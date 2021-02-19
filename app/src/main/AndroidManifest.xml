@@ -52,10 +52,10 @@
             android:name=".Views.Activities.IntroActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Views.Activities.DisplayActivity"
+            android:name=".Views.Activities.MainActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Views.Activities.MainActivity"
+            android:name=".Views.Activities.DisplayActivity"
             android:screenOrientation="portrait" />
     </application>
 
