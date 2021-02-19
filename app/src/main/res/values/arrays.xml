@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    // App Arrays
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <array name="activeColors">
+        <item>@color/Risloo500</item>
+        <item>@color/Risloo500</item>
+        <item>@color/Risloo500</item>
+        <item>@color/Risloo500</item>
+    </array>
+
+    <array name="inActiveColors">
+        <item>@color/Gray200</item>
+        <item>@color/Gray200</item>
+        <item>@color/Gray200</item>
+        <item>@color/Gray200</item>
+    </array>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+</resources>
