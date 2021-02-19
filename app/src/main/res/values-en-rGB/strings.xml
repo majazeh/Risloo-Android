@@ -4,15 +4,15 @@
     // App Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="AppName">ریسلو بتا</string>
-    <string name="AppVersion">نسخه</string>
+    <string name="AppName">Risloo Beta</string>
+    <string name="AppVersion">Version</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="SplashTitle">نامعلوم</string>
+    <string name="SplashTitle">Unknown</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,16 +29,16 @@
     <string name="IntroDescriptionThree">برنامه‌ریزی‌ کارهای مراکز درمان خود را با ریسلو انجام داده و دغدغه آن‌ها را نداشته باشید.</string>
     <string name="IntroDescriptionFour">کارهای  پژوهشی و علمی خود را به راحتی در بستری یک‌پارچه ساماندهی کنید.</string>
 
-    <string name="IntroNext">بعدی</string>
-    <string name="IntroSkip">رد شدن</string>
-    <string name="IntroStart">شروع</string>
+    <string name="IntroNext">Next</string>
+    <string name="IntroSkip">Skip</string>
+    <string name="IntroStart">Start</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Display Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="DisplayTitle">نامعلوم</string>
+    <string name="DisplayTitle">Unknown</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
