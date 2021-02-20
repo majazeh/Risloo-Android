@@ -1,38 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item
-        android:id="@+id/item_dashboard"
-        android:icon="@drawable/ic_dashboard_light"
-        android:title="@string/ItemDashboard"
-        android:checked="true"
-        android:checkable="true" />
-
-    <group android:checkableBehavior="none">
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/item_dashboard"
+            android:icon="@drawable/ic_dashboard_light"
+            android:title="@string/ItemDashboard"
+            android:checked="true" />
         <item
             android:id="@+id/item_centers"
             android:icon="@drawable/ic_centers_light"
-            android:title="@string/ItemCenters"/>
+            android:title="@string/ItemCenters" />
         <item
             android:id="@+id/item_users"
             android:icon="@drawable/ic_users_light"
-            android:title="@string/ItemCenters"/>
+            android:title="@string/ItemUsers" />
         <item
             android:id="@+id/item_scales"
             android:icon="@drawable/ic_scales_light"
-            android:title="@string/ItemScales"/>
+            android:title="@string/ItemScales" />
         <item
             android:id="@+id/item_samples"
             android:icon="@drawable/ic_samples_light"
-            android:title="@string/ItemSamples"/>
+            android:title="@string/ItemSamples" />
         <item
             android:id="@+id/item_documents"
             android:icon="@drawable/ic_documents_light"
-            android:title="@string/ItemDocuments"/>
+            android:title="@string/ItemDocuments" />
         <item
             android:id="@+id/item_settings"
             android:icon="@drawable/ic_settings_light"
-            android:title="@string/ItemSettings"/>
+            android:title="@string/ItemSettings" />
     </group>
 
 </menu>

@@ -22,6 +22,24 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // NavigationView Theme
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <style name="NavigationViewTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="fontFamily">@font/dana</item>
+        <item name="colorControlHighlight">@android:color/transparent</item>
+
+        <item name="android:listDivider">@null</item>
+    </style>
+
+    <style name="NavigationTextAppearance" parent="ThemeOverlay.AppCompat.Light">
+        <item name="android:textSize">@dimen/_11ssp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:fontFamily">@font/dana_light</item>
+    </style>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // BottomSheetDialog Theme
     //////////////////////////////////////////////////////////////////////////////////////
 
