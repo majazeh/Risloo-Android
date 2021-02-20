@@ -31,7 +31,7 @@ public class DisplayActivity extends AppCompatActivity {
     private Handler handler;
 
     // Widgets
-    private ImageView toolbarReturnImageView, toolbarDownloadImageView;
+    private ImageView returnImageView, downloadImageView;
     private ZoomageView avatarZoomageView;
 
     @Override
@@ -63,34 +63,34 @@ public class DisplayActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        toolbarReturnImageView = findViewById(R.id.activity_display_return_imageView);
-        toolbarReturnImageView.setImageResource(R.drawable.ic_angle_light);
-        ImageViewCompat.setImageTintList(toolbarReturnImageView, AppCompatResources.getColorStateList(this, R.color.Gray50));
-        toolbarDownloadImageView = findViewById(R.id.activity_display_download_imageView);
-        toolbarDownloadImageView.setImageResource(R.drawable.ic_download_light);
-        ImageViewCompat.setImageTintList(toolbarDownloadImageView, AppCompatResources.getColorStateList(this, R.color.Gray50));
+        returnImageView = findViewById(R.id.activity_display_return_imageView);
+        returnImageView.setImageResource(R.drawable.ic_angle_light);
+        ImageViewCompat.setImageTintList(returnImageView, AppCompatResources.getColorStateList(this, R.color.Gray50));
+        downloadImageView = findViewById(R.id.activity_display_download_imageView);
+        downloadImageView.setImageResource(R.drawable.ic_download_light);
+        ImageViewCompat.setImageTintList(downloadImageView, AppCompatResources.getColorStateList(this, R.color.Gray50));
 
         avatarZoomageView = findViewById(R.id.activity_display_avatar_zoomageView);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            toolbarReturnImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_gray200_ripple_gray300);
-            toolbarDownloadImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_gray200_ripple_gray300);
+            returnImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_gray200_ripple_gray300);
+            downloadImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_gray200_ripple_gray300);
         }
     }
 
     private void listener() {
-        toolbarReturnImageView.setOnClickListener(v -> {
-            toolbarReturnImageView.setClickable(false);
-            handler.postDelayed(() -> toolbarReturnImageView.setClickable(true), 300);
+        returnImageView.setOnClickListener(v -> {
+            returnImageView.setClickable(false);
+            handler.postDelayed(() -> returnImageView.setClickable(true), 300);
 
             finish();
         });
 
-        toolbarDownloadImageView.setOnClickListener(v -> {
-            toolbarDownloadImageView.setClickable(false);
-            handler.postDelayed(() -> toolbarDownloadImageView.setClickable(true), 300);
+        downloadImageView.setOnClickListener(v -> {
+            downloadImageView.setClickable(false);
+            handler.postDelayed(() -> downloadImageView.setClickable(true), 300);
 
             if (PermissionManager.storagePermission(this)) {
                 IntentManager.download(this, bitmap);
@@ -114,7 +114,7 @@ public class DisplayActivity extends AppCompatActivity {
         }
         if (!bitmap.equals("")) {
             Picasso.get().load(bitmap).placeholder(R.color.Gray900).into(avatarZoomageView);
-            toolbarDownloadImageView.setVisibility(View.VISIBLE);
+            downloadImageView.setVisibility(View.VISIBLE);
         }
         if (!path.equals("")) {
             avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), path));

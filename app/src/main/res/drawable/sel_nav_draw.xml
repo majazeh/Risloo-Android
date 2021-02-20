@@ -2,10 +2,10 @@
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:drawable="@drawable/draw_4sdp_solid_blue500"
+        android:drawable="@drawable/draw_4sdp_solid_blue500_margin_side"
         android:state_checked="true" />
     <item
-        android:drawable="@drawable/draw_4sdp_solid_blue200"
+        android:drawable="@drawable/draw_4sdp_solid_blue200_margin_side"
         android:state_pressed="true" />
     <item
         android:drawable="@android:color/transparent"
