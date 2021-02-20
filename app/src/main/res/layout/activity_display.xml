@@ -32,11 +32,4 @@
         app:zoomage_doubleTapToZoomScaleFactor="3"
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
-    <include
-        android:id="@+id/activity_display_toolbar"
-        layout="@layout/component_toolbar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -16,7 +16,7 @@
     </style>
 
     <style name="LauncherTheme" parent="AppTheme">
-        <item name="android:windowBackground">@color/Risloo500</item>
+        <item name="android:windowBackground">@color/Red500</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
 
@@ -39,10 +39,10 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="ActivityAnimationTheme" parent="@android:style/Animation.Activity">
-<!--        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>-->
-<!--        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>-->
-<!--        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>-->
-<!--        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>-->
+        <item name="android:activityOpenEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityOpenExitAnimation">@anim/fade_out</item>
+        <item name="android:activityCloseEnterAnimation">@anim/fade_in</item>
+        <item name="android:activityCloseExitAnimation">@anim/fade_out</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////

@@ -5,7 +5,7 @@
     android:id="@+id/component_toolbar"
     android:layout_width="match_parent"
     android:layout_height="?attr/actionBarSize"
-    android:layout_gravity="center"
+    android:layout_gravity="top"
     android:background="@color/Gray900"
     android:layoutDirection="rtl">
 

@@ -6,9 +6,23 @@
 
     <string name="AppName">ریسلو بتا</string>
 
-    <string name="AppVersion">نسخه 1.0.0 بتا</string>
+    <string name="AppVersion">نسخه</string>
 
     <string name="AppImageContent">عکس</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Menu Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="ItemDashboard">پیش‌خوان</string>
+    <string name="ItemCenters">مراکز درمانی</string>
+    <string name="ItemMyCenters">مراکز درمانی من</string>
+    <string name="ItemUsers">کاربران</string>
+    <string name="ItemScales">ارزیابی‌ها</string>
+    <string name="ItemSamples">نمونه‌ها</string>
+    <string name="ItemDocuments">مدارک و اعتبارنامه</string>
+    <string name="ItemSettings">تنظیمات</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

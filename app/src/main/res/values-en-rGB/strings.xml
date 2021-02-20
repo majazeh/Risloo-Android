@@ -6,9 +6,23 @@
 
     <string name="AppName">Risloo Beta</string>
 
-    <string name="AppVersion">Version 1.0.0 Beta</string>
+    <string name="AppVersion">Version</string>
 
     <string name="AppImageContent">Image</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Menu Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="ItemDashboard">Dashboard</string>
+    <string name="ItemCenters">Centers</string>
+    <string name="ItemMyCenters">My Centers</string>
+    <string name="ItemUsers">Users</string>
+    <string name="ItemScales">Scales</string>
+    <string name="ItemSamples">Samples</string>
+    <string name="ItemDocuments">Documents</string>
+    <string name="ItemSettings">Settings</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
