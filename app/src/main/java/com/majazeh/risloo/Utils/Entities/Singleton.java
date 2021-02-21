@@ -22,25 +22,8 @@ public class Singleton {
         editor.apply();
     }
 
-    public String getNotification() {
-        if (!sharedPreferences.getString("notification", "").equals("")) {
-            return sharedPreferences.getString("notification", "");
-        }
-        return "5";
-    }
-
-    public String getName() {
-        if (!sharedPreferences.getString("name", "").equals("")) {
-            return sharedPreferences.getString("name", "");
-        }
-        return "نام و نام خانوادگی";
-    }
-
-    public String getMoney() {
-        if (!sharedPreferences.getString("money", "").equals("")) {
-            return sharedPreferences.getString("money", "");
-        }
-        return "100.000 تومان";
+    public boolean getAuth() {
+        return sharedPreferences.getBoolean("auth", true);
     }
 
     public boolean getIntro() {
@@ -49,6 +32,34 @@ public class Singleton {
 
     public boolean getCallUs() {
         return sharedPreferences.getBoolean("callUs", true);
+    }
+
+    public String getName() {
+        if (!sharedPreferences.getString("name", "").equals("")) {
+            return sharedPreferences.getString("name", "");
+        }
+        return "";
+    }
+
+    public String getMoney() {
+        if (!sharedPreferences.getString("money", "").equals("")) {
+            return sharedPreferences.getString("money", "");
+        }
+        return "";
+    }
+
+    public String getNotification() {
+        if (!sharedPreferences.getString("notification", "").equals("")) {
+            return sharedPreferences.getString("notification", "");
+        }
+        return "";
+    }
+
+    public String getAvatar() {
+        if (!sharedPreferences.getString("avatar", "").equals("")) {
+            return sharedPreferences.getString("avatar", "");
+        }
+        return "";
     }
 
     public void setIntro(boolean bool) {

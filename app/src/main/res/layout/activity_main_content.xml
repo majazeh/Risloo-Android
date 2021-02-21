@@ -23,9 +23,9 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/activity_main_content_account_imageView"
-        layout="@layout/component_toolbar_rectangle"
-        android:layout_width="@dimen/_128sdp"
+        android:id="@+id/activity_main_content_logout_imageView"
+        layout="@layout/component_button_rectangle"
+        android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_12sdp"
@@ -33,11 +33,22 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/activity_main_content_account_imageView"
+        layout="@layout/component_toolbar_rectangle"
+        android:layout_width="@dimen/_128sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_logout_imageView"
+        app:layout_constraintEnd_toStartOf="@+id/activity_main_content_logout_imageView"
+        app:layout_constraintTop_toTopOf="@+id/activity_main_content_logout_imageView" />
+
+    <include
         android:id="@+id/activity_main_content_bell_imageView"
         layout="@layout/component_button_rectangle"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_account_imageView"
         app:layout_constraintEnd_toStartOf="@+id/activity_main_content_account_imageView"
         app:layout_constraintTop_toTopOf="@+id/activity_main_content_account_imageView" />
@@ -49,6 +60,7 @@
         android:layout_height="@dimen/_16sdp"
         android:layout_marginStart="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_2sdp"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/activity_main_content_bell_imageView"
         app:layout_constraintTop_toTopOf="@+id/activity_main_content_bell_imageView" />
 

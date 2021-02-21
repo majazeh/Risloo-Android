@@ -7,7 +7,7 @@
     android:layout_height="@dimen/_36sdp"
     android:layout_gravity="center"
     android:contentDescription="@string/AppImageContent"
-    android:padding="@dimen/_8sdp"
+    android:padding="@dimen/_9sdp"
     android:scaleType="fitCenter"
     android:layoutDirection="rtl"
     tools:src="@drawable/ic_ellipsis_light"

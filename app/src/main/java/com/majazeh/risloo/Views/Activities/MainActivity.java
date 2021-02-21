@@ -20,6 +20,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView avatarImageView;
     private TextView charTextView, nameTextView, moneyTextView;
     private TextView badgeTextView;
-    private ImageView menuImageView, bellImageView;
+    private ImageView menuImageView, logoutImageView, bellImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,6 +85,10 @@ public class MainActivity extends AppCompatActivity {
         menuImageView = findViewById(R.id.activity_main_content_menu_imageView);
         menuImageView.setImageResource(R.drawable.ic_bars_light);
         ImageViewCompat.setImageTintList(menuImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
+        logoutImageView = findViewById(R.id.activity_main_content_logout_imageView);
+        logoutImageView.setImageResource(R.drawable.ic_logout_light);
+        ImageViewCompat.setImageTintList(logoutImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
+        logoutImageView.setRotation(logoutImageView.getRotation() + 180);
         bellImageView = findViewById(R.id.activity_main_content_bell_imageView);
         bellImageView.setImageResource(R.drawable.ic_bell_light);
         ImageViewCompat.setImageTintList(bellImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
@@ -94,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
             accountConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
 
             menuImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
+            logoutImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_red400);
             bellImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
         }
     }
@@ -103,7 +109,7 @@ public class MainActivity extends AppCompatActivity {
             accountConstraintLayout.setClickable(false);
             handler.postDelayed(() -> accountConstraintLayout.setClickable(true), 300);
 
-
+            // TODO : Place Code Here
         });
 
         menuImageView.setOnClickListener(v -> {
@@ -113,22 +119,49 @@ public class MainActivity extends AppCompatActivity {
             drawerLayout.openDrawer(GravityCompat.START);
         });
 
+        logoutImageView.setOnClickListener(v -> {
+            logoutImageView.setClickable(false);
+            handler.postDelayed(() -> logoutImageView.setClickable(true), 300);
+
+            // TODO : Place Code Here
+        });
+
         bellImageView.setOnClickListener(v -> {
             bellImageView.setClickable(false);
             handler.postDelayed(() -> bellImageView.setClickable(true), 300);
 
-
+            // TODO : Place Code Here
         });
     }
 
     private void setData() {
-        charTextView.setText(StringManager.firstChars(singleton.getName()));
-        charTextView.setVisibility(View.VISIBLE);
+        if (singleton.getName().equals("")) {
+            nameTextView.setText(getResources().getString(R.string.MainNameDefault));
+        } else {
+            nameTextView.setText(singleton.getName());
+        }
 
-        nameTextView.setText(singleton.getName());
-        moneyTextView.setText(singleton.getMoney());
+        if (singleton.getMoney().equals("")) {
+            moneyTextView.setVisibility(View.GONE);
+        } else {
+            moneyTextView.setText(singleton.getMoney());
+        }
 
-        badgeTextView.setText(singleton.getNotification());
+        if (singleton.getNotification().equals("")) {
+            badgeTextView.setVisibility(View.GONE);
+        } else {
+            badgeTextView.setVisibility(View.VISIBLE);
+            badgeTextView.setText(singleton.getNotification());
+        }
+
+        if (singleton.getAvatar().equals("")) {
+            charTextView.setVisibility(View.VISIBLE);
+            charTextView.setText(StringManager.firstChars(nameTextView.getText().toString()));
+        } else {
+            charTextView.setVisibility(View.GONE);
+
+            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(avatarImageView);
+        }
     }
 
 }
