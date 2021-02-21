@@ -22,6 +22,27 @@ public class Singleton {
         editor.apply();
     }
 
+    public String getNotification() {
+        if (!sharedPreferences.getString("notification", "").equals("")) {
+            return sharedPreferences.getString("notification", "");
+        }
+        return "5";
+    }
+
+    public String getName() {
+        if (!sharedPreferences.getString("name", "").equals("")) {
+            return sharedPreferences.getString("name", "");
+        }
+        return "نام و نام خانوادگی";
+    }
+
+    public String getMoney() {
+        if (!sharedPreferences.getString("money", "").equals("")) {
+            return sharedPreferences.getString("money", "");
+        }
+        return "100.000 تومان";
+    }
+
     public boolean getIntro() {
         return sharedPreferences.getBoolean("intro", true);
     }

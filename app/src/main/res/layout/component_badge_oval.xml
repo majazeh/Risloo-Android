@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/component_badge_oval"
+    android:layout_width="@dimen/_16sdp"
+    android:layout_height="@dimen/_16sdp"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:textSize="@dimen/_10ssp"
+    android:textStyle="normal"
+    android:textColor="@color/White"
+    android:textAlignment="gravity"
+    android:fontFamily="@font/dana_bold"
+    android:background="@drawable/draw_oval_solid_red500"
+    android:layoutDirection="rtl"
+    tools:text="5" />
