@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_main"
+    app:startDestination="@id/dashboardFragment">
+
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Default.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard">
+        <action
+            android:id="@+id/action_dashboardFragment_to_centersFragment"
+            app:destination="@id/centersFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_usersFragment"
+            app:destination="@id/usersFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_scalesFragment"
+            app:destination="@id/scalesFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_samplesFragment"
+            app:destination="@id/samplesFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_documentsFragment"
+            app:destination="@id/documentsFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/centersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.CentersFragment"
+        android:label="fragment_centers"
+        tools:layout="@layout/fragment_centers" />
+    <fragment
+        android:id="@+id/usersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.UsersFragment"
+        android:label="fragment_users"
+        tools:layout="@layout/fragment_users" />
+    <fragment
+        android:id="@+id/scalesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.ScalesFragment"
+        android:label="fragment_scales"
+        tools:layout="@layout/fragment_scales" />
+    <fragment
+        android:id="@+id/samplesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.SamplesFragment"
+        android:label="fragment_samples"
+        tools:layout="@layout/fragment_samples" />
+    <fragment
+        android:id="@+id/documentsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.DocumentsFragment"
+        android:label="fragment_documents"
+        tools:layout="@layout/fragment_documents" />
+
+</navigation>

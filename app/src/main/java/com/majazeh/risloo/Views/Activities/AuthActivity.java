@@ -66,7 +66,8 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void navigator() {
-        handler.postDelayed(() -> IntentManager.main(this), 1000);
+        IntentManager.main(this);
+        singleton.setAuth(false);
     }
 
 }
