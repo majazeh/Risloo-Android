@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView avatarImageView;
     private TextView charTextView, nameTextView, moneyTextView;
     private ImageView menuImageView, logoutImageView, notificationImageView;
-    private TextView badgeTextView;
+    private TextView badgeTextView, locationTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,6 +92,7 @@ public class MainActivity extends AppCompatActivity {
         ImageViewCompat.setImageTintList(notificationImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
 
         badgeTextView = findViewById(R.id.activity_main_content_badge_textView);
+        locationTextView = findViewById(R.id.activity_main_content_location_textView);
     }
 
     private void detector() {
