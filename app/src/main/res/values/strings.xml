@@ -6,16 +6,30 @@
 
     <string name="AppName">ریسلو بتا</string>
 
-    <string name="AppVersion">نسخه</string>
-
     <string name="AppImageContent">عکس</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Menu Strings
+    // Splash Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="ItemRisloo">ریسلو</string>
+    <string name="SplashVersion">نسخه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Auth Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // TODO : Place Code Here
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Main Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="MainToolbar">کاربر آزمایشی</string>
+    <string name="MainHeader">ریسلو</string>
+
     <string name="ItemDashboard">پیش‌خوان</string>
     <string name="ItemCenters">مراکز درمانی</string>
     <string name="ItemMyCenters">مراکز درمانی من</string>
@@ -27,45 +41,10 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Splash Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="SplashTitle">نامعلوم</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Intro Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="IntroTitleOne">ریسلو</string>
-    <string name="IntroTitleTwo">آزمون‌</string>
-    <string name="IntroTitleThree">اداره مراکز درمان</string>
-    <string name="IntroTitleFour">همیار پژوهش و آموزش</string>
-
-    <string name="IntroDescriptionOne">بستری یک‌پارچه که کارهای روان‌شناس را در سه حوزه درمان، آموزش و پژوهش تسهیل می‌کند.</string>
-    <string name="IntroDescriptionTwo">آزمون روان‌شناختی مورد نیاز خود را انتخاب کنید و به آسانی آن را اجرا کرده، نمره‌گذاری و تفسیر آن را در اختیار داشته باشید.</string>
-    <string name="IntroDescriptionThree">برنامه‌ریزی‌ کارهای مراکز درمان خود را با ریسلو انجام داده و دغدغه آن‌ها را نداشته باشید.</string>
-    <string name="IntroDescriptionFour">کارهای  پژوهشی و علمی خود را به راحتی در بستری یک‌پارچه ساماندهی کنید.</string>
-
-    <string name="IntroNext">بعدی</string>
-    <string name="IntroSkip">رد شدن</string>
-    <string name="IntroStart">شروع</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
     // Display Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="DisplayTitle">نامعلوم</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Main Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="MainNameDefault">نامعلوم</string>
-    <string name="MainMoneyDefault">0 تومان</string>
-    <string name="MainBadgeDefault">0</string>
+    // TODO : Place Code Here
 
     //////////////////////////////////////////////////////////////////////////////////////
 

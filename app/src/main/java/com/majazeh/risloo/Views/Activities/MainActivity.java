@@ -36,8 +36,8 @@ public class MainActivity extends AppCompatActivity {
     private ConstraintLayout accountConstraintLayout;
     private ImageView avatarImageView;
     private TextView charTextView, nameTextView, moneyTextView;
+    private ImageView menuImageView, logoutImageView, notificationImageView;
     private TextView badgeTextView;
-    private ImageView menuImageView, logoutImageView, bellImageView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +80,6 @@ public class MainActivity extends AppCompatActivity {
         nameTextView = findViewById(R.id.component_toolbar_rectangle_name_textView);
         moneyTextView = findViewById(R.id.component_toolbar_rectangle_money_textView);
 
-        badgeTextView = findViewById(R.id.activity_main_content_badge_textView);
-
         menuImageView = findViewById(R.id.activity_main_content_menu_imageView);
         menuImageView.setImageResource(R.drawable.ic_bars_light);
         ImageViewCompat.setImageTintList(menuImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
@@ -89,9 +87,11 @@ public class MainActivity extends AppCompatActivity {
         logoutImageView.setImageResource(R.drawable.ic_logout_light);
         ImageViewCompat.setImageTintList(logoutImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
         logoutImageView.setRotation(logoutImageView.getRotation() + 180);
-        bellImageView = findViewById(R.id.activity_main_content_bell_imageView);
-        bellImageView.setImageResource(R.drawable.ic_bell_light);
-        ImageViewCompat.setImageTintList(bellImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
+        notificationImageView = findViewById(R.id.activity_main_content_notification_imageView);
+        notificationImageView.setImageResource(R.drawable.ic_bell_light);
+        ImageViewCompat.setImageTintList(notificationImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
+
+        badgeTextView = findViewById(R.id.activity_main_content_badge_textView);
     }
 
     private void detector() {
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
 
             menuImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
             logoutImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_red400);
-            bellImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
+            notificationImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
         }
     }
 
@@ -126,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
             // TODO : Place Code Here
         });
 
-        bellImageView.setOnClickListener(v -> {
-            bellImageView.setClickable(false);
-            handler.postDelayed(() -> bellImageView.setClickable(true), 300);
+        notificationImageView.setOnClickListener(v -> {
+            notificationImageView.setClickable(false);
+            handler.postDelayed(() -> notificationImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void setData() {
         if (singleton.getName().equals("")) {
-            nameTextView.setText(getResources().getString(R.string.MainNameDefault));
+            nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
             nameTextView.setText(singleton.getName());
         }

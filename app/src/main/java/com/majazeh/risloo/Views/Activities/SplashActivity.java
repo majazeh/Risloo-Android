@@ -8,11 +8,15 @@ import android.os.Handler;
 import android.widget.TextView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 
 public class SplashActivity extends AppCompatActivity {
+
+    // Singleton
+    private Singleton singleton;
 
     // Objects
     private Handler handler;
@@ -36,7 +40,7 @@ public class SplashActivity extends AppCompatActivity {
 
         setData();
 
-        getData();
+        navigator();
     }
 
     private void decorator() {
@@ -47,6 +51,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initializer() {
+        singleton = new Singleton(this);
+
         handler = new Handler();
 
         versionTextView = findViewById(R.id.activity_splash_version_textView);
@@ -63,15 +69,15 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        versionTextView.setText(getResources().getString(R.string.AppVersion) + " " + PackageManager.versionName(this));
-    }
-
-    private void getData() {
-        navigator();
+        versionTextView.setText(getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this));
     }
 
     private void navigator() {
-        handler.postDelayed(() -> IntentManager.intro(this), 1000);
+        if (singleton.getAuth()) {
+            handler.postDelayed(() -> IntentManager.auth(this), 1000);
+        } else {
+            handler.postDelayed(() -> IntentManager.main(this), 1000);
+        }
     }
 
     @Override

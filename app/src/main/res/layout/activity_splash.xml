@@ -28,7 +28,7 @@
         android:id="@+id/activity_splash_version_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"

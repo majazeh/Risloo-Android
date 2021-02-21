@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="@+id/activity_main_content_logout_imageView" />
 
     <include
-        android:id="@+id/activity_main_content_bell_imageView"
+        android:id="@+id/activity_main_content_notification_imageView"
         layout="@layout/component_button_rectangle"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
@@ -61,8 +61,8 @@
         android:layout_marginStart="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_2sdp"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/activity_main_content_bell_imageView"
-        app:layout_constraintTop_toTopOf="@+id/activity_main_content_bell_imageView" />
+        app:layout_constraintStart_toStartOf="@+id/activity_main_content_notification_imageView"
+        app:layout_constraintTop_toTopOf="@+id/activity_main_content_notification_imageView" />
 
 
 

@@ -26,12 +26,11 @@ public class Singleton {
         return sharedPreferences.getBoolean("auth", true);
     }
 
-    public boolean getIntro() {
-        return sharedPreferences.getBoolean("intro", true);
-    }
-
-    public boolean getCallUs() {
-        return sharedPreferences.getBoolean("callUs", true);
+    public String getNotification() {
+        if (!sharedPreferences.getString("notification", "").equals("")) {
+            return sharedPreferences.getString("notification", "");
+        }
+        return "";
     }
 
     public String getName() {
@@ -48,13 +47,6 @@ public class Singleton {
         return "";
     }
 
-    public String getNotification() {
-        if (!sharedPreferences.getString("notification", "").equals("")) {
-            return sharedPreferences.getString("notification", "");
-        }
-        return "";
-    }
-
     public String getAvatar() {
         if (!sharedPreferences.getString("avatar", "").equals("")) {
             return sharedPreferences.getString("avatar", "");
@@ -62,13 +54,8 @@ public class Singleton {
         return "";
     }
 
-    public void setIntro(boolean bool) {
-        editor.putBoolean("intro", bool);
-        editor.apply();
-    }
-
-    public void setCallUs(boolean bool) {
-        editor.putBoolean("callUs", bool);
+    public void setAuth(boolean bool) {
+        editor.putBoolean("auth", bool);
         editor.apply();
     }
 
