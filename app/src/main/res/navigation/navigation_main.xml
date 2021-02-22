@@ -10,21 +10,49 @@
         android:name="com.majazeh.risloo.Views.Fragments.Default.DashboardFragment"
         android:label="fragment_dashboard"
         tools:layout="@layout/fragment_dashboard">
+
         <action
             android:id="@+id/action_dashboardFragment_to_centersFragment"
-            app:destination="@id/centersFragment" />
+            app:destination="@id/centersFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_dashboardFragment_to_usersFragment"
-            app:destination="@id/usersFragment" />
+            app:destination="@id/usersFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_dashboardFragment_to_scalesFragment"
-            app:destination="@id/scalesFragment" />
+            app:destination="@id/scalesFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_dashboardFragment_to_samplesFragment"
-            app:destination="@id/samplesFragment" />
+            app:destination="@id/samplesFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
         <action
             android:id="@+id/action_dashboardFragment_to_documentsFragment"
-            app:destination="@id/documentsFragment" />
+            app:destination="@id/documentsFragment"
+            app:enterAnim="@anim/slide_in_left"
+            app:exitAnim="@anim/slide_out_right"
+            app:popEnterAnim="@anim/slide_in_right"
+            app:popExitAnim="@anim/slide_out_left" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_accountFragment"
+            app:destination="@id/accountFragment"
+            app:enterAnim="@anim/slide_in_bottom_decelerate"
+            app:exitAnim="@anim/stay_still"
+            app:popEnterAnim="@anim/stay_still"
+            app:popExitAnim="@anim/slide_out_bottom_decelerate" />
     </fragment>
 
     <fragment
@@ -52,5 +80,24 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.DocumentsFragment"
         android:label="fragment_documents"
         tools:layout="@layout/fragment_documents" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Default.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" >
+        <action
+            android:id="@+id/action_accountFragment_to_editAccountFragment"
+            app:destination="@id/editAccountFragment"
+            app:enterAnim="slide_in_bottom_decelerate"
+            app:exitAnim="@anim/stay_still"
+            app:popEnterAnim="@anim/stay_still"
+            app:popExitAnim="slide_out_bottom_decelerate" />
+    </fragment>
+    
+    <fragment
+        android:id="@+id/editAccountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
+        android:label="fragment_edit_account"
+        tools:layout="@layout/fragment_edit_account" />
 
 </navigation>
