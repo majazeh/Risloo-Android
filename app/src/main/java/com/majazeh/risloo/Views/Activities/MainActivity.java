@@ -11,6 +11,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -144,7 +145,11 @@ public class MainActivity extends AppCompatActivity {
             // TODO : Place Code Here
         });
 
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> locationTextView.setText(NavigationManager.currentLocation(MainActivity.this, navController)));
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+            String location = NavigationManager.previousLocation(MainActivity.this, navController) + NavigationManager.currentLocation(MainActivity.this, navController);
+
+            locationTextView.setText(StringManager.foregroundStyle(location, NavigationManager.previousLocation(MainActivity.this, navController).length(), location.length(), getResources().getColor(R.color.Gray700), Typeface.BOLD));
+        });
     }
 
     private void setData() {
