@@ -75,8 +75,8 @@ public class DisplayActivity extends AppCompatActivity {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            returnImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_gray200_ripple_gray300);
-            downloadImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_gray200_ripple_gray300);
+            returnImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            downloadImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
         }
     }
 

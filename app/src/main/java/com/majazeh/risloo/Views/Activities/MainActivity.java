@@ -85,11 +85,11 @@ public class MainActivity extends AppCompatActivity {
 
         accountConstraintLayout = findViewById(R.id.activity_main_content_account_imageView);
 
-        avatarImageView = findViewById(R.id.component_toolbar_rectangle_avatar_imageView);
+        avatarImageView = findViewById(R.id.component_account_rectangle_36sdp_avatar_imageView);
 
-        charTextView = findViewById(R.id.component_toolbar_rectangle_char_textView);
-        nameTextView = findViewById(R.id.component_toolbar_rectangle_name_textView);
-        moneyTextView = findViewById(R.id.component_toolbar_rectangle_money_textView);
+        charTextView = findViewById(R.id.component_account_rectangle_36sdp_char_textView);
+        nameTextView = findViewById(R.id.component_account_rectangle_36sdp_name_textView);
+        moneyTextView = findViewById(R.id.component_account_rectangle_36sdp_money_textView);
 
         menuImageView = findViewById(R.id.activity_main_content_menu_imageView);
         menuImageView.setImageResource(R.drawable.ic_bars_light);
@@ -108,11 +108,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            accountConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
+            accountConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
 
-            menuImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
-            logoutImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_red400);
-            notificationImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_gray300_ripple_gray400);
+            menuImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            logoutImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
+            notificationImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
         }
     }
 

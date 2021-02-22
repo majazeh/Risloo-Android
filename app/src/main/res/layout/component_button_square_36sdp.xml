@@ -2,7 +2,7 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_button_rectangle"
+    android:id="@+id/component_button_square_36sdp"
     android:layout_width="@dimen/_36sdp"
     android:layout_height="@dimen/_36sdp"
     android:layout_gravity="center"
@@ -12,4 +12,4 @@
     android:layoutDirection="rtl"
     tools:src="@drawable/ic_ellipsis_light"
     tools:tint="@color/Gray500"
-    tools:background="@drawable/draw_2sdp_border_gray300" />
+    tools:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray300" />

@@ -34,7 +34,7 @@
 
     <include
         android:id="@+id/activity_display_return_imageView"
-        layout="@layout/component_button_rectangle"
+        layout="@layout/component_button_square_36sdp"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_12sdp"
@@ -44,7 +44,7 @@
 
     <include
         android:id="@+id/activity_display_download_imageView"
-        layout="@layout/component_button_rectangle"
+        layout="@layout/component_button_square_36sdp"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_12sdp"
