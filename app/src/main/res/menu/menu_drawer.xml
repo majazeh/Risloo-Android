@@ -9,7 +9,7 @@
             android:checked="true" />
         <item
             android:id="@+id/centersFragment"
-            android:icon="@drawable/ic_centers_light"
+            android:icon="@drawable/ic_center_light"
             android:title="@string/CentersFragment" />
         <item
             android:id="@+id/usersFragment"
@@ -17,19 +17,19 @@
             android:title="@string/UsersFragment" />
         <item
             android:id="@+id/scalesFragment"
-            android:icon="@drawable/ic_scales_light"
+            android:icon="@drawable/ic_scale_light"
             android:title="@string/ScalesFragment" />
         <item
             android:id="@+id/samplesFragment"
-            android:icon="@drawable/ic_samples_light"
+            android:icon="@drawable/ic_sample_light"
             android:title="@string/SamplesFragment" />
         <item
             android:id="@+id/documentsFragment"
-            android:icon="@drawable/ic_documents_light"
+            android:icon="@drawable/ic_document_light"
             android:title="@string/DocumentsFragment" />
         <item
             android:id="@+id/settingsFragment"
-            android:icon="@drawable/ic_settings_light"
+            android:icon="@drawable/ic_setting_light"
             android:title="@string/SettingsFragment" />
     </group>
 
