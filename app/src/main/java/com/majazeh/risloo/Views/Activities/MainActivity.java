@@ -6,6 +6,9 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 import android.graphics.Color;
 import android.os.Build;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.NavigationManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.squareup.picasso.Picasso;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     // Objects
     private Handler handler;
+    private NavHostFragment navHostFragment;
+    private NavController navController;
 
     // Widgets
     private DrawerLayout drawerLayout;
@@ -72,6 +78,10 @@ public class MainActivity extends AppCompatActivity {
 
         navigationView = findViewById(R.id.activity_main_navigationView);
 
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.activity_main_content_nav_host_fragment);
+
+        navController = navHostFragment.getNavController();
+
         accountConstraintLayout = findViewById(R.id.activity_main_content_account_imageView);
 
         avatarImageView = findViewById(R.id.component_toolbar_rectangle_avatar_imageView);
@@ -110,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
             accountConstraintLayout.setClickable(false);
             handler.postDelayed(() -> accountConstraintLayout.setClickable(true), 300);
 
-            // TODO : Place Code Here
+            navController.navigate(R.id.accountFragment);
         });
 
         menuImageView.setOnClickListener(v -> {
@@ -133,9 +143,13 @@ public class MainActivity extends AppCompatActivity {
 
             // TODO : Place Code Here
         });
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> locationTextView.setText(NavigationManager.currentLocation(MainActivity.this, navController)));
     }
 
     private void setData() {
+        NavigationUI.setupWithNavController(navigationView, navController);
+
         if (singleton.getName().equals("")) {
             nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
@@ -163,6 +177,11 @@ public class MainActivity extends AppCompatActivity {
 
             Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(avatarImageView);
         }
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        return NavigationUI.navigateUp(navController, drawerLayout);
     }
 
     @Override

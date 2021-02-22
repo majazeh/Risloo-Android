@@ -3,34 +3,34 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/item_dashboard"
+            android:id="@+id/dashboardFragment"
             android:icon="@drawable/ic_dashboard_light"
-            android:title="@string/ItemDashboard"
+            android:title="@string/DashboardFragment"
             android:checked="true" />
         <item
-            android:id="@+id/item_centers"
+            android:id="@+id/centersFragment"
             android:icon="@drawable/ic_centers_light"
-            android:title="@string/ItemCenters" />
+            android:title="@string/CentersFragment" />
         <item
-            android:id="@+id/item_users"
+            android:id="@+id/usersFragment"
             android:icon="@drawable/ic_users_light"
-            android:title="@string/ItemUsers" />
+            android:title="@string/UsersFragment" />
         <item
-            android:id="@+id/item_scales"
+            android:id="@+id/scalesFragment"
             android:icon="@drawable/ic_scales_light"
-            android:title="@string/ItemScales" />
+            android:title="@string/ScalesFragment" />
         <item
-            android:id="@+id/item_samples"
+            android:id="@+id/samplesFragment"
             android:icon="@drawable/ic_samples_light"
-            android:title="@string/ItemSamples" />
+            android:title="@string/SamplesFragment" />
         <item
-            android:id="@+id/item_documents"
+            android:id="@+id/documentsFragment"
             android:icon="@drawable/ic_documents_light"
-            android:title="@string/ItemDocuments" />
+            android:title="@string/DocumentsFragment" />
         <item
-            android:id="@+id/item_settings"
+            android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_settings_light"
-            android:title="@string/ItemSettings" />
+            android:title="@string/SettingsFragment" />
     </group>
 
 </menu>
