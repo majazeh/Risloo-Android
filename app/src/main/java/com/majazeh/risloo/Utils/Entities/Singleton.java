@@ -40,6 +40,34 @@ public class Singleton {
         return "";
     }
 
+    public String getUsername() {
+        if (!sharedPreferences.getString("username", "").equals("")) {
+            return sharedPreferences.getString("username", "");
+        }
+        return "";
+    }
+
+    public String getMobile() {
+        if (!sharedPreferences.getString("mobile", "").equals("")) {
+            return sharedPreferences.getString("mobile", "");
+        }
+        return "";
+    }
+
+    public String getEmail() {
+        if (!sharedPreferences.getString("email", "").equals("")) {
+            return sharedPreferences.getString("email", "");
+        }
+        return "";
+    }
+
+    public String getBirthday() {
+        if (!sharedPreferences.getString("birthday", "").equals("")) {
+            return sharedPreferences.getString("birthday", "");
+        }
+        return "";
+    }
+
     public String getMoney() {
         if (!sharedPreferences.getString("money", "").equals("")) {
             return sharedPreferences.getString("money", "");

@@ -33,6 +33,8 @@
     <string name="AccountFragment">حساب من</string>
     <string name="EditAccountFragment">ویرایش من</string>
 
+    <string name="AccountFragmentEdit">ویرایش</string>
+
     <string name="DashboardFragment">پیش‌خوان</string>
     <string name="CentersFragment">مراکز درمانی</string>
     <string name="MyCentersFragment">مراکز درمانی من</string>

@@ -27,15 +27,17 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     // Singleton
-    private Singleton singleton;
+    public Singleton singleton;
 
     // Objects
-    private Handler handler;
+    public Handler handler;
     private NavHostFragment navHostFragment;
-    private NavController navController;
+    public NavController navController;
 
     // Widgets
     private DrawerLayout drawerLayout;
@@ -81,7 +83,7 @@ public class MainActivity extends AppCompatActivity {
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.activity_main_content_nav_host_fragment);
 
-        navController = navHostFragment.getNavController();
+        navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         accountConstraintLayout = findViewById(R.id.activity_main_content_account_imageView);
 

@@ -68,7 +68,7 @@
         android:id="@+id/activity_main_content_location_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:gravity="center"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
