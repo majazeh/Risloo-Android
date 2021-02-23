@@ -196,7 +196,9 @@ public class MainActivity extends AppCompatActivity {
         if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
             drawerLayout.closeDrawer(GravityCompat.START);
         } else {
-            finish();
+            if (!navController.popBackStack()) {
+                finish();
+            }
         }
     }
 
