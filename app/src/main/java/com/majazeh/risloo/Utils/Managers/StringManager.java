@@ -1,15 +1,28 @@
 package com.majazeh.risloo.Utils.Managers;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextPaint;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
+import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.navigation.NavBackStackEntry;
+import androidx.navigation.NavController;
+
+import com.majazeh.risloo.R;
 
 import java.text.DecimalFormat;
+import java.util.LinkedList;
+import java.util.Queue;
 
 public class StringManager {
 
@@ -227,6 +240,53 @@ public class StringManager {
         spannableString.setSpan(backgroundColorSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(styleSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
+    }
+
+    @SuppressLint("RestrictedApi")
+    public static SpannableStringBuilder clickableNavBackStack(Activity activity, NavController navController) {
+        Queue<Integer> enQueue = new LinkedList();
+        Queue<String> faQueue = new LinkedList();
+
+        SpannableStringBuilder destination = new SpannableStringBuilder();
+
+        for (NavBackStackEntry navBackStackEntry : navController.getBackStack()) {
+            if (navBackStackEntry.getDestination().getLabel() != null) {
+                if (!enQueue.isEmpty()) {
+                    destination.append("  >  ");
+                }
+                enQueue.add(navBackStackEntry.getDestination().getId());
+                faQueue.add(navBackStackEntry.getDestination().getLabel().toString());
+
+                destination.append(navBackStackEntry.getDestination().getLabel().toString());
+            }
+        }
+
+        for (int i = 0; i < faQueue.size(); i++) {
+            int j = i;
+            String s = (String) faQueue.toArray()[i];
+            if ( j+1!=faQueue.size()) {
+
+                destination.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        for (int k = j+1; k < navController.getBackStack().size(); k++) {
+                            navController.popBackStack();
+                            enQueue.remove();
+                            faQueue.remove();
+                        }
+                    }
+
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint textPaint) {
+                        textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
+                        textPaint.setUnderlineText(false);
+                    }
+
+                },destination.toString().indexOf(s),destination.toString().indexOf(s)+s.length(),0);
+            }
+        }
+
+        return destination;
     }
 
 }

@@ -11,10 +11,10 @@ import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.text.method.LinkMovementMethod;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,7 +22,6 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Managers.NavigationManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.squareup.picasso.Picasso;
@@ -123,6 +122,10 @@ public class MainActivity extends AppCompatActivity {
             accountConstraintLayout.setClickable(false);
             handler.postDelayed(() -> accountConstraintLayout.setClickable(true), 300);
 
+            if (!(Objects.requireNonNull(navController.getCurrentDestination()).getId() == R.id.dashboardFragment)) {
+                navController.popBackStack();
+            }
+
             navController.navigate(R.id.accountFragment);
         });
 
@@ -148,9 +151,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            String location = NavigationManager.previousLocation(MainActivity.this, navController) + NavigationManager.currentLocation(MainActivity.this, navController);
-
-            locationTextView.setText(StringManager.foregroundStyle(location, NavigationManager.previousLocation(MainActivity.this, navController).length(), location.length(), getResources().getColor(R.color.Gray700), Typeface.BOLD));
+            locationTextView.setText(StringManager.clickableNavBackStack(this, controller));
+            locationTextView.setMovementMethod(LinkMovementMethod.getInstance());
         });
     }
 
