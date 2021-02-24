@@ -30,12 +30,63 @@
     <string name="MainToolbar">کاربر آزمایشی</string>
     <string name="MainHeader">ریسلو</string>
 
+    //////////////////////////////////////////////////////////////////////////////////////
+
     /*
-    ---------- Account Fragment ----------
+    ---------- CreateCase Fragment ----------
     */
 
-    <string name="AccountFragmentTitle">حساب من</string>
-    <string name="AccountFragmentEdit">ویرایش</string>
+    <string name="CreateCaseFragmentTitle">ساخت پرونده</string>
+
+    /*
+    ---------- CreateCenter Fragment ----------
+    */
+
+    <string name="CreateCenterFragmentTitle">ساخت مرکز</string>
+
+    /*
+    ---------- CreateDocument Fragment ----------
+    */
+
+    <string name="CreateDocumentFragmentTitle">ساخت مدرک</string>
+
+    /*
+    ---------- CreatePractice Fragment ----------
+    */
+
+    <string name="CreatePracticeFragmentTitle">ساخت تمرین</string>
+
+    /*
+    ---------- CreateReport Fragment ----------
+    */
+
+    <string name="CreateReportFragmentTitle">ساخت گزارش</string>
+
+    /*
+    ---------- CreateRoom Fragment ----------
+    */
+
+    <string name="CreateRoomFragmentTitle">ساخت اتاق</string>
+
+    /*
+    ---------- CreateSample Fragment ----------
+    */
+
+    <string name="CreateSampleFragmentTitle">ساخت نمونه</string>
+
+    /*
+    ---------- CreateSession Fragment ----------
+    */
+
+    <string name="CreateSessionFragmentTitle">ساخت جلسه</string>
+
+    /*
+    ---------- CreateUser Fragment ----------
+    */
+
+    <string name="CreateUserFragmentTitle">ساخت کاربر</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
 
     /*
     ---------- EditAccount Fragment ----------
@@ -44,39 +95,30 @@
     <string name="EditAccountFragmentTitle">ویرایش من</string>
 
     /*
-    ---------- Dashboard Fragment ----------
+    ---------- EditCase Fragment ----------
     */
 
-    <string name="DashboardFragmentTitle">پیش‌خوان</string>
+    <string name="EditCaseFragmentTitle">ویرایش پرونده</string>
+
+    /*
+    ---------- EditCenter Fragment ----------
+    */
+
+    <string name="EditCenterFragmentTitle">ویرایش مرکز</string>
+
+    /*
+    ---------- EditSession Fragment ----------
+    */
+
+    <string name="EditSessionFragmentTitle">ویرایش جلسه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
 
     /*
     ---------- Centers Fragment ----------
     */
+
     <string name="CentersFragmentTitle">مراکز درمانی</string>
-
-    /*
-    ---------- MyCenters Fragment ----------
-    */
-
-    <string name="MyCentersFragmentTitle">مراکز درمانی من</string>
-
-    /*
-    ---------- Users Fragment ----------
-    */
-
-    <string name="UsersFragmentTitle">کاربران</string>
-
-    /*
-    ---------- Scales Fragment ----------
-    */
-
-    <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
-
-    /*
-    ---------- Samples Fragment ----------
-    */
-
-    <string name="SamplesFragmentTitle">نمونه‌ها</string>
 
     /*
     ---------- Documents Fragment ----------
@@ -85,10 +127,79 @@
     <string name="DocumentsFragmentTitle">مدارک و اعتبارنامه</string>
 
     /*
+    ---------- MyCenters Fragment ----------
+    */
+
+    <string name="MyCentersFragmentTitle">مراکز درمانی من</string>
+
+    /*
+    ---------- Samples Fragment ----------
+    */
+
+    <string name="SamplesFragmentTitle">نمونه‌ها</string>
+
+    /*
+    ---------- Scales Fragment ----------
+    */
+
+    <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
+
+    /*
     ---------- Settings Fragment ----------
     */
 
     <string name="SettingsFragmentTitle">تنظیمات</string>
+
+    /*
+    ---------- Users Fragment ----------
+    */
+
+    <string name="UsersFragmentTitle">کاربران</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ---------- Account Fragment ----------
+    */
+
+    <string name="AccountFragmentTitle">حساب من</string>
+    <string name="AccountFragmentEdit">ویرایش</string>
+
+    /*
+    ---------- Case Fragment ----------
+    */
+
+    <string name="CaseFragmentTitle">پرونده</string>
+
+    /*
+    ---------- Dashboard Fragment ----------
+    */
+
+    <string name="DashboardFragmentTitle">پیش‌خوان</string>
+
+    /*
+    ---------- Result Fragment ----------
+    */
+
+    <string name="ResultFragmentTitle">نمره</string>
+
+    /*
+    ---------- Sample Fragment ----------
+    */
+
+    <string name="SampleFragmentTitle">نمونه</string>
+
+    /*
+    ---------- Session Fragment ----------
+    */
+
+    <string name="SessionFragmentTitle">جلسه</string>
+
+    /*
+    ---------- Test Fragment ----------
+    */
+
+    <string name="TestFragmentTitle">آزمون</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
