@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity {
             accountConstraintLayout.setClickable(false);
             handler.postDelayed(() -> accountConstraintLayout.setClickable(true), 300);
 
-            if (!(Objects.requireNonNull(navController.getCurrentDestination()).getId() == R.id.dashboardFragment)) {
+            if (navController.getCurrentDestination().getId() != R.id.dashboardFragment || navController.getCurrentDestination().getId() == R.id.editAccountFragment) {
                 navController.popBackStack();
             }
 

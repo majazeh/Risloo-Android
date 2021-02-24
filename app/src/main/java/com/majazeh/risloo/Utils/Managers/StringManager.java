@@ -21,15 +21,13 @@ import androidx.navigation.NavController;
 import com.majazeh.risloo.R;
 
 import java.text.DecimalFormat;
-import java.util.LinkedList;
-import java.util.Queue;
 
 public class StringManager {
 
     public static String substring(String value, char character) {
         int position = 0;
 
-        for(int i=0; i<value.length(); i++) {
+        for (int i = 0; i < value.length(); i++) {
             if (value.charAt(i) == character) {
                 position = i;
             }
@@ -66,7 +64,7 @@ public class StringManager {
     }
 
     public static String persian(String value) {
-        String[] persianNumbers = new String[] {"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
+        String[] persianNumbers = new String[]{"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
         StringBuilder output = new StringBuilder();
         if (value.length() == 0) {
             return "";
@@ -96,7 +94,7 @@ public class StringManager {
     public static String separatePersian(String value) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
         String decimalFormatString = decimalFormat.format(Double.parseDouble(value));
-        String[] persianNumbers = new String[] {"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
+        String[] persianNumbers = new String[]{"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
         StringBuilder output = new StringBuilder();
         if (decimalFormatString.length() == 0) {
             return "";
@@ -116,7 +114,7 @@ public class StringManager {
     }
 
     public static SpannableString persianLining(String value) {
-        String[] persianNumbers = new String[] {"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
+        String[] persianNumbers = new String[]{"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
         StringBuilder output = new StringBuilder();
         if (value.length() == 0) {
             return null;
@@ -140,7 +138,7 @@ public class StringManager {
     public static SpannableString separatePersianLining(String value) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
         String decimalFormatString = decimalFormat.format(Double.parseDouble(value));
-        String[] persianNumbers = new String[] {"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
+        String[] persianNumbers = new String[]{"۰", "۱", "۲", "۳", "۴", "۵", "۶", "۷", "'۸", "۹"};
         StringBuilder output = new StringBuilder();
         if (decimalFormatString.length() == 0) {
             return null;
@@ -244,45 +242,32 @@ public class StringManager {
 
     @SuppressLint("RestrictedApi")
     public static SpannableStringBuilder clickableNavBackStack(Activity activity, NavController navController) {
-        Queue<Integer> enQueue = new LinkedList();
-        Queue<String> faQueue = new LinkedList();
-
         SpannableStringBuilder destination = new SpannableStringBuilder();
 
         for (NavBackStackEntry navBackStackEntry : navController.getBackStack()) {
             if (navBackStackEntry.getDestination().getLabel() != null) {
-                if (!enQueue.isEmpty()) {
+                destination.append(navBackStackEntry.getDestination().getLabel().toString());
+                if (!navBackStackEntry.getDestination().equals(navController.getCurrentDestination())) {
                     destination.append("  >  ");
                 }
-                enQueue.add(navBackStackEntry.getDestination().getId());
-                faQueue.add(navBackStackEntry.getDestination().getLabel().toString());
+                String singleLabel = navBackStackEntry.getDestination().getLabel().toString();
+                if (!navBackStackEntry.getDestination().equals(navController.getCurrentDestination())) {
 
-                destination.append(navBackStackEntry.getDestination().getLabel().toString());
-            }
-        }
-
-        for (int i = 0; i < faQueue.size(); i++) {
-            int j = i;
-            String s = (String) faQueue.toArray()[i];
-            if ( j+1!=faQueue.size()) {
-
-                destination.setSpan(new ClickableSpan() {
-                    @Override
-                    public void onClick(@NonNull View widget) {
-                        for (int k = j+1; k < navController.getBackStack().size(); k++) {
-                            navController.popBackStack();
-                            enQueue.remove();
-                            faQueue.remove();
+                    destination.setSpan(new ClickableSpan() {
+                        @Override
+                        public void onClick(@NonNull View widget) {
+                            while (!navBackStackEntry.getDestination().equals(navController.getCurrentDestination())) {
+                                navController.popBackStack();
+                            }
                         }
-                    }
+                        @Override
+                        public void updateDrawState(@NonNull TextPaint textPaint) {
+                            textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
+                            textPaint.setUnderlineText(false);
+                        }
 
-                    @Override
-                    public void updateDrawState(@NonNull TextPaint textPaint) {
-                        textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
-                        textPaint.setUnderlineText(false);
-                    }
-
-                },destination.toString().indexOf(s),destination.toString().indexOf(s)+s.length(),0);
+                    }, destination.toString().indexOf(singleLabel), destination.toString().indexOf(singleLabel) + singleLabel.length(), 0);
+                }
             }
         }
 

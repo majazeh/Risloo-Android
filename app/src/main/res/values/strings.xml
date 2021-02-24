@@ -20,7 +20,53 @@
     // Auth Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // TODO : Place Code Here
+    /*
+    ---------- Login Fragment ----------
+    */
+
+    <string name="LoginFragmentTitle">ورود</string>
+
+    /*
+    ---------- Register Fragment ----------
+    */
+
+    <string name="RegisterFragmentTitle">ثبت نام</string>
+
+    /*
+    ---------- Mobile Fragment ----------
+    */
+
+    <string name="MobileFragmentTitle">شماره همراه</string>
+
+    /*
+    ---------- Pin Fragment ----------
+    */
+
+    <string name="PinFragmentTitle">کد پیامکی</string>
+
+    /*
+    ---------- Password Fragment ----------
+    */
+
+    <string name="PasswordFragmentTitle">کلمه عبور</string>
+
+    /*
+    ---------- PasswordChange Fragment ----------
+    */
+
+    <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
+
+    /*
+    ---------- PasswordRecover Fragment ----------
+    */
+
+    <string name="PasswordRecoverFragmentTitle">بازیابی کلمه عبور</string>
+
+    /*
+    ---------- Serial Fragment ----------
+    */
+
+    <string name="SerialFragmentTitle">سریال نمونه</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -29,8 +75,6 @@
 
     <string name="MainToolbar">کاربر آزمایشی</string>
     <string name="MainHeader">ریسلو</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
 
     /*
     ---------- CreateCase Fragment ----------
@@ -89,12 +133,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- EditAccount Fragment ----------
-    */
-
-    <string name="EditAccountFragmentTitle">ویرایش من</string>
-
-    /*
     ---------- EditCase Fragment ----------
     */
 
@@ -111,6 +149,36 @@
     */
 
     <string name="EditSessionFragmentTitle">ویرایش جلسه</string>
+
+    /*
+    ---------- EditAccount Fragment ----------
+    */
+
+    <string name="EditAccountFragmentTitle">ویرایش من</string>
+
+    /*
+    ---------- EditPersonal Fragment ----------
+    */
+
+    <string name="EditPersonalFragmentTitle">ویرایش شخصی</string>
+
+    /*
+    ---------- EditPassword Fragment ----------
+    */
+
+    <string name="EditPasswordFragmentTitle">ویرایش کلمه عبور</string>
+
+    /*
+    ---------- EditAvatar Fragment ----------
+    */
+
+    <string name="EditAvatarFragmentTitle">ویرایش تصویر نمایشی</string>
+
+    /*
+    ---------- EditCrypto Fragment ----------
+    */
+
+    <string name="EditCryptoFragmentTitle">ویرایش کلید عمومی</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
