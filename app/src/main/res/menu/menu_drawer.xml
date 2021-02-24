@@ -5,32 +5,32 @@
         <item
             android:id="@+id/dashboardFragment"
             android:icon="@drawable/ic_dashboard_light"
-            android:title="@string/DashboardFragment"
+            android:title="@string/DashboardFragmentTitle"
             android:checked="true" />
         <item
             android:id="@+id/centersFragment"
             android:icon="@drawable/ic_center_light"
-            android:title="@string/CentersFragment" />
+            android:title="@string/CentersFragmentTitle" />
         <item
             android:id="@+id/usersFragment"
             android:icon="@drawable/ic_users_light"
-            android:title="@string/UsersFragment" />
+            android:title="@string/UsersFragmentTitle" />
         <item
             android:id="@+id/scalesFragment"
             android:icon="@drawable/ic_scale_light"
-            android:title="@string/ScalesFragment" />
+            android:title="@string/ScalesFragmentTitle" />
         <item
             android:id="@+id/samplesFragment"
             android:icon="@drawable/ic_sample_light"
-            android:title="@string/SamplesFragment" />
+            android:title="@string/SamplesFragmentTitle" />
         <item
             android:id="@+id/documentsFragment"
             android:icon="@drawable/ic_document_light"
-            android:title="@string/DocumentsFragment" />
+            android:title="@string/DocumentsFragmentTitle" />
         <item
             android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_setting_light"
-            android:title="@string/SettingsFragment" />
+            android:title="@string/SettingsFragmentTitle" />
     </group>
 
 </menu>

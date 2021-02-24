@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Default;
+package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.os.Build;
 import android.os.Bundle;

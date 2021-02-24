@@ -30,19 +30,65 @@
     <string name="MainToolbar">کاربر آزمایشی</string>
     <string name="MainHeader">ریسلو</string>
 
-    <string name="AccountFragment">حساب من</string>
-    <string name="EditAccountFragment">ویرایش من</string>
+    /*
+    ---------- Account Fragment ----------
+    */
 
+    <string name="AccountFragmentTitle">حساب من</string>
     <string name="AccountFragmentEdit">ویرایش</string>
 
-    <string name="DashboardFragment">پیش‌خوان</string>
-    <string name="CentersFragment">مراکز درمانی</string>
-    <string name="MyCentersFragment">مراکز درمانی من</string>
-    <string name="UsersFragment">کاربران</string>
-    <string name="ScalesFragment">ارزیابی‌ها</string>
-    <string name="SamplesFragment">نمونه‌ها</string>
-    <string name="DocumentsFragment">مدارک و اعتبارنامه</string>
-    <string name="SettingsFragment">تنظیمات</string>
+    /*
+    ---------- EditAccount Fragment ----------
+    */
+
+    <string name="EditAccountFragmentTitle">ویرایش من</string>
+
+    /*
+    ---------- Dashboard Fragment ----------
+    */
+
+    <string name="DashboardFragmentTitle">پیش‌خوان</string>
+
+    /*
+    ---------- Centers Fragment ----------
+    */
+    <string name="CentersFragmentTitle">مراکز درمانی</string>
+
+    /*
+    ---------- MyCenters Fragment ----------
+    */
+
+    <string name="MyCentersFragmentTitle">مراکز درمانی من</string>
+
+    /*
+    ---------- Users Fragment ----------
+    */
+
+    <string name="UsersFragmentTitle">کاربران</string>
+
+    /*
+    ---------- Scales Fragment ----------
+    */
+
+    <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
+
+    /*
+    ---------- Samples Fragment ----------
+    */
+
+    <string name="SamplesFragmentTitle">نمونه‌ها</string>
+
+    /*
+    ---------- Documents Fragment ----------
+    */
+
+    <string name="DocumentsFragmentTitle">مدارک و اعتبارنامه</string>
+
+    /*
+    ---------- Settings Fragment ----------
+    */
+
+    <string name="SettingsFragmentTitle">تنظیمات</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

@@ -7,8 +7,8 @@
 
     <fragment
         android:id="@+id/dashboardFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Default.DashboardFragment"
-        android:label="@string/DashboardFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.DashboardFragment"
+        android:label="@string/DashboardFragmentTitle"
         tools:layout="@layout/fragment_dashboard">
         <action
             android:id="@+id/action_dashboardFragment_to_centersFragment"
@@ -36,43 +36,43 @@
     <fragment
         android:id="@+id/centersFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.CentersFragment"
-        android:label="@string/CentersFragment"
+        android:label="@string/CentersFragmentTitle"
         tools:layout="@layout/fragment_centers" />
 
     <fragment
         android:id="@+id/usersFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.UsersFragment"
-        android:label="@string/UsersFragment"
+        android:label="@string/UsersFragmentTitle"
         tools:layout="@layout/fragment_users" />
 
     <fragment
         android:id="@+id/scalesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.ScalesFragment"
-        android:label="@string/ScalesFragment"
+        android:label="@string/ScalesFragmentTitle"
         tools:layout="@layout/fragment_scales" />
 
     <fragment
         android:id="@+id/samplesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.SamplesFragment"
-        android:label="@string/SamplesFragment"
+        android:label="@string/SamplesFragmentTitle"
         tools:layout="@layout/fragment_samples" />
 
     <fragment
         android:id="@+id/documentsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.DocumentsFragment"
-        android:label="@string/DocumentsFragment"
+        android:label="@string/DocumentsFragmentTitle"
         tools:layout="@layout/fragment_documents" />
 
     <fragment
         android:id="@+id/settingsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.SettingsFragment"
-        android:label="@string/SettingsFragment"
+        android:label="@string/SettingsFragmentTitle"
         tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Default.AccountFragment"
-        android:label="@string/AccountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.AccountFragment"
+        android:label="@string/AccountFragmentTitle"
         tools:layout="@layout/fragment_account">
         <action
             android:id="@+id/action_accountFragment_to_editAccountFragment"
@@ -82,7 +82,7 @@
     <fragment
         android:id="@+id/editAccountFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
-        android:label="@string/EditAccountFragment"
+        android:label="@string/EditAccountFragmentTitle"
         tools:layout="@layout/fragment_edit_account" />
 
 </navigation>
