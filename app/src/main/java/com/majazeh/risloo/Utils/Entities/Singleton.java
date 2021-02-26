@@ -47,9 +47,16 @@ public class Singleton {
         return "";
     }
 
-    public String getMobile() {
-        if (!sharedPreferences.getString("mobile", "").equals("")) {
-            return sharedPreferences.getString("mobile", "");
+    public String getEducation() {
+        if (!sharedPreferences.getString("education", "").equals("")) {
+            return sharedPreferences.getString("education", "");
+        }
+        return "";
+    }
+
+    public String getBirthday() {
+        if (!sharedPreferences.getString("birthday", "").equals("")) {
+            return sharedPreferences.getString("birthday", "");
         }
         return "";
     }
@@ -61,9 +68,9 @@ public class Singleton {
         return "";
     }
 
-    public String getBirthday() {
-        if (!sharedPreferences.getString("birthday", "").equals("")) {
-            return sharedPreferences.getString("birthday", "");
+    public String getMobile() {
+        if (!sharedPreferences.getString("mobile", "").equals("")) {
+            return sharedPreferences.getString("mobile", "");
         }
         return "";
     }

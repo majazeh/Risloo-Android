@@ -27,7 +27,8 @@ public class AccountFragment extends Fragment {
     // Widgets
     private CircleImageView avatarCircleImageView;
     private TextView charTextView;
-    private TextView nameTextView, usernameTextView, mobileTextView, emailTextView, birthdayTextView;
+    private TextView nameTextView, usernameTextView, educationTextView, birthdayTextView, emailTextView, mobileTextView;
+    private ImageView badgeImageView, educationImageView, birthdayImageView, emailImageView, mobileImageView;
     private ImageView enterImageView;
     private TextView editTextView;
 
@@ -54,9 +55,16 @@ public class AccountFragment extends Fragment {
 
         nameTextView = view.findViewById(R.id.fragment_account_name_textView);
         usernameTextView = view.findViewById(R.id.fragment_account_username_textView);
-        mobileTextView = view.findViewById(R.id.fragment_account_mobile_textView);
-        emailTextView = view.findViewById(R.id.fragment_account_email_textView);
+        educationTextView = view.findViewById(R.id.fragment_account_education_textView);
         birthdayTextView = view.findViewById(R.id.fragment_account_birthday_textView);
+        emailTextView = view.findViewById(R.id.fragment_account_email_textView);
+        mobileTextView = view.findViewById(R.id.fragment_account_mobile_textView);
+
+        badgeImageView = view.findViewById(R.id.fragment_account_badge_imageView);
+        educationImageView = view.findViewById(R.id.fragment_account_education_imageView);
+        birthdayImageView = view.findViewById(R.id.fragment_account_birthday_imageView);
+        emailImageView = view.findViewById(R.id.fragment_account_email_imageView);
+        mobileImageView = view.findViewById(R.id.fragment_account_mobile_imageView);
 
         enterImageView = view.findViewById(R.id.fragment_account_enter_imageView);
         enterImageView.setImageResource(R.drawable.ic_user_cog_light);
@@ -110,27 +118,37 @@ public class AccountFragment extends Fragment {
         }
 
         if (((MainActivity) getActivity()).singleton.getUsername().equals("")) {
-            usernameTextView.setText("نامعلوم");
+            usernameTextView.setVisibility(View.GONE);
         } else {
             usernameTextView.setText(((MainActivity) getActivity()).singleton.getUsername());
         }
 
-        if (((MainActivity) getActivity()).singleton.getMobile().equals("")) {
-            mobileTextView.setText("نامعلوم");
+        if (((MainActivity) getActivity()).singleton.getEducation().equals("")) {
+            educationTextView.setVisibility(View.GONE);
+            educationImageView.setVisibility(View.GONE);
         } else {
-            mobileTextView.setText(((MainActivity) getActivity()).singleton.getMobile());
+            educationTextView.setText(((MainActivity) getActivity()).singleton.getEducation());
+        }
+
+        if (((MainActivity) getActivity()).singleton.getBirthday().equals("")) {
+            birthdayTextView.setVisibility(View.GONE);
+            birthdayImageView.setVisibility(View.GONE);
+        } else {
+            birthdayTextView.setText(((MainActivity) getActivity()).singleton.getBirthday());
         }
 
         if (((MainActivity) getActivity()).singleton.getEmail().equals("")) {
-            emailTextView.setText("نامعلوم");
+            emailTextView.setVisibility(View.GONE);
+            emailImageView.setVisibility(View.GONE);
         } else {
             emailTextView.setText(((MainActivity) getActivity()).singleton.getEmail());
         }
 
-        if (((MainActivity) getActivity()).singleton.getBirthday().equals("")) {
-            birthdayTextView.setText("1400-01-01");
+        if (((MainActivity) getActivity()).singleton.getMobile().equals("")) {
+            mobileTextView.setVisibility(View.GONE);
+            mobileImageView.setVisibility(View.GONE);
         } else {
-            birthdayTextView.setText(((MainActivity) getActivity()).singleton.getBirthday());
+            mobileTextView.setText(((MainActivity) getActivity()).singleton.getMobile());
         }
 
         if (((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
