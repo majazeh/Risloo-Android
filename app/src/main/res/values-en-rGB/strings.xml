@@ -6,6 +6,7 @@
 
     <string name="AppName">ریسلو بتا</string>
 
+    <string name="AppSearchHint">جستجو</string>
     <string name="AppImageContent">عکس</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -232,6 +233,9 @@
 
     <string name="AccountFragmentTitle">حساب من</string>
     <string name="AccountFragmentEdit">ویرایش</string>
+
+    <string name="AccountFragmentDocumentsHeader">مدارک و اعتبارنامه‌ها</string>
+    <string name="AccountFragmentDocumentsAdd">افزودن مدرک</string>
 
     /*
     ---------- Case Fragment ----------

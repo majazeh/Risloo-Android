@@ -83,6 +83,16 @@
         android:id="@+id/editAccountFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
         android:label="@string/EditAccountFragmentTitle"
-        tools:layout="@layout/fragment_edit_account" />
+        tools:layout="@layout/fragment_edit_account" >
+        <action
+            android:id="@+id/action_editAccountFragment_to_createDocumentFragment"
+            app:destination="@id/createDocumentFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createDocumentFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment"
+        android:label="@string/CreateDocumentFragmentTitle"
+        tools:layout="@layout/fragment_create_document" />
 
 </navigation>
