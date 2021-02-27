@@ -78,6 +78,8 @@ public class MainActivity extends AppCompatActivity {
 
         handler = new Handler();
 
+        controlEditText = new ControlEditText();
+
         drawerLayout = findViewById(R.id.activity_main);
 
         navigationView = findViewById(R.id.activity_main_navigationView);

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/navigation_auth"
+    app:startDestination="@id/loginFragment">
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.LoginFragment"
+        android:label="@string/LoginFragmentTitle"
+        tools:layout="@layout/fragment_login" >
+        <action
+            android:id="@+id/action_loginFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_mobileFragment"
+            app:destination="@id/mobileFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_pinFragment"
+            app:destination="@id/pinFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_passwordFragment"
+            app:destination="@id/passwordFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_passwordChangeFragment"
+            app:destination="@id/passwordChangeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_passwordRecoverFragment"
+            app:destination="@id/passwordRecoverFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_serialFragment"
+            app:destination="@id/serialFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.RegisterFragment"
+        android:label="@string/RegisterFragmentTitle"
+        tools:layout="@layout/fragment_register" />
+
+    <fragment
+        android:id="@+id/mobileFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.MobileFragment"
+        android:label="@string/MobileFragmentTitle"
+        tools:layout="@layout/fragment_mobile" />
+
+    <fragment
+        android:id="@+id/pinFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.PinFragment"
+        android:label="@string/PinFragmentTitle"
+        tools:layout="@layout/fragment_pin" />
+
+    <fragment
+        android:id="@+id/passwordFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.PasswordFragment"
+        android:label="@string/PasswordFragmentTitle"
+        tools:layout="@layout/fragment_password" />
+
+    <fragment
+        android:id="@+id/passwordChangeFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.PasswordChangeFragment"
+        android:label="@string/PasswordChangeFragmentTitle"
+        tools:layout="@layout/fragment_password_change" />
+
+    <fragment
+        android:id="@+id/passwordRecoverFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.PasswordRecoverFragment"
+        android:label="@string/PasswordRecoverFragmentTitle"
+        tools:layout="@layout/fragment_password_recover" />
+
+    <fragment
+        android:id="@+id/serialFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.SerialFragment"
+        android:label="@string/SerialFragmentTitle"
+        tools:layout="@layout/fragment_serial" />
+
+</navigation>

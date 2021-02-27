@@ -21,23 +21,40 @@
     // Auth Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <string name="AuthHeader">ریسلو</string>
+
+    <string name="AuthLogin">ورود</string>
+    <string name="AuthRegister">عضویت</string>
+    <string name="AuthPasswordRecover">فراموشی کلمه عبور</string>
+
     /*
     ---------- Login Fragment ----------
     */
 
     <string name="LoginFragmentTitle">ورود</string>
 
+    <string name="LoginFragmentInput">موبایل، ایمیل یا نام کاربری</string>
+    <string name="LoginFragmentButton">ورود</string>
+
     /*
     ---------- Register Fragment ----------
     */
 
-    <string name="RegisterFragmentTitle">ثبت نام</string>
+    <string name="RegisterFragmentTitle">عضویت</string>
+
+    <string name="RegisterFragmentName">نام و نام خانوادگی</string>
+    <string name="RegisterFragmentMobile">تلفن همراه</string>
+    <string name="RegisterFragmentPassword">کلمه عبور</string>
+    <string name="RegisterFragmentButton">عضویت</string>
 
     /*
     ---------- Mobile Fragment ----------
     */
 
-    <string name="MobileFragmentTitle">شماره همراه</string>
+    <string name="MobileFragmentTitle">تلفن همراه</string>
+
+    <string name="MobileFragmentInput">تلفن همراه</string>
+    <string name="MobileFragmentButton">بررسی</string>
 
     /*
     ---------- Pin Fragment ----------
@@ -45,11 +62,19 @@
 
     <string name="PinFragmentTitle">کد پیامکی</string>
 
+    <string name="PinFragmentInput">کد پیامکی</string>
+    <string name="PinFragmentButton">بررسی</string>
+    <string name="PinFragmentLink">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
+    <string name="PinFragmentTimer">کد پیامکی به شما ارسال شد :</string>
+
     /*
     ---------- Password Fragment ----------
     */
 
     <string name="PasswordFragmentTitle">کلمه عبور</string>
+
+    <string name="PasswordFragmentInput">کلمه عبور</string>
+    <string name="PasswordFragmentButton">بررسی</string>
 
     /*
     ---------- PasswordChange Fragment ----------
@@ -57,17 +82,26 @@
 
     <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
 
+    <string name="PasswordChangeInput">کلمه عبور جديد</string>
+    <string name="PasswordChangeButton">تغییر</string>
+
     /*
     ---------- PasswordRecover Fragment ----------
     */
 
     <string name="PasswordRecoverFragmentTitle">بازیابی کلمه عبور</string>
 
+    <string name="PasswordRecoverInput">تلفن همراه</string>
+    <string name="PasswordRecoverButton">دریافت کد</string>
+
     /*
     ---------- Serial Fragment ----------
     */
 
     <string name="SerialFragmentTitle">سریال نمونه</string>
+
+    <string name="SerialFragmentInput">سریال نمونه</string>
+    <string name="SerialFragmentButton">شروع</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

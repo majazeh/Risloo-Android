@@ -6,13 +6,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/White"
+    android:background="@color/Gray50"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:layoutDirection="rtl"
     tools:context=".Views.Activities.AuthActivity">
 
-
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/activity_auth_nav_host_fragment"
+        android:name="androidx.navigation.fragment.NavHostFragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/activity_auth_bottom_view"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:defaultNavHost="true"
+        app:navGraph="@navigation/navigation_auth" />
 
     <View
         android:id="@+id/activity_auth_bottom_view"

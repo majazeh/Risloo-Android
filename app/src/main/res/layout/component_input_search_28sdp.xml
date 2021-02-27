@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/component_input_search_28sdp"
-    android:layout_width="@dimen/_200sdp"
+    android:layout_width="match_parent"
     android:layout_height="@dimen/_28sdp"
     android:layout_gravity="center"
     android:paddingStart="@dimen/_8sdp"
@@ -20,4 +20,5 @@
     android:fontFamily="@font/dana_regular"
     android:importantForAutofill="no"
     android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-    android:layoutDirection="rtl" />
+    android:layoutDirection="rtl"
+    tools:layout_margin="@dimen/_16sdp" />

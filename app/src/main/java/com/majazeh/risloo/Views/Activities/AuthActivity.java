@@ -1,8 +1,9 @@
 package com.majazeh.risloo.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
@@ -10,6 +11,9 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+
+import java.util.Objects;
 
 public class AuthActivity extends AppCompatActivity {
 
@@ -17,7 +21,10 @@ public class AuthActivity extends AppCompatActivity {
     private Singleton singleton;
 
     // Objects
-    private Handler handler;
+    public Handler handler;
+    public ControlEditText controlEditText;
+    private NavHostFragment navHostFragment;
+    public NavController navController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,45 +36,38 @@ public class AuthActivity extends AppCompatActivity {
 
         initializer();
 
-        detector();
-
-        listener();
-
-        setData();
-
-        navigator();
+//        navigator();
     }
 
     private void decorator() {
         WindowDecorator windowDecorator = new WindowDecorator();
 
         windowDecorator.lightShowSystemUI(this);
-        windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+        windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
     }
 
     private void initializer() {
         singleton = new Singleton(this);
 
         handler = new Handler();
-    }
 
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            // TODO : Place Code Here
-        }
-    }
+        controlEditText = new ControlEditText();
 
-    private void listener() {
-        // TODO : Place Code Here
-    }
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.activity_auth_nav_host_fragment);
 
-    private void setData() {
-        // TODO : Place Code Here
+        navController = Objects.requireNonNull(navHostFragment).getNavController();
     }
 
     private void navigator() {
         IntentManager.main(this);
         singleton.setAuth(false);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!navController.popBackStack()) {
+            finish();
+        }
     }
 
 }
