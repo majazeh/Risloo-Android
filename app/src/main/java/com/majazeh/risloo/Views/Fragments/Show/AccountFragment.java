@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Show;
 
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.Editable;
@@ -22,16 +23,12 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
-
-    // Objects
-    private ControlEditText controlEditText;
 
     // Widgets
     private CircleImageView avatarCircleImageView;
@@ -65,8 +62,6 @@ public class AccountFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        controlEditText = new ControlEditText();
-
         avatarCircleImageView = view.findViewById(R.id.component_avatar_oval_86sdp_circleImageView);
 
         charTextView = view.findViewById(R.id.component_avatar_oval_86sdp_textView);
@@ -125,13 +120,14 @@ public class AccountFragment extends Fragment {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         avatarCircleImageView.setOnClickListener(v -> {
             avatarCircleImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
 
-            if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
-                controlEditText.clear(getActivity(), controlEditText.input());
+            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
             }
 
             if (!((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
@@ -143,8 +139,8 @@ public class AccountFragment extends Fragment {
             editTextView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> editTextView.setClickable(true), 300);
 
-            if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
-                controlEditText.clear(getActivity(), controlEditText.input());
+            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
             }
 
             ((MainActivity) getActivity()).navController.navigate(R.id.editAccountFragment);
@@ -154,8 +150,8 @@ public class AccountFragment extends Fragment {
             enterImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> enterImageView.setClickable(true), 300);
 
-            if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
-                controlEditText.clear(getActivity(), controlEditText.input());
+            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
             }
 
             // TODO : Enter User From Another Account
@@ -164,12 +160,12 @@ public class AccountFragment extends Fragment {
         documentsSearchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!documentsSearchEditText.hasFocus()) {
-                    if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
-                        controlEditText.clear(getActivity(), controlEditText.input());
+                    if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+                        ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
                     }
 
-                    controlEditText.focus(documentsSearchEditText);
-                    controlEditText.select(documentsSearchEditText);
+                    ((MainActivity) getActivity()).controlEditText.focus(documentsSearchEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(documentsSearchEditText);
                 }
             }
             return false;
@@ -207,8 +203,8 @@ public class AccountFragment extends Fragment {
             documentsAddConstraintLayout.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> documentsAddConstraintLayout.setClickable(true), 300);
 
-            if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
-                controlEditText.clear(getActivity(), controlEditText.input());
+            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
             }
 
             ((MainActivity) getActivity()).navController.navigate(R.id.createDocumentFragment);

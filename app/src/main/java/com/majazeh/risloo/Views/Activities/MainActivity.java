@@ -24,6 +24,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     // Objects
     public Handler handler;
+    public ControlEditText controlEditText;
     private NavHostFragment navHostFragment;
     public NavController navController;
 
