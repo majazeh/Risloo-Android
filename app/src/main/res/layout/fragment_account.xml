@@ -245,7 +245,7 @@
 
     <include
         android:id="@+id/fragment_account_documents_search_editText"
-        layout="@layout/component_input_rectangle_28sdp"
+        layout="@layout/component_input_search_28sdp"
         android:layout_width="0dp"
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_6sdp"
