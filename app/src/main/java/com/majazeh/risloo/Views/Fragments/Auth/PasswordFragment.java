@@ -27,11 +27,11 @@ import com.majazeh.risloo.Views.Activities.AuthActivity;
 public class PasswordFragment extends Fragment {
 
     // Vars
-    private String input = "";
+    private String password = "";
     private boolean passwordVisibility = false;
 
     // Widgets
-    private CutCopyPasteEditText inputEditText;
+    private CutCopyPasteEditText passwordEditText;
     private ImageView passwordImageView;
     private ImageView errorImageView;
     private TextView errorTextView;
@@ -53,8 +53,8 @@ public class PasswordFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        inputEditText = view.findViewById(R.id.component_auth_input_password_editText);
-        inputEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
+        passwordEditText = view.findViewById(R.id.component_auth_input_password_editText);
+        passwordEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
 
         passwordImageView = view.findViewById(R.id.component_auth_input_password_imageView);
 
@@ -81,21 +81,21 @@ public class PasswordFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        inputEditText.setOnTouchListener((v, event) -> {
+        passwordEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!inputEditText.hasFocus()) {
+                if (!passwordEditText.hasFocus()) {
                     if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
                         ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(),"auth");
                     }
 
-                    ((AuthActivity) getActivity()).controlEditText.focus(inputEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(inputEditText, "auth");
+                    ((AuthActivity) getActivity()).controlEditText.focus(passwordEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(passwordEditText, "auth");
                 }
             }
             return false;
         });
 
-        inputEditText.addTextChangedListener(new TextWatcher() {
+        passwordEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -103,9 +103,9 @@ public class PasswordFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (inputEditText.length() == 0) {
+                if (passwordEditText.length() == 0) {
                     passwordImageView.setVisibility(View.INVISIBLE);
-                } else if (inputEditText.length() == 1) {
+                } else if (passwordEditText.length() == 1) {
                     passwordImageView.setVisibility(View.VISIBLE);
                 }
             }
@@ -116,7 +116,7 @@ public class PasswordFragment extends Fragment {
             }
         });
 
-        inputEditText.setOnCutCopyPasteListener(new CutCopyPasteEditText.OnCutCopyPasteListener() {
+        passwordEditText.setOnCutCopyPasteListener(new CutCopyPasteEditText.OnCutCopyPasteListener() {
             @Override
             public void onCut() {
 
@@ -129,7 +129,7 @@ public class PasswordFragment extends Fragment {
 
             @Override
             public void onPaste() {
-                if (inputEditText.length() != 0) {
+                if (passwordEditText.length() != 0) {
                     passwordImageView.setVisibility(View.VISIBLE);
                 }
             }
@@ -141,13 +141,13 @@ public class PasswordFragment extends Fragment {
                 passwordImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
 
                 ImageViewCompat.setImageTintList(passwordImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue800));
-                inputEditText.setTransformationMethod(null);
+                passwordEditText.setTransformationMethod(null);
             } else {
                 passwordVisibility = false;
                 passwordImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
 
                 ImageViewCompat.setImageTintList(passwordImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray600));
-                inputEditText.setTransformationMethod(new PasswordTransformationMethod());
+                passwordEditText.setTransformationMethod(new PasswordTransformationMethod());
             }
         });
 
@@ -159,10 +159,10 @@ public class PasswordFragment extends Fragment {
                 ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
-            if (inputEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), inputEditText, "auth");
+            if (passwordEditText.length() == 0) {
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), passwordEditText, "auth");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), passwordEditText, "auth");
                 doWork();
             }
         });
@@ -202,7 +202,7 @@ public class PasswordFragment extends Fragment {
     }
 
     private void doWork() {
-        input = inputEditText.getText().toString().trim();
+        password = passwordEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

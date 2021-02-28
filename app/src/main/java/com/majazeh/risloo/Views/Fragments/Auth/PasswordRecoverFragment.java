@@ -23,10 +23,10 @@ import com.majazeh.risloo.Views.Activities.AuthActivity;
 public class PasswordRecoverFragment extends Fragment {
 
     // Vars
-    private String input = "";
+    private String mobile = "";
 
     // Widgets
-    private EditText inputEditText;
+    private EditText mobileEditText;
     private ImageView errorImageView;
     private TextView errorTextView;
     private TextView passwordRecoverTextView;
@@ -47,8 +47,8 @@ public class PasswordRecoverFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        inputEditText = view.findViewById(R.id.component_auth_input_number_editText);
-        inputEditText.setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
+        mobileEditText = view.findViewById(R.id.component_auth_input_number_editText);
+        mobileEditText.setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
 
         errorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
 
@@ -71,21 +71,21 @@ public class PasswordRecoverFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        inputEditText.setOnTouchListener((v, event) -> {
+        mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!inputEditText.hasFocus()) {
+                if (!mobileEditText.hasFocus()) {
                     if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
                         ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(),"auth");
                     }
 
-                    ((AuthActivity) getActivity()).controlEditText.focus(inputEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(inputEditText, "auth");
+                    ((AuthActivity) getActivity()).controlEditText.focus(mobileEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(mobileEditText, "auth");
                 }
             }
             return false;
         });
 
-        inputEditText.addTextChangedListener(new TextWatcher() {
+        mobileEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -93,8 +93,8 @@ public class PasswordRecoverFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (inputEditText.length() == 11) {
-                    ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
+                if (mobileEditText.length() == 11) {
+                    ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), mobileEditText, "auth");
                     doWork();
                 }
             }
@@ -113,10 +113,10 @@ public class PasswordRecoverFragment extends Fragment {
                 ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
-            if (inputEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), inputEditText, "auth");
+            if (mobileEditText.length() == 0) {
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), mobileEditText, "auth");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), mobileEditText, "auth");
                 doWork();
             }
         });
@@ -145,7 +145,7 @@ public class PasswordRecoverFragment extends Fragment {
     }
 
     private void doWork() {
-        input = inputEditText.getText().toString().trim();
+        mobile = mobileEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

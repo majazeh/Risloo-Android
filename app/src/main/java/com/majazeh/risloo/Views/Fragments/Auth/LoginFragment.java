@@ -23,10 +23,10 @@ import com.majazeh.risloo.Views.Activities.AuthActivity;
 public class LoginFragment extends Fragment {
 
     // Vars
-    private String input = "";
+    private String username = "";
 
     // Widgets
-    private EditText inputEditText;
+    private EditText usernameEditText;
     private ImageView errorImageView;
     private TextView errorTextView;
     private TextView loginTextView;
@@ -47,8 +47,8 @@ public class LoginFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        inputEditText = view.findViewById(R.id.component_auth_input_text_editText);
-        inputEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
+        usernameEditText = view.findViewById(R.id.component_auth_input_text_editText);
+        usernameEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
 
         errorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
 
@@ -71,15 +71,15 @@ public class LoginFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        inputEditText.setOnTouchListener((v, event) -> {
+        usernameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!inputEditText.hasFocus()) {
+                if (!usernameEditText.hasFocus()) {
                     if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
                         ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
                     }
 
-                    ((AuthActivity) getActivity()).controlEditText.focus(inputEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(inputEditText, "auth");
+                    ((AuthActivity) getActivity()).controlEditText.focus(usernameEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(usernameEditText, "auth");
                 }
             }
             return false;
@@ -93,10 +93,10 @@ public class LoginFragment extends Fragment {
                 ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
-            if (inputEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), inputEditText, "auth");
+            if (usernameEditText.length() == 0) {
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), usernameEditText, "auth");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), usernameEditText, "auth");
                 doWork();
             }
         });
@@ -125,7 +125,7 @@ public class LoginFragment extends Fragment {
     }
 
     private void doWork() {
-        input = inputEditText.getText().toString().trim();
+        username = usernameEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }
