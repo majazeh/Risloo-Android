@@ -48,14 +48,14 @@ public class PasswordRecoverFragment extends Fragment {
 
     private void initializer(View view) {
         inputEditText = view.findViewById(R.id.component_auth_input_number_editText);
-        inputEditText.setHint(getResources().getString(R.string.PasswordRecoverInput));
+        inputEditText.setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
 
         errorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
 
         errorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
 
         passwordRecoverTextView = view.findViewById(R.id.fragment_password_recover_button_textView);
-        passwordRecoverTextView.setText(getResources().getString(R.string.PasswordRecoverButton));
+        passwordRecoverTextView.setText(getResources().getString(R.string.PasswordRecoverFragmentButton));
 
         loginTextView = view.findViewById(R.id.fragment_password_recover_login_textView);
         loginTextView.setText(getResources().getString(R.string.AuthLogin));

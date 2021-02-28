@@ -163,5 +163,4 @@ public class MobileFragment extends Fragment {
         // TODO : Call Work Method
     }
 
-
 }

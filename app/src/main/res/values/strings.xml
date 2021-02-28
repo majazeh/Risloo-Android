@@ -81,8 +81,8 @@
 
     <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
 
-    <string name="PasswordChangeInput">کلمه عبور جديد</string>
-    <string name="PasswordChangeButton">تغییر</string>
+    <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
+    <string name="PasswordChangeFragmentButton">تغییر</string>
 
     /*
     ---------- PasswordRecover Fragment ----------
@@ -90,8 +90,8 @@
 
     <string name="PasswordRecoverFragmentTitle">بازیابی کلمه عبور</string>
 
-    <string name="PasswordRecoverInput">تلفن همراه</string>
-    <string name="PasswordRecoverButton">دریافت کد</string>
+    <string name="PasswordRecoverFragmentInput">تلفن همراه</string>
+    <string name="PasswordRecoverFragmentButton">دریافت کد</string>
 
     /*
     ---------- Serial Fragment ----------
