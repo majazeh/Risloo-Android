@@ -1,30 +1,167 @@
 package com.majazeh.risloo.Views.Fragments.Auth;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Activities.AuthActivity;
 
 public class MobileFragment extends Fragment {
 
+    // Vars
+    private String input = "";
+
+    // Widgets
+    private EditText inputEditText;
+    private ImageView errorImageView;
+    private TextView errorTextView;
+    private TextView mobileTextView;
+    private TextView loginTextView, registerTextView, passwordRecoverTextView;
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mobile, viewGroup, false);
 
         initializer(view);
+
+        detector();
+
+        listener();
 
         return view;
     }
 
     private void initializer(View view) {
+        inputEditText = view.findViewById(R.id.component_auth_input_number_editText);
+        inputEditText.setHint(getResources().getString(R.string.MobileFragmentInput));
 
+        errorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
+
+        errorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
+
+        mobileTextView = view.findViewById(R.id.fragment_mobile_button_textView);
+        mobileTextView.setText(getResources().getString(R.string.MobileFragmentButton));
+
+        loginTextView = view.findViewById(R.id.fragment_mobile_login_textView);
+        loginTextView.setText(getResources().getString(R.string.AuthLogin));
+        registerTextView = view.findViewById(R.id.fragment_mobile_register_textView);
+        registerTextView.setText(getResources().getString(R.string.AuthRegister));
+        passwordRecoverTextView = view.findViewById(R.id.fragment_mobile_password_recover_textView);
+        passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
+
+    private void detector() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            mobileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener() {
+        inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!inputEditText.hasFocus()) {
+                    if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(),"auth");
+                    }
+
+                    ((AuthActivity) getActivity()).controlEditText.focus(inputEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(inputEditText, "auth");
+                }
+            }
+            return false;
+        });
+
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (inputEditText.length() == 11) {
+                    ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
+                    doWork();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        mobileTextView.setOnClickListener(v -> {
+            mobileTextView.setClickable(false);
+            ((AuthActivity) getActivity()).handler.postDelayed(() -> mobileTextView.setClickable(true), 300);
+
+            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+            }
+
+            if (inputEditText.length() == 0) {
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), inputEditText, "auth");
+            } else {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
+                doWork();
+            }
+        });
+
+        loginTextView.setOnClickListener(v -> {
+            loginTextView.setClickable(false);
+            ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+
+            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+            }
+
+            ((AuthActivity) getActivity()).navController.navigate(R.id.loginFragment);
+        });
+
+        registerTextView.setOnClickListener(v -> {
+            registerTextView.setClickable(false);
+            ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+
+            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+            }
+
+            ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
+        });
+
+        passwordRecoverTextView.setOnClickListener(v -> {
+            passwordRecoverTextView.setClickable(false);
+            ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+
+            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+            }
+
+            ((AuthActivity) getActivity()).navController.navigate(R.id.passwordChangeFragment);
+        });
+    }
+
+    private void doWork() {
+        input = inputEditText.getText().toString().trim();
+
+        // TODO : Call Work Method
+    }
+
 
 }
