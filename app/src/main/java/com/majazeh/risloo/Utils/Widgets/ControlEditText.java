@@ -21,21 +21,33 @@ public class ControlEditText {
         this.editText = editText;
     }
 
-    public void select(EditText editText) {
+    public void select(EditText editText, String theory) {
         editText.requestFocus();
-        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
+        if (theory.equals("auth")) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue500);
+        } else if (theory.equals("main")) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
+        }
     }
 
-    public void error(Activity activity, EditText editText) {
+    public void error(Activity activity, EditText editText, String theory) {
         editText.clearFocus();
-        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        if (theory.equals("auth")) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+        } else if (theory.equals("main")) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
 
         hideKeyboard(activity, editText);
     }
 
-    public void clear(Activity activity, EditText editText) {
+    public void clear(Activity activity, EditText editText, String theory) {
         editText.clearFocus();
-        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
+        if (theory.equals("auth")) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        } else if (theory.equals("main")) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
+        }
 
         hideKeyboard(activity, editText);
     }

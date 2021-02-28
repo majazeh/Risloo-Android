@@ -3,6 +3,8 @@ package com.majazeh.risloo.Views.Fragments.Auth;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,12 +47,12 @@ public class PasswordRecoverFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        inputEditText = view.findViewById(R.id.component_auth_input_text_editText);
+        inputEditText = view.findViewById(R.id.component_auth_input_number_editText);
         inputEditText.setHint(getResources().getString(R.string.PasswordRecoverInput));
 
-        errorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
+        errorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
 
-        errorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
+        errorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
 
         passwordRecoverTextView = view.findViewById(R.id.fragment_password_recover_button_textView);
         passwordRecoverTextView.setText(getResources().getString(R.string.PasswordRecoverButton));
@@ -73,14 +75,34 @@ public class PasswordRecoverFragment extends Fragment {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!inputEditText.hasFocus()) {
                     if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
+                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(),"auth");
                     }
 
                     ((AuthActivity) getActivity()).controlEditText.focus(inputEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(inputEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(inputEditText, "auth");
                 }
             }
             return false;
+        });
+
+        inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (inputEditText.length() == 11) {
+                    ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
+                    doWork();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
@@ -88,13 +110,13 @@ public class PasswordRecoverFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
             if (inputEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), inputEditText);
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), inputEditText, "auth");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText);
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), inputEditText, "auth");
                 doWork();
             }
         });
@@ -104,7 +126,7 @@ public class PasswordRecoverFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.loginFragment);
@@ -115,7 +137,7 @@ public class PasswordRecoverFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
