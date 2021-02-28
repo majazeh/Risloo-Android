@@ -73,11 +73,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void navigator() {
-        if (singleton.getAuth()) {
-            handler.postDelayed(() -> IntentManager.auth(this), 1000);
-        } else {
-            handler.postDelayed(() -> IntentManager.main(this), 1000);
-        }
+        handler.postDelayed(() -> IntentManager.auth(this), 1000);
     }
 
     @Override

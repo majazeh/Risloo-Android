@@ -153,7 +153,7 @@ public class MobileFragment extends Fragment {
                 ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
-            ((AuthActivity) getActivity()).navController.navigate(R.id.passwordChangeFragment);
+            ((AuthActivity) getActivity()).navController.navigate(R.id.passwordRecoverFragment);
         });
     }
 

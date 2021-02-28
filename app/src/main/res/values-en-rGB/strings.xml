@@ -21,6 +21,7 @@
     // Auth Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <string name="AuthToolbar">کاربر آزمایشی</string>
     <string name="AuthHeader">ریسلو</string>
 
     <string name="AuthLogin">ورود</string>

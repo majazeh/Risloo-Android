@@ -30,6 +30,17 @@
         app:layout_constraintBottom_toTopOf="@+id/fragment_serial_button_textView"
         app:layout_constraintEnd_toEndOf="@+id/fragment_serial_button_textView"
         app:layout_constraintStart_toStartOf="@+id/fragment_serial_button_textView"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_serial_avatar_imageView" />
+
+    <include
+        android:id="@+id/fragment_serial_avatar_imageView"
+        layout="@layout/component_auth_avatar_square"
+        android:layout_width="@dimen/_64sdp"
+        android:layout_height="@dimen/_64sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_serial_input_editText"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_serial_input_editText"
+        app:layout_constraintStart_toStartOf="@+id/fragment_serial_input_editText"
         app:layout_constraintTop_toBottomOf="@+id/fragment_serial_header_textView" />
 
     <include
@@ -37,10 +48,10 @@
         layout="@layout/component_auth_header_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_18sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_serial_input_editText"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_serial_input_editText"
-        app:layout_constraintStart_toStartOf="@+id/fragment_serial_input_editText"
+        android:layout_marginBottom="@dimen/_12sdp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_serial_avatar_imageView"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_serial_avatar_imageView"
+        app:layout_constraintStart_toStartOf="@+id/fragment_serial_avatar_imageView"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 

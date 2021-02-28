@@ -89,9 +89,4 @@ public class Singleton {
         return "";
     }
 
-    public void setAuth(boolean bool) {
-        editor.putBoolean("auth", bool);
-        editor.apply();
-    }
-
 }

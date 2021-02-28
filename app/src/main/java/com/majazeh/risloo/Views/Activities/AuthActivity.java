@@ -9,7 +9,6 @@ import android.os.Handler;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 
@@ -18,7 +17,7 @@ import java.util.Objects;
 public class AuthActivity extends AppCompatActivity {
 
     // Singleton
-    private Singleton singleton;
+    public Singleton singleton;
 
     // Objects
     public Handler handler;
@@ -35,8 +34,6 @@ public class AuthActivity extends AppCompatActivity {
         setContentView(R.layout.activity_auth);
 
         initializer();
-
-//        navigator();
     }
 
     private void decorator() {
@@ -56,11 +53,6 @@ public class AuthActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.activity_auth_nav_host_fragment);
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
-    }
-
-    private void navigator() {
-        IntentManager.main(this);
-        singleton.setAuth(false);
     }
 
     @Override

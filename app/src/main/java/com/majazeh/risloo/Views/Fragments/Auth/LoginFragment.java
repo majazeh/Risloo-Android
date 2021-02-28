@@ -120,7 +120,7 @@ public class LoginFragment extends Fragment {
                 ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
             }
 
-            ((AuthActivity) getActivity()).navController.navigate(R.id.passwordRecoverFragment);
+            ((AuthActivity) getActivity()).navController.navigate(R.id.serialFragment);
         });
     }
 

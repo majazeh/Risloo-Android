@@ -20,6 +20,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.squareup.picasso.Picasso;
 
 public class SerialFragment extends Fragment {
 
@@ -27,6 +28,8 @@ public class SerialFragment extends Fragment {
     private String serial = "";
 
     // Widgets
+    private ImageView avatarImageView;
+    private TextView charTextView;
     private EditText serialEditText;
     private ImageView errorImageView;
     private TextView errorTextView;
@@ -44,10 +47,16 @@ public class SerialFragment extends Fragment {
 
         listener();
 
+        setData();
+
         return view;
     }
 
     private void initializer(View view) {
+        avatarImageView = view.findViewById(R.id.component_auth_avatar_square_imageView);
+
+        charTextView = view.findViewById(R.id.component_auth_avatar_square_textView);
+
         serialEditText = view.findViewById(R.id.component_auth_input_text_editText);
         serialEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
@@ -59,7 +68,7 @@ public class SerialFragment extends Fragment {
         serialTextView.setText(getResources().getString(R.string.SerialFragmentButton));
 
         dashboardTextView = view.findViewById(R.id.fragment_serial_dashboard_textView);
-        dashboardTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthDashboard), 0, 7, getResources().getColor(R.color.Gray900), Typeface.BOLD));
+        dashboardTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900), Typeface.BOLD));
         logoutTextView = view.findViewById(R.id.fragment_serial_logout_textView);
         logoutTextView.setText(getResources().getString(R.string.AuthLogout));
     }
@@ -123,6 +132,21 @@ public class SerialFragment extends Fragment {
 
             // TODO : Place Code Here
         });
+    }
+
+    private void setData() {
+        if (((AuthActivity) getActivity()).singleton.getAvatar().equals("")) {
+            charTextView.setVisibility(View.VISIBLE);
+            if (((AuthActivity) getActivity()).singleton.getName().equals("")) {
+                charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AuthToolbar)));
+            } else {
+                charTextView.setText(StringManager.firstChars(((AuthActivity) getActivity()).singleton.getName()));
+            }
+        } else {
+            charTextView.setVisibility(View.GONE);
+
+            Picasso.get().load(((AuthActivity) getActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(avatarImageView);
+        }
     }
 
     private void doWork() {
