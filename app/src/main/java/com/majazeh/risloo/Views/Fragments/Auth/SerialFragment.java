@@ -1,17 +1,37 @@
 package com.majazeh.risloo.Views.Fragments.Auth;
 
+import android.annotation.SuppressLint;
+import android.graphics.Typeface;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Activities.AuthActivity;
 
 public class SerialFragment extends Fragment {
+
+    // Vars
+    private String serial = "";
+
+    // Widgets
+    private EditText serialEditText;
+    private ImageView errorImageView;
+    private TextView errorTextView;
+    private TextView serialTextView;
+    private TextView dashboardTextView, logoutTextView;
 
     @Nullable
     @Override
@@ -20,11 +40,95 @@ public class SerialFragment extends Fragment {
 
         initializer(view);
 
+        detector();
+
+        listener();
+
         return view;
     }
 
     private void initializer(View view) {
+        serialEditText = view.findViewById(R.id.component_auth_input_text_editText);
+        serialEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
+        errorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
+
+        errorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
+
+        serialTextView = view.findViewById(R.id.fragment_serial_button_textView);
+        serialTextView.setText(getResources().getString(R.string.SerialFragmentButton));
+
+        dashboardTextView = view.findViewById(R.id.fragment_serial_dashboard_textView);
+        dashboardTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthDashboard), 0, 7, getResources().getColor(R.color.Gray900), Typeface.BOLD));
+        logoutTextView = view.findViewById(R.id.fragment_serial_logout_textView);
+        logoutTextView.setText(getResources().getString(R.string.AuthLogout));
+    }
+
+    private void detector() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            serialTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener() {
+        serialEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!serialEditText.hasFocus()) {
+                    if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                    }
+
+                    ((AuthActivity) getActivity()).controlEditText.focus(serialEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(serialEditText, "auth");
+                }
+            }
+            return false;
+        });
+
+        serialTextView.setOnClickListener(v -> {
+            serialTextView.setClickable(false);
+            ((AuthActivity) getActivity()).handler.postDelayed(() -> serialTextView.setClickable(true), 300);
+
+            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+            }
+
+            if (serialEditText.length() == 0) {
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, "auth");
+            } else {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), serialEditText, "auth");
+                doWork();
+            }
+        });
+
+        dashboardTextView.setOnClickListener(v -> {
+            dashboardTextView.setClickable(false);
+            ((AuthActivity) getActivity()).handler.postDelayed(() -> dashboardTextView.setClickable(true), 300);
+
+            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+            }
+
+            IntentManager.main(getActivity());
+        });
+
+        logoutTextView.setOnClickListener(v -> {
+            logoutTextView.setClickable(false);
+            ((AuthActivity) getActivity()).handler.postDelayed(() -> logoutTextView.setClickable(true), 300);
+
+            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+            }
+
+            // TODO : Place Code Here
+        });
+    }
+
+    private void doWork() {
+        serial = serialEditText.getText().toString().trim();
+
+        // TODO : Call Work Method
     }
 
 }

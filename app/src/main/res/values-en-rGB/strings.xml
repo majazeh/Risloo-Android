@@ -26,6 +26,8 @@
     <string name="AuthLogin">ورود</string>
     <string name="AuthRegister">عضویت</string>
     <string name="AuthPasswordRecover">فراموشی کلمه عبور</string>
+    <string name="AuthDashboard">پیش‌خوان</string>
+    <string name="AuthLogout">خروج</string>
 
     /*
     ---------- Login Fragment ----------
