@@ -44,7 +44,6 @@
 
     <string name="RegisterFragmentName">نام و نام خانوادگی</string>
     <string name="RegisterFragmentMobile">تلفن همراه</string>
-    <string name="RegisterFragmentPassword">کلمه عبور</string>
     <string name="RegisterFragmentButton">عضویت</string>
 
     /*

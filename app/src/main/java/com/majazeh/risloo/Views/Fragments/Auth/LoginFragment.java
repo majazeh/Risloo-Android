@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.Fragments.Auth;
 
 import android.annotation.SuppressLint;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 
 public class LoginFragment extends Fragment {
@@ -56,7 +58,7 @@ public class LoginFragment extends Fragment {
         loginTextView.setText(getResources().getString(R.string.LoginFragmentButton));
 
         registerTextView = view.findViewById(R.id.fragment_login_register_textView);
-        registerTextView.setText(getResources().getString(R.string.AuthRegister));
+        registerTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthRegister), 0, 5, getResources().getColor(R.color.Gray900), Typeface.BOLD));
         passwordRecoverTextView = view.findViewById(R.id.fragment_login_password_recover_textView);
         passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
