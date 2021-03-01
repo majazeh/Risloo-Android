@@ -126,9 +126,9 @@ public class AccountFragment extends Fragment {
             avatarCircleImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
 
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
-            }
+//            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+//                ((MainActivity) getActivity()).controlEditText.check(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
+//            }
 
             if (!((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(getActivity(), "", "", ((MainActivity) getActivity()).singleton.getAvatar());
@@ -139,9 +139,9 @@ public class AccountFragment extends Fragment {
             editTextView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> editTextView.setClickable(true), 300);
 
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
-            }
+//            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+//                ((MainActivity) getActivity()).controlEditText.check(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
+//            }
 
             ((MainActivity) getActivity()).navController.navigate(R.id.editAccountFragment);
         });
@@ -150,26 +150,26 @@ public class AccountFragment extends Fragment {
             enterImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> enterImageView.setClickable(true), 300);
 
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
-            }
+//            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+//                ((MainActivity) getActivity()).controlEditText.check(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
+//            }
 
             // TODO : Enter User From Another Account
         });
 
-        documentsSearchEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!documentsSearchEditText.hasFocus()) {
-                    if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
-                    }
-
-                    ((MainActivity) getActivity()).controlEditText.focus(documentsSearchEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(documentsSearchEditText, "main");
-                }
-            }
-            return false;
-        });
+//        documentsSearchEditText.setOnTouchListener((v, event) -> {
+//            if (MotionEvent.ACTION_UP == event.getAction()) {
+//                if (!documentsSearchEditText.hasFocus()) {
+//                    if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+//                        ((MainActivity) getActivity()).controlEditText.check(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
+//                    }
+//
+//                    ((MainActivity) getActivity()).controlEditText.focus(documentsSearchEditText);
+//                    ((MainActivity) getActivity()).controlEditText.select(documentsSearchEditText, "main");
+//                }
+//            }
+//            return false;
+//        });
 
         documentsSearchEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -203,9 +203,9 @@ public class AccountFragment extends Fragment {
             documentsAddConstraintLayout.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> documentsAddConstraintLayout.setClickable(true), 300);
 
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
-            }
+//            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
+//                ((MainActivity) getActivity()).controlEditText.check(getActivity(), ((MainActivity) getActivity()).controlEditText.input(), "main");
+//            }
 
             ((MainActivity) getActivity()).navController.navigate(R.id.createDocumentFragment);
         });

@@ -85,11 +85,11 @@ public class SerialFragment extends Fragment {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!serialEditText.hasFocus()) {
                     if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
                     }
 
                     ((AuthActivity) getActivity()).controlEditText.focus(serialEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(serialEditText, "auth");
+                    ((AuthActivity) getActivity()).controlEditText.select(serialEditText);
                 }
             }
             return false;
@@ -100,13 +100,13 @@ public class SerialFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> serialTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
             }
 
             if (serialEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, "auth");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, errorImageView, errorTextView, "فیلد خالی است.");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), serialEditText, "auth");
+                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), serialEditText, errorImageView, errorTextView);
                 doWork();
             }
         });
@@ -116,7 +116,7 @@ public class SerialFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> dashboardTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
             }
 
             IntentManager.main(getActivity());
@@ -127,7 +127,7 @@ public class SerialFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> logoutTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
             }
 
             // TODO : Place Code Here

@@ -1,8 +1,11 @@
 package com.majazeh.risloo.Utils.Widgets;
 
 import android.app.Activity;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.majazeh.risloo.R;
 
@@ -21,33 +24,38 @@ public class ControlEditText {
         this.editText = editText;
     }
 
-    public void select(EditText editText, String theory) {
+    public void select(EditText editText) {
         editText.requestFocus();
-        if (theory.equals("auth")) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue500);
-        } else if (theory.equals("main")) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
-        }
+        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue500);
     }
 
-    public void error(Activity activity, EditText editText, String theory) {
+    public void clear(Activity activity, EditText editText) {
         editText.clearFocus();
-        if (theory.equals("auth")) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
-        } else if (theory.equals("main")) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
-        }
+        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
 
         hideKeyboard(activity, editText);
     }
 
-    public void clear(Activity activity, EditText editText, String theory) {
+    public void error(Activity activity, EditText editText, ImageView imageView, TextView textView, String value) {
         editText.clearFocus();
-        if (theory.equals("auth")) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-        } else if (theory.equals("main")) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
-        }
+        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+
+        imageView.setVisibility(View.VISIBLE);
+
+        textView.setVisibility(View.VISIBLE);
+        textView.setText(value);
+
+        hideKeyboard(activity, editText);
+    }
+
+    public void check(Activity activity, EditText editText, ImageView imageView, TextView textView) {
+        editText.clearFocus();
+        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+
+        imageView.setVisibility(View.GONE);
+
+        textView.setVisibility(View.GONE);
+        textView.setText("");
 
         hideKeyboard(activity, editText);
     }

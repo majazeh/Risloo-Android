@@ -2,17 +2,181 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_pin"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/Gray50"
+    android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Auth.PinFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/PinFragmentTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <include
+        android:id="@+id/fragment_pin_button_textView"
+        layout="@layout/component_auth_button_text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_24sdp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_pin_viewFlipper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_input_editText" />
+
+    <include
+        android:id="@+id/fragment_pin_input_editText"
+        layout="@layout/component_auth_input_number"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:minHeight="@dimen/_36sdp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_pin_button_textView"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_pin_button_textView"
+        app:layout_constraintStart_toStartOf="@+id/fragment_pin_button_textView"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_header_textView" />
+
+    <include
+        android:id="@+id/fragment_pin_header_textView"
+        layout="@layout/component_auth_header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_18sdp"
+        app:layout_constraintBottom_toTopOf="@+id/fragment_pin_input_editText"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_pin_input_editText"
+        app:layout_constraintStart_toStartOf="@+id/fragment_pin_input_editText"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <ViewFlipper
+        android:id="@+id/fragment_pin_viewFlipper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_button_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/fragment_pin_login_textView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/fragment_pin_hint_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/PinFragmentTimer"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/fragment_pin_countdown_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_2sdp"
+                android:gravity="center"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="bold"
+                android:textColor="@color/Gray700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintTop_toTopOf="@id/fragment_pin_hint_textView"
+                app:layout_constraintBottom_toBottomOf="@id/fragment_pin_hint_textView"
+                app:layout_constraintStart_toEndOf="@id/fragment_pin_hint_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:text="05:00"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+            android:id="@+id/fragment_pin_timer_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray400"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular" />
+
+    </ViewFlipper>
+
+    <include
+        android:id="@+id/fragment_pin_login_textView"
+        layout="@layout/component_auth_link_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_32sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_separate_view"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_viewFlipper" />
+
+    <View
+        android:id="@+id/fragment_pin_separate_view"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:background="@color/Gray500"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_login_textView"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_register_textView"
+        app:layout_constraintStart_toEndOf="@+id/fragment_pin_login_textView"
+        app:layout_constraintTop_toTopOf="@+id/fragment_pin_login_textView" />
+
+    <include
+        android:id="@+id/fragment_pin_register_textView"
+        layout="@layout/component_auth_link_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_login_textView"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_separate_view2"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/fragment_pin_separate_view"
+        app:layout_constraintTop_toTopOf="@+id/fragment_pin_login_textView" />
+
+    <View
+        android:id="@+id/fragment_pin_separate_view2"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:background="@color/Gray500"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_register_textView"
+        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_password_recover_textView"
+        app:layout_constraintStart_toEndOf="@+id/fragment_pin_register_textView"
+        app:layout_constraintTop_toTopOf="@+id/fragment_pin_register_textView" />
+
+    <include
+        android:id="@+id/fragment_pin_password_recover_textView"
+        layout="@layout/component_auth_link_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_register_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_chainStyle="packed"
+        app:layout_constraintStart_toEndOf="@+id/fragment_pin_separate_view2"
+        app:layout_constraintTop_toTopOf="@+id/fragment_pin_register_textView" />
+
+    <ImageView
+        android:id="@+id/fragment_pin_illu_imageView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_32sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/illu_006"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/fragment_pin_button_textView"
+        app:layout_constraintStart_toStartOf="@+id/fragment_pin_button_textView"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_login_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

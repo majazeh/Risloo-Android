@@ -67,7 +67,7 @@
     <string name="PinFragmentInput">کد پیامکی</string>
     <string name="PinFragmentButton">بررسی</string>
     <string name="PinFragmentLink">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
-    <string name="PinFragmentTimer">کد پیامکی به شما ارسال شد :</string>
+    <string name="PinFragmentTimer">کد پیامکی برای شما ارسال شد :</string>
 
     /*
     ---------- Password Fragment ----------

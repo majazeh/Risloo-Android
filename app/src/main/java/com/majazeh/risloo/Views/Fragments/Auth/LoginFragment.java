@@ -75,11 +75,11 @@ public class LoginFragment extends Fragment {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!usernameEditText.hasFocus()) {
                     if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
                     }
 
                     ((AuthActivity) getActivity()).controlEditText.focus(usernameEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(usernameEditText, "auth");
+                    ((AuthActivity) getActivity()).controlEditText.select(usernameEditText);
                 }
             }
             return false;
@@ -90,13 +90,13 @@ public class LoginFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
             }
 
             if (usernameEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), usernameEditText, "auth");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), usernameEditText, errorImageView, errorTextView, "فیلد خالی است.");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), usernameEditText, "auth");
+                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), usernameEditText, errorImageView, errorTextView);
                 doWork();
             }
         });
@@ -106,7 +106,7 @@ public class LoginFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
             }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
@@ -117,7 +117,7 @@ public class LoginFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
 
             if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input(), "auth");
+                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
             }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.serialFragment);
