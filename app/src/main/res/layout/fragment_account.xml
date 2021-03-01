@@ -36,7 +36,7 @@
 
         <include
             android:id="@+id/fragment_account_avatar_circleImageView"
-            layout="@layout/component_account_avatar_oval"
+            layout="@layout/component_avatar_oval_86sdp"
             android:layout_width="@dimen/_86sdp"
             android:layout_height="@dimen/_86sdp"
             android:layout_marginStart="@dimen/_12sdp"
@@ -237,7 +237,7 @@
 
     <include
         android:id="@+id/fragment_account_documents_header_constraintLayout"
-        layout="@layout/component_main_header_text"
+        layout="@layout/component_index_header_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_18sdp"
@@ -246,7 +246,7 @@
 
     <include
         android:id="@+id/fragment_account_documents_search_editText"
-        layout="@layout/component_main_input_search"
+        layout="@layout/component_index_input_search"
         android:layout_width="0dp"
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_6sdp"

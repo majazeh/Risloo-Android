@@ -2,7 +2,7 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_account_badge_oval"
+    android:id="@+id/component_main_badge_oval"
     android:layout_width="@dimen/_16sdp"
     android:layout_height="@dimen/_16sdp"
     android:layout_gravity="center"

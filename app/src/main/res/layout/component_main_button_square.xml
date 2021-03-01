@@ -2,7 +2,7 @@
 <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_button_square_36sdp"
+    android:id="@+id/component_main_button_square"
     android:layout_width="@dimen/_36sdp"
     android:layout_height="@dimen/_36sdp"
     android:layout_gravity="center"

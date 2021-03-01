@@ -62,9 +62,9 @@ public class AccountFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        avatarCircleImageView = view.findViewById(R.id.component_account_avatar_oval_circleImageView);
+        avatarCircleImageView = view.findViewById(R.id.component_avatar_oval_86sdp_circleImageView);
 
-        charTextView = view.findViewById(R.id.component_account_avatar_oval_textView);
+        charTextView = view.findViewById(R.id.component_avatar_oval_86sdp_textView);
 
         nameTextView = view.findViewById(R.id.fragment_account_name_textView);
         usernameTextView = view.findViewById(R.id.fragment_account_username_textView);
@@ -89,9 +89,9 @@ public class AccountFragment extends Fragment {
         enterImageView.setImageResource(R.drawable.ic_user_cog_light);
         ImageViewCompat.setImageTintList(enterImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray500));
 
-        documentsTitleTextView = view.findViewById(R.id.component_main_header_text_title_textView);
+        documentsTitleTextView = view.findViewById(R.id.component_index_header_text_title_textView);
         documentsTitleTextView.setText(getResources().getString(R.string.AccountFragmentDocumentsHeader));
-        documentsCountTextView = view.findViewById(R.id.component_main_header_text_count_textView);
+        documentsCountTextView = view.findViewById(R.id.component_index_header_text_count_textView);
 
         documentsSearchEditText = view.findViewById(R.id.fragment_account_documents_search_editText);
 
