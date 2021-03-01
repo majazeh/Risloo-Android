@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_avatar_oval_86sdp"
+    android:id="@+id/component_account_avatar_oval"
     android:layout_width="@dimen/_86sdp"
     android:layout_height="@dimen/_86sdp"
     android:layout_gravity="center"
     android:layoutDirection="rtl">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/component_avatar_oval_86sdp_circleImageView"
+        android:id="@+id/component_account_avatar_oval_circleImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:civ_border_color="@color/White"
@@ -21,7 +21,7 @@
         tools:background="@drawable/draw_oval_solid_gray50_border_4sdp_white" />
 
     <TextView
-        android:id="@+id/component_avatar_oval_86sdp_textView"
+        android:id="@+id/component_account_avatar_oval_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"

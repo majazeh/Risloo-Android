@@ -34,7 +34,7 @@
 
     <include
         android:id="@+id/activity_main_content_account_imageView"
-        layout="@layout/component_account_rectangle_36sdp"
+        layout="@layout/component_account_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
@@ -55,7 +55,7 @@
 
     <include
         android:id="@+id/activity_main_content_badge_textView"
-        layout="@layout/component_badge_oval_16sdp"
+        layout="@layout/component_account_badge_oval"
         android:layout_width="@dimen/_16sdp"
         android:layout_height="@dimen/_16sdp"
         android:layout_marginStart="@dimen/_2sdp"
