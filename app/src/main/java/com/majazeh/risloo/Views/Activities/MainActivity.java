@@ -90,11 +90,11 @@ public class MainActivity extends AppCompatActivity {
 
         accountConstraintLayout = findViewById(R.id.activity_main_content_account_imageView);
 
-        avatarImageView = findViewById(R.id.component_account_toolbar_avatar_imageView);
+        avatarImageView = findViewById(R.id.component_main_toolbar_avatar_imageView);
 
-        charTextView = findViewById(R.id.component_account_toolbar_char_textView);
-        nameTextView = findViewById(R.id.component_account_toolbar_name_textView);
-        moneyTextView = findViewById(R.id.component_account_toolbar_money_textView);
+        charTextView = findViewById(R.id.component_main_toolbar_char_textView);
+        nameTextView = findViewById(R.id.component_main_toolbar_name_textView);
+        moneyTextView = findViewById(R.id.component_main_toolbar_money_textView);
 
         menuImageView = findViewById(R.id.activity_main_content_menu_imageView);
         menuImageView.setImageResource(R.drawable.ic_bars_light);
