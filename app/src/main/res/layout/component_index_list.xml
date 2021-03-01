@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/component_index_list"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    app:cardCornerRadius="@dimen/_2sdp"
+    app:cardElevation="0dp"
+    tools:layout_margin="@dimen/_12sdp">
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/component_index_list_swipeRefreshLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/component_index_list_constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/component_index_list_shimmerFrameLayout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_margin="@dimen/_1sdp"
+                android:background="@drawable/draw_2sdp_solid_gray100"
+                android:visibility="visible"
+                app:shimmer_colored="false"
+                app:shimmer_base_alpha="1"
+                app:shimmer_highlight_alpha="0"
+                app:shimmer_auto_start="true"
+                app:shimmer_duration="1000"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/component_index_list_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:overScrollMode="never"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/component_index_list_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/AppEmptyHint"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/component_index_list_progressBar"
+                style="@style/Widget.AppCompat.ProgressBar"
+                android:layout_width="@dimen/_32sdp"
+                android:layout_height="@dimen/_32sdp"
+                android:layout_marginBottom="@dimen/_8sdp"
+                android:elevation="@dimen/_2sdp"
+                android:padding="@dimen/_7sdp"
+                android:visibility="gone"
+                android:theme="@style/ProgressBarTheme"
+                android:background="@drawable/draw_oval_solid_gray100"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+
+</androidx.cardview.widget.CardView>

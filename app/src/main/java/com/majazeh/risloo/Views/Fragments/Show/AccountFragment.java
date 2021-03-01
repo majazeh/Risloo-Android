@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,16 +20,24 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
+
+    // Objects
+    private LinearLayoutManager layoutManager;
 
     // Widgets
     private CircleImageView avatarCircleImageView;
@@ -44,6 +53,11 @@ public class AccountFragment extends Fragment {
     private ConstraintLayout documentsAddConstraintLayout;
     private TextView documentsAddTextView;
     private ImageView documentsAddImageView;
+    private SwipeRefreshLayout documentsSwipeRefreshLayout;
+    private ShimmerFrameLayout documentsShimmerLayout;
+    private RecyclerView documentsRecyclerView;
+    private TextView documentsEmptyTextView;
+    private ProgressBar documentsProgressBar;
 
     @Nullable
     @Override
@@ -58,10 +72,18 @@ public class AccountFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            documentsShimmerLayout.setVisibility(View.GONE);
+            documentsRecyclerView.setVisibility(View.VISIBLE);
+            documentsEmptyTextView.setVisibility(View.VISIBLE);
+        }, 5000);
+
         return view;
     }
 
     private void initializer(View view) {
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
         avatarCircleImageView = view.findViewById(R.id.component_avatar_oval_86sdp_circleImageView);
 
         charTextView = view.findViewById(R.id.component_avatar_oval_86sdp_textView);
@@ -104,6 +126,21 @@ public class AccountFragment extends Fragment {
         documentsAddImageView = view.findViewById(R.id.component_button_rectangle_drawable_28sdp_imageView);
         documentsAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(documentsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        documentsSwipeRefreshLayout = view.findViewById(R.id.component_index_list_swipeRefreshLayout);
+        documentsSwipeRefreshLayout.setColorSchemeResources(R.color.Blue600);
+        documentsSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.Gray100));
+
+        documentsShimmerLayout = view.findViewById(R.id.component_index_list_shimmerFrameLayout);
+
+        documentsRecyclerView = view.findViewById(R.id.component_index_list_recyclerView);
+        documentsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout",0, 0, 0));
+        documentsRecyclerView.setLayoutManager(layoutManager);
+        documentsRecyclerView.setHasFixedSize(true);
+
+        documentsEmptyTextView = view.findViewById(R.id.component_index_list_textView);
+
+        documentsProgressBar = view.findViewById(R.id.component_index_list_progressBar);
     }
 
     private void detector() {
@@ -208,6 +245,12 @@ public class AccountFragment extends Fragment {
             }
 
             ((MainActivity) getActivity()).navController.navigate(R.id.createDocumentFragment);
+        });
+
+        documentsSwipeRefreshLayout.setOnRefreshListener(() -> {
+            documentsSwipeRefreshLayout.setRefreshing(false);
+
+            // TODO : Call Work Method
         });
     }
 

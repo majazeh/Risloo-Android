@@ -7,6 +7,7 @@
     <string name="AppName">ریسلو بتا</string>
 
     <string name="AppSearchHint">جستجو</string>
+    <string name="AppEmptyHint">داده یافت نشد.</string>
     <string name="AppImageContent">عکس</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
