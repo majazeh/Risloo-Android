@@ -156,7 +156,7 @@ public class AccountFragment extends Fragment {
             editTextView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> editTextView.setClickable(true), 300);
 
-            ((MainActivity) getActivity()).navController.navigate(R.id.editAccountFragment);
+            ((MainActivity) getActivity()).navigator(R.id.editAccountFragment);
         });
 
         documentsSearchEditText.setOnTouchListener((v, event) -> {
@@ -201,7 +201,7 @@ public class AccountFragment extends Fragment {
             documentsAddImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> documentsAddImageView.setClickable(true), 300);
 
-            ((MainActivity) getActivity()).navController.navigate(R.id.createDocumentFragment);
+            ((MainActivity) getActivity()).navigator(R.id.createDocumentFragment);
         });
 
         documentsSwipeRefreshLayout.setOnRefreshListener(() -> {

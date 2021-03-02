@@ -59,6 +59,22 @@ public class AuthActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
     }
 
+    public void navigator(int destinationId) {
+        try {
+            if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
+                while (navController.getCurrentDestination().getId()!=destinationId) {
+                    navController.popBackStack();
+                }
+                if (destinationId == R.id.loginFragment){
+                    navController.popBackStack();
+                }
+            }
+        } catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+        navController.navigate(destinationId);
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {

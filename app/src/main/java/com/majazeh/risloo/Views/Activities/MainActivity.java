@@ -129,11 +129,7 @@ public class MainActivity extends AppCompatActivity {
             accountConstraintLayout.setClickable(false);
             handler.postDelayed(() -> accountConstraintLayout.setClickable(true), 300);
 
-            if (navController.getCurrentDestination().getId() != R.id.dashboardFragment || navController.getCurrentDestination().getId() == R.id.editAccountFragment) {
-                navController.popBackStack();
-            }
-
-            navController.navigate(R.id.accountFragment);
+            navigator(R.id.accountFragment);
         });
 
         menuImageView.setOnClickListener(v -> {
@@ -193,6 +189,22 @@ public class MainActivity extends AppCompatActivity {
 
             Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(avatarImageView);
         }
+    }
+
+    public void navigator(int destinationId) {
+        try {
+            if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
+                while (navController.getCurrentDestination().getId()!=destinationId) {
+                    navController.popBackStack();
+                }
+            }
+        } catch (IllegalArgumentException e) {
+            System.out.println(e.getMessage());
+        }
+        if (navController.getCurrentDestination().getId() != R.id.dashboardFragment  && destinationId == R.id.accountFragment) {
+            navController.popBackStack();
+        }
+        navController.navigate(destinationId);
     }
 
     @Override

@@ -117,14 +117,14 @@ public class PasswordRecoverFragment extends Fragment {
             loginTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navController.navigate(R.id.loginFragment);
+            ((AuthActivity) getActivity()).navigator(R.id.loginFragment);
         });
 
         registerTextView.setOnClickListener(v -> {
             registerTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
+            ((AuthActivity) getActivity()).navigator(R.id.registerFragment);
         });
     }
 
