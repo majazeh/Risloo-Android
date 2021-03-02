@@ -5,8 +5,8 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@null"
+    android:fitsSystemWindows="true"
     android:layoutDirection="rtl"
     tools:openDrawer="start">
 
@@ -17,8 +17,8 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         android:background="@color/Gray50"
+        android:fitsSystemWindows="true"
         android:theme="@style/NavigationViewTheme"
         app:headerLayout="@layout/activity_main_header"
         app:itemIconSize="@dimen/_16sdp"

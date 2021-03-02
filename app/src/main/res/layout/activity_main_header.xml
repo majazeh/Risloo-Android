@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="top"
-    android:fitsSystemWindows="false"
     android:background="@null"
+    android:fitsSystemWindows="false"
     android:layoutDirection="rtl"
     tools:context=".Views.Activities.MainActivity">
 
