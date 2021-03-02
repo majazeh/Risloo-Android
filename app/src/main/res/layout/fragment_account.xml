@@ -55,9 +55,9 @@
                 layout="@layout/component_button_rectangle_28sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_6sdp"
-                app:layout_goneMarginEnd="@dimen/_8sdp"
-                app:layout_constraintEnd_toStartOf="@id/fragment_account_enter_imageView"
+                android:layout_marginLeft="@dimen/_6sdp"
+                app:layout_goneMarginLeft="@dimen/_8sdp"
+                app:layout_constraintLeft_toRightOf="@id/fragment_account_enter_imageView"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_account_avatar_circleImageView" />
 
             <include
@@ -65,9 +65,9 @@
                 layout="@layout/component_button_oval_28sdp"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="@+id/fragment_account_edit_textView"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/fragment_account_edit_textView" />
 
             <TextView
@@ -260,8 +260,8 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_28sdp"
         android:layout_marginTop="@dimen/_6sdp"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_account_documents_add_imageView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_account_documents_header_constraintLayout"
+        app:layout_constraintLeft_toRightOf="@+id/fragment_account_documents_add_imageView"
+        app:layout_constraintRight_toRightOf="@+id/fragment_account_documents_header_constraintLayout"
         app:layout_constraintTop_toBottomOf="@+id/fragment_account_documents_header_constraintLayout" />
 
     <include
@@ -269,10 +269,10 @@
         layout="@layout/component_button_oval_28sdp"
         android:layout_width="@dimen/_28sdp"
         android:layout_height="@dimen/_28sdp"
-        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginRight="@dimen/_6sdp"
         app:layout_constraintBottom_toBottomOf="@+id/fragment_account_documents_search_editText"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_account_info_cardView"
-        app:layout_constraintStart_toEndOf="@id/fragment_account_documents_search_editText"
+        app:layout_constraintLeft_toLeftOf="@+id/fragment_account_info_cardView"
+        app:layout_constraintRight_toLeftOf="@id/fragment_account_documents_search_editText"
         app:layout_constraintTop_toTopOf="@+id/fragment_account_documents_search_editText" />
 
     <include
