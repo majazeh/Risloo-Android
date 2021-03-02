@@ -27,8 +27,8 @@ public class MobileFragment extends Fragment {
 
     // Widgets
     private EditText mobileEditText;
-    private ImageView errorImageView;
-    private TextView errorTextView;
+    private ImageView mobileErrorImageView;
+    private TextView mobileErrorTextView;
     private TextView mobileTextView;
     private TextView loginTextView, registerTextView, passwordRecoverTextView;
 
@@ -50,9 +50,9 @@ public class MobileFragment extends Fragment {
         mobileEditText = view.findViewById(R.id.component_auth_input_number_editText);
         mobileEditText.setHint(getResources().getString(R.string.MobileFragmentInput));
 
-        errorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
+        mobileErrorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
 
-        errorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
+        mobileErrorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
 
         mobileTextView = view.findViewById(R.id.fragment_mobile_button_textView);
         mobileTextView.setText(getResources().getString(R.string.MobileFragmentButton));
@@ -76,10 +76,6 @@ public class MobileFragment extends Fragment {
         mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!mobileEditText.hasFocus()) {
-                    if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-                    }
-
                     ((AuthActivity) getActivity()).controlEditText.focus(mobileEditText);
                     ((AuthActivity) getActivity()).controlEditText.select(mobileEditText);
                 }
@@ -96,7 +92,7 @@ public class MobileFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (mobileEditText.length() == 11) {
-                    ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, errorImageView, errorTextView);
+                    ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
                     doWork();
                 }
             }
@@ -111,14 +107,10 @@ public class MobileFragment extends Fragment {
             mobileTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> mobileTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             if (mobileEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), mobileEditText, errorImageView, errorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, "فیلد خالی است.");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, errorImageView, errorTextView);
+                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
                 doWork();
             }
         });
@@ -127,10 +119,6 @@ public class MobileFragment extends Fragment {
             loginTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             ((AuthActivity) getActivity()).navController.navigate(R.id.loginFragment);
         });
 
@@ -138,20 +126,12 @@ public class MobileFragment extends Fragment {
             registerTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
-
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.passwordRecoverFragment);
         });

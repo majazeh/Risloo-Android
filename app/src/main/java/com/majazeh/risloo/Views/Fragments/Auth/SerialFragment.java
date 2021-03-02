@@ -31,8 +31,8 @@ public class SerialFragment extends Fragment {
     private ImageView avatarImageView;
     private TextView charTextView;
     private EditText serialEditText;
-    private ImageView errorImageView;
-    private TextView errorTextView;
+    private ImageView serialErrorImageView;
+    private TextView serialErrorTextView;
     private TextView serialTextView;
     private TextView dashboardTextView, logoutTextView;
 
@@ -53,16 +53,16 @@ public class SerialFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        avatarImageView = view.findViewById(R.id.component_auth_avatar_square_imageView);
+        avatarImageView = view.findViewById(R.id.component_auth_avatar_imageView);
 
-        charTextView = view.findViewById(R.id.component_auth_avatar_square_textView);
+        charTextView = view.findViewById(R.id.component_auth_avatar_textView);
 
         serialEditText = view.findViewById(R.id.component_auth_input_text_editText);
         serialEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
-        errorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
+        serialErrorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
 
-        errorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
+        serialErrorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
 
         serialTextView = view.findViewById(R.id.fragment_serial_button_textView);
         serialTextView.setText(getResources().getString(R.string.SerialFragmentButton));
@@ -84,10 +84,6 @@ public class SerialFragment extends Fragment {
         serialEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!serialEditText.hasFocus()) {
-                    if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-                    }
-
                     ((AuthActivity) getActivity()).controlEditText.focus(serialEditText);
                     ((AuthActivity) getActivity()).controlEditText.select(serialEditText);
                 }
@@ -99,14 +95,10 @@ public class SerialFragment extends Fragment {
             serialTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> serialTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             if (serialEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, errorImageView, errorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView, "فیلد خالی است.");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), serialEditText, errorImageView, errorTextView);
+                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView);
                 doWork();
             }
         });
@@ -115,20 +107,12 @@ public class SerialFragment extends Fragment {
             dashboardTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> dashboardTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             IntentManager.main(getActivity());
         });
 
         logoutTextView.setOnClickListener(v -> {
             logoutTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> logoutTextView.setClickable(true), 300);
-
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
 
             // TODO : Place Code Here
         });
@@ -137,11 +121,10 @@ public class SerialFragment extends Fragment {
     private void setData() {
         if (((AuthActivity) getActivity()).singleton.getAvatar().equals("")) {
             charTextView.setVisibility(View.VISIBLE);
-            if (((AuthActivity) getActivity()).singleton.getName().equals("")) {
+            if (((AuthActivity) getActivity()).singleton.getName().equals(""))
                 charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AuthToolbar)));
-            } else {
+            else
                 charTextView.setText(StringManager.firstChars(((AuthActivity) getActivity()).singleton.getName()));
-            }
         } else {
             charTextView.setVisibility(View.GONE);
 

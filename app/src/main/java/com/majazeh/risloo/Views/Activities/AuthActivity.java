@@ -4,8 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.EditText;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -53,6 +57,23 @@ public class AuthActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.activity_auth_nav_host_fragment);
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
+    }
+
+    @Override
+    public boolean dispatchTouchEvent(MotionEvent event) {
+        if (event.getAction() == MotionEvent.ACTION_DOWN) {
+            View view = getCurrentFocus();
+            if (view instanceof EditText) {
+                Rect outRect = new Rect();
+                view.getGlobalVisibleRect(outRect);
+                if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
+                    if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
+                        controlEditText.clear(this, controlEditText.input());
+                    }
+                }
+            }
+        }
+        return super.dispatchTouchEvent(event);
     }
 
     @Override

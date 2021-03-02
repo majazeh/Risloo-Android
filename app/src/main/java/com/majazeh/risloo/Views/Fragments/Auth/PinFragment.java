@@ -39,8 +39,8 @@ public class PinFragment extends Fragment {
 
     // Widgets
     private EditText pinEditText;
-    private ImageView errorImageView;
-    private TextView errorTextView;
+    private ImageView pinErrorImageView;
+    private TextView pinErrorTextView;
     private TextView pinTextView;
     private ViewFlipper pinViewFlipper;
     private TextView pinCountdownTextView, pinTimerTextView;
@@ -66,9 +66,9 @@ public class PinFragment extends Fragment {
         pinEditText = view.findViewById(R.id.component_auth_input_number_editText);
         pinEditText.setHint(getResources().getString(R.string.PinFragmentInput));
 
-        errorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
+        pinErrorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
 
-        errorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
+        pinErrorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
 
         pinTextView = view.findViewById(R.id.fragment_pin_button_textView);
         pinTextView.setText(getResources().getString(R.string.PinFragmentButton));
@@ -98,10 +98,6 @@ public class PinFragment extends Fragment {
         pinEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!pinEditText.hasFocus()) {
-                    if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-                    }
-
                     ((AuthActivity) getActivity()).controlEditText.focus(pinEditText);
                     ((AuthActivity) getActivity()).controlEditText.select(pinEditText);
                 }
@@ -118,7 +114,7 @@ public class PinFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (pinEditText.length() == 6) {
-                    ((AuthActivity) getActivity()).controlEditText.check(getActivity(), pinEditText, errorImageView, errorTextView);
+                    ((AuthActivity) getActivity()).controlEditText.check(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView);
                     doWork("pin");
                 }
             }
@@ -133,14 +129,10 @@ public class PinFragment extends Fragment {
             pinTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> pinTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             if (pinEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), pinEditText, errorImageView, errorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView, "فیلد خالی است.");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), pinEditText, errorImageView, errorTextView);
+                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView);
                 doWork("pin");
             }
         });
@@ -177,10 +169,6 @@ public class PinFragment extends Fragment {
             loginTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             ((AuthActivity) getActivity()).navController.navigate(R.id.loginFragment);
         });
 
@@ -188,20 +176,12 @@ public class PinFragment extends Fragment {
             registerTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
-
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.passwordRecoverFragment);
         });

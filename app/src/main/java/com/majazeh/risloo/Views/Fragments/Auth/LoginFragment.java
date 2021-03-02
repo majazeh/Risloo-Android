@@ -27,8 +27,8 @@ public class LoginFragment extends Fragment {
 
     // Widgets
     private EditText usernameEditText;
-    private ImageView errorImageView;
-    private TextView errorTextView;
+    private ImageView usernameErrorImageView;
+    private TextView usernameErrorTextView;
     private TextView loginTextView;
     private TextView registerTextView, passwordRecoverTextView;
 
@@ -50,9 +50,9 @@ public class LoginFragment extends Fragment {
         usernameEditText = view.findViewById(R.id.component_auth_input_text_editText);
         usernameEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
 
-        errorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
+        usernameErrorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
 
-        errorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
+        usernameErrorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
 
         loginTextView = view.findViewById(R.id.fragment_login_button_textView);
         loginTextView.setText(getResources().getString(R.string.LoginFragmentButton));
@@ -74,10 +74,6 @@ public class LoginFragment extends Fragment {
         usernameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!usernameEditText.hasFocus()) {
-                    if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-                    }
-
                     ((AuthActivity) getActivity()).controlEditText.focus(usernameEditText);
                     ((AuthActivity) getActivity()).controlEditText.select(usernameEditText);
                 }
@@ -89,14 +85,10 @@ public class LoginFragment extends Fragment {
             loginTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             if (usernameEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), usernameEditText, errorImageView, errorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView, "فیلد خالی است.");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), usernameEditText, errorImageView, errorTextView);
+                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView);
                 doWork();
             }
         });
@@ -105,20 +97,12 @@ public class LoginFragment extends Fragment {
             registerTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
-
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.serialFragment);
         });

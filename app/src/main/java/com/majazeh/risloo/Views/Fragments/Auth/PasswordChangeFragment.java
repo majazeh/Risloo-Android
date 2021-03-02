@@ -33,8 +33,8 @@ public class PasswordChangeFragment extends Fragment {
     // Widgets
     private CutCopyPasteEditText passwordEditText;
     private ImageView passwordImageView;
-    private ImageView errorImageView;
-    private TextView errorTextView;
+    private ImageView passwordErrorImageView;
+    private TextView passwordErrorTextView;
     private TextView passwordChangeTextView;
     private TextView loginTextView, registerTextView, passwordRecoverTextView;
 
@@ -58,9 +58,9 @@ public class PasswordChangeFragment extends Fragment {
 
         passwordImageView = view.findViewById(R.id.component_auth_input_password_imageView);
 
-        errorImageView = view.findViewById(R.id.component_auth_input_password_error_imageView);
+        passwordErrorImageView = view.findViewById(R.id.component_auth_input_password_error_imageView);
 
-        errorTextView = view.findViewById(R.id.component_auth_input_password_error_textView);
+        passwordErrorTextView = view.findViewById(R.id.component_auth_input_password_error_textView);
 
         passwordChangeTextView = view.findViewById(R.id.fragment_password_change_button_textView);
         passwordChangeTextView.setText(getResources().getString(R.string.PasswordChangeFragmentButton));
@@ -84,10 +84,6 @@ public class PasswordChangeFragment extends Fragment {
         passwordEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!passwordEditText.hasFocus()) {
-                    if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-                    }
-
                     ((AuthActivity) getActivity()).controlEditText.focus(passwordEditText);
                     ((AuthActivity) getActivity()).controlEditText.select(passwordEditText);
                 }
@@ -155,14 +151,10 @@ public class PasswordChangeFragment extends Fragment {
             passwordChangeTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordChangeTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             if (passwordEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), passwordEditText, errorImageView, errorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView, "فیلد خالی است.");
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), passwordEditText, errorImageView, errorTextView);
+                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView);
                 doWork();
             }
         });
@@ -171,10 +163,6 @@ public class PasswordChangeFragment extends Fragment {
             loginTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             ((AuthActivity) getActivity()).navController.navigate(R.id.loginFragment);
         });
 
@@ -182,20 +170,12 @@ public class PasswordChangeFragment extends Fragment {
             registerTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
-
             ((AuthActivity) getActivity()).navController.navigate(R.id.registerFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
-
-            if (((AuthActivity) getActivity()).controlEditText.input() != null && ((AuthActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((AuthActivity) getActivity()).controlEditText.clear(getActivity(), ((AuthActivity) getActivity()).controlEditText.input());
-            }
 
             ((AuthActivity) getActivity()).navController.navigate(R.id.passwordRecoverFragment);
         });
