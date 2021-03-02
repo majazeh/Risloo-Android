@@ -46,6 +46,7 @@ public class AccountFragment extends Fragment {
     private TextView educationTextView, birthdayTextView, emailTextView, mobileTextView;
     private ImageView educationImageView, birthdayImageView, emailImageView, mobileImageView;
     private TextView editTextView;
+    private ImageView enterImageView;
     private TextView documentsTitleTextView, documentsCountTextView;
     private EditText documentsSearchEditText;
     private ImageView documentsAddImageView;
@@ -103,6 +104,10 @@ public class AccountFragment extends Fragment {
         editTextView.setText(getResources().getString(R.string.AccountFragmentEdit));
         editTextView.setTextColor(getResources().getColor(R.color.Gray500));
 
+        enterImageView = view.findViewById(R.id.fragment_account_enter_imageView);
+        enterImageView.setImageResource(R.drawable.ic_user_cog_light);
+        ImageViewCompat.setImageTintList(enterImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue600));
+
         documentsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
         documentsTitleTextView.setText(getResources().getString(R.string.AccountFragmentDocumentsHeader));
         documentsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
@@ -134,10 +139,12 @@ public class AccountFragment extends Fragment {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
 
+            enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
             documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
 
+            enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
             documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
@@ -158,6 +165,13 @@ public class AccountFragment extends Fragment {
             ((MainActivity) getActivity()).handler.postDelayed(() -> editTextView.setClickable(true), 300);
 
             ((MainActivity) getActivity()).navigator(R.id.editAccountFragment);
+        });
+
+        enterImageView.setOnClickListener(v -> {
+            enterImageView.setClickable(false);
+            ((MainActivity) getActivity()).handler.postDelayed(() -> enterImageView.setClickable(true), 300);
+
+            // TODO : Call Work Method
         });
 
         documentsSearchEditText.setOnTouchListener((v, event) -> {
