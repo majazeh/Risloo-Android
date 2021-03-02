@@ -17,7 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -47,11 +46,8 @@ public class AccountFragment extends Fragment {
     private TextView educationTextView, birthdayTextView, emailTextView, mobileTextView;
     private ImageView educationImageView, birthdayImageView, emailImageView, mobileImageView;
     private TextView editTextView;
-    private ImageView enterImageView;
     private TextView documentsTitleTextView, documentsCountTextView;
     private EditText documentsSearchEditText;
-    private ConstraintLayout documentsAddConstraintLayout;
-    private TextView documentsAddTextView;
     private ImageView documentsAddImageView;
     private SwipeRefreshLayout documentsSwipeRefreshLayout;
     private ShimmerFrameLayout documentsShimmerLayout;
@@ -84,9 +80,9 @@ public class AccountFragment extends Fragment {
     private void initializer(View view) {
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        avatarCircleImageView = view.findViewById(R.id.component_avatar_oval_86sdp_circleImageView);
+        avatarCircleImageView = view.findViewById(R.id.component_account_avatar_circleImageView);
 
-        charTextView = view.findViewById(R.id.component_avatar_oval_86sdp_textView);
+        charTextView = view.findViewById(R.id.component_account_avatar_textView);
 
         nameTextView = view.findViewById(R.id.fragment_account_name_textView);
         usernameTextView = view.findViewById(R.id.fragment_account_username_textView);
@@ -107,23 +103,13 @@ public class AccountFragment extends Fragment {
         editTextView.setText(getResources().getString(R.string.AccountFragmentEdit));
         editTextView.setTextColor(getResources().getColor(R.color.Gray500));
 
-        enterImageView = view.findViewById(R.id.fragment_account_enter_imageView);
-        enterImageView.setImageResource(R.drawable.ic_user_cog_light);
-        ImageViewCompat.setImageTintList(enterImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray500));
-
-        documentsTitleTextView = view.findViewById(R.id.component_index_header_text_title_textView);
+        documentsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
         documentsTitleTextView.setText(getResources().getString(R.string.AccountFragmentDocumentsHeader));
-        documentsCountTextView = view.findViewById(R.id.component_index_header_text_count_textView);
+        documentsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
         documentsSearchEditText = view.findViewById(R.id.fragment_account_documents_search_editText);
 
-        documentsAddConstraintLayout = view.findViewById(R.id.fragment_account_documents_add_constraintLayout);
-
-        documentsAddTextView = view.findViewById(R.id.component_button_rectangle_drawable_28sdp_textView);
-        documentsAddTextView.setText(getResources().getString(R.string.AccountFragmentDocumentsAdd));
-        documentsAddTextView.setTextColor(getResources().getColor(R.color.Green700));
-
-        documentsAddImageView = view.findViewById(R.id.component_button_rectangle_drawable_28sdp_imageView);
+        documentsAddImageView = view.findViewById(R.id.fragment_account_documents_add_imageView);
         documentsAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(documentsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
 
@@ -146,14 +132,12 @@ public class AccountFragment extends Fragment {
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-            enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
 
-            documentsAddConstraintLayout.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
 
-            documentsAddConstraintLayout.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -162,10 +146,6 @@ public class AccountFragment extends Fragment {
         avatarCircleImageView.setOnClickListener(v -> {
             avatarCircleImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
-
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
-            }
 
             if (!((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(getActivity(), "", "", ((MainActivity) getActivity()).singleton.getAvatar());
@@ -176,31 +156,12 @@ public class AccountFragment extends Fragment {
             editTextView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> editTextView.setClickable(true), 300);
 
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
-            }
-
             ((MainActivity) getActivity()).navController.navigate(R.id.editAccountFragment);
-        });
-
-        enterImageView.setOnClickListener(v -> {
-            enterImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> enterImageView.setClickable(true), 300);
-
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
-            }
-
-            // TODO : Enter User From Another Account
         });
 
         documentsSearchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!documentsSearchEditText.hasFocus()) {
-                    if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                        ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
-                    }
-
                     ((MainActivity) getActivity()).controlEditText.focus(documentsSearchEditText);
                     ((MainActivity) getActivity()).controlEditText.select(documentsSearchEditText);
                 }
@@ -236,13 +197,9 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        documentsAddConstraintLayout.setOnClickListener(v -> {
-            documentsAddConstraintLayout.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> documentsAddConstraintLayout.setClickable(true), 300);
-
-            if (((MainActivity) getActivity()).controlEditText.input() != null && ((MainActivity) getActivity()).controlEditText.input().hasFocus()) {
-                ((MainActivity) getActivity()).controlEditText.clear(getActivity(), ((MainActivity) getActivity()).controlEditText.input());
-            }
+        documentsAddImageView.setOnClickListener(v -> {
+            documentsAddImageView.setClickable(false);
+            ((MainActivity) getActivity()).handler.postDelayed(() -> documentsAddImageView.setClickable(true), 300);
 
             ((MainActivity) getActivity()).navController.navigate(R.id.createDocumentFragment);
         });

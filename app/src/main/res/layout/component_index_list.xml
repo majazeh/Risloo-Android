@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/component_index_list"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
@@ -14,13 +14,13 @@
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/component_index_list_swipeRefreshLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/component_index_list_constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/component_index_list_shimmerFrameLayout"
