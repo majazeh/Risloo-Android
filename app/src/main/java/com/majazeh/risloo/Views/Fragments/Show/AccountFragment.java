@@ -122,6 +122,7 @@ public class AccountFragment extends Fragment {
         documentsRecyclerView = view.findViewById(R.id.component_index_list_recyclerView);
         documentsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout",0, 0, 0));
         documentsRecyclerView.setLayoutManager(layoutManager);
+        documentsRecyclerView.setNestedScrollingEnabled(false);
         documentsRecyclerView.setHasFixedSize(true);
 
         documentsEmptyTextView = view.findViewById(R.id.component_index_list_textView);
