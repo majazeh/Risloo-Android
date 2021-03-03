@@ -198,25 +198,25 @@
     ---------- EditPersonal Fragment ----------
     */
 
-    <string name="EditPersonalFragmentTitle">ویرایش شخصی</string>
+    <string name="EditPersonalFragmentTitle">شخصی</string>
 
     /*
     ---------- EditPassword Fragment ----------
     */
 
-    <string name="EditPasswordFragmentTitle">ویرایش کلمه عبور</string>
+    <string name="EditPasswordFragmentTitle">کلمه عبور</string>
 
     /*
     ---------- EditAvatar Fragment ----------
     */
 
-    <string name="EditAvatarFragmentTitle">ویرایش تصویر نمایشی</string>
+    <string name="EditAvatarFragmentTitle">تصویر نمایشی</string>
 
     /*
     ---------- EditCrypto Fragment ----------
     */
 
-    <string name="EditCryptoFragmentTitle">ویرایش کلید عمومی</string>
+    <string name="EditCryptoFragmentTitle">کلید عمومی</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

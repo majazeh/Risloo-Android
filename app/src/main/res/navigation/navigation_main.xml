@@ -77,17 +77,16 @@
         <action
             android:id="@+id/action_accountFragment_to_editAccountFragment"
             app:destination="@id/editAccountFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_createDocumentFragment"
+            app:destination="@id/createDocumentFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/editAccountFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
         android:label="@string/EditAccountFragmentTitle"
-        tools:layout="@layout/fragment_edit_account" >
-        <action
-            android:id="@+id/action_editAccountFragment_to_createDocumentFragment"
-            app:destination="@id/createDocumentFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_edit_account" />
 
     <fragment
         android:id="@+id/createDocumentFragment"
