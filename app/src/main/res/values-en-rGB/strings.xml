@@ -9,6 +9,7 @@
     <string name="AppSearchHint">جستجو</string>
     <string name="AppEmptyHint">داده یافت نشد.</string>
     <string name="AppImageContent">عکس</string>
+    <string name="AppInputEmpty">فیلد خالی است.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -211,6 +212,9 @@
     */
 
     <string name="EditAvatarFragmentTitle">تصویر نمایشی</string>
+
+    <string name="EditAvatarFragmentHint">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+    <string name="EditAvatarFragmentButton">ویرایش</string>
 
     /*
     ---------- EditCrypto Fragment ----------

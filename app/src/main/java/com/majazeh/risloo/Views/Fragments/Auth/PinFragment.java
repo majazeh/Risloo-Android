@@ -130,7 +130,7 @@ public class PinFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> pinTextView.setClickable(true), 300);
 
             if (pinEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) getActivity()).controlEditText.check(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView);
                 doWork("pin");

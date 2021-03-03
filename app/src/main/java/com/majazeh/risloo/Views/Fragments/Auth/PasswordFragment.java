@@ -152,7 +152,7 @@ public class PasswordFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordTextView.setClickable(true), 300);
 
             if (passwordEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) getActivity()).controlEditText.check(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView);
                 doWork();

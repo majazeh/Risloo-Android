@@ -228,7 +228,7 @@ public class AccountFragment extends Fragment {
 
     private void setData() {
         if (((MainActivity) getActivity()).singleton.getName().equals("")) {
-            nameTextView.setText("کاربر آزمایشی");
+            nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
             nameTextView.setText(((MainActivity) getActivity()).singleton.getName());
         }

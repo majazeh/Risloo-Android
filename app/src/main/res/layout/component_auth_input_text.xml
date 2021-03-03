@@ -50,7 +50,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:gravity="center"
+        android:gravity="start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/Red500"

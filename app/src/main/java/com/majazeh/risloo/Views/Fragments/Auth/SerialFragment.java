@@ -96,7 +96,7 @@ public class SerialFragment extends Fragment {
             ((AuthActivity) getActivity()).handler.postDelayed(() -> serialTextView.setClickable(true), 300);
 
             if (serialEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView, "فیلد خالی است.");
+                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) getActivity()).controlEditText.check(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView);
                 doWork();
