@@ -89,4 +89,11 @@ public class Singleton {
         return "";
     }
 
+    public String getPassword() {
+        if (!sharedPreferences.getString("password", "").equals("")) {
+            return sharedPreferences.getString("password", "");
+        }
+        return "";
+    }
+
 }

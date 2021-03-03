@@ -47,7 +47,7 @@
             layout="@layout/component_button_rectangle_32sdp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             android:layout_marginBottom="@dimen/_8sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/fragment_edit_avatar_guide_constraintLayout"

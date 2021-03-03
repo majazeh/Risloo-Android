@@ -32,7 +32,7 @@ public class PasswordChangeFragment extends Fragment {
 
     // Widgets
     private CutCopyPasteEditText passwordEditText;
-    private ImageView passwordImageView;
+    private ImageView passwordVisibilityImageView;
     private ImageView passwordErrorImageView;
     private TextView passwordErrorTextView;
     private TextView passwordChangeTextView;
@@ -56,7 +56,7 @@ public class PasswordChangeFragment extends Fragment {
         passwordEditText = view.findViewById(R.id.component_auth_input_password_editText);
         passwordEditText.setHint(getResources().getString(R.string.PasswordChangeFragmentInput));
 
-        passwordImageView = view.findViewById(R.id.component_auth_input_password_imageView);
+        passwordVisibilityImageView = view.findViewById(R.id.component_auth_input_password_visibility_imageView);
 
         passwordErrorImageView = view.findViewById(R.id.component_auth_input_password_error_imageView);
 
@@ -100,9 +100,9 @@ public class PasswordChangeFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (passwordEditText.length() == 0) {
-                    passwordImageView.setVisibility(View.INVISIBLE);
+                    passwordVisibilityImageView.setVisibility(View.INVISIBLE);
                 } else if (passwordEditText.length() == 1) {
-                    passwordImageView.setVisibility(View.VISIBLE);
+                    passwordVisibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -126,23 +126,23 @@ public class PasswordChangeFragment extends Fragment {
             @Override
             public void onPaste() {
                 if (passwordEditText.length() != 0) {
-                    passwordImageView.setVisibility(View.VISIBLE);
+                    passwordVisibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
         });
 
-        passwordImageView.setOnClickListener(v -> {
+        passwordVisibilityImageView.setOnClickListener(v -> {
             if (!passwordVisibility) {
                 passwordVisibility = true;
-                passwordImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
+                passwordVisibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
 
-                ImageViewCompat.setImageTintList(passwordImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue800));
+                ImageViewCompat.setImageTintList(passwordVisibilityImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue800));
                 passwordEditText.setTransformationMethod(null);
             } else {
                 passwordVisibility = false;
-                passwordImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
+                passwordVisibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
 
-                ImageViewCompat.setImageTintList(passwordImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray600));
+                ImageViewCompat.setImageTintList(passwordVisibilityImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray600));
                 passwordEditText.setTransformationMethod(new PasswordTransformationMethod());
             }
         });

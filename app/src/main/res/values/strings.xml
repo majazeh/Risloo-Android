@@ -207,6 +207,10 @@
 
     <string name="EditPasswordFragmentTitle">کلمه عبور</string>
 
+    <string name="EditPasswordFragmentHeader">کلمه عبور</string>
+    <string name="EditPasswordFragmentHint">گذرواژه باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+    <string name="EditPasswordFragmentButton">تغییر</string>
+
     /*
     ---------- EditAvatar Fragment ----------
     */
