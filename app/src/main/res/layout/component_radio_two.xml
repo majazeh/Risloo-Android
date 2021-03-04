@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/component_radio_two"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:theme="@style/RadioButtonTheme"
+    android:layoutDirection="rtl"
+    tools:layout_margin="@dimen/_16sdp">
+
+    <TextView
+        android:id="@+id/component_radio_two_header_textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_11ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        tools:text="گزینه‌ها" />
+
+    <RadioButton
+        android:id="@+id/component_radio_two_first_radioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_4sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:checked="true"
+        android:gravity="center|start"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="گزینه اول" />
+
+    <RadioButton
+        android:id="@+id/component_radio_two_second_radioButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_4sdp"
+        android:paddingBottom="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="گزینه دوم" />
+
+</RadioGroup>

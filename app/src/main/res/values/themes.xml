@@ -60,6 +60,11 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <style name="RadioButtonTheme" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorControlNormal">@color/Gray300</item>
+        <item name="colorControlActivated">@color/Blue500</item>
+    </style>
+
     // BottomSheetDialog Theme
     //////////////////////////////////////////////////////////////////////////////////////
 

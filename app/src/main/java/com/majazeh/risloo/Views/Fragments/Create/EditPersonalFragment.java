@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -22,15 +24,17 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 public class EditPersonalFragment extends Fragment {
 
     // Vars
-    private String name = "", mobile = "", username = "", email = "";
+    private String name = "", mobile = "", username = "", email = "", status ="active", type = "admin", gender = "male";
 
     // Widgets
     private ConstraintLayout nameConstraintLayout, mobileConstraintLayout, usernameConstraintLayout, emailConstraintLayout;
-    private TextView nameHeaderTextView, mobileHeaderTextView, usernameHeaderTextView, emailHeaderTextView;
+    private RadioGroup statusRadioGroup, typeRadioGroup, genderRadioGroup;
+    private TextView nameHeaderTextView, mobileHeaderTextView, usernameHeaderTextView, emailHeaderTextView, statusHeaderTextView, typeHeaderTextView, genderHeaderTextView;
     private EditText nameEditText, mobileEditText, usernameEditText, emailEditText;
     private ImageView nameErrorImageView, mobileErrorImageView, usernameErrorImageView, emailErrorImageView;
     private TextView nameErrorTextView, mobileErrorTextView, usernameErrorTextView, emailErrorTextView;
     private TextView usernameGuideTextView;
+    private RadioButton activeRadioButton, waitingRadioButton, closedRadioButton, adminRadioButton, clientRadioButton, maleRadioButton, femaleRadioButton;
     private TextView editPersonalTextView;
 
     @Nullable
@@ -55,6 +59,10 @@ public class EditPersonalFragment extends Fragment {
         usernameConstraintLayout = view.findViewById(R.id.fragment_edit_personal_username_editText);
         emailConstraintLayout = view.findViewById(R.id.fragment_edit_personal_email_editText);
 
+        statusRadioGroup = view.findViewById(R.id.fragment_edit_personal_status_radioGroup);
+        typeRadioGroup = view.findViewById(R.id.fragment_edit_personal_type_radioGroup);
+        genderRadioGroup = view.findViewById(R.id.fragment_edit_personal_gender_radioGroup);
+
         nameHeaderTextView = nameConstraintLayout.findViewById(R.id.component_input_text_header_textView);
         nameHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentNameHeader));
         mobileHeaderTextView = mobileConstraintLayout.findViewById(R.id.component_input_number_header_textView);
@@ -63,6 +71,12 @@ public class EditPersonalFragment extends Fragment {
         usernameHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHeader));
         emailHeaderTextView = emailConstraintLayout.findViewById(R.id.component_input_text_header_textView);
         emailHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentEmailHeader));
+        statusHeaderTextView = statusRadioGroup.findViewById(R.id.component_radio_three_header_textView);
+        statusHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentStatusHeader));
+        typeHeaderTextView = typeRadioGroup.findViewById(R.id.component_radio_two_header_textView);
+        typeHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentTypeHeader));
+        genderHeaderTextView = genderRadioGroup.findViewById(R.id.component_radio_two_header_textView);
+        genderHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentGenderHeader));
 
         nameEditText = nameConstraintLayout.findViewById(R.id.component_input_text_editText);
         mobileEditText = mobileConstraintLayout.findViewById(R.id.component_input_number_editText);
@@ -81,6 +95,21 @@ public class EditPersonalFragment extends Fragment {
 
         usernameGuideTextView = view.findViewById(R.id.component_main_guide_error_textView);
         usernameGuideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
+
+        activeRadioButton = statusRadioGroup.findViewById(R.id.component_radio_three_first_radioButton);
+        activeRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusActive));
+        waitingRadioButton = statusRadioGroup.findViewById(R.id.component_radio_three_second_radioButton);
+        waitingRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusWaiting));
+        closedRadioButton = statusRadioGroup.findViewById(R.id.component_radio_three_third_radioButton);
+        closedRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusClosed));
+        adminRadioButton = typeRadioGroup.findViewById(R.id.component_radio_two_first_radioButton);
+        adminRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeAdmin));
+        clientRadioButton = typeRadioGroup.findViewById(R.id.component_radio_two_second_radioButton);
+        clientRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeClient));
+        maleRadioButton = genderRadioGroup.findViewById(R.id.component_radio_two_first_radioButton);
+        maleRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderMale));
+        femaleRadioButton = genderRadioGroup.findViewById(R.id.component_radio_two_second_radioButton);
+        femaleRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderFemale));
 
         editPersonalTextView = view.findViewById(R.id.fragment_edit_personal_button_textView);
         editPersonalTextView.setText(getResources().getString(R.string.EditPersonalFragmentButton));
@@ -137,6 +166,42 @@ public class EditPersonalFragment extends Fragment {
             return false;
         });
 
+        statusRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.component_radio_three_first_radioButton:
+                    status = "active";
+                    break;
+                case R.id.component_radio_three_second_radioButton:
+                    status = "waiting";
+                    break;
+                case R.id.component_radio_three_third_radioButton:
+                    status = "closed";
+                    break;
+            }
+        });
+
+        typeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.component_radio_two_first_radioButton:
+                    type = "admin";
+                    break;
+                case R.id.component_radio_two_second_radioButton:
+                    type = "client";
+                    break;
+            }
+        });
+
+        genderRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.component_radio_two_first_radioButton:
+                    gender = "male";
+                    break;
+                case R.id.component_radio_two_second_radioButton:
+                    gender = "female";
+                    break;
+            }
+        });
+
         editPersonalTextView.setOnClickListener(v -> {
             editPersonalTextView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> editPersonalTextView.setClickable(true), 300);
@@ -177,6 +242,42 @@ public class EditPersonalFragment extends Fragment {
         if (!((MainActivity) getActivity()).singleton.getEmail().equals("")) {
             email = ((MainActivity) getActivity()).singleton.getEmail();
             emailEditText.setText(email);
+        }
+        if (!((MainActivity) getActivity()).singleton.getStatus().equals("")) {
+            status = ((MainActivity) getActivity()).singleton.getStatus();
+            switch (status) {
+                case "active":
+                    activeRadioButton.setChecked(true);
+                    break;
+                case "waiting":
+                    waitingRadioButton.setChecked(true);
+                    break;
+                case "closed":
+                    closedRadioButton.setChecked(true);
+                    break;
+            }
+        }
+        if (!((MainActivity) getActivity()).singleton.getType().equals("")) {
+            type = ((MainActivity) getActivity()).singleton.getType();
+            switch (type) {
+                case "admin":
+                    adminRadioButton.setChecked(true);
+                    break;
+                case "client":
+                    clientRadioButton.setChecked(true);
+                    break;
+            }
+        }
+        if (!((MainActivity) getActivity()).singleton.getGender().equals("")) {
+            gender = ((MainActivity) getActivity()).singleton.getGender();
+            switch (gender) {
+                case "male":
+                    maleRadioButton.setChecked(true);
+                    break;
+                case "female":
+                    femaleRadioButton.setChecked(true);
+                    break;
+            }
         }
     }
 
