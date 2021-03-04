@@ -226,6 +226,35 @@
 
     <string name="EditCryptoFragmentTitle">کلید عمومی</string>
 
+    <string name="EditCryptoFragmentPublicDescription">در این قسمت شما می‌توانید با استفاده از دراختیار قراردادن کلید عمومی رمزگذاری نامتقارن خود، داده‌های خود را در ریسلو کدگذاری کنید و تنها خودتان به آن‌ها دسترسی خواهید داشت.</string>
+
+    <string name="EditCryptoFragmentPublicQuestion1">فایده این کار چیست؟</string>
+    <string name="EditCryptoFragmentPublicQuestion2">چه چیزهایی رمزگذاری می‌شوند؟</string>
+    <string name="EditCryptoFragmentPublicQuestion3">آیا می‌توانم کلید عمومی خودم را ویرایش کنم؟</string>
+
+    <string name="EditCryptoFragmentPublicAnswer1Header1">- کلید عمومی: این کلید در اختیار ما قرار می‌گیرد و با این کلید تنها می‌توان داده‌های ارسالی شما را رمزگذاری کرد.</string>
+    <string name="EditCryptoFragmentPublicAnswer1Header1Item1">+ توجه داشته باشید که با این کلید نمی‌توان داده‌های رمزگذاری‌شده را خواند.</string>
+    <string name="EditCryptoFragmentPublicAnswer1Header1Item2">+ ما به شما این اطمینان را می‌دهیم که داده‌های شما قبل از ارسال به سمت ریسلو، در مرورگر خود شما رمزگذاری شده و ما از آن‌ها بی‌اطلاع خواهیم بود، تنها داده رمزگذاری‌شده را در سیستم ذخیره می‌کنیم.</string>
+
+    <string name="EditCryptoFragmentPublicAnswer1Header2">- کلید خصوصی: این کلید تنها در اختیار خود شما باقی می‌ماند و ما از آن بی‌اطلاع هستیم، شما با این کلید می‌توانید داده‌های رمزگذاری‌شده خودتان را مشاهده نمایید.</string>
+    <string name="EditCryptoFragmentPublicAnswer1Header2Item1">+ بدانید که ارزش این کلید به آن است که فقط و فقط در اختیار خود شما باشد، اگر این کلید در دست حتی یک نفر دیگر غیر از خود شما باشد، ارزش امنیتی آن صفر است.</string>
+    <string name="EditCryptoFragmentPublicAnswer1Header2Item2">+ از آن‌جا که کلید خصوصی تنها در اختیار خود شماست و ریسلو از آن بی‌اطلاع است، در حفظ و نگهداری آن کوشا باشید، در غیر این‌صورت اگر کلید خصوصی را به هر صورتی از دست دادید، داده‌های رمزگذاری‌شده شما غیر قابل بازگشت خواهد بود.</string>
+
+    <string name="EditCryptoFragmentPublicAnswer2">گزارش جلسات درمانی.</string>
+    <string name="EditCryptoFragmentPublicAnswer3">درحال حاضر این امکان برای شما مهیا نیست.</string>
+
+    <string name="EditCryptoFragmentPublicHeader">کلید عمومی</string>
+    <string name="EditCryptoFragmentPublicButton">تنظيم</string>
+
+    <string name="EditCryptoFragmentPrivateDescription">برای این‌که بتوانید راحت و در خود سرویس ریسلو متون کدگذاری‌شده خود را ببینید، می‌توانید کلید خصوصی خود را در زیر قرار دهید:</string>
+
+    <string name="EditCryptoFragmentPrivateItem1">- می‌توانید به ما اطمینان نکنید و کلید خصوصی را نزد خود نگهداری کنید و به صورت دستی محتواهای کدگذاری‌شده را بازگشایی کنیدکلید خصوصی.</string>
+    <string name="EditCryptoFragmentPrivateItem2">- ما کلید خصوصی شما را در حافظه مرورگر خودتان نگهداری می‌کنیم و این کلید اصلا به سمت ریسلو ارسال نخواهد شد.</string>
+    <string name="EditCryptoFragmentPrivateItem3">- کلید خصوصی را تنها زمانی که رایانه متعلق به شماست وارد کنید؛ زیرا دیگران می‌توانند به کلید خصوصی شما از طریق آن رایانه دسترسی داشته باشند.</string>
+
+    <string name="EditCryptoFragmentPrivateHeader">کلید خصوصی</string>
+    <string name="EditCryptoFragmentPrivateButton">تنظيم</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*

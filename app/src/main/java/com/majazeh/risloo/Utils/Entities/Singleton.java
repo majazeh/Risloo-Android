@@ -96,4 +96,18 @@ public class Singleton {
         return "";
     }
 
+    public String getPublicKey() {
+        if (!sharedPreferences.getString("public_key", "").equals("")) {
+            return sharedPreferences.getString("public_key", "");
+        }
+        return "";
+    }
+
+    public String getPrivateKey() {
+        if (!sharedPreferences.getString("private_key", "").equals("")) {
+            return sharedPreferences.getString("private_key", "");
+        }
+        return "";
+    }
+
 }

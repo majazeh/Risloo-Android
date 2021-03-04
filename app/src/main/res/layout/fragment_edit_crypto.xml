@@ -2,17 +2,325 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fragment_edit_crypto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/White"
+    android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Create.EditCryptoFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_edit_crypto_constraintLayout"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/EditCryptoFragmentTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_description_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicDescription"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_question1_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicQuestion1"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray800"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_demi_bold"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_description_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_description_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_description_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer1_header1_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer1Header1"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question1_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_question1_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer1Header1Item1"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header1_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer1Header1Item2"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer1_header2_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer1Header2"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer1Header2Item1"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header2_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer1_header2_item2_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer1Header2Item2"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_question2_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicQuestion2"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray800"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_demi_bold"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question1_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header2_item2_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer2_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer2"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header2_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_question2_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_question3_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicQuestion3"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray800"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_demi_bold"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question2_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer2_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_public_answer3_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPublicAnswer3"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer2_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_question3_textView" />
+
+        <include
+            android:id="@+id/fragment_edit_crypto_public_editText"
+            layout="@layout/component_input_multi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question3_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question3_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer3_textView" />
+
+        <include
+            android:id="@+id/fragment_edit_crypto_public_button_textView"
+            layout="@layout/component_button_rectangle_32sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_editText"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_editText" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_private_description_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPrivateDescription"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_description_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_description_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_button_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_private_item1_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPrivateItem1"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer3_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer3_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_description_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_private_item2_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPrivateItem2"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_private_item1_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_private_item1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_item1_textView" />
+
+        <TextView
+            android:id="@+id/fragment_edit_crypto_private_item3_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:gravity="start"
+            android:text="@string/EditCryptoFragmentPrivateItem3"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_private_item2_textView"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_private_item2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_item2_textView" />
+
+        <include
+            android:id="@+id/fragment_edit_crypto_private_editText"
+            layout="@layout/component_input_multi"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_editText"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_editText"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_item3_textView" />
+
+        <include
+            android:id="@+id/fragment_edit_crypto_private_button_textView"
+            layout="@layout/component_button_rectangle_32sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:layout_marginBottom="@dimen/_8sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_private_editText"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_editText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
