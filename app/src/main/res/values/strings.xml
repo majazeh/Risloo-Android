@@ -201,6 +201,26 @@
 
     <string name="EditPersonalFragmentTitle">شخصی</string>
 
+    <string name="EditPersonalFragmentNameHeader">نام و نام خانوادگی</string>
+    <string name="EditPersonalFragmentMobileHeader">تلفن همراه</string>
+    <string name="EditPersonalFragmentUsernameHeader">شناسه کاربری</string>
+    <string name="EditPersonalFragmentEmailHeader">رایانامه</string>
+    <string name="EditPersonalFragmentStatusHeader">وضعیت</string>
+    <string name="EditPersonalFragmentTypeHeader">نوع کاربر</string>
+    <string name="EditPersonalFragmentGenderHeader">جنسیت</string>
+
+    <string name="EditPersonalFragmentStatusActive">فعال</string>
+    <string name="EditPersonalFragmentStatusWaiting">در انتظار</string>
+    <string name="EditPersonalFragmentStatusClosed">بسته شده</string>
+    <string name="EditPersonalFragmentTypeAdmin">ادمین</string>
+    <string name="EditPersonalFragmentTypeClient">کاربر</string>
+    <string name="EditPersonalFragmentGenderMale">مرد</string>
+    <string name="EditPersonalFragmentGenderFemale">زن</string>
+
+    <string name="EditPersonalFragmentUsernameHint">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
+
+    <string name="EditPersonalFragmentButton">ویرایش</string>
+
     /*
     ---------- EditPassword Fragment ----------
     */
