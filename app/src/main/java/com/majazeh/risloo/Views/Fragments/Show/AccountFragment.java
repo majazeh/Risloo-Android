@@ -177,8 +177,7 @@ public class AccountFragment extends Fragment {
         documentsSearchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!documentsSearchEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(documentsSearchEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(documentsSearchEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), documentsSearchEditText);
                 }
             }
             return false;

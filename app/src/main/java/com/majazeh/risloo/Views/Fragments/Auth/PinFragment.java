@@ -98,8 +98,7 @@ public class PinFragment extends Fragment {
         pinEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!pinEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.focus(pinEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(pinEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), pinEditText);
                 }
             }
             return false;

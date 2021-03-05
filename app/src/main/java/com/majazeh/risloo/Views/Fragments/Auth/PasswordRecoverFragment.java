@@ -74,8 +74,7 @@ public class PasswordRecoverFragment extends Fragment {
         mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!mobileEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.focus(mobileEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(mobileEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), mobileEditText);
                 }
             }
             return false;

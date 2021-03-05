@@ -89,8 +89,7 @@ public class EditCryptoFragment extends Fragment {
         publicKeyEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!publicKeyEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(publicKeyEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(publicKeyEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), publicKeyEditText);
                 }
             }
             return false;
@@ -99,8 +98,7 @@ public class EditCryptoFragment extends Fragment {
         privateKeyEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!privateKeyEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(privateKeyEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(privateKeyEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), privateKeyEditText);
                 }
             }
             return false;

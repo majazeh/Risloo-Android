@@ -28,7 +28,7 @@
         android:id="@+id/component_input_multi_editText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:minHeight="@dimen/_108sdp"
         android:paddingStart="@dimen/_12sdp"
         android:paddingEnd="@dimen/_12sdp"

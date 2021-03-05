@@ -84,8 +84,7 @@ public class SerialFragment extends Fragment {
         serialEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!serialEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.focus(serialEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(serialEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), serialEditText);
                 }
             }
             return false;

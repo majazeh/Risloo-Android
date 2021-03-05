@@ -74,8 +74,7 @@ public class LoginFragment extends Fragment {
         usernameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!usernameEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.focus(usernameEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(usernameEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), usernameEditText);
                 }
             }
             return false;

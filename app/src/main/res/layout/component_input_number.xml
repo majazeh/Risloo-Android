@@ -28,7 +28,7 @@
         android:id="@+id/component_input_number_editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
-        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_6sdp"
         android:paddingStart="@dimen/_12sdp"
         android:paddingEnd="@dimen/_12sdp"
         android:imeOptions="actionDone"

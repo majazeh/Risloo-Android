@@ -76,8 +76,7 @@ public class RegisterFragment extends Fragment {
         nameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!nameEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.focus(nameEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(nameEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), nameEditText);
                 }
             }
             return false;
@@ -86,8 +85,7 @@ public class RegisterFragment extends Fragment {
         mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!mobileEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.focus(mobileEditText);
-                    ((AuthActivity) getActivity()).controlEditText.select(mobileEditText);
+                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), mobileEditText);
                 }
             }
             return false;

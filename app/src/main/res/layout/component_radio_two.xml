@@ -14,7 +14,7 @@
         android:id="@+id/component_radio_two_header_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_2sdp"
         android:gravity="center|start"
         android:textSize="@dimen/_11ssp"
         android:textStyle="normal"

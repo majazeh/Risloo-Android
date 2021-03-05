@@ -88,8 +88,7 @@ public class EditPasswordFragment extends Fragment {
         passwordEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!passwordEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(passwordEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(passwordEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), passwordEditText);
                 }
             }
             return false;

@@ -8,6 +8,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 
 import java.util.Objects;
 
@@ -20,25 +22,35 @@ public class ControlEditText {
         return editText;
     }
 
-    public void focus(EditText editText) {
+    public void select(Activity activity, EditText editText) {
         this.editText = editText;
-    }
 
-    public void select(EditText editText) {
         editText.requestFocus();
-        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue500);
+        if (activity instanceof AuthActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue500);
+        } else if (activity instanceof MainActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
+        }
     }
 
     public void clear(Activity activity, EditText editText) {
         editText.clearFocus();
-        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        if (activity instanceof AuthActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        } else if (activity instanceof MainActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
 
         hideKeyboard(activity, editText);
     }
 
     public void error(Activity activity, EditText editText, ImageView imageView, TextView textView, String value) {
         editText.clearFocus();
-        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+        if (activity instanceof AuthActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+        } else if (activity instanceof MainActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
 
         imageView.setVisibility(View.VISIBLE);
 
@@ -50,7 +62,11 @@ public class ControlEditText {
 
     public void check(Activity activity, EditText editText, ImageView imageView, TextView textView) {
         editText.clearFocus();
-        editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        if (activity instanceof AuthActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        } else if (activity instanceof MainActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
 
         imageView.setVisibility(View.GONE);
 

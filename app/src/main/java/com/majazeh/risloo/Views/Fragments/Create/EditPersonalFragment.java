@@ -129,8 +129,7 @@ public class EditPersonalFragment extends Fragment {
         nameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!nameEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(nameEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(nameEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), nameEditText);
                 }
             }
             return false;
@@ -139,8 +138,7 @@ public class EditPersonalFragment extends Fragment {
         mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!mobileEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(mobileEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(mobileEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), mobileEditText);
                 }
             }
             return false;
@@ -149,8 +147,7 @@ public class EditPersonalFragment extends Fragment {
         usernameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!usernameEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(usernameEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(usernameEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), usernameEditText);
                 }
             }
             return false;
@@ -159,8 +156,7 @@ public class EditPersonalFragment extends Fragment {
         emailEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!emailEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.focus(emailEditText);
-                    ((MainActivity) getActivity()).controlEditText.select(emailEditText);
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), emailEditText);
                 }
             }
             return false;
