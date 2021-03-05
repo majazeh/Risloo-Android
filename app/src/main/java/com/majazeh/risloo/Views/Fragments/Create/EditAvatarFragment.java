@@ -24,9 +24,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditAvatarFragment extends Fragment {
 
-    // Dialogs
-//    private ImageDialog imageDialog;
-
     // Vars
     public String avatarPath = "";
 
@@ -56,8 +53,6 @@ public class EditAvatarFragment extends Fragment {
     }
 
     private void initializer(View view) {
-//        imageDialog = new ImageDialog(getActivity());
-
         avatarCircleImageView = view.findViewById(R.id.component_avatar_82sdp_circleImageView);
 
         charTextView = view.findViewById(R.id.component_avatar_82sdp_textView);
@@ -83,7 +78,7 @@ public class EditAvatarFragment extends Fragment {
             avatarCircleImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
 
-//            imageDialog.show(getActivity().getSupportFragmentManager(), "imageBottomSheet");
+            ((MainActivity) getActivity()).imageDialog.show(getActivity().getSupportFragmentManager(), "imageBottomSheet");
         });
 
         editAvatarTextView.setOnClickListener(v -> {

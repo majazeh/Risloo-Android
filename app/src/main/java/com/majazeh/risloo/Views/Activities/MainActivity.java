@@ -28,6 +28,7 @@ import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.Views.Dialogs.ImageDialog;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -39,8 +40,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Objects
     public Handler handler;
+    public ImageDialog imageDialog;
     public ControlEditText controlEditText;
-    private NavHostFragment navHostFragment;
+    public NavHostFragment navHostFragment;
     public NavController navController;
 
     // Widgets
@@ -80,6 +82,8 @@ public class MainActivity extends AppCompatActivity {
         singleton = new Singleton(this);
 
         handler = new Handler();
+
+        imageDialog = new ImageDialog();
 
         controlEditText = new ControlEditText();
 

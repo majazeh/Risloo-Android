@@ -240,6 +240,10 @@
     <string name="EditAvatarFragmentHint">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
     <string name="EditAvatarFragmentButton">ویرایش</string>
 
+    <string name="EditAvatarDialogImageTitle">از کجا می خوای تصویر بیارید؟</string>
+    <string name="EditAvatarDialogImageGallery">البوم</string>
+    <string name="EditAvatarDialogImageCamera">دوربین</string>
+
     /*
     ---------- EditCrypto Fragment ----------
     */

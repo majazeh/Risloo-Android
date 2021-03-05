@@ -73,7 +73,7 @@
     </style>
 
     <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
-        <!--        <item name="android:background">@drawable/?????</item>-->
+        <item name="android:background">@drawable/draw_12sdp_top_solid_white</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////

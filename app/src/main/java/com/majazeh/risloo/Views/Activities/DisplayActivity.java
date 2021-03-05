@@ -64,7 +64,7 @@ public class DisplayActivity extends AppCompatActivity {
         handler = new Handler();
 
         returnImageView = findViewById(R.id.activity_display_return_imageView);
-        returnImageView.setImageResource(R.drawable.ic_angle_light);
+        returnImageView.setImageResource(R.drawable.ic_angle_right_regular);
         ImageViewCompat.setImageTintList(returnImageView, AppCompatResources.getColorStateList(this, R.color.Gray50));
         downloadImageView = findViewById(R.id.activity_display_download_imageView);
         downloadImageView.setImageResource(R.drawable.ic_download_light);

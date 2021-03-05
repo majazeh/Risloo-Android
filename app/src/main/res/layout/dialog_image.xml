@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/dialog_image"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_12sdp_top_solid_white"
+    tools:context=".Views.Dialogs.ImageDialog">
+
+    <TextView
+        android:id="@+id/dialog_image_title_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:gravity="start"
+        android:text="@string/EditAvatarDialogImageTitle"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_demi_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/dialog_image_gallery_linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/dialog_image_title_textView"
+        app:layout_constraintStart_toStartOf="@id/dialog_image_title_textView"
+        app:layout_constraintEnd_toEndOf="@id/dialog_image_title_textView" >
+
+        <ImageView
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_gallery_regular"
+            android:padding="@dimen/_4sdp"
+            android:background="@drawable/draw_4sdp_solid_blue500"
+            app:tint="@color/White" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/EditAvatarDialogImageGallery"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dialog_image_camera_linearLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_24sdp"
+        android:paddingBottom="@dimen/_8sdp"
+        android:paddingTop="@dimen/_8sdp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/dialog_image_gallery_linearLayout"
+        app:layout_constraintStart_toStartOf="@id/dialog_image_gallery_linearLayout"
+        app:layout_constraintEnd_toEndOf="@id/dialog_image_gallery_linearLayout">
+
+        <ImageView
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_camera_regular"
+            android:padding="@dimen/_4sdp"
+            android:background="@drawable/draw_4sdp_solid_blue500"
+            app:tint="@color/White" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/EditAvatarDialogImageCamera"
+            android:textSize="@dimen/_13ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
