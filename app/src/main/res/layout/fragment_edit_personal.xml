@@ -76,14 +76,24 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_edit_personal_username_guide_constraintLayout" />
 
         <include
-            android:id="@+id/fragment_edit_personal_status_radioGroup"
-            layout="@layout/component_radio_three"
+            android:id="@+id/fragment_edit_personal_birthday_selectBox"
+            layout="@layout/component_select_box"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="@+id/fragment_edit_personal_email_editText"
             app:layout_constraintStart_toStartOf="@+id/fragment_edit_personal_email_editText"
             app:layout_constraintTop_toBottomOf="@+id/fragment_edit_personal_email_editText" />
+
+        <include
+            android:id="@+id/fragment_edit_personal_status_radioGroup"
+            layout="@layout/component_radio_three"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_personal_birthday_selectBox"
+            app:layout_constraintStart_toStartOf="@+id/fragment_edit_personal_birthday_selectBox"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_personal_birthday_selectBox" />
 
         <include
             android:id="@+id/fragment_edit_personal_type_radioGroup"
