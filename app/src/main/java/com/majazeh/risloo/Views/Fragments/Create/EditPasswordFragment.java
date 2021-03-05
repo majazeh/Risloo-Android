@@ -67,7 +67,7 @@ public class EditPasswordFragment extends Fragment {
 
         passwordErrorTextView = view.findViewById(R.id.component_input_password_error_textView);
 
-        passwordGuideTextView = view.findViewById(R.id.component_main_guide_error_textView);
+        passwordGuideTextView = view.findViewById(R.id.component_guide_layout_info_textView);
         passwordGuideTextView.setText(getResources().getString(R.string.EditPasswordFragmentHint));
 
         editPasswordTextView = view.findViewById(R.id.fragment_edit_password_button_textView);

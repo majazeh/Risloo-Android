@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_edit_personal"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/White"
+    android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="never"
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Create.EditPersonalFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_edit_personal_constraintLayout"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_12sdp"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:paddingBottom="@dimen/_12sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <include
             android:id="@+id/fragment_edit_personal_name_editText"
@@ -55,7 +57,7 @@
 
         <include
             android:id="@+id/fragment_edit_personal_username_guide_constraintLayout"
-            layout="@layout/component_main_guide"
+            layout="@layout/component_guide_layout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
@@ -109,11 +111,9 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            android:layout_marginBottom="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/fragment_edit_personal_gender_radioGroup"
             app:layout_constraintTop_toBottomOf="@+id/fragment_edit_personal_gender_radioGroup" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

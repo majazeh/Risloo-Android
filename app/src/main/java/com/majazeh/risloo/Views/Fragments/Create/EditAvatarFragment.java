@@ -62,7 +62,7 @@ public class EditAvatarFragment extends Fragment {
 
         charTextView = view.findViewById(R.id.component_avatar_82sdp_textView);
 
-        avatarGuideTextView = view.findViewById(R.id.component_main_guide_error_textView);
+        avatarGuideTextView = view.findViewById(R.id.component_guide_layout_info_textView);
         avatarGuideTextView.setText(getResources().getString(R.string.EditAvatarFragmentHint));
 
         editAvatarTextView = view.findViewById(R.id.fragment_edit_avatar_button_textView);

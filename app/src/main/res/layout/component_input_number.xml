@@ -50,11 +50,11 @@
         android:id="@+id/component_input_number_error_imageView"
         android:layout_width="@dimen/_8sdp"
         android:layout_height="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_exclamation_light"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/component_input_number_error_textView"
         app:layout_constraintStart_toStartOf="@+id/component_input_number_editText"
         app:layout_constraintTop_toTopOf="@+id/component_input_number_error_textView"
         app:tint="@color/Red500" />
