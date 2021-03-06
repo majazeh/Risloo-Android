@@ -24,15 +24,15 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 public class EditPersonalFragment extends Fragment {
 
     // Vars
-    private String name = "", mobile = "", username = "", email = "", status ="active", type = "admin", gender = "male";
+    private String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
 
     // Widgets
-    private ConstraintLayout nameConstraintLayout, mobileConstraintLayout, usernameConstraintLayout, emailConstraintLayout;
+    private ConstraintLayout nameConstraintLayout, mobileConstraintLayout, usernameConstraintLayout, emailConstraintLayout, birthdayConstraintLayout;
     private RadioGroup statusRadioGroup, typeRadioGroup, genderRadioGroup;
-    private TextView nameHeaderTextView, mobileHeaderTextView, usernameHeaderTextView, emailHeaderTextView, statusHeaderTextView, typeHeaderTextView, genderHeaderTextView;
+    private TextView nameHeaderTextView, mobileHeaderTextView, usernameHeaderTextView, emailHeaderTextView, birthdayHeaderTextView, statusHeaderTextView, typeHeaderTextView, genderHeaderTextView;
     private EditText nameEditText, mobileEditText, usernameEditText, emailEditText;
-    private ImageView nameErrorImageView, mobileErrorImageView, usernameErrorImageView, emailErrorImageView;
-    private TextView nameErrorTextView, mobileErrorTextView, usernameErrorTextView, emailErrorTextView;
+    private ImageView nameErrorImageView, mobileErrorImageView, usernameErrorImageView, emailErrorImageView, birthdayErrorImageView;
+    private TextView nameErrorTextView, mobileErrorTextView, usernameErrorTextView, emailErrorTextView, birthdayErrorTextView;
     private TextView usernameGuideTextView;
     private RadioButton activeRadioButton, waitingRadioButton, closedRadioButton, adminRadioButton, clientRadioButton, maleRadioButton, femaleRadioButton;
     private TextView editPersonalTextView;
@@ -58,6 +58,7 @@ public class EditPersonalFragment extends Fragment {
         mobileConstraintLayout = view.findViewById(R.id.fragment_edit_personal_mobile_editText);
         usernameConstraintLayout = view.findViewById(R.id.fragment_edit_personal_username_editText);
         emailConstraintLayout = view.findViewById(R.id.fragment_edit_personal_email_editText);
+        birthdayConstraintLayout = view.findViewById(R.id.fragment_edit_personal_birthday_selectBox);
 
         statusRadioGroup = view.findViewById(R.id.fragment_edit_personal_status_radioGroup);
         typeRadioGroup = view.findViewById(R.id.fragment_edit_personal_type_radioGroup);
@@ -71,6 +72,8 @@ public class EditPersonalFragment extends Fragment {
         usernameHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHeader));
         emailHeaderTextView = emailConstraintLayout.findViewById(R.id.component_input_text_header_textView);
         emailHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentEmailHeader));
+        birthdayHeaderTextView = birthdayConstraintLayout.findViewById(R.id.component_select_box_header_textView);
+        birthdayHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentBirthdayHeader));
         statusHeaderTextView = statusRadioGroup.findViewById(R.id.component_radio_three_header_textView);
         statusHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentStatusHeader));
         typeHeaderTextView = typeRadioGroup.findViewById(R.id.component_radio_two_header_textView);
@@ -87,11 +90,13 @@ public class EditPersonalFragment extends Fragment {
         mobileErrorImageView = mobileConstraintLayout.findViewById(R.id.component_input_number_error_imageView);
         usernameErrorImageView = usernameConstraintLayout.findViewById(R.id.component_input_text_error_imageView);
         emailErrorImageView = emailConstraintLayout.findViewById(R.id.component_input_text_error_imageView);
+        birthdayErrorImageView = birthdayConstraintLayout.findViewById(R.id.component_select_box_error_imageView);
 
         nameErrorTextView = nameConstraintLayout.findViewById(R.id.component_input_text_error_textView);
         mobileErrorTextView = mobileConstraintLayout.findViewById(R.id.component_input_number_error_textView);
         usernameErrorTextView = usernameConstraintLayout.findViewById(R.id.component_input_text_error_textView);
         emailErrorTextView = emailConstraintLayout.findViewById(R.id.component_input_text_error_textView);
+        birthdayErrorTextView = birthdayConstraintLayout.findViewById(R.id.component_select_box_error_textView);
 
         usernameGuideTextView = view.findViewById(R.id.component_guide_layout_info_textView);
         usernameGuideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
@@ -238,6 +243,10 @@ public class EditPersonalFragment extends Fragment {
         if (!((MainActivity) getActivity()).singleton.getEmail().equals("")) {
             email = ((MainActivity) getActivity()).singleton.getEmail();
             emailEditText.setText(email);
+        }
+        if (!((MainActivity) getActivity()).singleton.getBirthday().equals("")) {
+            birthday = ((MainActivity) getActivity()).singleton.getBirthday();
+            emailEditText.setText(birthday);
         }
         if (!((MainActivity) getActivity()).singleton.getStatus().equals("")) {
             status = ((MainActivity) getActivity()).singleton.getStatus();

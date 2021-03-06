@@ -205,6 +205,7 @@
     <string name="EditPersonalFragmentMobileHeader">تلفن همراه</string>
     <string name="EditPersonalFragmentUsernameHeader">شناسه کاربری</string>
     <string name="EditPersonalFragmentEmailHeader">رایانامه</string>
+    <string name="EditPersonalFragmentBirthdayHeader">تاریخ تولد</string>
     <string name="EditPersonalFragmentStatusHeader">وضعیت</string>
     <string name="EditPersonalFragmentTypeHeader">نوع کاربر</string>
     <string name="EditPersonalFragmentGenderHeader">جنسیت</string>
