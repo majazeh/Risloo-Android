@@ -210,6 +210,8 @@
     <string name="EditPersonalFragmentTypeHeader">نوع کاربر</string>
     <string name="EditPersonalFragmentGenderHeader">جنسیت</string>
 
+    <string name="EditPersonalFragmentBirthdayDefault">1400-01-01</string>
+
     <string name="EditPersonalFragmentStatusActive">فعال</string>
     <string name="EditPersonalFragmentStatusWaiting">در انتظار</string>
     <string name="EditPersonalFragmentStatusClosed">بسته شده</string>
@@ -221,6 +223,9 @@
     <string name="EditPersonalFragmentUsernameHint">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
 
     <string name="EditPersonalFragmentButton">ویرایش</string>
+
+    <string name="EditPersonalDialogDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="EditPersonalDialogDateEntry">ثبت</string>
 
     /*
     ---------- EditPassword Fragment ----------

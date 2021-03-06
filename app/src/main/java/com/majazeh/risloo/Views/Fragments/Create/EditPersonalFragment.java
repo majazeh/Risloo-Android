@@ -19,18 +19,21 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 
 public class EditPersonalFragment extends Fragment {
 
     // Vars
     private String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
+    private int year, month, day;
 
     // Widgets
     private ConstraintLayout nameConstraintLayout, mobileConstraintLayout, usernameConstraintLayout, emailConstraintLayout, birthdayConstraintLayout;
     private RadioGroup statusRadioGroup, typeRadioGroup, genderRadioGroup;
     private TextView nameHeaderTextView, mobileHeaderTextView, usernameHeaderTextView, emailHeaderTextView, birthdayHeaderTextView, statusHeaderTextView, typeHeaderTextView, genderHeaderTextView;
     private EditText nameEditText, mobileEditText, usernameEditText, emailEditText;
+    public TextView birthdayTextView;
     private ImageView nameErrorImageView, mobileErrorImageView, usernameErrorImageView, emailErrorImageView, birthdayErrorImageView;
     private TextView nameErrorTextView, mobileErrorTextView, usernameErrorTextView, emailErrorTextView, birthdayErrorTextView;
     private TextView usernameGuideTextView;
@@ -85,6 +88,8 @@ public class EditPersonalFragment extends Fragment {
         mobileEditText = mobileConstraintLayout.findViewById(R.id.component_input_number_editText);
         usernameEditText = usernameConstraintLayout.findViewById(R.id.component_input_text_editText);
         emailEditText = emailConstraintLayout.findViewById(R.id.component_input_text_editText);
+
+        birthdayTextView = birthdayConstraintLayout.findViewById(R.id.component_select_box_textView);
 
         nameErrorImageView = nameConstraintLayout.findViewById(R.id.component_input_text_error_imageView);
         mobileErrorImageView = mobileConstraintLayout.findViewById(R.id.component_input_number_error_imageView);
@@ -167,6 +172,14 @@ public class EditPersonalFragment extends Fragment {
             return false;
         });
 
+        birthdayTextView.setOnClickListener(v -> {
+            birthdayTextView.setClickable(false);
+            ((MainActivity) getActivity()).handler.postDelayed(() -> birthdayTextView.setClickable(true), 300);
+
+            ((MainActivity) getActivity()).dateDialog.show(getActivity().getSupportFragmentManager(), "");
+            // TODO : Set DateDialog Values
+        });
+
         statusRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.component_radio_three_first_radioButton:
@@ -246,8 +259,16 @@ public class EditPersonalFragment extends Fragment {
         }
         if (!((MainActivity) getActivity()).singleton.getBirthday().equals("")) {
             birthday = ((MainActivity) getActivity()).singleton.getBirthday();
-            emailEditText.setText(birthday);
+            birthdayTextView.setText(birthday);
+        } else {
+            birthday = getResources().getString(R.string.EditPersonalFragmentBirthdayDefault);
+            birthdayTextView.setText(birthday);
         }
+
+        year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+        month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+        day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+
         if (!((MainActivity) getActivity()).singleton.getStatus().equals("")) {
             status = ((MainActivity) getActivity()).singleton.getStatus();
             switch (status) {

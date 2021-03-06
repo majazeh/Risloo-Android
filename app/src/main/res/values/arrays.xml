@@ -4,7 +4,20 @@
     // App Arrays
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // TODO : Place Code Here
+    <array name="JalaliMonths">
+        <item>فروردین</item>
+        <item>اردیبهشت</item>
+        <item>خرداد</item>
+        <item>تیر</item>
+        <item>مرداد</item>
+        <item>شهریور</item>
+        <item>مهر</item>
+        <item>آبان</item>
+        <item>آذر</item>
+        <item>دی</item>
+        <item>بهمن</item>
+        <item>اسفند</item>
+    </array>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
