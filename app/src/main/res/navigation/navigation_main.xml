@@ -6,13 +6,35 @@
     app:startDestination="@id/dashboardFragment">
 
     <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.AccountFragment"
+        android:label="@string/AccountFragmentTitle"
+        tools:layout="@layout/fragment_account">
+        <action
+            android:id="@+id/action_accountFragment_to_editAccountFragment"
+            app:destination="@id/editAccountFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_createDocumentFragment"
+            app:destination="@id/createDocumentFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/dashboardFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.DashboardFragment"
         android:label="@string/DashboardFragmentTitle"
         tools:layout="@layout/fragment_dashboard">
         <action
+            android:id="@+id/action_dashboardFragment_to_accountFragment"
+            app:destination="@id/accountFragment" />
+        <action
             android:id="@+id/action_dashboardFragment_to_centersFragment"
             app:destination="@id/centersFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_casesFragment"
+            app:destination="@id/casesFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_sessionsFragment"
+            app:destination="@id/sessionsFragment" />
         <action
             android:id="@+id/action_dashboardFragment_to_usersFragment"
             app:destination="@id/usersFragment" />
@@ -28,9 +50,6 @@
         <action
             android:id="@+id/action_dashboardFragment_to_settingsFragment2"
             app:destination="@id/settingsFragment" />
-        <action
-            android:id="@+id/action_dashboardFragment_to_accountFragment"
-            app:destination="@id/accountFragment" />
     </fragment>
 
     <fragment
@@ -41,6 +60,26 @@
         <action
             android:id="@+id/action_centersFragment_to_createCenterFragment"
             app:destination="@id/createCenterFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/casesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.CasesFragment"
+        android:label="@string/CasesFragmentTitle"
+        tools:layout="@layout/fragment_cases" >
+        <action
+            android:id="@+id/action_casesFragment_to_createCaseFragment"
+            app:destination="@id/createCaseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/sessionsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.SessionsFragment"
+        android:label="@string/SessionsFragmentTitle"
+        tools:layout="@layout/fragment_sessions" >
+        <action
+            android:id="@+id/action_sessionsFragment_to_createSessionFragment"
+            app:destination="@id/createSessionFragment" />
     </fragment>
 
     <fragment
@@ -86,23 +125,22 @@
         tools:layout="@layout/fragment_settings" />
 
     <fragment
-        android:id="@+id/accountFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.AccountFragment"
-        android:label="@string/AccountFragmentTitle"
-        tools:layout="@layout/fragment_account">
-        <action
-            android:id="@+id/action_accountFragment_to_editAccountFragment"
-            app:destination="@id/editAccountFragment" />
-        <action
-            android:id="@+id/action_accountFragment_to_createDocumentFragment"
-            app:destination="@id/createDocumentFragment" />
-    </fragment>
-
-    <fragment
         android:id="@+id/createCenterFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment"
         android:label="@string/CreateCenterFragmentTitle"
         tools:layout="@layout/fragment_create_center" />
+
+    <fragment
+        android:id="@+id/createCaseFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment"
+        android:label="@string/CreateCaseFragmentTitle"
+        tools:layout="@layout/fragment_create_case" />
+
+    <fragment
+        android:id="@+id/createSessionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment"
+        android:label="@string/CreateSessionFragmentTitle"
+        tools:layout="@layout/fragment_create_session" />
 
     <fragment
         android:id="@+id/createUserFragment"
