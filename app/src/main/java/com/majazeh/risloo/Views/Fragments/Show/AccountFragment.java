@@ -49,6 +49,7 @@ public class AccountFragment extends Fragment {
     private ImageView enterImageView;
     private TextView documentsTitleTextView, documentsCountTextView;
     private EditText documentsSearchEditText;
+    private ProgressBar documentsSearchProgressBar;
     private ImageView documentsAddImageView;
     private SwipeRefreshLayout documentsSwipeRefreshLayout;
     private ShimmerFrameLayout documentsShimmerLayout;
@@ -112,7 +113,9 @@ public class AccountFragment extends Fragment {
         documentsTitleTextView.setText(getResources().getString(R.string.AccountFragmentDocumentsHeader));
         documentsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        documentsSearchEditText = view.findViewById(R.id.fragment_account_documents_search_editText);
+        documentsSearchEditText = view.findViewById(R.id.component_input_search_editText);
+
+        documentsSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
 
         documentsAddImageView = view.findViewById(R.id.fragment_account_documents_add_imageView);
         documentsAddImageView.setImageResource(R.drawable.ic_plus_light);
