@@ -293,17 +293,15 @@
 
     <string name="CentersFragmentTitle">مراکز درمانی</string>
 
+    <string name="CentersFragmentHeader">مراکز درمانی</string>
+
     /*
     ---------- Documents Fragment ----------
     */
 
     <string name="DocumentsFragmentTitle">مدارک و اعتبارنامه</string>
 
-    /*
-    ---------- MyCenters Fragment ----------
-    */
-
-    <string name="MyCentersFragmentTitle">مراکز درمانی من</string>
+    <string name="DocumentsFragmentHeader">مدارک و اعتبارنامه</string>
 
     /*
     ---------- Samples Fragment ----------
@@ -311,11 +309,15 @@
 
     <string name="SamplesFragmentTitle">نمونه‌ها</string>
 
+    <string name="SamplesFragmentHeader">نمونه‌ها</string>
+
     /*
     ---------- Scales Fragment ----------
     */
 
     <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
+
+    <string name="ScalesFragmentHeader">ارزیابی‌ها</string>
 
     /*
     ---------- Settings Fragment ----------
@@ -329,6 +331,8 @@
 
     <string name="UsersFragmentTitle">کاربران</string>
 
+    <string name="UsersFragmentHeader">کاربران</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
@@ -339,7 +343,6 @@
     <string name="AccountFragmentEdit">ویرایش</string>
 
     <string name="AccountFragmentDocumentsHeader">مدارک و اعتبارنامه‌ها</string>
-    <string name="AccountFragmentDocumentsAdd">افزودن مدرک</string>
 
     /*
     ---------- Case Fragment ----------
