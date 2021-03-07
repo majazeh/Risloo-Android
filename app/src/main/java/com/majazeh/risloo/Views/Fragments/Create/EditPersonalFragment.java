@@ -176,8 +176,8 @@ public class EditPersonalFragment extends Fragment {
             birthdayTextView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> birthdayTextView.setClickable(true), 300);
 
-            ((MainActivity) getActivity()).dateDialog.show(getActivity().getSupportFragmentManager(), "");
-            // TODO : Set DateDialog Values
+            ((MainActivity) getActivity()).dateDialog.show(getActivity().getSupportFragmentManager(), "dateSheetDialog");
+            ((MainActivity) getActivity()).dateDialog.setDate(year, month, day);
         });
 
         statusRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {

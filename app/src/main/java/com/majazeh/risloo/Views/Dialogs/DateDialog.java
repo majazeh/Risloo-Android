@@ -46,13 +46,15 @@ public class DateDialog extends BottomSheetDialogFragment {
 
         detector();
 
+        setNumberPicker();
+
         return view;
     }
 
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        clearDate();
+        clearNumberPicker();
     }
 
     private void initializer(View view) {
@@ -96,11 +98,7 @@ public class DateDialog extends BottomSheetDialogFragment {
         });
     }
 
-    public void setDate(int year, int month, int day) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
-
+    private void setNumberPicker() {
         yearNumberPicker.setMinValue(1300);
         yearNumberPicker.setMaxValue(2100);
         yearNumberPicker.setValue(year);
@@ -112,6 +110,12 @@ public class DateDialog extends BottomSheetDialogFragment {
 
         dayNumberPicker.setMinValue(1);
         dayNumberPicker.setMaxValue(31);
+        dayNumberPicker.setValue(day);
+    }
+
+    private void clearNumberPicker() {
+        yearNumberPicker.setValue(year);
+        monthNumberPicker.setValue(month);
         dayNumberPicker.setValue(day);
     }
 
@@ -133,10 +137,10 @@ public class DateDialog extends BottomSheetDialogFragment {
         }
     }
 
-    private void clearDate() {
-        yearNumberPicker.setValue(year);
-        monthNumberPicker.setValue(month);
-        dayNumberPicker.setValue(day);
+    public void setDate(int year, int month, int day) {
+        this.year = year;
+        this.month = month;
+        this.day = day;
     }
 
 }
