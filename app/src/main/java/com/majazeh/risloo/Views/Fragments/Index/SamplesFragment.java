@@ -49,7 +49,7 @@ public class SamplesFragment extends Fragment {
 
     private void initializer(View view) {
         samplesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
-        samplesTitleTextView.setText(getResources().getString(R.string.SamplesFragmentHeader));
+        samplesTitleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
         samplesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
         samplesSearchEditText = view.findViewById(R.id.component_input_search_editText);

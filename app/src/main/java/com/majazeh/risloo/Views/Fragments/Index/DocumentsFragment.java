@@ -49,7 +49,7 @@ public class DocumentsFragment extends Fragment {
 
     private void initializer(View view) {
         documentsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
-        documentsTitleTextView.setText(getResources().getString(R.string.DocumentsFragmentHeader));
+        documentsTitleTextView.setText(getResources().getString(R.string.DocumentsFragmentTitle));
         documentsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
         documentsSearchEditText = view.findViewById(R.id.component_input_search_editText);

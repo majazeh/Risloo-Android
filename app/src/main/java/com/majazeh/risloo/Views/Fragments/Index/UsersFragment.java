@@ -49,7 +49,7 @@ public class UsersFragment extends Fragment {
 
     private void initializer(View view) {
         usersTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
-        usersTitleTextView.setText(getResources().getString(R.string.UsersFragmentHeader));
+        usersTitleTextView.setText(getResources().getString(R.string.UsersFragmentTitle));
         usersCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
         usersSearchEditText = view.findViewById(R.id.component_input_search_editText);

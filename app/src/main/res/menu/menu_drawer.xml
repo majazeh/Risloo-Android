@@ -30,7 +30,8 @@
         <item
             android:id="@+id/settingsFragment"
             android:icon="@drawable/ic_setting_light"
-            android:title="@string/SettingsFragmentTitle" />
+            android:title="@string/SettingsFragmentTitle"
+            android:visible="false"/>
     </group>
 
 </menu>

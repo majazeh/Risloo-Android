@@ -99,16 +99,10 @@
     </fragment>
 
     <fragment
-        android:id="@+id/editAccountFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
-        android:label="@string/EditAccountFragmentTitle"
-        tools:layout="@layout/fragment_edit_account" />
-
-    <fragment
-        android:id="@+id/createDocumentFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment"
-        android:label="@string/CreateDocumentFragmentTitle"
-        tools:layout="@layout/fragment_create_document" />
+        android:id="@+id/createCenterFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment"
+        android:label="@string/CreateCenterFragmentTitle"
+        tools:layout="@layout/fragment_create_center" />
 
     <fragment
         android:id="@+id/createUserFragment"
@@ -117,15 +111,21 @@
         tools:layout="@layout/fragment_create_user" />
 
     <fragment
-        android:id="@+id/createCenterFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment"
-        android:label="@string/CreateCenterFragmentTitle"
-        tools:layout="@layout/fragment_create_center" />
-
-    <fragment
         android:id="@+id/createSampleFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment"
         android:label="@string/CreateSampleFragmentTitle"
         tools:layout="@layout/fragment_create_sample" />
+
+    <fragment
+        android:id="@+id/createDocumentFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment"
+        android:label="@string/CreateDocumentFragmentTitle"
+        tools:layout="@layout/fragment_create_document" />
+
+    <fragment
+        android:id="@+id/editAccountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
+        android:label="@string/EditAccountFragmentTitle"
+        tools:layout="@layout/fragment_edit_account" />
 
 </navigation>

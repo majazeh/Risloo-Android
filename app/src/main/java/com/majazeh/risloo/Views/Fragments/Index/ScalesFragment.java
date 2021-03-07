@@ -44,7 +44,7 @@ public class ScalesFragment extends Fragment {
 
     private void initializer(View view) {
         scalesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
-        scalesTitleTextView.setText(getResources().getString(R.string.ScalesFragmentHeader));
+        scalesTitleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
         scalesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
         scalesSearchEditText = view.findViewById(R.id.component_input_search_editText);

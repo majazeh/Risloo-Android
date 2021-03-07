@@ -49,7 +49,7 @@ public class CentersFragment extends Fragment {
 
     private void initializer(View view) {
         centersTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
-        centersTitleTextView.setText(getResources().getString(R.string.CentersFragmentHeader));
+        centersTitleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
         centersCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
         centersSearchEditText = view.findViewById(R.id.component_input_search_editText);
