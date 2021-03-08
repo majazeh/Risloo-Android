@@ -353,6 +353,12 @@
     <string name="DashboardFragmentTitle">پیش‌خوان</string>
 
     /*
+    ---------- Center Fragment ----------
+    */
+
+    <string name="CenterFragmentTitle">مرکز</string>
+
+    /*
     ---------- Case Fragment ----------
     */
 

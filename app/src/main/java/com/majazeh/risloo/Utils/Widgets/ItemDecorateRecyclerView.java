@@ -10,11 +10,12 @@ public class ItemDecorateRecyclerView extends RecyclerView.ItemDecoration {
 
     // Vars
     private final String layoutManager;
-    private final int marginOuter, marginInner, marginSide;
+    private final int marginTop, marginBottom, marginInner, marginSide;
 
-    public ItemDecorateRecyclerView(String layoutManager, int marginOuter, int marginInner, int marginSide) {
+    public ItemDecorateRecyclerView(String layoutManager, int marginTop, int marginBottom, int marginInner, int marginSide) {
         this.layoutManager = layoutManager;
-        this.marginOuter = marginOuter;
+        this.marginTop = marginTop;
+        this.marginBottom = marginBottom;
         this.marginInner = marginInner;
         this.marginSide = marginSide;
     }
@@ -30,8 +31,8 @@ public class ItemDecorateRecyclerView extends RecyclerView.ItemDecoration {
             case "verticalLayout":
 
                 if (position == 0) {
-                    if (marginOuter != 0) {
-                        rect.top = marginOuter;
+                    if (marginTop != 0) {
+                        rect.top = marginTop;
                     }
                 } else {
                     if (marginInner != 0) {
@@ -40,8 +41,8 @@ public class ItemDecorateRecyclerView extends RecyclerView.ItemDecoration {
                 }
 
                 if (count > 0 && position == count - 1) {
-                    if (marginOuter != 0) {
-                        rect.bottom = marginOuter;
+                    if (marginBottom != 0) {
+                        rect.bottom = marginBottom;
                     }
                 } else {
                     if (marginInner != 0) {
@@ -57,9 +58,12 @@ public class ItemDecorateRecyclerView extends RecyclerView.ItemDecoration {
                 break;
             case "horizontalLayout":
 
-                if (marginOuter != 0) {
-                    rect.top = marginOuter;
-                    rect.bottom = marginOuter;
+                if (marginTop != 0) {
+                    rect.top = marginTop;
+                }
+
+                if (marginBottom != 0) {
+                    rect.bottom = marginBottom;
                 }
 
                 if (position == 0) {
@@ -86,8 +90,8 @@ public class ItemDecorateRecyclerView extends RecyclerView.ItemDecoration {
             case "gridLayout":
 
                 if (position == 0 || position == 1) {
-                    if (marginOuter != 0) {
-                        rect.top = marginOuter;
+                    if (marginTop != 0) {
+                        rect.top = marginTop;
                     }
                 } else {
                     if (marginInner != 0) {
@@ -96,13 +100,13 @@ public class ItemDecorateRecyclerView extends RecyclerView.ItemDecoration {
                 }
 
                 if (count > 0 && position == count - 1) {
-                    if (marginOuter != 0) {
-                        rect.bottom = marginOuter;
+                    if (marginBottom != 0) {
+                        rect.bottom = marginBottom;
                     }
                 } else if (count > 0 && position == count - 2) {
                     if (position % 2 == 0) {
-                        if (marginOuter != 0) {
-                            rect.bottom = marginOuter;
+                        if (marginBottom != 0) {
+                            rect.bottom = marginBottom;
                         }
                     } else {
                         if (marginInner != 0) {

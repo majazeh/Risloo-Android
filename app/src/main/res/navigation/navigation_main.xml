@@ -60,6 +60,9 @@
         <action
             android:id="@+id/action_centersFragment_to_createCenterFragment"
             app:destination="@id/createCenterFragment" />
+        <action
+            android:id="@+id/action_centersFragment_to_centerFragment"
+            app:destination="@id/centerFragment" />
     </fragment>
 
     <fragment
@@ -165,5 +168,11 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
         android:label="@string/EditAccountFragmentTitle"
         tools:layout="@layout/fragment_edit_account" />
+
+    <fragment
+        android:id="@+id/centerFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.CenterFragment"
+        android:label="@string/CenterFragmentTitle"
+        tools:layout="@layout/fragment_center" />
 
 </navigation>

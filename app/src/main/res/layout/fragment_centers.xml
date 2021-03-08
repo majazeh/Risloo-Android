@@ -40,4 +40,27 @@
         app:layout_constraintRight_toLeftOf="@id/fragment_centers_search_editText"
         app:layout_constraintTop_toTopOf="@+id/fragment_centers_search_editText" />
 
+    <include
+        android:id="@+id/fragment_centers_index_shimmerLayout"
+        layout="@layout/component_shimmer_center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_centers_search_editText" />
+
+    <include
+        android:id="@+id/fragment_centers_index_constraintLayout"
+        layout="@layout/component_index_center"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_centers_search_editText" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

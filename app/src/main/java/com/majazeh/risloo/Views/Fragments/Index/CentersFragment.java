@@ -17,23 +17,40 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 
 public class CentersFragment extends Fragment {
+
+    // Adapters
+    private CentersAdapter centersAdapter;
+
+    // Objects
+    private LinearLayoutManager layoutManager;
 
     // Widgets
     private TextView centersTitleTextView, centersCountTextView;
     private EditText centersSearchEditText;
     private ProgressBar centersSearchProgressBar;
     private ImageView centersAddImageView;
+    private ShimmerFrameLayout centersShimmerLayout;
+    private ConstraintLayout centersConstraintLayout;
+    private RecyclerView centersRecyclerView;
+    private TextView centersEmptyTextView;
+    private ProgressBar centersProgressBar;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_centers, viewGroup, false);
 
         initializer(view);
@@ -44,10 +61,19 @@ public class CentersFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            centersShimmerLayout.setVisibility(View.GONE);
+            centersConstraintLayout.setVisibility(View.VISIBLE);
+        }, 5000);
+
         return view;
     }
 
     private void initializer(View view) {
+        centersAdapter = new CentersAdapter(getActivity());
+
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
         centersTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
         centersTitleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
         centersCountTextView = view.findViewById(R.id.component_index_header_count_textView);
@@ -59,6 +85,19 @@ public class CentersFragment extends Fragment {
         centersAddImageView = view.findViewById(R.id.fragment_centers_add_imageView);
         centersAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(centersAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        centersShimmerLayout = view.findViewById(R.id.fragment_centers_index_shimmerLayout);
+
+        centersConstraintLayout = view.findViewById(R.id.fragment_centers_index_constraintLayout);
+
+        centersRecyclerView = view.findViewById(R.id.component_index_center_recyclerView);
+        centersRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0, (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
+        centersRecyclerView.setLayoutManager(layoutManager);
+        centersRecyclerView.setHasFixedSize(true);
+
+        centersEmptyTextView = view.findViewById(R.id.component_index_center_textView);
+
+        centersProgressBar = view.findViewById(R.id.component_index_center_progressBar);
     }
 
     private void detector() {
@@ -117,7 +156,10 @@ public class CentersFragment extends Fragment {
     }
 
     private void setData() {
-        String dataSize = "5";
+//        centersAdapter.setCenter(null);
+        centersRecyclerView.setAdapter(centersAdapter);
+
+        String dataSize = "15";
         centersCountTextView.setText("(" + dataSize + ")");
     }
 

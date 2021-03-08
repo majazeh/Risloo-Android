@@ -42,7 +42,7 @@
 
             <include
                 android:id="@+id/fragment_account_avatar_circleImageView"
-                layout="@layout/component_account_avatar"
+                layout="@layout/component_main_avatar"
                 android:layout_width="@dimen/_86sdp"
                 android:layout_height="@dimen/_86sdp"
                 android:layout_marginStart="@dimen/_12sdp"
