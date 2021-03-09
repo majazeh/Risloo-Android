@@ -276,16 +276,4 @@
         app:layout_constraintRight_toLeftOf="@id/fragment_account_documents_search_editText"
         app:layout_constraintTop_toTopOf="@+id/fragment_account_documents_search_editText" />
 
-    <include
-        android:id="@+id/fragment_account_documents_items_listView"
-        layout="@layout/component_index_list"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:layout_marginBottom="@dimen/_12sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_account_info_cardView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_account_documents_search_editText"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_account_documents_search_editText" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

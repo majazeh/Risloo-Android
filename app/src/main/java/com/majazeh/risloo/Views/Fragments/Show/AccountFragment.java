@@ -20,14 +20,10 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.squareup.picasso.Picasso;
 
@@ -51,11 +47,6 @@ public class AccountFragment extends Fragment {
     private EditText documentsSearchEditText;
     private ProgressBar documentsSearchProgressBar;
     private ImageView documentsAddImageView;
-    private SwipeRefreshLayout documentsSwipeRefreshLayout;
-    private ShimmerFrameLayout documentsShimmerLayout;
-    private RecyclerView documentsRecyclerView;
-    private TextView documentsEmptyTextView;
-    private ProgressBar documentsProgressBar;
 
     @Nullable
     @Override
@@ -69,12 +60,6 @@ public class AccountFragment extends Fragment {
         listener();
 
         setData();
-
-        ((MainActivity) getActivity()).handler.postDelayed(() -> {
-            documentsShimmerLayout.setVisibility(View.GONE);
-            documentsRecyclerView.setVisibility(View.VISIBLE);
-            documentsEmptyTextView.setVisibility(View.VISIBLE);
-        }, 5000);
 
         return view;
     }
@@ -120,34 +105,18 @@ public class AccountFragment extends Fragment {
         documentsAddImageView = view.findViewById(R.id.fragment_account_documents_add_imageView);
         documentsAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(documentsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
-
-        documentsSwipeRefreshLayout = view.findViewById(R.id.component_index_list_swipeRefreshLayout);
-        documentsSwipeRefreshLayout.setColorSchemeResources(R.color.Blue600);
-        documentsSwipeRefreshLayout.setProgressBackgroundColorSchemeColor(getResources().getColor(R.color.Gray100));
-
-        documentsShimmerLayout = view.findViewById(R.id.component_index_list_shimmerFrameLayout);
-
-        documentsRecyclerView = view.findViewById(R.id.component_index_list_recyclerView);
-        documentsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0));
-        documentsRecyclerView.setLayoutManager(layoutManager);
-        documentsRecyclerView.setNestedScrollingEnabled(false);
-        documentsRecyclerView.setHasFixedSize(true);
-
-        documentsEmptyTextView = view.findViewById(R.id.component_index_list_textView);
-
-        documentsProgressBar = view.findViewById(R.id.component_index_list_progressBar);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-
             enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+
             documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-
             enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
+
             documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
@@ -219,12 +188,6 @@ public class AccountFragment extends Fragment {
             ((MainActivity) getActivity()).handler.postDelayed(() -> documentsAddImageView.setClickable(true), 300);
 
             ((MainActivity) getActivity()).navigator(R.id.createDocumentFragment);
-        });
-
-        documentsSwipeRefreshLayout.setOnRefreshListener(() -> {
-            documentsSwipeRefreshLayout.setRefreshing(false);
-
-            // TODO : Call Work Method
         });
     }
 

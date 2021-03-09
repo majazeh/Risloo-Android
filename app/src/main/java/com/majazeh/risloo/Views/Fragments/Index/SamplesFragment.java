@@ -19,11 +19,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 
 public class SamplesFragment extends Fragment {
+
+    // Objects
+    private LinearLayoutManager layoutManager;
 
     // Widgets
     private TextView samplesTitleTextView, samplesCountTextView;
@@ -48,6 +52,8 @@ public class SamplesFragment extends Fragment {
     }
 
     private void initializer(View view) {
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
         samplesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
         samplesTitleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
         samplesCountTextView = view.findViewById(R.id.component_index_header_count_textView);

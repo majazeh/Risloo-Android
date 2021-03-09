@@ -19,11 +19,15 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 
 public class UsersFragment extends Fragment {
+
+    // Objects
+    private LinearLayoutManager layoutManager;
 
     // Widgets
     private TextView usersTitleTextView, usersCountTextView;
@@ -48,6 +52,8 @@ public class UsersFragment extends Fragment {
     }
 
     private void initializer(View view) {
+        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+
         usersTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
         usersTitleTextView.setText(getResources().getString(R.string.UsersFragmentTitle));
         usersCountTextView = view.findViewById(R.id.component_index_header_count_textView);
