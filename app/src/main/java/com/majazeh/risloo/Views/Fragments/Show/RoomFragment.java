@@ -29,7 +29,7 @@ import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class CenterFragment extends Fragment {
+public class RoomFragment extends Fragment {
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -38,17 +38,16 @@ public class CenterFragment extends Fragment {
     private CircleImageView avatarCircleImageView;
     private TextView charTextView;
     private TextView nameTextView;
-    private TextView profileTextView;
-    private ImageView editImageView, usersImageView;
-    private TextView roomsTitleTextView, roomsCountTextView;
-    private EditText roomsSearchEditText;
-    private ProgressBar roomsSearchProgressBar;
-    private ImageView roomsAddImageView;
+    private ImageView usersImageView;
+    private TextView casesTitleTextView, casesCountTextView;
+    private EditText casesSearchEditText;
+    private ProgressBar casesSearchProgressBar;
+    private ImageView casesAddImageView;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_center, viewGroup, false);
+        View view = inflater.inflate(R.layout.fragment_room, viewGroup, false);
 
         initializer(view);
 
@@ -68,45 +67,34 @@ public class CenterFragment extends Fragment {
 
         charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
 
-        nameTextView = view.findViewById(R.id.fragment_center_name_textView);
+        nameTextView = view.findViewById(R.id.fragment_room_name_textView);
 
-        profileTextView = view.findViewById(R.id.fragment_center_profile_textView);
-        profileTextView.setText(getResources().getString(R.string.CenterFragmentProfile));
-        profileTextView.setTextColor(getResources().getColor(R.color.Gray500));
-
-        editImageView = view.findViewById(R.id.fragment_center_edit_imageView);
-        editImageView.setImageResource(R.drawable.ic_pen_light);
-        ImageViewCompat.setImageTintList(editImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray500));
-        usersImageView = view.findViewById(R.id.fragment_center_users_imageView);
+        usersImageView = view.findViewById(R.id.fragment_room_users_imageView);
         usersImageView.setImageResource(R.drawable.ic_users_light);
         ImageViewCompat.setImageTintList(usersImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue600));
 
-        roomsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
-        roomsTitleTextView.setText(getResources().getString(R.string.CenterFragmentRoomsHeader));
-        roomsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        casesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        casesTitleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
+        casesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        roomsSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        casesSearchEditText = view.findViewById(R.id.component_input_search_editText);
 
-        roomsSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        casesSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
 
-        roomsAddImageView = view.findViewById(R.id.fragment_center_rooms_add_imageView);
-        roomsAddImageView.setImageResource(R.drawable.ic_plus_light);
-        ImageViewCompat.setImageTintList(roomsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+        casesAddImageView = view.findViewById(R.id.fragment_room_cases_add_imageView);
+        casesAddImageView.setImageResource(R.drawable.ic_plus_light);
+        ImageViewCompat.setImageTintList(casesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            profileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-            editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
             usersImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
-            roomsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            casesAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            profileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            editImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
-            usersImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+            usersImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
 
-            roomsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            casesAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -121,20 +109,6 @@ public class CenterFragment extends Fragment {
             }
         });
 
-        profileTextView.setOnClickListener(v -> {
-            profileTextView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> profileTextView.setClickable(true), 300);
-
-            // TODO : Call Work Method
-        });
-
-        editImageView.setOnClickListener(v -> {
-            editImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> editImageView.setClickable(true), 300);
-
-            // TODO : Call Work Method
-        });
-
         usersImageView.setOnClickListener(v -> {
             usersImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> usersImageView.setClickable(true), 300);
@@ -142,16 +116,16 @@ public class CenterFragment extends Fragment {
             // TODO : Call Work Method
         });
 
-        roomsSearchEditText.setOnTouchListener((v, event) -> {
+        casesSearchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!roomsSearchEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), roomsSearchEditText);
+                if (!casesSearchEditText.hasFocus()) {
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), casesSearchEditText);
                 }
             }
             return false;
         });
 
-        roomsSearchEditText.addTextChangedListener(new TextWatcher() {
+        casesSearchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -161,13 +135,13 @@ public class CenterFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ((MainActivity) getActivity()).handler.removeCallbacksAndMessages(null);
                 ((MainActivity) getActivity()).handler.postDelayed(() -> {
-//                    if (roomsSearchEditText.length() != 0) {
-//                        getData("getRooms", "", roomsSearchEditText.getText().toString().trim());
+//                    if (casesSearchEditText.length() != 0) {
+//                        getData("getCases", "", casesSearchEditText.getText().toString().trim());
 //                    } else {
-//                        roomsRecyclerView.setAdapter(null);
+//                        casesRecyclerView.setAdapter(null);
 //
-//                        if (roomsEmptyTextView.getVisibility() == View.VISIBLE) {
-//                            roomsEmptyTextView.setVisibility(View.GONE);
+//                        if (casesEmptyTextView.getVisibility() == View.VISIBLE) {
+//                            casesEmptyTextView.setVisibility(View.GONE);
 //                        }
 //                    }
                 }, 750);
@@ -179,11 +153,11 @@ public class CenterFragment extends Fragment {
             }
         });
 
-        roomsAddImageView.setOnClickListener(v -> {
-            roomsAddImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> roomsAddImageView.setClickable(true), 300);
+        casesAddImageView.setOnClickListener(v -> {
+            casesAddImageView.setClickable(false);
+            ((MainActivity) getActivity()).handler.postDelayed(() -> casesAddImageView.setClickable(true), 300);
 
-//            ((MainActivity) getActivity()).navigator(R.id.createRoomFragment);
+            ((MainActivity) getActivity()).navigator(R.id.createCaseFragment);
         });
     }
 
@@ -206,7 +180,7 @@ public class CenterFragment extends Fragment {
         }
 
         String dataSize = "5";
-        roomsCountTextView.setText("(" + dataSize + ")");
+        casesCountTextView.setText("(" + dataSize + ")");
     }
 
 }
