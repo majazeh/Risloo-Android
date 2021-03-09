@@ -33,7 +33,7 @@
 
         <include
             android:id="@+id/single_item_center_avatar_circleImageView"
-            layout="@layout/component_main_avatar"
+            layout="@layout/component_avatar_86sdp_border_white"
             android:layout_width="@dimen/_86sdp"
             android:layout_height="@dimen/_86sdp"
             app:layout_constraintBottom_toBottomOf="@+id/single_item_center_background_imageView"

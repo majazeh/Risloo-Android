@@ -67,9 +67,9 @@ public class AccountFragment extends Fragment {
     private void initializer(View view) {
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        avatarCircleImageView = view.findViewById(R.id.component_main_avatar_circleImageView);
+        avatarCircleImageView = view.findViewById(R.id.component_avatar_86sdp_border_white_circleImageView);
 
-        charTextView = view.findViewById(R.id.component_main_avatar_textView);
+        charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
 
         nameTextView = view.findViewById(R.id.fragment_account_name_textView);
         usernameTextView = view.findViewById(R.id.fragment_account_username_textView);

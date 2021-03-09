@@ -75,7 +75,7 @@ public class EditPersonalFragment extends Fragment {
         usernameHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHeader));
         emailHeaderTextView = emailConstraintLayout.findViewById(R.id.component_input_text_header_textView);
         emailHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentEmailHeader));
-        birthdayHeaderTextView = birthdayConstraintLayout.findViewById(R.id.component_select_box_header_textView);
+        birthdayHeaderTextView = birthdayConstraintLayout.findViewById(R.id.component_input_select_header_textView);
         birthdayHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentBirthdayHeader));
         statusHeaderTextView = statusRadioGroup.findViewById(R.id.component_radio_three_header_textView);
         statusHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentStatusHeader));
@@ -89,19 +89,19 @@ public class EditPersonalFragment extends Fragment {
         usernameEditText = usernameConstraintLayout.findViewById(R.id.component_input_text_editText);
         emailEditText = emailConstraintLayout.findViewById(R.id.component_input_text_editText);
 
-        birthdayTextView = birthdayConstraintLayout.findViewById(R.id.component_select_box_textView);
+        birthdayTextView = birthdayConstraintLayout.findViewById(R.id.component_input_select_textView);
 
         nameErrorImageView = nameConstraintLayout.findViewById(R.id.component_input_text_error_imageView);
         mobileErrorImageView = mobileConstraintLayout.findViewById(R.id.component_input_number_error_imageView);
         usernameErrorImageView = usernameConstraintLayout.findViewById(R.id.component_input_text_error_imageView);
         emailErrorImageView = emailConstraintLayout.findViewById(R.id.component_input_text_error_imageView);
-        birthdayErrorImageView = birthdayConstraintLayout.findViewById(R.id.component_select_box_error_imageView);
+        birthdayErrorImageView = birthdayConstraintLayout.findViewById(R.id.component_input_select_error_imageView);
 
         nameErrorTextView = nameConstraintLayout.findViewById(R.id.component_input_text_error_textView);
         mobileErrorTextView = mobileConstraintLayout.findViewById(R.id.component_input_number_error_textView);
         usernameErrorTextView = usernameConstraintLayout.findViewById(R.id.component_input_text_error_textView);
         emailErrorTextView = emailConstraintLayout.findViewById(R.id.component_input_text_error_textView);
-        birthdayErrorTextView = birthdayConstraintLayout.findViewById(R.id.component_select_box_error_textView);
+        birthdayErrorTextView = birthdayConstraintLayout.findViewById(R.id.component_input_select_error_textView);
 
         usernameGuideTextView = view.findViewById(R.id.component_guide_layout_info_textView);
         usernameGuideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));

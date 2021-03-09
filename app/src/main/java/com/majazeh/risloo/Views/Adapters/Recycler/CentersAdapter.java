@@ -94,8 +94,8 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         public CentersHolder(View view) {
             super(view);
             itemConstraintLayout = view.findViewById(R.id.single_item_center_constraintLayout);
-            avatarCircleImageView = view.findViewById(R.id.component_main_avatar_circleImageView);
-            charTextView = view.findViewById(R.id.component_main_avatar_textView);
+            avatarCircleImageView = view.findViewById(R.id.component_avatar_86sdp_border_white_circleImageView);
+            charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
             nameTextView = view.findViewById(R.id.single_item_center_name_textView);
             centerTextView = view.findViewById(R.id.single_item_center_username_textView);
         }

@@ -77,7 +77,7 @@
 
         <include
             android:id="@+id/fragment_edit_personal_birthday_selectBox"
-            layout="@layout/component_select_box"
+            layout="@layout/component_input_select"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
