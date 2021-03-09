@@ -173,6 +173,16 @@
         android:id="@+id/centerFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.CenterFragment"
         android:label="@string/CenterFragmentTitle"
-        tools:layout="@layout/fragment_center" />
+        tools:layout="@layout/fragment_center" >
+        <action
+            android:id="@+id/action_centerFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/roomFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.RoomFragment"
+        android:label="@string/RoomFragmentTitle"
+        tools:layout="@layout/fragment_room" />
 
 </navigation>
