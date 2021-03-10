@@ -1,156 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/fragment_center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
+    android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="always"
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Show.CenterFragment">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/fragment_center_info_cardView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        app:cardCornerRadius="@dimen/_2sdp"
-        app:cardElevation="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/fragment_center_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_center_info_constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:paddingBottom="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+        <androidx.cardview.widget.CardView
+            android:id="@+id/fragment_center_info_cardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            app:cardCornerRadius="@dimen/_2sdp"
+            app:cardElevation="0dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/fragment_center_background_imageView"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_84sdp"
-                android:layout_margin="@dimen/_1sdp"
-                android:contentDescription="@string/AppImageContent"
-                android:scaleType="fitCenter"
-                android:background="@drawable/gra_2sdp_solid_blue100_white_border_2dp_gray200"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/fragment_center_info_constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingBottom="@dimen/_12sdp"
+                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
-            <include
-                android:id="@+id/fragment_center_avatar_circleImageView"
-                layout="@layout/component_avatar_86sdp_border_white"
-                android:layout_width="@dimen/_86sdp"
-                android:layout_height="@dimen/_86sdp"
-                android:layout_marginStart="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_center_background_imageView"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_center_background_imageView" />
+                <ImageView
+                    android:id="@+id/fragment_center_background_imageView"
+                    android:layout_width="0dp"
+                    android:layout_height="@dimen/_84sdp"
+                    android:layout_margin="@dimen/_1sdp"
+                    android:contentDescription="@string/AppImageContent"
+                    android:scaleType="fitCenter"
+                    android:background="@drawable/gra_2sdp_solid_blue100_white_border_2dp_gray200"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-            <include
-                android:id="@+id/fragment_center_users_imageView"
-                layout="@layout/component_button_oval_28sdp"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginLeft="@dimen/_6sdp"
-                app:layout_goneMarginLeft="@dimen/_8sdp"
-                app:layout_constraintLeft_toRightOf="@id/fragment_center_edit_imageView"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_center_avatar_circleImageView" />
+                <include
+                    android:id="@+id/fragment_center_avatar_circleImageView"
+                    layout="@layout/component_avatar_86sdp_border_white"
+                    android:layout_width="@dimen/_86sdp"
+                    android:layout_height="@dimen/_86sdp"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_background_imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_center_background_imageView" />
 
-            <include
-                android:id="@+id/fragment_center_edit_imageView"
-                layout="@layout/component_button_oval_28sdp"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginLeft="@dimen/_6sdp"
-                app:layout_goneMarginLeft="@dimen/_8sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_center_users_imageView"
-                app:layout_constraintLeft_toRightOf="@id/fragment_center_profile_textView"
-                app:layout_constraintTop_toTopOf="@+id/fragment_center_users_imageView" />
+                <include
+                    android:id="@+id/fragment_center_users_imageView"
+                    layout="@layout/component_button_oval_28sdp"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_6sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_center_edit_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_avatar_circleImageView" />
 
-            <include
-                android:id="@+id/fragment_center_profile_textView"
-                layout="@layout/component_button_rectangle_28sdp"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginLeft="@dimen/_8sdp"
-                app:layout_constraintBottom_toBottomOf="@+id/fragment_center_edit_imageView"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/fragment_center_edit_imageView" />
+                <include
+                    android:id="@+id/fragment_center_edit_imageView"
+                    layout="@layout/component_button_oval_28sdp"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_6sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_users_imageView"
+                    app:layout_constraintLeft_toRightOf="@id/fragment_center_profile_textView"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_center_users_imageView" />
 
-            <TextView
-                android:id="@+id/fragment_center_name_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="start"
-                android:textSize="@dimen/_12ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray900"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_bold"
-                app:layout_constraintStart_toStartOf="@+id/fragment_center_avatar_circleImageView"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_center_avatar_circleImageView"
-                tools:text="نام و نام خانوادگی" />
+                <include
+                    android:id="@+id/fragment_center_profile_textView"
+                    layout="@layout/component_button_rectangle_28sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_edit_imageView"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_center_edit_imageView" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <TextView
+                    android:id="@+id/fragment_center_name_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:gravity="start"
+                    android:textSize="@dimen/_12ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray900"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_bold"
+                    app:layout_constraintStart_toStartOf="@+id/fragment_center_avatar_circleImageView"
+                    app:layout_constraintTop_toBottomOf="@+id/fragment_center_avatar_circleImageView"
+                    tools:text="نام و نام خانوادگی" />
 
-    </androidx.cardview.widget.CardView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <include
-        android:id="@+id/fragment_center_rooms_header_constraintLayout"
-        layout="@layout/component_index_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_18sdp"
-        app:layout_constraintStart_toStartOf="@+id/fragment_center_info_cardView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_center_info_cardView" />
+        </androidx.cardview.widget.CardView>
 
-    <include
-        android:id="@+id/fragment_center_rooms_search_editText"
-        layout="@layout/component_input_search"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
-        app:layout_constraintLeft_toRightOf="@+id/fragment_center_rooms_add_imageView"
-        app:layout_constraintRight_toRightOf="@+id/fragment_center_rooms_header_constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_header_constraintLayout" />
+        <include
+            android:id="@+id/fragment_center_rooms_header_constraintLayout"
+            layout="@layout/component_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@+id/fragment_center_info_cardView"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_center_info_cardView" />
 
-    <include
-        android:id="@+id/fragment_center_rooms_add_imageView"
-        layout="@layout/component_button_oval_28sdp"
-        android:layout_width="@dimen/_28sdp"
-        android:layout_height="@dimen/_28sdp"
-        android:layout_marginRight="@dimen/_6sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_center_rooms_search_editText"
-        app:layout_constraintLeft_toLeftOf="@+id/fragment_center_info_cardView"
-        app:layout_constraintRight_toLeftOf="@id/fragment_center_rooms_search_editText"
-        app:layout_constraintTop_toTopOf="@+id/fragment_center_rooms_search_editText" />
+        <include
+            android:id="@+id/fragment_center_rooms_search_editText"
+            layout="@layout/component_input_search"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintLeft_toRightOf="@+id/fragment_center_rooms_add_imageView"
+            app:layout_constraintRight_toRightOf="@+id/fragment_center_rooms_header_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_header_constraintLayout" />
 
-    <include
-        android:id="@+id/fragment_center_rooms_index_shimmerLayout"
-        layout="@layout/component_shimmer_room"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_search_editText" />
+        <include
+            android:id="@+id/fragment_center_rooms_add_imageView"
+            layout="@layout/component_button_oval_28sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginRight="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_center_rooms_search_editText"
+            app:layout_constraintLeft_toLeftOf="@+id/fragment_center_info_cardView"
+            app:layout_constraintRight_toLeftOf="@id/fragment_center_rooms_search_editText"
+            app:layout_constraintTop_toTopOf="@+id/fragment_center_rooms_search_editText" />
 
-    <include
-        android:id="@+id/fragment_center_rooms_index_constraintLayout"
-        layout="@layout/component_index_room"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/_12sdp"
-        android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_search_editText" />
+        <include
+            android:id="@+id/fragment_center_rooms_index_shimmerLayout"
+            layout="@layout/component_shimmer_room"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_search_editText" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/fragment_center_rooms_index_constraintLayout"
+            layout="@layout/component_index_room"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_search_editText" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

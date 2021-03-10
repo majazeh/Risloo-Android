@@ -126,34 +126,6 @@
             app:layout_constraintStart_toStartOf="@+id/component_shimmer_case_item11"
             app:layout_constraintTop_toBottomOf="@+id/component_shimmer_case_item11" />
 
-        <include
-            android:id="@+id/component_shimmer_case_item13"
-            layout="@layout/shimmer_item_case"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_case_item12"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_case_item12"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_case_item12" />
-
-        <include
-            android:id="@+id/component_shimmer_case_item14"
-            layout="@layout/shimmer_item_case"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_case_item13"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_case_item13"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_case_item13" />
-
-        <include
-            android:id="@+id/component_shimmer_case_item15"
-            layout="@layout/shimmer_item_case"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_case_item14"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_case_item14"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_case_item14" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.facebook.shimmer.ShimmerFrameLayout>

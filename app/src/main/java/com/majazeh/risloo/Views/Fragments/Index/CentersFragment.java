@@ -91,8 +91,9 @@ public class CentersFragment extends Fragment {
         centersConstraintLayout = view.findViewById(R.id.fragment_centers_index_constraintLayout);
 
         centersRecyclerView = view.findViewById(R.id.component_index_center_recyclerView);
-        centersRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0, (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
+        centersRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
         centersRecyclerView.setLayoutManager(layoutManager);
+        centersRecyclerView.setNestedScrollingEnabled(false);
         centersRecyclerView.setHasFixedSize(true);
 
         centersEmptyTextView = view.findViewById(R.id.component_index_center_textView);

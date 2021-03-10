@@ -8,7 +8,7 @@
     android:background="@color/White"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
-    android:overScrollMode="never"
+    android:overScrollMode="always"
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Create.EditAvatarFragment">
 

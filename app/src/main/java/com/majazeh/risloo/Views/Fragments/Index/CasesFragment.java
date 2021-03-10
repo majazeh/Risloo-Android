@@ -92,12 +92,13 @@ public class CasesFragment extends Fragment {
         casesShimmerTopView = view.findViewById(R.id.shimmer_item_case_top_view);
         casesShimmerTopView.setVisibility(View.GONE);
 
-        casesHeaderLayout = view.findViewById(R.id.fragment_cases_index_header_constraintLayout);
+        casesHeaderLayout = view.findViewById(R.id.fragment_cases_index_headerLayout);
         casesConstraintLayout = view.findViewById(R.id.fragment_cases_index_constraintLayout);
 
         casesRecyclerView = view.findViewById(R.id.component_index_case_recyclerView);
         casesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
         casesRecyclerView.setLayoutManager(layoutManager);
+        casesRecyclerView.setNestedScrollingEnabled(false);
         casesRecyclerView.setHasFixedSize(true);
 
         casesEmptyTextView = view.findViewById(R.id.component_index_case_textView);

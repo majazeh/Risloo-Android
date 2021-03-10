@@ -119,8 +119,9 @@ public class CenterFragment extends Fragment {
         roomsConstraintLayout = view.findViewById(R.id.fragment_center_rooms_index_constraintLayout);
 
         roomsRecyclerView = view.findViewById(R.id.component_index_room_recyclerView);
-        roomsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0, (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
+        roomsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
         roomsRecyclerView.setLayoutManager(layoutManager);
+        roomsRecyclerView.setNestedScrollingEnabled(false);
         roomsRecyclerView.setHasFixedSize(true);
 
         roomsEmptyTextView = view.findViewById(R.id.component_index_room_textView);
