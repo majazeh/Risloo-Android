@@ -40,4 +40,50 @@
         app:layout_constraintRight_toLeftOf="@id/fragment_cases_search_editText"
         app:layout_constraintTop_toTopOf="@+id/fragment_cases_search_editText" />
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:padding="@dimen/_1sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/fragment_cases_add_imageView"
+        app:layout_constraintStart_toStartOf="@id/fragment_cases_search_editText"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_cases_search_editText">
+
+        <include
+            android:id="@+id/fragment_cases_index_shimmerLayout"
+            layout="@layout/component_shimmer_case"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/fragment_cases_index_header_constraintLayout"
+            layout="@layout/header_item_case"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/fragment_cases_index_constraintLayout"
+            layout="@layout/component_index_case"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_cases_index_header_constraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

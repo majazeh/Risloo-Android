@@ -17,14 +17,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.CasesAdapter;
 
 public class CasesFragment extends Fragment {
+
+    // Adapters
+    private CasesAdapter casesAdapter;
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -34,6 +42,12 @@ public class CasesFragment extends Fragment {
     private EditText casesSearchEditText;
     private ProgressBar casesSearchProgressBar;
     private ImageView casesAddImageView;
+    private ShimmerFrameLayout casesShimmerLayout;
+    private View casesShimmerTopView;
+    private ConstraintLayout casesHeaderLayout, casesConstraintLayout;
+    private RecyclerView casesRecyclerView;
+    private TextView casesEmptyTextView;
+    private ProgressBar casesProgressBar;
 
     @Nullable
     @Override
@@ -48,10 +62,18 @@ public class CasesFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            casesShimmerLayout.setVisibility(View.GONE);
+            casesHeaderLayout.setVisibility(View.VISIBLE);
+            casesConstraintLayout.setVisibility(View.VISIBLE);
+        }, 5000);
+
         return view;
     }
 
     private void initializer(View view) {
+        casesAdapter = new CasesAdapter(getActivity());
+
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         casesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
@@ -65,6 +87,22 @@ public class CasesFragment extends Fragment {
         casesAddImageView = view.findViewById(R.id.fragment_cases_add_imageView);
         casesAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(casesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        casesShimmerLayout = view.findViewById(R.id.fragment_cases_index_shimmerLayout);
+        casesShimmerTopView = view.findViewById(R.id.shimmer_item_case_top_view);
+        casesShimmerTopView.setVisibility(View.GONE);
+
+        casesHeaderLayout = view.findViewById(R.id.fragment_cases_index_header_constraintLayout);
+        casesConstraintLayout = view.findViewById(R.id.fragment_cases_index_constraintLayout);
+
+        casesRecyclerView = view.findViewById(R.id.component_index_case_recyclerView);
+        casesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
+        casesRecyclerView.setLayoutManager(layoutManager);
+        casesRecyclerView.setHasFixedSize(true);
+
+        casesEmptyTextView = view.findViewById(R.id.component_index_case_textView);
+
+        casesProgressBar = view.findViewById(R.id.component_index_case_progressBar);
     }
 
     private void detector() {
@@ -123,7 +161,10 @@ public class CasesFragment extends Fragment {
     }
 
     private void setData() {
-        String dataSize = "5";
+//        casesAdapter.setCenter(null);
+        casesRecyclerView.setAdapter(casesAdapter);
+
+        String dataSize = "15";
         casesCountTextView.setText("(" + dataSize + ")");
     }
 

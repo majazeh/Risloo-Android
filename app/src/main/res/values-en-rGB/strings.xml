@@ -299,6 +299,11 @@
 
     <string name="CasesFragmentTitle">پرونده‌ها</string>
 
+    <string name="CasesFragmentSerial">سریال</string>
+    <string name="CasesFragmentRoom">اتاق درمان</string>
+    <string name="CasesFragmentCenter">مرکز درمانی</string>
+    <string name="CasesFragmentReference">مراجعین</string>
+
     /*
     ---------- Sessions Fragment ----------
     */
