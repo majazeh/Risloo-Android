@@ -93,10 +93,10 @@
 
     <include
         android:id="@+id/single_item_scale_add_imageView"
-        layout="@layout/component_button_oval_28sdp"
-        android:layout_width="@dimen/_22sdp"
-        android:layout_height="@dimen/_22sdp"
-        android:layout_marginLeft="@dimen/_6sdp"
+        layout="@layout/component_button_image_26sdp"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:layout_marginLeft="@dimen/_4sdp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent" />

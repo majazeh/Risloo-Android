@@ -62,9 +62,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.itemView.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.addImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-        } else {
-            holder.addImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            holder.addImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_green300);
         }
     }
 
