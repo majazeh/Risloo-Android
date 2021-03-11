@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/single_item_scale"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    tools:background="@color/White"
+    tools:context=".Views.Adapters.Recycler.ScalesAdapter">
+
+    <View
+        android:id="@+id/single_item_scale_top_view"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/Gray200"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/single_item_scale_serial_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintHorizontal_weight="0.8"
+        app:layout_constraintBottom_toBottomOf="@+id/single_item_scale_version_textView"
+        app:layout_constraintEnd_toStartOf="@id/single_item_scale_name_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/single_item_scale_edition_textView"
+        tools:text="سریال" />
+
+    <TextView
+        android:id="@+id/single_item_scale_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintHorizontal_weight="1.2"
+        app:layout_constraintBottom_toBottomOf="@id/single_item_scale_version_textView"
+        app:layout_constraintEnd_toStartOf="@id/single_item_scale_edition_textView"
+        app:layout_constraintStart_toEndOf="@id/single_item_scale_serial_textView"
+        app:layout_constraintTop_toTopOf="@+id/single_item_scale_edition_textView"
+        tools:text="مقیاس" />
+
+    <TextView
+        android:id="@+id/single_item_scale_edition_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:gravity="start"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/single_item_scale_name_textView"
+        app:layout_constraintTop_toBottomOf="@+id/single_item_scale_top_view"
+        tools:text="ویرایش" />
+
+    <TextView
+        android:id="@+id/single_item_scale_version_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="start"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/single_item_scale_edition_textView"
+        app:layout_constraintStart_toStartOf="@id/single_item_scale_edition_textView"
+        app:layout_constraintTop_toBottomOf="@+id/single_item_scale_edition_textView"
+        tools:text="نسخه" />
+
+    <include
+        android:id="@+id/single_item_scale_add_imageView"
+        layout="@layout/component_button_oval_28sdp"
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_marginLeft="@dimen/_6sdp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

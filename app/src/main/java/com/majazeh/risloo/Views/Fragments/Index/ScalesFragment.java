@@ -14,13 +14,21 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.ScalesAdapter;
 
 public class ScalesFragment extends Fragment {
+
+    // Adapters
+    private ScalesAdapter scalesAdapter;
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -29,6 +37,12 @@ public class ScalesFragment extends Fragment {
     private TextView scalesTitleTextView, scalesCountTextView;
     private EditText scalesSearchEditText;
     private ProgressBar scalesSearchProgressBar;
+    private ShimmerFrameLayout scalesShimmerLayout;
+    private View scalesShimmerTopView;
+    private ConstraintLayout scalesHeaderLayout, scalesConstraintLayout;
+    private RecyclerView scalesRecyclerView;
+    private TextView scalesEmptyTextView;
+    private ProgressBar scalesProgressBar;
 
     @Nullable
     @Override
@@ -43,10 +57,18 @@ public class ScalesFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            scalesShimmerLayout.setVisibility(View.GONE);
+            scalesHeaderLayout.setVisibility(View.VISIBLE);
+            scalesConstraintLayout.setVisibility(View.VISIBLE);
+        }, 5000);
+
         return view;
     }
 
     private void initializer(View view) {
+        scalesAdapter = new ScalesAdapter(getActivity());
+
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         scalesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
@@ -56,10 +78,27 @@ public class ScalesFragment extends Fragment {
         scalesSearchEditText = view.findViewById(R.id.component_input_search_editText);
 
         scalesSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+
+        scalesShimmerLayout = view.findViewById(R.id.fragment_scales_index_shimmerLayout);
+        scalesShimmerTopView = view.findViewById(R.id.shimmer_item_scale_top_view);
+        scalesShimmerTopView.setVisibility(View.GONE);
+
+        scalesHeaderLayout = view.findViewById(R.id.fragment_scales_index_headerLayout);
+        scalesConstraintLayout = view.findViewById(R.id.fragment_scales_index_constraintLayout);
+
+        scalesRecyclerView = view.findViewById(R.id.component_index_scale_recyclerView);
+        scalesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
+        scalesRecyclerView.setLayoutManager(layoutManager);
+        scalesRecyclerView.setNestedScrollingEnabled(false);
+        scalesRecyclerView.setHasFixedSize(true);
+
+        scalesEmptyTextView = view.findViewById(R.id.component_index_scale_textView);
+
+        scalesProgressBar = view.findViewById(R.id.component_index_scale_progressBar);
     }
 
     private void detector() {
-        // TODO : Place Code Here
+        // TODO : Place Work Here
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -103,7 +142,10 @@ public class ScalesFragment extends Fragment {
     }
 
     private void setData() {
-        String dataSize = "5";
+//        scalesAdapter.setScale(null);
+        scalesRecyclerView.setAdapter(scalesAdapter);
+
+        String dataSize = "15";
         scalesCountTextView.setText("(" + dataSize + ")");
     }
 

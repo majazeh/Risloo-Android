@@ -322,6 +322,11 @@
 
     <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
 
+    <string name="ScalesFragmentSerial">سریال</string>
+    <string name="ScalesFragmentName">مقیاس</string>
+    <string name="ScalesFragmentEdition">ویرایش</string>
+    <string name="ScalesFragmentVersion">نسخه</string>
+
     /*
     ---------- Samples Fragment ----------
     */

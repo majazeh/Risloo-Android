@@ -162,7 +162,7 @@ public class CasesFragment extends Fragment {
     }
 
     private void setData() {
-//        casesAdapter.setCenter(null);
+//        casesAdapter.setCase(null);
         casesRecyclerView.setAdapter(casesAdapter);
 
         String dataSize = "15";
