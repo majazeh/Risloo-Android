@@ -380,6 +380,12 @@
     <string name="CenterFragmentTitle">مرکز</string>
     <string name="CenterFragmentProfile">پروفایل</string>
 
+    <string name="CenterFragmentRequest">درخواست پذیرش</string>
+    <string name="CenterFragmentOwner">شما مدیر این مرکز درمان هستید</string>
+    <string name="CenterFragmentKicked">رد شد</string>
+    <string name="CenterFragmentAwaiting">در انتظار</string>
+    <string name="CenterFragmentAccepted">پذیرفته شد</string>
+
     <string name="CenterFragmentRoomsHeader">اتاق‌های درمان</string>
 
     /*
@@ -387,6 +393,7 @@
     */
 
     <string name="RoomFragmentTitle">اتاق</string>
+    <string name="RoomFragmentSession">جلسه</string>
 
     <string name="RoomFragmentCasesHeader">پرونده‌ها</string>
 

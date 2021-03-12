@@ -3,15 +3,10 @@ package com.majazeh.risloo.Views.Fragments.Show;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -19,7 +14,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -31,9 +25,6 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class AccountFragment extends Fragment {
 
-    // Objects
-    private LinearLayoutManager layoutManager;
-
     // Widgets
     private CircleImageView avatarCircleImageView;
     private TextView charTextView;
@@ -43,10 +34,6 @@ public class AccountFragment extends Fragment {
     private ImageView educationImageView, birthdayImageView, emailImageView, mobileImageView;
     private TextView editTextView;
     private ImageView enterImageView;
-    private TextView documentsTitleTextView, documentsCountTextView;
-    private EditText documentsSearchEditText;
-    private ProgressBar documentsSearchProgressBar;
-    private ImageView documentsAddImageView;
 
     @Nullable
     @Override
@@ -65,8 +52,6 @@ public class AccountFragment extends Fragment {
     }
 
     private void initializer(View view) {
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
-
         avatarCircleImageView = view.findViewById(R.id.component_avatar_86sdp_border_white_circleImageView);
 
         charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
@@ -93,31 +78,15 @@ public class AccountFragment extends Fragment {
         enterImageView = view.findViewById(R.id.fragment_account_enter_imageView);
         enterImageView.setImageResource(R.drawable.ic_user_cog_light);
         ImageViewCompat.setImageTintList(enterImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue600));
-
-        documentsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
-        documentsTitleTextView.setText(getResources().getString(R.string.AccountFragmentDocumentsHeader));
-        documentsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
-
-        documentsSearchEditText = view.findViewById(R.id.component_input_search_editText);
-
-        documentsSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
-
-        documentsAddImageView = view.findViewById(R.id.fragment_account_documents_add_imageView);
-        documentsAddImageView.setImageResource(R.drawable.ic_plus_light);
-        ImageViewCompat.setImageTintList(documentsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
             enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
-
-            documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
             enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
-
-            documentsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -144,50 +113,6 @@ public class AccountFragment extends Fragment {
             ((MainActivity) getActivity()).handler.postDelayed(() -> enterImageView.setClickable(true), 300);
 
             // TODO : Call Work Method
-        });
-
-        documentsSearchEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!documentsSearchEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), documentsSearchEditText);
-                }
-            }
-            return false;
-        });
-
-        documentsSearchEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) getActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) getActivity()).handler.postDelayed(() -> {
-//                    if (documentsSearchEditText.length() != 0) {
-//                        getData("getDocuments", "", documentsSearchEditText.getText().toString().trim());
-//                    } else {
-//                        documentsRecyclerView.setAdapter(null);
-//
-//                        if (documentsEmptyTextView.getVisibility() == View.VISIBLE) {
-//                            documentsEmptyTextView.setVisibility(View.GONE);
-//                        }
-//                    }
-                }, 750);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        documentsAddImageView.setOnClickListener(v -> {
-            documentsAddImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> documentsAddImageView.setClickable(true), 300);
-
-            ((MainActivity) getActivity()).navigator(R.id.createDocumentFragment);
         });
     }
 
@@ -242,9 +167,6 @@ public class AccountFragment extends Fragment {
 
             Picasso.get().load(((MainActivity) getActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(avatarCircleImageView);
         }
-
-        String dataSize = "5";
-        documentsCountTextView.setText("(" + dataSize + ")");
     }
 
 }

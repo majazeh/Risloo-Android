@@ -245,34 +245,4 @@
 
     </androidx.cardview.widget.CardView>
 
-    <include
-        android:id="@+id/fragment_account_documents_header_constraintLayout"
-        layout="@layout/component_index_header"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_18sdp"
-        app:layout_constraintStart_toStartOf="@+id/fragment_account_info_cardView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_account_info_cardView" />
-
-    <include
-        android:id="@+id/fragment_account_documents_search_editText"
-        layout="@layout/component_input_search"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_28sdp"
-        android:layout_marginTop="@dimen/_6sdp"
-        app:layout_constraintLeft_toRightOf="@+id/fragment_account_documents_add_imageView"
-        app:layout_constraintRight_toRightOf="@+id/fragment_account_documents_header_constraintLayout"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_account_documents_header_constraintLayout" />
-
-    <include
-        android:id="@+id/fragment_account_documents_add_imageView"
-        layout="@layout/component_button_oval_28sdp"
-        android:layout_width="@dimen/_28sdp"
-        android:layout_height="@dimen/_28sdp"
-        android:layout_marginRight="@dimen/_6sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_account_documents_search_editText"
-        app:layout_constraintLeft_toLeftOf="@+id/fragment_account_info_cardView"
-        app:layout_constraintRight_toLeftOf="@id/fragment_account_documents_search_editText"
-        app:layout_constraintTop_toTopOf="@+id/fragment_account_documents_search_editText" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
