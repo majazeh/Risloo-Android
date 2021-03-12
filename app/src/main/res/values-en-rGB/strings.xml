@@ -345,6 +345,11 @@
 
     <string name="DocumentsFragmentTitle">اسناد و مدارک</string>
 
+    <string name="DocumentsFragmentSerial">سریال</string>
+    <string name="DocumentsFragmentName">عنوان</string>
+    <string name="DocumentsFragmentAttachment">پیوست</string>
+    <string name="DocumentsFragmentStatus">وضعیت</string>
+
     /*
     ---------- Settings Fragment ----------
     */

@@ -17,14 +17,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.DocumentsAdapter;
 
 public class DocumentsFragment extends Fragment {
+
+    // Adapters
+    private DocumentsAdapter documentsAdapter;
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -34,6 +42,12 @@ public class DocumentsFragment extends Fragment {
     private EditText documentsSearchEditText;
     private ProgressBar documentsSearchProgressBar;
     private ImageView documentsAddImageView;
+    private ShimmerFrameLayout documentsShimmerLayout;
+    private View documentsShimmerTopView;
+    private ConstraintLayout documentsHeaderLayout, documentsConstraintLayout;
+    private RecyclerView documentsRecyclerView;
+    private TextView documentsEmptyTextView;
+    private ProgressBar documentsProgressBar;
 
     @Nullable
     @Override
@@ -48,10 +62,18 @@ public class DocumentsFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            documentsShimmerLayout.setVisibility(View.GONE);
+            documentsHeaderLayout.setVisibility(View.VISIBLE);
+            documentsConstraintLayout.setVisibility(View.VISIBLE);
+        }, 5000);
+
         return view;
     }
 
     private void initializer(View view) {
+        documentsAdapter = new DocumentsAdapter(getActivity());
+
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         documentsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
@@ -65,6 +87,23 @@ public class DocumentsFragment extends Fragment {
         documentsAddImageView = view.findViewById(R.id.fragment_documents_add_imageView);
         documentsAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(documentsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        documentsShimmerLayout = view.findViewById(R.id.fragment_documents_index_shimmerLayout);
+        documentsShimmerTopView = view.findViewById(R.id.shimmer_item_document_top_view);
+        documentsShimmerTopView.setVisibility(View.GONE);
+
+        documentsHeaderLayout = view.findViewById(R.id.fragment_documents_index_headerLayout);
+        documentsConstraintLayout = view.findViewById(R.id.fragment_documents_index_constraintLayout);
+
+        documentsRecyclerView = view.findViewById(R.id.component_index_document_recyclerView);
+        documentsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
+        documentsRecyclerView.setLayoutManager(layoutManager);
+        documentsRecyclerView.setNestedScrollingEnabled(false);
+        documentsRecyclerView.setHasFixedSize(true);
+
+        documentsEmptyTextView = view.findViewById(R.id.component_index_document_textView);
+
+        documentsProgressBar = view.findViewById(R.id.component_index_document_progressBar);
     }
 
     private void detector() {
@@ -123,7 +162,10 @@ public class DocumentsFragment extends Fragment {
     }
 
     private void setData() {
-        String dataSize = "5";
+//        documentsAdapter.setDocument(null);
+        documentsRecyclerView.setAdapter(documentsAdapter);
+
+        String dataSize = "15";
         documentsCountTextView.setText("(" + dataSize + ")");
     }
 
