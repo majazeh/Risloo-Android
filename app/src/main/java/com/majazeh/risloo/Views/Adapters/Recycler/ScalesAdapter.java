@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -93,9 +91,6 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         holder.nameTextView.setText("آزمون ریون کودکان (5)");
         holder.editionTextView.setText("کودکان");
         holder.versionTextView.setText("5");
-
-        holder.addImageView.setImageResource(R.drawable.ic_plus_light);
-        ImageViewCompat.setImageTintList(holder.addImageView, AppCompatResources.getColorStateList(activity, R.color.Green700));
     }
 
     public class ScalesHolder extends RecyclerView.ViewHolder {

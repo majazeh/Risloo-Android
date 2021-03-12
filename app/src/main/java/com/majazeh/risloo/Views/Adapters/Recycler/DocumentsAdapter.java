@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -108,11 +106,6 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         holder.serialTextView.setText("P-96666DD");
         holder.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
         holder.statusTextView.setText("تأیید شده");
-
-        holder.cancelImageView.setImageResource(R.drawable.ic_times_light);
-        ImageViewCompat.setImageTintList(holder.cancelImageView, AppCompatResources.getColorStateList(activity, R.color.Red700));
-        holder.acceptImageView.setImageResource(R.drawable.ic_check_light);
-        ImageViewCompat.setImageTintList(holder.acceptImageView, AppCompatResources.getColorStateList(activity, R.color.Green700));
     }
 
     public class DocumentsHolder extends RecyclerView.ViewHolder {

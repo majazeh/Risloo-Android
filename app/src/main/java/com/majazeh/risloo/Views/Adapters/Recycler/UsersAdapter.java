@@ -9,8 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -118,11 +116,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         holder.usernameTextView.setText("baravak");
         holder.typeTextView.setText("ادمین");
         holder.statusTextView.setText("فعال");
-
-        holder.enterImageView.setImageResource(R.drawable.ic_user_cog_light);
-        ImageViewCompat.setImageTintList(holder.enterImageView, AppCompatResources.getColorStateList(activity, R.color.Blue700));
-        holder.editImageView.setImageResource(R.drawable.ic_edit_light);
-        ImageViewCompat.setImageTintList(holder.editImageView, AppCompatResources.getColorStateList(activity, R.color.Gray700));
     }
 
     public class UsersHolder extends RecyclerView.ViewHolder {
