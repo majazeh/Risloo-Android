@@ -17,14 +17,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.UsersAdapter;
 
 public class UsersFragment extends Fragment {
+
+    // Adapters
+    private UsersAdapter usersAdapter;
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -34,6 +42,12 @@ public class UsersFragment extends Fragment {
     private EditText usersSearchEditText;
     private ProgressBar usersSearchProgressBar;
     private ImageView usersAddImageView;
+    private ShimmerFrameLayout usersShimmerLayout;
+    private View usersShimmerTopView;
+    private ConstraintLayout usersHeaderLayout, usersConstraintLayout;
+    private RecyclerView usersRecyclerView;
+    private TextView usersEmptyTextView;
+    private ProgressBar usersProgressBar;
 
     @Nullable
     @Override
@@ -48,10 +62,18 @@ public class UsersFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            usersShimmerLayout.setVisibility(View.GONE);
+            usersHeaderLayout.setVisibility(View.VISIBLE);
+            usersConstraintLayout.setVisibility(View.VISIBLE);
+        }, 5000);
+
         return view;
     }
 
     private void initializer(View view) {
+        usersAdapter = new UsersAdapter(getActivity());
+
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         usersTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
@@ -65,6 +87,23 @@ public class UsersFragment extends Fragment {
         usersAddImageView = view.findViewById(R.id.fragment_users_add_imageView);
         usersAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(usersAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        usersShimmerLayout = view.findViewById(R.id.fragment_users_index_shimmerLayout);
+        usersShimmerTopView = view.findViewById(R.id.shimmer_item_user_top_view);
+        usersShimmerTopView.setVisibility(View.GONE);
+
+        usersHeaderLayout = view.findViewById(R.id.fragment_users_index_headerLayout);
+        usersConstraintLayout = view.findViewById(R.id.fragment_users_index_constraintLayout);
+
+        usersRecyclerView = view.findViewById(R.id.component_index_user_recyclerView);
+        usersRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
+        usersRecyclerView.setLayoutManager(layoutManager);
+        usersRecyclerView.setNestedScrollingEnabled(false);
+        usersRecyclerView.setHasFixedSize(true);
+
+        usersEmptyTextView = view.findViewById(R.id.component_index_user_textView);
+
+        usersProgressBar = view.findViewById(R.id.component_index_user_progressBar);
     }
 
     private void detector() {
@@ -123,7 +162,10 @@ public class UsersFragment extends Fragment {
     }
 
     private void setData() {
-        String dataSize = "5";
+//        usersAdapter.setUser(null);
+        usersRecyclerView.setAdapter(usersAdapter);
+
+        String dataSize = "15";
         usersCountTextView.setText("(" + dataSize + ")");
     }
 

@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/component_shimmer_user"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    app:shimmer_colored="false"
+    app:shimmer_base_alpha="1"
+    app:shimmer_highlight_alpha="0"
+    app:shimmer_auto_start="true"
+    app:shimmer_duration="1000">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/component_shimmer_user_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include
+            android:id="@+id/component_shimmer_user_item1"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item2"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item1"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item1"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item1" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item3"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item2"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item2"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item2" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item4"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item3"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item3"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item3" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item5"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item4"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item4"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item4" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item6"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item5"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item5"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item5" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item7"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item6"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item6"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item6" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item8"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item7"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item7"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item7" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item9"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item8"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item8"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item8" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item10"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item9"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item9"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item9" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item11"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item10"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item10"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item10" />
+
+        <include
+            android:id="@+id/component_shimmer_user_item12"
+            layout="@layout/shimmer_item_user"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_user_item11"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_user_item11"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_user_item11" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>

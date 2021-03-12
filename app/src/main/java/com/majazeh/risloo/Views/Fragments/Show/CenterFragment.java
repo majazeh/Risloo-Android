@@ -96,7 +96,7 @@ public class CenterFragment extends Fragment {
         profileTextView.setTextColor(getResources().getColor(R.color.Gray500));
 
         editImageView = view.findViewById(R.id.fragment_center_edit_imageView);
-        editImageView.setImageResource(R.drawable.ic_pen_light);
+        editImageView.setImageResource(R.drawable.ic_edit_light);
         ImageViewCompat.setImageTintList(editImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray500));
         usersImageView = view.findViewById(R.id.fragment_center_users_imageView);
         usersImageView.setImageResource(R.drawable.ic_users_light);

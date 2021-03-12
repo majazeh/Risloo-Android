@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/header_item_user"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray200"
+    tools:context=".Views.Fragments.Index.UsersFragment">
+
+    <TextView
+        android:id="@+id/header_item_user_serial_textView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|right"
+        android:text="@string/UsersFragmentSerial"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintHorizontal_weight="0.75"
+        app:layout_constraintBottom_toBottomOf="@+id/header_item_user_username_textView"
+        app:layout_constraintEnd_toStartOf="@+id/header_item_user_name_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/header_item_user_name_textView" />
+
+    <TextView
+        android:id="@+id/header_item_user_name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_2sdp"
+        android:gravity="right"
+        android:text="@string/UsersFragmentName"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintEnd_toStartOf="@+id/header_item_user_email_imageView"
+        app:layout_constraintStart_toEndOf="@+id/header_item_user_serial_textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/header_item_user_username_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="right"
+        android:text="@string/UsersFragmentUsername"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/header_item_user_name_textView"
+        app:layout_constraintStart_toStartOf="@+id/header_item_user_name_textView"
+        app:layout_constraintTop_toBottomOf="@+id/header_item_user_name_textView" />
+
+    <ImageView
+        android:id="@+id/header_item_user_email_imageView"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:padding="@dimen/_6sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_envelope_light"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/header_item_user_username_textView"
+        app:layout_constraintEnd_toStartOf="@+id/header_item_user_mobile_imageView"
+        app:layout_constraintStart_toEndOf="@+id/header_item_user_name_textView"
+        app:layout_constraintTop_toTopOf="@+id/header_item_user_name_textView"
+        app:tint="@color/Gray500" />
+
+    <ImageView
+        android:id="@+id/header_item_user_mobile_imageView"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:padding="@dimen/_6sdp"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_mobile_light"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintBottom_toBottomOf="@+id/header_item_user_username_textView"
+        app:layout_constraintEnd_toStartOf="@+id/header_item_user_type_textView"
+        app:layout_constraintStart_toEndOf="@+id/header_item_user_email_imageView"
+        app:layout_constraintTop_toTopOf="@+id/header_item_user_name_textView"
+        app:tint="@color/Gray500" />
+
+    <TextView
+        android:id="@+id/header_item_user_type_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_32sdp"
+        android:gravity="right"
+        android:text="@string/UsersFragmentType"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintHorizontal_weight="0.9"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/header_item_user_mobile_imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/header_item_user_status_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="right"
+        android:text="@string/UsersFragmentStatus"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/header_item_user_type_textView"
+        app:layout_constraintStart_toStartOf="@+id/header_item_user_type_textView"
+        app:layout_constraintTop_toBottomOf="@+id/header_item_user_type_textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
