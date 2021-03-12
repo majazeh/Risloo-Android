@@ -410,6 +410,12 @@
     <string name="SessionFragmentTitle">جلسه</string>
 
     /*
+    ---------- User Fragment ----------
+    */
+
+    <string name="UserFragmentTitle">کاربر</string>
+
+    /*
     ---------- Sample Fragment ----------
     */
 

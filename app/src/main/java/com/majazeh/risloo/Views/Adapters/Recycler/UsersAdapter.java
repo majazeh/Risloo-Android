@@ -72,7 +72,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
             holder.itemView.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.itemView.setClickable(true), 300);
 
-//            ((MainActivity) activity).navigator(R.id.userFragment);
+            ((MainActivity) activity).navigator(R.id.userFragment);
         });
 
         holder.emailImageView.setOnClickListener(v -> {

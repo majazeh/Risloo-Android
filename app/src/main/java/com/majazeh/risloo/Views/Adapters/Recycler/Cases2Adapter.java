@@ -67,7 +67,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
             holder.itemConstraintLayout.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.itemConstraintLayout.setClickable(true), 300);
 
-//            ((MainActivity) activity).navigator(R.id.caseFragment);
+            ((MainActivity) activity).navigator(R.id.caseFragment);
         });
     }
 

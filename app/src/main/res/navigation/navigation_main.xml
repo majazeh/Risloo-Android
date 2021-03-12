@@ -73,6 +73,9 @@
         <action
             android:id="@+id/action_casesFragment_to_createCaseFragment"
             app:destination="@id/createCaseFragment" />
+        <action
+            android:id="@+id/action_casesFragment_to_caseFragment"
+            app:destination="@id/caseFragment" />
     </fragment>
 
     <fragment
@@ -93,6 +96,9 @@
         <action
             android:id="@+id/action_usersFragment_to_createUserFragment"
             app:destination="@id/createUserFragment" />
+        <action
+            android:id="@+id/action_usersFragment_to_userFragment"
+            app:destination="@id/userFragment" />
     </fragment>
 
     <fragment
@@ -183,6 +189,22 @@
         android:id="@+id/roomFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.RoomFragment"
         android:label="@string/RoomFragmentTitle"
-        tools:layout="@layout/fragment_room" />
+        tools:layout="@layout/fragment_room" >
+        <action
+            android:id="@+id/action_roomFragment_to_caseFragment"
+            app:destination="@id/caseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/caseFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.CaseFragment"
+        android:label="@string/CaseFragmentTitle"
+        tools:layout="@layout/fragment_case" />
+
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.UserFragment"
+        android:label="@string/UserFragmentTitle"
+        tools:layout="@layout/fragment_user" />
 
 </navigation>

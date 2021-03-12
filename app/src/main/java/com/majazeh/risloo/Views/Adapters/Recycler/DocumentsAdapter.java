@@ -71,7 +71,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
             holder.itemView.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.itemView.setClickable(true), 300);
 
-//            ((MainActivity) activity).navigator(R.id.userFragment);
+//            ((MainActivity) activity).navigator(R.id.documentFragment);
         });
 
         holder.attachmentImageView.setOnClickListener(v -> {
