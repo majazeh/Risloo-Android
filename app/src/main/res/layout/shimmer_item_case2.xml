@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/shimmer_item_case2"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    app:cardCornerRadius="@dimen/_2sdp"
+    app:cardElevation="0dp"
+    tools:layout_margin="@dimen/_12sdp"
+    tools:context=".Views.Adapters.Recycler.Cases2Adapter">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/shimmer_item_case2_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+
+        <ImageView
+            android:id="@+id/shimmer_item_case2_serial_imageView"
+            android:layout_width="@dimen/_16sdp"
+            android:layout_height="@dimen/_16sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:background="@drawable/draw_oval_solid_gray50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/shimmer_item_case2_serial_textView"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray700"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_bold"
+            android:background="@color/Gray50"
+            app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_case2_serial_imageView"
+            app:layout_constraintEnd_toStartOf="@+id/shimmer_item_case2_serial_imageView"
+            app:layout_constraintTop_toTopOf="@+id/shimmer_item_case2_serial_imageView" />
+
+        <ImageView
+            android:id="@+id/shimmer_item_case2_reference_imageView"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:background="@drawable/draw_oval_solid_gray50"
+            app:layout_constraintBottom_toTopOf="@id/shimmer_item_case2_mid_view"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmer_item_case2_serial_imageView" />
+
+        <TextView
+            android:id="@+id/shimmer_item_case2_reference_textView"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:background="@color/Gray50"
+            app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_case2_reference_imageView"
+            app:layout_constraintStart_toEndOf="@+id/shimmer_item_case2_reference_imageView"
+            app:layout_constraintTop_toTopOf="@+id/shimmer_item_case2_reference_imageView" />
+
+        <View
+            android:id="@+id/shimmer_item_case2_mid_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:background="@color/Gray200"
+            app:layout_constraintBottom_toTopOf="@+id/shimmer_item_case2_date_imageView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/shimmer_item_case2_reference_imageView" />
+
+        <ImageView
+            android:id="@+id/shimmer_item_case2_date_imageView"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:background="@drawable/draw_oval_solid_gray50"
+            app:layout_constraintTop_toBottomOf="@id/shimmer_item_case2_mid_view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/shimmer_item_case2_date_textView"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:background="@color/Gray50"
+            app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_case2_date_imageView"
+            app:layout_constraintStart_toEndOf="@+id/shimmer_item_case2_date_imageView"
+            app:layout_constraintTop_toTopOf="@+id/shimmer_item_case2_date_imageView" />
+
+        <ImageView
+            android:id="@+id/shimmer_item_case2_session_count_imageView"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:background="@drawable/draw_oval_solid_gray50"
+            app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_case2_session_count_textView"
+            app:layout_constraintEnd_toStartOf="@+id/shimmer_item_case2_session_count_textView"
+            app:layout_constraintTop_toTopOf="@+id/shimmer_item_case2_session_count_textView" />
+
+        <TextView
+            android:id="@+id/shimmer_item_case2_session_count_textView"
+            android:layout_width="@dimen/_56sdp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:background="@color/Gray50"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

@@ -17,19 +17,27 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RoomFragment extends Fragment {
+
+    // Adapters
+    private Cases2Adapter cases2Adapter;
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -43,6 +51,11 @@ public class RoomFragment extends Fragment {
     private EditText casesSearchEditText;
     private ProgressBar casesSearchProgressBar;
     private ImageView casesAddImageView;
+    private ShimmerFrameLayout casesShimmerLayout;
+    private ConstraintLayout casesConstraintLayout;
+    private RecyclerView casesRecyclerView;
+    private TextView casesEmptyTextView;
+    private ProgressBar casesProgressBar;
 
     @Nullable
     @Override
@@ -57,10 +70,17 @@ public class RoomFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            casesShimmerLayout.setVisibility(View.GONE);
+            casesConstraintLayout.setVisibility(View.VISIBLE);
+        }, 5000);
+
         return view;
     }
 
     private void initializer(View view) {
+        cases2Adapter = new Cases2Adapter(getActivity());
+
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         avatarCircleImageView = view.findViewById(R.id.component_avatar_86sdp_border_white_circleImageView);
@@ -84,6 +104,20 @@ public class RoomFragment extends Fragment {
         casesAddImageView = view.findViewById(R.id.fragment_room_cases_add_imageView);
         casesAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(casesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        casesShimmerLayout = view.findViewById(R.id.fragment_room_cases_index_shimmerLayout);
+
+        casesConstraintLayout = view.findViewById(R.id.fragment_room_cases_index_constraintLayout);
+
+        casesRecyclerView = view.findViewById(R.id.component_index_case2_recyclerView);
+        casesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
+        casesRecyclerView.setLayoutManager(layoutManager);
+        casesRecyclerView.setNestedScrollingEnabled(false);
+        casesRecyclerView.setHasFixedSize(true);
+
+        casesEmptyTextView = view.findViewById(R.id.component_index_case2_textView);
+
+        casesProgressBar = view.findViewById(R.id.component_index_case2_progressBar);
     }
 
     private void detector() {
@@ -179,7 +213,10 @@ public class RoomFragment extends Fragment {
             Picasso.get().load(((MainActivity) getActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(avatarCircleImageView);
         }
 
-        String dataSize = "5";
+        //        cases2Adapter.setCase(null);
+        casesRecyclerView.setAdapter(cases2Adapter);
+
+        String dataSize = "15";
         casesCountTextView.setText("(" + dataSize + ")");
     }
 
