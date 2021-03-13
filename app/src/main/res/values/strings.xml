@@ -332,6 +332,8 @@
     <string name="ScalesFragmentName">مقیاس</string>
     <string name="ScalesFragmentEdition">ویرایش - نسخه</string>
 
+    <string name="ScalesFragmentCreate">ساختن</string>
+
     /*
     ---------- Samples Fragment ----------
     */

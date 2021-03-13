@@ -22,7 +22,7 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintHorizontal_weight="0.5"
+        app:layout_constraintWidth_percent="0.25"
         app:layout_constraintBottom_toBottomOf="@+id/header_item_scale_edition_textView"
         app:layout_constraintEnd_toStartOf="@+id/header_item_scale_name_textView"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:gravity="right"
         android:text="@string/ScalesFragmentName"
         android:textSize="@dimen/_8ssp"
@@ -43,7 +43,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_scale_add_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/header_item_scale_serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -63,17 +63,5 @@
         app:layout_constraintEnd_toEndOf="@+id/header_item_scale_name_textView"
         app:layout_constraintStart_toStartOf="@+id/header_item_scale_name_textView"
         app:layout_constraintTop_toBottomOf="@+id/header_item_scale_name_textView" />
-
-    <ImageView
-        android:id="@+id/header_item_scale_add_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:contentDescription="@string/AppImageContent"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_scale_edition_textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/header_item_scale_name_textView"
-        app:layout_constraintTop_toTopOf="@+id/header_item_scale_name_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
