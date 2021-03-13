@@ -343,6 +343,7 @@
     <string name="SamplesFragmentEdition">ویرایش - نسخه</string>
     <string name="SamplesFragmentRoom">اتاق درمان</string>
     <string name="SamplesFragmentCase">پرونده</string>
+    <string name="SamplesFragmentReference">مراجع</string>
     <string name="SamplesFragmentStatus">وضعیت</string>
 
     <string name="SamplesFragmentSeald">شروع</string>
