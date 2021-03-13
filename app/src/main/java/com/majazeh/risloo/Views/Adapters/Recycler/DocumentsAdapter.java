@@ -61,8 +61,10 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
             holder.itemView.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.attachmentImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-            holder.cancelImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-            holder.acceptImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+
+            holder.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+        } else {
+            holder.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -81,16 +83,9 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
             // TODO : Place Code Here
         });
 
-        holder.cancelImageView.setOnClickListener(v -> {
-            holder.cancelImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.cancelImageView.setClickable(true), 300);
-
-            // TODO : Place Code Here
-        });
-
-        holder.acceptImageView.setOnClickListener(v -> {
-            holder.acceptImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.acceptImageView.setClickable(true), 300);
+        holder.actionTextView.setOnClickListener(v -> {
+            holder.actionTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.actionTextView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -106,13 +101,16 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         holder.serialTextView.setText("P-96666DD");
         holder.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
         holder.statusTextView.setText("تأیید شده");
+
+        holder.actionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentAccept));
+        holder.actionTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 
     public class DocumentsHolder extends RecyclerView.ViewHolder {
 
         private View topView;
-        private TextView serialTextView, nameTextView, statusTextView;
-        private ImageView attachmentImageView, cancelImageView, acceptImageView;
+        private TextView serialTextView, nameTextView, statusTextView, actionTextView;
+        private ImageView attachmentImageView;
 
         public DocumentsHolder(View view) {
             super(view);
@@ -121,8 +119,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
             nameTextView = view.findViewById(R.id.single_item_document_name_textView);
             attachmentImageView = view.findViewById(R.id.single_item_document_attachment_imageView);
             statusTextView = view.findViewById(R.id.single_item_document_status_textView);
-            cancelImageView = view.findViewById(R.id.single_item_document_cancel_imageView);
-            acceptImageView = view.findViewById(R.id.single_item_document_accept_imageView);
+            actionTextView = view.findViewById(R.id.single_item_document_action_textView);
         }
     }
 

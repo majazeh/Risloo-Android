@@ -346,8 +346,10 @@
 
     <string name="DocumentsFragmentSerial">سریال</string>
     <string name="DocumentsFragmentName">عنوان</string>
-    <string name="DocumentsFragmentAttachment">پیوست</string>
     <string name="DocumentsFragmentStatus">وضعیت</string>
+
+    <string name="DocumentsFragmentAccept">تأیید</string>
+    <string name="DocumentsFragmentCancel">رد</string>
 
     /*
     ---------- Settings Fragment ----------
