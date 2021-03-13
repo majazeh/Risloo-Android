@@ -22,7 +22,7 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintHorizontal_weight="0.8"
+        app:layout_constraintWidth_percent="0.2"
         app:layout_constraintBottom_toBottomOf="@+id/header_item_document_name_textView"
         app:layout_constraintEnd_toStartOf="@+id/header_item_document_name_textView"
         app:layout_constraintStart_toStartOf="parent"
@@ -34,7 +34,7 @@
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_2sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:gravity="center|right"
         android:text="@string/DocumentsFragmentName"
         android:textSize="@dimen/_8ssp"
@@ -42,7 +42,7 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintHorizontal_weight="0.9"
+        app:layout_constraintWidth_percent="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/header_item_document_attachment_imageView"
         app:layout_constraintStart_toEndOf="@+id/header_item_document_serial_textView"
@@ -76,21 +76,9 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintHorizontal_weight="0.8"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_document_name_textView"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_document_action_textView"
-        app:layout_constraintStart_toEndOf="@+id/header_item_document_attachment_imageView"
-        app:layout_constraintTop_toTopOf="@+id/header_item_document_name_textView" />
-
-    <TextView
-        android:id="@+id/header_item_document_action_textView"
-        android:layout_width="@dimen/_40sdp"
-        android:layout_height="@dimen/_22sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="@+id/header_item_document_name_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/header_item_document_status_textView"
+        app:layout_constraintStart_toEndOf="@+id/header_item_document_attachment_imageView"
         app:layout_constraintTop_toTopOf="@+id/header_item_document_name_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

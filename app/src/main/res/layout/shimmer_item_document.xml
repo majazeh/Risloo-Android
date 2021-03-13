@@ -26,7 +26,7 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
-        app:layout_constraintHorizontal_weight="0.8"
+        app:layout_constraintWidth_percent="0.2"
         app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_document_name_textView"
         app:layout_constraintEnd_toStartOf="@+id/shimmer_item_document_name_textView"
         app:layout_constraintStart_toStartOf="parent"
@@ -40,7 +40,7 @@
         android:layout_marginEnd="@dimen/_4sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
-        app:layout_constraintHorizontal_weight="0.9"
+        app:layout_constraintWidth_percent="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/shimmer_item_document_attachment_imageView"
         app:layout_constraintStart_toEndOf="@+id/shimmer_item_document_serial_textView"
@@ -68,7 +68,6 @@
         android:layout_marginEnd="@dimen/_4sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
-        app:layout_constraintHorizontal_weight="0.8"
         app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_document_name_textView"
         app:layout_constraintEnd_toStartOf="@+id/shimmer_item_document_action_textView"
         app:layout_constraintStart_toEndOf="@+id/shimmer_item_document_attachment_imageView"
@@ -81,10 +80,9 @@
         android:layout_marginEnd="@dimen/_4sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@drawable/draw_16sdp_solid_gray50"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_document_name_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_document_status_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/shimmer_item_document_status_textView"
-        app:layout_constraintTop_toTopOf="@+id/shimmer_item_document_name_textView" />
+        app:layout_constraintTop_toTopOf="@+id/shimmer_item_document_status_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
