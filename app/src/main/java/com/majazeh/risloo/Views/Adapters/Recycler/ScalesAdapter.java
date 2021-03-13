@@ -60,7 +60,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.itemView.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.addImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_green300);
+            holder.createImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_green300);
         }
     }
 
@@ -72,9 +72,9 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 //            ((MainActivity) activity).navigator(R.id.scaleFragment);
         });
 
-        holder.addImageView.setOnClickListener(v -> {
-            holder.addImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.addImageView.setClickable(true), 300);
+        holder.createImageView.setOnClickListener(v -> {
+            holder.createImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.createImageView.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.createSampleFragment);
         });
@@ -96,7 +96,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
         private View topView;
         private TextView serialTextView, nameTextView, editionTextView;
-        private ImageView addImageView;
+        private ImageView createImageView;
 
         public ScalesHolder(View view) {
             super(view);
@@ -104,7 +104,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
             serialTextView = view.findViewById(R.id.single_item_scale_serial_textView);
             nameTextView = view.findViewById(R.id.single_item_scale_name_textView);
             editionTextView = view.findViewById(R.id.single_item_scale_edition_textView);
-            addImageView = view.findViewById(R.id.single_item_scale_add_imageView);
+            createImageView = view.findViewById(R.id.single_item_scale_create_imageView);
         }
     }
 
