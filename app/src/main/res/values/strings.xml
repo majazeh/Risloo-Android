@@ -338,6 +338,20 @@
 
     <string name="SamplesFragmentTitle">نمونه‌ها</string>
 
+    <string name="SamplesFragmentSerial">سریال</string>
+    <string name="SamplesFragmentName">مقیاس</string>
+    <string name="SamplesFragmentEdition">ویرایش - نسخه</string>
+    <string name="SamplesFragmentRoom">اتاق درمان</string>
+    <string name="SamplesFragmentCase">پرونده</string>
+    <string name="SamplesFragmentStatus">وضعیت</string>
+
+    <string name="SamplesFragmentSeald">شروع</string>
+    <string name="SamplesFragmentOpen">ادامه</string>
+    <string name="SamplesFragmentClosed">بسته شده</string>
+    <string name="SamplesFragmentScoring">نمره گذاری</string>
+    <string name="SamplesFragmentCreatingFiles">ساخت فایل‌ها</string>
+    <string name="SamplesFragmentDone">تمام شده</string>
+
     /*
     ---------- Documents Fragment ----------
     */

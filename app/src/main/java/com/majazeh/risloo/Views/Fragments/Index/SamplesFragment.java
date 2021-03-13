@@ -17,14 +17,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.SamplesAdapter;
 
 public class SamplesFragment extends Fragment {
+
+    // Adapters
+    private SamplesAdapter samplesAdapter;
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -34,6 +42,12 @@ public class SamplesFragment extends Fragment {
     private EditText samplesSearchEditText;
     private ProgressBar samplesSearchProgressBar;
     private ImageView samplesAddImageView;
+    private ShimmerFrameLayout samplesShimmerLayout;
+    private View samplesShimmerTopView;
+    private ConstraintLayout samplesHeaderLayout, samplesConstraintLayout;
+    private RecyclerView samplesRecyclerView;
+    private TextView samplesEmptyTextView;
+    private ProgressBar samplesProgressBar;
 
     @Nullable
     @Override
@@ -48,10 +62,18 @@ public class SamplesFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            samplesShimmerLayout.setVisibility(View.GONE);
+            samplesHeaderLayout.setVisibility(View.VISIBLE);
+            samplesConstraintLayout.setVisibility(View.VISIBLE);
+        }, 2000);
+
         return view;
     }
 
     private void initializer(View view) {
+        samplesAdapter = new SamplesAdapter(getActivity());
+
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         samplesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
@@ -65,6 +87,23 @@ public class SamplesFragment extends Fragment {
         samplesAddImageView = view.findViewById(R.id.fragment_samples_add_imageView);
         samplesAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(samplesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        samplesShimmerLayout = view.findViewById(R.id.fragment_samples_index_shimmerLayout);
+        samplesShimmerTopView = view.findViewById(R.id.shimmer_item_sample_top_view);
+        samplesShimmerTopView.setVisibility(View.GONE);
+
+        samplesHeaderLayout = view.findViewById(R.id.fragment_samples_index_headerLayout);
+        samplesConstraintLayout = view.findViewById(R.id.fragment_samples_index_constraintLayout);
+
+        samplesRecyclerView = view.findViewById(R.id.component_index_sample_recyclerView);
+        samplesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
+        samplesRecyclerView.setLayoutManager(layoutManager);
+        samplesRecyclerView.setNestedScrollingEnabled(false);
+        samplesRecyclerView.setHasFixedSize(true);
+
+        samplesEmptyTextView = view.findViewById(R.id.component_index_sample_textView);
+
+        samplesProgressBar = view.findViewById(R.id.component_index_sample_progressBar);
     }
 
     private void detector() {
@@ -123,7 +162,10 @@ public class SamplesFragment extends Fragment {
     }
 
     private void setData() {
-        String dataSize = "5";
+//        samplesAdapter.setSample(null);
+        samplesRecyclerView.setAdapter(samplesAdapter);
+
+        String dataSize = "15";
         samplesCountTextView.setText("(" + dataSize + ")");
     }
 
