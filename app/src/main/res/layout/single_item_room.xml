@@ -9,7 +9,8 @@
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
-    tools:layout_margin="@dimen/_12sdp">
+    tools:layout_margin="@dimen/_12sdp"
+    tools:context=".Views.Adapters.Recycler.RoomsAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/single_item_room_constraintLayout"

@@ -57,7 +57,7 @@
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_user_light"
-            app:layout_constraintBottom_toTopOf="@id/single_item_case2_mid_view"
+            app:layout_constraintBottom_toTopOf="@+id/single_item_case2_mid_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/single_item_case2_serial_imageView"
             app:tint="@color/Gray500" />
@@ -98,7 +98,7 @@
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_clock_light"
-            app:layout_constraintTop_toBottomOf="@id/single_item_case2_mid_view"
+            app:layout_constraintTop_toBottomOf="@+id/single_item_case2_mid_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/Gray500" />

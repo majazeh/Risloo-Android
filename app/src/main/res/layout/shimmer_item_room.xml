@@ -9,7 +9,8 @@
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
-    tools:layout_margin="@dimen/_12sdp">
+    tools:layout_margin="@dimen/_12sdp"
+    tools:context=".Views.Adapters.Recycler.RoomsAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/shimmer_item_room_constraintLayout"
@@ -24,7 +25,6 @@
             android:layout_height="@dimen/_82sdp"
             android:layout_margin="@dimen/_1sdp"
             android:contentDescription="@string/AppImageContent"
-            android:scaleType="fitCenter"
             android:background="@drawable/draw_2sdp_solid_gray100_border_2dp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,12 +45,7 @@
             android:layout_width="@dimen/_132sdp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="start"
             android:textSize="@dimen/_10ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray700"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_bold"
             android:background="@color/Gray50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
