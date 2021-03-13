@@ -24,7 +24,7 @@
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="@+id/header_item_case_center_textView"
-        app:layout_constraintEnd_toStartOf="@id/header_item_case_room_textView"
+        app:layout_constraintEnd_toStartOf="@+id/header_item_case_room_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/header_item_case_room_textView" />
 
@@ -35,7 +35,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
-        android:gravity="start"
+        android:gravity="right"
         android:text="@string/CasesFragmentRoom"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -43,8 +43,8 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1.5"
-        app:layout_constraintEnd_toStartOf="@id/header_item_case_reference_textView"
-        app:layout_constraintStart_toEndOf="@id/header_item_case_serial_textView"
+        app:layout_constraintEnd_toStartOf="@+id/header_item_case_reference_textView"
+        app:layout_constraintStart_toEndOf="@+id/header_item_case_serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -52,7 +52,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="start"
+        android:gravity="right"
         android:text="@string/CasesFragmentCenter"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
@@ -60,8 +60,8 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/header_item_case_room_textView"
-        app:layout_constraintStart_toStartOf="@id/header_item_case_room_textView"
+        app:layout_constraintEnd_toEndOf="@+id/header_item_case_room_textView"
+        app:layout_constraintStart_toStartOf="@+id/header_item_case_room_textView"
         app:layout_constraintTop_toBottomOf="@+id/header_item_case_room_textView" />
 
     <TextView
@@ -79,7 +79,7 @@
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="@+id/header_item_case_center_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/header_item_case_room_textView"
+        app:layout_constraintStart_toEndOf="@+id/header_item_case_room_textView"
         app:layout_constraintTop_toTopOf="@+id/header_item_case_room_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

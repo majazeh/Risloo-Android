@@ -89,14 +89,13 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
         holder.serialTextView.setText("$Raven-9Q");
         holder.nameTextView.setText("آزمون ریون کودکان (5)");
-        holder.editionTextView.setText("کودکان");
-        holder.versionTextView.setText("5");
+        holder.editionTextView.setText("کودکان - 5");
     }
 
     public class ScalesHolder extends RecyclerView.ViewHolder {
 
         private View topView;
-        private TextView serialTextView, nameTextView, editionTextView, versionTextView;
+        private TextView serialTextView, nameTextView, editionTextView;
         private ImageView addImageView;
 
         public ScalesHolder(View view) {
@@ -105,7 +104,6 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
             serialTextView = view.findViewById(R.id.single_item_scale_serial_textView);
             nameTextView = view.findViewById(R.id.single_item_scale_name_textView);
             editionTextView = view.findViewById(R.id.single_item_scale_edition_textView);
-            versionTextView = view.findViewById(R.id.single_item_scale_version_textView);
             addImageView = view.findViewById(R.id.single_item_scale_add_imageView);
         }
     }

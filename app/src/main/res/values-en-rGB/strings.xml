@@ -330,8 +330,7 @@
 
     <string name="ScalesFragmentSerial">سریال</string>
     <string name="ScalesFragmentName">مقیاس</string>
-    <string name="ScalesFragmentEdition">ویرایش</string>
-    <string name="ScalesFragmentVersion">نسخه</string>
+    <string name="ScalesFragmentEdition">ویرایش - نسخه</string>
 
     /*
     ---------- Samples Fragment ----------
