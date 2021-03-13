@@ -414,6 +414,7 @@
     */
 
     <string name="UserFragmentTitle">کاربر</string>
+    <string name="UserFragmentEdit">ویرایش</string>
 
     /*
     ---------- Sample Fragment ----------
