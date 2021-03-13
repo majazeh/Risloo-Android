@@ -66,7 +66,7 @@ public class CasesFragment extends Fragment {
             casesShimmerLayout.setVisibility(View.GONE);
             casesHeaderLayout.setVisibility(View.VISIBLE);
             casesConstraintLayout.setVisibility(View.VISIBLE);
-        }, 5000);
+        }, 2000);
 
         return view;
     }

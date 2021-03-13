@@ -66,7 +66,7 @@ public class UsersFragment extends Fragment {
             usersShimmerLayout.setVisibility(View.GONE);
             usersHeaderLayout.setVisibility(View.VISIBLE);
             usersConstraintLayout.setVisibility(View.VISIBLE);
-        }, 5000);
+        }, 2000);
 
         return view;
     }

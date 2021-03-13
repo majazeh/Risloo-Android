@@ -73,7 +73,7 @@ public class RoomFragment extends Fragment {
         ((MainActivity) getActivity()).handler.postDelayed(() -> {
             casesShimmerLayout.setVisibility(View.GONE);
             casesConstraintLayout.setVisibility(View.VISIBLE);
-        }, 5000);
+        }, 2000);
 
         return view;
     }

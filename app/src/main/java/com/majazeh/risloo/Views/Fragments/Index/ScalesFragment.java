@@ -61,7 +61,7 @@ public class ScalesFragment extends Fragment {
             scalesShimmerLayout.setVisibility(View.GONE);
             scalesHeaderLayout.setVisibility(View.VISIBLE);
             scalesConstraintLayout.setVisibility(View.VISIBLE);
-        }, 5000);
+        }, 2000);
 
         return view;
     }

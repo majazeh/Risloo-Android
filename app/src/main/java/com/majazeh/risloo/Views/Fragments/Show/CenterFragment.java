@@ -75,7 +75,7 @@ public class CenterFragment extends Fragment {
         ((MainActivity) getActivity()).handler.postDelayed(() -> {
             roomsShimmerLayout.setVisibility(View.GONE);
             roomsConstraintLayout.setVisibility(View.VISIBLE);
-        }, 5000);
+        }, 2000);
 
         return view;
     }

@@ -66,7 +66,7 @@ public class DocumentsFragment extends Fragment {
             documentsShimmerLayout.setVisibility(View.GONE);
             documentsHeaderLayout.setVisibility(View.VISIBLE);
             documentsConstraintLayout.setVisibility(View.VISIBLE);
-        }, 5000);
+        }, 2000);
 
         return view;
     }
