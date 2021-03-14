@@ -82,6 +82,21 @@
                     app:layout_constraintTop_toBottomOf="@+id/fragment_room_avatar_circleImageView"
                     tools:text="نام و نام خانوادگی" />
 
+                <ImageView
+                    android:id="@+id/fragment_room_badge_imageView"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:contentDescription="@string/AppImageContent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_badge_check_solid"
+                    android:visibility="gone"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_room_name_textView"
+                    app:layout_constraintStart_toEndOf="@+id/fragment_room_name_textView"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_room_name_textView"
+                    app:tint="@color/Blue500"
+                    tools:visibility="visible" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>

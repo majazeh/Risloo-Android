@@ -46,6 +46,7 @@ public class RoomFragment extends Fragment {
     private CircleImageView avatarCircleImageView;
     private TextView charTextView;
     private TextView nameTextView;
+    private ImageView badgeImageView;
     private ImageView usersImageView;
     private TextView casesTitleTextView, casesCountTextView;
     private EditText casesSearchEditText;
@@ -88,6 +89,8 @@ public class RoomFragment extends Fragment {
         charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
 
         nameTextView = view.findViewById(R.id.fragment_room_name_textView);
+
+        badgeImageView = view.findViewById(R.id.fragment_room_badge_imageView);
 
         usersImageView = view.findViewById(R.id.fragment_room_users_imageView);
         usersImageView.setImageResource(R.drawable.ic_users_light);

@@ -46,6 +46,9 @@ public class CenterFragment extends Fragment {
     private CircleImageView avatarCircleImageView;
     private TextView charTextView;
     private TextView nameTextView;
+    private ImageView badgeImageView;
+    private TextView ownerTextView, mobileTextView, descriptionTextView;
+    private ImageView ownerImageView, mobileImageView;
     private TextView profileTextView;
     private ImageView editImageView, usersImageView;
     private TextView roomsTitleTextView, roomsCountTextView;
@@ -89,6 +92,15 @@ public class CenterFragment extends Fragment {
         charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
 
         nameTextView = view.findViewById(R.id.fragment_center_name_textView);
+
+        badgeImageView = view.findViewById(R.id.fragment_center_badge_imageView);
+
+        ownerTextView = view.findViewById(R.id.fragment_center_owner_textView);
+        mobileTextView = view.findViewById(R.id.fragment_center_mobile_textView);
+        descriptionTextView = view.findViewById(R.id.fragment_center_description_textView);
+
+        ownerImageView = view.findViewById(R.id.fragment_center_owner_imageView);
+        mobileImageView = view.findViewById(R.id.fragment_center_mobile_imageView);
 
         profileTextView = view.findViewById(R.id.fragment_center_profile_textView);
         profileTextView.setText(getResources().getString(R.string.CenterFragmentProfile));
@@ -226,6 +238,26 @@ public class CenterFragment extends Fragment {
             nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
             nameTextView.setText(((MainActivity) getActivity()).singleton.getName());
+        }
+
+        if (((MainActivity) getActivity()).singleton.getOwner().equals("")) {
+            ownerTextView.setVisibility(View.GONE);
+            ownerImageView.setVisibility(View.GONE);
+        } else {
+            ownerTextView.setText(((MainActivity) getActivity()).singleton.getOwner());
+        }
+
+        if (((MainActivity) getActivity()).singleton.getMobile().equals("")) {
+            mobileTextView.setVisibility(View.GONE);
+            mobileImageView.setVisibility(View.GONE);
+        } else {
+            mobileTextView.setText(((MainActivity) getActivity()).singleton.getMobile());
+        }
+
+        if (((MainActivity) getActivity()).singleton.getDescription().equals("")) {
+            descriptionTextView.setVisibility(View.GONE);
+        } else {
+            descriptionTextView.setText(((MainActivity) getActivity()).singleton.getDescription());
         }
 
         if (((MainActivity) getActivity()).singleton.getAvatar().equals("")) {

@@ -131,4 +131,18 @@ public class Singleton {
         return "";
     }
 
+    public String getOwner() {
+        if (!sharedPreferences.getString("owner", "").equals("")) {
+            return sharedPreferences.getString("owner", "");
+        }
+        return "";
+    }
+
+    public String getDescription() {
+        if (!sharedPreferences.getString("description", "").equals("")) {
+            return sharedPreferences.getString("description", "");
+        }
+        return "";
+    }
+
 }
