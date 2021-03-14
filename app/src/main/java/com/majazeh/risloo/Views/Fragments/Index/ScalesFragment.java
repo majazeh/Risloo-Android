@@ -75,9 +75,9 @@ public class ScalesFragment extends Fragment {
         scalesTitleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
         scalesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        scalesSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        scalesSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        scalesSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        scalesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         scalesShimmerLayout = view.findViewById(R.id.fragment_scales_index_shimmerLayout);
         scalesShimmerTopView = view.findViewById(R.id.shimmer_item_scale_top_view);
@@ -86,15 +86,15 @@ public class ScalesFragment extends Fragment {
         scalesHeaderLayout = view.findViewById(R.id.fragment_scales_index_headerLayout);
         scalesConstraintLayout = view.findViewById(R.id.fragment_scales_index_constraintLayout);
 
-        scalesRecyclerView = view.findViewById(R.id.component_index_scale_recyclerView);
+        scalesRecyclerView = view.findViewById(R.id.component_single_scale_recyclerView);
         scalesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
         scalesRecyclerView.setLayoutManager(layoutManager);
         scalesRecyclerView.setNestedScrollingEnabled(false);
         scalesRecyclerView.setHasFixedSize(true);
 
-        scalesEmptyTextView = view.findViewById(R.id.component_index_scale_textView);
+        scalesEmptyTextView = view.findViewById(R.id.component_single_scale_textView);
 
-        scalesProgressBar = view.findViewById(R.id.component_index_scale_progressBar);
+        scalesProgressBar = view.findViewById(R.id.component_single_scale_progressBar);
     }
 
     private void detector() {

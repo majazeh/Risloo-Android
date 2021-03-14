@@ -41,7 +41,7 @@
 
             <include
                 android:id="@+id/fragment_edit_avatar_guide_constraintLayout"
-                layout="@layout/component_guide_layout"
+                layout="@layout/component_guide_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_12sdp"

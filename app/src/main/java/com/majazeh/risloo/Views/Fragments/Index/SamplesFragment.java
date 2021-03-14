@@ -80,9 +80,9 @@ public class SamplesFragment extends Fragment {
         samplesTitleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
         samplesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        samplesSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        samplesSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        samplesSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        samplesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         samplesAddImageView = view.findViewById(R.id.fragment_samples_add_imageView);
         samplesAddImageView.setImageResource(R.drawable.ic_plus_light);
@@ -95,15 +95,15 @@ public class SamplesFragment extends Fragment {
         samplesHeaderLayout = view.findViewById(R.id.fragment_samples_index_headerLayout);
         samplesConstraintLayout = view.findViewById(R.id.fragment_samples_index_constraintLayout);
 
-        samplesRecyclerView = view.findViewById(R.id.component_index_sample_recyclerView);
+        samplesRecyclerView = view.findViewById(R.id.component_single_sample_recyclerView);
         samplesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
         samplesRecyclerView.setLayoutManager(layoutManager);
         samplesRecyclerView.setNestedScrollingEnabled(false);
         samplesRecyclerView.setHasFixedSize(true);
 
-        samplesEmptyTextView = view.findViewById(R.id.component_index_sample_textView);
+        samplesEmptyTextView = view.findViewById(R.id.component_single_sample_textView);
 
-        samplesProgressBar = view.findViewById(R.id.component_index_sample_progressBar);
+        samplesProgressBar = view.findViewById(R.id.component_single_sample_progressBar);
     }
 
     private void detector() {

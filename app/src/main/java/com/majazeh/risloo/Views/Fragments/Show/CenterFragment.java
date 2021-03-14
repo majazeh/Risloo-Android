@@ -29,7 +29,6 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.squareup.picasso.Picasso;
 
@@ -106,9 +105,9 @@ public class CenterFragment extends Fragment {
         roomsTitleTextView.setText(getResources().getString(R.string.CenterFragmentRoomsHeader));
         roomsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        roomsSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        roomsSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        roomsSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        roomsSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         roomsAddImageView = view.findViewById(R.id.fragment_center_rooms_add_imageView);
         roomsAddImageView.setImageResource(R.drawable.ic_plus_light);
@@ -118,15 +117,15 @@ public class CenterFragment extends Fragment {
 
         roomsConstraintLayout = view.findViewById(R.id.fragment_center_rooms_index_constraintLayout);
 
-        roomsRecyclerView = view.findViewById(R.id.component_index_room_recyclerView);
+        roomsRecyclerView = view.findViewById(R.id.component_single_room_recyclerView);
         roomsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
         roomsRecyclerView.setLayoutManager(layoutManager);
         roomsRecyclerView.setNestedScrollingEnabled(false);
         roomsRecyclerView.setHasFixedSize(true);
 
-        roomsEmptyTextView = view.findViewById(R.id.component_index_room_textView);
+        roomsEmptyTextView = view.findViewById(R.id.component_single_room_textView);
 
-        roomsProgressBar = view.findViewById(R.id.component_index_room_progressBar);
+        roomsProgressBar = view.findViewById(R.id.component_single_room_progressBar);
     }
 
     private void detector() {

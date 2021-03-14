@@ -97,7 +97,7 @@
 
         <include
             android:id="@+id/fragment_room_cases_search_editText"
-            layout="@layout/component_input_search"
+            layout="@layout/component_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
@@ -128,7 +128,7 @@
 
         <include
             android:id="@+id/fragment_room_cases_index_constraintLayout"
-            layout="@layout/component_index_case2"
+            layout="@layout/component_single_case2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"

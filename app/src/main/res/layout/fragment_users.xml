@@ -28,7 +28,7 @@
 
         <include
             android:id="@+id/fragment_users_search_editText"
-            layout="@layout/component_input_search"
+            layout="@layout/component_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
@@ -83,7 +83,7 @@
 
             <include
                 android:id="@+id/fragment_users_index_constraintLayout"
-                layout="@layout/component_index_user"
+                layout="@layout/component_single_user"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"

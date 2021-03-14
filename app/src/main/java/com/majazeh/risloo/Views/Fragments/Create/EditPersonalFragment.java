@@ -103,7 +103,7 @@ public class EditPersonalFragment extends Fragment {
         emailErrorTextView = emailConstraintLayout.findViewById(R.id.component_input_text_error_textView);
         birthdayErrorTextView = birthdayConstraintLayout.findViewById(R.id.component_input_select_error_textView);
 
-        usernameGuideTextView = view.findViewById(R.id.component_guide_layout_info_textView);
+        usernameGuideTextView = view.findViewById(R.id.component_guide_text_textView);
         usernameGuideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
 
         activeRadioButton = statusRadioGroup.findViewById(R.id.component_radio_three_first_radioButton);

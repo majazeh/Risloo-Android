@@ -78,9 +78,9 @@ public class CentersFragment extends Fragment {
         centersTitleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
         centersCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        centersSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        centersSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        centersSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        centersSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         centersAddImageView = view.findViewById(R.id.fragment_centers_add_imageView);
         centersAddImageView.setImageResource(R.drawable.ic_plus_light);
@@ -90,15 +90,15 @@ public class CentersFragment extends Fragment {
 
         centersConstraintLayout = view.findViewById(R.id.fragment_centers_index_constraintLayout);
 
-        centersRecyclerView = view.findViewById(R.id.component_index_center_recyclerView);
+        centersRecyclerView = view.findViewById(R.id.component_single_center_recyclerView);
         centersRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
         centersRecyclerView.setLayoutManager(layoutManager);
         centersRecyclerView.setNestedScrollingEnabled(false);
         centersRecyclerView.setHasFixedSize(true);
 
-        centersEmptyTextView = view.findViewById(R.id.component_index_center_textView);
+        centersEmptyTextView = view.findViewById(R.id.component_single_center_textView);
 
-        centersProgressBar = view.findViewById(R.id.component_index_center_progressBar);
+        centersProgressBar = view.findViewById(R.id.component_single_center_progressBar);
     }
 
     private void detector() {

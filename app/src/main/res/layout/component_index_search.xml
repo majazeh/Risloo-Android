@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_input_search"
+    android:id="@+id/component_index_search"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
@@ -10,7 +10,7 @@
     tools:layout_margin="@dimen/_16sdp">
 
     <EditText
-        android:id="@+id/component_input_search_editText"
+        android:id="@+id/component_index_search_editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/_28sdp"
         android:paddingStart="@dimen/_8sdp"
@@ -33,7 +33,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/component_input_search_progressBar"
+        android:id="@+id/component_index_search_progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="@dimen/_24sdp"
         android:layout_height="@dimen/_24sdp"
@@ -41,9 +41,9 @@
         android:padding="@dimen/_4sdp"
         android:visibility="gone"
         android:theme="@style/ProgressBarTheme"
-        app:layout_constraintBottom_toBottomOf="@+id/component_input_search_editText"
-        app:layout_constraintEnd_toEndOf="@+id/component_input_search_editText"
-        app:layout_constraintTop_toTopOf="@id/component_input_search_editText"
+        app:layout_constraintBottom_toBottomOf="@+id/component_index_search_editText"
+        app:layout_constraintEnd_toEndOf="@+id/component_index_search_editText"
+        app:layout_constraintTop_toTopOf="@id/component_index_search_editText"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

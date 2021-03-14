@@ -80,9 +80,9 @@ public class UsersFragment extends Fragment {
         usersTitleTextView.setText(getResources().getString(R.string.UsersFragmentTitle));
         usersCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        usersSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        usersSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        usersSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        usersSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         usersAddImageView = view.findViewById(R.id.fragment_users_add_imageView);
         usersAddImageView.setImageResource(R.drawable.ic_plus_light);
@@ -95,15 +95,15 @@ public class UsersFragment extends Fragment {
         usersHeaderLayout = view.findViewById(R.id.fragment_users_index_headerLayout);
         usersConstraintLayout = view.findViewById(R.id.fragment_users_index_constraintLayout);
 
-        usersRecyclerView = view.findViewById(R.id.component_index_user_recyclerView);
+        usersRecyclerView = view.findViewById(R.id.component_single_user_recyclerView);
         usersRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
         usersRecyclerView.setLayoutManager(layoutManager);
         usersRecyclerView.setNestedScrollingEnabled(false);
         usersRecyclerView.setHasFixedSize(true);
 
-        usersEmptyTextView = view.findViewById(R.id.component_index_user_textView);
+        usersEmptyTextView = view.findViewById(R.id.component_single_user_textView);
 
-        usersProgressBar = view.findViewById(R.id.component_index_user_progressBar);
+        usersProgressBar = view.findViewById(R.id.component_single_user_progressBar);
     }
 
     private void detector() {

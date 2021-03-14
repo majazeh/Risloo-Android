@@ -2,14 +2,14 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_index_room"
+    android:id="@+id/component_single_room"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
     android:layoutDirection="rtl">
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/component_index_room_recyclerView"
+        android:id="@+id/component_single_room_recyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:overScrollMode="never"
@@ -21,7 +21,7 @@
         tools:listitem="@layout/single_item_room" />
 
     <TextView
-        android:id="@+id/component_index_room_textView"
+        android:id="@+id/component_single_room_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
@@ -38,7 +38,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/component_index_room_progressBar"
+        android:id="@+id/component_single_room_progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="@dimen/_32sdp"
         android:layout_height="@dimen/_32sdp"

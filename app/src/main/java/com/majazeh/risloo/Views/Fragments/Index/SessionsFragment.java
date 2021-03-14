@@ -80,9 +80,9 @@ public class SessionsFragment extends Fragment {
         sessionsTitleTextView.setText(getResources().getString(R.string.SessionsFragmentTitle));
         sessionsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        sessionsSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        sessionsSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        sessionsSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        sessionsSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         sessionsAddImageView = view.findViewById(R.id.fragment_sessions_add_imageView);
         sessionsAddImageView.setImageResource(R.drawable.ic_plus_light);
@@ -95,15 +95,15 @@ public class SessionsFragment extends Fragment {
         sessionsHeaderLayout = view.findViewById(R.id.fragment_sessions_index_headerLayout);
         sessionsConstraintLayout = view.findViewById(R.id.fragment_sessions_index_constraintLayout);
 
-        sessionsRecyclerView = view.findViewById(R.id.component_index_session_recyclerView);
+        sessionsRecyclerView = view.findViewById(R.id.component_single_session_recyclerView);
         sessionsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
         sessionsRecyclerView.setLayoutManager(layoutManager);
         sessionsRecyclerView.setNestedScrollingEnabled(false);
         sessionsRecyclerView.setHasFixedSize(true);
 
-        sessionsEmptyTextView = view.findViewById(R.id.component_index_session_textView);
+        sessionsEmptyTextView = view.findViewById(R.id.component_single_session_textView);
 
-        sessionsProgressBar = view.findViewById(R.id.component_index_session_progressBar);
+        sessionsProgressBar = view.findViewById(R.id.component_single_session_progressBar);
     }
 
     private void detector() {

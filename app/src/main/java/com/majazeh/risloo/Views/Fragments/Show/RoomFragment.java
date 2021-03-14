@@ -97,9 +97,9 @@ public class RoomFragment extends Fragment {
         casesTitleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
         casesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        casesSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        casesSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        casesSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        casesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         casesAddImageView = view.findViewById(R.id.fragment_room_cases_add_imageView);
         casesAddImageView.setImageResource(R.drawable.ic_plus_light);
@@ -109,15 +109,15 @@ public class RoomFragment extends Fragment {
 
         casesConstraintLayout = view.findViewById(R.id.fragment_room_cases_index_constraintLayout);
 
-        casesRecyclerView = view.findViewById(R.id.component_index_case2_recyclerView);
+        casesRecyclerView = view.findViewById(R.id.component_single_case2_recyclerView);
         casesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
         casesRecyclerView.setLayoutManager(layoutManager);
         casesRecyclerView.setNestedScrollingEnabled(false);
         casesRecyclerView.setHasFixedSize(true);
 
-        casesEmptyTextView = view.findViewById(R.id.component_index_case2_textView);
+        casesEmptyTextView = view.findViewById(R.id.component_single_case2_textView);
 
-        casesProgressBar = view.findViewById(R.id.component_index_case2_progressBar);
+        casesProgressBar = view.findViewById(R.id.component_single_case2_progressBar);
     }
 
     private void detector() {

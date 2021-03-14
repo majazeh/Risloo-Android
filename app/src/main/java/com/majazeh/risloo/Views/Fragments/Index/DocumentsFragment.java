@@ -80,9 +80,9 @@ public class DocumentsFragment extends Fragment {
         documentsTitleTextView.setText(getResources().getString(R.string.DocumentsFragmentTitle));
         documentsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
 
-        documentsSearchEditText = view.findViewById(R.id.component_input_search_editText);
+        documentsSearchEditText = view.findViewById(R.id.component_index_search_editText);
 
-        documentsSearchProgressBar = view.findViewById(R.id.component_input_search_progressBar);
+        documentsSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         documentsAddImageView = view.findViewById(R.id.fragment_documents_add_imageView);
         documentsAddImageView.setImageResource(R.drawable.ic_plus_light);
@@ -95,15 +95,15 @@ public class DocumentsFragment extends Fragment {
         documentsHeaderLayout = view.findViewById(R.id.fragment_documents_index_headerLayout);
         documentsConstraintLayout = view.findViewById(R.id.fragment_documents_index_constraintLayout);
 
-        documentsRecyclerView = view.findViewById(R.id.component_index_document_recyclerView);
+        documentsRecyclerView = view.findViewById(R.id.component_single_document_recyclerView);
         documentsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
         documentsRecyclerView.setLayoutManager(layoutManager);
         documentsRecyclerView.setNestedScrollingEnabled(false);
         documentsRecyclerView.setHasFixedSize(true);
 
-        documentsEmptyTextView = view.findViewById(R.id.component_index_document_textView);
+        documentsEmptyTextView = view.findViewById(R.id.component_single_document_textView);
 
-        documentsProgressBar = view.findViewById(R.id.component_index_document_progressBar);
+        documentsProgressBar = view.findViewById(R.id.component_single_document_progressBar);
     }
 
     private void detector() {
