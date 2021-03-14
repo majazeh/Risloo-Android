@@ -69,7 +69,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             holder.itemView.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.itemView.setClickable(true), 300);
 
-//            ((MainActivity) activity).navigator(R.id.sessionFragment);
+            ((MainActivity) activity).navigator(R.id.sessionFragment);
         });
 
         holder.editImageView.setOnClickListener(v -> {

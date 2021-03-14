@@ -69,7 +69,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
             holder.itemView.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.itemView.setClickable(true), 300);
 
-//            ((MainActivity) activity).navigator(R.id.scaleFragment);
+            // TODO : Place Code Here
         });
 
         holder.createTextView.setOnClickListener(v -> {

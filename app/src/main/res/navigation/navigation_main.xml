@@ -86,6 +86,9 @@
         <action
             android:id="@+id/action_sessionsFragment_to_createSessionFragment"
             app:destination="@id/createSessionFragment" />
+        <action
+            android:id="@+id/action_sessionsFragment_to_sessionFragment"
+            app:destination="@id/sessionFragment" />
     </fragment>
 
     <fragment
@@ -115,6 +118,9 @@
         <action
             android:id="@+id/action_samplesFragment_to_createSampleFragment"
             app:destination="@id/createSampleFragment" />
+        <action
+            android:id="@+id/action_samplesFragment_to_sampleFragment"
+            app:destination="@id/sampleFragment" />
     </fragment>
 
     <fragment
@@ -206,5 +212,17 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.UserFragment"
         android:label="@string/UserFragmentTitle"
         tools:layout="@layout/fragment_user" />
+
+    <fragment
+        android:id="@+id/sampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.SampleFragment"
+        android:label="@string/SampleFragmentTitle"
+        tools:layout="@layout/fragment_sample" />
+
+    <fragment
+        android:id="@+id/sessionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.SessionFragment"
+        android:label="@string/SessionFragmentTitle"
+        tools:layout="@layout/fragment_session" />
 
 </navigation>

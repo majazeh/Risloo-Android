@@ -70,7 +70,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
             holder.itemView.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.itemView.setClickable(true), 300);
 
-//            ((MainActivity) activity).navigator(R.id.sampleFragment);
+            ((MainActivity) activity).navigator(R.id.sampleFragment);
         });
 
         holder.statusTextView.setOnClickListener(v -> {

@@ -16,7 +16,7 @@
     </style>
 
     <style name="LauncherTheme" parent="AppTheme">
-        <item name="android:windowBackground">@color/Red500</item>
+        <item name="android:windowBackground">@color/Risloo500</item>
         <item name="android:windowDisablePreview">true</item>
     </style>
 
