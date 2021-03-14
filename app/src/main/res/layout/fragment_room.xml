@@ -96,7 +96,7 @@
             app:layout_constraintTop_toBottomOf="@+id/fragment_room_info_cardView" />
 
         <include
-            android:id="@+id/fragment_room_cases_search_editText"
+            android:id="@+id/fragment_room_cases_search_constraintLayout"
             layout="@layout/component_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
@@ -111,10 +111,10 @@
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_room_cases_search_editText"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_room_cases_search_constraintLayout"
             app:layout_constraintLeft_toLeftOf="@+id/fragment_room_info_cardView"
-            app:layout_constraintRight_toLeftOf="@id/fragment_room_cases_search_editText"
-            app:layout_constraintTop_toTopOf="@+id/fragment_room_cases_search_editText" />
+            app:layout_constraintRight_toLeftOf="@id/fragment_room_cases_search_constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/fragment_room_cases_search_constraintLayout" />
 
         <include
             android:id="@+id/fragment_room_cases_index_shimmerLayout"
@@ -124,7 +124,8 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_room_cases_search_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_room_cases_search_constraintLayout"
+            tools:visibility="gone" />
 
         <include
             android:id="@+id/fragment_room_cases_index_constraintLayout"
@@ -134,7 +135,8 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_room_cases_search_editText" />
+            app:layout_constraintTop_toBottomOf="@+id/fragment_room_cases_search_constraintLayout"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -27,7 +27,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/fragment_documents_search_editText"
+            android:id="@+id/fragment_documents_search_constraintLayout"
             layout="@layout/component_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
@@ -43,13 +43,13 @@
             android:layout_height="@dimen/_28sdp"
             android:layout_marginLeft="@dimen/_12sdp"
             android:layout_marginRight="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_documents_search_editText"
+            app:layout_constraintBottom_toBottomOf="@+id/fragment_documents_search_constraintLayout"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@id/fragment_documents_search_editText"
-            app:layout_constraintTop_toTopOf="@+id/fragment_documents_search_editText" />
+            app:layout_constraintRight_toLeftOf="@id/fragment_documents_search_constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/fragment_documents_search_constraintLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_documents_index_container_shimmerLayout"
+            android:id="@+id/fragment_documents_index_containerLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -58,8 +58,8 @@
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/fragment_documents_add_imageView"
-            app:layout_constraintStart_toStartOf="@id/fragment_documents_search_editText"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_documents_search_editText">
+            app:layout_constraintStart_toStartOf="@id/fragment_documents_search_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/fragment_documents_search_constraintLayout">
 
             <include
                 android:id="@+id/fragment_documents_index_shimmerLayout"
@@ -69,7 +69,8 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
 
             <include
                 android:id="@+id/fragment_documents_index_headerLayout"
@@ -79,7 +80,8 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
 
             <include
                 android:id="@+id/fragment_documents_index_constraintLayout"
@@ -89,7 +91,8 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_documents_index_headerLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/fragment_documents_index_headerLayout"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
