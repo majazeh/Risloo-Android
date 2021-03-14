@@ -16,6 +16,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.squareup.picasso.Picasso;
@@ -95,14 +96,16 @@ public class UserFragment extends Fragment {
             avatarCircleImageView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
 
-            // TODO : Place Code Here
+            if (!((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
+                IntentManager.display(getActivity(), "", "", ((MainActivity) getActivity()).singleton.getAvatar());
+            }
         });
 
         editTextView.setOnClickListener(v -> {
             editTextView.setClickable(false);
             ((MainActivity) getActivity()).handler.postDelayed(() -> editTextView.setClickable(true), 300);
 
-            // TODO : Place Code Here
+//            ((MainActivity) getActivity()).navigator(R.id.editUserFragment);
         });
 
         enterImageView.setOnClickListener(v -> {
