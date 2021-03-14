@@ -310,6 +310,15 @@
 
     <string name="SessionsFragmentTitle">جلسات</string>
 
+    <string name="SessionsFragmentSerial">سریال</string>
+    <string name="SessionsFragmentRoom">اتاق درمان</string>
+    <string name="SessionsFragmentCenter">مرکز درمانی</string>
+    <string name="SessionsFragmentCase">پرونده</string>
+    <string name="SessionsFragmentReference">مراجع</string>
+    <string name="SessionsFragmentStartTime">زمان شروع جلسه</string>
+    <string name="SessionsFragmentDuration">زمان جلسه</string>
+    <string name="SessionsFragmentStatus">وضعیت</string>
+
     /*
     ---------- Users Fragment ----------
     */

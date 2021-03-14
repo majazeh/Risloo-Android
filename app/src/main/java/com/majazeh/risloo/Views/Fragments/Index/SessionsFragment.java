@@ -17,14 +17,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.SessionsAdapter;
 
 public class SessionsFragment extends Fragment {
+
+    // Adapters
+    private SessionsAdapter sessionsAdapter;
 
     // Objects
     private LinearLayoutManager layoutManager;
@@ -34,6 +42,12 @@ public class SessionsFragment extends Fragment {
     private EditText sessionsSearchEditText;
     private ProgressBar sessionsSearchProgressBar;
     private ImageView sessionsAddImageView;
+    private ShimmerFrameLayout sessionsShimmerLayout;
+    private View sessionsShimmerTopView;
+    private ConstraintLayout sessionsHeaderLayout, sessionsConstraintLayout;
+    private RecyclerView sessionsRecyclerView;
+    private TextView sessionsEmptyTextView;
+    private ProgressBar sessionsProgressBar;
 
     @Nullable
     @Override
@@ -48,10 +62,18 @@ public class SessionsFragment extends Fragment {
 
         setData();
 
+        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+            sessionsShimmerLayout.setVisibility(View.GONE);
+            sessionsHeaderLayout.setVisibility(View.VISIBLE);
+            sessionsConstraintLayout.setVisibility(View.VISIBLE);
+        }, 2000);
+
         return view;
     }
 
     private void initializer(View view) {
+        sessionsAdapter = new SessionsAdapter(getActivity());
+
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
         sessionsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
@@ -65,6 +87,23 @@ public class SessionsFragment extends Fragment {
         sessionsAddImageView = view.findViewById(R.id.fragment_sessions_add_imageView);
         sessionsAddImageView.setImageResource(R.drawable.ic_plus_light);
         ImageViewCompat.setImageTintList(sessionsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+
+        sessionsShimmerLayout = view.findViewById(R.id.fragment_sessions_index_shimmerLayout);
+        sessionsShimmerTopView = view.findViewById(R.id.shimmer_item_session_top_view);
+        sessionsShimmerTopView.setVisibility(View.GONE);
+
+        sessionsHeaderLayout = view.findViewById(R.id.fragment_sessions_index_headerLayout);
+        sessionsConstraintLayout = view.findViewById(R.id.fragment_sessions_index_constraintLayout);
+
+        sessionsRecyclerView = view.findViewById(R.id.component_index_session_recyclerView);
+        sessionsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
+        sessionsRecyclerView.setLayoutManager(layoutManager);
+        sessionsRecyclerView.setNestedScrollingEnabled(false);
+        sessionsRecyclerView.setHasFixedSize(true);
+
+        sessionsEmptyTextView = view.findViewById(R.id.component_index_session_textView);
+
+        sessionsProgressBar = view.findViewById(R.id.component_index_session_progressBar);
     }
 
     private void detector() {
@@ -123,7 +162,10 @@ public class SessionsFragment extends Fragment {
     }
 
     private void setData() {
-        String dataSize = "5";
+//        sessionsAdapter.setSession(null);
+        sessionsRecyclerView.setAdapter(sessionsAdapter);
+
+        String dataSize = "15";
         sessionsCountTextView.setText("(" + dataSize + ")");
     }
 
