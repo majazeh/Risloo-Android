@@ -49,7 +49,7 @@ public class CenterFragment extends Fragment {
     private ImageView badgeImageView;
     private TextView ownerTextView, mobileTextView, descriptionTextView;
     private ImageView ownerImageView, mobileImageView;
-    private TextView profileTextView;
+    private TextView statusTextView, profileTextView;
     private ImageView editImageView, usersImageView;
     private TextView roomsTitleTextView, roomsCountTextView;
     private EditText roomsSearchEditText;
@@ -105,6 +105,9 @@ public class CenterFragment extends Fragment {
         profileTextView = view.findViewById(R.id.fragment_center_profile_textView);
         profileTextView.setText(getResources().getString(R.string.CenterFragmentProfile));
         profileTextView.setTextColor(getResources().getColor(R.color.Gray500));
+        statusTextView = view.findViewById(R.id.fragment_center_status_textView);
+        statusTextView.setText(getResources().getString(R.string.CenterFragmentRequest));
+        statusTextView.setTextColor(getResources().getColor(R.color.White));
 
         editImageView = view.findViewById(R.id.fragment_center_edit_imageView);
         editImageView.setImageResource(R.drawable.ic_edit_light);
@@ -143,12 +146,14 @@ public class CenterFragment extends Fragment {
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             profileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+            statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
             editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
             usersImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
             roomsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             profileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+            statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
             editImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
             usersImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
@@ -165,6 +170,13 @@ public class CenterFragment extends Fragment {
             if (!((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(getActivity(), "", "", ((MainActivity) getActivity()).singleton.getAvatar());
             }
+        });
+
+        statusTextView.setOnClickListener(v -> {
+            statusTextView.setClickable(false);
+            ((MainActivity) getActivity()).handler.postDelayed(() -> statusTextView.setClickable(true), 300);
+
+            // TODO : Call Work Method
         });
 
         profileTextView.setOnClickListener(v -> {

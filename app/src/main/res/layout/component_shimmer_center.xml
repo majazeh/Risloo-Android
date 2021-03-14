@@ -65,62 +65,12 @@
             layout="@layout/shimmer_item_center"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_center_item4"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_center_item4"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_center_item4" />
-
-        <include
-            android:id="@+id/component_shimmer_center_item6"
-            layout="@layout/shimmer_item_center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_center_item5"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_center_item5"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_center_item5" />
-
-        <include
-            android:id="@+id/component_shimmer_center_item7"
-            layout="@layout/shimmer_item_center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_center_item6"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_center_item6"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_center_item6" />
-
-        <include
-            android:id="@+id/component_shimmer_center_item8"
-            layout="@layout/shimmer_item_center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_center_item7"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_center_item7"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_center_item7" />
-
-        <include
-            android:id="@+id/component_shimmer_center_item9"
-            layout="@layout/shimmer_item_center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_center_item8"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_center_item8"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_center_item8" />
-
-        <include
-            android:id="@+id/component_shimmer_center_item10"
-            layout="@layout/shimmer_item_center"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_center_item9"
-            app:layout_constraintStart_toStartOf="@+id/component_shimmer_center_item9"
-            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_center_item9" />
+            app:layout_constraintEnd_toEndOf="@+id/component_shimmer_center_item4"
+            app:layout_constraintStart_toStartOf="@+id/component_shimmer_center_item4"
+            app:layout_constraintTop_toBottomOf="@+id/component_shimmer_center_item4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

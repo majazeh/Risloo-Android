@@ -89,6 +89,16 @@
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="@+id/fragment_center_edit_imageView" />
 
+                <include
+                    android:id="@+id/fragment_center_status_textView"
+                    layout="@layout/component_button_rectangle_28sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_name_textView"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/fragment_center_name_textView" />
+
                 <TextView
                     android:id="@+id/fragment_center_name_textView"
                     android:layout_width="0dp"
@@ -145,7 +155,7 @@
                     android:fontFamily="@font/dana_regular"
                     app:layout_constraintStart_toEndOf="@+id/fragment_center_owner_imageView"
                     app:layout_constraintTop_toBottomOf="@+id/fragment_center_name_textView"
-                    tools:text="مدرک تحصیلی" />
+                    tools:text="مدیر" />
 
                 <ImageView
                     android:id="@+id/fragment_center_mobile_imageView"
