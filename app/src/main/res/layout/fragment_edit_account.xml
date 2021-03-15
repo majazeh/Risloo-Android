@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/White"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Create.EditAccountFragment">
+    tools:context=".Views.Fragments.Edit.EditAccountFragment">
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/fragment_edit_account_tabLayout"

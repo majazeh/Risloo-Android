@@ -168,7 +168,7 @@
 
     <fragment
         android:id="@+id/editAccountFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditAccountFragment"
         android:label="@string/EditAccountFragmentTitle"
         tools:layout="@layout/fragment_edit_account" />
 

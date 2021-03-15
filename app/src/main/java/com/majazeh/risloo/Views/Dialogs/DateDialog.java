@@ -15,7 +15,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditAccountFragment;
 import com.majazeh.risloo.databinding.DialogDateBinding;
 
 public class DateDialog extends BottomSheetDialogFragment {

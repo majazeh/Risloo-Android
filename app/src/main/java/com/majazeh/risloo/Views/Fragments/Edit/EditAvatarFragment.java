@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Create;
+package com.majazeh.risloo.Views.Fragments.Edit;
 
 import android.graphics.Bitmap;
 import android.os.Build;

@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 
-import com.majazeh.risloo.Views.Fragments.Create.EditAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Create.EditCryptoFragment;
-import com.majazeh.risloo.Views.Fragments.Create.EditPasswordFragment;
-import com.majazeh.risloo.Views.Fragments.Create.EditPersonalFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCryptoFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPasswordFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 
 public class EditAccountAdapter extends FragmentStatePagerAdapter {
 

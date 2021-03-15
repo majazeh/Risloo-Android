@@ -10,7 +10,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Create.EditPersonalFragment">
+    tools:context=".Views.Fragments.Edit.EditPersonalFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/fragment_edit_personal_constraintLayout"
