@@ -16,25 +16,28 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
+import com.majazeh.risloo.databinding.FragmentRoomBinding;
 import com.squareup.picasso.Picasso;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class RoomFragment extends Fragment {
+
+    // Binding
+    private FragmentRoomBinding binding;
 
     // Adapters
     private Cases2Adapter cases2Adapter;
@@ -61,9 +64,9 @@ public class RoomFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_room, viewGroup, false);
+        binding = FragmentRoomBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
@@ -71,56 +74,51 @@ public class RoomFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
             casesShimmerLayout.setVisibility(View.GONE);
             casesConstraintLayout.setVisibility(View.VISIBLE);
         }, 2000);
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
+    private void initializer() {
         cases2Adapter = new Cases2Adapter(getActivity());
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        avatarCircleImageView = view.findViewById(R.id.component_avatar_86sdp_border_white_circleImageView);
+        avatarCircleImageView = binding.fragmentRoomAvatarCircleImageView.componentAvatar86sdpBorderWhiteCircleImageView;
 
-        charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
+        charTextView = binding.fragmentRoomAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView;
 
-        nameTextView = view.findViewById(R.id.fragment_room_name_textView);
+        nameTextView = binding.fragmentRoomNameTextView;
 
-        badgeImageView = view.findViewById(R.id.fragment_room_badge_imageView);
+        badgeImageView = binding.fragmentRoomBadgeImageView;
 
-        usersImageView = view.findViewById(R.id.fragment_room_users_imageView);
-        usersImageView.setImageResource(R.drawable.ic_users_light);
-        ImageViewCompat.setImageTintList(usersImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue600));
+        usersImageView = binding.fragmentRoomUsersImageView.componentButtonOval28sdp;
+        InitManager.imageView(getActivity(), usersImageView, R.drawable.ic_users_light, R.color.Blue600);
 
-        casesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        casesTitleTextView = binding.fragmentRoomCasesHeaderConstraintLayout.componentIndexHeaderTitleTextView;
         casesTitleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
-        casesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        casesCountTextView = binding.fragmentRoomCasesHeaderConstraintLayout.componentIndexHeaderCountTextView;
 
-        casesSearchEditText = view.findViewById(R.id.component_index_search_editText);
+        casesSearchEditText = binding.fragmentRoomCasesSearchConstraintLayout.componentIndexSearchEditText;
+        casesSearchProgressBar = binding.fragmentRoomCasesSearchConstraintLayout.componentIndexSearchProgressBar;
 
-        casesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
+        casesAddImageView = binding.fragmentRoomCasesAddImageView.componentButtonOval28sdp;
+        InitManager.imageView(getActivity(), casesAddImageView, R.drawable.ic_plus_light, R.color.Green700);
 
-        casesAddImageView = view.findViewById(R.id.fragment_room_cases_add_imageView);
-        casesAddImageView.setImageResource(R.drawable.ic_plus_light);
-        ImageViewCompat.setImageTintList(casesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
+        casesShimmerLayout = binding.fragmentRoomCasesIndexShimmerLayout.componentShimmerCase2;
+        casesConstraintLayout = binding.fragmentRoomCasesIndexConstraintLayout.componentSingleCase2;
 
-        casesShimmerLayout = view.findViewById(R.id.fragment_room_cases_index_shimmerLayout);
-
-        casesConstraintLayout = view.findViewById(R.id.fragment_room_cases_index_constraintLayout);
-
-        casesRecyclerView = view.findViewById(R.id.component_single_case2_recyclerView);
+        casesRecyclerView = binding.fragmentRoomCasesIndexConstraintLayout.componentSingleCase2RecyclerView;
         casesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
         casesRecyclerView.setLayoutManager(layoutManager);
         casesRecyclerView.setNestedScrollingEnabled(false);
         casesRecyclerView.setHasFixedSize(true);
 
-        casesEmptyTextView = view.findViewById(R.id.component_single_case2_textView);
-
-        casesProgressBar = view.findViewById(R.id.component_single_case2_progressBar);
+        casesEmptyTextView = binding.fragmentRoomCasesIndexConstraintLayout.componentSingleCase2TextView;
+        casesProgressBar = binding.fragmentRoomCasesIndexConstraintLayout.componentSingleCase2ProgressBar;
     }
 
     private void detector() {
@@ -139,16 +137,16 @@ public class RoomFragment extends Fragment {
     private void listener() {
         avatarCircleImageView.setOnClickListener(v -> {
             avatarCircleImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
 
-            if (!((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(getActivity(), "", "", ((MainActivity) getActivity()).singleton.getAvatar());
+            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+                IntentManager.display(getActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
         });
 
         usersImageView.setOnClickListener(v -> {
             usersImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> usersImageView.setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> usersImageView.setClickable(true), 300);
 
             // TODO : Call Work Method
         });
@@ -156,7 +154,7 @@ public class RoomFragment extends Fragment {
         casesSearchEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!casesSearchEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), casesSearchEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), casesSearchEditText);
                 }
             }
             return false;
@@ -170,8 +168,8 @@ public class RoomFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) getActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) getActivity()).handler.postDelayed(() -> {
+                ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
+                ((MainActivity) requireActivity()).handler.postDelayed(() -> {
 //                    if (casesSearchEditText.length() != 0) {
 //                        getData("getCases", "", casesSearchEditText.getText().toString().trim());
 //                    } else {
@@ -192,20 +190,20 @@ public class RoomFragment extends Fragment {
 
         casesAddImageView.setOnClickListener(v -> {
             casesAddImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> casesAddImageView.setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> casesAddImageView.setClickable(true), 300);
 
-            ((MainActivity) getActivity()).navigator(R.id.createCaseFragment);
+            ((MainActivity) requireActivity()).navigator(R.id.createCaseFragment);
         });
     }
 
     private void setData() {
-        if (((MainActivity) getActivity()).singleton.getName().equals("")) {
+        if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
             nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
-            nameTextView.setText(((MainActivity) getActivity()).singleton.getName());
+            nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
         }
 
-        if (((MainActivity) getActivity()).singleton.getAvatar().equals("")) {
+        if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
             charTextView.setVisibility(View.VISIBLE);
             charTextView.setText(StringManager.firstChars(nameTextView.getText().toString()));
 
@@ -213,7 +211,7 @@ public class RoomFragment extends Fragment {
         } else {
             charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(((MainActivity) getActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(avatarCircleImageView);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(avatarCircleImageView);
         }
 
         //        cases2Adapter.setCase(null);
@@ -221,6 +219,12 @@ public class RoomFragment extends Fragment {
 
         String dataSize = "15";
         casesCountTextView.setText("(" + dataSize + ")");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }
