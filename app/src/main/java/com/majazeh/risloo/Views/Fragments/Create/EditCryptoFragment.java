@@ -13,31 +13,33 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.FragmentEditCryptoBinding;
 
 public class EditCryptoFragment extends Fragment {
 
-    // Vars
-    private String publicKey = "", privateKey = "";
+    // Binding
+    private FragmentEditCryptoBinding binding;
 
     // Widgets
-    private ConstraintLayout publicKeyConstraintLayout, privateKeyConstraintLayout;
     private TextView publicKeyHeaderTextView, privateKeyHeaderTextView;
     private EditText publicKeyEditText, privateKeyEditText;
     private ImageView publicKeyErrorImageView, privateKeyErrorImageView;
     private TextView publicKeyErrorTextView, privateKeyErrorTextView;
     private TextView editPublicKeyTextView, editPrivateKeyTextView;
 
+    // Vars
+    private String publicKey = "", privateKey = "";
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_crypto, viewGroup, false);
+        binding = FragmentEditCryptoBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
@@ -45,31 +47,27 @@ public class EditCryptoFragment extends Fragment {
 
         setData();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        publicKeyConstraintLayout = view.findViewById(R.id.fragment_edit_crypto_public_editText);
-        privateKeyConstraintLayout = view.findViewById(R.id.fragment_edit_crypto_private_editText);
-
-        publicKeyHeaderTextView = publicKeyConstraintLayout.findViewById(R.id.component_input_multi_header_textView);
+    private void initializer() {
+        publicKeyHeaderTextView = binding.fragmentEditCryptoPublicEditText.componentInputMultiHeaderTextView;
         publicKeyHeaderTextView.setText(getResources().getString(R.string.EditCryptoFragmentPublicHeader));
-        privateKeyHeaderTextView = privateKeyConstraintLayout.findViewById(R.id.component_input_multi_header_textView);
+        privateKeyHeaderTextView = binding.fragmentEditCryptoPrivateEditText.componentInputMultiHeaderTextView;
         privateKeyHeaderTextView.setText(getResources().getString(R.string.EditCryptoFragmentPrivateHeader));
 
-        publicKeyEditText = publicKeyConstraintLayout.findViewById(R.id.component_input_multi_editText);
-        privateKeyEditText = privateKeyConstraintLayout.findViewById(R.id.component_input_multi_editText);
+        publicKeyEditText = binding.fragmentEditCryptoPublicEditText.componentInputMultiEditText;
+        privateKeyEditText = binding.fragmentEditCryptoPrivateEditText.componentInputMultiEditText;
 
-        publicKeyErrorImageView = publicKeyConstraintLayout.findViewById(R.id.component_input_multi_error_imageView);
-        privateKeyErrorImageView = privateKeyConstraintLayout.findViewById(R.id.component_input_multi_error_imageView);
+        publicKeyErrorImageView = binding.fragmentEditCryptoPublicEditText.componentInputMultiErrorImageView;
+        privateKeyErrorImageView = binding.fragmentEditCryptoPrivateEditText.componentInputMultiErrorImageView;
+        publicKeyErrorTextView = binding.fragmentEditCryptoPublicEditText.componentInputMultiErrorTextView;
+        privateKeyErrorTextView = binding.fragmentEditCryptoPrivateEditText.componentInputMultiErrorTextView;
 
-        publicKeyErrorTextView = publicKeyConstraintLayout.findViewById(R.id.component_input_multi_error_textView);
-        privateKeyErrorTextView = privateKeyConstraintLayout.findViewById(R.id.component_input_multi_error_textView);
-
-        editPublicKeyTextView = view.findViewById(R.id.fragment_edit_crypto_public_button_textView);
+        editPublicKeyTextView = binding.fragmentEditCryptoPublicButtonTextView.componentButtonRectangle32sdp;
         editPublicKeyTextView.setText(getResources().getString(R.string.EditCryptoFragmentPublicButton));
         editPublicKeyTextView.setTextColor(getResources().getColor(R.color.White));
-        editPrivateKeyTextView = view.findViewById(R.id.fragment_edit_crypto_private_button_textView);
+        editPrivateKeyTextView = binding.fragmentEditCryptoPrivateButtonTextView.componentButtonRectangle32sdp;
         editPrivateKeyTextView.setText(getResources().getString(R.string.EditCryptoFragmentPrivateButton));
         editPrivateKeyTextView.setTextColor(getResources().getColor(R.color.White));
     }
@@ -89,7 +87,7 @@ public class EditCryptoFragment extends Fragment {
         publicKeyEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!publicKeyEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), publicKeyEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), publicKeyEditText);
                 }
             }
             return false;
@@ -98,7 +96,7 @@ public class EditCryptoFragment extends Fragment {
         privateKeyEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!privateKeyEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), privateKeyEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), privateKeyEditText);
                 }
             }
             return false;
@@ -106,36 +104,36 @@ public class EditCryptoFragment extends Fragment {
 
         editPublicKeyTextView.setOnClickListener(v -> {
             editPublicKeyTextView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> editPublicKeyTextView.setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> editPublicKeyTextView.setClickable(true), 300);
 
             if (publicKeyEditText.length() == 0) {
-                ((MainActivity) getActivity()).controlEditText.error(getActivity(), publicKeyEditText, publicKeyErrorImageView, publicKeyErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), publicKeyEditText, publicKeyErrorImageView, publicKeyErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) getActivity()).controlEditText.check(getActivity(), publicKeyEditText, publicKeyErrorImageView, publicKeyErrorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), publicKeyEditText, publicKeyErrorImageView, publicKeyErrorTextView);
                 doWork();
             }
         });
 
         editPrivateKeyTextView.setOnClickListener(v -> {
             editPrivateKeyTextView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> editPrivateKeyTextView.setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> editPrivateKeyTextView.setClickable(true), 300);
 
             if (privateKeyEditText.length() == 0) {
-                ((MainActivity) getActivity()).controlEditText.error(getActivity(), privateKeyEditText, privateKeyErrorImageView, privateKeyErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), privateKeyEditText, privateKeyErrorImageView, privateKeyErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) getActivity()).controlEditText.check(getActivity(), privateKeyEditText, privateKeyErrorImageView, privateKeyErrorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), privateKeyEditText, privateKeyErrorImageView, privateKeyErrorTextView);
                 doWork();
             }
         });
     }
 
     private void setData() {
-        if (!((MainActivity) getActivity()).singleton.getPublicKey().equals("")) {
-            publicKey = ((MainActivity) getActivity()).singleton.getPublicKey();
+        if (!((MainActivity) requireActivity()).singleton.getPublicKey().equals("")) {
+            publicKey = ((MainActivity) requireActivity()).singleton.getPublicKey();
             publicKeyEditText.setText(publicKey);
         }
-        if (!((MainActivity) getActivity()).singleton.getPrivateKey().equals("")) {
-            privateKey = ((MainActivity) getActivity()).singleton.getPrivateKey();
+        if (!((MainActivity) requireActivity()).singleton.getPrivateKey().equals("")) {
+            privateKey = ((MainActivity) requireActivity()).singleton.getPrivateKey();
             privateKeyEditText.setText(privateKey);
         }
     }
@@ -145,6 +143,12 @@ public class EditCryptoFragment extends Fragment {
         privateKey = privateKeyEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

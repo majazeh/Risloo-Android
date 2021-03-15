@@ -12,10 +12,13 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.duolingo.open.rtlviewpager.RtlViewPager;
 import com.google.android.material.tabs.TabLayout;
-import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.EditAccountAdapter;
+import com.majazeh.risloo.databinding.FragmentEditAccountBinding;
 
 public class EditAccountFragment extends Fragment {
+
+    // Binding
+    private FragmentEditAccountBinding binding;
 
     // Adapters
     private EditAccountAdapter adapter;
@@ -27,23 +30,22 @@ public class EditAccountFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_account, viewGroup, false);
+        binding = FragmentEditAccountBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         listener();
 
         setData();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
+    private void initializer() {
         adapter = new EditAccountAdapter(getActivity().getSupportFragmentManager(), 0);
 
-        tabLayout = view.findViewById(R.id.fragment_edit_account_tabLayout);
-
-        rtlViewPager = view.findViewById(R.id.fragment_edit_account_rtlViewPager);
+        tabLayout = binding.fragmentEditAccountTabLayout;
+        rtlViewPager = binding.fragmentEditAccountRtlViewPager;
     }
 
     private void listener() {
@@ -84,6 +86,12 @@ public class EditAccountFragment extends Fragment {
 
     private void setData() {
         rtlViewPager.setAdapter(adapter);
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

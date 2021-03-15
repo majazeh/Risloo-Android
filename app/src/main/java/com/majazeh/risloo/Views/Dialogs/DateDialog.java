@@ -18,15 +18,19 @@ import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
 import com.majazeh.risloo.Utils.Widgets.SingleNumberPicker;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.EditAccountFragment;
+import com.majazeh.risloo.databinding.DialogDateBinding;
 
 public class DateDialog extends BottomSheetDialogFragment {
 
-    // Vars
-    private int year, month, day;
+    // Binding
+    private DialogDateBinding binding;
 
     // Widgets
     private SingleNumberPicker yearNumberPicker, monthNumberPicker, dayNumberPicker;
     private TextView entryTextView;
+
+    // Vars
+    private int year, month, day;
 
     @NonNull
     @Override
@@ -38,9 +42,9 @@ public class DateDialog extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialog_date, viewGroup, false);
+        binding = DialogDateBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         listener();
 
@@ -48,7 +52,7 @@ public class DateDialog extends BottomSheetDialogFragment {
 
         setNumberPicker();
 
-        return view;
+        return binding.getRoot();
     }
 
     @Override
@@ -57,12 +61,12 @@ public class DateDialog extends BottomSheetDialogFragment {
         clearNumberPicker();
     }
 
-    private void initializer(View view) {
-        yearNumberPicker = view.findViewById(R.id.dialog_date_year_NumberPicker);
-        monthNumberPicker = view.findViewById(R.id.dialog_date_month_NumberPicker);
-        dayNumberPicker = view.findViewById(R.id.dialog_date_day_NumberPicker);
+    private void initializer() {
+        yearNumberPicker = binding.dialogDateYearNumberPicker;
+        monthNumberPicker = binding.dialogDateMonthNumberPicker;
+        dayNumberPicker = binding.dialogDateDayNumberPicker;
 
-        entryTextView = view.findViewById(R.id.dialog_date_entry_button);
+        entryTextView = binding.dialogDateEntryButton;
     }
 
     private void detector() {
@@ -84,12 +88,12 @@ public class DateDialog extends BottomSheetDialogFragment {
 
         entryTextView.setOnClickListener(v -> {
             entryTextView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> entryTextView.setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> entryTextView.setClickable(true), 300);
             dismiss();
 
-            switch (((MainActivity) getActivity()).navController.getCurrentDestination().getId()) {
+            switch (((MainActivity) requireActivity()).navController.getCurrentDestination().getId()) {
                 case R.id.editAccountFragment:
-                    EditAccountFragment editAccountFragment = (EditAccountFragment) ((MainActivity) getActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    EditAccountFragment editAccountFragment = (EditAccountFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editAccountFragment != null) {
                         // TODO : Set Fragment TextView String
                     }
@@ -141,6 +145,12 @@ public class DateDialog extends BottomSheetDialogFragment {
         this.year = year;
         this.month = month;
         this.day = day;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

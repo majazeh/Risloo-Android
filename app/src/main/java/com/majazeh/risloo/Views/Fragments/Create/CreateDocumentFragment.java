@@ -9,22 +9,31 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.majazeh.risloo.R;
+import com.majazeh.risloo.databinding.FragmentCreateDocumentBinding;
 
 public class CreateDocumentFragment extends Fragment {
+
+    // Binding
+    private FragmentCreateDocumentBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_create_document, viewGroup, false);
+        binding = FragmentCreateDocumentBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
+    private void initializer() {
 
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

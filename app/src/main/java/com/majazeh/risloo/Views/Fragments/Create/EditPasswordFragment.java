@@ -23,12 +23,12 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.FragmentEditPasswordBinding;
 
 public class EditPasswordFragment extends Fragment {
 
-    // Vars
-    private String password = "";
-    private boolean passwordVisibility = false;
+    // Binding
+    private FragmentEditPasswordBinding binding;
 
     // Widgets
     private TextView passwordHeaderTextView;
@@ -39,12 +39,16 @@ public class EditPasswordFragment extends Fragment {
     private TextView passwordGuideTextView;
     private TextView editPasswordTextView;
 
+    // Vars
+    private String password = "";
+    private boolean passwordVisibility = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_edit_password, viewGroup, false);
+        binding = FragmentEditPasswordBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
@@ -52,25 +56,23 @@ public class EditPasswordFragment extends Fragment {
 
         setData();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        passwordHeaderTextView = view.findViewById(R.id.component_input_password_header_textView);
+    private void initializer() {
+        passwordHeaderTextView = binding.fragmentEditPasswordInputEditText.componentInputPasswordHeaderTextView;
         passwordHeaderTextView.setText(getResources().getString(R.string.EditPasswordFragmentHeader));
 
-        passwordEditText = view.findViewById(R.id.component_input_password_editText);
+        passwordEditText = binding.fragmentEditPasswordInputEditText.componentInputPasswordEditText;
 
-        passwordVisibilityImageView = view.findViewById(R.id.component_input_password_visibility_imageView);
+        passwordVisibilityImageView = binding.fragmentEditPasswordInputEditText.componentInputPasswordVisibilityImageView;
+        passwordErrorImageView = binding.fragmentEditPasswordInputEditText.componentInputPasswordErrorImageView;
+        passwordErrorTextView = binding.fragmentEditPasswordInputEditText.componentInputPasswordErrorTextView;
 
-        passwordErrorImageView = view.findViewById(R.id.component_input_password_error_imageView);
-
-        passwordErrorTextView = view.findViewById(R.id.component_input_password_error_textView);
-
-        passwordGuideTextView = view.findViewById(R.id.component_guide_text_textView);
+        passwordGuideTextView = binding.fragmentEditPasswordGuideConstraintLayout.componentGuideTextTextView;
         passwordGuideTextView.setText(getResources().getString(R.string.EditPasswordFragmentHint));
 
-        editPasswordTextView = view.findViewById(R.id.fragment_edit_password_button_textView);
+        editPasswordTextView = binding.fragmentEditPasswordButtonTextView.componentButtonRectangle32sdp;
         editPasswordTextView.setText(getResources().getString(R.string.EditPasswordFragmentButton));
         editPasswordTextView.setTextColor(getResources().getColor(R.color.White));
     }
@@ -88,7 +90,7 @@ public class EditPasswordFragment extends Fragment {
         passwordEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!passwordEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), passwordEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), passwordEditText);
                 }
             }
             return false;
@@ -152,20 +154,20 @@ public class EditPasswordFragment extends Fragment {
 
         editPasswordTextView.setOnClickListener(v -> {
             editPasswordTextView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> editPasswordTextView.setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> editPasswordTextView.setClickable(true), 300);
 
             if (passwordEditText.length() == 0) {
-                ((MainActivity) getActivity()).controlEditText.error(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) getActivity()).controlEditText.check(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView);
                 doWork();
             }
         });
     }
 
     private void setData() {
-        if (!((MainActivity) getActivity()).singleton.getPassword().equals("")) {
-            password = ((MainActivity) getActivity()).singleton.getPassword();
+        if (!((MainActivity) requireActivity()).singleton.getPassword().equals("")) {
+            password = ((MainActivity) requireActivity()).singleton.getPassword();
             passwordEditText.setText(password);
         }
     }
@@ -174,6 +176,12 @@ public class EditPasswordFragment extends Fragment {
         password = passwordEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }
