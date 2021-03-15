@@ -19,47 +19,50 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.databinding.FragmentPasswordRecoverBinding;
 
 public class PasswordRecoverFragment extends Fragment {
 
-    // Vars
-    private String mobile = "";
+    // Binding
+    private FragmentPasswordRecoverBinding binding;
 
     // Widgets
     private EditText mobileEditText;
     private ImageView mobileErrorImageView;
     private TextView mobileErrorTextView;
-    private TextView passwordRecoverTextView;
-    private TextView loginTextView, registerTextView;
+    private TextView passwordRecoverTextView, loginTextView, registerTextView;
+
+    // Vars
+    private String mobile = "";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_password_recover, viewGroup, false);
+        binding = FragmentPasswordRecoverBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
         listener();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        mobileEditText = view.findViewById(R.id.component_auth_input_number_editText);
+    private void initializer() {
+        mobileEditText = binding.fragmentPasswordRecoverInputEditText.componentAuthInputNumberEditText;
         mobileEditText.setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
 
-        mobileErrorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
+        mobileErrorImageView = binding.fragmentPasswordRecoverInputEditText.componentAuthInputNumberErrorImageView;
+        mobileErrorTextView = binding.fragmentPasswordRecoverInputEditText.componentAuthInputNumberErrorTextView;
 
-        mobileErrorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
-
-        passwordRecoverTextView = view.findViewById(R.id.fragment_password_recover_button_textView);
+        passwordRecoverTextView = binding.fragmentPasswordRecoverButtonTextView.componentAuthButton;
         passwordRecoverTextView.setText(getResources().getString(R.string.PasswordRecoverFragmentButton));
 
-        loginTextView = view.findViewById(R.id.fragment_password_recover_login_textView);
+        loginTextView = binding.fragmentPasswordRecoverLoginTextView.componentAuthLink;
         loginTextView.setText(getResources().getString(R.string.AuthLogin));
-        registerTextView = view.findViewById(R.id.fragment_password_recover_register_textView);
+
+        registerTextView = binding.fragmentPasswordRecoverRegisterTextView.componentAuthLink;
         registerTextView.setText(getResources().getString(R.string.AuthRegister));
     }
 
@@ -74,7 +77,7 @@ public class PasswordRecoverFragment extends Fragment {
         mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!mobileEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), mobileEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), mobileEditText);
                 }
             }
             return false;
@@ -89,7 +92,7 @@ public class PasswordRecoverFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (mobileEditText.length() == 11) {
-                    ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
+                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
                     doWork();
                 }
             }
@@ -102,28 +105,28 @@ public class PasswordRecoverFragment extends Fragment {
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
 
             if (mobileEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
                 doWork();
             }
         });
 
         loginTextView.setOnClickListener(v -> {
             loginTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.loginFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
         });
 
         registerTextView.setOnClickListener(v -> {
             registerTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.registerFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
     }
 
@@ -131,6 +134,12 @@ public class PasswordRecoverFragment extends Fragment {
         mobile = mobileEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

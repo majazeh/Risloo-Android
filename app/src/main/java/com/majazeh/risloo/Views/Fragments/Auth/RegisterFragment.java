@@ -17,51 +17,54 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.databinding.FragmentRegisterBinding;
 
 public class RegisterFragment extends Fragment {
 
-    // Vars
-    private String name = "", mobile = "";
+    // Binding
+    private FragmentRegisterBinding binding;
 
     // Widgets
     private EditText nameEditText, mobileEditText;
     private ImageView nameErrorImageView, mobileErrorImageView;
     private TextView nameErrorTextView, mobileErrorTextView;
-    private TextView registerTextView;
-    private TextView loginTextView, passwordRecoverTextView;
+    private TextView registerTextView, loginTextView, passwordRecoverTextView;
+
+    // Vars
+    private String name = "", mobile = "";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_register, viewGroup, false);
+        binding = FragmentRegisterBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
         listener();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        nameEditText = view.findViewById(R.id.component_auth_input_text_editText);
+    private void initializer() {
+        nameEditText = binding.fragmentRegisterNameEditText.componentAuthInputTextEditText;
         nameEditText.setHint(getResources().getString(R.string.RegisterFragmentName));
-        mobileEditText = view.findViewById(R.id.component_auth_input_number_editText);
+        mobileEditText = binding.fragmentRegisterMobileEditText.componentAuthInputNumberEditText;
         mobileEditText.setHint(getResources().getString(R.string.RegisterFragmentMobile));
 
-        nameErrorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
-        mobileErrorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
+        nameErrorImageView = binding.fragmentRegisterNameEditText.componentAuthInputTextErrorImageView;
+        nameErrorTextView = binding.fragmentRegisterNameEditText.componentAuthInputTextErrorTextView;
+        mobileErrorImageView = binding.fragmentRegisterMobileEditText.componentAuthInputNumberErrorImageView;
+        mobileErrorTextView = binding.fragmentRegisterMobileEditText.componentAuthInputNumberErrorTextView;
 
-        nameErrorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
-        mobileErrorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
-
-        registerTextView = view.findViewById(R.id.fragment_register_button_textView);
+        registerTextView = binding.fragmentRegisterButtonTextView.componentAuthButton;
         registerTextView.setText(getResources().getString(R.string.RegisterFragmentButton));
 
-        loginTextView = view.findViewById(R.id.fragment_register_login_textView);
+        loginTextView = binding.fragmentRegisterLoginTextView.componentAuthLink;
         loginTextView.setText(getResources().getString(R.string.AuthLogin));
-        passwordRecoverTextView = view.findViewById(R.id.fragment_register_password_recover_textView);
+
+        passwordRecoverTextView = binding.fragmentRegisterPasswordRecoverTextView.componentAuthLink;
         passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
@@ -76,7 +79,7 @@ public class RegisterFragment extends Fragment {
         nameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!nameEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), nameEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), nameEditText);
                 }
             }
             return false;
@@ -85,7 +88,7 @@ public class RegisterFragment extends Fragment {
         mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!mobileEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), mobileEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), mobileEditText);
                 }
             }
             return false;
@@ -93,18 +96,18 @@ public class RegisterFragment extends Fragment {
 
         registerTextView.setOnClickListener(v -> {
             registerTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
             if (nameEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), nameEditText, nameErrorImageView, nameErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), nameEditText, nameErrorImageView, nameErrorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (mobileEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (nameEditText.length() != 0 && mobileEditText.length() != 0) {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), nameEditText, nameErrorImageView, nameErrorTextView);
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), nameEditText, nameErrorImageView, nameErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
 
                 doWork();
             }
@@ -112,16 +115,16 @@ public class RegisterFragment extends Fragment {
 
         loginTextView.setOnClickListener(v -> {
             loginTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.loginFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.passwordRecoverFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
         });
     }
 
@@ -130,6 +133,12 @@ public class RegisterFragment extends Fragment {
         mobile = mobileEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

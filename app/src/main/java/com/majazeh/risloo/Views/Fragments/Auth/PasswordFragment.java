@@ -23,53 +23,56 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.databinding.FragmentPasswordBinding;
 
 public class PasswordFragment extends Fragment {
 
-    // Vars
-    private String password = "";
-    private boolean passwordVisibility = false;
+    // Binding
+    private FragmentPasswordBinding binding;
 
     // Widgets
     private CutCopyPasteEditText passwordEditText;
     private ImageView passwordVisibilityImageView;
     private ImageView passwordErrorImageView;
     private TextView passwordErrorTextView;
-    private TextView passwordTextView;
-    private TextView loginTextView, registerTextView, passwordRecoverTextView;
+    private TextView passwordTextView, loginTextView, registerTextView, passwordRecoverTextView;
+
+    // Vars
+    private String password = "";
+    private boolean passwordVisibility = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_password, viewGroup, false);
+        binding = FragmentPasswordBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
         listener();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        passwordEditText = view.findViewById(R.id.component_auth_input_password_editText);
+    private void initializer() {
+        passwordEditText = binding.fragmentPasswordInputEditText.componentAuthInputPasswordEditText;
         passwordEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
 
-        passwordVisibilityImageView = view.findViewById(R.id.component_auth_input_password_visibility_imageView);
+        passwordVisibilityImageView = binding.fragmentPasswordInputEditText.componentAuthInputPasswordVisibilityImageView;
+        passwordErrorImageView = binding.fragmentPasswordInputEditText.componentAuthInputPasswordErrorImageView;
+        passwordErrorTextView = binding.fragmentPasswordInputEditText.componentAuthInputPasswordErrorTextView;
 
-        passwordErrorImageView = view.findViewById(R.id.component_auth_input_password_error_imageView);
-
-        passwordErrorTextView = view.findViewById(R.id.component_auth_input_password_error_textView);
-
-        passwordTextView = view.findViewById(R.id.fragment_password_button_textView);
+        passwordTextView = binding.fragmentPasswordButtonTextView.componentAuthButton;
         passwordTextView.setText(getResources().getString(R.string.PasswordFragmentButton));
 
-        loginTextView = view.findViewById(R.id.fragment_password_login_textView);
+        loginTextView = binding.fragmentPasswordLoginTextView.componentAuthLink;
         loginTextView.setText(getResources().getString(R.string.AuthLogin));
-        registerTextView = view.findViewById(R.id.fragment_password_register_textView);
+
+        registerTextView = binding.fragmentPasswordRegisterTextView.componentAuthLink;
         registerTextView.setText(getResources().getString(R.string.AuthRegister));
-        passwordRecoverTextView = view.findViewById(R.id.fragment_password_password_recover_textView);
+
+        passwordRecoverTextView = binding.fragmentPasswordPasswordRecoverTextView.componentAuthLink;
         passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
@@ -84,7 +87,7 @@ public class PasswordFragment extends Fragment {
         passwordEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!passwordEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), passwordEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), passwordEditText);
                 }
             }
             return false;
@@ -135,48 +138,48 @@ public class PasswordFragment extends Fragment {
                 passwordVisibility = true;
                 passwordVisibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
 
-                ImageViewCompat.setImageTintList(passwordVisibilityImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue800));
+                ImageViewCompat.setImageTintList(passwordVisibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
                 passwordEditText.setTransformationMethod(null);
             } else {
                 passwordVisibility = false;
                 passwordVisibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
 
-                ImageViewCompat.setImageTintList(passwordVisibilityImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray600));
+                ImageViewCompat.setImageTintList(passwordVisibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
                 passwordEditText.setTransformationMethod(new PasswordTransformationMethod());
             }
         });
 
         passwordTextView.setOnClickListener(v -> {
             passwordTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordTextView.setClickable(true), 300);
 
             if (passwordEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), passwordEditText, passwordErrorImageView, passwordErrorTextView);
                 doWork();
             }
         });
 
         loginTextView.setOnClickListener(v -> {
             loginTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.loginFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
         });
 
         registerTextView.setOnClickListener(v -> {
             registerTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.registerFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.passwordRecoverFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
         });
     }
 
@@ -184,6 +187,12 @@ public class PasswordFragment extends Fragment {
         password = passwordEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

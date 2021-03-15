@@ -19,47 +19,50 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.databinding.FragmentLoginBinding;
 
 public class LoginFragment extends Fragment {
 
-    // Vars
-    private String username = "";
+    // Binding
+    private FragmentLoginBinding binding;
 
     // Widgets
     private EditText usernameEditText;
     private ImageView usernameErrorImageView;
     private TextView usernameErrorTextView;
-    private TextView loginTextView;
-    private TextView registerTextView, passwordRecoverTextView;
+    private TextView loginTextView, registerTextView, passwordRecoverTextView;
+
+    // Vars
+    private String username = "";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_login, viewGroup, false);
+        binding = FragmentLoginBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
         listener();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        usernameEditText = view.findViewById(R.id.component_auth_input_text_editText);
+    private void initializer() {
+        usernameEditText = binding.fragmentLoginInputEditText.componentAuthInputTextEditText;
         usernameEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
 
-        usernameErrorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
+        usernameErrorImageView = binding.fragmentLoginInputEditText.componentAuthInputTextErrorImageView;
+        usernameErrorTextView = binding.fragmentLoginInputEditText.componentAuthInputTextErrorTextView;
 
-        usernameErrorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
-
-        loginTextView = view.findViewById(R.id.fragment_login_button_textView);
+        loginTextView = binding.fragmentLoginButtonTextView.componentAuthButton;
         loginTextView.setText(getResources().getString(R.string.LoginFragmentButton));
 
-        registerTextView = view.findViewById(R.id.fragment_login_register_textView);
+        registerTextView = binding.fragmentLoginRegisterTextView.componentAuthLink;
         registerTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthRegister), 0, 5, getResources().getColor(R.color.Gray900), Typeface.BOLD));
-        passwordRecoverTextView = view.findViewById(R.id.fragment_login_password_recover_textView);
+
+        passwordRecoverTextView = binding.fragmentLoginPasswordRecoverTextView.componentAuthLink;
         passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
@@ -74,7 +77,7 @@ public class LoginFragment extends Fragment {
         usernameEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!usernameEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), usernameEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), usernameEditText);
                 }
             }
             return false;
@@ -82,28 +85,28 @@ public class LoginFragment extends Fragment {
 
         loginTextView.setOnClickListener(v -> {
             loginTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
             if (usernameEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView);
                 doWork();
             }
         });
 
         registerTextView.setOnClickListener(v -> {
             registerTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.registerFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.serialFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.serialFragment);
         });
     }
 
@@ -111,6 +114,12 @@ public class LoginFragment extends Fragment {
         username = usernameEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

@@ -20,12 +20,13 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.databinding.FragmentSerialBinding;
 import com.squareup.picasso.Picasso;
 
 public class SerialFragment extends Fragment {
 
-    // Vars
-    private String serial = "";
+    // Binding
+    private FragmentSerialBinding binding;
 
     // Widgets
     private ImageView avatarImageView;
@@ -33,15 +34,17 @@ public class SerialFragment extends Fragment {
     private EditText serialEditText;
     private ImageView serialErrorImageView;
     private TextView serialErrorTextView;
-    private TextView serialTextView;
-    private TextView dashboardTextView, logoutTextView;
+    private TextView serialTextView, dashboardTextView, logoutTextView;
+
+    // Vars
+    private String serial = "";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_serial, viewGroup, false);
+        binding = FragmentSerialBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
@@ -49,27 +52,26 @@ public class SerialFragment extends Fragment {
 
         setData();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        avatarImageView = view.findViewById(R.id.component_auth_avatar_imageView);
+    private void initializer() {
+        avatarImageView = binding.fragmentSerialAvatarImageView.componentAuthAvatarImageView;
+        charTextView = binding.fragmentSerialAvatarImageView.componentAuthAvatarTextView;
 
-        charTextView = view.findViewById(R.id.component_auth_avatar_textView);
-
-        serialEditText = view.findViewById(R.id.component_auth_input_text_editText);
+        serialEditText = binding.fragmentSerialInputEditText.componentAuthInputTextEditText;
         serialEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
-        serialErrorImageView = view.findViewById(R.id.component_auth_input_text_error_imageView);
+        serialErrorImageView = binding.fragmentSerialInputEditText.componentAuthInputTextErrorImageView;
+        serialErrorTextView = binding.fragmentSerialInputEditText.componentAuthInputTextErrorTextView;
 
-        serialErrorTextView = view.findViewById(R.id.component_auth_input_text_error_textView);
-
-        serialTextView = view.findViewById(R.id.fragment_serial_button_textView);
+        serialTextView = binding.fragmentSerialButtonTextView.componentAuthButton;
         serialTextView.setText(getResources().getString(R.string.SerialFragmentButton));
 
-        dashboardTextView = view.findViewById(R.id.fragment_serial_dashboard_textView);
+        dashboardTextView = binding.fragmentSerialDashboardTextView.componentAuthLink;
         dashboardTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900), Typeface.BOLD));
-        logoutTextView = view.findViewById(R.id.fragment_serial_logout_textView);
+
+        logoutTextView = binding.fragmentSerialLogoutTextView.componentAuthLink;
         logoutTextView.setText(getResources().getString(R.string.AuthLogout));
     }
 
@@ -84,7 +86,7 @@ public class SerialFragment extends Fragment {
         serialEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!serialEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), serialEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), serialEditText);
                 }
             }
             return false;
@@ -92,42 +94,42 @@ public class SerialFragment extends Fragment {
 
         serialTextView.setOnClickListener(v -> {
             serialTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> serialTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> serialTextView.setClickable(true), 300);
 
             if (serialEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), serialEditText, serialErrorImageView, serialErrorTextView);
                 doWork();
             }
         });
 
         dashboardTextView.setOnClickListener(v -> {
             dashboardTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> dashboardTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> dashboardTextView.setClickable(true), 300);
 
             IntentManager.main(getActivity());
         });
 
         logoutTextView.setOnClickListener(v -> {
             logoutTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> logoutTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> logoutTextView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
     }
 
     private void setData() {
-        if (((AuthActivity) getActivity()).singleton.getAvatar().equals("")) {
+        if (((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
             charTextView.setVisibility(View.VISIBLE);
-            if (((AuthActivity) getActivity()).singleton.getName().equals(""))
+            if (((AuthActivity) requireActivity()).singleton.getName().equals(""))
                 charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AuthToolbar)));
             else
-                charTextView.setText(StringManager.firstChars(((AuthActivity) getActivity()).singleton.getName()));
+                charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
         } else {
             charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(((AuthActivity) getActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(avatarImageView);
+            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(avatarImageView);
         }
     }
 
@@ -135,6 +137,12 @@ public class SerialFragment extends Fragment {
         serial = serialEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }

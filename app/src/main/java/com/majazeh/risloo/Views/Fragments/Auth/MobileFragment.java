@@ -19,49 +19,53 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.databinding.FragmentMobileBinding;
 
 public class MobileFragment extends Fragment {
 
-    // Vars
-    private String mobile = "";
+    // Binding
+    private FragmentMobileBinding binding;
 
     // Widgets
     private EditText mobileEditText;
     private ImageView mobileErrorImageView;
     private TextView mobileErrorTextView;
-    private TextView mobileTextView;
-    private TextView loginTextView, registerTextView, passwordRecoverTextView;
+    private TextView mobileTextView, loginTextView, registerTextView, passwordRecoverTextView;
+
+    // Vars
+    private String mobile = "";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_mobile, viewGroup, false);
+        binding = FragmentMobileBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
         listener();
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
-        mobileEditText = view.findViewById(R.id.component_auth_input_number_editText);
+    private void initializer() {
+        mobileEditText = binding.fragmentMobileInputEditText.componentAuthInputNumberEditText;
         mobileEditText.setHint(getResources().getString(R.string.MobileFragmentInput));
 
-        mobileErrorImageView = view.findViewById(R.id.component_auth_input_number_error_imageView);
+        mobileErrorImageView = binding.fragmentMobileInputEditText.componentAuthInputNumberErrorImageView;
+        mobileErrorTextView = binding.fragmentMobileInputEditText.componentAuthInputNumberErrorTextView;
 
-        mobileErrorTextView = view.findViewById(R.id.component_auth_input_number_error_textView);
-
-        mobileTextView = view.findViewById(R.id.fragment_mobile_button_textView);
+        mobileTextView = binding.fragmentMobileButtonTextView.componentAuthButton;
         mobileTextView.setText(getResources().getString(R.string.MobileFragmentButton));
 
-        loginTextView = view.findViewById(R.id.fragment_mobile_login_textView);
+        loginTextView = binding.fragmentMobileLoginTextView.componentAuthLink;
         loginTextView.setText(getResources().getString(R.string.AuthLogin));
-        registerTextView = view.findViewById(R.id.fragment_mobile_register_textView);
+
+        registerTextView = binding.fragmentMobileRegisterTextView.componentAuthLink;
         registerTextView.setText(getResources().getString(R.string.AuthRegister));
-        passwordRecoverTextView = view.findViewById(R.id.fragment_mobile_password_recover_textView);
+
+        passwordRecoverTextView = binding.fragmentMobilePasswordRecoverTextView.componentAuthLink;
         passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
@@ -76,7 +80,7 @@ public class MobileFragment extends Fragment {
         mobileEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!mobileEditText.hasFocus()) {
-                    ((AuthActivity) getActivity()).controlEditText.select(getActivity(), mobileEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), mobileEditText);
                 }
             }
             return false;
@@ -91,7 +95,7 @@ public class MobileFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (mobileEditText.length() == 11) {
-                    ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
+                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
                     doWork();
                 }
             }
@@ -104,35 +108,35 @@ public class MobileFragment extends Fragment {
 
         mobileTextView.setOnClickListener(v -> {
             mobileTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> mobileTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> mobileTextView.setClickable(true), 300);
 
             if (mobileEditText.length() == 0) {
-                ((AuthActivity) getActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) getActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
                 doWork();
             }
         });
 
         loginTextView.setOnClickListener(v -> {
             loginTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.loginFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
         });
 
         registerTextView.setOnClickListener(v -> {
             registerTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.registerFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
         passwordRecoverTextView.setOnClickListener(v -> {
             passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) getActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
 
-            ((AuthActivity) getActivity()).navigator(R.id.passwordRecoverFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
         });
     }
 
@@ -140,6 +144,12 @@ public class MobileFragment extends Fragment {
         mobile = mobileEditText.getText().toString().trim();
 
         // TODO : Call Work Method
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
     }
 
 }
