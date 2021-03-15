@@ -267,24 +267,6 @@
     <string name="EditCryptoFragmentPrivateHeader">کلید خصوصی</string>
     <string name="EditCryptoFragmentPrivateButton">تنظيم</string>
 
-    /*
-    ---------- EditCenter Fragment ----------
-    */
-
-    <string name="EditCenterFragmentTitle">ویرایش مرکز</string>
-
-    /*
-    ---------- EditCase Fragment ----------
-    */
-
-    <string name="EditCaseFragmentTitle">ویرایش پرونده</string>
-
-    /*
-    ---------- EditSession Fragment ----------
-    */
-
-    <string name="EditSessionFragmentTitle">ویرایش جلسه</string>
-
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
@@ -377,12 +359,6 @@
     <string name="DocumentsFragmentAccept">تأیید</string>
     <string name="DocumentsFragmentCancel">رد</string>
 
-    /*
-    ---------- Settings Fragment ----------
-    */
-
-    <string name="SettingsFragmentTitle">تنظیمات</string>
-
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
@@ -448,6 +424,12 @@
     */
 
     <string name="SampleFragmentTitle">نمونه</string>
+
+    /*
+    ---------- Setting Fragment ----------
+    */
+
+    <string name="SettingFragmentTitle">تنظیمات</string>
 
     /*
     ---------- Result Fragment ----------

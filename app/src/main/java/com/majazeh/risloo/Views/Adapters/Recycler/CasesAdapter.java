@@ -60,9 +60,9 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
     }
 
     private void listener(CasesHolder holder) {
-        holder.itemView.setOnClickListener(v -> {
-            holder.itemView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.itemView.setClickable(true), 300);
+        holder.binding.singleItemCase.setOnClickListener(v -> {
+            holder.binding.singleItemCase.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemCase.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.caseFragment);
         });

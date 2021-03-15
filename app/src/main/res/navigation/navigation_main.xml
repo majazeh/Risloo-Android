@@ -47,9 +47,6 @@
         <action
             android:id="@+id/action_dashboardFragment_to_documentsFragment"
             app:destination="@id/documentsFragment" />
-        <action
-            android:id="@+id/action_dashboardFragment_to_settingsFragment2"
-            app:destination="@id/settingsFragment" />
     </fragment>
 
     <fragment
@@ -132,12 +129,6 @@
             android:id="@+id/action_documentsFragment_to_createDocumentFragment"
             app:destination="@id/createDocumentFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/settingsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.SettingsFragment"
-        android:label="@string/SettingsFragmentTitle"
-        tools:layout="@layout/fragment_settings" />
 
     <fragment
         android:id="@+id/createCenterFragment"

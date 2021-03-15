@@ -32,7 +32,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/single_item_room_avatar_circleImageView"
+            android:id="@+id/single_item_room_avatar_includeLayout"
             layout="@layout/component_avatar_86sdp_border_white"
             android:layout_width="@dimen/_86sdp"
             android:layout_height="@dimen/_86sdp"
@@ -54,7 +54,7 @@
             android:fontFamily="@font/dana_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/single_item_room_avatar_circleImageView"
+            app:layout_constraintTop_toBottomOf="@+id/single_item_room_avatar_includeLayout"
             tools:text="نام و نام خانوادگی" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

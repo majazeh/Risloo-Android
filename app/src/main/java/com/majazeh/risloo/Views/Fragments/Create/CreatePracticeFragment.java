@@ -21,13 +21,7 @@ public class CreatePracticeFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
         binding = FragmentCreatePracticeBinding.inflate(inflater, viewGroup, false);
 
-        initializer();
-
         return binding.getRoot();
-    }
-
-    private void initializer() {
-
     }
 
     @Override

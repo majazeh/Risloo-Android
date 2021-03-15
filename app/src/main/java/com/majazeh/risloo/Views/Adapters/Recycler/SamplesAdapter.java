@@ -64,7 +64,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     }
 
     private void listener(SamplesHolder holder) {
-        holder.itemView.setOnClickListener(v -> {
+        holder.binding.singleItemSample.setOnClickListener(v -> {
             holder.binding.singleItemSample.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemSample.setClickable(true), 300);
 

@@ -62,7 +62,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
     }
 
     private void listener(ScalesHolder holder) {
-        holder.itemView.setOnClickListener(v -> {
+        holder.binding.singleItemScale.setOnClickListener(v -> {
             holder.binding.singleItemScale.setClickable(false);
             ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemScale.setClickable(true), 300);
 

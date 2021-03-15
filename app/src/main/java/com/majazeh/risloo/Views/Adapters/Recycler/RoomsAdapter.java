@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.ComponentAvatar86sdpBorderWhiteBinding;
 import com.majazeh.risloo.databinding.SingleItemRoomBinding;
 import com.squareup.picasso.Picasso;
 
@@ -72,19 +73,21 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     private void setData(RoomsHolder holder) {
         holder.binding.singleItemRoomNameTextView.setText("ریلسو");
 
-        holder.binding.singleItemRoomAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView.setVisibility(View.VISIBLE);
-        holder.binding.singleItemRoomAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView.setText(StringManager.firstChars(holder.binding.singleItemRoomNameTextView.getText().toString()));
+        holder.avatarBinding.componentAvatar86sdpBorderWhiteTextView.setVisibility(View.VISIBLE);
+        holder.avatarBinding.componentAvatar86sdpBorderWhiteTextView.setText(StringManager.firstChars(holder.binding.singleItemRoomNameTextView.getText().toString()));
 
-        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.singleItemRoomAvatarCircleImageView.componentAvatar86sdpBorderWhiteCircleImageView);
+        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.avatarBinding.componentAvatar86sdpBorderWhiteCircleImageView);
     }
 
     public class RoomsHolder extends RecyclerView.ViewHolder {
 
         private SingleItemRoomBinding binding;
+        private ComponentAvatar86sdpBorderWhiteBinding avatarBinding;
 
         public RoomsHolder(SingleItemRoomBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            this.avatarBinding = binding.singleItemRoomAvatarIncludeLayout;
         }
     }
 

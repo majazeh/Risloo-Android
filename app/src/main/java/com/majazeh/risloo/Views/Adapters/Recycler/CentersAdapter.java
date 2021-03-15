@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.ComponentAvatar86sdpBorderWhiteBinding;
 import com.majazeh.risloo.databinding.SingleItemCenterBinding;
 import com.squareup.picasso.Picasso;
 
@@ -74,19 +75,21 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         holder.binding.singleItemCenterNameTextView.setText("مرکز مشاوره ریلسو");
         holder.binding.singleItemCenterUsernameTextView.setText("کلینیک شخصی");
 
-        holder.binding.singleItemCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView.setVisibility(View.VISIBLE);
-        holder.binding.singleItemCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView.setText(StringManager.firstChars(holder.binding.singleItemCenterNameTextView.getText().toString()));
+        holder.avatarBinding.componentAvatar86sdpBorderWhiteTextView.setVisibility(View.VISIBLE);
+        holder.avatarBinding.componentAvatar86sdpBorderWhiteTextView.setText(StringManager.firstChars(holder.binding.singleItemCenterNameTextView.getText().toString()));
 
-        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.singleItemCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteCircleImageView);
+        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.avatarBinding.componentAvatar86sdpBorderWhiteCircleImageView);
     }
 
     public class CentersHolder extends RecyclerView.ViewHolder {
 
         private SingleItemCenterBinding binding;
+        private ComponentAvatar86sdpBorderWhiteBinding avatarBinding;
 
         public CentersHolder(SingleItemCenterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
+            this.avatarBinding = binding.singleItemCenterAvatarIncludeLayout;
         }
     }
 

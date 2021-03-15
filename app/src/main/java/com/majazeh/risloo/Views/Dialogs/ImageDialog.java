@@ -7,7 +7,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,9 +23,6 @@ public class ImageDialog extends BottomSheetDialogFragment {
     // Binding
     private DialogImageBinding binding;
 
-    // Widgets
-    private LinearLayout galleryLinearLayout, cameraLinearLayout;
-
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -39,8 +35,6 @@ public class ImageDialog extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = DialogImageBinding.inflate(inflater, viewGroup, false);
 
-        initializer();
-
         listener();
 
         detector();
@@ -48,22 +42,17 @@ public class ImageDialog extends BottomSheetDialogFragment {
         return binding.getRoot();
     }
 
-    private void initializer() {
-        galleryLinearLayout = binding.dialogImageGalleryLinearLayout;
-        cameraLinearLayout = binding.dialogImageCameraLinearLayout;
-    }
-
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            galleryLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
-            cameraLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
+            binding.dialogImageGalleryLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
+            binding.dialogImageCameraLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
         }
     }
 
     private void listener() {
-        galleryLinearLayout.setOnClickListener(v -> {
-            galleryLinearLayout.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> galleryLinearLayout.setClickable(true), 300);
+        binding.dialogImageGalleryLinearLayout.setOnClickListener(v -> {
+            binding.dialogImageGalleryLinearLayout.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.dialogImageGalleryLinearLayout.setClickable(true), 300);
             dismiss();
 
             if (PermissionManager.galleryPermission(getActivity())) {
@@ -71,9 +60,9 @@ public class ImageDialog extends BottomSheetDialogFragment {
             }
         });
 
-        cameraLinearLayout.setOnClickListener(v -> {
-            cameraLinearLayout.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> cameraLinearLayout.setClickable(true), 300);
+        binding.dialogImageCameraLinearLayout.setOnClickListener(v -> {
+            binding.dialogImageCameraLinearLayout.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.dialogImageCameraLinearLayout.setClickable(true), 300);
             dismiss();
 
             if (PermissionManager.cameraPermission(getActivity())) {

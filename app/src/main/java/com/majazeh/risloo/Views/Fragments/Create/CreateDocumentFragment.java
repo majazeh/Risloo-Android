@@ -21,13 +21,7 @@ public class CreateDocumentFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
         binding = FragmentCreateDocumentBinding.inflate(inflater, viewGroup, false);
 
-        initializer();
-
         return binding.getRoot();
-    }
-
-    private void initializer() {
-
     }
 
     @Override

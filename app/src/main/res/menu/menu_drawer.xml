@@ -35,11 +35,6 @@
             android:id="@+id/documentsFragment"
             android:icon="@drawable/ic_document_light"
             android:title="@string/DocumentsFragmentTitle" />
-        <item
-            android:id="@+id/settingsFragment"
-            android:icon="@drawable/ic_setting_light"
-            android:title="@string/SettingsFragmentTitle"
-            android:visible="false"/>
     </group>
 
 </menu>
