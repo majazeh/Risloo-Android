@@ -15,10 +15,14 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;
 
 public class AuthActivity extends AppCompatActivity {
+
+    // Binding
+    private ActivityAuthBinding binding;
 
     // Singleton
     public Singleton singleton;
@@ -26,7 +30,7 @@ public class AuthActivity extends AppCompatActivity {
     // Objects
     public Handler handler;
     public ControlEditText controlEditText;
-    private NavHostFragment navHostFragment;
+    public NavHostFragment navHostFragment;
     public NavController navController;
 
     @Override
@@ -35,7 +39,7 @@ public class AuthActivity extends AppCompatActivity {
 
         decorator();
 
-        setContentView(R.layout.activity_auth);
+        binder();
 
         initializer();
     }
@@ -47,6 +51,11 @@ public class AuthActivity extends AppCompatActivity {
         windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
     }
 
+    private void binder() {
+        binding = ActivityAuthBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+    }
+
     private void initializer() {
         singleton = new Singleton(this);
 
@@ -54,7 +63,7 @@ public class AuthActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.activity_auth_nav_host_fragment);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.activityAuthNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
     }
@@ -62,7 +71,7 @@ public class AuthActivity extends AppCompatActivity {
     public void navigator(int destinationId) {
         try {
             if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
-                while (navController.getCurrentDestination().getId()!=destinationId) {
+                while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
                     navController.popBackStack();
                 }
                 if (destinationId == R.id.loginFragment){

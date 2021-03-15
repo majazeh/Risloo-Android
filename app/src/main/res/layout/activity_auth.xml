@@ -16,12 +16,12 @@
     tools:context=".Views.Activities.AuthActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_auth_container_constraintLayout"
+        android:id="@+id/activity_auth_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/activity_auth_nav_host_fragment"
+            android:id="@+id/activity_auth_navHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"

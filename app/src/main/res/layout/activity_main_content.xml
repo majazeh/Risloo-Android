@@ -65,7 +65,7 @@
         app:layout_constraintTop_toTopOf="@+id/activity_main_content_notification_imageView" />
 
     <TextView
-        android:id="@+id/activity_main_content_location_textView"
+        android:id="@+id/activity_main_content_bread_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
@@ -76,14 +76,14 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
-        app:layout_constraintBottom_toTopOf="@id/activity_main_content_nav_host_fragment"
+        app:layout_constraintBottom_toTopOf="@id/activity_main_content_navHostFragment"
         app:layout_constraintEnd_toEndOf="@id/activity_main_content_logout_imageView"
         app:layout_constraintStart_toStartOf="@+id/activity_main_content_menu_imageView"
         app:layout_constraintTop_toBottomOf="@+id/activity_main_content_menu_imageView"
         tools:text="پیش‌خوان" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/activity_main_content_nav_host_fragment"
+        android:id="@+id/activity_main_content_navHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -92,7 +92,7 @@
         app:layout_constraintBottom_toTopOf="@id/activity_main_content_bottom_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_content_location_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_content_bread_textView" />
 
     <View
         android:id="@+id/activity_main_content_bottom_view"

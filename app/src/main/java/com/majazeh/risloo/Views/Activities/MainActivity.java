@@ -1,10 +1,8 @@
 package com.majazeh.risloo.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.view.GravityCompat;
-import androidx.core.widget.ImageViewCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -25,16 +23,21 @@ import android.widget.TextView;
 import com.google.android.material.navigation.NavigationView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.DateDialog;
 import com.majazeh.risloo.Views.Dialogs.ImageDialog;
+import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
+
+    // Binding
+    private ActivityMainBinding binding;
 
     // Singleton
     public Singleton singleton;
@@ -50,11 +53,11 @@ public class MainActivity extends AppCompatActivity {
     // Widgets
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
-    private ConstraintLayout accountConstraintLayout;
+    private ConstraintLayout accountToolbar;
     private ImageView avatarImageView;
     private TextView charTextView, nameTextView, moneyTextView;
     private ImageView menuImageView, logoutImageView, notificationImageView;
-    private TextView badgeTextView, locationTextView;
+    private TextView badgeTextView, breadTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         decorator();
 
-        setContentView(R.layout.activity_main);
+        binder();
 
         initializer();
 
@@ -80,6 +83,11 @@ public class MainActivity extends AppCompatActivity {
         windowDecorator.lightSetSystemUIColor(this, Color.TRANSPARENT, getResources().getColor(R.color.Gray50));
     }
 
+    private void binder() {
+        binding = ActivityMainBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+    }
+
     private void initializer() {
         singleton = new Singleton(this);
 
@@ -90,40 +98,38 @@ public class MainActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-        drawerLayout = findViewById(R.id.activity_main);
-
-        navigationView = findViewById(R.id.activity_main_navigationView);
-
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.activity_main_content_nav_host_fragment);
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.activityMainContent.activityMainContentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        accountConstraintLayout = findViewById(R.id.activity_main_content_account_imageView);
+        drawerLayout = binding.getRoot();
 
-        avatarImageView = findViewById(R.id.component_main_toolbar_avatar_imageView);
+        navigationView = binding.activityMainNavigationView;
 
-        charTextView = findViewById(R.id.component_main_toolbar_char_textView);
-        nameTextView = findViewById(R.id.component_main_toolbar_name_textView);
-        moneyTextView = findViewById(R.id.component_main_toolbar_money_textView);
+        accountToolbar = binding.activityMainContent.activityMainContentAccountImageView.componentMainToolbar;
 
-        menuImageView = findViewById(R.id.activity_main_content_menu_imageView);
-        menuImageView.setImageResource(R.drawable.ic_bars_light);
-        ImageViewCompat.setImageTintList(menuImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
-        logoutImageView = findViewById(R.id.activity_main_content_logout_imageView);
-        logoutImageView.setImageResource(R.drawable.ic_logout_light);
-        ImageViewCompat.setImageTintList(logoutImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
+        avatarImageView = binding.activityMainContent.activityMainContentAccountImageView.componentMainToolbarAvatarImageView;
+        charTextView = binding.activityMainContent.activityMainContentAccountImageView.componentMainToolbarCharTextView;
+        nameTextView = binding.activityMainContent.activityMainContentAccountImageView.componentMainToolbarNameTextView;
+        moneyTextView = binding.activityMainContent.activityMainContentAccountImageView.componentMainToolbarMoneyTextView;
+
+        menuImageView = binding.activityMainContent.activityMainContentMenuImageView.componentMainButton;
+        InitManager.imageView(this, menuImageView, R.drawable.ic_bars_light, R.color.Gray500);
+
+        logoutImageView = binding.activityMainContent.activityMainContentLogoutImageView.componentMainButton;
+        InitManager.imageView(this, logoutImageView, R.drawable.ic_logout_light, R.color.Gray500);
         logoutImageView.setRotation(logoutImageView.getRotation() + 180);
-        notificationImageView = findViewById(R.id.activity_main_content_notification_imageView);
-        notificationImageView.setImageResource(R.drawable.ic_bell_light);
-        ImageViewCompat.setImageTintList(notificationImageView, AppCompatResources.getColorStateList(this, R.color.Gray500));
 
-        badgeTextView = findViewById(R.id.activity_main_content_badge_textView);
-        locationTextView = findViewById(R.id.activity_main_content_location_textView);
+        notificationImageView = binding.activityMainContent.activityMainContentNotificationImageView.componentMainButton;
+        InitManager.imageView(this, notificationImageView, R.drawable.ic_bell_light, R.color.Gray500);
+
+        badgeTextView = binding.activityMainContent.activityMainContentBadgeTextView.componentMainBadge;
+        breadTextView = binding.activityMainContent.activityMainContentBreadTextView;
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            accountConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
+            accountToolbar.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
 
             menuImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
             logoutImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
@@ -132,9 +138,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        accountConstraintLayout.setOnClickListener(v -> {
-            accountConstraintLayout.setClickable(false);
-            handler.postDelayed(() -> accountConstraintLayout.setClickable(true), 300);
+        accountToolbar.setOnClickListener(v -> {
+            accountToolbar.setClickable(false);
+            handler.postDelayed(() -> accountToolbar.setClickable(true), 300);
 
             navigator(R.id.accountFragment);
         });
@@ -161,8 +167,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            locationTextView.setText(StringManager.clickableNavBackStack(this, controller));
-            locationTextView.setMovementMethod(LinkMovementMethod.getInstance());
+            breadTextView.setText(StringManager.clickableNavBackStack(this, controller));
+            breadTextView.setMovementMethod(LinkMovementMethod.getInstance());
         });
     }
 
@@ -201,14 +207,14 @@ public class MainActivity extends AppCompatActivity {
     public void navigator(int destinationId) {
         try {
             if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
-                while (navController.getCurrentDestination().getId()!=destinationId) {
+                while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
                     navController.popBackStack();
                 }
             }
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-        if (navController.getCurrentDestination().getId() != R.id.dashboardFragment  && destinationId == R.id.accountFragment) {
+        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment  && destinationId == R.id.accountFragment) {
             navController.popBackStack();
         }
         navController.navigate(destinationId);

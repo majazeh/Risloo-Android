@@ -2,8 +2,6 @@ package com.majazeh.risloo.Views.Activities;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.core.widget.ImageViewCompat;
 
 import android.content.pm.PackageManager;
 import android.os.Build;
@@ -16,15 +14,17 @@ import com.jsibbold.zoomage.ZoomageView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.squareup.picasso.Picasso;
 
 public class DisplayActivity extends AppCompatActivity {
 
-    // Vars
-    private String title = "", bitmap = "", path = "";
+    // Binding
+    private ActivityDisplayBinding binding;
 
     // Objects
     private Bundle extras;
@@ -34,13 +34,16 @@ public class DisplayActivity extends AppCompatActivity {
     private ImageView returnImageView, downloadImageView;
     private ZoomageView avatarZoomageView;
 
+    // Vars
+    private String title = "", bitmap = "", path = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         decorator();
 
-        setContentView(R.layout.activity_display);
+        binder();
 
         initializer();
 
@@ -58,19 +61,23 @@ public class DisplayActivity extends AppCompatActivity {
         windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Gray900), getResources().getColor(R.color.Gray900));
     }
 
+    private void binder() {
+        binding = ActivityDisplayBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
+    }
+
     private void initializer() {
         extras = getIntent().getExtras();
 
         handler = new Handler();
 
-        returnImageView = findViewById(R.id.activity_display_return_imageView);
-        returnImageView.setImageResource(R.drawable.ic_angle_right_regular);
-        ImageViewCompat.setImageTintList(returnImageView, AppCompatResources.getColorStateList(this, R.color.Gray50));
-        downloadImageView = findViewById(R.id.activity_display_download_imageView);
-        downloadImageView.setImageResource(R.drawable.ic_download_light);
-        ImageViewCompat.setImageTintList(downloadImageView, AppCompatResources.getColorStateList(this, R.color.Gray50));
+        returnImageView = binding.activityDisplayReturnImageView.componentMainButton;
+        InitManager.imageView(this, returnImageView, R.drawable.ic_angle_right_regular, R.color.Gray50);
 
-        avatarZoomageView = findViewById(R.id.activity_display_avatar_zoomageView);
+        downloadImageView = binding.activityDisplayDownloadImageView.componentMainButton;
+        InitManager.imageView(this, returnImageView, R.drawable.ic_download_light, R.color.Gray50);
+
+        avatarZoomageView = binding.activityDisplayAvatarZoomageView;
     }
 
     private void detector() {
