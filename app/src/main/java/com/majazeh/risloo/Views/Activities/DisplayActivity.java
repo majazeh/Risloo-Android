@@ -8,9 +8,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
-import android.widget.ImageView;
 
-import com.jsibbold.zoomage.ZoomageView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
@@ -19,20 +17,18 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
+import com.majazeh.risloo.databinding.ComponentMainButtonBinding;
 import com.squareup.picasso.Picasso;
 
 public class DisplayActivity extends AppCompatActivity {
 
     // Binding
     private ActivityDisplayBinding binding;
+    private ComponentMainButtonBinding returnBinding, downloadBinding;
 
     // Objects
     private Bundle extras;
     private Handler handler;
-
-    // Widgets
-    private ImageView returnImageView, downloadImageView;
-    private ZoomageView avatarZoomageView;
 
     // Vars
     private String title = "", bitmap = "", path = "";
@@ -71,33 +67,31 @@ public class DisplayActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        returnImageView = binding.activityDisplayReturnImageView.componentMainButton;
-        InitManager.imageView(this, returnImageView, R.drawable.ic_angle_right_regular, R.color.Gray50);
+        returnBinding = binding.activityDisplayReturnIncludeLayout;
+        downloadBinding = binding.activityDisplayDownloadIncludeLayout;
 
-        downloadImageView = binding.activityDisplayDownloadImageView.componentMainButton;
-        InitManager.imageView(this, returnImageView, R.drawable.ic_download_light, R.color.Gray50);
-
-        avatarZoomageView = binding.activityDisplayAvatarZoomageView;
+        InitManager.imgResTint(this, returnBinding.componentMainButton, R.drawable.ic_angle_right_regular, R.color.Gray50);
+        InitManager.imgResTint(this, downloadBinding.componentMainButton, R.drawable.ic_download_light, R.color.Gray50);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            returnImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-            downloadImageView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            returnBinding.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            downloadBinding.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener() {
-        returnImageView.setOnClickListener(v -> {
-            returnImageView.setClickable(false);
-            handler.postDelayed(() -> returnImageView.setClickable(true), 300);
+        returnBinding.componentMainButton.setOnClickListener(v -> {
+            returnBinding.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> returnBinding.componentMainButton.setClickable(true), 300);
 
             finish();
         });
 
-        downloadImageView.setOnClickListener(v -> {
-            downloadImageView.setClickable(false);
-            handler.postDelayed(() -> downloadImageView.setClickable(true), 300);
+        downloadBinding.componentMainButton.setOnClickListener(v -> {
+            downloadBinding.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> downloadBinding.componentMainButton.setClickable(true), 300);
 
             if (PermissionManager.storagePermission(this)) {
                 IntentManager.download(this, bitmap);
@@ -120,11 +114,11 @@ public class DisplayActivity extends AppCompatActivity {
             // TODO ; Place Code If Needed
         }
         if (!bitmap.equals("")) {
-            Picasso.get().load(bitmap).placeholder(R.color.Gray900).into(avatarZoomageView);
-            downloadImageView.setVisibility(View.VISIBLE);
+            Picasso.get().load(bitmap).placeholder(R.color.Gray900).into(binding.activityDisplayAvatarZoomageView);
+            binding.activityDisplayAvatarZoomageView.setVisibility(View.VISIBLE);
         }
         if (!path.equals("")) {
-            avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), path));
+            binding.activityDisplayAvatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), path));
             FileManager.deleteFileFromCache(this, "bitmap");
         }
     }

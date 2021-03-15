@@ -8,9 +8,15 @@ import androidx.core.widget.ImageViewCompat;
 
 public class InitManager {
 
-    public static void imageView(Activity activity, ImageView img, int imgRes, int imgColor) {
+    public static void imgResTint(Activity activity, ImageView img, int imgRes, int imgColor) {
         img.setImageResource(imgRes);
         ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+    }
+
+    public static void imgResTintRotate(Activity activity, ImageView img, int imgRes, int imgColor, int degree) {
+        img.setImageResource(imgRes);
+        ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
+        img.setRotation(img.getRotation() + degree);
     }
 
 }

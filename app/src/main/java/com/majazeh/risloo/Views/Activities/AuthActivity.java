@@ -39,7 +39,8 @@ public class AuthActivity extends AppCompatActivity {
 
         decorator();
 
-        binder();
+        binding = ActivityAuthBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         initializer();
     }
@@ -49,11 +50,6 @@ public class AuthActivity extends AppCompatActivity {
 
         windowDecorator.lightShowSystemUI(this);
         windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
-    }
-
-    private void binder() {
-        binding = ActivityAuthBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
     }
 
     private void initializer() {

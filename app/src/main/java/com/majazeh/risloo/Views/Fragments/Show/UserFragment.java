@@ -79,7 +79,7 @@ public class UserFragment extends Fragment {
         editTextView.setTextColor(getResources().getColor(R.color.Gray500));
 
         enterImageView = binding.fragmentUserEnterImageView.componentButtonOval28sdp;
-        InitManager.imageView(getActivity(), enterImageView, R.drawable.ic_user_cog_light, R.color.Blue600);
+        InitManager.imgResTint(getActivity(), enterImageView, R.drawable.ic_user_cog_light, R.color.Blue600);
     }
 
     private void detector() {

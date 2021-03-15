@@ -96,7 +96,7 @@ public class RoomFragment extends Fragment {
         badgeImageView = binding.fragmentRoomBadgeImageView;
 
         usersImageView = binding.fragmentRoomUsersImageView.componentButtonOval28sdp;
-        InitManager.imageView(getActivity(), usersImageView, R.drawable.ic_users_light, R.color.Blue600);
+        InitManager.imgResTint(getActivity(), usersImageView, R.drawable.ic_users_light, R.color.Blue600);
 
         casesTitleTextView = binding.fragmentRoomCasesHeaderConstraintLayout.componentIndexHeaderTitleTextView;
         casesTitleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
@@ -106,7 +106,7 @@ public class RoomFragment extends Fragment {
         casesSearchProgressBar = binding.fragmentRoomCasesSearchConstraintLayout.componentIndexSearchProgressBar;
 
         casesAddImageView = binding.fragmentRoomCasesAddImageView.componentButtonOval28sdp;
-        InitManager.imageView(getActivity(), casesAddImageView, R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(getActivity(), casesAddImageView, R.drawable.ic_plus_light, R.color.Green700);
 
         casesShimmerLayout = binding.fragmentRoomCasesIndexShimmerLayout.componentShimmerCase2;
         casesConstraintLayout = binding.fragmentRoomCasesIndexConstraintLayout.componentSingleCase2;

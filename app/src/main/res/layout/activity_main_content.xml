@@ -13,7 +13,7 @@
     tools:context=".Views.Activities.MainActivity">
 
     <include
-        android:id="@+id/activity_main_content_menu_imageView"
+        android:id="@+id/activity_main_content_menu_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/activity_main_content_logout_imageView"
+        android:id="@+id/activity_main_content_logout_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
@@ -33,36 +33,43 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/activity_main_content_account_imageView"
+        android:id="@+id/activity_main_content_account_includeLayout"
         layout="@layout/component_main_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_logout_imageView"
-        app:layout_constraintEnd_toStartOf="@+id/activity_main_content_logout_imageView"
-        app:layout_constraintTop_toTopOf="@+id/activity_main_content_logout_imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_logout_includeLayout"
+        app:layout_constraintEnd_toStartOf="@+id/activity_main_content_logout_includeLayout"
+        app:layout_constraintTop_toTopOf="@+id/activity_main_content_logout_includeLayout" />
 
     <include
-        android:id="@+id/activity_main_content_notification_imageView"
+        android:id="@+id/activity_main_content_notification_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_account_imageView"
-        app:layout_constraintEnd_toStartOf="@+id/activity_main_content_account_imageView"
-        app:layout_constraintTop_toTopOf="@+id/activity_main_content_account_imageView" />
+        app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_account_includeLayout"
+        app:layout_constraintEnd_toStartOf="@+id/activity_main_content_account_includeLayout"
+        app:layout_constraintTop_toTopOf="@+id/activity_main_content_account_includeLayout" />
 
-    <include
+    <TextView
         android:id="@+id/activity_main_content_badge_textView"
-        layout="@layout/component_main_badge"
         android:layout_width="@dimen/_16sdp"
         android:layout_height="@dimen/_16sdp"
         android:layout_marginStart="@dimen/_2sdp"
         android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/White"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        android:background="@drawable/draw_oval_solid_red500"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/activity_main_content_notification_imageView"
-        app:layout_constraintTop_toTopOf="@+id/activity_main_content_notification_imageView" />
+        app:layout_constraintStart_toStartOf="@+id/activity_main_content_notification_includeLayout"
+        app:layout_constraintTop_toTopOf="@+id/activity_main_content_notification_includeLayout"
+        tools:text="5" />
 
     <TextView
         android:id="@+id/activity_main_content_bread_textView"
@@ -77,9 +84,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
         app:layout_constraintBottom_toTopOf="@id/activity_main_content_navHostFragment"
-        app:layout_constraintEnd_toEndOf="@id/activity_main_content_logout_imageView"
-        app:layout_constraintStart_toStartOf="@+id/activity_main_content_menu_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_content_menu_imageView"
+        app:layout_constraintEnd_toEndOf="@id/activity_main_content_logout_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/activity_main_content_menu_includeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_content_menu_includeLayout"
         tools:text="پیش‌خوان" />
 
     <androidx.fragment.app.FragmentContainerView

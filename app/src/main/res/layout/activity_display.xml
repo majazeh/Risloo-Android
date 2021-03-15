@@ -33,7 +33,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <include
-        android:id="@+id/activity_display_return_imageView"
+        android:id="@+id/activity_display_return_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/activity_display_download_imageView"
+        android:id="@+id/activity_display_download_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"

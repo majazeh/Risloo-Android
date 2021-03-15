@@ -5,8 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -26,17 +24,14 @@ public class SplashActivity extends AppCompatActivity {
     // Objects
     private Handler handler;
 
-    // Widgets
-    private TextView versionTextView;
-    private ImageView logoTextView;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         decorator();
 
-        binder();
+        binding = ActivitySplashBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         initializer();
 
@@ -56,18 +51,10 @@ public class SplashActivity extends AppCompatActivity {
         windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
     }
 
-    private void binder() {
-        binding = ActivitySplashBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-    }
-
     private void initializer() {
         singleton = new Singleton(this);
 
         handler = new Handler();
-
-        versionTextView = binding.activitySplashVersionTextView;
-        logoTextView = binding.activitySplashLogoImageView;
     }
 
     private void detector() {
@@ -81,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        versionTextView.setText(getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this));
+        binding.activitySplashVersionTextView.setText(getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this));
     }
 
     private void navigator() {

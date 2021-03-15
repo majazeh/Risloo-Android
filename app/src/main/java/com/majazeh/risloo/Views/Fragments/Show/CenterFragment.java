@@ -113,9 +113,9 @@ public class CenterFragment extends Fragment {
         statusTextView.setTextColor(getResources().getColor(R.color.White));
 
         editImageView = binding.fragmentCenterEditImageView.componentButtonOval28sdp;
-        InitManager.imageView(getActivity(), editImageView, R.drawable.ic_edit_light, R.color.Gray500);
+        InitManager.imgResTint(getActivity(), editImageView, R.drawable.ic_edit_light, R.color.Gray500);
         usersImageView = binding.fragmentCenterUsersImageView.componentButtonOval28sdp;
-        InitManager.imageView(getActivity(), usersImageView, R.drawable.ic_users_light, R.color.Blue600);
+        InitManager.imgResTint(getActivity(), usersImageView, R.drawable.ic_users_light, R.color.Blue600);
 
         roomsTitleTextView = binding.fragmentCenterRoomsHeaderConstraintLayout.componentIndexHeaderTitleTextView;
         roomsTitleTextView.setText(getResources().getString(R.string.CenterFragmentRoomsHeader));
@@ -125,7 +125,7 @@ public class CenterFragment extends Fragment {
         roomsSearchProgressBar = binding.fragmentCenterRoomsSearchConstraintLayout.componentIndexSearchProgressBar;
 
         roomsAddImageView = binding.fragmentCenterRoomsAddImageView.componentButtonOval28sdp;
-        InitManager.imageView(getActivity(), roomsAddImageView, R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(getActivity(), roomsAddImageView, R.drawable.ic_plus_light, R.color.Green700);
 
         roomsShimmerLayout = binding.fragmentCenterRoomsIndexShimmerLayout.componentShimmerRoom;
         roomsConstraintLayout = binding.fragmentCenterRoomsIndexConstraintLayout.componentSingleRoom;
