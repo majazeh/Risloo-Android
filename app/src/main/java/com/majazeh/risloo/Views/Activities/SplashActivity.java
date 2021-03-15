@@ -68,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        binding.activitySplashVersionTextView.setText(getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this));
+        binding.versionTextView.setText(getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this));
     }
 
     private void navigator() {

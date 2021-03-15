@@ -9,7 +9,7 @@
     android:layoutDirection="rtl">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/component_avatar_86sdp_border_white_circleImageView"
+        android:id="@+id/avatar_circleImageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:civ_border_color="@color/White"
@@ -21,7 +21,7 @@
         tools:background="@drawable/draw_oval_solid_gray50_border_4sdp_white" />
 
     <TextView
-        android:id="@+id/component_avatar_86sdp_border_white_textView"
+        android:id="@+id/char_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"

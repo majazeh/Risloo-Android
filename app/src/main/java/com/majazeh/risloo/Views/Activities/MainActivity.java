@@ -26,8 +26,6 @@ import com.majazeh.risloo.Views.Dialogs.DateDialog;
 import com.majazeh.risloo.Views.Dialogs.ImageDialog;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.majazeh.risloo.databinding.ActivityMainContentBinding;
-import com.majazeh.risloo.databinding.ComponentMainButtonBinding;
-import com.majazeh.risloo.databinding.ComponentMainToolbarBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -37,8 +35,6 @@ public class MainActivity extends AppCompatActivity {
     // Binding
     private ActivityMainBinding binding;
     private ActivityMainContentBinding contentBinding;
-    private ComponentMainToolbarBinding accountBinding;
-    private ComponentMainButtonBinding menuBinding, logoutBinding, notificationBinding;
 
     // Singleton
     public Singleton singleton;
@@ -86,96 +82,91 @@ public class MainActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.activityMainIncludeLayout.activityMainContentNavHostFragment.getId());
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainIncludeLayout.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        contentBinding = binding.activityMainIncludeLayout;
+        contentBinding = binding.mainIncludeLayout;
 
-        accountBinding = contentBinding.activityMainContentAccountIncludeLayout;
-        menuBinding = contentBinding.activityMainContentMenuIncludeLayout;
-        logoutBinding = contentBinding.activityMainContentLogoutIncludeLayout;
-        notificationBinding = contentBinding.activityMainContentNotificationIncludeLayout;
-
-        InitManager.imgResTint(this, menuBinding.componentMainButton, R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.imgResTintRotate(this, logoutBinding.componentMainButton, R.drawable.ic_logout_light, R.color.Gray500, 180);
-        InitManager.imgResTint(this, notificationBinding.componentMainButton, R.drawable.ic_bell_light, R.color.Gray500);
+        InitManager.imgResTint(this, contentBinding.menuIncludeLayout.componentMainButton, R.drawable.ic_bars_light, R.color.Gray500);
+        InitManager.imgResTintRotate(this, contentBinding.logoutIncludeLayout.componentMainButton, R.drawable.ic_logout_light, R.color.Gray500, 180);
+        InitManager.imgResTint(this, contentBinding.notificationIncludeLayout.componentMainButton, R.drawable.ic_bell_light, R.color.Gray500);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            accountBinding.componentMainToolbar.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
+            contentBinding.accountIncludeLayout.componentMainToolbar.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
 
-            menuBinding.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            logoutBinding.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
-            notificationBinding.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            contentBinding.menuIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            contentBinding.logoutIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
+            contentBinding.notificationIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
         }
     }
 
     private void listener() {
-        accountBinding.componentMainToolbar.setOnClickListener(v -> {
-            accountBinding.componentMainToolbar.setClickable(false);
-            handler.postDelayed(() -> accountBinding.componentMainToolbar.setClickable(true), 300);
+        contentBinding.accountIncludeLayout.componentMainToolbar.setOnClickListener(v -> {
+            contentBinding.accountIncludeLayout.componentMainToolbar.setClickable(false);
+            handler.postDelayed(() -> contentBinding.accountIncludeLayout.componentMainToolbar.setClickable(true), 300);
 
             navigator(R.id.accountFragment);
         });
 
-        menuBinding.componentMainButton.setOnClickListener(v -> {
-            menuBinding.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> menuBinding.componentMainButton.setClickable(true), 300);
+        contentBinding.menuIncludeLayout.componentMainButton.setOnClickListener(v -> {
+            contentBinding.menuIncludeLayout.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> contentBinding.menuIncludeLayout.componentMainButton.setClickable(true), 300);
 
-            binding.activityMainDrawerLayout.openDrawer(GravityCompat.START);
+            binding.getRoot().openDrawer(GravityCompat.START);
         });
 
-        logoutBinding.componentMainButton.setOnClickListener(v -> {
-            logoutBinding.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> logoutBinding.componentMainButton.setClickable(true), 300);
+        contentBinding.logoutIncludeLayout.componentMainButton.setOnClickListener(v -> {
+            contentBinding.logoutIncludeLayout.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> contentBinding.logoutIncludeLayout.componentMainButton.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        notificationBinding.componentMainButton.setOnClickListener(v -> {
-            notificationBinding.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> notificationBinding.componentMainButton.setClickable(true), 300);
+        contentBinding.notificationIncludeLayout.componentMainButton.setOnClickListener(v -> {
+            contentBinding.notificationIncludeLayout.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> contentBinding.notificationIncludeLayout.componentMainButton.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            contentBinding.activityMainContentBreadTextView.setText(StringManager.clickableNavBackStack(this, controller));
-            contentBinding.activityMainContentBreadTextView.setMovementMethod(LinkMovementMethod.getInstance());
+            contentBinding.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
+            contentBinding.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
         });
     }
 
     private void setData() {
-        NavigationUI.setupWithNavController(binding.activityMainNavigationView, navController);
+        NavigationUI.setupWithNavController(binding.mainNavigationView, navController);
 
         if (singleton.getName().equals("")) {
-            accountBinding.componentMainToolbarNameTextView.setText(getResources().getString(R.string.MainToolbar));
+            contentBinding.accountIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
-            accountBinding.componentMainToolbarNameTextView.setText(singleton.getName());
+            contentBinding.accountIncludeLayout.nameTextView.setText(singleton.getName());
         }
 
         if (singleton.getMoney().equals("")) {
-            accountBinding.componentMainToolbarMoneyTextView.setVisibility(View.GONE);
+            contentBinding.accountIncludeLayout.moneyTextView.setVisibility(View.GONE);
         } else {
-            accountBinding.componentMainToolbarMoneyTextView.setText(singleton.getMoney());
+            contentBinding.accountIncludeLayout.moneyTextView.setText(singleton.getMoney());
         }
 
         if (singleton.getNotification().equals("")) {
-            contentBinding.activityMainContentBadgeTextView.setVisibility(View.GONE);
+            contentBinding.badgeTextView.setVisibility(View.GONE);
         } else {
-            contentBinding.activityMainContentBadgeTextView.setVisibility(View.VISIBLE);
-            contentBinding.activityMainContentBadgeTextView.setText(singleton.getNotification());
+            contentBinding.badgeTextView.setVisibility(View.VISIBLE);
+            contentBinding.badgeTextView.setText(singleton.getNotification());
         }
 
         if (singleton.getAvatar().equals("")) {
-            accountBinding.componentMainToolbarCharTextView.setVisibility(View.VISIBLE);
-            accountBinding.componentMainToolbarCharTextView.setText(StringManager.firstChars(accountBinding.componentMainToolbarNameTextView.getText().toString()));
+            contentBinding.accountIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            contentBinding.accountIncludeLayout.charTextView.setText(StringManager.firstChars(contentBinding.accountIncludeLayout.nameTextView.getText().toString()));
         } else {
-            accountBinding.componentMainToolbarCharTextView.setVisibility(View.GONE);
+            contentBinding.accountIncludeLayout.charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(accountBinding.componentMainToolbarAvatarImageView);
+            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(contentBinding.accountIncludeLayout.avatarImageView);
         }
     }
 
@@ -197,7 +188,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, binding.activityMainDrawerLayout);
+        return NavigationUI.navigateUp(navController, binding.getRoot());
     }
 
     @Override
@@ -219,8 +210,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (binding.activityMainDrawerLayout.isDrawerOpen(GravityCompat.START)) {
-            binding.activityMainDrawerLayout.closeDrawer(GravityCompat.START);
+        if (binding.getRoot().isDrawerOpen(GravityCompat.START)) {
+            binding.getRoot().closeDrawer(GravityCompat.START);
         } else {
             if (!navController.popBackStack()) {
                 finish();

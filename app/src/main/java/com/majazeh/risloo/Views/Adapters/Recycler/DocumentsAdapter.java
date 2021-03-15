@@ -57,11 +57,11 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.singleItemDocument.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.singleItemDocumentAttachmentImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.attachmentImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
 
-            holder.binding.singleItemDocumentActionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            holder.binding.singleItemDocumentActionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -73,16 +73,16 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
             // TODO : Place Code Here
         });
 
-        holder.binding.singleItemDocumentAttachmentImageView.setOnClickListener(v -> {
-            holder.binding.singleItemDocumentAttachmentImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemDocumentAttachmentImageView.setClickable(true), 300);
+        holder.binding.attachmentImageView.setOnClickListener(v -> {
+            holder.binding.attachmentImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.attachmentImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        holder.binding.singleItemDocumentActionTextView.setOnClickListener(v -> {
-            holder.binding.singleItemDocumentActionTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemDocumentActionTextView.setClickable(true), 300);
+        holder.binding.actionTextView.setOnClickListener(v -> {
+            holder.binding.actionTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.actionTextView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -90,17 +90,17 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
 
     private void setData(DocumentsHolder holder) {
         if (holder.getAdapterPosition() == 0) {
-            holder.binding.singleItemDocumentTopView.setVisibility(View.GONE);
+            holder.binding.topView.setVisibility(View.GONE);
         } else {
-            holder.binding.singleItemDocumentTopView.setVisibility(View.VISIBLE);
+            holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.singleItemDocumentSerialTextView.setText("P-96666DD");
-        holder.binding.singleItemDocumentNameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
-        holder.binding.singleItemDocumentStatusTextView.setText("تأیید شده");
+        holder.binding.serialTextView.setText("P-96666DD");
+        holder.binding.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
+        holder.binding.statusTextView.setText("تأیید شده");
 
-        holder.binding.singleItemDocumentActionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentAccept));
-        holder.binding.singleItemDocumentActionTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+        holder.binding.actionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentAccept));
+        holder.binding.actionTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 
     public class DocumentsHolder extends RecyclerView.ViewHolder {

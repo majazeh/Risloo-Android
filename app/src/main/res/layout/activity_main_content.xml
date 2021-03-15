@@ -13,7 +13,7 @@
     tools:context=".Views.Activities.MainActivity">
 
     <include
-        android:id="@+id/activity_main_content_menu_includeLayout"
+        android:id="@+id/menu_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
@@ -23,7 +23,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/activity_main_content_logout_includeLayout"
+        android:id="@+id/logout_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
@@ -33,28 +33,28 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/activity_main_content_account_includeLayout"
+        android:id="@+id/account_includeLayout"
         layout="@layout/component_main_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_logout_includeLayout"
-        app:layout_constraintEnd_toStartOf="@+id/activity_main_content_logout_includeLayout"
-        app:layout_constraintTop_toTopOf="@+id/activity_main_content_logout_includeLayout" />
+        app:layout_constraintBottom_toBottomOf="@+id/logout_includeLayout"
+        app:layout_constraintEnd_toStartOf="@+id/logout_includeLayout"
+        app:layout_constraintTop_toTopOf="@+id/logout_includeLayout" />
 
     <include
-        android:id="@+id/activity_main_content_notification_includeLayout"
+        android:id="@+id/notification_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/activity_main_content_account_includeLayout"
-        app:layout_constraintEnd_toStartOf="@+id/activity_main_content_account_includeLayout"
-        app:layout_constraintTop_toTopOf="@+id/activity_main_content_account_includeLayout" />
+        app:layout_constraintBottom_toBottomOf="@+id/account_includeLayout"
+        app:layout_constraintEnd_toStartOf="@+id/account_includeLayout"
+        app:layout_constraintTop_toTopOf="@+id/account_includeLayout" />
 
     <TextView
-        android:id="@+id/activity_main_content_badge_textView"
+        android:id="@+id/badge_textView"
         android:layout_width="@dimen/_16sdp"
         android:layout_height="@dimen/_16sdp"
         android:layout_marginStart="@dimen/_2sdp"
@@ -67,12 +67,12 @@
         android:fontFamily="@font/dana_bold"
         android:background="@drawable/draw_oval_solid_red500"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/activity_main_content_notification_includeLayout"
-        app:layout_constraintTop_toTopOf="@+id/activity_main_content_notification_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/notification_includeLayout"
+        app:layout_constraintTop_toTopOf="@+id/notification_includeLayout"
         tools:text="5" />
 
     <TextView
-        android:id="@+id/activity_main_content_bread_textView"
+        android:id="@+id/breadcump_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_10sdp"
@@ -83,26 +83,26 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_demi_bold"
-        app:layout_constraintBottom_toTopOf="@id/activity_main_content_navHostFragment"
-        app:layout_constraintEnd_toEndOf="@id/activity_main_content_logout_includeLayout"
-        app:layout_constraintStart_toStartOf="@+id/activity_main_content_menu_includeLayout"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_content_menu_includeLayout"
+        app:layout_constraintBottom_toTopOf="@id/fragment_navHostFragment"
+        app:layout_constraintEnd_toEndOf="@id/logout_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/menu_includeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/menu_includeLayout"
         tools:text="پیش‌خوان" />
 
     <androidx.fragment.app.FragmentContainerView
-        android:id="@+id/activity_main_content_navHostFragment"
+        android:id="@+id/fragment_navHostFragment"
         android:name="androidx.navigation.fragment.NavHostFragment"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:defaultNavHost="true"
         app:navGraph="@navigation/navigation_main"
-        app:layout_constraintBottom_toTopOf="@id/activity_main_content_bottom_view"
+        app:layout_constraintBottom_toTopOf="@id/bottom_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/activity_main_content_bread_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/breadcump_textView" />
 
     <View
-        android:id="@+id/activity_main_content_bottom_view"
+        android:id="@+id/bottom_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"

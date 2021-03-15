@@ -13,14 +13,14 @@
     tools:context=".Views.Adapters.Recycler.CentersAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/single_item_center_constraintLayout"
+        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/_12sdp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <ImageView
-            android:id="@+id/single_item_center_background_imageView"
+            android:id="@+id/background_imageView"
             android:layout_width="0dp"
             android:layout_height="@dimen/_82sdp"
             android:layout_margin="@dimen/_1sdp"
@@ -32,17 +32,17 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/single_item_center_avatar_includeLayout"
+            android:id="@+id/avatar_includeLayout"
             layout="@layout/component_avatar_86sdp_border_white"
             android:layout_width="@dimen/_86sdp"
             android:layout_height="@dimen/_86sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/single_item_center_background_imageView"
+            app:layout_constraintBottom_toBottomOf="@+id/background_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/single_item_center_background_imageView" />
+            app:layout_constraintTop_toBottomOf="@+id/background_imageView" />
 
         <TextView
-            android:id="@+id/single_item_center_name_textView"
+            android:id="@+id/name_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
@@ -54,11 +54,11 @@
             android:fontFamily="@font/dana_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/single_item_center_avatar_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout"
             tools:text="نام و نام خانوادگی" />
 
         <TextView
-            android:id="@+id/single_item_center_username_textView"
+            android:id="@+id/username_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
@@ -70,7 +70,7 @@
             android:fontFamily="@font/dana_regular"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/single_item_center_name_textView"
+            app:layout_constraintTop_toBottomOf="@+id/name_textView"
             tools:text="کلینیک شخصی" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

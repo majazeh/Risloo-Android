@@ -57,9 +57,9 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.singleItemSample.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.singleItemSampleStatusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            holder.binding.singleItemSampleStatusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -71,9 +71,9 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
             ((MainActivity) activity).navigator(R.id.sampleFragment);
         });
 
-        holder.binding.singleItemSampleStatusTextView.setOnClickListener(v -> {
-            holder.binding.singleItemSampleStatusTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemSampleStatusTextView.setClickable(true), 300);
+        holder.binding.statusTextView.setOnClickListener(v -> {
+            holder.binding.statusTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.statusTextView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -81,20 +81,20 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
 
     private void setData(SamplesHolder holder) {
         if (holder.getAdapterPosition() == 0) {
-            holder.binding.singleItemSampleTopView.setVisibility(View.GONE);
+            holder.binding.topView.setVisibility(View.GONE);
         } else {
-            holder.binding.singleItemSampleTopView.setVisibility(View.VISIBLE);
+            holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.singleItemSampleSerialTextView.setText("$X1HQUQ71U");
-        holder.binding.singleItemSampleNameTextView.setText("پرسشنامه 16 عاملی شخصیت کتل");
-        holder.binding.singleItemSampleEditionTextView.setText("ویرایش طلیعه سلامت - نسخه 4");
-        holder.binding.singleItemSampleRoomTextView.setText("اتاق درمان فاطمه عبدالملکی");
-        holder.binding.singleItemSampleCaseTextView.setText("RS96666DT");
-        holder.binding.singleItemSampleReferenceTextView.setText("مرضیه آشتیانی");
+        holder.binding.serialTextView.setText("$X1HQUQ71U");
+        holder.binding.nameTextView.setText("پرسشنامه 16 عاملی شخصیت کتل");
+        holder.binding.editionTextView.setText("ویرایش طلیعه سلامت - نسخه 4");
+        holder.binding.roomTextView.setText("اتاق درمان فاطمه عبدالملکی");
+        holder.binding.caseTextView.setText("RS96666DT");
+        holder.binding.referenceTextView.setText("مرضیه آشتیانی");
 
-        holder.binding.singleItemSampleStatusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentSeald));
-        holder.binding.singleItemSampleStatusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+        holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentSeald));
+        holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 
     public class SamplesHolder extends RecyclerView.ViewHolder {

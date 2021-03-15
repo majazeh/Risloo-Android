@@ -44,15 +44,15 @@ public class ImageDialog extends BottomSheetDialogFragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.dialogImageGalleryLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
-            binding.dialogImageCameraLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
+            binding.galleryLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
+            binding.cameraLinearLayout.setBackgroundResource(R.drawable.draw_4sdp_solid_white_ripple_gray300);
         }
     }
 
     private void listener() {
-        binding.dialogImageGalleryLinearLayout.setOnClickListener(v -> {
-            binding.dialogImageGalleryLinearLayout.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.dialogImageGalleryLinearLayout.setClickable(true), 300);
+        binding.galleryLinearLayout.setOnClickListener(v -> {
+            binding.galleryLinearLayout.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.galleryLinearLayout.setClickable(true), 300);
             dismiss();
 
             if (PermissionManager.galleryPermission(getActivity())) {
@@ -60,9 +60,9 @@ public class ImageDialog extends BottomSheetDialogFragment {
             }
         });
 
-        binding.dialogImageCameraLinearLayout.setOnClickListener(v -> {
-            binding.dialogImageCameraLinearLayout.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.dialogImageCameraLinearLayout.setClickable(true), 300);
+        binding.cameraLinearLayout.setOnClickListener(v -> {
+            binding.cameraLinearLayout.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.cameraLinearLayout.setClickable(true), 300);
             dismiss();
 
             if (PermissionManager.cameraPermission(getActivity())) {

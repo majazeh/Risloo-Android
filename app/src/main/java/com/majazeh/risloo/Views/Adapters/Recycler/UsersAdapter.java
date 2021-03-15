@@ -57,10 +57,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.singleItemUser.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.singleItemUserEmailImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-            holder.binding.singleItemUserMobileImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-            holder.binding.singleItemUserEnterImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_blue300);
-            holder.binding.singleItemUserEditImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.emailImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.mobileImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.enterImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_blue300);
+            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
         }
     }
 
@@ -72,30 +72,30 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
             ((MainActivity) activity).navigator(R.id.userFragment);
         });
 
-        holder.binding.singleItemUserEmailImageView.setOnClickListener(v -> {
-            holder.binding.singleItemUserEmailImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemUserEmailImageView.setClickable(true), 300);
+        holder.binding.emailImageView.setOnClickListener(v -> {
+            holder.binding.emailImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.emailImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        holder.binding.singleItemUserMobileImageView.setOnClickListener(v -> {
-            holder.binding.singleItemUserMobileImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemUserMobileImageView.setClickable(true), 300);
+        holder.binding.mobileImageView.setOnClickListener(v -> {
+            holder.binding.mobileImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.mobileImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        holder.binding.singleItemUserEnterImageView.setOnClickListener(v -> {
-            holder.binding.singleItemUserEnterImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemUserEnterImageView.setClickable(true), 300);
+        holder.binding.enterImageView.setOnClickListener(v -> {
+            holder.binding.enterImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.enterImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        holder.binding.singleItemUserEditImageView.setOnClickListener(v -> {
-            holder.binding.singleItemUserEditImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemUserEditImageView.setClickable(true), 300);
+        holder.binding.editImageView.setOnClickListener(v -> {
+            holder.binding.editImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -103,16 +103,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     private void setData(UsersHolder holder) {
         if (holder.getAdapterPosition() == 0) {
-            holder.binding.singleItemUserTopView.setVisibility(View.GONE);
+            holder.binding.topView.setVisibility(View.GONE);
         } else {
-            holder.binding.singleItemUserTopView.setVisibility(View.VISIBLE);
+            holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.singleItemUserSerialTextView.setText("IR966669");
-        holder.binding.singleItemUserNameTextView.setText("ریسلو");
-        holder.binding.singleItemUserUsernameTextView.setText("baravak");
-        holder.binding.singleItemUserTypeTextView.setText("ادمین");
-        holder.binding.singleItemUserStatusTextView.setText("فعال");
+        holder.binding.serialTextView.setText("IR966669");
+        holder.binding.nameTextView.setText("ریسلو");
+        holder.binding.usernameTextView.setText("baravak");
+        holder.binding.typeTextView.setText("ادمین");
+        holder.binding.statusTextView.setText("فعال");
     }
 
     public class UsersHolder extends RecyclerView.ViewHolder {

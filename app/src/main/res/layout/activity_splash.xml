@@ -13,7 +13,7 @@
     tools:context=".Views.Activities.SplashActivity">
 
     <ImageView
-        android:id="@+id/activity_splash_logo_imageView"
+        android:id="@+id/logo_imageView"
         android:layout_width="@dimen/_128sdp"
         android:layout_height="@dimen/_128sdp"
         android:contentDescription="@string/AppImageContent"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/activity_splash_version_textView"
+        android:id="@+id/version_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_12sdp"

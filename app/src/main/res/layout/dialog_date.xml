@@ -11,7 +11,7 @@
     tools:context=".Views.Dialogs.DateDialog">
 
     <TextView
-        android:id="@+id/dialog_date_title_textView"
+        android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
@@ -29,38 +29,38 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <com.majazeh.risloo.Utils.Widgets.SingleNumberPicker
-        android:id="@+id/dialog_date_year_NumberPicker"
+        android:id="@+id/year_numberPicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
         android:theme="@style/NumberPickerTheme"
-        app:layout_constraintBottom_toTopOf="@+id/dialog_date_entry_button"
-        app:layout_constraintEnd_toStartOf="@+id/dialog_date_month_NumberPicker"
-        app:layout_constraintStart_toStartOf="@+id/dialog_date_title_textView"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_date_title_textView" />
+        app:layout_constraintBottom_toTopOf="@+id/entry_button"
+        app:layout_constraintEnd_toStartOf="@+id/month_numberPicker"
+        app:layout_constraintStart_toStartOf="@+id/title_textView"
+        app:layout_constraintTop_toBottomOf="@+id/title_textView" />
 
     <com.majazeh.risloo.Utils.Widgets.SingleNumberPicker
-        android:id="@+id/dialog_date_month_NumberPicker"
+        android:id="@+id/month_numberPicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:theme="@style/NumberPickerTheme"
-        app:layout_constraintBottom_toBottomOf="@+id/dialog_date_year_NumberPicker"
-        app:layout_constraintEnd_toStartOf="@id/dialog_date_day_NumberPicker"
-        app:layout_constraintStart_toEndOf="@+id/dialog_date_year_NumberPicker"
-        app:layout_constraintTop_toTopOf="@+id/dialog_date_year_NumberPicker" />
+        app:layout_constraintBottom_toBottomOf="@+id/year_numberPicker"
+        app:layout_constraintEnd_toStartOf="@id/day_numberPicker"
+        app:layout_constraintStart_toEndOf="@+id/year_numberPicker"
+        app:layout_constraintTop_toTopOf="@+id/year_numberPicker" />
 
     <com.majazeh.risloo.Utils.Widgets.SingleNumberPicker
-        android:id="@+id/dialog_date_day_NumberPicker"
+        android:id="@+id/day_numberPicker"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:theme="@style/NumberPickerTheme"
-        app:layout_constraintBottom_toBottomOf="@+id/dialog_date_month_NumberPicker"
-        app:layout_constraintEnd_toEndOf="@+id/dialog_date_title_textView"
-        app:layout_constraintStart_toEndOf="@+id/dialog_date_month_NumberPicker"
-        app:layout_constraintTop_toTopOf="@+id/dialog_date_month_NumberPicker" />
+        app:layout_constraintBottom_toBottomOf="@+id/month_numberPicker"
+        app:layout_constraintEnd_toEndOf="@+id/title_textView"
+        app:layout_constraintStart_toEndOf="@+id/month_numberPicker"
+        app:layout_constraintTop_toTopOf="@+id/month_numberPicker" />
 
     <TextView
-        android:id="@+id/dialog_date_entry_button"
+        android:id="@+id/entry_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_6sdp"
@@ -74,8 +74,8 @@
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_16sdp_solid_blue500"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/dialog_date_title_textView"
-        app:layout_constraintStart_toStartOf="@+id/dialog_date_title_textView"
-        app:layout_constraintTop_toBottomOf="@+id/dialog_date_month_NumberPicker" />
+        app:layout_constraintEnd_toEndOf="@+id/title_textView"
+        app:layout_constraintStart_toStartOf="@+id/title_textView"
+        app:layout_constraintTop_toBottomOf="@+id/month_numberPicker" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

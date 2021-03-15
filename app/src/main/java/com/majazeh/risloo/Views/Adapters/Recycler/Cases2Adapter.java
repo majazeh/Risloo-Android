@@ -54,24 +54,24 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
     private void detector(Cases2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemCase2ConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener(Cases2Holder holder) {
-        holder.binding.singleItemCase2ConstraintLayout.setOnClickListener(v -> {
-            holder.binding.singleItemCase2ConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemCase2ConstraintLayout.setClickable(true), 300);
+        holder.binding.containerConstraintLayout.setOnClickListener(v -> {
+            holder.binding.containerConstraintLayout.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.caseFragment);
         });
     }
 
     private void setData(Cases2Holder holder) {
-        holder.binding.singleItemCase2SerialTextView.setText("RS96666DQ");
-        holder.binding.singleItemCase2ReferenceTextView.setText("حسن حسینی");
-        holder.binding.singleItemCase2DateTextView.setText("سه شنبه 19 اسفند 99");
-        holder.binding.singleItemCase2SessionCountTextView.setText("1 جلسه");
+        holder.binding.serialTextView.setText("RS96666DQ");
+        holder.binding.referenceTextView.setText("حسن حسینی");
+        holder.binding.dateTextView.setText("سه شنبه 19 اسفند 99");
+        holder.binding.sessionCountTextView.setText("1 جلسه");
     }
 
     public class Cases2Holder extends RecyclerView.ViewHolder {

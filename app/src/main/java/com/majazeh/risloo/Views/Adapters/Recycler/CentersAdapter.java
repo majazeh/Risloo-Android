@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.ComponentAvatar86sdpBorderWhiteBinding;
 import com.majazeh.risloo.databinding.SingleItemCenterBinding;
 import com.squareup.picasso.Picasso;
 
@@ -58,38 +57,36 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     private void detector(CentersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemCenterConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener(CentersHolder holder) {
-        holder.binding.singleItemCenterConstraintLayout.setOnClickListener(v -> {
-            holder.binding.singleItemCenterConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemCenterConstraintLayout.setClickable(true), 300);
+        holder.binding.containerConstraintLayout.setOnClickListener(v -> {
+            holder.binding.containerConstraintLayout.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.centerFragment);
         });
     }
 
     private void setData(CentersHolder holder) {
-        holder.binding.singleItemCenterNameTextView.setText("مرکز مشاوره ریلسو");
-        holder.binding.singleItemCenterUsernameTextView.setText("کلینیک شخصی");
+        holder.binding.nameTextView.setText("مرکز مشاوره ریلسو");
+        holder.binding.usernameTextView.setText("کلینیک شخصی");
 
-        holder.avatarBinding.componentAvatar86sdpBorderWhiteTextView.setVisibility(View.VISIBLE);
-        holder.avatarBinding.componentAvatar86sdpBorderWhiteTextView.setText(StringManager.firstChars(holder.binding.singleItemCenterNameTextView.getText().toString()));
+        holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+        holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
-        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.avatarBinding.componentAvatar86sdpBorderWhiteCircleImageView);
+        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
     }
 
     public class CentersHolder extends RecyclerView.ViewHolder {
 
         private SingleItemCenterBinding binding;
-        private ComponentAvatar86sdpBorderWhiteBinding avatarBinding;
 
         public CentersHolder(SingleItemCenterBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
-            this.avatarBinding = binding.singleItemCenterAvatarIncludeLayout;
         }
     }
 

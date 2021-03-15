@@ -55,24 +55,24 @@ public class DateDialog extends BottomSheetDialogFragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.dialogDateEntryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
     private void listener() {
-        binding.dialogDateMonthNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
-            if (picker == binding.dialogDateMonthNumberPicker) {
+        binding.monthNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
+            if (picker == binding.monthNumberPicker) {
                 if (newVal <= 6) {
-                    binding.dialogDateDayNumberPicker.setMaxValue(31);
+                    binding.dayNumberPicker.setMaxValue(31);
                 } else {
-                    binding.dialogDateDayNumberPicker.setMaxValue(30);
+                    binding.dayNumberPicker.setMaxValue(30);
                 }
             }
         });
 
-        binding.dialogDateEntryButton.setOnClickListener(v -> {
-            binding.dialogDateEntryButton.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.dialogDateEntryButton.setClickable(true), 300);
+        binding.entryButton.setOnClickListener(v -> {
+            binding.entryButton.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.entryButton.setClickable(true), 300);
             dismiss();
 
             switch (((MainActivity) requireActivity()).navController.getCurrentDestination().getId()) {
@@ -87,30 +87,30 @@ public class DateDialog extends BottomSheetDialogFragment {
     }
 
     private void setNumberPicker() {
-        binding.dialogDateYearNumberPicker.setMinValue(1300);
-        binding.dialogDateYearNumberPicker.setMaxValue(2100);
-        binding.dialogDateYearNumberPicker.setValue(year);
+        binding.yearNumberPicker.setMinValue(1300);
+        binding.yearNumberPicker.setMaxValue(2100);
+        binding.yearNumberPicker.setValue(year);
 
-        binding.dialogDateMonthNumberPicker.setMinValue(1);
-        binding.dialogDateMonthNumberPicker.setMaxValue(12);
-        binding.dialogDateMonthNumberPicker.setValue(month);
-        binding.dialogDateMonthNumberPicker.setDisplayedValues(getActivity().getResources().getStringArray(R.array.JalaliMonths));
+        binding.monthNumberPicker.setMinValue(1);
+        binding.monthNumberPicker.setMaxValue(12);
+        binding.monthNumberPicker.setValue(month);
+        binding.monthNumberPicker.setDisplayedValues(getActivity().getResources().getStringArray(R.array.JalaliMonths));
 
-        binding.dialogDateDayNumberPicker.setMinValue(1);
-        binding.dialogDateDayNumberPicker.setMaxValue(31);
-        binding.dialogDateDayNumberPicker.setValue(day);
+        binding.dayNumberPicker.setMinValue(1);
+        binding.dayNumberPicker.setMaxValue(31);
+        binding.dayNumberPicker.setValue(day);
     }
 
     private void clearNumberPicker() {
-        binding.dialogDateYearNumberPicker.setValue(year);
-        binding.dialogDateMonthNumberPicker.setValue(month);
-        binding.dialogDateDayNumberPicker.setValue(day);
+        binding.yearNumberPicker.setValue(year);
+        binding.monthNumberPicker.setValue(month);
+        binding.dayNumberPicker.setValue(day);
     }
 
     private String getDate() {
-        year = binding.dialogDateYearNumberPicker.getValue();
-        month = binding.dialogDateMonthNumberPicker.getValue();
-        day = binding.dialogDateDayNumberPicker.getValue();
+        year = binding.yearNumberPicker.getValue();
+        month = binding.monthNumberPicker.getValue();
+        day = binding.dayNumberPicker.getValue();
 
         if (month < 10) {
             if (day < 10)

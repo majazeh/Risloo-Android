@@ -12,7 +12,7 @@
     tools:context=".Views.Activities.MainActivity">
 
     <TextView
-        android:id="@+id/activity_main_header_textView"
+        android:id="@+id/header_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"

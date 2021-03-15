@@ -59,7 +59,7 @@ public class AuthActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.activityAuthNavHostFragment.getId());
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
     }

@@ -17,14 +17,12 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
-import com.majazeh.risloo.databinding.ComponentMainButtonBinding;
 import com.squareup.picasso.Picasso;
 
 public class DisplayActivity extends AppCompatActivity {
 
     // Binding
     private ActivityDisplayBinding binding;
-    private ComponentMainButtonBinding returnBinding, downloadBinding;
 
     // Objects
     private Bundle extras;
@@ -67,31 +65,28 @@ public class DisplayActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        returnBinding = binding.activityDisplayReturnIncludeLayout;
-        downloadBinding = binding.activityDisplayDownloadIncludeLayout;
-
-        InitManager.imgResTint(this, returnBinding.componentMainButton, R.drawable.ic_angle_right_regular, R.color.Gray50);
-        InitManager.imgResTint(this, downloadBinding.componentMainButton, R.drawable.ic_download_light, R.color.Gray50);
+        InitManager.imgResTint(this, binding.returnIncludeLayout.componentMainButton, R.drawable.ic_angle_right_regular, R.color.Gray50);
+        InitManager.imgResTint(this, binding.downloadIncludeLayout.componentMainButton, R.drawable.ic_download_light, R.color.Gray50);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            returnBinding.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-            downloadBinding.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            binding.returnIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            binding.downloadIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener() {
-        returnBinding.componentMainButton.setOnClickListener(v -> {
-            returnBinding.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> returnBinding.componentMainButton.setClickable(true), 300);
+        binding.returnIncludeLayout.componentMainButton.setOnClickListener(v -> {
+            binding.returnIncludeLayout.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> binding.returnIncludeLayout.componentMainButton.setClickable(true), 300);
 
             finish();
         });
 
-        downloadBinding.componentMainButton.setOnClickListener(v -> {
-            downloadBinding.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> downloadBinding.componentMainButton.setClickable(true), 300);
+        binding.downloadIncludeLayout.componentMainButton.setOnClickListener(v -> {
+            binding.downloadIncludeLayout.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> binding.downloadIncludeLayout.componentMainButton.setClickable(true), 300);
 
             if (PermissionManager.storagePermission(this)) {
                 IntentManager.download(this, bitmap);
@@ -114,11 +109,11 @@ public class DisplayActivity extends AppCompatActivity {
             // TODO ; Place Code If Needed
         }
         if (!bitmap.equals("")) {
-            Picasso.get().load(bitmap).placeholder(R.color.Gray900).into(binding.activityDisplayAvatarZoomageView);
-            binding.activityDisplayAvatarZoomageView.setVisibility(View.VISIBLE);
+            Picasso.get().load(bitmap).placeholder(R.color.Gray900).into(binding.avatarZoomageView);
+            binding.avatarZoomageView.setVisibility(View.VISIBLE);
         }
         if (!path.equals("")) {
-            binding.activityDisplayAvatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), path));
+            binding.avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), path));
             FileManager.deleteFileFromCache(this, "bitmap");
         }
     }

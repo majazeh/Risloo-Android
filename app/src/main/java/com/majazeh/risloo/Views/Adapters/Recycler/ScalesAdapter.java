@@ -57,7 +57,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.singleItemScale.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.singleItemScaleCreateTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            holder.binding.createTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         }
     }
 
@@ -69,9 +69,9 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
             // TODO : Place Code Here
         });
 
-        holder.binding.singleItemScaleCreateTextView.setOnClickListener(v -> {
-            holder.binding.singleItemScaleCreateTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemScaleCreateTextView.setClickable(true), 300);
+        holder.binding.createTextView.setOnClickListener(v -> {
+            holder.binding.createTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.createTextView.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.createSampleFragment);
         });
@@ -79,14 +79,14 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
     private void setData(ScalesHolder holder) {
         if (holder.getAdapterPosition() == 0) {
-            holder.binding.singleItemScaleTopView.setVisibility(View.GONE);
+            holder.binding.topView.setVisibility(View.GONE);
         } else {
-            holder.binding.singleItemScaleTopView.setVisibility(View.VISIBLE);
+            holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.singleItemScaleSerialTextView.setText("$Raven-9Q");
-        holder.binding.singleItemScaleNameTextView.setText("آزمون ریون کودکان (5)");
-        holder.binding.singleItemScaleEditionTextView.setText("کودکان - 5");
+        holder.binding.serialTextView.setText("$Raven-9Q");
+        holder.binding.nameTextView.setText("آزمون ریون کودکان (5)");
+        holder.binding.editionTextView.setText("کودکان - 5");
     }
 
     public class ScalesHolder extends RecyclerView.ViewHolder {

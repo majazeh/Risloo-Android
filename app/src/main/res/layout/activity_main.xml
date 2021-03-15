@@ -2,7 +2,7 @@
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_main_drawerLayout"
+    android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@null"
@@ -12,11 +12,11 @@
     tools:context=".Views.Activities.MainActivity">
 
     <include
-        android:id="@+id/activity_main_includeLayout"
+        android:id="@+id/main_includeLayout"
         layout="@layout/activity_main_content" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/activity_main_navigationView"
+        android:id="@+id/main_navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

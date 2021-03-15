@@ -11,7 +11,7 @@
     tools:context=".Views.Adapters.Recycler.SessionsAdapter">
 
     <View
-        android:id="@+id/single_item_session_top_view"
+        android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/single_item_session_serial_textView"
+        android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -31,14 +31,14 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintBottom_toBottomOf="@+id/single_item_session_center_textView"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_session_room_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/center_textView"
+        app:layout_constraintEnd_toStartOf="@+id/room_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/single_item_session_room_textView"
+        app:layout_constraintTop_toTopOf="@+id/room_textView"
         tools:text="سریال" />
 
     <TextView
-        android:id="@+id/single_item_session_room_textView"
+        android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -50,13 +50,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_session_case_textView"
-        app:layout_constraintStart_toEndOf="@+id/single_item_session_serial_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_session_top_view"
+        app:layout_constraintEnd_toStartOf="@+id/case_textView"
+        app:layout_constraintStart_toEndOf="@+id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="اتاق درمان" />
 
     <TextView
-        android:id="@+id/single_item_session_center_textView"
+        android:id="@+id/center_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -67,13 +67,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/single_item_session_room_textView"
-        app:layout_constraintStart_toStartOf="@+id/single_item_session_room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_session_room_textView"
+        app:layout_constraintEnd_toEndOf="@+id/room_textView"
+        app:layout_constraintStart_toStartOf="@+id/room_textView"
+        app:layout_constraintTop_toBottomOf="@+id/room_textView"
         tools:text="مرکز درمانی" />
 
     <TextView
-        android:id="@+id/single_item_session_case_textView"
+        android:id="@+id/case_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -85,13 +85,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_session_start_time_textView"
-        app:layout_constraintStart_toEndOf="@+id/single_item_session_room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_session_top_view"
+        app:layout_constraintEnd_toStartOf="@+id/start_time_textView"
+        app:layout_constraintStart_toEndOf="@+id/room_textView"
+        app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="پرونده" />
 
     <TextView
-        android:id="@+id/single_item_session_reference_textView"
+        android:id="@+id/reference_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -102,13 +102,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/single_item_session_case_textView"
-        app:layout_constraintStart_toStartOf="@+id/single_item_session_case_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_session_case_textView"
+        app:layout_constraintEnd_toEndOf="@+id/case_textView"
+        app:layout_constraintStart_toStartOf="@+id/case_textView"
+        app:layout_constraintTop_toBottomOf="@+id/case_textView"
         tools:text="مراجع" />
 
     <TextView
-        android:id="@+id/single_item_session_start_time_textView"
+        android:id="@+id/start_time_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -120,13 +120,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_session_status_textView"
-        app:layout_constraintStart_toEndOf="@+id/single_item_session_case_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_session_top_view"
+        app:layout_constraintEnd_toStartOf="@+id/status_textView"
+        app:layout_constraintStart_toEndOf="@+id/case_textView"
+        app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="زمان شروع" />
 
     <TextView
-        android:id="@+id/single_item_session_duration_textView"
+        android:id="@+id/duration_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -137,13 +137,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/single_item_session_start_time_textView"
-        app:layout_constraintStart_toStartOf="@+id/single_item_session_start_time_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_session_start_time_textView"
+        app:layout_constraintEnd_toEndOf="@+id/start_time_textView"
+        app:layout_constraintStart_toStartOf="@+id/start_time_textView"
+        app:layout_constraintTop_toBottomOf="@+id/start_time_textView"
         tools:text="مدت زمان جلسه" />
 
     <TextView
-        android:id="@+id/single_item_session_status_textView"
+        android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -154,14 +154,14 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@+id/single_item_session_serial_textView"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_session_edit_imageView"
-        app:layout_constraintStart_toEndOf="@+id/single_item_session_start_time_textView"
-        app:layout_constraintTop_toTopOf="@+id/single_item_session_serial_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/serial_textView"
+        app:layout_constraintEnd_toStartOf="@+id/edit_imageView"
+        app:layout_constraintStart_toEndOf="@+id/start_time_textView"
+        app:layout_constraintTop_toTopOf="@+id/serial_textView"
         tools:text="وضعیت" />
 
     <ImageView
-        android:id="@+id/single_item_session_edit_imageView"
+        android:id="@+id/edit_imageView"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginEnd="@dimen/_4sdp"
@@ -169,10 +169,10 @@
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_edit_light"
-        app:layout_constraintBottom_toBottomOf="@id/single_item_session_status_textView"
+        app:layout_constraintBottom_toBottomOf="@id/status_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/single_item_session_status_textView"
-        app:layout_constraintTop_toTopOf="@id/single_item_session_status_textView"
+        app:layout_constraintStart_toEndOf="@+id/status_textView"
+        app:layout_constraintTop_toTopOf="@id/status_textView"
         app:tint="@color/Gray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

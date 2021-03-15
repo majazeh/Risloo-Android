@@ -11,7 +11,7 @@
     tools:context=".Views.Dialogs.ImageDialog">
 
     <TextView
-        android:id="@+id/dialog_image_title_textView"
+        android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_12sdp"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/dialog_image_gallery_linearLayout"
+        android:id="@+id/gallery_linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -37,9 +37,9 @@
         android:paddingTop="@dimen/_8sdp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/dialog_image_title_textView"
-        app:layout_constraintStart_toStartOf="@id/dialog_image_title_textView"
-        app:layout_constraintEnd_toEndOf="@id/dialog_image_title_textView" >
+        app:layout_constraintTop_toBottomOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintEnd_toEndOf="@id/title_textView" >
 
         <ImageView
             android:layout_width="@dimen/_22sdp"
@@ -67,7 +67,7 @@
     </LinearLayout>
 
     <LinearLayout
-        android:id="@+id/dialog_image_camera_linearLayout"
+        android:id="@+id/camera_linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_24sdp"
@@ -76,9 +76,9 @@
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dialog_image_gallery_linearLayout"
-        app:layout_constraintStart_toStartOf="@id/dialog_image_gallery_linearLayout"
-        app:layout_constraintEnd_toEndOf="@id/dialog_image_gallery_linearLayout">
+        app:layout_constraintTop_toBottomOf="@id/gallery_linearLayout"
+        app:layout_constraintStart_toStartOf="@id/gallery_linearLayout"
+        app:layout_constraintEnd_toEndOf="@id/gallery_linearLayout">
 
         <ImageView
             android:layout_width="@dimen/_22sdp"

@@ -13,7 +13,7 @@
     tools:context=".Views.Activities.DisplayActivity">
 
     <com.jsibbold.zoomage.ZoomageView
-        android:id="@+id/activity_display_avatar_zoomageView"
+        android:id="@+id/avatar_zoomageView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,7 +33,7 @@
         tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <include
-        android:id="@+id/activity_display_return_includeLayout"
+        android:id="@+id/return_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
@@ -43,7 +43,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
-        android:id="@+id/activity_display_download_includeLayout"
+        android:id="@+id/download_includeLayout"
         layout="@layout/component_main_button"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"

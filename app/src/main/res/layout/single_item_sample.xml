@@ -11,7 +11,7 @@
     tools:context=".Views.Adapters.Recycler.SamplesAdapter">
 
     <View
-        android:id="@+id/single_item_sample_top_view"
+        android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"
@@ -20,7 +20,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/single_item_sample_serial_textView"
+        android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -31,14 +31,14 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintBottom_toBottomOf="@+id/single_item_sample_edition_textView"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_sample_name_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/edition_textView"
+        app:layout_constraintEnd_toStartOf="@+id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/single_item_sample_name_textView"
+        app:layout_constraintTop_toTopOf="@+id/name_textView"
         tools:text="سریال" />
 
     <TextView
-        android:id="@+id/single_item_sample_name_textView"
+        android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -51,13 +51,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.22"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_sample_room_textView"
-        app:layout_constraintStart_toEndOf="@+id/single_item_sample_serial_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_sample_top_view"
+        app:layout_constraintEnd_toStartOf="@+id/room_textView"
+        app:layout_constraintStart_toEndOf="@+id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="عنوان" />
 
     <TextView
-        android:id="@+id/single_item_sample_edition_textView"
+        android:id="@+id/edition_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -68,13 +68,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/single_item_sample_name_textView"
-        app:layout_constraintStart_toStartOf="@+id/single_item_sample_name_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_sample_name_textView"
+        app:layout_constraintEnd_toEndOf="@+id/name_textView"
+        app:layout_constraintStart_toStartOf="@+id/name_textView"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView"
         tools:text="ویرایش - نسخه" />
 
     <TextView
-        android:id="@+id/single_item_sample_room_textView"
+        android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right"
@@ -84,13 +84,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.22"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_sample_reference_textView"
-        app:layout_constraintStart_toEndOf="@+id/single_item_sample_name_textView"
-        app:layout_constraintTop_toTopOf="@+id/single_item_sample_name_textView"
+        app:layout_constraintEnd_toStartOf="@+id/reference_textView"
+        app:layout_constraintStart_toEndOf="@+id/name_textView"
+        app:layout_constraintTop_toTopOf="@+id/name_textView"
         tools:text="اتاق درمان" />
 
     <TextView
-        android:id="@+id/single_item_sample_case_textView"
+        android:id="@+id/case_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right"
@@ -99,14 +99,14 @@
         android:textColor="@color/Gray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@+id/single_item_sample_edition_textView"
-        app:layout_constraintEnd_toEndOf="@+id/single_item_sample_room_textView"
-        app:layout_constraintStart_toStartOf="@+id/single_item_sample_room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/single_item_sample_room_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/edition_textView"
+        app:layout_constraintEnd_toEndOf="@+id/room_textView"
+        app:layout_constraintStart_toStartOf="@+id/room_textView"
+        app:layout_constraintTop_toBottomOf="@+id/room_textView"
         tools:text="پرونده" />
 
     <TextView
-        android:id="@+id/single_item_sample_reference_textView"
+        android:id="@+id/reference_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -118,14 +118,14 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_goneMarginEnd="@dimen/_4sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/single_item_sample_case_textView"
-        app:layout_constraintEnd_toStartOf="@+id/single_item_sample_status_textView"
-        app:layout_constraintStart_toEndOf="@+id/single_item_sample_room_textView"
-        app:layout_constraintTop_toTopOf="@+id/single_item_sample_room_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/case_textView"
+        app:layout_constraintEnd_toStartOf="@+id/status_textView"
+        app:layout_constraintStart_toEndOf="@+id/room_textView"
+        app:layout_constraintTop_toTopOf="@+id/room_textView"
         tools:text="مراجع" />
 
     <TextView
-        android:id="@+id/single_item_sample_status_textView"
+        android:id="@+id/status_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_4sdp"
@@ -137,10 +137,10 @@
         android:textStyle="normal"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        app:layout_constraintBottom_toBottomOf="@+id/single_item_sample_reference_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/reference_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/single_item_sample_reference_textView"
-        app:layout_constraintTop_toTopOf="@+id/single_item_sample_reference_textView"
+        app:layout_constraintStart_toEndOf="@+id/reference_textView"
+        app:layout_constraintTop_toTopOf="@+id/reference_textView"
         tools:text="دکمه"
         tools:textColor="@color/Gray500"
         tools:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray500" />

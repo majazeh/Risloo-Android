@@ -57,7 +57,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.singleItemSession.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.singleItemSessionEditImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
         }
     }
 
@@ -69,9 +69,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             ((MainActivity) activity).navigator(R.id.sessionFragment);
         });
 
-        holder.binding.singleItemSessionEditImageView.setOnClickListener(v -> {
-            holder.binding.singleItemSessionEditImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemSessionEditImageView.setClickable(true), 300);
+        holder.binding.editImageView.setOnClickListener(v -> {
+            holder.binding.editImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -79,19 +79,19 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
     private void setData(SessionsHolder holder) {
         if (holder.getAdapterPosition() == 0) {
-            holder.binding.singleItemSessionTopView.setVisibility(View.GONE);
+            holder.binding.topView.setVisibility(View.GONE);
         } else {
-            holder.binding.singleItemSessionTopView.setVisibility(View.VISIBLE);
+            holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.singleItemSessionSerialTextView.setText("SE9666669");
-        holder.binding.singleItemSessionRoomTextView.setText("اتاق درمان فرزاد صیادی");
-        holder.binding.singleItemSessionCenterTextView.setText("مرکز مشاوره خانواده");
-        holder.binding.singleItemSessionCaseTextView.setText("RS966669P");
-        holder.binding.singleItemSessionReferenceTextView.setText("هانیه سادات سیدمحمدی");
-        holder.binding.singleItemSessionStartTimeTextView.setText("شنبه 11 بهمن 99\n ساعت 16:00");
-        holder.binding.singleItemSessionDurationTextView.setText("60 دقیقه");
-        holder.binding.singleItemSessionStatusTextView.setText("در انتظار تشکیل جلسه");
+        holder.binding.serialTextView.setText("SE9666669");
+        holder.binding.roomTextView.setText("اتاق درمان فرزاد صیادی");
+        holder.binding.centerTextView.setText("مرکز مشاوره خانواده");
+        holder.binding.caseTextView.setText("RS966669P");
+        holder.binding.referenceTextView.setText("هانیه سادات سیدمحمدی");
+        holder.binding.startTimeTextView.setText("شنبه 11 بهمن 99\n ساعت 16:00");
+        holder.binding.durationTextView.setText("60 دقیقه");
+        holder.binding.statusTextView.setText("در انتظار تشکیل جلسه");
     }
 
     public class SessionsHolder extends RecyclerView.ViewHolder {

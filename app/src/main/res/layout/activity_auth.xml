@@ -16,16 +16,16 @@
     tools:context=".Views.Activities.AuthActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/activity_auth_constraintLayout"
+        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <androidx.fragment.app.FragmentContainerView
-            android:id="@+id/activity_auth_navHostFragment"
+            android:id="@+id/fragment_navHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/activity_auth_bottom_view"
+            app:layout_constraintBottom_toTopOf="@id/bottom_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,7 +33,7 @@
             app:navGraph="@navigation/navigation_auth" />
 
         <View
-            android:id="@+id/activity_auth_bottom_view"
+            android:id="@+id/bottom_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
             android:background="@color/Gray200"

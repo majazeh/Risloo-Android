@@ -70,15 +70,15 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
 
     private void setData(CasesHolder holder) {
         if (holder.getAdapterPosition() == 0) {
-            holder.binding.singleItemCaseTopView.setVisibility(View.GONE);
+            holder.binding.topView.setVisibility(View.GONE);
         } else {
-            holder.binding.singleItemCaseTopView.setVisibility(View.VISIBLE);
+            holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.singleItemCaseSerialTextView.setText("SE9666669");
-        holder.binding.singleItemCaseRoomTextView.setText("اتاق درمان محمدعلی نخلی");
-        holder.binding.singleItemCaseCenterTextView.setText("مرکز مشاوره ریسلو");
-        holder.binding.singleItemCaseReferenceTextView.setText("محمد نخلی");
+        holder.binding.serialTextView.setText("SE9666669");
+        holder.binding.roomTextView.setText("اتاق درمان محمدعلی نخلی");
+        holder.binding.centerTextView.setText("مرکز مشاوره ریسلو");
+        holder.binding.referenceTextView.setText("محمد نخلی");
     }
 
     public class CasesHolder extends RecyclerView.ViewHolder {
