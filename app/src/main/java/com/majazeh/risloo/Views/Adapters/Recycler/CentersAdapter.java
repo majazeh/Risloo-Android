@@ -5,26 +5,23 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemCenterBinding;
 import com.squareup.picasso.Picasso;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersHolder> {
 
-    // Vars
-//    private ArrayList<Center> centers;
-
     // Objects
     private Activity activity;
+
+    // Vars
+//    private ArrayList<Center> centers;
 
     public CentersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -33,9 +30,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     @NonNull
     @Override
     public CentersHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.single_item_center, viewGroup, false);
-
-        return new CentersHolder(view);
+        return new CentersHolder(SingleItemCenterBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -62,42 +57,36 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     private void detector(CentersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.itemConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.singleItemCenterConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener(CentersHolder holder) {
-        holder.itemConstraintLayout.setOnClickListener(v -> {
-            holder.itemConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.itemConstraintLayout.setClickable(true), 300);
+        holder.binding.singleItemCenterConstraintLayout.setOnClickListener(v -> {
+            holder.binding.singleItemCenterConstraintLayout.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemCenterConstraintLayout.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.centerFragment);
         });
     }
 
     private void setData(CentersHolder holder) {
-        holder.nameTextView.setText("مرکز مشاوره ریلسو");
-        holder.centerTextView.setText("کلینیک شخصی");
+        holder.binding.singleItemCenterNameTextView.setText("مرکز مشاوره ریلسو");
+        holder.binding.singleItemCenterUsernameTextView.setText("کلینیک شخصی");
 
-        holder.charTextView.setVisibility(View.VISIBLE);
-        holder.charTextView.setText(StringManager.firstChars(holder.nameTextView.getText().toString()));
+        holder.binding.singleItemCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView.setVisibility(View.VISIBLE);
+        holder.binding.singleItemCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView.setText(StringManager.firstChars(holder.binding.singleItemCenterNameTextView.getText().toString()));
 
-        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.avatarCircleImageView);
+        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.singleItemCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteCircleImageView);
     }
 
     public class CentersHolder extends RecyclerView.ViewHolder {
 
-        private ConstraintLayout itemConstraintLayout;
-        private CircleImageView avatarCircleImageView;
-        private TextView charTextView, nameTextView, centerTextView;
+        private SingleItemCenterBinding binding;
 
-        public CentersHolder(View view) {
-            super(view);
-            itemConstraintLayout = view.findViewById(R.id.single_item_center_constraintLayout);
-            avatarCircleImageView = view.findViewById(R.id.component_avatar_86sdp_border_white_circleImageView);
-            charTextView = view.findViewById(R.id.component_avatar_86sdp_border_white_textView);
-            nameTextView = view.findViewById(R.id.single_item_center_name_textView);
-            centerTextView = view.findViewById(R.id.single_item_center_username_textView);
+        public CentersHolder(SingleItemCenterBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 

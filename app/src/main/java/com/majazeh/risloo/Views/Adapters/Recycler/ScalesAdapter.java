@@ -5,22 +5,21 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemScaleBinding;
 
 public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHolder> {
 
-    // Vars
-//    private ArrayList<Scale> scales;
-
     // Objects
     private Activity activity;
+
+    // Vars
+//    private ArrayList<Scale> scales;
 
     public ScalesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -29,9 +28,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
     @NonNull
     @Override
     public ScalesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        View view = LayoutInflater.from(activity).inflate(R.layout.single_item_scale, viewGroup, false);
-
-        return new ScalesHolder(view);
+        return new ScalesHolder(SingleItemScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -58,23 +55,23 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
     private void detector(ScalesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.itemView.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            holder.binding.singleItemScale.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.createTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            holder.binding.singleItemScaleCreateTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         }
     }
 
     private void listener(ScalesHolder holder) {
         holder.itemView.setOnClickListener(v -> {
-            holder.itemView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.itemView.setClickable(true), 300);
+            holder.binding.singleItemScale.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemScale.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        holder.createTextView.setOnClickListener(v -> {
-            holder.createTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.createTextView.setClickable(true), 300);
+        holder.binding.singleItemScaleCreateTextView.setOnClickListener(v -> {
+            holder.binding.singleItemScaleCreateTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemScaleCreateTextView.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.createSampleFragment);
         });
@@ -82,28 +79,23 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
     private void setData(ScalesHolder holder) {
         if (holder.getAdapterPosition() == 0) {
-            holder.topView.setVisibility(View.GONE);
+            holder.binding.singleItemScaleTopView.setVisibility(View.GONE);
         } else {
-            holder.topView.setVisibility(View.VISIBLE);
+            holder.binding.singleItemScaleTopView.setVisibility(View.VISIBLE);
         }
 
-        holder.serialTextView.setText("$Raven-9Q");
-        holder.nameTextView.setText("آزمون ریون کودکان (5)");
-        holder.editionTextView.setText("کودکان - 5");
+        holder.binding.singleItemScaleSerialTextView.setText("$Raven-9Q");
+        holder.binding.singleItemScaleNameTextView.setText("آزمون ریون کودکان (5)");
+        holder.binding.singleItemScaleEditionTextView.setText("کودکان - 5");
     }
 
     public class ScalesHolder extends RecyclerView.ViewHolder {
 
-        private View topView;
-        private TextView serialTextView, nameTextView, editionTextView, createTextView;
+        private SingleItemScaleBinding binding;
 
-        public ScalesHolder(View view) {
-            super(view);
-            topView = view.findViewById(R.id.single_item_scale_top_view);
-            serialTextView = view.findViewById(R.id.single_item_scale_serial_textView);
-            nameTextView = view.findViewById(R.id.single_item_scale_name_textView);
-            editionTextView = view.findViewById(R.id.single_item_scale_edition_textView);
-            createTextView = view.findViewById(R.id.single_item_scale_create_textView);
+        public ScalesHolder(SingleItemScaleBinding binding) {
+            super(binding.getRoot());
+            this.binding = binding;
         }
     }
 
