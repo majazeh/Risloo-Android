@@ -82,11 +82,11 @@ public class MainActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainContentLayout.fragmentNavHostFragment.getId());
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentLayout.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        contentBinding = binding.mainContentLayout;
+        contentBinding = binding.contentLayout;
 
         InitManager.imgResTint(this, contentBinding.menuImageView.componentMainButton, R.drawable.ic_bars_light, R.color.Gray500);
         InitManager.imgResTintRotate(this, contentBinding.logoutImageView.componentMainButton, R.drawable.ic_logout_light, R.color.Gray500, 180);
@@ -139,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        NavigationUI.setupWithNavController(binding.mainNavigationView, navController);
+        NavigationUI.setupWithNavController(binding.navigationView, navController);
 
         if (singleton.getName().equals("")) {
             contentBinding.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainToolbar));

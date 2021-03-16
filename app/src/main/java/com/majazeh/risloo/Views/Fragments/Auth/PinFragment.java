@@ -173,17 +173,17 @@ public class PinFragment extends Fragment {
         if (value) {
             pinCountDownTimer.start();
 
-            binding.containerViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_right_with_fade);
-            binding.containerViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_left_with_fade);
+            binding.pinViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_right_with_fade);
+            binding.pinViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_left_with_fade);
 
-            binding.containerViewFlipper.showPrevious();
+            binding.pinViewFlipper.showPrevious();
         } else {
             pinCountDownTimer.cancel();
 
-            binding.containerViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_left_with_fade);
-            binding.containerViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_right_with_fade);
+            binding.pinViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_left_with_fade);
+            binding.pinViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_right_with_fade);
 
-            binding.containerViewFlipper.showNext();
+            binding.pinViewFlipper.showNext();
         }
     }
 

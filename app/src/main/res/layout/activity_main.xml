@@ -12,11 +12,11 @@
     tools:context=".Views.Activities.MainActivity">
 
     <include
-        android:id="@+id/main_contentLayout"
+        android:id="@+id/contentLayout"
         layout="@layout/activity_main_content" />
 
     <com.google.android.material.navigation.NavigationView
-        android:id="@+id/main_navigationView"
+        android:id="@+id/navigationView"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_gravity="start"

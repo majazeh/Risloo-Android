@@ -16,7 +16,7 @@
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_24sdp"
-        app:layout_constraintBottom_toTopOf="@+id/container_viewFlipper"
+        app:layout_constraintBottom_toTopOf="@+id/pin_viewFlipper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/pin_includeLayout" />
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ViewFlipper
-        android:id="@+id/container_viewFlipper"
+        android:id="@+id/pin_viewFlipper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -117,7 +117,7 @@
         app:layout_constraintEnd_toStartOf="@+id/separator_view"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/container_viewFlipper" />
+        app:layout_constraintTop_toBottomOf="@+id/pin_viewFlipper" />
 
     <View
         android:id="@+id/separator_view"

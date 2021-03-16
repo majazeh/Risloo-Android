@@ -10,7 +10,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
-import com.duolingo.open.rtlviewpager.RtlViewPager;
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.Views.Adapters.Tab.EditAccountAdapter;
 import com.majazeh.risloo.databinding.FragmentEditAccountBinding;
@@ -22,10 +21,6 @@ public class EditAccountFragment extends Fragment {
 
     // Adapters
     private EditAccountAdapter adapter;
-
-    // Widgets
-    private TabLayout tabLayout;
-    private RtlViewPager rtlViewPager;
 
     @Nullable
     @Override
@@ -43,16 +38,13 @@ public class EditAccountFragment extends Fragment {
 
     private void initializer() {
         adapter = new EditAccountAdapter(getActivity().getSupportFragmentManager(), 0);
-
-        tabLayout = binding.fragmentEditAccountTabLayout;
-        rtlViewPager = binding.fragmentEditAccountRtlViewPager;
     }
 
     private void listener() {
-        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-                rtlViewPager.setCurrentItem(tab.getPosition());
+                binding.rtlViewPager.setCurrentItem(tab.getPosition());
             }
 
             @Override
@@ -66,7 +58,7 @@ public class EditAccountFragment extends Fragment {
             }
         });
 
-        rtlViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        binding.rtlViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -74,7 +66,7 @@ public class EditAccountFragment extends Fragment {
 
             @Override
             public void onPageSelected(int position) {
-                tabLayout.getTabAt(position).select();
+                binding.tabLayout.getTabAt(position).select();
             }
 
             @Override
@@ -85,7 +77,7 @@ public class EditAccountFragment extends Fragment {
     }
 
     private void setData() {
-        rtlViewPager.setAdapter(adapter);
+        binding.rtlViewPager.setAdapter(adapter);
     }
 
     @Override
