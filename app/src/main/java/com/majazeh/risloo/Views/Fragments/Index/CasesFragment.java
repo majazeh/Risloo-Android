@@ -76,13 +76,13 @@ public class CasesFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        casesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        casesTitleTextView = view.findViewById(R.id.title_textView);
         casesTitleTextView.setText(getResources().getString(R.string.CasesFragmentTitle));
-        casesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        casesCountTextView = view.findViewById(R.id.count_textView);
 
-        casesSearchEditText = view.findViewById(R.id.component_index_search_editText);
+        casesSearchEditText = view.findViewById(R.id.editText);
 
-        casesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
+        casesSearchProgressBar = view.findViewById(R.id.progressBar);
 
         casesAddImageView = view.findViewById(R.id.fragment_cases_add_imageView);
         casesAddImageView.setImageResource(R.drawable.ic_plus_light);

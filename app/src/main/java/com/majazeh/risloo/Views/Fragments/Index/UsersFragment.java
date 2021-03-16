@@ -76,13 +76,13 @@ public class UsersFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        usersTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        usersTitleTextView = view.findViewById(R.id.title_textView);
         usersTitleTextView.setText(getResources().getString(R.string.UsersFragmentTitle));
-        usersCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        usersCountTextView = view.findViewById(R.id.count_textView);
 
-        usersSearchEditText = view.findViewById(R.id.component_index_search_editText);
+        usersSearchEditText = view.findViewById(R.id.editText);
 
-        usersSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
+        usersSearchProgressBar = view.findViewById(R.id.progressBar);
 
         usersAddImageView = view.findViewById(R.id.fragment_users_add_imageView);
         usersAddImageView.setImageResource(R.drawable.ic_plus_light);

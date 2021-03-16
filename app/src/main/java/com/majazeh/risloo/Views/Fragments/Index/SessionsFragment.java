@@ -76,13 +76,13 @@ public class SessionsFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        sessionsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        sessionsTitleTextView = view.findViewById(R.id.title_textView);
         sessionsTitleTextView.setText(getResources().getString(R.string.SessionsFragmentTitle));
-        sessionsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        sessionsCountTextView = view.findViewById(R.id.count_textView);
 
-        sessionsSearchEditText = view.findViewById(R.id.component_index_search_editText);
+        sessionsSearchEditText = view.findViewById(R.id.editText);
 
-        sessionsSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
+        sessionsSearchProgressBar = view.findViewById(R.id.progressBar);
 
         sessionsAddImageView = view.findViewById(R.id.fragment_sessions_add_imageView);
         sessionsAddImageView.setImageResource(R.drawable.ic_plus_light);

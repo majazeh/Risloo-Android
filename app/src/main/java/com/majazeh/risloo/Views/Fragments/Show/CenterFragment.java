@@ -9,19 +9,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -32,8 +26,6 @@ import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterBinding;
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class CenterFragment extends Fragment {
 
     // Binding
@@ -43,26 +35,8 @@ public class CenterFragment extends Fragment {
     private RoomsAdapter roomsAdapter;
 
     // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
-
-    // Widgets
-    private CircleImageView avatarCircleImageView;
-    private TextView charTextView;
-    private TextView nameTextView;
-    private ImageView badgeImageView;
-    private TextView ownerTextView, mobileTextView, descriptionTextView;
-    private ImageView ownerImageView, mobileImageView;
-    private TextView statusTextView, profileTextView;
-    private ImageView editImageView, usersImageView;
-    private TextView roomsTitleTextView, roomsCountTextView;
-    private EditText roomsSearchEditText;
-    private ProgressBar roomsSearchProgressBar;
-    private ImageView roomsAddImageView;
-    private ShimmerFrameLayout roomsShimmerLayout;
-    private ConstraintLayout roomsConstraintLayout;
-    private RecyclerView roomsRecyclerView;
-    private TextView roomsEmptyTextView;
-    private ProgressBar roomsProgressBar;
 
     @Nullable
     @Override
@@ -78,8 +52,8 @@ public class CenterFragment extends Fragment {
         setData();
 
         ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            roomsShimmerLayout.setVisibility(View.GONE);
-            roomsConstraintLayout.setVisibility(View.VISIBLE);
+            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
 
         return binding.getRoot();
@@ -88,126 +62,88 @@ public class CenterFragment extends Fragment {
     private void initializer() {
         roomsAdapter = new RoomsAdapter(getActivity());
 
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp));
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        avatarCircleImageView = binding.fragmentCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteCircleImageView;
+        InitManager.txtTextColor(binding.profileTextView.getRoot(), getResources().getString(R.string.CenterFragmentProfile), getResources().getColor(R.color.Gray500));
+        InitManager.txtTextColor(binding.statusTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
 
-        charTextView = binding.fragmentCenterAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView;
+        InitManager.imgResTint(getActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
+        InitManager.imgResTint(getActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
 
-        nameTextView = binding.fragmentCenterNameTextView;
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterFragmentRoomsHeader));
 
-        badgeImageView = binding.fragmentCenterBadgeImageView;
-
-        ownerTextView = binding.fragmentCenterOwnerTextView;
-        mobileTextView = binding.fragmentCenterMobileTextView;
-        descriptionTextView = binding.fragmentCenterDescriptionTextView;
-
-        ownerImageView = binding.fragmentCenterOwnerImageView;
-        mobileImageView = binding.fragmentCenterMobileImageView;
-
-        profileTextView = binding.fragmentCenterProfileTextView.componentButtonRectangle28sdp;
-        profileTextView.setText(getResources().getString(R.string.CenterFragmentProfile));
-        profileTextView.setTextColor(getResources().getColor(R.color.Gray500));
-        statusTextView = binding.fragmentCenterStatusTextView.componentButtonRectangle28sdp;
-        statusTextView.setText(getResources().getString(R.string.CenterFragmentRequest));
-        statusTextView.setTextColor(getResources().getColor(R.color.White));
-
-        editImageView = binding.fragmentCenterEditImageView.componentButtonOval28sdp;
-        InitManager.imgResTint(getActivity(), editImageView, R.drawable.ic_edit_light, R.color.Gray500);
-        usersImageView = binding.fragmentCenterUsersImageView.componentButtonOval28sdp;
-        InitManager.imgResTint(getActivity(), usersImageView, R.drawable.ic_users_light, R.color.Blue600);
-
-        roomsTitleTextView = binding.fragmentCenterRoomsHeaderConstraintLayout.componentIndexHeaderTitleTextView;
-        roomsTitleTextView.setText(getResources().getString(R.string.CenterFragmentRoomsHeader));
-        roomsCountTextView = binding.fragmentCenterRoomsHeaderConstraintLayout.componentIndexHeaderCountTextView;
-
-        roomsSearchEditText = binding.fragmentCenterRoomsSearchConstraintLayout.componentIndexSearchEditText;
-        roomsSearchProgressBar = binding.fragmentCenterRoomsSearchConstraintLayout.componentIndexSearchProgressBar;
-
-        roomsAddImageView = binding.fragmentCenterRoomsAddImageView.componentButtonOval28sdp;
-        InitManager.imgResTint(getActivity(), roomsAddImageView, R.drawable.ic_plus_light, R.color.Green700);
-
-        roomsShimmerLayout = binding.fragmentCenterRoomsIndexShimmerLayout.componentShimmerRoom;
-        roomsConstraintLayout = binding.fragmentCenterRoomsIndexConstraintLayout.componentSingleRoom;
-
-        roomsRecyclerView = binding.fragmentCenterRoomsIndexConstraintLayout.componentSingleRoomRecyclerView;
-        roomsRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp)));
-        roomsRecyclerView.setLayoutManager(layoutManager);
-        roomsRecyclerView.setNestedScrollingEnabled(false);
-        roomsRecyclerView.setHasFixedSize(true);
-
-        roomsEmptyTextView = binding.fragmentCenterRoomsIndexConstraintLayout.componentSingleRoomTextView;
-
-        roomsProgressBar = binding.fragmentCenterRoomsIndexConstraintLayout.componentSingleRoomProgressBar;
+        InitManager.imgResTint(getActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            profileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-            statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
-            editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
-            usersImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+            binding.profileTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
-            roomsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            profileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
-            editImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
-            usersImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+            binding.profileTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+            binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
+            binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
-            roomsAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        avatarCircleImageView.setOnClickListener(v -> {
-            avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
+        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
+            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(getActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
         });
 
-        statusTextView.setOnClickListener(v -> {
-            statusTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> statusTextView.setClickable(true), 300);
+        binding.statusTextView.getRoot().setOnClickListener(v -> {
+            binding.statusTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.statusTextView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
 
-        profileTextView.setOnClickListener(v -> {
-            profileTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> profileTextView.setClickable(true), 300);
+        binding.profileTextView.getRoot().setOnClickListener(v -> {
+            binding.profileTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.profileTextView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
 
-        editImageView.setOnClickListener(v -> {
-            editImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> editImageView.setClickable(true), 300);
+        binding.editImageView.getRoot().setOnClickListener(v -> {
+            binding.editImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editImageView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
 
-        usersImageView.setOnClickListener(v -> {
-            usersImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> usersImageView.setClickable(true), 300);
+        binding.usersImageView.getRoot().setOnClickListener(v -> {
+            binding.usersImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.usersImageView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
 
-        roomsSearchEditText.setOnTouchListener((v, event) -> {
+        binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!roomsSearchEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), roomsSearchEditText);
+                if (!binding.searchIncludeLayout.editText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.searchIncludeLayout.editText);
                 }
             }
             return false;
         });
 
-        roomsSearchEditText.addTextChangedListener(new TextWatcher() {
+        binding.searchIncludeLayout.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -217,15 +153,7 @@ public class CenterFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
                 ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-//                    if (roomsSearchEditText.length() != 0) {
-//                        getData("getRooms", "", roomsSearchEditText.getText().toString().trim());
-//                    } else {
-//                        roomsRecyclerView.setAdapter(null);
-//
-//                        if (roomsEmptyTextView.getVisibility() == View.VISIBLE) {
-//                            roomsEmptyTextView.setVisibility(View.GONE);
-//                        }
-//                    }
+                    // TODO : Place Code Here
                 }, 750);
             }
 
@@ -235,9 +163,9 @@ public class CenterFragment extends Fragment {
             }
         });
 
-        roomsAddImageView.setOnClickListener(v -> {
-            roomsAddImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> roomsAddImageView.setClickable(true), 300);
+        binding.addImageView.getRoot().setOnClickListener(v -> {
+            binding.addImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
 
 //            ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment);
         });
@@ -245,47 +173,47 @@ public class CenterFragment extends Fragment {
 
     private void setData() {
         if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            nameTextView.setText(getResources().getString(R.string.MainToolbar));
+            binding.nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
-            nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
         }
 
         if (((MainActivity) requireActivity()).singleton.getOwner().equals("")) {
-            ownerTextView.setVisibility(View.GONE);
-            ownerImageView.setVisibility(View.GONE);
+            binding.ownerTextView.setVisibility(View.GONE);
+            binding.ownerImageView.setVisibility(View.GONE);
         } else {
-            ownerTextView.setText(((MainActivity) requireActivity()).singleton.getOwner());
+            binding.ownerTextView.setText(((MainActivity) requireActivity()).singleton.getOwner());
         }
 
         if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            mobileTextView.setVisibility(View.GONE);
-            mobileImageView.setVisibility(View.GONE);
+            binding.mobileTextView.setVisibility(View.GONE);
+            binding.mobileImageView.setVisibility(View.GONE);
         } else {
-            mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
+            binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
         }
 
         if (((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
-            descriptionTextView.setVisibility(View.GONE);
+            binding.descriptionTextView.setVisibility(View.GONE);
         } else {
-            descriptionTextView.setText(((MainActivity) requireActivity()).singleton.getDescription());
+            binding.descriptionTextView.setText(((MainActivity) requireActivity()).singleton.getDescription());
         }
 
         if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            charTextView.setVisibility(View.VISIBLE);
-            charTextView.setText(StringManager.firstChars(nameTextView.getText().toString()));
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(avatarCircleImageView);
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
-            charTextView.setVisibility(View.GONE);
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(avatarCircleImageView);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
-        //        roomsAdapter.setRoom(null);
-        roomsRecyclerView.setAdapter(roomsAdapter);
+//        roomsAdapter.setRoom(null);
+        binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
         String dataSize = "15";
-        roomsCountTextView.setText("(" + dataSize + ")");
+        binding.headerIncludeLayout.titleTextView.setText("(" + dataSize + ")");
     }
 
     @Override

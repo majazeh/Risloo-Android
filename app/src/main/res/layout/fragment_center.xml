@@ -2,7 +2,6 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
@@ -13,12 +12,12 @@
     tools:context=".Views.Fragments.Show.CenterFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_center_constraintLayout"
+        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/fragment_center_info_cardView"
+            android:id="@+id/info_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
@@ -30,14 +29,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_center_info_constraintLayout"
+                android:id="@+id/info_constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/_12sdp"
                 android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
                 <ImageView
-                    android:id="@+id/fragment_center_background_imageView"
+                    android:id="@+id/background_imageView"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_84sdp"
                     android:layout_margin="@dimen/_1sdp"
@@ -49,58 +48,58 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    android:id="@+id/fragment_center_avatar_circleImageView"
+                    android:id="@+id/avatar_includeLayout"
                     layout="@layout/component_avatar_border"
                     android:layout_width="@dimen/_86sdp"
                     android:layout_height="@dimen/_86sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_background_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/background_imageView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_center_background_imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/background_imageView" />
 
                 <include
-                    android:id="@+id/fragment_center_users_imageView"
+                    android:id="@+id/users_imageView"
                     layout="@layout/component_button_oval_28sdp"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
                     app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintLeft_toRightOf="@id/fragment_center_edit_imageView"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_avatar_circleImageView" />
+                    app:layout_constraintLeft_toRightOf="@id/edit_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_includeLayout" />
 
                 <include
-                    android:id="@+id/fragment_center_edit_imageView"
+                    android:id="@+id/edit_imageView"
                     layout="@layout/component_button_oval_28sdp"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
                     app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_users_imageView"
-                    app:layout_constraintLeft_toRightOf="@id/fragment_center_profile_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_center_users_imageView" />
+                    app:layout_constraintBottom_toBottomOf="@+id/users_imageView"
+                    app:layout_constraintLeft_toRightOf="@id/profile_textView"
+                    app:layout_constraintTop_toTopOf="@+id/users_imageView" />
 
                 <include
-                    android:id="@+id/fragment_center_profile_textView"
+                    android:id="@+id/profile_textView"
                     layout="@layout/component_button_rect_28sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_edit_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_imageView"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_center_edit_imageView" />
+                    app:layout_constraintTop_toTopOf="@+id/edit_imageView" />
 
                 <include
-                    android:id="@+id/fragment_center_status_textView"
+                    android:id="@+id/status_textView"
                     layout="@layout/component_button_rect_28sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_name_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_textView"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_center_name_textView" />
+                    app:layout_constraintTop_toTopOf="@+id/name_textView" />
 
                 <TextView
-                    android:id="@+id/fragment_center_name_textView"
+                    android:id="@+id/name_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
@@ -110,12 +109,12 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_center_avatar_circleImageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_center_avatar_circleImageView"
+                    app:layout_constraintStart_toStartOf="@+id/avatar_includeLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />
 
                 <ImageView
-                    android:id="@+id/fragment_center_badge_imageView"
+                    android:id="@+id/badge_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -123,26 +122,26 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_badge_check_solid"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_name_textView"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_center_name_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_center_name_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_textView"
+                    app:layout_constraintStart_toEndOf="@+id/name_textView"
+                    app:layout_constraintTop_toTopOf="@+id/name_textView"
                     app:tint="@color/Blue500"
                     tools:visibility="visible" />
 
                 <ImageView
-                    android:id="@+id/fragment_center_owner_imageView"
+                    android:id="@+id/owner_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_user_crown_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_owner_textView"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_center_name_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_center_owner_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/owner_textView"
+                    app:layout_constraintStart_toStartOf="@+id/name_textView"
+                    app:layout_constraintTop_toTopOf="@+id/owner_textView"
                     app:tint="@color/Gray500" />
 
                 <TextView
-                    android:id="@+id/fragment_center_owner_textView"
+                    android:id="@+id/owner_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -153,12 +152,12 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_center_owner_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_center_name_textView"
+                    app:layout_constraintStart_toEndOf="@+id/owner_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/name_textView"
                     tools:text="مدیر" />
 
                 <ImageView
-                    android:id="@+id/fragment_center_mobile_imageView"
+                    android:id="@+id/mobile_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:layout_marginStart="@dimen/_16sdp"
@@ -166,14 +165,14 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_phone_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_center_mobile_textView"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_center_owner_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_center_mobile_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/mobile_textView"
+                    app:layout_constraintStart_toEndOf="@+id/owner_textView"
+                    app:layout_constraintTop_toTopOf="@+id/mobile_textView"
                     app:layout_goneMarginStart="0dp"
                     app:tint="@color/Gray500" />
 
                 <TextView
-                    android:id="@+id/fragment_center_mobile_textView"
+                    android:id="@+id/mobile_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -184,12 +183,12 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_center_mobile_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_center_name_textView"
+                    app:layout_constraintStart_toEndOf="@+id/mobile_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/name_textView"
                     tools:text="شماره همراه" />
 
                 <TextView
-                    android:id="@+id/fragment_center_description_textView"
+                    android:id="@+id/description_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp"
@@ -199,71 +198,71 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_center_name_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_center_barrier"
+                    app:layout_constraintStart_toStartOf="@+id/name_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/barrier"
                     tools:text="توضیحات" />
 
                 <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/fragment_center_barrier"
+                    android:id="@+id/barrier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="fragment_center_owner_imageView,fragment_center_owner_textView,fragment_center_mobile_imageView,fragment_center_mobile_textView" />
+                    app:constraint_referenced_ids="owner_imageView,owner_textView,mobile_imageView,mobile_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
         <include
-            android:id="@+id/fragment_center_rooms_header_constraintLayout"
+            android:id="@+id/header_includeLayout"
             layout="@layout/component_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/fragment_center_info_cardView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_center_info_cardView" />
+            app:layout_constraintStart_toStartOf="@+id/info_cardView"
+            app:layout_constraintTop_toBottomOf="@+id/info_cardView" />
 
         <include
-            android:id="@+id/fragment_center_rooms_search_constraintLayout"
+            android:id="@+id/search_includeLayout"
             layout="@layout/component_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintLeft_toRightOf="@+id/fragment_center_rooms_add_imageView"
-            app:layout_constraintRight_toRightOf="@+id/fragment_center_rooms_header_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_header_constraintLayout" />
+            app:layout_constraintLeft_toRightOf="@+id/add_imageView"
+            app:layout_constraintRight_toRightOf="@+id/header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/header_includeLayout" />
 
         <include
-            android:id="@+id/fragment_center_rooms_add_imageView"
+            android:id="@+id/add_imageView"
             layout="@layout/component_button_oval_28sdp"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/fragment_center_rooms_search_constraintLayout"
-            app:layout_constraintLeft_toLeftOf="@+id/fragment_center_info_cardView"
-            app:layout_constraintRight_toLeftOf="@id/fragment_center_rooms_search_constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/fragment_center_rooms_search_constraintLayout" />
+            app:layout_constraintBottom_toBottomOf="@+id/search_includeLayout"
+            app:layout_constraintLeft_toLeftOf="@+id/info_cardView"
+            app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
+            app:layout_constraintTop_toTopOf="@+id/search_includeLayout" />
 
         <include
-            android:id="@+id/fragment_center_rooms_index_shimmerLayout"
+            android:id="@+id/rooms_shimmerLayout"
             layout="@layout/component_shimmer_room"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_search_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/search_includeLayout"
             tools:visibility="gone" />
 
         <include
-            android:id="@+id/fragment_center_rooms_index_constraintLayout"
+            android:id="@+id/rooms_singleLayout"
             layout="@layout/component_single_room"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_center_rooms_search_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/search_includeLayout"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

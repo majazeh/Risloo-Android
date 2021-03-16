@@ -71,13 +71,13 @@ public class ScalesFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        scalesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        scalesTitleTextView = view.findViewById(R.id.title_textView);
         scalesTitleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
-        scalesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        scalesCountTextView = view.findViewById(R.id.count_textView);
 
-        scalesSearchEditText = view.findViewById(R.id.component_index_search_editText);
+        scalesSearchEditText = view.findViewById(R.id.editText);
 
-        scalesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
+        scalesSearchProgressBar = view.findViewById(R.id.progressBar);
 
         scalesShimmerLayout = view.findViewById(R.id.fragment_scales_index_shimmerLayout);
         scalesShimmerTopView = view.findViewById(R.id.top_view);

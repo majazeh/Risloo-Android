@@ -76,13 +76,13 @@ public class DocumentsFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        documentsTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        documentsTitleTextView = view.findViewById(R.id.title_textView);
         documentsTitleTextView.setText(getResources().getString(R.string.DocumentsFragmentTitle));
-        documentsCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        documentsCountTextView = view.findViewById(R.id.count_textView);
 
-        documentsSearchEditText = view.findViewById(R.id.component_index_search_editText);
+        documentsSearchEditText = view.findViewById(R.id.editText);
 
-        documentsSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
+        documentsSearchProgressBar = view.findViewById(R.id.progressBar);
 
         documentsAddImageView = view.findViewById(R.id.fragment_documents_add_imageView);
         documentsAddImageView.setImageResource(R.drawable.ic_plus_light);

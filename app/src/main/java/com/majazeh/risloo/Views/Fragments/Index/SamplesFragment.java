@@ -76,13 +76,13 @@ public class SamplesFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        samplesTitleTextView = view.findViewById(R.id.component_index_header_title_textView);
+        samplesTitleTextView = view.findViewById(R.id.title_textView);
         samplesTitleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
-        samplesCountTextView = view.findViewById(R.id.component_index_header_count_textView);
+        samplesCountTextView = view.findViewById(R.id.count_textView);
 
-        samplesSearchEditText = view.findViewById(R.id.component_index_search_editText);
+        samplesSearchEditText = view.findViewById(R.id.editText);
 
-        samplesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
+        samplesSearchProgressBar = view.findViewById(R.id.progressBar);
 
         samplesAddImageView = view.findViewById(R.id.fragment_samples_add_imageView);
         samplesAddImageView.setImageResource(R.drawable.ic_plus_light);
