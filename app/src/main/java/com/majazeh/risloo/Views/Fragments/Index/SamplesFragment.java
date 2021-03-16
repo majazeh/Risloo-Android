@@ -89,7 +89,7 @@ public class SamplesFragment extends Fragment {
         ImageViewCompat.setImageTintList(samplesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
 
         samplesShimmerLayout = view.findViewById(R.id.fragment_samples_index_shimmerLayout);
-        samplesShimmerTopView = view.findViewById(R.id.shimmer_item_sample_top_view);
+        samplesShimmerTopView = view.findViewById(R.id.top_view);
         samplesShimmerTopView.setVisibility(View.GONE);
 
         samplesHeaderLayout = view.findViewById(R.id.fragment_samples_index_headerLayout);

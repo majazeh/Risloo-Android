@@ -31,7 +31,7 @@
 
             <include
                 android:id="@+id/fragment_edit_avatar_circleImageView"
-                layout="@layout/component_avatar_82sdp"
+                layout="@layout/component_avatar_borderless"
                 android:layout_width="@dimen/_82sdp"
                 android:layout_height="@dimen/_82sdp"
                 android:layout_marginStart="@dimen/_12sdp"

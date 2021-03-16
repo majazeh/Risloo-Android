@@ -89,7 +89,7 @@ public class DocumentsFragment extends Fragment {
         ImageViewCompat.setImageTintList(documentsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
 
         documentsShimmerLayout = view.findViewById(R.id.fragment_documents_index_shimmerLayout);
-        documentsShimmerTopView = view.findViewById(R.id.shimmer_item_document_top_view);
+        documentsShimmerTopView = view.findViewById(R.id.top_view);
         documentsShimmerTopView.setVisibility(View.GONE);
 
         documentsHeaderLayout = view.findViewById(R.id.fragment_documents_index_headerLayout);

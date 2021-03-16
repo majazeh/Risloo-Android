@@ -89,7 +89,7 @@ public class SessionsFragment extends Fragment {
         ImageViewCompat.setImageTintList(sessionsAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
 
         sessionsShimmerLayout = view.findViewById(R.id.fragment_sessions_index_shimmerLayout);
-        sessionsShimmerTopView = view.findViewById(R.id.shimmer_item_session_top_view);
+        sessionsShimmerTopView = view.findViewById(R.id.top_view);
         sessionsShimmerTopView.setVisibility(View.GONE);
 
         sessionsHeaderLayout = view.findViewById(R.id.fragment_sessions_index_headerLayout);

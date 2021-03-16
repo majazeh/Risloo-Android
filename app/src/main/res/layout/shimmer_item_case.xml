@@ -11,7 +11,7 @@
     tools:context=".Views.Adapters.Recycler.CasesAdapter">
 
     <View
-        android:id="@+id/shimmer_item_case_top_view"
+        android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"
@@ -20,20 +20,20 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
-        android:id="@+id/shimmer_item_case_serial_textView"
+        android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_case_center_textView"
-        app:layout_constraintEnd_toStartOf="@+id/shimmer_item_case_room_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/center_textView"
+        app:layout_constraintEnd_toStartOf="@+id/room_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/shimmer_item_case_room_textView" />
+        app:layout_constraintTop_toTopOf="@+id/room_textView" />
 
     <TextView
-        android:id="@+id/shimmer_item_case_room_textView"
+        android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -42,12 +42,12 @@
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
         app:layout_constraintHorizontal_weight="1.5"
-        app:layout_constraintEnd_toStartOf="@+id/shimmer_item_case_reference_textView"
-        app:layout_constraintStart_toEndOf="@+id/shimmer_item_case_serial_textView"
-        app:layout_constraintTop_toBottomOf="@+id/shimmer_item_case_top_view" />
+        app:layout_constraintEnd_toStartOf="@+id/reference_textView"
+        app:layout_constraintStart_toEndOf="@+id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@+id/top_view" />
 
     <TextView
-        android:id="@+id/shimmer_item_case_center_textView"
+        android:id="@+id/center_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -55,21 +55,21 @@
         android:textSize="@dimen/_7ssp"
         android:background="@color/Gray50"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/shimmer_item_case_room_textView"
-        app:layout_constraintStart_toStartOf="@+id/shimmer_item_case_room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/shimmer_item_case_room_textView" />
+        app:layout_constraintEnd_toEndOf="@+id/room_textView"
+        app:layout_constraintStart_toStartOf="@+id/room_textView"
+        app:layout_constraintTop_toBottomOf="@+id/room_textView" />
 
     <TextView
-        android:id="@+id/shimmer_item_case_reference_textView"
+        android:id="@+id/reference_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_8sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/shimmer_item_case_center_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/center_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/shimmer_item_case_room_textView"
-        app:layout_constraintTop_toTopOf="@+id/shimmer_item_case_room_textView" />
+        app:layout_constraintStart_toEndOf="@+id/room_textView"
+        app:layout_constraintTop_toTopOf="@+id/room_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

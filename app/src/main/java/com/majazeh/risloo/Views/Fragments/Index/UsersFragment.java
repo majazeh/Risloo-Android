@@ -89,7 +89,7 @@ public class UsersFragment extends Fragment {
         ImageViewCompat.setImageTintList(usersAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
 
         usersShimmerLayout = view.findViewById(R.id.fragment_users_index_shimmerLayout);
-        usersShimmerTopView = view.findViewById(R.id.shimmer_item_user_top_view);
+        usersShimmerTopView = view.findViewById(R.id.top_view);
         usersShimmerTopView.setVisibility(View.GONE);
 
         usersHeaderLayout = view.findViewById(R.id.fragment_users_index_headerLayout);

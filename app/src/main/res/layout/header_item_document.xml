@@ -11,7 +11,7 @@
     tools:context=".Views.Fragments.Index.DocumentsFragment">
 
     <TextView
-        android:id="@+id/header_item_document_serial_textView"
+        android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -23,13 +23,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_document_name_textView"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_document_name_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/name_textView"
+        app:layout_constraintEnd_toStartOf="@+id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header_item_document_name_textView" />
+        app:layout_constraintTop_toTopOf="@+id/name_textView" />
 
     <TextView
-        android:id="@+id/header_item_document_name_textView"
+        android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_8sdp"
@@ -44,12 +44,12 @@
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.3"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_document_attachment_imageView"
-        app:layout_constraintStart_toEndOf="@+id/header_item_document_serial_textView"
+        app:layout_constraintEnd_toStartOf="@+id/attachment_imageView"
+        app:layout_constraintStart_toEndOf="@+id/serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/header_item_document_attachment_imageView"
+        android:id="@+id/attachment_imageView"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:contentDescription="@string/AppImageContent"
@@ -57,14 +57,14 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_paperclip_light"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_document_name_textView"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_document_status_textView"
-        app:layout_constraintStart_toEndOf="@+id/header_item_document_name_textView"
-        app:layout_constraintTop_toTopOf="@+id/header_item_document_name_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/name_textView"
+        app:layout_constraintEnd_toStartOf="@+id/status_textView"
+        app:layout_constraintStart_toEndOf="@+id/name_textView"
+        app:layout_constraintTop_toTopOf="@+id/name_textView"
         app:tint="@color/Gray500" />
 
     <TextView
-        android:id="@+id/header_item_document_status_textView"
+        android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_6sdp"
@@ -76,9 +76,9 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_document_name_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/name_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/header_item_document_attachment_imageView"
-        app:layout_constraintTop_toTopOf="@+id/header_item_document_name_textView" />
+        app:layout_constraintStart_toEndOf="@+id/attachment_imageView"
+        app:layout_constraintTop_toTopOf="@+id/name_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

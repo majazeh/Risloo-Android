@@ -89,7 +89,7 @@ public class CasesFragment extends Fragment {
         ImageViewCompat.setImageTintList(casesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
 
         casesShimmerLayout = view.findViewById(R.id.fragment_cases_index_shimmerLayout);
-        casesShimmerTopView = view.findViewById(R.id.shimmer_item_case_top_view);
+        casesShimmerTopView = view.findViewById(R.id.top_view);
         casesShimmerTopView.setVisibility(View.GONE);
 
         casesHeaderLayout = view.findViewById(R.id.fragment_cases_index_headerLayout);

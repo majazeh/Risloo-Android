@@ -11,7 +11,7 @@
     tools:context=".Views.Fragments.Index.SamplesFragment">
 
     <TextView
-        android:id="@+id/header_item_sample_serial_textView"
+        android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -23,13 +23,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_sample_edition_textView"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_sample_name_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/edition_textView"
+        app:layout_constraintEnd_toStartOf="@+id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/header_item_sample_name_textView" />
+        app:layout_constraintTop_toTopOf="@+id/name_textView" />
 
     <TextView
-        android:id="@+id/header_item_sample_name_textView"
+        android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
@@ -43,12 +43,12 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.22"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_sample_room_textView"
-        app:layout_constraintStart_toEndOf="@+id/header_item_sample_serial_textView"
+        app:layout_constraintEnd_toStartOf="@+id/room_textView"
+        app:layout_constraintStart_toEndOf="@+id/serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/header_item_sample_edition_textView"
+        android:id="@+id/edition_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -60,12 +60,12 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/header_item_sample_name_textView"
-        app:layout_constraintStart_toStartOf="@+id/header_item_sample_name_textView"
-        app:layout_constraintTop_toBottomOf="@+id/header_item_sample_name_textView" />
+        app:layout_constraintEnd_toEndOf="@+id/name_textView"
+        app:layout_constraintStart_toStartOf="@+id/name_textView"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView" />
 
     <TextView
-        android:id="@+id/header_item_sample_room_textView"
+        android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right"
@@ -76,12 +76,12 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.22"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_sample_reference_textView"
-        app:layout_constraintStart_toEndOf="@+id/header_item_sample_name_textView"
-        app:layout_constraintTop_toTopOf="@+id/header_item_sample_name_textView" />
+        app:layout_constraintEnd_toStartOf="@+id/reference_textView"
+        app:layout_constraintStart_toEndOf="@+id/name_textView"
+        app:layout_constraintTop_toTopOf="@+id/name_textView" />
 
     <TextView
-        android:id="@+id/header_item_sample_case_textView"
+        android:id="@+id/case_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="right"
@@ -91,13 +91,13 @@
         android:textColor="@color/Gray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_sample_edition_textView"
-        app:layout_constraintEnd_toEndOf="@+id/header_item_sample_room_textView"
-        app:layout_constraintStart_toStartOf="@+id/header_item_sample_room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/header_item_sample_room_textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/edition_textView"
+        app:layout_constraintEnd_toEndOf="@+id/room_textView"
+        app:layout_constraintStart_toStartOf="@+id/room_textView"
+        app:layout_constraintTop_toBottomOf="@+id/room_textView" />
 
     <TextView
-        android:id="@+id/header_item_sample_reference_textView"
+        android:id="@+id/reference_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
@@ -110,13 +110,13 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_sample_case_textView"
-        app:layout_constraintEnd_toStartOf="@+id/header_item_sample_status_textView"
-        app:layout_constraintStart_toEndOf="@+id/header_item_sample_room_textView"
-        app:layout_constraintTop_toTopOf="@+id/header_item_sample_room_textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/case_textView"
+        app:layout_constraintEnd_toStartOf="@+id/status_textView"
+        app:layout_constraintStart_toEndOf="@+id/room_textView"
+        app:layout_constraintTop_toTopOf="@+id/room_textView" />
 
     <TextView
-        android:id="@+id/header_item_sample_status_textView"
+        android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/_4sdp"
@@ -128,9 +128,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/header_item_sample_reference_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/reference_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/header_item_sample_reference_textView"
-        app:layout_constraintTop_toTopOf="@+id/header_item_sample_reference_textView" />
+        app:layout_constraintStart_toEndOf="@+id/reference_textView"
+        app:layout_constraintTop_toTopOf="@+id/reference_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

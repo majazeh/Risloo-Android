@@ -80,7 +80,7 @@ public class ScalesFragment extends Fragment {
         scalesSearchProgressBar = view.findViewById(R.id.component_index_search_progressBar);
 
         scalesShimmerLayout = view.findViewById(R.id.fragment_scales_index_shimmerLayout);
-        scalesShimmerTopView = view.findViewById(R.id.shimmer_item_scale_top_view);
+        scalesShimmerTopView = view.findViewById(R.id.top_view);
         scalesShimmerTopView.setVisibility(View.GONE);
 
         scalesHeaderLayout = view.findViewById(R.id.fragment_scales_index_headerLayout);
