@@ -49,7 +49,7 @@ public class EditAvatarFragment extends Fragment {
     }
 
     private void initializer() {
-        binding.avatarGuideConstraintLayout.guideTextView.setText(getResources().getString(R.string.EditAvatarFragmentHint));
+        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditAvatarFragmentHint));
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditAvatarFragmentButton), getResources().getColor(R.color.White));
     }

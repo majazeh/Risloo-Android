@@ -25,7 +25,6 @@ import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.DateDialog;
 import com.majazeh.risloo.Views.Dialogs.ImageDialog;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
-import com.majazeh.risloo.databinding.ActivityMainContentBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
@@ -34,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Binding
     private ActivityMainBinding binding;
-    private ActivityMainContentBinding contentBinding;
 
     // Singleton
     public Singleton singleton;
@@ -82,59 +80,57 @@ public class MainActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentLayout.fragmentNavHostFragment.getId());
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainContent.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        contentBinding = binding.contentLayout;
-
-        InitManager.imgResTint(this, contentBinding.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.imgResTintRotate(this, contentBinding.logoutImageView.getRoot(), R.drawable.ic_logout_light, R.color.Gray500, 180);
-        InitManager.imgResTint(this, contentBinding.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
+        InitManager.imgResTint(this, binding.mainContent.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
+        InitManager.imgResTintRotate(this, binding.mainContent.logoutImageView.getRoot(), R.drawable.ic_logout_light, R.color.Gray500, 180);
+        InitManager.imgResTint(this, binding.mainContent.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            contentBinding.toolbarIncludeLayout.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
+            binding.mainContent.toolbarIncludeLayout.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
 
-            contentBinding.menuImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            contentBinding.logoutImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
-            contentBinding.notificationImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            binding.mainContent.menuImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            binding.mainContent.logoutImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
+            binding.mainContent.notificationImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
         }
     }
 
     private void listener() {
-        contentBinding.toolbarIncludeLayout.getRoot().setOnClickListener(v -> {
-            contentBinding.toolbarIncludeLayout.getRoot().setClickable(false);
-            handler.postDelayed(() -> contentBinding.toolbarIncludeLayout.getRoot().setClickable(true), 300);
+        binding.mainContent.toolbarIncludeLayout.getRoot().setOnClickListener(v -> {
+            binding.mainContent.toolbarIncludeLayout.getRoot().setClickable(false);
+            handler.postDelayed(() -> binding.mainContent.toolbarIncludeLayout.getRoot().setClickable(true), 300);
 
             navigator(R.id.accountFragment);
         });
 
-        contentBinding.menuImageView.getRoot().setOnClickListener(v -> {
-            contentBinding.menuImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> contentBinding.menuImageView.getRoot().setClickable(true), 300);
+        binding.mainContent.menuImageView.getRoot().setOnClickListener(v -> {
+            binding.mainContent.menuImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> binding.mainContent.menuImageView.getRoot().setClickable(true), 300);
 
             binding.getRoot().openDrawer(GravityCompat.START);
         });
 
-        contentBinding.logoutImageView.getRoot().setOnClickListener(v -> {
-            contentBinding.logoutImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> contentBinding.logoutImageView.getRoot().setClickable(true), 300);
+        binding.mainContent.logoutImageView.getRoot().setOnClickListener(v -> {
+            binding.mainContent.logoutImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> binding.mainContent.logoutImageView.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        contentBinding.notificationImageView.getRoot().setOnClickListener(v -> {
-            contentBinding.notificationImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> contentBinding.notificationImageView.getRoot().setClickable(true), 300);
+        binding.mainContent.notificationImageView.getRoot().setOnClickListener(v -> {
+            binding.mainContent.notificationImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> binding.mainContent.notificationImageView.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            contentBinding.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
-            contentBinding.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+            binding.mainContent.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
+            binding.mainContent.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
         });
     }
 
@@ -142,31 +138,31 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.navigationView, navController);
 
         if (singleton.getName().equals("")) {
-            contentBinding.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainToolbar));
+            binding.mainContent.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
-            contentBinding.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
+            binding.mainContent.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
         }
 
         if (singleton.getMoney().equals("")) {
-            contentBinding.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
+            binding.mainContent.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
         } else {
-            contentBinding.toolbarIncludeLayout.moneyTextView.setText(singleton.getMoney());
+            binding.mainContent.toolbarIncludeLayout.moneyTextView.setText(singleton.getMoney());
         }
 
         if (singleton.getNotification().equals("")) {
-            contentBinding.badgeTextView.setVisibility(View.GONE);
+            binding.mainContent.badgeTextView.setVisibility(View.GONE);
         } else {
-            contentBinding.badgeTextView.setVisibility(View.VISIBLE);
-            contentBinding.badgeTextView.setText(singleton.getNotification());
+            binding.mainContent.badgeTextView.setVisibility(View.VISIBLE);
+            binding.mainContent.badgeTextView.setText(singleton.getNotification());
         }
 
         if (singleton.getAvatar().equals("")) {
-            contentBinding.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            contentBinding.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(contentBinding.toolbarIncludeLayout.nameTextView.getText().toString()));
+            binding.mainContent.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            binding.mainContent.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.mainContent.toolbarIncludeLayout.nameTextView.getText().toString()));
         } else {
-            contentBinding.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
+            binding.mainContent.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(contentBinding.toolbarIncludeLayout.avatarImageView);
+            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.mainContent.toolbarIncludeLayout.avatarImageView);
         }
     }
 

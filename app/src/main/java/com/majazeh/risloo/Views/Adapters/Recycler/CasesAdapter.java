@@ -55,14 +55,14 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
 
     private void detector(CasesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemCase.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
     private void listener(CasesHolder holder) {
-        holder.binding.singleItemCase.setOnClickListener(v -> {
-            holder.binding.singleItemCase.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemCase.setClickable(true), 300);
+        holder.binding.getRoot().setOnClickListener(v -> {
+            holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.caseFragment);
         });

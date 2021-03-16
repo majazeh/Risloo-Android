@@ -2,7 +2,6 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_edit_personal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/White"
@@ -56,7 +55,7 @@
             app:layout_constraintTop_toBottomOf="@+id/mobile_includeLayout" />
 
         <include
-            android:id="@+id/username_guide_includeLayout"
+            android:id="@+id/username_guideLayout"
             layout="@layout/component_guide_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -71,9 +70,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/username_guide_includeLayout"
-            app:layout_constraintStart_toStartOf="@+id/username_guide_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/username_guide_includeLayout" />
+            app:layout_constraintEnd_toEndOf="@+id/username_guideLayout"
+            app:layout_constraintStart_toStartOf="@+id/username_guideLayout"
+            app:layout_constraintTop_toBottomOf="@+id/username_guideLayout" />
 
         <include
             android:id="@+id/birthday_includeLayout"

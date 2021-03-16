@@ -55,16 +55,16 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
     private void detector(SessionsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemSession.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
         }
     }
 
     private void listener(SessionsHolder holder) {
-        holder.binding.singleItemSession.setOnClickListener(v -> {
-            holder.binding.singleItemSession.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemSession.setClickable(true), 300);
+        holder.binding.getRoot().setOnClickListener(v -> {
+            holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.sessionFragment);
         });

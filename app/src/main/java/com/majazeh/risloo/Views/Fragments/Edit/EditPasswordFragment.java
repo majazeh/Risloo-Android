@@ -52,7 +52,7 @@ public class EditPasswordFragment extends Fragment {
     private void initializer() {
         binding.passwordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPasswordFragmentHeader));
 
-        binding.passwordGuideIncludeLayout.guideTextView.setText(getResources().getString(R.string.EditPasswordFragmentHint));
+        binding.passwordGuideLayout.guideTextView.setText(getResources().getString(R.string.EditPasswordFragmentHint));
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditPasswordFragmentButton), getResources().getColor(R.color.White));
     }

@@ -55,7 +55,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
 
     private void detector(SamplesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemSample.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
@@ -64,9 +64,9 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     }
 
     private void listener(SamplesHolder holder) {
-        holder.binding.singleItemSample.setOnClickListener(v -> {
-            holder.binding.singleItemSample.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemSample.setClickable(true), 300);
+        holder.binding.getRoot().setOnClickListener(v -> {
+            holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.sampleFragment);
         });

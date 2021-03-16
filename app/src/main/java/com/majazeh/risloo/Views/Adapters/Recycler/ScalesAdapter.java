@@ -55,16 +55,16 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
     private void detector(ScalesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemScale.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.binding.createTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         }
     }
 
     private void listener(ScalesHolder holder) {
-        holder.binding.singleItemScale.setOnClickListener(v -> {
-            holder.binding.singleItemScale.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemScale.setClickable(true), 300);
+        holder.binding.getRoot().setOnClickListener(v -> {
+            holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });

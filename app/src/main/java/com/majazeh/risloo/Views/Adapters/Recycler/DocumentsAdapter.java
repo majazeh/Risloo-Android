@@ -55,7 +55,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
 
     private void detector(DocumentsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemDocument.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.binding.attachmentImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
 
@@ -66,9 +66,9 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     }
 
     private void listener(DocumentsHolder holder) {
-        holder.binding.singleItemDocument.setOnClickListener(v -> {
-            holder.binding.singleItemDocument.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemDocument.setClickable(true), 300);
+        holder.binding.getRoot().setOnClickListener(v -> {
+            holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });

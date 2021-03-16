@@ -55,7 +55,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     private void detector(UsersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.singleItemUser.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.binding.emailImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
             holder.binding.mobileImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
@@ -65,9 +65,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     }
 
     private void listener(UsersHolder holder) {
-        holder.binding.singleItemUser.setOnClickListener(v -> {
-            holder.binding.singleItemUser.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.singleItemUser.setClickable(true), 300);
+        holder.binding.getRoot().setOnClickListener(v -> {
+            holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.userFragment);
         });

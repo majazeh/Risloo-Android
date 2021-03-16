@@ -2,7 +2,6 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_avatar_border"
     android:layout_width="@dimen/_86sdp"
     android:layout_height="@dimen/_86sdp"
     android:layout_gravity="center"

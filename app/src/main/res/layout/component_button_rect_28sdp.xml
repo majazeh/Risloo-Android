@@ -2,7 +2,6 @@
 <TextView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/component_button_rect_28sdp"
     android:layout_width="wrap_content"
     android:layout_height="@dimen/_28sdp"
     android:layout_gravity="center"

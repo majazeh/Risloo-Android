@@ -53,7 +53,7 @@ public class EditPersonalFragment extends Fragment {
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentTypeHeader));
         binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentGenderHeader));
 
-        binding.usernameGuideIncludeLayout.guideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
+        binding.usernameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
 
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusActive));
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusWaiting));
