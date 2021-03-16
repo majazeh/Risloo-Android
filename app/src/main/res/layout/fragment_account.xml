@@ -2,7 +2,6 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_account"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
@@ -13,12 +12,12 @@
     tools:context=".Views.Fragments.Show.AccountFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_account_constraintLayout"
+        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/fragment_account_info_cardView"
+            android:id="@+id/info_cardView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
@@ -30,14 +29,14 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/fragment_account_info_constraintLayout"
+                android:id="@+id/info_constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/_12sdp"
                 android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
                 <ImageView
-                    android:id="@+id/fragment_account_background_imageView"
+                    android:id="@+id/background_imageView"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_64sdp"
                     android:layout_margin="@dimen/_1sdp"
@@ -49,37 +48,37 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <include
-                    android:id="@+id/fragment_account_avatar_circleImageView"
+                    android:id="@+id/avatar_includeLayout"
                     layout="@layout/component_avatar_border"
                     android:layout_width="@dimen/_86sdp"
                     android:layout_height="@dimen/_86sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_background_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/background_imageView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_account_background_imageView" />
+                    app:layout_constraintTop_toBottomOf="@+id/background_imageView" />
 
                 <include
-                    android:id="@+id/fragment_account_edit_textView"
+                    android:id="@+id/edit_textView"
                     layout="@layout/component_button_rect_28sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
                     app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintLeft_toRightOf="@id/fragment_account_enter_imageView"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_avatar_circleImageView" />
+                    app:layout_constraintLeft_toRightOf="@id/enter_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_includeLayout" />
 
                 <include
-                    android:id="@+id/fragment_account_enter_imageView"
+                    android:id="@+id/enter_imageView"
                     layout="@layout/component_button_oval_28sdp"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_edit_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/edit_textView"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_account_edit_textView" />
+                    app:layout_constraintTop_toTopOf="@+id/edit_textView" />
 
                 <TextView
-                    android:id="@+id/fragment_account_name_textView"
+                    android:id="@+id/name_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
@@ -89,12 +88,12 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_account_avatar_circleImageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_account_avatar_circleImageView"
+                    app:layout_constraintStart_toStartOf="@+id/avatar_includeLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />
 
                 <ImageView
-                    android:id="@+id/fragment_account_badge_imageView"
+                    android:id="@+id/badge_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -102,14 +101,14 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_badge_check_solid"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_name_textView"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_account_name_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_account_name_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/name_textView"
+                    app:layout_constraintStart_toEndOf="@+id/name_textView"
+                    app:layout_constraintTop_toTopOf="@+id/name_textView"
                     app:tint="@color/Blue500"
                     tools:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/fragment_account_username_textView"
+                    android:id="@+id/username_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_6sdp"
@@ -119,24 +118,24 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_account_name_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_account_name_textView"
+                    app:layout_constraintStart_toStartOf="@+id/name_textView"
+                    app:layout_constraintTop_toBottomOf="@+id/name_textView"
                     tools:text="شناسه کاربری" />
 
                 <ImageView
-                    android:id="@+id/fragment_account_education_imageView"
+                    android:id="@+id/education_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_education_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_education_textView"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_account_username_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_account_education_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/education_textView"
+                    app:layout_constraintStart_toStartOf="@+id/username_textView"
+                    app:layout_constraintTop_toTopOf="@+id/education_textView"
                     app:tint="@color/Gray500" />
 
                 <TextView
-                    android:id="@+id/fragment_account_education_textView"
+                    android:id="@+id/education_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -147,12 +146,12 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_account_education_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_account_username_textView"
+                    app:layout_constraintStart_toEndOf="@+id/education_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/username_textView"
                     tools:text="مدرک تحصیلی" />
 
                 <ImageView
-                    android:id="@+id/fragment_account_birthday_imageView"
+                    android:id="@+id/birthday_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:layout_marginStart="@dimen/_16sdp"
@@ -160,14 +159,14 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_calendar_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_birthday_textView"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_account_education_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_account_birthday_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/birthday_textView"
+                    app:layout_constraintStart_toEndOf="@+id/education_textView"
+                    app:layout_constraintTop_toTopOf="@+id/birthday_textView"
                     app:layout_goneMarginStart="0dp"
                     app:tint="@color/Gray500" />
 
                 <TextView
-                    android:id="@+id/fragment_account_birthday_textView"
+                    android:id="@+id/birthday_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -178,25 +177,25 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_account_birthday_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_account_username_textView"
+                    app:layout_constraintStart_toEndOf="@+id/birthday_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/username_textView"
                     tools:text="تاریخ تولد" />
 
                 <ImageView
-                    android:id="@+id/fragment_account_email_imageView"
+                    android:id="@+id/email_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:padding="@dimen/_1sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_envelope_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_email_textView"
-                    app:layout_constraintStart_toStartOf="@+id/fragment_account_education_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_account_email_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/email_textView"
+                    app:layout_constraintStart_toStartOf="@+id/education_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/email_textView"
                     app:tint="@color/Gray500" />
 
                 <TextView
-                    android:id="@+id/fragment_account_email_textView"
+                    android:id="@+id/email_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -207,12 +206,12 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_account_email_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_account_barrier"
+                    app:layout_constraintStart_toEndOf="@+id/email_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/barrier"
                     tools:text="ایمیل" />
 
                 <ImageView
-                    android:id="@+id/fragment_account_mobile_imageView"
+                    android:id="@+id/mobile_imageView"
                     android:layout_width="@dimen/_14sdp"
                     android:layout_height="@dimen/_14sdp"
                     android:layout_marginStart="@dimen/_16sdp"
@@ -220,14 +219,14 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_phone_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/fragment_account_mobile_textView"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_account_email_textView"
-                    app:layout_constraintTop_toTopOf="@+id/fragment_account_mobile_textView"
+                    app:layout_constraintBottom_toBottomOf="@+id/mobile_textView"
+                    app:layout_constraintStart_toEndOf="@+id/email_textView"
+                    app:layout_constraintTop_toTopOf="@+id/mobile_textView"
                     app:layout_goneMarginStart="0dp"
                     app:tint="@color/Gray500" />
 
                 <TextView
-                    android:id="@+id/fragment_account_mobile_textView"
+                    android:id="@+id/mobile_textView"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -238,16 +237,16 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/fragment_account_mobile_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/fragment_account_barrier"
+                    app:layout_constraintStart_toEndOf="@+id/mobile_imageView"
+                    app:layout_constraintTop_toBottomOf="@+id/barrier"
                     tools:text="شماره همراه" />
 
                 <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/fragment_account_barrier"
+                    android:id="@+id/barrier"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="fragment_account_education_imageView,fragment_account_education_textView,fragment_account_birthday_imageView,fragment_account_birthday_textView" />
+                    app:constraint_referenced_ids="education_imageView,education_textView,birthday_imageView,birthday_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

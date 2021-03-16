@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,22 +19,10 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentAccountBinding;
 import com.squareup.picasso.Picasso;
 
-import de.hdodenhof.circleimageview.CircleImageView;
-
 public class AccountFragment extends Fragment {
 
     // Binding
     private FragmentAccountBinding binding;
-
-    // Widgets
-    private CircleImageView avatarCircleImageView;
-    private TextView charTextView;
-    private TextView nameTextView, usernameTextView;
-    private ImageView badgeImageView;
-    private TextView educationTextView, birthdayTextView, emailTextView, mobileTextView;
-    private ImageView educationImageView, birthdayImageView, emailImageView, mobileImageView;
-    private TextView editTextView;
-    private ImageView enterImageView;
 
     @Nullable
     @Override
@@ -55,64 +41,42 @@ public class AccountFragment extends Fragment {
     }
 
     private void initializer() {
-        avatarCircleImageView = binding.fragmentAccountAvatarCircleImageView.componentAvatar86sdpBorderWhiteCircleImageView;
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.AccountFragmentEdit), getResources().getColor(R.color.Gray500));
 
-        charTextView = binding.fragmentAccountAvatarCircleImageView.componentAvatar86sdpBorderWhiteTextView;
-
-        nameTextView = binding.fragmentAccountNameTextView;
-        usernameTextView = binding.fragmentAccountUsernameTextView;
-
-        badgeImageView = binding.fragmentAccountBadgeImageView;
-
-        educationTextView = binding.fragmentAccountEducationTextView;
-        birthdayTextView = binding.fragmentAccountBirthdayTextView;
-        emailTextView = binding.fragmentAccountEmailTextView;
-        mobileTextView = binding.fragmentAccountMobileTextView;
-
-        educationImageView = binding.fragmentAccountEducationImageView;
-        birthdayImageView = binding.fragmentAccountBirthdayImageView;
-        emailImageView = binding.fragmentAccountEmailImageView;
-        mobileImageView = binding.fragmentAccountMobileImageView;
-
-        editTextView = binding.fragmentAccountEditTextView.componentButtonRectangle28sdp;
-        editTextView.setText(getResources().getString(R.string.AccountFragmentEdit));
-        editTextView.setTextColor(getResources().getColor(R.color.Gray500));
-
-        enterImageView = binding.fragmentAccountEnterImageView.componentButtonOval28sdp;
-        InitManager.imgResTint(getActivity(), enterImageView, R.drawable.ic_user_cog_light, R.color.Blue600);
+        InitManager.imgResTint(getActivity(), binding.enterImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Blue600);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-            enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
         } else {
-            editTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            enterImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+            binding.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        avatarCircleImageView.setOnClickListener(v -> {
-            avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
+        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
+            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(getActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
         });
 
-        editTextView.setOnClickListener(v -> {
-            editTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> editTextView.setClickable(true), 300);
+        binding.editTextView.getRoot().setOnClickListener(v -> {
+            binding.editTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.editAccountFragment);
         });
 
-        enterImageView.setOnClickListener(v -> {
-            enterImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> enterImageView.setClickable(true), 300);
+        binding.enterImageView.getRoot().setOnClickListener(v -> {
+            binding.enterImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.enterImageView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
@@ -120,54 +84,54 @@ public class AccountFragment extends Fragment {
 
     private void setData() {
         if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            nameTextView.setText(getResources().getString(R.string.MainToolbar));
+            binding.nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
-            nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
         }
 
         if (((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
-            usernameTextView.setVisibility(View.GONE);
+            binding.usernameTextView.setVisibility(View.GONE);
         } else {
-            usernameTextView.setText(((MainActivity) requireActivity()).singleton.getUsername());
+            binding.usernameTextView.setText(((MainActivity) requireActivity()).singleton.getUsername());
         }
 
         if (((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
-            educationTextView.setVisibility(View.GONE);
-            educationImageView.setVisibility(View.GONE);
+            binding.educationTextView.setVisibility(View.GONE);
+            binding.educationImageView.setVisibility(View.GONE);
         } else {
-            educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
+            binding.educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
         }
 
         if (((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-            birthdayTextView.setVisibility(View.GONE);
-            birthdayImageView.setVisibility(View.GONE);
+            binding.birthdayTextView.setVisibility(View.GONE);
+            binding.birthdayImageView.setVisibility(View.GONE);
         } else {
-            birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
+            binding.birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
         }
 
         if (((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-            emailTextView.setVisibility(View.GONE);
-            emailImageView.setVisibility(View.GONE);
+            binding.emailTextView.setVisibility(View.GONE);
+            binding.emailImageView.setVisibility(View.GONE);
         } else {
-            emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
+            binding.emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
         }
 
         if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            mobileTextView.setVisibility(View.GONE);
-            mobileImageView.setVisibility(View.GONE);
+            binding.mobileTextView.setVisibility(View.GONE);
+            binding.mobileImageView.setVisibility(View.GONE);
         } else {
-            mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
+            binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
         }
 
         if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            charTextView.setVisibility(View.VISIBLE);
-            charTextView.setText(StringManager.firstChars(nameTextView.getText().toString()));
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(avatarCircleImageView);
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
-            charTextView.setVisibility(View.GONE);
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(avatarCircleImageView);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 
