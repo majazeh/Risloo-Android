@@ -12,7 +12,7 @@
     tools:context=".Views.Activities.MainActivity">
 
     <include
-        android:id="@+id/main_includeLayout"
+        android:id="@+id/main_contentLayout"
         layout="@layout/activity_main_content" />
 
     <com.google.android.material.navigation.NavigationView

@@ -82,52 +82,52 @@ public class MainActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainIncludeLayout.fragmentNavHostFragment.getId());
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainContentLayout.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        contentBinding = binding.mainIncludeLayout;
+        contentBinding = binding.mainContentLayout;
 
-        InitManager.imgResTint(this, contentBinding.menuIncludeLayout.componentMainButton, R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.imgResTintRotate(this, contentBinding.logoutIncludeLayout.componentMainButton, R.drawable.ic_logout_light, R.color.Gray500, 180);
-        InitManager.imgResTint(this, contentBinding.notificationIncludeLayout.componentMainButton, R.drawable.ic_bell_light, R.color.Gray500);
+        InitManager.imgResTint(this, contentBinding.menuImageView.componentMainButton, R.drawable.ic_bars_light, R.color.Gray500);
+        InitManager.imgResTintRotate(this, contentBinding.logoutImageView.componentMainButton, R.drawable.ic_logout_light, R.color.Gray500, 180);
+        InitManager.imgResTint(this, contentBinding.notificationImageView.componentMainButton, R.drawable.ic_bell_light, R.color.Gray500);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            contentBinding.accountIncludeLayout.componentMainToolbar.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
+            contentBinding.toolbarIncludeLayout.componentMainToolbar.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
 
-            contentBinding.menuIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            contentBinding.logoutIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
-            contentBinding.notificationIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            contentBinding.menuImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            contentBinding.logoutImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
+            contentBinding.notificationImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
         }
     }
 
     private void listener() {
-        contentBinding.accountIncludeLayout.componentMainToolbar.setOnClickListener(v -> {
-            contentBinding.accountIncludeLayout.componentMainToolbar.setClickable(false);
-            handler.postDelayed(() -> contentBinding.accountIncludeLayout.componentMainToolbar.setClickable(true), 300);
+        contentBinding.toolbarIncludeLayout.componentMainToolbar.setOnClickListener(v -> {
+            contentBinding.toolbarIncludeLayout.componentMainToolbar.setClickable(false);
+            handler.postDelayed(() -> contentBinding.toolbarIncludeLayout.componentMainToolbar.setClickable(true), 300);
 
             navigator(R.id.accountFragment);
         });
 
-        contentBinding.menuIncludeLayout.componentMainButton.setOnClickListener(v -> {
-            contentBinding.menuIncludeLayout.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> contentBinding.menuIncludeLayout.componentMainButton.setClickable(true), 300);
+        contentBinding.menuImageView.componentMainButton.setOnClickListener(v -> {
+            contentBinding.menuImageView.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> contentBinding.menuImageView.componentMainButton.setClickable(true), 300);
 
             binding.getRoot().openDrawer(GravityCompat.START);
         });
 
-        contentBinding.logoutIncludeLayout.componentMainButton.setOnClickListener(v -> {
-            contentBinding.logoutIncludeLayout.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> contentBinding.logoutIncludeLayout.componentMainButton.setClickable(true), 300);
+        contentBinding.logoutImageView.componentMainButton.setOnClickListener(v -> {
+            contentBinding.logoutImageView.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> contentBinding.logoutImageView.componentMainButton.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        contentBinding.notificationIncludeLayout.componentMainButton.setOnClickListener(v -> {
-            contentBinding.notificationIncludeLayout.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> contentBinding.notificationIncludeLayout.componentMainButton.setClickable(true), 300);
+        contentBinding.notificationImageView.componentMainButton.setOnClickListener(v -> {
+            contentBinding.notificationImageView.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> contentBinding.notificationImageView.componentMainButton.setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -142,15 +142,15 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupWithNavController(binding.mainNavigationView, navController);
 
         if (singleton.getName().equals("")) {
-            contentBinding.accountIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainToolbar));
+            contentBinding.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainToolbar));
         } else {
-            contentBinding.accountIncludeLayout.nameTextView.setText(singleton.getName());
+            contentBinding.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
         }
 
         if (singleton.getMoney().equals("")) {
-            contentBinding.accountIncludeLayout.moneyTextView.setVisibility(View.GONE);
+            contentBinding.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
         } else {
-            contentBinding.accountIncludeLayout.moneyTextView.setText(singleton.getMoney());
+            contentBinding.toolbarIncludeLayout.moneyTextView.setText(singleton.getMoney());
         }
 
         if (singleton.getNotification().equals("")) {
@@ -161,12 +161,12 @@ public class MainActivity extends AppCompatActivity {
         }
 
         if (singleton.getAvatar().equals("")) {
-            contentBinding.accountIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            contentBinding.accountIncludeLayout.charTextView.setText(StringManager.firstChars(contentBinding.accountIncludeLayout.nameTextView.getText().toString()));
+            contentBinding.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            contentBinding.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(contentBinding.toolbarIncludeLayout.nameTextView.getText().toString()));
         } else {
-            contentBinding.accountIncludeLayout.charTextView.setVisibility(View.GONE);
+            contentBinding.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(contentBinding.accountIncludeLayout.avatarImageView);
+            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(contentBinding.toolbarIncludeLayout.avatarImageView);
         }
     }
 

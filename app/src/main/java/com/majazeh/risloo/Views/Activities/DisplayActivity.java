@@ -65,28 +65,28 @@ public class DisplayActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        InitManager.imgResTint(this, binding.returnIncludeLayout.componentMainButton, R.drawable.ic_angle_right_regular, R.color.Gray50);
-        InitManager.imgResTint(this, binding.downloadIncludeLayout.componentMainButton, R.drawable.ic_download_light, R.color.Gray50);
+        InitManager.imgResTint(this, binding.returnImageView.componentMainButton, R.drawable.ic_angle_right_regular, R.color.Gray50);
+        InitManager.imgResTint(this, binding.downloadImageView.componentMainButton, R.drawable.ic_download_light, R.color.Gray50);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.returnIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-            binding.downloadIncludeLayout.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            binding.returnImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            binding.downloadImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener() {
-        binding.returnIncludeLayout.componentMainButton.setOnClickListener(v -> {
-            binding.returnIncludeLayout.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> binding.returnIncludeLayout.componentMainButton.setClickable(true), 300);
+        binding.returnImageView.componentMainButton.setOnClickListener(v -> {
+            binding.returnImageView.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> binding.returnImageView.componentMainButton.setClickable(true), 300);
 
             finish();
         });
 
-        binding.downloadIncludeLayout.componentMainButton.setOnClickListener(v -> {
-            binding.downloadIncludeLayout.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> binding.downloadIncludeLayout.componentMainButton.setClickable(true), 300);
+        binding.downloadImageView.componentMainButton.setOnClickListener(v -> {
+            binding.downloadImageView.componentMainButton.setClickable(false);
+            handler.postDelayed(() -> binding.downloadImageView.componentMainButton.setClickable(true), 300);
 
             if (PermissionManager.storagePermission(this)) {
                 IntentManager.download(this, bitmap);
