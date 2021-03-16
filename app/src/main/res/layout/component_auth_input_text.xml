@@ -10,7 +10,7 @@
     tools:layout_margin="@dimen/_16sdp">
 
     <EditText
-        android:id="@+id/component_auth_input_text_editText"
+        android:id="@+id/input_editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:paddingStart="@dimen/_12sdp"
@@ -32,7 +32,7 @@
         tools:hint="عنوان" />
 
     <ImageView
-        android:id="@+id/component_auth_input_text_error_imageView"
+        android:id="@+id/error_imageView"
         android:layout_width="@dimen/_8sdp"
         android:layout_height="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_4sdp"
@@ -40,12 +40,12 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_exclamation_light"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/component_auth_input_text_editText"
-        app:layout_constraintTop_toTopOf="@+id/component_auth_input_text_error_textView"
+        app:layout_constraintStart_toStartOf="@+id/input_editText"
+        app:layout_constraintTop_toTopOf="@+id/error_textView"
         app:tint="@color/Red500" />
 
     <TextView
-        android:id="@+id/component_auth_input_text_error_textView"
+        android:id="@+id/error_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
@@ -57,8 +57,8 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_light"
         android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@+id/component_auth_input_text_error_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/component_auth_input_text_editText"
+        app:layout_constraintStart_toEndOf="@+id/error_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/input_editText"
         tools:text="خطا" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

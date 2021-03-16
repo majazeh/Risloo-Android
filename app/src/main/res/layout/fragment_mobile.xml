@@ -10,102 +10,102 @@
     tools:context=".Views.Fragments.Auth.MobileFragment">
 
     <include
-        android:id="@+id/fragment_mobile_button_textView"
+        android:id="@+id/mobile_textView"
         layout="@layout/component_auth_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_24sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_mobile_login_textView"
+        app:layout_constraintBottom_toTopOf="@+id/login_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_mobile_input_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/mobile_includeLayout" />
 
     <include
-        android:id="@+id/fragment_mobile_input_editText"
+        android:id="@+id/mobile_includeLayout"
         layout="@layout/component_auth_input_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_12sdp"
         android:minHeight="@dimen/_36sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_mobile_button_textView"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_mobile_button_textView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_mobile_button_textView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_mobile_header_textView" />
+        app:layout_constraintBottom_toTopOf="@+id/mobile_textView"
+        app:layout_constraintEnd_toEndOf="@+id/mobile_textView"
+        app:layout_constraintStart_toStartOf="@+id/mobile_textView"
+        app:layout_constraintTop_toBottomOf="@+id/header_textView" />
 
     <include
-        android:id="@+id/fragment_mobile_header_textView"
+        android:id="@+id/header_textView"
         layout="@layout/component_auth_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_18sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_mobile_input_editText"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_mobile_input_editText"
-        app:layout_constraintStart_toStartOf="@+id/fragment_mobile_input_editText"
+        app:layout_constraintBottom_toTopOf="@+id/mobile_includeLayout"
+        app:layout_constraintEnd_toEndOf="@+id/mobile_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/mobile_includeLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <include
-        android:id="@+id/fragment_mobile_login_textView"
+        android:id="@+id/login_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginBottom="@dimen/_32sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_mobile_separate_view"
+        app:layout_constraintEnd_toStartOf="@+id/separator_view"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_mobile_button_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/mobile_textView" />
 
     <View
-        android:id="@+id/fragment_mobile_separate_view"
+        android:id="@+id/separator_view"
         android:layout_width="@dimen/_1sdp"
         android:layout_height="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_6sdp"
         android:background="@color/Gray500"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_mobile_login_textView"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_mobile_register_textView"
-        app:layout_constraintStart_toEndOf="@+id/fragment_mobile_login_textView"
-        app:layout_constraintTop_toTopOf="@+id/fragment_mobile_login_textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/login_textView"
+        app:layout_constraintEnd_toStartOf="@+id/register_textView"
+        app:layout_constraintStart_toEndOf="@+id/login_textView"
+        app:layout_constraintTop_toTopOf="@+id/login_textView" />
 
     <include
-        android:id="@+id/fragment_mobile_register_textView"
+        android:id="@+id/register_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_mobile_login_textView"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_mobile_separate_view2"
+        app:layout_constraintBottom_toBottomOf="@+id/login_textView"
+        app:layout_constraintEnd_toStartOf="@+id/separator_view2"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/fragment_mobile_separate_view"
-        app:layout_constraintTop_toTopOf="@+id/fragment_mobile_login_textView" />
+        app:layout_constraintStart_toEndOf="@+id/separator_view"
+        app:layout_constraintTop_toTopOf="@+id/login_textView" />
 
     <View
-        android:id="@+id/fragment_mobile_separate_view2"
+        android:id="@+id/separator_view2"
         android:layout_width="@dimen/_1sdp"
         android:layout_height="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_6sdp"
         android:background="@color/Gray500"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_mobile_register_textView"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_mobile_password_recover_textView"
-        app:layout_constraintStart_toEndOf="@+id/fragment_mobile_register_textView"
-        app:layout_constraintTop_toTopOf="@+id/fragment_mobile_register_textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/register_textView"
+        app:layout_constraintEnd_toStartOf="@+id/password_recover_textView"
+        app:layout_constraintStart_toEndOf="@+id/register_textView"
+        app:layout_constraintTop_toTopOf="@+id/register_textView" />
 
     <include
-        android:id="@+id/fragment_mobile_password_recover_textView"
+        android:id="@+id/password_recover_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_mobile_register_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/register_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/fragment_mobile_separate_view2"
-        app:layout_constraintTop_toTopOf="@+id/fragment_mobile_register_textView" />
+        app:layout_constraintStart_toEndOf="@+id/separator_view2"
+        app:layout_constraintTop_toTopOf="@+id/register_textView" />
 
     <ImageView
-        android:id="@+id/fragment_mobile_illu_imageView"
+        android:id="@+id/illu_imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_32sdp"
@@ -114,8 +114,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/illu_007"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_mobile_button_textView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_mobile_button_textView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_mobile_login_textView" />
+        app:layout_constraintEnd_toEndOf="@+id/mobile_textView"
+        app:layout_constraintStart_toStartOf="@+id/mobile_textView"
+        app:layout_constraintTop_toBottomOf="@+id/login_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

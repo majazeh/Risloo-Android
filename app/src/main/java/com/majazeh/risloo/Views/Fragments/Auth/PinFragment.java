@@ -13,10 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.ViewFlipper;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -38,14 +34,6 @@ public class PinFragment extends Fragment {
     private ClickableSpan pinLinkSpan;
     private CountDownTimer pinCountDownTimer;
 
-    // Widgets
-    private EditText pinEditText;
-    private ImageView pinErrorImageView;
-    private TextView pinErrorTextView;
-    private ViewFlipper pinViewFlipper;
-    private TextView pinCountdownTextView, pinTimerTextView;
-    private TextView pinTextView, loginTextView, registerTextView, passwordRecoverTextView;
-
     // Vars
     private String pin = "";
 
@@ -66,49 +54,35 @@ public class PinFragment extends Fragment {
     }
 
     private void initializer() {
-        pinEditText = binding.fragmentPinInputEditText.componentAuthInputNumberEditText;
-        pinEditText.setHint(getResources().getString(R.string.PinFragmentInput));
+        binding.pinIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PinFragmentInput));
 
-        pinErrorImageView = binding.fragmentPinInputEditText.componentAuthInputNumberErrorImageView;
-        pinErrorTextView = binding.fragmentPinInputEditText.componentAuthInputNumberErrorTextView;
+        binding.timerTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        pinViewFlipper = binding.fragmentPinViewFlipper;
+        binding.pinTextView.componentAuthButton.setText(getResources().getString(R.string.PinFragmentButton));
 
-        pinCountdownTextView = binding.fragmentPinCountdownTextView;
-        pinTimerTextView = binding.fragmentPinTimerTextView;
-        pinTimerTextView.setMovementMethod(LinkMovementMethod.getInstance());
-
-        pinTextView = binding.fragmentPinButtonTextView.componentAuthButton;
-        pinTextView.setText(getResources().getString(R.string.PinFragmentButton));
-
-        loginTextView = binding.fragmentPinLoginTextView.componentAuthLink;
-        loginTextView.setText(getResources().getString(R.string.AuthLogin));
-
-        registerTextView = binding.fragmentPinRegisterTextView.componentAuthLink;
-        registerTextView.setText(getResources().getString(R.string.AuthRegister));
-
-        passwordRecoverTextView = binding.fragmentPinPasswordRecoverTextView.componentAuthLink;
-        passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
+        binding.loginTextView.componentAuthLink.setText(getResources().getString(R.string.AuthLogin));
+        binding.registerTextView.componentAuthLink.setText(getResources().getString(R.string.AuthRegister));
+        binding.passwordRecoverTextView.componentAuthLink.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            pinTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.pinTextView.componentAuthButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        pinEditText.setOnTouchListener((v, event) -> {
+        binding.pinIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!pinEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), pinEditText);
+                if (!binding.pinIncludeLayout.inputEditText.hasFocus()) {
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.pinIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        pinEditText.addTextChangedListener(new TextWatcher() {
+        binding.pinIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -116,8 +90,8 @@ public class PinFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (pinEditText.length() == 6) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView);
+                if (binding.pinIncludeLayout.inputEditText.length() == 6) {
+                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
                     doWork("pin");
                 }
             }
@@ -128,14 +102,14 @@ public class PinFragment extends Fragment {
             }
         });
 
-        pinTextView.setOnClickListener(v -> {
-            pinTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> pinTextView.setClickable(true), 300);
+        binding.pinTextView.componentAuthButton.setOnClickListener(v -> {
+            binding.pinTextView.componentAuthButton.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.pinTextView.componentAuthButton.setClickable(true), 300);
 
-            if (pinEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.pinIncludeLayout.inputEditText.length() == 0) {
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), pinEditText, pinErrorImageView, pinErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
                 doWork("pin");
             }
         });
@@ -159,7 +133,7 @@ public class PinFragment extends Fragment {
                 int minutes = (int) (millisUntilFinished / 1000) / 60;
                 int seconds = (int) (millisUntilFinished / 1000) % 60;
 
-                pinCountdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds));
+                binding.countdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds));
             }
 
             @Override
@@ -168,30 +142,30 @@ public class PinFragment extends Fragment {
             }
         };
 
-        loginTextView.setOnClickListener(v -> {
-            loginTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+        binding.loginTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.loginTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
         });
 
-        registerTextView.setOnClickListener(v -> {
-            registerTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+        binding.registerTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.registerTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
-        passwordRecoverTextView.setOnClickListener(v -> {
-            passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+        binding.passwordRecoverTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.passwordRecoverTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
         });
     }
 
     private void setData() {
-        pinTimerTextView.setText(StringManager.clickable(getActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, pinLinkSpan));
+        binding.timerTextView.setText(StringManager.clickable(getActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, pinLinkSpan));
         pinCountDownTimer.start();
     }
 
@@ -199,22 +173,22 @@ public class PinFragment extends Fragment {
         if (value) {
             pinCountDownTimer.start();
 
-            pinViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_right_with_fade);
-            pinViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_left_with_fade);
+            binding.containerViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_right_with_fade);
+            binding.containerViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_left_with_fade);
 
-            pinViewFlipper.showPrevious();
+            binding.containerViewFlipper.showPrevious();
         } else {
             pinCountDownTimer.cancel();
 
-            pinViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_left_with_fade);
-            pinViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_right_with_fade);
+            binding.containerViewFlipper.setInAnimation(getActivity(), R.anim.slide_in_left_with_fade);
+            binding.containerViewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_right_with_fade);
 
-            pinViewFlipper.showNext();
+            binding.containerViewFlipper.showNext();
         }
     }
 
     private void doWork(String method) {
-        pin = pinEditText.getText().toString().trim();
+        pin = binding.pinIncludeLayout.inputEditText.getText().toString().trim();
 
         if (method.equals("pin")) {
             // TODO : Call Work Method

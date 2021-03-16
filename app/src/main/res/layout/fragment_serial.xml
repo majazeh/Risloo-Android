@@ -10,90 +10,90 @@
     tools:context=".Views.Fragments.Auth.SerialFragment">
 
     <include
-        android:id="@+id/fragment_serial_button_textView"
+        android:id="@+id/serial_textView"
         layout="@layout/component_auth_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_24sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_serial_dashboard_textView"
+        app:layout_constraintBottom_toTopOf="@+id/dashboard_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_serial_input_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/serial_includeLayout" />
 
     <include
-        android:id="@+id/fragment_serial_input_editText"
+        android:id="@+id/serial_includeLayout"
         layout="@layout/component_auth_input_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_12sdp"
         android:minHeight="@dimen/_36sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_serial_button_textView"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_serial_button_textView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_serial_button_textView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_serial_avatar_imageView" />
+        app:layout_constraintBottom_toTopOf="@+id/serial_textView"
+        app:layout_constraintEnd_toEndOf="@+id/serial_textView"
+        app:layout_constraintStart_toStartOf="@+id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout" />
 
     <include
-        android:id="@+id/fragment_serial_avatar_imageView"
+        android:id="@+id/avatar_includeLayout"
         layout="@layout/component_auth_avatar"
         android:layout_width="@dimen/_64sdp"
         android:layout_height="@dimen/_64sdp"
         android:layout_marginBottom="@dimen/_16sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_serial_input_editText"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_serial_input_editText"
-        app:layout_constraintStart_toStartOf="@+id/fragment_serial_input_editText"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_serial_header_textView" />
+        app:layout_constraintBottom_toTopOf="@+id/serial_includeLayout"
+        app:layout_constraintEnd_toEndOf="@+id/serial_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/serial_includeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/header_textView" />
 
     <include
-        android:id="@+id/fragment_serial_header_textView"
+        android:id="@+id/header_textView"
         layout="@layout/component_auth_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_12sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_serial_avatar_imageView"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_serial_avatar_imageView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_serial_avatar_imageView"
+        app:layout_constraintBottom_toTopOf="@+id/avatar_includeLayout"
+        app:layout_constraintEnd_toEndOf="@+id/avatar_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/avatar_includeLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <include
-        android:id="@+id/fragment_serial_dashboard_textView"
+        android:id="@+id/dashboard_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_6sdp"
         android:layout_marginBottom="@dimen/_32sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_serial_separate_view"
+        app:layout_constraintEnd_toStartOf="@+id/separator_view"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_serial_button_textView" />
+        app:layout_constraintTop_toBottomOf="@+id/serial_textView" />
 
     <View
-        android:id="@+id/fragment_serial_separate_view"
+        android:id="@+id/separator_view"
         android:layout_width="@dimen/_1sdp"
         android:layout_height="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_6sdp"
         android:background="@color/Gray500"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_serial_dashboard_textView"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_serial_logout_textView"
-        app:layout_constraintStart_toEndOf="@+id/fragment_serial_dashboard_textView"
-        app:layout_constraintTop_toTopOf="@+id/fragment_serial_dashboard_textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/dashboard_textView"
+        app:layout_constraintEnd_toStartOf="@+id/logout_textView"
+        app:layout_constraintStart_toEndOf="@+id/dashboard_textView"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_textView" />
 
     <include
-        android:id="@+id/fragment_serial_logout_textView"
+        android:id="@+id/logout_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_serial_dashboard_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/dashboard_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/fragment_serial_separate_view"
-        app:layout_constraintTop_toTopOf="@+id/fragment_serial_dashboard_textView" />
+        app:layout_constraintStart_toEndOf="@+id/separator_view"
+        app:layout_constraintTop_toTopOf="@+id/dashboard_textView" />
 
     <ImageView
-        android:id="@+id/fragment_serial_illu_imageView"
+        android:id="@+id/illu_imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_32sdp"
@@ -102,8 +102,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/illu_003"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_serial_button_textView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_serial_button_textView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_serial_dashboard_textView" />
+        app:layout_constraintEnd_toEndOf="@+id/serial_textView"
+        app:layout_constraintStart_toStartOf="@+id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@+id/dashboard_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

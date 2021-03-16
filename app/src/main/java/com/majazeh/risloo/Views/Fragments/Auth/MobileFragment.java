@@ -9,9 +9,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,12 +22,6 @@ public class MobileFragment extends Fragment {
 
     // Binding
     private FragmentMobileBinding binding;
-
-    // Widgets
-    private EditText mobileEditText;
-    private ImageView mobileErrorImageView;
-    private TextView mobileErrorTextView;
-    private TextView mobileTextView, loginTextView, registerTextView, passwordRecoverTextView;
 
     // Vars
     private String mobile = "";
@@ -50,43 +41,33 @@ public class MobileFragment extends Fragment {
     }
 
     private void initializer() {
-        mobileEditText = binding.fragmentMobileInputEditText.componentAuthInputNumberEditText;
-        mobileEditText.setHint(getResources().getString(R.string.MobileFragmentInput));
+        binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.MobileFragmentInput));
 
-        mobileErrorImageView = binding.fragmentMobileInputEditText.componentAuthInputNumberErrorImageView;
-        mobileErrorTextView = binding.fragmentMobileInputEditText.componentAuthInputNumberErrorTextView;
+        binding.mobileTextView.componentAuthButton.setText(getResources().getString(R.string.MobileFragmentButton));
 
-        mobileTextView = binding.fragmentMobileButtonTextView.componentAuthButton;
-        mobileTextView.setText(getResources().getString(R.string.MobileFragmentButton));
-
-        loginTextView = binding.fragmentMobileLoginTextView.componentAuthLink;
-        loginTextView.setText(getResources().getString(R.string.AuthLogin));
-
-        registerTextView = binding.fragmentMobileRegisterTextView.componentAuthLink;
-        registerTextView.setText(getResources().getString(R.string.AuthRegister));
-
-        passwordRecoverTextView = binding.fragmentMobilePasswordRecoverTextView.componentAuthLink;
-        passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
+        binding.loginTextView.componentAuthLink.setText(getResources().getString(R.string.AuthLogin));
+        binding.registerTextView.componentAuthLink.setText(getResources().getString(R.string.AuthRegister));
+        binding.passwordRecoverTextView.componentAuthLink.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            mobileTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.mobileTextView.componentAuthButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        mobileEditText.setOnTouchListener((v, event) -> {
+        binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!mobileEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), mobileEditText);
+                if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.mobileIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        mobileEditText.addTextChangedListener(new TextWatcher() {
+        binding.mobileIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -94,8 +75,8 @@ public class MobileFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (mobileEditText.length() == 11) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
+                if (binding.mobileIncludeLayout.inputEditText.length() == 11) {
+                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
                     doWork();
                 }
             }
@@ -106,42 +87,42 @@ public class MobileFragment extends Fragment {
             }
         });
 
-        mobileTextView.setOnClickListener(v -> {
-            mobileTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> mobileTextView.setClickable(true), 300);
+        binding.mobileTextView.componentAuthButton.setOnClickListener(v -> {
+            binding.mobileTextView.componentAuthButton.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.mobileTextView.componentAuthButton.setClickable(true), 300);
 
-            if (mobileEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
                 doWork();
             }
         });
 
-        loginTextView.setOnClickListener(v -> {
-            loginTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+        binding.loginTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.loginTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
         });
 
-        registerTextView.setOnClickListener(v -> {
-            registerTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+        binding.registerTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.registerTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
-        passwordRecoverTextView.setOnClickListener(v -> {
-            passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+        binding.passwordRecoverTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.passwordRecoverTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
         });
     }
 
     private void doWork() {
-        mobile = mobileEditText.getText().toString().trim();
+        mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

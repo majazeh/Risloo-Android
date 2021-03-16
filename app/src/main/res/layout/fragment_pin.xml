@@ -10,57 +10,57 @@
     tools:context=".Views.Fragments.Auth.PinFragment">
 
     <include
-        android:id="@+id/fragment_pin_button_textView"
+        android:id="@+id/pin_textView"
         layout="@layout/component_auth_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_24sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_pin_viewFlipper"
+        app:layout_constraintBottom_toTopOf="@+id/container_viewFlipper"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_input_editText" />
+        app:layout_constraintTop_toBottomOf="@+id/pin_includeLayout" />
 
     <include
-        android:id="@+id/fragment_pin_input_editText"
+        android:id="@+id/pin_includeLayout"
         layout="@layout/component_auth_input_number"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_12sdp"
         android:minHeight="@dimen/_36sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_pin_button_textView"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_pin_button_textView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_pin_button_textView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_header_textView" />
+        app:layout_constraintBottom_toTopOf="@+id/pin_textView"
+        app:layout_constraintEnd_toEndOf="@+id/pin_textView"
+        app:layout_constraintStart_toStartOf="@+id/pin_textView"
+        app:layout_constraintTop_toBottomOf="@+id/header_textView" />
 
     <include
-        android:id="@+id/fragment_pin_header_textView"
+        android:id="@+id/header_textView"
         layout="@layout/component_auth_header"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_18sdp"
-        app:layout_constraintBottom_toTopOf="@+id/fragment_pin_input_editText"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_pin_input_editText"
-        app:layout_constraintStart_toStartOf="@+id/fragment_pin_input_editText"
+        app:layout_constraintBottom_toTopOf="@+id/pin_includeLayout"
+        app:layout_constraintEnd_toEndOf="@+id/pin_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/pin_includeLayout"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
 
     <ViewFlipper
-        android:id="@+id/fragment_pin_viewFlipper"
+        android:id="@+id/container_viewFlipper"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_button_textView"
+        app:layout_constraintTop_toBottomOf="@+id/pin_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/fragment_pin_login_textView">
+        app:layout_constraintBottom_toTopOf="@id/login_textView">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/fragment_pin_hint_textView"
+                android:id="@+id/hint_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
@@ -75,7 +75,7 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <TextView
-                android:id="@+id/fragment_pin_countdown_textView"
+                android:id="@+id/countdown_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_2sdp"
@@ -85,16 +85,16 @@
                 android:textColor="@color/Gray700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                app:layout_constraintTop_toTopOf="@id/fragment_pin_hint_textView"
-                app:layout_constraintBottom_toBottomOf="@id/fragment_pin_hint_textView"
-                app:layout_constraintStart_toEndOf="@id/fragment_pin_hint_textView"
+                app:layout_constraintTop_toTopOf="@id/hint_textView"
+                app:layout_constraintBottom_toBottomOf="@id/hint_textView"
+                app:layout_constraintStart_toEndOf="@id/hint_textView"
                 app:layout_constraintEnd_toEndOf="parent"
                 tools:text="05:00"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
-            android:id="@+id/fragment_pin_timer_textView"
+            android:id="@+id/timer_textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center"
@@ -107,66 +107,66 @@
     </ViewFlipper>
 
     <include
-        android:id="@+id/fragment_pin_login_textView"
+        android:id="@+id/login_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginBottom="@dimen/_32sdp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_separate_view"
+        app:layout_constraintEnd_toStartOf="@+id/separator_view"
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_viewFlipper" />
+        app:layout_constraintTop_toBottomOf="@+id/container_viewFlipper" />
 
     <View
-        android:id="@+id/fragment_pin_separate_view"
+        android:id="@+id/separator_view"
         android:layout_width="@dimen/_1sdp"
         android:layout_height="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_6sdp"
         android:background="@color/Gray500"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_login_textView"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_register_textView"
-        app:layout_constraintStart_toEndOf="@+id/fragment_pin_login_textView"
-        app:layout_constraintTop_toTopOf="@+id/fragment_pin_login_textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/login_textView"
+        app:layout_constraintEnd_toStartOf="@+id/register_textView"
+        app:layout_constraintStart_toEndOf="@+id/login_textView"
+        app:layout_constraintTop_toTopOf="@+id/login_textView" />
 
     <include
-        android:id="@+id/fragment_pin_register_textView"
+        android:id="@+id/register_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_login_textView"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_separate_view2"
+        app:layout_constraintBottom_toBottomOf="@+id/login_textView"
+        app:layout_constraintEnd_toStartOf="@+id/separator_view2"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/fragment_pin_separate_view"
-        app:layout_constraintTop_toTopOf="@+id/fragment_pin_login_textView" />
+        app:layout_constraintStart_toEndOf="@+id/separator_view"
+        app:layout_constraintTop_toTopOf="@+id/login_textView" />
 
     <View
-        android:id="@+id/fragment_pin_separate_view2"
+        android:id="@+id/separator_view2"
         android:layout_width="@dimen/_1sdp"
         android:layout_height="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_6sdp"
         android:background="@color/Gray500"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_register_textView"
-        app:layout_constraintEnd_toStartOf="@+id/fragment_pin_password_recover_textView"
-        app:layout_constraintStart_toEndOf="@+id/fragment_pin_register_textView"
-        app:layout_constraintTop_toTopOf="@+id/fragment_pin_register_textView" />
+        app:layout_constraintBottom_toBottomOf="@+id/register_textView"
+        app:layout_constraintEnd_toStartOf="@+id/password_recover_textView"
+        app:layout_constraintStart_toEndOf="@+id/register_textView"
+        app:layout_constraintTop_toTopOf="@+id/register_textView" />
 
     <include
-        android:id="@+id/fragment_pin_password_recover_textView"
+        android:id="@+id/password_recover_textView"
         layout="@layout/component_auth_link"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        app:layout_constraintBottom_toBottomOf="@+id/fragment_pin_register_textView"
+        app:layout_constraintBottom_toBottomOf="@+id/register_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toEndOf="@+id/fragment_pin_separate_view2"
-        app:layout_constraintTop_toTopOf="@+id/fragment_pin_register_textView" />
+        app:layout_constraintStart_toEndOf="@+id/separator_view2"
+        app:layout_constraintTop_toTopOf="@+id/register_textView" />
 
     <ImageView
-        android:id="@+id/fragment_pin_illu_imageView"
+        android:id="@+id/illu_imageView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/_32sdp"
@@ -175,8 +175,8 @@
         android:scaleType="fitCenter"
         android:src="@drawable/illu_006"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/fragment_pin_button_textView"
-        app:layout_constraintStart_toStartOf="@+id/fragment_pin_button_textView"
-        app:layout_constraintTop_toBottomOf="@+id/fragment_pin_login_textView" />
+        app:layout_constraintEnd_toEndOf="@+id/pin_textView"
+        app:layout_constraintStart_toStartOf="@+id/pin_textView"
+        app:layout_constraintTop_toBottomOf="@+id/login_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

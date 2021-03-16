@@ -8,9 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,12 +22,6 @@ public class LoginFragment extends Fragment {
 
     // Binding
     private FragmentLoginBinding binding;
-
-    // Widgets
-    private EditText usernameEditText;
-    private ImageView usernameErrorImageView;
-    private TextView usernameErrorTextView;
-    private TextView loginTextView, registerTextView, passwordRecoverTextView;
 
     // Vars
     private String username = "";
@@ -50,68 +41,60 @@ public class LoginFragment extends Fragment {
     }
 
     private void initializer() {
-        usernameEditText = binding.fragmentLoginInputEditText.componentAuthInputTextEditText;
-        usernameEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
+        binding.loginIncludeLayout.inputEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
 
-        usernameErrorImageView = binding.fragmentLoginInputEditText.componentAuthInputTextErrorImageView;
-        usernameErrorTextView = binding.fragmentLoginInputEditText.componentAuthInputTextErrorTextView;
+        binding.loginTextView.componentAuthButton.setText(getResources().getString(R.string.LoginFragmentButton));
 
-        loginTextView = binding.fragmentLoginButtonTextView.componentAuthButton;
-        loginTextView.setText(getResources().getString(R.string.LoginFragmentButton));
-
-        registerTextView = binding.fragmentLoginRegisterTextView.componentAuthLink;
-        registerTextView.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthRegister), 0, 5, getResources().getColor(R.color.Gray900), Typeface.BOLD));
-
-        passwordRecoverTextView = binding.fragmentLoginPasswordRecoverTextView.componentAuthLink;
-        passwordRecoverTextView.setText(getResources().getString(R.string.AuthPasswordRecover));
+        binding.registerTextView.componentAuthLink.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthRegister), 0, 5, getResources().getColor(R.color.Gray900), Typeface.BOLD));
+        binding.passwordRecoverTextView.componentAuthLink.setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            loginTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.loginTextView.componentAuthButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        usernameEditText.setOnTouchListener((v, event) -> {
+        binding.loginIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!usernameEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), usernameEditText);
+                if (!binding.loginIncludeLayout.inputEditText.hasFocus()) {
+                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.loginIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        loginTextView.setOnClickListener(v -> {
-            loginTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> loginTextView.setClickable(true), 300);
+        binding.loginTextView.componentAuthButton.setOnClickListener(v -> {
+            binding.loginTextView.componentAuthButton.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.componentAuthButton.setClickable(true), 300);
 
-            if (usernameEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.loginIncludeLayout.inputEditText.length() == 0) {
+                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView);
                 doWork();
             }
         });
 
-        registerTextView.setOnClickListener(v -> {
-            registerTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> registerTextView.setClickable(true), 300);
+        binding.registerTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.registerTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
-        passwordRecoverTextView.setOnClickListener(v -> {
-            passwordRecoverTextView.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> passwordRecoverTextView.setClickable(true), 300);
+        binding.passwordRecoverTextView.componentAuthLink.setOnClickListener(v -> {
+            binding.passwordRecoverTextView.componentAuthLink.setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.componentAuthLink.setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.serialFragment);
         });
     }
 
     private void doWork() {
-        username = usernameEditText.getText().toString().trim();
+        username = binding.loginIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }
