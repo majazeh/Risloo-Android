@@ -60,7 +60,7 @@
 
                 <include
                     android:id="@+id/fragment_user_edit_textView"
-                    layout="@layout/component_button_rectangle_28sdp"
+                    layout="@layout/component_button_rect_28sdp"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"

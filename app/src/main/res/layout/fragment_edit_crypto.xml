@@ -13,7 +13,7 @@
     tools:context=".Views.Fragments.Edit.EditCryptoFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_edit_crypto_constraintLayout"
+        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_12sdp"
@@ -24,7 +24,7 @@
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_description_textView"
+            android:id="@+id/public_description_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
@@ -42,7 +42,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_question1_textView"
+            android:id="@+id/public_question1_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -53,12 +53,12 @@
             android:textColor="@color/Gray800"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_demi_bold"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_description_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_description_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_description_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_description_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_description_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_description_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer1_header1_textView"
+            android:id="@+id/public_answer1_header1_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_8sdp"
@@ -70,12 +70,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question1_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question1_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_question1_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_question1_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_question1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_question1_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView"
+            android:id="@+id/public_answer1_header1_item1_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
@@ -87,12 +87,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header1_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer1_header1_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer1_header1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer1_header1_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView"
+            android:id="@+id/public_answer1_header1_item2_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
@@ -103,12 +103,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header1_item1_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer1_header1_item1_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer1_header1_item1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer1_header1_item1_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer1_header2_textView"
+            android:id="@+id/public_answer1_header2_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_10sdp"
@@ -119,12 +119,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer1_header1_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer1_header1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer1_header1_item2_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView"
+            android:id="@+id/public_answer1_header2_item1_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
@@ -135,12 +135,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header1_item2_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header2_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer1_header1_item2_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer1_header1_item2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer1_header2_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer1_header2_item2_textView"
+            android:id="@+id/public_answer1_header2_item2_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_4sdp"
@@ -151,12 +151,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header2_item1_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer1_header2_item1_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer1_header2_item1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer1_header2_item1_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_question2_textView"
+            android:id="@+id/public_question2_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -167,12 +167,12 @@
             android:textColor="@color/Gray800"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_demi_bold"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question1_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question1_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer1_header2_item2_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_question1_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_question1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer1_header2_item2_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer2_textView"
+            android:id="@+id/public_answer2_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
@@ -183,12 +183,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer1_header2_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer1_header2_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_question2_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer1_header2_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer1_header2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_question2_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_question3_textView"
+            android:id="@+id/public_question3_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -199,12 +199,12 @@
             android:textColor="@color/Gray800"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_demi_bold"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question2_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question2_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer2_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_question2_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_question2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer2_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_public_answer3_textView"
+            android:id="@+id/public_answer3_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
@@ -215,31 +215,31 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer2_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer2_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_question3_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer2_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_question3_textView" />
 
         <include
-            android:id="@+id/fragment_edit_crypto_public_editText"
+            android:id="@+id/public_includeLayout"
             layout="@layout/component_input_multi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_question3_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_question3_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_answer3_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_question3_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_question3_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_answer3_textView" />
 
         <include
-            android:id="@+id/fragment_edit_crypto_public_button_textView"
-            layout="@layout/component_button_rectangle_32sdp"
+            android:id="@+id/public_edit_textView"
+            layout="@layout/component_button_rect_32sdp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_editText"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_editText" />
+            app:layout_constraintEnd_toEndOf="@+id/public_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/public_includeLayout" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_private_description_textView"
+            android:id="@+id/private_description_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
@@ -250,12 +250,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_description_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_description_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_public_button_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_description_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_description_textView"
+            app:layout_constraintTop_toBottomOf="@+id/public_edit_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_private_item1_textView"
+            android:id="@+id/private_item1_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
@@ -266,12 +266,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_answer3_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_answer3_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_description_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_answer3_textView"
+            app:layout_constraintStart_toStartOf="@+id/public_answer3_textView"
+            app:layout_constraintTop_toBottomOf="@+id/private_description_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_private_item2_textView"
+            android:id="@+id/private_item2_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
@@ -282,12 +282,12 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_private_item1_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_private_item1_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_item1_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/private_item1_textView"
+            app:layout_constraintStart_toStartOf="@+id/private_item1_textView"
+            app:layout_constraintTop_toBottomOf="@+id/private_item1_textView" />
 
         <TextView
-            android:id="@+id/fragment_edit_crypto_private_item3_textView"
+            android:id="@+id/private_item3_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_6sdp"
@@ -298,28 +298,28 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_private_item2_textView"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_private_item2_textView"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_item2_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/private_item2_textView"
+            app:layout_constraintStart_toStartOf="@+id/private_item2_textView"
+            app:layout_constraintTop_toBottomOf="@+id/private_item2_textView" />
 
         <include
-            android:id="@+id/fragment_edit_crypto_private_editText"
+            android:id="@+id/private_includeLayout"
             layout="@layout/component_input_multi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_public_editText"
-            app:layout_constraintStart_toStartOf="@+id/fragment_edit_crypto_public_editText"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_item3_textView" />
+            app:layout_constraintEnd_toEndOf="@+id/public_includeLayout"
+            app:layout_constraintStart_toStartOf="@+id/public_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/private_item3_textView" />
 
         <include
-            android:id="@+id/fragment_edit_crypto_private_button_textView"
-            layout="@layout/component_button_rectangle_32sdp"
+            android:id="@+id/private_edit_textView"
+            layout="@layout/component_button_rect_32sdp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_edit_crypto_private_editText"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_edit_crypto_private_editText" />
+            app:layout_constraintEnd_toEndOf="@+id/private_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/private_includeLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

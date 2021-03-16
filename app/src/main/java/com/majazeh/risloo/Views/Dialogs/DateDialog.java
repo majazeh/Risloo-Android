@@ -18,6 +18,8 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Edit.EditAccountFragment;
 import com.majazeh.risloo.databinding.DialogDateBinding;
 
+import java.util.Objects;
+
 public class DateDialog extends BottomSheetDialogFragment {
 
     // Binding
@@ -75,7 +77,7 @@ public class DateDialog extends BottomSheetDialogFragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.entryButton.setClickable(true), 300);
             dismiss();
 
-            switch (((MainActivity) requireActivity()).navController.getCurrentDestination().getId()) {
+            switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                 case R.id.editAccountFragment:
                     EditAccountFragment editAccountFragment = (EditAccountFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editAccountFragment != null) {

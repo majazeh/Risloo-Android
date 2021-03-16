@@ -43,15 +43,15 @@ public class LoginFragment extends Fragment {
     private void initializer() {
         binding.loginIncludeLayout.inputEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
 
-        binding.loginTextView.componentAuthButton.setText(getResources().getString(R.string.LoginFragmentButton));
+        binding.loginTextView.getRoot().setText(getResources().getString(R.string.LoginFragmentButton));
 
-        binding.registerTextView.componentAuthLink.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthRegister), 0, 5, getResources().getColor(R.color.Gray900), Typeface.BOLD));
-        binding.passwordRecoverTextView.componentAuthLink.setText(getResources().getString(R.string.AuthPasswordRecover));
+        binding.registerTextView.getRoot().setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthRegister), 0, 5, getResources().getColor(R.color.Gray900), Typeface.BOLD));
+        binding.passwordRecoverTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecover));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.loginTextView.componentAuthButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.loginTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -66,9 +66,9 @@ public class LoginFragment extends Fragment {
             return false;
         });
 
-        binding.loginTextView.componentAuthButton.setOnClickListener(v -> {
-            binding.loginTextView.componentAuthButton.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.componentAuthButton.setClickable(true), 300);
+        binding.loginTextView.getRoot().setOnClickListener(v -> {
+            binding.loginTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.getRoot().setClickable(true), 300);
 
             if (binding.loginIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -78,16 +78,16 @@ public class LoginFragment extends Fragment {
             }
         });
 
-        binding.registerTextView.componentAuthLink.setOnClickListener(v -> {
-            binding.registerTextView.componentAuthLink.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.componentAuthLink.setClickable(true), 300);
+        binding.registerTextView.getRoot().setOnClickListener(v -> {
+            binding.registerTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.getRoot().setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
-        binding.passwordRecoverTextView.componentAuthLink.setOnClickListener(v -> {
-            binding.passwordRecoverTextView.componentAuthLink.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.componentAuthLink.setClickable(true), 300);
+        binding.passwordRecoverTextView.getRoot().setOnClickListener(v -> {
+            binding.passwordRecoverTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.getRoot().setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.serialFragment);
         });

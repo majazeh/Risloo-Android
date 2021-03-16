@@ -7,15 +7,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCryptoBinding;
 
@@ -23,13 +21,6 @@ public class EditCryptoFragment extends Fragment {
 
     // Binding
     private FragmentEditCryptoBinding binding;
-
-    // Widgets
-    private TextView publicKeyHeaderTextView, privateKeyHeaderTextView;
-    private EditText publicKeyEditText, privateKeyEditText;
-    private ImageView publicKeyErrorImageView, privateKeyErrorImageView;
-    private TextView publicKeyErrorTextView, privateKeyErrorTextView;
-    private TextView editPublicKeyTextView, editPrivateKeyTextView;
 
     // Vars
     private String publicKey = "", privateKey = "";
@@ -51,77 +42,63 @@ public class EditCryptoFragment extends Fragment {
     }
 
     private void initializer() {
-        publicKeyHeaderTextView = binding.fragmentEditCryptoPublicEditText.componentInputMultiHeaderTextView;
-        publicKeyHeaderTextView.setText(getResources().getString(R.string.EditCryptoFragmentPublicHeader));
-        privateKeyHeaderTextView = binding.fragmentEditCryptoPrivateEditText.componentInputMultiHeaderTextView;
-        privateKeyHeaderTextView.setText(getResources().getString(R.string.EditCryptoFragmentPrivateHeader));
+        binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCryptoFragmentPublicHeader));
+        binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCryptoFragmentPrivateHeader));
 
-        publicKeyEditText = binding.fragmentEditCryptoPublicEditText.componentInputMultiEditText;
-        privateKeyEditText = binding.fragmentEditCryptoPrivateEditText.componentInputMultiEditText;
-
-        publicKeyErrorImageView = binding.fragmentEditCryptoPublicEditText.componentInputMultiErrorImageView;
-        privateKeyErrorImageView = binding.fragmentEditCryptoPrivateEditText.componentInputMultiErrorImageView;
-        publicKeyErrorTextView = binding.fragmentEditCryptoPublicEditText.componentInputMultiErrorTextView;
-        privateKeyErrorTextView = binding.fragmentEditCryptoPrivateEditText.componentInputMultiErrorTextView;
-
-        editPublicKeyTextView = binding.fragmentEditCryptoPublicButtonTextView.componentButtonRectangle32sdp;
-        editPublicKeyTextView.setText(getResources().getString(R.string.EditCryptoFragmentPublicButton));
-        editPublicKeyTextView.setTextColor(getResources().getColor(R.color.White));
-        editPrivateKeyTextView = binding.fragmentEditCryptoPrivateButtonTextView.componentButtonRectangle32sdp;
-        editPrivateKeyTextView.setText(getResources().getString(R.string.EditCryptoFragmentPrivateButton));
-        editPrivateKeyTextView.setTextColor(getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentPublicButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentPrivateButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            editPublicKeyTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-            editPrivateKeyTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.publicEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.privateEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         } else {
-            editPublicKeyTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
-            editPrivateKeyTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+            binding.publicEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+            binding.privateEditTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        publicKeyEditText.setOnTouchListener((v, event) -> {
+        binding.publicIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!publicKeyEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), publicKeyEditText);
+                if (!binding.publicIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.publicIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        privateKeyEditText.setOnTouchListener((v, event) -> {
+        binding.privateIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!privateKeyEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), privateKeyEditText);
+                if (!binding.privateIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.privateIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        editPublicKeyTextView.setOnClickListener(v -> {
-            editPublicKeyTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> editPublicKeyTextView.setClickable(true), 300);
+        binding.publicEditTextView.getRoot().setOnClickListener(v -> {
+            binding.publicEditTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.publicEditTextView.getRoot().setClickable(true), 300);
 
-            if (publicKeyEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), publicKeyEditText, publicKeyErrorImageView, publicKeyErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.publicIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), publicKeyEditText, publicKeyErrorImageView, publicKeyErrorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView);
                 doWork();
             }
         });
 
-        editPrivateKeyTextView.setOnClickListener(v -> {
-            editPrivateKeyTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> editPrivateKeyTextView.setClickable(true), 300);
+        binding.privateEditTextView.getRoot().setOnClickListener(v -> {
+            binding.privateEditTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.privateEditTextView.getRoot().setClickable(true), 300);
 
-            if (privateKeyEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), privateKeyEditText, privateKeyErrorImageView, privateKeyErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.privateIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), privateKeyEditText, privateKeyErrorImageView, privateKeyErrorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView);
                 doWork();
             }
         });
@@ -130,17 +107,17 @@ public class EditCryptoFragment extends Fragment {
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getPublicKey().equals("")) {
             publicKey = ((MainActivity) requireActivity()).singleton.getPublicKey();
-            publicKeyEditText.setText(publicKey);
+            binding.publicIncludeLayout.inputEditText.setText(publicKey);
         }
         if (!((MainActivity) requireActivity()).singleton.getPrivateKey().equals("")) {
             privateKey = ((MainActivity) requireActivity()).singleton.getPrivateKey();
-            privateKeyEditText.setText(privateKey);
+            binding.privateIncludeLayout.inputEditText.setText(privateKey);
         }
     }
 
     private void doWork() {
-        publicKey = publicKeyEditText.getText().toString().trim();
-        privateKey = privateKeyEditText.getText().toString().trim();
+        publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
+        privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

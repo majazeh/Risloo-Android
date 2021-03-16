@@ -65,28 +65,28 @@ public class DisplayActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        InitManager.imgResTint(this, binding.returnImageView.componentMainButton, R.drawable.ic_angle_right_regular, R.color.Gray50);
-        InitManager.imgResTint(this, binding.downloadImageView.componentMainButton, R.drawable.ic_download_light, R.color.Gray50);
+        InitManager.imgResTint(this, binding.returnImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray50);
+        InitManager.imgResTint(this, binding.downloadImageView.getRoot(), R.drawable.ic_download_light, R.color.Gray50);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.returnImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
-            binding.downloadImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            binding.returnImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+            binding.downloadImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener() {
-        binding.returnImageView.componentMainButton.setOnClickListener(v -> {
-            binding.returnImageView.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> binding.returnImageView.componentMainButton.setClickable(true), 300);
+        binding.returnImageView.getRoot().setOnClickListener(v -> {
+            binding.returnImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> binding.returnImageView.getRoot().setClickable(true), 300);
 
             finish();
         });
 
-        binding.downloadImageView.componentMainButton.setOnClickListener(v -> {
-            binding.downloadImageView.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> binding.downloadImageView.componentMainButton.setClickable(true), 300);
+        binding.downloadImageView.getRoot().setOnClickListener(v -> {
+            binding.downloadImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> binding.downloadImageView.getRoot().setClickable(true), 300);
 
             if (PermissionManager.storagePermission(this)) {
                 IntentManager.download(this, bitmap);

@@ -7,11 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.RadioButton;
-import android.widget.RadioGroup;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditPersonalBinding;
 
@@ -26,17 +22,6 @@ public class EditPersonalFragment extends Fragment {
 
     // Binding
     private FragmentEditPersonalBinding binding;
-
-    // Widgets
-    private RadioGroup statusRadioGroup, typeRadioGroup, genderRadioGroup;
-    private TextView nameHeaderTextView, mobileHeaderTextView, usernameHeaderTextView, emailHeaderTextView, birthdayHeaderTextView, statusHeaderTextView, typeHeaderTextView, genderHeaderTextView;
-    private EditText nameEditText, mobileEditText, usernameEditText, emailEditText;
-    public TextView birthdayTextView;
-    private ImageView nameErrorImageView, mobileErrorImageView, usernameErrorImageView, emailErrorImageView, birthdayErrorImageView;
-    private TextView nameErrorTextView, mobileErrorTextView, usernameErrorTextView, emailErrorTextView, birthdayErrorTextView;
-    private TextView usernameGuideTextView;
-    private RadioButton activeRadioButton, waitingRadioButton, closedRadioButton, adminRadioButton, clientRadioButton, maleRadioButton, femaleRadioButton;
-    private TextView editPersonalTextView;
 
     // Vars
     private String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
@@ -59,177 +44,138 @@ public class EditPersonalFragment extends Fragment {
     }
 
     private void initializer() {
-        statusRadioGroup = binding.fragmentEditPersonalStatusRadioGroup.componentRadioThree;
-        typeRadioGroup = binding.fragmentEditPersonalTypeRadioGroup.componentRadioTwo;
-        genderRadioGroup = binding.fragmentEditPersonalGenderRadioGroup.componentRadioTwo;
+        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentNameHeader));
+        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentMobileHeader));
+        binding.usernameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHeader));
+        binding.emailIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentEmailHeader));
+        binding.birthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentBirthdayHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentStatusHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentTypeHeader));
+        binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentGenderHeader));
 
-        nameHeaderTextView = binding.fragmentEditPersonalNameEditText.componentInputTextHeaderTextView;
-        nameHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentNameHeader));
-        mobileHeaderTextView = binding.fragmentEditPersonalMobileEditText.componentInputNumberHeaderTextView;
-        mobileHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentMobileHeader));
-        usernameHeaderTextView = binding.fragmentEditPersonalUsernameEditText.componentInputTextHeaderTextView;
-        usernameHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHeader));
-        emailHeaderTextView = binding.fragmentEditPersonalEmailEditText.componentInputTextHeaderTextView;
-        emailHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentEmailHeader));
-        birthdayHeaderTextView = binding.fragmentEditPersonalBirthdaySelectBox.componentInputSelectHeaderTextView;
-        birthdayHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentBirthdayHeader));
-        statusHeaderTextView = binding.fragmentEditPersonalStatusRadioGroup.componentRadioThreeHeaderTextView;
-        statusHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentStatusHeader));
-        typeHeaderTextView = binding.fragmentEditPersonalTypeRadioGroup.componentRadioTwoHeaderTextView;
-        typeHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentTypeHeader));
-        genderHeaderTextView = binding.fragmentEditPersonalGenderRadioGroup.componentRadioTwoHeaderTextView;
-        genderHeaderTextView.setText(getResources().getString(R.string.EditPersonalFragmentGenderHeader));
+        binding.usernameGuideIncludeLayout.guideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
 
-        nameEditText = binding.fragmentEditPersonalNameEditText.componentInputTextEditText;
-        mobileEditText = binding.fragmentEditPersonalMobileEditText.componentInputNumberEditText;
-        usernameEditText = binding.fragmentEditPersonalUsernameEditText.componentInputTextEditText;
-        emailEditText = binding.fragmentEditPersonalEmailEditText.componentInputTextEditText;
+        binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusActive));
+        binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusWaiting));
+        binding.statusIncludeLayout.thirdRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusClosed));
 
-        birthdayTextView = binding.fragmentEditPersonalBirthdaySelectBox.componentInputSelectTextView;
+        binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeAdmin));
+        binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeClient));
 
-        nameErrorImageView = binding.fragmentEditPersonalNameEditText.componentInputTextErrorImageView;
-        mobileErrorImageView = binding.fragmentEditPersonalMobileEditText.componentInputNumberErrorImageView;
-        usernameErrorImageView = binding.fragmentEditPersonalUsernameEditText.componentInputTextErrorImageView;
-        emailErrorImageView = binding.fragmentEditPersonalEmailEditText.componentInputTextErrorImageView;
-        birthdayErrorImageView = binding.fragmentEditPersonalBirthdaySelectBox.componentInputSelectErrorImageView;
+        binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderMale));
+        binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderFemale));
 
-        nameErrorTextView = binding.fragmentEditPersonalNameEditText.componentInputTextErrorTextView;
-        mobileErrorTextView = binding.fragmentEditPersonalMobileEditText.componentInputNumberErrorTextView;
-        usernameErrorTextView = binding.fragmentEditPersonalUsernameEditText.componentInputTextErrorTextView;
-        emailErrorTextView = binding.fragmentEditPersonalEmailEditText.componentInputTextErrorTextView;
-        birthdayErrorTextView = binding.fragmentEditPersonalBirthdaySelectBox.componentInputSelectErrorTextView;
-
-        usernameGuideTextView = binding.fragmentEditPersonalUsernameGuideConstraintLayout.componentGuideTextTextView;
-        usernameGuideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
-
-        activeRadioButton = binding.fragmentEditPersonalStatusRadioGroup.componentRadioThreeFirstRadioButton;
-        activeRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusActive));
-        waitingRadioButton = binding.fragmentEditPersonalStatusRadioGroup.componentRadioThreeSecondRadioButton;
-        waitingRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusWaiting));
-        closedRadioButton = binding.fragmentEditPersonalStatusRadioGroup.componentRadioThreeThirdRadioButton;
-        closedRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusClosed));
-        adminRadioButton = binding.fragmentEditPersonalTypeRadioGroup.componentRadioTwoFirstRadioButton;
-        adminRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeAdmin));
-        clientRadioButton = binding.fragmentEditPersonalTypeRadioGroup.componentRadioTwoSecondRadioButton;
-        clientRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeClient));
-        maleRadioButton = binding.fragmentEditPersonalGenderRadioGroup.componentRadioTwoFirstRadioButton;
-        maleRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderMale));
-        femaleRadioButton = binding.fragmentEditPersonalGenderRadioGroup.componentRadioTwoSecondRadioButton;
-        femaleRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderFemale));
-
-        editPersonalTextView = binding.fragmentEditPersonalButtonTextView.componentButtonRectangle32sdp;
-        editPersonalTextView.setText(getResources().getString(R.string.EditPersonalFragmentButton));
-        editPersonalTextView.setTextColor(getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditPersonalFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            editPersonalTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         } else {
-            editPersonalTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        nameEditText.setOnTouchListener((v, event) -> {
+        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!nameEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), nameEditText);
+                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.nameIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        mobileEditText.setOnTouchListener((v, event) -> {
+        binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!mobileEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), mobileEditText);
+                if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.mobileIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        usernameEditText.setOnTouchListener((v, event) -> {
+        binding.usernameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!usernameEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), usernameEditText);
+                if (!binding.usernameIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.usernameIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        emailEditText.setOnTouchListener((v, event) -> {
+        binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!emailEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), emailEditText);
+                if (!binding.emailIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.emailIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        birthdayTextView.setOnClickListener(v -> {
-            birthdayTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> birthdayTextView.setClickable(true), 300);
+        binding.birthdayIncludeLayout.selectTextView.setOnClickListener(v -> {
+            binding.birthdayIncludeLayout.selectTextView.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.birthdayIncludeLayout.selectTextView.setClickable(true), 300);
 
             ((MainActivity) requireActivity()).dateDialog.show(getActivity().getSupportFragmentManager(), "dateSheetDialog");
             ((MainActivity) requireActivity()).dateDialog.setDate(year, month, day);
         });
 
-        statusRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
-                case R.id.component_radio_three_first_radioButton:
+                case R.id.first_radioButton:
                     status = "active";
                     break;
-                case R.id.component_radio_three_second_radioButton:
+                case R.id.second_radioButton:
                     status = "waiting";
                     break;
-                case R.id.component_radio_three_third_radioButton:
+                case R.id.third_radioButton:
                     status = "closed";
                     break;
             }
         });
 
-        typeRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        binding.typeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
-                case R.id.component_radio_two_first_radioButton:
+                case R.id.first_radioButton:
                     type = "admin";
                     break;
-                case R.id.component_radio_two_second_radioButton:
+                case R.id.second_radioButton:
                     type = "client";
                     break;
             }
         });
 
-        genderRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        binding.genderIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
-                case R.id.component_radio_two_first_radioButton:
+                case R.id.first_radioButton:
                     gender = "male";
                     break;
-                case R.id.component_radio_two_second_radioButton:
+                case R.id.second_radioButton:
                     gender = "female";
                     break;
             }
         });
 
-        editPersonalTextView.setOnClickListener(v -> {
-            editPersonalTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> editPersonalTextView.setClickable(true), 300);
+        binding.editTextView.getRoot().setOnClickListener(v -> {
+            binding.editTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
-            if (nameEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), nameEditText, nameErrorImageView, nameErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
-            if (mobileEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
-            if (usernameEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.usernameIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameIncludeLayout.errorImageView, binding.usernameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (nameEditText.length() != 0 && mobileEditText.length() != 0 && usernameEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), nameEditText, nameErrorImageView, nameErrorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), mobileEditText, mobileErrorImageView, mobileErrorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), usernameEditText, usernameErrorImageView, usernameErrorTextView);
+            if (binding.nameIncludeLayout.inputEditText.length() != 0 && binding.mobileIncludeLayout.inputEditText.length() != 0 && binding.usernameIncludeLayout.inputEditText.length() != 0) {
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameIncludeLayout.errorImageView, binding.usernameIncludeLayout.errorTextView);
 
                 doWork();
             }
@@ -239,26 +185,26 @@ public class EditPersonalFragment extends Fragment {
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             name = ((MainActivity) requireActivity()).singleton.getName();
-            nameEditText.setText(name);
+            binding.nameIncludeLayout.inputEditText.setText(name);
         }
         if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
             mobile = ((MainActivity) requireActivity()).singleton.getMobile();
-            mobileEditText.setText(mobile);
+            binding.mobileIncludeLayout.inputEditText.setText(mobile);
         }
         if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
             username = ((MainActivity) requireActivity()).singleton.getUsername();
-            usernameEditText.setText(username);
+            binding.usernameIncludeLayout.inputEditText.setText(username);
         }
         if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
             email = ((MainActivity) requireActivity()).singleton.getEmail();
-            emailEditText.setText(email);
+            binding.emailIncludeLayout.inputEditText.setText(email);
         }
         if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
             birthday = ((MainActivity) requireActivity()).singleton.getBirthday();
-            birthdayTextView.setText(birthday);
+            binding.birthdayIncludeLayout.selectTextView.setText(birthday);
         } else {
             birthday = getResources().getString(R.string.EditPersonalFragmentBirthdayDefault);
-            birthdayTextView.setText(birthday);
+            binding.birthdayIncludeLayout.selectTextView.setText(birthday);
         }
 
         year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
@@ -269,13 +215,13 @@ public class EditPersonalFragment extends Fragment {
             status = ((MainActivity) requireActivity()).singleton.getStatus();
             switch (status) {
                 case "active":
-                    activeRadioButton.setChecked(true);
+                    binding.statusIncludeLayout.firstRadioButton.setChecked(true);
                     break;
                 case "waiting":
-                    waitingRadioButton.setChecked(true);
+                    binding.statusIncludeLayout.secondRadioButton.setChecked(true);
                     break;
                 case "closed":
-                    closedRadioButton.setChecked(true);
+                    binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
                     break;
             }
         }
@@ -283,10 +229,10 @@ public class EditPersonalFragment extends Fragment {
             type = ((MainActivity) requireActivity()).singleton.getType();
             switch (type) {
                 case "admin":
-                    adminRadioButton.setChecked(true);
+                    binding.typeIncludeLayout.firstRadioButton.setChecked(true);
                     break;
                 case "client":
-                    clientRadioButton.setChecked(true);
+                    binding.typeIncludeLayout.secondRadioButton.setChecked(true);
                     break;
             }
         }
@@ -294,20 +240,20 @@ public class EditPersonalFragment extends Fragment {
             gender = ((MainActivity) requireActivity()).singleton.getGender();
             switch (gender) {
                 case "male":
-                    maleRadioButton.setChecked(true);
+                    binding.genderIncludeLayout.firstRadioButton.setChecked(true);
                     break;
                 case "female":
-                    femaleRadioButton.setChecked(true);
+                    binding.genderIncludeLayout.secondRadioButton.setChecked(true);
                     break;
             }
         }
     }
 
     private void doWork() {
-        name = nameEditText.getText().toString().trim();
-        mobile = mobileEditText.getText().toString().trim();
-        username = usernameEditText.getText().toString().trim();
-        email = emailEditText.getText().toString().trim();
+        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
+        username = binding.usernameIncludeLayout.inputEditText.getText().toString().trim();
+        email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

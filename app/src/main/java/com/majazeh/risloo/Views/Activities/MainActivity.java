@@ -88,46 +88,46 @@ public class MainActivity extends AppCompatActivity {
 
         contentBinding = binding.contentLayout;
 
-        InitManager.imgResTint(this, contentBinding.menuImageView.componentMainButton, R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.imgResTintRotate(this, contentBinding.logoutImageView.componentMainButton, R.drawable.ic_logout_light, R.color.Gray500, 180);
-        InitManager.imgResTint(this, contentBinding.notificationImageView.componentMainButton, R.drawable.ic_bell_light, R.color.Gray500);
+        InitManager.imgResTint(this, contentBinding.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
+        InitManager.imgResTintRotate(this, contentBinding.logoutImageView.getRoot(), R.drawable.ic_logout_light, R.color.Gray500, 180);
+        InitManager.imgResTint(this, contentBinding.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            contentBinding.toolbarIncludeLayout.componentMainToolbar.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
+            contentBinding.toolbarIncludeLayout.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
 
-            contentBinding.menuImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            contentBinding.logoutImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
-            contentBinding.notificationImageView.componentMainButton.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            contentBinding.menuImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            contentBinding.logoutImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
+            contentBinding.notificationImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
         }
     }
 
     private void listener() {
-        contentBinding.toolbarIncludeLayout.componentMainToolbar.setOnClickListener(v -> {
-            contentBinding.toolbarIncludeLayout.componentMainToolbar.setClickable(false);
-            handler.postDelayed(() -> contentBinding.toolbarIncludeLayout.componentMainToolbar.setClickable(true), 300);
+        contentBinding.toolbarIncludeLayout.getRoot().setOnClickListener(v -> {
+            contentBinding.toolbarIncludeLayout.getRoot().setClickable(false);
+            handler.postDelayed(() -> contentBinding.toolbarIncludeLayout.getRoot().setClickable(true), 300);
 
             navigator(R.id.accountFragment);
         });
 
-        contentBinding.menuImageView.componentMainButton.setOnClickListener(v -> {
-            contentBinding.menuImageView.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> contentBinding.menuImageView.componentMainButton.setClickable(true), 300);
+        contentBinding.menuImageView.getRoot().setOnClickListener(v -> {
+            contentBinding.menuImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> contentBinding.menuImageView.getRoot().setClickable(true), 300);
 
             binding.getRoot().openDrawer(GravityCompat.START);
         });
 
-        contentBinding.logoutImageView.componentMainButton.setOnClickListener(v -> {
-            contentBinding.logoutImageView.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> contentBinding.logoutImageView.componentMainButton.setClickable(true), 300);
+        contentBinding.logoutImageView.getRoot().setOnClickListener(v -> {
+            contentBinding.logoutImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> contentBinding.logoutImageView.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });
 
-        contentBinding.notificationImageView.componentMainButton.setOnClickListener(v -> {
-            contentBinding.notificationImageView.componentMainButton.setClickable(false);
-            handler.postDelayed(() -> contentBinding.notificationImageView.componentMainButton.setClickable(true), 300);
+        contentBinding.notificationImageView.getRoot().setOnClickListener(v -> {
+            contentBinding.notificationImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> contentBinding.notificationImageView.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });

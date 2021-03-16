@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -16,12 +15,11 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditAvatarBinding;
 import com.squareup.picasso.Picasso;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 public class EditAvatarFragment extends Fragment {
 
@@ -30,12 +28,6 @@ public class EditAvatarFragment extends Fragment {
 
     // Objects
     public Bitmap avatarBitmap;
-
-    // Widgets
-    private CircleImageView avatarCircleImageView;
-    private TextView charTextView;
-    private TextView avatarGuideTextView;
-    private TextView editAvatarTextView;
 
     // Vars
     public String avatarPath = "";
@@ -57,36 +49,30 @@ public class EditAvatarFragment extends Fragment {
     }
 
     private void initializer() {
-        avatarCircleImageView = binding.fragmentEditAvatarCircleImageView.componentAvatar82sdpCircleImageView;
-        charTextView = binding.fragmentEditAvatarCircleImageView.componentAvatar82sdpTextView;
+        binding.avatarGuideConstraintLayout.guideTextView.setText(getResources().getString(R.string.EditAvatarFragmentHint));
 
-        avatarGuideTextView = binding.fragmentEditAvatarGuideConstraintLayout.componentGuideTextTextView;
-        avatarGuideTextView.setText(getResources().getString(R.string.EditAvatarFragmentHint));
-
-        editAvatarTextView = binding.fragmentEditAvatarButtonTextView.componentButtonRectangle32sdp;
-        editAvatarTextView.setText(getResources().getString(R.string.EditAvatarFragmentButton));
-        editAvatarTextView.setTextColor(getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditAvatarFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            editAvatarTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         } else {
-            editAvatarTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
         }
     }
 
     private void listener() {
-        avatarCircleImageView.setOnClickListener(v -> {
-            avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> avatarCircleImageView.setClickable(true), 300);
+        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
+            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
             ((MainActivity) requireActivity()).imageDialog.show(getActivity().getSupportFragmentManager(), "imageBottomSheet");
         });
 
-        editAvatarTextView.setOnClickListener(v -> {
-            editAvatarTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> editAvatarTextView.setClickable(true), 300);
+        binding.editTextView.getRoot().setOnClickListener(v -> {
+            binding.editTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
             if (avatarBitmap == null) {
                 Toast.makeText(getActivity(), "exception", Toast.LENGTH_SHORT).show();
@@ -98,17 +84,17 @@ public class EditAvatarFragment extends Fragment {
 
     private void setData() {
         if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            charTextView.setVisibility(View.VISIBLE);
-                if (((MainActivity) requireActivity()).singleton.getName().equals(""))
-                charTextView.setText(StringManager.firstChars(getResources().getString(R.string.MainToolbar)));
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            if (((MainActivity) requireActivity()).singleton.getName().equals(""))
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.MainToolbar)));
             else
-                charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(avatarCircleImageView);
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
-            charTextView.setVisibility(View.GONE);
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(avatarCircleImageView);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

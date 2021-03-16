@@ -2,11 +2,17 @@ package com.majazeh.risloo.Utils.Managers;
 
 import android.app.Activity;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ImageViewCompat;
 
 public class InitManager {
+
+    public static void txtTextColor(TextView txt, String txtValue, int txtColor) {
+        txt.setText(txtValue);
+        txt.setTextColor(txtColor);
+    }
 
     public static void imgResTint(Activity activity, ImageView img, int imgRes, int imgColor) {
         img.setImageResource(imgRes);

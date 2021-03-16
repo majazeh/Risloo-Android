@@ -11,7 +11,7 @@
     tools:layout_margin="@dimen/_16sdp">
 
     <TextView
-        android:id="@+id/component_radio_two_header_textView"
+        android:id="@+id/header_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_2sdp"
@@ -24,7 +24,7 @@
         tools:text="گزینه‌ها" />
 
     <RadioButton
-        android:id="@+id/component_radio_two_first_radioButton"
+        android:id="@+id/first_radioButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/_4sdp"
@@ -39,7 +39,7 @@
         tools:text="گزینه اول" />
 
     <RadioButton
-        android:id="@+id/component_radio_two_second_radioButton"
+        android:id="@+id/second_radioButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingTop="@dimen/_4sdp"

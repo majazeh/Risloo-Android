@@ -47,15 +47,15 @@ public class SerialFragment extends Fragment {
     private void initializer() {
         binding.serialIncludeLayout.inputEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
-        binding.serialTextView.componentAuthButton.setText(getResources().getString(R.string.SerialFragmentButton));
+        binding.serialTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
 
-        binding.dashboardTextView.componentAuthLink.setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900), Typeface.BOLD));
-        binding.logoutTextView.componentAuthLink.setText(getResources().getString(R.string.AuthLogout));
+        binding.dashboardTextView.getRoot().setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900), Typeface.BOLD));
+        binding.logoutTextView.getRoot().setText(getResources().getString(R.string.AuthLogout));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.serialTextView.componentAuthButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.serialTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -70,9 +70,9 @@ public class SerialFragment extends Fragment {
             return false;
         });
 
-        binding.serialTextView.componentAuthButton.setOnClickListener(v -> {
-            binding.serialTextView.componentAuthButton.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.serialTextView.componentAuthButton.setClickable(true), 300);
+        binding.serialTextView.getRoot().setOnClickListener(v -> {
+            binding.serialTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.serialTextView.getRoot().setClickable(true), 300);
 
             if (binding.serialIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -82,16 +82,16 @@ public class SerialFragment extends Fragment {
             }
         });
 
-        binding.dashboardTextView.componentAuthLink.setOnClickListener(v -> {
-            binding.dashboardTextView.componentAuthLink.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.dashboardTextView.componentAuthLink.setClickable(true), 300);
+        binding.dashboardTextView.getRoot().setOnClickListener(v -> {
+            binding.dashboardTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.dashboardTextView.getRoot().setClickable(true), 300);
 
             IntentManager.main(getActivity());
         });
 
-        binding.logoutTextView.componentAuthLink.setOnClickListener(v -> {
-            binding.logoutTextView.componentAuthLink.setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.logoutTextView.componentAuthLink.setClickable(true), 300);
+        binding.logoutTextView.getRoot().setOnClickListener(v -> {
+            binding.logoutTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.logoutTextView.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });
