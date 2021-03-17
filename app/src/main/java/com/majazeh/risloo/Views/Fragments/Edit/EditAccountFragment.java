@@ -37,7 +37,7 @@ public class EditAccountFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new EditAccountAdapter(getActivity().getSupportFragmentManager(), 0);
+        adapter = new EditAccountAdapter(requireActivity().getSupportFragmentManager(), 0);
     }
 
     private void listener() {

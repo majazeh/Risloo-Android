@@ -60,7 +60,7 @@ public class LoginFragment extends Fragment {
         binding.loginIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.loginIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.loginIncludeLayout.inputEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.loginIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -71,9 +71,9 @@ public class LoginFragment extends Fragment {
             ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.getRoot().setClickable(true), 300);
 
             if (binding.loginIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView);
                 doWork();
             }
         });

@@ -60,7 +60,7 @@ public class PasswordRecoverFragment extends Fragment {
         binding.passwordRecoverIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.passwordRecoverIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.passwordRecoverIncludeLayout.inputEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.passwordRecoverIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -75,7 +75,7 @@ public class PasswordRecoverFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.passwordRecoverIncludeLayout.inputEditText.length() == 11) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.passwordRecoverIncludeLayout.inputEditText, binding.passwordRecoverIncludeLayout.errorImageView, binding.passwordRecoverIncludeLayout.errorTextView);
+                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordRecoverIncludeLayout.inputEditText, binding.passwordRecoverIncludeLayout.errorImageView, binding.passwordRecoverIncludeLayout.errorTextView);
                     doWork();
                 }
             }
@@ -91,9 +91,9 @@ public class PasswordRecoverFragment extends Fragment {
             ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.getRoot().setClickable(true), 300);
 
             if (binding.passwordRecoverIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.passwordRecoverIncludeLayout.inputEditText, binding.passwordRecoverIncludeLayout.errorImageView, binding.passwordRecoverIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordRecoverIncludeLayout.inputEditText, binding.passwordRecoverIncludeLayout.errorImageView, binding.passwordRecoverIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.passwordRecoverIncludeLayout.inputEditText, binding.passwordRecoverIncludeLayout.errorImageView, binding.passwordRecoverIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordRecoverIncludeLayout.inputEditText, binding.passwordRecoverIncludeLayout.errorImageView, binding.passwordRecoverIncludeLayout.errorTextView);
                 doWork();
             }
         });

@@ -27,7 +27,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return CustomizeDialog.bottomSheet(getActivity(), dialog);
+        return CustomizeDialog.bottomSheet(requireActivity(), dialog);
     }
 
     @Nullable
@@ -55,7 +55,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.galleryLinearLayout.setClickable(true), 300);
             dismiss();
 
-            if (PermissionManager.galleryPermission(getActivity())) {
+            if (PermissionManager.galleryPermission(requireActivity())) {
                 Log.e("gallery", "hello");
             }
         });
@@ -65,7 +65,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.cameraLinearLayout.setClickable(true), 300);
             dismiss();
 
-            if (PermissionManager.cameraPermission(getActivity())) {
+            if (PermissionManager.cameraPermission(requireActivity())) {
                 Log.e("camera", "hello");
             }
         });

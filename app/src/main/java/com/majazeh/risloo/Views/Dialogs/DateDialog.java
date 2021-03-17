@@ -32,7 +32,7 @@ public class DateDialog extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return CustomizeDialog.bottomSheet(getActivity(), dialog);
+        return CustomizeDialog.bottomSheet(requireActivity(), dialog);
     }
 
     @Nullable
@@ -96,7 +96,7 @@ public class DateDialog extends BottomSheetDialogFragment {
         binding.monthNumberPicker.setMinValue(1);
         binding.monthNumberPicker.setMaxValue(12);
         binding.monthNumberPicker.setValue(month);
-        binding.monthNumberPicker.setDisplayedValues(getActivity().getResources().getStringArray(R.array.JalaliMonths));
+        binding.monthNumberPicker.setDisplayedValues(requireActivity().getResources().getStringArray(R.array.JalaliMonths));
 
         binding.dayNumberPicker.setMinValue(1);
         binding.dayNumberPicker.setMaxValue(31);

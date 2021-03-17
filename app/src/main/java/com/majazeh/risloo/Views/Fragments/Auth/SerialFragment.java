@@ -64,7 +64,7 @@ public class SerialFragment extends Fragment {
         binding.serialIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.serialIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.serialIncludeLayout.inputEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.serialIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -75,9 +75,9 @@ public class SerialFragment extends Fragment {
             ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.serialTextView.getRoot().setClickable(true), 300);
 
             if (binding.serialIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView);
                 doWork();
             }
         });
@@ -86,7 +86,7 @@ public class SerialFragment extends Fragment {
             binding.dashboardTextView.getRoot().setClickable(false);
             ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.dashboardTextView.getRoot().setClickable(true), 300);
 
-            IntentManager.main(getActivity());
+            IntentManager.main(requireActivity());
         });
 
         binding.logoutTextView.getRoot().setOnClickListener(v -> {

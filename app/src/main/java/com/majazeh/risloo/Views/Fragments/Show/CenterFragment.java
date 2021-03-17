@@ -60,20 +60,20 @@ public class CenterFragment extends Fragment {
     }
 
     private void initializer() {
-        roomsAdapter = new RoomsAdapter(getActivity());
+        roomsAdapter = new RoomsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp));
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         InitManager.txtTextColor(binding.profileTextView.getRoot(), getResources().getString(R.string.CenterFragmentProfile), getResources().getColor(R.color.Gray500));
         InitManager.txtTextColor(binding.statusTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
 
-        InitManager.imgResTint(getActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
-        InitManager.imgResTint(getActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
+        InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
+        InitManager.imgResTint(requireActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterFragmentRoomsHeader));
 
-        InitManager.imgResTint(getActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
@@ -102,7 +102,7 @@ public class CenterFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(getActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
+                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
         });
 
@@ -137,7 +137,7 @@ public class CenterFragment extends Fragment {
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.searchIncludeLayout.editText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.searchIncludeLayout.editText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
                 }
             }
             return false;

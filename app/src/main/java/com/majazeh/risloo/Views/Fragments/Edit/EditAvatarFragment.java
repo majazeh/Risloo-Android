@@ -67,7 +67,7 @@ public class EditAvatarFragment extends Fragment {
             binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
-            ((MainActivity) requireActivity()).imageDialog.show(getActivity().getSupportFragmentManager(), "imageBottomSheet");
+            ((MainActivity) requireActivity()).imageDialog.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
         });
 
         binding.editTextView.getRoot().setOnClickListener(v -> {
@@ -75,7 +75,7 @@ public class EditAvatarFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
             if (avatarBitmap == null) {
-                Toast.makeText(getActivity(), "exception", Toast.LENGTH_SHORT).show();
+                Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
             } else {
                 doWork();
             }
@@ -99,7 +99,7 @@ public class EditAvatarFragment extends Fragment {
     }
 
     private void doWork() {
-        FileManager.writeBitmapToCache(getActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
 
         // TODO : Call Work Method
     }

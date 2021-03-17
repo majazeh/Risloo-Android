@@ -45,7 +45,7 @@ public class ScalesFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
             binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -55,10 +55,10 @@ public class ScalesFragment extends Fragment {
     }
 
     private void initializer() {
-        scalesAdapter = new ScalesAdapter(getActivity());
+        scalesAdapter = new ScalesAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
 
@@ -72,7 +72,7 @@ public class ScalesFragment extends Fragment {
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.searchIncludeLayout.editText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), binding.searchIncludeLayout.editText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
                 }
             }
             return false;
@@ -86,8 +86,8 @@ public class ScalesFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) getActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) getActivity()).handler.postDelayed(() -> {
+                ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
+                ((MainActivity) requireActivity()).handler.postDelayed(() -> {
                     // TODO : Place Code Here
                 }, 750);
             }

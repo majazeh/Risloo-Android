@@ -70,7 +70,7 @@ public class EditPasswordFragment extends Fragment {
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.passwordIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.passwordIncludeLayout.inputEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -121,13 +121,13 @@ public class EditPasswordFragment extends Fragment {
                 passwordVisibility = true;
                 binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
 
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Blue800));
+                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(null);
             } else {
                 passwordVisibility = false;
                 binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
 
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Gray600));
+                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
             }
         });
@@ -137,9 +137,9 @@ public class EditPasswordFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordIncludeLayout.errorImageView, binding.passwordIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordIncludeLayout.errorImageView, binding.passwordIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordIncludeLayout.errorImageView, binding.passwordIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordIncludeLayout.errorImageView, binding.passwordIncludeLayout.errorTextView);
                 doWork();
             }
         });

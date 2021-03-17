@@ -60,16 +60,16 @@ public class RoomFragment extends Fragment {
     }
 
     private void initializer() {
-        cases2Adapter = new Cases2Adapter(getActivity());
+        cases2Adapter = new Cases2Adapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp));
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        InitManager.imgResTint(getActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
+        InitManager.imgResTint(requireActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
 
-        InitManager.imgResTint(getActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
@@ -92,7 +92,7 @@ public class RoomFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(getActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
+                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
         });
 
@@ -106,7 +106,7 @@ public class RoomFragment extends Fragment {
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.searchIncludeLayout.editText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.searchIncludeLayout.editText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
                 }
             }
             return false;

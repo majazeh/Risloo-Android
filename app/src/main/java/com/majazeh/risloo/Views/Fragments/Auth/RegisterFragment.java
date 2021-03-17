@@ -59,7 +59,7 @@ public class RegisterFragment extends Fragment {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.nameIncludeLayout.inputEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -68,7 +68,7 @@ public class RegisterFragment extends Fragment {
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.mobileIncludeLayout.inputEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -79,15 +79,15 @@ public class RegisterFragment extends Fragment {
             ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.getRoot().setClickable(true), 300);
 
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.nameIncludeLayout.inputEditText.length() != 0 && binding.mobileIncludeLayout.inputEditText.length() != 0) {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
 
                 doWork();
             }

@@ -76,7 +76,7 @@ public class PinFragment extends Fragment {
         binding.pinIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.pinIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(getActivity(), binding.pinIncludeLayout.inputEditText);
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.pinIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -91,7 +91,7 @@ public class PinFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.pinIncludeLayout.inputEditText.length() == 6) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
+                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
                     doWork("pin");
                 }
             }
@@ -107,9 +107,9 @@ public class PinFragment extends Fragment {
             ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.pinTextView.getRoot().setClickable(true), 300);
 
             if (binding.pinIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(getActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(getActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
                 doWork("pin");
             }
         });
@@ -165,7 +165,7 @@ public class PinFragment extends Fragment {
     }
 
     private void setData() {
-        binding.timerTextView.setText(StringManager.clickable(getActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, pinLinkSpan));
+        binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, pinLinkSpan));
         pinCountDownTimer.start();
     }
 
@@ -173,15 +173,15 @@ public class PinFragment extends Fragment {
         if (value) {
             pinCountDownTimer.start();
 
-            binding.viewFlipper.setInAnimation(getActivity(), R.anim.slide_in_right_with_fade);
-            binding.viewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_left_with_fade);
+            binding.viewFlipper.setInAnimation(requireActivity(), R.anim.slide_in_right_with_fade);
+            binding.viewFlipper.setOutAnimation(requireActivity(), R.anim.slide_out_left_with_fade);
 
             binding.viewFlipper.showPrevious();
         } else {
             pinCountDownTimer.cancel();
 
-            binding.viewFlipper.setInAnimation(getActivity(), R.anim.slide_in_left_with_fade);
-            binding.viewFlipper.setOutAnimation(getActivity(), R.anim.slide_out_right_with_fade);
+            binding.viewFlipper.setInAnimation(requireActivity(), R.anim.slide_in_left_with_fade);
+            binding.viewFlipper.setOutAnimation(requireActivity(), R.anim.slide_out_right_with_fade);
 
             binding.viewFlipper.showNext();
         }

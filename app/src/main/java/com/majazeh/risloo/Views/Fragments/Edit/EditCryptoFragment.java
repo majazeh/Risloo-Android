@@ -64,7 +64,7 @@ public class EditCryptoFragment extends Fragment {
         binding.publicIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.publicIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.publicIncludeLayout.inputEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.publicIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -73,7 +73,7 @@ public class EditCryptoFragment extends Fragment {
         binding.privateIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.privateIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.privateIncludeLayout.inputEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.privateIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -84,9 +84,9 @@ public class EditCryptoFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.publicEditTextView.getRoot().setClickable(true), 300);
 
             if (binding.publicIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView);
                 doWork();
             }
         });
@@ -96,9 +96,9 @@ public class EditCryptoFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.privateEditTextView.getRoot().setClickable(true), 300);
 
             if (binding.privateIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView);
                 doWork();
             }
         });

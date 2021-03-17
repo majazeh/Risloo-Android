@@ -48,7 +48,7 @@ public class CentersFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) getActivity()).handler.postDelayed(() -> {
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
             binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
@@ -57,14 +57,14 @@ public class CentersFragment extends Fragment {
     }
 
     private void initializer() {
-        centersAdapter = new CentersAdapter(getActivity());
+        centersAdapter = new CentersAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp));
-        layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
+        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
 
-        InitManager.imgResTint(getActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
@@ -81,7 +81,7 @@ public class CentersFragment extends Fragment {
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.searchIncludeLayout.editText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), binding.searchIncludeLayout.editText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
                 }
             }
             return false;
@@ -95,8 +95,8 @@ public class CentersFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) getActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) getActivity()).handler.postDelayed(() -> {
+                ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
+                ((MainActivity) requireActivity()).handler.postDelayed(() -> {
                     // TODO : Place Code Here
                 }, 750);
             }
@@ -109,9 +109,9 @@ public class CentersFragment extends Fragment {
 
         binding.addImageView.getRoot().setOnClickListener(v -> {
             binding.addImageView.getRoot().setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
 
-            ((MainActivity) getActivity()).navigator(R.id.createCenterFragment);
+            ((MainActivity) requireActivity()).navigator(R.id.createCenterFragment);
         });
     }
 

@@ -43,7 +43,7 @@ public class AccountFragment extends Fragment {
     private void initializer() {
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.AccountFragmentEdit), getResources().getColor(R.color.Gray500));
 
-        InitManager.imgResTint(getActivity(), binding.enterImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Blue600);
+        InitManager.imgResTint(requireActivity(), binding.enterImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Blue600);
     }
 
     private void detector() {
@@ -63,7 +63,7 @@ public class AccountFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(getActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
+                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
         });
 

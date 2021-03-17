@@ -81,7 +81,7 @@ public class EditPersonalFragment extends Fragment {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.nameIncludeLayout.inputEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -90,7 +90,7 @@ public class EditPersonalFragment extends Fragment {
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.mobileIncludeLayout.inputEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -99,7 +99,7 @@ public class EditPersonalFragment extends Fragment {
         binding.usernameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.usernameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.usernameIncludeLayout.inputEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.usernameIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -108,7 +108,7 @@ public class EditPersonalFragment extends Fragment {
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.emailIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(getActivity(), binding.emailIncludeLayout.inputEditText);
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -118,7 +118,7 @@ public class EditPersonalFragment extends Fragment {
             binding.birthdayIncludeLayout.selectTextView.setClickable(false);
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.birthdayIncludeLayout.selectTextView.setClickable(true), 300);
 
-            ((MainActivity) requireActivity()).dateDialog.show(getActivity().getSupportFragmentManager(), "dateSheetDialog");
+            ((MainActivity) requireActivity()).dateDialog.show(requireActivity().getSupportFragmentManager(), "dateSheetDialog");
             ((MainActivity) requireActivity()).dateDialog.setDate(year, month, day);
         });
 
@@ -163,19 +163,19 @@ public class EditPersonalFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.usernameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(getActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameIncludeLayout.errorImageView, binding.usernameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameIncludeLayout.errorImageView, binding.usernameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.nameIncludeLayout.inputEditText.length() != 0 && binding.mobileIncludeLayout.inputEditText.length() != 0 && binding.usernameIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(getActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameIncludeLayout.errorImageView, binding.usernameIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameIncludeLayout.errorImageView, binding.usernameIncludeLayout.errorTextView);
 
                 doWork();
             }
