@@ -64,7 +64,6 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     private void listener(CentersHolder holder) {
         holder.binding.containerConstraintLayout.setOnClickListener(v -> {
             holder.binding.containerConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.centerFragment);
         });

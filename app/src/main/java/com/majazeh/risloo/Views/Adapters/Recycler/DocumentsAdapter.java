@@ -68,7 +68,6 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     private void listener(DocumentsHolder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });

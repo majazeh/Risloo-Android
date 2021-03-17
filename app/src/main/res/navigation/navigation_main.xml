@@ -13,9 +13,6 @@
         <action
             android:id="@+id/action_accountFragment_to_editAccountFragment"
             app:destination="@id/editAccountFragment" />
-        <action
-            android:id="@+id/action_accountFragment_to_createDocumentFragment"
-            app:destination="@id/createDocumentFragment" />
     </fragment>
 
     <fragment
@@ -86,6 +83,9 @@
         <action
             android:id="@+id/action_sessionsFragment_to_sessionFragment"
             app:destination="@id/sessionFragment" />
+        <action
+            android:id="@+id/action_sessionsFragment_to_editSessionFragment"
+            app:destination="@id/editSessionFragment" />
     </fragment>
 
     <fragment
@@ -99,13 +99,20 @@
         <action
             android:id="@+id/action_usersFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_usersFragment_to_editUserFragment"
+            app:destination="@id/editUserFragment" />
     </fragment>
 
     <fragment
         android:id="@+id/scalesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.ScalesFragment"
         android:label="@string/ScalesFragmentTitle"
-        tools:layout="@layout/fragment_scales" />
+        tools:layout="@layout/fragment_scales" >
+        <action
+            android:id="@+id/action_scalesFragment_to_createSampleFragment"
+            app:destination="@id/createSampleFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/samplesFragment"
@@ -118,6 +125,9 @@
         <action
             android:id="@+id/action_samplesFragment_to_sampleFragment"
             app:destination="@id/sampleFragment" />
+        <action
+            android:id="@+id/action_samplesFragment_to_testFragment"
+            app:destination="@id/testFragment" />
     </fragment>
 
     <fragment
@@ -190,6 +200,9 @@
         <action
             android:id="@+id/action_roomFragment_to_caseFragment"
             app:destination="@id/caseFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_createCaseFragment"
+            app:destination="@id/createCaseFragment" />
     </fragment>
 
     <fragment
@@ -215,5 +228,23 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.SessionFragment"
         android:label="@string/SessionFragmentTitle"
         tools:layout="@layout/fragment_session" />
+
+    <fragment
+        android:id="@+id/testFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.TestFragment"
+        android:label="@string/TestFragmentTitle"
+        tools:layout="@layout/fragment_test" />
+
+    <fragment
+        android:id="@+id/editUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment"
+        android:label="@string/EditUserFragmentTitle"
+        tools:layout="@layout/fragment_edit_user" />
+
+    <fragment
+        android:id="@+id/editSessionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment"
+        android:label="@string/EditSessionFragmentTitle"
+        tools:layout="@layout/fragment_edit_session" />
 
 </navigation>

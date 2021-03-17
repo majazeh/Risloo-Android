@@ -32,6 +32,11 @@
     <string name="AuthDashboard">پیش‌خوان</string>
     <string name="AuthLogout">خروج</string>
 
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Auth Fragments
+    //////////////////////////////////////////////////////////////////////////////////////
+
     /*
     ---------- Login Fragment ----------
     */
@@ -40,43 +45,6 @@
 
     <string name="LoginFragmentInput">موبایل، ایمیل یا نام کاربری</string>
     <string name="LoginFragmentButton">ورود</string>
-
-    /*
-    ---------- Register Fragment ----------
-    */
-
-    <string name="RegisterFragmentTitle">عضویت</string>
-
-    <string name="RegisterFragmentName">نام و نام خانوادگی</string>
-    <string name="RegisterFragmentMobile">تلفن همراه</string>
-    <string name="RegisterFragmentButton">عضویت</string>
-
-    /*
-    ---------- Password Fragment ----------
-    */
-
-    <string name="PasswordFragmentTitle">کلمه عبور</string>
-
-    <string name="PasswordFragmentInput">کلمه عبور</string>
-    <string name="PasswordFragmentButton">بررسی</string>
-
-    /*
-    ---------- PasswordChange Fragment ----------
-    */
-
-    <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
-
-    <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
-    <string name="PasswordChangeFragmentButton">تغییر</string>
-
-    /*
-    ---------- PasswordRecover Fragment ----------
-    */
-
-    <string name="PasswordRecoverFragmentTitle">بازیابی کلمه عبور</string>
-
-    <string name="PasswordRecoverFragmentInput">تلفن همراه</string>
-    <string name="PasswordRecoverFragmentButton">دریافت کد</string>
 
     /*
     ---------- Mobile Fragment ----------
@@ -88,6 +56,33 @@
     <string name="MobileFragmentButton">بررسی</string>
 
     /*
+    ---------- PasswordChange Fragment ----------
+    */
+
+    <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
+
+    <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
+    <string name="PasswordChangeFragmentButton">تغییر</string>
+
+    /*
+    ---------- Password Fragment ----------
+    */
+
+    <string name="PasswordFragmentTitle">کلمه عبور</string>
+
+    <string name="PasswordFragmentInput">کلمه عبور</string>
+    <string name="PasswordFragmentButton">بررسی</string>
+
+    /*
+    ---------- PasswordRecover Fragment ----------
+    */
+
+    <string name="PasswordRecoverFragmentTitle">بازیابی کلمه عبور</string>
+
+    <string name="PasswordRecoverFragmentInput">تلفن همراه</string>
+    <string name="PasswordRecoverFragmentButton">دریافت کد</string>
+
+    /*
     ---------- Pin Fragment ----------
     */
 
@@ -97,6 +92,16 @@
     <string name="PinFragmentButton">بررسی</string>
     <string name="PinFragmentLink">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
     <string name="PinFragmentTimer">کد پیامکی برای شما ارسال شد :</string>
+
+    /*
+    ---------- Register Fragment ----------
+    */
+
+    <string name="RegisterFragmentTitle">عضویت</string>
+
+    <string name="RegisterFragmentName">نام و نام خانوادگی</string>
+    <string name="RegisterFragmentMobile">تلفن همراه</string>
+    <string name="RegisterFragmentButton">عضویت</string>
 
     /*
     ---------- Serial Fragment ----------
@@ -115,11 +120,10 @@
     <string name="MainToolbar">کاربر آزمایشی</string>
     <string name="MainHeader">ریسلو</string>
 
-    /*
-    ---------- CreateCenter Fragment ----------
-    */
+    //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="CreateCenterFragmentTitle">ساخت مرکز</string>
+    // Create Fragments
+    //////////////////////////////////////////////////////////////////////////////////////
 
     /*
     ---------- CreateCase Fragment ----------
@@ -128,34 +132,16 @@
     <string name="CreateCaseFragmentTitle">ساخت پرونده</string>
 
     /*
-    ---------- CreateSession Fragment ----------
+    ---------- CreateCenter Fragment ----------
     */
 
-    <string name="CreateSessionFragmentTitle">ساخت جلسه</string>
-
-    /*
-    ---------- CreateUser Fragment ----------
-    */
-
-    <string name="CreateUserFragmentTitle">ساخت کاربر</string>
-
-    /*
-    ---------- CreateSample Fragment ----------
-    */
-
-    <string name="CreateSampleFragmentTitle">ساخت نمونه</string>
+    <string name="CreateCenterFragmentTitle">ساخت مرکز</string>
 
     /*
     ---------- CreateDocument Fragment ----------
     */
 
     <string name="CreateDocumentFragmentTitle">ساخت مدرک</string>
-
-    /*
-    ---------- CreateRoom Fragment ----------
-    */
-
-    <string name="CreateRoomFragmentTitle">ساخت اتاق</string>
 
     /*
     ---------- CreatePractice Fragment ----------
@@ -169,6 +155,33 @@
 
     <string name="CreateReportFragmentTitle">ساخت گزارش</string>
 
+    /*
+    ---------- CreateRoom Fragment ----------
+    */
+
+    <string name="CreateRoomFragmentTitle">ساخت اتاق</string>
+
+    /*
+    ---------- CreateSample Fragment ----------
+    */
+
+    <string name="CreateSampleFragmentTitle">ساخت نمونه</string>
+
+    /*
+    ---------- CreateSession Fragment ----------
+    */
+
+    <string name="CreateSessionFragmentTitle">ساخت جلسه</string>
+
+    /*
+    ---------- CreateUser Fragment ----------
+    */
+
+    <string name="CreateUserFragmentTitle">ساخت کاربر</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
@@ -176,48 +189,6 @@
     */
 
     <string name="EditAccountFragmentTitle">ویرایش من</string>
-
-    /*
-    ---------- EditPersonal Fragment ----------
-    */
-
-    <string name="EditPersonalFragmentTitle">شخصی</string>
-
-    <string name="EditPersonalFragmentNameHeader">نام و نام خانوادگی</string>
-    <string name="EditPersonalFragmentMobileHeader">تلفن همراه</string>
-    <string name="EditPersonalFragmentUsernameHeader">شناسه کاربری</string>
-    <string name="EditPersonalFragmentEmailHeader">رایانامه</string>
-    <string name="EditPersonalFragmentBirthdayHeader">تاریخ تولد</string>
-    <string name="EditPersonalFragmentStatusHeader">وضعیت</string>
-    <string name="EditPersonalFragmentTypeHeader">نوع کاربر</string>
-    <string name="EditPersonalFragmentGenderHeader">جنسیت</string>
-
-    <string name="EditPersonalFragmentBirthdayDefault">1400-01-01</string>
-
-    <string name="EditPersonalFragmentStatusActive">فعال</string>
-    <string name="EditPersonalFragmentStatusWaiting">در انتظار</string>
-    <string name="EditPersonalFragmentStatusClosed">بسته شده</string>
-    <string name="EditPersonalFragmentTypeAdmin">ادمین</string>
-    <string name="EditPersonalFragmentTypeClient">کاربر</string>
-    <string name="EditPersonalFragmentGenderMale">مرد</string>
-    <string name="EditPersonalFragmentGenderFemale">زن</string>
-
-    <string name="EditPersonalFragmentUsernameHint">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
-
-    <string name="EditPersonalFragmentButton">ویرایش</string>
-
-    <string name="EditPersonalDialogDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
-    <string name="EditPersonalDialogDateEntry">ثبت</string>
-
-    /*
-    ---------- EditPassword Fragment ----------
-    */
-
-    <string name="EditPasswordFragmentTitle">کلمه عبور</string>
-
-    <string name="EditPasswordFragmentHeader">کلمه عبور</string>
-    <string name="EditPasswordFragmentHint">گذرواژه باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
-    <string name="EditPasswordFragmentButton">تغییر</string>
 
     /*
     ---------- EditAvatar Fragment ----------
@@ -267,13 +238,70 @@
     <string name="EditCryptoFragmentPrivateHeader">کلید خصوصی</string>
     <string name="EditCryptoFragmentPrivateButton">تنظيم</string>
 
-    //////////////////////////////////////////////////////////////////////////////////////
-
     /*
-    ---------- Centers Fragment ----------
+    ---------- EditPassword Fragment ----------
     */
 
-    <string name="CentersFragmentTitle">مراکز درمانی</string>
+    <string name="EditPasswordFragmentTitle">کلمه عبور</string>
+
+    <string name="EditPasswordFragmentHeader">کلمه عبور</string>
+    <string name="EditPasswordFragmentHint">گذرواژه باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+    <string name="EditPasswordFragmentButton">تغییر</string>
+
+    /*
+    ---------- EditPersonal Fragment ----------
+    */
+
+    <string name="EditPersonalFragmentTitle">شخصی</string>
+
+    <string name="EditPersonalFragmentNameHeader">نام و نام خانوادگی</string>
+    <string name="EditPersonalFragmentMobileHeader">تلفن همراه</string>
+    <string name="EditPersonalFragmentUsernameHeader">شناسه کاربری</string>
+    <string name="EditPersonalFragmentEmailHeader">رایانامه</string>
+    <string name="EditPersonalFragmentBirthdayHeader">تاریخ تولد</string>
+    <string name="EditPersonalFragmentStatusHeader">وضعیت</string>
+    <string name="EditPersonalFragmentTypeHeader">نوع کاربر</string>
+    <string name="EditPersonalFragmentGenderHeader">جنسیت</string>
+
+    <string name="EditPersonalFragmentBirthdayDefault">1400-01-01</string>
+
+    <string name="EditPersonalFragmentStatusActive">فعال</string>
+    <string name="EditPersonalFragmentStatusWaiting">در انتظار</string>
+    <string name="EditPersonalFragmentStatusClosed">بسته شده</string>
+    <string name="EditPersonalFragmentTypeAdmin">ادمین</string>
+    <string name="EditPersonalFragmentTypeClient">کاربر</string>
+    <string name="EditPersonalFragmentGenderMale">مرد</string>
+    <string name="EditPersonalFragmentGenderFemale">زن</string>
+
+    <string name="EditPersonalFragmentUsernameHint">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
+
+    <string name="EditPersonalFragmentButton">ویرایش</string>
+
+    <string name="EditPersonalDialogDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="EditPersonalDialogDateEntry">ثبت</string>
+
+    /*
+    ---------- EditSample Fragment ----------
+    */
+
+    <string name="EditSampleFragmentTitle">ویرایش نمونه</string>
+
+    /*
+    ---------- EditSession Fragment ----------
+    */
+
+    <string name="EditSessionFragmentTitle">ویرایش جلسه</string>
+
+    /*
+    ---------- EditUser Fragment ----------
+    */
+
+    <string name="EditUserFragmentTitle">ویرایش کاربر</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Index Fragments
+    //////////////////////////////////////////////////////////////////////////////////////
 
     /*
     ---------- Cases Fragment ----------
@@ -285,6 +313,58 @@
     <string name="CasesFragmentRoom">اتاق درمان</string>
     <string name="CasesFragmentCenter">مرکز درمانی</string>
     <string name="CasesFragmentReference">مراجعین</string>
+
+    /*
+    ---------- Centers Fragment ----------
+    */
+
+    <string name="CentersFragmentTitle">مراکز درمانی</string>
+
+    /*
+    ---------- Documents Fragment ----------
+    */
+
+    <string name="DocumentsFragmentTitle">اسناد و مدارک</string>
+
+    <string name="DocumentsFragmentSerial">سریال</string>
+    <string name="DocumentsFragmentName">عنوان</string>
+    <string name="DocumentsFragmentStatus">وضعیت</string>
+
+    <string name="DocumentsFragmentAccept">تأیید</string>
+    <string name="DocumentsFragmentCancel">رد</string>
+
+    /*
+    ---------- Samples Fragment ----------
+    */
+
+    <string name="SamplesFragmentTitle">نمونه‌ها</string>
+
+    <string name="SamplesFragmentSerial">سریال</string>
+    <string name="SamplesFragmentName">مقیاس</string>
+    <string name="SamplesFragmentEdition">ویرایش - نسخه</string>
+    <string name="SamplesFragmentRoom">اتاق درمان</string>
+    <string name="SamplesFragmentCase">پرونده</string>
+    <string name="SamplesFragmentReference">مراجع</string>
+    <string name="SamplesFragmentStatus">وضعیت</string>
+
+    <string name="SamplesFragmentSeald">شروع</string>
+    <string name="SamplesFragmentOpen">ادامه</string>
+    <string name="SamplesFragmentClosed">بسته شده</string>
+    <string name="SamplesFragmentScoring">نمره گذاری</string>
+    <string name="SamplesFragmentCreatingFiles">ساخت فایل‌ها</string>
+    <string name="SamplesFragmentDone">تمام شده</string>
+
+    /*
+    ---------- Scales Fragment ----------
+    */
+
+    <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
+
+    <string name="ScalesFragmentSerial">سریال</string>
+    <string name="ScalesFragmentName">مقیاس</string>
+    <string name="ScalesFragmentEdition">ویرایش - نسخه</string>
+
+    <string name="ScalesFragmentCreate">ساختن</string>
 
     /*
     ---------- Sessions Fragment ----------
@@ -313,52 +393,9 @@
     <string name="UsersFragmentType">نوع</string>
     <string name="UsersFragmentStatus">وضعیت</string>
 
-    /*
-    ---------- Scales Fragment ----------
-    */
+    //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
-
-    <string name="ScalesFragmentSerial">سریال</string>
-    <string name="ScalesFragmentName">مقیاس</string>
-    <string name="ScalesFragmentEdition">ویرایش - نسخه</string>
-
-    <string name="ScalesFragmentCreate">ساختن</string>
-
-    /*
-    ---------- Samples Fragment ----------
-    */
-
-    <string name="SamplesFragmentTitle">نمونه‌ها</string>
-
-    <string name="SamplesFragmentSerial">سریال</string>
-    <string name="SamplesFragmentName">مقیاس</string>
-    <string name="SamplesFragmentEdition">ویرایش - نسخه</string>
-    <string name="SamplesFragmentRoom">اتاق درمان</string>
-    <string name="SamplesFragmentCase">پرونده</string>
-    <string name="SamplesFragmentReference">مراجع</string>
-    <string name="SamplesFragmentStatus">وضعیت</string>
-
-    <string name="SamplesFragmentSeald">شروع</string>
-    <string name="SamplesFragmentOpen">ادامه</string>
-    <string name="SamplesFragmentClosed">بسته شده</string>
-    <string name="SamplesFragmentScoring">نمره گذاری</string>
-    <string name="SamplesFragmentCreatingFiles">ساخت فایل‌ها</string>
-    <string name="SamplesFragmentDone">تمام شده</string>
-
-    /*
-    ---------- Documents Fragment ----------
-    */
-
-    <string name="DocumentsFragmentTitle">اسناد و مدارک</string>
-
-    <string name="DocumentsFragmentSerial">سریال</string>
-    <string name="DocumentsFragmentName">عنوان</string>
-    <string name="DocumentsFragmentStatus">وضعیت</string>
-
-    <string name="DocumentsFragmentAccept">تأیید</string>
-    <string name="DocumentsFragmentCancel">رد</string>
-
+    // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
@@ -371,10 +408,10 @@
     <string name="AccountFragmentDocumentsHeader">اسناد و مدارک</string>
 
     /*
-    ---------- Dashboard Fragment ----------
+    ---------- Case Fragment ----------
     */
 
-    <string name="DashboardFragmentTitle">پیش‌خوان</string>
+    <string name="CaseFragmentTitle">پرونده</string>
 
     /*
     ---------- Center Fragment ----------
@@ -392,6 +429,18 @@
     <string name="CenterFragmentRoomsHeader">اتاق‌های درمان</string>
 
     /*
+    ---------- Dashboard Fragment ----------
+    */
+
+    <string name="DashboardFragmentTitle">پیش‌خوان</string>
+
+    /*
+    ---------- Result Fragment ----------
+    */
+
+    <string name="ResultFragmentTitle">نمره</string>
+
+    /*
     ---------- Room Fragment ----------
     */
 
@@ -401,10 +450,10 @@
     <string name="RoomFragmentCasesHeader">پرونده‌ها</string>
 
     /*
-    ---------- Case Fragment ----------
+    ---------- Sample Fragment ----------
     */
 
-    <string name="CaseFragmentTitle">پرونده</string>
+    <string name="SampleFragmentTitle">نمونه</string>
 
     /*
     ---------- Session Fragment ----------
@@ -413,35 +462,23 @@
     <string name="SessionFragmentTitle">جلسه</string>
 
     /*
-    ---------- User Fragment ----------
-    */
-
-    <string name="UserFragmentTitle">کاربر</string>
-    <string name="UserFragmentEdit">ویرایش</string>
-
-    /*
-    ---------- Sample Fragment ----------
-    */
-
-    <string name="SampleFragmentTitle">نمونه</string>
-
-    /*
     ---------- Setting Fragment ----------
     */
 
     <string name="SettingFragmentTitle">تنظیمات</string>
 
     /*
-    ---------- Result Fragment ----------
-    */
-
-    <string name="ResultFragmentTitle">نمره</string>
-
-    /*
     ---------- Test Fragment ----------
     */
 
     <string name="TestFragmentTitle">آزمون</string>
+
+    /*
+    ---------- User Fragment ----------
+    */
+
+    <string name="UserFragmentTitle">کاربر</string>
+    <string name="UserFragmentEdit">ویرایش</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
