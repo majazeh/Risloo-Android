@@ -460,6 +460,20 @@
     */
 
     <string name="SessionFragmentTitle">جلسه</string>
+    <string name="SessionFragmentEdit">ویرایش</string>
+
+    <string name="SessionFragmentReportHeader">گزارش</string>
+    <string name="SessionFragmentReportBodyDefault">تنها درمان‌گران این پرونده قادر به ثبت و مشاهده گزارش می‌باشند.</string>
+    <string name="SessionFragmentReportBodyEmpty">هنوز گزارشی برای این جلسه ثبت نشده است</string>
+
+    <string name="SessionFragmentPsychologistsHeader">درمانگران</string>
+    <string name="SessionFragmentReferencesHeader">مراجعین</string>
+
+    <string name="SessionFragmentPracticesHeader">کاربرگ‌ها</string>
+    <string name="SessionFragmentPracticesBodyEmpty">هنوز کاربرگی برای این جلسه ثبت نشده است.</string>
+
+    <string name="SessionFragmentSamplesHeader">نمونه‌ها</string>
+    <string name="SessionFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این جلسه ثبت نشده است.</string>
 
     /*
     ---------- Setting Fragment ----------

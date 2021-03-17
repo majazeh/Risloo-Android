@@ -1,18 +1,316 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/White"
+    android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="always"
+    android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Show.SessionFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/SessionFragmentTitle"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/serial_imageView"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_clipboard_light"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/Blue700" />
+
+            <TextView
+                android:id="@+id/serial_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:gravity="start"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Blue700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/serial_imageView"
+                app:layout_constraintEnd_toStartOf="@+id/serial_imageView"
+                app:layout_constraintTop_toTopOf="@+id/serial_imageView"
+                tools:text="سریال" />
+
+            <ImageView
+                android:id="@+id/date_imageView"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_calendar_light"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/date_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:gravity="start"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintBottom_toBottomOf="@+id/date_imageView"
+                app:layout_constraintStart_toEndOf="@+id/date_imageView"
+                app:layout_constraintTop_toTopOf="@+id/date_imageView"
+                tools:text="تاریخ جلسه" />
+
+            <ImageView
+                android:id="@+id/duration_imageView"
+                android:layout_width="@dimen/_14sdp"
+                android:layout_height="@dimen/_14sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_clock_light"
+                app:layout_constraintTop_toTopOf="@id/duration_textView"
+                app:layout_constraintBottom_toBottomOf="@id/duration_textView"
+                app:layout_constraintStart_toStartOf="@id/date_imageView"
+                app:layout_constraintEnd_toEndOf="@id/date_imageView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/duration_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="start"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toStartOf="@id/date_textView"
+                app:layout_constraintTop_toBottomOf="@+id/date_textView"
+                tools:text="مدت زمان جلسه" />
+
+            <TextView
+                android:id="@+id/status_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="start"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toStartOf="@id/date_imageView"
+                app:layout_constraintTop_toBottomOf="@+id/duration_textView"
+                tools:text="وضعیت" />
+
+            <include
+                android:id="@+id/edit_textView"
+                layout="@layout/component_button_rect_28sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                app:layout_goneMarginTop="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/duration_textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/report_header_includeLayout"
+            layout="@layout/component_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@+id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/info_constraintLayout" />
+
+        <TextView
+            android:id="@+id/report_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:padding="@dimen/_12sdp"
+            android:gravity="start"
+            android:text="@string/SessionFragmentReportBodyDefault"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/report_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/report_header_includeLayout" />
+
+        <include
+            android:id="@+id/psychologists_header_includeLayout"
+            layout="@layout/component_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@+id/report_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/report_textView" />
+
+        <include
+            android:id="@+id/psychologists_shimmerLayout"
+            layout="@layout/component_shimmer_psychology"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/psychologists_header_includeLayout"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/psychologists_singleLayout"
+            layout="@layout/component_single_psychology"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/psychologists_header_includeLayout"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/references_header_includeLayout"
+            layout="@layout/component_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@+id/psychologists_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/psychologists_singleLayout" />
+
+        <include
+            android:id="@+id/references_shimmerLayout"
+            layout="@layout/component_shimmer_reference"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/references_header_includeLayout"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/references_singleLayout"
+            layout="@layout/component_single_reference"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/references_header_includeLayout"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/practices_header_includeLayout"
+            layout="@layout/component_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@+id/references_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/references_singleLayout" />
+
+        <include
+            android:id="@+id/practices_add_imageView"
+            layout="@layout/component_button_oval_28sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/practices_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/practices_header_includeLayout" />
+
+        <include
+            android:id="@+id/practices_shimmerLayout"
+            layout="@layout/component_shimmer_case2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/practices_add_imageView"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/practices_singleLayout"
+            layout="@layout/component_single_case2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/practices_add_imageView"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/samples_header_includeLayout"
+            layout="@layout/component_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@+id/practices_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/practices_singleLayout" />
+
+        <include
+            android:id="@+id/samples_add_imageView"
+            layout="@layout/component_button_oval_28sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/samples_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/samples_header_includeLayout" />
+
+        <include
+            android:id="@+id/samples_shimmerLayout"
+            layout="@layout/component_shimmer_case2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/samples_add_imageView"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/samples_singleLayout"
+            layout="@layout/component_single_case2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/samples_add_imageView"
+            tools:visibility="gone" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
