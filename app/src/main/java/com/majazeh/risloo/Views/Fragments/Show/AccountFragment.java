@@ -69,14 +69,12 @@ public class AccountFragment extends Fragment {
 
         binding.editTextView.getRoot().setOnClickListener(v -> {
             binding.editTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.editAccountFragment);
         });
 
         binding.enterImageView.getRoot().setOnClickListener(v -> {
             binding.enterImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.enterImageView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });

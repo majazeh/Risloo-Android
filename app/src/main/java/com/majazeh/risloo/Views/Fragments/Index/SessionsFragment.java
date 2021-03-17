@@ -112,7 +112,6 @@ public class SessionsFragment extends Fragment {
 
         binding.addImageView.getRoot().setOnClickListener(v -> {
             binding.addImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createSessionFragment);
         });

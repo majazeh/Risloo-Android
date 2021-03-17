@@ -80,14 +80,12 @@ public class LoginFragment extends Fragment {
 
         binding.registerTextView.getRoot().setOnClickListener(v -> {
             binding.registerTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.getRoot().setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
         });
 
         binding.passwordRecoverTextView.getRoot().setOnClickListener(v -> {
             binding.passwordRecoverTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.getRoot().setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.serialFragment);
         });
