@@ -2,7 +2,6 @@
 <androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/fragment_scales"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
@@ -13,12 +12,12 @@
     tools:context=".Views.Fragments.Index.ScalesFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/fragment_scales_constraintLayout"
+        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include
-            android:id="@+id/fragment_scales_header_constraintLayout"
+            android:id="@+id/header_includeLayout"
             layout="@layout/component_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -27,18 +26,18 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/fragment_scales_search_constraintLayout"
+            android:id="@+id/search_includeLayout"
             layout="@layout/component_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
             android:layout_marginLeft="@dimen/_12sdp"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="@+id/fragment_scales_header_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_scales_header_constraintLayout" />
+            app:layout_constraintRight_toRightOf="@+id/header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/header_includeLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/fragment_scales_index_containerLayout"
+            android:id="@+id/index_containerLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -46,12 +45,12 @@
             android:padding="@dimen/_1sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/fragment_scales_search_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/fragment_scales_search_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/fragment_scales_search_constraintLayout">
+            app:layout_constraintEnd_toEndOf="@+id/search_includeLayout"
+            app:layout_constraintStart_toStartOf="@+id/search_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/search_includeLayout">
 
             <include
-                android:id="@+id/fragment_scales_index_shimmerLayout"
+                android:id="@+id/index_shimmerLayout"
                 layout="@layout/component_shimmer_scale"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -62,7 +61,7 @@
                 tools:visibility="gone" />
 
             <include
-                android:id="@+id/fragment_scales_index_headerLayout"
+                android:id="@+id/index_headerLayout"
                 layout="@layout/header_item_scale"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -73,14 +72,14 @@
                 tools:visibility="visible" />
 
             <include
-                android:id="@+id/fragment_scales_index_constraintLayout"
+                android:id="@+id/index_singleLayout"
                 layout="@layout/component_single_scale"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fragment_scales_index_headerLayout"
+                app:layout_constraintTop_toBottomOf="@+id/index_headerLayout"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

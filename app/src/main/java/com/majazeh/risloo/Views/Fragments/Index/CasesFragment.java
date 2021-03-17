@@ -9,52 +9,38 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.content.res.AppCompatResources;
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CasesAdapter;
+import com.majazeh.risloo.databinding.FragmentCasesBinding;
 
 public class CasesFragment extends Fragment {
+
+    // Binding
+    private FragmentCasesBinding binding;
 
     // Adapters
     private CasesAdapter casesAdapter;
 
     // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
-
-    // Widgets
-    private TextView casesTitleTextView, casesCountTextView;
-    private EditText casesSearchEditText;
-    private ProgressBar casesSearchProgressBar;
-    private ImageView casesAddImageView;
-    private ShimmerFrameLayout casesShimmerLayout;
-    private View casesShimmerTopView;
-    private ConstraintLayout casesHeaderLayout, casesConstraintLayout;
-    private RecyclerView casesRecyclerView;
-    private TextView casesEmptyTextView;
-    private ProgressBar casesProgressBar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_cases, viewGroup, false);
+        binding = FragmentCasesBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
+        initializer();
 
         detector();
 
@@ -63,69 +49,48 @@ public class CasesFragment extends Fragment {
         setData();
 
         ((MainActivity) getActivity()).handler.postDelayed(() -> {
-            casesShimmerLayout.setVisibility(View.GONE);
-            casesHeaderLayout.setVisibility(View.VISIBLE);
-            casesConstraintLayout.setVisibility(View.VISIBLE);
+            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
+    private void initializer() {
         casesAdapter = new CasesAdapter(getActivity());
 
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        casesTitleTextView = view.findViewById(R.id.title_textView);
-        casesTitleTextView.setText(getResources().getString(R.string.CasesFragmentTitle));
-        casesCountTextView = view.findViewById(R.id.count_textView);
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CasesFragmentTitle));
 
-        casesSearchEditText = view.findViewById(R.id.editText);
+        binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
-        casesSearchProgressBar = view.findViewById(R.id.progressBar);
-
-        casesAddImageView = view.findViewById(R.id.fragment_cases_add_imageView);
-        casesAddImageView.setImageResource(R.drawable.ic_plus_light);
-        ImageViewCompat.setImageTintList(casesAddImageView, AppCompatResources.getColorStateList(getActivity(), R.color.Green700));
-
-        casesShimmerLayout = view.findViewById(R.id.fragment_cases_index_shimmerLayout);
-        casesShimmerTopView = view.findViewById(R.id.top_view);
-        casesShimmerTopView.setVisibility(View.GONE);
-
-        casesHeaderLayout = view.findViewById(R.id.fragment_cases_index_headerLayout);
-        casesConstraintLayout = view.findViewById(R.id.fragment_cases_index_constraintLayout);
-
-        casesRecyclerView = view.findViewById(R.id.component_single_case_recyclerView);
-        casesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
-        casesRecyclerView.setLayoutManager(layoutManager);
-        casesRecyclerView.setNestedScrollingEnabled(false);
-        casesRecyclerView.setHasFixedSize(true);
-
-        casesEmptyTextView = view.findViewById(R.id.component_single_case_textView);
-
-        casesProgressBar = view.findViewById(R.id.component_single_case_progressBar);
+        InitManager.imgResTint(getActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            casesAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            casesAddImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        casesSearchEditText.setOnTouchListener((v, event) -> {
+        binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!casesSearchEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), casesSearchEditText);
+                if (!binding.searchIncludeLayout.editText.hasFocus()) {
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), binding.searchIncludeLayout.editText);
                 }
             }
             return false;
         });
 
-        casesSearchEditText.addTextChangedListener(new TextWatcher() {
+        binding.searchIncludeLayout.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -135,15 +100,7 @@ public class CasesFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ((MainActivity) getActivity()).handler.removeCallbacksAndMessages(null);
                 ((MainActivity) getActivity()).handler.postDelayed(() -> {
-//                    if (casesSearchEditText.length() != 0) {
-//                        getData("getCases", "", casesSearchEditText.getText().toString().trim());
-//                    } else {
-//                        casesRecyclerView.setAdapter(null);
-//
-//                        if (casesEmptyTextView.getVisibility() == View.VISIBLE) {
-//                            casesEmptyTextView.setVisibility(View.GONE);
-//                        }
-//                    }
+                    // TODO : Place Code Here
                 }, 750);
             }
 
@@ -153,9 +110,9 @@ public class CasesFragment extends Fragment {
             }
         });
 
-        casesAddImageView.setOnClickListener(v -> {
-            casesAddImageView.setClickable(false);
-            ((MainActivity) getActivity()).handler.postDelayed(() -> casesAddImageView.setClickable(true), 300);
+        binding.addImageView.getRoot().setOnClickListener(v -> {
+            binding.addImageView.getRoot().setClickable(false);
+            ((MainActivity) getActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) getActivity()).navigator(R.id.createCaseFragment);
         });
@@ -163,10 +120,10 @@ public class CasesFragment extends Fragment {
 
     private void setData() {
 //        casesAdapter.setCase(null);
-        casesRecyclerView.setAdapter(casesAdapter);
+        binding.indexSingleLayout.recyclerView.setAdapter(casesAdapter);
 
         String dataSize = "15";
-        casesCountTextView.setText("(" + dataSize + ")");
+        binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
     }
 
 }

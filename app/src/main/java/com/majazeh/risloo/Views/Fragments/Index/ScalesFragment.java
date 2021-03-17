@@ -8,111 +8,77 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
-import android.widget.ProgressBar;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ScalesAdapter;
+import com.majazeh.risloo.databinding.FragmentScalesBinding;
 
 public class ScalesFragment extends Fragment {
+
+    // Binding
+    private FragmentScalesBinding binding;
 
     // Adapters
     private ScalesAdapter scalesAdapter;
 
     // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
-
-    // Widgets
-    private TextView scalesTitleTextView, scalesCountTextView;
-    private EditText scalesSearchEditText;
-    private ProgressBar scalesSearchProgressBar;
-    private ShimmerFrameLayout scalesShimmerLayout;
-    private View scalesShimmerTopView;
-    private ConstraintLayout scalesHeaderLayout, scalesConstraintLayout;
-    private RecyclerView scalesRecyclerView;
-    private TextView scalesEmptyTextView;
-    private ProgressBar scalesProgressBar;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_scales, viewGroup, false);
+        binding = FragmentScalesBinding.inflate(inflater, viewGroup, false);
 
-        initializer(view);
-
-        detector();
+        initializer();
 
         listener();
 
         setData();
 
         ((MainActivity) getActivity()).handler.postDelayed(() -> {
-            scalesShimmerLayout.setVisibility(View.GONE);
-            scalesHeaderLayout.setVisibility(View.VISIBLE);
-            scalesConstraintLayout.setVisibility(View.VISIBLE);
+            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
 
-        return view;
+        return binding.getRoot();
     }
 
-    private void initializer(View view) {
+    private void initializer() {
         scalesAdapter = new ScalesAdapter(getActivity());
 
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
 
-        scalesTitleTextView = view.findViewById(R.id.title_textView);
-        scalesTitleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
-        scalesCountTextView = view.findViewById(R.id.count_textView);
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
 
-        scalesSearchEditText = view.findViewById(R.id.editText);
+        binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
-        scalesSearchProgressBar = view.findViewById(R.id.progressBar);
-
-        scalesShimmerLayout = view.findViewById(R.id.fragment_scales_index_shimmerLayout);
-        scalesShimmerTopView = view.findViewById(R.id.top_view);
-        scalesShimmerTopView.setVisibility(View.GONE);
-
-        scalesHeaderLayout = view.findViewById(R.id.fragment_scales_index_headerLayout);
-        scalesConstraintLayout = view.findViewById(R.id.fragment_scales_index_constraintLayout);
-
-        scalesRecyclerView = view.findViewById(R.id.component_single_scale_recyclerView);
-        scalesRecyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", 0,0, 0, 0));
-        scalesRecyclerView.setLayoutManager(layoutManager);
-        scalesRecyclerView.setNestedScrollingEnabled(false);
-        scalesRecyclerView.setHasFixedSize(true);
-
-        scalesEmptyTextView = view.findViewById(R.id.component_single_scale_textView);
-
-        scalesProgressBar = view.findViewById(R.id.component_single_scale_progressBar);
-    }
-
-    private void detector() {
-        // TODO : Place Work Here
+        InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        scalesSearchEditText.setOnTouchListener((v, event) -> {
+        binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!scalesSearchEditText.hasFocus()) {
-                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), scalesSearchEditText);
+                if (!binding.searchIncludeLayout.editText.hasFocus()) {
+                    ((MainActivity) getActivity()).controlEditText.select(getActivity(), binding.searchIncludeLayout.editText);
                 }
             }
             return false;
         });
 
-        scalesSearchEditText.addTextChangedListener(new TextWatcher() {
+        binding.searchIncludeLayout.editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -122,15 +88,7 @@ public class ScalesFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 ((MainActivity) getActivity()).handler.removeCallbacksAndMessages(null);
                 ((MainActivity) getActivity()).handler.postDelayed(() -> {
-//                    if (scalesSearchEditText.length() != 0) {
-//                        getData("getScales", "", scalesSearchEditText.getText().toString().trim());
-//                    } else {
-//                        scalesRecyclerView.setAdapter(null);
-//
-//                        if (scalesEmptyTextView.getVisibility() == View.VISIBLE) {
-//                            scalesEmptyTextView.setVisibility(View.GONE);
-//                        }
-//                    }
+                    // TODO : Place Code Here
                 }, 750);
             }
 
@@ -143,10 +101,10 @@ public class ScalesFragment extends Fragment {
 
     private void setData() {
 //        scalesAdapter.setScale(null);
-        scalesRecyclerView.setAdapter(scalesAdapter);
+        binding.indexSingleLayout.recyclerView.setAdapter(scalesAdapter);
 
         String dataSize = "15";
-        scalesCountTextView.setText("(" + dataSize + ")");
+        binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
     }
 
 }
