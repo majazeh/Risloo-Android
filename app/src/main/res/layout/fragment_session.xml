@@ -32,13 +32,13 @@
                 android:id="@+id/serial_imageView"
                 android:layout_width="@dimen/_16sdp"
                 android:layout_height="@dimen/_16sdp"
-                android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:contentDescription="@string/AppImageContent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_clipboard_light"
+                app:layout_constraintBottom_toBottomOf="@id/serial_textView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/serial_textView"
                 app:tint="@color/Blue700" />
 
             <TextView
@@ -46,28 +46,28 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="start"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Blue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
-                app:layout_constraintBottom_toBottomOf="@+id/serial_imageView"
                 app:layout_constraintEnd_toStartOf="@+id/serial_imageView"
-                app:layout_constraintTop_toTopOf="@+id/serial_imageView"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:text="سریال" />
 
             <ImageView
                 android:id="@+id/date_imageView"
                 android:layout_width="@dimen/_14sdp"
                 android:layout_height="@dimen/_14sdp"
-                android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:contentDescription="@string/AppImageContent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_calendar_light"
+                app:layout_constraintBottom_toBottomOf="@id/date_textView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="@id/date_textView"
                 app:tint="@color/Gray500" />
 
             <TextView
@@ -75,15 +75,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_4sdp"
                 android:gravity="start"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                app:layout_constraintBottom_toBottomOf="@+id/date_imageView"
                 app:layout_constraintStart_toEndOf="@+id/date_imageView"
-                app:layout_constraintTop_toTopOf="@+id/date_imageView"
+                app:layout_constraintTop_toBottomOf="@id/serial_textView"
                 tools:text="تاریخ جلسه" />
 
             <ImageView
@@ -116,15 +116,17 @@
 
             <TextView
                 android:id="@+id/status_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="start"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray400"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toStartOf="@id/edit_textView"
                 app:layout_constraintStart_toStartOf="@id/date_imageView"
                 app:layout_constraintTop_toBottomOf="@+id/duration_textView"
                 tools:text="وضعیت" />

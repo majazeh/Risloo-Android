@@ -209,7 +209,14 @@
         android:id="@+id/caseFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.CaseFragment"
         android:label="@string/CaseFragmentTitle"
-        tools:layout="@layout/fragment_case" />
+        tools:layout="@layout/fragment_case" >
+        <action
+            android:id="@+id/action_caseFragment_to_createSampleFragment"
+            app:destination="@id/createSampleFragment" />
+        <action
+            android:id="@+id/action_caseFragment_to_createSessionFragment"
+            app:destination="@id/createSessionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/userFragment"
@@ -227,7 +234,14 @@
         android:id="@+id/sessionFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.SessionFragment"
         android:label="@string/SessionFragmentTitle"
-        tools:layout="@layout/fragment_session" />
+        tools:layout="@layout/fragment_session" >
+        <action
+            android:id="@+id/action_sessionFragment_to_createSampleFragment"
+            app:destination="@id/createSampleFragment" />
+        <action
+            android:id="@+id/action_sessionFragment_to_createPracticeFragment"
+            app:destination="@id/createPracticeFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/testFragment"
@@ -246,5 +260,11 @@
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment"
         android:label="@string/EditSessionFragmentTitle"
         tools:layout="@layout/fragment_edit_session" />
+
+    <fragment
+        android:id="@+id/createPracticeFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment"
+        android:label="@string/CreatePracticeFragmentTitle"
+        tools:layout="@layout/fragment_create_practice" />
 
 </navigation>

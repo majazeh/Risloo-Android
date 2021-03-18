@@ -412,6 +412,16 @@
     */
 
     <string name="CaseFragmentTitle">پرونده</string>
+    <string name="CaseFragmentSituation">مسئله</string>
+
+    <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
+    <string name="CaseFragmentReferencesHeader">مراجعین</string>
+
+    <string name="CaseFragmentSessionsHeader">جلسات</string>
+    <string name="CaseFragmentSessionsBodyEmpty">هنوز جلسه‌ای برای این پرونده ثبت نشده است.</string>
+
+    <string name="CaseFragmentSamplesHeader">نمونه‌ها</string>
+    <string name="CaseFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این پرونده ثبت نشده است.</string>
 
     /*
     ---------- Center Fragment ----------
