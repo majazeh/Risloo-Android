@@ -420,8 +420,19 @@
     <string name="CaseFragmentSessionsHeader">جلسات</string>
     <string name="CaseFragmentSessionsBodyEmpty">هنوز جلسه‌ای برای این پرونده ثبت نشده است.</string>
 
+    <string name="CaseFragmentSessionsSerial">سریال</string>
+    <string name="CaseFragmentSessionsDate">زمان</string>
+    <string name="CaseFragmentSessionsDuration">مدت جلسه</string>
+    <string name="CaseFragmentSessionsStatus">پیوست</string>
+
     <string name="CaseFragmentSamplesHeader">نمونه‌ها</string>
     <string name="CaseFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این پرونده ثبت نشده است.</string>
+
+    <string name="CaseFragmentSamplesSerial">سریال</string>
+    <string name="CaseFragmentSamplesName">عنوان</string>
+    <string name="CaseFragmentSamplesSession">سریال جلسه</string>
+    <string name="CaseFragmentSamplesReference">مراجع</string>
+    <string name="CaseFragmentSamplesStatus">وضعیت</string>
 
     /*
     ---------- Center Fragment ----------
@@ -484,8 +495,20 @@
     <string name="SessionFragmentPracticesHeader">کاربرگ‌ها</string>
     <string name="SessionFragmentPracticesBodyEmpty">هنوز کاربرگی برای این جلسه ثبت نشده است.</string>
 
+    <string name="SessionFragmentPracticesSerial">سریال</string>
+    <string name="SessionFragmentPracticesName">عنوان</string>
+    <string name="SessionFragmentPracticesDescription">محتوا</string>
+    <string name="SessionFragmentPracticesAttachment">پیوست</string>
+    <string name="SessionFragmentPracticesPractice">تکلیف</string>
+
     <string name="SessionFragmentSamplesHeader">نمونه‌ها</string>
     <string name="SessionFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این جلسه ثبت نشده است.</string>
+
+    <string name="SessionFragmentSamplesSerial">سریال</string>
+    <string name="SessionFragmentSamplesName">عنوان</string>
+    <string name="SessionFragmentSamplesSession">سریال جلسه</string>
+    <string name="SessionFragmentSamplesReference">مراجع</string>
+    <string name="SessionFragmentSamplesStatus">وضعیت</string>
 
     /*
     ---------- Setting Fragment ----------

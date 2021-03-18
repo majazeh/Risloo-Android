@@ -19,6 +19,8 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Samples2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Sessions2Adapter;
 import com.majazeh.risloo.databinding.FragmentCaseBinding;
 
 public class CaseFragment extends Fragment {
@@ -29,10 +31,12 @@ public class CaseFragment extends Fragment {
     // Adapters
     private PsychologistsAdapter psychologistsAdapter;
     private ReferencesAdapter referencesAdapter;
+    private Sessions2Adapter sessions2Adapter;
+    private Samples2Adapter samples2Adapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager;
+    private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
+    private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager, sessionsLayoutManager, samplesLayoutManager;
 
     @Nullable
     @Override
@@ -52,6 +56,12 @@ public class CaseFragment extends Fragment {
             binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
             binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
 
         return binding.getRoot();
@@ -60,10 +70,15 @@ public class CaseFragment extends Fragment {
     private void initializer() {
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
         referencesAdapter = new ReferencesAdapter(requireActivity());
+        sessions2Adapter = new Sessions2Adapter(requireActivity());
+        samples2Adapter = new Samples2Adapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
+        itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         psychologistsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        sessionsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentPsychologistsHeader));
         binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentReferencesHeader));
@@ -75,6 +90,8 @@ public class CaseFragment extends Fragment {
 
         InitManager.recyclerView(binding.psychologistsSingleLayout.recyclerView, itemDecoration, psychologistsLayoutManager);
         InitManager.recyclerView(binding.referencesSingleLayout.recyclerView, itemDecoration, referencesLayoutManager);
+        InitManager.recyclerView(binding.sessionsSingleLayout.recyclerView, itemDecoration2, sessionsLayoutManager);
+        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samplesLayoutManager);
     }
 
     private void detector() {
@@ -109,8 +126,12 @@ public class CaseFragment extends Fragment {
 
 //        psychologistsAdapter.setPsychology(null);
 //        referencesAdapter.setReference(null);
+//        sessions2Adapter.setSession(null);
+//        samples2Adapter.setSample(null);
         binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
         binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+        binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
+        binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
 
         String dataSize = "15";
         binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
