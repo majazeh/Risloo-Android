@@ -99,7 +99,7 @@
                 app:layout_constraintEnd_toEndOf="@id/date_imageView"
                 app:tint="@color/Gray500" />
 
-            <TextView
+             <TextView
                 android:id="@+id/duration_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -153,23 +153,46 @@
             app:layout_constraintStart_toStartOf="@+id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@+id/info_constraintLayout" />
 
-        <TextView
-            android:id="@+id/report_textView"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/report_constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:padding="@dimen/_12sdp"
-            android:gravity="start"
-            android:text="@string/SessionFragmentReportBodyDefault"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
+            android:paddingBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/report_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/report_header_includeLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/report_header_includeLayout">
+
+            <TextView
+                android:id="@+id/report_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:gravity="start"
+                android:text="@string/SessionFragmentReportBodyEmpty"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <include
+                android:id="@+id/report_action_textView"
+                layout="@layout/component_button_rect_28sdp"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/report_textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/psychologists_header_includeLayout"
@@ -178,7 +201,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@+id/report_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/report_textView" />
+            app:layout_constraintTop_toBottomOf="@+id/report_constraintLayout" />
 
         <include
             android:id="@+id/psychologists_shimmerLayout"

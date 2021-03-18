@@ -15,14 +15,14 @@
         android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_12sdp"
+        android:padding="@dimen/_8sdp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <include
             android:id="@+id/avatar_includeLayout"
             layout="@layout/component_avatar_borderless2"
-            android:layout_width="@dimen/_56sdp"
-            android:layout_height="@dimen/_56sdp"
+            android:layout_width="@dimen/_52sdp"
+            android:layout_height="@dimen/_52sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

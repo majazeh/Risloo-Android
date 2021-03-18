@@ -61,11 +61,12 @@ public class SessionFragment extends Fragment {
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
         referencesAdapter = new ReferencesAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp));
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
         psychologistsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.SessionFragmentEdit), getResources().getColor(R.color.Gray500));
+        InitManager.txtTextColor(binding.reportActionTextView.getRoot(), getResources().getString(R.string.SessionFragmentReportAdd), getResources().getColor(R.color.Green700));
 
         binding.reportHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReportHeader));
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentPsychologistsHeader));
@@ -83,11 +84,13 @@ public class SessionFragment extends Fragment {
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
 
             binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+            binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
 
             binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
@@ -100,6 +103,12 @@ public class SessionFragment extends Fragment {
             binding.editTextView.getRoot().setClickable(false);
 
             ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment);
+        });
+
+        binding.reportActionTextView.getRoot().setOnClickListener(v -> {
+            binding.editTextView.getRoot().setClickable(false);
+
+            ((MainActivity) requireActivity()).navigator(R.id.createReportFragment);
         });
 
         binding.practicesAddImageView.getRoot().setOnClickListener(v -> {

@@ -241,6 +241,9 @@
         <action
             android:id="@+id/action_sessionFragment_to_createPracticeFragment"
             app:destination="@id/createPracticeFragment" />
+        <action
+            android:id="@+id/action_sessionFragment_to_createReportFragment"
+            app:destination="@id/createReportFragment" />
     </fragment>
 
     <fragment
@@ -266,5 +269,11 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment"
         android:label="@string/CreatePracticeFragmentTitle"
         tools:layout="@layout/fragment_create_practice" />
+
+    <fragment
+        android:id="@+id/createReportFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateReportFragment"
+        android:label="@string/CreateReportFragmentTitle"
+        tools:layout="@layout/fragment_create_report" />
 
 </navigation>

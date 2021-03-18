@@ -473,8 +473,10 @@
     <string name="SessionFragmentEdit">ویرایش</string>
 
     <string name="SessionFragmentReportHeader">گزارش</string>
-    <string name="SessionFragmentReportBodyDefault">تنها درمان‌گران این پرونده قادر به ثبت و مشاهده گزارش می‌باشند.</string>
-    <string name="SessionFragmentReportBodyEmpty">هنوز گزارشی برای این جلسه ثبت نشده است</string>
+    <string name="SessionFragmentReportAdd">ثبت گزارش</string>
+    <string name="SessionFragmentReportEdit">ویرایش گزارش</string>
+    <string name="SessionFragmentReportBodyPrivacy">تنها درمان‌گران این پرونده قادر به ثبت و مشاهده گزارش می‌باشند.</string>
+    <string name="SessionFragmentReportBodyEmpty">هنوز گزارشی برای این جلسه ثبت نشده است.</string>
 
     <string name="SessionFragmentPsychologistsHeader">درمانگران</string>
     <string name="SessionFragmentReferencesHeader">مراجعین</string>
