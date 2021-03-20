@@ -180,6 +180,15 @@
             app:layout_constraintTop_toBottomOf="@+id/psychologists_barrier" />
 
         <include
+            android:id="@+id/references_add_imageView"
+            layout="@layout/component_button_oval_28sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/references_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/references_header_includeLayout" />
+
+        <include
             android:id="@+id/references_shimmerLayout"
             layout="@layout/component_shimmer_reference"
             android:layout_width="0dp"
@@ -187,7 +196,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/references_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/references_add_imageView"
             tools:visibility="gone" />
 
         <include
@@ -198,7 +207,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/references_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/references_add_imageView"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier

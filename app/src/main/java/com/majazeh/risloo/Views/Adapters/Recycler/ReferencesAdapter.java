@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemReferenceBinding;
 
 public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.ReferencesHolder> {
@@ -61,7 +62,7 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
         holder.binding.containerConstraintLayout.setOnClickListener(v -> {
             holder.binding.containerConstraintLayout.setClickable(false);
 
-            // TODO : Place Code Here
+            ((MainActivity) activity).navigator(R.id.referenceFragment);
         });
     }
 

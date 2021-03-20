@@ -456,6 +456,30 @@
     <string name="DashboardFragmentTitle">پیش‌خوان</string>
 
     /*
+    ---------- Reference Fragment ----------
+    */
+
+    <string name="ReferenceFragmentTitle">کاربر مرکز</string>
+
+    <string name="ReferenceFragmentRoomsHeader">اتاق‌های درمان</string>
+
+    <string name="ReferenceFragmentCasesHeader">پرونده‌ها</string>
+    <string name="ReferenceFragmentCasesBodyEmpty">هنوز پرونده‌ای برای این کاربر ثبت نشده است.</string>
+
+    <string name="ReferenceFragmentCasesSerial">سریال</string>
+    <string name="ReferenceFragmentCasesRoom">اتاق درمان</string>
+    <string name="ReferenceFragmentCasesSessionCount">جلسات</string>
+
+    <string name="ReferenceFragmentSamplesHeader">نمونه‌ها</string>
+    <string name="ReferenceFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این کاربر ثبت نشده است.</string>
+
+    <string name="ReferenceFragmentSamplesSerial">سریال</string>
+    <string name="ReferenceFragmentSamplesName">مقیاس</string>
+    <string name="ReferenceFragmentSamplesRoom">اتاق درمان</string>
+    <string name="ReferenceFragmentSamplesCase">پرونده</string>
+    <string name="ReferenceFragmentSamplesStatus">وضعیت</string>
+
+    /*
     ---------- Result Fragment ----------
     */
 

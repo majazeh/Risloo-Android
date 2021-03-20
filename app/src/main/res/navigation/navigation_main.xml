@@ -216,6 +216,9 @@
         <action
             android:id="@+id/action_caseFragment_to_createSessionFragment"
             app:destination="@id/createSessionFragment" />
+        <action
+            android:id="@+id/action_caseFragment_to_referenceFragment"
+            app:destination="@id/referenceFragment" />
     </fragment>
 
     <fragment
@@ -244,6 +247,9 @@
         <action
             android:id="@+id/action_sessionFragment_to_createReportFragment"
             app:destination="@id/createReportFragment" />
+        <action
+            android:id="@+id/action_sessionFragment_to_referenceFragment"
+            app:destination="@id/referenceFragment" />
     </fragment>
 
     <fragment
@@ -275,5 +281,11 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateReportFragment"
         android:label="@string/CreateReportFragmentTitle"
         tools:layout="@layout/fragment_create_report" />
+
+    <fragment
+        android:id="@+id/referenceFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment"
+        android:label="@string/ReferenceFragmentTitle"
+        tools:layout="@layout/fragment_reference" />
 
 </navigation>

@@ -85,6 +85,7 @@ public class CaseFragment extends Fragment {
         binding.sessionsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentSessionsHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentSamplesHeader));
 
+        InitManager.imgResTint(requireActivity(), binding.referencesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.imgResTint(requireActivity(), binding.sessionsAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.imgResTint(requireActivity(), binding.samplesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
 
@@ -96,9 +97,11 @@ public class CaseFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
             binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
+            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
             binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
@@ -106,6 +109,12 @@ public class CaseFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.referencesAddImageView.getRoot().setOnClickListener(v -> {
+            binding.referencesAddImageView.getRoot().setClickable(false);
+
+            // TODO: Place Code Here
+        });
+
         binding.sessionsAddImageView.getRoot().setOnClickListener(v -> {
             binding.sessionsAddImageView.getRoot().setClickable(false);
 
