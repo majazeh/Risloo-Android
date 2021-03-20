@@ -350,7 +350,7 @@
     <string name="SamplesFragmentSeald">شروع</string>
     <string name="SamplesFragmentOpen">ادامه</string>
     <string name="SamplesFragmentClosed">بسته شده</string>
-    <string name="SamplesFragmentScoring">نمره گذاری</string>
+    <string name="SamplesFragmentScoring">نمره دهی</string>
     <string name="SamplesFragmentCreatingFiles">ساخت فایل‌ها</string>
     <string name="SamplesFragmentDone">تمام شده</string>
 
@@ -423,7 +423,7 @@
     <string name="CaseFragmentSessionsSerial">سریال</string>
     <string name="CaseFragmentSessionsDate">زمان</string>
     <string name="CaseFragmentSessionsDuration">مدت جلسه</string>
-    <string name="CaseFragmentSessionsStatus">پیوست</string>
+    <string name="CaseFragmentSessionsStatus">وضعیت</string>
 
     <string name="CaseFragmentSamplesHeader">نمونه‌ها</string>
     <string name="CaseFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این پرونده ثبت نشده است.</string>

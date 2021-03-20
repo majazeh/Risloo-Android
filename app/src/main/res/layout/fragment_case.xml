@@ -163,6 +163,13 @@
             app:layout_constraintTop_toBottomOf="@+id/psychologists_header_includeLayout"
             tools:visibility="visible" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/psychologists_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="psychologists_shimmerLayout,psychologists_singleLayout" />
+
         <include
             android:id="@+id/references_header_includeLayout"
             layout="@layout/component_index_header"
@@ -170,7 +177,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@+id/psychologists_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/psychologists_singleLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/psychologists_barrier" />
 
         <include
             android:id="@+id/references_shimmerLayout"
@@ -194,6 +201,13 @@
             app:layout_constraintTop_toBottomOf="@+id/references_header_includeLayout"
             tools:visibility="visible" />
 
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/references_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="references_shimmerLayout,references_singleLayout" />
+
         <include
             android:id="@+id/sessions_header_includeLayout"
             layout="@layout/component_index_header"
@@ -201,7 +215,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@+id/references_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/references_singleLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/references_barrier" />
 
         <include
             android:id="@+id/sessions_add_imageView"
@@ -235,7 +249,7 @@
                 tools:visibility="gone" />
 
             <include
-                android:id="@+id/session_headerLayout"
+                android:id="@+id/sessions_headerLayout"
                 layout="@layout/header_item_session2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -246,14 +260,14 @@
                 tools:visibility="visible" />
 
             <include
-                android:id="@+id/session_singleLayout"
+                android:id="@+id/sessions_singleLayout"
                 layout="@layout/component_single_session2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/session_headerLayout"
+                app:layout_constraintTop_toBottomOf="@+id/sessions_headerLayout"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -281,8 +295,10 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:padding="@dimen/_1sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@+id/samples_header_includeLayout"
             app:layout_constraintTop_toBottomOf="@+id/samples_add_imageView">

@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemSample2Binding;
 
 public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Samples2Holder> {
 
@@ -87,9 +87,7 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
         holder.binding.nameTextView.setText("آزمون ریون کودکان (5)");
         holder.binding.sessionTextView.setText("SE966669A");
         holder.binding.referenceTextView.setText("محمد حسین");
-
-        holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentSeald));
-        holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray500));
+        holder.binding.statusTextView.setText("نمره دهی");
     }
 
     public class Samples2Holder extends RecyclerView.ViewHolder {

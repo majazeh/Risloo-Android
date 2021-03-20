@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemSession2Binding;
 
 public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sessions2Holder> {
 
@@ -57,7 +58,10 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+
             holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+        } else {
+            holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
     }
 
@@ -77,7 +81,6 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
         holder.binding.editImageView.setOnClickListener(v -> {
             holder.binding.editImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
 
             // TODO : Place Code Here
         });

@@ -25,27 +25,27 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
-        app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintBottom_toBottomOf="@+id/description_textView"
-        app:layout_constraintEnd_toStartOf="@+id/name_textView"
+        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintBottom_toBottomOf="@+id/duration_textView"
+        app:layout_constraintEnd_toStartOf="@+id/date_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/name_textView" />
+        app:layout_constraintTop_toTopOf="@+id/date_textView" />
 
     <TextView
-        android:id="@+id/name_textView"
+        android:id="@+id/date_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:textSize="@dimen/_8ssp"
         android:background="@color/Gray50"
-        app:layout_constraintEnd_toStartOf="@+id/attachment_imageView"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintEnd_toStartOf="@+id/status_textView"
         app:layout_constraintStart_toEndOf="@+id/serial_textView"
         app:layout_constraintTop_toBottomOf="@+id/top_view" />
 
     <TextView
-        android:id="@+id/description_textView"
+        android:id="@+id/duration_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -53,31 +53,33 @@
         android:textSize="@dimen/_7ssp"
         android:background="@color/Gray50"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/name_textView"
-        app:layout_constraintStart_toStartOf="@+id/name_textView"
-        app:layout_constraintTop_toBottomOf="@+id/name_textView" />
+        app:layout_constraintEnd_toEndOf="@+id/date_textView"
+        app:layout_constraintStart_toStartOf="@+id/date_textView"
+        app:layout_constraintTop_toBottomOf="@+id/date_textView" />
+
+    <TextView
+        android:id="@+id/status_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:textSize="@dimen/_8ssp"
+        android:background="@color/Gray50"
+        app:layout_constraintBottom_toBottomOf="@+id/serial_textView"
+        app:layout_constraintEnd_toStartOf="@+id/edit_imageView"
+        app:layout_constraintStart_toEndOf="@+id/date_textView"
+        app:layout_constraintTop_toTopOf="@+id/serial_textView" />
 
     <ImageView
-        android:id="@+id/attachment_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:background="@drawable/draw_16sdp_solid_gray50"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/name_textView"
-        app:layout_constraintLeft_toRightOf="@+id/practice_imageView" />
-
-    <ImageView
-        android:id="@+id/practice_imageView"
+        android:id="@+id/edit_imageView"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
-        android:background="@drawable/draw_16sdp_solid_gray50"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        android:background="@drawable/draw_oval_solid_gray50"
+        app:layout_constraintBottom_toBottomOf="@id/status_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/status_textView"
+        app:layout_constraintTop_toTopOf="@id/status_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

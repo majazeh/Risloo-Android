@@ -20,7 +20,7 @@
 
         <TextView
             android:id="@+id/name_textView"
-            android:layout_width="@dimen/_96sdp"
+            android:layout_width="@dimen/_102sdp"
             android:layout_height="wrap_content"
             android:textSize="@dimen/_11ssp"
             android:background="@color/Gray50"
