@@ -29,7 +29,7 @@ public class RoomUsersFragment extends Fragment {
     private FragmentRoomUsersBinding binding;
 
     // Adapters
-    private RoomUsersAdapter roomUsersAdapter;
+    private RoomUsersAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -58,7 +58,7 @@ public class RoomUsersFragment extends Fragment {
     }
 
     private void initializer() {
-        roomUsersAdapter = new RoomUsersAdapter(requireActivity());
+        adapter = new RoomUsersAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -118,8 +118,8 @@ public class RoomUsersFragment extends Fragment {
     }
 
     private void setData() {
-//        roomUsersAdapter.setUser(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(roomUsersAdapter);
+//        adapter.setUser(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");

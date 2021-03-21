@@ -29,7 +29,7 @@ public class SamplesFragment extends Fragment {
     private FragmentSamplesBinding binding;
 
     // Adapters
-    private SamplesAdapter samplesAdapter;
+    private SamplesAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -58,7 +58,7 @@ public class SamplesFragment extends Fragment {
     }
 
     private void initializer() {
-        samplesAdapter = new SamplesAdapter(requireActivity());
+        adapter = new SamplesAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -118,8 +118,8 @@ public class SamplesFragment extends Fragment {
     }
 
     private void setData() {
-//        samplesAdapter.setSample(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(samplesAdapter);
+//        adapter.setSample(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");

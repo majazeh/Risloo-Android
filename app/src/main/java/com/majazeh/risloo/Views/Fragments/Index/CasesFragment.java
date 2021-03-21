@@ -29,7 +29,7 @@ public class CasesFragment extends Fragment {
     private FragmentCasesBinding binding;
 
     // Adapters
-    private CasesAdapter casesAdapter;
+    private CasesAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -58,7 +58,7 @@ public class CasesFragment extends Fragment {
     }
 
     private void initializer() {
-        casesAdapter = new CasesAdapter(requireActivity());
+        adapter = new CasesAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -118,8 +118,8 @@ public class CasesFragment extends Fragment {
     }
 
     private void setData() {
-//        casesAdapter.setCase(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(casesAdapter);
+//        adapter.setCase(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");

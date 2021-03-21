@@ -29,7 +29,7 @@ public class CentersFragment extends Fragment {
     private FragmentCentersBinding binding;
 
     // Adapters
-    private CentersAdapter centersAdapter;
+    private CentersAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -57,7 +57,7 @@ public class CentersFragment extends Fragment {
     }
 
     private void initializer() {
-        centersAdapter = new CentersAdapter(requireActivity());
+        adapter = new CentersAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp));
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -115,8 +115,8 @@ public class CentersFragment extends Fragment {
     }
 
     private void setData() {
-//        centersAdapter.setCenter(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(centersAdapter);
+//        adapter.setCenter(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");

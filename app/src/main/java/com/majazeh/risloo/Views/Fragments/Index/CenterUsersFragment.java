@@ -29,7 +29,7 @@ public class CenterUsersFragment extends Fragment {
     private FragmentCenterUsersBinding binding;
 
     // Adapters
-    private CenterUsersAdapter centerUsersAdapter;
+    private CenterUsersAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -58,7 +58,7 @@ public class CenterUsersFragment extends Fragment {
     }
 
     private void initializer() {
-        centerUsersAdapter = new CenterUsersAdapter(requireActivity());
+        adapter = new CenterUsersAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -118,8 +118,8 @@ public class CenterUsersFragment extends Fragment {
     }
 
     private void setData() {
-//        centerUsersAdapter.setUser(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(centerUsersAdapter);
+//        adapter.setUser(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");

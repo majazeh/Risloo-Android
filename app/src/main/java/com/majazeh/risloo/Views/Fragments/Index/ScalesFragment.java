@@ -28,7 +28,7 @@ public class ScalesFragment extends Fragment {
     private FragmentScalesBinding binding;
 
     // Adapters
-    private ScalesAdapter scalesAdapter;
+    private ScalesAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -55,7 +55,7 @@ public class ScalesFragment extends Fragment {
     }
 
     private void initializer() {
-        scalesAdapter = new ScalesAdapter(requireActivity());
+        adapter = new ScalesAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -100,8 +100,8 @@ public class ScalesFragment extends Fragment {
     }
 
     private void setData() {
-//        scalesAdapter.setScale(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(scalesAdapter);
+//        adapter.setScale(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");

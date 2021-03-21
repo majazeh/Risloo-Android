@@ -29,7 +29,7 @@ public class DocumentsFragment extends Fragment {
     private FragmentDocumentsBinding binding;
 
     // Adapters
-    private DocumentsAdapter documentsAdapter;
+    private DocumentsAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -58,7 +58,7 @@ public class DocumentsFragment extends Fragment {
     }
 
     private void initializer() {
-        documentsAdapter = new DocumentsAdapter(requireActivity());
+        adapter = new DocumentsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -118,8 +118,8 @@ public class DocumentsFragment extends Fragment {
     }
 
     private void setData() {
-//        documentsAdapter.setDocument(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(documentsAdapter);
+//        adapter.setDocument(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");

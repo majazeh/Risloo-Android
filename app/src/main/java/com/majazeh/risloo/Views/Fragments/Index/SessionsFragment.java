@@ -29,7 +29,7 @@ public class SessionsFragment extends Fragment {
     private FragmentSessionsBinding binding;
 
     // Adapters
-    private SessionsAdapter sessionsAdapter;
+    private SessionsAdapter adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -58,7 +58,7 @@ public class SessionsFragment extends Fragment {
     }
 
     private void initializer() {
-        sessionsAdapter = new SessionsAdapter(requireActivity());
+        adapter = new SessionsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -118,8 +118,8 @@ public class SessionsFragment extends Fragment {
     }
 
     private void setData() {
-//        sessionsAdapter.setSession(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(sessionsAdapter);
+//        adapter.setSession(null);
+        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
         String dataSize = "15";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
