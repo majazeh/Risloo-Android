@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemCase3Binding;
 
 public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Holder> {
 
@@ -75,7 +76,7 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
 
         holder.binding.serialTextView.setText("SE9666669");
         holder.binding.roomTextView.setText("اتاق درمان محمدعلی نخلی");
-        holder.binding.sessionCountTextView.setText("مرکز مشاوره ریسلو");
+        holder.binding.sessionCountTextView.setText("4");
     }
 
     public class Cases3Holder extends RecyclerView.ViewHolder {

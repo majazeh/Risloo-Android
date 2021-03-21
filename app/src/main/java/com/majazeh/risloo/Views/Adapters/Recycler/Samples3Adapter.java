@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemSample3Binding;
 
 public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Samples3Holder> {
 
