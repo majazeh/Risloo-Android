@@ -99,7 +99,7 @@ public class RoomFragment extends Fragment {
         binding.usersImageView.getRoot().setOnClickListener(v -> {
             binding.usersImageView.getRoot().setClickable(false);
 
-            // TODO : Call Work Method
+            ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment);
         });
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {

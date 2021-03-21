@@ -190,6 +190,9 @@
         <action
             android:id="@+id/action_centerFragment_to_roomFragment"
             app:destination="@id/roomFragment" />
+        <action
+            android:id="@+id/action_centerFragment_to_centerUsersFragment"
+            app:destination="@id/centerUsersFragment" />
     </fragment>
 
     <fragment
@@ -203,6 +206,9 @@
         <action
             android:id="@+id/action_roomFragment_to_createCaseFragment"
             app:destination="@id/createCaseFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_roomUsersFragment"
+            app:destination="@id/roomUsersFragment" />
     </fragment>
 
     <fragment
@@ -286,6 +292,42 @@
         android:id="@+id/referenceFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment"
         android:label="@string/ReferenceFragmentTitle"
-        tools:layout="@layout/fragment_reference" />
+        tools:layout="@layout/fragment_reference" >
+        <action
+            android:id="@+id/action_referenceFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
+        <action
+            android:id="@+id/action_referenceFragment_to_sampleFragment"
+            app:destination="@id/sampleFragment" />
+        <action
+            android:id="@+id/action_referenceFragment_to_caseFragment"
+            app:destination="@id/caseFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editSampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditSampleFragment"
+        android:label="@string/EditSampleFragmentTitle"
+        tools:layout="@layout/fragment_edit_sample" />
+
+    <fragment
+        android:id="@+id/centerUsersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment"
+        android:label="@string/CenterUsersFragmentTitle"
+        tools:layout="@layout/fragment_center_users" >
+        <action
+            android:id="@+id/action_centerUsersFragment_to_referenceFragment"
+            app:destination="@id/referenceFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/roomUsersFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment"
+        android:label="@string/RoomUsersFragmentTitle"
+        tools:layout="@layout/fragment_room_users" >
+        <action
+            android:id="@+id/action_roomUsersFragment_to_referenceFragment"
+            app:destination="@id/referenceFragment" />
+    </fragment>
 
 </navigation>

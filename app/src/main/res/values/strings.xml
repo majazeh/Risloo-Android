@@ -321,6 +321,12 @@
     <string name="CentersFragmentTitle">مراکز درمانی</string>
 
     /*
+    ---------- CenterUsers Fragment ----------
+    */
+
+    <string name="CenterUsersFragmentTitle">کاربران مرکز</string>
+
+    /*
     ---------- Documents Fragment ----------
     */
 
@@ -332,6 +338,12 @@
 
     <string name="DocumentsFragmentAccept">تأیید</string>
     <string name="DocumentsFragmentCancel">رد</string>
+
+    /*
+    ---------- RoomUsers Fragment ----------
+    */
+
+    <string name="RoomUsersFragmentTitle">کاربران اتاق</string>
 
     /*
     ---------- Samples Fragment ----------

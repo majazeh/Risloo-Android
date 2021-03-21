@@ -127,7 +127,7 @@ public class CenterFragment extends Fragment {
         binding.usersImageView.getRoot().setOnClickListener(v -> {
             binding.usersImageView.getRoot().setClickable(false);
 
-            // TODO : Call Work Method
+            ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment);
         });
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
@@ -208,7 +208,7 @@ public class CenterFragment extends Fragment {
         binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
         String dataSize = "15";
-        binding.headerIncludeLayout.titleTextView.setText("(" + dataSize + ")");
+        binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
     }
 
     @Override
