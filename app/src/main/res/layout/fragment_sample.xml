@@ -37,7 +37,7 @@
                 android:gravity="start"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray700"
+                android:textColor="@color/Gray900"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
                 app:layout_constraintStart_toStartOf="parent"
@@ -160,6 +160,95 @@
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@+id/profiles_header_includeLayout"
             app:layout_constraintTop_toBottomOf="@+id/profiles_barrier" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/forms_general_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/forms_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/forms_header_includeLayout">
+
+            <TextView
+                android:id="@+id/forms_general_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:gravity="start"
+                android:text="@string/SampleFragmentFormGeneral"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_demi_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/forms_prerequisite_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/forms_general_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/forms_general_constraintLayout">
+
+            <TextView
+                android:id="@+id/forms_prerequisite_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:gravity="start"
+                android:text="@string/SampleFragmentFormPrerequisite"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_demi_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/forms_answer_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@+id/forms_prerequisite_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/forms_prerequisite_constraintLayout">
+
+            <TextView
+                android:id="@+id/forms_answer_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/_12sdp"
+                android:gravity="start"
+                android:text="@string/SampleFragmentFormAnswer"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_demi_bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

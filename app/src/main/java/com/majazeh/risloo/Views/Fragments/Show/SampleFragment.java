@@ -82,12 +82,14 @@ public class SampleFragment extends Fragment {
     private void listener() {
         binding.primaryTextView.getRoot().setOnClickListener(v -> {
             binding.primaryTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.primaryTextView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
 
         binding.secondaryTextView.getRoot().setOnClickListener(v -> {
             binding.secondaryTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.secondaryTextView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
