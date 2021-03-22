@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemRoomUserBinding;
 
 public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.RoomUsersHolder> {
 
@@ -26,7 +27,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     @NonNull
     @Override
     public RoomUsersHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new RoomUsersHolder(SingleItemRoomUsersBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new RoomUsersHolder(SingleItemRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -71,9 +72,9 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
 
     public class RoomUsersHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemRoomUsersBinding binding;
+        private SingleItemRoomUserBinding binding;
 
-        public RoomUsersHolder(SingleItemRoomUsersBinding binding) {
+        public RoomUsersHolder(SingleItemRoomUserBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

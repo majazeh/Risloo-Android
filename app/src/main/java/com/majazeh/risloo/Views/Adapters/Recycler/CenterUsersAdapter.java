@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
 
 public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.CenterUsersHolder> {
 
@@ -26,7 +27,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     @NonNull
     @Override
     public CenterUsersHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new CenterUsersHolder(SingleItemCenterUsersBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new CenterUsersHolder(SingleItemCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -71,9 +72,9 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemCenterUsersBinding binding;
+        private SingleItemCenterUserBinding binding;
 
-        public CenterUsersHolder(SingleItemCenterUsersBinding binding) {
+        public CenterUsersHolder(SingleItemCenterUserBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
