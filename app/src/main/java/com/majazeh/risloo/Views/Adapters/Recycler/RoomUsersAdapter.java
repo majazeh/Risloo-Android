@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -67,7 +68,19 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     }
 
     private void setData(RoomUsersHolder holder) {
+        if (holder.getAdapterPosition() == 0) {
+            holder.binding.topView.setVisibility(View.GONE);
+        } else {
+            holder.binding.topView.setVisibility(View.VISIBLE);
+        }
 
+        holder.binding.serialTextView.setText("GH96666DY");
+        holder.binding.nameTextView.setText("محمد نخلی");
+        holder.binding.mobileTextView.setText("+989905511926");
+        holder.binding.typeTextView.setText("مراجع");
+        holder.binding.statusTexView.setText("پذیرش شده");
+        holder.binding.acceptedTextView.setText("99-12-26 10:55 ");
+        holder.binding.canceledTextView.setText("99-12-26 10:55 ");
     }
 
     public class RoomUsersHolder extends RecyclerView.ViewHolder {

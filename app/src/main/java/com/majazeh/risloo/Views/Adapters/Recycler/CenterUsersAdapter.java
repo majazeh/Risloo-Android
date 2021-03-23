@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -55,6 +56,12 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private void detector(CenterUsersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+
+            holder.binding.typeTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+
+            holder.binding.taskImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+        } else {
+            holder.binding.typeTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
     }
 
@@ -64,10 +71,29 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
             ((MainActivity) activity).navigator(R.id.referenceFragment);
         });
+
+        holder.binding.typeTextView.setOnClickListener(v -> {
+            holder.binding.typeTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.typeTextView.setClickable(true), 300);
+
+            // TODO : Place Code Here
+        });
     }
 
     private void setData(CenterUsersHolder holder) {
+        if (holder.getAdapterPosition() == 0) {
+            holder.binding.topView.setVisibility(View.GONE);
+        } else {
+            holder.binding.topView.setVisibility(View.VISIBLE);
+        }
 
+        holder.binding.serialTextView.setText("GH96666DY");
+        holder.binding.nameTextView.setText("محمد نخلی");
+        holder.binding.mobileTextView.setText("+989905511926");
+        holder.binding.typeTextView.setText("مراجع");
+        holder.binding.statusTexView.setText("پذیرش شده");
+        holder.binding.acceptedTextView.setText("99-12-26 10:55 ");
+        holder.binding.canceledTextView.setText("99-12-26 10:55 ");
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

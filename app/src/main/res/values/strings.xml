@@ -326,6 +326,20 @@
 
     <string name="CenterUsersFragmentTitle">کاربران مرکز</string>
 
+    <string name="CenterUsersFragmentSerial">سریال</string>
+    <string name="CenterUsersFragmentName">نام</string>
+    <string name="CenterUsersFragmentMobile">شماره همراه</string>
+    <string name="CenterUsersFragmentType">موقعیت</string>
+    <string name="CenterUsersFragmentStatus">وضعیت</string>
+    <string name="CenterUsersFragmentAccepted">زمان پذیرش</string>
+    <string name="CenterUsersFragmentCanceled">زمان تعلیق</string>
+
+    <string name="CenterUsersFragmentAccept">پذیرفتن</string>
+    <string name="CenterUsersFragmentCancel">تعلیق</string>
+    <string name="CenterUsersFragmentCreate">ساختن اتاق درمان</string>
+    <string name="CenterUsersFragmentEdit">ویرایش کاربر</string>
+    <string name="CenterUsersFragmentEnter">ورود به کاربری</string>
+
     /*
     ---------- Documents Fragment ----------
     */
@@ -344,6 +358,14 @@
     */
 
     <string name="RoomUsersFragmentTitle">کاربران اتاق</string>
+
+    <string name="RoomUsersFragmentSerial">سریال</string>
+    <string name="RoomUsersFragmentName">نام</string>
+    <string name="RoomUsersFragmentMobile">شماره همراه</string>
+    <string name="RoomUsersFragmentType">موقعیت</string>
+    <string name="RoomUsersFragmentStatus">وضعیت</string>
+    <string name="RoomUsersFragmentAccepted">زمان پذیرش</string>
+    <string name="RoomUsersFragmentCanceled">زمان تعلیق</string>
 
     /*
     ---------- Samples Fragment ----------
