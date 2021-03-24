@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    tools:layout_margin="@dimen/_16sdp"
+    tools:context=".Views.Adapters.Recycler.FormsAdapter">
+
+    <TextView
+        android:id="@+id/header_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_4sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/top_barrier"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="سرتيتر" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/top_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="input_editText,select_textView" />
+
+    <EditText
+        android:id="@+id/input_editText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:imeOptions="actionDone"
+        android:gravity="center|start"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:visibility="visible"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_barrier" />
+
+    <TextView
+        android:id="@+id/select_textView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_28sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_barrier" />
+
+    <ImageView
+        android:id="@+id/angle_imageView"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_angle_down_light"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@+id/select_textView"
+        app:layout_constraintEnd_toEndOf="@+id/select_textView"
+        app:layout_constraintTop_toTopOf="@id/select_textView"
+        app:tint="@color/Gray600" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/bottom_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="input_editText,select_textView" />
+
+    <ImageView
+        android:id="@+id/error_imageView"
+        android:layout_width="@dimen/_8sdp"
+        android:layout_height="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_exclamation_light"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/error_textView"
+        app:tint="@color/Red500" />
+
+    <TextView
+        android:id="@+id/error_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="start"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Red500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_light"
+        android:visibility="gone"
+        app:layout_constraintStart_toEndOf="@+id/error_imageView"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_barrier"
+        tools:text="خطا" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -45,7 +45,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
     @Override
     public int getItemCount() {
 //        return cases.size();
-        return 15;
+        return 12;
     }
 
 //    public void setCase(ArrayList<Case> cases) {

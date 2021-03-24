@@ -45,7 +45,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
     @Override
     public int getItemCount() {
 //        return scales.size();
-        return 15;
+        return 12;
     }
 
 //    public void setScale(ArrayList<Scale> scales) {

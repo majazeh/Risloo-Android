@@ -47,7 +47,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     @Override
     public int getItemCount() {
 //        return centers.size();
-        return 15;
+        return 5;
     }
 
 //    public void setCenter(ArrayList<Center> centers) {

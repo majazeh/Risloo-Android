@@ -17,6 +17,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.FormsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
 
@@ -27,10 +28,11 @@ public class SampleFragment extends Fragment {
 
     // Adapters
     private ProfilesAdapter profilesAdapter;
+    private FormsAdapter formsGeneralAdapter, formsPrerequisiteAdapter, formsAnswerAdapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager profilesLayoutManager, formsGeneralLayoutManager, formsPrerequisiteLayoutManager, formsAnswerLayoutManager;
 
     @Nullable
     @Override
@@ -48,6 +50,12 @@ public class SampleFragment extends Fragment {
         ((MainActivity) requireActivity()).handler.postDelayed(() -> {
             binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.profilesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.formsGeneralShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.formsGeneralSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.formsPrerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.formsPrerequisiteSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.formsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.formsAnswerSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
 
         return binding.getRoot();
@@ -55,9 +63,15 @@ public class SampleFragment extends Fragment {
 
     private void initializer() {
         profilesAdapter = new ProfilesAdapter(requireActivity());
+        formsGeneralAdapter = new FormsAdapter(requireActivity());
+        formsPrerequisiteAdapter = new FormsAdapter(requireActivity());
+        formsAnswerAdapter = new FormsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        profilesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        formsGeneralLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        formsPrerequisiteLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        formsAnswerLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.Gray500));
         InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.Gray500));
@@ -65,7 +79,10 @@ public class SampleFragment extends Fragment {
         binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
         binding.formsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFormHeader));
 
-        InitManager.recyclerView(binding.profilesSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.profilesSingleLayout.recyclerView, itemDecoration, profilesLayoutManager);
+        InitManager.recyclerView(binding.formsGeneralSingleLayout.recyclerView, itemDecoration, formsGeneralLayoutManager);
+        InitManager.recyclerView(binding.formsPrerequisiteSingleLayout.recyclerView, itemDecoration, formsPrerequisiteLayoutManager);
+        InitManager.recyclerView(binding.formsAnswerSingleLayout.recyclerView, itemDecoration, formsAnswerLayoutManager);
     }
 
     private void detector() {
@@ -101,7 +118,13 @@ public class SampleFragment extends Fragment {
         binding.statusTextView.setText("باز");
 
 //        profilesAdapter.setProfile(null);
+//        formsGeneralAdapter.setForm(null);
+//        formsPrerequisiteAdapter.setForm(null);
+//        formsAnswerAdapter.setForm(null);
         binding.profilesSingleLayout.recyclerView.setAdapter(profilesAdapter);
+        binding.formsGeneralSingleLayout.recyclerView.setAdapter(formsGeneralAdapter);
+        binding.formsPrerequisiteSingleLayout.recyclerView.setAdapter(formsPrerequisiteAdapter);
+        binding.formsAnswerSingleLayout.recyclerView.setAdapter(formsAnswerAdapter);
 
         String dataSize = "15";
         binding.profilesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");

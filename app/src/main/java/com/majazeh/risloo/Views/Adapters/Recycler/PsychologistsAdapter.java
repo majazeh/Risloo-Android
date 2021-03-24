@@ -46,7 +46,7 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
     @Override
     public int getItemCount() {
 //        return psychologists.size();
-        return 15;
+        return 5;
     }
 
 //    public void setPsychology(ArrayList<Psychology> psychologists) {

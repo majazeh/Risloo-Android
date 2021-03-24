@@ -45,7 +45,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     @Override
     public int getItemCount() {
 //        return documents.size();
-        return 15;
+        return 12;
     }
 
 //    public void setDocument(ArrayList<Document> documents) {

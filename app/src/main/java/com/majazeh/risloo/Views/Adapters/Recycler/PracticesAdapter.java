@@ -45,7 +45,7 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
     @Override
     public int getItemCount() {
 //        return practices.size();
-        return 15;
+        return 12;
     }
 
 //    public void setPractice(ArrayList<Practice> practices) {

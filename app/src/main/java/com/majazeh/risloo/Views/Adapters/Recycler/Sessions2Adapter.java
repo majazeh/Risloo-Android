@@ -45,7 +45,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     @Override
     public int getItemCount() {
         //        return sessions.size();
-        return 15;
+        return 12;
     }
 
     //    public void setSession(ArrayList<Session> sessions) {

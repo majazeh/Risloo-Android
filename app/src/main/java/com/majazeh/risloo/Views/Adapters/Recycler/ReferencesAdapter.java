@@ -44,7 +44,7 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
     @Override
     public int getItemCount() {
 //        return references.size();
-        return 15;
+        return 5;
     }
 
 //    public void setReference(ArrayList<Reference> references) {

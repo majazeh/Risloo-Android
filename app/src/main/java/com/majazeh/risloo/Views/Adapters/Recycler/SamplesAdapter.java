@@ -45,7 +45,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     @Override
     public int getItemCount() {
 //        return samples.size();
-        return 15;
+        return 12;
     }
 
 //    public void setSample(ArrayList<Sample> samples) {
