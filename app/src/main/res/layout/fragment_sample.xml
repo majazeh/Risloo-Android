@@ -161,6 +161,26 @@
             app:layout_constraintStart_toStartOf="@+id/profiles_header_includeLayout"
             app:layout_constraintTop_toBottomOf="@+id/profiles_barrier" />
 
+        <CheckBox
+            android:id="@+id/forms_editable_imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:theme="@style/CheckBoxTheme"
+            android:paddingEnd="@dimen/_6sdp"
+            android:checked="false"
+            android:gravity="center"
+            android:text="@string/SampleFragmentEdit"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintBottom_toBottomOf="@+id/forms_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@+id/forms_header_includeLayout" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/forms_general_constraintLayout"
             android:layout_width="0dp"

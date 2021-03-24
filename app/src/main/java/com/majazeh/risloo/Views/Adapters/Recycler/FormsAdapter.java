@@ -1,13 +1,15 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemFormBinding;
 
 public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder> {
@@ -17,6 +19,7 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
 
     // Vars
 //    private ArrayList<Form> forms;
+    private boolean editable = false;
 
     public FormsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -31,8 +34,6 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
     @Override
     public void onBindViewHolder(@NonNull FormsHolder holder, int i) {
 //        Forms form = forms.get(i);
-
-        detector(holder);
 
         listener(holder);
 
@@ -50,18 +51,35 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
 //        notifyDataSetChanged();
 //    }
 
-    private void detector(FormsHolder holder) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener(FormsHolder holder) {
+        if (editable) {
+            holder.binding.inputEditText.setOnTouchListener((v, event) -> {
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    if (!holder.binding.inputEditText.hasFocus()) {
+                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                    }
+                }
+                return false;
+            });
         }
     }
 
-    private void listener(FormsHolder holder) {
+    private void setData(FormsHolder holder) {
+        if (editable) {
+            holder.binding.inputEditText.setFocusableInTouchMode(true);
+            holder.binding.selectTextView.setEnabled(true);
+        } else {
+            holder.binding.inputEditText.setFocusableInTouchMode(false);
+            holder.binding.selectTextView.setEnabled(false);
+        }
 
+        holder.binding.headerTextView.setText("عنوان");
     }
 
-    private void setData(FormsHolder holder) {
-        holder.binding.headerTextView.setText("عنوان");
+    public void setEditable(boolean editable) {
+        this.editable = editable;
+        notifyDataSetChanged();
     }
 
     public class FormsHolder extends RecyclerView.ViewHolder {

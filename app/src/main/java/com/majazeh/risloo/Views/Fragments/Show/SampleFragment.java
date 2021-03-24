@@ -110,6 +110,22 @@ public class SampleFragment extends Fragment {
 
             // TODO : Call Work Method
         });
+
+        binding.formsEditableImageView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                binding.formsEditableImageView.setTextColor(getResources().getColor(R.color.Gray900));
+
+                formsGeneralAdapter.setEditable(true);
+                formsPrerequisiteAdapter.setEditable(true);
+                formsAnswerAdapter.setEditable(true);
+            } else {
+                binding.formsEditableImageView.setTextColor(getResources().getColor(R.color.Gray600));
+
+                formsGeneralAdapter.setEditable(false);
+                formsPrerequisiteAdapter.setEditable(false);
+                formsAnswerAdapter.setEditable(false);
+            }
+        });
     }
 
     private void setData() {
