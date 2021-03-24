@@ -63,6 +63,7 @@ public class CenterFragment extends Fragment {
         roomsAdapter = new RoomsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
+
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         InitManager.txtTextColor(binding.profileTextView.getRoot(), getResources().getString(R.string.CenterFragmentProfile), getResources().getColor(R.color.Gray500));

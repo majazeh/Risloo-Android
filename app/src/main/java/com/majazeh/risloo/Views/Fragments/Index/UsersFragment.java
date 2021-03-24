@@ -61,6 +61,7 @@ public class UsersFragment extends Fragment {
         adapter = new UsersAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
+
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.UsersFragmentTitle));

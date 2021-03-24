@@ -61,6 +61,7 @@ public class DocumentsFragment extends Fragment {
         adapter = new DocumentsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
+
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.DocumentsFragmentTitle));

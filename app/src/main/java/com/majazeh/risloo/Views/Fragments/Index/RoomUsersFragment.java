@@ -61,6 +61,7 @@ public class RoomUsersFragment extends Fragment {
         adapter = new RoomUsersAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
+
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomUsersFragmentTitle));

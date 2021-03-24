@@ -50,10 +50,13 @@ public class SampleFragment extends Fragment {
         ((MainActivity) requireActivity()).handler.postDelayed(() -> {
             binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.profilesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.formsGeneralShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.formsGeneralSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.formsPrerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.formsPrerequisiteSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.formsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.formsAnswerSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
@@ -68,6 +71,7 @@ public class SampleFragment extends Fragment {
         formsAnswerAdapter = new FormsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
+
         profilesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         formsGeneralLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         formsPrerequisiteLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);

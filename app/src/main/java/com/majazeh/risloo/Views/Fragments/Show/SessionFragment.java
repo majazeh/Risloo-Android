@@ -54,11 +54,14 @@ public class SessionFragment extends Fragment {
         ((MainActivity) requireActivity()).handler.postDelayed(() -> {
             binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.practicesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.practicesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -75,6 +78,7 @@ public class SessionFragment extends Fragment {
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
         itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
+
         psychologistsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         practicesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);

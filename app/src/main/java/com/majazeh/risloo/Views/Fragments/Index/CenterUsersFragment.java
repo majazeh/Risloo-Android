@@ -61,6 +61,7 @@ public class CenterUsersFragment extends Fragment {
         adapter = new CenterUsersAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
+
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterUsersFragmentTitle));

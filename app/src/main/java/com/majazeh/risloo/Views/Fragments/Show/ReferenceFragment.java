@@ -52,9 +52,11 @@ public class ReferenceFragment extends Fragment {
         ((MainActivity) requireActivity()).handler.postDelayed(() -> {
             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -70,6 +72,7 @@ public class ReferenceFragment extends Fragment {
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
         itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
+
         roomsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         casesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
