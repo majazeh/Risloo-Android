@@ -19,44 +19,60 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/select_recyclerView"
-        app:layout_constraintStart_toStartOf="@+id/select_recyclerView"
+        app:layout_constraintBottom_toTopOf="@+id/top_barrier"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="سرتيتر" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/select_recyclerView"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/top_barrier"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:minHeight="@dimen/_36sdp"
-        android:paddingTop="@dimen/_6sdp"
-        android:paddingBottom="@dimen/_6sdp"
-        android:paddingLeft="@dimen/_12sdp"
-        android:paddingRight="@dimen/_12sdp"
-        android:overScrollMode="never"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_textView" />
+        app:barrierDirection="top"
+        app:constraint_referenced_ids="select_textView,name_textView" />
 
     <TextView
-        android:id="@+id/count_textView"
-        android:layout_width="@dimen/_17sdp"
-        android:layout_height="@dimen/_17sdp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:paddingTop="@dimen/_1sdp"
+        android:id="@+id/select_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/_28sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
         android:gravity="center"
+        android:text="@string/AppFileSelect"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/White"
+        android:textColor="@color/Gray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        android:background="@drawable/draw_oval_solid_blue500_border_1sdp_white"
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/select_recyclerView"
-        app:layout_constraintEnd_toEndOf="@+id/select_recyclerView"
-        app:layout_constraintTop_toTopOf="@id/select_recyclerView"
-        tools:text="5" />
+        android:background="@drawable/draw_2sdp_solid_gray100"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_textView"
+        app:layout_constraintBottom_toTopOf="@id/error_textView"/>
+
+    <TextView
+        android:id="@+id/name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:gravity="right"
+        android:text="@string/AppFileEmpty"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/select_textView"
+        app:layout_constraintStart_toEndOf="@id/select_textView"
+        app:layout_constraintTop_toTopOf="@id/select_textView" />
+
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/bottom_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="select_textView,name_textView" />
 
     <ImageView
         android:id="@+id/error_imageView"
@@ -67,7 +83,7 @@
         android:scaleType="fitCenter"
         android:src="@drawable/ic_exclamation_light"
         android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@+id/select_recyclerView"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/error_textView"
         app:tint="@color/Red500" />
 
@@ -85,7 +101,7 @@
         android:fontFamily="@font/dana_light"
         android:visibility="gone"
         app:layout_constraintStart_toEndOf="@+id/error_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/select_recyclerView"
+        app:layout_constraintTop_toBottomOf="@+id/bottom_barrier"
         tools:text="خطا" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -7,9 +7,11 @@
     <string name="AppName">ریسلو بتا</string>
 
     <string name="AppSearchHint">جستجو</string>
-    <string name="AppEmptyHint">داده یافت نشد.</string>
     <string name="AppImageContent">عکس</string>
+    <string name="AppFileSelect">انتخاب فايل</string>
+    <string name="AppEmptyHint">داده یافت نشد.</string>
     <string name="AppInputEmpty">فیلد خالی است.</string>
+    <string name="AppFileEmpty">فايل انتخاب نشده است.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -137,6 +139,19 @@
 
     <string name="CreateCenterFragmentTitle">ساخت مرکز</string>
 
+    <string name="CreateCenterFragmentCenterHeader">نوع مرکز درمانی</string>
+    <string name="CreateCenterFragmentManagerHeader">مدیر</string>
+    <string name="CreateCenterFragmentNameHeader">عنوان</string>
+    <string name="CreateCenterFragmentAvatarHeader">تصویر نمایشی</string>
+    <string name="CreateCenterFragmentAddressHeader">آدرس</string>
+    <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
+    <string name="CreateCenterFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="CreateCenterFragmentCenterPersonal">شخصی</string>
+    <string name="CreateCenterFragmentCenterClinic">مرکز مشاوره</string>
+
+    <string name="CreateCenterFragmentButton">ساخت</string>
+
     /*
     ---------- CreateDocument Fragment ----------
     */
@@ -160,6 +175,9 @@
     */
 
     <string name="CreateRoomFragmentTitle">ساخت اتاق</string>
+
+    <string name="CreateRoomFragmentHeader">روان‌شناس</string>
+    <string name="CreateRoomFragmentButton">ساخت</string>
 
     /*
     ---------- CreateSample Fragment ----------

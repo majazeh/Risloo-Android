@@ -163,7 +163,7 @@ public class CenterFragment extends Fragment {
         binding.addImageView.getRoot().setOnClickListener(v -> {
             binding.addImageView.getRoot().setClickable(false);
 
-//            ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment);
+            ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment);
         });
     }
 

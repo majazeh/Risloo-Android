@@ -193,6 +193,9 @@
         <action
             android:id="@+id/action_centerFragment_to_centerUsersFragment"
             app:destination="@id/centerUsersFragment" />
+        <action
+            android:id="@+id/action_centerFragment_to_createRoomFragment"
+            app:destination="@id/createRoomFragment" />
     </fragment>
 
     <fragment
@@ -329,5 +332,11 @@
             android:id="@+id/action_roomUsersFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/createRoomFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment"
+        android:label="@string/CreateReportFragmentTitle"
+        tools:layout="@layout/fragment_create_room" />
 
 </navigation>
