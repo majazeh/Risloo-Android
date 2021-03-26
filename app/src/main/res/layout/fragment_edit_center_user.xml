@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Edit.EditSessionFragment">
+    tools:context=".Views.Fragments.Edit.EditCenterUserFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
@@ -22,7 +22,7 @@
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <include
-            android:id="@+id/start_time_includeLayout"
+            android:id="@+id/type_includeLayout"
             layout="@layout/component_input_select"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -34,24 +34,34 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <include
-            android:id="@+id/duration_includeLayout"
-            layout="@layout/component_input_number"
+            android:id="@+id/name_includeLayout"
+            layout="@layout/component_input_text"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/start_time_includeLayout"
-            app:layout_constraintStart_toStartOf="@+id/start_time_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/start_time_includeLayout" />
+            app:layout_constraintEnd_toEndOf="@+id/type_includeLayout"
+            app:layout_constraintStart_toStartOf="@+id/type_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/type_includeLayout" />
+
+        <include
+            android:id="@+id/name_guideLayout"
+            layout="@layout/component_guide_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintEnd_toEndOf="@+id/name_includeLayout"
+            app:layout_constraintStart_toStartOf="@+id/name_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/name_includeLayout" />
 
         <include
             android:id="@+id/status_includeLayout"
-            layout="@layout/component_input_select"
+            layout="@layout/component_radio_two"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/duration_includeLayout"
-            app:layout_constraintStart_toStartOf="@+id/duration_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/duration_includeLayout" />
+            app:layout_constraintEnd_toEndOf="@+id/name_guideLayout"
+            app:layout_constraintStart_toStartOf="@+id/name_guideLayout"
+            app:layout_constraintTop_toBottomOf="@+id/name_guideLayout" />
 
         <include
             android:id="@+id/edit_textView"

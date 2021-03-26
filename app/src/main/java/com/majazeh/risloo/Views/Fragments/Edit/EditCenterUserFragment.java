@@ -9,17 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.majazeh.risloo.databinding.FragmentEditSampleBinding;
+import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 
-public class EditSampleFragment extends Fragment {
+public class EditCenterUserFragment extends Fragment {
 
     // Binding
-    private FragmentEditSampleBinding binding;
+    private FragmentEditCenterUserBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditSampleBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditCenterUserBinding.inflate(inflater, viewGroup, false);
 
         return binding.getRoot();
     }

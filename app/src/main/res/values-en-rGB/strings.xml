@@ -343,6 +343,40 @@
     <string name="EditAvatarDialogImageCamera">دوربین</string>
 
     /*
+    ---------- EditCenter Fragment ----------
+    */
+
+    <string name="EditCenterFragmentTitle">ویرایش مرکز</string>
+
+    <string name="EditCenterFragmentManagerHeader">مدیر</string>
+    <string name="EditCenterFragmentNameHeader">عنوان</string>
+    <string name="EditCenterFragmentAvatarHeader">تصویر نمایشی</string>
+    <string name="EditCenterFragmentAddressHeader">آدرس</string>
+    <string name="EditCenterFragmentAddressHint">غیر ضروری</string>
+    <string name="EditCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
+    <string name="EditCenterFragmentDescriptionHeader">توضیحات</string>
+    <string name="EditCenterFragmentDescriptionHint">غیر ضروری</string>
+
+    <string name="EditCenterFragmentButton">ویرایش</string>
+
+    /*
+    ---------- EditCenterUser Fragment ----------
+    */
+
+    <string name="EditCenterUserFragmentTitle">ثبت عضو مرکز درمانی</string>
+
+    <string name="EditCenterUserFragmentTypeHeader">موقعیت</string>
+    <string name="EditCenterUserFragmentNameHeader">نام مراجع</string>
+    <string name="EditCenterUserFragmentStatusHeader">وضعیت</string>
+
+    <string name="EditCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="EditCenterUserFragmentStatusAccept">پذیرفتن</string>
+    <string name="EditCenterUserFragmentStatusKick">تعلیق</string>
+
+    <string name="EditCenterUserFragmentButton">ویرایش</string>
+
+    /*
     ---------- EditCrypto Fragment ----------
     */
 
@@ -430,6 +464,12 @@
     */
 
     <string name="EditSessionFragmentTitle">ویرایش جلسه</string>
+
+    <string name="EditSessionFragmentStartTimeHeader">زمان شروع</string>
+    <string name="EditSessionFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="EditSessionFragmentStatusHeader">وضعیت</string>
+
+    <string name="EditSessionFragmentButton">ویرایش</string>
 
     /*
     ---------- EditUser Fragment ----------
