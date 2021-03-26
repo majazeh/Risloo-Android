@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/White"
+    android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="always"
+    android:layoutDirection="rtl"
+    tools:context=".Views.Fragments.Create.CreateCaseFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_12sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+
+        <include
+            android:id="@+id/mobile_includeLayout"
+            layout="@layout/component_input_number"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginEnd="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/type_includeLayout"
+            layout="@layout/component_input_select"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="@+id/mobile_includeLayout"
+            app:layout_constraintStart_toStartOf="@+id/mobile_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/mobile_includeLayout" />
+
+        <include
+            android:id="@+id/create_textView"
+            layout="@layout/component_button_rect_32sdp"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintStart_toStartOf="@+id/type_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/type_includeLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>

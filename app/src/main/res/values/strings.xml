@@ -141,6 +141,17 @@
     <string name="CreateCaseFragmentButton">ساخت</string>
 
     /*
+    ---------- CreateCaseUser Fragment ----------
+    */
+
+    <string name="CreateCaseUserFragmentTitle">ثبت نام عضو جدید</string>
+
+    <string name="CreateCaseUserFragmentReferenceHeader">مراجع</string>
+    <string name="CreateCaseUserFragmentReferenceHint">انتخاب مراجع</string>
+
+    <string name="CreateCaseUserFragmentButton">ایجاد</string>
+
+    /*
     ---------- CreateCenter Fragment ----------
     */
 
@@ -160,6 +171,17 @@
     <string name="CreateCenterFragmentCenterClinic">مرکز مشاوره</string>
 
     <string name="CreateCenterFragmentButton">ساخت</string>
+
+    /*
+    ---------- CreateCenterUser Fragment ----------
+    */
+
+    <string name="CreateCenterUserFragmentTitle">ثبت نام عضو جدید</string>
+
+    <string name="CreateCenterUserFragmentMobileHeader">تلفن همراه</string>
+    <string name="CreateCenterUserFragmentTypeHeader">موقعیت</string>
+
+    <string name="CreateCenterUserFragmentButton">ایجاد</string>
 
     /*
     ---------- CreateDocument Fragment ----------
@@ -213,6 +235,16 @@
     <string name="CreateRoomFragmentPsychologyHint">انتخاب روان‌شناس</string>
 
     <string name="CreateRoomFragmentButton">ساخت</string>
+
+    /*
+    ---------- CreateRoomUser Fragment ----------
+    */
+
+    <string name="CreateRoomUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateRoomUserFragmentReferenceHeader">عضو</string>
+
+    <string name="CreateRoomUserFragmentButton">ایجاد</string>
 
     /*
     ---------- CreateSample Fragment ----------
