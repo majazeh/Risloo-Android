@@ -10,9 +10,9 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditCryptoFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPasswordFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 
-public class EditAccountAdapter extends FragmentStatePagerAdapter {
+public class EditUserAdapter extends FragmentStatePagerAdapter {
 
-    public EditAccountAdapter(@NonNull FragmentManager fragmentManager, int behavior) {
+    public EditUserAdapter(@NonNull FragmentManager fragmentManager, int behavior) {
         super(fragmentManager, behavior);
     }
 

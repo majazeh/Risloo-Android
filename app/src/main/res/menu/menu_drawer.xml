@@ -13,11 +13,11 @@
             android:title="@string/CentersFragmentTitle" />
         <item
             android:id="@+id/casesFragment"
-            android:icon="@drawable/ic_folders_light"
+            android:icon="@drawable/ic_cases_light"
             android:title="@string/CasesFragmentTitle" />
         <item
             android:id="@+id/sessionsFragment"
-            android:icon="@drawable/ic_friends_light"
+            android:icon="@drawable/ic_sessions_light"
             android:title="@string/SessionsFragmentTitle" />
         <item
             android:id="@+id/usersFragment"

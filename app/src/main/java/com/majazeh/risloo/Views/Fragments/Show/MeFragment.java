@@ -16,18 +16,18 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.FragmentAccountBinding;
+import com.majazeh.risloo.databinding.FragmentMeBinding;
 import com.squareup.picasso.Picasso;
 
-public class AccountFragment extends Fragment {
+public class MeFragment extends Fragment {
 
     // Binding
-    private FragmentAccountBinding binding;
+    private FragmentMeBinding binding;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentAccountBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentMeBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

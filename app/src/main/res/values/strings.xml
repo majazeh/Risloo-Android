@@ -698,12 +698,6 @@
     <string name="ReferenceFragmentSamplesStatus">وضعیت</string>
 
     /*
-    ---------- Result Fragment ----------
-    */
-
-    <string name="ResultFragmentTitle">نمره</string>
-
-    /*
     ---------- Room Fragment ----------
     */
 
@@ -765,12 +759,6 @@
     <string name="SessionFragmentSamplesStatus">وضعیت</string>
 
     /*
-    ---------- Setting Fragment ----------
-    */
-
-    <string name="SettingFragmentTitle">تنظیمات</string>
-
-    /*
     ---------- Test Fragment ----------
     */
 
@@ -782,13 +770,6 @@
 
     <string name="UserFragmentTitle">کاربر</string>
     <string name="UserFragmentEdit">ویرایش</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Display Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // TODO : Place Code Here
 
     //////////////////////////////////////////////////////////////////////////////////////
 

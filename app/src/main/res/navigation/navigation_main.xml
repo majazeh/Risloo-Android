@@ -7,9 +7,9 @@
 
     <fragment
         android:id="@+id/accountFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.AccountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.MeFragment"
         android:label="@string/AccountFragmentTitle"
-        tools:layout="@layout/fragment_account">
+        tools:layout="@layout/fragment_me">
         <action
             android:id="@+id/action_accountFragment_to_editAccountFragment"
             app:destination="@id/editAccountFragment" />
@@ -178,9 +178,9 @@
 
     <fragment
         android:id="@+id/editAccountFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditAccountFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment"
         android:label="@string/EditAccountFragmentTitle"
-        tools:layout="@layout/fragment_edit_account" />
+        tools:layout="@layout/fragment_edit_user" />
 
     <fragment
         android:id="@+id/centerFragment"
