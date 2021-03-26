@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         InitManager.imgResTint(this, binding.mainContent.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.imgResTintRotate(this, binding.mainContent.logoutImageView.getRoot(), R.drawable.ic_logout_light, R.color.Gray500, 180);
+        InitManager.imgResTintRotate(this, binding.mainContent.logoutImageView.getRoot(), R.drawable.ic_sign_out_light, R.color.Gray500, 180);
         InitManager.imgResTint(this, binding.mainContent.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
     }
 

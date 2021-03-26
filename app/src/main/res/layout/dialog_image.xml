@@ -47,7 +47,7 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_gallery_regular"
+            android:src="@drawable/ic_images_regular"
             android:padding="@dimen/_4sdp"
             android:background="@drawable/draw_4sdp_solid_blue500"
             app:tint="@color/White" />

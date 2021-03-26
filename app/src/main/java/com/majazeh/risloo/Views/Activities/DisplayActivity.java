@@ -66,7 +66,7 @@ public class DisplayActivity extends AppCompatActivity {
         handler = new Handler();
 
         InitManager.imgResTint(this, binding.returnImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray50);
-        InitManager.imgResTint(this, binding.downloadImageView.getRoot(), R.drawable.ic_download_light, R.color.Gray50);
+        InitManager.imgResTint(this, binding.downloadImageView.getRoot(), R.drawable.ic_arrow_to_bottom_light, R.color.Gray50);
     }
 
     private void detector() {

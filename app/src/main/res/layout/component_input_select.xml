@@ -61,7 +61,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_exclamation_light"
+        android:src="@drawable/ic_exclamation_triangle_light"
         android:visibility="gone"
         app:layout_constraintStart_toStartOf="@+id/select_textView"
         app:layout_constraintTop_toTopOf="@+id/error_textView"

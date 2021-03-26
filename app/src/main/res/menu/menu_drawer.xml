@@ -4,20 +4,20 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@+id/dashboardFragment"
-            android:icon="@drawable/ic_dashboard_light"
+            android:icon="@drawable/ic_tachometer_alt_light"
             android:title="@string/DashboardFragmentTitle"
             android:checked="true" />
         <item
             android:id="@+id/centersFragment"
-            android:icon="@drawable/ic_center_light"
+            android:icon="@drawable/ic_building_light"
             android:title="@string/CentersFragmentTitle" />
         <item
             android:id="@+id/casesFragment"
-            android:icon="@drawable/ic_cases_light"
+            android:icon="@drawable/ic_folders_light"
             android:title="@string/CasesFragmentTitle" />
         <item
             android:id="@+id/sessionsFragment"
-            android:icon="@drawable/ic_sessions_light"
+            android:icon="@drawable/ic_user_friends_light"
             android:title="@string/SessionsFragmentTitle" />
         <item
             android:id="@+id/usersFragment"
@@ -25,15 +25,15 @@
             android:title="@string/UsersFragmentTitle" />
         <item
             android:id="@+id/scalesFragment"
-            android:icon="@drawable/ic_scale_light"
+            android:icon="@drawable/ic_balance_scale_light"
             android:title="@string/ScalesFragmentTitle" />
         <item
             android:id="@+id/samplesFragment"
-            android:icon="@drawable/ic_sample_light"
+            android:icon="@drawable/ic_vial_light"
             android:title="@string/SamplesFragmentTitle" />
         <item
             android:id="@+id/documentsFragment"
-            android:icon="@drawable/ic_document_light"
+            android:icon="@drawable/ic_file_certificate_light"
             android:title="@string/DocumentsFragmentTitle" />
     </group>
 

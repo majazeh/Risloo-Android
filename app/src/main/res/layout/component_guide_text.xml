@@ -15,7 +15,7 @@
         android:layout_marginTop="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_info_light"
+        android:src="@drawable/ic_info_circle_light"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/guide_textView"
         app:tint="@color/Gray500" />

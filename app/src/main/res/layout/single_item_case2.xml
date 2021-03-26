@@ -125,7 +125,7 @@
             android:layout_marginEnd="@dimen/_6sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_sessions_light"
+            android:src="@drawable/ic_user_friends_light"
             app:layout_constraintBottom_toBottomOf="@+id/session_count_textView"
             app:layout_constraintEnd_toStartOf="@+id/session_count_textView"
             app:layout_constraintTop_toTopOf="@+id/session_count_textView"

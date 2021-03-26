@@ -78,7 +78,7 @@
         android:contentDescription="@string/AppImageContent"
         android:padding="@dimen/_6sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_paper_light"
+        android:src="@drawable/ic_paper_plane_light"
         app:layout_constraintBottom_toBottomOf="@+id/username_textView"
         app:layout_constraintEnd_toStartOf="@+id/mobile_imageView"
         app:layout_constraintStart_toEndOf="@+id/name_textView"
