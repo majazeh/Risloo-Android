@@ -166,6 +166,13 @@ public class Singleton {
         return "";
     }
 
+    public String getPsychology() {
+        if (!sharedPreferences.getString("psychology", "").equals("")) {
+            return sharedPreferences.getString("psychology", "");
+        }
+        return "";
+    }
+
     public String getAddress() {
         if (!sharedPreferences.getString("address", "").equals("")) {
             return sharedPreferences.getString("address", "");

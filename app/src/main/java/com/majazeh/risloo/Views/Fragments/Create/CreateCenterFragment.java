@@ -1,9 +1,11 @@
 package com.majazeh.risloo.Views.Fragments.Create;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -21,8 +23,11 @@ public class CreateCenterFragment extends Fragment {
     // Binding
     private FragmentCreateCenterBinding binding;
 
+    // Objects
+    public Bitmap avatarBitmap;
+
     // Vars
-    private String center = "personal", manager = "", name = "", avatarPath = "", address = "", description ="";
+    public String center = "personal", manager = "", name = "", avatarPath = "", address = "", description ="";
 
     @Nullable
     @Override
@@ -49,6 +54,9 @@ public class CreateCenterFragment extends Fragment {
         binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentPhonesHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentDescriptionHeader));
 
+        binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentAddressHint));
+        binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentDescriptionHint));
+
         binding.centerIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCenterPersonal));
         binding.centerIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCenterClinic));
 
@@ -70,21 +78,103 @@ public class CreateCenterFragment extends Fragment {
                 case R.id.first_radioButton:
                     center = "personal";
 
-                    // TODO : Place Code Here
+                    binding.nameIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.avatarIncludeLayout.getRoot().setVisibility(View.GONE);
                     break;
                 case R.id.second_radioButton:
                     center = "clinic";
 
-                    // TODO : Place Code Here
+                    binding.nameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.avatarIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
             }
+        });
+
+        binding.managerIncludeLayout.selectTextView.setOnClickListener(v -> {
+            binding.managerIncludeLayout.selectTextView.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.managerIncludeLayout.selectTextView.setClickable(true), 300);
+
+            // TODO : Place Code Here
+        });
+
+        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                }
+            }
+            return false;
+        });
+
+        binding.avatarIncludeLayout.selectTextView.setOnClickListener(v -> {
+            binding.avatarIncludeLayout.selectTextView.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.selectTextView.setClickable(true), 300);
+
+            // TODO : Place Code Here
+        });
+
+        binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.addressIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
+                }
+            }
+            return false;
+        });
+
+        binding.phonesIncludeLayout.selectRecyclerView.setOnClickListener(v -> {
+            binding.phonesIncludeLayout.selectRecyclerView.setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.phonesIncludeLayout.selectRecyclerView.setClickable(true), 300);
+
+            // TODO : Place Code Here
+        });
+
+        binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                }
+            }
+            return false;
         });
 
         binding.createTextView.getRoot().setOnClickListener(v -> {
             binding.createTextView.getRoot().setClickable(false);
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
 
-            // TODO : Place Code Here
+            if (center.equals("personal")) {
+                if (manager.equals("")) {
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                }
+                if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                }
+
+                if (!manager.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView);
+
+                    doWork();
+                }
+            } else {
+                if (manager.equals("")) {
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                }
+                if (binding.nameIncludeLayout.inputEditText.length() == 0) {
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                }
+                if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                }
+
+                if (!manager.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView);
+
+                    doWork();
+                }
+            }
         });
     }
 
@@ -92,24 +182,59 @@ public class CreateCenterFragment extends Fragment {
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             center = ((MainActivity) requireActivity()).singleton.getName();
             switch (center) {
-                case "male":
+                case "personal":
                     binding.centerIncludeLayout.firstRadioButton.setChecked(true);
 
-                    // TODO : Place Code Here
+                    binding.nameIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.avatarIncludeLayout.getRoot().setVisibility(View.GONE);
                     break;
-                case "female":
+                case "clinic":
                     binding.centerIncludeLayout.secondRadioButton.setChecked(true);
 
-                    // TODO : Place Code Here
+                    binding.nameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.avatarIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
             }
         }
 
-        // TODO : Place Code Here
+        if (!((MainActivity) requireActivity()).singleton.getManager().equals("")) {
+            manager = ((MainActivity) requireActivity()).singleton.getManager();
+            binding.managerIncludeLayout.selectTextView.setText(manager);
+        }
+        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
+            binding.avatarIncludeLayout.nameTextView.setText(avatarPath);
+        }
+        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+            address = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.addressIncludeLayout.inputEditText.setText(address);
+        }
+        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+            address = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.addressIncludeLayout.inputEditText.setText(address);
+        }
+
+        // TODO : Set Phones Here
+
+        if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
+            description = ((MainActivity) requireActivity()).singleton.getDescription();
+            binding.descriptionIncludeLayout.inputEditText.setText(description);
+        }
     }
 
     private void doWork() {
-        // TODO : Call Work Method
+        if (center.equals("personal")) {
+            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+
+            // TODO : Call Work Method
+        } else {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+
+            // TODO : Call Work Method
+        }
     }
 
     @Override

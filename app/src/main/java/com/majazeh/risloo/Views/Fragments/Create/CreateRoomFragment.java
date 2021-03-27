@@ -43,6 +43,8 @@ public class CreateRoomFragment extends Fragment {
     private void initializer() {
         binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomFragmentPsychologyHeader));
 
+        binding.psychologyIncludeLayout.selectTextView.setHint(getResources().getString(R.string.CreateRoomFragmentPsychologyHint));
+
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomFragmentButton), getResources().getColor(R.color.White));
     }
 
@@ -68,18 +70,19 @@ public class CreateRoomFragment extends Fragment {
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
 
             if (psychology.equals("")) {
-                // TODO : Set Error
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyIncludeLayout.errorImageView, binding.psychologyIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!psychology.equals("")) {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyIncludeLayout.errorImageView, binding.psychologyIncludeLayout.errorTextView);
                 doWork();
             }
         });
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            psychology = ((MainActivity) requireActivity()).singleton.getName();
+        if (!((MainActivity) requireActivity()).singleton.getPsychology().equals("")) {
+            psychology = ((MainActivity) requireActivity()).singleton.getPsychology();
             binding.psychologyIncludeLayout.selectTextView.setText(psychology);
         }
     }

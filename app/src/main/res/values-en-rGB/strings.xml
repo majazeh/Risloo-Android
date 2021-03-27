@@ -174,9 +174,10 @@
     <string name="CreateCenterFragmentNameHeader">عنوان</string>
     <string name="CreateCenterFragmentAvatarHeader">تصویر نمایشی</string>
     <string name="CreateCenterFragmentAddressHeader">آدرس</string>
-    <string name="CreateCenterFragmentAddressHint">غیر ضروری</string>
     <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
     <string name="CreateCenterFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="CreateCenterFragmentAddressHint">غیر ضروری</string>
     <string name="CreateCenterFragmentDescriptionHint">غیر ضروری</string>
 
     <string name="CreateCenterFragmentCenterPersonal">شخصی</string>
@@ -202,9 +203,10 @@
     <string name="CreateDocumentFragmentTitle">ساخت مدرک</string>
 
     <string name="CreateDocumentFragmentNameHeader">عنوان</string>
-    <string name="CreateDocumentFragmentDescriptionHeader">محتوا</string>
-    <string name="CreateDocumentFragmentDescriptionHint">غیر ضروری</string>
+    <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
     <string name="CreateDocumentFragmentFileHeader">پیوست</string>
+
+    <string name="CreateDocumentFragmentDescriptionHint">غیر ضروری</string>
 
     <string name="CreateDocumentFragmentButton">ثبت</string>
 
@@ -244,6 +246,7 @@
     <string name="CreateRoomFragmentTitle">ساخت اتاق</string>
 
     <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
+
     <string name="CreateRoomFragmentPsychologyHint">انتخاب روان‌شناس</string>
 
     <string name="CreateRoomFragmentButton">ساخت</string>
