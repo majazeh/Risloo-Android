@@ -32,13 +32,24 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <include
+        android:id="@+id/user_imageView"
+        layout="@layout/component_main_button"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/logout_imageView"
+        app:layout_constraintLeft_toRightOf="@id/logout_imageView"
+        app:layout_constraintTop_toTopOf="@id/logout_imageView" />
+
+    <include
         android:id="@+id/toolbar_includeLayout"
         layout="@layout/component_main_toolbar"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         app:layout_constraintBottom_toBottomOf="@+id/logout_imageView"
-        app:layout_constraintEnd_toStartOf="@+id/logout_imageView"
+        app:layout_constraintEnd_toStartOf="@+id/user_imageView"
         app:layout_constraintTop_toTopOf="@+id/logout_imageView" />
 
     <include
@@ -48,9 +59,9 @@
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@+id/toolbar_includeLayout"
+        app:layout_constraintBottom_toBottomOf="@+id/logout_imageView"
         app:layout_constraintEnd_toStartOf="@+id/toolbar_includeLayout"
-        app:layout_constraintTop_toTopOf="@+id/toolbar_includeLayout" />
+        app:layout_constraintTop_toTopOf="@+id/logout_imageView" />
 
     <TextView
         android:id="@+id/badge_textView"

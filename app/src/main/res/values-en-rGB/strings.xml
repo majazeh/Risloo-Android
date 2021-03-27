@@ -6,11 +6,14 @@
 
     <string name="AppName">ریسلو بتا</string>
 
-    <string name="AppSearchHint">جستجو</string>
     <string name="AppImageContent">عکس</string>
-    <string name="AppFileSelect">انتخاب فايل</string>
-    <string name="AppEmptyHint">داده یافت نشد.</string>
+
+    <string name="AppSearchHint">جستجو</string>
+    <string name="AppSearchEmpty">داده یافت نشد.</string>
+
     <string name="AppInputEmpty">فیلد خالی است.</string>
+
+    <string name="AppFileSelect">انتخاب فايل</string>
     <string name="AppFileEmpty">فايل انتخاب نشده است.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -46,6 +49,7 @@
     <string name="LoginFragmentTitle">ورود</string>
 
     <string name="LoginFragmentInput">موبایل، ایمیل یا نام کاربری</string>
+
     <string name="LoginFragmentButton">ورود</string>
 
     /*
@@ -55,6 +59,7 @@
     <string name="MobileFragmentTitle">تلفن همراه</string>
 
     <string name="MobileFragmentInput">تلفن همراه</string>
+
     <string name="MobileFragmentButton">بررسی</string>
 
     /*
@@ -64,6 +69,7 @@
     <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
 
     <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
+
     <string name="PasswordChangeFragmentButton">تغییر</string>
 
     /*
@@ -73,6 +79,7 @@
     <string name="PasswordFragmentTitle">کلمه عبور</string>
 
     <string name="PasswordFragmentInput">کلمه عبور</string>
+
     <string name="PasswordFragmentButton">بررسی</string>
 
     /*
@@ -82,6 +89,7 @@
     <string name="PasswordRecoverFragmentTitle">بازیابی کلمه عبور</string>
 
     <string name="PasswordRecoverFragmentInput">تلفن همراه</string>
+
     <string name="PasswordRecoverFragmentButton">دریافت کد</string>
 
     /*
@@ -91,9 +99,11 @@
     <string name="PinFragmentTitle">کد پیامکی</string>
 
     <string name="PinFragmentInput">کد پیامکی</string>
-    <string name="PinFragmentButton">بررسی</string>
+
     <string name="PinFragmentLink">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
     <string name="PinFragmentTimer">کد پیامکی برای شما ارسال شد :</string>
+
+    <string name="PinFragmentButton">بررسی</string>
 
     /*
     ---------- Register Fragment ----------
@@ -103,6 +113,7 @@
 
     <string name="RegisterFragmentName">نام و نام خانوادگی</string>
     <string name="RegisterFragmentMobile">تلفن همراه</string>
+
     <string name="RegisterFragmentButton">عضویت</string>
 
     /*
@@ -112,6 +123,7 @@
     <string name="SerialFragmentTitle">سریال نمونه</string>
 
     <string name="SerialFragmentInput">سریال نمونه</string>
+
     <string name="SerialFragmentButton">شروع</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -698,12 +710,6 @@
     <string name="ReferenceFragmentSamplesStatus">وضعیت</string>
 
     /*
-    ---------- Result Fragment ----------
-    */
-
-    <string name="ResultFragmentTitle">نمره</string>
-
-    /*
     ---------- Room Fragment ----------
     */
 
@@ -765,12 +771,6 @@
     <string name="SessionFragmentSamplesStatus">وضعیت</string>
 
     /*
-    ---------- Setting Fragment ----------
-    */
-
-    <string name="SettingFragmentTitle">تنظیمات</string>
-
-    /*
     ---------- Test Fragment ----------
     */
 
@@ -782,13 +782,6 @@
 
     <string name="UserFragmentTitle">کاربر</string>
     <string name="UserFragmentEdit">ویرایش</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Display Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // TODO : Place Code Here
 
     //////////////////////////////////////////////////////////////////////////////////////
 

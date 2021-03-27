@@ -22,8 +22,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
-import com.majazeh.risloo.Views.Dialogs.DateDialog;
-import com.majazeh.risloo.Views.Dialogs.ImageDialog;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.squareup.picasso.Picasso;
 
@@ -39,8 +37,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Objects
     public Handler handler;
-    public ImageDialog imageDialog;
-    public DateDialog dateDialog;
     public ControlEditText controlEditText;
     public NavHostFragment navHostFragment;
     public NavController navController;
@@ -75,9 +71,6 @@ public class MainActivity extends AppCompatActivity {
 
         handler = new Handler();
 
-        imageDialog = new ImageDialog();
-        dateDialog = new DateDialog();
-
         controlEditText = new ControlEditText();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainContent.fragmentNavHostFragment.getId());
@@ -86,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
         InitManager.imgResTint(this, binding.mainContent.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.mainContent.logoutImageView.getRoot(), R.drawable.ic_sign_out_light, R.color.Gray500, 180);
+        InitManager.imgResTint(this, binding.mainContent.userImageView.getRoot(), R.drawable.ic_user_light, R.color.Gray500);
         InitManager.imgResTint(this, binding.mainContent.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
     }
 
@@ -95,6 +89,7 @@ public class MainActivity extends AppCompatActivity {
 
             binding.mainContent.menuImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
             binding.mainContent.logoutImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
+            binding.mainContent.userImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
             binding.mainContent.notificationImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
         }
     }
@@ -117,6 +112,13 @@ public class MainActivity extends AppCompatActivity {
         binding.mainContent.logoutImageView.getRoot().setOnClickListener(v -> {
             binding.mainContent.logoutImageView.getRoot().setClickable(false);
             handler.postDelayed(() -> binding.mainContent.logoutImageView.getRoot().setClickable(true), 300);
+
+            // TODO : Place Code Here
+        });
+
+        binding.mainContent.userImageView.getRoot().setOnClickListener(v -> {
+            binding.mainContent.userImageView.getRoot().setClickable(false);
+            handler.postDelayed(() -> binding.mainContent.userImageView.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });

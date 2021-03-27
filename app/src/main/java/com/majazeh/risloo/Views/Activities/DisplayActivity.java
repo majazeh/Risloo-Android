@@ -37,7 +37,8 @@ public class DisplayActivity extends AppCompatActivity {
 
         decorator();
 
-        binder();
+        binding = ActivityDisplayBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
         initializer();
 
@@ -53,11 +54,6 @@ public class DisplayActivity extends AppCompatActivity {
 
         windowDecorator.darkShowSystemUI(this);
         windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Gray900), getResources().getColor(R.color.Gray900));
-    }
-
-    private void binder() {
-        binding = ActivityDisplayBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
     }
 
     private void initializer() {
