@@ -53,7 +53,7 @@ public class EditPersonalFragment extends Fragment {
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentTypeHeader));
         binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentGenderHeader));
 
-        binding.usernameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHint));
+        binding.usernameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameGuide));
 
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusActive));
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusWaiting));
@@ -118,8 +118,7 @@ public class EditPersonalFragment extends Fragment {
             binding.birthdayIncludeLayout.selectTextView.setClickable(false);
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.birthdayIncludeLayout.selectTextView.setClickable(true), 300);
 
-            ((MainActivity) requireActivity()).dateDialog.show(requireActivity().getSupportFragmentManager(), "dateSheetDialog");
-            ((MainActivity) requireActivity()).dateDialog.setDate(year, month, day);
+            // TODO : Place Code Here
         });
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {

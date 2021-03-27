@@ -336,18 +336,13 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- EditAccount Fragment ----------
-    */
-
-    <string name="EditAccountFragmentTitle">ویرایش من</string>
-
-    /*
     ---------- EditAvatar Fragment ----------
     */
 
     <string name="EditAvatarFragmentTitle">تصویر نمایشی</string>
 
-    <string name="EditAvatarFragmentHint">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+    <string name="EditAvatarFragmentGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+
     <string name="EditAvatarFragmentButton">ویرایش</string>
 
     <string name="EditAvatarDialogImageTitle">از کجا می خوای تصویر بیارید؟</string>
@@ -395,6 +390,7 @@
     <string name="EditCryptoFragmentTitle">کلید عمومی</string>
 
     <string name="EditCryptoFragmentPublicDescription">در این قسمت شما می‌توانید با استفاده از دراختیار قراردادن کلید عمومی رمزگذاری نامتقارن خود، داده‌های خود را در ریسلو کدگذاری کنید و تنها خودتان به آن‌ها دسترسی خواهید داشت.</string>
+    <string name="EditCryptoFragmentPrivateDescription">برای این‌که بتوانید راحت و در خود سرویس ریسلو متون کدگذاری‌شده خود را ببینید، می‌توانید کلید خصوصی خود را در زیر قرار دهید:</string>
 
     <string name="EditCryptoFragmentPublicQuestion1">فایده این کار چیست؟</string>
     <string name="EditCryptoFragmentPublicQuestion2">چه چیزهایی رمزگذاری می‌شوند؟</string>
@@ -411,17 +407,14 @@
     <string name="EditCryptoFragmentPublicAnswer2">گزارش جلسات درمانی.</string>
     <string name="EditCryptoFragmentPublicAnswer3">درحال حاضر این امکان برای شما مهیا نیست.</string>
 
-    <string name="EditCryptoFragmentPublicHeader">کلید عمومی</string>
-    <string name="EditCryptoFragmentPublicButton">تنظيم</string>
-
-    <string name="EditCryptoFragmentPrivateDescription">برای این‌که بتوانید راحت و در خود سرویس ریسلو متون کدگذاری‌شده خود را ببینید، می‌توانید کلید خصوصی خود را در زیر قرار دهید:</string>
-
     <string name="EditCryptoFragmentPrivateItem1">- می‌توانید به ما اطمینان نکنید و کلید خصوصی را نزد خود نگهداری کنید و به صورت دستی محتواهای کدگذاری‌شده را بازگشایی کنیدکلید خصوصی.</string>
     <string name="EditCryptoFragmentPrivateItem2">- ما کلید خصوصی شما را در حافظه مرورگر خودتان نگهداری می‌کنیم و این کلید اصلا به سمت ریسلو ارسال نخواهد شد.</string>
     <string name="EditCryptoFragmentPrivateItem3">- کلید خصوصی را تنها زمانی که رایانه متعلق به شماست وارد کنید؛ زیرا دیگران می‌توانند به کلید خصوصی شما از طریق آن رایانه دسترسی داشته باشند.</string>
 
+    <string name="EditCryptoFragmentPublicHeader">کلید عمومی</string>
     <string name="EditCryptoFragmentPrivateHeader">کلید خصوصی</string>
-    <string name="EditCryptoFragmentPrivateButton">تنظيم</string>
+
+    <string name="EditCryptoFragmentButton">تنظيم</string>
 
     /*
     ---------- EditPassword Fragment ----------
@@ -429,8 +422,10 @@
 
     <string name="EditPasswordFragmentTitle">کلمه عبور</string>
 
-    <string name="EditPasswordFragmentHeader">کلمه عبور</string>
-    <string name="EditPasswordFragmentHint">گذرواژه باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+    <string name="EditPasswordFragmentHeader">کلمه عبور جدید</string>
+
+    <string name="EditPasswordFragmentGuide">گذرواژه باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+
     <string name="EditPasswordFragmentButton">تغییر</string>
 
     /*
@@ -448,28 +443,24 @@
     <string name="EditPersonalFragmentTypeHeader">نوع کاربر</string>
     <string name="EditPersonalFragmentGenderHeader">جنسیت</string>
 
+    <string name="EditPersonalFragmentUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
+
     <string name="EditPersonalFragmentBirthdayDefault">1400-01-01</string>
 
     <string name="EditPersonalFragmentStatusActive">فعال</string>
     <string name="EditPersonalFragmentStatusWaiting">در انتظار</string>
     <string name="EditPersonalFragmentStatusClosed">بسته شده</string>
+
     <string name="EditPersonalFragmentTypeAdmin">ادمین</string>
     <string name="EditPersonalFragmentTypeClient">کاربر</string>
+
     <string name="EditPersonalFragmentGenderMale">مرد</string>
     <string name="EditPersonalFragmentGenderFemale">زن</string>
-
-    <string name="EditPersonalFragmentUsernameHint">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
 
     <string name="EditPersonalFragmentButton">ویرایش</string>
 
     <string name="EditPersonalDialogDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
     <string name="EditPersonalDialogDateEntry">ثبت</string>
-
-    /*
-    ---------- EditSample Fragment ----------
-    */
-
-    <string name="EditSampleFragmentTitle">ویرایش نمونه</string>
 
     /*
     ---------- EditSession Fragment ----------

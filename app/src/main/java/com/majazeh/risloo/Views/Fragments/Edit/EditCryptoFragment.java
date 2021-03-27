@@ -45,8 +45,8 @@ public class EditCryptoFragment extends Fragment {
         binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCryptoFragmentPublicHeader));
         binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCryptoFragmentPrivateHeader));
 
-        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentPublicButton), getResources().getColor(R.color.White));
-        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentPrivateButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {

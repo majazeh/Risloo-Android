@@ -49,7 +49,7 @@ public class EditAvatarFragment extends Fragment {
     }
 
     private void initializer() {
-        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditAvatarFragmentHint));
+        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditAvatarFragmentGuide));
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditAvatarFragmentButton), getResources().getColor(R.color.White));
     }
@@ -67,7 +67,7 @@ public class EditAvatarFragment extends Fragment {
             binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
             ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
 
-            ((MainActivity) requireActivity()).imageDialog.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
+            // TODO : Place Code Here
         });
 
         binding.editTextView.getRoot().setOnClickListener(v -> {

@@ -179,7 +179,7 @@
     <fragment
         android:id="@+id/editAccountFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment"
-        android:label="@string/EditAccountFragmentTitle"
+        android:label="@string/EditUserFragmentTitle"
         tools:layout="@layout/fragment_edit_user" />
 
     <fragment
@@ -306,12 +306,6 @@
             android:id="@+id/action_referenceFragment_to_caseFragment"
             app:destination="@id/caseFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/editSampleFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragment"
-        android:label="@string/EditSampleFragmentTitle"
-        tools:layout="@layout/fragment_edit_center_user" />
 
     <fragment
         android:id="@+id/centerUsersFragment"
