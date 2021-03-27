@@ -122,7 +122,7 @@ public class CenterFragment extends Fragment {
         binding.editImageView.getRoot().setOnClickListener(v -> {
             binding.editImageView.getRoot().setClickable(false);
 
-            // TODO : Call Work Method
+            ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment);
         });
 
         binding.usersImageView.getRoot().setOnClickListener(v -> {

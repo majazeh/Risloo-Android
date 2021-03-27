@@ -196,6 +196,9 @@
         <action
             android:id="@+id/action_centerFragment_to_createRoomFragment"
             app:destination="@id/createRoomFragment" />
+        <action
+            android:id="@+id/action_centerFragment_to_editCenterFragment"
+            app:destination="@id/editCenterFragment" />
     </fragment>
 
     <fragment
@@ -332,5 +335,11 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment"
         android:label="@string/CreateReportFragmentTitle"
         tools:layout="@layout/fragment_create_room" />
+
+    <fragment
+        android:id="@+id/editCenterFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment"
+        android:label="@string/EditCenterFragmentTitle"
+        tools:layout="@layout/fragment_edit_center" />
 
 </navigation>

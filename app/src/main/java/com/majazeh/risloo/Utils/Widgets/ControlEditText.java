@@ -7,6 +7,8 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -60,6 +62,32 @@ public class ControlEditText {
         hideKeyboard(activity, editText);
     }
 
+    public void error(Activity activity, TextView widget, ImageView imageView, TextView textView, String value) {
+        if (activity instanceof AuthActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+        } else if (activity instanceof MainActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
+
+        imageView.setVisibility(View.VISIBLE);
+
+        textView.setVisibility(View.VISIBLE);
+        textView.setText(value);
+    }
+
+    public void error(Activity activity, RecyclerView widget, ImageView imageView, TextView textView, String value) {
+        if (activity instanceof AuthActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+        } else if (activity instanceof MainActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
+
+        imageView.setVisibility(View.VISIBLE);
+
+        textView.setVisibility(View.VISIBLE);
+        textView.setText(value);
+    }
+
     public void check(Activity activity, EditText editText, ImageView imageView, TextView textView) {
         editText.clearFocus();
         if (activity instanceof AuthActivity) {
@@ -74,6 +102,32 @@ public class ControlEditText {
         textView.setText("");
 
         hideKeyboard(activity, editText);
+    }
+
+    public void check(Activity activity, TextView widget, ImageView imageView, TextView textView) {
+        if (activity instanceof AuthActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        } else if (activity instanceof MainActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        imageView.setVisibility(View.GONE);
+
+        textView.setVisibility(View.GONE);
+        textView.setText("");
+    }
+
+    public void check(Activity activity, RecyclerView widget, ImageView imageView, TextView textView) {
+        if (activity instanceof AuthActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        } else if (activity instanceof MainActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        imageView.setVisibility(View.GONE);
+
+        textView.setVisibility(View.GONE);
+        textView.setText("");
     }
 
     private void hideKeyboard(Activity activity, EditText editText) {

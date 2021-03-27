@@ -145,4 +145,32 @@ public class Singleton {
         return "";
     }
 
+    public String getStartTime() {
+        if (!sharedPreferences.getString("start_time", "").equals("")) {
+            return sharedPreferences.getString("start_time", "");
+        }
+        return "";
+    }
+
+    public String getDuration() {
+        if (!sharedPreferences.getString("duration", "").equals("")) {
+            return sharedPreferences.getString("duration", "");
+        }
+        return "";
+    }
+
+    public String getManager() {
+        if (!sharedPreferences.getString("manager", "").equals("")) {
+            return sharedPreferences.getString("manager", "");
+        }
+        return "";
+    }
+
+    public String getAddress() {
+        if (!sharedPreferences.getString("address", "").equals("")) {
+            return sharedPreferences.getString("address", "");
+        }
+        return "";
+    }
+
 }
