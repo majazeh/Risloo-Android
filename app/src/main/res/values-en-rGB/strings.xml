@@ -307,7 +307,7 @@
     ---------- CreateUser Fragment ----------
     */
 
-    <string name="CreateUserFragmentTitle">ساخت کاربر</string>
+    <string name="CreateUserFragmentTitle">ثبت کاربر جدید</string>
 
     <string name="CreateUserFragmentNameHeader">نام و نام خانوادگی</string>
     <string name="CreateUserFragmentMobileHeader">تلفن همراه</string>
@@ -327,12 +327,14 @@
     <string name="CreateUserFragmentStatusActive">فعال</string>
     <string name="CreateUserFragmentStatusWaiting">در انتظار</string>
     <string name="CreateUserFragmentStatusClosed">بسته شده</string>
+
     <string name="CreateUserFragmentTypeAdmin">ادمین</string>
     <string name="CreateUserFragmentTypeClient">کاربر</string>
+
     <string name="CreateUserFragmentGenderMale">مرد</string>
     <string name="CreateUserFragmentGenderFemale">زن</string>
 
-    <string name="CreateUserFragmentButton">ساخت</string>
+    <string name="CreateUserFragmentButton">ایجاد</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

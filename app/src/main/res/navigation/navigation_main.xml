@@ -231,6 +231,9 @@
         <action
             android:id="@+id/action_caseFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />
+        <action
+            android:id="@+id/action_caseFragment_to_createCaseUserFragment"
+            app:destination="@id/createCaseUserFragment" />
     </fragment>
 
     <fragment
@@ -341,5 +344,11 @@
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment"
         android:label="@string/EditCenterFragmentTitle"
         tools:layout="@layout/fragment_edit_center" />
+
+    <fragment
+        android:id="@+id/createCaseUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment"
+        android:label="@string/CreateCaseUserFragmentTitle"
+        tools:layout="@layout/fragment_create_case_user" />
 
 </navigation>

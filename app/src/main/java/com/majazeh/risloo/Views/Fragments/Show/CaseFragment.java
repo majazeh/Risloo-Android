@@ -116,7 +116,7 @@ public class CaseFragment extends Fragment {
         binding.referencesAddImageView.getRoot().setOnClickListener(v -> {
             binding.referencesAddImageView.getRoot().setClickable(false);
 
-            // TODO: Place Code Here
+            ((MainActivity) requireActivity()).navigator(R.id.createCaseUserFragment);
         });
 
         binding.sessionsAddImageView.getRoot().setOnClickListener(v -> {
