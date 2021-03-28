@@ -126,4 +126,10 @@ public class CenterUsersFragment extends Fragment {
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        binding = null;
+    }
+
 }
