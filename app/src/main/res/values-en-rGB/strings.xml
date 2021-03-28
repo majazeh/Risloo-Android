@@ -147,8 +147,9 @@
 
     <string name="CreateCaseFragmentRoomHeader">اتاق درمان</string>
     <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
+    <string name="CreateCaseFragmentSituationHeader">مسئله</string>
+
     <string name="CreateCaseFragmentReferenceHint">انتخاب مراجع از طریق جستجوی موبایل یا نام</string>
-    <string name="CreateCaseFragmentDescriptionHeader">مسئله</string>
 
     <string name="CreateCaseFragmentButton">ساخت</string>
 
@@ -200,7 +201,7 @@
     ---------- CreateDocument Fragment ----------
     */
 
-    <string name="CreateDocumentFragmentTitle">ساخت مدرک</string>
+    <string name="CreateDocumentFragmentTitle">ارسال مدرک</string>
 
     <string name="CreateDocumentFragmentNameHeader">عنوان</string>
     <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
@@ -235,7 +236,7 @@
     <string name="CreateReportFragmentWithoutKey">بدون رمزگذاری</string>
 
     <string name="CreateReportFragmentCryptoHint">متن گزارش جلسه‌ای که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش جلسات درمانی شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
-    <string name="CreateReportFragmentCrypto">ارسال کلید عمومی من</string>
+    <string name="CreateReportFragmentCryptoButton">ارسال کلید عمومی من</string>
 
     <string name="CreateReportFragmentButton">ثبت</string>
 

@@ -5,6 +5,7 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -88,6 +89,19 @@ public class ControlEditText {
         textView.setText(value);
     }
 
+    public void error(Activity activity, LinearLayout widget, ImageView imageView, TextView textView, String value) {
+        if (activity instanceof AuthActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+        } else if (activity instanceof MainActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
+
+        imageView.setVisibility(View.VISIBLE);
+
+        textView.setVisibility(View.VISIBLE);
+        textView.setText(value);
+    }
+
     public void check(Activity activity, EditText editText, ImageView imageView, TextView textView) {
         editText.clearFocus();
         if (activity instanceof AuthActivity) {
@@ -118,6 +132,19 @@ public class ControlEditText {
     }
 
     public void check(Activity activity, RecyclerView widget, ImageView imageView, TextView textView) {
+        if (activity instanceof AuthActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        } else if (activity instanceof MainActivity) {
+            widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        imageView.setVisibility(View.GONE);
+
+        textView.setVisibility(View.GONE);
+        textView.setText("");
+    }
+
+    public void check(Activity activity, LinearLayout widget, ImageView imageView, TextView textView) {
         if (activity instanceof AuthActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         } else if (activity instanceof MainActivity) {
