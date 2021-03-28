@@ -23,7 +23,7 @@ public class CreateCaseFragment extends Fragment {
     private FragmentCreateCaseBinding binding;
 
     // Vars
-    public String room = "", center = "", situation = "";
+    private String room = "", center = "", situation = "";
 
     @Nullable
     @Override

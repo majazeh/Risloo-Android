@@ -321,6 +321,9 @@
         <action
             android:id="@+id/action_centerUsersFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />
+        <action
+            android:id="@+id/action_centerUsersFragment_to_createCenterUserFragment"
+            app:destination="@id/createCenterUserFragment" />
     </fragment>
 
     <fragment
@@ -331,6 +334,9 @@
         <action
             android:id="@+id/action_roomUsersFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />
+        <action
+            android:id="@+id/action_roomUsersFragment_to_createRoomUserFragment"
+            app:destination="@id/createRoomUserFragment" />
     </fragment>
 
     <fragment
@@ -350,5 +356,17 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment"
         android:label="@string/CreateCaseUserFragmentTitle"
         tools:layout="@layout/fragment_create_case_user" />
+
+    <fragment
+        android:id="@+id/createRoomUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment"
+        android:label="@string/CreateRoomUserFragmentTitle"
+        tools:layout="@layout/fragment_create_room_user" />
+
+    <fragment
+        android:id="@+id/createCenterUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment"
+        android:label="@string/CreateCenterUserFragmentTitle"
+        tools:layout="@layout/fragment_create_center_user" />
 
 </navigation>

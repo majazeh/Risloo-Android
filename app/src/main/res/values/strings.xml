@@ -194,6 +194,17 @@
 
     <string name="CreateCenterUserFragmentMobileHeader">تلفن همراه</string>
     <string name="CreateCenterUserFragmentTypeHeader">موقعیت</string>
+    <string name="CreateCenterUserFragmentRoomHeader">اتاق درمان</string>
+    <string name="CreateCenterUserFragmentNameHeader">نام مراجع</string>
+
+    <string name="CreateCenterUserFragmentTypeOwner">مدیر</string>
+    <string name="CreateCenterUserFragmentTypeOperator">اپراتور</string>
+    <string name="CreateCenterUserFragmentTypePsychology">روان‌شناس</string>
+    <string name="CreateCenterUserFragmentTypeClient">مراجع</string>
+
+    <string name="CreateCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="CreateCenterUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
 
     <string name="CreateCenterUserFragmentButton">ایجاد</string>
 
@@ -258,7 +269,12 @@
 
     <string name="CreateRoomUserFragmentTitle">ثبت عضو جدید</string>
 
-    <string name="CreateRoomUserFragmentReferenceHeader">عضو</string>
+    <string name="CreateRoomUserFragmentMobileHeader">تلفن همراه</string>
+    <string name="CreateRoomUserFragmentNameHeader">نام مراجع</string>
+
+    <string name="CreateRoomUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="CreateRoomUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
 
     <string name="CreateRoomUserFragmentButton">ایجاد</string>
 

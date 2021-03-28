@@ -114,7 +114,7 @@ public class CenterUsersFragment extends Fragment {
         binding.addImageView.getRoot().setOnClickListener(v -> {
             binding.addImageView.getRoot().setClickable(false);
 
-            ((MainActivity) requireActivity()).navigator(R.id.referenceFragment);
+            ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment);
         });
     }
 
