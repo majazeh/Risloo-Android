@@ -12,197 +12,222 @@
     tools:context=".Views.Fragments.Create.CreateSampleFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_12sdp"
-        android:layout_marginStart="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
-        android:paddingBottom="@dimen/_12sdp"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+        android:layout_height="match_parent">
 
-        <include
-            android:id="@+id/scale_includeLayout"
-            layout="@layout/component_input_recycler"
-            android:layout_width="0dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_constraintLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
 
-        <include
-            android:id="@+id/scale_guideLayout"
-            layout="@layout/component_guide_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintEnd_toEndOf="@+id/scale_includeLayout"
-            app:layout_constraintStart_toStartOf="@+id/scale_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/scale_includeLayout" />
-
-        <include
-            android:id="@+id/room_includeLayout"
-            layout="@layout/component_input_select"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/scale_guideLayout"
-            app:layout_constraintStart_toStartOf="@+id/scale_guideLayout"
-            app:layout_constraintTop_toBottomOf="@+id/scale_guideLayout" />
-
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/type_tabLayout"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_36sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/draw_line_solid_transparent_border_bottom_2sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
-            app:layout_constraintStart_toStartOf="@id/room_includeLayout"
-            app:layout_constraintTop_toBottomOf="@id/room_includeLayout"
-            app:tabBackground="@null"
-            app:tabGravity="fill"
-            app:tabMode="fixed"
-            app:tabMaxWidth="0dp"
-            app:tabRippleColor="@color/Gray300"
-            app:tabIndicatorColor="@color/Blue500"
-            app:tabIndicatorHeight="@dimen/_2sdp"
-            app:tabTextColor="@color/Gray500"
-            app:tabSelectedTextColor="@color/Gray900"
-            app:tabTextAppearance="@style/TabTextAppearance">
-
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
+            <include
+                android:id="@+id/scale_includeLayout"
+                layout="@layout/component_input_recycler"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/CreateSampleFragmentTabCase" />
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
+            <include
+                android:id="@+id/scale_guideLayout"
+                layout="@layout/component_guide_text"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/CreateSampleFragmentTabRoom" />
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@+id/scale_includeLayout"
+                app:layout_constraintStart_toStartOf="@+id/scale_includeLayout"
+                app:layout_constraintTop_toBottomOf="@+id/scale_includeLayout" />
 
-            <com.google.android.material.tabs.TabItem
-                android:layout_width="match_parent"
+            <include
+                android:id="@+id/room_includeLayout"
+                layout="@layout/component_input_select2"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:text="@string/CreateSampleFragmentTabGroup" />
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/scale_guideLayout"
+                app:layout_constraintStart_toStartOf="@+id/scale_guideLayout"
+                app:layout_constraintTop_toBottomOf="@+id/scale_guideLayout" />
 
-        </com.google.android.material.tabs.TabLayout>
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/type_tabLayout"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_36sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:background="@drawable/draw_line_solid_transparent_border_bottom_2sdp_gray200"
+                app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/room_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/room_includeLayout"
+                app:tabBackground="@null"
+                app:tabGravity="fill"
+                app:tabMode="fixed"
+                app:tabMaxWidth="0dp"
+                app:tabRippleColor="@color/Gray300"
+                app:tabIndicatorColor="@color/Blue500"
+                app:tabIndicatorHeight="@dimen/_2sdp"
+                app:tabTextColor="@color/Gray500"
+                app:tabSelectedTextColor="@color/Gray900"
+                app:tabTextAppearance="@style/TabTextAppearance">
 
-        <TextView
-            android:id="@+id/group_hint_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:padding="@dimen/_8sdp"
-            android:gravity="start"
-            android:text="@string/CreateSampleFragmentGroupGuide"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray700"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray300"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@id/type_tabLayout" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/CreateSampleFragmentTabCase" />
 
-        <include
-            android:id="@+id/name_includeLayout"
-            layout="@layout/component_input_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/group_hint_textView" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/CreateSampleFragmentTabRoom" />
 
-        <include
-            android:id="@+id/name_guideLayout"
-            layout="@layout/component_guide_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/name_includeLayout" />
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/CreateSampleFragmentTabGroup" />
 
-        <include
-            android:id="@+id/user_count_includeLayout"
-            layout="@layout/component_input_number"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/name_guideLayout" />
+            </com.google.android.material.tabs.TabLayout>
 
-        <include
-            android:id="@+id/user_count_guideLayout"
-            layout="@layout/component_guide_text"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/user_count_includeLayout" />
+            <TextView
+                android:id="@+id/group_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:padding="@dimen/_8sdp"
+                android:gravity="start"
+                android:text="@string/CreateSampleFragmentGroupGuide"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray300"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/type_tabLayout" />
 
-        <include
-            android:id="@+id/case_type_includeLayout"
-            layout="@layout/component_input_select"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/user_count_guideLayout" />
+            <include
+                android:id="@+id/name_includeLayout"
+                layout="@layout/component_input_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/group_hint_textView" />
 
-        <include
-            android:id="@+id/case_includeLayout"
-            layout="@layout/component_input_select"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/case_type_includeLayout" />
+            <include
+                android:id="@+id/name_guideLayout"
+                layout="@layout/component_guide_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/name_includeLayout" />
 
-        <include
-            android:id="@+id/session_includeLayout"
-            layout="@layout/component_input_select2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/case_includeLayout" />
+            <include
+                android:id="@+id/user_count_includeLayout"
+                layout="@layout/component_input_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/name_guideLayout" />
 
-        <include
-            android:id="@+id/reference_includeLayout"
-            layout="@layout/component_input_recycler"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/session_includeLayout" />
+            <include
+                android:id="@+id/user_count_guideLayout"
+                layout="@layout/component_guide_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/user_count_includeLayout" />
+
+            <include
+                android:id="@+id/case_type_includeLayout"
+                layout="@layout/component_input_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/user_count_guideLayout" />
+
+            <include
+                android:id="@+id/case_includeLayout"
+                layout="@layout/component_input_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/case_type_includeLayout" />
+
+            <include
+                android:id="@+id/session_includeLayout"
+                layout="@layout/component_input_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/case_includeLayout" />
+
+            <include
+                android:id="@+id/reference_includeLayout"
+                layout="@layout/component_input_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/session_includeLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/case_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="case_includeLayout,session_includeLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/room_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="reference_includeLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/scale_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="group_hint_textView,name_includeLayout, name_guideLayout, user_count_includeLayout, user_count_guideLayout, case_type_includeLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/create_textView"
             layout="@layout/component_button_rect_32sdp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-            app:layout_constraintTop_toBottomOf="@+id/reference_includeLayout" />
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/container_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
