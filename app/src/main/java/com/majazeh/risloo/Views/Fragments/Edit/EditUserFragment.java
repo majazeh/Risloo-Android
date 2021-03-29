@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.viewpager.widget.ViewPager;
 
 import com.google.android.material.tabs.TabLayout;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditUserAdapter;
 import com.majazeh.risloo.databinding.FragmentEditUserBinding;
 
@@ -84,6 +85,7 @@ public class EditUserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

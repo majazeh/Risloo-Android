@@ -95,12 +95,14 @@ public class RegisterFragment extends Fragment {
 
         binding.loginTextView.getRoot().setOnClickListener(v -> {
             binding.loginTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.getRoot().setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
         });
 
         binding.passwordRecoverTextView.getRoot().setOnClickListener(v -> {
             binding.passwordRecoverTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.getRoot().setClickable(true), 300);
 
             ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
         });
@@ -117,6 +119,7 @@ public class RegisterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((AuthActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

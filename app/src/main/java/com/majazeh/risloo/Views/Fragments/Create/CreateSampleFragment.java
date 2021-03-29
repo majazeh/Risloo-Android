@@ -213,7 +213,7 @@ public class CreateSampleFragment extends Fragment {
     private void setData() {
         binding.scaleGuideLayout.guideTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
 
-        // TODO : Set Scales Here8
+        // TODO : Set Scales Here
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             room = ((MainActivity) requireActivity()).singleton.getAddress();
@@ -289,6 +289,7 @@ public class CreateSampleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

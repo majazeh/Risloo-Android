@@ -241,6 +241,7 @@ public class CreateCenterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

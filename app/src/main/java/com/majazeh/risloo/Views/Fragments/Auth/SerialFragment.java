@@ -84,12 +84,14 @@ public class SerialFragment extends Fragment {
 
         binding.dashboardTextView.getRoot().setOnClickListener(v -> {
             binding.dashboardTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.dashboardTextView.getRoot().setClickable(true), 300);
 
             IntentManager.main(requireActivity());
         });
 
         binding.logoutTextView.getRoot().setOnClickListener(v -> {
             binding.logoutTextView.getRoot().setClickable(false);
+            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.logoutTextView.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -119,6 +121,7 @@ public class SerialFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((AuthActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

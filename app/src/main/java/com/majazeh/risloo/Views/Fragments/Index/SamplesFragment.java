@@ -48,12 +48,6 @@ public class SamplesFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -113,6 +107,7 @@ public class SamplesFragment extends Fragment {
 
         binding.addImageView.getRoot().setOnClickListener(v -> {
             binding.addImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment);
         });
@@ -122,14 +117,21 @@ public class SamplesFragment extends Fragment {
 //        adapter.setSample(null);
         binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

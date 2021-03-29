@@ -116,7 +116,7 @@ public class CreateCaseFragment extends Fragment {
             binding.roomIncludeLayout.secondaryTextView.setText(center);
         }
 
-        // TODO : Set Phones Here
+        // TODO : Set References Here
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             situation = ((MainActivity) requireActivity()).singleton.getAddress();
@@ -134,6 +134,7 @@ public class CreateCaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }
