@@ -160,6 +160,7 @@
     <string name="CreateCaseUserFragmentTitle">ثبت نام عضو جدید</string>
 
     <string name="CreateCaseUserFragmentReferenceHeader">مراجع</string>
+
     <string name="CreateCaseUserFragmentReferenceHint">انتخاب مراجع</string>
 
     <string name="CreateCaseUserFragmentButton">ایجاد</string>
@@ -663,15 +664,6 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- Account Fragment ----------
-    */
-
-    <string name="AccountFragmentTitle">حساب من</string>
-    <string name="AccountFragmentEdit">ویرایش</string>
-
-    <string name="AccountFragmentDocumentsHeader">اسناد و مدارک</string>
-
-    /*
     ---------- Case Fragment ----------
     */
 
@@ -702,7 +694,8 @@
     ---------- Center Fragment ----------
     */
 
-    <string name="CenterFragmentTitle">مرکز</string>
+    <string name="CenterFragmentTitle">مرکز درمان</string>
+
     <string name="CenterFragmentProfile">پروفایل</string>
 
     <string name="CenterFragmentRequest">درخواست پذیرش</string>
@@ -725,12 +718,21 @@
     <string name="DashboardFragmentCentersHeader">مراکز درمانی من</string>
 
     /*
+    ---------- Me Fragment ----------
+    */
+
+    <string name="MeFragmentTitle">حساب من</string>
+
+    <string name="MeFragmentEdit">ویرایش</string>
+
+    /*
     ---------- Reference Fragment ----------
     */
 
     <string name="ReferenceFragmentTitle">کاربر مرکز</string>
 
     <string name="ReferenceFragmentRoomsHeader">اتاق‌های درمان</string>
+    <string name="ReferenceFragmentRoomsBodyEmpty">هنوز اتاق درمانی برای این کاربر ثبت نشده است.</string>
 
     <string name="ReferenceFragmentCasesHeader">پرونده‌ها</string>
     <string name="ReferenceFragmentCasesBodyEmpty">هنوز پرونده‌ای برای این کاربر ثبت نشده است.</string>
@@ -752,7 +754,8 @@
     ---------- Room Fragment ----------
     */
 
-    <string name="RoomFragmentTitle">اتاق</string>
+    <string name="RoomFragmentTitle">اتاق درمان</string>
+
     <string name="RoomFragmentSession">جلسه</string>
 
     <string name="RoomFragmentCasesHeader">پرونده‌ها</string>
@@ -820,6 +823,7 @@
     */
 
     <string name="UserFragmentTitle">کاربر</string>
+
     <string name="UserFragmentEdit">ویرایش</string>
 
     //////////////////////////////////////////////////////////////////////////////////////

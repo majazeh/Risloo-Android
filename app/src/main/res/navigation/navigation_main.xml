@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.MeFragment"
-        android:label="@string/AccountFragmentTitle"
+        android:label="@string/MeFragmentTitle"
         tools:layout="@layout/fragment_me">
         <action
             android:id="@+id/action_accountFragment_to_editAccountFragment"

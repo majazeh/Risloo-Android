@@ -49,19 +49,6 @@ public class ReferenceFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -136,16 +123,30 @@ public class ReferenceFragment extends Fragment {
         binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.roomsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.casesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

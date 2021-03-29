@@ -51,11 +51,6 @@ public class CenterFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -109,24 +104,28 @@ public class CenterFragment extends Fragment {
 
         binding.statusTextView.getRoot().setOnClickListener(v -> {
             binding.statusTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.statusTextView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
 
         binding.profileTextView.getRoot().setOnClickListener(v -> {
             binding.profileTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.profileTextView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
 
         binding.editImageView.getRoot().setOnClickListener(v -> {
             binding.editImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment);
         });
 
         binding.usersImageView.getRoot().setOnClickListener(v -> {
             binding.usersImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.usersImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment);
         });
@@ -162,6 +161,7 @@ public class CenterFragment extends Fragment {
 
         binding.addImageView.getRoot().setOnClickListener(v -> {
             binding.addImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment);
         });
@@ -208,14 +208,20 @@ public class CenterFragment extends Fragment {
 //        roomsAdapter.setRoom(null);
         binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

@@ -45,21 +45,6 @@ public class DashboardFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -100,17 +85,33 @@ public class DashboardFragment extends Fragment {
         binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
         binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.casesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.roomsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.centersHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

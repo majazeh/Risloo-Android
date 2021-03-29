@@ -41,7 +41,7 @@ public class MeFragment extends Fragment {
     }
 
     private void initializer() {
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.AccountFragmentEdit), getResources().getColor(R.color.Gray500));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.MeFragmentEdit), getResources().getColor(R.color.Gray500));
 
         InitManager.imgResTint(requireActivity(), binding.enterImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Blue600);
     }
@@ -69,12 +69,14 @@ public class MeFragment extends Fragment {
 
         binding.editTextView.getRoot().setOnClickListener(v -> {
             binding.editTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
-            ((MainActivity) requireActivity()).navigator(R.id.editAccountFragment);
+            ((MainActivity) requireActivity()).navigator(R.id.editUserFragment);
         });
 
         binding.enterImageView.getRoot().setOnClickListener(v -> {
             binding.enterImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.enterImageView.getRoot().setClickable(true), 300);
 
             // TODO : Call Work Method
         });
@@ -137,6 +139,7 @@ public class MeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

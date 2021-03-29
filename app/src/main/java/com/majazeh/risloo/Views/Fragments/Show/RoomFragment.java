@@ -51,11 +51,6 @@ public class RoomFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -99,6 +94,7 @@ public class RoomFragment extends Fragment {
 
         binding.usersImageView.getRoot().setOnClickListener(v -> {
             binding.usersImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.usersImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment);
         });
@@ -134,6 +130,7 @@ public class RoomFragment extends Fragment {
 
         binding.addImageView.getRoot().setOnClickListener(v -> {
             binding.addImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createCaseFragment);
         });
@@ -160,14 +157,20 @@ public class RoomFragment extends Fragment {
 //        cases2Adapter.setCase(null);
         binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }
