@@ -582,7 +582,7 @@
     <string name="DocumentsFragmentStatus">وضعیت</string>
 
     <string name="DocumentsFragmentAccept">تأیید</string>
-    <string name="DocumentsFragmentCancel">رد</string>
+    <string name="DocumentsFragmentKick">رد</string>
 
     /*
     ---------- RoomUsers Fragment ----------

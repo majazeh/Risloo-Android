@@ -61,6 +61,7 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
     private void listener(ReferencesHolder holder) {
         holder.binding.containerConstraintLayout.setOnClickListener(v -> {
             holder.binding.containerConstraintLayout.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.referenceFragment);
         });

@@ -45,7 +45,7 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
     @Override
     public int getItemCount() {
 //        return cases.size();
-        return 12;
+        return 5;
     }
 
 //    public void setCase(ArrayList<Case> cases) {
@@ -62,6 +62,7 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
     private void listener(Cases3Holder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.caseFragment);
         });

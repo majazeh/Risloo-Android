@@ -45,7 +45,7 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
     @Override
     public int getItemCount() {
 //        return practices.size();
-        return 12;
+        return 5;
     }
 
 //    public void setPractice(ArrayList<Practice> practices) {
@@ -65,6 +65,7 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
     private void listener(PracticesHolder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });

@@ -45,7 +45,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
     @Override
     public int getItemCount() {
 //        return scales.size();
-        return 12;
+        return 5;
     }
 
 //    public void setScale(ArrayList<Scale> scales) {
@@ -71,6 +71,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
         holder.binding.createTextView.setOnClickListener(v -> {
             holder.binding.createTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.createTextView.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.createSampleFragment);
         });
