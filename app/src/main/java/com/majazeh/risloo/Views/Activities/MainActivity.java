@@ -99,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             binding.mainContent.toolbarIncludeLayout.getRoot().setClickable(false);
             handler.postDelayed(() -> binding.mainContent.toolbarIncludeLayout.getRoot().setClickable(true), 300);
 
-            navigator(R.id.accountFragment);
+            navigator(R.id.meFragment);
         });
 
         binding.mainContent.menuImageView.getRoot().setOnClickListener(v -> {
@@ -178,7 +178,7 @@ public class MainActivity extends AppCompatActivity {
         } catch (IllegalArgumentException e) {
             System.out.println(e.getMessage());
         }
-        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment  && destinationId == R.id.accountFragment) {
+        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment  && destinationId == R.id.meFragment) {
             navController.popBackStack();
         }
         navController.navigate(destinationId);

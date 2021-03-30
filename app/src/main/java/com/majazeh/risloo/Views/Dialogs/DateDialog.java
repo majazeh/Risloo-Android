@@ -78,7 +78,7 @@ public class DateDialog extends BottomSheetDialogFragment {
             dismiss();
 
             switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-                case R.id.editAccountFragment:
+                case R.id.editUserFragment:
                     EditUserFragment editAccountFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editAccountFragment != null) {
                         // TODO : Set Fragment TextView String
