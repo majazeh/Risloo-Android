@@ -217,4 +217,10 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        handler.removeCallbacksAndMessages(null);
+    }
+
 }

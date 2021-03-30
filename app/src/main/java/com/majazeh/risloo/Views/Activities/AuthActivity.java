@@ -104,4 +104,10 @@ public class AuthActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    public void finish() {
+        super.finish();
+        handler.removeCallbacksAndMessages(null);
+    }
+
 }
