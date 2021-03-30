@@ -51,22 +51,6 @@ public class SessionFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.practicesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.practicesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -122,24 +106,28 @@ public class SessionFragment extends Fragment {
     private void listener() {
         binding.editTextView.getRoot().setOnClickListener(v -> {
             binding.editTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment);
         });
 
         binding.reportActionTextView.getRoot().setOnClickListener(v -> {
-            binding.editTextView.getRoot().setClickable(false);
+            binding.reportActionTextView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.reportActionTextView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createReportFragment);
         });
 
         binding.practicesAddImageView.getRoot().setOnClickListener(v -> {
             binding.practicesAddImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.practicesAddImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createPracticeFragment);
         });
 
         binding.samplesAddImageView.getRoot().setOnClickListener(v -> {
             binding.samplesAddImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.samplesAddImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment);
         });
@@ -160,17 +148,34 @@ public class SessionFragment extends Fragment {
         binding.practicesSingleLayout.recyclerView.setAdapter(practicesAdapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.referencesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.practicesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.practicesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.practicesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

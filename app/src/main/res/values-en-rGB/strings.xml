@@ -668,6 +668,7 @@
     */
 
     <string name="CaseFragmentTitle">پرونده</string>
+
     <string name="CaseFragmentSituation">مسئله</string>
 
     <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
@@ -783,6 +784,7 @@
     */
 
     <string name="SessionFragmentTitle">جلسه</string>
+
     <string name="SessionFragmentEdit">ویرایش</string>
 
     <string name="SessionFragmentReportHeader">گزارش</string>

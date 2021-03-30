@@ -47,20 +47,6 @@ public class SampleFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.profilesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.formsGeneralShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.formsGeneralSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.formsPrerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.formsPrerequisiteSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.formsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.formsAnswerSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -146,15 +132,30 @@ public class SampleFragment extends Fragment {
         binding.formsPrerequisiteSingleLayout.recyclerView.setAdapter(formsPrerequisiteAdapter);
         binding.formsAnswerSingleLayout.recyclerView.setAdapter(formsAnswerAdapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.profilesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.formsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.profilesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.formsGeneralShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.formsGeneralSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.formsPrerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.formsPrerequisiteSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.formsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.formsAnswerSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

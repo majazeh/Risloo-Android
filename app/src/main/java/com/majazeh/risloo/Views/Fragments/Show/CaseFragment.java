@@ -51,22 +51,6 @@ public class CaseFragment extends Fragment {
 
         setData();
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
-            binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-
-            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
-
         return binding.getRoot();
     }
 
@@ -115,18 +99,21 @@ public class CaseFragment extends Fragment {
     private void listener() {
         binding.referencesAddImageView.getRoot().setOnClickListener(v -> {
             binding.referencesAddImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.referencesAddImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createCaseUserFragment);
         });
 
         binding.sessionsAddImageView.getRoot().setOnClickListener(v -> {
             binding.sessionsAddImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.sessionsAddImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createSessionFragment);
         });
 
         binding.samplesAddImageView.getRoot().setOnClickListener(v -> {
             binding.samplesAddImageView.getRoot().setClickable(false);
+            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.samplesAddImageView.getRoot().setClickable(true), 300);
 
             ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment);
         });
@@ -146,17 +133,34 @@ public class CaseFragment extends Fragment {
         binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
 
-        String dataSize = "15";
+        String dataSize = "5";
         binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.referencesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.sessionsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+
+        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+            binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+        }, 2000);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }
