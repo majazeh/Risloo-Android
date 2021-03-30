@@ -248,7 +248,7 @@
 
             <include
                 android:id="@+id/sessions_shimmerLayout"
-                layout="@layout/component_shimmer_session2"
+                layout="@layout/component_shimmer_index"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
@@ -314,7 +314,7 @@
 
             <include
                 android:id="@+id/samples_shimmerLayout"
-                layout="@layout/component_shimmer_sample2"
+                layout="@layout/component_shimmer_index"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"

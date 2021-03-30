@@ -8,24 +8,23 @@
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
-    tools:layout_margin="@dimen/_12sdp"
-    tools:context=".Views.Adapters.Recycler.ReferencesAdapter">
+    tools:layout_margin="@dimen/_12sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_12sdp"
+        android:padding="@dimen/_6sdp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
-        <TextView
-            android:id="@+id/name_textView"
-            android:layout_width="@dimen/_102sdp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/_11ssp"
-            android:background="@color/Gray50"
+        <View
+            android:id="@+id/name_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_36sdp"
+            android:background="@drawable/draw_2sdp_solid_gray50"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

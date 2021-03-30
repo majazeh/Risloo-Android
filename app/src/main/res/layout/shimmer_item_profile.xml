@@ -8,8 +8,7 @@
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
-    tools:layout_margin="@dimen/_12sdp"
-    tools:context=".Views.Adapters.Recycler.ProfilesAdapter">
+    tools:layout_margin="@dimen/_12sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
@@ -18,12 +17,11 @@
         android:padding="@dimen/_6sdp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
-        <ImageView
-            android:id="@+id/avatar_imageView"
+        <View
+            android:id="@+id/avatar_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/_200sdp"
-            android:contentDescription="@string/AppImageContent"
-            android:background="@drawable/draw_2sdp_solid_gray100"
+            android:background="@drawable/draw_2sdp_solid_gray50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

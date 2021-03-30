@@ -39,7 +39,7 @@
 
             <include
                 android:id="@+id/samples_shimmerLayout"
-                layout="@layout/component_shimmer_sample"
+                layout="@layout/component_shimmer_index"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
@@ -84,7 +84,7 @@
 
         <include
             android:id="@+id/cases_shimmerLayout"
-            layout="@layout/component_shimmer_case2"
+            layout="@layout/component_shimmer_case"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="visible"

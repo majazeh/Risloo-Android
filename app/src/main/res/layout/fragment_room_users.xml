@@ -62,7 +62,7 @@
 
             <include
                 android:id="@+id/index_shimmerLayout"
-                layout="@layout/component_shimmer_room_user"
+                layout="@layout/component_shimmer_index"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"

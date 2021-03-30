@@ -19,7 +19,7 @@
 
         <include
             android:id="@+id/shimmer_item1"
-            layout="@layout/shimmer_item_document"
+            layout="@layout/shimmer_item_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
@@ -28,7 +28,7 @@
 
         <include
             android:id="@+id/shimmer_item2"
-            layout="@layout/shimmer_item_document"
+            layout="@layout/shimmer_item_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/shimmer_item1"
@@ -37,7 +37,7 @@
 
         <include
             android:id="@+id/shimmer_item3"
-            layout="@layout/shimmer_item_document"
+            layout="@layout/shimmer_item_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/shimmer_item2"
@@ -46,7 +46,7 @@
 
         <include
             android:id="@+id/shimmer_item4"
-            layout="@layout/shimmer_item_document"
+            layout="@layout/shimmer_item_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/shimmer_item3"
@@ -55,7 +55,7 @@
 
         <include
             android:id="@+id/shimmer_item5"
-            layout="@layout/shimmer_item_document"
+            layout="@layout/shimmer_item_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="@+id/shimmer_item4"
