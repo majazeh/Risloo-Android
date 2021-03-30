@@ -45,7 +45,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     @Override
     public int getItemCount() {
 //        return users.size();
-        return 12;
+        return 5;
     }
 
 //    public void setUser(ArrayList<User> users) {
@@ -67,6 +67,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     private void listener(UsersHolder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.userFragment);
         });
@@ -94,6 +95,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
         holder.binding.editImageView.setOnClickListener(v -> {
             holder.binding.editImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.editUserFragment);
         });
@@ -109,8 +111,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         holder.binding.serialTextView.setText("IR966669");
         holder.binding.nameTextView.setText("ریسلو");
         holder.binding.usernameTextView.setText("baravak");
-        holder.binding.typeTextView.setText("ادمین");
-        holder.binding.statusTextView.setText("فعال");
     }
 
     public class UsersHolder extends RecyclerView.ViewHolder {

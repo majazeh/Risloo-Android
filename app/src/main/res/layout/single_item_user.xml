@@ -22,7 +22,7 @@
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_8sdp"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -32,8 +32,8 @@
         app:layout_constraintWidth_percent="0.2"
         app:layout_constraintBottom_toBottomOf="@+id/username_textView"
         app:layout_constraintEnd_toStartOf="@+id/name_textView"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/name_textView"
+        app:layout_constraintStart_toStartOf="parent"
         tools:text="سریال" />
 
     <TextView
@@ -41,6 +41,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:gravity="right"
         android:textSize="@dimen/_8ssp"
@@ -48,10 +49,9 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.25"
         app:layout_constraintEnd_toStartOf="@+id/email_imageView"
-        app:layout_constraintStart_toEndOf="@+id/serial_textView"
         app:layout_constraintTop_toBottomOf="@+id/top_view"
+        app:layout_constraintStart_toEndOf="@+id/serial_textView"
         tools:text="نام و نام خانوادگی" />
 
     <TextView
@@ -67,86 +67,54 @@
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/name_textView"
-        app:layout_constraintStart_toStartOf="@+id/name_textView"
         app:layout_constraintTop_toBottomOf="@+id/name_textView"
+        app:layout_constraintStart_toStartOf="@+id/name_textView"
         tools:text="شناسه کاربری" />
 
     <ImageView
         android:id="@+id/email_imageView"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
         android:contentDescription="@string/AppImageContent"
         android:padding="@dimen/_6sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_paper_plane_light"
-        app:layout_constraintBottom_toBottomOf="@+id/username_textView"
+        android:src="@drawable/ic_envelope_open_light"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/mobile_imageView"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toEndOf="@+id/name_textView"
-        app:layout_constraintTop_toTopOf="@+id/name_textView"
         app:tint="@color/Gray500" />
 
     <ImageView
         android:id="@+id/mobile_imageView"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
         android:contentDescription="@string/AppImageContent"
         android:padding="@dimen/_6sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_phone_light"
-        app:layout_constraintBottom_toBottomOf="@+id/username_textView"
-        app:layout_constraintEnd_toStartOf="@+id/type_textView"
-        app:layout_constraintStart_toEndOf="@+id/email_imageView"
-        app:layout_constraintTop_toTopOf="@+id/name_textView"
-        app:tint="@color/Gray500" />
-
-    <TextView
-        android:id="@+id/type_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:gravity="right"
-        android:textSize="@dimen/_8ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/enter_imageView"
-        app:layout_constraintStart_toEndOf="@+id/mobile_imageView"
-        app:layout_constraintTop_toTopOf="@+id/top_view"
-        tools:text="نوع" />
-
-    <TextView
-        android:id="@+id/status_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
-        android:textSize="@dimen/_7ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/type_textView"
-        app:layout_constraintStart_toStartOf="@+id/type_textView"
-        app:layout_constraintTop_toBottomOf="@+id/type_textView"
-        tools:text="وضعیت" />
+        app:layout_constraintEnd_toStartOf="@+id/enter_imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/email_imageView"
+        app:tint="@color/Gray500" />
 
     <ImageView
         android:id="@+id/enter_imageView"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
         android:contentDescription="@string/AppImageContent"
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_user_cog_light"
         app:layout_goneMarginEnd="@dimen/_4sdp"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintRight_toLeftOf="@id/type_textView"
-        app:layout_constraintLeft_toRightOf="@+id/edit_imageView"
+        app:layout_constraintEnd_toStartOf="@id/edit_imageView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mobile_imageView"
         app:tint="@color/Blue600" />
 
     <ImageView
@@ -158,9 +126,9 @@
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_edit_light"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:tint="@color/Gray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

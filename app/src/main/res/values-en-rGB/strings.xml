@@ -655,8 +655,6 @@
     <string name="UsersFragmentSerial">سریال</string>
     <string name="UsersFragmentName">نام و نام خانوادگی</string>
     <string name="UsersFragmentUsername">شناسه کاربری</string>
-    <string name="UsersFragmentType">نوع</string>
-    <string name="UsersFragmentStatus">وضعیت</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
