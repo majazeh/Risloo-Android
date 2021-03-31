@@ -10,6 +10,8 @@ import android.os.Handler;
 import android.view.View;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Interfaces.CustomClickListener;
+import com.majazeh.risloo.Utils.Interfaces.CustomExtraCode;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -73,21 +75,15 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        binding.returnImageView.getRoot().setOnClickListener(v -> {
-            binding.returnImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> binding.returnImageView.getRoot().setClickable(true), 300);
-
+        onClickListener(() -> {
             finish();
-        });
+        }).widget(binding.returnImageView.getRoot());
 
-        binding.downloadImageView.getRoot().setOnClickListener(v -> {
-            binding.downloadImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> binding.downloadImageView.getRoot().setClickable(true), 300);
-
+        onClickListener(() -> {
             if (PermissionManager.storagePermission(this)) {
                 IntentManager.download(this, bitmap);
             }
-        });
+        }).widget(binding.downloadImageView.getRoot());
     }
 
     private void setData() {
@@ -132,6 +128,15 @@ public class DisplayActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    public CustomClickListener onClickListener(CustomExtraCode customExtraCode){
+        return view -> view.setOnClickListener((View.OnClickListener) v -> {
+            view.setClickable(false);
+            handler.postDelayed(() -> view.setClickable(true), 300);
+
+            customExtraCode.code();
+        });
     }
 
 }

@@ -5,9 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Interfaces.CustomClickListener;
+import com.majazeh.risloo.Utils.Interfaces.CustomExtraCode;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
@@ -79,6 +82,15 @@ public class SplashActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    public CustomClickListener onClickListener(CustomExtraCode customExtraCode){
+        return view -> view.setOnClickListener((View.OnClickListener) v -> {
+            view.setClickable(false);
+            handler.postDelayed(() -> view.setClickable(true), 300);
+
+            customExtraCode.code();
+        });
     }
 
 }

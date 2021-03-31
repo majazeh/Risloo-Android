@@ -18,6 +18,8 @@ import android.widget.EditText;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Interfaces.CustomClickListener;
+import com.majazeh.risloo.Utils.Interfaces.CustomExtraCode;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
@@ -95,40 +97,25 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        binding.mainContent.toolbarIncludeLayout.getRoot().setOnClickListener(v -> {
-            binding.mainContent.toolbarIncludeLayout.getRoot().setClickable(false);
-            handler.postDelayed(() -> binding.mainContent.toolbarIncludeLayout.getRoot().setClickable(true), 300);
-
+        onClickListener(() -> {
             navigator(R.id.meFragment);
-        });
+        }).widget(binding.mainContent.toolbarIncludeLayout.getRoot());
 
-        binding.mainContent.menuImageView.getRoot().setOnClickListener(v -> {
-            binding.mainContent.menuImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> binding.mainContent.menuImageView.getRoot().setClickable(true), 300);
-
+        onClickListener(() -> {
             binding.getRoot().openDrawer(GravityCompat.START);
-        });
+        }).widget(binding.mainContent.menuImageView.getRoot());
 
-        binding.mainContent.logoutImageView.getRoot().setOnClickListener(v -> {
-            binding.mainContent.logoutImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> binding.mainContent.logoutImageView.getRoot().setClickable(true), 300);
-
+        onClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.mainContent.logoutImageView.getRoot());
 
-        binding.mainContent.userImageView.getRoot().setOnClickListener(v -> {
-            binding.mainContent.userImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> binding.mainContent.userImageView.getRoot().setClickable(true), 300);
-
+        onClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.mainContent.userImageView.getRoot());
 
-        binding.mainContent.notificationImageView.getRoot().setOnClickListener(v -> {
-            binding.mainContent.notificationImageView.getRoot().setClickable(false);
-            handler.postDelayed(() -> binding.mainContent.notificationImageView.getRoot().setClickable(true), 300);
-
+        onClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.mainContent.notificationImageView.getRoot());
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             binding.mainContent.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
@@ -221,6 +208,15 @@ public class MainActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    public CustomClickListener onClickListener(CustomExtraCode customExtraCode){
+        return view -> view.setOnClickListener((View.OnClickListener) v -> {
+            view.setClickable(false);
+            handler.postDelayed(() -> view.setClickable(true), 300);
+
+            customExtraCode.code();
+        });
     }
 
 }

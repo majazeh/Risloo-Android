@@ -13,6 +13,8 @@ import android.widget.EditText;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Interfaces.CustomClickListener;
+import com.majazeh.risloo.Utils.Interfaces.CustomExtraCode;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
@@ -108,6 +110,15 @@ public class AuthActivity extends AppCompatActivity {
     public void finish() {
         super.finish();
         handler.removeCallbacksAndMessages(null);
+    }
+
+    public CustomClickListener onClickListener(CustomExtraCode customExtraCode){
+        return view -> view.setOnClickListener((View.OnClickListener) v -> {
+            view.setClickable(false);
+            handler.postDelayed(() -> view.setClickable(true), 300);
+
+            customExtraCode.code();
+        });
     }
 
 }
