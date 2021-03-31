@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
@@ -59,19 +60,13 @@ public class CreateCaseFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.roomIncludeLayout.selectContainer.setOnClickListener(v -> {
-            binding.roomIncludeLayout.selectContainer.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.roomIncludeLayout.selectContainer.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.roomIncludeLayout.selectContainer);
 
-        binding.referenceIncludeLayout.selectRecyclerView.setOnClickListener(v -> {
-            binding.referenceIncludeLayout.selectRecyclerView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.referenceIncludeLayout.selectRecyclerView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.referenceIncludeLayout.selectRecyclerView);
 
         binding.situationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -82,10 +77,7 @@ public class CreateCaseFragment extends Fragment {
             return false;
         });
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (room.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomIncludeLayout.errorImageView, binding.roomIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -103,7 +95,7 @@ public class CreateCaseFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -134,7 +126,6 @@ public class CreateCaseFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

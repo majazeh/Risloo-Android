@@ -19,6 +19,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
@@ -124,12 +125,9 @@ public class CreateUserFragment extends Fragment {
             return false;
         });
 
-        binding.birthdayIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.birthdayIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.birthdayIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -180,7 +178,7 @@ public class CreateUserFragment extends Fragment {
             }
         });
 
-        binding.passwordIncludeLayout.visibilityImageView.setOnClickListener(v -> {
+        ClickManager.onDelayedClickListener(() -> {
             if (!passwordVisibility) {
                 passwordVisibility = true;
                 binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
@@ -194,7 +192,7 @@ public class CreateUserFragment extends Fragment {
                 ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
             }
-        });
+        }).widget(binding.passwordIncludeLayout.visibilityImageView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
@@ -232,10 +230,7 @@ public class CreateUserFragment extends Fragment {
             }
         });
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -257,7 +252,7 @@ public class CreateUserFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -345,7 +340,6 @@ public class CreateUserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

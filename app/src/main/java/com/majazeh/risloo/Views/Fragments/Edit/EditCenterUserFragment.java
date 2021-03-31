@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
@@ -64,12 +65,9 @@ public class EditCenterUserFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.typeIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.typeIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.typeIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.typeIncludeLayout.selectTextView);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -91,10 +89,7 @@ public class EditCenterUserFragment extends Fragment {
             }
         });
 
-        binding.editTextView.getRoot().setOnClickListener(v -> {
-            binding.editTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (type.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectTextView, binding.typeIncludeLayout.errorImageView, binding.typeIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -108,7 +103,7 @@ public class EditCenterUserFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {
@@ -144,7 +139,6 @@ public class EditCenterUserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

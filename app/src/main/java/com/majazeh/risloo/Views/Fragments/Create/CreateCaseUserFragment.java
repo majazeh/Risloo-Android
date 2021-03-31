@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
@@ -53,17 +54,11 @@ public class CreateCaseUserFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.referenceIncludeLayout.selectRecyclerView.setOnClickListener(v -> {
-            binding.referenceIncludeLayout.selectRecyclerView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.referenceIncludeLayout.selectRecyclerView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.referenceIncludeLayout.selectRecyclerView);
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceIncludeLayout.errorImageView, binding.referenceIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -73,7 +68,7 @@ public class CreateCaseUserFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -88,7 +83,6 @@ public class CreateCaseUserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateReportBinding;
@@ -61,12 +62,9 @@ public class CreateReportFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.encryptionIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.encryptionIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.encryptionIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.encryptionIncludeLayout.selectTextView);
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -77,17 +75,11 @@ public class CreateReportFragment extends Fragment {
             return false;
         });
 
-        binding.cryptoTextView.getRoot().setOnClickListener(v -> {
-            binding.cryptoTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.cryptoTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.cryptoTextView.getRoot());
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.descriptionIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionIncludeLayout.errorImageView, binding.descriptionIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -97,7 +89,7 @@ public class CreateReportFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -121,7 +113,6 @@ public class CreateReportFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
@@ -64,12 +65,9 @@ public class EditCenterDetailFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.managerIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.managerIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.managerIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -89,12 +87,9 @@ public class EditCenterDetailFragment extends Fragment {
             return false;
         });
 
-        binding.phonesIncludeLayout.selectRecyclerView.setOnClickListener(v -> {
-            binding.phonesIncludeLayout.selectRecyclerView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.phonesIncludeLayout.selectRecyclerView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.phonesIncludeLayout.selectRecyclerView);
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -105,10 +100,7 @@ public class EditCenterDetailFragment extends Fragment {
             return false;
         });
 
-        binding.editTextView.getRoot().setOnClickListener(v -> {
-            binding.editTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (manager.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -126,7 +118,7 @@ public class EditCenterDetailFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {
@@ -163,7 +155,6 @@ public class EditCenterDetailFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateDocumentBinding;
@@ -79,17 +80,11 @@ public class CreateDocumentFragment extends Fragment {
             return false;
         });
 
-        binding.fileIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.fileIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.fileIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.fileIncludeLayout.selectTextView);
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -103,7 +98,7 @@ public class CreateDocumentFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -132,7 +127,6 @@ public class CreateDocumentFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

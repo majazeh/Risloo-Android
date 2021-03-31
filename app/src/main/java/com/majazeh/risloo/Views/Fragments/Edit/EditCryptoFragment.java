@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCryptoBinding;
@@ -79,29 +80,25 @@ public class EditCryptoFragment extends Fragment {
             return false;
         });
 
-        binding.publicEditTextView.getRoot().setOnClickListener(v -> {
-            binding.publicEditTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.publicEditTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.publicIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicIncludeLayout.errorImageView, binding.publicIncludeLayout.errorTextView);
+
                 doWork();
             }
-        });
+        }).widget(binding.publicEditTextView.getRoot());
 
-        binding.privateEditTextView.getRoot().setOnClickListener(v -> {
-            binding.privateEditTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.privateEditTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.privateIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateIncludeLayout.errorImageView, binding.privateIncludeLayout.errorTextView);
+
                 doWork();
             }
-        });
+        }).widget(binding.privateEditTextView.getRoot());
     }
 
     private void setData() {
@@ -126,7 +123,6 @@ public class EditCryptoFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

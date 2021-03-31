@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -63,23 +64,17 @@ public class EditAvatarFragment extends Fragment {
     }
 
     private void listener() {
-        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
-            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        binding.editTextView.getRoot().setOnClickListener(v -> {
-            binding.editTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (avatarBitmap == null) {
                 Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
             } else {
                 doWork();
             }
-        });
+        }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {
@@ -108,7 +103,6 @@ public class EditAvatarFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

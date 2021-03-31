@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
@@ -74,19 +75,13 @@ public class CreateCenterUserFragment extends Fragment {
             return false;
         });
 
-        binding.typeIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.typeIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.typeIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.typeIncludeLayout.selectTextView);
 
-        binding.roomIncludeLayout.selectContainer.setOnClickListener(v -> {
-            binding.roomIncludeLayout.selectContainer.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.roomIncludeLayout.selectContainer.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.roomIncludeLayout.selectContainer);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -99,10 +94,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         binding.caseCheckbox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> createCase = isChecked);
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -120,7 +112,7 @@ public class CreateCenterUserFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -157,7 +149,6 @@ public class CreateCenterUserFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

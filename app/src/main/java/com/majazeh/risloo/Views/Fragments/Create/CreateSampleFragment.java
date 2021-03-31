@@ -18,6 +18,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -80,12 +81,9 @@ public class CreateSampleFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.scaleIncludeLayout.selectRecyclerView.setOnClickListener(v -> {
-            binding.scaleIncludeLayout.selectRecyclerView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.scaleIncludeLayout.selectRecyclerView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.scaleIncludeLayout.selectRecyclerView);
 
         assessmentLinkSpan = new ClickableSpan() {
             @Override
@@ -100,12 +98,9 @@ public class CreateSampleFragment extends Fragment {
             }
         };
 
-        binding.roomIncludeLayout.selectContainer.setOnClickListener(v -> {
-            binding.roomIncludeLayout.selectContainer.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.roomIncludeLayout.selectContainer.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.roomIncludeLayout.selectContainer);
 
         binding.typeTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -162,38 +157,23 @@ public class CreateSampleFragment extends Fragment {
             return false;
         });
 
-        binding.caseTypeIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.caseTypeIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.caseTypeIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.caseTypeIncludeLayout.selectTextView);
 
-        binding.caseIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.caseIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.caseIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.caseIncludeLayout.selectTextView);
 
-        binding.sessionIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.sessionIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.sessionIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.sessionIncludeLayout.selectTextView);
 
-        binding.referenceIncludeLayout.selectRecyclerView.setOnClickListener(v -> {
-            binding.referenceIncludeLayout.selectRecyclerView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.referenceIncludeLayout.selectRecyclerView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.referenceIncludeLayout.selectRecyclerView);
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleIncludeLayout.errorImageView, binding.scaleIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -207,7 +187,7 @@ public class CreateSampleFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -289,7 +269,6 @@ public class CreateSampleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

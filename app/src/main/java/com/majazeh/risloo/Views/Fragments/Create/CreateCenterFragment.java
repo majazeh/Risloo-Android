@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
@@ -90,12 +91,9 @@ public class CreateCenterFragment extends Fragment {
             }
         });
 
-        binding.managerIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.managerIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.managerIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -106,12 +104,9 @@ public class CreateCenterFragment extends Fragment {
             return false;
         });
 
-        binding.avatarIncludeLayout.selectTextView.setOnClickListener(v -> {
-            binding.avatarIncludeLayout.selectTextView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.selectTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.avatarIncludeLayout.selectTextView);
 
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -122,12 +117,9 @@ public class CreateCenterFragment extends Fragment {
             return false;
         });
 
-        binding.phonesIncludeLayout.selectRecyclerView.setOnClickListener(v -> {
-            binding.phonesIncludeLayout.selectRecyclerView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.phonesIncludeLayout.selectRecyclerView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.phonesIncludeLayout.selectRecyclerView);
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -138,10 +130,7 @@ public class CreateCenterFragment extends Fragment {
             return false;
         });
 
-        binding.createTextView.getRoot().setOnClickListener(v -> {
-            binding.createTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.createTextView.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (center.equals("personal")) {
                 if (manager.equals("")) {
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -175,7 +164,7 @@ public class CreateCenterFragment extends Fragment {
                     doWork();
                 }
             }
-        });
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
@@ -241,7 +230,6 @@ public class CreateCenterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }
