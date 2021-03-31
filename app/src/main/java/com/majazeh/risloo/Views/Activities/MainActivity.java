@@ -10,7 +10,6 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,8 +17,7 @@ import android.widget.EditText;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Interfaces.CustomClickListener;
-import com.majazeh.risloo.Utils.Interfaces.CustomExtraCode;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
@@ -38,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
     public Singleton singleton;
 
     // Objects
-    public Handler handler;
     public ControlEditText controlEditText;
     public NavHostFragment navHostFragment;
     public NavController navController;
@@ -71,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
     private void initializer() {
         singleton = new Singleton(this);
 
-        handler = new Handler();
-
         controlEditText = new ControlEditText();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainContent.fragmentNavHostFragment.getId());
@@ -97,19 +92,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        onClickListener(() -> navigator(R.id.meFragment)).widget(binding.mainContent.toolbarIncludeLayout.getRoot());
+        ClickManager.onClickListener(() -> navigator(R.id.meFragment)).widget(binding.mainContent.toolbarIncludeLayout.getRoot());
 
-        onClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.mainContent.menuImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.mainContent.menuImageView.getRoot());
 
-        onClickListener(() -> {
+        ClickManager.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(binding.mainContent.logoutImageView.getRoot());
 
-        onClickListener(() -> {
+        ClickManager.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(binding.mainContent.userImageView.getRoot());
 
-        onClickListener(() -> {
+        ClickManager.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(binding.mainContent.notificationImageView.getRoot());
 
@@ -198,21 +193,6 @@ public class MainActivity extends AppCompatActivity {
                 finish();
             }
         }
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        handler.removeCallbacksAndMessages(null);
-    }
-
-    public CustomClickListener onClickListener(CustomExtraCode customExtraCode){
-        return view -> view.setOnClickListener((View.OnClickListener) v -> {
-            view.setClickable(false);
-            handler.postDelayed(() -> view.setClickable(true), 300);
-
-            customExtraCode.code();
-        });
     }
 
 }

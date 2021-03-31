@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
@@ -70,7 +71,7 @@ public class SerialFragment extends Fragment {
             return false;
         });
 
-        ((AuthActivity) requireActivity()).onClickListener(() -> {
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.serialIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
@@ -79,9 +80,9 @@ public class SerialFragment extends Fragment {
             }
         }).widget(binding.serialTextView.getRoot());
 
-        ((AuthActivity) requireActivity()).onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardTextView.getRoot());
+        ClickManager.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardTextView.getRoot());
 
-        ((AuthActivity) requireActivity()).onClickListener(() -> {
+        ClickManager.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(binding.logoutTextView.getRoot());
     }

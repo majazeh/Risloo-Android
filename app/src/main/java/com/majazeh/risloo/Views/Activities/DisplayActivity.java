@@ -6,13 +6,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.View;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Interfaces.CustomClickListener;
-import com.majazeh.risloo.Utils.Interfaces.CustomExtraCode;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -28,7 +26,6 @@ public class DisplayActivity extends AppCompatActivity {
 
     // Objects
     private Bundle extras;
-    private Handler handler;
 
     // Vars
     private String title = "", bitmap = "", path = "";
@@ -61,8 +58,6 @@ public class DisplayActivity extends AppCompatActivity {
     private void initializer() {
         extras = getIntent().getExtras();
 
-        handler = new Handler();
-
         InitManager.imgResTint(this, binding.returnImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray50);
         InitManager.imgResTint(this, binding.downloadImageView.getRoot(), R.drawable.ic_arrow_to_bottom_light, R.color.Gray50);
     }
@@ -75,9 +70,9 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        onClickListener(this::finish).widget(binding.returnImageView.getRoot());
+        ClickManager.onClickListener(this::finish).widget(binding.returnImageView.getRoot());
 
-        onClickListener(() -> {
+        ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.storagePermission(this)) {
                 IntentManager.download(this, bitmap);
             }
@@ -120,21 +115,6 @@ public class DisplayActivity extends AppCompatActivity {
                 IntentManager.download(this, bitmap);
             }
         }
-    }
-
-    @Override
-    public void finish() {
-        super.finish();
-        handler.removeCallbacksAndMessages(null);
-    }
-
-    public CustomClickListener onClickListener(CustomExtraCode customExtraCode){
-        return view -> view.setOnClickListener((View.OnClickListener) v -> {
-            view.setClickable(false);
-            handler.postDelayed(() -> view.setClickable(true), 300);
-
-            customExtraCode.code();
-        });
     }
 
 }
