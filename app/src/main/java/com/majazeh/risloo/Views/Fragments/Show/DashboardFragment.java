@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +15,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
@@ -91,7 +91,7 @@ public class DashboardFragment extends Fragment {
         binding.roomsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.centersHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -111,7 +111,6 @@ public class DashboardFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSession2Binding;
 
@@ -66,26 +67,15 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     }
 
     private void listener(Sessions2Holder holder) {
-        holder.binding.getRoot().setOnClickListener(v -> {
-            holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.getRoot());
 
-        holder.binding.statusTextView.setOnClickListener(v -> {
-            holder.binding.statusTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.statusTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.statusTextView);
 
-        holder.binding.editImageView.setOnClickListener(v -> {
-            holder.binding.editImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
-
-            ((MainActivity) activity).navigator(R.id.editSessionFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.editSessionFragment)).widget(holder.binding.editImageView);
     }
 
     private void setData(Sessions2Holder holder) {

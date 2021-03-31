@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemUserBinding;
 
@@ -65,40 +66,21 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     }
 
     private void listener(UsersHolder holder) {
-        holder.binding.getRoot().setOnClickListener(v -> {
-            holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.userFragment)).widget(holder.binding.getRoot());
 
-            ((MainActivity) activity).navigator(R.id.userFragment);
-        });
-
-        holder.binding.emailImageView.setOnClickListener(v -> {
-            holder.binding.emailImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.emailImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.emailImageView);
 
-        holder.binding.mobileImageView.setOnClickListener(v -> {
-            holder.binding.mobileImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.mobileImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.mobileImageView);
 
-        holder.binding.enterImageView.setOnClickListener(v -> {
-            holder.binding.enterImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.enterImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.enterImageView);
 
-        holder.binding.editImageView.setOnClickListener(v -> {
-            holder.binding.editImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
-
-            ((MainActivity) activity).navigator(R.id.editUserFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.editUserFragment)).widget(holder.binding.editImageView);
     }
 
     private void setData(UsersHolder holder) {

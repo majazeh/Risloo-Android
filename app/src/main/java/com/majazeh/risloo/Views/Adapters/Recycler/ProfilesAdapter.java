@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemProfileBinding;
@@ -61,14 +62,11 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
     }
 
     private void listener(ProfilesHolder holder) {
-        holder.binding.containerConstraintLayout.setOnClickListener(v -> {
-            holder.binding.containerConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (!((MainActivity) activity).singleton.getAvatar().equals("")) {
                 IntentManager.display(activity, "", "", ((MainActivity) activity).singleton.getAvatar());
             }
-        });
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(ProfilesHolder holder) {

@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
 
@@ -62,19 +63,11 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
     }
 
     private void listener(ScalesHolder holder) {
-        holder.binding.getRoot().setOnClickListener(v -> {
-            holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.getRoot());
 
-        holder.binding.createTextView.setOnClickListener(v -> {
-            holder.binding.createTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.createTextView.setClickable(true), 300);
-
-            ((MainActivity) activity).navigator(R.id.createSampleFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.createSampleFragment)).widget(holder.binding.createTextView);
     }
 
     private void setData(ScalesHolder holder) {

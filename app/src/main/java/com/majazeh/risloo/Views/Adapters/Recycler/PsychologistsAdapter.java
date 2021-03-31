@@ -10,8 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemPsychologyBinding;
 import com.squareup.picasso.Picasso;
 
@@ -62,12 +62,9 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
     }
 
     private void listener(PsychologistsHolder holder) {
-        holder.binding.containerConstraintLayout.setOnClickListener(v -> {
-            holder.binding.containerConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(PsychologistsHolder holder) {

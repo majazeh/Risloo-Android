@@ -74,7 +74,7 @@ public class DateDialog extends BottomSheetDialogFragment {
 
         binding.entryButton.setOnClickListener(v -> {
             binding.entryButton.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.entryButton.setClickable(true), 300);
+//            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.entryButton.setClickable(true), 300);
             dismiss();
 
             switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {

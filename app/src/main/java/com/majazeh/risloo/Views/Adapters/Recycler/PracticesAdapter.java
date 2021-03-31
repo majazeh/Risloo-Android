@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.databinding.SingleItemPracticeBinding;
 
 public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.PracticesHolder> {
@@ -63,26 +63,17 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
     }
 
     private void listener(PracticesHolder holder) {
-        holder.binding.getRoot().setOnClickListener(v -> {
-            holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.getRoot());
 
-        holder.binding.attachmentImageView.setOnClickListener(v -> {
-            holder.binding.attachmentImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.attachmentImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.attachmentImageView);
 
-        holder.binding.practiceImageView.setOnClickListener(v -> {
-            holder.binding.practiceImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.practiceImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.practiceImageView);
     }
 
     private void setData(PracticesHolder holder) {

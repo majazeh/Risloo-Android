@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSample2Binding;
 
@@ -64,19 +65,9 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
     }
 
     private void listener(Samples2Holder holder) {
-        holder.binding.getRoot().setOnClickListener(v -> {
-            holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sampleFragment)).widget(holder.binding.getRoot());
 
-            ((MainActivity) activity).navigator(R.id.sampleFragment);
-        });
-
-        holder.binding.statusTextView.setOnClickListener(v -> {
-            holder.binding.statusTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.statusTextView.setClickable(true), 300);
-
-            ((MainActivity) activity).navigator(R.id.testFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.testFragment)).widget(holder.binding.statusTextView);
     }
 
     private void setData(Samples2Holder holder) {

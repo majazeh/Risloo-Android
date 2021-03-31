@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCase2Binding;
 
@@ -59,12 +60,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
     }
 
     private void listener(Cases2Holder holder) {
-        holder.binding.containerConstraintLayout.setOnClickListener(v -> {
-            holder.binding.containerConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
-
-            ((MainActivity) activity).navigator(R.id.caseFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.caseFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(Cases2Holder holder) {

@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -33,6 +34,7 @@ public class ScalesFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
+    private Handler handler;
 
     @Nullable
     @Override
@@ -54,6 +56,8 @@ public class ScalesFragment extends Fragment {
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        handler = new Handler();
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
 
@@ -81,8 +85,8 @@ public class ScalesFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+                handler.removeCallbacksAndMessages(null);
+                handler.postDelayed(() -> {
                     // TODO : Place Code Here
                 }, 750);
             }
@@ -101,7 +105,7 @@ public class ScalesFragment extends Fragment {
         String dataSize = "5";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -112,7 +116,6 @@ public class ScalesFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

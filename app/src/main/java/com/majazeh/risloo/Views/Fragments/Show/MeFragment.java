@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -58,28 +59,17 @@ public class MeFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
-            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
-        });
+        }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        binding.editTextView.getRoot().setOnClickListener(v -> {
-            binding.editTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editUserFragment)).widget(binding.editTextView.getRoot());
 
-            ((MainActivity) requireActivity()).navigator(R.id.editUserFragment);
-        });
-
-        binding.enterImageView.getRoot().setOnClickListener(v -> {
-            binding.enterImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.enterImageView.getRoot().setClickable(true), 300);
-
-            // TODO : Call Work Method
-        });
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.enterImageView.getRoot());
     }
 
     private void setData() {
@@ -139,7 +129,6 @@ public class MeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

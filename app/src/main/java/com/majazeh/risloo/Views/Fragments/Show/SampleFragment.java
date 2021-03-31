@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Fragments.Show;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.FormsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
@@ -87,19 +88,13 @@ public class SampleFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.primaryTextView.getRoot().setOnClickListener(v -> {
-            binding.primaryTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.primaryTextView.getRoot().setClickable(true), 300);
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.primaryTextView.getRoot());
 
-            // TODO : Call Work Method
-        });
-
-        binding.secondaryTextView.getRoot().setOnClickListener(v -> {
-            binding.secondaryTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.secondaryTextView.getRoot().setClickable(true), 300);
-
-            // TODO : Call Work Method
-        });
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.secondaryTextView.getRoot());
 
         binding.formsEditableImageView.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -136,7 +131,7 @@ public class SampleFragment extends Fragment {
         binding.profilesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.formsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.profilesSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
@@ -155,7 +150,6 @@ public class SampleFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

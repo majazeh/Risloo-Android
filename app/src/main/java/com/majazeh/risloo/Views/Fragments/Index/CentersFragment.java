@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Fragments.Index;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -34,6 +36,7 @@ public class CentersFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
+    private Handler handler;
 
     @Nullable
     @Override
@@ -57,6 +60,8 @@ public class CentersFragment extends Fragment {
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._6sdp), (int) getResources().getDimension(R.dimen._12sdp));
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        handler = new Handler();
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
 
@@ -91,8 +96,8 @@ public class CentersFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+                handler.removeCallbacksAndMessages(null);
+                handler.postDelayed(() -> {
                     // TODO : Place Code Here
                 }, 750);
             }
@@ -103,12 +108,7 @@ public class CentersFragment extends Fragment {
             }
         });
 
-        binding.addImageView.getRoot().setOnClickListener(v -> {
-            binding.addImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.createCenterFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterFragment)).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
@@ -118,7 +118,7 @@ public class CentersFragment extends Fragment {
         String dataSize = "5";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
@@ -128,7 +128,6 @@ public class CentersFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

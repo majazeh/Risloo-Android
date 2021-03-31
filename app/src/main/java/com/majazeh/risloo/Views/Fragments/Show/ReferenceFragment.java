@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -75,14 +77,11 @@ public class ReferenceFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
-            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
-        });
+        }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
     }
 
     private void setData() {
@@ -128,7 +127,7 @@ public class ReferenceFragment extends Fragment {
         binding.casesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
@@ -146,7 +145,6 @@ public class ReferenceFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

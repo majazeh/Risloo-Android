@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Fragments.Show;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -104,33 +106,13 @@ public class SessionFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.editTextView.getRoot().setOnClickListener(v -> {
-            binding.editTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editTextView.getRoot().setClickable(true), 300);
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment)).widget(binding.editTextView.getRoot());
 
-            ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createReportFragment)).widget(binding.reportActionTextView.getRoot());
 
-        binding.reportActionTextView.getRoot().setOnClickListener(v -> {
-            binding.reportActionTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.reportActionTextView.getRoot().setClickable(true), 300);
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createPracticeFragment)).widget(binding.practicesAddImageView.getRoot());
 
-            ((MainActivity) requireActivity()).navigator(R.id.createReportFragment);
-        });
-
-        binding.practicesAddImageView.getRoot().setOnClickListener(v -> {
-            binding.practicesAddImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.practicesAddImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.createPracticeFragment);
-        });
-
-        binding.samplesAddImageView.getRoot().setOnClickListener(v -> {
-            binding.samplesAddImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.samplesAddImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment)).widget(binding.samplesAddImageView.getRoot());
     }
 
     private void setData() {
@@ -154,7 +136,7 @@ public class SessionFragment extends Fragment {
         binding.practicesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
@@ -175,7 +157,6 @@ public class SessionFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Fragments.Show;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -37,6 +39,7 @@ public class RoomFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
+    private Handler handler;
 
     @Nullable
     @Override
@@ -61,6 +64,8 @@ public class RoomFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
+        handler = new Handler();
+
         InitManager.imgResTint(requireActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
@@ -83,21 +88,13 @@ public class RoomFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
-            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
-        });
+        }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        binding.usersImageView.getRoot().setOnClickListener(v -> {
-            binding.usersImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.usersImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment)).widget(binding.usersImageView.getRoot());
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -116,8 +113,8 @@ public class RoomFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+                handler.removeCallbacksAndMessages(null);
+                handler.postDelayed(() -> {
                     // TODO : Place Code Here
                 }, 750);
             }
@@ -128,12 +125,7 @@ public class RoomFragment extends Fragment {
             }
         });
 
-        binding.addImageView.getRoot().setOnClickListener(v -> {
-            binding.addImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.createCaseFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseFragment)).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
@@ -160,7 +152,7 @@ public class RoomFragment extends Fragment {
         String dataSize = "5";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
@@ -170,7 +162,6 @@ public class RoomFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

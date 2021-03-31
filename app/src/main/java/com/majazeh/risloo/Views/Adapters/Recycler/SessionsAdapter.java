@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSessionBinding;
 
@@ -62,19 +63,9 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     }
 
     private void listener(SessionsHolder holder) {
-        holder.binding.getRoot().setOnClickListener(v -> {
-            holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sessionFragment)).widget(holder.binding.getRoot());
 
-            ((MainActivity) activity).navigator(R.id.sessionFragment);
-        });
-
-        holder.binding.editImageView.setOnClickListener(v -> {
-            holder.binding.editImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
-
-            ((MainActivity) activity).navigator(R.id.editSessionFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.editSessionFragment)).widget(holder.binding.editImageView);
     }
 
     private void setData(SessionsHolder holder) {

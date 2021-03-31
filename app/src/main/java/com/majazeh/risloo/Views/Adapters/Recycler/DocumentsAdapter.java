@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.databinding.SingleItemDocumentBinding;
 
 public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.DocumentsHolder> {
@@ -66,26 +66,17 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     }
 
     private void listener(DocumentsHolder holder) {
-        holder.binding.getRoot().setOnClickListener(v -> {
-            holder.binding.getRoot().setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.getRoot());
 
-        holder.binding.attachmentImageView.setOnClickListener(v -> {
-            holder.binding.attachmentImageView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.attachmentImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.attachmentImageView);
 
-        holder.binding.actionTextView.setOnClickListener(v -> {
-            holder.binding.actionTextView.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.actionTextView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(holder.binding.actionTextView);
     }
 
     private void setData(DocumentsHolder holder) {

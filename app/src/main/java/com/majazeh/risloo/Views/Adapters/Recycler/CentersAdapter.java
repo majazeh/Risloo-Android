@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCenterBinding;
@@ -62,12 +63,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     }
 
     private void listener(CentersHolder holder) {
-        holder.binding.containerConstraintLayout.setOnClickListener(v -> {
-            holder.binding.containerConstraintLayout.setClickable(false);
-            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.containerConstraintLayout.setClickable(true), 300);
-
-            ((MainActivity) activity).navigator(R.id.centerFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.centerFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(CentersHolder holder) {

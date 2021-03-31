@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Fragments.Show;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -37,6 +39,7 @@ public class CenterFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
+    private Handler handler;
 
     @Nullable
     @Override
@@ -60,6 +63,8 @@ public class CenterFragment extends Fragment {
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        handler = new Handler();
 
         InitManager.txtTextColor(binding.profileTextView.getRoot(), getResources().getString(R.string.CenterFragmentProfile), getResources().getColor(R.color.Gray500));
         InitManager.txtTextColor(binding.statusTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
@@ -93,42 +98,23 @@ public class CenterFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.avatarIncludeLayout.avatarCircleImageView.setOnClickListener(v -> {
-            binding.avatarIncludeLayout.avatarCircleImageView.setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.avatarIncludeLayout.avatarCircleImageView.setClickable(true), 300);
-
+        ClickManager.onDelayedClickListener(() -> {
             if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
                 IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
-        });
+        }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        binding.statusTextView.getRoot().setOnClickListener(v -> {
-            binding.statusTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.statusTextView.getRoot().setClickable(true), 300);
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.statusTextView.getRoot());
 
-            // TODO : Call Work Method
-        });
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.profileTextView.getRoot());
 
-        binding.profileTextView.getRoot().setOnClickListener(v -> {
-            binding.profileTextView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.profileTextView.getRoot().setClickable(true), 300);
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment)).widget(binding.editImageView.getRoot());
 
-            // TODO : Call Work Method
-        });
-
-        binding.editImageView.getRoot().setOnClickListener(v -> {
-            binding.editImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.editImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment);
-        });
-
-        binding.usersImageView.getRoot().setOnClickListener(v -> {
-            binding.usersImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.usersImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment)).widget(binding.usersImageView.getRoot());
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -147,8 +133,8 @@ public class CenterFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
-                ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+                handler.removeCallbacksAndMessages(null);
+                handler.postDelayed(() -> {
                     // TODO : Place Code Here
                 }, 750);
             }
@@ -159,12 +145,7 @@ public class CenterFragment extends Fragment {
             }
         });
 
-        binding.addImageView.getRoot().setOnClickListener(v -> {
-            binding.addImageView.getRoot().setClickable(false);
-            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.addImageView.getRoot().setClickable(true), 300);
-
-            ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment);
-        });
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment)).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
@@ -211,7 +192,7 @@ public class CenterFragment extends Fragment {
         String dataSize = "5";
         binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
 
-        ((MainActivity) requireActivity()).handler.postDelayed(() -> {
+        new Handler().postDelayed(() -> {
             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 2000);
@@ -221,7 +202,6 @@ public class CenterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((MainActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }
