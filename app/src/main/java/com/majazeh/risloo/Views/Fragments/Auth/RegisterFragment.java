@@ -74,10 +74,7 @@ public class RegisterFragment extends Fragment {
             return false;
         });
 
-        binding.registerTextView.getRoot().setOnClickListener(v -> {
-            binding.registerTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.getRoot().setClickable(true), 300);
-
+        ((AuthActivity) requireActivity()).onClickListener(() -> {
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -91,21 +88,10 @@ public class RegisterFragment extends Fragment {
 
                 doWork();
             }
-        });
+        }).widget(binding.registerTextView.getRoot());
 
-        binding.loginTextView.getRoot().setOnClickListener(v -> {
-            binding.loginTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.getRoot().setClickable(true), 300);
-
-            ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
-        });
-
-        binding.passwordRecoverTextView.getRoot().setOnClickListener(v -> {
-            binding.passwordRecoverTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.getRoot().setClickable(true), 300);
-
-            ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
-        });
+        ((AuthActivity) requireActivity()).onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.loginFragment)).widget(binding.loginTextView.getRoot());
+        ((AuthActivity) requireActivity()).onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void doWork() {
@@ -119,7 +105,6 @@ public class RegisterFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((AuthActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

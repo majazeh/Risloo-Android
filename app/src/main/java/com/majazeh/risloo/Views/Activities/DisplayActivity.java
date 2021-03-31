@@ -75,9 +75,7 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        onClickListener(() -> {
-            finish();
-        }).widget(binding.returnImageView.getRoot());
+        onClickListener(this::finish).widget(binding.returnImageView.getRoot());
 
         onClickListener(() -> {
             if (PermissionManager.storagePermission(this)) {

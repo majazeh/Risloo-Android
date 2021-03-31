@@ -70,31 +70,20 @@ public class SerialFragment extends Fragment {
             return false;
         });
 
-        binding.serialTextView.getRoot().setOnClickListener(v -> {
-            binding.serialTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.serialTextView.getRoot().setClickable(true), 300);
-
+        ((AuthActivity) requireActivity()).onClickListener(() -> {
             if (binding.serialIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView);
                 doWork();
             }
-        });
+        }).widget(binding.serialTextView.getRoot());
 
-        binding.dashboardTextView.getRoot().setOnClickListener(v -> {
-            binding.dashboardTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.dashboardTextView.getRoot().setClickable(true), 300);
+        ((AuthActivity) requireActivity()).onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardTextView.getRoot());
 
-            IntentManager.main(requireActivity());
-        });
-
-        binding.logoutTextView.getRoot().setOnClickListener(v -> {
-            binding.logoutTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.logoutTextView.getRoot().setClickable(true), 300);
-
+        ((AuthActivity) requireActivity()).onClickListener(() -> {
             // TODO : Place Code Here
-        });
+        }).widget(binding.logoutTextView.getRoot());
     }
 
     private void setData() {
@@ -121,7 +110,6 @@ public class SerialFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((AuthActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

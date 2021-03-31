@@ -129,38 +129,18 @@ public class PasswordChangeFragment extends Fragment {
             }
         });
 
-        binding.passwordChangeTextView.getRoot().setOnClickListener(v -> {
-            binding.passwordChangeTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordChangeTextView.getRoot().setClickable(true), 300);
-
+        ((AuthActivity) requireActivity()).onClickListener(() -> {
             if (binding.passwordChangeInputLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordChangeInputLayout.inputEditText, binding.passwordChangeInputLayout.errorImageView, binding.passwordChangeInputLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordChangeInputLayout.inputEditText, binding.passwordChangeInputLayout.errorImageView, binding.passwordChangeInputLayout.errorTextView);
                 doWork();
             }
-        });
+        }).widget(binding.passwordChangeTextView.getRoot());
 
-        binding.loginTextView.getRoot().setOnClickListener(v -> {
-            binding.loginTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.getRoot().setClickable(true), 300);
-
-            ((AuthActivity) requireActivity()).navigator(R.id.loginFragment);
-        });
-
-        binding.registerTextView.getRoot().setOnClickListener(v -> {
-            binding.registerTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.getRoot().setClickable(true), 300);
-
-            ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
-        });
-
-        binding.passwordRecoverTextView.getRoot().setOnClickListener(v -> {
-            binding.passwordRecoverTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.getRoot().setClickable(true), 300);
-
-            ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment);
-        });
+        ((AuthActivity) requireActivity()).onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.loginFragment)).widget(binding.loginTextView.getRoot());
+        ((AuthActivity) requireActivity()).onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.registerFragment)).widget(binding.registerTextView.getRoot());
+        ((AuthActivity) requireActivity()).onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void doWork() {
@@ -173,7 +153,6 @@ public class PasswordChangeFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((AuthActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

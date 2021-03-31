@@ -66,31 +66,17 @@ public class LoginFragment extends Fragment {
             return false;
         });
 
-        binding.loginTextView.getRoot().setOnClickListener(v -> {
-            binding.loginTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.loginTextView.getRoot().setClickable(true), 300);
-
+        ((AuthActivity) requireActivity()).onClickListener(() -> {
             if (binding.loginIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.loginIncludeLayout.inputEditText, binding.loginIncludeLayout.errorImageView, binding.loginIncludeLayout.errorTextView);
                 doWork();
             }
-        });
+        }).widget(binding.loginTextView.getRoot());
 
-        binding.registerTextView.getRoot().setOnClickListener(v -> {
-            binding.registerTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.registerTextView.getRoot().setClickable(true), 300);
-
-            ((AuthActivity) requireActivity()).navigator(R.id.registerFragment);
-        });
-
-        binding.passwordRecoverTextView.getRoot().setOnClickListener(v -> {
-            binding.passwordRecoverTextView.getRoot().setClickable(false);
-            ((AuthActivity) requireActivity()).handler.postDelayed(() -> binding.passwordRecoverTextView.getRoot().setClickable(true), 300);
-
-            ((AuthActivity) requireActivity()).navigator(R.id.serialFragment);
-        });
+        ((AuthActivity) requireActivity()).onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.registerFragment)).widget(binding.registerTextView.getRoot());
+        ((AuthActivity) requireActivity()).onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.serialFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void doWork() {
@@ -103,7 +89,6 @@ public class LoginFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        ((AuthActivity) requireActivity()).handler.removeCallbacksAndMessages(null);
     }
 
 }

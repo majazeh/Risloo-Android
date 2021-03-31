@@ -97,13 +97,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        onClickListener(() -> {
-            navigator(R.id.meFragment);
-        }).widget(binding.mainContent.toolbarIncludeLayout.getRoot());
+        onClickListener(() -> navigator(R.id.meFragment)).widget(binding.mainContent.toolbarIncludeLayout.getRoot());
 
-        onClickListener(() -> {
-            binding.getRoot().openDrawer(GravityCompat.START);
-        }).widget(binding.mainContent.menuImageView.getRoot());
+        onClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.mainContent.menuImageView.getRoot());
 
         onClickListener(() -> {
             // TODO : Place Code Here
