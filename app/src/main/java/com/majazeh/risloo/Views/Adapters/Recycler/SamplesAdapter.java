@@ -45,7 +45,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     @Override
     public int getItemCount() {
 //        return samples.size();
-        return 12;
+        return 5;
     }
 
 //    public void setSample(ArrayList<Sample> samples) {
@@ -66,12 +66,14 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     private void listener(SamplesHolder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.sampleFragment);
         });
 
         holder.binding.statusTextView.setOnClickListener(v -> {
             holder.binding.statusTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.statusTextView.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.testFragment);
         });

@@ -45,7 +45,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     @Override
     public int getItemCount() {
 //        return sessions.size();
-        return 12;
+        return 5;
     }
 
 //    public void setSession(ArrayList<Session> sessions) {
@@ -64,12 +64,14 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     private void listener(SessionsHolder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.sessionFragment);
         });
 
         holder.binding.editImageView.setOnClickListener(v -> {
             holder.binding.editImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.editSessionFragment);
         });

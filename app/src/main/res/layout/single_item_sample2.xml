@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     tools:background="@color/White"
-    tools:context=".Views.Adapters.Recycler.SamplesAdapter">
+    tools:context=".Views.Adapters.Recycler.Samples2Adapter">
 
     <View
         android:id="@+id/top_view"

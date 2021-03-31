@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     tools:background="@color/White"
-    tools:context=".Views.Adapters.Recycler.RoomUsersAdapter">
+    tools:context=".Views.Adapters.Recycler.CenterUsersAdapter">
 
     <View
         android:id="@+id/top_view"
@@ -96,7 +96,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_4sdp"
-        android:layout_marginStart="@dimen/_4sdp"
         android:gravity="right"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
@@ -128,7 +127,7 @@
         tools:text="زمان پذیرش" />
 
     <TextView
-        android:id="@+id/canceled_textView"
+        android:id="@+id/kicked_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -153,7 +152,7 @@
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_ellipsis_v_light"
-        app:layout_constraintBottom_toBottomOf="@id/canceled_textView"
+        app:layout_constraintBottom_toBottomOf="@id/kicked_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/accepted_textView"
         app:layout_constraintTop_toTopOf="@id/accepted_textView"

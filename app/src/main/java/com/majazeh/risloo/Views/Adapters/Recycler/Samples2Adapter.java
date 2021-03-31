@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSample2Binding;
 
 public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Samples2Holder> {
@@ -44,7 +45,7 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
     @Override
     public int getItemCount() {
 //        return samples.size();
-        return 12;
+        return 5;
     }
 
 //    public void setSample(ArrayList<Sample> samples) {
@@ -65,14 +66,16 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
     private void listener(Samples2Holder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
-            // TODO : Place Code Here
+            ((MainActivity) activity).navigator(R.id.sampleFragment);
         });
 
         holder.binding.statusTextView.setOnClickListener(v -> {
             holder.binding.statusTextView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.statusTextView.setClickable(true), 300);
 
-            // TODO : Place Code Here
+            ((MainActivity) activity).navigator(R.id.testFragment);
         });
     }
 

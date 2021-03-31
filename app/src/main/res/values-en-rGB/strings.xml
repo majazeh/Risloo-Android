@@ -563,7 +563,7 @@
     <string name="CenterUsersFragmentType">موقعیت</string>
     <string name="CenterUsersFragmentStatus">وضعیت</string>
     <string name="CenterUsersFragmentAccepted">زمان پذیرش</string>
-    <string name="CenterUsersFragmentCanceled">زمان تعلیق</string>
+    <string name="CenterUsersFragmentKicked">زمان تعلیق</string>
 
     <string name="CenterUsersFragmentAccept">پذیرفتن</string>
     <string name="CenterUsersFragmentCancel">تعلیق</string>
@@ -596,7 +596,7 @@
     <string name="RoomUsersFragmentType">موقعیت</string>
     <string name="RoomUsersFragmentStatus">وضعیت</string>
     <string name="RoomUsersFragmentAccepted">زمان پذیرش</string>
-    <string name="RoomUsersFragmentCanceled">زمان تعلیق</string>
+    <string name="RoomUsersFragmentKicked">زمان تعلیق</string>
 
     /*
     ---------- Samples Fragment ----------

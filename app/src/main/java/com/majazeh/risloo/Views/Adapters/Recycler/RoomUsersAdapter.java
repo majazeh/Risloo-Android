@@ -45,7 +45,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     @Override
     public int getItemCount() {
 //        return users.size();
-        return 12;
+        return 5;
     }
 
 //    public void setUser(ArrayList<User> users) {
@@ -62,6 +62,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     private void listener(RoomUsersHolder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             ((MainActivity) activity).navigator(R.id.referenceFragment);
         });
@@ -80,7 +81,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
         holder.binding.typeTextView.setText("مراجع");
         holder.binding.statusTexView.setText("پذیرش شده");
         holder.binding.acceptedTextView.setText("99-12-26 10:55 ");
-        holder.binding.canceledTextView.setText("99-12-26 10:55 ");
+        holder.binding.kickedTextView.setText("99-12-26 10:55 ");
     }
 
     public class RoomUsersHolder extends RecyclerView.ViewHolder {

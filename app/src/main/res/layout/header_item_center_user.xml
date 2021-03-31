@@ -121,7 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:gravity="right"
-        android:text="@string/CenterUsersFragmentCanceled"
+        android:text="@string/CenterUsersFragmentKicked"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"

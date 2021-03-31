@@ -19,7 +19,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     private Activity activity;
 
     // Vars
-    //    private ArrayList<Session> sessions;
+//    private ArrayList<Session> sessions;
 
     public Sessions2Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -33,7 +33,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
     @Override
     public void onBindViewHolder(@NonNull Sessions2Holder holder, int i) {
-        //        Sessions session = sessions.get(i);
+//        Sessions session = sessions.get(i);
 
         detector(holder);
 
@@ -44,14 +44,14 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
     @Override
     public int getItemCount() {
-        //        return sessions.size();
-        return 12;
+//        return sessions.size();
+        return 5;
     }
 
-    //    public void setSession(ArrayList<Session> sessions) {
-    //        this.sessions = sessions;
-    //        notifyDataSetChanged();
-    //    }
+//    public void setSession(ArrayList<Session> sessions) {
+//        this.sessions = sessions;
+//        notifyDataSetChanged();
+//    }
 
     private void detector(Sessions2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -68,6 +68,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     private void listener(Sessions2Holder holder) {
         holder.binding.getRoot().setOnClickListener(v -> {
             holder.binding.getRoot().setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.getRoot().setClickable(true), 300);
 
             // TODO : Place Code Here
         });
@@ -81,8 +82,9 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
         holder.binding.editImageView.setOnClickListener(v -> {
             holder.binding.editImageView.setClickable(false);
+            ((MainActivity) activity).handler.postDelayed(() -> holder.binding.editImageView.setClickable(true), 300);
 
-            // TODO : Place Code Here
+            ((MainActivity) activity).navigator(R.id.editSessionFragment);
         });
     }
 
