@@ -296,14 +296,14 @@
 
     <string name="CreateSampleFragmentTabCase">پرونده</string>
     <string name="CreateSampleFragmentTabRoom">اتاق درمان</string>
-    <string name="CreateSampleFragmentTabGroup">گروهی</string>
+    <string name="CreateSampleFragmentTabBulkSample">گروهی</string>
 
     <string name="CreateSampleFragmentScaleHint">جستجو</string>
     <string name="CreateSampleFragmentNameHint">مثال: گروه درمانی دکتر جان بزرگی - CBT - درمان وسواس</string>
     <string name="CreateSampleFragmentReferenceHint">بدون مراجع مشخص شده</string>
 
     <string name="CreateSampleFragmentScaleGuide">در این قسمت لیست آزمون‌های پُر کاربرد را مشاهده می‌کنید. جهت انتخاب آزمونی که در این لیست وجود ندارد، عنوان آزمون مد نظر را جست‌وجو کرده و آن را انتخاب نمایید. شما می‌توانید لیست تمام آزمون‌های موجود در سامانه را نیز در این صفحه مشاهده نمایید.</string>
-    <string name="CreateSampleFragmentGroupGuide">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
+    <string name="CreateSampleFragmentBulkSampleGuide">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
     <string name="CreateSampleFragmentNameGuide">کمک می‌کند تا نمونه‌های شما یک نام مشترک داشته باشند و راحت‌تر آن‌ها را پیدا کنید.</string>
     <string name="CreateSampleFragmentUserCountGuide">تعداد اعضائی که قصد دارند نمونه(ها) را انجام دهند.</string>
 
@@ -606,11 +606,12 @@
 
     <string name="SamplesFragmentSerial">سریال</string>
     <string name="SamplesFragmentName">مقیاس</string>
-    <string name="SamplesFragmentEdition">ویرایش - نسخه</string>
     <string name="SamplesFragmentRoom">اتاق درمان</string>
     <string name="SamplesFragmentCase">پرونده</string>
     <string name="SamplesFragmentReference">مراجع</string>
     <string name="SamplesFragmentStatus">وضعیت</string>
+
+    <string name="SamplesFragmentBulk">نمو‌نه‌های زنجیره‌ای این نمونه</string>
 
     <string name="SamplesFragmentSeald">شروع</string>
     <string name="SamplesFragmentOpen">ادامه</string>

@@ -68,6 +68,10 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sampleFragment)).widget(holder.binding.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.testFragment)).widget(holder.binding.statusTextView);
+
+        ClickManager.onClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(holder.binding.bulkTextView);
     }
 
     private void setData(SamplesHolder holder) {

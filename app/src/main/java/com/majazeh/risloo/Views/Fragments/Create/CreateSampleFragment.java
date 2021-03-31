@@ -110,19 +110,19 @@ public class CreateSampleFragment extends Fragment {
 
                     binding.caseGroup.setVisibility(View.VISIBLE);
                     binding.roomGroup.setVisibility(View.GONE);
-                    binding.scaleGroup.setVisibility(View.GONE);
+                    binding.bulkSampleGroup.setVisibility(View.GONE);
                 } else if (tab.getPosition() == 1) {
                     type = "room";
 
                     binding.caseGroup.setVisibility(View.GONE);
                     binding.roomGroup.setVisibility(View.VISIBLE);
-                    binding.scaleGroup.setVisibility(View.GONE);
+                    binding.bulkSampleGroup.setVisibility(View.GONE);
                 } else {
                     type = "scale";
 
                     binding.caseGroup.setVisibility(View.GONE);
                     binding.roomGroup.setVisibility(View.GONE);
-                    binding.scaleGroup.setVisibility(View.VISIBLE);
+                    binding.bulkSampleGroup.setVisibility(View.VISIBLE);
 
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                 }
@@ -212,21 +212,21 @@ public class CreateSampleFragment extends Fragment {
 
                     binding.caseGroup.setVisibility(View.VISIBLE);
                     binding.roomGroup.setVisibility(View.GONE);
-                    binding.scaleGroup.setVisibility(View.GONE);
+                    binding.bulkSampleGroup.setVisibility(View.GONE);
                     break;
                 case "room":
                     binding.typeTabLayout.getTabAt(1);
 
                     binding.caseGroup.setVisibility(View.GONE);
                     binding.roomGroup.setVisibility(View.VISIBLE);
-                    binding.scaleGroup.setVisibility(View.GONE);
+                    binding.bulkSampleGroup.setVisibility(View.GONE);
                     break;
                 case "scale":
                     binding.typeTabLayout.getTabAt(2);
 
                     binding.caseGroup.setVisibility(View.GONE);
                     binding.roomGroup.setVisibility(View.GONE);
-                    binding.scaleGroup.setVisibility(View.VISIBLE);
+                    binding.bulkSampleGroup.setVisibility(View.VISIBLE);
 
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;

@@ -92,18 +92,18 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/CreateSampleFragmentTabGroup" />
+                    android:text="@string/CreateSampleFragmentTabBulkSample" />
 
             </com.google.android.material.tabs.TabLayout>
 
             <TextView
-                android:id="@+id/group_hint_textView"
+                android:id="@+id/bulk_sample_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_8sdp"
                 android:gravity="start"
-                android:text="@string/CreateSampleFragmentGroupGuide"
+                android:text="@string/CreateSampleFragmentBulkSampleGuide"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray700"
@@ -122,7 +122,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/group_hint_textView" />
+                app:layout_constraintTop_toBottomOf="@+id/bulk_sample_textView" />
 
             <include
                 android:id="@+id/name_guideLayout"
@@ -210,11 +210,11 @@
                 app:constraint_referenced_ids="reference_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/scale_group"
+                android:id="@+id/bulk_sample_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="group_hint_textView,name_includeLayout, name_guideLayout, user_count_includeLayout, user_count_guideLayout, case_type_includeLayout" />
+                app:constraint_referenced_ids="bulk_sample_textView,name_includeLayout, name_guideLayout, user_count_includeLayout, user_count_guideLayout, case_type_includeLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
