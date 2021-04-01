@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,7 @@ public class CreateCenterUserFragment extends Fragment {
     private FragmentCreateCenterUserBinding binding;
 
     // Vars
-    private String mobile = "", type = "owner", room = "", center = "", name = "";
+    private String mobile = "", type = "", room = "", center = "", name = "";
     private boolean createCase = false;
 
     @Nullable
@@ -53,6 +54,8 @@ public class CreateCenterUserFragment extends Fragment {
 
         binding.caseCheckbox.getRoot().setText(getResources().getString(R.string.CreateCenterUserFragmentCheckbox));
 
+        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.UsersTypes);
+
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterUserFragmentButton), getResources().getColor(R.color.White));
     }
 
@@ -75,9 +78,23 @@ public class CreateCenterUserFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.typeIncludeLayout.selectTextView);
+        binding.typeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = parent.getItemAtPosition(position).toString();
+
+                if (position == 3) {
+                    binding.clientGroup.setVisibility(View.VISIBLE);
+                } else {
+                    binding.clientGroup.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
@@ -122,7 +139,17 @@ public class CreateCenterUserFragment extends Fragment {
         }
         if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
             type = ((MainActivity) requireActivity()).singleton.getType();
-            binding.typeIncludeLayout.selectTextView.setText(type);
+            for (int i=0; i<binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.typeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
+                    binding.typeIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (i == 3) {
+                        binding.clientGroup.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.clientGroup.setVisibility(View.GONE);
+                    }
+                }
+            }
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             room = ((MainActivity) requireActivity()).singleton.getAddress();

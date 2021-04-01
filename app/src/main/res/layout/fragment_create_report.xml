@@ -28,7 +28,7 @@
 
             <include
                 android:id="@+id/encryption_includeLayout"
-                layout="@layout/component_input_select"
+                layout="@layout/component_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"

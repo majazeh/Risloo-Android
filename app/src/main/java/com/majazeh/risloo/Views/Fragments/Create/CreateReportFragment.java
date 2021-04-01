@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -46,6 +47,8 @@ public class CreateReportFragment extends Fragment {
         binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentEncryptionHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentDescriptionHeader));
 
+        InitManager.spinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates);
+
         InitManager.txtTextColor(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Blue600));
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White));
     }
@@ -62,9 +65,23 @@ public class CreateReportFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.encryptionIncludeLayout.selectTextView);
+        binding.encryptionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                encryption = parent.getItemAtPosition(position).toString();
+
+                if (position == 0) {
+                    binding.cryptoConstraintLayout.setVisibility(View.GONE);
+                } else {
+                    binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -95,7 +112,11 @@ public class CreateReportFragment extends Fragment {
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             encryption = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.encryptionIncludeLayout.selectTextView.setText(encryption);
+            for (int i=0; i<binding.encryptionIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.encryptionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(encryption)) {
+                    binding.encryptionIncludeLayout.selectSpinner.setSelection(i);
+                }
+            }
         }
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
             description = ((MainActivity) requireActivity()).singleton.getDescription();

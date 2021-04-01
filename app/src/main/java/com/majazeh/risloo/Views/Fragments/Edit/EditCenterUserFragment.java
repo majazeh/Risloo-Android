@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -24,7 +25,7 @@ public class EditCenterUserFragment extends Fragment {
     private FragmentEditCenterUserBinding binding;
 
     // Vars
-    private String type = "owner", name = "", status ="";
+    private String type = "", name = "", status ="";
 
     @Nullable
     @Override
@@ -52,6 +53,8 @@ public class EditCenterUserFragment extends Fragment {
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditCenterUserFragmentStatusAccept));
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditCenterUserFragmentStatusKick));
 
+        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.UsersTypes);
+
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterUserFragmentButton), getResources().getColor(R.color.White));
     }
 
@@ -65,9 +68,23 @@ public class EditCenterUserFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.typeIncludeLayout.selectTextView);
+        binding.typeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = parent.getItemAtPosition(position).toString();
+
+                if (position == 3) {
+                    binding.clientGroup.setVisibility(View.VISIBLE);
+                } else {
+                    binding.clientGroup.setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -90,15 +107,11 @@ public class EditCenterUserFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (type.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectTextView, binding.typeIncludeLayout.errorImageView, binding.typeIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!type.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectTextView, binding.typeIncludeLayout.errorImageView, binding.typeIncludeLayout.errorTextView);
+            if (binding.nameIncludeLayout.inputEditText.length() != 0) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
 
                 doWork();
@@ -109,7 +122,17 @@ public class EditCenterUserFragment extends Fragment {
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
             type = ((MainActivity) requireActivity()).singleton.getType();
-            binding.typeIncludeLayout.selectTextView.setText(type);
+            for (int i=0; i<binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.typeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
+                    binding.typeIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (i == 3) {
+                        binding.clientGroup.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.clientGroup.setVisibility(View.GONE);
+                    }
+                }
+            }
         }
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             name = ((MainActivity) requireActivity()).singleton.getName();

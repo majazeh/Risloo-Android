@@ -156,13 +156,24 @@
 
             <include
                 android:id="@+id/case_type_includeLayout"
-                layout="@layout/component_input_select"
+                layout="@layout/component_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
                 app:layout_constraintTop_toBottomOf="@+id/user_count_guideLayout" />
+
+            <include
+                android:id="@+id/situation_includeLayout"
+                layout="@layout/component_input_multi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/case_type_includeLayout" />
 
             <include
                 android:id="@+id/case_includeLayout"
@@ -172,7 +183,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/case_type_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/situation_includeLayout" />
 
             <include
                 android:id="@+id/session_includeLayout"

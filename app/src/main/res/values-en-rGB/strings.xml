@@ -198,11 +198,6 @@
     <string name="CreateCenterUserFragmentRoomHeader">اتاق درمان</string>
     <string name="CreateCenterUserFragmentNameHeader">نام مراجع</string>
 
-    <string name="CreateCenterUserFragmentTypeOwner">مدیر</string>
-    <string name="CreateCenterUserFragmentTypeOperator">اپراتور</string>
-    <string name="CreateCenterUserFragmentTypePsychology">روان‌شناس</string>
-    <string name="CreateCenterUserFragmentTypeClient">مراجع</string>
-
     <string name="CreateCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
 
     <string name="CreateCenterUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
@@ -243,9 +238,6 @@
 
     <string name="CreateReportFragmentEncryptionHeader">نوع رمزگذاری</string>
     <string name="CreateReportFragmentDescriptionHeader">متن گزارش</string>
-
-    <string name="CreateReportFragmentWithKey">با رمزگذاری</string>
-    <string name="CreateReportFragmentWithoutKey">بدون رمزگذاری</string>
 
     <string name="CreateReportFragmentCryptoHint">متن گزارش جلسه‌ای که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش جلسات درمانی شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
     <string name="CreateReportFragmentCryptoButton">ارسال کلید عمومی من</string>
@@ -290,6 +282,7 @@
     <string name="CreateSampleFragmentNameHeader">عنوان</string>
     <string name="CreateSampleFragmentUserCountHeader">تعداد اعضاء</string>
     <string name="CreateSampleFragmentCaseTypeHeader">وضعیت پرونده</string>
+    <string name="CreateSampleFragmentSituationHeader">مسئله</string>
     <string name="CreateSampleFragmentCaseHeader">پرونده</string>
     <string name="CreateSampleFragmentSessionHeader">جلسه</string>
     <string name="CreateSampleFragmentReferenceHeader">مراجع</string>
@@ -421,11 +414,6 @@
     <string name="EditCenterUserFragmentStatusHeader">وضعیت</string>
 
     <string name="EditCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
-
-    <string name="EditCenterUserFragmentTypeOwner">مدیر</string>
-    <string name="EditCenterUserFragmentTypeOperator">اپراتور</string>
-    <string name="EditCenterUserFragmentTypeClient">مراجع</string>
-    <string name="EditCenterUserFragmentTypePsychology">روان‌شناس</string>
 
     <string name="EditCenterUserFragmentStatusAccept">پذیرفتن</string>
     <string name="EditCenterUserFragmentStatusKick">تعلیق</string>

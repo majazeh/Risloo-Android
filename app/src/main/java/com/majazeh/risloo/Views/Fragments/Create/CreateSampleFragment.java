@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -33,7 +34,7 @@ public class CreateSampleFragment extends Fragment {
     private ClickableSpan assessmentLinkSpan;
 
     // Vars
-    private String room = "", center = "", type = "case", name = "", userCount = "", caseType = "", casse = "",  session = "";
+    private String room = "", center = "", type = "case", name = "", userCount = "", caseType = "", situation = "", casse = "",  session = "";
 
     @Nullable
     @Override
@@ -57,6 +58,7 @@ public class CreateSampleFragment extends Fragment {
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentNameHeader));
         binding.userCountIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountHeader));
         binding.caseTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseTypeHeader));
+        binding.situationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentSituationHeader));
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseHeader));
         binding.sessionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentSessionHeader));
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentReferenceHeader));
@@ -67,6 +69,8 @@ public class CreateSampleFragment extends Fragment {
 
         binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentNameGuide));
         binding.userCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountGuide));
+
+        InitManager.spinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CasesTypes);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }
@@ -111,6 +115,9 @@ public class CreateSampleFragment extends Fragment {
                     binding.caseGroup.setVisibility(View.VISIBLE);
                     binding.roomGroup.setVisibility(View.GONE);
                     binding.bulkSampleGroup.setVisibility(View.GONE);
+
+                    binding.caseIncludeLayout.selectTextView.setEnabled(true);
+                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
                 } else if (tab.getPosition() == 1) {
                     type = "room";
 
@@ -118,13 +125,15 @@ public class CreateSampleFragment extends Fragment {
                     binding.roomGroup.setVisibility(View.VISIBLE);
                     binding.bulkSampleGroup.setVisibility(View.GONE);
                 } else {
-                    type = "scale";
+                    type = "bulk";
 
                     binding.caseGroup.setVisibility(View.GONE);
                     binding.roomGroup.setVisibility(View.GONE);
                     binding.bulkSampleGroup.setVisibility(View.VISIBLE);
 
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
                 }
             }
 
@@ -157,9 +166,43 @@ public class CreateSampleFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.caseTypeIncludeLayout.selectTextView);
+        binding.caseTypeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                caseType = parent.getItemAtPosition(position).toString();
+
+                if (position == 0) {
+                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                    binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                } else if (position == 1 || position == 2) {
+                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                    binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                } else {
+                    binding.caseIncludeLayout.selectTextView.setEnabled(true);
+                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
+                    binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.situationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.situationIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.situationIncludeLayout.inputEditText);
+                }
+            }
+            return false;
+        });
 
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
@@ -213,6 +256,9 @@ public class CreateSampleFragment extends Fragment {
                     binding.caseGroup.setVisibility(View.VISIBLE);
                     binding.roomGroup.setVisibility(View.GONE);
                     binding.bulkSampleGroup.setVisibility(View.GONE);
+
+                    binding.caseIncludeLayout.selectTextView.setEnabled(true);
+                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
                     break;
                 case "room":
                     binding.typeTabLayout.getTabAt(1);
@@ -229,6 +275,8 @@ public class CreateSampleFragment extends Fragment {
                     binding.bulkSampleGroup.setVisibility(View.VISIBLE);
 
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
                     break;
             }
         }
@@ -243,7 +291,32 @@ public class CreateSampleFragment extends Fragment {
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             caseType = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.caseTypeIncludeLayout.selectTextView.setText(caseType);
+            for (int i=0; i<binding.caseTypeIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.caseTypeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(caseType)) {
+                    binding.caseTypeIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (i == 0) {
+                        binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                        binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                    } else if (i == 1 && i == 2) {
+                        binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                        binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    } else {
+                        binding.caseIncludeLayout.selectTextView.setEnabled(true);
+                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
+                        binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                    }
+                }
+            }
+        }
+        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+            situation = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.situationIncludeLayout.inputEditText.setText(situation);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             casse = ((MainActivity) requireActivity()).singleton.getAddress();
@@ -261,6 +334,7 @@ public class CreateSampleFragment extends Fragment {
     private void doWork() {
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         userCount = binding.userCountIncludeLayout.inputEditText.getText().toString().trim();
+        situation = binding.situationIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

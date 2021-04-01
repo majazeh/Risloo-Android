@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,7 +26,7 @@ public class CreateSessionFragment extends Fragment {
     private FragmentCreateSessionBinding binding;
 
     // Vars
-    private String startTime = "", duration = "60", status = "waiting";
+    private String startTime = "", duration = "60", status = "";
     private int year, month, day, hour, minute;
 
     @Nullable
@@ -48,6 +49,10 @@ public class CreateSessionFragment extends Fragment {
         binding.startTimeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionFragmentStartTimeHeader));
         binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionFragmentDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionFragmentStatusHeader));
+
+        binding.durationIncludeLayout.inputEditText.setText(duration);
+
+        InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionFragmentButton), getResources().getColor(R.color.White));
     }
@@ -75,9 +80,17 @@ public class CreateSessionFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.statusIncludeLayout.selectTextView);
+        binding.statusIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                status = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         ClickManager.onDelayedClickListener(() -> {
             if (startTime.equals("")) {
@@ -87,13 +100,13 @@ public class CreateSessionFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationIncludeLayout.errorImageView, binding.durationIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (status.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectTextView, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0 && !status.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeIncludeLayout.errorImageView, binding.startTimeIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationIncludeLayout.errorImageView, binding.durationIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectTextView, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView);
 
                 doWork();
             }
@@ -111,7 +124,11 @@ public class CreateSessionFragment extends Fragment {
         }
         if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
             status = ((MainActivity) requireActivity()).singleton.getStatus();
-            binding.statusIncludeLayout.selectTextView.setText(status);
+            for (int i=0; i<binding.statusIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
+                    binding.statusIncludeLayout.selectSpinner.setSelection(i);
+                }
+            }
         }
     }
 
