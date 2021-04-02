@@ -22,7 +22,7 @@ import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 public class CreateCenterFragment extends Fragment {
 
     // Binding
-    private FragmentCreateCenterBinding binding;
+    public FragmentCreateCenterBinding binding;
 
     // Objects
     public Bitmap avatarBitmap;

@@ -21,7 +21,6 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.DialogImageBinding;
 
@@ -73,7 +72,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
                     case R.id.createCenterFragment:
                         CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (createCenterFragment != null) {
-                            // TODO : Place Code Here
+                            createCenterFragment.avatarPath = IntentManager.camera(requireActivity());
                         }
                         break;
                     case R.id.editCenterFragment:

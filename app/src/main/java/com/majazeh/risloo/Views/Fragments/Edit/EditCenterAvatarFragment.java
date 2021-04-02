@@ -26,7 +26,7 @@ import com.squareup.picasso.Picasso;
 public class EditCenterAvatarFragment extends Fragment {
 
     // Binding
-    private FragmentEditCenterAvatarBinding binding;
+    public FragmentEditCenterAvatarBinding binding;
 
     // Objects
     private ImageDialog imageDialog;

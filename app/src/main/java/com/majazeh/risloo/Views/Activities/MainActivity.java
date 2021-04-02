@@ -1,11 +1,15 @@
 package com.majazeh.risloo.Views.Activities;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
@@ -14,14 +18,22 @@ import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.squareup.picasso.Picasso;
 
@@ -191,6 +203,100 @@ public class MainActivity extends AppCompatActivity {
         } else {
             if (!navController.popBackStack()) {
                 finish();
+            }
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 300) {
+            if (grantResults.length > 0) {
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                }
+                IntentManager.gallery(this);
+            }
+        } else if (requestCode == 400) {
+            if (grantResults.length > 0) {
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                }
+                switch (navController.getCurrentDestination().getId()) {
+                    case R.id.createCenterFragment:
+                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                        if (createCenterFragment != null) {
+                            createCenterFragment.avatarPath = IntentManager.camera(this);
+                        }
+                        break;
+                    case R.id.editCenterFragment:
+                        EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                        if (editCenterFragment != null) {
+                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.getRegisteredFragment(2);
+                            editCenterAvatarFragment.avatarPath = IntentManager.camera(this);
+                        }
+                        break;
+                    case R.id.editUserFragment:
+                        EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                        if (editUserFragment != null) {
+                            EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.getRegisteredFragment(2);
+                            editAvatarFragment.avatarPath = IntentManager.camera(this);
+                        }
+                        break;
+                }
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (resultCode == RESULT_OK) {
+            switch (navController.getCurrentDestination().getId()) {
+                case R.id.createCenterFragment:
+                    CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (createCenterFragment != null) {
+                        if (requestCode == 300) {
+                            ResultManager.galleryResult(this, data, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.avatarCircleImageView, createCenterFragment.binding.avatarIncludeLayout.charTextView);
+                        } else if (requestCode == 400) {
+                            ResultManager.cameraResult(this, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.avatarCircleImageView, createCenterFragment.binding.avatarIncludeLayout.charTextView);
+                        }
+                    }
+                    break;
+                case R.id.editCenterFragment:
+                    EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (editCenterFragment != null) {
+                        EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.getRegisteredFragment(2);
+
+                        if (requestCode == 300) {
+                            ResultManager.galleryResult(this, data, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                        } else if (requestCode == 400) {
+                            ResultManager.cameraResult(this, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                        }
+                    }
+                    break;
+                case R.id.editUserFragment:
+                    EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (editUserFragment != null) {
+                        EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.getRegisteredFragment(2);
+
+                        if (requestCode == 300) {
+                            ResultManager.galleryResult(this, data, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                        } else if (requestCode == 400) {
+                            ResultManager.cameraResult(this, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                        }
+                    }
+                    break;
+            }
+        } else if (resultCode == RESULT_CANCELED) {
+            if (requestCode == 300) {
+                Toast.makeText(this, "Gallery Exception", Toast.LENGTH_SHORT).show();
+            } else if (requestCode == 400) {
+                Toast.makeText(this, "Camera Exception", Toast.LENGTH_SHORT).show();
             }
         }
     }
