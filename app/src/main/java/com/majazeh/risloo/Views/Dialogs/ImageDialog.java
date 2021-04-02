@@ -18,7 +18,10 @@ import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.DialogImageBinding;
 
@@ -76,13 +79,17 @@ public class ImageDialog extends BottomSheetDialogFragment {
                     case R.id.editCenterFragment:
                         EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (editCenterFragment != null) {
-                            // TODO : Place Code Here
+                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.getRegisteredFragment(2);
+
+                            editCenterAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
                         }
                         break;
                     case R.id.editUserFragment:
                         EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (editUserFragment != null) {
-                            // TODO : Place Code Here
+                            EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.getRegisteredFragment(2);
+
+                            editAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
                         }
                         break;
                 }

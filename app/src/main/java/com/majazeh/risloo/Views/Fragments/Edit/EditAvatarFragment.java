@@ -69,7 +69,7 @@ public class EditAvatarFragment extends Fragment {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            imageDialog.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         ClickManager.onDelayedClickListener(() -> {

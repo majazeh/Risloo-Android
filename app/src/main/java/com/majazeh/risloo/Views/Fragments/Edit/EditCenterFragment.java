@@ -20,7 +20,7 @@ public class EditCenterFragment extends Fragment {
     private FragmentEditCenterBinding binding;
 
     // Adapters
-    private EditCenterAdapter adapter;
+    public EditCenterAdapter adapter;
 
     @Nullable
     @Override
