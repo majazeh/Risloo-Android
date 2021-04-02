@@ -17,6 +17,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.DialogDateBinding;
 
@@ -91,7 +92,15 @@ public class DateDialog extends BottomSheetDialogFragment {
                 case R.id.editUserFragment:
                     EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editUserFragment != null) {
-                        // TODO : Place Code Here
+                        EditPersonalFragment editPersonalFragment = (EditPersonalFragment) editUserFragment.adapter.getRegisteredFragment(0);
+
+                        editPersonalFragment.birthday = getDate();
+
+                        editPersonalFragment.year = year;
+                        editPersonalFragment.month = month;
+                        editPersonalFragment.day = day;
+
+                        editPersonalFragment.binding.birthdayIncludeLayout.selectTextView.setText(editPersonalFragment.birthday);
                     }
                     break;
             }

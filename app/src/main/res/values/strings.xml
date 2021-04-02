@@ -16,6 +16,20 @@
     <string name="AppFileSelect">انتخاب فايل</string>
     <string name="AppFileEmpty">فايل انتخاب نشده است.</string>
 
+    <string name="AppChooserSelect">ارسال پیام</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Dialog Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="DialogDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="DialogDateEntry">ثبت</string>
+
+    <string name="DialogImageTitle">از کجا می خوای تصویر بیارید؟</string>
+    <string name="DialogImageGallery">البوم</string>
+    <string name="DialogImageCamera">دوربین</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings
@@ -362,10 +376,6 @@
 
     <string name="EditAvatarFragmentButton">ویرایش</string>
 
-    <string name="EditAvatarDialogImageTitle">از کجا می خوای تصویر بیارید؟</string>
-    <string name="EditAvatarDialogImageGallery">البوم</string>
-    <string name="EditAvatarDialogImageCamera">دوربین</string>
-
     /*
     ---------- EditCenterAvatar Fragment ----------
     */
@@ -375,10 +385,6 @@
     <string name="EditCenterAvatarFragmentGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
 
     <string name="EditCenterAvatarFragmentButton">ویرایش</string>
-
-    <string name="EditCenterAvatarDialogImageTitle">از کجا می خوای تصویر بیارید؟</string>
-    <string name="EditCenterAvatarDialogImageGallery">البوم</string>
-    <string name="EditCenterAvatarDialogImageCamera">دوربین</string>
 
     /*
     ---------- EditCenterDetail Fragment ----------
@@ -495,9 +501,6 @@
     <string name="EditPersonalFragmentGenderFemale">زن</string>
 
     <string name="EditPersonalFragmentButton">ویرایش</string>
-
-    <string name="EditPersonalDialogDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
-    <string name="EditPersonalDialogDateEntry">ثبت</string>
 
     /*
     ---------- EditSession Fragment ----------

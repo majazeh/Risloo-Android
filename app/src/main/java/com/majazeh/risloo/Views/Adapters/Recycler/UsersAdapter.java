@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemUserBinding;
 
@@ -69,11 +70,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.userFragment)).widget(holder.binding.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            IntentManager.email(activity, new String[]{"a.dehbashi@gmail.com"}, "", "", activity.getResources().getString(R.string.AppChooserSelect));
         }).widget(holder.binding.emailImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            IntentManager.phone(activity, "+989900000000");
         }).widget(holder.binding.mobileImageView);
 
         ClickManager.onDelayedClickListener(() -> {

@@ -20,7 +20,7 @@ public class EditUserFragment extends Fragment {
     private FragmentEditUserBinding binding;
 
     // Adapters
-    private EditUserAdapter adapter;
+    public EditUserAdapter adapter;
 
     @Nullable
     @Override

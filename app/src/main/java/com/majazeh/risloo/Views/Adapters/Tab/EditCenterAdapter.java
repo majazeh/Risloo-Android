@@ -1,5 +1,8 @@
 package com.majazeh.risloo.Views.Adapters.Tab;
 
+import android.util.SparseArray;
+import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -9,6 +12,26 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 
 public class EditCenterAdapter extends FragmentStatePagerAdapter {
+
+    SparseArray<Fragment> registeredFragments = new SparseArray<>();
+
+    @NonNull
+    @Override
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        Fragment fragment = (Fragment) super.instantiateItem(container, position);
+        registeredFragments.put(position, fragment);
+        return fragment;
+    }
+
+    @Override
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
+        registeredFragments.remove(position);
+        super.destroyItem(container, position, object);
+    }
+
+    public Fragment getRegisteredFragment(int position) {
+        return registeredFragments.get(position);
+    }
 
     public EditCenterAdapter(@NonNull FragmentManager fragmentManager, int behavior) {
         super(fragmentManager, behavior);
