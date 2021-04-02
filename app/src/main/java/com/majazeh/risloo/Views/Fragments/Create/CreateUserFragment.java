@@ -24,16 +24,20 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Dialogs.DateDialog;
 import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
 
 public class CreateUserFragment extends Fragment {
 
     // Binding
-    private FragmentCreateUserBinding binding;
+    public FragmentCreateUserBinding binding;
+
+    // Objects
+    private DateDialog dateDialog;
 
     // Vars
-    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "admin", gender = "male";
-    private int year, month, day;
+    public String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "admin", gender = "male";
+    public int year, month, day;
     private boolean passwordVisibility = false;
 
     @Nullable
@@ -53,6 +57,8 @@ public class CreateUserFragment extends Fragment {
     }
 
     private void initializer() {
+        dateDialog = new DateDialog();
+
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateUserFragmentNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateUserFragmentMobileHeader));
         binding.usernameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateUserFragmentUsernameHeader));
@@ -126,7 +132,8 @@ public class CreateUserFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            dateDialog.show(requireActivity().getSupportFragmentManager(), "dateBottomSheet");
+            dateDialog.setDate(year, month, day);
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {

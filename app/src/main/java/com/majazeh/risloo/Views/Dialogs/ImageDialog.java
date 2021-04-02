@@ -13,9 +13,9 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.DialogImageBinding;
 
 public class ImageDialog extends BottomSheetDialogFragment {
@@ -50,25 +50,21 @@ public class ImageDialog extends BottomSheetDialogFragment {
     }
 
     private void listener() {
-        binding.galleryLinearLayout.setOnClickListener(v -> {
-            binding.galleryLinearLayout.setClickable(false);
-//            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.galleryLinearLayout.setClickable(true), 300);
-            dismiss();
-
+        ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.galleryPermission(requireActivity())) {
                 Log.e("gallery", "hello");
             }
-        });
 
-        binding.cameraLinearLayout.setOnClickListener(v -> {
-            binding.cameraLinearLayout.setClickable(false);
-//            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.cameraLinearLayout.setClickable(true), 300);
             dismiss();
+        }).widget(binding.galleryLinearLayout);
 
+        ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
                 Log.e("camera", "hello");
             }
-        });
+
+            dismiss();
+        }).widget(binding.cameraLinearLayout);
     }
 
     @Override

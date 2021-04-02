@@ -17,16 +17,20 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Dialogs.DateDialog;
 import com.majazeh.risloo.databinding.FragmentEditPersonalBinding;
 
 public class EditPersonalFragment extends Fragment {
 
     // Binding
-    private FragmentEditPersonalBinding binding;
+    public FragmentEditPersonalBinding binding;
+
+    // Objects
+    private DateDialog dateDialog;
 
     // Vars
-    private String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
-    private int year, month, day;
+    public String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
+    public int year, month, day;
 
     @Nullable
     @Override
@@ -45,6 +49,8 @@ public class EditPersonalFragment extends Fragment {
     }
 
     private void initializer() {
+        dateDialog = new DateDialog();
+
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentMobileHeader));
         binding.usernameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHeader));
@@ -116,7 +122,8 @@ public class EditPersonalFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            dateDialog.show(requireActivity().getSupportFragmentManager(), "dateBottomSheet");
+            dateDialog.setDate(year, month, day);
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {

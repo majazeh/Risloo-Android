@@ -13,8 +13,10 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.DialogDateBinding;
 
@@ -72,20 +74,30 @@ public class DateDialog extends BottomSheetDialogFragment {
             }
         });
 
-        binding.entryButton.setOnClickListener(v -> {
-            binding.entryButton.setClickable(false);
-//            ((MainActivity) requireActivity()).handler.postDelayed(() -> binding.entryButton.setClickable(true), 300);
-            dismiss();
-
+        ClickManager.onDelayedClickListener(() -> {
             switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
+                case R.id.createUserFragment:
+                    CreateUserFragment createUserFragment = (CreateUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createUserFragment != null) {
+                        createUserFragment.birthday = getDate();
+
+                        createUserFragment.year = year;
+                        createUserFragment.month = month;
+                        createUserFragment.day = day;
+
+                        createUserFragment.binding.birthdayIncludeLayout.selectTextView.setText(createUserFragment.birthday);
+                    }
+                    break;
                 case R.id.editUserFragment:
-                    EditUserFragment editAccountFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                    if (editAccountFragment != null) {
-                        // TODO : Set Fragment TextView String
+                    EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editUserFragment != null) {
+                        // TODO : Place Code Here
                     }
                     break;
             }
-        });
+
+            dismiss();
+        }).widget(binding.entryButton);
     }
 
     private void setNumberPicker() {
