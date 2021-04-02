@@ -19,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Dialogs.ImageDialog;
 import com.majazeh.risloo.databinding.FragmentEditCenterAvatarBinding;
 import com.squareup.picasso.Picasso;
 
@@ -28,6 +29,7 @@ public class EditCenterAvatarFragment extends Fragment {
     private FragmentEditCenterAvatarBinding binding;
 
     // Objects
+    private ImageDialog imageDialog;
     public Bitmap avatarBitmap;
 
     // Vars
@@ -50,6 +52,8 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void initializer() {
+        imageDialog = new ImageDialog();
+
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterAvatarFragmentGuide));
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterAvatarFragmentButton), getResources().getColor(R.color.White));

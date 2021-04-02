@@ -3,7 +3,6 @@ package com.majazeh.risloo.Views.Dialogs;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,9 +13,16 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.DialogImageBinding;
+
+import java.util.Objects;
 
 public class ImageDialog extends BottomSheetDialogFragment {
 
@@ -52,7 +58,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.galleryPermission(requireActivity())) {
-                Log.e("gallery", "hello");
+                IntentManager.gallery(requireActivity());
             }
 
             dismiss();
@@ -60,7 +66,26 @@ public class ImageDialog extends BottomSheetDialogFragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
-                Log.e("camera", "hello");
+                switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
+                    case R.id.createCenterFragment:
+                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createCenterFragment != null) {
+                            // TODO : Place Code Here
+                        }
+                        break;
+                    case R.id.editCenterFragment:
+                        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (editCenterFragment != null) {
+                            // TODO : Place Code Here
+                        }
+                        break;
+                    case R.id.editUserFragment:
+                        EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (editUserFragment != null) {
+                            // TODO : Place Code Here
+                        }
+                        break;
+                }
             }
 
             dismiss();
