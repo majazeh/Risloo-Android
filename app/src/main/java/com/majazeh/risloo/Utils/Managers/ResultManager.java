@@ -26,7 +26,9 @@ public class ResultManager {
             bitmap = BitmapManager.scaleToCenter(imageBitmap);
 
             circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
-            textView.setVisibility(View.GONE);
+            if (textView != null) {
+                textView.setVisibility(View.GONE);
+            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -47,7 +49,9 @@ public class ResultManager {
         bitmap = BitmapManager.scaleToCenter(imageBitmap);
 
         circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
-        textView.setVisibility(View.GONE);
+        if (textView != null) {
+            textView.setVisibility(View.GONE);
+        }
     }
 
 }

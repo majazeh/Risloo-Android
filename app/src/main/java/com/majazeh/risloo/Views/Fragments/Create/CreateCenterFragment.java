@@ -14,10 +14,14 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Dialogs.ImageDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
+import com.squareup.picasso.Picasso;
 
 public class CreateCenterFragment extends Fragment {
 
@@ -25,6 +29,7 @@ public class CreateCenterFragment extends Fragment {
     public FragmentCreateCenterBinding binding;
 
     // Objects
+    private ImageDialog imageDialog;
     public Bitmap avatarBitmap;
 
     // Vars
@@ -47,6 +52,8 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
+        imageDialog = new ImageDialog();
+
         binding.centerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentCenterHeader));
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentManagerHeader));
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentNameHeader));
@@ -54,6 +61,8 @@ public class CreateCenterFragment extends Fragment {
         binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentAddressHeader));
         binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentPhonesHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentDescriptionHeader));
+
+        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateCenterFragmentAvatarGuide));
 
         binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentAddressHint));
         binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentDescriptionHint));
@@ -79,14 +88,12 @@ public class CreateCenterFragment extends Fragment {
                 case R.id.first_radioButton:
                     center = "personal";
 
-                    binding.nameIncludeLayout.getRoot().setVisibility(View.GONE);
-                    binding.avatarIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.clinicGroup.setVisibility(View.GONE);
                     break;
                 case R.id.second_radioButton:
                     center = "clinic";
 
-                    binding.nameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.avatarIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.clinicGroup.setVisibility(View.VISIBLE);
                     break;
             }
         });
@@ -105,8 +112,8 @@ public class CreateCenterFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.avatarIncludeLayout.selectTextView);
+            imageDialog.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
+        }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -174,14 +181,12 @@ public class CreateCenterFragment extends Fragment {
                 case "personal":
                     binding.centerIncludeLayout.firstRadioButton.setChecked(true);
 
-                    binding.nameIncludeLayout.getRoot().setVisibility(View.GONE);
-                    binding.avatarIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.clinicGroup.setVisibility(View.GONE);
                     break;
                 case "clinic":
                     binding.centerIncludeLayout.secondRadioButton.setChecked(true);
 
-                    binding.nameIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.avatarIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.clinicGroup.setVisibility(View.VISIBLE);
                     break;
             }
         }
@@ -191,8 +196,7 @@ public class CreateCenterFragment extends Fragment {
             binding.managerIncludeLayout.selectTextView.setText(manager);
         }
         if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
-            binding.avatarIncludeLayout.nameTextView.setText(avatarPath);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             address = ((MainActivity) requireActivity()).singleton.getAddress();
@@ -218,6 +222,8 @@ public class CreateCenterFragment extends Fragment {
 
             // TODO : Call Work Method
         } else {
+            FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+
             name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();

@@ -54,21 +54,28 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/manager_includeLayout"
                 app:layout_constraintStart_toStartOf="@+id/manager_includeLayout"
                 app:layout_constraintTop_toBottomOf="@+id/manager_includeLayout" />
 
             <include
                 android:id="@+id/avatar_includeLayout"
-                layout="@layout/component_input_file"
+                layout="@layout/component_input_avatar"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/manager_includeLayout"
+                app:layout_constraintRight_toRightOf="@id/manager_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
+
+            <include
+                android:id="@+id/avatar_guideLayout"
+                layout="@layout/component_guide_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@id/manager_includeLayout"
                 app:layout_constraintStart_toStartOf="@+id/manager_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/name_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout" />
 
             <include
                 android:id="@+id/address_includeLayout"
@@ -78,7 +85,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@+id/manager_includeLayout"
                 app:layout_constraintStart_toStartOf="@+id/manager_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/avatar_guideLayout" />
 
             <include
                 android:id="@+id/phones_includeLayout"
@@ -101,6 +108,13 @@
                 app:layout_constraintEnd_toEndOf="@+id/phones_includeLayout"
                 app:layout_constraintStart_toStartOf="@+id/phones_includeLayout"
                 app:layout_constraintTop_toBottomOf="@+id/phones_includeLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/clinic_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="name_includeLayout,avatar_includeLayout, avatar_guideLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -196,6 +196,8 @@
     <string name="CreateCenterFragmentAddressHint">غیر ضروری</string>
     <string name="CreateCenterFragmentDescriptionHint">غیر ضروری</string>
 
+    <string name="CreateCenterFragmentAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+
     <string name="CreateCenterFragmentCenterPersonal">شخصی</string>
     <string name="CreateCenterFragmentCenterClinic">مرکز مشاوره</string>
 
