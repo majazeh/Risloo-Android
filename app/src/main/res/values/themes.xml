@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     // App Theme
     //////////////////////////////////////////////////////////////////////////////////////
@@ -94,11 +94,12 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowIsFloating">false</item>
         <item name="bottomSheetStyle">@style/BottomSheetModal</item>
     </style>
 
     <style name="BottomSheetModal" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/draw_12sdp_top_solid_white</item>
+        <item name="android:background">@drawable/draw_12sdp_top_solid_white_border_2dp_gray200</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////

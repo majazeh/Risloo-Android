@@ -8,4 +8,11 @@
         </shape>
     </item>
 
+    <item android:top="-2dp" android:right="-2dp" android:left="-2dp">
+        <shape>
+            <solid android:color="@android:color/transparent" />
+            <stroke android:color="@color/Gray200" android:width="@dimen/_1sdp"/>
+        </shape>
+    </item>
+
 </layer-list>

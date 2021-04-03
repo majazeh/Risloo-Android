@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
@@ -35,7 +34,7 @@ public class DateDialog extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return CustomizeDialog.bottomSheet(requireActivity(), dialog);
+        return dialog;
     }
 
     @Nullable

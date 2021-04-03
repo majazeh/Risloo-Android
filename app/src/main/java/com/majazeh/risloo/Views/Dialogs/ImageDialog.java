@@ -15,7 +15,6 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
-import com.majazeh.risloo.Utils.Widgets.CustomizeDialog;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
@@ -35,7 +34,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return CustomizeDialog.bottomSheet(requireActivity(), dialog);
+        return dialog;
     }
 
     @Nullable
