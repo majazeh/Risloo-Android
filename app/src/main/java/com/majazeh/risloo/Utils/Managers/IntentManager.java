@@ -77,7 +77,7 @@ public class IntentManager {
         try {
             String imageFileName = new SimpleDateFormat("yyyy-MM-dd:HH-mm-ss").format(new Date()) + "_";
             String imageFileSuffix = ".jpg";
-            File imageStorageDir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES);
+            File imageStorageDir = activity.getExternalFilesDir(Environment.DIRECTORY_PICTURES);
 
             File imageFile = File.createTempFile(imageFileName, imageFileSuffix, imageStorageDir);
             String fileProviderAuthority = "com.majazeh.risloo.debug.fileprovider";
