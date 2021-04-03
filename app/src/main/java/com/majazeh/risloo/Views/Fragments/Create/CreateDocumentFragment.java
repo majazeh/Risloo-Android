@@ -14,17 +14,21 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateDocumentBinding;
 
 public class CreateDocumentFragment extends Fragment {
 
     // Binding
-    private FragmentCreateDocumentBinding binding;
+    public FragmentCreateDocumentBinding binding;
 
     // Vars
-    private String name = "", description = "", filePath = "";
+    private String name = "", description = "";
+    public String filePath = "";
 
     @Nullable
     @Override
@@ -54,6 +58,8 @@ public class CreateDocumentFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            binding.fileIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_ripple_gray300);
+
             binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         } else {
             binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
@@ -81,7 +87,9 @@ public class CreateDocumentFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            if (PermissionManager.filePermission(requireActivity())) {
+                IntentManager.file(requireActivity());
+            }
         }).widget(binding.fileIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -127,6 +135,8 @@ public class CreateDocumentFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+
+        FileManager.deleteFolderFromCache(requireActivity(), "documents");
     }
 
 }

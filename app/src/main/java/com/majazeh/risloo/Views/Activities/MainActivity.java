@@ -30,6 +30,8 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
@@ -209,7 +211,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 300) {
+        if (requestCode == 100) {
+            if (grantResults.length > 0) {
+                for (int grantResult : grantResults) {
+                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
+                        return;
+                    }
+                }
+                IntentManager.file(this);
+            }
+        } else if (requestCode == 300) {
             if (grantResults.length > 0) {
                 for (int grantResult : grantResults) {
                     if (grantResult != PackageManager.PERMISSION_GRANTED) {
@@ -291,9 +302,27 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                     break;
+                case R.id.createDocumentFragment:
+                    CreateDocumentFragment createDocumentFragment = (CreateDocumentFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (createDocumentFragment != null) {
+                        if (requestCode == 100) {
+                            ResultManager.fileResult(this, data, createDocumentFragment.filePath, createDocumentFragment.binding.fileIncludeLayout.nameTextView);
+                        }
+                    }
+                    break;
+                case R.id.createPracticeFragment:
+                    CreatePracticeFragment createPracticeFragment = (CreatePracticeFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (createPracticeFragment != null) {
+                        if (requestCode == 100) {
+                            ResultManager.fileResult(this, data, createPracticeFragment.filePath, createPracticeFragment.binding.fileIncludeLayout.nameTextView);
+                        }
+                    }
+                    break;
             }
         } else if (resultCode == RESULT_CANCELED) {
-            if (requestCode == 300) {
+            if (requestCode == 100) {
+                Toast.makeText(this, "File Exception", Toast.LENGTH_SHORT).show();
+            } else if (requestCode == 300) {
                 Toast.makeText(this, "Gallery Exception", Toast.LENGTH_SHORT).show();
             } else if (requestCode == 400) {
                 Toast.makeText(this, "Camera Exception", Toast.LENGTH_SHORT).show();

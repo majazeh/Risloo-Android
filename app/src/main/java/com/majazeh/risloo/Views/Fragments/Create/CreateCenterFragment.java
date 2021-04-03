@@ -33,7 +33,8 @@ public class CreateCenterFragment extends Fragment {
     public Bitmap avatarBitmap;
 
     // Vars
-    public String center = "personal", manager = "", name = "", avatarPath = "", address = "", description ="";
+    private String center = "personal", manager = "", name = "", address = "", description ="";
+    public String avatarPath = "";
 
     @Nullable
     @Override
@@ -195,12 +196,12 @@ public class CreateCenterFragment extends Fragment {
             manager = ((MainActivity) requireActivity()).singleton.getManager();
             binding.managerIncludeLayout.selectTextView.setText(manager);
         }
+        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
+            name = ((MainActivity) requireActivity()).singleton.getName();
+            binding.nameIncludeLayout.inputEditText.setText(name);
+        }
         if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
             Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            address = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.addressIncludeLayout.inputEditText.setText(address);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             address = ((MainActivity) requireActivity()).singleton.getAddress();

@@ -16,6 +16,16 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ResultManager {
 
+    public static void fileResult(Activity activity, Intent data, String path, TextView textView) {
+        Uri fileUri = data.getData();
+
+        path = PathManager.localPath(activity, fileUri);
+
+        if (textView != null) {
+            textView.setText(StringManager.substring(path, '/'));
+        }
+    }
+
     public static void galleryResult(Activity activity, Intent data, String path, Bitmap bitmap, CircleImageView circleImageView, TextView textView) {
         try {
             Uri imageUri = data.getData();
