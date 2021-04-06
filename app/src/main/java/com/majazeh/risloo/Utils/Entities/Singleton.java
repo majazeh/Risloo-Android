@@ -187,4 +187,8 @@ public class Singleton {
         return "";
     }
 
+    public boolean getCreateCase() {
+        return sharedPreferences.getBoolean("createCase", true);
+    }
+
 }

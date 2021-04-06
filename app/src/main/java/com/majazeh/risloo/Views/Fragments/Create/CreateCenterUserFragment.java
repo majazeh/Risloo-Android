@@ -163,6 +163,10 @@ public class CreateCenterUserFragment extends Fragment {
             name = ((MainActivity) requireActivity()).singleton.getName();
             binding.nameIncludeLayout.inputEditText.setText(name);
         }
+        if (((MainActivity) requireActivity()).singleton.getCreateCase()) {
+            createCase = true;
+            binding.caseCheckbox.getRoot().setChecked(true);
+        }
     }
 
     private void doWork() {

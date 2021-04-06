@@ -28,8 +28,10 @@ public class EditAvatarFragment extends Fragment {
     // Binding
     public FragmentEditAvatarBinding binding;
 
-    // Objects
+    // Dialogs
     private ImageDialog imageDialog;
+
+    // Objects
     public Bitmap avatarBitmap;
 
     // Vars
@@ -93,7 +95,8 @@ public class EditAvatarFragment extends Fragment {
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
 
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
+            Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

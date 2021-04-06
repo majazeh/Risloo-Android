@@ -32,7 +32,7 @@ public class CreateUserFragment extends Fragment {
     // Binding
     public FragmentCreateUserBinding binding;
 
-    // Objects
+    // Dialogs
     private BirthdayDialog birthdayDialog;
 
     // Vars

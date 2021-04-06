@@ -25,7 +25,7 @@ public class EditPersonalFragment extends Fragment {
     // Binding
     public FragmentEditPersonalBinding binding;
 
-    // Objects
+    // Dialogs
     private BirthdayDialog birthdayDialog;
 
     // Vars

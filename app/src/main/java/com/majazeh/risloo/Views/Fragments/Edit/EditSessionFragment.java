@@ -28,7 +28,7 @@ public class EditSessionFragment extends Fragment {
     // Binding
     public FragmentEditSessionBinding binding;
 
-    // Objects
+    // Dialogs
     private DateDialog dateDialog;
     private TimeDialog timeDialog;
 
