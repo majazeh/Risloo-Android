@@ -17,17 +17,17 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
-import com.majazeh.risloo.databinding.DialogDateBinding;
+import com.majazeh.risloo.databinding.DialogTimeBinding;
 
 import java.util.Objects;
 
-public class DateDialog extends BottomSheetDialogFragment {
+public class TimeDialog extends BottomSheetDialogFragment {
 
     // Binding
-    private DialogDateBinding binding;
+    private DialogTimeBinding binding;
 
     // Vars
-    private int year, month, day;
+    private int hour, minute;
 
     @NonNull
     @Override
@@ -39,7 +39,7 @@ public class DateDialog extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = DialogDateBinding.inflate(inflater, viewGroup, false);
+        binding = DialogTimeBinding.inflate(inflater, viewGroup, false);
 
         listener();
 
@@ -63,40 +63,28 @@ public class DateDialog extends BottomSheetDialogFragment {
     }
 
     private void listener() {
-        binding.monthNumberPicker.setOnValueChangedListener((picker, oldVal, newVal) -> {
-            if (picker == binding.monthNumberPicker) {
-                if (newVal <= 6) {
-                    binding.dayNumberPicker.setMaxValue(31);
-                } else {
-                    binding.dayNumberPicker.setMaxValue(30);
-                }
-            }
-        });
-
         ClickManager.onDelayedClickListener(() -> {
             switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                 case R.id.createSessionFragment:
                     CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSessionFragment != null) {
-                        createSessionFragment.startDate = getDate();
+                        createSessionFragment.startTime = getDate();
 
-                        createSessionFragment.year = year;
-                        createSessionFragment.month = month;
-                        createSessionFragment.day = day;
+                        createSessionFragment.hour = hour;
+                        createSessionFragment.minute = minute;
 
-                        createSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(createSessionFragment.startDate);
+                        createSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(createSessionFragment.startTime);
                     }
                     break;
                 case R.id.editSessionFragment:
                     EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editSessionFragment != null) {
-                        editSessionFragment.startDate = getDate();
+                        editSessionFragment.startTime = getDate();
 
-                        editSessionFragment.year = year;
-                        editSessionFragment.month = month;
-                        editSessionFragment.day = day;
+                        editSessionFragment.hour = hour;
+                        editSessionFragment.minute = minute;
 
-                        editSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(editSessionFragment.startDate);
+                        editSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(editSessionFragment.startTime);
                     }
                     break;
             }
@@ -106,48 +94,40 @@ public class DateDialog extends BottomSheetDialogFragment {
     }
 
     private void setNumberPicker() {
-        binding.yearNumberPicker.setMinValue(1300);
-        binding.yearNumberPicker.setMaxValue(2100);
-        binding.yearNumberPicker.setValue(year);
+        binding.hourNumberPicker.setMinValue(0);
+        binding.hourNumberPicker.setMaxValue(23);
+        binding.hourNumberPicker.setValue(hour);
 
-        binding.monthNumberPicker.setMinValue(1);
-        binding.monthNumberPicker.setMaxValue(12);
-        binding.monthNumberPicker.setValue(month);
-        binding.monthNumberPicker.setDisplayedValues(requireActivity().getResources().getStringArray(R.array.JalaliMonths));
-
-        binding.dayNumberPicker.setMinValue(1);
-        binding.dayNumberPicker.setMaxValue(31);
-        binding.dayNumberPicker.setValue(day);
+        binding.minuteNumberPicker.setMinValue(0);
+        binding.minuteNumberPicker.setMaxValue(59);
+        binding.minuteNumberPicker.setValue(minute);
     }
 
     private void clearNumberPicker() {
-        binding.yearNumberPicker.setValue(year);
-        binding.monthNumberPicker.setValue(month);
-        binding.dayNumberPicker.setValue(day);
+        binding.hourNumberPicker.setValue(hour);
+        binding.minuteNumberPicker.setValue(minute);
     }
 
     private String getDate() {
-        year = binding.yearNumberPicker.getValue();
-        month = binding.monthNumberPicker.getValue();
-        day = binding.dayNumberPicker.getValue();
+        hour = binding.hourNumberPicker.getValue();
+        minute = binding.minuteNumberPicker.getValue();
 
-        if (month < 10) {
-            if (day < 10)
-                return year + "-" + "0" + month + "-" + "0" + day;
+        if (hour < 10) {
+            if (minute < 10)
+                return "0" + hour + ":" + "0" + minute;
             else
-                return year + "-" + "0" + month + "-" + day;
+                return "0" + hour + ":" + minute;
         } else {
-            if (day < 10)
-                return year + "-" + month + "-" + "0" + day;
+            if (minute < 10)
+                return hour + ":" + "0" + minute;
             else
-                return year + "-" + month + "-" + day;
+                return hour + ":" + minute;
         }
     }
 
-    public void setDate(int year, int month, int day) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
+    public void setTime(int hour, int minute) {
+        this.hour = hour;
+        this.minute = minute;
     }
 
     @Override

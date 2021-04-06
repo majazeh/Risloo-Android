@@ -77,7 +77,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
                     case R.id.editCenterFragment:
                         EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (editCenterFragment != null) {
-                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.getRegisteredFragment(2);
+                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.getRegisteredFragment(1);
 
                             editCenterAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
                         }

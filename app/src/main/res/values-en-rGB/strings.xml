@@ -18,17 +18,30 @@
 
     <string name="AppChooserSelect">ارسال پیام</string>
 
+    <string name="AppDateDefault">1400-01-01</string>
+    <string name="AppTimeDefault">01:00</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Dialog Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="DialogDateTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="DialogBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="DialogBirthdayEntry">ثبت</string>
+
+    <string name="DialogDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
     <string name="DialogDateEntry">ثبت</string>
 
     <string name="DialogImageTitle">از کجا می خوای تصویر بیارید؟</string>
     <string name="DialogImageGallery">البوم</string>
     <string name="DialogImageCamera">دوربین</string>
+
+    <string name="DialogPhoneTitle">شماره تلفن(ها) را وارد کنید.</string>
+    <string name="DialogPhoneHint">شماره تلفن</string>
+    <string name="DialogPhoneEntry">ثبت</string>
+
+    <string name="DialogTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
+    <string name="DialogTimeEntry">ثبت</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -324,6 +337,7 @@
 
     <string name="CreateSessionFragmentTitle">ساخت جلسه</string>
 
+    <string name="CreateSessionFragmentStartDateHeader">تاریخ شروع</string>
     <string name="CreateSessionFragmentStartTimeHeader">زمان شروع</string>
     <string name="CreateSessionFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
     <string name="CreateSessionFragmentStatusHeader">وضعیت</string>
@@ -348,8 +362,6 @@
 
     <string name="CreateUserFragmentUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
     <string name="CreateUserFragmentPasswordGuide">گذرواژه باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
-
-    <string name="CreateUserFragmentBirthdayDefault">1400-01-01</string>
 
     <string name="CreateUserFragmentStatusActive">فعال</string>
     <string name="CreateUserFragmentStatusWaiting">در انتظار</string>
@@ -490,8 +502,6 @@
 
     <string name="EditPersonalFragmentUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
 
-    <string name="EditPersonalFragmentBirthdayDefault">1400-01-01</string>
-
     <string name="EditPersonalFragmentStatusActive">فعال</string>
     <string name="EditPersonalFragmentStatusWaiting">در انتظار</string>
     <string name="EditPersonalFragmentStatusClosed">بسته شده</string>
@@ -510,6 +520,7 @@
 
     <string name="EditSessionFragmentTitle">ویرایش جلسه</string>
 
+    <string name="EditSessionFragmentStartDateHeader">تاریخ شروع</string>
     <string name="EditSessionFragmentStartTimeHeader">زمان شروع</string>
     <string name="EditSessionFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
     <string name="EditSessionFragmentStatusHeader">وضعیت</string>

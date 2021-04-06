@@ -145,6 +145,13 @@ public class Singleton {
         return "";
     }
 
+    public String getStartDate() {
+        if (!sharedPreferences.getString("start_date", "").equals("")) {
+            return sharedPreferences.getString("start_date", "");
+        }
+        return "";
+    }
+
     public String getStartTime() {
         if (!sharedPreferences.getString("start_time", "").equals("")) {
             return sharedPreferences.getString("start_time", "");

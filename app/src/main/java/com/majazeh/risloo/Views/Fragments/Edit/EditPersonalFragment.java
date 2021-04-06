@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.DateDialog;
+import com.majazeh.risloo.Views.Dialogs.BirthdayDialog;
 import com.majazeh.risloo.databinding.FragmentEditPersonalBinding;
 
 public class EditPersonalFragment extends Fragment {
@@ -26,7 +26,7 @@ public class EditPersonalFragment extends Fragment {
     public FragmentEditPersonalBinding binding;
 
     // Objects
-    private DateDialog dateDialog;
+    private BirthdayDialog birthdayDialog;
 
     // Vars
     public String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
@@ -49,7 +49,7 @@ public class EditPersonalFragment extends Fragment {
     }
 
     private void initializer() {
-        dateDialog = new DateDialog();
+        birthdayDialog = new BirthdayDialog();
 
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentMobileHeader));
@@ -122,8 +122,8 @@ public class EditPersonalFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            dateDialog.show(requireActivity().getSupportFragmentManager(), "dateBottomSheet");
-            dateDialog.setDate(year, month, day);
+            birthdayDialog.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
+            birthdayDialog.setDate(year, month, day);
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
@@ -204,7 +204,7 @@ public class EditPersonalFragment extends Fragment {
             birthday = ((MainActivity) requireActivity()).singleton.getBirthday();
             binding.birthdayIncludeLayout.selectTextView.setText(birthday);
         } else {
-            birthday = getResources().getString(R.string.EditPersonalFragmentBirthdayDefault);
+            birthday = getResources().getString(R.string.AppDateDefault);
             binding.birthdayIncludeLayout.selectTextView.setText(birthday);
         }
 

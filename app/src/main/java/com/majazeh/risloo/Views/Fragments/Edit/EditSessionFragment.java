@@ -15,19 +15,26 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Dialogs.DateDialog;
+import com.majazeh.risloo.Views.Dialogs.TimeDialog;
 import com.majazeh.risloo.databinding.FragmentEditSessionBinding;
 
 public class EditSessionFragment extends Fragment {
 
     // Binding
-    private FragmentEditSessionBinding binding;
+    public FragmentEditSessionBinding binding;
+
+    // Objects
+    private DateDialog dateDialog;
+    private TimeDialog timeDialog;
 
     // Vars
-    private String startTime = "", duration = "60", status = "";
-    private int year, month, day, hour, minute;
+    public String startDate = "", startTime = "", duration = "60", status = "";
+    public int year, month, day, hour, minute;
 
     @Nullable
     @Override
@@ -46,6 +53,10 @@ public class EditSessionFragment extends Fragment {
     }
 
     private void initializer() {
+        dateDialog = new DateDialog();
+        timeDialog = new TimeDialog();
+
+        binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionFragmentStartDateHeader));
         binding.startTimeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionFragmentStartTimeHeader));
         binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionFragmentDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionFragmentStatusHeader));
@@ -68,7 +79,13 @@ public class EditSessionFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            dateDialog.show(requireActivity().getSupportFragmentManager(), "dateBottomSheet");
+            dateDialog.setDate(year, month, day);
+        }).widget(binding.startDateIncludeLayout.selectTextView);
+
+        ClickManager.onDelayedClickListener(() -> {
+            timeDialog.show(requireActivity().getSupportFragmentManager(), "timeBottomSheet");
+            timeDialog.setTime(hour, minute);
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -93,6 +110,9 @@ public class EditSessionFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
+            if (startDate.equals("")) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            }
             if (startTime.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeIncludeLayout.errorImageView, binding.startTimeIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
@@ -103,7 +123,8 @@ public class EditSessionFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0 && !status.equals("")) {
+            if (!startDate.equals("") && !startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0 && !status.equals("")) {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeIncludeLayout.errorImageView, binding.startTimeIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationIncludeLayout.errorImageView, binding.durationIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView);
@@ -114,18 +135,37 @@ public class EditSessionFragment extends Fragment {
     }
 
     private void setData() {
+        if (!((MainActivity) requireActivity()).singleton.getStartDate().equals("")) {
+            startDate = ((MainActivity) requireActivity()).singleton.getStartDate();
+            binding.startDateIncludeLayout.selectTextView.setText(startDate);
+        } else {
+            startDate = getResources().getString(R.string.AppDateDefault);
+            binding.startDateIncludeLayout.selectTextView.setText(startDate);
+        }
+
+        year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", startDate)));
+        month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", startDate)));
+        day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", startDate)));
+
         if (!((MainActivity) requireActivity()).singleton.getStartTime().equals("")) {
             startTime = ((MainActivity) requireActivity()).singleton.getStartTime();
             binding.startTimeIncludeLayout.selectTextView.setText(startTime);
+        } else {
+            startTime = getResources().getString(R.string.AppTimeDefault);
+            binding.startTimeIncludeLayout.selectTextView.setText(startTime);
         }
+
+        hour = Integer.parseInt(DateManager.dateToString("hh", DateManager.stringToDate("hh:mm", startTime)));
+        minute = Integer.parseInt(DateManager.dateToString("mm", DateManager.stringToDate("hh:mm", startTime)));
+
         if (!((MainActivity) requireActivity()).singleton.getDuration().equals("")) {
             duration = ((MainActivity) requireActivity()).singleton.getDuration();
             binding.durationIncludeLayout.inputEditText.setText(duration);
         }
         if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
             status = ((MainActivity) requireActivity()).singleton.getStatus();
-            for (int i=0; i<binding.statusIncludeLayout.selectSpinner.getCount(); i++){
-                if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)){
+            for (int i=0; i<binding.statusIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
                     binding.statusIncludeLayout.selectSpinner.setSelection(i);
                 }
             }

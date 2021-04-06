@@ -15,16 +15,17 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
-import com.majazeh.risloo.databinding.DialogDateBinding;
+import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
+import com.majazeh.risloo.databinding.DialogBirthdayBinding;
 
 import java.util.Objects;
 
-public class DateDialog extends BottomSheetDialogFragment {
+public class BirthdayDialog extends BottomSheetDialogFragment {
 
     // Binding
-    private DialogDateBinding binding;
+    private DialogBirthdayBinding binding;
 
     // Vars
     private int year, month, day;
@@ -39,7 +40,7 @@ public class DateDialog extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = DialogDateBinding.inflate(inflater, viewGroup, false);
+        binding = DialogBirthdayBinding.inflate(inflater, viewGroup, false);
 
         listener();
 
@@ -75,28 +76,30 @@ public class DateDialog extends BottomSheetDialogFragment {
 
         ClickManager.onDelayedClickListener(() -> {
             switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-                case R.id.createSessionFragment:
-                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                    if (createSessionFragment != null) {
-                        createSessionFragment.startDate = getDate();
+                case R.id.createUserFragment:
+                    CreateUserFragment createUserFragment = (CreateUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createUserFragment != null) {
+                        createUserFragment.birthday = getDate();
 
-                        createSessionFragment.year = year;
-                        createSessionFragment.month = month;
-                        createSessionFragment.day = day;
+                        createUserFragment.year = year;
+                        createUserFragment.month = month;
+                        createUserFragment.day = day;
 
-                        createSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(createSessionFragment.startDate);
+                        createUserFragment.binding.birthdayIncludeLayout.selectTextView.setText(createUserFragment.birthday);
                     }
                     break;
-                case R.id.editSessionFragment:
-                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                    if (editSessionFragment != null) {
-                        editSessionFragment.startDate = getDate();
+                case R.id.editUserFragment:
+                    EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editUserFragment != null) {
+                        EditPersonalFragment editPersonalFragment = (EditPersonalFragment) editUserFragment.adapter.getRegisteredFragment(0);
 
-                        editSessionFragment.year = year;
-                        editSessionFragment.month = month;
-                        editSessionFragment.day = day;
+                        editPersonalFragment.birthday = getDate();
 
-                        editSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(editSessionFragment.startDate);
+                        editPersonalFragment.year = year;
+                        editPersonalFragment.month = month;
+                        editPersonalFragment.day = day;
+
+                        editPersonalFragment.binding.birthdayIncludeLayout.selectTextView.setText(editPersonalFragment.birthday);
                     }
                     break;
             }
