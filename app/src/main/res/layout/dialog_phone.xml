@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
+    tools:context=".Views.Dialogs.PhoneDialog">
+
+    <TextView
+        android:id="@+id/title_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:gravity="start"
+        android:text="@string/DialogPhoneTitle"
+        android:textSize="@dimen/_13ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_demi_bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/phone_editText"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_32sdp"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:imeOptions="actionDone"
+        android:inputType="phone"
+        android:hint="@string/DialogPhoneHint"
+        android:gravity="center|right"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+        app:layout_constraintBottom_toTopOf="@id/list_recyclerView"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/title_textView" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/list_recyclerView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:overScrollMode="never"
+        app:layout_constrainedHeight="true"
+        app:layout_constraintBottom_toTopOf="@id/entry_button"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/phone_editText"
+        tools:listitem="@layout/single_item_phone" />
+
+    <TextView
+        android:id="@+id/entry_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
+        android:gravity="center"
+        android:text="@string/DialogPhoneEntry"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/White"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_16sdp_solid_blue500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/title_textView"
+        app:layout_constraintStart_toStartOf="@+id/title_textView"
+        app:layout_constraintTop_toBottomOf="@+id/list_recyclerView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
