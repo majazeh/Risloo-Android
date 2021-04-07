@@ -19,20 +19,31 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.PhonesAdapter;
 import com.majazeh.risloo.Views.Dialogs.ImageDialog;
+import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class CreateCenterFragment extends Fragment {
 
     // Binding
     public FragmentCreateCenterBinding binding;
 
-    // Objects
+    // Adapters
+    public PhonesAdapter phonesAdapter;
+
+    // Dialogs
     private ImageDialog imageDialog;
+    private PhoneDialog phoneDialog;
+
+    // Objects
     public Bitmap avatarBitmap;
 
     // Vars
+    private ArrayList<String> phones = new ArrayList<>();
     private String center = "personal", manager = "", name = "", address = "", description ="";
     public String avatarPath = "";
 
@@ -53,7 +64,10 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
+        phonesAdapter = new PhonesAdapter(requireActivity());
+
         imageDialog = new ImageDialog();
+        phoneDialog = new PhoneDialog();
 
         binding.centerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentCenterHeader));
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentManagerHeader));
@@ -99,9 +113,12 @@ public class CreateCenterFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.managerIncludeLayout.selectTextView);
+        binding.managerIncludeLayout.selectTextView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                // TODO : Place Code Here
+            }
+            return false;
+        });
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -125,9 +142,13 @@ public class CreateCenterFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.phonesIncludeLayout.selectRecyclerView);
+        binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                phoneDialog.show(requireActivity().getSupportFragmentManager(), "phoneBottomSheet");
+                phoneDialog.setPhones(phones);
+            }
+            return false;
+        });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -201,14 +222,27 @@ public class CreateCenterFragment extends Fragment {
             binding.nameIncludeLayout.inputEditText.setText(name);
         }
         if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
+            Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             address = ((MainActivity) requireActivity()).singleton.getAddress();
             binding.addressIncludeLayout.inputEditText.setText(address);
         }
 
-        // TODO : Set Phones Here
+//        if (extras.getString("phones") != null) {
+//            try {
+//                JSONArray phones = new JSONArray(extras.getString("phones"));
+//
+//                for (int i = 0; i < phones.length(); i++) {
+//                    this.phones.add(phones.getString(i));
+//                }
+//
+//                 setRecyclerView();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
             description = ((MainActivity) requireActivity()).singleton.getDescription();
@@ -216,10 +250,17 @@ public class CreateCenterFragment extends Fragment {
         }
     }
 
+    public void setRecyclerView() {
+        phonesAdapter.setPhones(phones);
+        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
+    }
+
     private void doWork() {
         if (center.equals("personal")) {
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+
+            phones = phonesAdapter.getPhones();
 
             // TODO : Call Work Method
         } else {
@@ -228,6 +269,8 @@ public class CreateCenterFragment extends Fragment {
             name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+
+            phones = phonesAdapter.getPhones();
 
             // TODO : Call Work Method
         }

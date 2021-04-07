@@ -16,14 +16,25 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.PhonesAdapter;
+import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
+
+import java.util.ArrayList;
 
 public class EditCenterDetailFragment extends Fragment {
 
     // Binding
-    private FragmentEditCenterDetailBinding binding;
+    public FragmentEditCenterDetailBinding binding;
+
+    // Adapters
+    public PhonesAdapter phonesAdapter;
+
+    // Dialogs
+    private PhoneDialog phoneDialog;
 
     // Vars
+    private ArrayList<String> phones = new ArrayList<>();
     private String manager = "", name = "", address = "", description = "";
 
     @Nullable
@@ -43,6 +54,10 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void initializer() {
+        phonesAdapter = new PhonesAdapter(requireActivity());
+
+        phoneDialog = new PhoneDialog();
+
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentManagerHeader));
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentNameHeader));
         binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentAddressHeader));
@@ -87,15 +102,19 @@ public class EditCenterDetailFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.phonesIncludeLayout.selectRecyclerView);
+        binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                phoneDialog.show(requireActivity().getSupportFragmentManager(), "phoneBottomSheet");
+                phoneDialog.setPhones(phones);
+            }
+            return false;
+        });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
                     ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-                }
+                 }
             }
             return false;
         });
@@ -135,7 +154,19 @@ public class EditCenterDetailFragment extends Fragment {
             binding.addressIncludeLayout.inputEditText.setText(address);
         }
 
-        // TODO : Set Phones Here
+//        if (extras.getString("phones") != null) {
+//            try {
+//                JSONArray phones = new JSONArray(extras.getString("phones"));
+//
+//                for (int i = 0; i < phones.length(); i++) {
+//                    this.phones.add(phones.getString(i));
+//                }
+//
+//                 setRecyclerView();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
             description = ((MainActivity) requireActivity()).singleton.getDescription();
@@ -143,10 +174,17 @@ public class EditCenterDetailFragment extends Fragment {
         }
     }
 
+    public void setRecyclerView() {
+        phonesAdapter.setPhones(phones);
+        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
+    }
+
     private void doWork() {
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+
+        phones = phonesAdapter.getPhones();
 
         // TODO : Call Work Method
     }
