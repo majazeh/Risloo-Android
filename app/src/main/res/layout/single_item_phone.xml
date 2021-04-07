@@ -30,13 +30,13 @@
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_medium"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/delete_imageView"
+            app:layout_constraintEnd_toStartOf="@id/remove_imageView"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="989120000000" />
 
         <ImageView
-            android:id="@+id/delete_imageView"
+            android:id="@+id/remove_imageView"
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
             android:layout_marginEnd="@dimen/_2sdp"
