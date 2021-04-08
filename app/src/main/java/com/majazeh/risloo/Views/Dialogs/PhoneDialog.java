@@ -77,7 +77,7 @@ public class PhoneDialog extends BottomSheetDialogFragment {
     private void initializer() {
         phonesAdapter = new PhonesAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._18sdp), (int) getResources().getDimension(R.dimen._18sdp), (int) getResources().getDimension(R.dimen._3sdp), 0);
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, (int) getResources().getDimension(R.dimen._18sdp), (int) getResources().getDimension(R.dimen._3sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 

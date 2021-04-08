@@ -34,6 +34,7 @@
         android:paddingStart="@dimen/_8sdp"
         android:paddingEnd="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
         android:imeOptions="actionDone"
         android:inputType="phone"
         android:hint="@string/DialogPhoneHint"
