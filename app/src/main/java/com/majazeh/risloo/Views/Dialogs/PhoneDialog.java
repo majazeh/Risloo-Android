@@ -81,7 +81,7 @@ public class PhoneDialog extends BottomSheetDialogFragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        InitManager.recyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
+        InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
@@ -101,12 +101,13 @@ public class PhoneDialog extends BottomSheetDialogFragment {
             return false;
         });
 
-        binding.phoneEditText.setOnKeyListener((v, keyCode, event) -> {
+        binding.phoneEditText.setOnEditorActionListener((v, actionId, event) -> {
             if (binding.phoneEditText.length() != 0) {
                 String phone = binding.phoneEditText.getText().toString().trim();
 
                 if (!phonesAdapter.getPhones().contains(phone)) {
                     phonesAdapter.addPhone(phone);
+                    setRecyclerView();
                 }
 
                 switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
@@ -115,6 +116,7 @@ public class PhoneDialog extends BottomSheetDialogFragment {
                         if (createCenterFragment != null) {
                             if (!createCenterFragment.phonesAdapter.getPhones().contains(phone)) {
                                 createCenterFragment.phonesAdapter.addPhone(phone);
+                                createCenterFragment.setRecyclerView();
                             }
                         }
                         break;
@@ -125,6 +127,7 @@ public class PhoneDialog extends BottomSheetDialogFragment {
 
                             if (!editCenterDetailFragment.phonesAdapter.getPhones().contains(phone)) {
                                 editCenterDetailFragment.phonesAdapter.addPhone(phone);
+                                editCenterDetailFragment.setRecyclerView();
                             }
                         }
                         break;

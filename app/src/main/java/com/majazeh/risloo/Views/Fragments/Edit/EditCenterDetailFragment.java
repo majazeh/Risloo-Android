@@ -11,10 +11,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PhonesAdapter;
 import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
@@ -32,6 +35,10 @@ public class EditCenterDetailFragment extends Fragment {
 
     // Dialogs
     private PhoneDialog phoneDialog;
+
+    // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
+    private LinearLayoutManager layoutManager;
 
     // Vars
     private ArrayList<String> phones = new ArrayList<>();
@@ -58,6 +65,10 @@ public class EditCenterDetailFragment extends Fragment {
 
         phoneDialog = new PhoneDialog();
 
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._3sdp), 0);
+
+        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentManagerHeader));
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentNameHeader));
         binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentAddressHeader));
@@ -66,6 +77,8 @@ public class EditCenterDetailFragment extends Fragment {
 
         binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailFragmentAddressHint));
         binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailFragmentDescriptionHint));
+
+        InitManager.unfixedRecyclerView(binding.phonesIncludeLayout.selectRecyclerView, itemDecoration, layoutManager);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterDetailFragmentButton), getResources().getColor(R.color.White));
     }

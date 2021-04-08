@@ -44,4 +44,11 @@ public class InitManager {
         recyclerView.setHasFixedSize(true);
     }
 
+    public static void unfixedRecyclerView(RecyclerView recyclerView, RecyclerView.ItemDecoration itemDecoration, LinearLayoutManager layoutManager) {
+        recyclerView.addItemDecoration(itemDecoration);
+        recyclerView.setLayoutManager(layoutManager);
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(false);
+    }
+
 }
