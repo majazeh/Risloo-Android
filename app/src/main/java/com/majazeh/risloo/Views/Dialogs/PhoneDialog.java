@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,13 +22,11 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PhonesAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogPhoneBinding;
 
-import java.util.ArrayList;
 import java.util.Objects;
 
 public class PhoneDialog extends BottomSheetDialogFragment {
@@ -35,15 +34,9 @@ public class PhoneDialog extends BottomSheetDialogFragment {
     // Binding
     private DialogPhoneBinding binding;
 
-    // Adapters
-    private PhonesAdapter phonesAdapter;
-
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
-
-    // Vars
-    private ArrayList<String> phones;
 
     @NonNull
     @Override
@@ -75,8 +68,6 @@ public class PhoneDialog extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        phonesAdapter = new PhonesAdapter(requireActivity());
-
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, (int) getResources().getDimension(R.dimen._18sdp), (int) getResources().getDimension(R.dimen._3sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
@@ -101,14 +92,9 @@ public class PhoneDialog extends BottomSheetDialogFragment {
             return false;
         });
 
-        binding.phoneEditText.setOnEditorActionListener((v, actionId, event) -> {
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.phoneEditText.length() != 0) {
                 String phone = binding.phoneEditText.getText().toString().trim();
-
-                if (!phonesAdapter.getPhones().contains(phone)) {
-                    phonesAdapter.addPhone(phone);
-                    setRecyclerView();
-                }
 
                 switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                     case R.id.createCenterFragment:
@@ -116,7 +102,8 @@ public class PhoneDialog extends BottomSheetDialogFragment {
                         if (createCenterFragment != null) {
                             if (!createCenterFragment.phonesAdapter.getPhones().contains(phone)) {
                                 createCenterFragment.phonesAdapter.addPhone(phone);
-                                createCenterFragment.setRecyclerView();
+                            } else {
+                                Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                             }
                         }
                         break;
@@ -127,31 +114,42 @@ public class PhoneDialog extends BottomSheetDialogFragment {
 
                             if (!editCenterDetailFragment.phonesAdapter.getPhones().contains(phone)) {
                                 editCenterDetailFragment.phonesAdapter.addPhone(phone);
-                                editCenterDetailFragment.setRecyclerView();
+                            } else {
+                                Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                             }
                         }
                         break;
                 }
-            }
-            return false;
-        });
 
-        ClickManager.onDelayedClickListener(() -> {
-            dismiss();
+                ((MainActivity) requireActivity()).controlEditText.clear(requireActivity(), ((MainActivity) requireActivity()).controlEditText.input());
+                clearEditText();
+            } else {
+                dismiss();
+            }
         }).widget(binding.entryButton);
     }
 
     private void setRecyclerView() {
-        phonesAdapter.setPhones(phones);
-        binding.listRecyclerView.setAdapter(phonesAdapter);
+        switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
+            case R.id.createCenterFragment:
+                CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createCenterFragment != null) {
+                    binding.listRecyclerView.setAdapter(createCenterFragment.phonesAdapter);
+                }
+                break;
+            case R.id.editCenterFragment:
+                EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (editCenterFragment != null) {
+                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
+
+                    binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);
+                }
+                break;
+        }
     }
 
     private void clearEditText() {
         binding.phoneEditText.getText().clear();
-    }
-
-    public void setPhones(ArrayList<String> phones) {
-        this.phones = phones;
     }
 
     @Override

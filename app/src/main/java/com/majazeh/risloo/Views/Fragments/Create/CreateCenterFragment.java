@@ -74,7 +74,7 @@ public class CreateCenterFragment extends Fragment {
         imageDialog = new ImageDialog();
         phoneDialog = new PhoneDialog();
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._3sdp), 0);
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -156,7 +156,6 @@ public class CreateCenterFragment extends Fragment {
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 phoneDialog.show(requireActivity().getSupportFragmentManager(), "phoneBottomSheet");
-                phoneDialog.setPhones(phones);
             }
             return false;
         });
@@ -249,10 +248,12 @@ public class CreateCenterFragment extends Fragment {
 //                    this.phones.add(phones.getString(i));
 //                }
 //
-//                 setRecyclerView();
+//                setRecyclerView();
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
+//        } else {
+            setRecyclerView();
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
@@ -261,7 +262,7 @@ public class CreateCenterFragment extends Fragment {
         }
     }
 
-    public void setRecyclerView() {
+    private void setRecyclerView() {
         phonesAdapter.setPhones(phones);
         binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
     }
