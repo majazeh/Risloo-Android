@@ -7,7 +7,7 @@
     android:layout_gravity="bottom"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
-    tools:context=".Views.Dialogs.TimeDialog">
+    tools:context=".Views.BottomSheets.TimeBottomSheet">
 
     <TextView
         android:id="@+id/title_textView"
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="start"
-        android:text="@string/DialogTimeTitle"
+        android:text="@string/BottomSheetTimeTitle"
         android:textSize="@dimen/_13ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -55,7 +55,7 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginBottom="@dimen/_18sdp"
         android:gravity="center"
-        android:text="@string/DialogTimeEntry"
+        android:text="@string/BottomSheetTimeEntry"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/White"

@@ -7,7 +7,7 @@
     android:layout_gravity="bottom"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
-    tools:context=".Views.Dialogs.ImageDialog">
+    tools:context=".Views.BottomSheets.ImageBottomSheet">
 
     <TextView
         android:id="@+id/title_textView"
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="start"
-        android:text="@string/DialogImageTitle"
+        android:text="@string/BottomSheetImageTitle"
         android:textSize="@dimen/_13ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -56,7 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="@string/DialogImageGallery"
+            android:text="@string/BottomSheetImageGallery"
             android:textSize="@dimen/_13ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray600"
@@ -96,7 +96,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="start"
-            android:text="@string/DialogImageCamera"
+            android:text="@string/BottomSheetImageCamera"
             android:textSize="@dimen/_13ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray600"

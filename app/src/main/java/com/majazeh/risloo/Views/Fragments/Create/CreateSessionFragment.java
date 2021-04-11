@@ -19,8 +19,8 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.DateDialog;
-import com.majazeh.risloo.Views.Dialogs.TimeDialog;
+import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
+import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
 
 public class CreateSessionFragment extends Fragment {
@@ -28,9 +28,9 @@ public class CreateSessionFragment extends Fragment {
     // Binding
     public FragmentCreateSessionBinding binding;
 
-    // Dialogs
-    private DateDialog dateDialog;
-    private TimeDialog timeDialog;
+    // BottomSheets
+    private DateBottomSheet dateBottomSheet;
+    private TimeBottomSheet timeBottomSheet;
 
     // Vars
     public String startDate = "", startTime = "", duration = "60", status = "";
@@ -53,8 +53,8 @@ public class CreateSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        dateDialog = new DateDialog();
-        timeDialog = new TimeDialog();
+        dateBottomSheet = new DateBottomSheet();
+        timeBottomSheet = new TimeBottomSheet();
 
         binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionFragmentStartDateHeader));
         binding.startTimeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionFragmentStartTimeHeader));
@@ -79,13 +79,13 @@ public class CreateSessionFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            dateDialog.show(requireActivity().getSupportFragmentManager(), "dateBottomSheet");
-            dateDialog.setDate(year, month, day);
+            dateBottomSheet.show(requireActivity().getSupportFragmentManager(), "dateBottomSheet");
+            dateBottomSheet.setDate(year, month, day);
         }).widget(binding.startDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            timeDialog.show(requireActivity().getSupportFragmentManager(), "timeBottomSheet");
-            timeDialog.setTime(hour, minute);
+            timeBottomSheet.show(requireActivity().getSupportFragmentManager(), "timeBottomSheet");
+            timeBottomSheet.setTime(hour, minute);
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {

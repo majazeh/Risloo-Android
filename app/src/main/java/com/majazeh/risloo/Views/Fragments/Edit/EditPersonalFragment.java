@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.BirthdayDialog;
+import com.majazeh.risloo.Views.BottomSheets.BirthdayBottomSheet;
 import com.majazeh.risloo.databinding.FragmentEditPersonalBinding;
 
 public class EditPersonalFragment extends Fragment {
@@ -25,8 +25,8 @@ public class EditPersonalFragment extends Fragment {
     // Binding
     public FragmentEditPersonalBinding binding;
 
-    // Dialogs
-    private BirthdayDialog birthdayDialog;
+    // BottomSheets
+    private BirthdayBottomSheet birthdayBottomSheet;
 
     // Vars
     public String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
@@ -49,7 +49,7 @@ public class EditPersonalFragment extends Fragment {
     }
 
     private void initializer() {
-        birthdayDialog = new BirthdayDialog();
+        birthdayBottomSheet = new BirthdayBottomSheet();
 
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentMobileHeader));
@@ -122,8 +122,8 @@ public class EditPersonalFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            birthdayDialog.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
-            birthdayDialog.setDate(year, month, day);
+            birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
+            birthdayBottomSheet.setDate(year, month, day);
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {

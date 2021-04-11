@@ -19,7 +19,7 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.ImageDialog;
+import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.databinding.FragmentEditAvatarBinding;
 import com.squareup.picasso.Picasso;
 
@@ -28,8 +28,8 @@ public class EditAvatarFragment extends Fragment {
     // Binding
     public FragmentEditAvatarBinding binding;
 
-    // Dialogs
-    private ImageDialog imageDialog;
+    // BottomSheets
+    private ImageBottomSheet imageBottomSheet;
 
     // Objects
     public Bitmap avatarBitmap;
@@ -54,7 +54,7 @@ public class EditAvatarFragment extends Fragment {
     }
 
     private void initializer() {
-        imageDialog = new ImageDialog();
+        imageBottomSheet = new ImageBottomSheet();
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditAvatarFragmentGuide));
 
@@ -71,7 +71,7 @@ public class EditAvatarFragment extends Fragment {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            imageDialog.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
+            imageBottomSheet.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         ClickManager.onDelayedClickListener(() -> {

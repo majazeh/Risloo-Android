@@ -109,10 +109,10 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="DialogTheme" parent="@android:style/Theme.Dialog">
-        <item name="android:windowAnimationStyle">@style/DialogAnimation</item>
+        <item name="android:windowAnimationStyle">@style/DialogAnimationTheme</item>
     </style>
 
-    <style name="DialogAnimation">
+    <style name="DialogAnimationTheme">
         <item name="android:windowEnterAnimation">@anim/fade_in</item>
         <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>

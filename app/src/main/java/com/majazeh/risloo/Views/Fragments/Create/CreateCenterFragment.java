@@ -23,7 +23,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PhonesAdapter;
-import com.majazeh.risloo.Views.Dialogs.ImageDialog;
+import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.squareup.picasso.Picasso;
@@ -38,8 +38,10 @@ public class CreateCenterFragment extends Fragment {
     // Adapters
     public PhonesAdapter phonesAdapter;
 
+    // BottomSheets
+    private ImageBottomSheet imageBottomSheet;
+
     // Dialogs
-    private ImageDialog imageDialog;
     private PhoneDialog phoneDialog;
 
     // Objects
@@ -71,7 +73,8 @@ public class CreateCenterFragment extends Fragment {
     private void initializer() {
         phonesAdapter = new PhonesAdapter(requireActivity());
 
-        imageDialog = new ImageDialog();
+        imageBottomSheet = new ImageBottomSheet();
+
         phoneDialog = new PhoneDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
@@ -141,7 +144,7 @@ public class CreateCenterFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            imageDialog.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
+            imageBottomSheet.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {

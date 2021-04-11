@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Dialogs;
+package com.majazeh.risloo.Views.BottomSheets;
 
 import android.app.Dialog;
 import android.os.Build;
@@ -21,14 +21,14 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
-import com.majazeh.risloo.databinding.DialogImageBinding;
+import com.majazeh.risloo.databinding.BottomSheetImageBinding;
 
 import java.util.Objects;
 
-public class ImageDialog extends BottomSheetDialogFragment {
+public class ImageBottomSheet extends BottomSheetDialogFragment {
 
     // Binding
-    private DialogImageBinding binding;
+    private BottomSheetImageBinding binding;
 
     @NonNull
     @Override
@@ -40,7 +40,7 @@ public class ImageDialog extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = DialogImageBinding.inflate(inflater, viewGroup, false);
+        binding = BottomSheetImageBinding.inflate(inflater, viewGroup, false);
 
         listener();
 

@@ -23,25 +23,30 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // Dialog Strings
+    // BottomSheet Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="DialogBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
-    <string name="DialogBirthdayEntry">ثبت</string>
+    <string name="BottomSheetBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="BottomSheetBirthdayEntry">ثبت</string>
 
-    <string name="DialogDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
-    <string name="DialogDateEntry">ثبت</string>
+    <string name="BottomSheetDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
+    <string name="BottomSheetDateEntry">ثبت</string>
 
-    <string name="DialogImageTitle">از کجا می خوای تصویر بیارید؟</string>
-    <string name="DialogImageGallery">البوم</string>
-    <string name="DialogImageCamera">دوربین</string>
+    <string name="BottomSheetImageTitle">از کجا می خوای تصویر بیارید؟</string>
+    <string name="BottomSheetImageGallery">البوم</string>
+    <string name="BottomSheetImageCamera">دوربین</string>
+
+    <string name="BottomSheetTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
+    <string name="BottomSheetTimeEntry">ثبت</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Dialog Strings
+    //////////////////////////////////////////////////////////////////////////////////////
 
     <string name="DialogPhoneTitle">شماره تلفن(ها) را وارد کنید.</string>
     <string name="DialogPhoneHint">شماره تلفن</string>
     <string name="DialogPhoneEntry">ثبت</string>
-
-    <string name="DialogTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
-    <string name="DialogTimeEntry">ثبت</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

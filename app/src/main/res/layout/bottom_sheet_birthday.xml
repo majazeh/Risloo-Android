@@ -7,7 +7,7 @@
     android:layout_gravity="bottom"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
-    tools:context=".Views.Dialogs.DateDialog">
+    tools:context=".Views.BottomSheets.BirthdayBottomSheet">
 
     <TextView
         android:id="@+id/title_textView"
@@ -17,7 +17,7 @@
         android:layout_marginTop="@dimen/_16sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="start"
-        android:text="@string/DialogDateTitle"
+        android:text="@string/BottomSheetBirthdayTitle"
         android:textSize="@dimen/_13ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -65,7 +65,7 @@
         android:layout_marginTop="@dimen/_12sdp"
         android:layout_marginBottom="@dimen/_18sdp"
         android:gravity="center"
-        android:text="@string/DialogDateEntry"
+        android:text="@string/BottomSheetBirthdayEntry"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/White"
