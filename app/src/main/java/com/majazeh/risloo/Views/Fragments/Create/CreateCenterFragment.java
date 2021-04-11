@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PhonesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.PhonesDialogAdapter;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
@@ -36,7 +36,7 @@ public class CreateCenterFragment extends Fragment {
     public FragmentCreateCenterBinding binding;
 
     // Adapters
-    public PhonesAdapter phonesAdapter;
+    public PhonesDialogAdapter phonesDialogAdapter;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
@@ -71,7 +71,7 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesAdapter = new PhonesAdapter(requireActivity());
+        phonesDialogAdapter = new PhonesDialogAdapter(requireActivity());
 
         imageBottomSheet = new ImageBottomSheet();
 
@@ -266,8 +266,8 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        phonesAdapter.setPhones(phones);
-        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
+        phonesDialogAdapter.setPhones(phones);
+        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesDialogAdapter);
     }
 
     private void doWork() {
@@ -275,7 +275,7 @@ public class CreateCenterFragment extends Fragment {
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 
-            phones = phonesAdapter.getPhones();
+            phones = phonesDialogAdapter.getPhones();
 
             // TODO : Call Work Method
         } else {
@@ -285,7 +285,7 @@ public class CreateCenterFragment extends Fragment {
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 
-            phones = phonesAdapter.getPhones();
+            phones = phonesDialogAdapter.getPhones();
 
             // TODO : Call Work Method
         }

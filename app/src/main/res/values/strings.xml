@@ -48,6 +48,10 @@
     <string name="DialogPhoneHint">شماره تلفن</string>
     <string name="DialogPhoneEntry">ثبت</string>
 
+    <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
+    <string name="DialogScaleHint">جستجو</string>
+    <string name="DialogScaleEntry">ثبت</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings

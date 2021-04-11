@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    app:cardCornerRadius="@dimen/_2sdp"
+    app:cardElevation="0dp"
+    tools:layout_marginTop="@dimen/_3sdp"
+    tools:layout_marginBottom="@dimen/_3sdp"
+    tools:context=".Views.Adapters.Recycler.ScalesDialogAdapter">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200">
+
+        <TextView
+            android:id="@+id/name_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginEnd="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray700"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintBottom_toTopOf="@id/edition_textView"
+            app:layout_constraintEnd_toStartOf="@id/remove_imageView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="آزمون ریون" />
+
+        <TextView
+            android:id="@+id/edition_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray400"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/name_textView"
+            app:layout_constraintStart_toStartOf="@id/name_textView"
+            app:layout_constraintTop_toBottomOf="@id/name_textView"
+            tools:text="ویرایش پیشرفته - نسخه 5" />
+
+        <ImageView
+            android:id="@+id/remove_imageView"
+            android:layout_width="@dimen/_22sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginEnd="@dimen/_2sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:padding="@dimen/_5sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_times_light"
+            app:layout_constraintBottom_toBottomOf="@+id/container_constraintLayout"
+            app:layout_constraintEnd_toEndOf="@+id/container_constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/container_constraintLayout"
+            app:tint="@color/Gray600" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

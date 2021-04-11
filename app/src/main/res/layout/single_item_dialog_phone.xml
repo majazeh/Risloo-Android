@@ -10,7 +10,7 @@
     app:cardElevation="0dp"
     tools:layout_marginTop="@dimen/_3sdp"
     tools:layout_marginBottom="@dimen/_3sdp"
-    tools:context=".Views.Adapters.Recycler.PhonesAdapter">
+    tools:context=".Views.Adapters.Recycler.PhonesDialogAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
