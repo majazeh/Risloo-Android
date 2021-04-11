@@ -377,7 +377,11 @@
         android:id="@+id/createSampleFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment"
         android:label="@string/CreateSampleFragmentTitle"
-        tools:layout="@layout/fragment_create_sample" />
+        tools:layout="@layout/fragment_create_sample" >
+        <action
+            android:id="@+id/action_createSampleFragment_to_scalesFragment"
+            app:destination="@id/scalesFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/createSessionFragment"

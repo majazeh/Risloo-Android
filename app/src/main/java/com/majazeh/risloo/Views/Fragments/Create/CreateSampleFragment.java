@@ -11,29 +11,45 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.ScalesDialogAdapter;
+import com.majazeh.risloo.Views.Dialogs.ScaleDialog;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
+
+import java.util.ArrayList;
 
 public class CreateSampleFragment extends Fragment {
 
     // Binding
-    private FragmentCreateSampleBinding binding;
+    public FragmentCreateSampleBinding binding;
+
+    // Adapters
+    public ScalesDialogAdapter scalesDialogAdapter;
+
+    // Dialogs
+    private ScaleDialog scaleDialog;
 
     // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
+    private LinearLayoutManager scalesLayoutManager;
     private ClickableSpan assessmentLinkSpan;
 
     // Vars
+    private ArrayList<Model> scales = new ArrayList<>();
     private String room = "", center = "", type = "case", name = "", userCount = "", caseType = "", situation = "", casse = "",  session = "";
 
     @Nullable
@@ -53,6 +69,12 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void initializer() {
+        scaleDialog = new ScaleDialog();
+
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
+
+        scalesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
         binding.scaleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentScaleHeader));
         binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentRoomHeader));
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentNameHeader));
@@ -70,6 +92,8 @@ public class CreateSampleFragment extends Fragment {
         binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentNameGuide));
         binding.userCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountGuide));
 
+        InitManager.unfixedRecyclerView(binding.scaleIncludeLayout.selectRecyclerView, itemDecoration, scalesLayoutManager);
+
         InitManager.spinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CasesTypes);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
@@ -86,13 +110,13 @@ public class CreateSampleFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            scaleDialog.show(requireActivity().getSupportFragmentManager(), "scaleDialog");
         }).widget(binding.scaleIncludeLayout.selectRecyclerView);
 
         assessmentLinkSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                ((MainActivity) requireActivity()).navigator(R.id.scalesFragment);
             }
 
             @Override
@@ -236,7 +260,24 @@ public class CreateSampleFragment extends Fragment {
     private void setData() {
         binding.scaleGuideLayout.guideTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
 
-        // TODO : Set Scales Here
+//        if (extras.getString("scales") != null) {
+//            try {
+//                JSONArray scales = new JSONArray(extras.getString("phones"));
+//
+//                for (int i = 0; i < scales.length(); i++) {
+//                    JSONObject scale = (JSONObject) scales.get(i);
+//                    Model model = new Model(scale);
+//
+//                    this.scales.add(model);
+//                }
+//
+//                setRecyclerView();
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+            setRecyclerView();
+//        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             room = ((MainActivity) requireActivity()).singleton.getAddress();
@@ -331,7 +372,14 @@ public class CreateSampleFragment extends Fragment {
 
     }
 
+    private void setRecyclerView() {
+        scalesDialogAdapter.setScales(scales);
+        binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesDialogAdapter);
+    }
+
     private void doWork() {
+        scales = scalesDialogAdapter.getScales();
+
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         userCount = binding.userCountIncludeLayout.inputEditText.getText().toString().trim();
         situation = binding.situationIncludeLayout.inputEditText.getText().toString().trim();
