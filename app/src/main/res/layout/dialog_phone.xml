@@ -4,9 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="bottom"
+    android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
+    android:background="@drawable/draw_12sdp_solid_white"
     tools:context=".Views.Dialogs.PhoneDialog">
 
     <TextView
@@ -34,7 +34,6 @@
         android:paddingStart="@dimen/_8sdp"
         android:paddingEnd="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:layout_marginBottom="@dimen/_18sdp"
         android:imeOptions="actionDone"
         android:inputType="phone"
         android:hint="@string/DialogPhoneHint"
@@ -56,13 +55,16 @@
         android:id="@+id/list_recyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
         android:overScrollMode="never"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@id/entry_button"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
         app:layout_constraintTop_toBottomOf="@id/phone_editText"
-        tools:listitem="@layout/single_item_phone" />
+        tools:listitem="@layout/single_item_phone"
+        tools:itemCount="4" />
 
     <TextView
         android:id="@+id/entry_button"

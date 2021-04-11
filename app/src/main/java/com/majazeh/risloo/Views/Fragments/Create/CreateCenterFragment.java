@@ -155,7 +155,7 @@ public class CreateCenterFragment extends Fragment {
 
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                phoneDialog.show(requireActivity().getSupportFragmentManager(), "phoneBottomSheet");
+                phoneDialog.show(requireActivity().getSupportFragmentManager(), "phoneDialog");
             }
             return false;
         });

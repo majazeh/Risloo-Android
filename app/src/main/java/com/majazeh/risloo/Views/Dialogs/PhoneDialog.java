@@ -3,23 +3,27 @@ package com.majazeh.risloo.Views.Dialogs;
 import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
@@ -29,7 +33,7 @@ import com.majazeh.risloo.databinding.DialogPhoneBinding;
 
 import java.util.Objects;
 
-public class PhoneDialog extends BottomSheetDialogFragment {
+public class PhoneDialog extends AppCompatDialogFragment {
 
     // Binding
     private DialogPhoneBinding binding;
@@ -41,7 +45,16 @@ public class PhoneDialog extends BottomSheetDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
+        Dialog dialog = new Dialog(requireActivity(), R.style.DialogTheme);
+
+        DialogPhoneBinding binding = DialogPhoneBinding.inflate(LayoutInflater.from(requireActivity()));
+
+        dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.setContentView(binding.getRoot());
+        dialog.setCancelable(true);
+        dialog.getWindow().setAttributes(ParamsManager.apply(dialog));
+
         return dialog;
     }
 
@@ -68,7 +81,7 @@ public class PhoneDialog extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, (int) getResources().getDimension(R.dimen._18sdp), (int) getResources().getDimension(R.dimen._3sdp), 0);
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._3sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 

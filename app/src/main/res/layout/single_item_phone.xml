@@ -8,7 +8,8 @@
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
-    tools:layout_margin="@dimen/_12sdp"
+    tools:layout_marginTop="@dimen/_3sdp"
+    tools:layout_marginBottom="@dimen/_3sdp"
     tools:context=".Views.Adapters.Recycler.PhonesAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
