@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
+    tools:context=".Views.BottomSheets.LogoutBottomSheet">
+
+    <ImageView
+        android:id="@+id/background_imageView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_64sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:background="@drawable/gra_2sdp_solid_gray200_gray100_border_2dp_gray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/avatar_includeLayout"
+        layout="@layout/component_avatar_border"
+        android:layout_width="@dimen/_86sdp"
+        android:layout_height="@dimen/_86sdp"
+        app:layout_constraintBottom_toBottomOf="@+id/background_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_imageView" />
+
+    <TextView
+        android:id="@+id/name_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
+        android:gravity="start"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray900"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintBottom_toTopOf="@+id/entry_button"
+        app:layout_constraintEnd_toEndOf="@+id/avatar_includeLayout"
+        app:layout_constraintStart_toStartOf="@+id/avatar_includeLayout"
+        app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout"
+        tools:text="نام و نام خانوادگی" />
+
+    <TextView
+        android:id="@+id/entry_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:gravity="center"
+        android:text="@string/BottomSheetLogoutEntry"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/White"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_16sdp_solid_red500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/name_textView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

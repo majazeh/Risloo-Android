@@ -36,6 +36,9 @@
     <string name="BottomSheetImageGallery">البوم</string>
     <string name="BottomSheetImageCamera">دوربین</string>
 
+    <string name="BottomSheetLogoutTitle">آیا تمایل به خروج از حساب کاربری دارید؟</string>
+    <string name="BottomSheetLogoutEntry">خروج</string>
+
     <string name="BottomSheetTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
     <string name="BottomSheetTimeEntry">ثبت</string>
 

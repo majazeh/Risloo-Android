@@ -29,6 +29,7 @@ import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
@@ -48,6 +49,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Singleton
     public Singleton singleton;
+
+    // BottomSheets
+    private LogoutBottomSheet logoutBottomSheet;
 
     // Objects
     public ControlEditText controlEditText;
@@ -82,6 +86,8 @@ public class MainActivity extends AppCompatActivity {
     private void initializer() {
         singleton = new Singleton(this);
 
+        logoutBottomSheet = new LogoutBottomSheet();
+
         controlEditText = new ControlEditText();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.mainContent.fragmentNavHostFragment.getId());
@@ -111,7 +117,8 @@ public class MainActivity extends AppCompatActivity {
         ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.mainContent.menuImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
+            logoutBottomSheet.show(this.getSupportFragmentManager(), "logoutBottomSheet");
+            logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
         }).widget(binding.mainContent.logoutImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
