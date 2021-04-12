@@ -55,6 +55,10 @@
     <string name="DialogScaleHint">جستجو</string>
     <string name="DialogScaleEntry">ثبت</string>
 
+    <string name="DialogReferenceTitle">مراجعین را انتخاب کنید.</string>
+    <string name="DialogReferenceHint">جستجو</string>
+    <string name="DialogReferenceEntry">ثبت</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    app:cardCornerRadius="@dimen/_2sdp"
+    app:cardElevation="0dp"
+    tools:layout_marginTop="@dimen/_2sdp"
+    tools:layout_marginBottom="@dimen/_2sdp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
+
+        <TextView
+            android:id="@+id/title_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray700"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintBottom_toTopOf="@id/sub_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="عنوان" />
+
+        <TextView
+            android:id="@+id/sub_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_4sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray400"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/title_textView"
+            app:layout_constraintStart_toStartOf="@id/title_textView"
+            app:layout_constraintTop_toBottomOf="@id/title_textView"
+            tools:text="زیرنویس" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

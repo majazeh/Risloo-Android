@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray200"
-    tools:context=".Views.Fragments.Index.UsersFragment">
+    android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray200">
 
     <TextView
         android:id="@+id/serial_textView"
