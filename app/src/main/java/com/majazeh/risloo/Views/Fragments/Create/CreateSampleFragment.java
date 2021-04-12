@@ -40,12 +40,12 @@ public class CreateSampleFragment extends Fragment {
     public FragmentCreateSampleBinding binding;
 
     // Adapters
-    private RecyclerMultiAdapter scalesAdapter;
-    private RecyclerSingleAdapter referencesAdapter;
+    public RecyclerMultiAdapter scalesAdapter;
+    public RecyclerSingleAdapter referencesAdapter;
 
     // Dialogs
-    private MultiDialog scaleDialog;
-    private SingleDialog referenceDialog;
+    public MultiDialog scaleDialog;
+    public SingleDialog referenceDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;

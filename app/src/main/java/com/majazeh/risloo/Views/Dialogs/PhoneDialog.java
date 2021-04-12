@@ -113,14 +113,14 @@ public class PhoneDialog extends AppCompatDialogFragment {
             if (binding.inputEditText.length() != 0) {
                 try {
                     String phone = binding.inputEditText.getText().toString().trim();
-                    Model model = new Model(new JSONObject().put("id", phone).put("phone", phone));
+                    Model item = new Model(new JSONObject().put("id", phone).put("phone", phone));
 
                     switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                         case R.id.createCenterFragment:
                             CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (createCenterFragment != null) {
                                 if (!createCenterFragment.phonesAdapter.getIds().contains(phone)) {
-                                    createCenterFragment.phonesAdapter.addItem(model);
+                                    createCenterFragment.phonesAdapter.addItem(item);
                                 } else {
                                     Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                                 }
@@ -132,7 +132,7 @@ public class PhoneDialog extends AppCompatDialogFragment {
                                 EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
                                 if (!editCenterDetailFragment.phonesAdapter.getIds().contains(phone)) {
-                                    editCenterDetailFragment.phonesAdapter.addItem(model);
+                                    editCenterDetailFragment.phonesAdapter.addItem(item);
                                 } else {
                                     Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                                 }

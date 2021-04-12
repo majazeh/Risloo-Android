@@ -11,11 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.databinding.PopItemRecyclerSingleBinding;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAdapter.RecyclerSingleHandler> {
 
@@ -85,7 +88,7 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
         notifyDataSetChanged();
     }
 
-    public void replacePhone(int position, Model item) {
+    public void replaceItem(int position, Model item) {
         items.set(position, item);
 
         try {
@@ -98,7 +101,7 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
         notifyItemRangeChanged(position, getItemCount());
     }
 
-    private void removePhone(int position) {
+    public void removeItem(int position) {
         items.remove(position);
         ids.remove(position);
         notifyItemRemoved(position);
@@ -119,7 +122,18 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
         }).widget(holder.binding.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            removePhone(position);
+            removeItem(position);
+
+            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                case R.id.createSampleFragment:
+                    CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createSampleFragment != null) {
+                        if (method.equals("references")) {
+                            createSampleFragment.referenceDialog.singleAdapter.notifyDataSetChanged();
+                        }
+                    }
+                    break;
+            }
         }).widget(holder.binding.removeImageView);
     }
 
