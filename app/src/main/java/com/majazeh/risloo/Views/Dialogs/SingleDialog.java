@@ -28,15 +28,14 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
-import com.majazeh.risloo.databinding.DialogScaleBinding;
+import com.majazeh.risloo.databinding.DialogSingleBinding;
 
 import java.util.Objects;
 
-public class ScaleDialog extends AppCompatDialogFragment {
+public class SingleDialog extends AppCompatDialogFragment {
 
     // Binding
-    private DialogScaleBinding binding;
+    private DialogSingleBinding binding;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -48,7 +47,7 @@ public class ScaleDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(requireActivity(), R.style.DialogTheme);
 
-        DialogScaleBinding binding = DialogScaleBinding.inflate(LayoutInflater.from(requireActivity()));
+        DialogSingleBinding binding = DialogSingleBinding.inflate(LayoutInflater.from(requireActivity()));
 
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -62,7 +61,7 @@ public class ScaleDialog extends AppCompatDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = DialogScaleBinding.inflate(inflater, viewGroup, false);
+        binding = DialogSingleBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -82,7 +81,7 @@ public class ScaleDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._3sdp), 0);
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -99,16 +98,16 @@ public class ScaleDialog extends AppCompatDialogFragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.scaleEditText.setOnTouchListener((v, event) -> {
+        binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.scaleEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scaleEditText);
+                if (!binding.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.inputEditText);
                 }
             }
             return false;
         });
 
-        binding.scaleEditText.addTextChangedListener(new TextWatcher() {
+        binding.inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -135,17 +134,12 @@ public class ScaleDialog extends AppCompatDialogFragment {
 
     private void setRecyclerView() {
         switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-            case R.id.createSampleFragment:
-                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                if (createSampleFragment != null) {
-                    binding.listRecyclerView.setAdapter(createSampleFragment.scalesDialogAdapter);
-                }
-                break;
+            // TODO : Place Code Here
         }
     }
 
     private void clearEditText() {
-        binding.scaleEditText.getText().clear();
+        binding.inputEditText.getText().clear();
     }
 
     @Override

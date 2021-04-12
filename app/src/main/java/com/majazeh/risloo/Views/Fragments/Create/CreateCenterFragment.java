@@ -16,13 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PhoneDialogAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerSingleAdapter;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
@@ -36,7 +37,7 @@ public class CreateCenterFragment extends Fragment {
     public FragmentCreateCenterBinding binding;
 
     // Adapters
-    public PhoneDialogAdapter phoneDialogAdapter;
+    public RecyclerSingleAdapter phonesAdapter;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
@@ -46,11 +47,11 @@ public class CreateCenterFragment extends Fragment {
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager phoneLayoutManager;
     public Bitmap avatarBitmap;
 
     // Vars
-    private ArrayList<String> phones = new ArrayList<>();
+    private ArrayList<Model> phones = new ArrayList<>();
     private String center = "personal", manager = "", name = "", address = "", description ="";
     public String avatarPath = "";
 
@@ -71,7 +72,7 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        phoneDialogAdapter = new PhoneDialogAdapter(requireActivity());
+        phonesAdapter = new RecyclerSingleAdapter(requireActivity());
 
         imageBottomSheet = new ImageBottomSheet();
 
@@ -79,7 +80,7 @@ public class CreateCenterFragment extends Fragment {
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        phoneLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.centerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentCenterHeader));
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentManagerHeader));
@@ -97,7 +98,7 @@ public class CreateCenterFragment extends Fragment {
         binding.centerIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCenterPersonal));
         binding.centerIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCenterClinic));
 
-        InitManager.unfixedRecyclerView(binding.phonesIncludeLayout.selectRecyclerView, itemDecoration, layoutManager);
+        InitManager.unfixedRecyclerView(binding.phonesIncludeLayout.selectRecyclerView, itemDecoration, phoneLayoutManager);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }
@@ -245,18 +246,21 @@ public class CreateCenterFragment extends Fragment {
 
 //        if (extras.getString("phones") != null) {
 //            try {
-//                JSONArray phones = new JSONArray(extras.getString("phones"));
+//                JSONArray jsonArray = new JSONArray(extras.getString("phones"));
 //
-//                for (int i = 0; i < phones.length(); i++) {
-//                    this.phones.add(phones.getString(i));
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
+//
+//                    phones.add(model);
 //                }
 //
-//                setRecyclerView();
+//                setRecyclerView(phones, "phones");
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView();
+            setRecyclerView(phones, "phones");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
@@ -265,17 +269,17 @@ public class CreateCenterFragment extends Fragment {
         }
     }
 
-    private void setRecyclerView() {
-        phoneDialogAdapter.setPhones(phones);
-        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phoneDialogAdapter);
+    private void setRecyclerView(ArrayList<Model> data, String method) {
+        if (method.equals("phones")) {
+            phonesAdapter.setItems(data, method);
+            binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
+        }
     }
 
     private void doWork() {
         if (center.equals("personal")) {
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-            phones = phoneDialogAdapter.getPhones();
 
             // TODO : Call Work Method
         } else {
@@ -284,8 +288,6 @@ public class CreateCenterFragment extends Fragment {
             name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-            phones = phoneDialogAdapter.getPhones();
 
             // TODO : Call Work Method
         }

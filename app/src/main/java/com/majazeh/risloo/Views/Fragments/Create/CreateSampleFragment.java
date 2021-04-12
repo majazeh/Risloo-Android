@@ -26,8 +26,10 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.ScalesDialogAdapter;
-import com.majazeh.risloo.Views.Dialogs.ScaleDialog;
+import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerMultiAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerSingleAdapter;
+import com.majazeh.risloo.Views.Dialogs.MultiDialog;
+import com.majazeh.risloo.Views.Dialogs.SingleDialog;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 
 import java.util.ArrayList;
@@ -38,18 +40,20 @@ public class CreateSampleFragment extends Fragment {
     public FragmentCreateSampleBinding binding;
 
     // Adapters
-    public ScalesDialogAdapter scalesDialogAdapter;
+    private RecyclerMultiAdapter scalesAdapter;
+    private RecyclerSingleAdapter referencesAdapter;
 
     // Dialogs
-    private ScaleDialog scaleDialog;
+    private MultiDialog scaleDialog;
+    private SingleDialog referenceDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager scalesLayoutManager;
+    private LinearLayoutManager scalesLayoutManager, referencesLayoutManager;
     private ClickableSpan assessmentLinkSpan;
 
     // Vars
-    private ArrayList<Model> scales = new ArrayList<>();
+    private ArrayList<Model> scales = new ArrayList<>(), references = new ArrayList<>();
     private String room = "", center = "", type = "case", name = "", userCount = "", caseType = "", situation = "", casse = "",  session = "";
 
     @Nullable
@@ -69,11 +73,16 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void initializer() {
-        scaleDialog = new ScaleDialog();
+        scalesAdapter = new RecyclerMultiAdapter(requireActivity());
+        referencesAdapter = new RecyclerSingleAdapter(requireActivity());
+
+        scaleDialog = new MultiDialog();
+        referenceDialog = new SingleDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         scalesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.scaleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentScaleHeader));
         binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentRoomHeader));
@@ -93,6 +102,7 @@ public class CreateSampleFragment extends Fragment {
         binding.userCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountGuide));
 
         InitManager.unfixedRecyclerView(binding.scaleIncludeLayout.selectRecyclerView, itemDecoration, scalesLayoutManager);
+        InitManager.unfixedRecyclerView(binding.referenceIncludeLayout.selectRecyclerView, itemDecoration, referencesLayoutManager);
 
         InitManager.spinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CasesTypes);
 
@@ -237,7 +247,7 @@ public class CreateSampleFragment extends Fragment {
         }).widget(binding.sessionIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            referenceDialog.show(requireActivity().getSupportFragmentManager(), "referenceDialog");
         }).widget(binding.referenceIncludeLayout.selectRecyclerView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -262,21 +272,21 @@ public class CreateSampleFragment extends Fragment {
 
 //        if (extras.getString("scales") != null) {
 //            try {
-//                JSONArray scales = new JSONArray(extras.getString("phones"));
+//                JSONArray jsonArray = new JSONArray(extras.getString("phones"));
 //
-//                for (int i = 0; i < scales.length(); i++) {
-//                    JSONObject scale = (JSONObject) scales.get(i);
-//                    Model model = new Model(scale);
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
 //
-//                    this.scales.add(model);
+//                    scales.add(model);
 //                }
 //
-//                setRecyclerView();
+//                setRecyclerView(scales, "scales");
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView();
+            setRecyclerView(scales, "scales");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
@@ -368,18 +378,38 @@ public class CreateSampleFragment extends Fragment {
             binding.sessionIncludeLayout.selectTextView.setText(session);
         }
 
-        // TODO : Set References Here
+//        if (extras.getString("references") != null) {
+//            try {
+//                JSONArray jsonArray = new JSONArray(extras.getString("references"));
+//
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
+//
+//                    references.add(model);
+//                }
+//
+//                setRecyclerView(references, "references");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+            setRecyclerView(references, "references");
+//        }
 
     }
 
-    private void setRecyclerView() {
-        scalesDialogAdapter.setScales(scales);
-        binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesDialogAdapter);
+    private void setRecyclerView(ArrayList<Model> data, String method) {
+        if (method.equals("scales")) {
+            scalesAdapter.setItems(data, method);
+            binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesAdapter);
+        } else if (method.equals("references")) {
+            referencesAdapter.setItems(data, method);
+            binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+        }
     }
 
     private void doWork() {
-        scales = scalesDialogAdapter.getScales();
-
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         userCount = binding.userCountIncludeLayout.inputEditText.getText().toString().trim();
         situation = binding.situationIncludeLayout.inputEditText.getText().toString().trim();

@@ -15,11 +15,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PhoneDialogAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerSingleAdapter;
 import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
 
@@ -31,17 +32,17 @@ public class EditCenterDetailFragment extends Fragment {
     public FragmentEditCenterDetailBinding binding;
 
     // Adapters
-    public PhoneDialogAdapter phoneDialogAdapter;
+    public RecyclerSingleAdapter phonesAdapter;
 
     // Dialogs
     private PhoneDialog phoneDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
+    private LinearLayoutManager phoneLayoutManager;
 
     // Vars
-    private ArrayList<String> phones = new ArrayList<>();
+    private ArrayList<Model> phones = new ArrayList<>();
     private String manager = "", name = "", address = "", description = "";
 
     @Nullable
@@ -61,13 +62,13 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void initializer() {
-        phoneDialogAdapter = new PhoneDialogAdapter(requireActivity());
+        phonesAdapter = new RecyclerSingleAdapter(requireActivity());
 
         phoneDialog = new PhoneDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        phoneLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentManagerHeader));
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentNameHeader));
@@ -78,7 +79,7 @@ public class EditCenterDetailFragment extends Fragment {
         binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailFragmentAddressHint));
         binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailFragmentDescriptionHint));
 
-        InitManager.unfixedRecyclerView(binding.phonesIncludeLayout.selectRecyclerView, itemDecoration, layoutManager);
+        InitManager.unfixedRecyclerView(binding.phonesIncludeLayout.selectRecyclerView, itemDecoration, phoneLayoutManager);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterDetailFragmentButton), getResources().getColor(R.color.White));
     }
@@ -168,18 +169,21 @@ public class EditCenterDetailFragment extends Fragment {
 
 //        if (extras.getString("phones") != null) {
 //            try {
-//                JSONArray phones = new JSONArray(extras.getString("phones"));
+//                JSONArray jsonArray = new JSONArray(extras.getString("phones"));
 //
-//                for (int i = 0; i < phones.length(); i++) {
-//                    this.phones.add(phones.getString(i));
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
+//
+//                    phones.add(model);
 //                }
 //
-//                setRecyclerView();
+//                setRecyclerView(phones, "phones");
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView();
+        setRecyclerView(phones, "phones");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
@@ -188,17 +192,17 @@ public class EditCenterDetailFragment extends Fragment {
         }
     }
 
-    private void setRecyclerView() {
-        phoneDialogAdapter.setPhones(phones);
-        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phoneDialogAdapter);
+    private void setRecyclerView(ArrayList<Model> data, String method) {
+        if (method.equals("phones")) {
+            phonesAdapter.setItems(data, method);
+            binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
+        }
     }
 
     private void doWork() {
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-        phones = phoneDialogAdapter.getPhones();
 
         // TODO : Call Work Method
     }
