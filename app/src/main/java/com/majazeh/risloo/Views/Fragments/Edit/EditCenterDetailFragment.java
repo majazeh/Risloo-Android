@@ -19,7 +19,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PhonesDialogAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.PhoneDialogAdapter;
 import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
 
@@ -31,7 +31,7 @@ public class EditCenterDetailFragment extends Fragment {
     public FragmentEditCenterDetailBinding binding;
 
     // Adapters
-    public PhonesDialogAdapter phonesDialogAdapter;
+    public PhoneDialogAdapter phoneDialogAdapter;
 
     // Dialogs
     private PhoneDialog phoneDialog;
@@ -61,7 +61,7 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesDialogAdapter = new PhonesDialogAdapter(requireActivity());
+        phoneDialogAdapter = new PhoneDialogAdapter(requireActivity());
 
         phoneDialog = new PhoneDialog();
 
@@ -189,8 +189,8 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void setRecyclerView() {
-        phonesDialogAdapter.setPhones(phones);
-        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesDialogAdapter);
+        phoneDialogAdapter.setPhones(phones);
+        binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phoneDialogAdapter);
     }
 
     private void doWork() {
@@ -198,7 +198,7 @@ public class EditCenterDetailFragment extends Fragment {
         address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 
-        phones = phonesDialogAdapter.getPhones();
+        phones = phoneDialogAdapter.getPhones();
 
         // TODO : Call Work Method
     }

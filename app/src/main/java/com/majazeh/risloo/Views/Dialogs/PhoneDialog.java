@@ -81,7 +81,7 @@ public class PhoneDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._3sdp), 0);
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -96,25 +96,25 @@ public class PhoneDialog extends AppCompatDialogFragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.phoneEditText.setOnTouchListener((v, event) -> {
+        binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.phoneEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.phoneEditText);
+                if (!binding.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.inputEditText);
                 }
             }
             return false;
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.phoneEditText.length() != 0) {
-                String phone = binding.phoneEditText.getText().toString().trim();
+            if (binding.inputEditText.length() != 0) {
+                String phone = binding.inputEditText.getText().toString().trim();
 
                 switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                     case R.id.createCenterFragment:
                         CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (createCenterFragment != null) {
-                            if (!createCenterFragment.phonesDialogAdapter.getPhones().contains(phone)) {
-                                createCenterFragment.phonesDialogAdapter.addPhone(phone);
+                            if (!createCenterFragment.phoneDialogAdapter.getPhones().contains(phone)) {
+                                createCenterFragment.phoneDialogAdapter.addPhone(phone);
                             } else {
                                 Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                             }
@@ -125,8 +125,8 @@ public class PhoneDialog extends AppCompatDialogFragment {
                         if (editCenterFragment != null) {
                             EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
-                            if (!editCenterDetailFragment.phonesDialogAdapter.getPhones().contains(phone)) {
-                                editCenterDetailFragment.phonesDialogAdapter.addPhone(phone);
+                            if (!editCenterDetailFragment.phoneDialogAdapter.getPhones().contains(phone)) {
+                                editCenterDetailFragment.phoneDialogAdapter.addPhone(phone);
                             } else {
                                 Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                             }
@@ -147,7 +147,7 @@ public class PhoneDialog extends AppCompatDialogFragment {
             case R.id.createCenterFragment:
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createCenterFragment != null) {
-                    binding.listRecyclerView.setAdapter(createCenterFragment.phonesDialogAdapter);
+                    binding.listRecyclerView.setAdapter(createCenterFragment.phoneDialogAdapter);
                 }
                 break;
             case R.id.editCenterFragment:
@@ -155,14 +155,14 @@ public class PhoneDialog extends AppCompatDialogFragment {
                 if (editCenterFragment != null) {
                     EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
-                    binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesDialogAdapter);
+                    binding.listRecyclerView.setAdapter(editCenterDetailFragment.phoneDialogAdapter);
                 }
                 break;
         }
     }
 
     private void clearEditText() {
-        binding.phoneEditText.getText().clear();
+        binding.inputEditText.getText().clear();
     }
 
     @Override

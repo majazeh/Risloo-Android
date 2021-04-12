@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.databinding.SingleItemDialogPhoneBinding;
+import com.majazeh.risloo.databinding.PopItemRecyclerSingleBinding;
 
 import java.util.ArrayList;
 
-public class PhonesDialogAdapter extends RecyclerView.Adapter<PhonesDialogAdapter.PhonesDialogHolder> {
+public class PhoneDialogAdapter extends RecyclerView.Adapter<PhoneDialogAdapter.PhoneDialogHolder> {
 
     // Objects
     private Activity activity;
@@ -22,18 +22,18 @@ public class PhonesDialogAdapter extends RecyclerView.Adapter<PhonesDialogAdapte
     // Vars
     private ArrayList<String> phones;
 
-    public PhonesDialogAdapter(@NonNull Activity activity) {
+    public PhoneDialogAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public PhonesDialogHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new PhonesDialogHolder(SingleItemDialogPhoneBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public PhoneDialogHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new PhoneDialogHolder(PopItemRecyclerSingleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PhonesDialogHolder holder, int i) {
+    public void onBindViewHolder(@NonNull PhoneDialogHolder holder, int i) {
         String phone = phones.get(i);
 
         detector(holder);
@@ -79,7 +79,7 @@ public class PhonesDialogAdapter extends RecyclerView.Adapter<PhonesDialogAdapte
         notifyItemRangeChanged(position, getItemCount());
     }
 
-    private void detector(PhonesDialogHolder holder) {
+    private void detector(PhoneDialogHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
 
@@ -87,7 +87,7 @@ public class PhonesDialogAdapter extends RecyclerView.Adapter<PhonesDialogAdapte
         }
     }
 
-    private void listener(PhonesDialogHolder holder, int position) {
+    private void listener(PhoneDialogHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -97,15 +97,15 @@ public class PhonesDialogAdapter extends RecyclerView.Adapter<PhonesDialogAdapte
         }).widget(holder.binding.removeImageView);
     }
 
-    private void setData(PhonesDialogHolder holder, String phone) {
-        holder.binding.phoneTextView.setText(phone);
+    private void setData(PhoneDialogHolder holder, String phone) {
+        holder.binding.titleTextView.setText(phone);
     }
 
-    public class PhonesDialogHolder extends RecyclerView.ViewHolder {
+    public class PhoneDialogHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemDialogPhoneBinding binding;
+        private PopItemRecyclerSingleBinding binding;
 
-        public PhonesDialogHolder(SingleItemDialogPhoneBinding binding) {
+        public PhoneDialogHolder(PopItemRecyclerSingleBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
