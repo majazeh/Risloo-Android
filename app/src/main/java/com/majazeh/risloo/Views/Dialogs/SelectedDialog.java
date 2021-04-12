@@ -30,17 +30,17 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
-import com.majazeh.risloo.databinding.DialogPhoneBinding;
+import com.majazeh.risloo.databinding.DialogSelectedBinding;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class PhoneDialog extends AppCompatDialogFragment {
+public class SelectedDialog extends AppCompatDialogFragment {
 
     // Binding
-    private DialogPhoneBinding binding;
+    private DialogSelectedBinding binding;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -51,7 +51,7 @@ public class PhoneDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(requireActivity(), R.style.DialogTheme);
 
-        DialogPhoneBinding binding = DialogPhoneBinding.inflate(LayoutInflater.from(requireActivity()));
+        DialogSelectedBinding binding = DialogSelectedBinding.inflate(LayoutInflater.from(requireActivity()));
 
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -65,7 +65,7 @@ public class PhoneDialog extends AppCompatDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = DialogPhoneBinding.inflate(inflater, viewGroup, false);
+        binding = DialogSelectedBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

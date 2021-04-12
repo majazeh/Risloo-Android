@@ -28,14 +28,18 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.DialogSingleBinding;
+import com.majazeh.risloo.Views.Adapters.Recycler.SearchableAdapter;
+import com.majazeh.risloo.databinding.DialogSearchableBinding;
 
 import java.util.Objects;
 
-public class SingleDialog extends AppCompatDialogFragment {
+public class SearchableDialog extends AppCompatDialogFragment {
 
     // Binding
-    private DialogSingleBinding binding;
+    private DialogSearchableBinding binding;
+
+    // Adapters
+    public SearchableAdapter searchableAdapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -47,7 +51,7 @@ public class SingleDialog extends AppCompatDialogFragment {
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         Dialog dialog = new Dialog(requireActivity(), R.style.DialogTheme);
 
-        DialogSingleBinding binding = DialogSingleBinding.inflate(LayoutInflater.from(requireActivity()));
+        DialogSearchableBinding binding = DialogSearchableBinding.inflate(LayoutInflater.from(requireActivity()));
 
         dialog.getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -61,7 +65,7 @@ public class SingleDialog extends AppCompatDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = DialogSingleBinding.inflate(inflater, viewGroup, false);
+        binding = DialogSearchableBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -81,6 +85,8 @@ public class SingleDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
+        searchableAdapter = new SearchableAdapter(requireActivity());
+
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);

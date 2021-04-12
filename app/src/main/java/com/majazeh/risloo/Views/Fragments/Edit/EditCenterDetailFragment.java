@@ -20,8 +20,8 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerSingleAdapter;
-import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
 
 import java.util.ArrayList;
@@ -29,13 +29,13 @@ import java.util.ArrayList;
 public class EditCenterDetailFragment extends Fragment {
 
     // Binding
-    public FragmentEditCenterDetailBinding binding;
+    private FragmentEditCenterDetailBinding binding;
 
     // Adapters
-    public RecyclerSingleAdapter phonesAdapter;
+    public SelectedAdapter phonesAdapter;
 
     // Dialogs
-    private PhoneDialog phoneDialog;
+    private SelectedDialog phonesDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -62,9 +62,9 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesAdapter = new RecyclerSingleAdapter(requireActivity());
+        phonesAdapter = new SelectedAdapter(requireActivity());
 
-        phoneDialog = new PhoneDialog();
+        phonesDialog = new SelectedDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -118,7 +118,7 @@ public class EditCenterDetailFragment extends Fragment {
 
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                phoneDialog.show(requireActivity().getSupportFragmentManager(), "phoneDialog");
+                phonesDialog.show(requireActivity().getSupportFragmentManager(), "phonesDialog");
             }
             return false;
         });

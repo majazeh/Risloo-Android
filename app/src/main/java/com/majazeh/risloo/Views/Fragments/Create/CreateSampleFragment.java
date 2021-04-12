@@ -26,10 +26,8 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerMultiAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerSingleAdapter;
-import com.majazeh.risloo.Views.Dialogs.MultiDialog;
-import com.majazeh.risloo.Views.Dialogs.SingleDialog;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 
 import java.util.ArrayList;
@@ -37,15 +35,13 @@ import java.util.ArrayList;
 public class CreateSampleFragment extends Fragment {
 
     // Binding
-    public FragmentCreateSampleBinding binding;
+    private FragmentCreateSampleBinding binding;
 
     // Adapters
-    public RecyclerMultiAdapter scalesAdapter;
-    public RecyclerSingleAdapter referencesAdapter;
+    public SelectedAdapter scalesAdapter, referencesAdapter;
 
     // Dialogs
-    public MultiDialog scaleDialog;
-    public SingleDialog referenceDialog;
+    public SearchableDialog scalesDialog, referencesDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -73,11 +69,11 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void initializer() {
-        scalesAdapter = new RecyclerMultiAdapter(requireActivity());
-        referencesAdapter = new RecyclerSingleAdapter(requireActivity());
+        scalesAdapter = new SelectedAdapter(requireActivity());
+        referencesAdapter = new SelectedAdapter(requireActivity());
 
-        scaleDialog = new MultiDialog();
-        referenceDialog = new SingleDialog();
+        scalesDialog = new SearchableDialog();
+        referencesDialog = new SearchableDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -120,7 +116,7 @@ public class CreateSampleFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            scaleDialog.show(requireActivity().getSupportFragmentManager(), "scaleDialog");
+            scalesDialog.show(requireActivity().getSupportFragmentManager(), "scalesDialog");
         }).widget(binding.scaleIncludeLayout.selectRecyclerView);
 
         assessmentLinkSpan = new ClickableSpan() {
@@ -247,7 +243,7 @@ public class CreateSampleFragment extends Fragment {
         }).widget(binding.sessionIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            referenceDialog.show(requireActivity().getSupportFragmentManager(), "referenceDialog");
+            referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
         }).widget(binding.referenceIncludeLayout.selectRecyclerView);
 
         ClickManager.onDelayedClickListener(() -> {

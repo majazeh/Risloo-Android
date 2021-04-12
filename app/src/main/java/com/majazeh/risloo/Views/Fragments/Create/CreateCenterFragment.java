@@ -23,9 +23,9 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.RecyclerSingleAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
-import com.majazeh.risloo.Views.Dialogs.PhoneDialog;
+import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.squareup.picasso.Picasso;
 
@@ -37,13 +37,13 @@ public class CreateCenterFragment extends Fragment {
     public FragmentCreateCenterBinding binding;
 
     // Adapters
-    public RecyclerSingleAdapter phonesAdapter;
+    public SelectedAdapter phonesAdapter;
+
+    // Dialogs
+    private SelectedDialog phonesDialog;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
-
-    // Dialogs
-    private PhoneDialog phoneDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -72,11 +72,11 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesAdapter = new RecyclerSingleAdapter(requireActivity());
+        phonesAdapter = new SelectedAdapter(requireActivity());
+
+        phonesDialog = new SelectedDialog();
 
         imageBottomSheet = new ImageBottomSheet();
-
-        phoneDialog = new PhoneDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -159,7 +159,7 @@ public class CreateCenterFragment extends Fragment {
 
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                phoneDialog.show(requireActivity().getSupportFragmentManager(), "phoneDialog");
+                phonesDialog.show(requireActivity().getSupportFragmentManager(), "phonesDialog");
             }
             return false;
         });

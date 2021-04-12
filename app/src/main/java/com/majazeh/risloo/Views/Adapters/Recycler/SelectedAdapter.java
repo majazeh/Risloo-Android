@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -13,14 +14,14 @@ import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
-import com.majazeh.risloo.databinding.PopItemRecyclerSingleBinding;
+import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAdapter.RecyclerSingleHandler> {
+public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedHolder> {
 
     // Objects
     private Activity activity;
@@ -30,18 +31,18 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
     private ArrayList<String> ids = new ArrayList<>();
     private String method;
 
-    public RecyclerSingleAdapter(@NonNull Activity activity) {
+    public SelectedAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public RecyclerSingleHandler onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new RecyclerSingleHandler(PopItemRecyclerSingleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public SelectedHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new SelectedHolder(SingleItemSelectedBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerSingleHandler holder, int i) {
+    public void onBindViewHolder(@NonNull SelectedHolder holder, int i) {
         Model item = items.get(i);
 
         detector(holder);
@@ -108,7 +109,7 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
         notifyItemRangeChanged(position, getItemCount());
     }
 
-    private void detector(RecyclerSingleHandler holder) {
+    private void detector(SelectedHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
 
@@ -116,7 +117,7 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
         }
     }
 
-    private void listener(RecyclerSingleHandler holder, int position) {
+    private void listener(SelectedHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -128,8 +129,10 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
                 case R.id.createSampleFragment:
                     CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSampleFragment != null) {
-                        if (method.equals("references")) {
-                            createSampleFragment.referenceDialog.singleAdapter.notifyDataSetChanged();
+                        if (method.equals("scales")) {
+                            createSampleFragment.scalesDialog.searchableAdapter.notifyDataSetChanged();
+                        } else if (method.equals("references")) {
+                            createSampleFragment.referencesDialog.searchableAdapter.notifyDataSetChanged();
                         }
                     }
                     break;
@@ -137,27 +140,44 @@ public class RecyclerSingleAdapter extends RecyclerView.Adapter<RecyclerSingleAd
         }).widget(holder.binding.removeImageView);
     }
 
-    private void setData(RecyclerSingleHandler holder, Model item) {
+    private void setData(SelectedHolder holder, Model item) {
         try {
-            if (method.equals("phones")) {
-                ids.add(item.get("id").toString());
+            switch (method) {
+                case "scales":
+                    ids.add(item.get("id").toString());
 
-                holder.binding.titleTextView.setText(item.get("phone").toString());
-            } else if (method.equals("references")) {
-                ids.add(item.get("id").toString());
+                    holder.binding.titleTextView.setText(item.get("title").toString());
 
-                holder.binding.titleTextView.setText(item.get("title").toString());
+                    holder.binding.subTextView.setVisibility(View.VISIBLE);
+                    holder.binding.subTextView.setText(item.get("subtitle").toString());
+                    break;
+                case "references":
+                    ids.add(item.get("id").toString());
+
+                    holder.binding.titleTextView.setText(item.get("title").toString());
+
+                    holder.binding.subTextView.setVisibility(View.GONE);
+                    holder.binding.subTextView.setText("");
+                    break;
+                case "phones":
+                    ids.add(item.get("id").toString());
+
+                    holder.binding.titleTextView.setText(item.get("phone").toString());
+
+                    holder.binding.subTextView.setVisibility(View.GONE);
+                    holder.binding.subTextView.setText("");
+                    break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public class RecyclerSingleHandler extends RecyclerView.ViewHolder {
+    public class SelectedHolder extends RecyclerView.ViewHolder {
 
-        private PopItemRecyclerSingleBinding binding;
+        private SingleItemSelectedBinding binding;
 
-        public RecyclerSingleHandler(PopItemRecyclerSingleBinding binding) {
+        public SelectedHolder(SingleItemSelectedBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
