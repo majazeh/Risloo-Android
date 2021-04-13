@@ -157,7 +157,7 @@ public class CreateCaseFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(references, "references");
+        setRecyclerView(references, new ArrayList<>(), "references");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
@@ -166,9 +166,9 @@ public class CreateCaseFragment extends Fragment {
         }
     }
 
-    private void setRecyclerView(ArrayList<Model> data, String method) {
+    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("references")) {
-            referencesAdapter.setItems(data, method);
+            referencesAdapter.setItems(items, ids, method);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
     }

@@ -22,7 +22,6 @@
             android:id="@+id/title_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginTop="@dimen/_4sdp"
             android:gravity="start"
@@ -33,7 +32,7 @@
             android:fontFamily="@font/dana_medium"
             app:layout_goneMarginBottom="@dimen/_4sdp"
             app:layout_constraintBottom_toTopOf="@id/sub_textView"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/end_view"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="عنوان" />
@@ -54,6 +53,18 @@
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/title_textView"
             tools:text="زیرنویس" />
+
+        <View
+            android:id="@+id/end_view"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="@dimen/_22sdp"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_7sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="@id/container_constraintLayout"
+            app:layout_constraintEnd_toEndOf="@id/container_constraintLayout"
+            app:layout_constraintStart_toEndOf="@id/title_textView"
+            app:layout_constraintTop_toTopOf="@id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

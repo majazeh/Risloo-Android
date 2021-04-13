@@ -68,6 +68,20 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         notifyDataSetChanged();
     }
 
+    private void detector(SearchableHolder holder, boolean selected) {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            if (selected)
+                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray200_ripple_gray300);
+            else
+                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+        } else {
+            if (selected)
+                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray200);
+            else
+                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        }
+    }
+
     private void listener(SearchableHolder holder, Model item) {
         ClickManager.onDelayedClickListener(() -> {
             try {
@@ -78,13 +92,18 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             if (method.equals("scales")) {
                                 int position = createSampleFragment.scalesAdapter.getIds().indexOf(item.get("id").toString());
 
-                                if (position == -1) {
+                                if (position == -1)
                                     createSampleFragment.scalesAdapter.addItem(item);
-                                } else {
+                                else
                                     createSampleFragment.scalesAdapter.removeItem(position);
-                                }
-                            } else if (method.equals("references")) {
 
+                            } else if (method.equals("references")) {
+                                int position = createSampleFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
+
+                                if (position == -1)
+                                    createSampleFragment.referencesAdapter.addItem(item);
+                                else
+                                    createSampleFragment.referencesAdapter.removeItem(position);
                             }
                         }
                         break;
@@ -92,7 +111,12 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (createCaseFragment != null) {
                             if (method.equals("references")) {
+                                int position = createCaseFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
 
+                                if (position == -1)
+                                    createCaseFragment.referencesAdapter.addItem(item);
+                                else
+                                    createCaseFragment.referencesAdapter.removeItem(position);
                             }
                         }
                         break;
@@ -100,7 +124,12 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (createCaseUserFragment != null) {
                             if (method.equals("references")) {
+                                int position = createCaseUserFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
 
+                                if (position == -1)
+                                    createCaseUserFragment.referencesAdapter.addItem(item);
+                                else
+                                    createCaseUserFragment.referencesAdapter.removeItem(position);
                             }
                         }
                         break;
@@ -166,20 +195,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
             }
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-    }
-
-    private void detector(SearchableHolder holder, boolean selected) {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (selected)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
-            else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-        } else {
-            if (selected)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
-            else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         }
     }
 

@@ -25,7 +25,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
     // Vars
     private ArrayList<Model> items;
-    private ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<String> ids;
     private String method;
 
     public SelectedAdapter(@NonNull Activity activity) {
@@ -62,8 +62,9 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         return ids;
     }
 
-    public void setItems(ArrayList<Model> items, String method) {
+    public void setItems(ArrayList<Model> items, ArrayList<String> ids, String method) {
         this.items = items;
+        this.ids = ids;
         this.method = method;
         notifyDataSetChanged();
     }
@@ -124,8 +125,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         try {
             switch (method) {
                 case "scales":
-                    ids.add(item.get("id").toString());
-
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
@@ -133,8 +132,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     break;
                 case "references":
                 case "phones":
-                    ids.add(item.get("id").toString());
-
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);

@@ -184,7 +184,7 @@ public class EditCenterDetailFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(phones, "phones");
+        setRecyclerView(phones, new ArrayList<>(),"phones");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
@@ -193,9 +193,9 @@ public class EditCenterDetailFragment extends Fragment {
         }
     }
 
-    private void setRecyclerView(ArrayList<Model> data, String method) {
+    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("phones")) {
-            phonesAdapter.setItems(data, method);
+            phonesAdapter.setItems(items, ids, method);
             binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
         }
     }

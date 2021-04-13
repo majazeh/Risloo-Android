@@ -124,13 +124,13 @@ public class CreateCaseUserFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(references, "references");
+        setRecyclerView(references, new ArrayList<>(), "references");
 //        }
     }
 
-    private void setRecyclerView(ArrayList<Model> data, String method) {
+    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
          if (method.equals("references")) {
-            referencesAdapter.setItems(data, method);
+            referencesAdapter.setItems(items, ids, method);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
     }

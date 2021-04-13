@@ -290,7 +290,7 @@ public class CreateSampleFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(scales, "scales");
+            setRecyclerView(scales, new ArrayList<>(), "scales");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
@@ -398,17 +398,17 @@ public class CreateSampleFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(references, "references");
+            setRecyclerView(references, new ArrayList<>(), "references");
 //        }
 
     }
 
-    private void setRecyclerView(ArrayList<Model> data, String method) {
+    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("scales")) {
-            scalesAdapter.setItems(data, method);
+            scalesAdapter.setItems(items, ids, method);
             binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesAdapter);
         } else if (method.equals("references")) {
-            referencesAdapter.setItems(data, method);
+            referencesAdapter.setItems(items, ids, method);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
     }
