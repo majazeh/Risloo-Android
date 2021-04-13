@@ -115,9 +115,13 @@ public class CreateSampleFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
-            scalesDialog.show(requireActivity().getSupportFragmentManager(), "scalesDialog");
-        }).widget(binding.scaleIncludeLayout.selectRecyclerView);
+        binding.scaleIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                scalesDialog.show(requireActivity().getSupportFragmentManager(), "scalesDialog");
+                scalesDialog.setData("scales");
+            }
+            return false;
+        });
 
         assessmentLinkSpan = new ClickableSpan() {
             @Override
@@ -242,9 +246,13 @@ public class CreateSampleFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.sessionIncludeLayout.selectTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
-            referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
-        }).widget(binding.referenceIncludeLayout.selectRecyclerView);
+        binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
+                referencesDialog.setData("references");
+            }
+            return false;
+        });
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() == 0) {

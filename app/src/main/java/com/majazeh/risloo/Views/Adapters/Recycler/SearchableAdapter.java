@@ -13,6 +13,8 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
 
@@ -28,7 +30,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     // Vars
     private ArrayList<Model> items;
-    private ArrayList<String> ids = new ArrayList<>();
     private String method;
 
     public SearchableAdapter(@NonNull Activity activity) {
@@ -45,11 +46,11 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     public void onBindViewHolder(@NonNull SearchableHolder holder, int i) {
         Model item = items.get(i);
 
-        listener(holder, item, i);
+        listener(holder, item);
 
         setData(holder, item);
 
-        setSelected(holder, i);
+        setActive(holder, item);
     }
 
     @Override
@@ -61,43 +62,53 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         return items;
     }
 
-    public ArrayList<String> getIds() {
-        return ids;
-    }
-
     public void setItems(ArrayList<Model> items, String method) {
         this.items = items;
         this.method = method;
         notifyDataSetChanged();
     }
 
-    public void clearItems() {
-        items.clear();
-        ids.clear();
-        notifyDataSetChanged();
-    }
-
-    private void listener(SearchableHolder holder, Model item, int position) {
+    private void listener(SearchableHolder holder, Model item) {
         ClickManager.onDelayedClickListener(() -> {
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.createSampleFragment:
-                    CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                    if (createSampleFragment != null) {
-                        if (method.equals("scales")) {
-                            if (!createSampleFragment.scalesAdapter.getIds().contains(ids.get(position)))
-                                createSampleFragment.scalesAdapter.addItem(item);
-                            else
-                                createSampleFragment.scalesAdapter.removeItem(position);
-                        } else if (method.equals("references")) {
-                            if (!createSampleFragment.referencesAdapter.getIds().contains(ids.get(position)))
-                                createSampleFragment.referencesAdapter.addItem(item);
-                            else
-                                createSampleFragment.referencesAdapter.removeItem(position);
-                        }
+            try {
+                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                    case R.id.createSampleFragment:
+                        CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createSampleFragment != null) {
+                            if (method.equals("scales")) {
+                                int position = createSampleFragment.scalesAdapter.getIds().indexOf(item.get("id").toString());
 
-                        notifyDataSetChanged();
-                    }
-                    break;
+                                if (position == -1) {
+                                    createSampleFragment.scalesAdapter.addItem(item);
+                                } else {
+                                    createSampleFragment.scalesAdapter.removeItem(position);
+                                }
+                            } else if (method.equals("references")) {
+
+                            }
+                        }
+                        break;
+                    case R.id.createCaseFragment:
+                        CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createCaseFragment != null) {
+                            if (method.equals("references")) {
+
+                            }
+                        }
+                        break;
+                    case R.id.createCaseUserFragment:
+                        CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createCaseUserFragment != null) {
+                            if (method.equals("references")) {
+
+                            }
+                        }
+                        break;
+                }
+
+                notifyDataSetChanged();
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }).widget(holder.binding.getRoot());
     }
@@ -106,16 +117,12 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         try {
             switch (method) {
                 case "scales":
-                    ids.add(item.get("id").toString());
-
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
                     holder.binding.subTextView.setText(item.get("subtitle").toString());
                     break;
                 case "references":
-                    ids.add(item.get("id").toString());
-
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
@@ -127,18 +134,38 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         }
     }
 
-    private void setSelected(SearchableHolder holder, int position) {
-        switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-            case R.id.createSampleFragment:
-                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                if (createSampleFragment != null) {
-                    if (method.equals("scales")) {
-                        detector(holder, !createSampleFragment.scalesAdapter.getIds().contains(ids.get(position)));
-                    } else  if (method.equals("references")) {
-                        detector(holder, !createSampleFragment.referencesAdapter.getIds().contains(ids.get(position)));
+    private void setActive(SearchableHolder holder, Model item) {
+        try {
+            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                case R.id.createSampleFragment:
+                    CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createSampleFragment != null) {
+                        if (method.equals("scales")) {
+                            detector(holder, createSampleFragment.scalesAdapter.getIds().contains(item.get("id").toString()));
+                        } else if (method.equals("references")) {
+                            detector(holder, createSampleFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                        }
                     }
-                }
-                break;
+                    break;
+                case R.id.createCaseFragment:
+                    CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCaseFragment != null) {
+                        if (method.equals("references")) {
+                            detector(holder, createCaseFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                        }
+                    }
+                    break;
+                case R.id.createCaseUserFragment:
+                    CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCaseUserFragment != null) {
+                        if (method.equals("references")) {
+                            detector(holder, createCaseUserFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                        }
+                    }
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

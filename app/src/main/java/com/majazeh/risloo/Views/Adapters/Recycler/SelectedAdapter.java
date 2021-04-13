@@ -12,14 +12,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedHolder> {
 
@@ -78,28 +75,24 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     }
 
     public void addItem(Model item) {
-        items.add(item);
-
         try {
+            items.add(item);
             ids.add(item.get("id").toString());
+            notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        notifyDataSetChanged();
     }
 
     public void replaceItem(int position, Model item) {
-        items.set(position, item);
-
         try {
+            items.set(position, item);
             ids.set(position, item.get("id").toString());
+            notifyItemChanged(position);
+            notifyItemRangeChanged(position, getItemCount());
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
-        notifyItemChanged(position);
-        notifyItemRangeChanged(position, getItemCount());
     }
 
     public void removeItem(int position) {
@@ -124,19 +117,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
         ClickManager.onDelayedClickListener(() -> {
             removeItem(position);
-
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.createSampleFragment:
-                    CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                    if (createSampleFragment != null) {
-                        if (method.equals("scales")) {
-                            createSampleFragment.scalesDialog.searchableAdapter.notifyDataSetChanged();
-                        } else if (method.equals("references")) {
-                            createSampleFragment.referencesDialog.searchableAdapter.notifyDataSetChanged();
-                        }
-                    }
-                    break;
-            }
         }).widget(holder.binding.removeImageView);
     }
 
@@ -152,17 +132,10 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     holder.binding.subTextView.setText(item.get("subtitle").toString());
                     break;
                 case "references":
-                    ids.add(item.get("id").toString());
-
-                    holder.binding.titleTextView.setText(item.get("title").toString());
-
-                    holder.binding.subTextView.setVisibility(View.GONE);
-                    holder.binding.subTextView.setText("");
-                    break;
                 case "phones":
                     ids.add(item.get("id").toString());
 
-                    holder.binding.titleTextView.setText(item.get("phone").toString());
+                    holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");

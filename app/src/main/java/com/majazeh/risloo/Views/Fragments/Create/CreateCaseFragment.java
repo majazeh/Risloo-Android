@@ -11,19 +11,38 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
+
+import java.util.ArrayList;
 
 public class CreateCaseFragment extends Fragment {
 
     // Binding
     private FragmentCreateCaseBinding binding;
 
+    // Adapters
+    public SelectedAdapter referencesAdapter;
+
+    // Dialogs
+    public SearchableDialog referencesDialog;
+
+    // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
+    private LinearLayoutManager referencesLayoutManager;
+
     // Vars
+    private ArrayList<Model> references = new ArrayList<>();
     private String room = "", center = "", situation = "";
 
     @Nullable
@@ -43,9 +62,19 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void initializer() {
+        referencesAdapter = new SelectedAdapter(requireActivity());
+
+        referencesDialog = new SearchableDialog();
+
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
+
+        referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
         binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentRoomHeader));
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentReferenceHeader));
         binding.situationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentSituationHeader));
+
+        InitManager.unfixedRecyclerView(binding.referenceIncludeLayout.selectRecyclerView, itemDecoration, referencesLayoutManager);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }
@@ -64,9 +93,13 @@ public class CreateCaseFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.roomIncludeLayout.selectContainer);
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.referenceIncludeLayout.selectRecyclerView);
+        binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
+                referencesDialog.setData("references");
+            }
+            return false;
+        });
 
         binding.situationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -108,11 +141,35 @@ public class CreateCaseFragment extends Fragment {
             binding.roomIncludeLayout.secondaryTextView.setText(center);
         }
 
-        // TODO : Set References Here
+//        if (extras.getString("references") != null) {
+//            try {
+//                JSONArray jsonArray = new JSONArray(extras.getString("references"));
+//
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
+//
+//                    references.add(model);
+//                }
+//
+//                setRecyclerView(references, "references");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+        setRecyclerView(references, "references");
+//        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
             situation = ((MainActivity) requireActivity()).singleton.getAddress();
             binding.situationIncludeLayout.inputEditText.setText(situation);
+        }
+    }
+
+    private void setRecyclerView(ArrayList<Model> data, String method) {
+        if (method.equals("references")) {
+            referencesAdapter.setItems(data, method);
+            binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
     }
 

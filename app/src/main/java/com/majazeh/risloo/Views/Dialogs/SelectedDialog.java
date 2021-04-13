@@ -7,6 +7,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -45,6 +46,9 @@ public class SelectedDialog extends AppCompatDialogFragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
+
+    // Vars
+    private String method;
 
     @NonNull
     @Override
@@ -89,6 +93,15 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
+        switch (method) {
+            case "phones":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogPhoneTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogPhoneHint));
+                binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                binding.entryButton.setText(getResources().getString(R.string.DialogPhoneEntry));
+                break;
+        }
+
         InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
     }
 
@@ -112,17 +125,18 @@ public class SelectedDialog extends AppCompatDialogFragment {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.inputEditText.length() != 0) {
                 try {
-                    String phone = binding.inputEditText.getText().toString().trim();
-                    Model item = new Model(new JSONObject().put("id", phone).put("phone", phone));
+                    String value = binding.inputEditText.getText().toString().trim();
+                    Model item = new Model(new JSONObject().put("id", value).put("title", value));
 
                     switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                         case R.id.createCenterFragment:
                             CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (createCenterFragment != null) {
-                                if (!createCenterFragment.phonesAdapter.getIds().contains(phone)) {
-                                    createCenterFragment.phonesAdapter.addItem(item);
-                                } else {
-                                    Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                if (method.equals("phones")) {
+                                    if (!createCenterFragment.phonesAdapter.getIds().contains(value))
+                                        createCenterFragment.phonesAdapter.addItem(item);
+                                    else
+                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                                 }
                             }
                             break;
@@ -131,10 +145,11 @@ public class SelectedDialog extends AppCompatDialogFragment {
                             if (editCenterFragment != null) {
                                 EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
-                                if (!editCenterDetailFragment.phonesAdapter.getIds().contains(phone)) {
-                                    editCenterDetailFragment.phonesAdapter.addItem(item);
-                                } else {
-                                    Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                if (method.equals("phones")) {
+                                    if (!editCenterDetailFragment.phonesAdapter.getIds().contains(value))
+                                        editCenterDetailFragment.phonesAdapter.addItem(item);
+                                    else
+                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                                 }
                             }
                             break;
@@ -156,7 +171,9 @@ public class SelectedDialog extends AppCompatDialogFragment {
             case R.id.createCenterFragment:
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createCenterFragment != null) {
-                    binding.listRecyclerView.setAdapter(createCenterFragment.phonesAdapter);
+                    if (method.equals("phones")) {
+                        binding.listRecyclerView.setAdapter(createCenterFragment.phonesAdapter);
+                    }
                 }
                 break;
             case R.id.editCenterFragment:
@@ -164,7 +181,9 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 if (editCenterFragment != null) {
                     EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
-                    binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);
+                    if (method.equals("phones")) {
+                        binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);
+                    }
                 }
                 break;
         }
@@ -172,6 +191,10 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
     private void clearEditText() {
         binding.inputEditText.getText().clear();
+    }
+
+    public void setData(String method) {
+        this.method = method;
     }
 
     @Override

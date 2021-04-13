@@ -23,14 +23,22 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SearchableAdapter;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SearchableDialog extends AppCompatDialogFragment {
@@ -45,6 +53,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
     private Handler handler;
+
+    // Vars
+    private String method;
 
     @NonNull
     @Override
@@ -93,6 +104,19 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         handler = new Handler();
 
+        switch (method) {
+            case "scales":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogScaleTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogScaleHint));
+                binding.entryButton.setText(getResources().getString(R.string.DialogScaleEntry));
+                break;
+            case "references":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogReferenceTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogReferenceHint));
+                binding.entryButton.setText(getResources().getString(R.string.DialogReferenceEntry));
+                break;
+        }
+
         InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
     }
 
@@ -139,13 +163,63 @@ public class SearchableDialog extends AppCompatDialogFragment {
     }
 
     private void setRecyclerView() {
+        ArrayList<Model> values = new ArrayList<>();
+
+        for (int i = 0; i < 5; i++) {
+            try {
+                JSONObject jsonObject = new JSONObject();
+                jsonObject.put("id", String.valueOf(i));
+                jsonObject.put("title", "عنوان" + " " + i);
+                jsonObject.put("subtitle", "زیرنویس" + " " + i);
+
+                Model model = new Model(jsonObject);
+
+                values.add(model);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-            // TODO : Place Code Here
+            case R.id.createSampleFragment:
+                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createSampleFragment != null) {
+                    if (method.equals("scales")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    } else if (method.equals("references")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
+            case R.id.createCaseFragment:
+                CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createCaseFragment != null) {
+                    if (method.equals("references")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
+            case R.id.createCaseUserFragment:
+                CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createCaseUserFragment != null) {
+                    if (method.equals("references")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
         }
     }
 
     private void clearEditText() {
         binding.inputEditText.getText().clear();
+    }
+
+    public void setData(String method) {
+        this.method = method;
     }
 
     @Override
