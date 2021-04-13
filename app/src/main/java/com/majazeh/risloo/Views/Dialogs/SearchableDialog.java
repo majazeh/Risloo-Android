@@ -33,7 +33,10 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SearchableAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 
 import org.json.JSONException;
@@ -121,6 +124,21 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogManagerHint));
                 binding.entryButton.setVisibility(View.GONE);
                 break;
+            case "psychologies":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogPsychologyTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogPsychologyHint));
+                binding.entryButton.setVisibility(View.GONE);
+                break;
+            case "cases":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogCaseTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogCaseHint));
+                binding.entryButton.setVisibility(View.GONE);
+                break;
+            case "sessions":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogSessionTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogSessionHint));
+                binding.entryButton.setVisibility(View.GONE);
+                break;
         }
 
         InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
@@ -190,12 +208,23 @@ public class SearchableDialog extends AppCompatDialogFragment {
             case R.id.createSampleFragment:
                 CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createSampleFragment != null) {
-                    if (method.equals("scales")) {
-                        searchableAdapter.setItems(values, method);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
-                    } else if (method.equals("references")) {
-                        searchableAdapter.setItems(values, method);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    switch (method) {
+                        case "scales":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "references":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "cases":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "sessions":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
                     }
                 }
                 break;
@@ -220,6 +249,26 @@ public class SearchableDialog extends AppCompatDialogFragment {
             case R.id.createCenterFragment:
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createCenterFragment != null) {
+                    if (method.equals("managers")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
+            case R.id.createRoomFragment:
+                CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createRoomFragment != null) {
+                    if (method.equals("psychologies")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
+            case R.id.editCenterFragment:
+                EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (editCenterFragment != null) {
+                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
+
                     if (method.equals("managers")) {
                         searchableAdapter.setItems(values, method);
                         binding.listRecyclerView.setAdapter(searchableAdapter);

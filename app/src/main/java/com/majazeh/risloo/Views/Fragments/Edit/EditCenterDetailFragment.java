@@ -21,6 +21,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
 
@@ -29,12 +30,13 @@ import java.util.ArrayList;
 public class EditCenterDetailFragment extends Fragment {
 
     // Binding
-    private FragmentEditCenterDetailBinding binding;
+    public FragmentEditCenterDetailBinding binding;
 
     // Adapters
     public SelectedAdapter phonesAdapter;
 
     // Dialogs
+    public SearchableDialog managersDialog;
     private SelectedDialog phonesDialog;
 
     // Objects
@@ -43,7 +45,7 @@ public class EditCenterDetailFragment extends Fragment {
 
     // Vars
     private ArrayList<Model> phones = new ArrayList<>();
-    private String manager = "", name = "", address = "", description = "";
+    public String managerId = "", managerName = "", name = "", address = "", description = "";
 
     @Nullable
     @Override
@@ -64,6 +66,7 @@ public class EditCenterDetailFragment extends Fragment {
     private void initializer() {
         phonesAdapter = new SelectedAdapter(requireActivity());
 
+        managersDialog = new SearchableDialog();
         phonesDialog = new SelectedDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
@@ -95,7 +98,8 @@ public class EditCenterDetailFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            managersDialog.show(requireActivity().getSupportFragmentManager(), "managersDialog");
+            managersDialog.setData("managers");
         }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -134,7 +138,7 @@ public class EditCenterDetailFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (manager.equals("")) {
+            if (managerId.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
@@ -144,7 +148,7 @@ public class EditCenterDetailFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!manager.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
+            if (!managerId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView);
@@ -156,8 +160,9 @@ public class EditCenterDetailFragment extends Fragment {
 
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getManager().equals("")) {
-            manager = ((MainActivity) requireActivity()).singleton.getManager();
-            binding.managerIncludeLayout.selectTextView.setText(manager);
+            managerId = ((MainActivity) requireActivity()).singleton.getManager();
+            managerName = ((MainActivity) requireActivity()).singleton.getManager();
+            binding.managerIncludeLayout.selectTextView.setText(managerName);
         }
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             name = ((MainActivity) requireActivity()).singleton.getName();

@@ -15,15 +15,19 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 
 public class CreateRoomFragment extends Fragment {
 
     // Binding
-    private FragmentCreateRoomBinding binding;
+    public FragmentCreateRoomBinding binding;
+
+    // Dialogs
+    public SearchableDialog psychologiesDialog;
 
     // Vars
-    private String psychology = "";
+    public String psychologyId = "", psychologyName = "";
 
     @Nullable
     @Override
@@ -42,6 +46,8 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void initializer() {
+        psychologiesDialog = new SearchableDialog();
+
         binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomFragmentPsychologyHeader));
 
         binding.psychologyIncludeLayout.selectTextView.setHint(getResources().getString(R.string.CreateRoomFragmentPsychologyHint));
@@ -60,15 +66,16 @@ public class CreateRoomFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            psychologiesDialog.show(requireActivity().getSupportFragmentManager(), "psychologiesDialog");
+            psychologiesDialog.setData("psychologies");
         }).widget(binding.psychologyIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (psychology.equals("")) {
+            if (psychologyId.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyIncludeLayout.errorImageView, binding.psychologyIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!psychology.equals("")) {
+            if (!psychologyId.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyIncludeLayout.errorImageView, binding.psychologyIncludeLayout.errorTextView);
 
                 doWork();
@@ -78,8 +85,9 @@ public class CreateRoomFragment extends Fragment {
 
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getPsychology().equals("")) {
-            psychology = ((MainActivity) requireActivity()).singleton.getPsychology();
-            binding.psychologyIncludeLayout.selectTextView.setText(psychology);
+            psychologyId = ((MainActivity) requireActivity()).singleton.getPsychology();
+            psychologyName = ((MainActivity) requireActivity()).singleton.getPsychology();
+            binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
         }
     }
 

@@ -35,13 +35,13 @@ import java.util.ArrayList;
 public class CreateSampleFragment extends Fragment {
 
     // Binding
-    private FragmentCreateSampleBinding binding;
+    public FragmentCreateSampleBinding binding;
 
     // Adapters
     public SelectedAdapter scalesAdapter, referencesAdapter;
 
     // Dialogs
-    public SearchableDialog scalesDialog, referencesDialog;
+    public SearchableDialog scalesDialog, referencesDialog, casesDialog, sessionsDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -50,7 +50,7 @@ public class CreateSampleFragment extends Fragment {
 
     // Vars
     private ArrayList<Model> scales = new ArrayList<>(), references = new ArrayList<>();
-    private String room = "", center = "", type = "case", name = "", userCount = "", caseType = "", situation = "", casse = "",  session = "";
+    public String room = "", center = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "", caseName = "",  sessionId = "", sessionName = "";
 
     @Nullable
     @Override
@@ -74,6 +74,8 @@ public class CreateSampleFragment extends Fragment {
 
         scalesDialog = new SearchableDialog();
         referencesDialog = new SearchableDialog();
+        casesDialog = new SearchableDialog();
+        sessionsDialog = new SearchableDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -239,11 +241,13 @@ public class CreateSampleFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
+            casesDialog.setData("cases");
         }).widget(binding.caseIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            sessionsDialog.show(requireActivity().getSupportFragmentManager(), "sessionsDialog");
+            sessionsDialog.setData("sessions");
         }).widget(binding.sessionIncludeLayout.selectTextView);
 
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -374,12 +378,14 @@ public class CreateSampleFragment extends Fragment {
             binding.situationIncludeLayout.inputEditText.setText(situation);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            casse = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.caseIncludeLayout.selectTextView.setText(casse);
+            caseId = ((MainActivity) requireActivity()).singleton.getAddress();
+            caseName = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.caseIncludeLayout.selectTextView.setText(caseName);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            session = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.sessionIncludeLayout.selectTextView.setText(session);
+            sessionId = ((MainActivity) requireActivity()).singleton.getAddress();
+            sessionName = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.sessionIncludeLayout.selectTextView.setText(sessionName);
         }
 
 //        if (extras.getString("references") != null) {

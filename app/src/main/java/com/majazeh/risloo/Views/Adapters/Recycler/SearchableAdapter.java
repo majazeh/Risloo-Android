@@ -16,7 +16,10 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
 
 import org.json.JSONException;
@@ -90,21 +93,55 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     case R.id.createSampleFragment:
                         CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (createSampleFragment != null) {
-                            if (method.equals("scales")) {
-                                int position = createSampleFragment.scalesAdapter.getIds().indexOf(item.get("id").toString());
+                            switch (method) {
+                                case "scales": {
+                                    int position = createSampleFragment.scalesAdapter.getIds().indexOf(item.get("id").toString());
 
-                                if (position == -1)
-                                    createSampleFragment.scalesAdapter.addItem(item);
-                                else
-                                    createSampleFragment.scalesAdapter.removeItem(position);
+                                    if (position == -1)
+                                        createSampleFragment.scalesAdapter.addItem(item);
+                                    else
+                                        createSampleFragment.scalesAdapter.removeItem(position);
+                                    break;
+                                }
+                                case "references": {
+                                    int position = createSampleFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
 
-                            } else if (method.equals("references")) {
-                                int position = createSampleFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
+                                    if (position == -1)
+                                        createSampleFragment.referencesAdapter.addItem(item);
+                                    else
+                                        createSampleFragment.referencesAdapter.removeItem(position);
+                                    break;
+                                }
+                                case "cases":
+                                    if (!createSampleFragment.caseId.equals(item.get("id").toString())) {
+                                        createSampleFragment.caseId = item.get("id").toString();
+                                        createSampleFragment.caseName = item.get("title").toString();
 
-                                if (position == -1)
-                                    createSampleFragment.referencesAdapter.addItem(item);
-                                else
-                                    createSampleFragment.referencesAdapter.removeItem(position);
+                                        createSampleFragment.binding.caseIncludeLayout.selectTextView.setText(createSampleFragment.caseName);
+                                    } else if (createSampleFragment.caseId.equals(item.get("id").toString())) {
+                                        createSampleFragment.caseId = "";
+                                        createSampleFragment.caseName = "";
+
+                                        createSampleFragment.binding.caseIncludeLayout.selectTextView.setText("");
+                                    }
+
+                                    createSampleFragment.casesDialog.dismiss();
+                                    break;
+                                case "sessions":
+                                    if (!createSampleFragment.sessionId.equals(item.get("id").toString())) {
+                                        createSampleFragment.sessionId = item.get("id").toString();
+                                        createSampleFragment.sessionName = item.get("title").toString();
+
+                                        createSampleFragment.binding.sessionIncludeLayout.selectTextView.setText(createSampleFragment.sessionName);
+                                    } else if (createSampleFragment.sessionId.equals(item.get("id").toString())) {
+                                        createSampleFragment.sessionId = "";
+                                        createSampleFragment.sessionName = "";
+
+                                        createSampleFragment.binding.sessionIncludeLayout.selectTextView.setText("");
+                                    }
+
+                                    createSampleFragment.sessionsDialog.dismiss();
+                                    break;
                             }
                         }
                         break;
@@ -154,6 +191,48 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             }
                         }
                         break;
+                    case R.id.createRoomFragment:
+                        CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createRoomFragment != null) {
+                            if (method.equals("psychologies")) {
+                                if (!createRoomFragment.psychologyId.equals(item.get("id").toString())) {
+                                    createRoomFragment.psychologyId = item.get("id").toString();
+                                    createRoomFragment.psychologyName = item.get("title").toString();
+
+                                    createRoomFragment.binding.psychologyIncludeLayout.selectTextView.setText(createRoomFragment.psychologyName);
+                                } else if (createRoomFragment.psychologyId.equals(item.get("id").toString())) {
+                                    createRoomFragment.psychologyId = "";
+                                    createRoomFragment.psychologyName = "";
+
+                                    createRoomFragment.binding.psychologyIncludeLayout.selectTextView.setText("");
+                                }
+
+                                createRoomFragment.psychologiesDialog.dismiss();
+                            }
+                        }
+                        break;
+                    case R.id.editCenterFragment:
+                        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (editCenterFragment != null) {
+                            EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
+
+                            if (method.equals("managers")) {
+                                if (!editCenterDetailFragment.managerId.equals(item.get("id").toString())) {
+                                    editCenterDetailFragment.managerId = item.get("id").toString();
+                                    editCenterDetailFragment.managerName = item.get("title").toString();
+
+                                    editCenterDetailFragment.binding.managerIncludeLayout.selectTextView.setText(editCenterDetailFragment.managerName);
+                                } else if (editCenterDetailFragment.managerId.equals(item.get("id").toString())) {
+                                    editCenterDetailFragment.managerId = "";
+                                    editCenterDetailFragment.managerName = "";
+
+                                    editCenterDetailFragment.binding.managerIncludeLayout.selectTextView.setText("");
+                                }
+
+                                editCenterDetailFragment.managersDialog.dismiss();
+                            }
+                        }
+                        break;
                 }
 
                 notifyDataSetChanged();
@@ -174,6 +253,8 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     break;
                 case "references":
                 case "managers":
+                case "cases":
+                case "sessions":
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
@@ -191,10 +272,19 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 case R.id.createSampleFragment:
                     CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSampleFragment != null) {
-                        if (method.equals("scales")) {
-                            detector(holder, createSampleFragment.scalesAdapter.getIds().contains(item.get("id").toString()));
-                        } else if (method.equals("references")) {
-                            detector(holder, createSampleFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                        switch (method) {
+                            case "scales":
+                                detector(holder, createSampleFragment.scalesAdapter.getIds().contains(item.get("id").toString()));
+                                break;
+                            case "references":
+                                detector(holder, createSampleFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                                break;
+                            case "cases":
+                                detector(holder, createSampleFragment.caseId.equals(item.get("id").toString()));
+                                break;
+                            case "session":
+                                detector(holder, createSampleFragment.sessionId.equals(item.get("id").toString()));
+                                break;
                         }
                     }
                     break;
@@ -219,6 +309,24 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     if (createCenterFragment != null) {
                         if (method.equals("managers")) {
                             detector(holder, createCenterFragment.managerId.equals(item.get("id").toString()));
+                        }
+                    }
+                    break;
+                case R.id.createRoomFragment:
+                    CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createRoomFragment != null) {
+                        if (method.equals("psychologies")) {
+                            detector(holder, createRoomFragment.psychologyId.equals(item.get("id").toString()));
+                        }
+                    }
+                    break;
+                case R.id.editCenterFragment:
+                    EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editCenterFragment != null) {
+                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
+
+                        if (method.equals("managers")) {
+                            detector(holder, editCenterDetailFragment.managerId.equals(item.get("id").toString()));
                         }
                     }
                     break;
