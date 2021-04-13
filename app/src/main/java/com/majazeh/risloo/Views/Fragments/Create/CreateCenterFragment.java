@@ -25,6 +25,7 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.squareup.picasso.Picasso;
@@ -40,6 +41,7 @@ public class CreateCenterFragment extends Fragment {
     public SelectedAdapter phonesAdapter;
 
     // Dialogs
+    public SearchableDialog managersDialog;
     private SelectedDialog phonesDialog;
 
     // BottomSheets
@@ -52,7 +54,7 @@ public class CreateCenterFragment extends Fragment {
 
     // Vars
     private ArrayList<Model> phones = new ArrayList<>();
-    private String center = "personal", manager = "", name = "", address = "", description ="";
+    public String center = "personal", managerId = "", managerName = "", name = "", address = "", description ="";
     public String avatarPath = "";
 
     @Nullable
@@ -74,6 +76,7 @@ public class CreateCenterFragment extends Fragment {
     private void initializer() {
         phonesAdapter = new SelectedAdapter(requireActivity());
 
+        managersDialog = new SearchableDialog();
         phonesDialog = new SelectedDialog();
 
         imageBottomSheet = new ImageBottomSheet();
@@ -128,12 +131,10 @@ public class CreateCenterFragment extends Fragment {
             }
         });
 
-        binding.managerIncludeLayout.selectTextView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                // TODO : Place Code Here
-            }
-            return false;
-        });
+        ClickManager.onDelayedClickListener(() -> {
+            managersDialog.show(requireActivity().getSupportFragmentManager(), "managersDialog");
+            managersDialog.setData("managers");
+        }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -176,21 +177,21 @@ public class CreateCenterFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (center.equals("personal")) {
-                if (manager.equals("")) {
+                if (managerId.equals("")) {
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
 
-                if (!manager.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
+                if (!managerId.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView);
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView);
 
                     doWork();
                 }
             } else {
-                if (manager.equals("")) {
+                if (managerId.equals("")) {
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.nameIncludeLayout.inputEditText.length() == 0) {
@@ -200,7 +201,7 @@ public class CreateCenterFragment extends Fragment {
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
 
-                if (!manager.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
+                if (!managerId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerIncludeLayout.errorImageView, binding.managerIncludeLayout.errorTextView);
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesIncludeLayout.errorImageView, binding.phonesIncludeLayout.errorTextView);
@@ -229,8 +230,9 @@ public class CreateCenterFragment extends Fragment {
         }
 
         if (!((MainActivity) requireActivity()).singleton.getManager().equals("")) {
-            manager = ((MainActivity) requireActivity()).singleton.getManager();
-            binding.managerIncludeLayout.selectTextView.setText(manager);
+            managerId = ((MainActivity) requireActivity()).singleton.getManager();
+            managerName = ((MainActivity) requireActivity()).singleton.getManager();
+            binding.managerIncludeLayout.selectTextView.setText(managerName);
         }
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             name = ((MainActivity) requireActivity()).singleton.getName();

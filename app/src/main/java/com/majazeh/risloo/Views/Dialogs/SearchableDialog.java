@@ -32,6 +32,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SearchableAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 
@@ -114,6 +115,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.titleTextView.setText(getResources().getString(R.string.DialogReferenceTitle));
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogReferenceHint));
                 binding.entryButton.setText(getResources().getString(R.string.DialogReferenceEntry));
+                break;
+            case "managers":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogManagerTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogManagerHint));
+                binding.entryButton.setVisibility(View.GONE);
                 break;
         }
 
@@ -206,6 +212,15 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createCaseUserFragment != null) {
                     if (method.equals("references")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
+            case R.id.createCenterFragment:
+                CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createCenterFragment != null) {
+                    if (method.equals("managers")) {
                         searchableAdapter.setItems(values, method);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }

@@ -15,6 +15,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
 
@@ -133,6 +134,26 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             }
                         }
                         break;
+                    case R.id.createCenterFragment:
+                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createCenterFragment != null) {
+                            if (method.equals("managers")) {
+                                if (!createCenterFragment.managerId.equals(item.get("id").toString())) {
+                                    createCenterFragment.managerId = item.get("id").toString();
+                                    createCenterFragment.managerName = item.get("title").toString();
+
+                                    createCenterFragment.binding.managerIncludeLayout.selectTextView.setText(createCenterFragment.managerName);
+                                } else if (createCenterFragment.managerId.equals(item.get("id").toString())) {
+                                    createCenterFragment.managerId = "";
+                                    createCenterFragment.managerName = "";
+
+                                    createCenterFragment.binding.managerIncludeLayout.selectTextView.setText("");
+                                }
+
+                                createCenterFragment.managersDialog.dismiss();
+                            }
+                        }
+                        break;
                 }
 
                 notifyDataSetChanged();
@@ -152,6 +173,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     holder.binding.subTextView.setText(item.get("subtitle").toString());
                     break;
                 case "references":
+                case "managers":
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
@@ -189,6 +211,14 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     if (createCaseUserFragment != null) {
                         if (method.equals("references")) {
                             detector(holder, createCaseUserFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                        }
+                    }
+                    break;
+                case R.id.createCenterFragment:
+                    CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCenterFragment != null) {
+                        if (method.equals("managers")) {
+                            detector(holder, createCenterFragment.managerId.equals(item.get("id").toString()));
                         }
                     }
                     break;

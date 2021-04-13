@@ -59,6 +59,9 @@
     <string name="DialogReferenceHint">جستجو</string>
     <string name="DialogReferenceEntry">ثبت</string>
 
+    <string name="DialogManagerTitle">مدیر را انتخاب کنید.</string>
+    <string name="DialogManagerHint">جستجو</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings
