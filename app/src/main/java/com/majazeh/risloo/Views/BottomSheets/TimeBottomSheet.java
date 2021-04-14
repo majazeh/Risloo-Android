@@ -28,6 +28,7 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
     // Vars
     private int hour, minute;
+    private String method;
 
     @NonNull
     @Override
@@ -40,6 +41,8 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = BottomSheetTimeBinding.inflate(inflater, viewGroup, false);
+
+        initializer();
 
         listener();
 
@@ -56,6 +59,15 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
         clearNumberPicker();
     }
 
+    private void initializer() {
+        switch (method) {
+            case "startTime":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartTimeTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartTimeEntry));
+                break;
+        }
+    }
+
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
@@ -68,23 +80,27 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                 case R.id.createSessionFragment:
                     CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSessionFragment != null) {
-                        createSessionFragment.startTime = getDate();
+                        if (method.equals("startTime")) {
+                            createSessionFragment.startTime = getDate();
 
-                        createSessionFragment.hour = hour;
-                        createSessionFragment.minute = minute;
+                            createSessionFragment.hour = hour;
+                            createSessionFragment.minute = minute;
 
-                        createSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(createSessionFragment.startTime);
+                            createSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(createSessionFragment.startTime);
+                        }
                     }
                     break;
                 case R.id.editSessionFragment:
                     EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editSessionFragment != null) {
-                        editSessionFragment.startTime = getDate();
+                        if (method.equals("startTime")) {
+                            editSessionFragment.startTime = getDate();
 
-                        editSessionFragment.hour = hour;
-                        editSessionFragment.minute = minute;
+                            editSessionFragment.hour = hour;
+                            editSessionFragment.minute = minute;
 
-                        editSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(editSessionFragment.startTime);
+                            editSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(editSessionFragment.startTime);
+                        }
                     }
                     break;
             }
@@ -125,9 +141,10 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setTime(int hour, int minute) {
+    public void setTime(int hour, int minute, String method) {
         this.hour = hour;
         this.minute = minute;
+        this.method = method;
     }
 
     @Override

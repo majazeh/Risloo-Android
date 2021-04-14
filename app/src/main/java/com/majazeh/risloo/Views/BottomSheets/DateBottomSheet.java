@@ -16,7 +16,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
 import java.util.Objects;
@@ -28,6 +31,7 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
 
     // Vars
     private int year, month, day;
+    private String method;
 
     @NonNull
     @Override
@@ -40,6 +44,8 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = BottomSheetDateBinding.inflate(inflater, viewGroup, false);
+
+        initializer();
 
         listener();
 
@@ -54,6 +60,19 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
         clearNumberPicker();
+    }
+
+    private void initializer() {
+        switch (method) {
+            case "startDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartDateEntry));
+                break;
+            case "birthday":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayTitle));
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayEntry));
+                break;
+        }
     }
 
     private void detector() {
@@ -78,25 +97,59 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 case R.id.createSessionFragment:
                     CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSessionFragment != null) {
-                        createSessionFragment.startDate = getDate();
+                        if (method.equals("startDate")) {
+                            createSessionFragment.startDate = getDate();
 
-                        createSessionFragment.year = year;
-                        createSessionFragment.month = month;
-                        createSessionFragment.day = day;
+                            createSessionFragment.year = year;
+                            createSessionFragment.month = month;
+                            createSessionFragment.day = day;
 
-                        createSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(createSessionFragment.startDate);
+                            createSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(createSessionFragment.startDate);
+                        }
                     }
                     break;
                 case R.id.editSessionFragment:
                     EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editSessionFragment != null) {
-                        editSessionFragment.startDate = getDate();
+                        if (method.equals("startDate")) {
+                            editSessionFragment.startDate = getDate();
 
-                        editSessionFragment.year = year;
-                        editSessionFragment.month = month;
-                        editSessionFragment.day = day;
+                            editSessionFragment.year = year;
+                            editSessionFragment.month = month;
+                            editSessionFragment.day = day;
 
-                        editSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(editSessionFragment.startDate);
+                            editSessionFragment.binding.startDateIncludeLayout.selectTextView.setText(editSessionFragment.startDate);
+                        }
+                    }
+                    break;
+                case R.id.createUserFragment:
+                    CreateUserFragment createUserFragment = (CreateUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createUserFragment != null) {
+                        if (method.equals("birthday")) {
+                            createUserFragment.birthday = getDate();
+
+                            createUserFragment.year = year;
+                            createUserFragment.month = month;
+                            createUserFragment.day = day;
+
+                            createUserFragment.binding.birthdayIncludeLayout.selectTextView.setText(createUserFragment.birthday);
+                        }
+                    }
+                    break;
+                case R.id.editUserFragment:
+                    EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editUserFragment != null) {
+                        EditPersonalFragment editPersonalFragment = (EditPersonalFragment) editUserFragment.adapter.getRegisteredFragment(0);
+
+                        if (method.equals("birthday")) {
+                            editPersonalFragment.birthday = getDate();
+
+                            editPersonalFragment.year = year;
+                            editPersonalFragment.month = month;
+                            editPersonalFragment.day = day;
+
+                            editPersonalFragment.binding.birthdayIncludeLayout.selectTextView.setText(editPersonalFragment.birthday);
+                        }
                     }
                     break;
             }
@@ -144,10 +197,11 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setDate(int year, int month, int day) {
+    public void setDate(int year, int month, int day, String method) {
         this.year = year;
         this.month = month;
         this.day = day;
+        this.method = method;
     }
 
     @Override

@@ -29,8 +29,8 @@ public class EditSessionFragment extends Fragment {
     public FragmentEditSessionBinding binding;
 
     // BottomSheets
-    private DateBottomSheet dateBottomSheet;
-    private TimeBottomSheet timeBottomSheet;
+    private DateBottomSheet startDateBottomSheet;
+    private TimeBottomSheet startTimeBottomSheet;
 
     // Vars
     public String startDate = "", startTime = "", duration = "60", status = "";
@@ -53,8 +53,8 @@ public class EditSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        dateBottomSheet = new DateBottomSheet();
-        timeBottomSheet = new TimeBottomSheet();
+        startDateBottomSheet = new DateBottomSheet();
+        startTimeBottomSheet = new TimeBottomSheet();
 
         binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionFragmentStartDateHeader));
         binding.startTimeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionFragmentStartTimeHeader));
@@ -79,13 +79,13 @@ public class EditSessionFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            dateBottomSheet.show(requireActivity().getSupportFragmentManager(), "dateBottomSheet");
-            dateBottomSheet.setDate(year, month, day);
+            startDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startDateBottomSheet");
+            startDateBottomSheet.setDate(year, month, day, "startDate");
         }).widget(binding.startDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            timeBottomSheet.show(requireActivity().getSupportFragmentManager(), "timeBottomSheet");
-            timeBottomSheet.setTime(hour, minute);
+            startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
+            startTimeBottomSheet.setTime(hour, minute, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {

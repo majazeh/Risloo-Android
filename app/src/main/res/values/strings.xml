@@ -29,8 +29,11 @@
     <string name="BottomSheetBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
     <string name="BottomSheetBirthdayEntry">ثبت</string>
 
-    <string name="BottomSheetDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
-    <string name="BottomSheetDateEntry">ثبت</string>
+    <string name="BottomSheetStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
+    <string name="BottomSheetStartDateEntry">ثبت</string>
+
+    <string name="BottomSheetStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
+    <string name="BottomSheetStartTimeEntry">ثبت</string>
 
     <string name="BottomSheetImageTitle">از کجا می خوای تصویر بیارید؟</string>
     <string name="BottomSheetImageGallery">البوم</string>
@@ -38,9 +41,6 @@
 
     <string name="BottomSheetLogoutTitle">آیا تمایل به خروج از حساب کاربری دارید؟</string>
     <string name="BottomSheetLogoutEntry">خروج</string>
-
-    <string name="BottomSheetTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
-    <string name="BottomSheetTimeEntry">ثبت</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
