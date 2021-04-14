@@ -29,13 +29,13 @@ import java.util.ArrayList;
 public class CreateCaseFragment extends Fragment {
 
     // Binding
-    private FragmentCreateCaseBinding binding;
+    public FragmentCreateCaseBinding binding;
 
     // Adapters
     public SelectedAdapter referencesAdapter;
 
     // Dialogs
-    public SearchableDialog referencesDialog;
+    public SearchableDialog roomsDialog, referencesDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -43,7 +43,7 @@ public class CreateCaseFragment extends Fragment {
 
     // Vars
     private ArrayList<Model> references = new ArrayList<>();
-    private String room = "", center = "", situation = "";
+    public String roomId = "", roomName = "", centerName = "", situation = "";
 
     @Nullable
     @Override
@@ -64,6 +64,7 @@ public class CreateCaseFragment extends Fragment {
     private void initializer() {
         referencesAdapter = new SelectedAdapter(requireActivity());
 
+        roomsDialog = new SearchableDialog();
         referencesDialog = new SearchableDialog();
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
@@ -90,7 +91,8 @@ public class CreateCaseFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            roomsDialog.show(requireActivity().getSupportFragmentManager(), "roomsDialog");
+            roomsDialog.setData("rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -111,7 +113,7 @@ public class CreateCaseFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (room.equals("")) {
+            if (roomId.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomIncludeLayout.errorImageView, binding.roomIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() == 0) {
@@ -121,7 +123,7 @@ public class CreateCaseFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationIncludeLayout.errorImageView, binding.situationIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!room.equals("") && binding.referenceIncludeLayout.selectRecyclerView.getChildCount() != 0 && binding.situationIncludeLayout.inputEditText.length() != 0) {
+            if (!roomId.equals("") && binding.referenceIncludeLayout.selectRecyclerView.getChildCount() != 0 && binding.situationIncludeLayout.inputEditText.length() != 0) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomIncludeLayout.errorImageView, binding.roomIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceIncludeLayout.errorImageView, binding.referenceIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationIncludeLayout.errorImageView, binding.situationIncludeLayout.errorTextView);
@@ -133,12 +135,13 @@ public class CreateCaseFragment extends Fragment {
 
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            room = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.primaryTextView.setText(room);
+            roomId = ((MainActivity) requireActivity()).singleton.getAddress();
+            roomName = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.roomIncludeLayout.primaryTextView.setText(roomName);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            center = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.secondaryTextView.setText(center);
+            centerName = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.roomIncludeLayout.secondaryTextView.setText(centerName);
         }
 
 //        if (extras.getString("references") != null) {

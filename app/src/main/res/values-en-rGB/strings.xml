@@ -71,6 +71,9 @@
     <string name="DialogSessionTitle">جلسه را انتخاب کنید.</string>
     <string name="DialogSessionHint">جستجو</string>
 
+    <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
+    <string name="DialogRoomHint">جستجو</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Splash Strings

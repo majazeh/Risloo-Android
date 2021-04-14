@@ -33,6 +33,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SearchableAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
@@ -139,6 +140,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogSessionHint));
                 binding.entryButton.setVisibility(View.GONE);
                 break;
+            case "rooms":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogRoomTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogRoomHint));
+                binding.entryButton.setVisibility(View.GONE);
+                break;
         }
 
         InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
@@ -225,6 +231,10 @@ public class SearchableDialog extends AppCompatDialogFragment {
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
+                        case "rooms":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
                     }
                 }
                 break;
@@ -232,6 +242,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createCaseFragment != null) {
                     if (method.equals("references")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    } else if (method.equals("rooms")) {
                         searchableAdapter.setItems(values, method);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
@@ -270,6 +283,15 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
                     if (method.equals("managers")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
+            case R.id.createCenterUserFragment:
+                CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createCenterUserFragment != null) {
+                    if (method.equals("rooms")) {
                         searchableAdapter.setItems(values, method);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }

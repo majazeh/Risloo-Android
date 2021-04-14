@@ -16,6 +16,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
@@ -142,19 +143,59 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
                                     createSampleFragment.sessionsDialog.dismiss();
                                     break;
+                                case "rooms":
+                                    if (!createSampleFragment.roomId.equals(item.get("id").toString())) {
+                                        createSampleFragment.roomId = item.get("id").toString();
+                                        createSampleFragment.roomName = item.get("title").toString();
+                                        createSampleFragment.centerName = item.get("subtitle").toString();
+
+                                        createSampleFragment.binding.roomIncludeLayout.primaryTextView.setText(createSampleFragment.roomName);
+                                        createSampleFragment.binding.roomIncludeLayout.secondaryTextView.setText(createSampleFragment.centerName);
+                                    } else if (createSampleFragment.roomId.equals(item.get("id").toString())) {
+                                        createSampleFragment.roomId = "";
+                                        createSampleFragment.roomName = "";
+                                        createSampleFragment.centerName = "";
+
+                                        createSampleFragment.binding.roomIncludeLayout.primaryTextView.setText("");
+                                        createSampleFragment.binding.roomIncludeLayout.secondaryTextView.setText("");
+                                    }
+
+                                    createSampleFragment.roomsDialog.dismiss();
+                                    break;
                             }
                         }
                         break;
                     case R.id.createCaseFragment:
                         CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (createCaseFragment != null) {
-                            if (method.equals("references")) {
-                                int position = createCaseFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
+                            switch (method) {
+                                case "references":
+                                    int position = createCaseFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
 
-                                if (position == -1)
-                                    createCaseFragment.referencesAdapter.addItem(item);
-                                else
-                                    createCaseFragment.referencesAdapter.removeItem(position);
+                                    if (position == -1)
+                                        createCaseFragment.referencesAdapter.addItem(item);
+                                    else
+                                        createCaseFragment.referencesAdapter.removeItem(position);
+                                    break;
+                                case "rooms":
+                                    if (!createCaseFragment.roomId.equals(item.get("id").toString())) {
+                                        createCaseFragment.roomId = item.get("id").toString();
+                                        createCaseFragment.roomName = item.get("title").toString();
+                                        createCaseFragment.centerName = item.get("subtitle").toString();
+
+                                        createCaseFragment.binding.roomIncludeLayout.primaryTextView.setText(createCaseFragment.roomName);
+                                        createCaseFragment.binding.roomIncludeLayout.secondaryTextView.setText(createCaseFragment.centerName);
+                                    } else if (createCaseFragment.roomId.equals(item.get("id").toString())) {
+                                        createCaseFragment.roomId = "";
+                                        createCaseFragment.roomName = "";
+                                        createCaseFragment.centerName = "";
+
+                                        createCaseFragment.binding.roomIncludeLayout.primaryTextView.setText("");
+                                        createCaseFragment.binding.roomIncludeLayout.secondaryTextView.setText("");
+                                    }
+
+                                    createCaseFragment.roomsDialog.dismiss();
+                                    break;
                             }
                         }
                         break;
@@ -233,6 +274,30 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             }
                         }
                         break;
+                    case R.id.createCenterUserFragment:
+                        CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createCenterUserFragment != null) {
+                            if (method.equals("rooms")) {
+                                if (!createCenterUserFragment.roomId.equals(item.get("id").toString())) {
+                                    createCenterUserFragment.roomId = item.get("id").toString();
+                                    createCenterUserFragment.roomName = item.get("title").toString();
+                                    createCenterUserFragment.centerName = item.get("subtitle").toString();
+
+                                    createCenterUserFragment.binding.roomIncludeLayout.primaryTextView.setText(createCenterUserFragment.roomName);
+                                    createCenterUserFragment.binding.roomIncludeLayout.secondaryTextView.setText(createCenterUserFragment.centerName);
+                                } else if (createCenterUserFragment.roomId.equals(item.get("id").toString())) {
+                                    createCenterUserFragment.roomId = "";
+                                    createCenterUserFragment.roomName = "";
+                                    createCenterUserFragment.centerName = "";
+
+                                    createCenterUserFragment.binding.roomIncludeLayout.primaryTextView.setText("");
+                                    createCenterUserFragment.binding.roomIncludeLayout.secondaryTextView.setText("");
+                                }
+
+                                createCenterUserFragment.roomsDialog.dismiss();
+                            }
+                        }
+                        break;
                 }
 
                 notifyDataSetChanged();
@@ -246,6 +311,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         try {
             switch (method) {
                 case "scales":
+                case "rooms":
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
@@ -282,8 +348,11 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             case "cases":
                                 detector(holder, createSampleFragment.caseId.equals(item.get("id").toString()));
                                 break;
-                            case "session":
+                            case "sessions":
                                 detector(holder, createSampleFragment.sessionId.equals(item.get("id").toString()));
+                                break;
+                            case "rooms":
+                                detector(holder, createSampleFragment.roomId.equals(item.get("id").toString()));
                                 break;
                         }
                     }
@@ -291,8 +360,13 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 case R.id.createCaseFragment:
                     CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createCaseFragment != null) {
-                        if (method.equals("references")) {
-                            detector(holder, createCaseFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                        switch (method) {
+                            case "references":
+                                detector(holder, createCaseFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                                break;
+                            case "rooms":
+                                detector(holder, createCaseFragment.roomId.equals(item.get("id").toString()));
+                                break;
                         }
                     }
                     break;
@@ -327,6 +401,14 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
                         if (method.equals("managers")) {
                             detector(holder, editCenterDetailFragment.managerId.equals(item.get("id").toString()));
+                        }
+                    }
+                    break;
+                case R.id.createCenterUserFragment:
+                    CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCenterUserFragment != null) {
+                        if (method.equals("rooms")) {
+                            detector(holder, createCenterUserFragment.roomId.equals(item.get("id").toString()));
                         }
                     }
                     break;

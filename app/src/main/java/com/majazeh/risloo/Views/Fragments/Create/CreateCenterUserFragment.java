@@ -17,15 +17,19 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 
 public class CreateCenterUserFragment extends Fragment {
 
     // Binding
-    private FragmentCreateCenterUserBinding binding;
+    public FragmentCreateCenterUserBinding binding;
+
+    // Dialogs
+    public SearchableDialog roomsDialog;
 
     // Vars
-    private String mobile = "", type = "", room = "", center = "", name = "";
+    public String mobile = "", type = "", roomId = "", roomName = "", centerName = "", name = "";
     private boolean createCase = false;
 
     @Nullable
@@ -45,6 +49,8 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void initializer() {
+        roomsDialog = new SearchableDialog();
+
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentMobileHeader));
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentTypeHeader));
         binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentRoomHeader));
@@ -97,7 +103,8 @@ public class CreateCenterUserFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            roomsDialog.show(requireActivity().getSupportFragmentManager(), "roomsDialog");
+            roomsDialog.setData("rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -115,14 +122,14 @@ public class CreateCenterUserFragment extends Fragment {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
-            if (room.equals("")) {
+            if (roomId.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomIncludeLayout.errorImageView, binding.roomIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (binding.mobileIncludeLayout.inputEditText.length() != 0 && !room.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0) {
+            if (binding.mobileIncludeLayout.inputEditText.length() != 0 && !roomId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomIncludeLayout.errorImageView, binding.roomIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
@@ -152,12 +159,13 @@ public class CreateCenterUserFragment extends Fragment {
             }
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            room = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.primaryTextView.setText(room);
+            roomId = ((MainActivity) requireActivity()).singleton.getAddress();
+            roomName = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.roomIncludeLayout.primaryTextView.setText(roomName);
         }
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            center = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.secondaryTextView.setText(center);
+            centerName = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.roomIncludeLayout.secondaryTextView.setText(centerName);
         }
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             name = ((MainActivity) requireActivity()).singleton.getName();
