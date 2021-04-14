@@ -570,6 +570,20 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
+    ---------- Bulk Samples Fragment ----------
+    */
+
+    <string name="BulkSamplesFragmentTitle">نمونه‌های گروهی</string>
+
+    <string name="BulkSamplesFragmentSerial">سریال</string>
+    <string name="BulkSamplesFragmentName">عنوان</string>
+    <string name="BulkSamplesFragmentRoom">اتاق درمان</string>
+    <string name="BulkSamplesFragmentCenter">مرکز درمانی</string>
+    <string name="BulkSamplesFragmentCase">پرونده</string>
+    <string name="BulkSamplesFragmentReference">اعضا</string>
+    <string name="BulkSamplesFragmentStatus">وضعیت</string>
+
+    /*
     ---------- Cases Fragment ----------
     */
 
@@ -696,6 +710,12 @@
 
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ---------- Bulk Sample Fragment ----------
+    */
+
+    <string name="BulkSampleFragmentTitle">نمونه گروهی</string>
 
     /*
     ---------- Case Fragment ----------

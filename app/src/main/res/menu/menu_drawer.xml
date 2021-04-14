@@ -32,6 +32,10 @@
             android:icon="@drawable/ic_vial_light"
             android:title="@string/SamplesFragmentTitle" />
         <item
+            android:id="@+id/bulkSamplesFragment"
+            android:icon="@drawable/ic_users_medical_light"
+            android:title="@string/BulkSamplesFragmentTitle" />
+        <item
             android:id="@+id/documentsFragment"
             android:icon="@drawable/ic_file_certificate_light"
             android:title="@string/DocumentsFragmentTitle" />

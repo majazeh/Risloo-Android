@@ -128,6 +128,19 @@
     </fragment>
 
     <fragment
+        android:id="@+id/bulkSamplesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.BulkSamplesFragment"
+        android:label="@string/BulkSamplesFragmentTitle"
+        tools:layout="@layout/fragment_bulk_samples" >
+        <action
+            android:id="@+id/action_bulkSamplesFragment_to_createSampleFragment"
+            app:destination="@id/createSampleFragment" />
+        <action
+            android:id="@+id/action_bulkSamplesFragment_to_bulkSampleFragment"
+            app:destination="@id/bulkSampleFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/scalesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.ScalesFragment"
         android:label="@string/ScalesFragmentTitle"
@@ -182,6 +195,12 @@
             android:id="@+id/action_meFragment_to_editUserFragment"
             app:destination="@id/editUserFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/bulkSampleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragment"
+        android:label="@string/BulkSampleFragmentTitle"
+        tools:layout="@layout/fragment_bulk_sample" />
 
     <fragment
         android:id="@+id/caseFragment"
