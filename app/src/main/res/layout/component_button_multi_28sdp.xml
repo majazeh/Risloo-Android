@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="@dimen/_28sdp"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray500">
+
+    <TextView
+        android:id="@+id/button_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_10sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:layoutDirection="rtl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="دکمه"
+        tools:textColor="@color/Gray500" />
+
+    <View
+        android:id="@+id/mid_view"
+        android:layout_width="@dimen/_1sdp"
+        android:layout_height="0dp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:layout_marginBottom="@dimen/_1sdp"
+        android:background="@color/Gray300"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/button_textView"
+        app:layout_constraintStart_toEndOf="@id/button_imageView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/button_imageView"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="0dp"
+        android:layout_gravity="center"
+        android:contentDescription="@string/AppImageContent"
+        android:paddingBottom="@dimen/_6sdp"
+        android:paddingEnd="@dimen/_2sdp"
+        android:paddingStart="@dimen/_4sdp"
+        android:paddingTop="@dimen/_6sdp"
+        android:scaleType="fitCenter"
+        android:layoutDirection="rtl"
+        app:layout_constraintBottom_toBottomOf="@id/button_textView"
+        app:layout_constraintEnd_toStartOf="@id/button_textView"
+        app:layout_constraintTop_toTopOf="@id/button_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:src="@drawable/ic_ellipsis_v_light"
+        tools:tint="@color/Gray500" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
