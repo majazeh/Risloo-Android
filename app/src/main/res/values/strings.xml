@@ -62,8 +62,8 @@
     <string name="DialogManagerTitle">مدیر را انتخاب کنید.</string>
     <string name="DialogManagerHint">جستجو</string>
 
-    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
-    <string name="DialogPsychologyHint">جستجو</string>
+    <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
+    <string name="DialogRoomHint">جستجو</string>
 
     <string name="DialogCaseTitle">پرونده را انتخاب کنید.</string>
     <string name="DialogCaseHint">جستجو</string>
@@ -71,8 +71,8 @@
     <string name="DialogSessionTitle">جلسه را انتخاب کنید.</string>
     <string name="DialogSessionHint">جستجو</string>
 
-    <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
-    <string name="DialogRoomHint">جستجو</string>
+    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
+    <string name="DialogPsychologyHint">جستجو</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

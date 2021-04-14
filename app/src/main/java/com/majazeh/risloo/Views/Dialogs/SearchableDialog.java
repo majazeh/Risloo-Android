@@ -125,9 +125,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogManagerHint));
                 binding.entryButton.setVisibility(View.GONE);
                 break;
-            case "psychologies":
-                binding.titleTextView.setText(getResources().getString(R.string.DialogPsychologyTitle));
-                binding.inputEditText.setHint(getResources().getString(R.string.DialogPsychologyHint));
+            case "rooms":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogRoomTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogRoomHint));
                 binding.entryButton.setVisibility(View.GONE);
                 break;
             case "cases":
@@ -140,9 +140,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogSessionHint));
                 binding.entryButton.setVisibility(View.GONE);
                 break;
-            case "rooms":
-                binding.titleTextView.setText(getResources().getString(R.string.DialogRoomTitle));
-                binding.inputEditText.setHint(getResources().getString(R.string.DialogRoomHint));
+            case "psychologies":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogPsychologyTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogPsychologyHint));
                 binding.entryButton.setVisibility(View.GONE);
                 break;
         }
@@ -211,23 +211,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
         }
 
         switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-            case R.id.createSampleFragment:
-                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                if (createSampleFragment != null) {
+            case R.id.createCaseFragment:
+                CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createCaseFragment != null) {
                     switch (method) {
-                        case "scales":
-                            searchableAdapter.setItems(values, method);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
                         case "references":
-                            searchableAdapter.setItems(values, method);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                        case "cases":
-                            searchableAdapter.setItems(values, method);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                        case "sessions":
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
@@ -235,18 +223,6 @@ public class SearchableDialog extends AppCompatDialogFragment {
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
-                    }
-                }
-                break;
-            case R.id.createCaseFragment:
-                CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                if (createCaseFragment != null) {
-                    if (method.equals("references")) {
-                        searchableAdapter.setItems(values, method);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
-                    } else if (method.equals("rooms")) {
-                        searchableAdapter.setItems(values, method);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
                 }
                 break;
@@ -268,6 +244,15 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     }
                 }
                 break;
+            case R.id.createCenterUserFragment:
+                CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createCenterUserFragment != null) {
+                    if (method.equals("rooms")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
             case R.id.createRoomFragment:
                 CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createRoomFragment != null) {
@@ -277,21 +262,39 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     }
                 }
                 break;
+            case R.id.createSampleFragment:
+                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createSampleFragment != null) {
+                    switch (method) {
+                        case "scales":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "references":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "rooms":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "cases":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "sessions":
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                    }
+                }
+                break;
             case R.id.editCenterFragment:
                 EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (editCenterFragment != null) {
                     EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
                     if (method.equals("managers")) {
-                        searchableAdapter.setItems(values, method);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
-                    }
-                }
-                break;
-            case R.id.createCenterUserFragment:
-                CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                if (createCenterUserFragment != null) {
-                    if (method.equals("rooms")) {
                         searchableAdapter.setItems(values, method);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
