@@ -16,6 +16,7 @@ import androidx.core.content.FileProvider;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.DisplayActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.io.File;
 import java.io.IOException;
@@ -44,6 +45,13 @@ public class IntentManager {
         intent.putExtra("title", title);
         intent.putExtra("bitmap", bitmap);
         intent.putExtra("path", path);
+
+        activity.startActivity(intent);
+    }
+
+    public static void test(Activity activity, String test) {
+        Intent intent = new Intent(activity, TestActivity.class);
+        intent.putExtra("test", test);
 
         activity.startActivity(intent);
     }

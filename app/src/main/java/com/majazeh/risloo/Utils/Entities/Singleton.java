@@ -187,6 +187,13 @@ public class Singleton {
         return "";
     }
 
+    public int getProgress() {
+        if (sharedPreferences.getInt("progress", 0) != -1) {
+            return sharedPreferences.getInt("address", 0);
+        }
+        return -1;
+    }
+
     public boolean getCreateCase() {
         return sharedPreferences.getBoolean("createCase", true);
     }
