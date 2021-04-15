@@ -717,6 +717,27 @@
 
     <string name="BulkSampleFragmentTitle">نمونه گروهی</string>
 
+    <string name="BulkSampleFragmentEdit">ویرایش</string>
+    <string name="BulkSampleFragmentLink">ثبت نام</string>
+
+    <string name="BulkSampleFragmentReferencesHeader">اعضاء</string>
+
+    <string name="BulkSampleFragmentScalesHeader">ارزیابی‌ها</string>
+    <string name="BulkSampleFragmentScalesBodyEmpty">هنوز ارزیابی‌ برای این جلسه ثبت نشده است.</string>
+
+    <string name="BulkSampleFragmentScalesSerial">سریال</string>
+    <string name="BulkSampleFragmentScalesName">مقیاس</string>
+    <string name="BulkSampleFragmentScalesEdition">ویرایش - نسخه</string>
+
+    <string name="BulkSampleFragmentSamplesHeader">نمونه‌ها</string>
+    <string name="BulkSampleFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این جلسه ثبت نشده است.</string>
+
+    <string name="BulkSampleFragmentSamplesSerial">سریال</string>
+    <string name="BulkSampleFragmentSamplesName">مقياس</string>
+    <string name="BulkSampleFragmentSamplesEdition">ویرایش - نسخه</string>
+    <string name="BulkSampleFragmentSamplesReference">مراجع</string>
+    <string name="BulkSampleFragmentSamplesStatus">وضعیت</string>
+
     /*
     ---------- Case Fragment ----------
     */
