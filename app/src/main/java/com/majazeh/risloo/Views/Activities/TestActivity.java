@@ -38,7 +38,7 @@ public class TestActivity extends AppCompatActivity {
     private Bundle extras;
 
     // Vars
-    private String test = "", status = "", page = "", location = "";
+    private String test = "", type = "", status = "", page = "", location = "";
     private int progress = -1;
 
     @Override
@@ -128,6 +128,9 @@ public class TestActivity extends AppCompatActivity {
 
         test = "پرسشنامه 16 عاملی شخصیت کتل";
         binding.headerIncludeLayout.titleTextView.setText(test);
+
+        type = "";
+        binding.headerIncludeLayout.typeTextView.setText(type);
 
         progress = 25;
         binding.headerIncludeLayout.loadingProgressBar.setProgress(progress);
