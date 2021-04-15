@@ -8,6 +8,8 @@
 
     <string name="AppImageContent">عکس</string>
 
+    <string name="AppLoadingProgress">در حال بارگذاري ...</string>
+
     <string name="AppSearchHint">جستجو</string>
     <string name="AppSearchEmpty">داده یافت نشد.</string>
 
