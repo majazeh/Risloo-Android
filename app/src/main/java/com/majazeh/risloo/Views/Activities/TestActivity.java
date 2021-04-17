@@ -33,8 +33,8 @@ public class TestActivity extends AppCompatActivity {
 
     // Objects
     public ControlEditText controlEditText;
-//    public NavHostFragment navHostFragment;
-//    public NavController navController;
+    public NavHostFragment navHostFragment;
+    public NavController navController;
     private Bundle extras;
 
     // Vars
@@ -71,9 +71,9 @@ public class TestActivity extends AppCompatActivity {
 
         controlEditText = new ControlEditText();
 
-//        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
-//
-//        navController = Objects.requireNonNull(navHostFragment).getNavController();
+        navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
+
+        navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         extras = getIntent().getExtras();
 
@@ -142,21 +142,21 @@ public class TestActivity extends AppCompatActivity {
         binding.pageTextView.setText(page);
     }
 
-//    public void navigator(int destinationId) {
-//        try {
-//            if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
-//                while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
-//                    navController.popBackStack();
-//                }
-//                if (destinationId == R.id.bulkTestFragment){
-//                    navController.popBackStack();
-//                }
-//            }
-//        } catch(IllegalArgumentException e){
-//            System.out.println(e.getMessage());
-//        }
-//        navController.navigate(destinationId);
-//    }
+    public void navigator(int destinationId) {
+        try {
+            if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
+                while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
+                    navController.popBackStack();
+                }
+                if (destinationId == R.id.testFormFragment){
+                    navController.popBackStack();
+                }
+            }
+        } catch(IllegalArgumentException e){
+            System.out.println(e.getMessage());
+        }
+        navController.navigate(destinationId);
+    }
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -175,11 +175,11 @@ public class TestActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(event);
     }
 
-//    @Override
-//    public void onBackPressed() {
-//        if (!navController.popBackStack()) {
-//            finish();
-//        }
-//    }
+    @Override
+    public void onBackPressed() {
+        if (!navController.popBackStack()) {
+            finish();
+        }
+    }
 
 }

@@ -914,34 +914,46 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- ??? Fragment ----------
+    ---------- TestBulk Fragment ----------
     */
 
-
+    <string name="TestBulkFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
 
     /*
-    ---------- ??? Fragment ----------
+    ---------- TestDescription Fragment ----------
     */
 
-
+    <string name="TestDescriptionFragmentTitle">توضیحات</string>
 
     /*
-    ---------- ??? Fragment ----------
+    ---------- TestEnd Fragment ----------
     */
 
+    <string name="TestEndFragmentTitle">پایان نمونه‌گیری</string>
+    <string name="TestEndFragmentDescription">اگر از اتمام نمونه مطمئن هستید و به تمامی گزینه‌ها پاسخ داده‌اید می‌توانید دکمه اتمام نمونه را بزنید. بعد از زدن این دکمه، دیگر قادر به ویرایش نمونه نمی‌باشید.</string>
 
+    <string name="TestEndFragmentButtonSample">اتمام نمونه</string>
+    <string name="TestEndFragmentButtonNext">اتمام و انتقال به نمونه بعدی</string>
+    <string name="TestEndFragmentButtonBulk">اتمام نمونه زنجیره‌ای</string>
 
     /*
-    ---------- ??? Fragment ----------
+    ----------  TestForm Fragment ----------
     */
 
-
+    <string name="TestFormFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
+    <string name="TestFormFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
 
     /*
-    ---------- ??? Fragment ----------
+    ----------  TestOptional Fragment ----------
     */
 
+    // TODO : Place If Needed Later
 
+    /*
+    ----------  TestPictoral Fragment ----------
+    */
+
+    // TODO : Place If Needed Later
 
     //////////////////////////////////////////////////////////////////////////////////////
 
