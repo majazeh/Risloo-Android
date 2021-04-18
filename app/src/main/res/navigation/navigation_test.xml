@@ -11,12 +11,21 @@
         android:label="@string/TestFormFragmentTitle"
         tools:layout="@layout/fragment_test_form" >
         <action
+            android:id="@+id/action_testFormFragment_to_testBulkFragment"
+            app:destination="@id/testBulkFragment" />
+        <action
             android:id="@+id/action_testFormFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
         <action
             android:id="@+id/action_testFormFragment_to_testEndFragment"
             app:destination="@id/testEndFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/testBulkFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestBulkFragment"
+        android:label="@string/TestBulkFragmentTitle"
+        tools:layout="@layout/fragment_test_bulk" />
 
     <fragment
         android:id="@+id/testDescriptionFragment"
