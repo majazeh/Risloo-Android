@@ -66,7 +66,7 @@ public class AuthActivity extends AppCompatActivity {
                 while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
                     navController.popBackStack();
                 }
-                if (destinationId == R.id.loginFragment){
+                if (destinationId == navController.getGraph().getStartDestination()){
                     navController.popBackStack();
                 }
             }

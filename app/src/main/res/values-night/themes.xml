@@ -55,7 +55,10 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     <style name="ProgressBarTheme" parent="ThemeOverlay.AppCompat.Light">
-        <item name="colorAccent">@color/Blue500</item>
+        <item name="colorAccent">@color/Blue600</item>
+    </style>
+    <style name="ProgressBarTheme2" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorAccent">@color/White</item>
     </style>
 
     //////////////////////////////////////////////////////////////////////////////////////

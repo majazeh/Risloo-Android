@@ -148,7 +148,7 @@ public class TestActivity extends AppCompatActivity {
                 while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
                     navController.popBackStack();
                 }
-                if (destinationId == R.id.testFormFragment){
+                if (destinationId == navController.getGraph().getStartDestination()){
                     navController.popBackStack();
                 }
             }
