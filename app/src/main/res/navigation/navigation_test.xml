@@ -19,6 +19,12 @@
         <action
             android:id="@+id/action_testFormFragment_to_testEndFragment"
             app:destination="@id/testEndFragment" />
+        <action
+            android:id="@+id/action_testFormFragment_to_testOptionalFragment"
+            app:destination="@id/testOptionalFragment" />
+        <action
+            android:id="@+id/action_testFormFragment_to_testPictoralFragment"
+            app:destination="@id/testPictoralFragment" />
     </fragment>
 
     <fragment
@@ -38,5 +44,17 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestEndFragment"
         android:label="@string/TestEndFragmentTitle"
         tools:layout="@layout/fragment_test_end" />
+
+    <fragment
+        android:id="@+id/testOptionalFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragment"
+        android:label="@string/TestOptionalFragmentTitle"
+        tools:layout="@layout/fragment_test_optional" />
+
+    <fragment
+        android:id="@+id/testPictoralFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragment"
+        android:label="@string/TestPictoralFragmentTitle"
+        tools:layout="@layout/fragment_test_pictoral" />
 
 </navigation>

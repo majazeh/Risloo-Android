@@ -947,13 +947,13 @@
     ----------  TestOptional Fragment ----------
     */
 
-    // TODO : Place If Needed Later
+    <string name="TestOptionalFragmentTitle">تست متنی</string>
 
     /*
     ----------  TestPictoral Fragment ----------
     */
 
-    // TODO : Place If Needed Later
+    <string name="TestPictoralFragmentTitle">تست تصویری</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
