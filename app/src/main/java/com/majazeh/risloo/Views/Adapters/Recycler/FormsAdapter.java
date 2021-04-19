@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.SingleItemFormBinding;
 
 public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder> {
@@ -57,7 +58,10 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
             holder.binding.inputEditText.setOnTouchListener((v, event) -> {
                 if (MotionEvent.ACTION_UP == event.getAction()) {
                     if (!holder.binding.inputEditText.hasFocus()) {
-                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                        if (activity instanceof MainActivity)
+                            ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                        else if (activity instanceof TestActivity)
+                            ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
                     }
                 }
                 return false;

@@ -32,7 +32,7 @@
             <ImageView
                 android:id="@+id/question_imageView"
                 android:layout_width="0dp"
-                android:layout_height="@dimen/_110sdp"
+                android:layout_height="@dimen/_120sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -41,7 +41,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:layout_height="@dimen/_110sdp"
+                tools:layout_height="@dimen/_120sdp"
                 tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
             <include

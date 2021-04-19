@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -28,7 +29,7 @@ public class TestPictoralFragment extends Fragment {
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
+    private GridLayoutManager layoutManager;
 
     @Nullable
     @Override
@@ -45,15 +46,15 @@ public class TestPictoralFragment extends Fragment {
     private void initializer() {
         pictoralsAdapter = new PictoralsAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._16sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
+        itemDecoration = new ItemDecorateRecyclerView("gridLayout", (int) getResources().getDimension(R.dimen._16sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
 
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        layoutManager = new GridLayoutManager(requireActivity(), 2, LinearLayoutManager.VERTICAL, false);
 
         InitManager.recyclerView(binding.pictoralsSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void setData() {
-        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.questionImageView);
+        Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(binding.questionImageView);
 
 //        pictoralsAdapter.setPictoral(null);
         binding.pictoralsSingleLayout.recyclerView.setAdapter(pictoralsAdapter);
