@@ -43,7 +43,7 @@ public class CreateSampleFragment extends Fragment {
     public SelectedAdapter scalesAdapter, referencesAdapter;
 
     // Dialogs
-    public SearchableDialog scalesDialog, roomsDialog, referencesDialog, casesDialog, sessionsDialog;
+    private SearchableDialog scalesDialog, roomsDialog, referencesDialog, casesDialog, sessionsDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;

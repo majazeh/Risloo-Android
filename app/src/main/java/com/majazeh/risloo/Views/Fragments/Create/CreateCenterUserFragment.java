@@ -29,7 +29,7 @@ public class CreateCenterUserFragment extends Fragment {
     private FragmentCreateCenterUserBinding binding;
 
     // Dialogs
-    public SearchableDialog roomsDialog;
+    private SearchableDialog roomsDialog;
 
     // Vars
     public String mobile = "", type = "", roomId = "", roomName = "", centerName = "", name = "";

@@ -27,7 +27,7 @@ public class CreateRoomFragment extends Fragment {
     private FragmentCreateRoomBinding binding;
 
     // Dialogs
-    public SearchableDialog psychologiesDialog;
+    private SearchableDialog psychologiesDialog;
 
     // Vars
     public String psychologyId = "", psychologyName = "";

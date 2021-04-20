@@ -52,7 +52,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private DialogSearchableBinding binding;
 
     // Adapters
-    public SearchableAdapter searchableAdapter;
+    private SearchableAdapter searchableAdapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;

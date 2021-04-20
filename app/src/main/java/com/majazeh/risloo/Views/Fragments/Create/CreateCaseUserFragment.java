@@ -37,7 +37,7 @@ public class CreateCaseUserFragment extends Fragment {
     public SelectedAdapter referencesAdapter;
 
     // Dialogs
-    public SearchableDialog referencesDialog;
+    private SearchableDialog referencesDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;

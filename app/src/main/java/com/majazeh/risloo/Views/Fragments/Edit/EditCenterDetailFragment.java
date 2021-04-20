@@ -38,7 +38,7 @@ public class EditCenterDetailFragment extends Fragment {
     public SelectedAdapter phonesAdapter;
 
     // Dialogs
-    public SearchableDialog managersDialog;
+    private SearchableDialog managersDialog;
     private SelectedDialog phonesDialog;
 
     // Objects
