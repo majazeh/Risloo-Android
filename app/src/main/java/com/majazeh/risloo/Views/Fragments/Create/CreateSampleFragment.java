@@ -30,12 +30,14 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class CreateSampleFragment extends Fragment {
 
     // Binding
-    public FragmentCreateSampleBinding binding;
+    private FragmentCreateSampleBinding binding;
 
     // Adapters
     public SelectedAdapter scalesAdapter, referencesAdapter;
@@ -419,6 +421,80 @@ public class CreateSampleFragment extends Fragment {
         } else if (method.equals("references")) {
             referencesAdapter.setItems(items, ids, method);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "scales":
+                    int scalePosition = scalesAdapter.getIds().indexOf(item.get("id").toString());
+
+                    if (scalePosition == -1)
+                        scalesAdapter.addItem(item);
+                    else
+                        scalesAdapter.removeItem(scalePosition);
+                    break;
+                case "rooms":
+                    if (!roomId.equals(item.get("id").toString())) {
+                        roomId = item.get("id").toString();
+                        roomName = item.get("title").toString();
+                        centerName = item.get("subtitle").toString();
+
+                        binding.roomIncludeLayout.primaryTextView.setText(roomName);
+                        binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+                    } else if (roomId.equals(item.get("id").toString())) {
+                        roomId = "";
+                        roomName = "";
+                        centerName = "";
+
+                        binding.roomIncludeLayout.primaryTextView.setText("");
+                        binding.roomIncludeLayout.secondaryTextView.setText("");
+                    }
+
+                    roomsDialog.dismiss();
+                    break;
+                case "references":
+                    int referencePosition = referencesAdapter.getIds().indexOf(item.get("id").toString());
+
+                    if (referencePosition == -1)
+                        referencesAdapter.addItem(item);
+                    else
+                        referencesAdapter.removeItem(referencePosition);
+                    break;
+                case "cases":
+                    if (!caseId.equals(item.get("id").toString())) {
+                        caseId = item.get("id").toString();
+                        caseName = item.get("title").toString();
+
+                        binding.caseIncludeLayout.selectTextView.setText(caseName);
+                    } else if (caseId.equals(item.get("id").toString())) {
+                        caseId = "";
+                        caseName = "";
+
+                        binding.caseIncludeLayout.selectTextView.setText("");
+                    }
+
+                    casesDialog.dismiss();
+                    break;
+                case "sessions":
+                    if (!sessionId.equals(item.get("id").toString())) {
+                        sessionId = item.get("id").toString();
+                        sessionName = item.get("title").toString();
+
+                        binding.sessionIncludeLayout.selectTextView.setText(sessionName);
+                    } else if (sessionId.equals(item.get("id").toString())) {
+                        sessionId = "";
+                        sessionName = "";
+
+                        binding.sessionIncludeLayout.selectTextView.setText("");
+                    }
+
+                    sessionsDialog.dismiss();
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

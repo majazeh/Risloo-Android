@@ -12,16 +12,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 
+import org.json.JSONException;
+
 public class CreateRoomFragment extends Fragment {
 
     // Binding
-    public FragmentCreateRoomBinding binding;
+    private FragmentCreateRoomBinding binding;
 
     // Dialogs
     public SearchableDialog psychologiesDialog;
@@ -88,6 +91,30 @@ public class CreateRoomFragment extends Fragment {
             psychologyId = ((MainActivity) requireActivity()).singleton.getPsychology();
             psychologyName = ((MainActivity) requireActivity()).singleton.getPsychology();
             binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "psychologies":
+                    if (!psychologyId.equals(item.get("id").toString())) {
+                        psychologyId = item.get("id").toString();
+                        psychologyName = item.get("title").toString();
+
+                        binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+                    } else if (psychologyId.equals(item.get("id").toString())) {
+                        psychologyId = "";
+                        psychologyName = "";
+
+                        binding.psychologyIncludeLayout.selectTextView.setText("");
+                    }
+
+                    psychologiesDialog.dismiss();
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

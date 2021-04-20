@@ -25,12 +25,14 @@ import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class EditCenterDetailFragment extends Fragment {
 
     // Binding
-    public FragmentEditCenterDetailBinding binding;
+    private FragmentEditCenterDetailBinding binding;
 
     // Adapters
     public SelectedAdapter phonesAdapter;
@@ -202,6 +204,30 @@ public class EditCenterDetailFragment extends Fragment {
         if (method.equals("phones")) {
             phonesAdapter.setItems(items, ids, method);
             binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "managers":
+                    if (!managerId.equals(item.get("id").toString())) {
+                        managerId = item.get("id").toString();
+                        managerName = item.get("title").toString();
+
+                        binding.managerIncludeLayout.selectTextView.setText(managerName);
+                    } else if (managerId.equals(item.get("id").toString())) {
+                        managerId = "";
+                        managerName = "";
+
+                        binding.managerIncludeLayout.selectTextView.setText("");
+                    }
+
+                    managersDialog.dismiss();
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

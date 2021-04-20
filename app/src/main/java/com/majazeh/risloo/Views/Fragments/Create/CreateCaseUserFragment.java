@@ -24,6 +24,8 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class CreateCaseUserFragment extends Fragment {
@@ -132,6 +134,23 @@ public class CreateCaseUserFragment extends Fragment {
          if (method.equals("references")) {
             referencesAdapter.setItems(items, ids, method);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "references":
+                    int position = referencesAdapter.getIds().indexOf(item.get("id").toString());
+
+                    if (position == -1)
+                        referencesAdapter.addItem(item);
+                    else
+                        referencesAdapter.removeItem(position);
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

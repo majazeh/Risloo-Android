@@ -14,16 +14,19 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 
+import org.json.JSONException;
+
 public class CreateCenterUserFragment extends Fragment {
 
     // Binding
-    public FragmentCreateCenterUserBinding binding;
+    private FragmentCreateCenterUserBinding binding;
 
     // Dialogs
     public SearchableDialog roomsDialog;
@@ -174,6 +177,34 @@ public class CreateCenterUserFragment extends Fragment {
         if (((MainActivity) requireActivity()).singleton.getCreateCase()) {
             createCase = true;
             binding.caseCheckbox.getRoot().setChecked(true);
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "rooms":
+                    if (!roomId.equals(item.get("id").toString())) {
+                        roomId = item.get("id").toString();
+                        roomName = item.get("title").toString();
+                        centerName = item.get("subtitle").toString();
+
+                        binding.roomIncludeLayout.primaryTextView.setText(roomName);
+                        binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+                    } else if (roomId.equals(item.get("id").toString())) {
+                        roomId = "";
+                        roomName = "";
+                        centerName = "";
+
+                        binding.roomIncludeLayout.primaryTextView.setText("");
+                        binding.roomIncludeLayout.secondaryTextView.setText("");
+                    }
+
+                    roomsDialog.dismiss();
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

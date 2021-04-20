@@ -30,6 +30,8 @@ import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class CreateCenterFragment extends Fragment {
@@ -276,6 +278,30 @@ public class CreateCenterFragment extends Fragment {
         if (method.equals("phones")) {
             phonesAdapter.setItems(items, ids, method);
             binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "managers":
+                    if (!managerId.equals(item.get("id").toString())) {
+                        managerId = item.get("id").toString();
+                        managerName = item.get("title").toString();
+
+                        binding.managerIncludeLayout.selectTextView.setText(managerName);
+                    } else if (managerId.equals(item.get("id").toString())) {
+                        managerId = "";
+                        managerName = "";
+
+                        binding.managerIncludeLayout.selectTextView.setText("");
+                    }
+
+                    managersDialog.dismiss();
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

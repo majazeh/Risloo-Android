@@ -24,12 +24,14 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
 
+import org.json.JSONException;
+
 import java.util.ArrayList;
 
 public class CreateCaseFragment extends Fragment {
 
     // Binding
-    public FragmentCreateCaseBinding binding;
+    private FragmentCreateCaseBinding binding;
 
     // Adapters
     public SelectedAdapter referencesAdapter;
@@ -173,6 +175,42 @@ public class CreateCaseFragment extends Fragment {
         if (method.equals("references")) {
             referencesAdapter.setItems(items, ids, method);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "rooms":
+                    if (!roomId.equals(item.get("id").toString())) {
+                        roomId = item.get("id").toString();
+                        roomName = item.get("title").toString();
+                        centerName = item.get("subtitle").toString();
+
+                        binding.roomIncludeLayout.primaryTextView.setText(roomName);
+                        binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+                    } else if (roomId.equals(item.get("id").toString())) {
+                        roomId = "";
+                        roomName = "";
+                        centerName = "";
+
+                        binding.roomIncludeLayout.primaryTextView.setText("");
+                        binding.roomIncludeLayout.secondaryTextView.setText("");
+                    }
+
+                    roomsDialog.dismiss();
+                    break;
+                case "references":
+                    int position = referencesAdapter.getIds().indexOf(item.get("id").toString());
+
+                    if (position == -1)
+                        referencesAdapter.addItem(item);
+                    else
+                        referencesAdapter.removeItem(position);
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

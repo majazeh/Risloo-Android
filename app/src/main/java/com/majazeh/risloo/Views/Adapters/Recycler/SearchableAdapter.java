@@ -89,221 +89,53 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     private void listener(SearchableHolder holder, Model item) {
         ClickManager.onDelayedClickListener(() -> {
-            try {
-                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                    case R.id.createCaseFragment:
-                        CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createCaseFragment != null) {
-                            switch (method) {
-                                case "references":
-                                    int position = createCaseFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
+            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                case R.id.createCaseFragment:
+                    CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCaseFragment != null) {
+                        createCaseFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.createCaseUserFragment:
+                    CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCaseUserFragment != null) {
+                        createCaseUserFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.createCenterFragment:
+                    CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCenterFragment != null) {
+                        createCenterFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.createCenterUserFragment:
+                    CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createCenterUserFragment != null) {
+                        createCenterUserFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.createRoomFragment:
+                    CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createRoomFragment != null) {
+                        createRoomFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.createSampleFragment:
+                    CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createSampleFragment != null) {
+                        createSampleFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.editCenterFragment:
+                    EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editCenterFragment != null) {
+                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
 
-                                    if (position == -1)
-                                        createCaseFragment.referencesAdapter.addItem(item);
-                                    else
-                                        createCaseFragment.referencesAdapter.removeItem(position);
-                                    break;
-                                case "rooms":
-                                    if (!createCaseFragment.roomId.equals(item.get("id").toString())) {
-                                        createCaseFragment.roomId = item.get("id").toString();
-                                        createCaseFragment.roomName = item.get("title").toString();
-                                        createCaseFragment.centerName = item.get("subtitle").toString();
-
-                                        createCaseFragment.binding.roomIncludeLayout.primaryTextView.setText(createCaseFragment.roomName);
-                                        createCaseFragment.binding.roomIncludeLayout.secondaryTextView.setText(createCaseFragment.centerName);
-                                    } else if (createCaseFragment.roomId.equals(item.get("id").toString())) {
-                                        createCaseFragment.roomId = "";
-                                        createCaseFragment.roomName = "";
-                                        createCaseFragment.centerName = "";
-
-                                        createCaseFragment.binding.roomIncludeLayout.primaryTextView.setText("");
-                                        createCaseFragment.binding.roomIncludeLayout.secondaryTextView.setText("");
-                                    }
-
-                                    createCaseFragment.roomsDialog.dismiss();
-                                    break;
-                            }
-                        }
-                        break;
-                    case R.id.createCaseUserFragment:
-                        CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createCaseUserFragment != null) {
-                            if (method.equals("references")) {
-                                int position = createCaseUserFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
-
-                                if (position == -1)
-                                    createCaseUserFragment.referencesAdapter.addItem(item);
-                                else
-                                    createCaseUserFragment.referencesAdapter.removeItem(position);
-                            }
-                        }
-                        break;
-                    case R.id.createCenterFragment:
-                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createCenterFragment != null) {
-                            if (method.equals("managers")) {
-                                if (!createCenterFragment.managerId.equals(item.get("id").toString())) {
-                                    createCenterFragment.managerId = item.get("id").toString();
-                                    createCenterFragment.managerName = item.get("title").toString();
-
-                                    createCenterFragment.binding.managerIncludeLayout.selectTextView.setText(createCenterFragment.managerName);
-                                } else if (createCenterFragment.managerId.equals(item.get("id").toString())) {
-                                    createCenterFragment.managerId = "";
-                                    createCenterFragment.managerName = "";
-
-                                    createCenterFragment.binding.managerIncludeLayout.selectTextView.setText("");
-                                }
-
-                                createCenterFragment.managersDialog.dismiss();
-                            }
-                        }
-                        break;
-                    case R.id.createCenterUserFragment:
-                        CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createCenterUserFragment != null) {
-                            if (method.equals("rooms")) {
-                                if (!createCenterUserFragment.roomId.equals(item.get("id").toString())) {
-                                    createCenterUserFragment.roomId = item.get("id").toString();
-                                    createCenterUserFragment.roomName = item.get("title").toString();
-                                    createCenterUserFragment.centerName = item.get("subtitle").toString();
-
-                                    createCenterUserFragment.binding.roomIncludeLayout.primaryTextView.setText(createCenterUserFragment.roomName);
-                                    createCenterUserFragment.binding.roomIncludeLayout.secondaryTextView.setText(createCenterUserFragment.centerName);
-                                } else if (createCenterUserFragment.roomId.equals(item.get("id").toString())) {
-                                    createCenterUserFragment.roomId = "";
-                                    createCenterUserFragment.roomName = "";
-                                    createCenterUserFragment.centerName = "";
-
-                                    createCenterUserFragment.binding.roomIncludeLayout.primaryTextView.setText("");
-                                    createCenterUserFragment.binding.roomIncludeLayout.secondaryTextView.setText("");
-                                }
-
-                                createCenterUserFragment.roomsDialog.dismiss();
-                            }
-                        }
-                        break;
-                    case R.id.createRoomFragment:
-                        CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createRoomFragment != null) {
-                            if (method.equals("psychologies")) {
-                                if (!createRoomFragment.psychologyId.equals(item.get("id").toString())) {
-                                    createRoomFragment.psychologyId = item.get("id").toString();
-                                    createRoomFragment.psychologyName = item.get("title").toString();
-
-                                    createRoomFragment.binding.psychologyIncludeLayout.selectTextView.setText(createRoomFragment.psychologyName);
-                                } else if (createRoomFragment.psychologyId.equals(item.get("id").toString())) {
-                                    createRoomFragment.psychologyId = "";
-                                    createRoomFragment.psychologyName = "";
-
-                                    createRoomFragment.binding.psychologyIncludeLayout.selectTextView.setText("");
-                                }
-
-                                createRoomFragment.psychologiesDialog.dismiss();
-                            }
-                        }
-                        break;
-                    case R.id.createSampleFragment:
-                        CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createSampleFragment != null) {
-                            switch (method) {
-                                case "scales": {
-                                    int position = createSampleFragment.scalesAdapter.getIds().indexOf(item.get("id").toString());
-
-                                    if (position == -1)
-                                        createSampleFragment.scalesAdapter.addItem(item);
-                                    else
-                                        createSampleFragment.scalesAdapter.removeItem(position);
-                                    break;
-                                }
-                                case "references": {
-                                    int position = createSampleFragment.referencesAdapter.getIds().indexOf(item.get("id").toString());
-
-                                    if (position == -1)
-                                        createSampleFragment.referencesAdapter.addItem(item);
-                                    else
-                                        createSampleFragment.referencesAdapter.removeItem(position);
-                                    break;
-                                }
-                                case "rooms":
-                                    if (!createSampleFragment.roomId.equals(item.get("id").toString())) {
-                                        createSampleFragment.roomId = item.get("id").toString();
-                                        createSampleFragment.roomName = item.get("title").toString();
-                                        createSampleFragment.centerName = item.get("subtitle").toString();
-
-                                        createSampleFragment.binding.roomIncludeLayout.primaryTextView.setText(createSampleFragment.roomName);
-                                        createSampleFragment.binding.roomIncludeLayout.secondaryTextView.setText(createSampleFragment.centerName);
-                                    } else if (createSampleFragment.roomId.equals(item.get("id").toString())) {
-                                        createSampleFragment.roomId = "";
-                                        createSampleFragment.roomName = "";
-                                        createSampleFragment.centerName = "";
-
-                                        createSampleFragment.binding.roomIncludeLayout.primaryTextView.setText("");
-                                        createSampleFragment.binding.roomIncludeLayout.secondaryTextView.setText("");
-                                    }
-
-                                    createSampleFragment.roomsDialog.dismiss();
-                                    break;
-                                case "cases":
-                                    if (!createSampleFragment.caseId.equals(item.get("id").toString())) {
-                                        createSampleFragment.caseId = item.get("id").toString();
-                                        createSampleFragment.caseName = item.get("title").toString();
-
-                                        createSampleFragment.binding.caseIncludeLayout.selectTextView.setText(createSampleFragment.caseName);
-                                    } else if (createSampleFragment.caseId.equals(item.get("id").toString())) {
-                                        createSampleFragment.caseId = "";
-                                        createSampleFragment.caseName = "";
-
-                                        createSampleFragment.binding.caseIncludeLayout.selectTextView.setText("");
-                                    }
-
-                                    createSampleFragment.casesDialog.dismiss();
-                                    break;
-                                case "sessions":
-                                    if (!createSampleFragment.sessionId.equals(item.get("id").toString())) {
-                                        createSampleFragment.sessionId = item.get("id").toString();
-                                        createSampleFragment.sessionName = item.get("title").toString();
-
-                                        createSampleFragment.binding.sessionIncludeLayout.selectTextView.setText(createSampleFragment.sessionName);
-                                    } else if (createSampleFragment.sessionId.equals(item.get("id").toString())) {
-                                        createSampleFragment.sessionId = "";
-                                        createSampleFragment.sessionName = "";
-
-                                        createSampleFragment.binding.sessionIncludeLayout.selectTextView.setText("");
-                                    }
-
-                                    createSampleFragment.sessionsDialog.dismiss();
-                                    break;
-                            }
-                        }
-                        break;
-                    case R.id.editCenterFragment:
-                        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (editCenterFragment != null) {
-                            EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
-
-                            if (method.equals("managers")) {
-                                if (!editCenterDetailFragment.managerId.equals(item.get("id").toString())) {
-                                    editCenterDetailFragment.managerId = item.get("id").toString();
-                                    editCenterDetailFragment.managerName = item.get("title").toString();
-
-                                    editCenterDetailFragment.binding.managerIncludeLayout.selectTextView.setText(editCenterDetailFragment.managerName);
-                                } else if (editCenterDetailFragment.managerId.equals(item.get("id").toString())) {
-                                    editCenterDetailFragment.managerId = "";
-                                    editCenterDetailFragment.managerName = "";
-
-                                    editCenterDetailFragment.binding.managerIncludeLayout.selectTextView.setText("");
-                                }
-
-                                editCenterDetailFragment.managersDialog.dismiss();
-                            }
-                        }
-                        break;
-                }
-
-                notifyDataSetChanged();
-            } catch (JSONException e) {
-                e.printStackTrace();
+                        editCenterDetailFragment.responseDialog(method, item);
+                    }
+                    break;
             }
+            notifyDataSetChanged();
         }).widget(holder.binding.getRoot());
     }
 
