@@ -30,14 +30,14 @@ import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
 public class CreateUserFragment extends Fragment {
 
     // Binding
-    public FragmentCreateUserBinding binding;
+    private FragmentCreateUserBinding binding;
 
     // BottomSheets
     private DateBottomSheet birthdayBottomSheet;
 
     // Vars
-    public String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "admin", gender = "male";
-    public int year, month, day;
+    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "admin", gender = "male";
+    private int year, month, day;
     private boolean passwordVisibility = false;
 
     @Nullable
@@ -330,6 +330,20 @@ public class CreateUserFragment extends Fragment {
                     binding.genderIncludeLayout.secondRadioButton.setChecked(true);
                     break;
             }
+        }
+    }
+
+    public void responseBottomSheet(String method, String data) {
+        switch (method) {
+            case "birthday":
+                birthday = data;
+
+                year = birthdayBottomSheet.year;
+                month = birthdayBottomSheet.month;
+                day = birthdayBottomSheet.day;
+
+                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                break;
         }
     }
 

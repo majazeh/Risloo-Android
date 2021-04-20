@@ -26,15 +26,15 @@ import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
 public class CreateSessionFragment extends Fragment {
 
     // Binding
-    public FragmentCreateSessionBinding binding;
+    private FragmentCreateSessionBinding binding;
 
     // BottomSheets
     private DateBottomSheet startDateBottomSheet;
     private TimeBottomSheet startTimeBottomSheet;
 
     // Vars
-    public String startDate = "", startTime = "", duration = "60", status = "";
-    public int year, month, day, hour, minute;
+    private String startDate = "", startTime = "", duration = "60", status = "";
+    private int year, month, day, hour, minute;
 
     @Nullable
     @Override
@@ -169,6 +169,28 @@ public class CreateSessionFragment extends Fragment {
                     binding.statusIncludeLayout.selectSpinner.setSelection(i);
                 }
             }
+        }
+    }
+
+    public void responseBottomSheet(String method, String data) {
+        switch (method) {
+            case "startDate":
+                startDate = data;
+
+                year = startDateBottomSheet.year;
+                month = startDateBottomSheet.month;
+                day = startDateBottomSheet.day;
+
+                binding.startDateIncludeLayout.selectTextView.setText(startDate);
+                break;
+            case "startTime":
+                startTime = data;
+
+                hour = startTimeBottomSheet.hour;
+                minute = startTimeBottomSheet.minute;
+
+                binding.startTimeIncludeLayout.selectTextView.setText(startTime);
+                break;
         }
     }
 

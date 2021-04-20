@@ -27,7 +27,7 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetTimeBinding binding;
 
     // Vars
-    private int hour, minute;
+    public int hour, minute;
     private String method;
 
     @NonNull
@@ -80,27 +80,13 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                 case R.id.createSessionFragment:
                     CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSessionFragment != null) {
-                        if (method.equals("startTime")) {
-                            createSessionFragment.startTime = getDate();
-
-                            createSessionFragment.hour = hour;
-                            createSessionFragment.minute = minute;
-
-                            createSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(createSessionFragment.startTime);
-                        }
+                        createSessionFragment.responseBottomSheet(method, getTime());
                     }
                     break;
                 case R.id.editSessionFragment:
                     EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editSessionFragment != null) {
-                        if (method.equals("startTime")) {
-                            editSessionFragment.startTime = getDate();
-
-                            editSessionFragment.hour = hour;
-                            editSessionFragment.minute = minute;
-
-                            editSessionFragment.binding.startTimeIncludeLayout.selectTextView.setText(editSessionFragment.startTime);
-                        }
+                        editSessionFragment.responseBottomSheet(method, getTime());
                     }
                     break;
             }
@@ -124,7 +110,7 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
         binding.minuteNumberPicker.setValue(minute);
     }
 
-    private String getDate() {
+    private String getTime() {
         hour = binding.hourNumberPicker.getValue();
         minute = binding.minuteNumberPicker.getValue();
 

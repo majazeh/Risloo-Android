@@ -23,14 +23,14 @@ import com.majazeh.risloo.databinding.FragmentEditPersonalBinding;
 public class EditPersonalFragment extends Fragment {
 
     // Binding
-    public FragmentEditPersonalBinding binding;
+    private FragmentEditPersonalBinding binding;
 
     // BottomSheets
     private DateBottomSheet birthdayBottomSheet;
 
     // Vars
-    public String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
-    public int year, month, day;
+    private String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
+    private int year, month, day;
 
     @Nullable
     @Override
@@ -247,6 +247,20 @@ public class EditPersonalFragment extends Fragment {
                     binding.genderIncludeLayout.secondRadioButton.setChecked(true);
                     break;
             }
+        }
+    }
+
+    public void responseBottomSheet(String method, String data) {
+        switch (method) {
+            case "birthday":
+                birthday = data;
+
+                year = birthdayBottomSheet.year;
+                month = birthdayBottomSheet.month;
+                day = birthdayBottomSheet.day;
+
+                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                break;
         }
     }
 

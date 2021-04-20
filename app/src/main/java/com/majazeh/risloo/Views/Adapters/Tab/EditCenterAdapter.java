@@ -13,7 +13,7 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 
 public class EditCenterAdapter extends FragmentStatePagerAdapter {
 
-    SparseArray<Fragment> registeredFragments = new SparseArray<>();
+    private final SparseArray<Fragment> registeredFragments = new SparseArray<>();
 
     @NonNull
     @Override

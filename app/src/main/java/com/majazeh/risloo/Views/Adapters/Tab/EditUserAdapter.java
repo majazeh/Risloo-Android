@@ -15,7 +15,7 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 
 public class EditUserAdapter extends FragmentStatePagerAdapter {
 
-    SparseArray<Fragment> registeredFragments = new SparseArray<>();
+    private final SparseArray<Fragment> registeredFragments = new SparseArray<>();
 
     @NonNull
     @Override
