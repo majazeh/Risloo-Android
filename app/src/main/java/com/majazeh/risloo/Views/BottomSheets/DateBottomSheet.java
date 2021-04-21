@@ -70,7 +70,7 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 break;
             case "birthday":
                 binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayTitle));
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayEntry));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetBirthdayEntry));
                 break;
         }
     }

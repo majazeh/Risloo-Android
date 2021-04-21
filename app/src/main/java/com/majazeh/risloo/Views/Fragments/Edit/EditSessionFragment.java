@@ -63,7 +63,7 @@ public class EditSessionFragment extends Fragment {
 
         binding.durationIncludeLayout.inputEditText.setText(duration);
 
-        InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
+        InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionFragmentButton), getResources().getColor(R.color.White));
     }

@@ -38,7 +38,7 @@ public class TestActivity extends AppCompatActivity {
     private Bundle extras;
 
     // Vars
-    private String test = "", type = "", status = "", page = "", location = "";
+    private String test = "", type = "", status = "", location = "", locationSum = "";
     private int progress = -1;
 
     @Override
@@ -77,7 +77,7 @@ public class TestActivity extends AppCompatActivity {
 
         extras = getIntent().getExtras();
 
-        InitManager.spinner(this, binding.locationIncludeLayout.selectSpinner, R.array.TestStages);
+        InitManager.spinner(this, binding.locationIncludeLayout.selectSpinner, R.array.TestStages, "test");
 
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);
@@ -95,17 +95,106 @@ public class TestActivity extends AppCompatActivity {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
+            switch (location) {
+                case "زنجیره":
+                    finish();
+                    break;
+                case "اطلاعات":
+                    location = "زنجیره";
+                    navigator(R.id.testBulkFragment);
+                    break;
+                case "توضیحات":
+                    location = "اطلاعات";
+                    navigator(R.id.testFormFragment);
+                    break;
+                case "یک":
+                    location = "توضیحات";
+                    navigator(R.id.testDescriptionFragment);
+                    break;
+                case "دو":
+                    location = "یک";
+                    navigator(R.id.testOptionalFragment);
+                    break;
+                case "پایان":
+                    location = "دو";
+                    navigator(R.id.testPictoralFragment);
+                    break;
+            }
+
+            for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
+                    binding.locationIncludeLayout.selectSpinner.setSelection(i);
+                }
+            }
+
+            locationSum = "185" + " / "  + location;
+            binding.locationSumTextView.setText(locationSum);
+
         }).widget(binding.backwardImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
+            switch (location) {
+                case "زنجیره":
+                    location = "اطلاعات";
+                    navigator(R.id.testFormFragment);
+                    break;
+                case "اطلاعات":
+                    location = "توضیحات";
+                    navigator(R.id.testDescriptionFragment);
+                    break;
+                case "توضیحات":
+                    location = "یک";
+                    navigator(R.id.testOptionalFragment);
+                    break;
+                case "یک":
+                    location = "دو";
+                    navigator(R.id.testPictoralFragment);
+                    break;
+                case "دو":
+                    location = "پایان";
+                    navigator(R.id.testEndFragment);
+                    break;
+            }
+
+            for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
+                    binding.locationIncludeLayout.selectSpinner.setSelection(i);
+                }
+            }
+
+            locationSum = "185" + " / "  + location;
+            binding.locationSumTextView.setText(locationSum);
+
         }).widget(binding.forwardImageView.getRoot());
 
         binding.locationIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 location = parent.getItemAtPosition(position).toString();
+
+                switch (location) {
+                    case "زنجیره":
+                        navigator(R.id.testBulkFragment);
+                        break;
+                    case "اطلاعات":
+                        navigator(R.id.testFormFragment);
+                        break;
+                    case "توضیحات":
+                        navigator(R.id.testDescriptionFragment);
+                        break;
+                    case "یک":
+                        navigator(R.id.testOptionalFragment);
+                        break;
+                    case "دو":
+                        navigator(R.id.testPictoralFragment);
+                        break;
+                    case "پایان":
+                        navigator(R.id.testEndFragment);
+                        break;
+                }
+
+                locationSum = "185" + " / "  + location;
+                binding.locationSumTextView.setText(locationSum);
             }
 
             @Override
@@ -138,8 +227,15 @@ public class TestActivity extends AppCompatActivity {
         status = getResources().getString(R.string.TestUnChanged);
         binding.statusTextView.setText(status);
 
-        page = "1/185";
-        binding.pageTextView.setText(page);
+        location = "زنجیره";
+        for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
+            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
+                binding.locationIncludeLayout.selectSpinner.setSelection(i);
+            }
+        }
+
+        locationSum = "185" + " / "  + location;
+        binding.locationSumTextView.setText(locationSum);
     }
 
     public void navigator(int destinationId) {
@@ -177,9 +273,40 @@ public class TestActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (!navController.popBackStack()) {
-            finish();
+        switch (location) {
+            case "زنجیره":
+                finish();
+                break;
+            case "اطلاعات":
+                location = "زنجیره";
+                navigator(R.id.testBulkFragment);
+                break;
+            case "توضیحات":
+                location = "اطلاعات";
+                navigator(R.id.testFormFragment);
+                break;
+            case "یک":
+                location = "توضیحات";
+                navigator(R.id.testDescriptionFragment);
+                break;
+            case "دو":
+                location = "یک";
+                navigator(R.id.testOptionalFragment);
+                break;
+            case "پایان":
+                location = "دو";
+                navigator(R.id.testPictoralFragment);
+                break;
         }
+
+        for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
+            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
+                binding.locationIncludeLayout.selectSpinner.setSelection(i);
+            }
+        }
+
+        locationSum = "185" + " / "  + location;
+        binding.locationSumTextView.setText(locationSum);
     }
 
 }

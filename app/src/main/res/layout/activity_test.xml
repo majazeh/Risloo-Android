@@ -69,7 +69,7 @@
             tools:text="بدون تغییر" />
 
         <TextView
-            android:id="@+id/page_textView"
+            android:id="@+id/location_sum_textView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"

@@ -63,7 +63,7 @@ public class CreateSessionFragment extends Fragment {
 
         binding.durationIncludeLayout.inputEditText.setText(duration);
 
-        InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
+        InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionFragmentButton), getResources().getColor(R.color.White));
     }

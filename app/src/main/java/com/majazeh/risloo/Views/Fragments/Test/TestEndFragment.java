@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
 
@@ -77,7 +78,7 @@ public class TestEndFragment extends Fragment {
     }
 
     private void doWork() {
-        // TODO : Call Work Method
+        IntentManager.main(requireActivity());
     }
 
     @Override

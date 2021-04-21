@@ -47,7 +47,7 @@ public class CreateReportFragment extends Fragment {
         binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentEncryptionHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentDescriptionHeader));
 
-        InitManager.spinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates);
+        InitManager.spinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates, "main");
 
         InitManager.txtTextColor(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Blue600));
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White));

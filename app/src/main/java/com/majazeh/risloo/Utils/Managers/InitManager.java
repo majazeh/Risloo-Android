@@ -31,10 +31,27 @@ public class InitManager {
         img.setRotation(img.getRotation() + degree);
     }
 
-    public static void spinner(Activity activity, Spinner spinner, int arrayRes) {
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, arrayRes, R.layout.spinner_item_background);
-        adapter.setDropDownViewResource(R.layout.spinner_item_dropdown);
-        spinner.setAdapter(adapter);
+    public static void spinner(Activity activity, Spinner spinner, int arrayRes, String dimension) {
+        switch (dimension) {
+            case "main": {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, arrayRes, R.layout.spinner_item_background_main);
+                adapter.setDropDownViewResource(R.layout.spinner_item_dropdown_main);
+                spinner.setAdapter(adapter);
+                break;
+            }
+            case "test": {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, arrayRes, R.layout.spinner_item_background_test);
+                adapter.setDropDownViewResource(R.layout.spinner_item_dropdown_test);
+                spinner.setAdapter(adapter);
+                break;
+            }
+            case "adapter": {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, arrayRes, R.layout.spinner_item_background_adapter);
+                adapter.setDropDownViewResource(R.layout.spinner_item_dropdown_adapter);
+                spinner.setAdapter(adapter);
+                break;
+            }
+        }
     }
 
     public static void recyclerView(RecyclerView recyclerView, RecyclerView.ItemDecoration itemDecoration, LinearLayoutManager layoutManager) {
