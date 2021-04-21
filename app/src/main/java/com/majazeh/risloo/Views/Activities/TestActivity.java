@@ -77,7 +77,7 @@ public class TestActivity extends AppCompatActivity {
 
         extras = getIntent().getExtras();
 
-        InitManager.spinner(this, binding.locationIncludeLayout.selectSpinner, R.array.SessionStatus);
+        InitManager.spinner(this, binding.locationIncludeLayout.selectSpinner, R.array.TestStages);
 
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);

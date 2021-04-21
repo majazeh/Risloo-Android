@@ -63,7 +63,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         binding.caseCheckbox.getRoot().setText(getResources().getString(R.string.CreateCenterUserFragmentCheckbox));
 
-        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.UsersTypes);
+        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.UserTypes);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterUserFragmentButton), getResources().getColor(R.color.White));
     }

@@ -49,7 +49,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.3"
-        app:layout_constraintEnd_toStartOf="@+id/status_textView"
+        app:layout_constraintEnd_toStartOf="@+id/status_spinner"
         app:layout_constraintStart_toEndOf="@+id/serial_textView"
         app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="زمان" />
@@ -71,24 +71,33 @@
         app:layout_constraintTop_toBottomOf="@+id/date_textView"
         tools:text="مدت جلسه" />
 
-    <TextView
-        android:id="@+id/status_textView"
+    <Spinner
+        android:id="@+id/status_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
-        android:padding="@dimen/_8sdp"
-        android:gravity="center|right"
-        android:textSize="@dimen/_8ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
+        android:minHeight="@dimen/_24sdp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
         app:layout_constraintBottom_toBottomOf="@+id/serial_textView"
         app:layout_constraintEnd_toStartOf="@+id/edit_imageView"
         app:layout_constraintStart_toEndOf="@+id/date_textView"
-        app:layout_constraintTop_toTopOf="@+id/serial_textView"
-        tools:text="وضعیت" />
+        app:layout_constraintTop_toTopOf="@+id/serial_textView" />
+
+    <ImageView
+        android:id="@+id/status_angle_imageView"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_angle_down_light"
+        app:layout_constraintBottom_toBottomOf="@+id/status_spinner"
+        app:layout_constraintEnd_toEndOf="@+id/status_spinner"
+        app:layout_constraintTop_toTopOf="@id/status_spinner"
+        app:tint="@color/Gray500" />
 
     <ImageView
         android:id="@+id/edit_imageView"
@@ -99,10 +108,10 @@
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_edit_light"
-        app:layout_constraintBottom_toBottomOf="@id/status_textView"
+        app:layout_constraintBottom_toBottomOf="@id/status_spinner"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/status_textView"
-        app:layout_constraintTop_toTopOf="@id/status_textView"
+        app:layout_constraintStart_toEndOf="@+id/status_spinner"
+        app:layout_constraintTop_toTopOf="@id/status_spinner"
         app:tint="@color/Gray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

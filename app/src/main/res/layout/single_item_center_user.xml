@@ -49,7 +49,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintEnd_toStartOf="@+id/type_textView"
+        app:layout_constraintEnd_toStartOf="@+id/type_spinner"
         app:layout_constraintStart_toEndOf="@+id/serial_textView"
         app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="نام" />
@@ -71,24 +71,33 @@
         app:layout_constraintTop_toBottomOf="@+id/name_textView"
         tools:text="شماره همراه" />
 
-    <TextView
-        android:id="@+id/type_textView"
+    <Spinner
+        android:id="@+id/type_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:padding="@dimen/_4sdp"
-        android:gravity="right"
-        android:textSize="@dimen/_8ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
+        android:minHeight="@dimen/_24sdp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
         app:layout_constraintWidth_percent="0.2"
         app:layout_constraintEnd_toStartOf="@+id/accepted_textView"
         app:layout_constraintStart_toEndOf="@+id/name_textView"
-        app:layout_constraintTop_toBottomOf="@+id/top_view"
-        tools:text="موقعیت" />
+        app:layout_constraintTop_toBottomOf="@+id/top_view" />
+
+    <ImageView
+        android:id="@+id/type_angle_imageView"
+        android:layout_width="@dimen/_14sdp"
+        android:layout_height="@dimen/_14sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_angle_down_light"
+        app:layout_constraintBottom_toBottomOf="@+id/type_spinner"
+        app:layout_constraintEnd_toEndOf="@+id/type_spinner"
+        app:layout_constraintTop_toTopOf="@id/type_spinner"
+        app:tint="@color/Gray500" />
 
     <TextView
         android:id="@+id/status_texView"
@@ -103,9 +112,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/type_textView"
-        app:layout_constraintStart_toStartOf="@+id/type_textView"
-        app:layout_constraintTop_toBottomOf="@+id/type_textView"
+        app:layout_constraintEnd_toEndOf="@+id/type_spinner"
+        app:layout_constraintStart_toStartOf="@+id/type_spinner"
+        app:layout_constraintTop_toBottomOf="@+id/type_spinner"
         tools:text="وضعیت" />
 
     <TextView
@@ -122,7 +131,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toStartOf="@+id/task_imageView"
-        app:layout_constraintStart_toEndOf="@+id/type_textView"
+        app:layout_constraintStart_toEndOf="@+id/type_spinner"
         app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="زمان پذیرش" />
 

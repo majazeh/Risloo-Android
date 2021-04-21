@@ -5,12 +5,14 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
 
@@ -21,6 +23,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     // Vars
 //    private ArrayList<User> users;
+    private String type = "";
 
     public CenterUsersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,6 +38,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     @Override
     public void onBindViewHolder(@NonNull CenterUsersHolder holder, int i) {
 //        Users user = users.get(i);
+
+        initializer(holder);
 
         detector(holder);
 
@@ -54,15 +59,19 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 //        notifyDataSetChanged();
 //    }
 
+    private void initializer(CenterUsersHolder holder) {
+        InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes);
+    }
+
     private void detector(CenterUsersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.typeTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
 
             holder.binding.taskImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
         } else {
-            holder.binding.typeTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+            holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
     }
 
@@ -71,7 +80,21 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        }).widget(holder.binding.typeTextView);
+        }).widget(holder.binding.taskImageView);
+
+        holder.binding.typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                type = parent.getItemAtPosition(position).toString();
+
+                doWork();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setData(CenterUsersHolder holder) {
@@ -84,10 +107,20 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         holder.binding.serialTextView.setText("GH96666DY");
         holder.binding.nameTextView.setText("محمد نخلی");
         holder.binding.mobileTextView.setText("+989905511926");
-        holder.binding.typeTextView.setText("مراجع");
         holder.binding.statusTexView.setText("پذیرش شده");
         holder.binding.acceptedTextView.setText("99-12-26 10:55 ");
         holder.binding.kickedTextView.setText("99-12-26 10:55 ");
+
+//        type = ((MainActivity) activity).singleton.getType();
+//        for (int i=0; i<holder.binding.typeSpinner.getCount(); i++) {
+//            if (holder.binding.typeSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
+//                holder.binding.typeSpinner.setSelection(i);
+//            }
+//        }
+    }
+
+    private void doWork() {
+
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

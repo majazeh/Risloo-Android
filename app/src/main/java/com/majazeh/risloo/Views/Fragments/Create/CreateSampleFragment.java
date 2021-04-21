@@ -105,7 +105,7 @@ public class CreateSampleFragment extends Fragment {
         InitManager.unfixedRecyclerView(binding.scaleIncludeLayout.selectRecyclerView, itemDecoration, scalesLayoutManager);
         InitManager.unfixedRecyclerView(binding.referenceIncludeLayout.selectRecyclerView, itemDecoration, referencesLayoutManager);
 
-        InitManager.spinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CasesTypes);
+        InitManager.spinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CaseTypes);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }

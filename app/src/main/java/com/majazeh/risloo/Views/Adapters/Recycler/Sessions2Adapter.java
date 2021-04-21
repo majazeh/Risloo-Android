@@ -5,12 +5,14 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSession2Binding;
 
@@ -21,6 +23,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
     // Vars
 //    private ArrayList<Session> sessions;
+    private String status = "";
 
     public Sessions2Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,6 +38,8 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     @Override
     public void onBindViewHolder(@NonNull Sessions2Holder holder, int i) {
 //        Sessions session = sessions.get(i);
+
+        initializer(holder);
 
         detector(holder);
 
@@ -54,15 +59,19 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 //        notifyDataSetChanged();
 //    }
 
+    private void initializer(Sessions2Holder holder) {
+        InitManager.spinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
+    }
+
     private void detector(Sessions2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
 
             holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
         } else {
-            holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
     }
 
@@ -71,9 +80,19 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.statusTextView);
+        holder.binding.statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                status = parent.getItemAtPosition(position).toString();
+
+                doWork();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.editSessionFragment)).widget(holder.binding.editImageView);
     }
@@ -88,7 +107,17 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
         holder.binding.serialTextView.setText("SE966669A");
         holder.binding.dateTextView.setText("شنبه 11 بهمن 99 ساعت 16:00");
         holder.binding.durationTextView.setText("60 دقیقه");
-        holder.binding.statusTextView.setText("در جلسه");
+
+//        status = ((MainActivity) activity).singleton.getStatus();
+//        for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
+//            if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
+//                holder.binding.statusSpinner.setSelection(i);
+//            }
+//        }
+    }
+
+    private void doWork() {
+
     }
 
     public class Sessions2Holder extends RecyclerView.ViewHolder {
