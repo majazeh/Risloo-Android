@@ -61,6 +61,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     private void initializer(CenterUsersHolder holder) {
         InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes, "adapter");
+        InitManager.spinner(activity, holder.binding.taskSpinner, R.array.CenterUserTasks, "test");
     }
 
     private void detector(CenterUsersHolder holder) {
@@ -68,8 +69,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
             holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-
-            holder.binding.taskImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
         } else {
             holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
@@ -78,9 +77,36 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private void listener(CenterUsersHolder holder) {
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment)).widget(holder.binding.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.taskImageView);
+        holder.binding.taskSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String task = parent.getItemAtPosition(position).toString();
+
+                switch (task) {
+                    case "پذیرفتن":
+                        // TODO : Place Code Here
+                        break;
+                    case "تعلیق":
+                        // TODO : Place Code Here
+                        break;
+                    case "ساختن اتاق درمان":
+                        // TODO : Place Code Here
+                        break;
+                    case "ویرایش کاربر":
+                        // TODO : Place Code Here
+                        break;
+                    case "ورود به کاربری":
+                        // TODO : Place Code Here
+                        break;
+                }
+
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         holder.binding.typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -120,7 +146,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     private void doWork() {
-
+        // TODO : Call Work Method
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

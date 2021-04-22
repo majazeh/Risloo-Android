@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -45,7 +46,7 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        decorator();
+        decorator(true);
 
         binding = ActivityTestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -59,11 +60,14 @@ public class TestActivity extends AppCompatActivity {
         setData();
     }
 
-    private void decorator() {
+    private void decorator(boolean dark) {
         WindowDecorator windowDecorator = new WindowDecorator();
 
         windowDecorator.lightShowSystemUI(this);
-        windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+        if (dark)
+            windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Blue600), getResources().getColor(R.color.Gray50));
+        else
+            windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
     }
 
     private void initializer() {
@@ -236,6 +240,11 @@ public class TestActivity extends AppCompatActivity {
 
         locationSum = "185" + " / "  + location;
         binding.locationSumTextView.setText(locationSum);
+
+        new Handler().postDelayed(() -> {
+            binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
+            decorator(false);
+        }, 2000);
     }
 
     public void navigator(int destinationId) {

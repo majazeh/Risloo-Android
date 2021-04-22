@@ -616,12 +616,6 @@
     <string name="CenterUsersFragmentAccepted">زمان پذیرش</string>
     <string name="CenterUsersFragmentKicked">زمان تعلیق</string>
 
-    <string name="CenterUsersFragmentAccept">پذیرفتن</string>
-    <string name="CenterUsersFragmentCancel">تعلیق</string>
-    <string name="CenterUsersFragmentCreate">ساختن اتاق درمان</string>
-    <string name="CenterUsersFragmentEdit">ویرایش کاربر</string>
-    <string name="CenterUsersFragmentEnter">ورود به کاربری</string>
-
     /*
     ---------- Documents Fragment ----------
     */

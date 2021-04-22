@@ -167,4 +167,16 @@
         app:layout_constraintTop_toTopOf="@id/accepted_textView"
         app:tint="@color/Gray500" />
 
+    <Spinner
+        android:id="@+id/task_spinner"
+        android:layout_width="@dimen/_26sdp"
+        android:layout_height="@dimen/_26sdp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@id/task_imageView"
+        app:layout_constraintEnd_toEndOf="@id/task_imageView"
+        app:layout_constraintStart_toStartOf="@id/task_imageView"
+        app:layout_constraintTop_toTopOf="@id/task_imageView" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
