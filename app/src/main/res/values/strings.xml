@@ -365,6 +365,44 @@
     <string name="CreateSampleFragmentButton">ساخت</string>
 
     /*
+    ---------- CreateSchedule Fragment ----------
+    */
+
+    <string name="CreateScheduleFragmentTitle">ساخت برنامه</string>
+
+    /*
+    ---------- CreateSchedulePayment Fragment ----------
+    */
+
+    <string name="CreateSchedulePaymentFragmentTitle">پرداخت</string>
+
+
+
+    /*
+    ---------- CreateScheduleReference Fragment ----------
+    */
+
+    <string name="CreateScheduleReferenceFragmentTitle">مراجعین</string>
+
+
+
+    /*
+    ---------- CreateScheduleSession Fragment ----------
+    */
+
+    <string name="CreateScheduleSessionFragmentTitle">جلسه</string>
+
+
+
+    /*
+    ---------- CreateScheduleTime Fragment ----------
+    */
+
+    <string name="CreateScheduleTimeFragmentTitle">زمان</string>
+
+
+
+    /*
     ---------- CreateSession Fragment ----------
     */
 
@@ -601,6 +639,12 @@
     */
 
     <string name="CentersFragmentTitle">مراکز درمانی</string>
+
+    /*
+    ---------- CenterSchedules Fragment ----------
+    */
+
+    <string name="CenterSchedulesFragmentTitle">برنامه‌های مرکز</string>
 
     /*
     ---------- CenterUsers Fragment ----------

@@ -236,6 +236,9 @@
             android:id="@+id/action_centerFragment_to_centerUsersFragment"
             app:destination="@id/centerUsersFragment" />
         <action
+            android:id="@+id/action_centerFragment_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
+        <action
             android:id="@+id/action_centerFragment_to_createRoomFragment"
             app:destination="@id/createRoomFragment" />
         <action
@@ -383,6 +386,12 @@
             android:id="@+id/action_createSampleFragment_to_scalesFragment"
             app:destination="@id/scalesFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/createScheduleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment"
+        android:label="@string/CreateScheduleFragmentTitle"
+        tools:layout="@layout/fragment_create_schedule" />
 
     <fragment
         android:id="@+id/createSessionFragment"
