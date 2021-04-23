@@ -66,33 +66,41 @@ public class CenterFragment extends Fragment {
 
         handler = new Handler();
 
-        InitManager.txtTextColor(binding.profileTextView.getRoot(), getResources().getString(R.string.CenterFragmentProfile), getResources().getColor(R.color.Gray500));
-        InitManager.txtTextColor(binding.statusTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
-
         InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
+        InitManager.imgResTint(requireActivity(), binding.profileImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.Blue600);
+        InitManager.imgResTint(requireActivity(), binding.schedulesImageView.getRoot(), R.drawable.ic_user_clock_light, R.color.Blue600);
         InitManager.imgResTint(requireActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
+
+        InitManager.txtTextColor(binding.statusTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterFragmentRoomsHeader));
 
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addScheduleImageView.getRoot(), R.drawable.ic_calendar_plus_light, R.color.Green700);
         InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.profileTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-            binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
-            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.profileImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+            binding.schedulesImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
             binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+
+            binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
 
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            binding.profileTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
-            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+            binding.profileImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+            binding.schedulesImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
             binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
+            binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
+
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -108,11 +116,11 @@ public class CenterFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.statusTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.profileTextView.getRoot());
-
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment)).widget(binding.editImageView.getRoot());
+
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.userFragment)).widget(binding.profileImageView.getRoot());
+
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.schedulesFragment)).widget(binding.schedulesImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment)).widget(binding.usersImageView.getRoot());
 
@@ -146,6 +154,8 @@ public class CenterFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment)).widget(binding.addImageView.getRoot());
+
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment)).widget(binding.addScheduleImageView.getRoot());
     }
 
     private void setData() {

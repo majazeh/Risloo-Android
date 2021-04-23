@@ -710,6 +710,12 @@
     <string name="SamplesFragmentDone">تمام شده</string>
 
     /*
+    ---------- Schedules Fragment ----------
+    */
+
+    <string name="SchedulesFragmentTitle">برنامه‌ها</string>
+
+    /*
     ---------- Scales Fragment ----------
     */
 
@@ -811,8 +817,6 @@
     */
 
     <string name="CenterFragmentTitle">مرکز درمان</string>
-
-    <string name="CenterFragmentProfile">پروفایل</string>
 
     <string name="CenterFragmentRequest">درخواست پذیرش</string>
     <string name="CenterFragmentOwner">شما مدیر این مرکز درمان هستید</string>

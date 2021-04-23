@@ -115,9 +115,20 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintLeft_toRightOf="@+id/add_imageView"
+            app:layout_constraintLeft_toRightOf="@+id/add_schedule_imageView"
             app:layout_constraintRight_toRightOf="@+id/header_includeLayout"
             app:layout_constraintTop_toBottomOf="@+id/header_includeLayout" />
+
+        <include
+            android:id="@+id/add_schedule_imageView"
+            layout="@layout/component_button_oval_28sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginRight="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/search_includeLayout"
+            app:layout_constraintLeft_toRightOf="@+id/add_imageView"
+            app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
+            app:layout_constraintTop_toTopOf="@+id/search_includeLayout" />
 
         <include
             android:id="@+id/add_imageView"
@@ -125,10 +136,10 @@
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/search_includeLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/add_schedule_imageView"
             app:layout_constraintLeft_toLeftOf="@+id/info_cardView"
-            app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
-            app:layout_constraintTop_toTopOf="@+id/search_includeLayout" />
+            app:layout_constraintRight_toLeftOf="@id/add_schedule_imageView"
+            app:layout_constraintTop_toTopOf="@+id/add_schedule_imageView" />
 
         <include
             android:id="@+id/cases_shimmerLayout"

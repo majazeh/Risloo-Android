@@ -71,6 +71,7 @@ public class RoomFragment extends Fragment {
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
 
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addScheduleImageView.getRoot(), R.drawable.ic_calendar_plus_light, R.color.Green700);
         InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
@@ -79,10 +80,12 @@ public class RoomFragment extends Fragment {
             binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
 
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -126,6 +129,8 @@ public class RoomFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseFragment)).widget(binding.addImageView.getRoot());
+
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment)).widget(binding.addScheduleImageView.getRoot());
     }
 
     private void setData() {

@@ -148,6 +148,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/schedulesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.SchedulesFragment"
+        android:label="@string/SchedulesFragmentTitle"
+        tools:layout="@layout/fragment_schedules" />
+
+    <fragment
         android:id="@+id/sessionsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.SessionsFragment"
         android:label="@string/SessionsFragmentTitle"
@@ -233,14 +239,26 @@
             android:id="@+id/action_centerFragment_to_editCenterFragment"
             app:destination="@id/editCenterFragment" />
         <action
+            android:id="@+id/action_centerFragment_to_userFragment"
+            app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_centerFragment_to_schedulesFragment"
+            app:destination="@id/schedulesFragment" />
+        <action
             android:id="@+id/action_centerFragment_to_centerUsersFragment"
             app:destination="@id/centerUsersFragment" />
         <action
             android:id="@+id/action_centerFragment_to_createScheduleFragment"
             app:destination="@id/createScheduleFragment" />
         <action
+            android:id="@+id/action_centerFragment_to_createCaseFragment"
+            app:destination="@id/createCaseFragment" />
+        <action
             android:id="@+id/action_centerFragment_to_createRoomFragment"
             app:destination="@id/createRoomFragment" />
+        <action
+            android:id="@+id/action_centerFragment_to_caseFragment"
+            app:destination="@id/caseFragment" />
         <action
             android:id="@+id/action_centerFragment_to_roomFragment"
             app:destination="@id/roomFragment" />
@@ -271,11 +289,14 @@
             android:id="@+id/action_roomFragment_to_roomUsersFragment"
             app:destination="@id/roomUsersFragment" />
         <action
-            android:id="@+id/action_roomFragment_to_caseFragment"
-            app:destination="@id/caseFragment" />
+            android:id="@+id/action_roomFragment_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
         <action
             android:id="@+id/action_roomFragment_to_createCaseFragment"
             app:destination="@id/createCaseFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_caseFragment"
+            app:destination="@id/caseFragment" />
     </fragment>
 
     <fragment

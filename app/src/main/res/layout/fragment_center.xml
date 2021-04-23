@@ -64,29 +64,40 @@
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
                     app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintLeft_toRightOf="@id/edit_imageView"
+                    app:layout_constraintLeft_toRightOf="@id/schedules_imageView"
                     app:layout_constraintBottom_toBottomOf="@+id/avatar_includeLayout" />
 
                 <include
-                    android:id="@+id/edit_imageView"
+                    android:id="@+id/schedules_imageView"
                     layout="@layout/component_button_oval_28sdp"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
                     app:layout_goneMarginLeft="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@+id/users_imageView"
-                    app:layout_constraintLeft_toRightOf="@id/profile_textView"
+                    app:layout_constraintLeft_toRightOf="@id/profile_imageView"
                     app:layout_constraintTop_toTopOf="@+id/users_imageView" />
 
                 <include
-                    android:id="@+id/profile_textView"
-                    layout="@layout/component_button_rect_28sdp"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/profile_imageView"
+                    layout="@layout/component_button_oval_28sdp"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_6sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/schedules_imageView"
+                    app:layout_constraintLeft_toRightOf="@id/edit_imageView"
+                    app:layout_constraintTop_toTopOf="@+id/schedules_imageView" />
+
+                <include
+                    android:id="@+id/edit_imageView"
+                    layout="@layout/component_button_oval_28sdp"
+                    android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/edit_imageView"
+                    app:layout_constraintBottom_toBottomOf="@+id/profile_imageView"
                     app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/edit_imageView" />
+                    app:layout_constraintTop_toTopOf="@+id/profile_imageView" />
 
                 <include
                     android:id="@+id/status_textView"
@@ -228,9 +239,20 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintLeft_toRightOf="@+id/add_imageView"
+            app:layout_constraintLeft_toRightOf="@+id/add_schedule_imageView"
             app:layout_constraintRight_toRightOf="@+id/header_includeLayout"
             app:layout_constraintTop_toBottomOf="@+id/header_includeLayout" />
+
+        <include
+            android:id="@+id/add_schedule_imageView"
+            layout="@layout/component_button_oval_28sdp"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginRight="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="@+id/search_includeLayout"
+            app:layout_constraintLeft_toRightOf="@+id/add_imageView"
+            app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
+            app:layout_constraintTop_toTopOf="@+id/search_includeLayout" />
 
         <include
             android:id="@+id/add_imageView"
@@ -238,10 +260,10 @@
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/search_includeLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/add_schedule_imageView"
             app:layout_constraintLeft_toLeftOf="@+id/info_cardView"
-            app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
-            app:layout_constraintTop_toTopOf="@+id/search_includeLayout" />
+            app:layout_constraintRight_toLeftOf="@id/add_schedule_imageView"
+            app:layout_constraintTop_toTopOf="@+id/add_schedule_imageView" />
 
         <include
             android:id="@+id/rooms_shimmerLayout"
