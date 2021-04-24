@@ -80,6 +80,12 @@ public class EditSessionSessionFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 status = parent.getItemAtPosition(position).toString();
+
+                if (status.equals("زمان\u200Cبندی شده")) {
+                    binding.scheduledIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                } else {
+                    binding.scheduledIncludeLayout.getRoot().setVisibility(View.GONE);
+                }
             }
 
             @Override

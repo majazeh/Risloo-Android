@@ -78,6 +78,22 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Scheduled Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="StartTime">زمان شروع نوبت‌گیری</string>
+    <string name="EndTime">زمان بستن نوبت‌گیری</string>
+
+    <string name="AccurateTime">زمان دقیق</string>
+    <string name="RelativeTime">زمان نسبی</string>
+
+    <string name="DayHint">روز و</string>
+    <string name="HourHint">ساعت و</string>
+    <string name="MinuteStartHint">دقیقه قبل تشکیل جلسه</string>
+    <string name="MinuteEndHint">دقیقه بعد اتمام جلسه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // Splash Strings
     //////////////////////////////////////////////////////////////////////////////////////
 

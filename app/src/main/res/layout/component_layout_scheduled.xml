@@ -1,0 +1,433 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    tools:layout_margin="@dimen/_16sdp">
+
+    <RadioGroup
+        android:id="@+id/start_radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:theme="@style/RadioButtonTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/start_relative_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:gravity="center|start"
+            android:text="@string/RelativeTime"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:layoutDirection="rtl" />
+
+        <RadioButton
+            android:id="@+id/start_accurate_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingEnd="@dimen/_4sdp"
+            android:gravity="center|start"
+            android:text="@string/AccurateTime"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:layoutDirection="rtl" />
+
+        <TextView
+            android:id="@+id/start_hint_textView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center|start"
+            android:text="@string/StartTime"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray800"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/start_day_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintStart_toStartOf="@id/start_radioGroup"
+        app:layout_constraintTop_toBottomOf="@id/start_radioGroup" />
+
+    <TextView
+        android:id="@+id/start_day_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:text="@string/DayHint"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="@id/start_day_editText"
+        app:layout_constraintStart_toEndOf="@id/start_day_editText"
+        app:layout_constraintTop_toTopOf="@id/start_day_editText" />
+
+    <EditText
+        android:id="@+id/start_hour_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintBottom_toBottomOf="@id/start_day_textView"
+        app:layout_constraintStart_toEndOf="@id/start_day_textView"
+        app:layout_constraintTop_toTopOf="@id/start_day_textView" />
+
+    <TextView
+        android:id="@+id/start_hour_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:text="@string/HourHint"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="@id/start_hour_editText"
+        app:layout_constraintStart_toEndOf="@id/start_hour_editText"
+        app:layout_constraintTop_toTopOf="@id/start_hour_editText" />
+
+    <EditText
+        android:id="@+id/start_minute_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintBottom_toBottomOf="@id/start_hour_textView"
+        app:layout_constraintStart_toEndOf="@id/start_hour_textView"
+        app:layout_constraintTop_toTopOf="@id/start_hour_textView" />
+
+    <TextView
+        android:id="@+id/start_minute_textView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:text="@string/MinuteStartHint"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="@id/start_minute_editText"
+        app:layout_constraintEnd_toEndOf="@id/start_radioGroup"
+        app:layout_constraintStart_toEndOf="@id/start_minute_editText"
+        app:layout_constraintTop_toTopOf="@id/start_minute_editText" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/start_relative_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="start_day_editText,start_day_textView,start_hour_editText,start_hour_textView,start_minute_editText,start_minute_textView" />
+
+    <TextView
+        android:id="@+id/start_accurate_textView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_28sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintEnd_toEndOf="@id/start_radioGroup"
+        app:layout_constraintStart_toStartOf="@id/start_radioGroup"
+        app:layout_constraintTop_toBottomOf="@id/start_day_editText" />
+
+    <ImageView
+        android:id="@+id/start_accurate_imageView"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_angle_down_light"
+        app:layout_constraintBottom_toBottomOf="@+id/start_accurate_textView"
+        app:layout_constraintEnd_toEndOf="@+id/start_accurate_textView"
+        app:layout_constraintTop_toTopOf="@id/start_accurate_textView"
+        app:tint="@color/Gray600" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/start_accurate_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="start_accurate_textView,start_accurate_imageView" />
+
+    <RadioGroup
+        android:id="@+id/end_radioGroup"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:layoutDirection="ltr"
+        android:orientation="horizontal"
+        android:theme="@style/RadioButtonTheme"
+        app:layout_constraintEnd_toEndOf="@id/start_radioGroup"
+        app:layout_constraintStart_toStartOf="@id/start_radioGroup"
+        app:layout_constraintTop_toBottomOf="@id/start_accurate_textView">
+
+        <RadioButton
+            android:id="@+id/end_relative_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:checked="true"
+            android:gravity="center|start"
+            android:text="@string/RelativeTime"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:layoutDirection="rtl" />
+
+        <RadioButton
+            android:id="@+id/end_accurate_radioButton"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:paddingEnd="@dimen/_4sdp"
+            android:gravity="center|start"
+            android:text="@string/AccurateTime"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:layoutDirection="rtl" />
+
+        <CheckBox
+            android:id="@+id/end_hint_checkBox"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:checked="false"
+            android:gravity="center|start"
+            android:text="@string/EndTime"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray800"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            android:layoutDirection="rtl"
+            android:theme="@style/CheckBoxTheme" />
+
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/end_day_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintStart_toStartOf="@id/end_radioGroup"
+        app:layout_constraintTop_toBottomOf="@id/end_radioGroup" />
+
+    <TextView
+        android:id="@+id/end_day_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:text="@string/DayHint"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="@id/end_day_editText"
+        app:layout_constraintStart_toEndOf="@id/end_day_editText"
+        app:layout_constraintTop_toTopOf="@id/end_day_editText" />
+
+    <EditText
+        android:id="@+id/end_hour_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintBottom_toBottomOf="@id/end_day_textView"
+        app:layout_constraintStart_toEndOf="@id/end_day_textView"
+        app:layout_constraintTop_toTopOf="@id/end_day_textView" />
+
+    <TextView
+        android:id="@+id/end_hour_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:text="@string/HourHint"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="@id/end_hour_editText"
+        app:layout_constraintStart_toEndOf="@id/end_hour_editText"
+        app:layout_constraintTop_toTopOf="@id/end_hour_editText" />
+
+    <EditText
+        android:id="@+id/end_minute_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintBottom_toBottomOf="@id/end_hour_textView"
+        app:layout_constraintStart_toEndOf="@id/end_hour_textView"
+        app:layout_constraintTop_toTopOf="@id/end_hour_textView" />
+
+    <TextView
+        android:id="@+id/end_minute_textView"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:text="@string/MinuteEndHint"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="@id/end_minute_editText"
+        app:layout_constraintEnd_toEndOf="@id/end_radioGroup"
+        app:layout_constraintStart_toEndOf="@id/end_minute_editText"
+        app:layout_constraintTop_toTopOf="@id/end_minute_editText" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/end_relative_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="visible"
+        app:constraint_referenced_ids="end_day_editText,end_day_textView,end_hour_editText,end_hour_textView,end_minute_editText,end_minute_textView" />
+
+    <TextView
+        android:id="@+id/end_accurate_textView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingEnd="@dimen/_28sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        app:layout_constraintEnd_toEndOf="@id/end_radioGroup"
+        app:layout_constraintStart_toStartOf="@id/end_radioGroup"
+        app:layout_constraintTop_toBottomOf="@id/end_day_editText" />
+
+    <ImageView
+        android:id="@+id/end_accurate_imageView"
+        android:layout_width="@dimen/_18sdp"
+        android:layout_height="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_angle_down_light"
+        app:layout_constraintBottom_toBottomOf="@+id/end_accurate_textView"
+        app:layout_constraintEnd_toEndOf="@+id/end_accurate_textView"
+        app:layout_constraintTop_toTopOf="@id/end_accurate_textView"
+        app:tint="@color/Gray600" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/end_accurate_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="end_accurate_textView,end_accurate_imageView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
