@@ -410,12 +410,36 @@
 
     <string name="CreateSessionFragmentTitle">ساخت جلسه</string>
 
-    <string name="CreateSessionFragmentStartDateHeader">تاریخ شروع</string>
-    <string name="CreateSessionFragmentStartTimeHeader">زمان شروع</string>
-    <string name="CreateSessionFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="CreateSessionFragmentStatusHeader">وضعیت</string>
+    /*
+    ---------- CreateSessionPayment Fragment ----------
+    */
 
-    <string name="CreateSessionFragmentButton">ساخت</string>
+    <string name="CreateSessionPaymentFragmentTitle">پرداخت</string>
+
+    <string name="CreateSessionPaymentFragmentPaymentHeader">نوع دریافت</string>
+
+    <string name="CreateSessionPaymentFragmentPaymentButton">ساخت</string>
+
+    /*
+    ---------- CreateSessionSession Fragment ----------
+    */
+
+    <string name="CreateSessionSessionFragmentTitle">جلسه</string>
+
+
+
+    /*
+    ---------- CreateSessionTime Fragment ----------
+    */
+
+    <string name="CreateSessionTimeFragmentTitle">زمان</string>
+
+    <string name="CreateSessionTimeFragmentStartDateHeader">تاریخ شروع</string>
+    <string name="CreateSessionTimeFragmentStartTimeHeader">زمان شروع</string>
+    <string name="CreateSessionTimeFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="CreateSessionTimeFragmentStatusHeader">وضعیت</string>
+
+    <string name="CreateSessionTimeFragmentButton">ساخت</string>
 
     /*
     ---------- CreateUser Fragment ----------

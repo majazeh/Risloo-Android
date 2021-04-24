@@ -15,8 +15,6 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.BottomSheetTimeBinding;
 
 import java.util.Objects;
@@ -77,18 +75,18 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
             switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-                case R.id.createSessionFragment:
-                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                    if (createSessionFragment != null) {
-                        createSessionFragment.responseBottomSheet(method, getTime());
-                    }
-                    break;
-                case R.id.editSessionFragment:
-                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                    if (editSessionFragment != null) {
-                        editSessionFragment.responseBottomSheet(method, getTime());
-                    }
-                    break;
+//                case R.id.createSessionFragment:
+//                    CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+//                    if (createSessionTimeFragment != null) {
+//                        createSessionTimeFragment.responseBottomSheet(method, getTime());
+//                    }
+//                    break;
+//                case R.id.editSessionFragment:
+//                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+//                    if (editSessionFragment != null) {
+//                        editSessionFragment.responseBottomSheet(method, getTime());
+//                    }
+//                    break;
             }
 
             dismiss();
