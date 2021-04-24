@@ -1,86 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/White"
-    android:fillViewport="true"
-    android:scrollbarSize="0dp"
-    android:overScrollMode="always"
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Edit.EditSessionFragment">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tabLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:background="@drawable/draw_line_solid_transparent_border_bottom_2sdp_gray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tabBackground="@null"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabMaxWidth="0dp"
+        app:tabRippleColor="@color/Gray300"
+        app:tabIndicatorColor="@color/Blue500"
+        app:tabIndicatorHeight="@dimen/_2sdp"
+        app:tabTextColor="@color/Gray500"
+        app:tabSelectedTextColor="@color/Gray900"
+        app:tabTextAppearance="@style/TabTextAppearance">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_constraintLayout"
+        <com.google.android.material.tabs.TabItem
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            android:text="@string/EditSessionTimeFragmentTitle" />
 
-            <include
-                android:id="@+id/start_date_includeLayout"
-                layout="@layout/component_input_select"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/EditSessionSessionFragmentTitle" />
 
-            <include
-                android:id="@+id/start_time_includeLayout"
-                layout="@layout/component_input_select"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/start_date_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/start_date_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/start_date_includeLayout" />
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/EditSessionPaymentFragmentTitle" />
 
-            <include
-                android:id="@+id/duration_includeLayout"
-                layout="@layout/component_input_number"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/start_time_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/start_time_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/start_time_includeLayout" />
+    </com.google.android.material.tabs.TabLayout>
 
-            <include
-                android:id="@+id/status_includeLayout"
-                layout="@layout/component_input_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/duration_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/duration_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/duration_includeLayout" />
+    <com.duolingo.open.rtlviewpager.RtlViewPager
+        android:id="@+id/rtlViewPager"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:overScrollMode="always"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <include
-            android:id="@+id/edit_textView"
-            layout="@layout/component_button_rect_32sdp"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintStart_toStartOf="@+id/container_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/container_constraintLayout" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

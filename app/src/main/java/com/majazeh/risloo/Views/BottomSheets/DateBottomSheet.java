@@ -21,6 +21,8 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
@@ -112,16 +114,18 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                         createScheduleTimeFragment.responseBottomSheet(method, getDate());
                     }
                     break;
-//                case R.id.editSessionFragment:
-//                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-//                    if (editSessionFragment != null) {
-//                        editSessionFragment.responseBottomSheet(method, getDate());
-//                    }
-//                    break;
                 case R.id.createUserFragment:
                     CreateUserFragment createUserFragment = (CreateUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createUserFragment != null) {
                         createUserFragment.responseBottomSheet(method, getDate());
+                    }
+                    break;
+                case R.id.editSessionFragment:
+                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editSessionFragment != null) {
+                        EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.getRegisteredFragment(0);
+
+                        editSessionTimeFragment.responseBottomSheet(method, getDate());
                     }
                     break;
                 case R.id.editUserFragment:

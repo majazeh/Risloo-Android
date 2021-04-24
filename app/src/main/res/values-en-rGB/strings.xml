@@ -628,12 +628,39 @@
 
     <string name="EditSessionFragmentTitle">ویرایش جلسه</string>
 
-    <string name="EditSessionFragmentStartDateHeader">تاریخ شروع</string>
-    <string name="EditSessionFragmentStartTimeHeader">زمان شروع</string>
-    <string name="EditSessionFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="EditSessionFragmentStatusHeader">وضعیت</string>
+    /*
+    ---------- EditSessionPayment Fragment ----------
+    */
 
-    <string name="EditSessionFragmentButton">ویرایش</string>
+    <string name="EditSessionPaymentFragmentTitle">پرداخت</string>
+
+    <string name="EditSessionPaymentFragmentPaymentHeader">نوع دریافت</string>
+
+    <string name="EditSessionPaymentFragmentPaymentButton">ویرایش</string>
+
+    /*
+    ---------- EditSessionSession Fragment ----------
+    */
+
+    <string name="EditSessionSessionFragmentTitle">جلسه</string>
+
+    <string name="EditSessionSessionFragmentTypeHeader">نوع جلسه</string>
+    <string name="EditSessionSessionFragmentStatusHeader">وضعیت جلسه</string>
+    <string name="EditSessionSessionFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="EditSessionSessionFragmentButton">ویرایش</string>
+
+    /*
+    ---------- EditSessionTime Fragment ----------
+    */
+
+    <string name="EditSessionTimeFragmentTitle">زمان</string>
+
+    <string name="EditSessionTimeFragmentStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="EditSessionTimeFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="EditSessionTimeFragmentStartDateHeader">تاریخ</string>
+
+    <string name="EditSessionTimeFragmentButton">ویرایش</string>
 
     /*
     ---------- EditUser Fragment ----------
