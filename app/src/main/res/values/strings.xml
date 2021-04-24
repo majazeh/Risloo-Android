@@ -376,7 +376,9 @@
 
     <string name="CreateSchedulePaymentFragmentTitle">پرداخت</string>
 
+    <string name="CreateSchedulePaymentFragmentPaymentHeader">نوع دریافت</string>
 
+    <string name="CreateSchedulePaymentFragmentPaymentButton">ساخت</string>
 
     /*
     ---------- CreateScheduleReference Fragment ----------
