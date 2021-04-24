@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -29,12 +28,12 @@ public class CreateSessionTimeFragment extends Fragment {
     private FragmentCreateSessionTimeBinding binding;
 
     // BottomSheets
-    private DateBottomSheet startDateBottomSheet;
     private TimeBottomSheet startTimeBottomSheet;
+    private DateBottomSheet startDateBottomSheet;
 
     // Vars
-    private String startDate = "", startTime = "", duration = "60", status = "";
-    private int year, month, day, hour, minute;
+    private String startTime = "", duration = "60", startDate = "";
+    private int hour, minute, year, month, day;
 
     @Nullable
     @Override
@@ -53,17 +52,14 @@ public class CreateSessionTimeFragment extends Fragment {
     }
 
     private void initializer() {
-        startDateBottomSheet = new DateBottomSheet();
         startTimeBottomSheet = new TimeBottomSheet();
+        startDateBottomSheet = new DateBottomSheet();
 
-        binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeFragmentStartDateHeader));
-        binding.startTimeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeFragmentStartTimeHeader));
+        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTimeFragmentStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTimeFragmentDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeFragmentStatusHeader));
+        binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeFragmentStartDateHeader));
 
         binding.durationIncludeLayout.inputEditText.setText(duration);
-
-        InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTimeFragmentButton), getResources().getColor(R.color.White));
     }
@@ -79,11 +75,6 @@ public class CreateSessionTimeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            startDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startDateBottomSheet");
-            startDateBottomSheet.setDate(year, month, day, "startDate");
-        }).widget(binding.startDateIncludeLayout.selectTextView);
-
-        ClickManager.onDelayedClickListener(() -> {
             startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
             startTimeBottomSheet.setTime(hour, minute, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
@@ -97,37 +88,26 @@ public class CreateSessionTimeFragment extends Fragment {
             return false;
         });
 
-        binding.statusIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                status = parent.getItemAtPosition(position).toString();
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
+        ClickManager.onDelayedClickListener(() -> {
+            startDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startDateBottomSheet");
+            startDateBottomSheet.setDate(year, month, day, "startDate");
+        }).widget(binding.startDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (startDate.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
             if (startTime.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeIncludeLayout.errorImageView, binding.startTimeIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.durationIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationIncludeLayout.errorImageView, binding.durationIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
-            if (status.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (startDate.equals("")) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!startDate.equals("") && !startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0 && !status.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView);
+            if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0 && !startDate.equals("")) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeIncludeLayout.errorImageView, binding.startTimeIncludeLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationIncludeLayout.errorImageView, binding.durationIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusIncludeLayout.errorImageView, binding.statusIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView);
 
                 doWork();
             }
@@ -135,18 +115,6 @@ public class CreateSessionTimeFragment extends Fragment {
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getStartDate().equals("")) {
-            startDate = ((MainActivity) requireActivity()).singleton.getStartDate();
-            binding.startDateIncludeLayout.selectTextView.setText(startDate);
-        } else {
-            startDate = getResources().getString(R.string.AppDateDefault);
-            binding.startDateIncludeLayout.selectTextView.setText(startDate);
-        }
-
-        year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", startDate)));
-        month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", startDate)));
-        day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", startDate)));
-
         if (!((MainActivity) requireActivity()).singleton.getStartTime().equals("")) {
             startTime = ((MainActivity) requireActivity()).singleton.getStartTime();
             binding.startTimeIncludeLayout.selectTextView.setText(startTime);
@@ -162,18 +130,30 @@ public class CreateSessionTimeFragment extends Fragment {
             duration = ((MainActivity) requireActivity()).singleton.getDuration();
             binding.durationIncludeLayout.inputEditText.setText(duration);
         }
-        if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-            status = ((MainActivity) requireActivity()).singleton.getStatus();
-            for (int i=0; i<binding.statusIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
-                    binding.statusIncludeLayout.selectSpinner.setSelection(i);
-                }
-            }
+
+        if (!((MainActivity) requireActivity()).singleton.getStartDate().equals("")) {
+            startDate = ((MainActivity) requireActivity()).singleton.getStartDate();
+            binding.startDateIncludeLayout.selectTextView.setText(startDate);
+        } else {
+            startDate = getResources().getString(R.string.AppDateDefault);
+            binding.startDateIncludeLayout.selectTextView.setText(startDate);
         }
+
+        year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", startDate)));
+        month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", startDate)));
+        day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", startDate)));
     }
 
     public void responseBottomSheet(String method, String data) {
         switch (method) {
+            case "startTime":
+                startTime = data;
+
+                hour = startTimeBottomSheet.hour;
+                minute = startTimeBottomSheet.minute;
+
+                binding.startTimeIncludeLayout.selectTextView.setText(startTime);
+                break;
             case "startDate":
                 startDate = data;
 
@@ -182,14 +162,6 @@ public class CreateSessionTimeFragment extends Fragment {
                 day = startDateBottomSheet.day;
 
                 binding.startDateIncludeLayout.selectTextView.setText(startDate);
-                break;
-            case "startTime":
-                startTime = data;
-
-                hour = startTimeBottomSheet.hour;
-                minute = startTimeBottomSheet.minute;
-
-                binding.startTimeIncludeLayout.selectTextView.setText(startTime);
                 break;
         }
     }

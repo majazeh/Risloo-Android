@@ -394,7 +394,11 @@
 
     <string name="CreateScheduleSessionFragmentTitle">جلسه</string>
 
+    <string name="CreateScheduleSessionFragmentTypeHeader">نوع جلسه</string>
+    <string name="CreateScheduleSessionFragmentStatusHeader">وضعیت جلسه</string>
+    <string name="CreateScheduleSessionFragmentDescriptionHeader">توضیحات</string>
 
+    <string name="CreateScheduleSessionFragmentButton">ساخت</string>
 
     /*
     ---------- CreateScheduleTime Fragment ----------
@@ -402,7 +406,11 @@
 
     <string name="CreateScheduleTimeFragmentTitle">زمان</string>
 
+    <string name="CreateScheduleTimeFragmentStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="CreateScheduleTimeFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="CreateScheduleTimeFragmentStartDateHeader">تاریخ مشخص</string>
 
+    <string name="CreateScheduleTimeFragmentButton">ساخت</string>
 
     /*
     ---------- CreateSession Fragment ----------
@@ -426,7 +434,11 @@
 
     <string name="CreateSessionSessionFragmentTitle">جلسه</string>
 
+    <string name="CreateSessionSessionFragmentTypeHeader">نوع جلسه</string>
+    <string name="CreateSessionSessionFragmentStatusHeader">وضعیت جلسه</string>
+    <string name="CreateSessionSessionFragmentDescriptionHeader">توضیحات</string>
 
+    <string name="CreateSessionSessionFragmentButton">ساخت</string>
 
     /*
     ---------- CreateSessionTime Fragment ----------
@@ -434,10 +446,9 @@
 
     <string name="CreateSessionTimeFragmentTitle">زمان</string>
 
-    <string name="CreateSessionTimeFragmentStartDateHeader">تاریخ شروع</string>
-    <string name="CreateSessionTimeFragmentStartTimeHeader">زمان شروع</string>
+    <string name="CreateSessionTimeFragmentStartTimeHeader">زمان (ساعت - دقیقه)</string>
     <string name="CreateSessionTimeFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="CreateSessionTimeFragmentStatusHeader">وضعیت</string>
+    <string name="CreateSessionTimeFragmentStartDateHeader">تاریخ</string>
 
     <string name="CreateSessionTimeFragmentButton">ساخت</string>
 

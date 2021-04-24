@@ -48,7 +48,16 @@
     // Session Arrays
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <array name="SessionTypes">
+        <item>جلسه حضوری</item>
+        <item>تماس تلفنی</item>
+        <item>تماس صوتی آنلاین</item>
+        <item>ویدئو کنفرانس</item>
+    </array>
+
     <array name="SessionStatus">
+        <item>پیش‌نویس</item>
+        <item>زمان‌بندی شده</item>
         <item>در انتظار تأیید مراجع</item>
         <item>در انتظار تشکیل جلسه</item>
         <item>در جلسه</item>

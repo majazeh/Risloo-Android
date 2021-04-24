@@ -20,6 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +28,7 @@
             app:layout_constraintEnd_toEndOf="parent">
 
             <include
-                android:id="@+id/start_date_includeLayout"
+                android:id="@+id/start_time_includeLayout"
                 layout="@layout/component_input_select"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -39,28 +40,18 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/start_time_includeLayout"
-                layout="@layout/component_input_select"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/start_date_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/start_date_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/start_date_includeLayout" />
-
-            <include
                 android:id="@+id/duration_includeLayout"
                 layout="@layout/component_input_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/start_time_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/start_time_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/start_time_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/start_time_includeLayout" />
 
             <include
-                android:id="@+id/status_includeLayout"
-                layout="@layout/component_input_spinner"
+                android:id="@+id/start_date_includeLayout"
+                layout="@layout/component_input_select"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
