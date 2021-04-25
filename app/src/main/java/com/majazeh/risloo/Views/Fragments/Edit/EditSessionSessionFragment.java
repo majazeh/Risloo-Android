@@ -36,6 +36,7 @@ public class EditSessionSessionFragment extends Fragment {
     private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
     private int startAccurateHour, startAccurateMinute, startAccurateYear, startAccurateMonth, startAccurateDay, endAccurateHour, endAccurateMinute, endAccurateYear, endAccurateMonth, endAccurateDay;
     private int startRelativeDay, startRelativeHour, startRelativeMinute, endRelativeDay, endRelativeHour, endRelativeMinute;
+    private boolean hasEndScheduleTime = false;
 
     @Nullable
     @Override
@@ -183,16 +184,26 @@ public class EditSessionSessionFragment extends Fragment {
 
         binding.scheduledIncludeLayout.endHintCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
+                hasEndScheduleTime = true;
 
+                binding.scheduledIncludeLayout.setAlpha((float) 1);
+                binding.scheduledIncludeLayout.setEnable(true);
+                binding.scheduledIncludeLayout.setFocusableInTouchMode(true);
             } else {
+                hasEndScheduleTime = false;
 
+                binding.scheduledIncludeLayout.setAlpha((float) 0.4);
+                binding.scheduledIncludeLayout.setEnable(false);
+                binding.scheduledIncludeLayout.setFocusableInTouchMode(false);
             }
         });
 
         binding.scheduledIncludeLayout.endRelativeDayEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.scheduledIncludeLayout.endRelativeDayEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeDayEditText);
+                if (binding.scheduledIncludeLayout.getFocusableInTouchMode()) {
+                    if (!binding.scheduledIncludeLayout.endRelativeDayEditText.hasFocus()) {
+                        ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeDayEditText);
+                    }
                 }
             }
             return false;
@@ -200,8 +211,10 @@ public class EditSessionSessionFragment extends Fragment {
 
         binding.scheduledIncludeLayout.endRelativeHourEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.scheduledIncludeLayout.endRelativeHourEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeHourEditText);
+                if (binding.scheduledIncludeLayout.getFocusableInTouchMode()) {
+                    if (!binding.scheduledIncludeLayout.endRelativeHourEditText.hasFocus()) {
+                        ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeHourEditText);
+                    }
                 }
             }
             return false;
@@ -209,8 +222,10 @@ public class EditSessionSessionFragment extends Fragment {
 
         binding.scheduledIncludeLayout.endRelativeMinuteEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.scheduledIncludeLayout.endRelativeMinuteEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeMinuteEditText);
+                if (binding.scheduledIncludeLayout.getFocusableInTouchMode()) {
+                    if (!binding.scheduledIncludeLayout.endRelativeMinuteEditText.hasFocus()) {
+                        ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeMinuteEditText);
+                    }
                 }
             }
             return false;
@@ -324,6 +339,20 @@ public class EditSessionSessionFragment extends Fragment {
         startAccurateYear = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", startAccurateDate)));
         startAccurateMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", startAccurateDate)));
         startAccurateDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", startAccurateDate)));
+
+        if (((MainActivity) requireActivity()).singleton.getEndScheduleTime()) {
+            hasEndScheduleTime = true;
+
+            binding.scheduledIncludeLayout.setAlpha((float) 1);
+            binding.scheduledIncludeLayout.setEnable(true);
+            binding.scheduledIncludeLayout.setFocusableInTouchMode(true);
+        } else {
+            hasEndScheduleTime = false;
+
+            binding.scheduledIncludeLayout.setAlpha((float) 0.4);
+            binding.scheduledIncludeLayout.setEnable(false);
+            binding.scheduledIncludeLayout.setFocusableInTouchMode(false);
+        }
 
         if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
             String endTime = ((MainActivity) requireActivity()).singleton.getStatus();

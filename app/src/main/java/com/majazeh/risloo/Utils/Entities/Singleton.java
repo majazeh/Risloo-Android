@@ -198,4 +198,8 @@ public class Singleton {
         return sharedPreferences.getBoolean("createCase", true);
     }
 
+    public boolean getEndScheduleTime() {
+        return sharedPreferences.getBoolean("endScheduleTime", false);
+    }
+
 }
