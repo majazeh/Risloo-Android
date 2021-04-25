@@ -16,6 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionSessionFragment;
@@ -112,9 +113,19 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                 case R.id.createScheduleFragment:
                     CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createScheduleFragment != null) {
-                        CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
+                        switch (method) {
+                            case "startTime":
+                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
 
-                        createScheduleTimeFragment.responseBottomSheet(method, getTime());
+                                createScheduleTimeFragment.responseBottomSheet(method, getTime());
+                                break;
+                            case "startAccurateTime":
+                            case "endAccurateTime":
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
+
+                                createScheduleSessionFragment.responseBottomSheet(method, getTime());
+                                break;
+                        }
                     }
                     break;
                 case R.id.editSessionFragment:
