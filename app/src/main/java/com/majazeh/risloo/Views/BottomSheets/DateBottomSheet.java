@@ -18,10 +18,12 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
@@ -72,6 +74,14 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartDateTitle));
                 binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartDateEntry));
                 break;
+            case "startAccurateDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartAccurateDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartAccurateDateEntry));
+                break;
+            case "endAccurateDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetEndAccurateDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetEndAccurateDateEntry));
+                break;
             case "birthday":
                 binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayTitle));
                 binding.entryButton.setText(getResources().getString(R.string.BottomSheetBirthdayEntry));
@@ -101,9 +111,19 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 case R.id.createSessionFragment:
                     CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSessionFragment != null) {
-                        CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.getRegisteredFragment(0);
+                        switch (method) {
+                            case "startDate":
+                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.getRegisteredFragment(0);
 
-                        createSessionTimeFragment.responseBottomSheet(method, getDate());
+                                createSessionTimeFragment.responseBottomSheet(method, getDate());
+                                break;
+                            case "startAccurateDate":
+                            case "endAccurateDate":
+                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.getRegisteredFragment(1);
+
+                                createSessionSessionFragment.responseBottomSheet(method, getDate());
+                                break;
+                        }
                     }
                     break;
                 case R.id.createScheduleFragment:
@@ -123,9 +143,19 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 case R.id.editSessionFragment:
                     EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editSessionFragment != null) {
-                        EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.getRegisteredFragment(0);
+                        switch (method) {
+                            case "startDate":
+                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.getRegisteredFragment(0);
 
-                        editSessionTimeFragment.responseBottomSheet(method, getDate());
+                                editSessionTimeFragment.responseBottomSheet(method, getDate());
+                                break;
+                            case "startAccurateDate":
+                            case "endAccurateDate":
+                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.getRegisteredFragment(1);
+
+                                editSessionSessionFragment.responseBottomSheet(method, getDate());
+                                break;
+                        }
                     }
                     break;
                 case R.id.editUserFragment:

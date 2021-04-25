@@ -34,8 +34,20 @@
     <string name="BottomSheetStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
     <string name="BottomSheetStartDateEntry">ثبت</string>
 
+    <string name="BottomSheetStartAccurateDateTitle">تاریخ دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetStartAccurateDateEntry">ثبت</string>
+
+    <string name="BottomSheetEndAccurateDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetEndAccurateDateEntry">ثبت</string>
+
     <string name="BottomSheetStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
     <string name="BottomSheetStartTimeEntry">ثبت</string>
+
+    <string name="BottomSheetStartAccurateTimeTitle">زمان دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetStartAccurateTimeEntry">ثبت</string>
+
+    <string name="BottomSheetEndAccurateTimeTitle">زمان دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetEndAccurateTimeEntry">ثبت</string>
 
     <string name="BottomSheetImageTitle">از کجا می خوای تصویر بیارید؟</string>
     <string name="BottomSheetImageGallery">البوم</string>
