@@ -61,7 +61,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentNameGuide));
 
-        binding.caseCheckbox.getRoot().setText(getResources().getString(R.string.CreateCenterUserFragmentCheckbox));
+        binding.caseCheckBox.getRoot().setText(getResources().getString(R.string.CreateCenterUserFragmentCheckbox));
 
         InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.UserTypes, "main");
 
@@ -119,7 +119,7 @@ public class CreateCenterUserFragment extends Fragment {
             return false;
         });
 
-        binding.caseCheckbox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> createCase = isChecked);
+        binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> createCase = isChecked);
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
@@ -176,7 +176,7 @@ public class CreateCenterUserFragment extends Fragment {
         }
         if (((MainActivity) requireActivity()).singleton.getCreateCase()) {
             createCase = true;
-            binding.caseCheckbox.getRoot().setChecked(true);
+            binding.caseCheckBox.getRoot().setChecked(true);
         }
     }
 

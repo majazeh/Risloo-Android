@@ -96,15 +96,15 @@ public class SampleFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.secondaryTextView.getRoot());
 
-        binding.formsEditableImageView.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.formsEditableCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                binding.formsEditableImageView.setTextColor(getResources().getColor(R.color.Gray900));
+                binding.formsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray900));
 
                 formsGeneralAdapter.setEditable(true);
                 formsPrerequisiteAdapter.setEditable(true);
                 formsAnswerAdapter.setEditable(true);
             } else {
-                binding.formsEditableImageView.setTextColor(getResources().getColor(R.color.Gray600));
+                binding.formsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray600));
 
                 formsGeneralAdapter.setEditable(false);
                 formsPrerequisiteAdapter.setEditable(false);

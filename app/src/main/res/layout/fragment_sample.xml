@@ -162,7 +162,7 @@
             app:layout_constraintTop_toBottomOf="@+id/profiles_barrier" />
 
         <CheckBox
-            android:id="@+id/forms_editable_imageView"
+            android:id="@+id/forms_editable_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layoutDirection="rtl"

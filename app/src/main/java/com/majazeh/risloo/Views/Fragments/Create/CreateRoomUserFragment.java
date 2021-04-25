@@ -49,7 +49,7 @@ public class CreateRoomUserFragment extends Fragment {
 
         binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateRoomUserFragmentNameGuide));
 
-        binding.caseCheckbox.getRoot().setText(getResources().getString(R.string.CreateRoomUserFragmentCheckbox));
+        binding.caseCheckBox.getRoot().setText(getResources().getString(R.string.CreateRoomUserFragmentCheckbox));
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomUserFragmentButton), getResources().getColor(R.color.White));
     }
@@ -82,7 +82,7 @@ public class CreateRoomUserFragment extends Fragment {
             return false;
         });
 
-        binding.caseCheckbox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> createCase = isChecked);
+        binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> createCase = isChecked);
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
@@ -112,7 +112,7 @@ public class CreateRoomUserFragment extends Fragment {
         }
         if (((MainActivity) requireActivity()).singleton.getCreateCase()) {
             createCase = true;
-            binding.caseCheckbox.getRoot().setChecked(true);
+            binding.caseCheckBox.getRoot().setChecked(true);
         }
     }
 
