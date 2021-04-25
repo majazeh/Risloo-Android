@@ -52,7 +52,7 @@ public class CreateSampleFragment extends Fragment {
 
     // Vars
     private ArrayList<Model> scales = new ArrayList<>(), references = new ArrayList<>();
-    public String roomId = "", roomName = "", centerName = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "", caseName = "",  sessionId = "", sessionName = "";
+    public String roomId = "", roomName = "", centerName = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "", caseName = "",  sessionId = "", sessionName = "", psychologyDescription = "";
 
     @Nullable
     @Override
@@ -94,6 +94,7 @@ public class CreateSampleFragment extends Fragment {
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseHeader));
         binding.sessionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentSessionHeader));
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentReferenceHeader));
+        binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionHeader));
 
         binding.nameIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateSampleFragmentNameHint));
 
@@ -101,6 +102,7 @@ public class CreateSampleFragment extends Fragment {
 
         binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentNameGuide));
         binding.userCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountGuide));
+        binding.psychologyGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionGuide));
 
         InitManager.unfixedRecyclerView(binding.scaleIncludeLayout.selectRecyclerView, itemDecoration, scalesLayoutManager);
         InitManager.unfixedRecyclerView(binding.referenceIncludeLayout.selectRecyclerView, itemDecoration, referencesLayoutManager);
@@ -262,6 +264,15 @@ public class CreateSampleFragment extends Fragment {
             return false;
         });
 
+        binding.psychologyIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.psychologyIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.psychologyIncludeLayout.inputEditText);
+                }
+            }
+            return false;
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleIncludeLayout.errorImageView, binding.scaleIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -412,6 +423,11 @@ public class CreateSampleFragment extends Fragment {
             setRecyclerView(references, new ArrayList<>(), "references");
 //        }
 
+        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+            psychologyDescription = ((MainActivity) requireActivity()).singleton.getAddress();
+            binding.psychologyIncludeLayout.inputEditText.setText(psychologyDescription);
+        }
+
     }
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
@@ -502,6 +518,7 @@ public class CreateSampleFragment extends Fragment {
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         userCount = binding.userCountIncludeLayout.inputEditText.getText().toString().trim();
         situation = binding.situationIncludeLayout.inputEditText.getText().toString().trim();
+        psychologyDescription = binding.psychologyIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

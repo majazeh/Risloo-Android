@@ -201,10 +201,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
                 app:layout_constraintTop_toBottomOf="@+id/session_includeLayout" />
+
+            <include
+                android:id="@+id/psychology_includeLayout"
+                layout="@layout/component_input_multi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/reference_includeLayout" />
+
+            <include
+                android:id="@+id/psychology_guideLayout"
+                layout="@layout/component_guide_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@+id/psychology_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/case_group"

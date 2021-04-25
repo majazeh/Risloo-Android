@@ -376,6 +376,7 @@
     <string name="CreateSampleFragmentCaseHeader">پرونده</string>
     <string name="CreateSampleFragmentSessionHeader">جلسه</string>
     <string name="CreateSampleFragmentReferenceHeader">مراجع</string>
+    <string name="CreateSampleFragmentPsychologyDescriptionHeader">توضیحات روان‌شناس</string>
 
     <string name="CreateSampleFragmentTabCase">پرونده</string>
     <string name="CreateSampleFragmentTabRoom">اتاق درمان</string>
@@ -389,6 +390,7 @@
     <string name="CreateSampleFragmentBulkSampleGuide">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
     <string name="CreateSampleFragmentNameGuide">کمک می‌کند تا نمونه‌های شما یک نام مشترک داشته باشند و راحت‌تر آن‌ها را پیدا کنید.</string>
     <string name="CreateSampleFragmentUserCountGuide">تعداد اعضائی که قصد دارند نمونه(ها) را انجام دهند.</string>
+    <string name="CreateSampleFragmentPsychologyDescriptionGuide">در این قسمت شما می‌توانید توضیحاتی را اضافه بر توضیحات یک نمونه وارد کنید تا مراجع قبل از انجام نمونه(ها) این توضیحات را مشاهده کند.</string>
 
     <string name="CreateSampleFragmentButton">ساخت</string>
 
