@@ -12,26 +12,45 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
+import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleSessionBinding;
+
+import java.util.ArrayList;
 
 public class CreateScheduleSessionFragment extends Fragment {
 
     // Binding
     private FragmentCreateScheduleSessionBinding binding;
 
+    // Adapters
+    public SelectedAdapter axisesAdapter;
+
+    // Dialogs
+    private SelectedDialog axisesDialog;
+
     // BottomSheets
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
     private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
 
+    // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
+    private LinearLayoutManager axisLayoutManager;
+
     // Vars
+    private ArrayList<Model> axises = new ArrayList<>();
     private String type = "", status = "", description = "";
     private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
     private int startAccurateHour, startAccurateMinute, startAccurateYear, startAccurateMonth, startAccurateDay, endAccurateHour, endAccurateMinute, endAccurateYear, endAccurateMonth, endAccurateDay;
@@ -55,17 +74,30 @@ public class CreateScheduleSessionFragment extends Fragment {
     }
 
     private void initializer() {
+        axisesAdapter = new SelectedAdapter(requireActivity());
+
+        axisesDialog = new SelectedDialog();
+
         startAccurateTimeBottomSheet = new TimeBottomSheet();
         endAccurateTimeBottomSheet = new TimeBottomSheet();
         startAccurateDateBottomSheet = new DateBottomSheet();
         endAccurateDateBottomSheet = new DateBottomSheet();
 
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
+
+        axisLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentTypeHeader));
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentStatusHeader));
+        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentAxisHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentDescriptionHeader));
+
+        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentAxisGuide));
 
         InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.SessionTypes, "main");
         InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
+
+        InitManager.unfixedRecyclerView(binding.axisIncludeLayout.selectRecyclerView, itemDecoration, axisLayoutManager);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleSessionFragmentButton), getResources().getColor(R.color.White));
     }
@@ -108,6 +140,14 @@ public class CreateScheduleSessionFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
+        });
+
+        binding.axisIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                axisesDialog.show(requireActivity().getSupportFragmentManager(), "axisesDialog");
+                axisesDialog.setData("axises");
+            }
+            return false;
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -281,6 +321,25 @@ public class CreateScheduleSessionFragment extends Fragment {
             }
         }
 
+//        if (extras.getString("axises") != null) {
+//            try {
+//                JSONArray jsonArray = new JSONArray(extras.getString("axises"));
+//
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
+//
+//                    axises.add(model);
+//                }
+//
+//                setRecyclerView(axises, "axises");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+        setRecyclerView(axises, new ArrayList<>(), "axises");
+//        }
+
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
             description = ((MainActivity) requireActivity()).singleton.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
@@ -408,6 +467,13 @@ public class CreateScheduleSessionFragment extends Fragment {
         endAccurateMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", endAccurateDate)));
         endAccurateDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", endAccurateDate)));
 
+    }
+
+    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+        if (method.equals("axises")) {
+            axisesAdapter.setItems(items, ids, method);
+            binding.axisIncludeLayout.selectRecyclerView.setAdapter(axisesAdapter);
+        }
     }
 
     private void doWork() {

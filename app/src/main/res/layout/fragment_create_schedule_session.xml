@@ -62,6 +62,26 @@
                 app:layout_constraintTop_toBottomOf="@+id/status_includeLayout" />
 
             <include
+                android:id="@+id/axis_includeLayout"
+                layout="@layout/component_input_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@+id/status_includeLayout"
+                app:layout_constraintStart_toStartOf="@+id/status_includeLayout"
+                app:layout_constraintTop_toBottomOf="@+id/scheduled_includeLayout" />
+
+            <include
+                android:id="@+id/axis_guideLayout"
+                layout="@layout/component_guide_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@+id/status_includeLayout"
+                app:layout_constraintStart_toStartOf="@+id/status_includeLayout"
+                app:layout_constraintTop_toBottomOf="@+id/axis_includeLayout" />
+
+            <include
                 android:id="@+id/description_includeLayout"
                 layout="@layout/component_input_multi"
                 android:layout_width="0dp"
@@ -71,7 +91,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@+id/status_includeLayout"
                 app:layout_constraintStart_toStartOf="@+id/status_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/scheduled_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@+id/axis_guideLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

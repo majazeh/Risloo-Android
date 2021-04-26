@@ -29,6 +29,8 @@ import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
@@ -100,6 +102,12 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
                 binding.entryButton.setText(getResources().getString(R.string.DialogPhoneEntry));
                 break;
+            case "axises":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogAxisTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogAxisHint));
+                binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+                binding.entryButton.setText(getResources().getString(R.string.DialogAxisEntry));
+                break;
         }
 
         InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
@@ -140,6 +148,19 @@ public class SelectedDialog extends AppCompatDialogFragment {
                                 }
                             }
                             break;
+                        case R.id.createScheduleFragment:
+                            CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            if (createScheduleFragment != null) {
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
+
+                                if (method.equals("axises")) {
+                                    if (!createScheduleSessionFragment.axisesAdapter.getIds().contains(value))
+                                        createScheduleSessionFragment.axisesAdapter.addItem(item);
+                                    else
+                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                            break;
                         case R.id.editCenterFragment:
                             EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (editCenterFragment != null) {
@@ -173,6 +194,16 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 if (createCenterFragment != null) {
                     if (method.equals("phones")) {
                         binding.listRecyclerView.setAdapter(createCenterFragment.phonesAdapter);
+                    }
+                }
+                break;
+            case R.id.createScheduleFragment:
+                CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createScheduleFragment != null) {
+                    CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
+
+                    if (method.equals("axises")) {
+                        binding.listRecyclerView.setAdapter(createScheduleSessionFragment.axisesAdapter);
                     }
                 }
                 break;

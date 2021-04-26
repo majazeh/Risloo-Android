@@ -65,6 +65,10 @@
     <string name="DialogPhoneHint">شماره تلفن</string>
     <string name="DialogPhoneEntry">ثبت</string>
 
+    <string name="DialogAxisTitle">محور(ها) جلسه را تایپ کنید.</string>
+    <string name="DialogAxisHint">موضوع</string>
+    <string name="DialogAxisEntry">ثبت</string>
+
     <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
     <string name="DialogScaleHint">جستجو</string>
     <string name="DialogScaleEntry">ثبت</string>
@@ -433,7 +437,10 @@
 
     <string name="CreateScheduleSessionFragmentTypeHeader">نوع جلسه</string>
     <string name="CreateScheduleSessionFragmentStatusHeader">وضعیت جلسه</string>
+    <string name="CreateScheduleSessionFragmentAxisHeader">محور جلسه</string>
     <string name="CreateScheduleSessionFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="CreateScheduleSessionFragmentAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
 
     <string name="CreateScheduleSessionFragmentButton">ساخت</string>
 

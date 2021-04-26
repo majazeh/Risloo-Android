@@ -132,6 +132,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     break;
                 case "references":
                 case "phones":
+                case "axises":
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
