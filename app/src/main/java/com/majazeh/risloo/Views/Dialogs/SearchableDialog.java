@@ -36,6 +36,8 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
@@ -286,6 +288,17 @@ public class SearchableDialog extends AppCompatDialogFragment {
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
+                    }
+                }
+                break;
+            case R.id.createScheduleFragment:
+                CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createScheduleFragment != null) {
+                    CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
+
+                    if (method.equals("cases")) {
+                        searchableAdapter.setItems(values, method);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
                 }
                 break;

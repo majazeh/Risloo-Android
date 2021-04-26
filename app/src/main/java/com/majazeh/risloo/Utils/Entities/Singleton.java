@@ -198,6 +198,10 @@ public class Singleton {
         return sharedPreferences.getBoolean("createCase", true);
     }
 
+    public boolean getBulkSession() {
+        return sharedPreferences.getBoolean("bulkSession", false);
+    }
+
     public boolean getEndScheduleTime() {
         return sharedPreferences.getBoolean("endScheduleTime", false);
     }

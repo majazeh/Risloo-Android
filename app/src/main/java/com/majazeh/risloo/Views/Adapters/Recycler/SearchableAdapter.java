@@ -19,6 +19,8 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
@@ -124,6 +126,14 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createSampleFragment != null) {
                         createSampleFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.createScheduleFragment:
+                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createScheduleFragment != null) {
+                        CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
+
+                        createScheduleReferenceFragment.responseDialog(method, item);
                     }
                     break;
                 case R.id.editCenterFragment:
@@ -232,6 +242,16 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             case "sessions":
                                 detector(holder, createSampleFragment.sessionId.equals(item.get("id").toString()));
                                 break;
+                        }
+                    }
+                    break;
+                case R.id.createScheduleFragment:
+                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createScheduleFragment != null) {
+                        CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
+
+                        if (method.equals("cases")) {
+                            detector(holder, createScheduleReferenceFragment.caseId.equals(item.get("id").toString()));
                         }
                     }
                     break;

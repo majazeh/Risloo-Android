@@ -416,7 +416,14 @@
 
     <string name="CreateScheduleReferenceFragmentTitle">مراجعین</string>
 
+    <string name="CreateScheduleReferenceFragmentTypeHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="CreateScheduleReferenceFragmentCaseHeader">پرونده</string>
+    <string name="CreateScheduleReferenceFragmentCountHeader">تعداد حداکثر مراجعین</string>
+    <string name="CreateScheduleReferenceFragmentSelectionHeader">نوع انتخاب مراجعین</string>
 
+    <string name="CreateScheduleReferenceFragmentCheckbox">جلسه گروهی</string>
+
+    <string name="CreateScheduleReferenceFragmentButton">ساخت</string>
 
     /*
     ---------- CreateScheduleSession Fragment ----------
