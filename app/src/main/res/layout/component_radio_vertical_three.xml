@@ -5,8 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:theme="@style/RadioButtonTheme"
     android:layoutDirection="rtl"
+    android:theme="@style/RadioButtonTheme"
     tools:layout_margin="@dimen/_16sdp">
 
     <TextView

@@ -5,50 +5,48 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:layoutDirection="ltr"
+    android:orientation="horizontal"
     android:theme="@style/RadioButtonTheme"
-    android:layoutDirection="rtl"
     tools:layout_margin="@dimen/_16sdp">
+
+    <RadioButton
+        android:id="@+id/second_radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center|start"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        android:layoutDirection="rtl"
+        tools:text="گزینه دوم" />
+
+    <RadioButton
+        android:id="@+id/first_radioButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="true"
+        android:gravity="center|start"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        android:layoutDirection="rtl"
+        tools:text="گزینه اول" />
 
     <TextView
         android:id="@+id/header_textView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_2sdp"
+        android:layout_height="match_parent"
         android:gravity="center|start"
-        android:textSize="@dimen/_11ssp"
+        android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         tools:text="گزینه‌ها" />
-
-    <RadioButton
-        android:id="@+id/first_radioButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/_4sdp"
-        android:paddingBottom="@dimen/_4sdp"
-        android:checked="true"
-        android:gravity="center|start"
-        android:textSize="@dimen/_10ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray600"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        tools:text="گزینه اول" />
-
-    <RadioButton
-        android:id="@+id/second_radioButton"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingTop="@dimen/_4sdp"
-        android:paddingBottom="@dimen/_4sdp"
-        android:gravity="center|start"
-        android:textSize="@dimen/_10ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray600"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        tools:text="گزینه دوم" />
 
 </RadioGroup>

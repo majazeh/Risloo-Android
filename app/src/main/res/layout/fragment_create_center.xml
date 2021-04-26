@@ -28,7 +28,7 @@
 
             <include
                 android:id="@+id/center_includeLayout"
-                layout="@layout/component_radio_two"
+                layout="@layout/component_radio_vertical_two"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
