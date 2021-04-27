@@ -21,6 +21,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
@@ -131,9 +132,18 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 case R.id.createScheduleFragment:
                     CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createScheduleFragment != null) {
-                        CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
+                        switch (method) {
+                            case "cases":
+                                CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
 
-                        createScheduleReferenceFragment.responseDialog(method, item);
+                                createScheduleReferenceFragment.responseDialog(method, item);
+                                break;
+                            case "patternDays":
+                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
+
+                                createScheduleTimeFragment.responseDialog(method, item);
+                                break;
+                        }
                     }
                     break;
                 case R.id.editCenterFragment:
@@ -164,6 +174,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 case "cases":
                 case "sessions":
                 case "psychologies":
+                case "patternDays":
                     holder.binding.titleTextView.setText(item.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
@@ -248,10 +259,17 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 case R.id.createScheduleFragment:
                     CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (createScheduleFragment != null) {
-                        CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
+                        switch (method) {
+                            case "cases":
+                                CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
 
-                        if (method.equals("cases")) {
-                            detector(holder, createScheduleReferenceFragment.caseId.equals(item.get("id").toString()));
+                                detector(holder, createScheduleReferenceFragment.caseId.equals(item.get("id").toString()));
+                                break;
+                            case "patternDays":
+                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
+
+                                detector(holder, createScheduleTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                break;
                         }
                     }
                     break;

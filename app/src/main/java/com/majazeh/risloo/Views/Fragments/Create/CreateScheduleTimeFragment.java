@@ -11,6 +11,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Model;
@@ -18,10 +20,15 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTimeBinding;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -30,14 +37,24 @@ public class CreateScheduleTimeFragment extends Fragment {
     // Binding
     private FragmentCreateScheduleTimeBinding binding;
 
+    // Adapters
+    public SelectedAdapter patternDaysAdapter;
+
+    // Dialogs
+    private SearchableDialog patternDaysDialog;
+
     // BottomSheets
     private TimeBottomSheet startTimeBottomSheet;
     private DateBottomSheet specifiedDateBottomSheet, periodStartDateBottomSheet, periodEndDateBottomSheet;
 
+    // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
+    private LinearLayoutManager patternDaysLayoutManager;
+
     // Vars
     private ArrayList<Model> patternDays = new ArrayList<>();
     private String startTime = "", duration = "60", dateType = "", patternType = "", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
-    private int hour, minute, year, month, day;
+    private int startHour, startMinute, specifiedYear, periodStartYear, periodEndYear, specifiedMonth, periodStartMonth, periodEndMonth, specifiedDay, periodStartDay, periodEndDay;
 
     @Nullable
     @Override
@@ -56,6 +73,14 @@ public class CreateScheduleTimeFragment extends Fragment {
     }
 
     private void initializer() {
+        patternDaysAdapter = new SelectedAdapter(requireActivity());
+
+        patternDaysDialog = new SearchableDialog();
+
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
+
+        patternDaysLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
         startTimeBottomSheet = new TimeBottomSheet();
         specifiedDateBottomSheet = new DateBottomSheet();
         periodStartDateBottomSheet = new DateBottomSheet();
@@ -80,6 +105,8 @@ public class CreateScheduleTimeFragment extends Fragment {
         binding.durationIncludeLayout.inputEditText.setText(duration);
         binding.repeatWeeksIncludeLayout.inputEditText.setText(repeatWeeks);
 
+        InitManager.unfixedRecyclerView(binding.patternDaysIncludeLayout.selectRecyclerView, itemDecoration, patternDaysLayoutManager);
+
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTimeFragmentButton), getResources().getColor(R.color.White));
     }
 
@@ -95,7 +122,7 @@ public class CreateScheduleTimeFragment extends Fragment {
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
             startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
-            startTimeBottomSheet.setTime(hour, minute, "startTime");
+            startTimeBottomSheet.setTime(startHour, startMinute, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -138,12 +165,13 @@ public class CreateScheduleTimeFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             specifiedDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "specifiedDateBottomSheet");
-            specifiedDateBottomSheet.setDate(year, month, day, "specifiedDate");
+            specifiedDateBottomSheet.setDate(specifiedYear, specifiedMonth, specifiedDay, "specifiedDate");
         }).widget(binding.specifiedDateIncludeLayout.selectTextView);
 
         binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                // TODO : Place Code Here
+                patternDaysDialog.show(requireActivity().getSupportFragmentManager(), "patternDaysDialog");
+                patternDaysDialog.setData("patternDays");
             }
             return false;
         });
@@ -176,12 +204,12 @@ public class CreateScheduleTimeFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             periodStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodStartDateBottomSheet");
-            periodStartDateBottomSheet.setDate(year, month, day, "periodStartDate");
+            periodStartDateBottomSheet.setDate(periodStartYear, periodStartMonth, periodStartDay, "periodStartDate");
         }).widget(binding.periodStartDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
             periodEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodEndDateBottomSheet");
-            periodEndDateBottomSheet.setDate(year, month, day, "periodEndDate");
+            periodEndDateBottomSheet.setDate(periodEndYear, periodEndMonth, periodEndDay, "periodEndDate");
         }).widget(binding.periodEndDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -210,8 +238,8 @@ public class CreateScheduleTimeFragment extends Fragment {
             binding.startTimeIncludeLayout.selectTextView.setText(startTime);
         }
 
-        hour = Integer.parseInt(DateManager.dateToString("hh", DateManager.stringToDate("hh:mm", startTime)));
-        minute = Integer.parseInt(DateManager.dateToString("mm", DateManager.stringToDate("hh:mm", startTime)));
+        startHour = Integer.parseInt(DateManager.dateToString("hh", DateManager.stringToDate("hh:mm", startTime)));
+        startMinute = Integer.parseInt(DateManager.dateToString("mm", DateManager.stringToDate("hh:mm", startTime)));
 
         if (!((MainActivity) requireActivity()).singleton.getDuration().equals("")) {
             duration = ((MainActivity) requireActivity()).singleton.getDuration();
@@ -244,7 +272,28 @@ public class CreateScheduleTimeFragment extends Fragment {
             binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
         }
 
-        // TODO : Place Code Here
+        specifiedYear = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
+        specifiedMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
+        specifiedDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
+
+//        if (extras.getString("patternDays") != null) {
+//            try {
+//                JSONArray jsonArray = new JSONArray(extras.getString("patternDays"));
+//
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
+//
+//                    patternDays.add(model);
+//                }
+//
+//                setRecyclerView(patternDays, "patternDays");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+        setRecyclerView(patternDays, new ArrayList<>(), "patternDays");
+//        }
 
         if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
             patternType = ((MainActivity) requireActivity()).singleton.getType();
@@ -277,6 +326,10 @@ public class CreateScheduleTimeFragment extends Fragment {
             binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
         }
 
+        periodStartYear = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", periodStartDate)));
+        periodStartMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", periodStartDate)));
+        periodStartDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", periodStartDate)));
+
         if (!((MainActivity) requireActivity()).singleton.getStartDate().equals("")) {
             periodEndDate = ((MainActivity) requireActivity()).singleton.getStartDate();
             binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
@@ -285,9 +338,16 @@ public class CreateScheduleTimeFragment extends Fragment {
             binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
         }
 
-        year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
-        month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
-        day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
+        periodEndYear = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", periodEndDate)));
+        periodEndMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", periodEndDate)));
+        periodEndDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", periodEndDate)));
+    }
+
+    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+        if (method.equals("patternDays")) {
+            patternDaysAdapter.setItems(items, ids, method);
+            binding.patternDaysIncludeLayout.selectRecyclerView.setAdapter(patternDaysAdapter);
+        }
     }
 
     public void responseBottomSheet(String method, String data) {
@@ -295,38 +355,55 @@ public class CreateScheduleTimeFragment extends Fragment {
             case "startTime":
                 startTime = data;
 
-                hour = startTimeBottomSheet.hour;
-                minute = startTimeBottomSheet.minute;
+                startHour = startTimeBottomSheet.hour;
+                startMinute = startTimeBottomSheet.minute;
 
                 binding.startTimeIncludeLayout.selectTextView.setText(startTime);
                 break;
             case "specifiedDate":
                 specifiedDate = data;
 
-                year = specifiedDateBottomSheet.year;
-                month = specifiedDateBottomSheet.month;
-                day = specifiedDateBottomSheet.day;
+                specifiedYear = specifiedDateBottomSheet.year;
+                specifiedMonth = specifiedDateBottomSheet.month;
+                specifiedDay = specifiedDateBottomSheet.day;
 
                 binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
                 break;
             case "periodStartDate":
                 periodStartDate = data;
 
-                year = periodStartDateBottomSheet.year;
-                month = periodStartDateBottomSheet.month;
-                day = periodStartDateBottomSheet.day;
+                periodStartYear = periodStartDateBottomSheet.year;
+                periodStartMonth = periodStartDateBottomSheet.month;
+                periodStartDay = periodStartDateBottomSheet.day;
 
                 binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
                 break;
             case "periodEndDate":
                 periodEndDate = data;
 
-                year = periodEndDateBottomSheet.year;
-                month = periodEndDateBottomSheet.month;
-                day = periodEndDateBottomSheet.day;
+                periodEndYear = periodEndDateBottomSheet.year;
+                periodEndMonth = periodEndDateBottomSheet.month;
+                periodEndDay = periodEndDateBottomSheet.day;
 
                 binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
                 break;
+        }
+    }
+
+    public void responseDialog(String method, Model item) {
+        try {
+            switch (method) {
+                case "patternDays":
+                    int position = patternDaysAdapter.getIds().indexOf(item.get("id").toString());
+
+                    if (position == -1)
+                        patternDaysAdapter.addItem(item);
+                    else
+                        patternDaysAdapter.removeItem(position);
+                    break;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 

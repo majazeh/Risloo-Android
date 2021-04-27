@@ -83,6 +83,18 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 binding.titleTextView.setText(getResources().getString(R.string.BottomSheetEndAccurateDateTitle));
                 binding.entryButton.setText(getResources().getString(R.string.BottomSheetEndAccurateDateEntry));
                 break;
+            case "specifiedDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetSpecifiedDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetSpecifiedDateEntry));
+                break;
+            case "periodStartDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodStartDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetPeriodStartDateEntry));
+                break;
+            case "periodEndDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodEndDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetPeriodEndDateEntry));
+                break;
             case "birthday":
                 binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayTitle));
                 binding.entryButton.setText(getResources().getString(R.string.BottomSheetBirthdayEntry));
@@ -132,6 +144,9 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                     if (createScheduleFragment != null) {
                         switch (method) {
                             case "startDate":
+                            case "specifiedDate":
+                            case "periodStartDate":
+                            case "periodEndDate":
                                 CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
 
                                 createScheduleTimeFragment.responseBottomSheet(method, getDate());

@@ -38,6 +38,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
@@ -147,6 +148,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogPsychologyHint));
                 binding.entryButton.setVisibility(View.GONE);
                 break;
+            case "patternDays":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogDayTitle));
+                binding.inputEditText.setVisibility(View.GONE);
+                binding.entryButton.setText(getResources().getString(R.string.DialogDayEntry));
+                break;
         }
 
         InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
@@ -197,18 +203,36 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private void setRecyclerView() {
         ArrayList<Model> values = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++) {
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", String.valueOf(i));
-                jsonObject.put("title", "عنوان" + " " + i);
-                jsonObject.put("subtitle", "زیرنویس" + " " + i);
+        if (method.equals("patternDays")) {
+            String[] weekDays = requireActivity().getResources().getStringArray(R.array.WeekDays);
 
-                Model model = new Model(jsonObject);
+            for (int i = 0; i < weekDays.length; i++) {
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("id", weekDays[i]);
+                    jsonObject.put("title", weekDays[i]);
 
-                values.add(model);
-            } catch (JSONException e) {
-                e.printStackTrace();
+                    Model model = new Model(jsonObject);
+
+                    values.add(model);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            for (int i = 0; i < 5; i++) {
+                try {
+                    JSONObject jsonObject = new JSONObject();
+                    jsonObject.put("id", String.valueOf(i));
+                    jsonObject.put("title", "عنوان" + " " + i);
+                    jsonObject.put("subtitle", "زیرنویس" + " " + i);
+
+                    Model model = new Model(jsonObject);
+
+                    values.add(model);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }
 
@@ -294,11 +318,19 @@ public class SearchableDialog extends AppCompatDialogFragment {
             case R.id.createScheduleFragment:
                 CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createScheduleFragment != null) {
-                    CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
+                    switch (method) {
+                        case "cases":
+                            CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
 
-                    if (method.equals("cases")) {
-                        searchableAdapter.setItems(values, method);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                        case "patternDays":
+                            CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
+
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
                     }
                 }
                 break;

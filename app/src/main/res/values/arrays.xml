@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    // Month Arrays
+    // Date Arrays
     //////////////////////////////////////////////////////////////////////////////////////
 
     <array name="JalaliMonths">
@@ -17,6 +17,16 @@
         <item>دی</item>
         <item>بهمن</item>
         <item>اسفند</item>
+    </array>
+
+    <array name="WeekDays">
+        <item>شنبه</item>
+        <item>یک‌شنبه</item>
+        <item>دو‌شنبه</item>
+        <item>سه‌شنبه</item>
+        <item>چهارشنبه</item>
+        <item>پنچ‌شنبه</item>
+        <item>جمعه</item>
     </array>
 
     //////////////////////////////////////////////////////////////////////////////////////

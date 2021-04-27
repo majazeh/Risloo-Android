@@ -40,6 +40,15 @@
     <string name="BottomSheetEndAccurateDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
     <string name="BottomSheetEndAccurateDateEntry">ثبت</string>
 
+    <string name="BottomSheetSpecifiedDateTitle">تاریخ مشخص را انتخاب کنید.</string>
+    <string name="BottomSheetSpecifiedDateEntry">ثبت</string>
+
+    <string name="BottomSheetPeriodStartDateTitle">تاریخ شروع بازه زمانی را انتخاب کنید.</string>
+    <string name="BottomSheetPeriodStartDateEntry">ثبت</string>
+
+    <string name="BottomSheetPeriodEndDateTitle">تاریخ پایان بازه زمانی را انتخاب کنید.</string>
+    <string name="BottomSheetPeriodEndDateEntry">ثبت</string>
+
     <string name="BottomSheetStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
     <string name="BottomSheetStartTimeEntry">ثبت</string>
 
@@ -68,6 +77,9 @@
     <string name="DialogAxisTitle">محور(ها) جلسه را تایپ کنید.</string>
     <string name="DialogAxisHint">موضوع</string>
     <string name="DialogAxisEntry">ثبت</string>
+
+    <string name="DialogDayTitle">روزهای هفته را انتخاب کنید.</string>
+    <string name="DialogDayEntry">ثبت</string>
 
     <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
     <string name="DialogScaleHint">جستجو</string>
