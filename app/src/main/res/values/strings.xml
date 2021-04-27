@@ -452,7 +452,19 @@
 
     <string name="CreateScheduleTimeFragmentStartTimeHeader">زمان (ساعت - دقیقه)</string>
     <string name="CreateScheduleTimeFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="CreateScheduleTimeFragmentStartDateHeader">تاریخ مشخص</string>
+    <string name="CreateScheduleTimeFragmentDateTypeHeader">نوع تاریخ انتخابی</string>
+    <string name="CreateScheduleTimeFragmentSpecifiedDateHeader">تاریخ</string>
+    <string name="CreateScheduleTimeFragmentPatternDaysHeader">روزهای هفته</string>
+    <string name="CreateScheduleTimeFragmentPatternTypeHeader">نوع الگوی التخابی</string>
+    <string name="CreateScheduleTimeFragmentRepeatWeeksHeader">تعداد هفته</string>
+    <string name="CreateScheduleTimeFragmentPeriodStartDateHeader">شروع</string>
+    <string name="CreateScheduleTimeFragmentPeriodEndDateHeader">پایان</string>
+
+    <string name="CreateScheduleTimeFragmentDateTypeSpecified">مشخص</string>
+    <string name="CreateScheduleTimeFragmentDateTypePattern">الگو</string>
+
+    <string name="CreateScheduleTimeFragmentPatternTypeRepeat">تکرار</string>
+    <string name="CreateScheduleTimeFragmentPatternTypePeriod">بازه زمانی</string>
 
     <string name="CreateScheduleTimeFragmentButton">ساخت</string>
 
