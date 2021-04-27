@@ -471,7 +471,7 @@ public class CreateScheduleSessionFragment extends Fragment {
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("axises")) {
-            axisesAdapter.setItems(items, ids, method);
+            axisesAdapter.setItems(items, ids, method, binding.axisIncludeLayout.countTextView);
             binding.axisIncludeLayout.selectRecyclerView.setAdapter(axisesAdapter);
         }
     }

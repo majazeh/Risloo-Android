@@ -202,7 +202,7 @@ public class EditCenterDetailFragment extends Fragment {
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("phones")) {
-            phonesAdapter.setItems(items, ids, method);
+            phonesAdapter.setItems(items, ids, method, binding.phonesIncludeLayout.countTextView);
             binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
         }
     }

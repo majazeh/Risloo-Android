@@ -5,6 +5,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,9 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
     // Objects
     private Activity activity;
+
+    // Widget
+    private TextView countTextView;
 
     // Vars
     private ArrayList<Model> items;
@@ -62,17 +66,22 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         return ids;
     }
 
-    public void setItems(ArrayList<Model> items, ArrayList<String> ids, String method) {
+    public void setItems(ArrayList<Model> items, ArrayList<String> ids, String method, TextView countTextView) {
         this.items = items;
         this.ids = ids;
         this.method = method;
+        this.countTextView = countTextView;
         notifyDataSetChanged();
+
+        calculateCount(this.countTextView);
     }
 
     public void clearItems() {
         items.clear();
         ids.clear();
         notifyDataSetChanged();
+
+        calculateCount(countTextView);
     }
 
     public void addItem(Model item) {
@@ -80,6 +89,8 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
             items.add(item);
             ids.add(item.get("id").toString());
             notifyDataSetChanged();
+
+            calculateCount(countTextView);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -91,6 +102,8 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
             ids.set(position, item.get("id").toString());
             notifyItemChanged(position);
             notifyItemRangeChanged(position, getItemCount());
+
+            calculateCount(countTextView);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -101,6 +114,8 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         ids.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
+
+        calculateCount(countTextView);
     }
 
     private void detector(SelectedHolder holder) {
@@ -142,6 +157,18 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void calculateCount(TextView widget) {
+        if (getItemCount() != 0) {
+            String count = "(" + getItemCount() + ")";
+
+            widget.setText(count);
+            widget.setVisibility(View.VISIBLE);
+        } else {
+            widget.setText("");
+            widget.setVisibility(View.GONE);
         }
     }
 

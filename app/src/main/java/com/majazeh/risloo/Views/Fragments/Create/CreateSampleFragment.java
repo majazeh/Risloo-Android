@@ -432,10 +432,10 @@ public class CreateSampleFragment extends Fragment {
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("scales")) {
-            scalesAdapter.setItems(items, ids, method);
+            scalesAdapter.setItems(items, ids, method, binding.scaleIncludeLayout.countTextView);
             binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesAdapter);
         } else if (method.equals("references")) {
-            referencesAdapter.setItems(items, ids, method);
+            referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
     }

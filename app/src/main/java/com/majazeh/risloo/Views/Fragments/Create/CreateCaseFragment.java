@@ -173,7 +173,7 @@ public class CreateCaseFragment extends Fragment {
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("references")) {
-            referencesAdapter.setItems(items, ids, method);
+            referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
     }

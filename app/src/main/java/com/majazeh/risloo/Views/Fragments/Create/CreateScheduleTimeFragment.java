@@ -345,7 +345,7 @@ public class CreateScheduleTimeFragment extends Fragment {
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
         if (method.equals("patternDays")) {
-            patternDaysAdapter.setItems(items, ids, method);
+            patternDaysAdapter.setItems(items, ids, method, binding.patternDaysIncludeLayout.countTextView);
             binding.patternDaysIncludeLayout.selectRecyclerView.setAdapter(patternDaysAdapter);
         }
     }
