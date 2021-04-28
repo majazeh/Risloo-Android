@@ -9,7 +9,7 @@
     android:background="@color/Blue600">
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/preview_progressBar"
         style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"

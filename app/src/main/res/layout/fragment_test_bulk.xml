@@ -37,7 +37,7 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="start"
-                android:text="@string/TestBulkFragmentTitle"
+                android:text="@string/BulkFragmentTitle"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray800"

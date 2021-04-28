@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
@@ -43,14 +42,12 @@ public class TestEndFragment extends Fragment {
     }
 
     private void initializer() {
-        InitManager.txtTextColor(binding.endTextView.getRoot(), getResources().getString(R.string.TestEndFragmentButtonSample), getResources().getColor(R.color.White));
+        binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonSample));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.endTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        } else {
-            binding.endTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
         }
     }
 
@@ -65,13 +62,13 @@ public class TestEndFragment extends Fragment {
 
             switch (status) {
                 case "sample":
-                    InitManager.txtTextColor(binding.endTextView.getRoot(), getResources().getString(R.string.TestEndFragmentButtonSample), getResources().getColor(R.color.White));
+                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonSample));
                     break;
                 case "next":
-                    InitManager.txtTextColor(binding.endTextView.getRoot(), getResources().getString(R.string.TestEndFragmentButtonNext), getResources().getColor(R.color.White));
+                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonNext));
                     break;
                 case "bulk":
-                    InitManager.txtTextColor(binding.endTextView.getRoot(), getResources().getString(R.string.TestEndFragmentButtonBulk), getResources().getColor(R.color.White));
+                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonBulk));
                     break;
             }
         }

@@ -1078,9 +1078,9 @@
     // Test Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="TestUnChanged">بدون تغییر</string>
+    <string name="TestFixed">بدون تغییر</string>
     <string name="TestSaving">در حال ذخیره کردن ...</string>
-    <string name="TestUnAnswered">پرش روی تست‌های خالی</string>
+    <string name="TestJump">پرش روی تست‌های خالی</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1091,43 +1091,43 @@
     ---------- TestBulk Fragment ----------
     */
 
-    <string name="TestBulkFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
+    <string name="BulkFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
 
     /*
     ---------- TestDescription Fragment ----------
     */
 
-    <string name="TestDescriptionFragmentTitle">توضیحات</string>
+    <string name="DescriptionFragmentTitle">توضیحات</string>
 
     /*
     ---------- TestEnd Fragment ----------
     */
 
-    <string name="TestEndFragmentTitle">پایان نمونه‌گیری</string>
-    <string name="TestEndFragmentDescription">اگر از اتمام نمونه مطمئن هستید و به تمامی گزینه‌ها پاسخ داده‌اید می‌توانید دکمه اتمام نمونه را بزنید. بعد از زدن این دکمه، دیگر قادر به ویرایش نمونه نمی‌باشید.</string>
+    <string name="EndFragmentTitle">پایان نمونه‌گیری</string>
+    <string name="EndFragmentDescription">اگر از اتمام نمونه مطمئن هستید و به تمامی گزینه‌ها پاسخ داده‌اید می‌توانید دکمه اتمام نمونه را بزنید. بعد از زدن این دکمه، دیگر قادر به ویرایش نمونه نمی‌باشید.</string>
 
-    <string name="TestEndFragmentButtonSample">اتمام نمونه</string>
-    <string name="TestEndFragmentButtonNext">اتمام و انتقال به نمونه بعدی</string>
-    <string name="TestEndFragmentButtonBulk">اتمام نمونه زنجیره‌ای</string>
+    <string name="EndFragmentButtonSample">اتمام نمونه</string>
+    <string name="EndFragmentButtonNext">اتمام و انتقال به نمونه بعدی</string>
+    <string name="EndFragmentButtonBulk">اتمام نمونه زنجیره‌ای</string>
 
     /*
     ----------  TestForm Fragment ----------
     */
 
-    <string name="TestFormFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
-    <string name="TestFormFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
+    <string name="FormFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
+    <string name="FormFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
 
     /*
     ----------  TestOptional Fragment ----------
     */
 
-    <string name="TestOptionalFragmentTitle">تست متنی</string>
+    <string name="OptionalFragmentTitle">تست متنی</string>
 
     /*
     ----------  TestPictoral Fragment ----------
     */
 
-    <string name="TestPictoralFragmentTitle">تست تصویری</string>
+    <string name="PictoralFragmentTitle">تست تصویری</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

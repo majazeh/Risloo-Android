@@ -15,7 +15,6 @@
     tools:context=".Views.Activities.TestActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -85,7 +84,7 @@
 
         <include
             android:id="@+id/backward_imageView"
-            layout="@layout/component_test_button"
+            layout="@layout/component_test_button_square"
             android:layout_width="@dimen/_36sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_marginBottom="@dimen/_12sdp"
@@ -94,7 +93,7 @@
 
         <include
             android:id="@+id/forward_imageView"
-            layout="@layout/component_test_button"
+            layout="@layout/component_test_button_square"
             android:layout_width="@dimen/_36sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_marginStart="@dimen/_4sdp"
@@ -104,14 +103,14 @@
 
         <include
             android:id="@+id/location_includeLayout"
-            layout="@layout/component_test_spinner"
+            layout="@layout/component_test_input_spinner"
             android:layout_width="0dp"
             android:layout_height="@dimen/_36sdp"
             android:layout_marginStart="@dimen/_10sdp"
             app:layout_constraintBottom_toBottomOf="@id/forward_imageView"
+            app:layout_constraintEnd_toEndOf="@id/header_includeLayout"
             app:layout_constraintStart_toEndOf="@id/forward_imageView"
-            app:layout_constraintTop_toTopOf="@id/forward_imageView"
-            app:layout_constraintEnd_toEndOf="@id/header_includeLayout" />
+            app:layout_constraintTop_toTopOf="@id/forward_imageView" />
 
         <include
             android:id="@+id/loading_includeLayout"
@@ -120,9 +119,9 @@
             android:layout_height="0dp"
             android:visibility="visible"
             app:layout_constraintBottom_toTopOf="@id/bottom_view"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             tools:visibility="gone" />
 
         <View

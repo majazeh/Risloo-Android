@@ -40,7 +40,7 @@ public class TestActivity extends AppCompatActivity {
 
     // Vars
     private String test = "", type = "", status = "", location = "", locationSum = "";
-    private int progress = -1;
+    private int andswered = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,16 +124,7 @@ public class TestActivity extends AppCompatActivity {
                     navigator(R.id.testPictoralFragment);
                     break;
             }
-
-            for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
-                    binding.locationIncludeLayout.selectSpinner.setSelection(i);
-                }
-            }
-
-            locationSum = "185" + " / "  + location;
-            binding.locationSumTextView.setText(locationSum);
-
+            setWidgets(true, true);
         }).widget(binding.backwardImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
@@ -159,16 +150,7 @@ public class TestActivity extends AppCompatActivity {
                     navigator(R.id.testEndFragment);
                     break;
             }
-
-            for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
-                    binding.locationIncludeLayout.selectSpinner.setSelection(i);
-                }
-            }
-
-            locationSum = "185" + " / "  + location;
-            binding.locationSumTextView.setText(locationSum);
-
+            setWidgets(true, true);
         }).widget(binding.forwardImageView.getRoot());
 
         binding.locationIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -196,9 +178,7 @@ public class TestActivity extends AppCompatActivity {
                         navigator(R.id.testEndFragment);
                         break;
                 }
-
-                locationSum = "185" + " / "  + location;
-                binding.locationSumTextView.setText(locationSum);
+                setWidgets(false, true);
             }
 
             @Override
@@ -211,9 +191,6 @@ public class TestActivity extends AppCompatActivity {
     private void setData() {
         if (extras.getString("test") != null) {
             test = extras.getString("test");
-        }
-
-        if (!test.equals("")) {
             binding.headerIncludeLayout.titleTextView.setText(test);
 
             // TODO : Place Code Here
@@ -225,10 +202,10 @@ public class TestActivity extends AppCompatActivity {
         type = "";
         binding.headerIncludeLayout.typeTextView.setText(type);
 
-        progress = 25;
-        binding.headerIncludeLayout.loadingProgressBar.setProgress(progress);
+        andswered = 25;
+        binding.headerIncludeLayout.answeredProgressBar.setProgress(andswered);
 
-        status = getResources().getString(R.string.TestUnChanged);
+        status = getResources().getString(R.string.TestFixed);
         binding.statusTextView.setText(status);
 
         location = "زنجیره";
@@ -245,6 +222,21 @@ public class TestActivity extends AppCompatActivity {
             binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
             decorator(false);
         }, 2000);
+    }
+
+    private void setWidgets(boolean spinner, boolean textView) {
+        if (spinner) {
+            for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
+                    binding.locationIncludeLayout.selectSpinner.setSelection(i);
+                }
+            }
+        }
+
+        if (textView) {
+            locationSum = "185" + " / "  + location;
+            binding.locationSumTextView.setText(locationSum);
+        }
     }
 
     public void navigator(int destinationId) {
