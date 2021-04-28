@@ -17,12 +17,12 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.databinding.FragmentMobileBinding;
+import com.majazeh.risloo.databinding.FragmentAuthMobileBinding;
 
-public class MobileFragment extends Fragment {
+public class AuthMobileFragment extends Fragment {
 
     // Binding
-    private FragmentMobileBinding binding;
+    private FragmentAuthMobileBinding binding;
 
     // Vars
     private String mobile = "";
@@ -30,7 +30,7 @@ public class MobileFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentMobileBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthMobileBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -44,7 +44,7 @@ public class MobileFragment extends Fragment {
     private void initializer() {
         binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.MobileFragmentInput));
 
-        binding.mobileTextView.getRoot().setText(getResources().getString(R.string.MobileFragmentButton));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.MobileFragmentButton));
 
         binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
         binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
@@ -53,7 +53,7 @@ public class MobileFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.mobileTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -95,11 +95,11 @@ public class MobileFragment extends Fragment {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
                 doWork();
             }
-        }).widget(binding.mobileTextView.getRoot());
+        }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.loginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.registerFragment)).widget(binding.registerTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void doWork() {

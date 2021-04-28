@@ -18,13 +18,13 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.databinding.FragmentSerialBinding;
+import com.majazeh.risloo.databinding.FragmentAuthSerialBinding;
 import com.squareup.picasso.Picasso;
 
-public class SerialFragment extends Fragment {
+public class AuthSerialFragment extends Fragment {
 
     // Binding
-    private FragmentSerialBinding binding;
+    private FragmentAuthSerialBinding binding;
 
     // Vars
     private String serial = "";
@@ -32,7 +32,7 @@ public class SerialFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentSerialBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthSerialBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -48,15 +48,16 @@ public class SerialFragment extends Fragment {
     private void initializer() {
         binding.serialIncludeLayout.inputEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
-        binding.serialTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
 
-        binding.dashboardTextView.getRoot().setText(StringManager.foregroundStyle(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900), Typeface.BOLD));
+        binding.dashboardTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900)));
+        binding.dashboardTextView.getRoot().setTextAppearance(requireActivity(), R.style.danaDemiBoldTextStyle);
         binding.logoutTextView.getRoot().setText(getResources().getString(R.string.AuthLogout));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.serialTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -78,7 +79,7 @@ public class SerialFragment extends Fragment {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView);
                 doWork();
             }
-        }).widget(binding.serialTextView.getRoot());
+        }).widget(binding.buttonTextView.getRoot());
 
         ClickManager.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardTextView.getRoot());
 
@@ -90,13 +91,13 @@ public class SerialFragment extends Fragment {
     private void setData() {
         if (((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (((AuthActivity) requireActivity()).singleton.getName().equals(""))
+            if (((AuthActivity) requireActivity()).singleton.getName().equals("")) {
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AuthToolbar)));
-            else
+            } else {
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
+            }
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-
             Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.avatarIncludeLayout.avatarImageView);
         }
     }

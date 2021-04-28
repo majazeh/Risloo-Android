@@ -22,18 +22,18 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.databinding.FragmentPinBinding;
+import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 
 import java.util.Locale;
 
-public class PinFragment extends Fragment {
+public class AuthPinFragment extends Fragment {
 
     // Binding
-    private FragmentPinBinding binding;
+    private FragmentAuthPinBinding binding;
 
     // Objects
-    private ClickableSpan pinLinkSpan;
-    private CountDownTimer pinCountDownTimer;
+    private ClickableSpan clickableSpan;
+    private CountDownTimer countDownTimer;
 
     // Vars
     private String pin = "";
@@ -41,7 +41,7 @@ public class PinFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentPinBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthPinBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -59,7 +59,7 @@ public class PinFragment extends Fragment {
 
         binding.timerTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        binding.pinTextView.getRoot().setText(getResources().getString(R.string.PinFragmentButton));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PinFragmentButton));
 
         binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
         binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
@@ -68,7 +68,7 @@ public class PinFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.pinTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -103,7 +103,7 @@ public class PinFragment extends Fragment {
             }
         });
 
-        pinLinkSpan = new ClickableSpan() {
+        clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
                 doWork("verification");
@@ -116,7 +116,7 @@ public class PinFragment extends Fragment {
             }
         };
 
-        pinCountDownTimer = new CountDownTimer(300000, 1000) {
+        countDownTimer = new CountDownTimer(300000, 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
                 int minutes = (int) (millisUntilFinished / 1000) / 60;
@@ -138,28 +138,28 @@ public class PinFragment extends Fragment {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
                 doWork("pin");
             }
-        }).widget(binding.pinTextView.getRoot());
+        }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.loginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.registerFragment)).widget(binding.registerTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void setData() {
-        binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, pinLinkSpan));
-        pinCountDownTimer.start();
+        binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, clickableSpan));
+        countDownTimer.start();
     }
 
     private void showTimer(boolean value) {
         if (value) {
-            pinCountDownTimer.start();
+            countDownTimer.start();
 
             binding.viewFlipper.setInAnimation(requireActivity(), R.anim.slide_in_right_with_fade);
             binding.viewFlipper.setOutAnimation(requireActivity(), R.anim.slide_out_left_with_fade);
 
             binding.viewFlipper.showPrevious();
         } else {
-            pinCountDownTimer.cancel();
+            countDownTimer.cancel();
 
             binding.viewFlipper.setInAnimation(requireActivity(), R.anim.slide_in_left_with_fade);
             binding.viewFlipper.setOutAnimation(requireActivity(), R.anim.slide_out_right_with_fade);
@@ -173,14 +173,8 @@ public class PinFragment extends Fragment {
 
         if (method.equals("pin")) {
             // TODO : Call Work Method
-
-
-
         } else if (method.equals("verification")) {
-
-
-
-            // TODO : If Work Was Done Success
+            // TODO : Call Work Method
             showTimer(true);
         }
     }

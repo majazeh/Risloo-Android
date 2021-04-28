@@ -22,12 +22,12 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.databinding.FragmentPasswordChangeBinding;
+import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
 
-public class PasswordChangeFragment extends Fragment {
+public class AuthPasswordChangeFragment extends Fragment {
 
     // Binding
-    private FragmentPasswordChangeBinding binding;
+    private FragmentAuthPasswordChangeBinding binding;
 
     // Vars
     private String password = "";
@@ -36,7 +36,7 @@ public class PasswordChangeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentPasswordChangeBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthPasswordChangeBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -50,7 +50,7 @@ public class PasswordChangeFragment extends Fragment {
     private void initializer() {
         binding.passwordChangeInputLayout.inputEditText.setHint(getResources().getString(R.string.PasswordChangeFragmentInput));
 
-        binding.passwordChangeTextView.getRoot().setText(getResources().getString(R.string.PasswordChangeFragmentButton));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordChangeFragmentButton));
 
         binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
         binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
@@ -59,7 +59,7 @@ public class PasswordChangeFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.passwordChangeTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -83,7 +83,7 @@ public class PasswordChangeFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.passwordChangeInputLayout.inputEditText.length() == 0) {
-                    binding.passwordChangeInputLayout.visibilityImageView.setVisibility(View.INVISIBLE);
+                    binding.passwordChangeInputLayout.visibilityImageView.setVisibility(View.GONE);
                 } else if (binding.passwordChangeInputLayout.inputEditText.length() == 1) {
                     binding.passwordChangeInputLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
@@ -137,11 +137,11 @@ public class PasswordChangeFragment extends Fragment {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordChangeInputLayout.inputEditText, binding.passwordChangeInputLayout.errorImageView, binding.passwordChangeInputLayout.errorTextView);
                 doWork();
             }
-        }).widget(binding.passwordChangeTextView.getRoot());
+        }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.loginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.registerFragment)).widget(binding.registerTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void doWork() {

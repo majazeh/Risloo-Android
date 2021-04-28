@@ -15,12 +15,12 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.databinding.FragmentRegisterBinding;
+import com.majazeh.risloo.databinding.FragmentAuthRegisterBinding;
 
-public class RegisterFragment extends Fragment {
+public class AuthRegisterFragment extends Fragment {
 
     // Binding
-    private FragmentRegisterBinding binding;
+    private FragmentAuthRegisterBinding binding;
 
     // Vars
     private String name = "", mobile = "";
@@ -28,7 +28,7 @@ public class RegisterFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentRegisterBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthRegisterBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -43,7 +43,7 @@ public class RegisterFragment extends Fragment {
         binding.nameIncludeLayout.inputEditText.setHint(getResources().getString(R.string.RegisterFragmentName));
         binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.RegisterFragmentMobile));
 
-        binding.registerTextView.getRoot().setText(getResources().getString(R.string.RegisterFragmentButton));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.RegisterFragmentButton));
 
         binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
         binding.passwordRecoverTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecover));
@@ -51,7 +51,7 @@ public class RegisterFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.registerTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -89,10 +89,10 @@ public class RegisterFragment extends Fragment {
 
                 doWork();
             }
-        }).widget(binding.registerTextView.getRoot());
+        }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.loginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void doWork() {

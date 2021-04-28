@@ -22,12 +22,12 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.databinding.FragmentPasswordBinding;
+import com.majazeh.risloo.databinding.FragmentAuthPasswordBinding;
 
-public class PasswordFragment extends Fragment {
+public class AuthPasswordFragment extends Fragment {
 
     // Binding
-    private FragmentPasswordBinding binding;
+    private FragmentAuthPasswordBinding binding;
 
     // Vars
     private String password = "";
@@ -36,7 +36,7 @@ public class PasswordFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentPasswordBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentAuthPasswordBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -50,7 +50,7 @@ public class PasswordFragment extends Fragment {
     private void initializer() {
         binding.passwordIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
 
-        binding.passwordTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentButton));
+        binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentButton));
 
         binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
         binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
@@ -59,7 +59,7 @@ public class PasswordFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.passwordTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.buttonTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
@@ -83,7 +83,7 @@ public class PasswordFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                    binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.INVISIBLE);
+                    binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
                 } else if (binding.passwordIncludeLayout.inputEditText.length() == 1) {
                     binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
@@ -137,11 +137,11 @@ public class PasswordFragment extends Fragment {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordIncludeLayout.errorImageView, binding.passwordIncludeLayout.errorTextView);
                 doWork();
             }
-        }).widget(binding.passwordTextView.getRoot());
+        }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.loginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.registerFragment)).widget(binding.registerTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.passwordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
     }
 
     private void doWork() {
