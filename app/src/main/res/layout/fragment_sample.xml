@@ -219,12 +219,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/forms_general_textView"
                 tools:visibility="gone" />
 
-            <include
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/forms_general_singleLayout"
-                layout="@layout/component_single_form"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
                 android:visibility="gone"
+                app:layout_constrainedHeight="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/forms_general_textView"
@@ -270,12 +271,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/forms_prerequisite_textView"
                 tools:visibility="gone" />
 
-            <include
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/forms_prerequisite_singleLayout"
-                layout="@layout/component_single_form"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
                 android:visibility="gone"
+                app:layout_constrainedHeight="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/forms_prerequisite_textView"
@@ -323,12 +325,13 @@
                 app:layout_constraintTop_toBottomOf="@+id/forms_answer_textView"
                 tools:visibility="gone" />
 
-            <include
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/forms_answer_singleLayout"
-                layout="@layout/component_single_form"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:overScrollMode="never"
                 android:visibility="gone"
+                app:layout_constrainedHeight="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/forms_answer_textView"

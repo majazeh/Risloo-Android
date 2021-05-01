@@ -48,12 +48,12 @@ public class TestBulkFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        InitManager.recyclerView(binding.bulksSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.bulksRecyclerView, itemDecoration, layoutManager);
     }
 
     private void setData() {
-//        bulksAdapter.setBulk(null);
-        binding.bulksSingleLayout.recyclerView.setAdapter(bulksAdapter);
+//        bulksAdapter.setBulks(null);
+        binding.bulksRecyclerView.setAdapter(bulksAdapter);
     }
 
     @Override

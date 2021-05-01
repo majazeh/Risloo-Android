@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Test;
 
 import android.os.Bundle;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -49,14 +48,12 @@ public class TestFormFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        InitManager.recyclerView(binding.formsSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.formsRecyclerView, itemDecoration, layoutManager);
     }
 
     private void setData() {
-//        formsAdapter.setForm(null);
-        formsAdapter.setEditable(true);
-
-        binding.formsSingleLayout.recyclerView.setAdapter(formsAdapter);
+//        formsAdapter.setForms(null);
+        binding.formsRecyclerView.setAdapter(formsAdapter);
     }
 
     @Override

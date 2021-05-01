@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.SingleItemFormBinding;
 
@@ -20,7 +19,6 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
 
     // Vars
 //    private ArrayList<Form> forms;
-    private boolean editable = false;
 
     public FormsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -44,46 +42,28 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
     @Override
     public int getItemCount() {
 //        return forms.size();
-        return 5;
+        return 4;
     }
 
-//    public void setForm(ArrayList<Form> forms) {
+//    public void setForms(ArrayList<Form> forms) {
 //        this.forms = forms;
 //        notifyDataSetChanged();
 //    }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(FormsHolder holder) {
-        if (editable) {
-            holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-                if (MotionEvent.ACTION_UP == event.getAction()) {
-                    if (!holder.binding.inputEditText.hasFocus()) {
-                        if (activity instanceof MainActivity)
-                            ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
-                        else if (activity instanceof TestActivity)
-                            ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
-                    }
+        holder.binding.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!holder.binding.inputEditText.hasFocus()) {
+                    ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
                 }
-                return false;
-            });
-        }
+            }
+            return false;
+        });
     }
 
     private void setData(FormsHolder holder) {
-        if (editable) {
-            holder.binding.inputEditText.setFocusableInTouchMode(true);
-            holder.binding.selectTextView.setEnabled(true);
-        } else {
-            holder.binding.inputEditText.setFocusableInTouchMode(false);
-            holder.binding.selectTextView.setEnabled(false);
-        }
-
         holder.binding.headerTextView.setText("عنوان");
-    }
-
-    public void setEditable(boolean editable) {
-        this.editable = editable;
-        notifyDataSetChanged();
     }
 
     public class FormsHolder extends RecyclerView.ViewHolder {

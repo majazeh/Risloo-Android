@@ -50,14 +50,14 @@ public class TestPictoralFragment extends Fragment {
 
         layoutManager = new GridLayoutManager(requireActivity(), 2, LinearLayoutManager.VERTICAL, false);
 
-        InitManager.recyclerView(binding.pictoralsSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.pictoralsRecyclerView, itemDecoration, layoutManager);
     }
 
     private void setData() {
         Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(binding.questionImageView);
 
-//        pictoralsAdapter.setPictoral(null);
-        binding.pictoralsSingleLayout.recyclerView.setAdapter(pictoralsAdapter);
+//        pictoralsAdapter.setPictorals(null);
+        binding.pictoralsRecyclerView.setAdapter(pictoralsAdapter);
     }
 
     @Override

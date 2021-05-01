@@ -43,10 +43,10 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
     @Override
     public int getItemCount() {
 //        return pictorals.size();
-        return 5;
+        return 4;
     }
 
-//    public void setPictoral(ArrayList<Pictoral> pictorals) {
+//    public void setPictorals(ArrayList<Pictoral> pictorals) {
 //        this.pictorals = pictorals;
 //        notifyDataSetChanged();
 //    }
@@ -54,40 +54,40 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
     private void detector(PictoralsHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (selected)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
             else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         } else {
             if (selected)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue600);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue600);
             else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
     }
 
     private void listener(PictoralsHolder holder) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.itemView);
     }
 
     private void setData(PictoralsHolder holder) {
-        holder.binding.numberTextView.setText(String.valueOf(holder.getAdapterPosition() + 1));
+        holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
         Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(holder.binding.answerImageView);
 
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             detector(holder, true);
 
-            holder.binding.containerConstraintLayout.setEnabled(true);
-            holder.binding.containerConstraintLayout.setClickable(true);
+            holder.itemView.setEnabled(true);
+            holder.itemView.setClickable(true);
 
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.White));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
         } else {
             detector(holder, false);
 
-            holder.binding.containerConstraintLayout.setEnabled(false);
-            holder.binding.containerConstraintLayout.setClickable(false);
+            holder.itemView.setEnabled(false);
+            holder.itemView.setClickable(false);
 
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);

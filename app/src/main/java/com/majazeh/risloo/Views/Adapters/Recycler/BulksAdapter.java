@@ -42,16 +42,16 @@ public class BulksAdapter extends RecyclerView.Adapter<BulksAdapter.BulksHolder>
     @Override
     public int getItemCount() {
 //        return bulks.size();
-        return 5;
+        return 4;
     }
 
-//    public void setBulk(ArrayList<Bulk> bulks) {
+//    public void setBulks(ArrayList<Bulk> bulks) {
 //        this.bulks = bulks;
 //        notifyDataSetChanged();
 //    }
 
     private void setData(BulksHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -59,7 +59,7 @@ public class BulksAdapter extends RecyclerView.Adapter<BulksAdapter.BulksHolder>
 
         holder.binding.nameTextView.setText("آزمون سلامت عمومی (1)");
 
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
             holder.binding.nameTextView.setTextAppearance(activity, R.style.danaDemiBoldTextStyle);
 

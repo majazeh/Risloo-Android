@@ -42,10 +42,10 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     @Override
     public int getItemCount() {
 //        return optionals.size();
-        return 5;
+        return 4;
     }
 
-//    public void setOptional(ArrayList<Optional> optionals) {
+//    public void setOptionals(ArrayList<Optional> optionals) {
 //        this.optionals = optionals;
 //        notifyDataSetChanged();
 //    }
@@ -53,40 +53,40 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     private void detector(OptionalsHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (selected)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_blue600_ripple_gray300);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_blue600_ripple_gray300);
             else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
         } else {
             if (selected)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_blue600);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_blue600);
             else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
         }
     }
 
     private void listener(OptionalsHolder holder) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.itemView);
     }
 
     private void setData(OptionalsHolder holder) {
-        holder.binding.numberTextView.setText(String.valueOf(holder.getAdapterPosition() + 1));
+        holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
         holder.binding.answerTextView.setText("مطمئن نیستم");
 
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             detector(holder, true);
 
-            holder.binding.containerConstraintLayout.setEnabled(true);
-            holder.binding.containerConstraintLayout.setClickable(true);
+            holder.itemView.setEnabled(true);
+            holder.itemView.setClickable(true);
 
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.White));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
         } else {
             detector(holder, false);
 
-            holder.binding.containerConstraintLayout.setEnabled(false);
-            holder.binding.containerConstraintLayout.setClickable(false);
+            holder.itemView.setEnabled(false);
+            holder.itemView.setClickable(false);
 
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);

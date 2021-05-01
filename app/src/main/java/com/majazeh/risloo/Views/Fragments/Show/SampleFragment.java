@@ -29,7 +29,7 @@ public class SampleFragment extends Fragment {
 
     // Adapters
     private ProfilesAdapter profilesAdapter;
-    private FormsAdapter formsGeneralAdapter, formsPrerequisiteAdapter, formsAnswerAdapter;
+//    private FormsAdapter formsGeneralAdapter, formsPrerequisiteAdapter, formsAnswerAdapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
@@ -53,9 +53,9 @@ public class SampleFragment extends Fragment {
 
     private void initializer() {
         profilesAdapter = new ProfilesAdapter(requireActivity());
-        formsGeneralAdapter = new FormsAdapter(requireActivity());
-        formsPrerequisiteAdapter = new FormsAdapter(requireActivity());
-        formsAnswerAdapter = new FormsAdapter(requireActivity());
+//        formsGeneralAdapter = new FormsAdapter(requireActivity());
+//        formsPrerequisiteAdapter = new FormsAdapter(requireActivity());
+//        formsAnswerAdapter = new FormsAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
 
@@ -71,9 +71,9 @@ public class SampleFragment extends Fragment {
         binding.formsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFormHeader));
 
         InitManager.recyclerView(binding.profilesSingleLayout.recyclerView, itemDecoration, profilesLayoutManager);
-        InitManager.recyclerView(binding.formsGeneralSingleLayout.recyclerView, itemDecoration, formsGeneralLayoutManager);
-        InitManager.recyclerView(binding.formsPrerequisiteSingleLayout.recyclerView, itemDecoration, formsPrerequisiteLayoutManager);
-        InitManager.recyclerView(binding.formsAnswerSingleLayout.recyclerView, itemDecoration, formsAnswerLayoutManager);
+        InitManager.recyclerView(binding.formsGeneralSingleLayout, itemDecoration, formsGeneralLayoutManager);
+        InitManager.recyclerView(binding.formsPrerequisiteSingleLayout, itemDecoration, formsPrerequisiteLayoutManager);
+        InitManager.recyclerView(binding.formsAnswerSingleLayout, itemDecoration, formsAnswerLayoutManager);
     }
 
     private void detector() {
@@ -100,15 +100,15 @@ public class SampleFragment extends Fragment {
             if (isChecked) {
                 binding.formsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray900));
 
-                formsGeneralAdapter.setEditable(true);
-                formsPrerequisiteAdapter.setEditable(true);
-                formsAnswerAdapter.setEditable(true);
+//                formsGeneralAdapter.setEditable(true);
+//                formsPrerequisiteAdapter.setEditable(true);
+//                formsAnswerAdapter.setEditable(true);
             } else {
                 binding.formsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray600));
 
-                formsGeneralAdapter.setEditable(false);
-                formsPrerequisiteAdapter.setEditable(false);
-                formsAnswerAdapter.setEditable(false);
+//                formsGeneralAdapter.setEditable(false);
+//                formsPrerequisiteAdapter.setEditable(false);
+//                formsAnswerAdapter.setEditable(false);
             }
         });
     }
@@ -123,9 +123,9 @@ public class SampleFragment extends Fragment {
 //        formsPrerequisiteAdapter.setForm(null);
 //        formsAnswerAdapter.setForm(null);
         binding.profilesSingleLayout.recyclerView.setAdapter(profilesAdapter);
-        binding.formsGeneralSingleLayout.recyclerView.setAdapter(formsGeneralAdapter);
-        binding.formsPrerequisiteSingleLayout.recyclerView.setAdapter(formsPrerequisiteAdapter);
-        binding.formsAnswerSingleLayout.recyclerView.setAdapter(formsAnswerAdapter);
+//        binding.formsGeneralSingleLayout.recyclerView.setAdapter(formsGeneralAdapter);
+//        binding.formsPrerequisiteSingleLayout.recyclerView.setAdapter(formsPrerequisiteAdapter);
+//        binding.formsAnswerSingleLayout.recyclerView.setAdapter(formsAnswerAdapter);
 
         String dataSize = "5";
         binding.profilesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
@@ -136,13 +136,13 @@ public class SampleFragment extends Fragment {
             binding.profilesSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
             binding.formsGeneralShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.formsGeneralSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.formsGeneralSingleLayout.setVisibility(View.VISIBLE);
 
             binding.formsPrerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.formsPrerequisiteSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.formsPrerequisiteSingleLayout.setVisibility(View.VISIBLE);
 
             binding.formsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.formsAnswerSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.formsAnswerSingleLayout.setVisibility(View.VISIBLE);
         }, 2000);
     }
 
