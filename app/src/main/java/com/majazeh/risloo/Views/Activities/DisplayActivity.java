@@ -82,22 +82,18 @@ public class DisplayActivity extends AppCompatActivity {
     private void setData() {
         if (extras.getString("title") != null) {
             title = extras.getString("title");
+
+            // TODO ; Place Code If Needed
         }
         if (extras.getString("bitmap") != null) {
             bitmap = extras.getString("bitmap");
-        }
-        if (extras.getString("path") != null) {
-            path = extras.getString("path");
-        }
 
-        if (!title.equals("")) {
-            // TODO ; Place Code If Needed
-        }
-        if (!bitmap.equals("")) {
             Picasso.get().load(bitmap).placeholder(R.color.Gray900).into(binding.avatarZoomageView);
             binding.avatarZoomageView.setVisibility(View.VISIBLE);
         }
-        if (!path.equals("")) {
+        if (extras.getString("path") != null) {
+            path = extras.getString("path");
+
             binding.avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), path));
             FileManager.deleteFileFromCache(this, "bitmap");
         }
