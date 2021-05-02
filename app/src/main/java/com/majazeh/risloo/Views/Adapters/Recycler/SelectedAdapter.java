@@ -13,11 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedHolder> {
 
@@ -132,6 +136,18 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         }).widget(holder.binding.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
+            if (method.equals("axises")) {
+                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                    case R.id.createScheduleFragment:
+                        CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createScheduleFragment != null) {
+                            CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.getRegisteredFragment(3);
+
+                            createSchedulePaymentFragment.axisPaymentsAdapter.removeItem(position);
+                        }
+                        break;
+                }
+            }
             removeItem(position);
         }).widget(holder.binding.removeImageView);
     }

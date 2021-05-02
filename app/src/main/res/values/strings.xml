@@ -424,6 +424,9 @@
 
     <string name="CreateSchedulePaymentFragmentPaymentHeader">نوع دریافت</string>
 
+    <string name="CreateSchedulePaymentFragmentPaymentAxisTotal">مبلغ جلسه</string>
+    <string name="CreateSchedulePaymentFragmentPaymentAxisCurrency">(تومان)</string>
+
     <string name="CreateSchedulePaymentFragmentPaymentButton">ساخت</string>
 
     /*

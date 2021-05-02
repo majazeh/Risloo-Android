@@ -30,6 +30,7 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
@@ -134,7 +135,12 @@ public class SelectedDialog extends AppCompatDialogFragment {
             if (binding.inputEditText.length() != 0) {
                 try {
                     String value = binding.inputEditText.getText().toString().trim();
-                    Model item = new Model(new JSONObject().put("id", value).put("title", value));
+                    Model item;
+
+                    if (method.equals("axises"))
+                        item = new Model(new JSONObject().put("id", "").put("title", value));
+                    else
+                        item = new Model(new JSONObject().put("id", value).put("title", value));
 
                     switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                         case R.id.createCenterFragment:
@@ -152,12 +158,15 @@ public class SelectedDialog extends AppCompatDialogFragment {
                             CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (createScheduleFragment != null) {
                                 CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
+                                CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.getRegisteredFragment(3);
 
                                 if (method.equals("axises")) {
-                                    if (!createScheduleSessionFragment.axisesAdapter.getIds().contains(value))
+                                    if (!createScheduleSessionFragment.axisesAdapter.getIds().contains(value)) {
                                         createScheduleSessionFragment.axisesAdapter.addItem(item);
-                                    else
+                                        createSchedulePaymentFragment.axisPaymentsAdapter.addItem(item);
+                                    } else {
                                         Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                             break;
