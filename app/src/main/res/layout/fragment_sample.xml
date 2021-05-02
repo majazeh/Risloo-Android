@@ -134,15 +134,18 @@
             app:layout_constraintTop_toBottomOf="@+id/profiles_header_includeLayout"
             tools:visibility="gone" />
 
-        <include
-            android:id="@+id/profiles_singleLayout"
-            layout="@layout/component_single_profile"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profiles_recyclerView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:overScrollMode="never"
             android:visibility="gone"
+            app:layout_constrainedHeight="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profiles_header_includeLayout"
+            tools:listitem="@layout/single_item_profile"
+            tools:itemCount="4"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -150,10 +153,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="profiles_shimmerLayout,profiles_singleLayout" />
+            app:constraint_referenced_ids="profiles_shimmerLayout,profiles_recyclerView" />
 
         <include
-            android:id="@+id/forms_header_includeLayout"
+            android:id="@+id/fields_header_includeLayout"
             layout="@layout/component_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -162,7 +165,7 @@
             app:layout_constraintTop_toBottomOf="@+id/profiles_barrier" />
 
         <CheckBox
-            android:id="@+id/forms_editable_checkBox"
+            android:id="@+id/fields_editable_checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layoutDirection="rtl"
@@ -177,22 +180,22 @@
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintBottom_toBottomOf="@+id/forms_header_includeLayout"
+            app:layout_constraintBottom_toBottomOf="@+id/fields_header_includeLayout"
             app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/forms_header_includeLayout" />
+            app:layout_constraintTop_toTopOf="@+id/fields_header_includeLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/forms_general_constraintLayout"
+            android:id="@+id/fields_general_constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/forms_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/forms_header_includeLayout">
+            app:layout_constraintStart_toStartOf="@+id/fields_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@+id/fields_header_includeLayout">
 
             <TextView
-                android:id="@+id/forms_general_textView"
+                android:id="@+id/fields_general_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -209,18 +212,18 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <include
-                android:id="@+id/forms_general_shimmerLayout"
+                android:id="@+id/fields_general_shimmerLayout"
                 layout="@layout/component_shimmer_form"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forms_general_textView"
+                app:layout_constraintTop_toBottomOf="@+id/fields_general_textView"
                 tools:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/forms_general_singleLayout"
+                android:id="@+id/fields_general_recyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
@@ -228,23 +231,25 @@
                 app:layout_constrainedHeight="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forms_general_textView"
+                app:layout_constraintTop_toBottomOf="@+id/fields_general_textView"
+                tools:listitem="@layout/single_item_field"
+                tools:itemCount="4"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/forms_prerequisite_constraintLayout"
+            android:id="@+id/fields_prerequisite_constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/forms_general_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/forms_general_constraintLayout">
+            app:layout_constraintStart_toStartOf="@+id/fields_general_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/fields_general_constraintLayout">
 
             <TextView
-                android:id="@+id/forms_prerequisite_textView"
+                android:id="@+id/fields_prerequisite_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -261,18 +266,18 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <include
-                android:id="@+id/forms_prerequisite_shimmerLayout"
+                android:id="@+id/fields_prerequisite_shimmerLayout"
                 layout="@layout/component_shimmer_form"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forms_prerequisite_textView"
+                app:layout_constraintTop_toBottomOf="@+id/fields_prerequisite_textView"
                 tools:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/forms_prerequisite_singleLayout"
+                android:id="@+id/fields_prerequisite_recyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
@@ -280,13 +285,15 @@
                 app:layout_constrainedHeight="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forms_prerequisite_textView"
+                app:layout_constraintTop_toBottomOf="@+id/fields_prerequisite_textView"
+                tools:listitem="@layout/single_item_field"
+                tools:itemCount="4"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/forms_answer_constraintLayout"
+            android:id="@+id/fields_answer_constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
@@ -294,11 +301,11 @@
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/forms_prerequisite_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/forms_prerequisite_constraintLayout">
+            app:layout_constraintStart_toStartOf="@+id/fields_prerequisite_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@+id/fields_prerequisite_constraintLayout">
 
             <TextView
-                android:id="@+id/forms_answer_textView"
+                android:id="@+id/fields_answer_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -315,18 +322,18 @@
                 app:layout_constraintStart_toStartOf="parent" />
 
             <include
-                android:id="@+id/forms_answer_shimmerLayout"
+                android:id="@+id/fields_answer_shimmerLayout"
                 layout="@layout/component_shimmer_form"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forms_answer_textView"
+                app:layout_constraintTop_toBottomOf="@+id/fields_answer_textView"
                 tools:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/forms_answer_singleLayout"
+                android:id="@+id/fields_answer_recyclerVIew"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"
@@ -334,7 +341,9 @@
                 app:layout_constrainedHeight="true"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/forms_answer_textView"
+                app:layout_constraintTop_toBottomOf="@+id/fields_answer_textView"
+                tools:listitem="@layout/single_item_field"
+                tools:itemCount="4"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
