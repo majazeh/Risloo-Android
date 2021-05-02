@@ -30,8 +30,6 @@ public class TestEndFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
         binding = FragmentTestEndBinding.inflate(inflater, viewGroup, false);
 
-        initializer();
-
         detector();
 
         listener();
@@ -41,19 +39,15 @@ public class TestEndFragment extends Fragment {
         return binding.getRoot();
     }
 
-    private void initializer() {
-        binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonSample));
-    }
-
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.endTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.endTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(this::doWork).widget(binding.endTextView.getRoot());
+        ClickManager.onDelayedClickListener(this::doWork).widget(binding.endTextView);
     }
 
     private void setData() {
@@ -62,13 +56,13 @@ public class TestEndFragment extends Fragment {
 
             switch (status) {
                 case "sample":
-                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonSample));
+                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
                     break;
                 case "next":
-                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonNext));
+                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonNext));
                     break;
                 case "bulk":
-                    binding.endTextView.getRoot().setText(getResources().getString(R.string.EndFragmentButtonBulk));
+                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonBulk));
                     break;
             }
         }
