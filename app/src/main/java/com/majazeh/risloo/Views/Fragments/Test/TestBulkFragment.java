@@ -48,6 +48,8 @@ public class TestBulkFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.BulkFragmentTitle));
+
         InitManager.recyclerView(binding.bulksRecyclerView, itemDecoration, layoutManager);
     }
 

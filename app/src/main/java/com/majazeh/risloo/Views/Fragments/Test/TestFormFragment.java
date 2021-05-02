@@ -48,6 +48,9 @@ public class TestFormFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.FormFragmentTitle));
+        binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.FormFragmentDescription));
+
         InitManager.recyclerView(binding.formsRecyclerView, itemDecoration, layoutManager);
     }
 

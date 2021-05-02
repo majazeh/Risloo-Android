@@ -30,6 +30,8 @@ public class TestEndFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
         binding = FragmentTestEndBinding.inflate(inflater, viewGroup, false);
 
+        initializer();
+
         detector();
 
         listener();
@@ -37,6 +39,11 @@ public class TestEndFragment extends Fragment {
         setData();
 
         return binding.getRoot();
+    }
+
+    private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.EndFragmentTitle));
+        binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.EndFragmentDescription));
     }
 
     private void detector() {

@@ -52,7 +52,7 @@ public class TestOptionalFragment extends Fragment {
     }
 
     private void setData() {
-        binding.questionTextView.setText("به مردم کنایه\u200Cهای تند و نیشدار می\u200Cزنم اگر فکر کنم که حقشان همین است.");
+        binding.questionTextView.getRoot().setText("به مردم کنایه\u200Cهای تند و نیشدار می\u200Cزنم اگر فکر کنم که حقشان همین است.");
 
 //        optionalsAdapter.setOptionals(null);
         binding.optionalsRecyclerView.setAdapter(optionalsAdapter);
