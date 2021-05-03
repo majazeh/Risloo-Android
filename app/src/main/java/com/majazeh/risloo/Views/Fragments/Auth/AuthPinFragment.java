@@ -36,6 +36,7 @@ public class AuthPinFragment extends Fragment {
     private CountDownTimer countDownTimer;
 
     // Vars
+    private String mobile = "";
     private String pin = "";
 
     @Nullable
@@ -55,11 +56,13 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.PinFragmentTitle));
+
         binding.pinIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PinFragmentInput));
 
-        binding.timerTextView.setMovementMethod(LinkMovementMethod.getInstance());
-
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PinFragmentButton));
+
+        binding.timerTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
         binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
         binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
@@ -146,7 +149,18 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void setData() {
+        if (!((AuthActivity) requireActivity()).singleton.getMobile().equals("")) {
+            mobile = ((AuthActivity) requireActivity()).singleton.getMobile();
+            binding.mobileIncludeLayout.getRoot().setText(mobile);
+        } else {
+            binding.mobileIncludeLayout.getRoot().setText(mobile);
+            binding.mobileIncludeLayout.getRoot().setVisibility(View.GONE);
+        }
+
+        binding.guideIncludeLayout.guideTextView.setText(requireActivity().getResources().getString(R.string.PinFragmentGuide1) + " " + mobile + " " + requireActivity().getResources().getString(R.string.PinFragmentGuide2));
+
         binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, clickableSpan));
+
         countDownTimer.start();
     }
 

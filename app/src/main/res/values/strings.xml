@@ -180,7 +180,7 @@
 
     <string name="PasswordChangeFragmentGuide">کلمه عبور جدید خود را وارد کرده و روی دکمه ثبت کلیک کنید.</string>
 
-    <string name="PasswordChangeFragmentButton">ثبت</string>
+    <string name="PasswordChangeFragmentButton">تغییر</string>
 
     /*
     ---------- Password Fragment ----------
@@ -210,14 +210,17 @@
     ---------- Pin Fragment ----------
     */
 
-    <string name="PinFragmentTitle">کد پیامکی</string>
+    <string name="PinFragmentTitle">تأیید موبایل</string>
 
     <string name="PinFragmentInput">کد پیامکی</string>
+
+    <string name="PinFragmentGuide1">یک کد 6 رقمی به شماره</string>
+    <string name="PinFragmentGuide2">پیامک شد. کد پیامک شده را در فیلد مشخص شده وارد کرده و روی دکمه تأیید کلیک کنید.</string>
 
     <string name="PinFragmentLink">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
     <string name="PinFragmentTimer">کد پیامکی برای شما ارسال شد :</string>
 
-    <string name="PinFragmentButton">بررسی</string>
+    <string name="PinFragmentButton">تأیید</string>
 
     /*
     ---------- Register Fragment ----------
