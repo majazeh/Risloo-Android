@@ -60,6 +60,7 @@
         android:layout_height="@dimen/_36sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="0sp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"

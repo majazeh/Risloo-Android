@@ -17,6 +17,7 @@ import android.os.Bundle;
 import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -95,39 +96,59 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         InitManager.imgResTint(this, binding.mainContent.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.imgResTintRotate(this, binding.mainContent.logoutImageView.getRoot(), R.drawable.ic_sign_out_light, R.color.Gray500, 180);
-        InitManager.imgResTint(this, binding.mainContent.userImageView.getRoot(), R.drawable.ic_user_light, R.color.Gray500);
         InitManager.imgResTint(this, binding.mainContent.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
+
+        InitManager.spinner(this, binding.mainContent.toolbarIncludeLayout.toolbarSpinner, R.array.MainDestinations, "toolbar");
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.mainContent.toolbarIncludeLayout.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
-
             binding.mainContent.menuImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            binding.mainContent.logoutImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_red300);
-            binding.mainContent.userImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
             binding.mainContent.notificationImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+
+            binding.mainContent.toolbarIncludeLayout.toolbarSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
         }
     }
 
     private void listener() {
-        ClickManager.onClickListener(() -> navigator(R.id.meFragment)).widget(binding.mainContent.toolbarIncludeLayout.getRoot());
-
         ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.mainContent.menuImageView.getRoot());
-
-        ClickManager.onClickListener(() -> {
-            logoutBottomSheet.show(this.getSupportFragmentManager(), "logoutBottomSheet");
-            logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
-        }).widget(binding.mainContent.logoutImageView.getRoot());
-
-        ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.mainContent.userImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(binding.mainContent.notificationImageView.getRoot());
+
+        binding.mainContent.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String access = parent.getItemAtPosition(position).toString();
+
+                switch (access) {
+                    case "مشاهده پروفایل":
+                        navigator(R.id.meFragment);
+                        break;
+                    case "کیف پول\u200Cها":
+                        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "صورت حساب\u200Cها":
+                        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "شارژ حساب":
+                        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
+                        break;
+                    case "خروج":
+                        logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
+                        logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
+                        break;
+                }
+
+                binding.mainContent.toolbarIncludeLayout.toolbarSpinner.setSelection(binding.mainContent.toolbarIncludeLayout.toolbarSpinner.getAdapter().getCount());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             binding.mainContent.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
@@ -138,32 +159,31 @@ public class MainActivity extends AppCompatActivity {
     private void setData() {
         NavigationUI.setupWithNavController(binding.navigationView, navController);
 
-        if (singleton.getName().equals("")) {
-            binding.mainContent.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainToolbar));
-        } else {
+        if (!singleton.getName().equals("")) {
             binding.mainContent.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
+        } else {
+            binding.mainContent.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainName));
         }
 
-        if (singleton.getMoney().equals("")) {
-            binding.mainContent.toolbarIncludeLayout.moneyTextView.setVisibility(View.GONE);
+        if (!singleton.getMoney().equals("")) {
+            binding.mainContent.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman));
         } else {
-            binding.mainContent.toolbarIncludeLayout.moneyTextView.setText(singleton.getMoney());
+            binding.mainContent.toolbarIncludeLayout.moneyTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
         }
 
-        if (singleton.getNotification().equals("")) {
-            binding.mainContent.badgeTextView.setVisibility(View.GONE);
-        } else {
+        if (!singleton.getNotification().equals("")) {
             binding.mainContent.badgeTextView.setVisibility(View.VISIBLE);
             binding.mainContent.badgeTextView.setText(singleton.getNotification());
+        } else {
+            binding.mainContent.badgeTextView.setVisibility(View.GONE);
         }
 
-        if (singleton.getAvatar().equals("")) {
+        if (!singleton.getAvatar().equals("")) {
+            binding.mainContent.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.mainContent.toolbarIncludeLayout.avatarImageView);
+        } else {
             binding.mainContent.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.mainContent.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.mainContent.toolbarIncludeLayout.nameTextView.getText().toString()));
-        } else {
-            binding.mainContent.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-
-            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.mainContent.toolbarIncludeLayout.avatarImageView);
         }
     }
 

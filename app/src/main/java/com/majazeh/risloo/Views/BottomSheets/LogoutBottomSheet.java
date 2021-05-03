@@ -66,7 +66,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
     private void setWidget() {
         if (name.equals("")) {
-            binding.nameTextView.setText(getResources().getString(R.string.MainToolbar));
+            binding.nameTextView.setText(getResources().getString(R.string.MainName));
         } else {
             binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
         }

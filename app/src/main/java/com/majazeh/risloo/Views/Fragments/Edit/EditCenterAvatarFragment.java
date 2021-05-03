@@ -87,7 +87,7 @@ public class EditCenterAvatarFragment extends Fragment {
         if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (((MainActivity) requireActivity()).singleton.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.MainToolbar)));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.MainName)));
             else
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
 
