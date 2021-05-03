@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Auth;
 
 import android.annotation.SuppressLint;
-import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -48,6 +47,8 @@ public class AuthSerialFragment extends Fragment {
     private void initializer() {
         binding.serialIncludeLayout.inputEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
+        binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.SerialFragmentGuide));
+
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
 
         binding.dashboardTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900)));
@@ -89,16 +90,16 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void setData() {
-        if (((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        if (!((AuthActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.avatarIncludeLayout.avatarImageView);
+        } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (((AuthActivity) requireActivity()).singleton.getName().equals("")) {
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AuthToolbar)));
             } else {
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
             }
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.avatarIncludeLayout.avatarImageView);
         }
     }
 

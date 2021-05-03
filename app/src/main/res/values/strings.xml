@@ -152,9 +152,11 @@
 
     <string name="LoginFragmentTitle">ورود</string>
 
-    <string name="LoginFragmentInput">موبایل، ایمیل یا نام کاربری</string>
+    <string name="LoginFragmentInput">موبایل</string>
 
-    <string name="LoginFragmentButton">ورود</string>
+    <string name="LoginFragmentGuide">برای ورود به ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
+
+    <string name="LoginFragmentButton">ادامه</string>
 
     /*
     ---------- Mobile Fragment ----------
@@ -190,11 +192,13 @@
     ---------- PasswordRecover Fragment ----------
     */
 
-    <string name="PasswordRecoverFragmentTitle">بازیابی کلمه عبور</string>
+    <string name="PasswordRecoverFragmentTitle">فراموشی کلمه عبور</string>
 
-    <string name="PasswordRecoverFragmentInput">تلفن همراه</string>
+    <string name="PasswordRecoverFragmentInput">موبایل</string>
 
-    <string name="PasswordRecoverFragmentButton">دریافت کد</string>
+    <string name="PasswordRecoverFragmentGuide">اگر کلمه عبور خود را فراموش کرده‌اید، موبایل خود را در فیلد بالا وارد کنید و روی دکمه دریافت کد پیامکی کلیک کنید.</string>
+
+    <string name="PasswordRecoverFragmentButton">دریافت کد پیامکی</string>
 
     /*
     ---------- Pin Fragment ----------
@@ -215,20 +219,23 @@
 
     <string name="RegisterFragmentTitle">عضویت</string>
 
-    <string name="RegisterFragmentName">نام و نام خانوادگی</string>
-    <string name="RegisterFragmentMobile">تلفن همراه</string>
+    <string name="RegisterFragmentMobile">موبایل</string>
 
-    <string name="RegisterFragmentButton">عضویت</string>
+    <string name="RegisterFragmentGuide">برای عضویت در ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
+
+    <string name="RegisterFragmentButton">ادامه</string>
 
     /*
     ---------- Serial Fragment ----------
     */
 
-    <string name="SerialFragmentTitle">سریال نمونه</string>
+    <string name="SerialFragmentTitle">ورود</string>
 
-    <string name="SerialFragmentInput">سریال نمونه</string>
+    <string name="SerialFragmentInput">دستور ورودی</string>
 
-    <string name="SerialFragmentButton">شروع</string>
+    <string name="SerialFragmentGuide">برای شروع آزمون دسنور ورودی خود را در فیلد بالا وارد کرده و روی دکمه بررسی کلیک کنید.</string>
+
+    <string name="SerialFragmentButton">بررسی</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

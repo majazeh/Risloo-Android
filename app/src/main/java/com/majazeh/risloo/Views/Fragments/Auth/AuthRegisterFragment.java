@@ -3,6 +3,8 @@ package com.majazeh.risloo.Views.Fragments.Auth;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -23,7 +25,7 @@ public class AuthRegisterFragment extends Fragment {
     private FragmentAuthRegisterBinding binding;
 
     // Vars
-    private String name = "", mobile = "";
+    private String mobile = "";
 
     @Nullable
     @Override
@@ -40,8 +42,9 @@ public class AuthRegisterFragment extends Fragment {
     }
 
     private void initializer() {
-        binding.nameIncludeLayout.inputEditText.setHint(getResources().getString(R.string.RegisterFragmentName));
         binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.RegisterFragmentMobile));
+
+        binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.RegisterFragmentGuide));
 
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.RegisterFragmentButton));
 
@@ -57,15 +60,6 @@ public class AuthRegisterFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
-                }
-            }
-            return false;
-        });
-
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
@@ -75,18 +69,31 @@ public class AuthRegisterFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+        binding.mobileIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
             }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (binding.mobileIncludeLayout.inputEditText.length() == 11 && !binding.mobileIncludeLayout.inputEditText.getText().toString().contains("+")) {
+                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
+                    doWork();
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-
-            if (binding.nameIncludeLayout.inputEditText.length() != 0 && binding.mobileIncludeLayout.inputEditText.length() != 0) {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameIncludeLayout.errorImageView, binding.nameIncludeLayout.errorTextView);
+            } else {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
-
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
@@ -96,7 +103,6 @@ public class AuthRegisterFragment extends Fragment {
     }
 
     private void doWork() {
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
