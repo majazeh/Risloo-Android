@@ -30,6 +30,7 @@ public class AuthPasswordFragment extends Fragment {
     private FragmentAuthPasswordBinding binding;
 
     // Vars
+    private String mobile = "";
     private String password = "";
     private boolean passwordVisibility = false;
 
@@ -44,11 +45,17 @@ public class AuthPasswordFragment extends Fragment {
 
         listener();
 
+        setData();
+
         return binding.getRoot();
     }
 
     private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentTitle));
+
         binding.passwordIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
+
+        binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.PasswordFragmentGuide));
 
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentButton));
 
@@ -142,6 +149,16 @@ public class AuthPasswordFragment extends Fragment {
         ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
         ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
         ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+    }
+
+    private void setData() {
+        if (!((AuthActivity) requireActivity()).singleton.getMobile().equals("")) {
+            mobile = ((AuthActivity) requireActivity()).singleton.getMobile();
+            binding.mobileIncludeLayout.getRoot().setText(mobile);
+        } else {
+            binding.mobileIncludeLayout.getRoot().setText(mobile);
+            binding.mobileIncludeLayout.getRoot().setVisibility(View.GONE);
+        }
     }
 
     private void doWork() {

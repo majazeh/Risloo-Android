@@ -42,6 +42,8 @@ public class AuthPasswordRecoverFragment extends Fragment {
     }
 
     private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordRecoverFragmentTitle));
+
         binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
 
         binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.PasswordRecoverFragmentGuide));

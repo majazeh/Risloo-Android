@@ -42,6 +42,8 @@ public class AuthRegisterFragment extends Fragment {
     }
 
     private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.RegisterFragmentTitle));
+
         binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.RegisterFragmentMobile));
 
         binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.RegisterFragmentGuide));

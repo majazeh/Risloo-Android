@@ -45,6 +45,8 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentTitle));
+
         binding.serialIncludeLayout.inputEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
 
         binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.SerialFragmentGuide));

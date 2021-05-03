@@ -162,9 +162,11 @@
     ---------- Mobile Fragment ----------
     */
 
-    <string name="MobileFragmentTitle">تلفن همراه</string>
+    <string name="MobileFragmentTitle">شماره موبایل</string>
 
-    <string name="MobileFragmentInput">تلفن همراه</string>
+    <string name="MobileFragmentInput">موبایل</string>
+
+    <string name="MobileFragmentGuide">موبایل خود را وارد کرده و روی دکمه بررسی کلیک کنید.</string>
 
     <string name="MobileFragmentButton">بررسی</string>
 
@@ -176,7 +178,9 @@
 
     <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
 
-    <string name="PasswordChangeFragmentButton">تغییر</string>
+    <string name="PasswordChangeFragmentGuide">کلمه عبور جدید خود را وارد کرده و روی دکمه ثبت کلیک کنید.</string>
+
+    <string name="PasswordChangeFragmentButton">ثبت</string>
 
     /*
     ---------- Password Fragment ----------
@@ -186,7 +190,9 @@
 
     <string name="PasswordFragmentInput">کلمه عبور</string>
 
-    <string name="PasswordFragmentButton">بررسی</string>
+    <string name="PasswordFragmentGuide">کلمه عبور خود را وارد کرده و روی دکمه ورود کلیک کنید.</string>
+
+    <string name="PasswordFragmentButton">ورود</string>
 
     /*
     ---------- PasswordRecover Fragment ----------

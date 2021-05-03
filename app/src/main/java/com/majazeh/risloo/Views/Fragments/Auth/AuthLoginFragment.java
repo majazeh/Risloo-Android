@@ -43,6 +43,8 @@ public class AuthLoginFragment extends Fragment {
     }
 
     private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.LoginFragmentTitle));
+
         binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.LoginFragmentInput));
 
         binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.LoginFragmentGuide));

@@ -42,7 +42,11 @@ public class AuthMobileFragment extends Fragment {
     }
 
     private void initializer() {
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.MobileFragmentTitle));
+
         binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.MobileFragmentInput));
+
+        binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.MobileFragmentGuide));
 
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.MobileFragmentButton));
 
@@ -76,7 +80,7 @@ public class AuthMobileFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (binding.mobileIncludeLayout.inputEditText.length() == 11) {
+                if (binding.mobileIncludeLayout.inputEditText.length() == 11 && !binding.mobileIncludeLayout.inputEditText.getText().toString().contains("+")) {
                     ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
                     doWork();
                 }
