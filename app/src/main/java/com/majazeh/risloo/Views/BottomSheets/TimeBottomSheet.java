@@ -97,13 +97,13 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                     if (createSessionFragment != null) {
                         switch (method) {
                             case "startTime":
-                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.getRegisteredFragment(0);
+                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
 
                                 createSessionTimeFragment.responseBottomSheet(method, getTime());
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
-                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.getRegisteredFragment(1);
+                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
 
                                 createSessionSessionFragment.responseBottomSheet(method, getTime());
                                 break;
@@ -115,13 +115,13 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                     if (createScheduleFragment != null) {
                         switch (method) {
                             case "startTime":
-                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
+                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
 
                                 createScheduleTimeFragment.responseBottomSheet(method, getTime());
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
 
                                 createScheduleSessionFragment.responseBottomSheet(method, getTime());
                                 break;
@@ -133,13 +133,13 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                     if (editSessionFragment != null) {
                         switch (method) {
                             case "startTime":
-                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.getRegisteredFragment(0);
+                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
 
                                 editSessionTimeFragment.responseBottomSheet(method, getTime());
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
-                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.getRegisteredFragment(1);
+                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
 
                                 editSessionSessionFragment.responseBottomSheet(method, getTime());
                                 break;

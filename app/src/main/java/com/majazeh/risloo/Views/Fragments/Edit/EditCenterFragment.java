@@ -8,19 +8,25 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
 
-import com.google.android.material.tabs.TabLayout;
+import com.google.android.material.tabs.TabLayoutMediator;
+import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.EditCenterAdapter;
 import com.majazeh.risloo.databinding.FragmentEditCenterBinding;
 
 public class EditCenterFragment extends Fragment {
 
     // Binding
-    private FragmentEditCenterBinding binding;
+    public FragmentEditCenterBinding binding;
 
     // Adapters
     public EditCenterAdapter adapter;
+
+    // Objects
+    private TabLayoutMediator tabLayoutMediator;
+
+    // Vars
+    private String[] tabs;
 
     @Nullable
     @Override
@@ -29,55 +35,21 @@ public class EditCenterFragment extends Fragment {
 
         initializer();
 
-        listener();
-
         setData();
 
         return binding.getRoot();
     }
 
     private void initializer() {
-        adapter = new EditCenterAdapter(requireActivity().getSupportFragmentManager(), 0);
-    }
+        adapter = new EditCenterAdapter(requireActivity());
 
-    private void listener() {
-        binding.tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                binding.rtlViewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-
-            }
-        });
-
-        binding.rtlViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-            }
-
-            @Override
-            public void onPageSelected(int position) {
-                binding.tabLayout.getTabAt(position).select();
-            }
-
-            @Override
-            public void onPageScrollStateChanged(int state) {
-
-            }
-        });
+        tabs = getResources().getStringArray(R.array.EditCenterTabs);
+        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> tab.setText(tabs[position]));
     }
 
     private void setData() {
-        binding.rtlViewPager.setAdapter(adapter);
+        binding.viewPager.setAdapter(adapter);
+        tabLayoutMediator.attach();
     }
 
     @Override

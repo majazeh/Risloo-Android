@@ -44,11 +44,10 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.2.0' // AppCompat
     implementation 'androidx.cardview:cardview:1.0.0' // CardView
     implementation 'androidx.multidex:multidex:2.0.1' // MultiDex
-    implementation 'androidx.viewpager:viewpager:1.0.0' // ViewPager
+    implementation 'androidx.viewpager2:viewpager2:1.0.0' // ViewPager2
     implementation 'androidx.recyclerview:recyclerview:1.2.0' // RecyclerView
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4' // ConstraintLayout
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0' // SwipeRefreshLayout
-
     implementation 'androidx.navigation:navigation-fragment:2.3.5' // Navigation Fragment
     implementation 'androidx.navigation:navigation-ui:2.3.5' // Navigation Ui
 
@@ -57,9 +56,7 @@ dependencies {
 
     implementation 'com.facebook.shimmer:shimmer:0.5.0' // Facebook Shimmer
 
-    implementation 'com.duolingo.open:rtl-viewpager:2.0.0' // Duolingo RtlViewPager
-
-    implementation 'com.squareup.picasso:picasso:2.71828' // Squareup Picasso
+    implementation 'com.squareup.picasso:picasso:2.71828' // SquareUp Picasso
 
     implementation 'com.intuit.sdp:sdp-android:1.0.6' // Responsive dp
     implementation 'com.intuit.ssp:ssp-android:1.0.6' // Responsive sp

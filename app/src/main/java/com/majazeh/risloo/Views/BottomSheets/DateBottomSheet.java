@@ -126,13 +126,13 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                     if (createSessionFragment != null) {
                         switch (method) {
                             case "startDate":
-                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.getRegisteredFragment(0);
+                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
 
                                 createSessionTimeFragment.responseBottomSheet(method, getDate());
                                 break;
                             case "startAccurateDate":
                             case "endAccurateDate":
-                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.getRegisteredFragment(1);
+                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
 
                                 createSessionSessionFragment.responseBottomSheet(method, getDate());
                                 break;
@@ -147,13 +147,13 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                             case "specifiedDate":
                             case "periodStartDate":
                             case "periodEndDate":
-                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
+                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
 
                                 createScheduleTimeFragment.responseBottomSheet(method, getDate());
                                 break;
                             case "startAccurateDate":
                             case "endAccurateDate":
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
 
                                 createScheduleSessionFragment.responseBottomSheet(method, getDate());
                                 break;
@@ -171,13 +171,13 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                     if (editSessionFragment != null) {
                         switch (method) {
                             case "startDate":
-                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.getRegisteredFragment(0);
+                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
 
                                 editSessionTimeFragment.responseBottomSheet(method, getDate());
                                 break;
                             case "startAccurateDate":
                             case "endAccurateDate":
-                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.getRegisteredFragment(1);
+                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
 
                                 editSessionSessionFragment.responseBottomSheet(method, getDate());
                                 break;
@@ -187,7 +187,7 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 case R.id.editUserFragment:
                     EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editUserFragment != null) {
-                        EditPersonalFragment editPersonalFragment = (EditPersonalFragment) editUserFragment.adapter.getRegisteredFragment(0);
+                        EditPersonalFragment editPersonalFragment = (EditPersonalFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
 
                         editPersonalFragment.responseBottomSheet(method, getDate());
                     }

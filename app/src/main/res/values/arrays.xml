@@ -179,4 +179,40 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Tab Arrays
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <array name="CreateScheduleTabs">
+        <item>زمان</item>
+        <item>مراجعین</item>
+        <item>جلسه</item>
+        <item>پرداخت</item>
+    </array>
+
+    <array name="CreateSessionTabs">
+        <item>زمان</item>
+        <item>جلسه</item>
+        <item>پرداخت</item>
+    </array>
+
+    <array name="EditCenterTabs">
+        <item>اطلاعات</item>
+        <item>تصویر نمایشی</item>
+    </array>
+
+    <array name="EditSessionTabs">
+        <item>زمان</item>
+        <item>جلسه</item>
+        <item>پرداخت</item>
+    </array>
+
+    <array name="EditUserTabs">
+        <item>شخصی</item>
+        <item>کلمه عبور</item>
+        <item>تصویر نمایشی</item>
+        <item>کلید عمومی</item>
+    </array>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
 </resources>

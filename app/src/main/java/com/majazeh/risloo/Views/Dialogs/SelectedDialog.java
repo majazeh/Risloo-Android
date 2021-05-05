@@ -157,8 +157,8 @@ public class SelectedDialog extends AppCompatDialogFragment {
                         case R.id.createScheduleFragment:
                             CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (createScheduleFragment != null) {
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
-                                CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.getRegisteredFragment(3);
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                                CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
 
                                 if (method.equals("axises")) {
                                     if (!createScheduleSessionFragment.axisesAdapter.getIds().contains(value)) {
@@ -173,7 +173,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                         case R.id.editCenterFragment:
                             EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (editCenterFragment != null) {
-                                EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
+                                EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
 
                                 if (method.equals("phones")) {
                                     if (!editCenterDetailFragment.phonesAdapter.getIds().contains(value))
@@ -209,7 +209,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
             case R.id.createScheduleFragment:
                 CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createScheduleFragment != null) {
-                    CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.getRegisteredFragment(2);
+                    CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
 
                     if (method.equals("axises")) {
                         binding.listRecyclerView.setAdapter(createScheduleSessionFragment.axisesAdapter);
@@ -219,7 +219,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
             case R.id.editCenterFragment:
                 EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (editCenterFragment != null) {
-                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
+                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
 
                     if (method.equals("phones")) {
                         binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);

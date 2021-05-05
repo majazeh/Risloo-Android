@@ -141,7 +141,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     case R.id.createScheduleFragment:
                         CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (createScheduleFragment != null) {
-                            CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.getRegisteredFragment(3);
+                            CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
 
                             createSchedulePaymentFragment.axisPaymentsAdapter.removeItem(position);
                         }

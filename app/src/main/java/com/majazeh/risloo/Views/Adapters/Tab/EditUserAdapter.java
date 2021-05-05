@@ -1,63 +1,52 @@
 package com.majazeh.risloo.Views.Adapters.Tab;
 
-import android.util.SparseArray;
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCryptoFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPasswordFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
 
-public class EditUserAdapter extends FragmentStatePagerAdapter {
+import java.util.HashMap;
 
-    private final SparseArray<Fragment> registeredFragments = new SparseArray<>();
+public class EditUserAdapter extends FragmentStateAdapter {
 
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        registeredFragments.put(position, fragment);
-        return fragment;
-    }
+    public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        registeredFragments.remove(position);
-        super.destroyItem(container, position, object);
-    }
-
-    public Fragment getRegisteredFragment(int position) {
-        return registeredFragments.get(position);
-    }
-
-    public EditUserAdapter(@NonNull FragmentManager fragmentManager, int behavior) {
-        super(fragmentManager, behavior);
+    public EditUserAdapter(@NonNull FragmentActivity fragment) {
+        super(fragment);
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new EditPersonalFragment();
+                Fragment fragment0 = new EditPersonalFragment();
+                hashMap.put(position, fragment0);
+                return fragment0;
             case 1:
-                return new EditPasswordFragment();
+                Fragment fragment1 = new EditPasswordFragment();
+                hashMap.put(position, fragment1);
+                return fragment1;
             case 2:
-                return new EditAvatarFragment();
+                Fragment fragment2 = new EditAvatarFragment();
+                hashMap.put(position, fragment2);
+                return fragment2;
             case 3:
-                return new EditCryptoFragment();
+                Fragment fragment3 = new EditCryptoFragment();
+                hashMap.put(position, fragment3);
+                return fragment3;
             default:
                 return null;
         }
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return 4;
     }
 

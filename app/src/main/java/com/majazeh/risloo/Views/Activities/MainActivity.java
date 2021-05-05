@@ -357,14 +357,14 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.editCenterFragment:
                         EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editCenterFragment != null) {
-                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.getRegisteredFragment(1);
+                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
                             editCenterAvatarFragment.avatarPath = IntentManager.camera(this);
                         }
                         break;
                     case R.id.editUserFragment:
                         EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editUserFragment != null) {
-                            EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.getRegisteredFragment(2);
+                            EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
                             editAvatarFragment.avatarPath = IntentManager.camera(this);
                         }
                         break;
@@ -392,7 +392,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.editCenterFragment:
                     EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editCenterFragment != null) {
-                        EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.getRegisteredFragment(1);
+                        EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
 
                         if (requestCode == 300) {
                             ResultManager.galleryResult(this, data, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
@@ -404,7 +404,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.editUserFragment:
                     EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editUserFragment != null) {
-                        EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.getRegisteredFragment(2);
+                        EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
 
                         if (requestCode == 300) {
                             ResultManager.galleryResult(this, data, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);

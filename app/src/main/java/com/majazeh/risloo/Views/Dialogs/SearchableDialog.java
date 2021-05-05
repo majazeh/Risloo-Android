@@ -320,13 +320,13 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 if (createScheduleFragment != null) {
                     switch (method) {
                         case "cases":
-                            CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.getRegisteredFragment(1);
+                            CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
 
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                         case "patternDays":
-                            CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.getRegisteredFragment(0);
+                            CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
 
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
@@ -337,7 +337,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
             case R.id.editCenterFragment:
                 EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (editCenterFragment != null) {
-                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.getRegisteredFragment(0);
+                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
 
                     if (method.equals("managers")) {
                         searchableAdapter.setItems(values, method);

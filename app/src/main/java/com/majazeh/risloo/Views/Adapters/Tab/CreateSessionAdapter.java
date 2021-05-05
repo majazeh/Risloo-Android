@@ -1,60 +1,47 @@
 package com.majazeh.risloo.Views.Adapters.Tab;
 
-import android.util.SparseArray;
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionTimeFragment;
 
-public class CreateSessionAdapter extends FragmentStatePagerAdapter {
+import java.util.HashMap;
 
-    private final SparseArray<Fragment> registeredFragments = new SparseArray<>();
+public class CreateSessionAdapter extends FragmentStateAdapter {
 
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        registeredFragments.put(position, fragment);
-        return fragment;
-    }
+    public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        registeredFragments.remove(position);
-        super.destroyItem(container, position, object);
-    }
-
-    public Fragment getRegisteredFragment(int position) {
-        return registeredFragments.get(position);
-    }
-
-    public CreateSessionAdapter(@NonNull FragmentManager fragmentManager, int behavior) {
-        super(fragmentManager, behavior);
+    public CreateSessionAdapter(@NonNull FragmentActivity fragment) {
+        super(fragment);
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new CreateSessionTimeFragment();
+                Fragment fragment0 = new CreateSessionTimeFragment();
+                hashMap.put(position, fragment0);
+                return fragment0;
             case 1:
-                return new CreateSessionSessionFragment();
+                Fragment fragment1 = new CreateSessionSessionFragment();
+                hashMap.put(position, fragment1);
+                return fragment1;
             case 2:
-                return new CreateSessionPaymentFragment();
+                Fragment fragment2 = new CreateSessionPaymentFragment();
+                hashMap.put(position, fragment2);
+                return fragment2;
             default:
                 return null;
         }
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return 3;
     }
 

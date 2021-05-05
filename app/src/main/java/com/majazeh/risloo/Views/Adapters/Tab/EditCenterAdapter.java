@@ -1,57 +1,42 @@
 package com.majazeh.risloo.Views.Adapters.Tab;
 
-import android.util.SparseArray;
-import android.view.ViewGroup;
-
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentStatePagerAdapter;
+import androidx.fragment.app.FragmentActivity;
+import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
 
-public class EditCenterAdapter extends FragmentStatePagerAdapter {
+import java.util.HashMap;
 
-    private final SparseArray<Fragment> registeredFragments = new SparseArray<>();
+public class EditCenterAdapter extends FragmentStateAdapter {
 
-    @NonNull
-    @Override
-    public Object instantiateItem(@NonNull ViewGroup container, int position) {
-        Fragment fragment = (Fragment) super.instantiateItem(container, position);
-        registeredFragments.put(position, fragment);
-        return fragment;
-    }
+    public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    @Override
-    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
-        registeredFragments.remove(position);
-        super.destroyItem(container, position, object);
-    }
-
-    public Fragment getRegisteredFragment(int position) {
-        return registeredFragments.get(position);
-    }
-
-    public EditCenterAdapter(@NonNull FragmentManager fragmentManager, int behavior) {
-        super(fragmentManager, behavior);
+    public EditCenterAdapter(@NonNull FragmentActivity fragment) {
+        super(fragment);
     }
 
     @NonNull
     @Override
-    public Fragment getItem(int position) {
+    public Fragment createFragment(int position) {
         switch (position) {
             case 0:
-                return new EditCenterDetailFragment();
+                Fragment fragment0 = new EditCenterDetailFragment();
+                hashMap.put(position, fragment0);
+                return fragment0;
             case 1:
-                return new EditCenterAvatarFragment();
+                Fragment fragment1 = new EditCenterAvatarFragment();
+                hashMap.put(position, fragment1);
+                return fragment1;
             default:
                 return null;
         }
     }
 
     @Override
-    public int getCount() {
+    public int getItemCount() {
         return 2;
     }
 
