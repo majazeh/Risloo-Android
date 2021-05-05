@@ -43,6 +43,30 @@
         <item></item>
     </array>
 
+    <array name="MainTitles">
+        <item>پیش‌خوان</item>
+        <item>مراکز درمانی</item>
+        <item>پرونده‌ها</item>
+        <item>جلسات</item>
+        <item>کاربران</item>
+        <item>ارزیابی‌ها</item>
+        <item>نمونه‌ها</item>
+        <item>نمونه‌های گروهی</item>
+        <item>اسناد و مدارک</item>
+    </array>
+
+    <array name="MainDescription">
+        <item>خلاصه‌ای از سامانه</item>
+        <item>همه مراکز درمانی</item>
+        <item>پرونده‌های درمانی من</item>
+        <item>جلسات درمانی من</item>
+        <item>کاربران موجود در سامانه</item>
+        <item>آزمون‌های روان شناختی موجود در سامانه</item>
+        <item>آزمون‌های گرفته شده</item>
+        <item>آزمون‌های گروهی گرفته شده</item>
+        <item>اسناد و مدارک من</item>
+    </array>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Test Arrays

@@ -11,25 +11,16 @@
     tools:context=".Views.Activities.MainActivity">
 
     <include
-        android:id="@+id/mainContent"
-        layout="@layout/activity_main_content" />
+        android:id="@+id/content_includeLayout"
+        layout="@layout/activity_main_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 
-    <com.google.android.material.navigation.NavigationView
-        android:id="@+id/navigationView"
-        android:layout_width="wrap_content"
+    <include
+        android:id="@+id/nav_includeLayout"
+        layout="@layout/activity_main_nav"
+        android:layout_width="@dimen/_220sdp"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/Gray50"
-        android:fitsSystemWindows="true"
-        android:theme="@style/NavigationViewTheme"
-        app:headerLayout="@layout/activity_main_header"
-        app:itemIconSize="@dimen/_16sdp"
-        app:itemIconPadding="@dimen/_16sdp"
-        app:itemHorizontalPadding="@dimen/_16sdp"
-        app:itemIconTint="@drawable/sel_nav_icon"
-        app:itemBackground="@drawable/sel_nav_draw"
-        app:itemTextColor="@drawable/sel_nav_text"
-        app:itemTextAppearance="@style/NavigationTextAppearance"
-        app:menu="@menu/menu_drawer" />
+        android:layout_gravity="start" />
 
 </androidx.drawerlayout.widget.DrawerLayout>
