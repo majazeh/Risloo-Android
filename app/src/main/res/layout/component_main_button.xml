@@ -8,7 +8,7 @@
     android:contentDescription="@string/AppImageContent"
     android:padding="@dimen/_9sdp"
     android:scaleType="fitCenter"
+    android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray300"
     android:layoutDirection="rtl"
     tools:src="@drawable/ic_ellipsis_v_light"
-    tools:tint="@color/Gray500"
-    tools:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray300" />
+    tools:tint="@color/Gray500" />

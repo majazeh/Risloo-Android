@@ -120,7 +120,7 @@ public class CenterFragment extends Fragment {
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.userFragment)).widget(binding.profileImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.schedulesFragment)).widget(binding.schedulesImageView.getRoot());
+//        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.schedulesFragment)).widget(binding.schedulesImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment)).widget(binding.usersImageView.getRoot());
 

@@ -43,6 +43,15 @@
         <action
             android:id="@+id/action_dashboardFragment_to_documentsFragment"
             app:destination="@id/documentsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_treasuriesFragment"
+            app:destination="@id/treasuriesFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_billingsFragment"
+            app:destination="@id/billingsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_paymentsFragment"
+            app:destination="@id/paymentsFragment" />
     </fragment>
 
 
@@ -438,5 +447,26 @@
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment"
         android:label="@string/EditUserFragmentTitle"
         tools:layout="@layout/fragment_edit_user" />
+
+
+
+
+    <fragment
+        android:id="@+id/treasuriesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment"
+        android:label="کیف پول ها"
+        tools:layout="@layout/fragment_treasuries" />
+
+    <fragment
+        android:id="@+id/billingsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.BillingsFragment"
+        android:label="صورت حساب ها"
+        tools:layout="@layout/fragment_billings" />
+
+    <fragment
+        android:id="@+id/paymentsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.PaymentsFragment"
+        android:label="شارژ حساب"
+        tools:layout="@layout/fragment_payments" />
 
 </navigation>

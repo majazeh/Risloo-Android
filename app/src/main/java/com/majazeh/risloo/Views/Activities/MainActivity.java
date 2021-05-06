@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -122,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
 
         InitManager.spinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
 
-        InitManager.recyclerView(binding.navIncludeLayout.navsRecyclerView, itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.navIncludeLayout.listRecyclerView.getRoot(), itemDecoration, layoutManager);
     }
 
     private void detector() {
@@ -144,22 +143,20 @@ public class MainActivity extends AppCompatActivity {
         binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String access = parent.getItemAtPosition(position).toString();
-
-                switch (access) {
-                    case "مشاهده پروفایل":
+                switch (position) {
+                    case 0:
                         navigator(R.id.meFragment);
                         break;
-                    case "کیف پول\u200Cها":
-                        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
+                    case 1:
+                        navigator(R.id.treasuriesFragment);
                         break;
-                    case "صورت حساب\u200Cها":
-                        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
+                    case 2:
+                        navigator(R.id.billingsFragment);
                         break;
-                    case "شارژ حساب":
-                        Toast.makeText(MainActivity.this, access, Toast.LENGTH_SHORT).show();
+                    case 3:
+                        navigator(R.id.paymentsFragment);
                         break;
-                    case "خروج":
+                    case 4:
                         logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
                         logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
                         break;
@@ -231,7 +228,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             navsAdapter.setItems(values);
-            binding.navIncludeLayout.navsRecyclerView.setAdapter(navsAdapter);
+            binding.navIncludeLayout.listRecyclerView.getRoot().setAdapter(navsAdapter);
         }
     }
 
@@ -285,11 +282,6 @@ public class MainActivity extends AppCompatActivity {
             navController.popBackStack();
         }
         navController.navigate(destinationId);
-    }
-
-    @Override
-    public boolean onSupportNavigateUp() {
-        return NavigationUI.navigateUp(navController, binding.getRoot());
     }
 
     @Override
@@ -358,14 +350,18 @@ public class MainActivity extends AppCompatActivity {
                         EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editCenterFragment != null) {
                             EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
-                            editCenterAvatarFragment.avatarPath = IntentManager.camera(this);
+                            if (editCenterAvatarFragment != null) {
+                                editCenterAvatarFragment.avatarPath = IntentManager.camera(this);
+                            }
                         }
                         break;
                     case R.id.editUserFragment:
                         EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editUserFragment != null) {
                             EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
-                            editAvatarFragment.avatarPath = IntentManager.camera(this);
+                            if (editAvatarFragment != null) {
+                                editAvatarFragment.avatarPath = IntentManager.camera(this);
+                            }
                         }
                         break;
                 }
@@ -378,7 +374,7 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            switch (navController.getCurrentDestination().getId()) {
+            switch (Objects.requireNonNull(navController.getCurrentDestination()).getId()) {
                 case R.id.createCenterFragment:
                     CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCenterFragment != null) {
@@ -393,11 +389,12 @@ public class MainActivity extends AppCompatActivity {
                     EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editCenterFragment != null) {
                         EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
-
-                        if (requestCode == 300) {
-                            ResultManager.galleryResult(this, data, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
-                        } else if (requestCode == 400) {
-                            ResultManager.cameraResult(this, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                        if (editCenterAvatarFragment != null) {
+                            if (requestCode == 300) {
+                                ResultManager.galleryResult(this, data, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                            } else if (requestCode == 400) {
+                                ResultManager.cameraResult(this, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                            }
                         }
                     }
                     break;
@@ -405,11 +402,12 @@ public class MainActivity extends AppCompatActivity {
                     EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editUserFragment != null) {
                         EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
-
-                        if (requestCode == 300) {
-                            ResultManager.galleryResult(this, data, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
-                        } else if (requestCode == 400) {
-                            ResultManager.cameraResult(this, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                        if (editAvatarFragment != null) {
+                            if (requestCode == 300) {
+                                ResultManager.galleryResult(this, data, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                            } else if (requestCode == 400) {
+                                ResultManager.cameraResult(this, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                            }
                         }
                     }
                     break;
