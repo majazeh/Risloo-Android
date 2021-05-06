@@ -187,106 +187,13 @@
 
     //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////
 
+    //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////
 
+    //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////
 
-    // BottomSheet Strings
-    //////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="BottomSheetBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
-    <string name="BottomSheetBirthdayEntry">ثبت</string>
-
-    <string name="BottomSheetStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
-    <string name="BottomSheetStartDateEntry">ثبت</string>
-
-    <string name="BottomSheetStartAccurateDateTitle">تاریخ دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetStartAccurateDateEntry">ثبت</string>
-
-    <string name="BottomSheetEndAccurateDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetEndAccurateDateEntry">ثبت</string>
-
-    <string name="BottomSheetSpecifiedDateTitle">تاریخ مشخص را انتخاب کنید.</string>
-    <string name="BottomSheetSpecifiedDateEntry">ثبت</string>
-
-    <string name="BottomSheetPeriodStartDateTitle">تاریخ شروع بازه زمانی را انتخاب کنید.</string>
-    <string name="BottomSheetPeriodStartDateEntry">ثبت</string>
-
-    <string name="BottomSheetPeriodEndDateTitle">تاریخ پایان بازه زمانی را انتخاب کنید.</string>
-    <string name="BottomSheetPeriodEndDateEntry">ثبت</string>
-
-    <string name="BottomSheetStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
-    <string name="BottomSheetStartTimeEntry">ثبت</string>
-
-    <string name="BottomSheetStartAccurateTimeTitle">زمان دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetStartAccurateTimeEntry">ثبت</string>
-
-    <string name="BottomSheetEndAccurateTimeTitle">زمان دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetEndAccurateTimeEntry">ثبت</string>
-
-    <string name="BottomSheetImageTitle">از کجا می خوای تصویر بیارید؟</string>
-    <string name="BottomSheetImageGallery">البوم</string>
-    <string name="BottomSheetImageCamera">دوربین</string>
-
-    <string name="BottomSheetLogoutTitle">آیا تمایل به خروج از حساب کاربری دارید؟</string>
-    <string name="BottomSheetLogoutEntry">خروج</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Dialog Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="DialogPhoneTitle">شماره تلفن(ها) را وارد کنید.</string>
-    <string name="DialogPhoneHint">شماره تلفن</string>
-    <string name="DialogPhoneEntry">ثبت</string>
-
-    <string name="DialogAxisTitle">محور(ها) جلسه را تایپ کنید.</string>
-    <string name="DialogAxisHint">موضوع</string>
-    <string name="DialogAxisEntry">ثبت</string>
-
-    <string name="DialogDayTitle">روزهای هفته را انتخاب کنید.</string>
-    <string name="DialogDayEntry">ثبت</string>
-
-    <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
-    <string name="DialogScaleHint">جستجو</string>
-    <string name="DialogScaleEntry">ثبت</string>
-
-    <string name="DialogReferenceTitle">مراجعین را انتخاب کنید.</string>
-    <string name="DialogReferenceHint">جستجو</string>
-    <string name="DialogReferenceEntry">ثبت</string>
-
-    <string name="DialogManagerTitle">مدیر را انتخاب کنید.</string>
-    <string name="DialogManagerHint">جستجو</string>
-
-    <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
-    <string name="DialogRoomHint">جستجو</string>
-
-    <string name="DialogCaseTitle">پرونده را انتخاب کنید.</string>
-    <string name="DialogCaseHint">جستجو</string>
-
-    <string name="DialogSessionTitle">جلسه را انتخاب کنید.</string>
-    <string name="DialogSessionHint">جستجو</string>
-
-    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
-    <string name="DialogPsychologyHint">جستجو</string>
-
-    <string name="DialogLoadingTitle">در حال بارگذاري ...</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Scheduled Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="StartTime">زمان شروع نوبت‌گیری</string>
-    <string name="EndTime">زمان بستن نوبت‌گیری</string>
-
-    <string name="AccurateTime">زمان دقیق</string>
-    <string name="RelativeTime">زمان نسبی</string>
-
-    <string name="DayHint">روز و</string>
-    <string name="HourHint">ساعت و</string>
-    <string name="MinuteStartHint">دقیقه قبل تشکیل جلسه</string>
-    <string name="MinuteEndHint">دقیقه بعد اتمام جلسه</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////
 
     // Create Fragments
     //////////////////////////////////////////////////////////////////////////////////////
@@ -572,6 +479,12 @@
     <string name="CreateSessionTimeFragmentButton">ساخت</string>
 
     /*
+    ---------- CreateTreasury Fragment ----------
+    */
+
+
+
+    /*
     ---------- CreateUser Fragment ----------
     */
 
@@ -782,6 +695,12 @@
     <string name="EditSessionTimeFragmentButton">ویرایش</string>
 
     /*
+    ---------- EditTreasury Fragment ----------
+    */
+
+
+
+    /*
     ---------- EditUser Fragment ----------
     */
 
@@ -791,6 +710,12 @@
 
     // Index Fragments
     //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ---------- Billings Fragment ----------
+    */
+
+
 
     /*
     ---------- Bulk Samples Fragment ----------
@@ -827,7 +752,7 @@
     ---------- CenterSchedules Fragment ----------
     */
 
-    <string name="CenterSchedulesFragmentTitle">برنامه‌های مرکز</string>
+
 
     /*
     ---------- CenterUsers Fragment ----------
@@ -855,6 +780,18 @@
 
     <string name="DocumentsFragmentAccept">تأیید</string>
     <string name="DocumentsFragmentKick">رد</string>
+
+    /*
+    ---------- Payments Fragment ----------
+    */
+
+
+
+    /*
+    ---------- RoomSchedules Fragment ----------
+    */
+
+
 
     /*
     ---------- RoomUsers Fragment ----------
@@ -893,12 +830,6 @@
     <string name="SamplesFragmentDone">تمام شده</string>
 
     /*
-    ---------- Schedules Fragment ----------
-    */
-
-    <string name="SchedulesFragmentTitle">برنامه‌ها</string>
-
-    /*
     ---------- Scales Fragment ----------
     */
 
@@ -926,6 +857,12 @@
     <string name="SessionsFragmentStatus">وضعیت</string>
 
     /*
+    ---------- Treasuries Fragment ----------
+    */
+
+
+
+    /*
     ---------- Users Fragment ----------
     */
 
@@ -939,6 +876,12 @@
 
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ---------- Bill Fragment ----------
+    */
+
+
 
     /*
     ---------- Bulk Sample Fragment ----------
@@ -1117,12 +1060,119 @@
     <string name="SessionFragmentSamplesStatus">وضعیت</string>
 
     /*
+    ---------- Treasury Fragment ----------
+    */
+
+
+
+    /*
     ---------- User Fragment ----------
     */
 
     <string name="UserFragmentTitle">کاربر</string>
 
     <string name="UserFragmentEdit">ویرایش</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Scheduled Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="StartTime">زمان شروع نوبت‌گیری</string>
+    <string name="EndTime">زمان بستن نوبت‌گیری</string>
+
+    <string name="AccurateTime">زمان دقیق</string>
+    <string name="RelativeTime">زمان نسبی</string>
+
+    <string name="DayHint">روز و</string>
+    <string name="HourHint">ساعت و</string>
+    <string name="MinuteStartHint">دقیقه قبل تشکیل جلسه</string>
+    <string name="MinuteEndHint">دقیقه بعد اتمام جلسه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // BottomSheet Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="BottomSheetBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
+    <string name="BottomSheetBirthdayEntry">ثبت</string>
+
+    <string name="BottomSheetStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
+    <string name="BottomSheetStartDateEntry">ثبت</string>
+
+    <string name="BottomSheetStartAccurateDateTitle">تاریخ دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetStartAccurateDateEntry">ثبت</string>
+
+    <string name="BottomSheetEndAccurateDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetEndAccurateDateEntry">ثبت</string>
+
+    <string name="BottomSheetSpecifiedDateTitle">تاریخ مشخص را انتخاب کنید.</string>
+    <string name="BottomSheetSpecifiedDateEntry">ثبت</string>
+
+    <string name="BottomSheetPeriodStartDateTitle">تاریخ شروع بازه زمانی را انتخاب کنید.</string>
+    <string name="BottomSheetPeriodStartDateEntry">ثبت</string>
+
+    <string name="BottomSheetPeriodEndDateTitle">تاریخ پایان بازه زمانی را انتخاب کنید.</string>
+    <string name="BottomSheetPeriodEndDateEntry">ثبت</string>
+
+    <string name="BottomSheetStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
+    <string name="BottomSheetStartTimeEntry">ثبت</string>
+
+    <string name="BottomSheetStartAccurateTimeTitle">زمان دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetStartAccurateTimeEntry">ثبت</string>
+
+    <string name="BottomSheetEndAccurateTimeTitle">زمان دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetEndAccurateTimeEntry">ثبت</string>
+
+    <string name="BottomSheetImageTitle">از کجا می خوای تصویر بیارید؟</string>
+    <string name="BottomSheetImageGallery">البوم</string>
+    <string name="BottomSheetImageCamera">دوربین</string>
+
+    <string name="BottomSheetLogoutTitle">آیا تمایل به خروج از حساب کاربری دارید؟</string>
+    <string name="BottomSheetLogoutEntry">خروج</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Dialog Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="DialogPhoneTitle">شماره تلفن(ها) را وارد کنید.</string>
+    <string name="DialogPhoneHint">شماره تلفن</string>
+    <string name="DialogPhoneEntry">ثبت</string>
+
+    <string name="DialogAxisTitle">محور(ها) جلسه را تایپ کنید.</string>
+    <string name="DialogAxisHint">موضوع</string>
+    <string name="DialogAxisEntry">ثبت</string>
+
+    <string name="DialogDayTitle">روزهای هفته را انتخاب کنید.</string>
+    <string name="DialogDayEntry">ثبت</string>
+
+    <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
+    <string name="DialogScaleHint">جستجو</string>
+    <string name="DialogScaleEntry">ثبت</string>
+
+    <string name="DialogReferenceTitle">مراجعین را انتخاب کنید.</string>
+    <string name="DialogReferenceHint">جستجو</string>
+    <string name="DialogReferenceEntry">ثبت</string>
+
+    <string name="DialogManagerTitle">مدیر را انتخاب کنید.</string>
+    <string name="DialogManagerHint">جستجو</string>
+
+    <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
+    <string name="DialogRoomHint">جستجو</string>
+
+    <string name="DialogCaseTitle">پرونده را انتخاب کنید.</string>
+    <string name="DialogCaseHint">جستجو</string>
+
+    <string name="DialogSessionTitle">جلسه را انتخاب کنید.</string>
+    <string name="DialogSessionHint">جستجو</string>
+
+    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
+    <string name="DialogPsychologyHint">جستجو</string>
+
+    <string name="DialogLoadingTitle">در حال بارگذاري ...</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
