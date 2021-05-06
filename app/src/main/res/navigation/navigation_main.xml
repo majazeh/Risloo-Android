@@ -148,12 +148,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/schedulesFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.SchedulesFragment"
-        android:label="@string/SchedulesFragmentTitle"
-        tools:layout="@layout/fragment_schedules" />
-
-    <fragment
         android:id="@+id/sessionsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.SessionsFragment"
         android:label="@string/SessionsFragmentTitle"
@@ -241,9 +235,6 @@
         <action
             android:id="@+id/action_centerFragment_to_userFragment"
             app:destination="@id/userFragment" />
-        <action
-            android:id="@+id/action_centerFragment_to_schedulesFragment"
-            app:destination="@id/schedulesFragment" />
         <action
             android:id="@+id/action_centerFragment_to_centerUsersFragment"
             app:destination="@id/centerUsersFragment" />
