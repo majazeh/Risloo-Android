@@ -86,7 +86,7 @@ public class ReferenceFragment extends Fragment {
 
     private void setData() {
         if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            binding.nameTextView.setText(getResources().getString(R.string.MainName));
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         } else {
             binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
         }

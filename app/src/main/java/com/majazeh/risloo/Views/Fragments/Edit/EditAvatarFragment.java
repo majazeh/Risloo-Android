@@ -87,7 +87,7 @@ public class EditAvatarFragment extends Fragment {
         if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (((MainActivity) requireActivity()).singleton.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.MainName)));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
             else
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
 

@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
 
-        InitManager.spinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainDestinations, "toolbar");
+        InitManager.spinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
 
         InitManager.recyclerView(binding.navIncludeLayout.navsRecyclerView, itemDecoration, layoutManager);
     }
@@ -184,7 +184,7 @@ public class MainActivity extends AppCompatActivity {
         if (!singleton.getName().equals("")) {
             binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
         } else {
-            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.MainName));
+            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         }
 
         if (!singleton.getMoney().equals("")) {
@@ -213,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<Model> values = new ArrayList<>();
 
         String[] titles = getResources().getStringArray(R.array.MainTitles);
-        String[] description = getResources().getStringArray(R.array.MainDescription);
+        String[] description = getResources().getStringArray(R.array.MainDescriptions);
         int[] images = new int[]{R.drawable.ic_tachometer_alt_light, R.drawable.ic_building_light, R.drawable.ic_folders_light, R.drawable.ic_user_friends_light, R.drawable.ic_users_light, R.drawable.ic_balance_scale_light, R.drawable.ic_vial_light, R.drawable.ic_users_medical_light, R.drawable.ic_file_certificate_light};
 
         for (int i = 0; i < titles.length; i++) {
