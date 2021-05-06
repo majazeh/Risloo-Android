@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Edit;
+package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -16,12 +16,12 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.FragmentEditCryptoBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserCryptoBinding;
 
-public class EditCryptoFragment extends Fragment {
+public class EditUserCryptoFragment extends Fragment {
 
     // Binding
-    private FragmentEditCryptoBinding binding;
+    private FragmentEditUserCryptoBinding binding;
 
     // Vars
     private String publicKey = "", privateKey = "";
@@ -29,7 +29,7 @@ public class EditCryptoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditCryptoBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserCryptoBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

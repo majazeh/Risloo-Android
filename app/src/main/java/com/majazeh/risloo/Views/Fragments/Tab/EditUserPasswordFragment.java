@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Edit;
+package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -23,12 +23,12 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.FragmentEditPasswordBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserPasswordBinding;
 
-public class EditPasswordFragment extends Fragment {
+public class EditUserPasswordFragment extends Fragment {
 
     // Binding
-    private FragmentEditPasswordBinding binding;
+    private FragmentEditUserPasswordBinding binding;
 
     // Vars
     private String password = "";
@@ -37,7 +37,7 @@ public class EditPasswordFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditPasswordBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserPasswordBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

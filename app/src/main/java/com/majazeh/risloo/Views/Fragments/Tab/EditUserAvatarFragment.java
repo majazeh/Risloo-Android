@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Edit;
+package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.graphics.Bitmap;
 import android.os.Build;
@@ -20,13 +20,13 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
-import com.majazeh.risloo.databinding.FragmentEditCenterAvatarBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserAvatarBinding;
 import com.squareup.picasso.Picasso;
 
-public class EditCenterAvatarFragment extends Fragment {
+public class EditUserAvatarFragment extends Fragment {
 
     // Binding
-    public FragmentEditCenterAvatarBinding binding;
+    public FragmentEditUserAvatarBinding binding;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
@@ -40,7 +40,7 @@ public class EditCenterAvatarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditCenterAvatarBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserAvatarBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -56,9 +56,9 @@ public class EditCenterAvatarFragment extends Fragment {
     private void initializer() {
         imageBottomSheet = new ImageBottomSheet();
 
-        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterAvatarFragmentGuide));
+        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditAvatarFragmentGuide));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterAvatarFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditAvatarFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {

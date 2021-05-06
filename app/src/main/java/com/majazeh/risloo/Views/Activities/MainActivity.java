@@ -38,8 +38,8 @@ import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
@@ -358,9 +358,9 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.editUserFragment:
                         EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editUserFragment != null) {
-                            EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
-                            if (editAvatarFragment != null) {
-                                editAvatarFragment.avatarPath = IntentManager.camera(this);
+                            EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
+                            if (editUserAvatarFragment != null) {
+                                editUserAvatarFragment.avatarPath = IntentManager.camera(this);
                             }
                         }
                         break;
@@ -401,12 +401,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.editUserFragment:
                     EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editUserFragment != null) {
-                        EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
-                        if (editAvatarFragment != null) {
+                        EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
+                        if (editUserAvatarFragment != null) {
                             if (requestCode == 300) {
-                                ResultManager.galleryResult(this, data, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                                ResultManager.galleryResult(this, data, editUserAvatarFragment.avatarPath, editUserAvatarFragment.avatarBitmap, editUserAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editUserAvatarFragment.binding.avatarIncludeLayout.charTextView);
                             } else if (requestCode == 400) {
-                                ResultManager.cameraResult(this, editAvatarFragment.avatarPath, editAvatarFragment.avatarBitmap, editAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                                ResultManager.cameraResult(this, editUserAvatarFragment.avatarPath, editUserAvatarFragment.avatarBitmap, editUserAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editUserAvatarFragment.binding.avatarIncludeLayout.charTextView);
                             }
                         }
                     }

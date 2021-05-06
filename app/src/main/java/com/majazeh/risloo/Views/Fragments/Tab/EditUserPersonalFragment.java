@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Edit;
+package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -18,12 +18,12 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
-import com.majazeh.risloo.databinding.FragmentEditPersonalBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserPersonalBinding;
 
-public class EditPersonalFragment extends Fragment {
+public class EditUserPersonalFragment extends Fragment {
 
     // Binding
-    private FragmentEditPersonalBinding binding;
+    private FragmentEditUserPersonalBinding binding;
 
     // BottomSheets
     private DateBottomSheet birthdayBottomSheet;
@@ -35,7 +35,7 @@ public class EditPersonalFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditPersonalBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserPersonalBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

@@ -16,16 +16,16 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditPersonalFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserPersonalFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
@@ -187,9 +187,9 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 case R.id.editUserFragment:
                     EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editUserFragment != null) {
-                        EditPersonalFragment editPersonalFragment = (EditPersonalFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
+                        EditUserPersonalFragment editUserPersonalFragment = (EditUserPersonalFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
 
-                        editPersonalFragment.responseBottomSheet(method, getDate());
+                        editUserPersonalFragment.responseBottomSheet(method, getDate());
                     }
                     break;
             }

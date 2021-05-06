@@ -23,13 +23,13 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases3Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples3Adapter;
-import com.majazeh.risloo.databinding.FragmentReferenceBinding;
+import com.majazeh.risloo.databinding.FragmentCenterUserBinding;
 import com.squareup.picasso.Picasso;
 
-public class ReferenceFragment extends Fragment {
+public class CenterUserFragment extends Fragment {
 
     // Binding
-    private FragmentReferenceBinding binding;
+    private FragmentCenterUserBinding binding;
 
     // Adapters
     private RoomsAdapter roomsAdapter;
@@ -43,7 +43,7 @@ public class ReferenceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentReferenceBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCenterUserBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

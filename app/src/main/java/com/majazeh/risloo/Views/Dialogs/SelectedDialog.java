@@ -30,9 +30,9 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSchedulePaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
 

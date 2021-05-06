@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Edit;
+package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -20,12 +20,12 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
-import com.majazeh.risloo.databinding.FragmentEditSessionTimeBinding;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTimeBinding;
 
-public class EditSessionTimeFragment extends Fragment {
+public class CreateSessionTimeFragment extends Fragment {
 
     // Binding
-    private FragmentEditSessionTimeBinding binding;
+    private FragmentCreateSessionTimeBinding binding;
 
     // BottomSheets
     private TimeBottomSheet startTimeBottomSheet;
@@ -38,7 +38,7 @@ public class EditSessionTimeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditSessionTimeBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCreateSessionTimeBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -55,20 +55,20 @@ public class EditSessionTimeFragment extends Fragment {
         startTimeBottomSheet = new TimeBottomSheet();
         startDateBottomSheet = new DateBottomSheet();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTimeFragmentStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTimeFragmentDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTimeFragmentStartDateHeader));
+        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTimeFragmentStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTimeFragmentDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeFragmentStartDateHeader));
 
         binding.durationIncludeLayout.inputEditText.setText(duration);
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTimeFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTimeFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         } else {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
         }
     }
 
@@ -111,7 +111,7 @@ public class EditSessionTimeFragment extends Fragment {
 
                 doWork();
             }
-        }).widget(binding.editTextView.getRoot());
+        }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {

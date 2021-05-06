@@ -17,8 +17,8 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditCenterAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetImageBinding;
@@ -85,9 +85,9 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
                     case R.id.editUserFragment:
                         EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                         if (editUserFragment != null) {
-                            EditAvatarFragment editAvatarFragment = (EditAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
+                            EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
 
-                            editAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
+                            editUserAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
                         }
                         break;
                 }

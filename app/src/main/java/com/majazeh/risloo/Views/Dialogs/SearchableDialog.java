@@ -37,9 +37,9 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 

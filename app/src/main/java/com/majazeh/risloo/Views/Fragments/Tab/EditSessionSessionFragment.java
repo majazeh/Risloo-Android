@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Fragments.Create;
+package com.majazeh.risloo.Views.Fragments.Tab;
 
 import android.annotation.SuppressLint;
 import android.os.Build;
@@ -20,12 +20,12 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
-import com.majazeh.risloo.databinding.FragmentCreateSessionSessionBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionSessionBinding;
 
-public class CreateSessionSessionFragment extends Fragment {
+public class EditSessionSessionFragment extends Fragment {
 
     // Binding
-    private FragmentCreateSessionSessionBinding binding;
+    private FragmentEditSessionSessionBinding binding;
 
     // BottomSheets
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
@@ -41,7 +41,7 @@ public class CreateSessionSessionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateSessionSessionBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditSessionSessionBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -60,21 +60,21 @@ public class CreateSessionSessionFragment extends Fragment {
         startAccurateDateBottomSheet = new DateBottomSheet();
         endAccurateDateBottomSheet = new DateBottomSheet();
 
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionFragmentTypeHeader));
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionFragmentStatusHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionFragmentDescriptionHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionFragmentTypeHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionFragmentStatusHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionFragmentDescriptionHeader));
 
         InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.SessionTypes, "main");
         InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionSessionFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionSessionFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         } else {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
         }
     }
 
@@ -259,7 +259,7 @@ public class CreateSessionSessionFragment extends Fragment {
 
                 doWork();
             }
-        }).widget(binding.createTextView.getRoot());
+        }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {
