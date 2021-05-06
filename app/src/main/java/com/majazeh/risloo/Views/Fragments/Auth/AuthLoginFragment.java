@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -57,6 +58,8 @@ public class AuthLoginFragment extends Fragment {
         binding.registerLinkTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthRegisterLink), 0, 5, getResources().getColor(R.color.Gray800)));
         binding.registerLinkTextView.getRoot().setTextAppearance(requireActivity(), R.style.danaDemiBoldTextStyle);
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
+
+        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_001, null));
     }
 
     private void detector() {

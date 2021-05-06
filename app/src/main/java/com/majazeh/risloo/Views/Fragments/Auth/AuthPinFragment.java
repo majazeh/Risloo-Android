@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -67,6 +68,8 @@ public class AuthPinFragment extends Fragment {
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
+
+        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_007, null));
     }
 
     private void detector() {

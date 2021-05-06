@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -55,6 +56,8 @@ public class AuthPasswordRecoverFragment extends Fragment {
 
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
+
+        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_006, null));
     }
 
     private void detector() {

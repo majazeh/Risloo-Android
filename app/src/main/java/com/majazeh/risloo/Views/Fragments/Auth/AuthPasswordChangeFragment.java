@@ -62,6 +62,8 @@ public class AuthPasswordChangeFragment extends Fragment {
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
+
+        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_004, null));
     }
 
     private void detector() {

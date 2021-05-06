@@ -125,15 +125,14 @@
         app:layout_constraintStart_toEndOf="@id/separator_view"
         app:layout_constraintTop_toTopOf="@id/login_link_textView" />
 
-    <ImageView
+    <include
         android:id="@+id/illu_imageView"
+        layout="@layout/component_auth_image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_32sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitEnd"
-        android:src="@drawable/illu_002"
+        app:layout_constraintDimensionRatio="14:9"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/mobile_editText"
         app:layout_constraintStart_toStartOf="@id/mobile_editText"

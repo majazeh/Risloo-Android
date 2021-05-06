@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -56,6 +57,8 @@ public class AuthSerialFragment extends Fragment {
         binding.dashboardLinkTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthDashboardLink), 0, 8, getResources().getColor(R.color.Gray800)));
         binding.dashboardLinkTextView.getRoot().setTextAppearance(requireActivity(), R.style.danaDemiBoldTextStyle);
         binding.logoutLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLogoutLink));
+
+        binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_003, null));
     }
 
     private void detector() {
