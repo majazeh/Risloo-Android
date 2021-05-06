@@ -19,5 +19,5 @@
     android:importantForAutofill="no"
     android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_16sdp"
+    tools:layout_margin="@dimen/_24sdp"
     tools:hint="عنوان" />

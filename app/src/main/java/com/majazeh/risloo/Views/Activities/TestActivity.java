@@ -33,14 +33,14 @@ public class TestActivity extends AppCompatActivity {
     public Singleton singleton;
 
     // Objects
+    private Bundle extras;
     public ControlEditText controlEditText;
     public NavHostFragment navHostFragment;
     public NavController navController;
-    private Bundle extras;
 
     // Vars
     private String test = "", type = "", status = "", location = "", locationSum = "";
-    private int andswered = -1;
+    private int answered = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,22 +64,23 @@ public class TestActivity extends AppCompatActivity {
         WindowDecorator windowDecorator = new WindowDecorator();
 
         windowDecorator.lightShowSystemUI(this);
-        if (dark)
+        if (dark) {
             windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Blue600), getResources().getColor(R.color.Gray50));
-        else
+        } else {
             windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+        }
     }
 
     private void initializer() {
         singleton = new Singleton(this);
+
+        extras = getIntent().getExtras();
 
         controlEditText = new ControlEditText();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
-
-        extras = getIntent().getExtras();
 
         InitManager.spinner(this, binding.locationIncludeLayout.selectSpinner, R.array.TestStages, "test");
 
@@ -202,11 +203,11 @@ public class TestActivity extends AppCompatActivity {
         type = "";
         binding.headerIncludeLayout.typeTextView.setText(type);
 
-        andswered = 25;
-        binding.headerIncludeLayout.answeredProgressBar.setProgress(andswered);
+        answered = 25;
+        binding.headerIncludeLayout.answeredProgressBar.setProgress(answered);
 
         status = getResources().getString(R.string.TestFixed);
-        binding.statusTextView.setText(status);
+        binding.statusTextView.getRoot().setText(status);
 
         location = "زنجیره";
         for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
@@ -216,12 +217,12 @@ public class TestActivity extends AppCompatActivity {
         }
 
         locationSum = "185" + " / "  + location;
-        binding.locationSumTextView.setText(locationSum);
+        binding.locationSumTextView.getRoot().setText(locationSum);
 
         new Handler().postDelayed(() -> {
             binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
             decorator(false);
-        }, 2000);
+        }, 1000);
     }
 
     private void setWidgets(boolean spinner, boolean textView) {
@@ -235,7 +236,7 @@ public class TestActivity extends AppCompatActivity {
 
         if (textView) {
             locationSum = "185" + " / "  + location;
-            binding.locationSumTextView.setText(locationSum);
+            binding.locationSumTextView.getRoot().setText(locationSum);
         }
     }
 
@@ -299,15 +300,7 @@ public class TestActivity extends AppCompatActivity {
                 navigator(R.id.testPictoralFragment);
                 break;
         }
-
-        for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
-            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
-                binding.locationIncludeLayout.selectSpinner.setSelection(i);
-            }
-        }
-
-        locationSum = "185" + " / "  + location;
-        binding.locationSumTextView.setText(locationSum);
+        setWidgets(true, true);
     }
 
 }

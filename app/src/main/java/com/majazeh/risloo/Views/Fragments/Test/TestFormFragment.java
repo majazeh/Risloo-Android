@@ -44,19 +44,19 @@ public class TestFormFragment extends Fragment {
     private void initializer() {
         formsAdapter = new FormsAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._16sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.FormFragmentTitle));
         binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.FormFragmentDescription));
 
-        InitManager.recyclerView(binding.formsRecyclerView, itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.listRecyclerView.getRoot(), itemDecoration, layoutManager);
     }
 
     private void setData() {
 //        formsAdapter.setForms(null);
-        binding.formsRecyclerView.setAdapter(formsAdapter);
+        binding.listRecyclerView.getRoot().setAdapter(formsAdapter);
     }
 
     @Override

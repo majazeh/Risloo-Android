@@ -52,35 +52,23 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
-        <TextView
+        <include
             android:id="@+id/status_textView"
+            layout="@layout/component_test_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:gravity="start"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
             app:layout_constraintBottom_toTopOf="@id/backward_imageView"
-            app:layout_constraintStart_toStartOf="@id/header_includeLayout"
-            tools:text="بدون تغییر" />
+            app:layout_constraintStart_toStartOf="@id/header_includeLayout" />
 
-        <TextView
+        <include
             android:id="@+id/location_sum_textView"
+            layout="@layout/component_test_description"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/_8sdp"
-            android:gravity="start"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
             app:layout_constraintBottom_toTopOf="@id/backward_imageView"
-            app:layout_constraintEnd_toEndOf="@id/header_includeLayout"
-            tools:text="1/185" />
+            app:layout_constraintEnd_toEndOf="@id/header_includeLayout" />
 
         <include
             android:id="@+id/backward_imageView"

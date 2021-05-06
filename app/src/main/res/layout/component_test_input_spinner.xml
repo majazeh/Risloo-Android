@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_16sdp">
+    tools:layout_margin="@dimen/_12sdp">
 
     <Spinner
         android:id="@+id/select_spinner"
@@ -32,6 +32,6 @@
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
-        app:tint="@color/Gray600" />
+        app:tint="@color/Gray500" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,13 +6,13 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_16sdp">
+    tools:layout_margin="@dimen/_12sdp">
 
     <TextView
         android:id="@+id/title_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:gravity="center|right"
+        android:gravity="center|start"
         android:textSize="@dimen/_14ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -27,7 +27,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_6sdp"
-        android:gravity="center|right"
+        android:gravity="center|start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray600"
