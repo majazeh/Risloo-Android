@@ -70,7 +70,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.userFragment)).widget(holder.binding.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            IntentManager.email(activity, new String[]{"a.dehbashi@gmail.com"}, "", "", activity.getResources().getString(R.string.AppChooserSelect));
+            IntentManager.email(activity, new String[]{"a.dehbashi@gmail.com"}, "", "", "");
         }).widget(holder.binding.emailImageView);
 
         ClickManager.onDelayedClickListener(() -> {

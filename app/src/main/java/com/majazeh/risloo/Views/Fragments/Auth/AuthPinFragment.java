@@ -58,15 +58,15 @@ public class AuthPinFragment extends Fragment {
     private void initializer() {
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PinFragmentTitle));
 
-        binding.pinIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PinFragmentInput));
+        binding.pinEditText.getRoot().setHint(getResources().getString(R.string.PinFragmentInput));
 
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PinFragmentButton));
 
         binding.timerTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
-        binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
-        binding.passwordRecoverTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecover));
+        binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
+        binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
+        binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
     }
 
     private void detector() {
@@ -77,16 +77,16 @@ public class AuthPinFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.pinIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.pinEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.pinIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.pinIncludeLayout.inputEditText);
+                if (!binding.pinEditText.getRoot().hasFocus()) {
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.pinEditText.getRoot());
                 }
             }
             return false;
         });
 
-        binding.pinIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
+        binding.pinEditText.getRoot().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -94,8 +94,8 @@ public class AuthPinFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (binding.pinIncludeLayout.inputEditText.length() == 6) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
+                if (binding.pinEditText.getRoot().length() == 6) {
+                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
                     doWork("pin");
                 }
             }
@@ -135,31 +135,31 @@ public class AuthPinFragment extends Fragment {
         };
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.pinIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.pinEditText.getRoot().length() == 0) {
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinIncludeLayout.inputEditText, binding.pinIncludeLayout.errorImageView, binding.pinIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
                 doWork("pin");
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setData() {
         if (!((AuthActivity) requireActivity()).singleton.getMobile().equals("")) {
             mobile = ((AuthActivity) requireActivity()).singleton.getMobile();
-            binding.mobileIncludeLayout.getRoot().setText(mobile);
+            binding.mobileTextView.getRoot().setText(mobile);
         } else {
-            binding.mobileIncludeLayout.getRoot().setText(mobile);
-            binding.mobileIncludeLayout.getRoot().setVisibility(View.GONE);
+            binding.mobileTextView.getRoot().setText(mobile);
+            binding.mobileTextView.getRoot().setVisibility(View.GONE);
         }
 
         binding.guideIncludeLayout.guideTextView.setText(requireActivity().getResources().getString(R.string.PinFragmentGuide1) + " " + mobile + " " + requireActivity().getResources().getString(R.string.PinFragmentGuide2));
 
-        binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentLink), 24, 34, clickableSpan));
+        binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
 
         countDownTimer.start();
     }
@@ -183,12 +183,12 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void doWork(String method) {
-        pin = binding.pinIncludeLayout.inputEditText.getText().toString().trim();
+        pin = binding.pinEditText.getRoot().getText().toString().trim();
 
         if (method.equals("pin")) {
-            // TODO : Call Work Method
+            // TODO : call work method and place pin as it's input
         } else if (method.equals("verification")) {
-            // TODO : Call Work Method
+            // TODO : call work method and place pin as it's input
             showTimer(true);
         }
     }

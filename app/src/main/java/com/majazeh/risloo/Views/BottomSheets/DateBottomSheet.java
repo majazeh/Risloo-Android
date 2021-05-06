@@ -206,7 +206,7 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
         binding.monthNumberPicker.setMinValue(1);
         binding.monthNumberPicker.setMaxValue(12);
         binding.monthNumberPicker.setValue(month);
-        binding.monthNumberPicker.setDisplayedValues(requireActivity().getResources().getStringArray(R.array.JalaliMonths));
+        binding.monthNumberPicker.setDisplayedValues(requireActivity().getResources().getStringArray(R.array.YearMonths));
 
         binding.dayNumberPicker.setMinValue(1);
         binding.dayNumberPicker.setMaxValue(31);

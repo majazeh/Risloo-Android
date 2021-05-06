@@ -9,31 +9,31 @@
     tools:layout_margin="@dimen/_24sdp">
 
     <ImageView
-        android:id="@+id/guide_imageView"
+        android:id="@+id/error_imageView"
         android:layout_width="@dimen/_8sdp"
         android:layout_height="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_info_circle_light"
+        android:src="@drawable/ic_exclamation_triangle_light"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/guide_textView"
-        app:tint="@color/Gray500" />
+        app:layout_constraintTop_toTopOf="@id/error_textView"
+        app:tint="@color/Red500" />
 
     <TextView
-        android:id="@+id/guide_textView"
+        android:id="@+id/error_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:gravity="start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/Red600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_light"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guide_imageView"
+        app:layout_constraintStart_toEndOf="@id/error_imageView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="متن راهنما" />
+        tools:text="متن خطا" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

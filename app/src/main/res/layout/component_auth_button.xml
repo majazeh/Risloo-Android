@@ -13,5 +13,5 @@
     android:fontFamily="@font/dana_medium"
     android:background="@drawable/draw_16sdp_solid_blue500"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_16sdp"
+    tools:layout_margin="@dimen/_24sdp"
     tools:text="دکمه" />

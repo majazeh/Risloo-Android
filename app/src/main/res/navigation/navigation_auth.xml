@@ -11,9 +11,6 @@
         android:label="@string/LoginFragmentTitle"
         tools:layout="@layout/fragment_auth_login" >
         <action
-            android:id="@+id/action_authLoginFragment_to_authMobileFragment"
-            app:destination="@id/authMobileFragment" />
-        <action
             android:id="@+id/action_authLoginFragment_to_authPasswordChangeFragment"
             app:destination="@id/authPasswordChangeFragment" />
         <action
@@ -32,12 +29,6 @@
             android:id="@+id/action_authLoginFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />
     </fragment>
-
-    <fragment
-        android:id="@+id/authMobileFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthMobileFragment"
-        android:label="@string/MobileFragmentTitle"
-        tools:layout="@layout/fragment_auth_mobile" />
 
     <fragment
         android:id="@+id/authPasswordChangeFragment"

@@ -44,14 +44,17 @@ public class AuthPasswordRecoverFragment extends Fragment {
     private void initializer() {
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordRecoverFragmentTitle));
 
-        binding.mobileIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
+        binding.mobileEditText.getRoot().setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
 
         binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.PasswordRecoverFragmentGuide));
 
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordRecoverFragmentButton));
 
-        binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
-        binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
+        binding.loginHelperTextView.getRoot().setText(getResources().getString(R.string.AuthLoginHelper));
+        binding.registerHelperTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterHelper));
+
+        binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
+        binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
     }
 
     private void detector() {
@@ -62,16 +65,16 @@ public class AuthPasswordRecoverFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.mobileEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
+                if (!binding.mobileEditText.getRoot().hasFocus()) {
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileEditText.getRoot());
                 }
             }
             return false;
         });
 
-        binding.mobileIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
+        binding.mobileEditText.getRoot().addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -79,8 +82,8 @@ public class AuthPasswordRecoverFragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (binding.mobileIncludeLayout.inputEditText.length() == 11 && !binding.mobileIncludeLayout.inputEditText.getText().toString().contains("+")) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
+                if (binding.mobileEditText.getRoot().length() == 11 && !binding.mobileEditText.getRoot().getText().toString().contains("+")) {
+                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
                     doWork();
                 }
             }
@@ -92,22 +95,22 @@ public class AuthPasswordRecoverFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.mobileEditText.getRoot().length() == 0) {
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileIncludeLayout.errorImageView, binding.mobileIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerLinkTextView.getRoot());
     }
 
     private void doWork() {
-        mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
+        mobile = binding.mobileEditText.getRoot().getText().toString().trim();
 
-        // TODO : Call Work Method
+        // TODO : call work method and place mobile as it's input
     }
 
     @Override

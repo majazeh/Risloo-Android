@@ -380,7 +380,7 @@ public class CreateScheduleSessionFragment extends Fragment {
             startAccurateTime = ((MainActivity) requireActivity()).singleton.getStartTime();
             binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(startAccurateTime);
         } else {
-            startAccurateTime = getResources().getString(R.string.AppTimeDefault);
+            startAccurateTime = getResources().getString(R.string.AppDefaultTime);
             binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(startAccurateTime);
         }
 
@@ -391,7 +391,7 @@ public class CreateScheduleSessionFragment extends Fragment {
             startAccurateDate = ((MainActivity) requireActivity()).singleton.getStartDate();
             binding.scheduledIncludeLayout.startAccurateDateTextView.setText(startAccurateDate);
         } else {
-            startAccurateDate = getResources().getString(R.string.AppDateDefault);
+            startAccurateDate = getResources().getString(R.string.AppDefaultDate);
             binding.scheduledIncludeLayout.startAccurateDateTextView.setText(startAccurateDate);
         }
 
@@ -448,7 +448,7 @@ public class CreateScheduleSessionFragment extends Fragment {
             endAccurateTime = ((MainActivity) requireActivity()).singleton.getStartTime();
             binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(endAccurateTime);
         } else {
-            endAccurateTime = getResources().getString(R.string.AppTimeDefault);
+            endAccurateTime = getResources().getString(R.string.AppDefaultTime);
             binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(endAccurateTime);
         }
 
@@ -459,7 +459,7 @@ public class CreateScheduleSessionFragment extends Fragment {
             endAccurateDate = ((MainActivity) requireActivity()).singleton.getStartDate();
             binding.scheduledIncludeLayout.endAccurateDateTextView.setText(endAccurateDate);
         } else {
-            endAccurateDate = getResources().getString(R.string.AppDateDefault);
+            endAccurateDate = getResources().getString(R.string.AppDefaultDate);
             binding.scheduledIncludeLayout.endAccurateDateTextView.setText(endAccurateDate);
         }
 

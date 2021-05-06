@@ -47,15 +47,15 @@ public class AuthSerialFragment extends Fragment {
     private void initializer() {
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentTitle));
 
-        binding.serialIncludeLayout.inputEditText.setHint(getResources().getString(R.string.SerialFragmentInput));
+        binding.serialEditText.getRoot().setHint(getResources().getString(R.string.SerialFragmentInput));
 
         binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.SerialFragmentGuide));
 
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
 
-        binding.dashboardTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthDashboard), 0, 8, getResources().getColor(R.color.Gray900)));
-        binding.dashboardTextView.getRoot().setTextAppearance(requireActivity(), R.style.danaDemiBoldTextStyle);
-        binding.logoutTextView.getRoot().setText(getResources().getString(R.string.AuthLogout));
+        binding.dashboardLinkTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthDashboardLink), 0, 8, getResources().getColor(R.color.Gray800)));
+        binding.dashboardLinkTextView.getRoot().setTextAppearance(requireActivity(), R.style.danaDemiBoldTextStyle);
+        binding.logoutLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLogoutLink));
     }
 
     private void detector() {
@@ -66,29 +66,31 @@ public class AuthSerialFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.serialIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.serialEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.serialIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.serialIncludeLayout.inputEditText);
+                if (!binding.serialEditText.getRoot().hasFocus()) {
+                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.serialEditText.getRoot());
                 }
             }
             return false;
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.serialIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.serialEditText.getRoot().length() == 0) {
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialIncludeLayout.inputEditText, binding.serialIncludeLayout.errorImageView, binding.serialIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardTextView.getRoot());
+        ClickManager.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardLinkTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.logoutTextView.getRoot());
+            // TODO : call logout method
+
+            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment);
+        }).widget(binding.logoutLinkTextView.getRoot());
     }
 
     private void setData() {
@@ -98,7 +100,7 @@ public class AuthSerialFragment extends Fragment {
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (((AuthActivity) requireActivity()).singleton.getName().equals("")) {
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AuthToolbar)));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
             } else {
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
             }
@@ -106,9 +108,9 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void doWork() {
-        serial = binding.serialIncludeLayout.inputEditText.getText().toString().trim();
+        serial = binding.serialEditText.getRoot().getText().toString().trim();
 
-        // TODO : Call Work Method
+        // TODO : call work method and place mobile as it's input
     }
 
     @Override

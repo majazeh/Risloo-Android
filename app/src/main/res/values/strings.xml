@@ -4,26 +4,127 @@
     // App Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="AppName">ریسلو بتا</string>
+    <string name="AppName">ریسلو</string>
+    <string name="AppAlpha">ریسلو آلفا</string>
+    <string name="AppDebug">ریسلو دیباگ</string>
 
     <string name="AppImageContent">عکس</string>
 
-    <string name="AppLoadingProgress">در حال بارگذاري ...</string>
+    <string name="AppInputEmpty">فیلد خالی است.</string>
 
     <string name="AppSearchHint">جستجو</string>
-    <string name="AppSearchEmpty">داده یافت نشد.</string>
-
-    <string name="AppInputEmpty">فیلد خالی است.</string>
+    <string name="AppSearchEmpty">داده یافت نشده است.</string>
 
     <string name="AppFileSelect">انتخاب فايل</string>
     <string name="AppFileEmpty">فايل انتخاب نشده است.</string>
 
-    <string name="AppChooserSelect">ارسال پیام</string>
-
-    <string name="AppDateDefault">1400-01-01</string>
-    <string name="AppTimeDefault">01:00</string>
+    <string name="AppDefaultName">کاربر آزمایشی</string>
+    <string name="AppDefaultDate">1400-01-01</string>
+    <string name="AppDefaultTime">01:00</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
+
+    // Auth Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="AuthHeader">ریسلو</string>
+
+    <string name="AuthLoginHelper">اگر عضو ریسلو هستید و کلمه عبور خود را به‌ یاد دارید روی گزینه ورود کلیک کنید.</string>
+    <string name="AuthRegisterHelper">اگر عضو ریسلو نیستید، روی گزینه عضویت کلیک کنید.</string>
+    <string name="AuthPasswordRecoverHelper">اگر عضو ریسلو هستید و کلمه عبور خود را فراموش کرده‌اید روی گزینه فراموشی کلمه عبور کلیک کنید.</string>
+
+    <string name="AuthLoginLink">ورود</string>
+    <string name="AuthRegisterLink">عضویت</string>
+    <string name="AuthPasswordRecoverLink">فراموشی کلمه عبور</string>
+    <string name="AuthDashboardLink">پیش‌خوان</string>
+    <string name="AuthLogoutLink">خروج</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Splash Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="SplashVersion">نسخه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Auth Fragments
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ---------- Login Fragment ----------
+    */
+
+    <string name="LoginFragmentTitle">ورود</string>
+    <string name="LoginFragmentInput">موبایل</string>
+    <string name="LoginFragmentGuide">برای ورود به ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
+    <string name="LoginFragmentButton">ادامه</string>
+
+    /*
+    ---------- PasswordChange Fragment ----------
+    */
+
+    <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
+    <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
+    <string name="PasswordChangeFragmentGuide">کلمه عبور جدید خود را وارد کرده و روی دکمه تغییر کلیک کنید.</string>
+    <string name="PasswordChangeFragmentButton">تغییر</string>
+
+    /*
+    ---------- Password Fragment ----------
+    */
+
+    <string name="PasswordFragmentTitle">کلمه عبور</string>
+    <string name="PasswordFragmentInput">کلمه عبور</string>
+    <string name="PasswordFragmentGuide">کلمه عبور خود را وارد کرده و روی دکمه ورود کلیک کنید.</string>
+    <string name="PasswordFragmentButton">ورود</string>
+
+    /*
+    ---------- PasswordRecover Fragment ----------
+    */
+
+    <string name="PasswordRecoverFragmentTitle">فراموشی کلمه عبور</string>
+    <string name="PasswordRecoverFragmentInput">موبایل</string>
+    <string name="PasswordRecoverFragmentGuide">اگر کلمه عبور خود را فراموش کرده‌اید، موبایل خود را در فیلد بالا وارد کرده و روی دکمه دریافت کد پیامکی کلیک کنید.</string>
+    <string name="PasswordRecoverFragmentButton">دریافت کد پیامکی</string>
+
+    /*
+    ---------- Pin Fragment ----------
+    */
+
+    <string name="PinFragmentTitle">تأیید موبایل</string>
+    <string name="PinFragmentInput">کد پیامکی</string>
+    <string name="PinFragmentGuide1">یک کد 6 رقمی به شماره</string>
+    <string name="PinFragmentGuide2">پیامک شد. کد پیامک شده را در فیلد مشخص شده وارد کرده و روی دکمه تأیید کلیک کنید.</string>
+    <string name="PinFragmentButton">تأیید</string>
+
+    <string name="PinFragmentResend">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
+    <string name="PinFragmentTimer">کد پیامکی برای شما ارسال شد :</string>
+
+    /*
+    ---------- Register Fragment ----------
+    */
+
+    <string name="RegisterFragmentTitle">عضویت</string>
+    <string name="RegisterFragmentMobile">موبایل</string>
+    <string name="RegisterFragmentGuide">برای عضویت در ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
+    <string name="RegisterFragmentButton">ادامه</string>
+
+    /*
+    ---------- Serial Fragment ----------
+    */
+
+    <string name="SerialFragmentTitle">ورود</string>
+    <string name="SerialFragmentInput">دستور ورودی</string>
+    <string name="SerialFragmentGuide">برای شروع آزمون دستور ورودی خود را در فیلد بالا وارد کرده و روی دکمه بررسی کلیک کنید.</string>
+    <string name="SerialFragmentButton">بررسی</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////     //////////////////////////////////////////////////////////////////////////////////////
+
+
 
     // BottomSheet Strings
     //////////////////////////////////////////////////////////////////////////////////////
@@ -104,6 +205,8 @@
     <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
     <string name="DialogPsychologyHint">جستجو</string>
 
+    <string name="DialogLoadingTitle">در حال بارگذاري ...</string>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Scheduled Strings
@@ -119,132 +222,6 @@
     <string name="HourHint">ساعت و</string>
     <string name="MinuteStartHint">دقیقه قبل تشکیل جلسه</string>
     <string name="MinuteEndHint">دقیقه بعد اتمام جلسه</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Splash Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="SplashVersion">نسخه</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Auth Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="AuthToolbar">کاربر آزمایشی</string>
-    <string name="AuthHeader">ریسلو</string>
-
-    <string name="AuthLogin">ورود</string>
-    <string name="AuthRegister">عضویت</string>
-    <string name="AuthPasswordRecover">فراموشی کلمه عبور</string>
-    <string name="AuthDashboard">پیش‌خوان</string>
-    <string name="AuthLogout">خروج</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Auth Fragments
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    /*
-    ---------- Login Fragment ----------
-    */
-
-    <string name="LoginFragmentTitle">ورود</string>
-
-    <string name="LoginFragmentInput">موبایل</string>
-
-    <string name="LoginFragmentGuide">برای ورود به ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
-
-    <string name="LoginFragmentButton">ادامه</string>
-
-    /*
-    ---------- Mobile Fragment ----------
-    */
-
-    <string name="MobileFragmentTitle">شماره موبایل</string>
-
-    <string name="MobileFragmentInput">موبایل</string>
-
-    <string name="MobileFragmentGuide">موبایل خود را وارد کرده و روی دکمه بررسی کلیک کنید.</string>
-
-    <string name="MobileFragmentButton">بررسی</string>
-
-    /*
-    ---------- PasswordChange Fragment ----------
-    */
-
-    <string name="PasswordChangeFragmentTitle">تغییر کلمه عبور</string>
-
-    <string name="PasswordChangeFragmentInput">کلمه عبور جديد</string>
-
-    <string name="PasswordChangeFragmentGuide">کلمه عبور جدید خود را وارد کرده و روی دکمه ثبت کلیک کنید.</string>
-
-    <string name="PasswordChangeFragmentButton">تغییر</string>
-
-    /*
-    ---------- Password Fragment ----------
-    */
-
-    <string name="PasswordFragmentTitle">کلمه عبور</string>
-
-    <string name="PasswordFragmentInput">کلمه عبور</string>
-
-    <string name="PasswordFragmentGuide">کلمه عبور خود را وارد کرده و روی دکمه ورود کلیک کنید.</string>
-
-    <string name="PasswordFragmentButton">ورود</string>
-
-    /*
-    ---------- PasswordRecover Fragment ----------
-    */
-
-    <string name="PasswordRecoverFragmentTitle">فراموشی کلمه عبور</string>
-
-    <string name="PasswordRecoverFragmentInput">موبایل</string>
-
-    <string name="PasswordRecoverFragmentGuide">اگر کلمه عبور خود را فراموش کرده‌اید، موبایل خود را در فیلد بالا وارد کنید و روی دکمه دریافت کد پیامکی کلیک کنید.</string>
-
-    <string name="PasswordRecoverFragmentButton">دریافت کد پیامکی</string>
-
-    /*
-    ---------- Pin Fragment ----------
-    */
-
-    <string name="PinFragmentTitle">تأیید موبایل</string>
-
-    <string name="PinFragmentInput">کد پیامکی</string>
-
-    <string name="PinFragmentGuide1">یک کد 6 رقمی به شماره</string>
-    <string name="PinFragmentGuide2">پیامک شد. کد پیامک شده را در فیلد مشخص شده وارد کرده و روی دکمه تأیید کلیک کنید.</string>
-
-    <string name="PinFragmentLink">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>
-    <string name="PinFragmentTimer">کد پیامکی برای شما ارسال شد :</string>
-
-    <string name="PinFragmentButton">تأیید</string>
-
-    /*
-    ---------- Register Fragment ----------
-    */
-
-    <string name="RegisterFragmentTitle">عضویت</string>
-
-    <string name="RegisterFragmentMobile">موبایل</string>
-
-    <string name="RegisterFragmentGuide">برای عضویت در ریسلو موبایل خود را در فیلد بالا وارد کرده و روی دکمه ادامه کلیک کنید.</string>
-
-    <string name="RegisterFragmentButton">ادامه</string>
-
-    /*
-    ---------- Serial Fragment ----------
-    */
-
-    <string name="SerialFragmentTitle">ورود</string>
-
-    <string name="SerialFragmentInput">دستور ورودی</string>
-
-    <string name="SerialFragmentGuide">برای شروع آزمون دسنور ورودی خود را در فیلد بالا وارد کرده و روی دکمه بررسی کلیک کنید.</string>
-
-    <string name="SerialFragmentButton">بررسی</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

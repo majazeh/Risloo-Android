@@ -204,7 +204,7 @@ public class EditPersonalFragment extends Fragment {
             birthday = ((MainActivity) requireActivity()).singleton.getBirthday();
             binding.birthdayIncludeLayout.selectTextView.setText(birthday);
         } else {
-            birthday = getResources().getString(R.string.AppDateDefault);
+            birthday = getResources().getString(R.string.AppDefaultDate);
             binding.birthdayIncludeLayout.selectTextView.setText(birthday);
         }
 

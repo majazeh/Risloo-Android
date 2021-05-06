@@ -119,7 +119,7 @@ public class EditSessionTimeFragment extends Fragment {
             startTime = ((MainActivity) requireActivity()).singleton.getStartTime();
             binding.startTimeIncludeLayout.selectTextView.setText(startTime);
         } else {
-            startTime = getResources().getString(R.string.AppTimeDefault);
+            startTime = getResources().getString(R.string.AppDefaultTime);
             binding.startTimeIncludeLayout.selectTextView.setText(startTime);
         }
 
@@ -135,7 +135,7 @@ public class EditSessionTimeFragment extends Fragment {
             startDate = ((MainActivity) requireActivity()).singleton.getStartDate();
             binding.startDateIncludeLayout.selectTextView.setText(startDate);
         } else {
-            startDate = getResources().getString(R.string.AppDateDefault);
+            startDate = getResources().getString(R.string.AppDefaultDate);
             binding.startDateIncludeLayout.selectTextView.setText(startDate);
         }
 

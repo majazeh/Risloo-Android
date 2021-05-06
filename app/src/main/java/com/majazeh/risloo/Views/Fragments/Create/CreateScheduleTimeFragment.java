@@ -234,7 +234,7 @@ public class CreateScheduleTimeFragment extends Fragment {
             startTime = ((MainActivity) requireActivity()).singleton.getStartTime();
             binding.startTimeIncludeLayout.selectTextView.setText(startTime);
         } else {
-            startTime = getResources().getString(R.string.AppTimeDefault);
+            startTime = getResources().getString(R.string.AppDefaultTime);
             binding.startTimeIncludeLayout.selectTextView.setText(startTime);
         }
 
@@ -268,7 +268,7 @@ public class CreateScheduleTimeFragment extends Fragment {
             specifiedDate = ((MainActivity) requireActivity()).singleton.getStartDate();
             binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
         } else {
-            specifiedDate = getResources().getString(R.string.AppDateDefault);
+            specifiedDate = getResources().getString(R.string.AppDefaultDate);
             binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
         }
 
@@ -322,7 +322,7 @@ public class CreateScheduleTimeFragment extends Fragment {
             periodStartDate = ((MainActivity) requireActivity()).singleton.getStartDate();
             binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
         } else {
-            periodStartDate = getResources().getString(R.string.AppDateDefault);
+            periodStartDate = getResources().getString(R.string.AppDefaultDate);
             binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
         }
 
@@ -334,7 +334,7 @@ public class CreateScheduleTimeFragment extends Fragment {
             periodEndDate = ((MainActivity) requireActivity()).singleton.getStartDate();
             binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
         } else {
-            periodEndDate = getResources().getString(R.string.AppDateDefault);
+            periodEndDate = getResources().getString(R.string.AppDefaultDate);
             binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
         }
 

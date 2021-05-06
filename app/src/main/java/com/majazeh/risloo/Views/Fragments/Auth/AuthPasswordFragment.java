@@ -59,9 +59,9 @@ public class AuthPasswordFragment extends Fragment {
 
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentButton));
 
-        binding.loginTextView.getRoot().setText(getResources().getString(R.string.AuthLogin));
-        binding.registerTextView.getRoot().setText(getResources().getString(R.string.AuthRegister));
-        binding.passwordRecoverTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecover));
+        binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
+        binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
+        binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
     }
 
     private void detector() {
@@ -139,32 +139,32 @@ public class AuthPasswordFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordIncludeLayout.errorImageView, binding.passwordIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordIncludeLayout.errorImageView, binding.passwordIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setData() {
         if (!((AuthActivity) requireActivity()).singleton.getMobile().equals("")) {
             mobile = ((AuthActivity) requireActivity()).singleton.getMobile();
-            binding.mobileIncludeLayout.getRoot().setText(mobile);
+            binding.mobileTextView.getRoot().setText(mobile);
         } else {
-            binding.mobileIncludeLayout.getRoot().setText(mobile);
-            binding.mobileIncludeLayout.getRoot().setVisibility(View.GONE);
+            binding.mobileTextView.getRoot().setText(mobile);
+            binding.mobileTextView.getRoot().setVisibility(View.GONE);
         }
     }
 
     private void doWork() {
         password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        // TODO : call work method and place password as it's input
     }
 
     @Override

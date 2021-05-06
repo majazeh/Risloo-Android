@@ -30,7 +30,7 @@
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_16sdp"
         android:gravity="start"
-        android:text="@string/AppLoadingProgress"
+        android:text="@string/DialogLoadingTitle"
         android:textSize="@dimen/_13ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray800"
