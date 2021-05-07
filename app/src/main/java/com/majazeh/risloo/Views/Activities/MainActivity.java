@@ -379,9 +379,9 @@ public class MainActivity extends AppCompatActivity {
                     CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCenterFragment != null) {
                         if (requestCode == 300) {
-                            ResultManager.galleryResult(this, data, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.avatarCircleImageView, null);
+                            ResultManager.galleryResult(this, data, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.selectCircleImageView, null);
                         } else if (requestCode == 400) {
-                            ResultManager.cameraResult(this, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.avatarCircleImageView, null);
+                            ResultManager.cameraResult(this, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.selectCircleImageView, null);
                         }
                     }
                     break;

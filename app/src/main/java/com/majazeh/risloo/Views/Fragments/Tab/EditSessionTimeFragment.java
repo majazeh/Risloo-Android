@@ -95,19 +95,19 @@ public class EditSessionTimeFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (startTime.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeIncludeLayout.errorImageView, binding.startTimeIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.durationIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationIncludeLayout.errorImageView, binding.durationIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
             }
             if (startDate.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startDateIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0 && !startDate.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeIncludeLayout.errorImageView, binding.startTimeIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationIncludeLayout.errorImageView, binding.durationIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startDateIncludeLayout.selectTextView, binding.startDateIncludeLayout.errorImageView, binding.startDateIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startDateIncludeLayout.selectTextView, null, null);
 
                 doWork();
             }

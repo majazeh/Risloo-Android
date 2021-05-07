@@ -98,11 +98,11 @@ public class CreateCaseUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceIncludeLayout.errorImageView, binding.referenceIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, null, null, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceIncludeLayout.errorImageView, binding.referenceIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, null, null);
 
                 doWork();
             }

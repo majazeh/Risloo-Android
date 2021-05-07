@@ -30,7 +30,7 @@
 
             <include
                 android:id="@+id/type_includeLayout"
-                layout="@layout/component_input_spinner"
+                layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -42,7 +42,7 @@
 
             <include
                 android:id="@+id/case_includeLayout"
-                layout="@layout/component_input_select"
+                layout="@layout/component_main_input_select"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -63,7 +63,7 @@
 
             <include
                 android:id="@+id/count_includeLayout"
-                layout="@layout/component_input_number"
+                layout="@layout/component_main_input_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -74,7 +74,7 @@
 
             <include
                 android:id="@+id/selection_includeLayout"
-                layout="@layout/component_input_spinner"
+                layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"

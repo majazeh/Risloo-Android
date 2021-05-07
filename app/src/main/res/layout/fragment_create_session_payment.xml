@@ -29,7 +29,7 @@
 
             <include
                 android:id="@+id/payment_includeLayout"
-                layout="@layout/component_input_spinner"
+                layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"

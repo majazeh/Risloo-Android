@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_16sdp">
+    tools:layout_margin="@dimen/_12sdp">
 
     <TextView
         android:id="@+id/header_textView"
@@ -18,9 +18,9 @@
         android:textColor="@color/Gray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
+        app:layout_constraintBottom_toTopOf="@id/top_barrier"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@+id/top_barrier"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toStartOf="@id/select_textView"
         tools:text="سرتيتر" />
 
     <androidx.constraintlayout.widget.Barrier
@@ -28,7 +28,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:barrierDirection="top"
-        app:constraint_referenced_ids="select_textView,name_textView" />
+        app:constraint_referenced_ids="select_textView, name_textView" />
 
     <TextView
         android:id="@+id/select_textView"
@@ -46,8 +46,7 @@
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_2sdp_solid_gray100"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_textView"
-        app:layout_constraintBottom_toTopOf="@id/error_textView"/>
+        app:layout_constraintTop_toBottomOf="@id/header_textView" />
 
     <TextView
         android:id="@+id/name_textView"
@@ -62,46 +61,9 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="@id/select_textView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/select_textView"
         app:layout_constraintTop_toTopOf="@id/select_textView" />
-
-    <androidx.constraintlayout.widget.Barrier
-        android:id="@+id/bottom_barrier"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:barrierDirection="bottom"
-        app:constraint_referenced_ids="select_textView,name_textView" />
-
-    <ImageView
-        android:id="@+id/error_imageView"
-        android:layout_width="@dimen/_8sdp"
-        android:layout_height="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_exclamation_triangle_light"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/error_textView"
-        app:tint="@color/Red500" />
-
-    <TextView
-        android:id="@+id/error_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:gravity="start"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Red500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_light"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@+id/error_imageView"
-        app:layout_constraintTop_toBottomOf="@+id/bottom_barrier"
-        tools:text="خطا" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

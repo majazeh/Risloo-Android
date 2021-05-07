@@ -74,11 +74,11 @@ public class EditSessionPaymentFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentIncludeLayout.errorImageView, binding.paymentIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentIncludeLayout.errorImageView, binding.paymentIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, null, null);
 
                 doWork();
             }

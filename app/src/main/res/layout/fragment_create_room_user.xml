@@ -28,7 +28,7 @@
 
             <include
                 android:id="@+id/mobile_includeLayout"
-                layout="@layout/component_input_number"
+                layout="@layout/component_main_input_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -40,7 +40,7 @@
 
             <include
                 android:id="@+id/name_includeLayout"
-                layout="@layout/component_input_text"
+                layout="@layout/component_main_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"

@@ -135,15 +135,15 @@ public class CreateScheduleReferenceFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (type.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeIncludeLayout.errorImageView, binding.typeIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
             }
             if (selection.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionIncludeLayout.errorImageView, binding.selectionIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!type.equals("") && !selection.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeIncludeLayout.errorImageView, binding.typeIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionIncludeLayout.errorImageView, binding.selectionIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, null, null);
 
                 doWork();
             }

@@ -28,7 +28,7 @@
 
             <include
                 android:id="@+id/reference_includeLayout"
-                layout="@layout/component_input_recycler"
+                layout="@layout/component_main_input_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_12sdp"

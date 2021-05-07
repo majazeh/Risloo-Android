@@ -220,7 +220,7 @@
 
         <include
             android:id="@+id/public_includeLayout"
-            layout="@layout/component_input_multi"
+            layout="@layout/component_main_input_multi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
@@ -303,7 +303,7 @@
 
         <include
             android:id="@+id/private_includeLayout"
-            layout="@layout/component_input_multi"
+            layout="@layout/component_main_input_multi"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"

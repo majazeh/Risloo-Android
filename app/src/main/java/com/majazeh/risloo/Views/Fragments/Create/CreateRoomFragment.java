@@ -75,11 +75,11 @@ public class CreateRoomFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (psychologyId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyIncludeLayout.errorImageView, binding.psychologyIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!psychologyId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyIncludeLayout.errorImageView, binding.psychologyIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, null, null);
 
                 doWork();
             }
