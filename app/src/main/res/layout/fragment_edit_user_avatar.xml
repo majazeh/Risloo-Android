@@ -29,7 +29,7 @@
 
             <include
                 android:id="@+id/avatar_includeLayout"
-                layout="@layout/component_avatar_borderless"
+                layout="@layout/component_main_avatar_borderless_big"
                 android:layout_width="@dimen/_82sdp"
                 android:layout_height="@dimen/_82sdp"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -39,7 +39,7 @@
 
             <include
                 android:id="@+id/avatar_guideLayout"
-                layout="@layout/component_guide_text"
+                layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
@@ -54,7 +54,7 @@
 
         <include
             android:id="@+id/edit_textView"
-            layout="@layout/component_button_rect_32sdp"
+            layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"

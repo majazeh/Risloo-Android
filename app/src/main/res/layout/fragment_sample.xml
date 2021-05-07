@@ -91,7 +91,7 @@
 
             <include
                 android:id="@+id/secondary_textView"
-                layout="@layout/component_button_rect_28sdp"
+                layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginEnd="@dimen/_6sdp"
@@ -103,7 +103,7 @@
 
             <include
                 android:id="@+id/primary_textView"
-                layout="@layout/component_button_rect_28sdp"
+                layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginEnd="@dimen/_8sdp"
@@ -116,7 +116,7 @@
 
         <include
             android:id="@+id/profiles_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -157,7 +157,7 @@
 
         <include
             android:id="@+id/fields_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"

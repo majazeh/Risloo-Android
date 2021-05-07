@@ -49,7 +49,7 @@
 
                 <include
                     android:id="@+id/avatar_includeLayout"
-                    layout="@layout/component_avatar_border"
+                    layout="@layout/component_main_avatar_border_big"
                     android:layout_width="@dimen/_86sdp"
                     android:layout_height="@dimen/_86sdp"
                     android:layout_marginStart="@dimen/_12sdp"
@@ -141,7 +141,7 @@
 
         <include
             android:id="@+id/rooms_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -179,7 +179,7 @@
 
         <include
             android:id="@+id/cases_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -234,7 +234,7 @@
 
         <include
             android:id="@+id/samples_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"

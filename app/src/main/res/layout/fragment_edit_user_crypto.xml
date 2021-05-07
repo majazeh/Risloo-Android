@@ -230,7 +230,7 @@
 
         <include
             android:id="@+id/public_edit_textView"
-            layout="@layout/component_button_rect_32sdp"
+            layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
@@ -313,7 +313,7 @@
 
         <include
             android:id="@+id/private_edit_textView"
-            layout="@layout/component_button_rect_32sdp"
+            layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"

@@ -15,11 +15,11 @@
         android:gravity="center"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray700"
+        android:textColor="@color/Gray800"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/separator_view"
+        app:layout_constraintStart_toEndOf="@id/separator_view"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="عنوان" />
 
@@ -35,9 +35,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@+id/title_textView"
-        app:layout_constraintStart_toEndOf="@+id/title_textView"
-        app:layout_constraintTop_toTopOf="@+id/title_textView"
+        app:layout_constraintBottom_toBottomOf="@id/title_textView"
+        app:layout_constraintStart_toEndOf="@id/title_textView"
+        app:layout_constraintTop_toTopOf="@id/title_textView"
         tools:text="(5)" />
 
     <View

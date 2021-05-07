@@ -49,7 +49,7 @@
 
                 <include
                     android:id="@+id/avatar_includeLayout"
-                    layout="@layout/component_avatar_border"
+                    layout="@layout/component_main_avatar_border_big"
                     android:layout_width="@dimen/_86sdp"
                     android:layout_height="@dimen/_86sdp"
                     android:layout_marginStart="@dimen/_12sdp"
@@ -59,7 +59,7 @@
 
                 <include
                     android:id="@+id/users_imageView"
-                    layout="@layout/component_button_oval_28sdp"
+                    layout="@layout/component_main_button_oval_mid"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
@@ -69,7 +69,7 @@
 
                 <include
                     android:id="@+id/schedules_imageView"
-                    layout="@layout/component_button_oval_28sdp"
+                    layout="@layout/component_main_button_oval_mid"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
@@ -80,7 +80,7 @@
 
                 <include
                     android:id="@+id/profile_imageView"
-                    layout="@layout/component_button_oval_28sdp"
+                    layout="@layout/component_main_button_oval_mid"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_6sdp"
@@ -91,7 +91,7 @@
 
                 <include
                     android:id="@+id/edit_imageView"
-                    layout="@layout/component_button_oval_28sdp"
+                    layout="@layout/component_main_button_oval_mid"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
@@ -101,7 +101,7 @@
 
                 <include
                     android:id="@+id/status_textView"
-                    layout="@layout/component_button_rect_28sdp"
+                    layout="@layout/component_main_button_rect_mid"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
@@ -226,7 +226,7 @@
 
         <include
             android:id="@+id/header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -235,7 +235,7 @@
 
         <include
             android:id="@+id/search_includeLayout"
-            layout="@layout/component_index_search"
+            layout="@layout/component_main_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
@@ -245,7 +245,7 @@
 
         <include
             android:id="@+id/add_schedule_imageView"
-            layout="@layout/component_button_oval_28sdp"
+            layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"
@@ -256,7 +256,7 @@
 
         <include
             android:id="@+id/add_imageView"
-            layout="@layout/component_button_oval_28sdp"
+            layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"

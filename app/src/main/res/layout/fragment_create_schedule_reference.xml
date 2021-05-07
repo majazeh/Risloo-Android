@@ -53,7 +53,7 @@
 
             <include
                 android:id="@+id/bulk_session_checkBox"
-                layout="@layout/component_check_box"
+                layout="@layout/component_main_checkbox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_8sdp"
@@ -88,7 +88,7 @@
 
         <include
             android:id="@+id/create_textView"
-            layout="@layout/component_button_rect_32sdp"
+            layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"

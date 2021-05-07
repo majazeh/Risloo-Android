@@ -18,7 +18,7 @@
 
         <include
             android:id="@+id/header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/_12sdp"
@@ -27,7 +27,7 @@
 
         <include
             android:id="@+id/search_includeLayout"
-            layout="@layout/component_index_search"
+            layout="@layout/component_main_index_search"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
@@ -37,7 +37,7 @@
 
         <include
             android:id="@+id/add_imageView"
-            layout="@layout/component_button_oval_28sdp"
+            layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginLeft="@dimen/_12sdp"

@@ -13,7 +13,7 @@
 
     <include
         android:id="@+id/menu_imageView"
-        layout="@layout/component_main_button"
+        layout="@layout/component_main_button_square"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_12sdp"
@@ -33,7 +33,7 @@
 
     <include
         android:id="@+id/notification_imageView"
-        layout="@layout/component_main_button"
+        layout="@layout/component_main_button_square"
         android:layout_width="@dimen/_36sdp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_4sdp"

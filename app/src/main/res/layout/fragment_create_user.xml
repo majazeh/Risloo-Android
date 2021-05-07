@@ -60,7 +60,7 @@
 
             <include
                 android:id="@+id/username_guideLayout"
-                layout="@layout/component_guide_text"
+                layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_6sdp"
@@ -100,7 +100,7 @@
 
             <include
                 android:id="@+id/password_guideLayout"
-                layout="@layout/component_guide_text"
+                layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_6sdp"
@@ -110,7 +110,7 @@
 
             <include
                 android:id="@+id/status_includeLayout"
-                layout="@layout/component_radio_vertical_three"
+                layout="@layout/component_main_radio_ver_three"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -120,7 +120,7 @@
 
             <include
                 android:id="@+id/type_includeLayout"
-                layout="@layout/component_radio_vertical_two"
+                layout="@layout/component_main_radio_ver_two"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
@@ -130,7 +130,7 @@
 
             <include
                 android:id="@+id/gender_includeLayout"
-                layout="@layout/component_radio_vertical_two"
+                layout="@layout/component_main_radio_ver_two"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
@@ -144,7 +144,7 @@
 
         <include
             android:id="@+id/create_textView"
-            layout="@layout/component_button_rect_32sdp"
+            layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginBottom="@dimen/_12sdp"

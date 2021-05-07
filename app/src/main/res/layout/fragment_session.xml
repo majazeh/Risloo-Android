@@ -133,7 +133,7 @@
 
             <include
                 android:id="@+id/edit_textView"
-                layout="@layout/component_button_rect_28sdp"
+                layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
@@ -146,7 +146,7 @@
 
         <include
             android:id="@+id/report_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -183,7 +183,7 @@
 
             <include
                 android:id="@+id/report_action_textView"
-                layout="@layout/component_button_rect_28sdp"
+                layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
@@ -196,7 +196,7 @@
 
         <include
             android:id="@+id/psychologists_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -234,7 +234,7 @@
 
         <include
             android:id="@+id/references_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -272,7 +272,7 @@
 
         <include
             android:id="@+id/practices_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -281,7 +281,7 @@
 
         <include
             android:id="@+id/practices_add_imageView"
-            layout="@layout/component_button_oval_28sdp"
+            layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             app:layout_constraintBottom_toBottomOf="@+id/practices_header_includeLayout"
@@ -336,7 +336,7 @@
 
         <include
             android:id="@+id/samples_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -345,7 +345,7 @@
 
         <include
             android:id="@+id/samples_add_imageView"
-            layout="@layout/component_button_oval_28sdp"
+            layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             app:layout_constraintBottom_toBottomOf="@+id/samples_header_includeLayout"

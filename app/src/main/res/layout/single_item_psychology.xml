@@ -20,7 +20,7 @@
 
         <include
             android:id="@+id/avatar_includeLayout"
-            layout="@layout/component_avatar_borderless2"
+            layout="@layout/component_main_avatar_borderless_small"
             android:layout_width="@dimen/_52sdp"
             android:layout_height="@dimen/_52sdp"
             app:layout_constraintBottom_toBottomOf="parent"

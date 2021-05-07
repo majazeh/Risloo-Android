@@ -72,7 +72,7 @@
 
         <include
             android:id="@+id/backward_imageView"
-            layout="@layout/component_test_button"
+            layout="@layout/component_test_button_square"
             android:layout_width="@dimen/_36sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_marginBottom="@dimen/_12sdp"
@@ -81,7 +81,7 @@
 
         <include
             android:id="@+id/forward_imageView"
-            layout="@layout/component_test_button"
+            layout="@layout/component_test_button_square"
             android:layout_width="@dimen/_36sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_marginStart="@dimen/_4sdp"

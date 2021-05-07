@@ -59,7 +59,7 @@
 
             <include
                 android:id="@+id/avatars_includeLayout"
-                layout="@layout/component_avatar_multi"
+                layout="@layout/component_main_avatar_multi"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
@@ -145,7 +145,7 @@
 
             <include
                 android:id="@+id/edit_textView"
-                layout="@layout/component_button_oval_28sdp"
+                layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginEnd="@dimen/_4sdp"
@@ -155,7 +155,7 @@
 
             <include
                 android:id="@+id/link_textView"
-                layout="@layout/component_button_multi_28sdp"
+                layout="@layout/component_main_button_multi_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
@@ -168,7 +168,7 @@
 
         <include
             android:id="@+id/references_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -206,7 +206,7 @@
 
         <include
             android:id="@+id/scales_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
@@ -261,7 +261,7 @@
 
         <include
             android:id="@+id/samples_header_includeLayout"
-            layout="@layout/component_index_header"
+            layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
