@@ -98,11 +98,11 @@ public class CreateCaseUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorIncludeLayout.errorImageView, binding.referenceErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorIncludeLayout.errorImageView, binding.referenceErrorIncludeLayout.errorTextView);
 
                 doWork();
             }
@@ -147,6 +147,15 @@ public class CreateCaseUserFragment extends Fragment {
                         referencesAdapter.addItem(item);
                     else
                         referencesAdapter.removeItem(position);
+
+                    if (referencesAdapter.getIds().size() != 0) {
+                        binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
+                        binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                    } else {
+                        binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
+                        binding.referenceIncludeLayout.countTextView.setText("");
+                    }
+
                     break;
             }
         } catch (JSONException e) {

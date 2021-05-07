@@ -194,11 +194,25 @@
 
     <string name="CreateCaseFragmentTitle">ساخت پرونده درمانی</string>
 
+    <string name="CreateCaseFragmentRoomHeader">اتاق درمان</string>
+    <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
+    <string name="CreateCaseFragmentSituationHeader">مسئله</string>
+
+    <string name="CreateCaseFragmentReferenceHint">انتخاب مراجع از طریق جستجوی موبایل یا نام</string>
+
+    <string name="CreateCaseFragmentButton">ساخت</string>
+
     /*
     ---------- CreateCaseUser Fragment ----------
     */
 
     <string name="CreateCaseUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateCaseUserFragmentReferenceHeader">مراجع</string>
+
+    <string name="CreateCaseUserFragmentReferenceHint">انتخاب مراجع</string>
+
+    <string name="CreateCaseUserFragmentButton">ثبت</string>
 
     /*
     ---------- CreateCenter Fragment ----------
@@ -206,11 +220,40 @@
 
     <string name="CreateCenterFragmentTitle">ساخت مرکز درمانی</string>
 
+    <string name="CreateCenterFragmentCenterHeader">نوع مرکز درمانی</string>
+    <string name="CreateCenterFragmentManagerHeader">مدیر</string>
+    <string name="CreateCenterFragmentNameHeader">عنوان</string>
+    <string name="CreateCenterFragmentAvatarHeader">تصویر نمایشی</string>
+    <string name="CreateCenterFragmentAddressHeader">آدرس</string>
+    <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
+    <string name="CreateCenterFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="CreateCenterFragmentAddressHint">غیر ضروری</string>
+    <string name="CreateCenterFragmentDescriptionHint">غیر ضروری</string>
+
+    <string name="CreateCenterFragmentAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+
+    <string name="CreateCenterFragmentCenterPersonal">شخصی</string>
+    <string name="CreateCenterFragmentCenterClinic">مرکز مشاوره</string>
+
+    <string name="CreateCenterFragmentButton">ساخت</string>
+
     /*
     ---------- CreateCenterUser Fragment ----------
     */
 
     <string name="CreateCenterUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateCenterUserFragmentMobileHeader">موبایل</string>
+    <string name="CreateCenterUserFragmentTypeHeader">موقعیت</string>
+    <string name="CreateCenterUserFragmentRoomHeader">اتاق درمان</string>
+    <string name="CreateCenterUserFragmentNameHeader">نام مراجع</string>
+
+    <string name="CreateCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="CreateCenterUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
+
+    <string name="CreateCenterUserFragmentButton">ثبت</string>
 
     /*
     ---------- CreateDocument Fragment ----------
@@ -218,11 +261,25 @@
 
     <string name="CreateDocumentFragmentTitle">افزودن مدرک یا سند</string>
 
+    <string name="CreateDocumentFragmentNameHeader">عنوان</string>
+    <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
+    <string name="CreateDocumentFragmentFileHeader">پیوست</string>
+
+    <string name="CreateDocumentFragmentDescriptionHint">غیر ضروری</string>
+
+    <string name="CreateDocumentFragmentButton">ثبت</string>
+
     /*
     ---------- CreatePractice Fragment ----------
     */
 
-    <string name="CreatePracticeFragmentTitle">ساخت تمرین</string>
+    <string name="CreatePracticeFragmentTitle">ساخت کاربرگ</string>
+
+    <string name="CreatePracticeFragmentNameHeader">عنوان</string>
+    <string name="CreatePracticeFragmentDescriptionHeader">محتوا</string>
+    <string name="CreatePracticeFragmentFileHeader">پیوست</string>
+
+    <string name="CreatePracticeFragmentButton">ساخت</string>
 
     /*
     ---------- CreateReport Fragment ----------
@@ -230,17 +287,40 @@
 
     <string name="CreateReportFragmentTitle">ساخت گزارش جلسه</string>
 
+    <string name="CreateReportFragmentEncryptionHeader">نوع رمزگذاری</string>
+    <string name="CreateReportFragmentDescriptionHeader">متن گزارش</string>
+
+    <string name="CreateReportFragmentCryptoHint">متن گزارش جلسه‌ای که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش جلسات درمانی شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
+    <string name="CreateReportFragmentCryptoButton">ارسال کلید عمومی من</string>
+
+    <string name="CreateReportFragmentButton">ساخت</string>
+
     /*
     ---------- CreateRoom Fragment ----------
     */
 
     <string name="CreateRoomFragmentTitle">ساخت اتاق درمانی</string>
 
+    <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
+
+    <string name="CreateRoomFragmentPsychologyHint">انتخاب روان‌شناس</string>
+
+    <string name="CreateRoomFragmentButton">ساخت</string>
+
     /*
     ---------- CreateRoomUser Fragment ----------
     */
 
     <string name="CreateRoomUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateRoomUserFragmentMobileHeader">موبایل</string>
+    <string name="CreateRoomUserFragmentNameHeader">نام مراجع</string>
+
+    <string name="CreateRoomUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="CreateRoomUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
+
+    <string name="CreateRoomUserFragmentButton">ثبت</string>
 
     /*
     ---------- CreateSample Fragment ----------
@@ -515,103 +595,7 @@
 
 
 
-    //////////////
-    <string name="CreateCaseFragmentRoomHeader">اتاق درمان</string>
-    <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
-    <string name="CreateCaseFragmentSituationHeader">مسئله</string>
 
-    <string name="CreateCaseFragmentReferenceHint">انتخاب مراجع از طریق جستجوی موبایل یا نام</string>
-
-    <string name="CreateCaseFragmentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateCaseUserFragmentReferenceHeader">مراجع</string>
-
-    <string name="CreateCaseUserFragmentReferenceHint">انتخاب مراجع</string>
-
-    <string name="CreateCaseUserFragmentButton">ایجاد</string>
-    //////////////
-
-    //////////////
-    <string name="CreateCenterFragmentCenterHeader">نوع مرکز درمانی</string>
-    <string name="CreateCenterFragmentManagerHeader">مدیر</string>
-    <string name="CreateCenterFragmentNameHeader">عنوان</string>
-    <string name="CreateCenterFragmentAvatarHeader">تصویر نمایشی</string>
-    <string name="CreateCenterFragmentAddressHeader">آدرس</string>
-    <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
-    <string name="CreateCenterFragmentDescriptionHeader">توضیحات</string>
-
-    <string name="CreateCenterFragmentAddressHint">غیر ضروری</string>
-    <string name="CreateCenterFragmentDescriptionHint">غیر ضروری</string>
-
-    <string name="CreateCenterFragmentAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
-
-    <string name="CreateCenterFragmentCenterPersonal">شخصی</string>
-    <string name="CreateCenterFragmentCenterClinic">مرکز مشاوره</string>
-
-    <string name="CreateCenterFragmentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateCenterUserFragmentMobileHeader">تلفن همراه</string>
-    <string name="CreateCenterUserFragmentTypeHeader">موقعیت</string>
-    <string name="CreateCenterUserFragmentRoomHeader">اتاق درمان</string>
-    <string name="CreateCenterUserFragmentNameHeader">نام مراجع</string>
-
-    <string name="CreateCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
-
-    <string name="CreateCenterUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
-
-    <string name="CreateCenterUserFragmentButton">ایجاد</string>
-    //////////////
-
-    //////////////
-    <string name="CreateDocumentFragmentNameHeader">عنوان</string>
-    <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
-    <string name="CreateDocumentFragmentFileHeader">پیوست</string>
-
-    <string name="CreateDocumentFragmentDescriptionHint">غیر ضروری</string>
-
-    <string name="CreateDocumentFragmentButton">ثبت</string>
-    //////////////
-
-    //////////////
-    <string name="CreatePracticeFragmentNameHeader">عنوان</string>
-    <string name="CreatePracticeFragmentDescriptionHeader">محتوا</string>
-    <string name="CreatePracticeFragmentFileHeader">پیوست</string>
-
-    <string name="CreatePracticeFragmentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateReportFragmentEncryptionHeader">نوع رمزگذاری</string>
-    <string name="CreateReportFragmentDescriptionHeader">متن گزارش</string>
-
-    <string name="CreateReportFragmentCryptoHint">متن گزارش جلسه‌ای که قصد دارید ثبت کنید بدون کدگذاری ذخیره خواهد شد؛ برای این‌که مطمئن باشید هیچ فردی، حتی سرویس ریسلو دسترسی به متن گزارش جلسات درمانی شما نداشته باشد، برای ما کلید عمومی رمزگذاری خود را ارسال کنید.</string>
-    <string name="CreateReportFragmentCryptoButton">ارسال کلید عمومی من</string>
-
-    <string name="CreateReportFragmentButton">ثبت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
-
-    <string name="CreateRoomFragmentPsychologyHint">انتخاب روان‌شناس</string>
-
-    <string name="CreateRoomFragmentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateRoomUserFragmentMobileHeader">تلفن همراه</string>
-    <string name="CreateRoomUserFragmentNameHeader">نام مراجع</string>
-
-    <string name="CreateRoomUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
-
-    <string name="CreateRoomUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
-
-    <string name="CreateRoomUserFragmentButton">ایجاد</string>
-    //////////////
 
     //////////////
     <string name="CreateSampleFragmentScaleHeader">مقیاس</string>

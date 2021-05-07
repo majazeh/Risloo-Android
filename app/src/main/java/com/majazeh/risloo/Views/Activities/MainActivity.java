@@ -35,6 +35,7 @@ import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
+import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
@@ -61,6 +62,9 @@ public class MainActivity extends AppCompatActivity {
 
     // Adapters
     private NavsAdapter navsAdapter;
+
+    // Dialogs
+    public LoadingDialog loadingDialog;
 
     // BottomSheets
     private LogoutBottomSheet logoutBottomSheet;
@@ -103,6 +107,8 @@ public class MainActivity extends AppCompatActivity {
         singleton = new Singleton(this);
 
         navsAdapter = new NavsAdapter(this);
+
+        loadingDialog = new LoadingDialog();
 
         logoutBottomSheet = new LogoutBottomSheet();
 
@@ -339,7 +345,7 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
-                switch (navController.getCurrentDestination().getId()) {
+                switch (Objects.requireNonNull(navController.getCurrentDestination()).getId()) {
                     case R.id.createCenterFragment:
                         CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (createCenterFragment != null) {
@@ -379,9 +385,9 @@ public class MainActivity extends AppCompatActivity {
                     CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCenterFragment != null) {
                         if (requestCode == 300) {
-                            ResultManager.galleryResult(this, data, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.selectCircleImageView, null);
+                            createCenterFragment.responseAction("gallery", data);
                         } else if (requestCode == 400) {
-                            ResultManager.cameraResult(this, createCenterFragment.avatarPath, createCenterFragment.avatarBitmap, createCenterFragment.binding.avatarIncludeLayout.selectCircleImageView, null);
+                            createCenterFragment.responseAction("camera", data);
                         }
                     }
                     break;
@@ -415,7 +421,7 @@ public class MainActivity extends AppCompatActivity {
                     CreateDocumentFragment createDocumentFragment = (CreateDocumentFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createDocumentFragment != null) {
                         if (requestCode == 100) {
-                            ResultManager.fileResult(this, data, createDocumentFragment.filePath, createDocumentFragment.binding.fileIncludeLayout.nameTextView);
+                            createDocumentFragment.responseAction("file", data);
                         }
                     }
                     break;
@@ -423,7 +429,7 @@ public class MainActivity extends AppCompatActivity {
                     CreatePracticeFragment createPracticeFragment = (CreatePracticeFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createPracticeFragment != null) {
                         if (requestCode == 100) {
-                            ResultManager.fileResult(this, data, createPracticeFragment.filePath, createPracticeFragment.binding.fileIncludeLayout.nameTextView);
+                            createPracticeFragment.responseAction("file", data);
                         }
                     }
                     break;

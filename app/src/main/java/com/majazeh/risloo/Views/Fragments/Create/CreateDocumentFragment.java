@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.Fragments.Create;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -18,17 +19,18 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
+import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateDocumentBinding;
 
 public class CreateDocumentFragment extends Fragment {
 
     // Binding
-    public FragmentCreateDocumentBinding binding;
+    private FragmentCreateDocumentBinding binding;
 
     // Vars
     private String name = "", description = "";
-    public String filePath = "";
+    private String filePath = "";
 
     @Nullable
     @Override
@@ -94,15 +96,15 @@ public class CreateDocumentFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (filePath.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorIncludeLayout.errorImageView, binding.fileErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.nameIncludeLayout.inputEditText.length() != 0 && !filePath.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.fileIncludeLayout.selectTextView, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorIncludeLayout.errorImageView, binding.fileErrorIncludeLayout.errorTextView);
 
                 doWork();
             }
@@ -121,6 +123,12 @@ public class CreateDocumentFragment extends Fragment {
         if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
             filePath = ((MainActivity) requireActivity()).singleton.getAvatar();
             binding.fileIncludeLayout.nameTextView.setText(filePath);
+        }
+    }
+
+    public void responseAction(String method, Intent data) {
+        if (method.equals("file")) {
+            ResultManager.fileResult(requireActivity(), data, filePath, binding.fileIncludeLayout.nameTextView);
         }
     }
 

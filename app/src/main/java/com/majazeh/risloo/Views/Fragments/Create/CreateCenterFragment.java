@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.Fragments.Create;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -21,6 +22,7 @@ import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
@@ -37,7 +39,7 @@ import java.util.ArrayList;
 public class CreateCenterFragment extends Fragment {
 
     // Binding
-    public FragmentCreateCenterBinding binding;
+    private FragmentCreateCenterBinding binding;
 
     // Adapters
     public SelectedAdapter phonesAdapter;
@@ -52,7 +54,7 @@ public class CreateCenterFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager phoneLayoutManager;
-    public Bitmap avatarBitmap;
+    private Bitmap avatarBitmap;
 
     // Vars
     private ArrayList<Model> phones = new ArrayList<>();
@@ -180,33 +182,33 @@ public class CreateCenterFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (center.equals("personal")) {
                 if (managerId.equals("")) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, null, null, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
 
                 if (!managerId.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, null, null);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, null, null);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView);
 
                     doWork();
                 }
             } else {
                 if (managerId.equals("")) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, null, null, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
 
                 if (!managerId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, null, null);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, null, null);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView);
 
                     doWork();
                 }
@@ -302,6 +304,14 @@ public class CreateCenterFragment extends Fragment {
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void responseAction(String method, Intent data) {
+        if (method.equals("gallery")) {
+            ResultManager.galleryResult(requireActivity(), data, avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
+        } else if (method.equals("camera")) {
+            ResultManager.cameraResult(requireActivity(), avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
         }
     }
 

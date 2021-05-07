@@ -116,19 +116,19 @@ public class CreateCaseFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorIncludeLayout.errorImageView, binding.roomErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorIncludeLayout.errorImageView, binding.referenceErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.situationIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.situationIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationErrorIncludeLayout.errorImageView, binding.situationErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!roomId.equals("") && binding.referenceIncludeLayout.selectRecyclerView.getChildCount() != 0 && binding.situationIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.situationIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorIncludeLayout.errorImageView, binding.roomErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorIncludeLayout.errorImageView, binding.referenceErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationErrorIncludeLayout.errorImageView, binding.situationErrorIncludeLayout.errorTextView);
 
                 doWork();
             }
@@ -207,6 +207,15 @@ public class CreateCaseFragment extends Fragment {
                         referencesAdapter.addItem(item);
                     else
                         referencesAdapter.removeItem(position);
+
+                    if (referencesAdapter.getIds().size() != 0) {
+                        binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
+                        binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                    } else {
+                        binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
+                        binding.referenceIncludeLayout.countTextView.setText("");
+                    }
+
                     break;
             }
         } catch (JSONException e) {

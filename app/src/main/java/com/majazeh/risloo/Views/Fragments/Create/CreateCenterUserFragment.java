@@ -123,19 +123,19 @@ public class CreateCenterUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorIncludeLayout.errorImageView, binding.mobileErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorIncludeLayout.errorImageView, binding.roomErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.mobileIncludeLayout.inputEditText.length() != 0 && !roomId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorIncludeLayout.errorImageView, binding.mobileErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorIncludeLayout.errorImageView, binding.roomErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView);
 
                 doWork();
             }

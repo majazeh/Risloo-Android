@@ -98,11 +98,11 @@ public class CreateReportFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.descriptionIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorIncludeLayout.errorImageView, binding.descriptionErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.descriptionIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorIncludeLayout.errorImageView, binding.descriptionErrorIncludeLayout.errorTextView);
 
                 doWork();
             }
@@ -115,6 +115,12 @@ public class CreateReportFragment extends Fragment {
             for (int i=0; i<binding.encryptionIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.encryptionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(encryption)) {
                     binding.encryptionIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (i == 0) {
+                        binding.cryptoConstraintLayout.setVisibility(View.GONE);
+                    } else {
+                        binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
+                    }
                 }
             }
         }

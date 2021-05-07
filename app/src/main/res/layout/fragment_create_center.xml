@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/White"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
@@ -13,27 +13,28 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <include
                 android:id="@+id/center_includeLayout"
                 layout="@layout/component_main_radio_ver_two"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -44,9 +45,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/center_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/center_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/center_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/center_includeLayout" />
+
+            <include
+                android:id="@+id/manager_error_includeLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/manager_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/manager_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/manager_includeLayout" />
 
             <include
                 android:id="@+id/name_includeLayout"
@@ -54,9 +66,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/manager_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/manager_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/manager_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/manager_error_includeLayout" />
+
+            <include
+                android:id="@+id/name_error_includeLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/name_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/name_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
 
             <include
                 android:id="@+id/avatar_includeLayout"
@@ -64,18 +87,29 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintRight_toRightOf="@id/manager_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
+                app:layout_constraintRight_toRightOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_error_includeLayout" />
+
+            <include
+                android:id="@+id/avatar_error_includeLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout" />
 
             <include
                 android:id="@+id/avatar_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                app:layout_constraintEnd_toEndOf="@id/manager_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/manager_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout" />
+                app:layout_goneMarginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/avatar_error_includeLayout" />
 
             <include
                 android:id="@+id/address_includeLayout"
@@ -83,9 +117,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/manager_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/manager_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/avatar_guideLayout" />
+                app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/avatar_guideLayout" />
+
+            <include
+                android:id="@+id/address_error_includeLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/address_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/address_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/address_includeLayout" />
 
             <include
                 android:id="@+id/phones_includeLayout"
@@ -93,28 +138,52 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/address_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/address_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/address_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/address_error_includeLayout" />
+
+            <include
+                android:id="@+id/phones_error_includeLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/phones_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/phones_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/phones_includeLayout" />
 
             <include
                 android:id="@+id/description_includeLayout"
                 layout="@layout/component_main_input_multi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
+                app:layout_goneMarginBottom="@dimen/_12sdp"
+                app:layout_constraintBottom_toTopOf="@id/description_error_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/center_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/phones_error_includeLayout" />
+
+            <include
+                android:id="@+id/description_error_includeLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/phones_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/phones_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/phones_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/description_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/description_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/description_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/clinic_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="name_includeLayout,avatar_includeLayout, avatar_guideLayout" />
+                app:constraint_referenced_ids="name_includeLayout, avatar_includeLayout, avatar_guideLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -123,11 +192,9 @@
             layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
-            android:layout_marginBottom="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/container_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/container_constraintLayout" />
+            app:layout_constraintStart_toStartOf="@id/container_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

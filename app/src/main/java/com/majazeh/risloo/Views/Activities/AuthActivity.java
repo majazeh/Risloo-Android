@@ -14,6 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;
@@ -25,6 +26,9 @@ public class AuthActivity extends AppCompatActivity {
 
     // Singleton
     public Singleton singleton;
+
+    // Dialogs
+    public LoadingDialog loadingDialog;
 
     // Objects
     public ControlEditText controlEditText;
@@ -52,6 +56,8 @@ public class AuthActivity extends AppCompatActivity {
 
     private void initializer() {
         singleton = new Singleton(this);
+
+        loadingDialog = new LoadingDialog();
 
         controlEditText = new ControlEditText();
 
