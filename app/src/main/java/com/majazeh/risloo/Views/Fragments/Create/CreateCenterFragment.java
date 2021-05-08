@@ -182,33 +182,33 @@ public class CreateCenterFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (center.equals("personal")) {
                 if (managerId.equals("")) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
 
                 if (!managerId.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView);
 
                     doWork();
                 }
             } else {
                 if (managerId.equals("")) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
                 if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
 
                 if (!managerId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorIncludeLayout.errorImageView, binding.managerErrorIncludeLayout.errorTextView);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorIncludeLayout.errorImageView, binding.phonesErrorIncludeLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView);
 
                     doWork();
                 }

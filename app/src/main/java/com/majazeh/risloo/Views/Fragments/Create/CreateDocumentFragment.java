@@ -96,15 +96,15 @@ public class CreateDocumentFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (filePath.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorIncludeLayout.errorImageView, binding.fileErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.errorImageView, binding.fileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.nameIncludeLayout.inputEditText.length() != 0 && !filePath.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorIncludeLayout.errorImageView, binding.nameErrorIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorIncludeLayout.errorImageView, binding.fileErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.errorImageView, binding.fileErrorLayout.errorTextView);
 
                 doWork();
             }

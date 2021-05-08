@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/mobile_error_includeLayout"
+                android:id="@+id/mobile_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,10 +58,10 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/mobile_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/mobile_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/mobile_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/mobile_errorLayout" />
 
             <include
-                android:id="@+id/name_error_includeLayout"
+                android:id="@+id/name_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -79,7 +79,7 @@
                 app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/name_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/name_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/name_errorLayout" />
 
             <include
                 android:id="@+id/case_checkBox"

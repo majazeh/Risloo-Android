@@ -50,7 +50,7 @@
                 app:layout_constraintTop_toBottomOf="@id/center_includeLayout" />
 
             <include
-                android:id="@+id/manager_error_includeLayout"
+                android:id="@+id/manager_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -68,10 +68,10 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/center_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/manager_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/manager_errorLayout" />
 
             <include
-                android:id="@+id/name_error_includeLayout"
+                android:id="@+id/name_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -88,10 +88,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintRight_toRightOf="@id/center_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/name_errorLayout" />
 
             <include
-                android:id="@+id/avatar_error_includeLayout"
+                android:id="@+id/avatar_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -109,7 +109,7 @@
                 app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/center_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/avatar_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/avatar_errorLayout" />
 
             <include
                 android:id="@+id/address_includeLayout"
@@ -122,7 +122,7 @@
                 app:layout_constraintTop_toBottomOf="@id/avatar_guideLayout" />
 
             <include
-                android:id="@+id/address_error_includeLayout"
+                android:id="@+id/address_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -140,10 +140,10 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/center_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/address_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/address_errorLayout" />
 
             <include
-                android:id="@+id/phones_error_includeLayout"
+                android:id="@+id/phones_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -160,13 +160,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/description_error_includeLayout"
+                app:layout_constraintBottom_toTopOf="@id/description_errorLayout"
                 app:layout_constraintEnd_toEndOf="@id/center_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/center_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/phones_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/phones_errorLayout" />
 
             <include
-                android:id="@+id/description_error_includeLayout"
+                android:id="@+id/description_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

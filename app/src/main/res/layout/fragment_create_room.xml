@@ -36,13 +36,13 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/psychology_error_includeLayout"
+                app:layout_constraintBottom_toTopOf="@id/psychology_errorLayout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/psychology_error_includeLayout"
+                android:id="@+id/psychology_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

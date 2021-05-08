@@ -98,11 +98,11 @@ public class CreateReportFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.descriptionIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorIncludeLayout.errorImageView, binding.descriptionErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.descriptionIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorIncludeLayout.errorImageView, binding.descriptionErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView);
 
                 doWork();
             }

@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/room_error_includeLayout"
+                android:id="@+id/room_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -58,10 +58,10 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/room_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/room_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/room_errorLayout" />
 
             <include
-                android:id="@+id/reference_error_includeLayout"
+                android:id="@+id/reference_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -78,13 +78,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/situation_error_includeLayout"
+                app:layout_constraintBottom_toTopOf="@id/situation_errorLayout"
                 app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/room_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/reference_error_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/reference_errorLayout" />
 
             <include
-                android:id="@+id/situation_error_includeLayout"
+                android:id="@+id/situation_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

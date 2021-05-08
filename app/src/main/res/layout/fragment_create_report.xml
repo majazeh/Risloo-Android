@@ -40,7 +40,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/encryption_error_includeLayout"
+                android:id="@+id/encryption_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                 android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray300"
                 app:layout_constraintEnd_toEndOf="@id/encryption_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/encryption_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/encryption_error_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/encryption_errorLayout"
                 tools:visibility="visible">
 
                 <TextView
@@ -96,13 +96,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/description_error_includeLayout"
+                app:layout_constraintBottom_toTopOf="@id/description_errorLayout"
                 app:layout_constraintEnd_toEndOf="@id/encryption_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/encryption_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/crypto_constraintLayout" />
 
             <include
-                android:id="@+id/description_error_includeLayout"
+                android:id="@+id/description_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"

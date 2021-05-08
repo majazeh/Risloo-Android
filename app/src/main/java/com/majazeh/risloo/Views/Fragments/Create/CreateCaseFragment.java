@@ -116,19 +116,19 @@ public class CreateCaseFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorIncludeLayout.errorImageView, binding.roomErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorIncludeLayout.errorImageView, binding.referenceErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.errorImageView, binding.referenceErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.situationIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationErrorIncludeLayout.errorImageView, binding.situationErrorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationErrorLayout.errorImageView, binding.situationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!roomId.equals("") && binding.referenceIncludeLayout.selectRecyclerView.getChildCount() != 0 && binding.situationIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorIncludeLayout.errorImageView, binding.roomErrorIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorIncludeLayout.errorImageView, binding.referenceErrorIncludeLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationErrorIncludeLayout.errorImageView, binding.situationErrorIncludeLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.errorImageView, binding.referenceErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.situationIncludeLayout.inputEditText, binding.situationErrorLayout.errorImageView, binding.situationErrorLayout.errorTextView);
 
                 doWork();
             }
