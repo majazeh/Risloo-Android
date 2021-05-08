@@ -126,13 +126,13 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                     if (createSessionFragment != null) {
                         switch (method) {
                             case "startDate":
-                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
+                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createSessionTimeFragment.responseBottomSheet(method, getDate());
                                 break;
                             case "startAccurateDate":
                             case "endAccurateDate":
-                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
+                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createSessionSessionFragment.responseBottomSheet(method, getDate());
                                 break;
@@ -147,13 +147,13 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                             case "specifiedDate":
                             case "periodStartDate":
                             case "periodEndDate":
-                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createScheduleTimeFragment.responseBottomSheet(method, getDate());
                                 break;
                             case "startAccurateDate":
                             case "endAccurateDate":
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createScheduleSessionFragment.responseBottomSheet(method, getDate());
                                 break;

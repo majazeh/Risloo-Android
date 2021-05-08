@@ -127,8 +127,10 @@ public class CreateDocumentFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
-        if (method.equals("file")) {
-            ResultManager.fileResult(requireActivity(), data, filePath, binding.fileIncludeLayout.nameTextView);
+        switch (method) {
+            case "file":
+                ResultManager.fileResult(requireActivity(), data, filePath, binding.fileIncludeLayout.nameTextView);
+                break;
         }
     }
 

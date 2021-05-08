@@ -308,10 +308,13 @@ public class CreateCenterFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
-        if (method.equals("gallery")) {
-            ResultManager.galleryResult(requireActivity(), data, avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
-        } else if (method.equals("camera")) {
-            ResultManager.cameraResult(requireActivity(), avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
+        switch (method) {
+            case "gallery":
+                ResultManager.galleryResult(requireActivity(), data, avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
+                break;
+            case "camera":
+                ResultManager.cameraResult(requireActivity(), avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
+                break;
         }
     }
 

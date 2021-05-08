@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/White"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
@@ -13,41 +13,52 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp"
-            android:paddingBottom="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <include
                 android:id="@+id/scale_includeLayout"
                 layout="@layout/component_main_input_recycler"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/scale_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/scale_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/scale_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/scale_includeLayout" />
 
             <include
                 android:id="@+id/scale_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                app:layout_constraintEnd_toEndOf="@+id/scale_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/scale_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/scale_includeLayout" />
+                app:layout_goneMarginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@id/scale_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/scale_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/scale_errorLayout" />
 
             <include
                 android:id="@+id/room_includeLayout"
@@ -55,9 +66,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/scale_guideLayout"
-                app:layout_constraintStart_toStartOf="@+id/scale_guideLayout"
-                app:layout_constraintTop_toBottomOf="@+id/scale_guideLayout" />
+                app:layout_constraintEnd_toEndOf="@id/scale_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/scale_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/scale_guideLayout" />
+
+            <include
+                android:id="@+id/room_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/room_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/room_includeLayout" />
 
             <com.google.android.material.tabs.TabLayout
                 android:id="@+id/type_tabLayout"
@@ -65,9 +87,9 @@
                 android:layout_height="@dimen/_36sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:background="@drawable/draw_line_solid_transparent_border_bottom_2sdp_gray200"
-                app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/room_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/room_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/scale_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/scale_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/room_errorLayout"
                 app:tabBackground="@null"
                 app:tabGravity="fill"
                 app:tabMode="fixed"
@@ -120,19 +142,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/bulk_sample_textView" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/bulk_sample_textView" />
+
+            <include
+                android:id="@+id/name_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
 
             <include
                 android:id="@+id/name_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/name_includeLayout" />
+                app:layout_goneMarginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_errorLayout" />
 
             <include
                 android:id="@+id/user_count_includeLayout"
@@ -140,19 +173,30 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/name_guideLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/name_guideLayout" />
+
+            <include
+                android:id="@+id/user_count_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/user_count_includeLayout" />
 
             <include
                 android:id="@+id/user_count_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/user_count_includeLayout" />
+                app:layout_goneMarginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/user_count_errorLayout" />
 
             <include
                 android:id="@+id/case_type_includeLayout"
@@ -160,9 +204,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/user_count_guideLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/user_count_guideLayout" />
+
+            <include
+                android:id="@+id/case_type_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_type_includeLayout" />
 
             <include
                 android:id="@+id/situation_includeLayout"
@@ -171,9 +226,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/case_type_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_type_errorLayout" />
+
+            <include
+                android:id="@+id/situation_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/situation_includeLayout" />
 
             <include
                 android:id="@+id/case_includeLayout"
@@ -181,9 +247,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/situation_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/situation_errorLayout" />
+
+            <include
+                android:id="@+id/case_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_includeLayout" />
 
             <include
                 android:id="@+id/session_includeLayout"
@@ -191,9 +268,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/case_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_errorLayout" />
+
+            <include
+                android:id="@+id/session_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/session_includeLayout" />
 
             <include
                 android:id="@+id/reference_includeLayout"
@@ -201,9 +289,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/session_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/session_errorLayout" />
+
+            <include
+                android:id="@+id/reference_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/reference_includeLayout" />
 
             <include
                 android:id="@+id/psychology_includeLayout"
@@ -211,27 +310,39 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/reference_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/reference_errorLayout" />
+
+            <include
+                android:id="@+id/psychology_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/psychology_includeLayout" />
 
             <include
                 android:id="@+id/psychology_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
+                android:layout_marginBottom="@dimen/_12sdp"
+                app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/type_tabLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@+id/psychology_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/psychology_errorLayout" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/case_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
-                app:constraint_referenced_ids="case_includeLayout,session_includeLayout" />
+                app:constraint_referenced_ids="case_includeLayout, session_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/room_group"
@@ -245,7 +356,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="bulk_sample_textView,name_includeLayout, name_guideLayout, user_count_includeLayout, user_count_guideLayout, case_type_includeLayout" />
+                app:constraint_referenced_ids="bulk_sample_textView, name_includeLayout, name_guideLayout, user_count_includeLayout, user_count_guideLayout, case_type_includeLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -254,11 +365,9 @@
             layout="@layout/component_main_button_rect_big"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
-            android:layout_marginBottom="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/container_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/container_constraintLayout" />
+            app:layout_constraintStart_toStartOf="@id/container_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

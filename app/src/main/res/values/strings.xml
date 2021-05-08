@@ -328,6 +328,33 @@
 
     <string name="CreateSampleFragmentTitle">ساخت نمونه</string>
 
+    <string name="CreateSampleFragmentScaleHeader">مقیاس</string>
+    <string name="CreateSampleFragmentRoomHeader">اتاق درمان</string>
+    <string name="CreateSampleFragmentNameHeader">عنوان</string>
+    <string name="CreateSampleFragmentUserCountHeader">تعداد اعضاء</string>
+    <string name="CreateSampleFragmentCaseTypeHeader">وضعیت پرونده</string>
+    <string name="CreateSampleFragmentSituationHeader">مسئله</string>
+    <string name="CreateSampleFragmentCaseHeader">پرونده</string>
+    <string name="CreateSampleFragmentSessionHeader">جلسه</string>
+    <string name="CreateSampleFragmentReferenceHeader">مراجع</string>
+    <string name="CreateSampleFragmentPsychologyDescriptionHeader">توضیحات روان‌شناس</string>
+
+    <string name="CreateSampleFragmentTabCase">پرونده</string>
+    <string name="CreateSampleFragmentTabRoom">اتاق درمان</string>
+    <string name="CreateSampleFragmentTabBulkSample">گروهی</string>
+
+    <string name="CreateSampleFragmentScaleHint">جستجو</string>
+    <string name="CreateSampleFragmentNameHint">مثال: گروه درمانی دکتر جان بزرگی - CBT - درمان وسواس</string>
+    <string name="CreateSampleFragmentReferenceHint">بدون مراجع مشخص شده</string>
+
+    <string name="CreateSampleFragmentScaleGuide">در این قسمت لیست آزمون‌های پُر کاربرد را مشاهده می‌کنید. جهت انتخاب آزمونی که در این لیست وجود ندارد، عنوان آزمون مد نظر را جست‌وجو کرده و آن را انتخاب نمایید. شما می‌توانید لیست تمام آزمون‌های موجود در سامانه را نیز در این صفحه مشاهده نمایید.</string>
+    <string name="CreateSampleFragmentBulkSampleGuide">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
+    <string name="CreateSampleFragmentNameGuide">کمک می‌کند تا نمونه‌های شما یک نام مشترک داشته باشند و راحت‌تر آن‌ها را پیدا کنید.</string>
+    <string name="CreateSampleFragmentUserCountGuide">تعداد اعضائی که قصد دارند نمونه(ها) را انجام دهند.</string>
+    <string name="CreateSampleFragmentPsychologyDescriptionGuide">در این قسمت شما می‌توانید توضیحاتی را اضافه بر توضیحات یک نمونه وارد کنید تا مراجع قبل از انجام نمونه(ها) این توضیحات را مشاهده کند.</string>
+
+    <string name="CreateSampleFragmentButton">ساخت</string>
+
     /*
     ---------- CreateSchedule Fragment ----------
     */
@@ -346,11 +373,44 @@
 
     <string name="CreateTreasuryFragmentTitle">ساخت کیف پول</string>
 
+    <string name="CreateTreasuryFragmentNameHeader">عنوان</string>
+
+    <string name="CreateTreasuryFragmentNameHint">عنوان کیف پول</string>
+
+    <string name="CreateTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
+
+    <string name="CreateTreasuryFragmentButton">ساخت</string>
+
     /*
     ---------- CreateUser Fragment ----------
     */
 
     <string name="CreateUserFragmentTitle">ثبت کاربر جدید</string>
+
+    <string name="CreateUserFragmentNameHeader">نام و نام خانوادگی</string>
+    <string name="CreateUserFragmentMobileHeader">موبایل</string>
+    <string name="CreateUserFragmentUsernameHeader">شناسه کاربری</string>
+    <string name="CreateUserFragmentEmailHeader">رایانامه</string>
+    <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
+    <string name="CreateUserFragmentPasswordHeader">کلمه عبور</string>
+    <string name="CreateUserFragmentStatusHeader">وضعیت</string>
+    <string name="CreateUserFragmentTypeHeader">نوع کاربر</string>
+    <string name="CreateUserFragmentGenderHeader">جنسیت</string>
+
+    <string name="CreateUserFragmentUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
+    <string name="CreateUserFragmentPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+
+    <string name="CreateUserFragmentStatusActive">فعال</string>
+    <string name="CreateUserFragmentStatusWaiting">در انتظار</string>
+    <string name="CreateUserFragmentStatusClosed">بسته شده</string>
+
+    <string name="CreateUserFragmentTypeAdmin">ادمین</string>
+    <string name="CreateUserFragmentTypeClient">کاربر</string>
+
+    <string name="CreateUserFragmentGenderMale">مرد</string>
+    <string name="CreateUserFragmentGenderFemale">زن</string>
+
+    <string name="CreateUserFragmentButton">ایجاد</string>
 
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
@@ -597,34 +657,7 @@
 
 
 
-    //////////////
-    <string name="CreateSampleFragmentScaleHeader">مقیاس</string>
-    <string name="CreateSampleFragmentRoomHeader">اتاق درمان</string>
-    <string name="CreateSampleFragmentNameHeader">عنوان</string>
-    <string name="CreateSampleFragmentUserCountHeader">تعداد اعضاء</string>
-    <string name="CreateSampleFragmentCaseTypeHeader">وضعیت پرونده</string>
-    <string name="CreateSampleFragmentSituationHeader">مسئله</string>
-    <string name="CreateSampleFragmentCaseHeader">پرونده</string>
-    <string name="CreateSampleFragmentSessionHeader">جلسه</string>
-    <string name="CreateSampleFragmentReferenceHeader">مراجع</string>
-    <string name="CreateSampleFragmentPsychologyDescriptionHeader">توضیحات روان‌شناس</string>
 
-    <string name="CreateSampleFragmentTabCase">پرونده</string>
-    <string name="CreateSampleFragmentTabRoom">اتاق درمان</string>
-    <string name="CreateSampleFragmentTabBulkSample">گروهی</string>
-
-    <string name="CreateSampleFragmentScaleHint">جستجو</string>
-    <string name="CreateSampleFragmentNameHint">مثال: گروه درمانی دکتر جان بزرگی - CBT - درمان وسواس</string>
-    <string name="CreateSampleFragmentReferenceHint">بدون مراجع مشخص شده</string>
-
-    <string name="CreateSampleFragmentScaleGuide">در این قسمت لیست آزمون‌های پُر کاربرد را مشاهده می‌کنید. جهت انتخاب آزمونی که در این لیست وجود ندارد، عنوان آزمون مد نظر را جست‌وجو کرده و آن را انتخاب نمایید. شما می‌توانید لیست تمام آزمون‌های موجود در سامانه را نیز در این صفحه مشاهده نمایید.</string>
-    <string name="CreateSampleFragmentBulkSampleGuide">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
-    <string name="CreateSampleFragmentNameGuide">کمک می‌کند تا نمونه‌های شما یک نام مشترک داشته باشند و راحت‌تر آن‌ها را پیدا کنید.</string>
-    <string name="CreateSampleFragmentUserCountGuide">تعداد اعضائی که قصد دارند نمونه(ها) را انجام دهند.</string>
-    <string name="CreateSampleFragmentPsychologyDescriptionGuide">در این قسمت شما می‌توانید توضیحاتی را اضافه بر توضیحات یک نمونه وارد کنید تا مراجع قبل از انجام نمونه(ها) این توضیحات را مشاهده کند.</string>
-
-    <string name="CreateSampleFragmentButton">ساخت</string>
-    //////////////
 
     //////////////
     <string name="CreateSchedulePaymentFragmentPaymentHeader">نوع دریافت</string>
@@ -697,33 +730,6 @@
     <string name="CreateSessionTimeFragmentStartDateHeader">تاریخ</string>
 
     <string name="CreateSessionTimeFragmentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateUserFragmentNameHeader">نام و نام خانوادگی</string>
-    <string name="CreateUserFragmentMobileHeader">تلفن همراه</string>
-    <string name="CreateUserFragmentUsernameHeader">شناسه کاربری</string>
-    <string name="CreateUserFragmentEmailHeader">رایانامه</string>
-    <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
-    <string name="CreateUserFragmentPasswordHeader">کلمه عبور</string>
-    <string name="CreateUserFragmentStatusHeader">وضعیت</string>
-    <string name="CreateUserFragmentTypeHeader">نوع کاربر</string>
-    <string name="CreateUserFragmentGenderHeader">جنسیت</string>
-
-    <string name="CreateUserFragmentUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
-    <string name="CreateUserFragmentPasswordGuide">گذرواژه باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
-
-    <string name="CreateUserFragmentStatusActive">فعال</string>
-    <string name="CreateUserFragmentStatusWaiting">در انتظار</string>
-    <string name="CreateUserFragmentStatusClosed">بسته شده</string>
-
-    <string name="CreateUserFragmentTypeAdmin">ادمین</string>
-    <string name="CreateUserFragmentTypeClient">کاربر</string>
-
-    <string name="CreateUserFragmentGenderMale">مرد</string>
-    <string name="CreateUserFragmentGenderFemale">زن</string>
-
-    <string name="CreateUserFragmentButton">ایجاد</string>
     //////////////
 
     //////////////////////////////////////////////////////////////////////////////////////

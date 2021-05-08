@@ -44,11 +44,11 @@ public class CreateSessionFragment extends Fragment {
         adapter = new CreateSessionAdapter(requireActivity());
 
         tabs = getResources().getStringArray(R.array.CreateSessionTabs);
-        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout, binding.viewPager, (tab, position) -> tab.setText(tabs[position]));
+        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
     }
 
     private void setData() {
-        binding.viewPager.setAdapter(adapter);
+        binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
     }
 

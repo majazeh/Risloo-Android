@@ -97,13 +97,13 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                     if (createSessionFragment != null) {
                         switch (method) {
                             case "startTime":
-                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
+                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createSessionTimeFragment.responseBottomSheet(method, getTime());
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
-                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getCurrentItem());
+                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createSessionSessionFragment.responseBottomSheet(method, getTime());
                                 break;
@@ -115,13 +115,13 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                     if (createScheduleFragment != null) {
                         switch (method) {
                             case "startTime":
-                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createScheduleTimeFragment.responseBottomSheet(method, getTime());
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createScheduleSessionFragment.responseBottomSheet(method, getTime());
                                 break;

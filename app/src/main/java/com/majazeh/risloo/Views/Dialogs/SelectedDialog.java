@@ -157,7 +157,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                         case R.id.createScheduleFragment:
                             CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (createScheduleFragment != null) {
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
                                 CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
 
                                 if (method.equals("axises")) {
@@ -209,7 +209,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
             case R.id.createScheduleFragment:
                 CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (createScheduleFragment != null) {
-                    CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                    CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
                     if (method.equals("axises")) {
                         binding.listRecyclerView.setAdapter(createScheduleSessionFragment.axisesAdapter);

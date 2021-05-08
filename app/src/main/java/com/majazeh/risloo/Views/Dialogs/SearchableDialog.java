@@ -320,13 +320,13 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 if (createScheduleFragment != null) {
                     switch (method) {
                         case "cases":
-                            CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                            CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                         case "patternDays":
-                            CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getCurrentItem());
+                            CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);

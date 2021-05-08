@@ -275,15 +275,15 @@ public class CreateSampleFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.errorImageView, binding.scaleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() != 0 && !roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.errorImageView, binding.scaleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -375,7 +375,7 @@ public class CreateSampleFragment extends Fragment {
                         binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
                         binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
-                    } else if (i == 1 && i == 2) {
+                    } else if (i == 1 || i == 2) {
                         binding.caseIncludeLayout.selectTextView.setEnabled(false);
                         binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
@@ -450,6 +450,15 @@ public class CreateSampleFragment extends Fragment {
                         scalesAdapter.addItem(item);
                     else
                         scalesAdapter.removeItem(scalePosition);
+
+                    if (scalesAdapter.getIds().size() != 0) {
+                        binding.scaleIncludeLayout.countTextView.setVisibility(View.VISIBLE);
+                        binding.scaleIncludeLayout.countTextView.setText("(" + scalesAdapter.getIds().size() + ")");
+                    } else {
+                        binding.scaleIncludeLayout.countTextView.setVisibility(View.GONE);
+                        binding.scaleIncludeLayout.countTextView.setText("");
+                    }
+
                     break;
                 case "rooms":
                     if (!roomId.equals(item.get("id").toString())) {
@@ -477,6 +486,15 @@ public class CreateSampleFragment extends Fragment {
                         referencesAdapter.addItem(item);
                     else
                         referencesAdapter.removeItem(referencePosition);
+
+                    if (referencesAdapter.getIds().size() != 0) {
+                        binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
+                        binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                    } else {
+                        binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
+                        binding.referenceIncludeLayout.countTextView.setText("");
+                    }
+
                     break;
                 case "cases":
                     if (!caseId.equals(item.get("id").toString())) {
