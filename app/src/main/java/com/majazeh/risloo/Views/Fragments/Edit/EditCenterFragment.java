@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditCenterAdapter;
 import com.majazeh.risloo.databinding.FragmentEditCenterBinding;
 
@@ -26,6 +27,7 @@ public class EditCenterFragment extends Fragment {
     private TabLayoutMediator tabLayoutMediator;
 
     // Vars
+    public String center = "personal";
     private String[] tabs;
 
     @Nullable
@@ -41,13 +43,25 @@ public class EditCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new EditCenterAdapter(requireActivity());
-
         tabs = getResources().getStringArray(R.array.EditCenterTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
     }
 
     private void setData() {
+        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
+            center = ((MainActivity) requireActivity()).singleton.getName();
+            switch (center) {
+                case "personal":
+                    binding.tabLayout.getRoot().setVisibility(View.GONE);
+                    break;
+                case "clinic":
+                    binding.tabLayout.getRoot().setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
+
+        adapter = new EditCenterAdapter(requireActivity(), center);
+
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
     }

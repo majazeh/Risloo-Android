@@ -23,6 +23,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
 
 import org.json.JSONException;
@@ -75,18 +76,18 @@ public class EditCenterDetailFragment extends Fragment {
 
         phoneLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentManagerHeader));
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentNameHeader));
-        binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentAddressHeader));
-        binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentPhonesHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailFragmentDescriptionHeader));
+        binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabManagerHeader));
+        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabNameHeader));
+        binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabAddressHeader));
+        binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabPhonesHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabDescriptionHeader));
 
-        binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailFragmentAddressHint));
-        binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailFragmentDescriptionHint));
+        binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailTabAddressHint));
+        binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailTabDescriptionHint));
 
         InitManager.unfixedRecyclerView(binding.phonesIncludeLayout.selectRecyclerView, itemDecoration, phoneLayoutManager);
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterDetailFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterDetailTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -141,19 +142,19 @@ public class EditCenterDetailFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (managerId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!managerId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -161,6 +162,14 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void setData() {
+        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (editCenterFragment != null) {
+            if (editCenterFragment.center.equals("personal"))
+                binding.clinicGroup.setVisibility(View.GONE);
+            else
+                binding.clinicGroup.setVisibility(View.VISIBLE);
+        }
+
         if (!((MainActivity) requireActivity()).singleton.getManager().equals("")) {
             managerId = ((MainActivity) requireActivity()).singleton.getManager();
             managerName = ((MainActivity) requireActivity()).singleton.getManager();

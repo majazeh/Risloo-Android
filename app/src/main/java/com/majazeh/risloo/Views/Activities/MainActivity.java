@@ -397,9 +397,9 @@ public class MainActivity extends AppCompatActivity {
                         EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (editCenterAvatarFragment != null) {
                             if (requestCode == 300) {
-                                ResultManager.galleryResult(this, data, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                                editCenterAvatarFragment.responseAction("gallery", data);
                             } else if (requestCode == 400) {
-                                ResultManager.cameraResult(this, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                                editCenterAvatarFragment.responseAction("camera", data);
                             }
                         }
                     }

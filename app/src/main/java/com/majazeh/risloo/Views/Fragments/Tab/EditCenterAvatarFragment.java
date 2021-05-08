@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Tab;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
@@ -26,13 +28,13 @@ import com.squareup.picasso.Picasso;
 public class EditCenterAvatarFragment extends Fragment {
 
     // Binding
-    public FragmentEditCenterAvatarBinding binding;
+    private FragmentEditCenterAvatarBinding binding;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
 
     // Objects
-    public Bitmap avatarBitmap;
+    private Bitmap avatarBitmap;
 
     // Vars
     public String avatarPath = "";
@@ -56,9 +58,9 @@ public class EditCenterAvatarFragment extends Fragment {
     private void initializer() {
         imageBottomSheet = new ImageBottomSheet();
 
-        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterAvatarFragmentGuide));
+        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterAvatarTabAvatarGuide));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterAvatarFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterAvatarTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -84,7 +86,12 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void setData() {
-        if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+
+            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
+            Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             if (((MainActivity) requireActivity()).singleton.getName().equals(""))
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
@@ -92,11 +99,17 @@ public class EditCenterAvatarFragment extends Fragment {
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+        }
+    }
 
-            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
-            Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+    public void responseAction(String method, Intent data) {
+        switch (method) {
+            case "gallery":
+                ResultManager.galleryResult(requireActivity(), data, avatarPath, avatarBitmap, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                break;
+            case "camera":
+                ResultManager.cameraResult(requireActivity(), avatarPath, avatarBitmap, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                break;
         }
     }
 

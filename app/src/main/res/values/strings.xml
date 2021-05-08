@@ -421,6 +421,25 @@
 
     <string name="EditCenterFragmentTitle">ویرایش مرکز درمانی</string>
 
+    ---------- // EditCenterDetail Tab
+
+    <string name="EditCenterDetailTabManagerHeader">مدیر</string>
+    <string name="EditCenterDetailTabNameHeader">عنوان</string>
+    <string name="EditCenterDetailTabAddressHeader">آدرس</string>
+    <string name="EditCenterDetailTabPhonesHeader">شماره تلفن(ها)</string>
+    <string name="EditCenterDetailTabDescriptionHeader">توضیحات</string>
+
+    <string name="EditCenterDetailTabAddressHint">غیر ضروری</string>
+    <string name="EditCenterDetailTabDescriptionHint">غیر ضروری</string>
+
+    <string name="EditCenterDetailTabButton">ویرایش</string>
+
+    ---------- // EditCenterAvatar Tab
+
+    <string name="EditCenterAvatarTabAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
+
+    <string name="EditCenterAvatarTabButton">ویرایش</string>
+
     /*
     ---------- EditCenterUser Fragment ----------
     */
@@ -817,52 +836,7 @@
     <string name="CreateSessionPaymentFragmentPaymentButton">ساخت</string>
     <string name="CreateSessionTimeFragmentButton">ساخت</string>
 
-    //////////////
-
-    //////////////
-
-    //////////////
-
-    //////////////
-
-    //////////////
-
     //////////////////////////////////////////////////////////////////////////////////////
-
-    //////////////
-
-    //////////////
-
-    //////////////
-    <string name="EditCenterAvatarFragmentGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
-
-    <string name="EditCenterAvatarFragmentButton">ویرایش</string>
-    //////////////
-
-    //////////////
-    <string name="EditCenterDetailFragmentManagerHeader">مدیر</string>
-    <string name="EditCenterDetailFragmentNameHeader">عنوان</string>
-    <string name="EditCenterDetailFragmentAddressHeader">آدرس</string>
-    <string name="EditCenterDetailFragmentPhonesHeader">شماره تلفن(ها)</string>
-    <string name="EditCenterDetailFragmentDescriptionHeader">توضیحات</string>
-
-    <string name="EditCenterDetailFragmentAddressHint">غیر ضروری</string>
-    <string name="EditCenterDetailFragmentDescriptionHint">غیر ضروری</string>
-
-    <string name="EditCenterDetailFragmentButton">ویرایش</string>
-    //////////////
-
-    //////////////
-
-    //////////////
-
-    //////////////
-
-    //////////////
-
-    //////////////
-
-    //////////////
 
     //////////////
     <string name="EditSessionPaymentFragmentPaymentHeader">نوع دریافت</string>

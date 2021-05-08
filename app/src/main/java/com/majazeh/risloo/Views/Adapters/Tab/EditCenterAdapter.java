@@ -12,32 +12,48 @@ import java.util.HashMap;
 
 public class EditCenterAdapter extends FragmentStateAdapter {
 
+    // Vars
+    private String center;
+
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    public EditCenterAdapter(@NonNull FragmentActivity fragment) {
+    public EditCenterAdapter(@NonNull FragmentActivity fragment, String center) {
         super(fragment);
+        this.center = center;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position) {
-            case 0:
+        if (center.equals("personal")) {
+            if (position == 0) {
                 Fragment fragment0 = new EditCenterDetailFragment();
                 hashMap.put(position, fragment0);
                 return fragment0;
-            case 1:
-                Fragment fragment1 = new EditCenterAvatarFragment();
-                hashMap.put(position, fragment1);
-                return fragment1;
-            default:
-                return null;
+            }
+            return null;
+        } else {
+            switch (position) {
+                case 0:
+                    Fragment fragment0 = new EditCenterDetailFragment();
+                    hashMap.put(position, fragment0);
+                    return fragment0;
+                case 1:
+                    Fragment fragment1 = new EditCenterAvatarFragment();
+                    hashMap.put(position, fragment1);
+                    return fragment1;
+                default:
+                    return null;
+            }
         }
     }
 
     @Override
     public int getItemCount() {
-        return 2;
+        if (center.equals("personal"))
+            return 1;
+        else
+            return 2;
     }
 
 }
