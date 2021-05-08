@@ -8,36 +8,25 @@
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Edit.EditUserFragment">
 
-    <com.google.android.material.tabs.TabLayout
+    <include
         android:id="@+id/tabLayout"
-        android:layout_width="match_parent"
+        layout="@layout/component_main_tablayout"
+        android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
-        android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_12sdp"
-        android:background="@drawable/draw_line_solid_transparent_border_bottom_2sdp_gray200"
+        android:layout_marginStart="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabBackground="@null"
-        app:tabGravity="fill"
-        app:tabMode="fixed"
-        app:tabMaxWidth="0dp"
-        app:tabRippleColor="@color/Gray300"
-        app:tabIndicatorColor="@color/Blue500"
-        app:tabIndicatorHeight="@dimen/_2sdp"
-        app:tabTextColor="@color/Gray500"
-        app:tabSelectedTextColor="@color/Gray900"
-        app:tabTextAppearance="@style/TabTextAppearance" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <androidx.viewpager2.widget.ViewPager2
+    <include
         android:id="@+id/viewPager"
+        layout="@layout/component_main_viewpager"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:overScrollMode="always"
-        android:layoutDirection="rtl"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tabLayout" />
+        app:layout_constraintTop_toBottomOf="@id/tabLayout" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

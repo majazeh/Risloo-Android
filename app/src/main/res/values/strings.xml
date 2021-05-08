@@ -427,6 +427,17 @@
 
     <string name="EditCenterUserFragmentTitle">ویرایش عضو مرکز درمانی</string>
 
+    <string name="EditCenterUserFragmentTypeHeader">موقعیت</string>
+    <string name="EditCenterUserFragmentNameHeader">نام مراجع</string>
+    <string name="EditCenterUserFragmentStatusHeader">وضعیت</string>
+
+    <string name="EditCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+
+    <string name="EditCenterUserFragmentStatusAccept">پذیرفتن</string>
+    <string name="EditCenterUserFragmentStatusKick">تعلیق</string>
+
+    <string name="EditCenterUserFragmentButton">ویرایش</string>
+
     /*
     ---------- EditSession Fragment ----------
     */
@@ -438,6 +449,14 @@
     */
 
     <string name="EditTreasuryFragmentTitle">ویرایش کیف پول</string>
+
+    <string name="EditTreasuryFragmentNameHeader">عنوان</string>
+
+    <string name="EditTreasuryFragmentNameHint">عنوان کیف پول</string>
+
+    <string name="EditTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
+
+    <string name="EditTreasuryFragmentButton">ویرایش</string>
 
     /*
     ---------- EditUser Fragment ----------
@@ -757,19 +776,6 @@
     <string name="EditCenterDetailFragmentDescriptionHint">غیر ضروری</string>
 
     <string name="EditCenterDetailFragmentButton">ویرایش</string>
-    //////////////
-
-    //////////////
-    <string name="EditCenterUserFragmentTypeHeader">موقعیت</string>
-    <string name="EditCenterUserFragmentNameHeader">نام مراجع</string>
-    <string name="EditCenterUserFragmentStatusHeader">وضعیت</string>
-
-    <string name="EditCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
-
-    <string name="EditCenterUserFragmentStatusAccept">پذیرفتن</string>
-    <string name="EditCenterUserFragmentStatusKick">تعلیق</string>
-
-    <string name="EditCenterUserFragmentButton">ویرایش</string>
     //////////////
 
     //////////////
