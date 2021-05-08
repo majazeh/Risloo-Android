@@ -149,7 +149,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 case R.id.editCenterFragment:
                     EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editCenterFragment != null) {
-                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
+                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
                         editCenterDetailFragment.responseDialog(method, item);
                     }
@@ -276,7 +276,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 case R.id.editCenterFragment:
                     EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editCenterFragment != null) {
-                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
+                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
                         if (method.equals("managers")) {
                             detector(holder, editCenterDetailFragment.managerId.equals(item.get("id").toString()));

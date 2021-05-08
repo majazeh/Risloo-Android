@@ -173,7 +173,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                         case R.id.editCenterFragment:
                             EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (editCenterFragment != null) {
-                                EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
+                                EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 if (method.equals("phones")) {
                                     if (!editCenterDetailFragment.phonesAdapter.getIds().contains(value))
@@ -219,7 +219,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
             case R.id.editCenterFragment:
                 EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (editCenterFragment != null) {
-                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
+                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
                     if (method.equals("phones")) {
                         binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);

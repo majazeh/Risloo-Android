@@ -51,28 +51,28 @@ public class EditUserPersonalFragment extends Fragment {
     private void initializer() {
         birthdayBottomSheet = new DateBottomSheet();
 
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentNameHeader));
-        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentMobileHeader));
-        binding.usernameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameHeader));
-        binding.emailIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentEmailHeader));
-        binding.birthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentBirthdayHeader));
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentStatusHeader));
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentTypeHeader));
-        binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPersonalFragmentGenderHeader));
+        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabNameHeader));
+        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabMobileHeader));
+        binding.usernameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabUsernameHeader));
+        binding.emailIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabEmailHeader));
+        binding.birthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabBirthdayHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabStatusHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabTypeHeader));
+        binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabGenderHeader));
 
-        binding.usernameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditPersonalFragmentUsernameGuide));
+        binding.usernameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserPersonalTabUsernameGuide));
 
-        binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusActive));
-        binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusWaiting));
-        binding.statusIncludeLayout.thirdRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentStatusClosed));
+        binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusActive));
+        binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusWaiting));
+        binding.statusIncludeLayout.thirdRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusClosed));
 
-        binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeAdmin));
-        binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentTypeClient));
+        binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabTypeAdmin));
+        binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabTypeClient));
 
-        binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderMale));
-        binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditPersonalFragmentGenderFemale));
+        binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabGenderMale));
+        binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabGenderFemale));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditPersonalFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserPersonalTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -164,19 +164,19 @@ public class EditUserPersonalFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.usernameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.usernameIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (binding.nameIncludeLayout.inputEditText.length() != 0 && binding.mobileIncludeLayout.inputEditText.length() != 0 && binding.usernameIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.usernameIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView);
 
                 doWork();
             }

@@ -337,7 +337,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
             case R.id.editCenterFragment:
                 EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                 if (editCenterFragment != null) {
-                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
+                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
                     if (method.equals("managers")) {
                         searchableAdapter.setItems(values, method);

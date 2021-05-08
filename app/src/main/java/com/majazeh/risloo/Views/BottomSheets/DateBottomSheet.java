@@ -171,13 +171,13 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                     if (editSessionFragment != null) {
                         switch (method) {
                             case "startDate":
-                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
+                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 editSessionTimeFragment.responseBottomSheet(method, getDate());
                                 break;
                             case "startAccurateDate":
                             case "endAccurateDate":
-                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
+                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 editSessionSessionFragment.responseBottomSheet(method, getDate());
                                 break;
@@ -187,7 +187,7 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                 case R.id.editUserFragment:
                     EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editUserFragment != null) {
-                        EditUserPersonalFragment editUserPersonalFragment = (EditUserPersonalFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
+                        EditUserPersonalFragment editUserPersonalFragment = (EditUserPersonalFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
 
                         editUserPersonalFragment.responseBottomSheet(method, getDate());
                     }

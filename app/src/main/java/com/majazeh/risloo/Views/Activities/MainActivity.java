@@ -355,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.editCenterFragment:
                         EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editCenterFragment != null) {
-                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
+                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (editCenterAvatarFragment != null) {
                                 editCenterAvatarFragment.avatarPath = IntentManager.camera(this);
                             }
@@ -364,7 +364,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.editUserFragment:
                         EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editUserFragment != null) {
-                            EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
+                            EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (editUserAvatarFragment != null) {
                                 editUserAvatarFragment.avatarPath = IntentManager.camera(this);
                             }
@@ -394,7 +394,7 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.editCenterFragment:
                     EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editCenterFragment != null) {
-                        EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getCurrentItem());
+                        EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (editCenterAvatarFragment != null) {
                             if (requestCode == 300) {
                                 ResultManager.galleryResult(this, data, editCenterAvatarFragment.avatarPath, editCenterAvatarFragment.avatarBitmap, editCenterAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editCenterAvatarFragment.binding.avatarIncludeLayout.charTextView);
@@ -407,12 +407,12 @@ public class MainActivity extends AppCompatActivity {
                 case R.id.editUserFragment:
                     EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editUserFragment != null) {
-                        EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getCurrentItem());
+                        EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (editUserAvatarFragment != null) {
                             if (requestCode == 300) {
-                                ResultManager.galleryResult(this, data, editUserAvatarFragment.avatarPath, editUserAvatarFragment.avatarBitmap, editUserAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editUserAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                                editUserAvatarFragment.responseAction("gallery", data);
                             } else if (requestCode == 400) {
-                                ResultManager.cameraResult(this, editUserAvatarFragment.avatarPath, editUserAvatarFragment.avatarBitmap, editUserAvatarFragment.binding.avatarIncludeLayout.avatarCircleImageView, editUserAvatarFragment.binding.avatarIncludeLayout.charTextView);
+                                editUserAvatarFragment.responseAction("camera", data);
                             }
                         }
                     }

@@ -43,11 +43,11 @@ public class EditUserCryptoFragment extends Fragment {
     }
 
     private void initializer() {
-        binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCryptoFragmentPublicHeader));
-        binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCryptoFragmentPrivateHeader));
+        binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserCryptoTabPublicHeader));
+        binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserCryptoTabPrivateHeader));
 
-        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentButton), getResources().getColor(R.color.White));
-        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditCryptoFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditUserCryptoTabFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditUserCryptoTabFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -82,9 +82,9 @@ public class EditUserCryptoFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.publicIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.publicIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.errorImageView, binding.publicErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.errorImageView, binding.publicErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -92,9 +92,9 @@ public class EditUserCryptoFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.privateIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.privateIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.errorImageView, binding.privateErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.errorImageView, binding.privateErrorLayout.errorTextView);
 
                 doWork();
             }

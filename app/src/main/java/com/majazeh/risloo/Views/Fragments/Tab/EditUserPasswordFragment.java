@@ -51,11 +51,11 @@ public class EditUserPasswordFragment extends Fragment {
     }
 
     private void initializer() {
-        binding.passwordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditPasswordFragmentHeader));
+        binding.passwordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPasswordTabPasswordHeader));
 
-        binding.passwordGuideLayout.guideTextView.setText(getResources().getString(R.string.EditPasswordFragmentGuide));
+        binding.passwordGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserPasswordTabPasswordGuide));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditPasswordFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserPasswordTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -135,9 +135,9 @@ public class EditUserPasswordFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordErrorLayout.errorImageView, binding.passwordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordErrorLayout.errorImageView, binding.passwordErrorLayout.errorTextView);
 
                 doWork();
             }

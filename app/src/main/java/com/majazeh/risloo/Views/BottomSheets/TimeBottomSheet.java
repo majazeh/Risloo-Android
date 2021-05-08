@@ -133,13 +133,13 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
                     if (editSessionFragment != null) {
                         switch (method) {
                             case "startTime":
-                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
+                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 editSessionTimeFragment.responseBottomSheet(method, getTime());
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
-                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getCurrentItem());
+                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 editSessionSessionFragment.responseBottomSheet(method, getTime());
                                 break;
