@@ -37,8 +37,10 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
@@ -327,6 +329,19 @@ public class SearchableDialog extends AppCompatDialogFragment {
                             break;
                         case "patternDays":
                             CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
+
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
+                    }
+                }
+                break;
+            case R.id.createSessionFragment:
+                CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createSessionFragment != null) {
+                    switch (method) {
+                        case "patternDays":
+                            CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);

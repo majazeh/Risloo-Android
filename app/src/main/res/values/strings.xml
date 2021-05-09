@@ -420,6 +420,48 @@
 
     <string name="CreateSessionFragmentTitle">ساخت جلسه درمانی</string>
 
+    ---------- // CreateSessionTime Tab
+
+    <string name="CreateSessionTimeTabStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="CreateSessionTimeTabDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="CreateSessionTimeTabDateTypeHeader">نوع تاریخ انتخابی</string>
+    <string name="CreateSessionTimeTabSpecifiedDateHeader">تاریخ</string>
+    <string name="CreateSessionTimeTabPatternDaysHeader">روزهای هفته</string>
+    <string name="CreateSessionTimeTabPatternTypeHeader">نوع الگوی التخابی</string>
+    <string name="CreateSessionTimeTabRepeatWeeksHeader">تعداد هفته</string>
+    <string name="CreateSessionTimeTabPeriodStartDateHeader">شروع</string>
+    <string name="CreateSessionTimeTabPeriodEndDateHeader">پایان</string>
+
+    <string name="CreateSessionTimeTabDateTypeSpecified">مشخص</string>
+    <string name="CreateSessionTimeTabDateTypePattern">الگو</string>
+
+    <string name="CreateSessionTimeTabPatternTypeRepeat">تکرار</string>
+    <string name="CreateSessionTimeTabPatternTypePeriod">بازه زمانی</string>
+
+    <string name="CreateSessionTimeTabButton">ساخت</string>
+
+    ---------- // CreateSessionSession Tab
+
+    <string name="CreateSessionSessionTabTypeHeader">نوع جلسه</string>
+    <string name="CreateSessionSessionTabStatusHeader">وضعیت جلسه</string>
+    <string name="CreateSessionSessionTabAxisHeader">محور جلسه</string>
+    <string name="CreateSessionSessionTabDescriptionHeader">توضیحات</string>
+    <string name="CreateSessionSessionTabCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="CreateSessionSessionTabAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
+    <string name="CreateSessionSessionTabCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="CreateSessionSessionTabButton">ساخت</string>
+
+    ---------- // CreateSessionPayment Tab
+
+    <string name="CreateSessionPaymentTabPaymentHeader">نوع دریافت</string>
+
+    <string name="CreateSessionPaymentTabAxisTotal">مبلغ جلسه</string>
+    <string name="CreateSessionPaymentTabAxisCurrency">(تومان)</string>
+
+    <string name="CreateSessionPaymentTabButton">ساخت</string>
+
     /*
     ---------- CreateTreasury Fragment ----------
     */
@@ -809,28 +851,6 @@
 
 
 
-
-
-
-
-
-    //////////////
-
-    <string name="CreateSessionTimeFragmentStartTimeHeader">زمان (ساعت - دقیقه)</string>
-    <string name="CreateSessionTimeFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="CreateSessionTimeFragmentStartDateHeader">تاریخ</string>
-
-    <string name="CreateSessionSessionFragmentTypeHeader">نوع جلسه</string>
-    <string name="CreateSessionSessionFragmentStatusHeader">وضعیت جلسه</string>
-    <string name="CreateSessionSessionFragmentDescriptionHeader">توضیحات</string>
-
-    <string name="CreateSessionPaymentFragmentPaymentHeader">نوع دریافت</string>
-
-    <string name="CreateSessionSessionFragmentButton">ساخت</string>
-    <string name="CreateSessionPaymentFragmentPaymentButton">ساخت</string>
-    <string name="CreateSessionTimeFragmentButton">ساخت</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
 
     //////////////
     <string name="EditSessionPaymentFragmentPaymentHeader">نوع دریافت</string>

@@ -30,8 +30,11 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
@@ -170,6 +173,22 @@ public class SelectedDialog extends AppCompatDialogFragment {
                                 }
                             }
                             break;
+                        case R.id.createSessionFragment:
+                            CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            if (createSessionFragment != null) {
+                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                                CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
+
+                                if (method.equals("axises")) {
+                                    if (!createSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
+                                        createSessionSessionFragment.axisesAdapter.addItem(item);
+                                        createSessionPaymentFragment.axisPaymentsAdapter.addItem(item);
+                                    } else {
+                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                            break;
                         case R.id.editCenterFragment:
                             EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                             if (editCenterFragment != null) {
@@ -213,6 +232,16 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                     if (method.equals("axises")) {
                         binding.listRecyclerView.setAdapter(createScheduleSessionFragment.axisesAdapter);
+                    }
+                }
+                break;
+            case R.id.createSessionFragment:
+                CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (createSessionFragment != null) {
+                    CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+
+                    if (method.equals("axises")) {
+                        binding.listRecyclerView.setAdapter(createSessionSessionFragment.axisesAdapter);
                     }
                 }
                 break;

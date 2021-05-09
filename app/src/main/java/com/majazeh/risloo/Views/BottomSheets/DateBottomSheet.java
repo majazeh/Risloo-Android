@@ -126,6 +126,9 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
                     if (createSessionFragment != null) {
                         switch (method) {
                             case "startDate":
+                            case "specifiedDate":
+                            case "periodStartDate":
+                            case "periodEndDate":
                                 CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
                                 createSessionTimeFragment.responseBottomSheet(method, getDate());

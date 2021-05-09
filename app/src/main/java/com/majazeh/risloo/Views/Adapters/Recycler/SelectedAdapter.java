@@ -15,7 +15,9 @@ import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 
 import org.json.JSONException;
@@ -144,6 +146,14 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                             CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
 
                             createSchedulePaymentFragment.axisPaymentsAdapter.removeItem(position);
+                        }
+                        break;
+                    case R.id.createSessionFragment:
+                        CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        if (createSessionFragment != null) {
+                            CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
+
+                            createSessionPaymentFragment.axisPaymentsAdapter.removeItem(position);
                         }
                         break;
                 }
