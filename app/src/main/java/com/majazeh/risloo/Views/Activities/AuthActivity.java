@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.EditText;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
@@ -45,6 +46,8 @@ public class AuthActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initializer();
+
+        ExtendOnFailureException.activity = this;
     }
 
     private void decorator() {
@@ -66,7 +69,7 @@ public class AuthActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
     }
 
-    public void navigator(int destinationId) {
+    public void navigator(int destinationId,Bundle extras) {
         try {
             if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
                 while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
@@ -79,7 +82,11 @@ public class AuthActivity extends AppCompatActivity {
         } catch(IllegalArgumentException e){
             System.out.println(e.getMessage());
         }
-        navController.navigate(destinationId);
+        navController.navigate(destinationId,extras);
+    }
+
+    public void navigator(int destinationId) {
+        navigator(destinationId, null);
     }
 
     @Override

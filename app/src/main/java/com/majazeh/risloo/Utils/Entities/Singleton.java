@@ -22,6 +22,13 @@ public class Singleton {
         editor.apply();
     }
 
+    public String getToken() {
+        if (!sharedPreferences.getString("token", "").equals("")) {
+            return sharedPreferences.getString("token", "");
+        }
+        return "";
+    }
+
     public boolean getAuth() {
         return sharedPreferences.getBoolean("auth", true);
     }

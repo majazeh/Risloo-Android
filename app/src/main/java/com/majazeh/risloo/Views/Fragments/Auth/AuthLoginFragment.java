@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthLoginBinding;
+import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
+
+import java.util.HashMap;
 
 public class AuthLoginFragment extends Fragment {
 
@@ -31,7 +36,7 @@ public class AuthLoginFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentAuthLoginBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -109,13 +114,41 @@ public class AuthLoginFragment extends Fragment {
         }).widget(binding.buttonTextView.getRoot());
 
         ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authSerialFragment)).widget(binding.passwordRecoverLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void doWork() {
         mobile = binding.mobileEditText.getRoot().getText().toString().trim();
-
         // TODO : call work method and place mobile as it's input
+        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        HashMap data = new HashMap();
+        data.put("authorized_key", mobile);
+        Auth.auth(data, new HashMap<>(), object -> {
+            AuthModel model = (AuthModel) object;
+            if (((AuthModel) object).getUser() == null) {
+                Bundle extras = new Bundle();
+                extras.putString("key", model.getKey());
+                extras.putString("callback", model.getCallback());
+                switch (model.getTheory()) {
+                    case "password":
+                        getActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+                        });
+                        break;
+                    case "mobileCode":
+                        getActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
+                        });
+                        break;
+                }
+            } else {
+                // TODO: go to next activity
+                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

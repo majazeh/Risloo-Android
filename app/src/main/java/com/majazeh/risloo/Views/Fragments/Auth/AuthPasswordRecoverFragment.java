@@ -19,6 +19,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordRecoverBinding;
+import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
+
+import java.util.HashMap;
 
 public class AuthPasswordRecoverFragment extends Fragment {
 
@@ -112,8 +116,36 @@ public class AuthPasswordRecoverFragment extends Fragment {
 
     private void doWork() {
         mobile = binding.mobileEditText.getRoot().getText().toString().trim();
-
         // TODO : call work method and place mobile as it's input
+        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        HashMap data = new HashMap();
+        data.put("mobile", mobile);
+        Auth.recovery(data, new HashMap<>(), object -> {
+            AuthModel model = (AuthModel) object;
+            Bundle extras = new Bundle();
+            extras.putString("key", model.getKey());
+            extras.putString("callback", model.getCallback());
+            switch (model.getTheory()) {
+                case "password":
+                    getActivity().runOnUiThread(() -> {
+                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+                    });
+                    break;
+                case "mobileCode":
+                    getActivity().runOnUiThread(() -> {
+                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                        ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
+                    });
+                    break;
+                case "recovery":
+                    getActivity().runOnUiThread(() -> {
+                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
+                    });
+                    break;
+            }
+        });
     }
 
     @Override

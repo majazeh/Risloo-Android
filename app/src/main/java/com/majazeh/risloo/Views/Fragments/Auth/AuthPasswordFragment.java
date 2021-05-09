@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +24,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordBinding;
+import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
+
+import java.util.HashMap;
 
 public class AuthPasswordFragment extends Fragment {
 
@@ -165,8 +170,34 @@ public class AuthPasswordFragment extends Fragment {
 
     private void doWork() {
         password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
-
         // TODO : call work method and place password as it's input
+        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        HashMap data = new HashMap();
+        data.put("password", password);
+        if (getArguments().getString("key")!=null)
+            data.put("key", getArguments().getString("key"));
+        if (getArguments().getString("callback")!=null)
+            data.put("callback", getArguments().getString("callback"));
+        Auth.auth_theory(data, new HashMap<>(), object -> {
+            AuthModel model = (AuthModel) object;
+            if (((AuthModel) object).getUser()==null) {
+                Bundle extras = new Bundle();
+                extras.putString("key", model.getKey());
+                extras.putString("callback", model.getCallback());
+                switch (model.getTheory()) {
+                    case "mobileCode":
+                        getActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
+                        });
+                        break;
+                }
+            }else{
+                //TODO : go to next activity
+                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show());
+            }
+        });
     }
 
     @Override
