@@ -361,6 +361,59 @@
 
     <string name="CreateScheduleFragmentTitle">ساخت برنامه درمانی</string>
 
+    ---------- // CreateScheduleTime Tab
+
+    <string name="CreateScheduleTimeTabStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="CreateScheduleTimeTabDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="CreateScheduleTimeTabDateTypeHeader">نوع تاریخ انتخابی</string>
+    <string name="CreateScheduleTimeTabSpecifiedDateHeader">تاریخ</string>
+    <string name="CreateScheduleTimeTabPatternDaysHeader">روزهای هفته</string>
+    <string name="CreateScheduleTimeTabPatternTypeHeader">نوع الگوی التخابی</string>
+    <string name="CreateScheduleTimeTabRepeatWeeksHeader">تعداد هفته</string>
+    <string name="CreateScheduleTimeTabPeriodStartDateHeader">شروع</string>
+    <string name="CreateScheduleTimeTabPeriodEndDateHeader">پایان</string>
+
+    <string name="CreateScheduleTimeTabDateTypeSpecified">مشخص</string>
+    <string name="CreateScheduleTimeTabDateTypePattern">الگو</string>
+
+    <string name="CreateScheduleTimeTabPatternTypeRepeat">تکرار</string>
+    <string name="CreateScheduleTimeTabPatternTypePeriod">بازه زمانی</string>
+
+    <string name="CreateScheduleTimeTabButton">ساخت</string>
+
+    ---------- // CreateScheduleReference Tab
+
+    <string name="CreateScheduleReferenceTabTypeHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="CreateScheduleReferenceTabCaseHeader">پرونده</string>
+    <string name="CreateScheduleReferenceTabCountHeader">تعداد حداکثر مراجعین</string>
+    <string name="CreateScheduleReferenceTabSelectionHeader">نوع انتخاب مراجعین</string>
+
+    <string name="CreateScheduleReferenceTabCheckbox">جلسه گروهی</string>
+
+    <string name="CreateScheduleReferenceTabButton">ساخت</string>
+
+    ---------- // CreateScheduleSession Tab
+
+    <string name="CreateScheduleSessionTabTypeHeader">نوع جلسه</string>
+    <string name="CreateScheduleSessionTabStatusHeader">وضعیت جلسه</string>
+    <string name="CreateScheduleSessionTabAxisHeader">محور جلسه</string>
+    <string name="CreateScheduleSessionTabDescriptionHeader">توضیحات</string>
+    <string name="CreateScheduleSessionTabCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+
+    <string name="CreateScheduleSessionTabAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
+    <string name="CreateScheduleSessionTabCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+
+    <string name="CreateScheduleSessionTabButton">ساخت</string>
+
+    ---------- // CreateSchedulePayment Tab
+
+    <string name="CreateSchedulePaymentTabPaymentHeader">نوع دریافت</string>
+
+    <string name="CreateSchedulePaymentTabAxisTotal">مبلغ جلسه</string>
+    <string name="CreateSchedulePaymentTabAxisCurrency">(تومان)</string>
+
+    <string name="CreateSchedulePaymentTabButton">ساخت</string>
+
     /*
     ---------- CreateSession Fragment ----------
     */
@@ -760,65 +813,6 @@
 
 
 
-
-
-
-
-
-
-
-
-
-    //////////////
-    <string name="CreateSchedulePaymentFragmentPaymentHeader">نوع دریافت</string>
-
-    <string name="CreateSchedulePaymentFragmentPaymentAxisTotal">مبلغ جلسه</string>
-    <string name="CreateSchedulePaymentFragmentPaymentAxisCurrency">(تومان)</string>
-
-    <string name="CreateSchedulePaymentFragmentPaymentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateScheduleReferenceFragmentTypeHeader">نوع مراجعین درخواست دهنده</string>
-    <string name="CreateScheduleReferenceFragmentCaseHeader">پرونده</string>
-    <string name="CreateScheduleReferenceFragmentCountHeader">تعداد حداکثر مراجعین</string>
-    <string name="CreateScheduleReferenceFragmentSelectionHeader">نوع انتخاب مراجعین</string>
-
-    <string name="CreateScheduleReferenceFragmentCheckbox">جلسه گروهی</string>
-
-    <string name="CreateScheduleReferenceFragmentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateScheduleSessionFragmentTypeHeader">نوع جلسه</string>
-    <string name="CreateScheduleSessionFragmentStatusHeader">وضعیت جلسه</string>
-    <string name="CreateScheduleSessionFragmentAxisHeader">محور جلسه</string>
-    <string name="CreateScheduleSessionFragmentDescriptionHeader">توضیحات</string>
-
-    <string name="CreateScheduleSessionFragmentAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
-
-    <string name="CreateScheduleSessionFragmentButton">ساخت</string>
-    //////////////
-
-    //////////////
-    <string name="CreateScheduleTimeFragmentStartTimeHeader">زمان (ساعت - دقیقه)</string>
-    <string name="CreateScheduleTimeFragmentDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="CreateScheduleTimeFragmentDateTypeHeader">نوع تاریخ انتخابی</string>
-    <string name="CreateScheduleTimeFragmentSpecifiedDateHeader">تاریخ</string>
-    <string name="CreateScheduleTimeFragmentPatternDaysHeader">روزهای هفته</string>
-    <string name="CreateScheduleTimeFragmentPatternTypeHeader">نوع الگوی التخابی</string>
-    <string name="CreateScheduleTimeFragmentRepeatWeeksHeader">تعداد هفته</string>
-    <string name="CreateScheduleTimeFragmentPeriodStartDateHeader">شروع</string>
-    <string name="CreateScheduleTimeFragmentPeriodEndDateHeader">پایان</string>
-
-    <string name="CreateScheduleTimeFragmentDateTypeSpecified">مشخص</string>
-    <string name="CreateScheduleTimeFragmentDateTypePattern">الگو</string>
-
-    <string name="CreateScheduleTimeFragmentPatternTypeRepeat">تکرار</string>
-    <string name="CreateScheduleTimeFragmentPatternTypePeriod">بازه زمانی</string>
-
-    <string name="CreateScheduleTimeFragmentButton">ساخت</string>
-    //////////////
 
     //////////////
 

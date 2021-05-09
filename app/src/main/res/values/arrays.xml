@@ -175,6 +175,7 @@
         <item>تماس تلفنی</item>
         <item>تماس صوتی آنلاین</item>
         <item>ویدئو کنفرانس</item>
+        <item>انتخاب به عهده مراجع</item>
     </array>
 
     <array name="SessionStatus">

@@ -13,19 +13,20 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <include
                 android:id="@+id/payment_includeLayout"
@@ -37,19 +38,29 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/axis_recyclerView"
+            <include
+                android:id="@+id/payment_errorLayout"
+                layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:overScrollMode="never"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/payment_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/payment_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/payment_includeLayout" />
+
+            <include
+                android:id="@+id/axis_recyclerView"
+                layout="@layout/component_main_recycler"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/_12sdp"
                 app:layout_constrainedHeight="true"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/payment_includeLayout"
-                tools:listitem="@layout/single_item_axis_payment"
-                tools:itemCount="4" />
+                app:layout_constraintEnd_toEndOf="@id/payment_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/payment_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/payment_errorLayout"
+                tools:layout_marginTop="@dimen/_12sdp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -59,8 +70,8 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintStart_toStartOf="@+id/container_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/container_constraintLayout" />
+            app:layout_constraintRight_toRightOf="@id/container_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

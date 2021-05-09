@@ -60,17 +60,17 @@ public class CreateSchedulePaymentFragment extends Fragment {
     private void initializer() {
         axisPaymentsAdapter = new AxisPaymentsAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp),0, (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), 0, (int) getResources().getDimension(R.dimen._4sdp), 0);
 
         axisPaymentslayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSchedulePaymentFragmentPaymentHeader));
+        binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSchedulePaymentTabPaymentHeader));
 
         InitManager.spinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes, "main");
 
-        InitManager.unfixedRecyclerView(binding.axisRecyclerView, itemDecoration, axisPaymentslayoutManager);
+        InitManager.unfixedRecyclerView(binding.axisRecyclerView.getRoot(), itemDecoration, axisPaymentslayoutManager);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSchedulePaymentFragmentPaymentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSchedulePaymentTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -97,11 +97,11 @@ public class CreateSchedulePaymentFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.errorImageView, binding.paymentErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.errorImageView, binding.paymentErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -140,7 +140,7 @@ public class CreateSchedulePaymentFragment extends Fragment {
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids) {
         axisPaymentsAdapter.setItems(items, ids);
-        binding.axisRecyclerView.setAdapter(axisPaymentsAdapter);
+        binding.axisRecyclerView.getRoot().setAdapter(axisPaymentsAdapter);
     }
 
     private void doWork() {

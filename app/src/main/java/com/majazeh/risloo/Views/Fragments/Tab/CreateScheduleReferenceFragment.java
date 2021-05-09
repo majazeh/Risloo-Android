@@ -54,17 +54,17 @@ public class CreateScheduleReferenceFragment extends Fragment {
     private void initializer() {
         casesDialog = new SearchableDialog();
 
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceFragmentTypeHeader));
-        binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceFragmentCaseHeader));
-        binding.countIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceFragmentCountHeader));
-        binding.selectionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceFragmentSelectionHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabTypeHeader));
+        binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabCaseHeader));
+        binding.countIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabCountHeader));
+        binding.selectionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabSelectionHeader));
 
-        binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.CreateScheduleReferenceFragmentCheckbox));
+        binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.CreateScheduleReferenceTabCheckbox));
 
         InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.RequestTypes, "main");
         InitManager.spinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes, "main");
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleReferenceFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleReferenceTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -135,15 +135,15 @@ public class CreateScheduleReferenceFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (type.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (selection.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.errorImageView, binding.selectionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!type.equals("") && !selection.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.errorImageView, binding.selectionErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -156,6 +156,12 @@ public class CreateScheduleReferenceFragment extends Fragment {
             for (int i=0; i<binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.typeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
                     binding.typeIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (type.contains("پرونده درمانی")) {
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    } else {
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+                    }
                 }
             }
         }

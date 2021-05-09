@@ -86,28 +86,28 @@ public class CreateScheduleTimeFragment extends Fragment {
         periodStartDateBottomSheet = new DateBottomSheet();
         periodEndDateBottomSheet = new DateBottomSheet();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTimeFragmentStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTimeFragmentDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeFragmentDateTypeHeader));
-        binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeFragmentSpecifiedDateHeader));
-        binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeFragmentPatternDaysHeader));
-        binding.patternTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeFragmentPatternTypeHeader));
-        binding.repeatWeeksIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeFragmentRepeatWeeksHeader));
-        binding.periodStartDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeFragmentPeriodStartDateHeader));
-        binding.periodEndDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeFragmentPeriodEndDateHeader));
+        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTimeTabStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTimeTabDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabDateTypeHeader));
+        binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabSpecifiedDateHeader));
+        binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabPatternDaysHeader));
+        binding.patternTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabPatternTypeHeader));
+        binding.repeatWeeksIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabRepeatWeeksHeader));
+        binding.periodStartDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabPeriodStartDateHeader));
+        binding.periodEndDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabPeriodEndDateHeader));
 
-        binding.dateTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeFragmentDateTypeSpecified));
-        binding.dateTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeFragmentDateTypePattern));
+        binding.dateTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabDateTypeSpecified));
+        binding.dateTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabDateTypePattern));
 
-        binding.patternTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeFragmentPatternTypeRepeat));
-        binding.patternTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeFragmentPatternTypePeriod));
+        binding.patternTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabPatternTypeRepeat));
+        binding.patternTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabPatternTypePeriod));
 
         binding.durationIncludeLayout.inputEditText.setText(duration);
         binding.repeatWeeksIncludeLayout.inputEditText.setText(repeatWeeks);
 
         InitManager.unfixedRecyclerView(binding.patternDaysIncludeLayout.selectRecyclerView, itemDecoration, patternDaysLayoutManager);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTimeFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTimeTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -214,15 +214,15 @@ public class CreateScheduleTimeFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (startTime.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.errorImageView, binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.durationIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.errorImageView, binding.durationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
             if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, null, null);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.errorImageView, binding.startTimeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.errorImageView, binding.durationErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -254,12 +254,24 @@ public class CreateScheduleTimeFragment extends Fragment {
 
                     binding.specifiedDateGroup.setVisibility(View.VISIBLE);
                     binding.patternDateGroup.setVisibility(View.GONE);
+
+                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton) {
+                        binding.repeatPatternGroup.setVisibility(View.GONE);
+                    } else {
+                        binding.periodPatternGroup.setVisibility(View.GONE);
+                    }
                     break;
                 case "pattern":
                     binding.dateTypeIncludeLayout.secondRadioButton.setChecked(true);
 
                     binding.specifiedDateGroup.setVisibility(View.GONE);
                     binding.patternDateGroup.setVisibility(View.VISIBLE);
+
+                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton) {
+                        binding.repeatPatternGroup.setVisibility(View.VISIBLE);
+                    } else {
+                        binding.periodPatternGroup.setVisibility(View.VISIBLE);
+                    }
                     break;
             }
         }
@@ -400,6 +412,15 @@ public class CreateScheduleTimeFragment extends Fragment {
                         patternDaysAdapter.addItem(item);
                     else
                         patternDaysAdapter.removeItem(position);
+
+                    if (patternDaysAdapter.getIds().size() != 0) {
+                        binding.patternDaysIncludeLayout.countTextView.setVisibility(View.VISIBLE);
+                        binding.patternDaysIncludeLayout.countTextView.setText("(" + patternDaysAdapter.getIds().size() + ")");
+                    } else {
+                        binding.patternDaysIncludeLayout.countTextView.setVisibility(View.GONE);
+                        binding.patternDaysIncludeLayout.countTextView.setText("");
+                    }
+
                     break;
             }
         } catch (JSONException e) {

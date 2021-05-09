@@ -20,25 +20,36 @@
             android:id="@+id/container_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintEnd_toEndOf="parent">
+            app:layout_constraintTop_toTopOf="parent">
 
             <include
                 android:id="@+id/type_includeLayout"
                 layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/type_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/type_includeLayout" />
 
             <include
                 android:id="@+id/case_includeLayout"
@@ -47,9 +58,20 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/type_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/type_errorLayout" />
+
+            <include
+                android:id="@+id/case_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/case_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/case_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_includeLayout" />
 
             <include
                 android:id="@+id/bulk_session_checkBox"
@@ -59,7 +81,7 @@
                 android:layout_marginStart="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/case_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/case_errorLayout" />
 
             <include
                 android:id="@+id/count_includeLayout"
@@ -68,21 +90,45 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@+id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/bulk_session_checkBox" />
+                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/bulk_session_checkBox" />
+
+            <include
+                android:id="@+id/count_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/count_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/count_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/count_includeLayout" />
 
             <include
                 android:id="@+id/selection_includeLayout"
                 layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
+                app:layout_goneMarginBottom="@dimen/_12sdp"
+                app:layout_constraintBottom_toTopOf="@id/selection_errorLayout"
+                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/count_errorLayout" />
+
+            <include
+                android:id="@+id/selection_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@+id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@+id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/count_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/selection_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/selection_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/selection_includeLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -92,8 +138,8 @@
             android:layout_width="wrap_content"
             android:layout_height="@dimen/_32sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintStart_toStartOf="@+id/container_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/container_constraintLayout" />
+            app:layout_constraintRight_toRightOf="@id/container_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/container_constraintLayout" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -214,8 +214,8 @@
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_angle_down_light"
-            app:layout_constraintBottom_toBottomOf="@+id/start_accurate_time_textView"
-            app:layout_constraintEnd_toEndOf="@+id/start_accurate_time_textView"
+            app:layout_constraintBottom_toBottomOf="@id/start_accurate_time_textView"
+            app:layout_constraintEnd_toEndOf="@id/start_accurate_time_textView"
             app:layout_constraintTop_toTopOf="@id/start_accurate_time_textView"
             app:tint="@color/Gray600" />
 
@@ -245,8 +245,8 @@
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_angle_down_light"
-            app:layout_constraintBottom_toBottomOf="@+id/start_accurate_date_textView"
-            app:layout_constraintEnd_toEndOf="@+id/start_accurate_date_textView"
+            app:layout_constraintBottom_toBottomOf="@id/start_accurate_date_textView"
+            app:layout_constraintEnd_toEndOf="@id/start_accurate_date_textView"
             app:layout_constraintTop_toTopOf="@id/start_accurate_date_textView"
             app:tint="@color/Gray600" />
 
@@ -474,8 +474,8 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_angle_down_light"
             android:alpha="@{alpha}"
-            app:layout_constraintBottom_toBottomOf="@+id/end_accurate_time_textView"
-            app:layout_constraintEnd_toEndOf="@+id/end_accurate_time_textView"
+            app:layout_constraintBottom_toBottomOf="@id/end_accurate_time_textView"
+            app:layout_constraintEnd_toEndOf="@id/end_accurate_time_textView"
             app:layout_constraintTop_toTopOf="@id/end_accurate_time_textView"
             app:tint="@color/Gray600" />
 
@@ -508,8 +508,8 @@
             android:scaleType="fitCenter"
             android:src="@drawable/ic_angle_down_light"
             android:alpha="@{alpha}"
-            app:layout_constraintBottom_toBottomOf="@+id/end_accurate_date_textView"
-            app:layout_constraintEnd_toEndOf="@+id/end_accurate_date_textView"
+            app:layout_constraintBottom_toBottomOf="@id/end_accurate_date_textView"
+            app:layout_constraintEnd_toEndOf="@id/end_accurate_date_textView"
             app:layout_constraintTop_toTopOf="@id/end_accurate_date_textView"
             app:tint="@color/Gray600" />
 

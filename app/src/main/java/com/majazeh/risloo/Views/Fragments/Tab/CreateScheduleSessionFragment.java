@@ -51,7 +51,7 @@ public class CreateScheduleSessionFragment extends Fragment {
 
     // Vars
     private ArrayList<Model> axises = new ArrayList<>();
-    private String type = "", status = "", description = "";
+    private String type = "", status = "", description = "", coordination = "";
     private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
     private int startAccurateHour, startAccurateMinute, startAccurateYear, startAccurateMonth, startAccurateDay, endAccurateHour, endAccurateMinute, endAccurateYear, endAccurateMonth, endAccurateDay;
     private int startRelativeDay, startRelativeHour, startRelativeMinute, endRelativeDay, endRelativeHour, endRelativeMinute;
@@ -87,19 +87,21 @@ public class CreateScheduleSessionFragment extends Fragment {
 
         axisLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentTypeHeader));
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentStatusHeader));
-        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentAxisHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentDescriptionHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabTypeHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabStatusHeader));
+        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabAxisHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabDescriptionHeader));
+        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabCoordinationHeader));
 
-        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionFragmentAxisGuide));
+        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabAxisGuide));
+        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabCoordinationGuide));
 
         InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.SessionTypes, "main");
         InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
 
         InitManager.unfixedRecyclerView(binding.axisIncludeLayout.selectRecyclerView, itemDecoration, axisLayoutManager);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleSessionFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleSessionTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -154,6 +156,15 @@ public class CreateScheduleSessionFragment extends Fragment {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
                     ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                }
+            }
+            return false;
+        });
+
+        binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.coordinationIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -283,19 +294,23 @@ public class CreateScheduleSessionFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (type.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (status.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusErrorLayout.errorImageView, binding.statusErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.descriptionIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            }
+            if (binding.coordinationIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.coordinationIncludeLayout.inputEditText, binding.coordinationErrorLayout.errorImageView, binding.coordinationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!type.equals("") && !status.equals("") && binding.descriptionIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, null, null);
+            if (!type.equals("") && !status.equals("") && binding.descriptionIncludeLayout.inputEditText.length() != 0 && binding.coordinationIncludeLayout.inputEditText.length() != 0) {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusErrorLayout.errorImageView, binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.coordinationIncludeLayout.inputEditText, binding.coordinationErrorLayout.errorImageView, binding.coordinationErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -317,6 +332,12 @@ public class CreateScheduleSessionFragment extends Fragment {
             for (int i=0; i<binding.statusIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
                     binding.statusIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (status.equals("زمان\u200Cبندی شده")) {
+                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    } else {
+                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.GONE);
+                    }
                 }
             }
         }
@@ -343,6 +364,11 @@ public class CreateScheduleSessionFragment extends Fragment {
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
             description = ((MainActivity) requireActivity()).singleton.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
+        }
+
+        if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
+            coordination = ((MainActivity) requireActivity()).singleton.getDescription();
+            binding.coordinationIncludeLayout.inputEditText.setText(coordination);
         }
 
         if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
@@ -478,6 +504,7 @@ public class CreateScheduleSessionFragment extends Fragment {
 
     private void doWork() {
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+        coordination = binding.coordinationIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

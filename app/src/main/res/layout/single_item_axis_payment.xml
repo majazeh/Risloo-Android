@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:gravity="center"
-        android:text="@string/CreateSchedulePaymentFragmentPaymentAxisCurrency"
+        android:text="@string/CreateSchedulePaymentTabAxisCurrency"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"
