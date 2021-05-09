@@ -38,11 +38,13 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 
 import org.json.JSONException;
@@ -357,6 +359,19 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     if (method.equals("managers")) {
                         searchableAdapter.setItems(values, method);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
+                    }
+                }
+                break;
+            case R.id.editSessionFragment:
+                EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (editSessionFragment != null) {
+                    switch (method) {
+                        case "patternDays":
+                            EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            break;
                     }
                 }
                 break;

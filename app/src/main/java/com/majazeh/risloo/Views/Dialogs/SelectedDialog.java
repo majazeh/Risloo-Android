@@ -31,12 +31,15 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
 
 import org.json.JSONException;
@@ -202,6 +205,22 @@ public class SelectedDialog extends AppCompatDialogFragment {
                                 }
                             }
                             break;
+                        case R.id.editSessionFragment:
+                            EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            if (editSessionFragment != null) {
+                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                                EditSessionPaymentFragment editSessionPaymentFragment = (EditSessionPaymentFragment) editSessionFragment.adapter.hashMap.get(2);
+
+                                if (method.equals("axises")) {
+                                    if (!editSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
+                                        editSessionSessionFragment.axisesAdapter.addItem(item);
+                                        editSessionPaymentFragment.axisPaymentsAdapter.addItem(item);
+                                    } else {
+                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    }
+                                }
+                            }
+                            break;
                     }
 
                     ((MainActivity) requireActivity()).controlEditText.clear(requireActivity(), ((MainActivity) requireActivity()).controlEditText.input());
@@ -252,6 +271,16 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                     if (method.equals("phones")) {
                         binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);
+                    }
+                }
+                break;
+            case R.id.editSessionFragment:
+                EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                if (editSessionFragment != null) {
+                    EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+
+                    if (method.equals("axises")) {
+                        binding.listRecyclerView.setAdapter(editSessionSessionFragment.axisesAdapter);
                     }
                 }
                 break;

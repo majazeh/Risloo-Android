@@ -12,27 +12,46 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
+import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentEditSessionSessionBinding;
+
+import java.util.ArrayList;
 
 public class EditSessionSessionFragment extends Fragment {
 
     // Binding
     private FragmentEditSessionSessionBinding binding;
 
+    // Adapters
+    public SelectedAdapter axisesAdapter;
+
+    // Dialogs
+    private SelectedDialog axisesDialog;
+
     // BottomSheets
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
     private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
 
+    // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
+    private LinearLayoutManager axisLayoutManager;
+
     // Vars
-    private String type = "", status = "", description = "";
+    private ArrayList<Model> axises = new ArrayList<>();
+    private String type = "", status = "", description = "", coordination = "";
     private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
     private int startAccurateHour, startAccurateMinute, startAccurateYear, startAccurateMonth, startAccurateDay, endAccurateHour, endAccurateMinute, endAccurateYear, endAccurateMonth, endAccurateDay;
     private int startRelativeDay, startRelativeHour, startRelativeMinute, endRelativeDay, endRelativeHour, endRelativeMinute;
@@ -55,19 +74,34 @@ public class EditSessionSessionFragment extends Fragment {
     }
 
     private void initializer() {
+        axisesAdapter = new SelectedAdapter(requireActivity());
+
+        axisesDialog = new SelectedDialog();
+
         startAccurateTimeBottomSheet = new TimeBottomSheet();
         endAccurateTimeBottomSheet = new TimeBottomSheet();
         startAccurateDateBottomSheet = new DateBottomSheet();
         endAccurateDateBottomSheet = new DateBottomSheet();
 
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionFragmentTypeHeader));
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionFragmentStatusHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionFragmentDescriptionHeader));
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
+
+        axisLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabTypeHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabStatusHeader));
+        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabAxisHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabDescriptionHeader));
+        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabCoordinationHeader));
+
+        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.EditSessionSessionTabAxisGuide));
+        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.EditSessionSessionTabCoordinationGuide));
 
         InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.SessionTypes, "main");
         InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionSessionFragmentButton), getResources().getColor(R.color.White));
+        InitManager.unfixedRecyclerView(binding.axisIncludeLayout.selectRecyclerView, itemDecoration, axisLayoutManager);
+
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionSessionTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -110,10 +144,27 @@ public class EditSessionSessionFragment extends Fragment {
             }
         });
 
+        binding.axisIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                axisesDialog.show(requireActivity().getSupportFragmentManager(), "axisesDialog");
+                axisesDialog.setData("axises");
+            }
+            return false;
+        });
+
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
                     ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                }
+            }
+            return false;
+        });
+
+        binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.coordinationIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -243,19 +294,23 @@ public class EditSessionSessionFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (type.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (status.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusErrorLayout.errorImageView, binding.statusErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
             if (binding.descriptionIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, null, null, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            }
+            if (binding.coordinationIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.coordinationIncludeLayout.inputEditText, binding.coordinationErrorLayout.errorImageView, binding.coordinationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
 
-            if (!type.equals("") && !status.equals("") && binding.descriptionIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, null, null);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, null, null);
+            if (!type.equals("") && !status.equals("") && binding.descriptionIncludeLayout.inputEditText.length() != 0 && binding.coordinationIncludeLayout.inputEditText.length() != 0) {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusErrorLayout.errorImageView, binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.coordinationIncludeLayout.inputEditText, binding.coordinationErrorLayout.errorImageView, binding.coordinationErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -277,13 +332,43 @@ public class EditSessionSessionFragment extends Fragment {
             for (int i=0; i<binding.statusIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.statusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
                     binding.statusIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (status.equals("زمان\u200Cبندی شده")) {
+                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    } else {
+                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.GONE);
+                    }
                 }
             }
         }
 
+//        if (extras.getString("axises") != null) {
+//            try {
+//                JSONArray jsonArray = new JSONArray(extras.getString("axises"));
+//
+//                for (int i = 0; i < jsonArray.length(); i++) {
+//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
+//                    Model model = new Model(jsonObject);
+//
+//                    axises.add(model);
+//                }
+//
+//                setRecyclerView(axises, "axises");
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        } else {
+        setRecyclerView(axises, new ArrayList<>(), "axises");
+//        }
+
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
             description = ((MainActivity) requireActivity()).singleton.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
+        }
+
+        if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
+            coordination = ((MainActivity) requireActivity()).singleton.getDescription();
+            binding.coordinationIncludeLayout.inputEditText.setText(coordination);
         }
 
         if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
@@ -410,8 +495,16 @@ public class EditSessionSessionFragment extends Fragment {
 
     }
 
+    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+        if (method.equals("axises")) {
+            axisesAdapter.setItems(items, ids, method, binding.axisIncludeLayout.countTextView);
+            binding.axisIncludeLayout.selectRecyclerView.setAdapter(axisesAdapter);
+        }
+    }
+
     private void doWork() {
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+        coordination = binding.coordinationIncludeLayout.inputEditText.getText().toString().trim();
 
         // TODO : Call Work Method
     }

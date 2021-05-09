@@ -21,11 +21,13 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
 
 import org.json.JSONException;
@@ -148,12 +150,36 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         }
                     }
                     break;
+                case R.id.createSessionFragment:
+                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createSessionFragment != null) {
+                        switch (method) {
+                            case "patternDays":
+                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+
+                                createSessionTimeFragment.responseDialog(method, item);
+                                break;
+                        }
+                    }
+                    break;
                 case R.id.editCenterFragment:
                     EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
                     if (editCenterFragment != null) {
                         EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
                         editCenterDetailFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.editSessionFragment:
+                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editSessionFragment != null) {
+                        switch (method) {
+                            case "patternDays":
+                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+
+                                editSessionTimeFragment.responseDialog(method, item);
+                                break;
+                        }
                     }
                     break;
             }
@@ -294,6 +320,18 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
                         if (method.equals("managers")) {
                             detector(holder, editCenterDetailFragment.managerId.equals(item.get("id").toString()));
+                        }
+                    }
+                    break;
+                case R.id.editSessionFragment:
+                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editSessionFragment != null) {
+                        switch (method) {
+                            case "patternDays":
+                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+
+                                detector(holder, editSessionTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                break;
                         }
                     }
                     break;
