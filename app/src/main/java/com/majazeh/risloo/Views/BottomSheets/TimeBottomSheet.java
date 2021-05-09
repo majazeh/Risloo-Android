@@ -40,8 +40,7 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return dialog;
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Nullable
@@ -93,55 +92,67 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
         ClickManager.onDelayedClickListener(() -> {
             switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                 case R.id.createSessionFragment:
-                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createSessionFragment != null) {
                         switch (method) {
                             case "startTime":
                                 CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                createSessionTimeFragment.responseBottomSheet(method, getTime());
+                                if (createSessionTimeFragment != null) {
+                                    createSessionTimeFragment.responseBottomSheet(method, getTime());
+                                }
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
                                 CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                createSessionSessionFragment.responseBottomSheet(method, getTime());
+                                if (createSessionSessionFragment != null) {
+                                    createSessionSessionFragment.responseBottomSheet(method, getTime());
+                                }
                                 break;
                         }
                     }
                     break;
                 case R.id.createScheduleFragment:
-                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createScheduleFragment != null) {
                         switch (method) {
                             case "startTime":
                                 CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                createScheduleTimeFragment.responseBottomSheet(method, getTime());
+                                if (createScheduleTimeFragment != null) {
+                                    createScheduleTimeFragment.responseBottomSheet(method, getTime());
+                                }
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
                                 CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                createScheduleSessionFragment.responseBottomSheet(method, getTime());
+                                if (createScheduleSessionFragment != null) {
+                                    createScheduleSessionFragment.responseBottomSheet(method, getTime());
+                                }
                                 break;
                         }
                     }
                     break;
                 case R.id.editSessionFragment:
-                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (editSessionFragment != null) {
                         switch (method) {
                             case "startTime":
                                 EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                editSessionTimeFragment.responseBottomSheet(method, getTime());
+                                if (editSessionTimeFragment != null) {
+                                    editSessionTimeFragment.responseBottomSheet(method, getTime());
+                                }
                                 break;
                             case "startAccurateTime":
                             case "endAccurateTime":
                                 EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                editSessionSessionFragment.responseBottomSheet(method, getTime());
+                                if (editSessionSessionFragment != null) {
+                                    editSessionSessionFragment.responseBottomSheet(method, getTime());
+                                }
                                 break;
                         }
                     }

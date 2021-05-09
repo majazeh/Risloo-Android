@@ -33,8 +33,7 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return dialog;
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Nullable
@@ -69,25 +68,29 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
             if (PermissionManager.cameraPermission(requireActivity())) {
                 switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                     case R.id.createCenterFragment:
-                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (createCenterFragment != null) {
                             createCenterFragment.avatarPath = IntentManager.camera(requireActivity());
                         }
                         break;
                     case R.id.editCenterFragment:
-                        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editCenterFragment != null) {
                             EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                            editCenterAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
+                            if (editCenterAvatarFragment != null) {
+                                editCenterAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
+                            }
                         }
                         break;
                     case R.id.editUserFragment:
-                        EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                        EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editUserFragment != null) {
                             EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                            editUserAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
+                            if (editUserAvatarFragment != null) {
+                                editUserAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
+                            }
                         }
                         break;
                 }

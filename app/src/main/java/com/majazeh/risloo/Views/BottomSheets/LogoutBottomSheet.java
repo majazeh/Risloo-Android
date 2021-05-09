@@ -30,8 +30,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        Dialog dialog = super.onCreateDialog(savedInstanceState);
-        return dialog;
+        return super.onCreateDialog(savedInstanceState);
     }
 
     @Nullable
@@ -65,21 +64,20 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void setWidget() {
-        if (name.equals("")) {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        } else {
+        if (!name.equals("")) {
             binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+        } else {
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         }
 
-        if (avatar.equals("")) {
+        if (!avatar.equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
     }
 

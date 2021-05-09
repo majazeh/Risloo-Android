@@ -13,9 +13,9 @@
         android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginTop="@dimen/_16sdp"
-        android:layout_marginEnd="@dimen/_12sdp"
         android:gravity="start"
         android:text="@string/BottomSheetImageTitle"
         android:textSize="@dimen/_13ssp"
@@ -36,15 +36,15 @@
         android:paddingTop="@dimen/_8sdp"
         android:gravity="center"
         android:orientation="horizontal"
-        app:layout_constraintTop_toBottomOf="@id/title_textView"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:layout_constraintEnd_toEndOf="@id/title_textView" >
+        app:layout_constraintTop_toBottomOf="@id/title_textView">
 
         <ImageView
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
-            android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_8sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_images_regular"
@@ -69,22 +69,22 @@
         android:id="@+id/camera_linearLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_4sdp"
         android:layout_marginBottom="@dimen/_18sdp"
+        android:layout_marginTop="@dimen/_4sdp"
         android:paddingBottom="@dimen/_8sdp"
         android:paddingTop="@dimen/_8sdp"
         android:gravity="center"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/gallery_linearLayout"
+        app:layout_constraintEnd_toEndOf="@id/gallery_linearLayout"
         app:layout_constraintStart_toStartOf="@id/gallery_linearLayout"
-        app:layout_constraintEnd_toEndOf="@id/gallery_linearLayout">
+        app:layout_constraintTop_toBottomOf="@id/gallery_linearLayout">
 
         <ImageView
             android:layout_width="@dimen/_22sdp"
             android:layout_height="@dimen/_22sdp"
-            android:layout_marginStart="@dimen/_8sdp"
             android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_8sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_camera_regular"
