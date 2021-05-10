@@ -18,8 +18,11 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 
 import org.json.JSONException;
@@ -128,7 +131,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
     private void detector(SelectedHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
 
             holder.binding.removeImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_gray50_ripple_red300);
         }
@@ -140,34 +143,57 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         }).widget(holder.binding.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            if (method.equals("axises")) {
-                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                    case R.id.createScheduleFragment:
-                        CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createScheduleFragment != null) {
-                            CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
+            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                case R.id.createScheduleFragment:
+                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createScheduleFragment != null) {
+                        if (method.equals("axises")) {
+                            CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
+                            if (createScheduleSessionFragment != null) {
+//                                createScheduleSessionFragment.axisesDialog.calculateCount();
 
-                            createSchedulePaymentFragment.axisAdapter.removeItem(position);
+                                CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
+                                if (createSchedulePaymentFragment != null) {
+                                    createSchedulePaymentFragment.axisAdapter.removeItem(position);
+                                }
+                            }
                         }
-                        break;
-                    case R.id.createSessionFragment:
-                        CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (createSessionFragment != null) {
-                            CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
+                    }
+                    break;
+                case R.id.createSessionFragment:
+                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (createSessionFragment != null) {
+                        if (method.equals("axises")) {
+                            CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                            if (createSessionSessionFragment != null) {
+//                                createSessionSessionFragment.axisesDialog.calculateCount();
 
-                            createSessionPaymentFragment.axisAdapter.removeItem(position);
+                                CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
+                                if (createSessionPaymentFragment != null) {
+                                    createSessionPaymentFragment.axisAdapter.removeItem(position);
+                                }
+                            }
                         }
-                        break;
-                    case R.id.editSessionFragment:
-                        EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
-                        if (editSessionFragment != null) {
-                            EditSessionPaymentFragment editSessionPaymentFragment = (EditSessionPaymentFragment) editSessionFragment.adapter.hashMap.get(2);
+                    }
+                    break;
+                case R.id.editSessionFragment:
+                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                    if (editSessionFragment != null) {
+                        if (method.equals("axises")) {
+                            EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                            if (editSessionSessionFragment != null) {
+//                                editSessionSessionFragment.axisesDialog.calculateCount();
 
-                            editSessionPaymentFragment.axisAdapter.removeItem(position);
+                                EditSessionPaymentFragment editSessionPaymentFragment = (EditSessionPaymentFragment) editSessionFragment.adapter.hashMap.get(2);
+                                if (editSessionPaymentFragment != null) {
+                                    editSessionPaymentFragment.axisAdapter.removeItem(position);
+                                }
+                            }
                         }
-                        break;
-                }
+                    }
+                    break;
             }
+
             removeItem(position);
         }).widget(holder.binding.removeImageView);
     }
@@ -200,11 +226,11 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         if (getItemCount() != 0) {
             String count = "(" + getItemCount() + ")";
 
-            widget.setText(count);
             widget.setVisibility(View.VISIBLE);
+            widget.setText(count);
         } else {
-            widget.setText("");
             widget.setVisibility(View.GONE);
+            widget.setText("");
         }
     }
 

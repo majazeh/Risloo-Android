@@ -13,6 +13,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -98,7 +99,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._16sdp), 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -150,7 +151,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                     switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                         case R.id.createCenterFragment:
-                            CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                             if (createCenterFragment != null) {
                                 if (method.equals("phones")) {
                                     if (!createCenterFragment.phonesAdapter.getIds().contains(value))
@@ -161,67 +162,82 @@ public class SelectedDialog extends AppCompatDialogFragment {
                             }
                             break;
                         case R.id.createScheduleFragment:
-                            CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                             if (createScheduleFragment != null) {
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-                                CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
-
                                 if (method.equals("axises")) {
-                                    if (!createScheduleSessionFragment.axisesAdapter.getIds().contains(value)) {
-                                        createScheduleSessionFragment.axisesAdapter.addItem(item);
-                                        createSchedulePaymentFragment.axisAdapter.addItem(item);
-                                    } else {
-                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
+                                    if (createScheduleSessionFragment != null) {
+                                        if (!createScheduleSessionFragment.axisesAdapter.getIds().contains(value)) {
+                                            createScheduleSessionFragment.axisesAdapter.addItem(item);
+
+                                            CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
+                                            if (createSchedulePaymentFragment != null) {
+                                                createSchedulePaymentFragment.axisAdapter.addItem(item);
+                                            }
+                                        } else {
+                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                             }
                             break;
                         case R.id.createSessionFragment:
-                            CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                             if (createSessionFragment != null) {
-                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                                CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
-
                                 if (method.equals("axises")) {
-                                    if (!createSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
-                                        createSessionSessionFragment.axisesAdapter.addItem(item);
-                                        createSessionPaymentFragment.axisAdapter.addItem(item);
-                                    } else {
-                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                                    if (createSessionSessionFragment != null) {
+                                        if (!createSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
+                                            createSessionSessionFragment.axisesAdapter.addItem(item);
+
+                                            CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
+                                            if (createSessionPaymentFragment != null) {
+                                                createSessionPaymentFragment.axisAdapter.addItem(item);
+                                            }
+                                        } else {
+                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                             }
                             break;
                         case R.id.editCenterFragment:
-                            EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                             if (editCenterFragment != null) {
-                                EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
-
                                 if (method.equals("phones")) {
-                                    if (!editCenterDetailFragment.phonesAdapter.getIds().contains(value))
-                                        editCenterDetailFragment.phonesAdapter.addItem(item);
-                                    else
-                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
+                                    if (editCenterDetailFragment != null) {
+                                        if (!editCenterDetailFragment.phonesAdapter.getIds().contains(value))
+                                            editCenterDetailFragment.phonesAdapter.addItem(item);
+                                        else
+                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
                             }
                             break;
                         case R.id.editSessionFragment:
-                            EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                            EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                             if (editSessionFragment != null) {
-                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                                EditSessionPaymentFragment editSessionPaymentFragment = (EditSessionPaymentFragment) editSessionFragment.adapter.hashMap.get(2);
-
                                 if (method.equals("axises")) {
-                                    if (!editSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
-                                        editSessionSessionFragment.axisesAdapter.addItem(item);
-                                        editSessionPaymentFragment.axisAdapter.addItem(item);
-                                    } else {
-                                        Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                    EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                                    if (editSessionSessionFragment != null) {
+                                        if (!editSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
+                                            editSessionSessionFragment.axisesAdapter.addItem(item);
+
+                                            EditSessionPaymentFragment editSessionPaymentFragment = (EditSessionPaymentFragment) editSessionFragment.adapter.hashMap.get(2);
+                                            if (editSessionPaymentFragment != null) {
+                                                editSessionPaymentFragment.axisAdapter.addItem(item);
+                                            }
+                                        } else {
+                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
                             }
                             break;
                     }
+
+                    calculateCount();
 
                     ((MainActivity) requireActivity()).controlEditText.clear(requireActivity(), ((MainActivity) requireActivity()).controlEditText.input());
                     clearEditText();
@@ -237,7 +253,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
     private void setRecyclerView() {
         switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
             case R.id.createCenterFragment:
-                CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterFragment != null) {
                     if (method.equals("phones")) {
                         binding.listRecyclerView.setAdapter(createCenterFragment.phonesAdapter);
@@ -245,46 +261,52 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 }
                 break;
             case R.id.createScheduleFragment:
-                CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createScheduleFragment != null) {
-                    CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-
                     if (method.equals("axises")) {
-                        binding.listRecyclerView.setAdapter(createScheduleSessionFragment.axisesAdapter);
+                        CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
+                        if (createScheduleSessionFragment != null) {
+                            binding.listRecyclerView.setAdapter(createScheduleSessionFragment.axisesAdapter);
+                        }
                     }
                 }
                 break;
             case R.id.createSessionFragment:
-                CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createSessionFragment != null) {
-                    CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-
                     if (method.equals("axises")) {
-                        binding.listRecyclerView.setAdapter(createSessionSessionFragment.axisesAdapter);
+                        CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                        if (createSessionSessionFragment != null) {
+                            binding.listRecyclerView.setAdapter(createSessionSessionFragment.axisesAdapter);
+                        }
                     }
                 }
                 break;
             case R.id.editCenterFragment:
-                EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (editCenterFragment != null) {
-                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
-
                     if (method.equals("phones")) {
-                        binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);
+                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
+                        if (editCenterDetailFragment != null) {
+                            binding.listRecyclerView.setAdapter(editCenterDetailFragment.phonesAdapter);
+                        }
                     }
                 }
                 break;
             case R.id.editSessionFragment:
-                EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (editSessionFragment != null) {
-                    EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-
                     if (method.equals("axises")) {
-                        binding.listRecyclerView.setAdapter(editSessionSessionFragment.axisesAdapter);
+                        EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                        if (editSessionSessionFragment != null) {
+                            binding.listRecyclerView.setAdapter(editSessionSessionFragment.axisesAdapter);
+                        }
                     }
                 }
                 break;
         }
+
+        calculateCount();
     }
 
     private void clearEditText() {
@@ -293,6 +315,18 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
     public void setData(String method) {
         this.method = method;
+    }
+
+    public void calculateCount() {
+        if (Objects.requireNonNull(binding.listRecyclerView.getAdapter()).getItemCount() != 0) {
+            String count = "(" + binding.listRecyclerView.getAdapter().getItemCount() + ")";
+
+            binding.countTextView.setVisibility(View.VISIBLE);
+            binding.countTextView.setText(count);
+        } else {
+            binding.countTextView.setVisibility(View.GONE);
+            binding.countTextView.setText("");
+        }
     }
 
     @Override
