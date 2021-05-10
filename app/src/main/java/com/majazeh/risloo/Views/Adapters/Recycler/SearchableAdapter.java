@@ -5,6 +5,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -40,6 +41,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     // Objects
     private Activity activity;
 
+    // Widget
+    private TextView countTextView;
+
     // Vars
     private ArrayList<Model> items;
     private String method;
@@ -74,9 +78,12 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         return items;
     }
 
-    public void setItems(ArrayList<Model> items, String method) {
+    public void setItems(ArrayList<Model> items, String method, TextView countTextView) {
         this.items = items;
         this.method = method;
+        if (countTextView != null) {
+            this.countTextView = countTextView;
+        }
         notifyDataSetChanged();
     }
 
@@ -224,6 +231,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         switch (method) {
                             case "references":
                                 detector(holder, createCaseFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                                calculateCount(createCaseFragment.referencesAdapter.getIds().size());
                                 break;
                             case "rooms":
                                 detector(holder, createCaseFragment.roomId.equals(item.get("id").toString()));
@@ -236,6 +244,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     if (createCaseUserFragment != null) {
                         if (method.equals("references")) {
                             detector(holder, createCaseUserFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                            calculateCount(createCaseUserFragment.referencesAdapter.getIds().size());
                         }
                     }
                     break;
@@ -269,9 +278,11 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         switch (method) {
                             case "scales":
                                 detector(holder, createSampleFragment.scalesAdapter.getIds().contains(item.get("id").toString()));
+                                calculateCount(createSampleFragment.scalesAdapter.getIds().size());
                                 break;
                             case "references":
                                 detector(holder, createSampleFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                                calculateCount(createSampleFragment.referencesAdapter.getIds().size());
                                 break;
                             case "rooms":
                                 detector(holder, createSampleFragment.roomId.equals(item.get("id").toString()));
@@ -299,6 +310,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                                 CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
                                 if (createScheduleTimeFragment != null) {
                                     detector(holder, createScheduleTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                    calculateCount(createScheduleTimeFragment.patternDaysAdapter.getIds().size());
                                 }
                                 break;
                         }
@@ -311,6 +323,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (createSessionTimeFragment != null) {
                                 detector(holder, createSessionTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                calculateCount(createSessionTimeFragment.patternDaysAdapter.getIds().size());
                             }
                         }
                     }
@@ -333,6 +346,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (editSessionTimeFragment != null) {
                                 detector(holder, editSessionTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                calculateCount(editSessionTimeFragment.patternDaysAdapter.getIds().size());
                             }
                         }
                     }
@@ -340,6 +354,18 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void calculateCount(int listSize) {
+        if (listSize != 0) {
+            String count = "(" + listSize + ")";
+
+            countTextView.setVisibility(View.VISIBLE);
+            countTextView.setText(count);
+        } else {
+            countTextView.setVisibility(View.GONE);
+            countTextView.setText("");
         }
     }
 

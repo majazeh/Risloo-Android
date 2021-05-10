@@ -84,7 +84,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         this.countTextView = countTextView;
         notifyDataSetChanged();
 
-        calculateCount(this.countTextView);
+        calculateCount();
     }
 
     public void clearItems() {
@@ -92,7 +92,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         ids.clear();
         notifyDataSetChanged();
 
-        calculateCount(countTextView);
+        calculateCount();
     }
 
     public void addItem(Model item) {
@@ -101,7 +101,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
             ids.add(item.get("id").toString());
             notifyDataSetChanged();
 
-            calculateCount(countTextView);
+            calculateCount();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -114,7 +114,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
             notifyItemChanged(position);
             notifyItemRangeChanged(position, getItemCount());
 
-            calculateCount(countTextView);
+            calculateCount();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -126,7 +126,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
 
-        calculateCount(countTextView);
+        calculateCount();
     }
 
     private void detector(SelectedHolder holder) {
@@ -150,8 +150,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                         if (method.equals("axises")) {
                             CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (createScheduleSessionFragment != null) {
-//                                createScheduleSessionFragment.axisesDialog.calculateCount();
-
                                 CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
                                 if (createSchedulePaymentFragment != null) {
                                     createSchedulePaymentFragment.axisAdapter.removeItem(position);
@@ -166,8 +164,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                         if (method.equals("axises")) {
                             CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (createSessionSessionFragment != null) {
-//                                createSessionSessionFragment.axisesDialog.calculateCount();
-
                                 CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
                                 if (createSessionPaymentFragment != null) {
                                     createSessionPaymentFragment.axisAdapter.removeItem(position);
@@ -182,8 +178,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                         if (method.equals("axises")) {
                             EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (editSessionSessionFragment != null) {
-//                                editSessionSessionFragment.axisesDialog.calculateCount();
-
                                 EditSessionPaymentFragment editSessionPaymentFragment = (EditSessionPaymentFragment) editSessionFragment.adapter.hashMap.get(2);
                                 if (editSessionPaymentFragment != null) {
                                     editSessionPaymentFragment.axisAdapter.removeItem(position);
@@ -222,15 +216,15 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         }
     }
 
-    private void calculateCount(TextView widget) {
+    private void calculateCount() {
         if (getItemCount() != 0) {
             String count = "(" + getItemCount() + ")";
 
-            widget.setVisibility(View.VISIBLE);
-            widget.setText(count);
+            countTextView.setVisibility(View.VISIBLE);
+            countTextView.setText(count);
         } else {
-            widget.setVisibility(View.GONE);
-            widget.setText("");
+            countTextView.setVisibility(View.GONE);
+            countTextView.setText("");
         }
     }
 

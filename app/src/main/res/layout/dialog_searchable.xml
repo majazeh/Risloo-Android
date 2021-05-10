@@ -69,6 +69,20 @@
         tools:layout_marginBottom="@dimen/_14sdp"
         tools:hint="جستجو" />
 
+    <ProgressBar
+        android:id="@+id/search_progressBar"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:padding="@dimen/_4sdp"
+        android:theme="@style/ProgressBarTheme"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/input_editText"
+        app:layout_constraintEnd_toEndOf="@id/input_editText"
+        app:layout_constraintTop_toTopOf="@id/input_editText"
+        style="@style/Widget.AppCompat.ProgressBar"
+        tools:visibility="visible" />
+
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/top_barrier"
         android:layout_width="wrap_content"

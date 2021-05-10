@@ -39,7 +39,7 @@ public class CreateSessionSessionFragment extends Fragment {
     public SelectedAdapter axisesAdapter;
 
     // Dialogs
-    public SelectedDialog axisesDialog;
+    private SelectedDialog axisesDialog;
 
     // BottomSheets
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;

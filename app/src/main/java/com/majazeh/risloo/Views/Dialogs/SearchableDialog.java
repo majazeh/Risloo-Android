@@ -244,11 +244,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 if (createCaseFragment != null) {
                     switch (method) {
                         case "references":
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, binding.countTextView);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                         case "rooms":
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, null);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                     }
@@ -258,7 +258,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCaseUserFragment != null) {
                     if (method.equals("references")) {
-                        searchableAdapter.setItems(values, method);
+                        searchableAdapter.setItems(values, method, binding.countTextView);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
                 }
@@ -267,7 +267,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterFragment != null) {
                     if (method.equals("managers")) {
-                        searchableAdapter.setItems(values, method);
+                        searchableAdapter.setItems(values, method, null);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
                 }
@@ -276,7 +276,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterUserFragment != null) {
                     if (method.equals("rooms")) {
-                        searchableAdapter.setItems(values, method);
+                        searchableAdapter.setItems(values, method, null);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
                 }
@@ -285,7 +285,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createRoomFragment != null) {
                     if (method.equals("psychologies")) {
-                        searchableAdapter.setItems(values, method);
+                        searchableAdapter.setItems(values, method, null);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
                     }
                 }
@@ -295,23 +295,23 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 if (createSampleFragment != null) {
                     switch (method) {
                         case "scales":
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, binding.countTextView);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                         case "references":
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, binding.countTextView);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                         case "rooms":
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, null);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                         case "cases":
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, null);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                         case "sessions":
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, null);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                             break;
                     }
@@ -324,14 +324,14 @@ public class SearchableDialog extends AppCompatDialogFragment {
                         case "cases":
                             CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (createScheduleReferenceFragment != null) {
-                                searchableAdapter.setItems(values, method);
+                                searchableAdapter.setItems(values, method, null);
                                 binding.listRecyclerView.setAdapter(searchableAdapter);
                             }
                             break;
                         case "patternDays":
                             CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (createScheduleTimeFragment != null) {
-                                searchableAdapter.setItems(values, method);
+                                searchableAdapter.setItems(values, method, binding.countTextView);
                                 binding.listRecyclerView.setAdapter(searchableAdapter);
                             }
                             break;
@@ -344,7 +344,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     if (method.equals("patternDays")) {
                         CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (createSessionTimeFragment != null) {
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, binding.countTextView);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                         }
                     }
@@ -356,7 +356,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     if (method.equals("managers")) {
                         EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (editCenterDetailFragment != null) {
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, null);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                         }
                     }
@@ -368,7 +368,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     if (method.equals("patternDays")) {
                         EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (editSessionTimeFragment != null) {
-                            searchableAdapter.setItems(values, method);
+                            searchableAdapter.setItems(values, method, binding.countTextView);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                         }
                     }
