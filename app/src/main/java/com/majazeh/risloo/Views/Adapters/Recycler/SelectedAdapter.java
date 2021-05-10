@@ -147,7 +147,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                         if (createScheduleFragment != null) {
                             CreateSchedulePaymentFragment createSchedulePaymentFragment = (CreateSchedulePaymentFragment) createScheduleFragment.adapter.hashMap.get(3);
 
-                            createSchedulePaymentFragment.axisPaymentsAdapter.removeItem(position);
+                            createSchedulePaymentFragment.axisAdapter.removeItem(position);
                         }
                         break;
                     case R.id.createSessionFragment:
@@ -155,7 +155,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                         if (createSessionFragment != null) {
                             CreateSessionPaymentFragment createSessionPaymentFragment = (CreateSessionPaymentFragment) createSessionFragment.adapter.hashMap.get(2);
 
-                            createSessionPaymentFragment.axisPaymentsAdapter.removeItem(position);
+                            createSessionPaymentFragment.axisAdapter.removeItem(position);
                         }
                         break;
                     case R.id.editSessionFragment:
@@ -163,7 +163,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                         if (editSessionFragment != null) {
                             EditSessionPaymentFragment editSessionPaymentFragment = (EditSessionPaymentFragment) editSessionFragment.adapter.hashMap.get(2);
 
-                            editSessionPaymentFragment.axisPaymentsAdapter.removeItem(position);
+                            editSessionPaymentFragment.axisAdapter.removeItem(position);
                         }
                         break;
                 }

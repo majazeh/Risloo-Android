@@ -8,7 +8,7 @@
     android:layoutDirection="rtl"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.AxisPaymentsAdapter">
+    tools:context=".Views.Adapters.Recycler.AxisAdapter">
 
     <TextView
         android:id="@+id/header_textView"
@@ -21,7 +21,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintBottom_toTopOf="@id/input_editText"
-        app:layout_constraintStart_toStartOf="@id/input_editText"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="سرتيتر" />
 
@@ -46,8 +46,8 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginTop="@dimen/_6sdp"
-        android:paddingStart="@dimen/_12sdp"
         android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
         android:imeOptions="actionDone"
         android:inputType="number"
         android:gravity="center|start"

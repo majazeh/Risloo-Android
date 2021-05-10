@@ -20,7 +20,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.AxisPaymentsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.AxisAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateSessionPaymentBinding;
 
 import java.util.ArrayList;
@@ -31,14 +31,14 @@ public class CreateSessionPaymentFragment extends Fragment {
     private FragmentCreateSessionPaymentBinding binding;
 
     // Adapters
-    public AxisPaymentsAdapter axisPaymentsAdapter;
+    public AxisAdapter axisAdapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager axisPaymentslayoutManager;
+    private LinearLayoutManager axisLayoutManager;
 
     // Vars
-    private ArrayList<Model> axisPayments = new ArrayList<>();
+    private ArrayList<Model> axis = new ArrayList<>();
     private String payment = "";
 
     @Nullable
@@ -58,17 +58,17 @@ public class CreateSessionPaymentFragment extends Fragment {
     }
 
     private void initializer() {
-        axisPaymentsAdapter = new AxisPaymentsAdapter(requireActivity());
+        axisAdapter = new AxisAdapter(requireActivity());
 
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), 0, (int) getResources().getDimension(R.dimen._4sdp), 0);
 
-        axisPaymentslayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        axisLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionPaymentTabPaymentHeader));
 
         InitManager.spinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes, "main");
 
-        InitManager.unfixedRecyclerView(binding.axisRecyclerView, itemDecoration, axisPaymentslayoutManager);
+        InitManager.unfixedRecyclerView(binding.axisRecyclerView, itemDecoration, axisLayoutManager);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionPaymentTabButton), getResources().getColor(R.color.White));
     }
@@ -118,29 +118,29 @@ public class CreateSessionPaymentFragment extends Fragment {
             }
         }
 
-//        if (extras.getString("axisPayments") != null) {
+//        if (extras.getString("axis") != null) {
 //            try {
-//                JSONArray jsonArray = new JSONArray(extras.getString("axisPayments"));
+//                JSONArray jsonArray = new JSONArray(extras.getString("axis"));
 //
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
 //                    Model model = new Model(jsonObject);
 //
-//                    axisPayments.add(model);
+//                    axis.add(model);
 //                }
 //
-//                setRecyclerView(axisPayments, "axisPayments");
+//                setRecyclerView(axis, "axis");
 //            } catch (JSONException e) {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(axisPayments, new ArrayList<>());
+        setRecyclerView(axis, new ArrayList<>());
 //        }
     }
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids) {
-        axisPaymentsAdapter.setItems(items, ids);
-        binding.axisRecyclerView.setAdapter(axisPaymentsAdapter);
+        axisAdapter.setItems(items, ids);
+        binding.axisRecyclerView.setAdapter(axisAdapter);
     }
 
     private void doWork() {

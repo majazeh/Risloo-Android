@@ -12,13 +12,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.SingleItemAxisPaymentBinding;
+import com.majazeh.risloo.databinding.SingleItemAxisBinding;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class AxisPaymentsAdapter extends RecyclerView.Adapter<AxisPaymentsAdapter.AxisPaymentsHolder> {
+public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
 
     // Objects
     private Activity activity;
@@ -27,18 +27,18 @@ public class AxisPaymentsAdapter extends RecyclerView.Adapter<AxisPaymentsAdapte
     private ArrayList<Model> items;
     private ArrayList<String> ids;
 
-    public AxisPaymentsAdapter(@NonNull Activity activity) {
+    public AxisAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public AxisPaymentsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new AxisPaymentsHolder(SingleItemAxisPaymentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public AxisHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new AxisHolder(SingleItemAxisBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull AxisPaymentsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull AxisHolder holder, int i) {
         Model item = items.get(i);
 
         listener(holder, i);
@@ -100,7 +100,7 @@ public class AxisPaymentsAdapter extends RecyclerView.Adapter<AxisPaymentsAdapte
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(AxisPaymentsHolder holder, int position) {
+    private void listener(AxisHolder holder, int position) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!holder.binding.inputEditText.hasFocus()) {
@@ -117,7 +117,7 @@ public class AxisPaymentsAdapter extends RecyclerView.Adapter<AxisPaymentsAdapte
         });
     }
 
-    private void setData(AxisPaymentsHolder holder, Model item, int position) {
+    private void setData(AxisHolder holder, Model item, int position) {
         try {
             holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateSchedulePaymentTabAxisTotal) + " " + item.get("title").toString());
 
@@ -131,11 +131,11 @@ public class AxisPaymentsAdapter extends RecyclerView.Adapter<AxisPaymentsAdapte
         }
     }
 
-    public class AxisPaymentsHolder extends RecyclerView.ViewHolder {
+    public class AxisHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemAxisPaymentBinding binding;
+        private SingleItemAxisBinding binding;
 
-        public AxisPaymentsHolder(SingleItemAxisPaymentBinding binding) {
+        public AxisHolder(SingleItemAxisBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

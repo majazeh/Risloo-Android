@@ -169,7 +169,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                                 if (method.equals("axises")) {
                                     if (!createScheduleSessionFragment.axisesAdapter.getIds().contains(value)) {
                                         createScheduleSessionFragment.axisesAdapter.addItem(item);
-                                        createSchedulePaymentFragment.axisPaymentsAdapter.addItem(item);
+                                        createSchedulePaymentFragment.axisAdapter.addItem(item);
                                     } else {
                                         Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                                     }
@@ -185,7 +185,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                                 if (method.equals("axises")) {
                                     if (!createSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
                                         createSessionSessionFragment.axisesAdapter.addItem(item);
-                                        createSessionPaymentFragment.axisPaymentsAdapter.addItem(item);
+                                        createSessionPaymentFragment.axisAdapter.addItem(item);
                                     } else {
                                         Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                                     }
@@ -214,7 +214,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                                 if (method.equals("axises")) {
                                     if (!editSessionSessionFragment.axisesAdapter.getIds().contains(value)) {
                                         editSessionSessionFragment.axisesAdapter.addItem(item);
-                                        editSessionPaymentFragment.axisPaymentsAdapter.addItem(item);
+                                        editSessionPaymentFragment.axisAdapter.addItem(item);
                                     } else {
                                         Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
                                     }
