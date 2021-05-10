@@ -8,7 +8,7 @@
     android:layoutDirection="rtl"
     android:paddingBottom="@dimen/_2sdp"
     android:paddingTop="@dimen/_2sdp"
-    tools:layout_margin="@dimen/_8sdp"
+    tools:layout_marginBottom="@dimen/_4sdp"
     tools:context=".Views.Adapters.Recycler.NavsAdapter">
 
     <ImageView

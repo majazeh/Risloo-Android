@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_12sdp"
+    tools:layout_marginBottom="@dimen/_4sdp"
     tools:context=".Views.Adapters.Recycler.FormsAdapter">
 
     <TextView
@@ -52,7 +52,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_barrier"
-        tools:hint="عنوان" />
+        tools:text="عنوان" />
 
     <Spinner
         android:id="@+id/select_spinner"

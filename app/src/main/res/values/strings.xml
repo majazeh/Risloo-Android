@@ -19,7 +19,7 @@
     <string name="AppFileEmpty">فايل انتخاب نشده است.</string>
 
     <string name="AppDefaultName">کاربر آزمایشی</string>
-    <string name="AppDefaultDate">1400-01-01</string>
+    <string name="AppDefaultDate">1400–01–01</string>
     <string name="AppDefaultTime">01:00</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -904,6 +904,47 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Dialog Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="DialogLoadingTitle">در حال بارگذاري …</string>
+
+    <string name="DialogDayTitle">روز(ها) هفته را انتخاب کنید.</string>
+    <string name="DialogDayEntry">ثبت</string>
+
+    <string name="DialogPhoneTitle">شماره تلفن(ها) را تایپ کنید.</string>
+    <string name="DialogPhoneHint">شماره تلفن</string>
+    <string name="DialogPhoneEntry">ثبت</string>
+
+    <string name="DialogAxisTitle">محور(ها) جلسه را تایپ کنید.</string>
+    <string name="DialogAxisHint">محور</string>
+    <string name="DialogAxisEntry">ثبت</string>
+
+    <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
+    <string name="DialogScaleHint">جستجو</string>
+    <string name="DialogScaleEntry">ثبت</string>
+
+    <string name="DialogReferenceTitle">مراجع(ین) را انتخاب کنید.</string>
+    <string name="DialogReferenceHint">جستجو</string>
+    <string name="DialogReferenceEntry">ثبت</string>
+
+    <string name="DialogCaseTitle">پرونده را انتخاب کنید.</string>
+    <string name="DialogCaseHint">جستجو</string>
+
+    <string name="DialogManagerTitle">مدیر را انتخاب کنید.</string>
+    <string name="DialogManagerHint">جستجو</string>
+
+    <string name="DialogSessionTitle">جلسه را انتخاب کنید.</string>
+    <string name="DialogSessionHint">جستجو</string>
+
+    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
+    <string name="DialogPsychologyHint">جستجو</string>
+
+    <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
+    <string name="DialogRoomHint">جستجو</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // LayoutScheduled Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1189,50 +1230,5 @@
     ///////////////
     <string name="UserFragmentEdit">ویرایش</string>
     ///////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Dialog Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="DialogPhoneTitle">شماره تلفن(ها) را وارد کنید.</string>
-    <string name="DialogPhoneHint">شماره تلفن</string>
-    <string name="DialogPhoneEntry">ثبت</string>
-
-    <string name="DialogAxisTitle">محور(ها) جلسه را تایپ کنید.</string>
-    <string name="DialogAxisHint">موضوع</string>
-    <string name="DialogAxisEntry">ثبت</string>
-
-    <string name="DialogDayTitle">روزهای هفته را انتخاب کنید.</string>
-    <string name="DialogDayEntry">ثبت</string>
-
-    <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
-    <string name="DialogScaleHint">جستجو</string>
-    <string name="DialogScaleEntry">ثبت</string>
-
-    <string name="DialogReferenceTitle">مراجعین را انتخاب کنید.</string>
-    <string name="DialogReferenceHint">جستجو</string>
-    <string name="DialogReferenceEntry">ثبت</string>
-
-    <string name="DialogManagerTitle">مدیر را انتخاب کنید.</string>
-    <string name="DialogManagerHint">جستجو</string>
-
-    <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
-    <string name="DialogRoomHint">جستجو</string>
-
-    <string name="DialogCaseTitle">پرونده را انتخاب کنید.</string>
-    <string name="DialogCaseHint">جستجو</string>
-
-    <string name="DialogSessionTitle">جلسه را انتخاب کنید.</string>
-    <string name="DialogSessionHint">جستجو</string>
-
-    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
-    <string name="DialogPsychologyHint">جستجو</string>
-
-    <string name="DialogLoadingTitle">در حال بارگذاري ...</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
 
 </resources>

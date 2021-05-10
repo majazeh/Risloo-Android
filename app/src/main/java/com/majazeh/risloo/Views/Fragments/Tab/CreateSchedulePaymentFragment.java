@@ -68,7 +68,7 @@ public class CreateSchedulePaymentFragment extends Fragment {
 
         InitManager.spinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes, "main");
 
-        InitManager.unfixedRecyclerView(binding.axisRecyclerView.getRoot(), itemDecoration, axisPaymentslayoutManager);
+        InitManager.unfixedRecyclerView(binding.axisRecyclerView, itemDecoration, axisPaymentslayoutManager);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSchedulePaymentTabButton), getResources().getColor(R.color.White));
     }
@@ -140,7 +140,7 @@ public class CreateSchedulePaymentFragment extends Fragment {
 
     private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids) {
         axisPaymentsAdapter.setItems(items, ids);
-        binding.axisRecyclerView.getRoot().setAdapter(axisPaymentsAdapter);
+        binding.axisRecyclerView.setAdapter(axisPaymentsAdapter);
     }
 
     private void doWork() {

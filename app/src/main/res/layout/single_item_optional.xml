@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200"
-    tools:layout_margin="@dimen/_12sdp"
+    tools:layout_marginBottom="@dimen/_4sdp"
     tools:context=".Views.Adapters.Recycler.OptionalsAdapter">
 
     <TextView

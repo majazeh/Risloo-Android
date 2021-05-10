@@ -50,12 +50,12 @@ public class TestBulkFragment extends Fragment {
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.BulkFragmentTitle));
 
-        InitManager.recyclerView(binding.listRecyclerView.getRoot(), itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
     }
 
     private void setData() {
 //        bulksAdapter.setBulks(null);
-        binding.listRecyclerView.getRoot().setAdapter(bulksAdapter);
+        binding.listRecyclerView.setAdapter(bulksAdapter);
     }
 
     @Override

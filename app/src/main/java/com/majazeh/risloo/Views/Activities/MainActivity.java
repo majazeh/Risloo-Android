@@ -28,7 +28,6 @@ import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
-import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
@@ -127,7 +126,7 @@ public class MainActivity extends AppCompatActivity {
 
         InitManager.spinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
 
-        InitManager.recyclerView(binding.navIncludeLayout.listRecyclerView.getRoot(), itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.navIncludeLayout.listRecyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
@@ -234,7 +233,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
             navsAdapter.setItems(values);
-            binding.navIncludeLayout.listRecyclerView.getRoot().setAdapter(navsAdapter);
+            binding.navIncludeLayout.listRecyclerView.setAdapter(navsAdapter);
         }
     }
 
@@ -356,6 +355,7 @@ public class MainActivity extends AppCompatActivity {
                         EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editCenterFragment != null) {
                             EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
+
                             if (editCenterAvatarFragment != null) {
                                 editCenterAvatarFragment.avatarPath = IntentManager.camera(this);
                             }
@@ -365,6 +365,7 @@ public class MainActivity extends AppCompatActivity {
                         EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
                         if (editUserFragment != null) {
                             EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
+
                             if (editUserAvatarFragment != null) {
                                 editUserAvatarFragment.avatarPath = IntentManager.camera(this);
                             }

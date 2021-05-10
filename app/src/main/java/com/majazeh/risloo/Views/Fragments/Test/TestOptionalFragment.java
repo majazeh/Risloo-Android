@@ -48,14 +48,14 @@ public class TestOptionalFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        InitManager.recyclerView(binding.listRecyclerView.getRoot(), itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
     }
 
     private void setData() {
         binding.questionTextView.getRoot().setText("به مردم کنایه\u200Cهای تند و نیشدار می\u200Cزنم اگر فکر کنم که حقشان همین است.");
 
 //        optionalsAdapter.setOptionals(null);
-        binding.listRecyclerView.getRoot().setAdapter(optionalsAdapter);
+        binding.listRecyclerView.setAdapter(optionalsAdapter);
     }
 
     @Override

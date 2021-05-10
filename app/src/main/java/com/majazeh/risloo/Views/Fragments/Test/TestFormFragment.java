@@ -51,12 +51,12 @@ public class TestFormFragment extends Fragment {
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.FormFragmentTitle));
         binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.FormFragmentDescription));
 
-        InitManager.recyclerView(binding.listRecyclerView.getRoot(), itemDecoration, layoutManager);
+        InitManager.recyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
     }
 
     private void setData() {
 //        formsAdapter.setForms(null);
-        binding.listRecyclerView.getRoot().setAdapter(formsAdapter);
+        binding.listRecyclerView.setAdapter(formsAdapter);
     }
 
     @Override
