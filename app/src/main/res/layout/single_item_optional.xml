@@ -8,6 +8,7 @@
     android:layoutDirection="rtl"
     android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200"
     tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp"
     tools:context=".Views.Adapters.Recycler.OptionalsAdapter">
 
     <TextView

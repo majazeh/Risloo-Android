@@ -62,7 +62,7 @@
                 app:layout_constraintTop_toBottomOf="@id/payment_errorLayout"
                 android:layout_marginBottom="@dimen/_12sdp"
                 tools:layout_marginBottom="@dimen/_8sdp"
-                tools:layout_marginTop="@dimen/_12sdp"
+                tools:layout_marginTop="@dimen/_8sdp"
                 tools:listitem="@layout/single_item_axis_payment"
                 tools:itemCount="4" />
 

@@ -57,7 +57,7 @@
                 tools:layout_marginBottom="@dimen/_8sdp"
                 tools:layout_marginEnd="@dimen/_8sdp"
                 tools:layout_marginStart="@dimen/_8sdp"
-                tools:layout_marginTop="@dimen/_12sdp"
+                tools:layout_marginTop="@dimen/_8sdp"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 tools:listitem="@layout/single_item_pictoral"
                 tools:itemCount="4"

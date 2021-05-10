@@ -7,6 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp"
     tools:context=".Views.Adapters.Recycler.FormsAdapter">
 
     <TextView
