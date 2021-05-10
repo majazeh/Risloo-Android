@@ -199,9 +199,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
-            dismiss();
-        }).widget(binding.entryButton);
+        ClickManager.onDelayedClickListener(this::dismiss).widget(binding.entryButton);
     }
 
     private void setRecyclerView() {
@@ -210,11 +208,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
         if (method.equals("patternDays")) {
             String[] weekDays = requireActivity().getResources().getStringArray(R.array.WeekDays);
 
-            for (int i = 0; i < weekDays.length; i++) {
+            for (String weekDay : weekDays) {
                 try {
                     JSONObject jsonObject = new JSONObject();
-                    jsonObject.put("id", weekDays[i]);
-                    jsonObject.put("title", weekDays[i]);
+                    jsonObject.put("id", weekDay);
+                    jsonObject.put("title", weekDay);
 
                     Model model = new Model(jsonObject);
 
@@ -224,7 +222,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 }
             }
         } else {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 4; i++) {
                 try {
                     JSONObject jsonObject = new JSONObject();
                     jsonObject.put("id", String.valueOf(i));
@@ -242,7 +240,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
             case R.id.createCaseFragment:
-                CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCaseFragment != null) {
                     switch (method) {
                         case "references":
@@ -257,7 +255,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 }
                 break;
             case R.id.createCaseUserFragment:
-                CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCaseUserFragment != null) {
                     if (method.equals("references")) {
                         searchableAdapter.setItems(values, method);
@@ -266,7 +264,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 }
                 break;
             case R.id.createCenterFragment:
-                CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterFragment != null) {
                     if (method.equals("managers")) {
                         searchableAdapter.setItems(values, method);
@@ -275,7 +273,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 }
                 break;
             case R.id.createCenterUserFragment:
-                CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterUserFragment != null) {
                     if (method.equals("rooms")) {
                         searchableAdapter.setItems(values, method);
@@ -284,7 +282,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 }
                 break;
             case R.id.createRoomFragment:
-                CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createRoomFragment != null) {
                     if (method.equals("psychologies")) {
                         searchableAdapter.setItems(values, method);
@@ -293,7 +291,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 }
                 break;
             case R.id.createSampleFragment:
-                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createSampleFragment != null) {
                     switch (method) {
                         case "scales":
@@ -320,58 +318,59 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 }
                 break;
             case R.id.createScheduleFragment:
-                CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createScheduleFragment != null) {
                     switch (method) {
                         case "cases":
                             CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-
-                            searchableAdapter.setItems(values, method);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            if (createScheduleReferenceFragment != null) {
+                                searchableAdapter.setItems(values, method);
+                                binding.listRecyclerView.setAdapter(searchableAdapter);
+                            }
                             break;
                         case "patternDays":
                             CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-
-                            searchableAdapter.setItems(values, method);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            if (createScheduleTimeFragment != null) {
+                                searchableAdapter.setItems(values, method);
+                                binding.listRecyclerView.setAdapter(searchableAdapter);
+                            }
                             break;
                     }
                 }
                 break;
             case R.id.createSessionFragment:
-                CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createSessionFragment != null) {
-                    switch (method) {
-                        case "patternDays":
-                            CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-
+                    if (method.equals("patternDays")) {
+                        CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                        if (createSessionTimeFragment != null) {
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
+                        }
                     }
                 }
                 break;
             case R.id.editCenterFragment:
-                EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (editCenterFragment != null) {
-                    EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
-
                     if (method.equals("managers")) {
-                        searchableAdapter.setItems(values, method);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
+                        if (editCenterDetailFragment != null) {
+                            searchableAdapter.setItems(values, method);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                        }
                     }
                 }
                 break;
             case R.id.editSessionFragment:
-                EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);;
+                EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (editSessionFragment != null) {
-                    switch (method) {
-                        case "patternDays":
-                            EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-
+                    if (method.equals("patternDays")) {
+                        EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                        if (editSessionTimeFragment != null) {
                             searchableAdapter.setItems(values, method);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
+                        }
                     }
                 }
                 break;
