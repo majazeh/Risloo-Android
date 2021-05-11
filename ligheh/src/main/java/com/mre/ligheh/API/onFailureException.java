@@ -13,8 +13,7 @@ public abstract class onFailureException {
     String message_text;
     String MESSAGE_TEXT;
 
-    public onFailureException(Object object) {
-        super();
+    public onFailureException(Response callback, Object object) {
         switch (object.getClass().getName()) {
             case "java.net.UnknownHostException":
                 onClient("اینترنت خود را چک کنید!");
@@ -36,6 +35,7 @@ public abstract class onFailureException {
                 try {
                     okhttp3.Response response = (okhttp3.Response) object;
                     body = response.body().string();
+                    callback.onFailure(body);
                     statusCode = response.code();
                     if (statusCode == 401) {
                         // delete token

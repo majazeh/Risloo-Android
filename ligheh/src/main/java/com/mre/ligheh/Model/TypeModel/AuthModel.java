@@ -10,7 +10,7 @@ public class AuthModel extends TypeModel {
     private String key;
     private String callback;
     private String token;
-    private User user;
+    private UserModel user;
 
     public AuthModel(JSONObject jsonObject) throws JSONException {
         if (!jsonObject.isNull("theory"))
@@ -22,7 +22,7 @@ public class AuthModel extends TypeModel {
         if (!jsonObject.isNull("token"))
             setToken(jsonObject.getString("token"));
         if (!jsonObject.isNull("token"))
-            setUser(new User(jsonObject));
+            setUser(new UserModel(jsonObject));
     }
 
     public String getTheory() {
@@ -57,11 +57,11 @@ public class AuthModel extends TypeModel {
         this.token = token;
     }
 
-    public User getUser() {
+    public UserModel getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserModel user) {
         this.user = user;
     }
 

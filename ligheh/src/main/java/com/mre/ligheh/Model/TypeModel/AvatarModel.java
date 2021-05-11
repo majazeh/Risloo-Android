@@ -10,7 +10,6 @@ public class AvatarModel extends TypeModel {
 
     public AvatarModel(JSONArray jsonArray) throws JSONException {
         for (int i = 0; i < jsonArray.length(); i++) {
-
             switch (jsonArray.getJSONObject(i).getString("mode")) {
                 case "small":
                     setSmall(new AvatarDetail(jsonArray.getJSONObject(i)));

@@ -27,14 +27,14 @@ public abstract class APIEvents {
                 if (response.isSuccessful()) {
                     onResponsed(callback, response, aClass);
                 } else {
-                    Exceptioner.make(response);
+                    Exceptioner.make(callback,response);
                     Model.request = false;
                 }
             }
 
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
-                Exceptioner.make(e);
+                Exceptioner.make(callback,e);
                 Model.request = false;
             }
 

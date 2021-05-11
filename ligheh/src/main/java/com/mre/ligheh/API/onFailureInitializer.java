@@ -4,8 +4,8 @@ import java.util.HashMap;
 
 public class onFailureInitializer extends onFailureException {
 
-    public onFailureInitializer(Object object) {
-        super(object);
+    public onFailureInitializer(Response callback,Object object) {
+        super(callback,object);
     }
 
     @Override

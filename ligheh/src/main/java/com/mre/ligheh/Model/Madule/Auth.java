@@ -34,7 +34,7 @@ public class Auth extends Model {
                 data.remove("key");
                 Model.post(endpoint + "/theory" + "/" + key, data, header, response, AuthModel.class);
             } else {
-                Exceptioner.make("کلید را وارد کنید");
+                Exceptioner.make(response,"کلید را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -46,7 +46,7 @@ public class Auth extends Model {
             if (has(header, "Authorization")) {
                 Model.get("me", data, header, response, AuthModel.class);
             } else {
-                Exceptioner.make("شما لاگین نیستید");
+                Exceptioner.make(response,"شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -58,7 +58,7 @@ public class Auth extends Model {
             if (has(header, "Authorization")) {
                 Model.put("me", data, header, response, AuthModel.class);
             } else {
-                Exceptioner.make("شما لاگین نیستید");
+                Exceptioner.make(response,"شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -71,10 +71,10 @@ public class Auth extends Model {
                 if (has(data, "id")) {
                     Model.put("users/" + data.get("id") + "/change-password", data, header, response, AuthModel.class);
                 } else {
-                    Exceptioner.make("آیدی را وارد کنید");
+                    Exceptioner.make(response,"آیدی را وارد کنید");
                 }
             } else {
-                Exceptioner.make("شما لاگین نیستید");
+                Exceptioner.make(response,"شما لاگین نیستید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -86,7 +86,7 @@ public class Auth extends Model {
             if (has(data, "mobile")) {
                 Model.create("register?key=register", data, header, response, AuthModel.class);
             } else {
-                Exceptioner.make("شماره موبایل الزامی است");
+                Exceptioner.make(response,"شماره موبایل الزامی است");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,7 +101,7 @@ public class Auth extends Model {
                 e.printStackTrace();
             }
         } else {
-            Exceptioner.make("شماره موبایل الزامی است");
+            Exceptioner.make(response,"شماره موبایل الزامی است");
         }
     }
 
@@ -113,7 +113,7 @@ public class Auth extends Model {
                 e.printStackTrace();
             }
         } else {
-            Exceptioner.make("شماره موبایل الزامی است");
+            Exceptioner.make(response,"شماره موبایل الزامی است");
         }
     }
 
@@ -125,7 +125,7 @@ public class Auth extends Model {
                 e.printStackTrace();
             }
         } else {
-            Exceptioner.make("شما لاگین نیستید!");
+            Exceptioner.make(response,"شما لاگین نیستید!");
         }
     }
     public static void changeAvatar(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
@@ -137,10 +137,10 @@ public class Auth extends Model {
                     e.printStackTrace();
                 }
             }else{
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
             }
         } else {
-            Exceptioner.make("شما لاگین نیستید!");
+            Exceptioner.make(response,"شما لاگین نیستید!");
         }
     }
 

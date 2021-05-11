@@ -10,8 +10,8 @@ public class Singleton {
 
     // Objects
     private final Activity activity;
-    private final SharedPreferences sharedPreferences;
-    private final SharedPreferences.Editor editor;
+    public final SharedPreferences sharedPreferences;
+    public final SharedPreferences.Editor editor;
 
     public Singleton(@NonNull Activity activity) {
         this.activity = activity;

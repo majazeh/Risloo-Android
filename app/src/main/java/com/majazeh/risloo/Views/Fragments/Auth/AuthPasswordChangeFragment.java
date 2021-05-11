@@ -24,8 +24,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
+import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 
@@ -178,30 +180,37 @@ public class AuthPasswordChangeFragment extends Fragment {
             data.put("key", getArguments().getString("key"));
         if (getArguments().getString("callback")!=null)
             data.put("callback", getArguments().getString("callback"));
-        Auth.auth_theory(data, new HashMap<>(), object -> {
-            AuthModel model = (AuthModel) object;
-            if (((AuthModel) object).getUser() == null) {
-                Bundle extras = new Bundle();
-                extras.putString("key", model.getKey());
-                extras.putString("callback", model.getCallback());
-                switch (model.getTheory()) {
-                    case "mobileCode":
-                        getActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                        });
-                        break;
-                    case "recovery":
-                        getActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                        });
-                        break;
+        Auth.auth_theory(data, new HashMap<>(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                AuthModel model = (AuthModel) object;
+                if (((AuthModel) object).getUser() == null) {
+                    Bundle extras = new Bundle();
+                    extras.putString("key", model.getKey());
+                    extras.putString("callback", model.getCallback());
+                    switch (model.getTheory()) {
+                        case "mobileCode":
+                            getActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
+                            });
+                            break;
+                        case "recovery":
+                            getActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
+                            });
+                            break;
+                    }
+                }  else {
+                    getActivity().runOnUiThread(() -> ((AuthActivity) requireActivity()).login(model));
                 }
-            } else {
-                // TODO: go to next activity
-                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show());            }
+            }
+
+            @Override
+            public void onFailure(String response) {
+
+            }
         });
     }
 

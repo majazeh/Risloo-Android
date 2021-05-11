@@ -8,10 +8,10 @@ import java.lang.reflect.InvocationTargetException;
 public class Exceptioner {
     public static Class External;
 
-    public static void make(Object object) {
+    public static void make(Response callback, Object object) {
         if (External != null) {
             try {
-                External.getDeclaredConstructor(Object.class).newInstance(object);
+                External.getDeclaredConstructor(Response.class,Object.class).newInstance(callback,object);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
             } catch (InstantiationException e) {
@@ -23,7 +23,7 @@ public class Exceptioner {
             }
 
         } else {
-            new onFailureInitializer(object);
+            new onFailureInitializer(callback,object);
         }
     }
 }

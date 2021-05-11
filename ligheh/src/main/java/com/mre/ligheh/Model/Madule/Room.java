@@ -51,7 +51,7 @@ public class Room extends Model {
             if (has(data, "roomId"))
                 Model.create(endpoint + "/" + data.get("roomId") + "/cases", data, header, response, CaseModel.class);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -63,7 +63,7 @@ public class Room extends Model {
             if (has(data, "id"))
                 Model.show(endpoint + "/" + data.get("id") + "/users", data, header, response, UserModel.class);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -74,7 +74,7 @@ public class Room extends Model {
             if (has(data, "id"))
                 Model.post(endpoint + "/" + data.get("id") + "/users", data, header, response, null);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -85,7 +85,7 @@ public class Room extends Model {
             if (has(data, "id") && has(data, "userId"))
                 Model.show(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }

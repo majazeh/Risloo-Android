@@ -33,7 +33,7 @@ public class Center extends Model {
             if (has(data, "id"))
                 Model.show(endpoint, data, header, response, CenterModel.class);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -43,7 +43,7 @@ public class Center extends Model {
             if (has(data, "id"))
                 Model.show(endpoint + "/" + data.get("id") + "/users", data, header, response, UserModel.class);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,7 +53,7 @@ public class Center extends Model {
             if (has(data, "id"))
                 Model.post(endpoint + "/" + data.get("id") + "/users", data, header, response, null);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -66,7 +66,7 @@ public class Center extends Model {
                 data.remove("key");
                 Model.post("auth" + "/theory" + "/" + key, data, header, response, null);
             } else {
-                Exceptioner.make("کلید را وارد کنید");
+                Exceptioner.make(response,"کلید را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -78,7 +78,7 @@ public class Center extends Model {
             if (has(data, "id") && has(data, "userId"))
                 Model.show(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,7 +89,7 @@ public class Center extends Model {
             if (has(data, "id") && has(data, "userId"))
                 Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, null);
             else
-                Exceptioner.make("آیدی را وارد کنید!");
+                Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }

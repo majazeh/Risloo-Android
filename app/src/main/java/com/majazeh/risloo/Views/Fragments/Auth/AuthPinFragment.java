@@ -25,8 +25,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
+import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -150,9 +152,19 @@ public class AuthPinFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> {
+            countDownTimer.cancel();
+            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment);
+        }).widget(binding.loginLinkTextView.getRoot()
+        );
+        ClickManager.onClickListener(() -> {
+            countDownTimer.cancel();
+            ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment);
+        }).widget(binding.registerLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> {
+            countDownTimer.cancel();
+            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment);
+        }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setData() {
@@ -199,33 +211,41 @@ public class AuthPinFragment extends Fragment {
             data.put("key", getArguments().getString("key"));
         if (getArguments().getString("callback") != null)
             data.put("callback", getArguments().getString("callback"));
-        Auth.auth_theory(data, new HashMap<>(), object -> {
-            countDownTimer.cancel();
-            AuthModel model = (AuthModel) object;
-            if (((AuthModel) object).getUser() == null) {
-                Bundle extras = new Bundle();
-                extras.putString("key", model.getKey());
-                extras.putString("callback", model.getCallback());
-                switch (model.getTheory()) {
-                    case "password":
-                        getActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                        });
-                        break;
-                    case "recovery":
-                        getActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                        });
-                        break;
+        Auth.auth_theory(data, new HashMap<>(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                countDownTimer.cancel();
+                AuthModel model = (AuthModel) object;
+                if (((AuthModel) object).getUser() == null) {
+                    Bundle extras = new Bundle();
+                    extras.putString("key", model.getKey());
+                    extras.putString("callback", model.getCallback());
+                    switch (model.getTheory()) {
+                        case "password":
+                            getActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+                            });
+                            break;
+                        case "recovery":
+                            getActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
+                            });
+                            break;
+                    }
+                } else {
+                    getActivity().runOnUiThread(() -> ((AuthActivity) requireActivity()).login(model));
                 }
-            } else {
-                // TODO: go to next activity
-                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                getActivity().runOnUiThread(() ->  ((AuthActivity) requireActivity()).navigator(R.id.authSerialFragment));
+            }
+
+            @Override
+            public void onFailure(String response) {
+                countDownTimer.cancel();
+
             }
         });
+
 
         if (method.equals("pin")) {
             // TODO : call work method and place pin as it's input

@@ -19,6 +19,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordRecoverBinding;
+import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 
@@ -120,30 +121,38 @@ public class AuthPasswordRecoverFragment extends Fragment {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
         HashMap data = new HashMap();
         data.put("mobile", mobile);
-        Auth.recovery(data, new HashMap<>(), object -> {
-            AuthModel model = (AuthModel) object;
-            Bundle extras = new Bundle();
-            extras.putString("key", model.getKey());
-            extras.putString("callback", model.getCallback());
-            switch (model.getTheory()) {
-                case "password":
-                    getActivity().runOnUiThread(() -> {
-                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                    });
-                    break;
-                case "mobileCode":
-                    getActivity().runOnUiThread(() -> {
-                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                        ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                    });
-                    break;
-                case "recovery":
-                    getActivity().runOnUiThread(() -> {
-                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                    });
-                    break;
+        Auth.recovery(data, new HashMap<>(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                AuthModel model = (AuthModel) object;
+                Bundle extras = new Bundle();
+                extras.putString("key", model.getKey());
+                extras.putString("callback", model.getCallback());
+                switch (model.getTheory()) {
+                    case "password":
+                        getActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+                        });
+                        break;
+                    case "mobileCode":
+                        getActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
+                        });
+                        break;
+                    case "recovery":
+                        getActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
+                        });
+                        break;
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+
             }
         });
     }

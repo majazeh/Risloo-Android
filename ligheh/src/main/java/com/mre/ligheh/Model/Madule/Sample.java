@@ -36,7 +36,7 @@ public class Sample extends Model {
                 data.remove("key");
                 Model.post("auth" + "/theory" + "/" + key, data, header, response, null);
             } else {
-                Exceptioner.make("کلید را وارد کنید");
+                Exceptioner.make(response,"کلید را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,7 +65,7 @@ public class Sample extends Model {
             if (data.containsKey("id")) {
                 Model.show(endpoint + "/samples/" + data.get("id") + "/dashboard", data, header, response, SampleModel.class);
             } else {
-                Exceptioner.make("آیدی را وارد کنید");
+                Exceptioner.make(response,"آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -77,7 +77,7 @@ public class Sample extends Model {
             if (data.containsKey("id")) {
                 Model.show("bulk-samples/" + data.get("id"), data, header, response, SampleModel.class);
             } else {
-                Exceptioner.make("آیدی را وارد کنید");
+                Exceptioner.make(response,"آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class Sample extends Model {
                 data.remove("id");
                 Model.put(endpoint + "/samples/" + id + "/close", data, header, response, null);
             } else {
-                Exceptioner.make("آیدی را وارد کنید");
+                Exceptioner.make(response,"آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -103,18 +103,26 @@ public class Sample extends Model {
         try {
             if (data.containsKey("id")) {
                 String id = (String) data.get("id");
-                Model.post(endpoint + "/samples/" + id + "/scoring", data, header, object -> {
-                    data.remove("id");
-                    data.put("samples", id);
-                    try {
-                        TimeUnit.SECONDS.sleep(3);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
+                Model.post(endpoint + "/samples/" + id + "/scoring", data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        data.remove("id");
+                        data.put("samples", id);
+                        try {
+                            TimeUnit.SECONDS.sleep(3);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                        getScore(data, header, response);
                     }
-                    getScore(data, header, response);
+
+                    @Override
+                    public void onFailure(String response) {
+
+                    }
                 }, SampleModel.class);
             } else {
-                Exceptioner.make("آیدی را وارد کنید");
+                Exceptioner.make(response,"آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -124,27 +132,36 @@ public class Sample extends Model {
     public static void getScore(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (data.containsKey("samples")) {
-                Model.get("live/samples-status-check", data, header, object -> {
-                    List list = (List) object;
-                    boolean repeat = false;
-                    for (int i = 0; i < list.size(); i++) {
-                        if (((SampleModel) list.data().get(i)).getSampleStatus().equals("scoring") || ((SampleModel) list.data().get(i)).getSampleStatus().equals("creating_files")) {
-                            repeat = true;
+                Model.get("live/samples-status-check", data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+                                boolean repeat = false;
+                                for (int i = 0; i < list.size(); i++) {
+                                    if (((SampleModel) list.data().get(i)).getSampleStatus().equals("scoring") || ((SampleModel) list.data().get(i)).getSampleStatus().equals("creating_files")) {
+                                        repeat = true;
+                                    }
+                                }
+                                if (repeat) {
+                                    try {
+                                        TimeUnit.SECONDS.sleep(3);
+                                    } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                    }
+                                    getScore(data, header, response);
+                                } else {
+                                    response.onOK(object);
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+
+                            }
                         }
-                    }
-                    if (repeat) {
-                        try {
-                            TimeUnit.SECONDS.sleep(3);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        getScore(data, header, response);
-                    } else {
-                        response.onOK(object);
-                    }
-                }, SampleModel.class);
+                        , SampleModel.class);
             } else {
-                Exceptioner.make("لیست خالی است");
+                Exceptioner.make(response,"لیست خالی است");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -169,13 +186,18 @@ public class Sample extends Model {
                         @Override
                         public void onOK(Object object) {
                             if (data.containsKey("items"))
-                            data.remove("items");
+                                data.remove("items");
                             response.onOK(object);
+                        }
+
+                        @Override
+                        public void onFailure(String response) {
+
                         }
                     }, null);
                 }
             } else {
-                Exceptioner.make("آیدی را وارد کنید");
+                Exceptioner.make(response,"آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
