@@ -317,7 +317,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
         this.method = method;
     }
 
-    private void calculateCount() {
+    public void calculateCount() {
         if (Objects.requireNonNull(binding.listRecyclerView.getAdapter()).getItemCount() != 0) {
             String count = "(" + binding.listRecyclerView.getAdapter().getItemCount() + ")";
 

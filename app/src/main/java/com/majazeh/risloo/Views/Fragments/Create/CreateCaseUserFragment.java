@@ -43,9 +43,6 @@ public class CreateCaseUserFragment extends Fragment {
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager referencesLayoutManager;
 
-    // Vars
-    private ArrayList<Model> references = new ArrayList<>();
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -126,7 +123,7 @@ public class CreateCaseUserFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(references, new ArrayList<>(), "references");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
 //        }
     }
 

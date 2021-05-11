@@ -52,7 +52,6 @@ public class CreateSessionTimeFragment extends Fragment {
     private LinearLayoutManager patternDaysLayoutManager;
 
     // Vars
-    private ArrayList<Model> patternDays = new ArrayList<>();
     private String startTime = "", duration = "60", dateType = "", patternType = "", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
     private int startHour, startMinute, specifiedYear, periodStartYear, periodEndYear, specifiedMonth, periodStartMonth, periodEndMonth, specifiedDay, periodStartDay, periodEndDay;
 
@@ -304,7 +303,7 @@ public class CreateSessionTimeFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(patternDays, new ArrayList<>(), "patternDays");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "patternDays");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {

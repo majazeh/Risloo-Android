@@ -6,6 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
+    android:paddingBottom="@dimen/_18sdp"
     android:background="@drawable/draw_12sdp_solid_white"
     tools:context=".Views.Dialogs.SearchableDialog">
 
@@ -49,7 +50,6 @@
         android:layout_height="@dimen/_32sdp"
         android:paddingEnd="@dimen/_8sdp"
         android:paddingStart="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_16sdp"
         android:layout_marginTop="@dimen/_12sdp"
         android:imeOptions="actionDone"
         android:inputType="text"
@@ -62,11 +62,9 @@
         android:fontFamily="@font/dana_medium"
         android:importantForAutofill="no"
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-        app:layout_constraintBottom_toTopOf="@id/top_barrier"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
         app:layout_constraintTop_toBottomOf="@id/title_textView"
-        tools:layout_marginBottom="@dimen/_14sdp"
         tools:hint="جستجو" />
 
     <ProgressBar
@@ -94,14 +92,19 @@
         android:id="@+id/list_recyclerView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
         android:overScrollMode="never"
         android:layoutDirection="rtl"
-        android:visibility="visible"
         app:layout_constrainedHeight="true"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_barrier"
+        app:layout_constraintBottom_toTopOf="@id/entry_button"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:layout_constraintTop_toTopOf="@id/top_barrier"
+        app:layout_constraintTop_toBottomOf="@id/input_editText"
+        app:layout_goneMarginBottom="0dp"
+        app:layout_goneMarginTop="@dimen/_12sdp"
+        tools:layout_marginBottom="@dimen/_14sdp"
+        tools:layout_marginTop="@dimen/_14sdp"
         tools:listitem="@layout/single_item_searchable"
         tools:itemCount="4" />
 
@@ -109,6 +112,8 @@
         android:id="@+id/empty_textView"
         android:layout_width="0dp"
         android:layout_height="@dimen/_96sdp"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginTop="@dimen/_16sdp"
         android:gravity="center"
         android:text="@string/AppSearchEmpty"
         android:textSize="@dimen/_9ssp"
@@ -118,10 +123,12 @@
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/bottom_barrier"
+        app:layout_constraintBottom_toTopOf="@id/entry_button"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:layout_constraintTop_toTopOf="@id/top_barrier" />
+        app:layout_constraintTop_toBottomOf="@id/input_editText"
+        app:layout_goneMarginBottom="0dp"
+        app:layout_goneMarginTop="@dimen/_12sdp" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottom_barrier"
@@ -134,8 +141,6 @@
         android:id="@+id/entry_button"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
-        android:layout_marginBottom="@dimen/_18sdp"
-        android:layout_marginTop="@dimen/_16sdp"
         android:gravity="center"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
@@ -143,11 +148,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_16sdp_solid_blue500"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="@id/title_textView"
         app:layout_constraintTop_toBottomOf="@id/bottom_barrier"
-        tools:layout_marginTop="@dimen/_14sdp"
         tools:text="ثبت" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

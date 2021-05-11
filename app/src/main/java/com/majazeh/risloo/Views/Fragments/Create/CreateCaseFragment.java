@@ -44,7 +44,6 @@ public class CreateCaseFragment extends Fragment {
     private LinearLayoutManager referencesLayoutManager;
 
     // Vars
-    private ArrayList<Model> references = new ArrayList<>();
     public String roomId = "", roomName = "", centerName = "", situation = "";
 
     @Nullable
@@ -162,7 +161,7 @@ public class CreateCaseFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(references, new ArrayList<>(), "references");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {

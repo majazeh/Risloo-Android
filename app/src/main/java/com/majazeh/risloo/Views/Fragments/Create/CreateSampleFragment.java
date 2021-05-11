@@ -51,7 +51,6 @@ public class CreateSampleFragment extends Fragment {
     private ClickableSpan assessmentLinkSpan;
 
     // Vars
-    private ArrayList<Model> scales = new ArrayList<>(), references = new ArrayList<>();
     public String roomId = "", roomName = "", centerName = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "", caseName = "",  sessionId = "", sessionName = "", psychologyDescription = "";
 
     @Nullable
@@ -309,7 +308,7 @@ public class CreateSampleFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(scales, new ArrayList<>(), "scales");
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
@@ -420,7 +419,7 @@ public class CreateSampleFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(references, new ArrayList<>(), "references");
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {

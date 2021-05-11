@@ -39,7 +39,7 @@ public class CreateSessionSessionFragment extends Fragment {
     public SelectedAdapter axisesAdapter;
 
     // Dialogs
-    private SelectedDialog axisesDialog;
+    public SelectedDialog axisesDialog;
 
     // BottomSheets
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
@@ -50,7 +50,6 @@ public class CreateSessionSessionFragment extends Fragment {
     private LinearLayoutManager axisLayoutManager;
 
     // Vars
-    private ArrayList<Model> axises = new ArrayList<>();
     private String type = "", status = "", description = "", coordination = "";
     private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
     private int startAccurateHour, startAccurateMinute, startAccurateYear, startAccurateMonth, startAccurateDay, endAccurateHour, endAccurateMinute, endAccurateYear, endAccurateMonth, endAccurateDay;
@@ -358,7 +357,7 @@ public class CreateSessionSessionFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(axises, new ArrayList<>(), "axises");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "axises");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {

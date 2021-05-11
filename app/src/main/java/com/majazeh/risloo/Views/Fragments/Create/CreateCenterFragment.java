@@ -46,7 +46,7 @@ public class CreateCenterFragment extends Fragment {
 
     // Dialogs
     private SearchableDialog managersDialog;
-    private SelectedDialog phonesDialog;
+    public SelectedDialog phonesDialog;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
@@ -57,7 +57,6 @@ public class CreateCenterFragment extends Fragment {
     private Bitmap avatarBitmap;
 
     // Vars
-    private ArrayList<Model> phones = new ArrayList<>();
     public String center = "personal", managerId = "", managerName = "", name = "", address = "", description ="";
     public String avatarPath = "";
 
@@ -267,7 +266,7 @@ public class CreateCenterFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(phones, new ArrayList<>(), "phones");
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {

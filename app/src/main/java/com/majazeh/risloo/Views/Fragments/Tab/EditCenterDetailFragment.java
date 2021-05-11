@@ -40,14 +40,13 @@ public class EditCenterDetailFragment extends Fragment {
 
     // Dialogs
     private SearchableDialog managersDialog;
-    private SelectedDialog phonesDialog;
+    public SelectedDialog phonesDialog;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager phoneLayoutManager;
 
     // Vars
-    private ArrayList<Model> phones = new ArrayList<>();
     public String managerId = "", managerName = "", name = "", address = "", description = "";
 
     @Nullable
@@ -200,7 +199,7 @@ public class EditCenterDetailFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(phones, new ArrayList<>(),"phones");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(),"phones");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {

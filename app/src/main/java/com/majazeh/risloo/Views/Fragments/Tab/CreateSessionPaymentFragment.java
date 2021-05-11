@@ -38,7 +38,6 @@ public class CreateSessionPaymentFragment extends Fragment {
     private LinearLayoutManager axisLayoutManager;
 
     // Vars
-    private ArrayList<Model> axis = new ArrayList<>();
     private String payment = "";
 
     @Nullable
@@ -134,7 +133,7 @@ public class CreateSessionPaymentFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-        setRecyclerView(axis, new ArrayList<>());
+        setRecyclerView(new ArrayList<>(), new ArrayList<>());
 //        }
     }
 
