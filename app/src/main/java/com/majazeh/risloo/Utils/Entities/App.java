@@ -13,14 +13,13 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+        APIRequest.ExternalAPIEvents = ExtendEvent.class;
+        Exceptioner.External = ExtendOnFailureException.class;
     }
 
     @Override
     public void onConfigurationChanged(@NonNull Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-
-        APIRequest.ExternalAPIEvents = ExtendEvent.class;
-        Exceptioner.External = ExtendOnFailureException.class;
     }
 
     @Override

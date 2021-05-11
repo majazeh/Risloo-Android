@@ -200,6 +200,7 @@ public class AuthPinFragment extends Fragment {
         if (getArguments().getString("callback") != null)
             data.put("callback", getArguments().getString("callback"));
         Auth.auth_theory(data, new HashMap<>(), object -> {
+            countDownTimer.cancel();
             AuthModel model = (AuthModel) object;
             if (((AuthModel) object).getUser() == null) {
                 Bundle extras = new Bundle();
@@ -222,7 +223,7 @@ public class AuthPinFragment extends Fragment {
             } else {
                 // TODO: go to next activity
                 ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show());
+                getActivity().runOnUiThread(() ->  ((AuthActivity) requireActivity()).navigator(R.id.authSerialFragment));
             }
         });
 
