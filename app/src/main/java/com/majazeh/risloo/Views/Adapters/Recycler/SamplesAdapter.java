@@ -47,10 +47,10 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     @Override
     public int getItemCount() {
 //        return samples.size();
-        return 5;
+        return 4;
     }
 
-//    public void setSample(ArrayList<Sample> samples) {
+//    public void setSamples(ArrayList<Sample> samples) {
 //        this.samples = samples;
 //        notifyDataSetChanged();
 //    }
@@ -58,10 +58,6 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     private void detector(SamplesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-
-            holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-        } else {
-            holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -76,7 +72,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     }
 
     private void setData(SamplesHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -89,8 +85,72 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
         holder.binding.caseTextView.setText("RS96666DT");
         holder.binding.referenceTextView.setText("مرضیه آشتیانی");
 
-        holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentSeald));
-        holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+        if (holder.getBindingAdapterPosition() == 0) {
+            setAction(holder, "seald");
+        } else if (holder.getBindingAdapterPosition() == 2) {
+            setAction(holder, "open");
+        } else {
+            setAction(holder, "closed");
+        }
+    }
+
+    private void setAction(SamplesHolder holder, String action) {
+        switch (action) {
+            case "seald":
+                holder.binding.statusTextView.setEnabled(true);
+
+                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusSeald));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+                else
+                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+                break;
+            case "open":
+                holder.binding.statusTextView.setEnabled(true);
+
+                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusOpen));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+                else
+                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+                break;
+            case "closed":
+                holder.binding.statusTextView.setEnabled(false);
+
+                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusClosed));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
+                break;
+            case "scoring":
+                holder.binding.statusTextView.setEnabled(false);
+
+                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusScoring));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
+                break;
+            case "creating_files":
+                holder.binding.statusTextView.setEnabled(false);
+
+                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusCreatingFiles));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
+                break;
+            case "done":
+                holder.binding.statusTextView.setEnabled(false);
+
+                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusDone));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
+                break;
+        }
     }
 
     public class SamplesHolder extends RecyclerView.ViewHolder {

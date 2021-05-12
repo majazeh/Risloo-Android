@@ -2,15 +2,18 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
 
@@ -46,10 +49,10 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
     @Override
     public int getItemCount() {
 //        return bulkSamples.size();
-        return 5;
+        return 4;
     }
 
-//    public void setBulkSample(ArrayList<BulkSample> bulkSamples) {
+//    public void setBulkSamples(ArrayList<BulkSample> bulkSamples) {
 //        this.bulkSamples = bulkSamples;
 //        notifyDataSetChanged();
 //    }
@@ -58,20 +61,43 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.linkImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
     private void listener(BulkSamplesHolder holder) {
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.bulkSampleFragment)).widget(holder.binding.getRoot());
 
+        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String task = parent.getItemAtPosition(position).toString();
+
+                switch (position) {
+                    case 0:
+                        Log.e("method", "link");
+                        break;
+                    case 1:
+                        Log.e("method", "copy");
+                        break;
+                }
+
+                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        }).widget(holder.binding.linkImageView);
+        }).widget(holder.binding.editImageView);
     }
 
     private void setData(BulkSamplesHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -79,11 +105,13 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
         holder.binding.serialTextView.setText("BS966666W");
         holder.binding.nameTextView.setText("تست چند نمونه");
+        holder.binding.caseTextView.setText("بدون پرونده");
         holder.binding.roomTextView.setText("محمد رضا سالاری فر");
         holder.binding.centerTextView.setText("کلینیک شخصی محمد رضا سالاری فر");
-        holder.binding.caseTextView.setText("بدون پرونده");
-        holder.binding.referenceTextView.setText("10 / 1");
         holder.binding.statusTextView.setText("بازنشده");
+        holder.binding.referenceTextView.setText("10 / 1");
+
+        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
     }
 
     public class BulkSamplesHolder extends RecyclerView.ViewHolder {

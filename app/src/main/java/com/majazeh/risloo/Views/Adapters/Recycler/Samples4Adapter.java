@@ -83,7 +83,7 @@ public class Samples4Adapter extends RecyclerView.Adapter<Samples4Adapter.Sample
         holder.binding.editionTextView.setText("ویرایش طلیعه سلامت - نسخه 4");
         holder.binding.referenceTextView.setText("محمد حسین");
 
-        holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentSeald));
+        holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusSeald));
         holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 

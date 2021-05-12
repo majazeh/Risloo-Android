@@ -206,6 +206,12 @@
     // Task Arrays
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <array name="BulkSamplesTasks">
+        <item>لینک ثبت نام</item>
+        <item>کپی کردن لینک</item>
+        <item></item>
+    </array>
+
     <array name="CenterUserTasks">
         <item>پذیرفتن</item>
         <item>تعلیق</item>

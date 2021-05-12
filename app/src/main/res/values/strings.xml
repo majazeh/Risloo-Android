@@ -703,6 +703,16 @@
 
     <string name="BulkSamplesFragmentTitle">نمونه‌های گروهی</string>
 
+    <string name="BulkSamplesFragmentSerial">سریال</string>
+    <string name="BulkSamplesFragmentName">عنوان</string>
+    <string name="BulkSamplesFragmentCase">پرونده</string>
+    <string name="BulkSamplesFragmentRoom">اتاق درمان</string>
+    <string name="BulkSamplesFragmentCenter">مرکز درمانی</string>
+    <string name="BulkSamplesFragmentStatus">وضعیت</string>
+    <string name="BulkSamplesFragmentReference">اعضا</string>
+
+    <string name="BulkSamplesFragmentEmpty">هنوز نمونه‌ گروهی ثبت نشده است.</string>
+
     /*
     ---------- Cases Fragment ----------
     */
@@ -772,6 +782,24 @@
     */
 
     <string name="SamplesFragmentTitle">نمونه‌ها</string>
+
+    <string name="SamplesFragmentSerial">سریال</string>
+    <string name="SamplesFragmentName">مقیاس</string>
+    <string name="SamplesFragmentRoom">اتاق درمان</string>
+    <string name="SamplesFragmentCase">پرونده</string>
+    <string name="SamplesFragmentReference">مراجع</string>
+    <string name="SamplesFragmentStatus">وضعیت</string>
+
+    <string name="SamplesFragmentStatusSeald">شروع</string>
+    <string name="SamplesFragmentStatusOpen">ادامه</string>
+    <string name="SamplesFragmentStatusClosed">بسته شده</string>
+    <string name="SamplesFragmentStatusScoring">نمره دهی</string>
+    <string name="SamplesFragmentStatusCreatingFiles">ساخت فایل‌ها</string>
+    <string name="SamplesFragmentStatusDone">تمام شده</string>
+
+    <string name="SamplesFragmentBulk">نمو‌نه‌های زنجیره‌ای این نمونه</string>
+
+    <string name="SamplesFragmentEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
 
     /*
     ---------- Scales Fragment ----------
@@ -1040,15 +1068,7 @@
 
 
 
-    ///////////////
-    <string name="BulkSamplesFragmentSerial">سریال</string>
-    <string name="BulkSamplesFragmentName">عنوان</string>
-    <string name="BulkSamplesFragmentRoom">اتاق درمان</string>
-    <string name="BulkSamplesFragmentCenter">مرکز درمانی</string>
-    <string name="BulkSamplesFragmentCase">پرونده</string>
-    <string name="BulkSamplesFragmentReference">اعضا</string>
-    <string name="BulkSamplesFragmentStatus">وضعیت</string>
-    ///////////////
+
 
     ///////////////
     <string name="CenterUsersFragmentSerial">سریال</string>
@@ -1068,24 +1088,6 @@
     <string name="RoomUsersFragmentStatus">وضعیت</string>
     <string name="RoomUsersFragmentAccepted">زمان پذیرش</string>
     <string name="RoomUsersFragmentKicked">زمان تعلیق</string>
-    ///////////////
-
-    ///////////////
-    <string name="SamplesFragmentSerial">سریال</string>
-    <string name="SamplesFragmentName">مقیاس</string>
-    <string name="SamplesFragmentRoom">اتاق درمان</string>
-    <string name="SamplesFragmentCase">پرونده</string>
-    <string name="SamplesFragmentReference">مراجع</string>
-    <string name="SamplesFragmentStatus">وضعیت</string>
-
-    <string name="SamplesFragmentBulk">نمو‌نه‌های زنجیره‌ای این نمونه</string>
-
-    <string name="SamplesFragmentSeald">شروع</string>
-    <string name="SamplesFragmentOpen">ادامه</string>
-    <string name="SamplesFragmentClosed">بسته شده</string>
-    <string name="SamplesFragmentScoring">نمره دهی</string>
-    <string name="SamplesFragmentCreatingFiles">ساخت فایل‌ها</string>
-    <string name="SamplesFragmentDone">تمام شده</string>
     ///////////////
 
     //////////////////////////////////////////////////////////////////////////////////////

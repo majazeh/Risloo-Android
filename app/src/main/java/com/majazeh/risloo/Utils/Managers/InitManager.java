@@ -120,6 +120,70 @@ public class InitManager {
                 spinner.setSelection(adapter.getCount());
                 break;
             }
+            case "bulkSamples": {
+                ArrayList<String> list = new ArrayList<>();
+                Collections.addAll(list, activity.getResources().getStringArray(arrayRes));
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, list) {
+
+                    private TextView dropdownTextView;
+                    private ImageView dropdownImageView;
+
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        return super.getView(position, convertView, viewGroup);
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_recycler, viewGroup, false);
+
+                        initializer(view);
+
+                        detector(view, position);
+
+                        setData(position);
+
+                        return view;
+                    }
+
+                    private void initializer(View view) {
+                        dropdownTextView = view.findViewById(R.id.item_textView);
+                        dropdownImageView = view.findViewById(R.id.item_imageView);
+                    }
+
+                    private void detector(View view, int position) {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
+                        }
+                    }
+
+                    private void setData(int position) {
+                        dropdownTextView.setText(list.get(position));
+
+                        if (position == 0) {
+                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+
+                            dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_link_light, null));
+                            ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                        } else if (position == 1) {
+                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+
+                            dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_copy_light, null));
+                            ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                        }
+                    }
+
+                    @Override
+                    public int getCount() {
+                        return super.getCount() - 1;
+                    }
+
+                };
+
+                spinner.setAdapter(adapter);
+                spinner.setSelection(adapter.getCount());
+                break;
+            }
         }
     }
 

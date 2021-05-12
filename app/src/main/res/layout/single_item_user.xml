@@ -117,8 +117,8 @@
         android:src="@drawable/ic_ellipsis_v_light"
         app:layout_constraintBottom_toBottomOf="@id/status_textView"
         app:layout_constraintEnd_toStartOf="@id/edit_imageView"
-        app:layout_constraintTop_toTopOf="@id/type_textView"
         app:layout_constraintStart_toEndOf="@id/type_textView"
+        app:layout_constraintTop_toTopOf="@id/type_textView"
         app:tint="@color/Gray500" />
 
     <Spinner

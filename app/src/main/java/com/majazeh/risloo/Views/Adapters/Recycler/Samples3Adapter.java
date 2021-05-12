@@ -84,7 +84,7 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
         holder.binding.roomTextView.setText("اتاق درمان فاطمه عبدالملکی");
         holder.binding.caseTextView.setText("RS96666DT");
 
-        holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentSeald));
+        holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusSeald));
         holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 
