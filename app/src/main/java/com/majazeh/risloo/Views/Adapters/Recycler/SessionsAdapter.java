@@ -46,10 +46,10 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     @Override
     public int getItemCount() {
 //        return sessions.size();
-        return 5;
+        return 4;
     }
 
-//    public void setSession(ArrayList<Session> sessions) {
+//    public void setSessions(ArrayList<Session> sessions) {
 //        this.sessions = sessions;
 //        notifyDataSetChanged();
 //    }
@@ -58,7 +58,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
@@ -69,7 +69,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     }
 
     private void setData(SessionsHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);

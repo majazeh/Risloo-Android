@@ -73,9 +73,9 @@ public class SessionsFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -114,17 +114,15 @@ public class SessionsFragment extends Fragment {
     }
 
     private void setData() {
-//        adapter.setSession(null);
+//        adapter.setSessions(null);
         binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-
-        String dataSize = "5";
-        binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

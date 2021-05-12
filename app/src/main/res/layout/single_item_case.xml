@@ -14,9 +14,9 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/serial_textView"
@@ -30,19 +30,19 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/center_textView"
-        app:layout_constraintEnd_toStartOf="@+id/room_textView"
+        app:layout_constraintBottom_toBottomOf="@id/center_textView"
+        app:layout_constraintEnd_toStartOf="@id/room_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/room_textView"
+        app:layout_constraintTop_toTopOf="@id/room_textView"
         tools:text="سریال" />
 
     <TextView
         android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -50,9 +50,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1.5"
-        app:layout_constraintEnd_toStartOf="@+id/reference_textView"
-        app:layout_constraintStart_toEndOf="@+id/serial_textView"
-        app:layout_constraintTop_toBottomOf="@+id/top_view"
+        app:layout_constraintEnd_toStartOf="@id/reference_textView"
+        app:layout_constraintStart_toEndOf="@id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="اتاق درمان" />
 
     <TextView
@@ -67,9 +67,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/room_textView"
-        app:layout_constraintStart_toStartOf="@+id/room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/room_textView"
+        app:layout_constraintEnd_toEndOf="@id/room_textView"
+        app:layout_constraintStart_toStartOf="@id/room_textView"
+        app:layout_constraintTop_toBottomOf="@id/room_textView"
         tools:text="مرکز درمانی" />
 
     <TextView
@@ -84,10 +84,10 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/center_textView"
+        app:layout_constraintBottom_toBottomOf="@id/center_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/room_textView"
-        app:layout_constraintTop_toTopOf="@+id/room_textView"
+        app:layout_constraintStart_toEndOf="@id/room_textView"
+        app:layout_constraintTop_toTopOf="@id/room_textView"
         tools:text="مراجعین" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

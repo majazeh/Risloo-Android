@@ -45,10 +45,10 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     @Override
     public int getItemCount() {
 //        return documents.size();
-        return 5;
+        return 4;
     }
 
-//    public void setDocument(ArrayList<Document> documents) {
+//    public void setDocuments(ArrayList<Document> documents) {
 //        this.documents = documents;
 //        notifyDataSetChanged();
 //    }
@@ -57,11 +57,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.attachmentImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-
-            holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-        } else {
-            holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            holder.binding.attachmentImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
@@ -80,7 +76,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     }
 
     private void setData(DocumentsHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -90,8 +86,38 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         holder.binding.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
         holder.binding.statusTextView.setText("تأیید شده");
 
-        holder.binding.actionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentAccept));
-        holder.binding.actionTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+        if (holder.getBindingAdapterPosition() == 0) {
+            setAction(holder, "none");
+        } else if (holder.getBindingAdapterPosition() == 2) {
+            setAction(holder, "kick");
+        } else {
+            setAction(holder, "accept");
+        }
+    }
+
+    private void setAction(DocumentsHolder holder, String action) {
+        if (action.equals("accept")) {
+            holder.binding.actionTextView.setVisibility(View.VISIBLE);
+            holder.binding.actionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentAccept));
+            holder.binding.actionTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            else
+                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+        } else if (action.equals("kick")) {
+            holder.binding.actionTextView.setVisibility(View.VISIBLE);
+            holder.binding.actionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentKick));
+            holder.binding.actionTextView.setTextColor(activity.getResources().getColor(R.color.Red600));
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_red700_ripple_red300);
+            else
+                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_red700);
+        } else {
+            holder.binding.actionTextView.setVisibility(View.GONE);
+            holder.binding.actionTextView.setText("");
+        }
     }
 
     public class DocumentsHolder extends RecyclerView.ViewHolder {

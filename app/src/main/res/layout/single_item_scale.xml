@@ -14,9 +14,9 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/serial_textView"
@@ -30,29 +30,29 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintBottom_toBottomOf="@+id/edition_textView"
-        app:layout_constraintEnd_toStartOf="@+id/name_textView"
+        app:layout_constraintBottom_toBottomOf="@id/edition_textView"
+        app:layout_constraintEnd_toStartOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/name_textView"
+        app:layout_constraintTop_toTopOf="@id/name_textView"
         tools:text="سریال" />
 
     <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
+        app:layout_constraintEnd_toStartOf="@id/create_textView"
+        app:layout_constraintStart_toEndOf="@id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         app:layout_goneMarginEnd="@dimen/_8sdp"
-        app:layout_constraintEnd_toStartOf="@+id/create_textView"
-        app:layout_constraintStart_toEndOf="@+id/serial_textView"
-        app:layout_constraintTop_toBottomOf="@+id/top_view"
         tools:text="مقیاس" />
 
     <TextView
@@ -67,18 +67,18 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/name_textView"
-        app:layout_constraintStart_toStartOf="@+id/name_textView"
-        app:layout_constraintTop_toBottomOf="@+id/name_textView"
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toStartOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/name_textView"
         tools:text="ویرایش - نسخه" />
 
     <TextView
         android:id="@+id/create_textView"
         android:layout_width="wrap_content"
         android:layout_height="@dimen/_22sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:paddingStart="@dimen/_12sdp"
-        android:paddingEnd="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:paddingStart="@dimen/_8sdp"
         android:gravity="center"
         android:text="@string/ScalesFragmentCreate"
         android:textSize="@dimen/_8ssp"
@@ -87,9 +87,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_green700"
-        app:layout_constraintBottom_toBottomOf="@+id/edition_textView"
+        app:layout_constraintBottom_toBottomOf="@id/edition_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/name_textView"
-        app:layout_constraintTop_toTopOf="@+id/name_textView" />
+        app:layout_constraintStart_toEndOf="@id/name_textView"
+        app:layout_constraintTop_toTopOf="@id/name_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

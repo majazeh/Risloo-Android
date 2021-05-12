@@ -14,9 +14,9 @@
         android:layout_width="0dp"
         android:layout_height="@dimen/_1sdp"
         android:background="@color/Gray200"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/serial_textView"
@@ -29,29 +29,29 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintBottom_toBottomOf="@+id/center_textView"
-        app:layout_constraintEnd_toStartOf="@+id/room_textView"
+        app:layout_constraintWidth_percent="0.16"
+        app:layout_constraintBottom_toBottomOf="@id/center_textView"
+        app:layout_constraintEnd_toStartOf="@id/room_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/room_textView"
+        app:layout_constraintTop_toTopOf="@id/room_textView"
         tools:text="سریال" />
 
     <TextView
         android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintEnd_toStartOf="@+id/case_textView"
-        app:layout_constraintStart_toEndOf="@+id/serial_textView"
-        app:layout_constraintTop_toBottomOf="@+id/top_view"
+        app:layout_constraintWidth_percent="0.18"
+        app:layout_constraintEnd_toStartOf="@id/case_textView"
+        app:layout_constraintStart_toEndOf="@id/serial_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="اتاق درمان" />
 
     <TextView
@@ -66,27 +66,27 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/room_textView"
-        app:layout_constraintStart_toStartOf="@+id/room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/room_textView"
+        app:layout_constraintEnd_toEndOf="@id/room_textView"
+        app:layout_constraintStart_toStartOf="@id/room_textView"
+        app:layout_constraintTop_toBottomOf="@id/room_textView"
         tools:text="مرکز درمانی" />
 
     <TextView
         android:id="@+id/case_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.15"
-        app:layout_constraintEnd_toStartOf="@+id/start_time_textView"
-        app:layout_constraintStart_toEndOf="@+id/room_textView"
-        app:layout_constraintTop_toBottomOf="@+id/top_view"
+        app:layout_constraintWidth_percent="0.18"
+        app:layout_constraintEnd_toStartOf="@id/start_time_textView"
+        app:layout_constraintStart_toEndOf="@id/room_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="پرونده" />
 
     <TextView
@@ -101,27 +101,27 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/case_textView"
-        app:layout_constraintStart_toStartOf="@+id/case_textView"
-        app:layout_constraintTop_toBottomOf="@+id/case_textView"
+        app:layout_constraintEnd_toEndOf="@id/case_textView"
+        app:layout_constraintStart_toStartOf="@id/case_textView"
+        app:layout_constraintTop_toBottomOf="@id/case_textView"
         tools:text="مراجع" />
 
     <TextView
         android:id="@+id/start_time_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintEnd_toStartOf="@+id/status_textView"
-        app:layout_constraintStart_toEndOf="@+id/case_textView"
-        app:layout_constraintTop_toBottomOf="@+id/top_view"
+        app:layout_constraintWidth_percent="0.18"
+        app:layout_constraintEnd_toStartOf="@id/status_textView"
+        app:layout_constraintStart_toEndOf="@id/case_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="زمان شروع" />
 
     <TextView
@@ -136,27 +136,27 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/start_time_textView"
-        app:layout_constraintStart_toStartOf="@+id/start_time_textView"
-        app:layout_constraintTop_toBottomOf="@+id/start_time_textView"
+        app:layout_constraintEnd_toEndOf="@id/start_time_textView"
+        app:layout_constraintStart_toStartOf="@id/start_time_textView"
+        app:layout_constraintTop_toBottomOf="@id/start_time_textView"
         tools:text="مدت زمان جلسه" />
 
     <TextView
         android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@+id/serial_textView"
-        app:layout_constraintEnd_toStartOf="@+id/edit_imageView"
-        app:layout_constraintStart_toEndOf="@+id/start_time_textView"
-        app:layout_constraintTop_toTopOf="@+id/serial_textView"
+        app:layout_constraintBottom_toBottomOf="@id/serial_textView"
+        app:layout_constraintEnd_toStartOf="@id/edit_imageView"
+        app:layout_constraintStart_toEndOf="@id/start_time_textView"
+        app:layout_constraintTop_toTopOf="@id/serial_textView"
         tools:text="وضعیت" />
 
     <ImageView
@@ -170,7 +170,7 @@
         android:src="@drawable/ic_edit_light"
         app:layout_constraintBottom_toBottomOf="@id/status_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/status_textView"
+        app:layout_constraintStart_toEndOf="@id/status_textView"
         app:layout_constraintTop_toTopOf="@id/status_textView"
         app:tint="@color/Gray500" />
 

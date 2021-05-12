@@ -709,6 +709,13 @@
 
     <string name="CasesFragmentTitle">پرونده‌ها</string>
 
+    <string name="CasesFragmentSerial">سریال</string>
+    <string name="CasesFragmentRoom">اتاق درمان</string>
+    <string name="CasesFragmentCenter">مرکز درمانی</string>
+    <string name="CasesFragmentReference">مراجعین</string>
+
+    <string name="CasesFragmentEmpty">هنوز پرونده‌‌ای ثبت نشده است.</string>
+
     /*
     ---------- Centers Fragment ----------
     */
@@ -732,6 +739,15 @@
     */
 
     <string name="DocumentsFragmentTitle">مدارک و اسناد</string>
+
+    <string name="DocumentsFragmentSerial">سریال</string>
+    <string name="DocumentsFragmentName">عنوان</string>
+    <string name="DocumentsFragmentStatus">وضعیت</string>
+
+    <string name="DocumentsFragmentAccept">تأیید</string>
+    <string name="DocumentsFragmentKick">رد کردن</string>
+
+    <string name="DocumentsFragmentEmpty">هنوز مدرک یا سندی ثبت نشده است.</string>
 
     /*
     ---------- Payments Fragment ----------
@@ -763,11 +779,30 @@
 
     <string name="ScalesFragmentTitle">ارزیابی‌ها</string>
 
+    <string name="ScalesFragmentSerial">سریال</string>
+    <string name="ScalesFragmentName">مقیاس</string>
+    <string name="ScalesFragmentEdition">ویرایش - نسخه</string>
+
+    <string name="ScalesFragmentCreate">ساختن نمونه</string>
+
+    <string name="ScalesFragmentEmpty">هنوز مقیاسی ثبت نشده است.</string>
+
     /*
     ---------- Sessions Fragment ----------
     */
 
     <string name="SessionsFragmentTitle">جلسات</string>
+
+    <string name="SessionsFragmentSerial">سریال</string>
+    <string name="SessionsFragmentRoom">اتاق درمان</string>
+    <string name="SessionsFragmentCenter">مرکز درمانی</string>
+    <string name="SessionsFragmentCase">پرونده</string>
+    <string name="SessionsFragmentReference">مراجع</string>
+    <string name="SessionsFragmentStartTime">زمان شروع</string>
+    <string name="SessionsFragmentDuration">مدت‌زمان جلسه</string>
+    <string name="SessionsFragmentStatus">وضعیت</string>
+
+    <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ای ثبت نشده است.</string>
 
     /*
     ---------- Treasuries Fragment ----------
@@ -1006,13 +1041,6 @@
     ///////////////
 
     ///////////////
-    <string name="CasesFragmentSerial">سریال</string>
-    <string name="CasesFragmentRoom">اتاق درمان</string>
-    <string name="CasesFragmentCenter">مرکز درمانی</string>
-    <string name="CasesFragmentReference">مراجعین</string>
-    ///////////////
-
-    ///////////////
     <string name="CenterUsersFragmentSerial">سریال</string>
     <string name="CenterUsersFragmentName">نام</string>
     <string name="CenterUsersFragmentMobile">شماره همراه</string>
@@ -1020,15 +1048,6 @@
     <string name="CenterUsersFragmentStatus">وضعیت</string>
     <string name="CenterUsersFragmentAccepted">زمان پذیرش</string>
     <string name="CenterUsersFragmentKicked">زمان تعلیق</string>
-    ///////////////
-
-    ///////////////
-    <string name="DocumentsFragmentSerial">سریال</string>
-    <string name="DocumentsFragmentName">عنوان</string>
-    <string name="DocumentsFragmentStatus">وضعیت</string>
-
-    <string name="DocumentsFragmentAccept">تأیید</string>
-    <string name="DocumentsFragmentKick">رد</string>
     ///////////////
 
     ///////////////
@@ -1057,25 +1076,6 @@
     <string name="SamplesFragmentScoring">نمره دهی</string>
     <string name="SamplesFragmentCreatingFiles">ساخت فایل‌ها</string>
     <string name="SamplesFragmentDone">تمام شده</string>
-    ///////////////
-
-    ///////////////
-    <string name="ScalesFragmentSerial">سریال</string>
-    <string name="ScalesFragmentName">مقیاس</string>
-    <string name="ScalesFragmentEdition">ویرایش - نسخه</string>
-
-    <string name="ScalesFragmentCreate">ساختن</string>
-    ///////////////
-
-    ///////////////
-    <string name="SessionsFragmentSerial">سریال</string>
-    <string name="SessionsFragmentRoom">اتاق درمان</string>
-    <string name="SessionsFragmentCenter">مرکز درمانی</string>
-    <string name="SessionsFragmentCase">پرونده</string>
-    <string name="SessionsFragmentReference">مراجع</string>
-    <string name="SessionsFragmentStartTime">زمان شروع جلسه</string>
-    <string name="SessionsFragmentDuration">زمان جلسه</string>
-    <string name="SessionsFragmentStatus">وضعیت</string>
     ///////////////
 
     ///////////////

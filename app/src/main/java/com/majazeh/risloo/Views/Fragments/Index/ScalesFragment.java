@@ -99,17 +99,15 @@ public class ScalesFragment extends Fragment {
     }
 
     private void setData() {
-//        adapter.setScale(null);
+//        adapter.setScales(null);
         binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-
-        String dataSize = "5";
-        binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override
