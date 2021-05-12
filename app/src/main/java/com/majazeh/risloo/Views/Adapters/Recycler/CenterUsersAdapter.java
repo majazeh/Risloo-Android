@@ -60,8 +60,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 //    }
 
     private void initializer(CenterUsersHolder holder) {
-        InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes, "adapter");
-        InitManager.spinner(activity, holder.binding.taskSpinner, R.array.CenterUserTasks, "test");
+//        InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes, "adapter");
+//        InitManager.spinner(activity, holder.binding.taskSpinner, R.array.CenterUserTasks, "test");
     }
 
     private void detector(CenterUsersHolder holder) {

@@ -21,18 +21,17 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintBottom_toBottomOf="@+id/username_textView"
-        app:layout_constraintEnd_toStartOf="@+id/name_textView"
+        app:layout_constraintBottom_toBottomOf="@id/username_textView"
+        app:layout_constraintEnd_toStartOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/name_textView" />
+        app:layout_constraintTop_toTopOf="@id/name_textView" />
 
     <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="right"
         android:text="@string/UsersFragmentName"
         android:textSize="@dimen/_8ssp"
@@ -40,8 +39,9 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@+id/email_imageView"
-        app:layout_constraintStart_toEndOf="@+id/serial_textView"
+        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintEnd_toStartOf="@id/type_textView"
+        app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -57,57 +57,43 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/name_textView"
-        app:layout_constraintStart_toStartOf="@+id/name_textView"
-        app:layout_constraintTop_toBottomOf="@+id/name_textView" />
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toStartOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/name_textView" />
 
-    <ImageView
-        android:id="@+id/email_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:padding="@dimen/_5sdp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_mailbox_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/mobile_imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/name_textView"
-        app:tint="@color/Gray500" />
-
-    <ImageView
-        android:id="@+id/mobile_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:padding="@dimen/_6sdp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_mobile_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/enter_imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/email_imageView"
-        app:tint="@color/Gray500" />
-
-    <View
-        android:id="@+id/enter_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/edit_imageView"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toEndOf="@id/mobile_imageView" />
-
-    <View
-        android:id="@+id/edit_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        app:layout_constraintBottom_toBottomOf="parent"
+    <TextView
+        android:id="@+id/type_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="right"
+        android:text="@string/UsersFragmentType"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/name_textView"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/status_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="right"
+        android:text="@string/UsersFragmentStatus"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/type_textView"
+        app:layout_constraintStart_toStartOf="@id/type_textView"
+        app:layout_constraintTop_toBottomOf="@id/type_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

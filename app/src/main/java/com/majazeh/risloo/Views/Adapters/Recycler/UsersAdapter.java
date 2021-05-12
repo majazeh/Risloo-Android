@@ -2,18 +2,23 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemUserBinding;
+
+import java.util.ArrayList;
 
 public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder> {
 
@@ -47,7 +52,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     @Override
     public int getItemCount() {
 //        return users.size();
-        return 5;
+        return 4;
     }
 
 //    public void setUser(ArrayList<User> users) {
@@ -59,33 +64,44 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.emailImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-            holder.binding.mobileImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-            holder.binding.enterImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_blue300);
-            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
     private void listener(UsersHolder holder) {
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.userFragment)).widget(holder.binding.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            IntentManager.email(activity, new String[]{"a.dehbashi@gmail.com"}, "", "", "");
-        }).widget(holder.binding.emailImageView);
+        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String task = parent.getItemAtPosition(position).toString();
 
-        ClickManager.onDelayedClickListener(() -> {
-            IntentManager.phone(activity, "+989900000000");
-        }).widget(holder.binding.mobileImageView);
+                switch (position) {
+                    case 0:
+                        Log.e("method", "enter");
+                        break;
+                    case 1:
+                        IntentManager.phone(activity, task);
+                        break;
+                    case 2:
+                        IntentManager.email(activity, new String[]{task}, "", "", "");
+                        break;
+                }
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.enterImageView);
+                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.editUserFragment)).widget(holder.binding.editImageView);
     }
 
     private void setData(UsersHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -94,6 +110,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         holder.binding.serialTextView.setText("IR966669");
         holder.binding.nameTextView.setText("ریسلو");
         holder.binding.usernameTextView.setText("baravak");
+        holder.binding.typeTextView.setText("عضو");
+        holder.binding.statusTextView.setText("فعال");
+
+        ArrayList<String> menuValues = new ArrayList<>();
+
+        menuValues.add(activity.getResources().getString(R.string.UsersFragmentEnter));
+        menuValues.add("+989387719765");
+        menuValues.add("a.dehbashi@gmail.com");
+        menuValues.add("");
+
+        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menuValues, "users");
     }
 
     public class UsersHolder extends RecyclerView.ViewHolder {

@@ -816,6 +816,16 @@
 
     <string name="UsersFragmentTitle">کاربران</string>
 
+    <string name="UsersFragmentSerial">سریال</string>
+    <string name="UsersFragmentName">نام و نام خانوادگی</string>
+    <string name="UsersFragmentUsername">شناسه کاربری</string>
+    <string name="UsersFragmentType">نوع</string>
+    <string name="UsersFragmentStatus">وضعیت</string>
+
+    <string name="UsersFragmentEnter">ورود به کاربری</string>
+
+    <string name="UsersFragmentEmpty">هنوز کاربری ثبت نشده است.</string>
+
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1076,12 +1086,6 @@
     <string name="SamplesFragmentScoring">نمره دهی</string>
     <string name="SamplesFragmentCreatingFiles">ساخت فایل‌ها</string>
     <string name="SamplesFragmentDone">تمام شده</string>
-    ///////////////
-
-    ///////////////
-    <string name="UsersFragmentSerial">سریال</string>
-    <string name="UsersFragmentName">نام و نام خانوادگی</string>
-    <string name="UsersFragmentUsername">شناسه کاربری</string>
     ///////////////
 
     //////////////////////////////////////////////////////////////////////////////////////
