@@ -48,10 +48,10 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     @Override
     public int getItemCount() {
 //        return centers.size();
-        return 5;
+        return 4;
     }
 
-//    public void setCenter(ArrayList<Center> centers) {
+//    public void setCenters(ArrayList<Center> centers) {
 //        this.centers = centers;
 //        notifyDataSetChanged();
 //    }
@@ -70,10 +70,19 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         holder.binding.nameTextView.setText("مرکز مشاوره ریلسو");
         holder.binding.usernameTextView.setText("کلینیک شخصی");
 
-        holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-        holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
+        setAvatar(holder, "");
+    }
 
-        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+    private void setAvatar(CentersHolder holder, String url) {
+        if (!url.equals("")) {
+            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(url).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
+            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
+
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+        }
     }
 
     public class CentersHolder extends RecyclerView.ViewHolder {

@@ -24,7 +24,7 @@
             android:layout_margin="@dimen/_1sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
-            android:background="@drawable/draw_2sdp_solid_gray100_border_2dp_gray200"
+            android:background="@drawable/draw_2sdp_solid_gray100_border_bottom_2dp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -34,10 +34,10 @@
             layout="@layout/component_main_avatar_border_big"
             android:layout_width="@dimen/_86sdp"
             android:layout_height="@dimen/_86sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/background_imageView"
+            app:layout_constraintBottom_toBottomOf="@id/background_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/background_imageView" />
+            app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
         <TextView
             android:id="@+id/name_textView"
@@ -52,7 +52,7 @@
             android:fontFamily="@font/dana_bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
             tools:text="نام و نام خانوادگی" />
 
         <TextView
@@ -70,7 +70,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name_textView"
+            app:layout_constraintTop_toBottomOf="@id/name_textView"
             tools:text="کلینیک شخصی" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

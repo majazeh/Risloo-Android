@@ -47,10 +47,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     @Override
     public int getItemCount() {
 //        return rooms.size();
-        return 5;
+        return 4;
     }
 
-//    public void setRoom(ArrayList<Room> rooms) {
+//    public void setRooms(ArrayList<Room> rooms) {
 //        this.rooms = rooms;
 //        notifyDataSetChanged();
 //    }
@@ -68,10 +68,19 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     private void setData(RoomsHolder holder) {
         holder.binding.nameTextView.setText("ریلسو");
 
-        holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-        holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
+        setAvatar(holder, "");
+    }
 
-        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+    private void setAvatar(RoomsHolder holder, String url) {
+        if (!url.equals("")) {
+            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(url).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
+            holder.binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
+
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+        }
     }
 
     public class RoomsHolder extends RecyclerView.ViewHolder {
