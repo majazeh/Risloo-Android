@@ -14,28 +14,28 @@
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_8sdp"
         android:gravity="center|right"
-        android:text="@string/ReferenceFragmentCasesSerial"
+        android:text="@string/Cases3AdapterSerial"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/room_textView"
-        app:layout_constraintEnd_toStartOf="@+id/room_textView"
+        app:layout_constraintBottom_toBottomOf="@id/room_textView"
+        app:layout_constraintEnd_toStartOf="@id/room_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/room_textView" />
+        app:layout_constraintTop_toTopOf="@id/room_textView" />
 
     <TextView
         android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:gravity="center|right"
-        android:text="@string/ReferenceFragmentCasesRoom"
+        android:text="@string/Cases3AdapterRoom"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -43,8 +43,8 @@
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1.5"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/session_count_textView"
-        app:layout_constraintStart_toEndOf="@+id/serial_textView"
+        app:layout_constraintEnd_toStartOf="@id/session_count_textView"
+        app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -53,16 +53,16 @@
         android:layout_height="0dp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:gravity="center|right"
-        android:text="@string/ReferenceFragmentCasesSessionCount"
+        android:text="@string/Cases3AdapterSessionCount"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@+id/room_textView"
+        app:layout_constraintBottom_toBottomOf="@id/room_textView"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/room_textView"
-        app:layout_constraintTop_toTopOf="@+id/room_textView" />
+        app:layout_constraintStart_toEndOf="@id/room_textView"
+        app:layout_constraintTop_toTopOf="@id/room_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

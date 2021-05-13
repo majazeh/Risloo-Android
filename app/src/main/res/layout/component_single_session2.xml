@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl">
 
@@ -17,19 +17,21 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/single_item_session2" />
+        tools:listitem="@layout/single_item_session2"
+        tools:itemCount="4" />
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_96sdp"
         android:gravity="center"
         android:text="@string/AppSearchEmpty"
-        android:textSize="@dimen/_10ssp"
+        android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray400"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -38,17 +40,17 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        style="@style/Widget.AppCompat.ProgressBar"
         android:layout_width="@dimen/_32sdp"
         android:layout_height="@dimen/_32sdp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:elevation="@dimen/_2sdp"
         android:padding="@dimen/_7sdp"
-        android:visibility="gone"
         android:theme="@style/ProgressBarTheme"
         android:background="@drawable/draw_oval_solid_gray100"
+        android:visibility="gone"
+        app:elevation="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        style="@style/Widget.AppCompat.ProgressBar" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

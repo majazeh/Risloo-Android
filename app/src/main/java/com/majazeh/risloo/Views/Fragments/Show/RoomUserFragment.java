@@ -67,7 +67,7 @@ public class RoomUserFragment extends Fragment {
         samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.roomsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferenceFragmentRoomsHeader));
-        binding.casesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferenceFragmentCasesHeader));
+        binding.casesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases3AdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferenceFragmentSamplesHeader));
 
         InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, roomsLayoutManager);

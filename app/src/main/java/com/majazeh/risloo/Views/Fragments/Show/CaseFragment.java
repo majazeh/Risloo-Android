@@ -72,7 +72,7 @@ public class CaseFragment extends Fragment {
 
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentPsychologistsHeader));
         binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentReferencesHeader));
-        binding.sessionsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentSessionsHeader));
+        binding.sessionsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Sessions2AdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentSamplesHeader));
 
         InitManager.imgResTint(requireActivity(), binding.referencesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);

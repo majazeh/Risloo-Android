@@ -23,7 +23,6 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
     // Vars
 //    private ArrayList<Session> sessions;
-    private String status = "";
 
     public Sessions2Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -51,27 +50,23 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     @Override
     public int getItemCount() {
 //        return sessions.size();
-        return 5;
+        return 4;
     }
 
-//    public void setSession(ArrayList<Session> sessions) {
+//    public void setSessions(ArrayList<Session> sessions) {
 //        this.sessions = sessions;
 //        notifyDataSetChanged();
 //    }
 
     private void initializer(Sessions2Holder holder) {
-//        InitManager.spinner(activity, holder.binding.statusSpinner, R.array.SessionStatus, "adapter");
+        InitManager.spinner(activity, holder.binding.statusSpinner, R.array.SessionStatus, "adapter");
     }
 
     private void detector(Sessions2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-
-            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-        } else {
-            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
@@ -83,9 +78,9 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
         holder.binding.statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                status = parent.getItemAtPosition(position).toString();
+                String status = parent.getItemAtPosition(position).toString();
 
-                doWork();
+                doWork(status);
             }
 
             @Override
@@ -98,7 +93,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     }
 
     private void setData(Sessions2Holder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -108,15 +103,38 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
         holder.binding.dateTextView.setText("شنبه 11 بهمن 99 ساعت 16:00");
         holder.binding.durationTextView.setText("60 دقیقه");
 
-//        status = ((MainActivity) activity).singleton.getStatus();
-//        for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
-//            if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
-//                holder.binding.statusSpinner.setSelection(i);
-//            }
-//        }
+        for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
+            if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase("در جلسه")) {
+                holder.binding.statusSpinner.setSelection(i);
+            }
+        }
+
+        if (holder.getBindingAdapterPosition() == 0) {
+            setStatus(holder, true);
+        } else {
+            setStatus(holder, false);
+        }
     }
 
-    private void doWork() {
+    private void setStatus(Sessions2Holder holder, boolean enable) {
+        if (enable) {
+            holder.binding.statusSpinner.setEnabled(true);
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            else
+                holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+
+            holder.binding.statusAngleImageView.setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.statusSpinner.setEnabled(false);
+            holder.binding.statusSpinner.setBackgroundResource(android.R.color.transparent);
+
+            holder.binding.statusAngleImageView.setVisibility(View.GONE);
+        }
+    }
+
+    private void doWork(String status) {
 
     }
 

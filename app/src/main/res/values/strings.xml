@@ -935,6 +935,64 @@
 
     <string name="UserFragmentTitle">کاربر</string>
 
+    // Adapter Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    /*
+    ---------- Cases3 Adapter ----------
+    */
+
+    <string name="Cases3AdapterHeader">پرونده‌ها</string>
+
+    <string name="Cases3AdapterSerial">سریال</string>
+    <string name="Cases3AdapterRoom">اتاق درمان</string>
+    <string name="Cases3AdapterSessionCount">جلسات</string>
+
+    <string name="Cases3AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
+
+    /*
+    ---------- Scales2 Adapter ----------
+    */
+
+    <string name="Scales2AdapterHeader">ارزیابی‌ها</string>
+
+    <string name="Scales2AdapterSerial">سریال</string>
+    <string name="Scales2AdapterName">مقیاس</string>
+    <string name="Scales2AdapterEdition">ویرایش - نسخه</string>
+
+    <string name="Scales2AdapterEmpty">هنوز مقیاسی ثبت نشده است.</string>
+
+    /*
+    ---------- Sessions2 Adapter ----------
+    */
+
+    <string name="Sessions2AdapterHeader">جلسات</string>
+
+    <string name="Sessions2AdapterSerial">سریال</string>
+    <string name="Sessions2AdapterDate">زمان</string>
+    <string name="Sessions2AdapterDuration">مدت‌زمان جلسه</string>
+    <string name="Sessions2AdapterStatus">وضعیت</string>
+
+    <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
+
+    /*
+    ---------- ??? Adapter ----------
+    */
+
+
+
+    /*
+    ---------- ??? Adapter ----------
+    */
+
+
+
+    /*
+    ---------- ??? Adapter ----------
+    */
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // BottomSheet Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -1098,13 +1156,6 @@
 
     <string name="BulkSampleFragmentReferencesHeader">اعضاء</string>
 
-    <string name="BulkSampleFragmentScalesHeader">ارزیابی‌ها</string>
-    <string name="BulkSampleFragmentScalesBodyEmpty">هنوز ارزیابی‌ برای این جلسه ثبت نشده است.</string>
-
-    <string name="BulkSampleFragmentScalesSerial">سریال</string>
-    <string name="BulkSampleFragmentScalesName">مقیاس</string>
-    <string name="BulkSampleFragmentScalesEdition">ویرایش - نسخه</string>
-
     <string name="BulkSampleFragmentSamplesHeader">نمونه‌ها</string>
     <string name="BulkSampleFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این جلسه ثبت نشده است.</string>
 
@@ -1120,14 +1171,6 @@
 
     <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
     <string name="CaseFragmentReferencesHeader">مراجعین</string>
-
-    <string name="CaseFragmentSessionsHeader">جلسات</string>
-    <string name="CaseFragmentSessionsBodyEmpty">هنوز جلسه‌ای برای این پرونده ثبت نشده است.</string>
-
-    <string name="CaseFragmentSessionsSerial">سریال</string>
-    <string name="CaseFragmentSessionsDate">زمان</string>
-    <string name="CaseFragmentSessionsDuration">مدت جلسه</string>
-    <string name="CaseFragmentSessionsStatus">وضعیت</string>
 
     <string name="CaseFragmentSamplesHeader">نمونه‌ها</string>
     <string name="CaseFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این پرونده ثبت نشده است.</string>
@@ -1159,13 +1202,6 @@
     ///////////////
     <string name="ReferenceFragmentRoomsHeader">اتاق‌های درمان</string>
     <string name="ReferenceFragmentRoomsBodyEmpty">هنوز اتاق درمانی برای این کاربر ثبت نشده است.</string>
-
-    <string name="ReferenceFragmentCasesHeader">پرونده‌ها</string>
-    <string name="ReferenceFragmentCasesBodyEmpty">هنوز پرونده‌ای برای این کاربر ثبت نشده است.</string>
-
-    <string name="ReferenceFragmentCasesSerial">سریال</string>
-    <string name="ReferenceFragmentCasesRoom">اتاق درمان</string>
-    <string name="ReferenceFragmentCasesSessionCount">جلسات</string>
 
     <string name="ReferenceFragmentSamplesHeader">نمونه‌ها</string>
     <string name="ReferenceFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این کاربر ثبت نشده است.</string>

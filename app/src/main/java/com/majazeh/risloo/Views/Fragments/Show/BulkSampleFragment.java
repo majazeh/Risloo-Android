@@ -75,7 +75,7 @@ public class BulkSampleFragment extends Fragment {
         InitManager.txtTextColor(binding.linkTextView.buttonTextView, getResources().getString(R.string.BulkSampleFragmentLink), getResources().getColor(R.color.Gray500));
 
         binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.BulkSampleFragmentReferencesHeader));
-        binding.scalesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.BulkSampleFragmentScalesHeader));
+        binding.scalesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.BulkSampleFragmentSamplesHeader));
 
         InitManager.recyclerView(binding.referencesSingleLayout.recyclerView, itemDecoration, referencesLayoutManager);

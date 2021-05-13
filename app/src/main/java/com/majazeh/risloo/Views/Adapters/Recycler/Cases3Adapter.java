@@ -46,10 +46,10 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
     @Override
     public int getItemCount() {
 //        return cases.size();
-        return 5;
+        return 4;
     }
 
-//    public void setCase(ArrayList<Case> cases) {
+//    public void setCases(ArrayList<Case> cases) {
 //        this.cases = cases;
 //        notifyDataSetChanged();
 //    }
@@ -65,7 +65,7 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
     }
 
     private void setData(Cases3Holder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);

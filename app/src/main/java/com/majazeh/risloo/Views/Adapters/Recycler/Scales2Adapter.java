@@ -45,10 +45,10 @@ public class Scales2Adapter extends RecyclerView.Adapter<Scales2Adapter.Scales2H
     @Override
     public int getItemCount() {
 //        return scales.size();
-        return 5;
+        return 4;
     }
 
-//    public void setScale(ArrayList<Scale> scales) {
+//    public void setScales(ArrayList<Scale> scales) {
 //        this.scales = scales;
 //        notifyDataSetChanged();
 //    }
@@ -66,7 +66,7 @@ public class Scales2Adapter extends RecyclerView.Adapter<Scales2Adapter.Scales2H
     }
 
     private void setData(Scales2Holder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);

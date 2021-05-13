@@ -55,6 +55,12 @@ public class InitManager {
                 spinner.setAdapter(adapter);
                 break;
             }
+            case "adapter": {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, arrayRes, R.layout.spinner_item_background_adapter);
+                adapter.setDropDownViewResource(R.layout.spinner_item_dropdown_adapter);
+                spinner.setAdapter(adapter);
+                break;
+            }
         }
     }
 
