@@ -22,8 +22,8 @@
             android:id="@+id/serial_imageView"
             android:layout_width="@dimen/_16sdp"
             android:layout_height="@dimen/_16sdp"
-            android:layout_marginTop="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_copy_light"
@@ -42,9 +42,9 @@
             android:textColor="@color/Gray700"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_bold"
-            app:layout_constraintBottom_toBottomOf="@+id/serial_imageView"
-            app:layout_constraintEnd_toStartOf="@+id/serial_imageView"
-            app:layout_constraintTop_toTopOf="@+id/serial_imageView"
+            app:layout_constraintBottom_toBottomOf="@id/serial_imageView"
+            app:layout_constraintEnd_toStartOf="@id/serial_imageView"
+            app:layout_constraintTop_toTopOf="@id/serial_imageView"
             tools:text="سریال" />
 
         <ImageView
@@ -56,9 +56,9 @@
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_user_light"
-            app:layout_constraintBottom_toTopOf="@+id/mid_view"
+            app:layout_constraintBottom_toTopOf="@id/mid_view"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/serial_imageView"
+            app:layout_constraintTop_toBottomOf="@id/serial_imageView"
             app:tint="@color/Gray500" />
 
         <TextView
@@ -72,22 +72,22 @@
             android:textColor="@color/Gray500"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintBottom_toBottomOf="@+id/reference_imageView"
-            app:layout_constraintStart_toEndOf="@+id/reference_imageView"
-            app:layout_constraintTop_toTopOf="@+id/reference_imageView"
+            app:layout_constraintBottom_toBottomOf="@id/reference_imageView"
+            app:layout_constraintStart_toEndOf="@id/reference_imageView"
+            app:layout_constraintTop_toTopOf="@id/reference_imageView"
             tools:text="مراجع" />
 
         <View
             android:id="@+id/mid_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_10sdp"
             android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_10sdp"
             android:background="@color/Gray200"
-            app:layout_constraintBottom_toTopOf="@+id/date_imageView"
+            app:layout_constraintBottom_toTopOf="@id/date_imageView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/reference_imageView" />
+            app:layout_constraintTop_toBottomOf="@id/reference_imageView" />
 
         <ImageView
             android:id="@+id/date_imageView"
@@ -97,7 +97,7 @@
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_clock_light"
-            app:layout_constraintTop_toBottomOf="@+id/mid_view"
+            app:layout_constraintTop_toBottomOf="@id/mid_view"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:tint="@color/Gray500" />
@@ -113,9 +113,9 @@
             android:textColor="@color/Gray500"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            app:layout_constraintBottom_toBottomOf="@+id/date_imageView"
-            app:layout_constraintStart_toEndOf="@+id/date_imageView"
-            app:layout_constraintTop_toTopOf="@+id/date_imageView"
+            app:layout_constraintBottom_toBottomOf="@id/date_imageView"
+            app:layout_constraintStart_toEndOf="@id/date_imageView"
+            app:layout_constraintTop_toTopOf="@id/date_imageView"
             tools:text="تاریخ جلسه" />
 
         <ImageView
@@ -126,9 +126,9 @@
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_user_friends_light"
-            app:layout_constraintBottom_toBottomOf="@+id/session_count_textView"
-            app:layout_constraintEnd_toStartOf="@+id/session_count_textView"
-            app:layout_constraintTop_toTopOf="@+id/session_count_textView"
+            app:layout_constraintBottom_toBottomOf="@id/session_count_textView"
+            app:layout_constraintEnd_toStartOf="@id/session_count_textView"
+            app:layout_constraintTop_toTopOf="@id/session_count_textView"
             app:tint="@color/Gray500" />
 
         <TextView

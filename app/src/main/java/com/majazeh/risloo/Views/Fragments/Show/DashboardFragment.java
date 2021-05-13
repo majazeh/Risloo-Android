@@ -34,7 +34,7 @@ public class DashboardFragment extends Fragment {
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager samplesLayoutManager, casesLayoutManager, roomsLayoutManager, centersLayoutManager;
+    private LinearLayoutManager samplesLayoutManager, cases2LayoutManager, roomsLayoutManager, centersLayoutManager;
 
     @Nullable
     @Override
@@ -58,7 +58,7 @@ public class DashboardFragment extends Fragment {
         itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
 
         samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        casesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        cases2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         roomsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         centersLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -70,26 +70,25 @@ public class DashboardFragment extends Fragment {
         binding.samplesShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
         InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samplesLayoutManager);
-        InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, casesLayoutManager);
+        InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, cases2LayoutManager);
         InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, roomsLayoutManager);
         InitManager.recyclerView(binding.centersSingleLayout.recyclerView, itemDecoration, centersLayoutManager);
     }
 
     private void setData() {
-//        samplesAdapter.setSample(null);
-//        cases2Adapter.setCase(null);
-//        roomsAdapter.setRoom(null);
-//        centersAdapter.setCenter(null);
+//        samplesAdapter.setSamples(null);
+//        cases2Adapter.setCases(null);
+//        roomsAdapter.setRooms(null);
+//        centersAdapter.setCenters(null);
         binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
         binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
         binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
         binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
 
-        String dataSize = "5";
-        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.casesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.roomsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.centersHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samplesAdapter.getItemCount() + ")");
+        binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+        binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+        binding.centersHeaderIncludeLayout.countTextView.setText("(" + centersAdapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -104,7 +103,7 @@ public class DashboardFragment extends Fragment {
 
             binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

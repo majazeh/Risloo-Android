@@ -893,6 +893,11 @@
 
     <string name="DashboardFragmentTitle">پیش‌خوان</string>
 
+    <string name="DashboardFragmentSamplesHeader">نمونه‌های من</string>
+    <string name="DashboardFragmentCasesHeader">پرونده‌های من</string>
+    <string name="DashboardFragmentRoomsHeader">اتاق‌های من</string>
+    <string name="DashboardFragmentCentersHeader">مراکز درمانی من</string>
+
     /*
     ---------- Me Fragment ----------
     */
@@ -1210,13 +1215,6 @@
     <string name="CenterFragmentAccepted">پذیرفته شد</string>
 
     <string name="CenterFragmentRoomsHeader">اتاق‌های درمان</string>
-    ///////////////
-
-    ///////////////
-    <string name="DashboardFragmentSamplesHeader">نمونه‌های من</string>
-    <string name="DashboardFragmentCasesHeader">پرونده‌های من</string>
-    <string name="DashboardFragmentRoomsHeader">اتاق‌های من</string>
-    <string name="DashboardFragmentCentersHeader">مراکز درمانی من</string>
     ///////////////
 
     ///////////////

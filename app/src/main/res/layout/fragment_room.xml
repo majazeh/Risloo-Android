@@ -143,7 +143,7 @@
 
         <include
             android:id="@+id/cases_shimmerLayout"
-            layout="@layout/component_shimmer_case"
+            layout="@layout/component_shimmer_case2"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:visibility="visible"
