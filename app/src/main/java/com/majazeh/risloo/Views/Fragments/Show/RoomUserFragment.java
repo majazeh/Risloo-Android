@@ -68,7 +68,7 @@ public class RoomUserFragment extends Fragment {
 
         binding.roomsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferenceFragmentRoomsHeader));
         binding.casesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases3AdapterHeader));
-        binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferenceFragmentSamplesHeader));
+        binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples3AdapterHeader));
 
         InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, roomsLayoutManager);
         InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration2, casesLayoutManager);

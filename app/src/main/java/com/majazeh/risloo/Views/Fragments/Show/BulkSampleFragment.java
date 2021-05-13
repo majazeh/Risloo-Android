@@ -76,7 +76,7 @@ public class BulkSampleFragment extends Fragment {
 
         binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.BulkSampleFragmentReferencesHeader));
         binding.scalesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
-        binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.BulkSampleFragmentSamplesHeader));
+        binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
 
         InitManager.recyclerView(binding.referencesSingleLayout.recyclerView, itemDecoration, referencesLayoutManager);
         InitManager.recyclerView(binding.scalesSingleLayout.recyclerView, itemDecoration2, scalesLayoutManager);

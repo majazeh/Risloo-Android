@@ -951,6 +951,48 @@
     <string name="Cases3AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
 
     /*
+    ---------- Samples2 Adapter ----------
+    */
+
+    <string name="Samples2AdapterHeader">نمونه‌ها</string>
+
+    <string name="Samples2AdapterSerial">سریال</string>
+    <string name="Samples2AdapterName">عنوان</string>
+    <string name="Samples2AdapterSession">جلسه</string>
+    <string name="Samples2AdapterReference">مراجع</string>
+    <string name="Samples2AdapterStatus">وضعیت</string>
+
+    <string name="Samples2AdapterEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
+
+    /*
+    ---------- Samples3 Adapter ----------
+    */
+
+    <string name="Samples3AdapterHeader">نمونه‌ها</string>
+
+    <string name="Samples3AdapterSerial">سریال</string>
+    <string name="Samples3AdapterName">مقیاس</string>
+    <string name="Samples3AdapterRoom">اتاق درمان</string>
+    <string name="Samples3AdapterCase">پرونده</string>
+    <string name="Samples3AdapterStatus">وضعیت</string>
+
+    <string name="Samples3AdapterEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
+
+    /*
+    ---------- Samples4 Adapter ----------
+    */
+
+    <string name="Samples4AdapterHeader">نمونه‌ها</string>
+
+    <string name="Samples4AdapterSerial">سریال</string>
+    <string name="Samples4AdapterName">مقياس</string>
+    <string name="Samples4AdapterEdition">ویرایش - نسخه</string>
+    <string name="Samples4AdapterReference">مراجع</string>
+    <string name="Samples4AdapterStatus">وضعیت</string>
+
+    <string name="Samples4AdapterEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
+
+    /*
     ---------- Scales2 Adapter ----------
     */
 
@@ -974,12 +1016,6 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- ??? Adapter ----------
-    */
-
-
 
     /*
     ---------- ??? Adapter ----------
@@ -1156,14 +1192,6 @@
 
     <string name="BulkSampleFragmentReferencesHeader">اعضاء</string>
 
-    <string name="BulkSampleFragmentSamplesHeader">نمونه‌ها</string>
-    <string name="BulkSampleFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این جلسه ثبت نشده است.</string>
-
-    <string name="BulkSampleFragmentSamplesSerial">سریال</string>
-    <string name="BulkSampleFragmentSamplesName">مقياس</string>
-    <string name="BulkSampleFragmentSamplesEdition">ویرایش - نسخه</string>
-    <string name="BulkSampleFragmentSamplesReference">مراجع</string>
-    <string name="BulkSampleFragmentSamplesStatus">وضعیت</string>
     ///////////////
 
     ///////////////
@@ -1172,14 +1200,6 @@
     <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
     <string name="CaseFragmentReferencesHeader">مراجعین</string>
 
-    <string name="CaseFragmentSamplesHeader">نمونه‌ها</string>
-    <string name="CaseFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این پرونده ثبت نشده است.</string>
-
-    <string name="CaseFragmentSamplesSerial">سریال</string>
-    <string name="CaseFragmentSamplesName">عنوان</string>
-    <string name="CaseFragmentSamplesSession">سریال جلسه</string>
-    <string name="CaseFragmentSamplesReference">مراجع</string>
-    <string name="CaseFragmentSamplesStatus">وضعیت</string>
     ///////////////
 
     ///////////////
@@ -1202,15 +1222,6 @@
     ///////////////
     <string name="ReferenceFragmentRoomsHeader">اتاق‌های درمان</string>
     <string name="ReferenceFragmentRoomsBodyEmpty">هنوز اتاق درمانی برای این کاربر ثبت نشده است.</string>
-
-    <string name="ReferenceFragmentSamplesHeader">نمونه‌ها</string>
-    <string name="ReferenceFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این کاربر ثبت نشده است.</string>
-
-    <string name="ReferenceFragmentSamplesSerial">سریال</string>
-    <string name="ReferenceFragmentSamplesName">مقیاس</string>
-    <string name="ReferenceFragmentSamplesRoom">اتاق درمان</string>
-    <string name="ReferenceFragmentSamplesCase">پرونده</string>
-    <string name="ReferenceFragmentSamplesStatus">وضعیت</string>
     ///////////////
 
     ///////////////
@@ -1259,14 +1270,6 @@
     <string name="SessionFragmentPracticesAttachment">پیوست</string>
     <string name="SessionFragmentPracticesPractice">تکلیف</string>
 
-    <string name="SessionFragmentSamplesHeader">نمونه‌ها</string>
-    <string name="SessionFragmentSamplesBodyEmpty">هنوز نمونه‌ای برای این جلسه ثبت نشده است.</string>
-
-    <string name="SessionFragmentSamplesSerial">سریال</string>
-    <string name="SessionFragmentSamplesName">عنوان</string>
-    <string name="SessionFragmentSamplesSession">سریال جلسه</string>
-    <string name="SessionFragmentSamplesReference">مراجع</string>
-    <string name="SessionFragmentSamplesStatus">وضعیت</string>
     ///////////////
 
     ///////////////
