@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_12sdp"
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp"
     tools:context=".Views.Adapters.Recycler.FieldsAdapter">
 
     <TextView
@@ -52,7 +53,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_barrier"
-        tools:hint="عنوان" />
+        tools:text="عنوان" />
 
     <Spinner
         android:id="@+id/select_spinner"
@@ -60,6 +61,7 @@
         android:layout_height="@dimen/_36sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="0sp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
         android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
@@ -78,7 +80,7 @@
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
-        app:tint="@color/Gray600" />
+        app:tint="@color/Gray500" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/bottom_barrier"

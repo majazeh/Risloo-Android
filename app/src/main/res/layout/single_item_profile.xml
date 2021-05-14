@@ -8,20 +8,21 @@
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
-    tools:layout_margin="@dimen/_12sdp"
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp"
     tools:context=".Views.Adapters.Recycler.ProfilesAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/_6sdp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <com.jsibbold.zoomage.ZoomageView
             android:id="@+id/avatar_zoomageView"
             android:layout_width="0dp"
             android:layout_height="@dimen/_200sdp"
+            android:layout_margin="@dimen/_6sdp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

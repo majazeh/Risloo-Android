@@ -6,7 +6,8 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_12sdp">
+    tools:layout_margin="@dimen/_12sdp"
+    tools:background="@color/White">
 
     <TextView
         android:id="@+id/top_view"
@@ -14,7 +15,7 @@
         android:layout_height="@dimen/_18sdp"
         android:background="@drawable/draw_2sdp_solid_gray50"
         app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_view"
+        app:layout_constraintBottom_toTopOf="@id/bottom_view"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 

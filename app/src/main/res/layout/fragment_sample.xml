@@ -213,7 +213,7 @@
 
             <include
                 android:id="@+id/fields_general_shimmerLayout"
-                layout="@layout/component_shimmer_form"
+                layout="@layout/component_shimmer_field"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
@@ -267,7 +267,7 @@
 
             <include
                 android:id="@+id/fields_prerequisite_shimmerLayout"
-                layout="@layout/component_shimmer_form"
+                layout="@layout/component_shimmer_field"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
@@ -323,7 +323,7 @@
 
             <include
                 android:id="@+id/fields_answer_shimmerLayout"
-                layout="@layout/component_shimmer_form"
+                layout="@layout/component_shimmer_field"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"

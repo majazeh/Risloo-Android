@@ -10,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemReferenceBinding;
 
 public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.ReferencesHolder> {
@@ -45,10 +44,10 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
     @Override
     public int getItemCount() {
 //        return references.size();
-        return 5;
+        return 4;
     }
 
-//    public void setReference(ArrayList<Reference> references) {
+//    public void setReferences(ArrayList<Reference> references) {
 //        this.references = references;
 //        notifyDataSetChanged();
 //    }
@@ -60,7 +59,9 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
     }
 
     private void listener(ReferencesHolder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment)).widget(holder.binding.containerConstraintLayout);
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(ReferencesHolder holder) {
