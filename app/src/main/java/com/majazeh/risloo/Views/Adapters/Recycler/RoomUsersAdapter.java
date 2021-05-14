@@ -2,17 +2,22 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemRoomUserBinding;
+
+import java.util.ArrayList;
 
 public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.RoomUsersHolder> {
 
@@ -46,10 +51,10 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     @Override
     public int getItemCount() {
 //        return users.size();
-        return 5;
+        return 4;
     }
 
-//    public void setUser(ArrayList<User> users) {
+//    public void setUsers(ArrayList<User> users) {
 //        this.users = users;
 //        notifyDataSetChanged();
 //    }
@@ -61,11 +66,43 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     }
 
     private void listener(RoomUsersHolder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment)).widget(holder.binding.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.roomUsersFragment)).widget(holder.binding.getRoot());
+
+        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String task = parent.getItemAtPosition(position).toString();
+
+                switch (task) {
+                    case "پذیرفتن":
+                        Log.e("method", "accept");
+                        break;
+                    case "تعلیق":
+                        Log.e("method", "kick");
+                        break;
+                    case "ساختن اتاق درمان":
+                        Log.e("method", "create_room");
+                        break;
+                    case "ویرایش کاربر":
+                        Log.e("method", "edit");
+                        break;
+                    case "ورود به کاربری":
+                        Log.e("method", "enter");
+                        break;
+                }
+
+                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setData(RoomUsersHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -78,6 +115,17 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
         holder.binding.statusTexView.setText("پذیرش شده");
         holder.binding.acceptedTextView.setText("99-12-26 10:55 ");
         holder.binding.kickedTextView.setText("99-12-26 10:55 ");
+
+        ArrayList<String> menuValues = new ArrayList<>();
+
+        menuValues.add(activity.getResources().getString(R.string.RoomUsersFragmentAccept));
+        menuValues.add(activity.getResources().getString(R.string.RoomUsersFragmentKick));
+        menuValues.add(activity.getResources().getString(R.string.RoomUsersFragmentCreateRoom));
+        menuValues.add(activity.getResources().getString(R.string.RoomUsersFragmentEdit));
+        menuValues.add(activity.getResources().getString(R.string.RoomUsersFragmentEnter));
+        menuValues.add("");
+
+        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menuValues, "roomUsers");
     }
 
     public class RoomUsersHolder extends RecyclerView.ViewHolder {

@@ -76,7 +76,7 @@ public class SessionFragment extends Fragment {
         binding.reportHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReportHeader));
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentPsychologistsHeader));
         binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReferencesHeader));
-        binding.practicesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentPracticesHeader));
+        binding.practicesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples2AdapterHeader));
 
         InitManager.imgResTint(requireActivity(), binding.practicesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);

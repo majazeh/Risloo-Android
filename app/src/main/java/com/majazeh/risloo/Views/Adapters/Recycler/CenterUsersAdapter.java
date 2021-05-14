@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
 
+import java.util.ArrayList;
+
 public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.CenterUsersHolder> {
 
     // Objects
@@ -23,7 +26,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     // Vars
 //    private ArrayList<User> users;
-    private String type = "";
 
     public CenterUsersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -51,55 +53,51 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     @Override
     public int getItemCount() {
 //        return users.size();
-        return 5;
+        return 4;
     }
 
-//    public void setUser(ArrayList<User> users) {
+//    public void setUsers(ArrayList<User> users) {
 //        this.users = users;
 //        notifyDataSetChanged();
 //    }
 
     private void initializer(CenterUsersHolder holder) {
-//        InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes, "adapter");
-//        InitManager.spinner(activity, holder.binding.taskSpinner, R.array.CenterUserTasks, "test");
+        InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes, "adapter2");
     }
 
     private void detector(CenterUsersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-
-            holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
-        } else {
-            holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
     }
 
     private void listener(CenterUsersHolder holder) {
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment)).widget(holder.binding.getRoot());
 
-        holder.binding.taskSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String task = parent.getItemAtPosition(position).toString();
 
                 switch (task) {
                     case "پذیرفتن":
-                        // TODO : Place Code Here
+                        Log.e("method", "accept");
                         break;
                     case "تعلیق":
-                        // TODO : Place Code Here
+                        Log.e("method", "kick");
                         break;
                     case "ساختن اتاق درمان":
-                        // TODO : Place Code Here
+                        Log.e("method", "create_room");
                         break;
                     case "ویرایش کاربر":
-                        // TODO : Place Code Here
+                        Log.e("method", "edit");
                         break;
                     case "ورود به کاربری":
-                        // TODO : Place Code Here
+                        Log.e("method", "enter");
                         break;
                 }
 
+                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
             }
 
             @Override
@@ -111,9 +109,9 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         holder.binding.typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = parent.getItemAtPosition(position).toString();
+                String type = parent.getItemAtPosition(position).toString();
 
-                doWork();
+                doWork(type);
             }
 
             @Override
@@ -124,7 +122,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     private void setData(CenterUsersHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
@@ -137,16 +135,50 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         holder.binding.acceptedTextView.setText("99-12-26 10:55 ");
         holder.binding.kickedTextView.setText("99-12-26 10:55 ");
 
-//        type = ((MainActivity) activity).singleton.getType();
-//        for (int i=0; i<holder.binding.typeSpinner.getCount(); i++) {
-//            if (holder.binding.typeSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
-//                holder.binding.typeSpinner.setSelection(i);
-//            }
-//        }
+        for (int i=0; i<holder.binding.typeSpinner.getCount(); i++) {
+            if (holder.binding.typeSpinner.getItemAtPosition(i).toString().equalsIgnoreCase("مراجع")) {
+                holder.binding.typeSpinner.setSelection(i);
+            }
+        }
+
+        if (holder.getBindingAdapterPosition() == 0) {
+            setType(holder, true);
+        } else {
+            setType(holder, false);
+        }
+
+        ArrayList<String> menuValues = new ArrayList<>();
+
+        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
+        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
+        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
+        menuValues.add("");
+
+        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menuValues, "centerUsers");
     }
 
-    private void doWork() {
-        // TODO : Call Work Method
+    private void setType(CenterUsersHolder holder, boolean enable) {
+        if (enable) {
+            holder.binding.typeSpinner.setEnabled(true);
+
+            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            else
+                holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+
+            holder.binding.typeAngleImageView.setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.typeSpinner.setEnabled(false);
+            holder.binding.typeSpinner.setBackgroundResource(android.R.color.transparent);
+
+            holder.binding.typeAngleImageView.setVisibility(View.GONE);
+        }
+    }
+
+    private void doWork(String status) {
+
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

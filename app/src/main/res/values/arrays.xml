@@ -212,14 +212,6 @@
         <item></item>
     </array>
 
-    <array name="CenterUserTasks">
-        <item>پذیرفتن</item>
-        <item>تعلیق</item>
-        <item>ساختن اتاق درمان</item>
-        <item>ویرایش کاربر</item>
-        <item>ورود به کاربری</item>
-    </array>
-
     //////////////////////////////////////////////////////////////////////////////////////
 
 </resources>

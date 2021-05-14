@@ -45,10 +45,10 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
     @Override
     public int getItemCount() {
 //        return practices.size();
-        return 5;
+        return 4;
     }
 
-//    public void setPractice(ArrayList<Practice> practices) {
+//    public void setPractices(ArrayList<Practice> practices) {
 //        this.practices = practices;
 //        notifyDataSetChanged();
 //    }
@@ -57,8 +57,8 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
-            holder.binding.attachmentImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
-            holder.binding.practiceImageView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_ripple_gray300);
+            holder.binding.attachmentImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
+            holder.binding.workImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
@@ -73,11 +73,11 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
 
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
-        }).widget(holder.binding.practiceImageView);
+        }).widget(holder.binding.workImageView);
     }
 
     private void setData(PracticesHolder holder) {
-        if (holder.getAdapterPosition() == 0) {
+        if (holder.getAbsoluteAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);

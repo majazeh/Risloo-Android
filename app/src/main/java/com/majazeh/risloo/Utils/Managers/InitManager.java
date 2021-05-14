@@ -61,6 +61,12 @@ public class InitManager {
                 spinner.setAdapter(adapter);
                 break;
             }
+            case "adapter2": {
+                ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, arrayRes, R.layout.spinner_item_background_adapter2);
+                adapter.setDropDownViewResource(R.layout.spinner_item_dropdown_adapter);
+                spinner.setAdapter(adapter);
+                break;
+            }
         }
     }
 
@@ -252,6 +258,106 @@ public class InitManager {
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_envelope_light, null));
                             ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                        }
+                    }
+
+                    @Override
+                    public int getCount() {
+                        return super.getCount() - 1;
+                    }
+
+                };
+
+                spinner.setAdapter(adapter);
+                spinner.setSelection(adapter.getCount());
+                break;
+            }
+            case "centerUsers":
+            case "roomUsers": {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
+
+                    private TextView dropdownTextView;
+                    private ImageView dropdownImageView;
+
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        return super.getView(position, convertView, viewGroup);
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_recycler, viewGroup, false);
+
+                        initializer(view);
+
+                        detector(view, position);
+
+                        setData(position);
+
+                        return view;
+                    }
+
+                    private void initializer(View view) {
+                        dropdownTextView = view.findViewById(R.id.item_textView);
+                        dropdownImageView = view.findViewById(R.id.item_imageView);
+                    }
+
+                    private void detector(View view, int position) {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            switch (arrayList.get(position)) {
+                                case "پذیرفتن":
+                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_green300);
+                                    break;
+                                case "تعلیق":
+                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_red300);
+                                    break;
+                                case "ساختن اتاق درمان":
+                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_green300);
+                                    break;
+                                case "ویرایش کاربر":
+                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                                    break;
+                                case "ورود به کاربری":
+                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
+                                    break;
+                            }
+                        }
+                    }
+
+                    private void setData(int position) {
+                        dropdownTextView.setText(arrayList.get(position));
+
+                        switch (arrayList.get(position)) {
+                            case "پذیرفتن":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_check_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Green600));
+                                break;
+                            case "تعلیق":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Red600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_times_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Red600));
+                                break;
+                            case "ساختن اتاق درمان":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_plus_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Green600));
+                                break;
+                            case "ویرایش کاربر":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_edit_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
+                            case "ورود به کاربری":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_user_cog_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                                break;
                         }
                     }
 

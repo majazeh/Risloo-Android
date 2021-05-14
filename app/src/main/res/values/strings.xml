@@ -744,6 +744,22 @@
 
     <string name="CenterUsersFragmentTitle">کاربران مرکز درمانی</string>
 
+    <string name="CenterUsersFragmentSerial">سریال</string>
+    <string name="CenterUsersFragmentName">نام مستعار</string>
+    <string name="CenterUsersFragmentMobile">موبایل</string>
+    <string name="CenterUsersFragmentType">موقعیت</string>
+    <string name="CenterUsersFragmentStatus">وضعیت</string>
+    <string name="CenterUsersFragmentAccepted">زمان پذیرش</string>
+    <string name="CenterUsersFragmentKicked">زمان تعلیق</string>
+
+    <string name="CenterUsersFragmentAccept">پذیرفتن</string>
+    <string name="CenterUsersFragmentKick">تعلیق</string>
+    <string name="CenterUsersFragmentCreateRoom">ساختن اتاق درمان</string>
+    <string name="CenterUsersFragmentEdit">ویرایش کاربر</string>
+    <string name="CenterUsersFragmentEnter">ورود به کاربری</string>
+
+    <string name="CenterUsersFragmentEmpty">هنوز کاربری برای این مرکز ثبت نشده است.</string>
+
     /*
     ---------- Documents Fragment ----------
     */
@@ -776,6 +792,22 @@
     */
 
     <string name="RoomUsersFragmentTitle">کاربران اتاق درمانی</string>
+
+    <string name="RoomUsersFragmentSerial">سریال</string>
+    <string name="RoomUsersFragmentName">نام مستعار</string>
+    <string name="RoomUsersFragmentMobile">موبایل</string>
+    <string name="RoomUsersFragmentType">موقعیت</string>
+    <string name="RoomUsersFragmentStatus">وضعیت</string>
+    <string name="RoomUsersFragmentAccepted">زمان پذیرش</string>
+    <string name="RoomUsersFragmentKicked">زمان تعلیق</string>
+
+    <string name="RoomUsersFragmentAccept">پذیرفتن</string>
+    <string name="RoomUsersFragmentKick">تعلیق</string>
+    <string name="RoomUsersFragmentCreateRoom">ساختن اتاق درمان</string>
+    <string name="RoomUsersFragmentEdit">ویرایش کاربر</string>
+    <string name="RoomUsersFragmentEnter">ورود به کاربری</string>
+
+    <string name="RoomUsersFragmentEmpty">هنوز کاربری برای این اتاق ثبت نشده است.</string>
 
     /*
     ---------- Samples Fragment ----------
@@ -956,6 +988,20 @@
     <string name="Cases3AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
 
     /*
+    ---------- Practices Adapter ----------
+    */
+
+    <string name="PracticesAdapterHeader">کاربرگ‌ها</string>
+
+    <string name="PracticesAdapterSerial">سریال</string>
+    <string name="PracticesAdapterName">عنوان</string>
+    <string name="PracticesAdapterDescription">محتوا</string>
+    <string name="PracticesAdapterAttachment">پیوست</string>
+    <string name="PracticesAdapterWork">تکلیف</string>
+
+    <string name="PracticesAdapterEmpty">هنوز کاربرگی ثبت نشده است.</string>
+
+    /*
     ---------- Samples2 Adapter ----------
     */
 
@@ -1021,12 +1067,6 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- ??? Adapter ----------
-    */
-
-
 
     /*
     ---------- ??? Adapter ----------
@@ -1169,27 +1209,7 @@
 
 
 
-    ///////////////
-    <string name="CenterUsersFragmentSerial">سریال</string>
-    <string name="CenterUsersFragmentName">نام</string>
-    <string name="CenterUsersFragmentMobile">شماره همراه</string>
-    <string name="CenterUsersFragmentType">موقعیت</string>
-    <string name="CenterUsersFragmentStatus">وضعیت</string>
-    <string name="CenterUsersFragmentAccepted">زمان پذیرش</string>
-    <string name="CenterUsersFragmentKicked">زمان تعلیق</string>
-    ///////////////
 
-    ///////////////
-    <string name="RoomUsersFragmentSerial">سریال</string>
-    <string name="RoomUsersFragmentName">نام</string>
-    <string name="RoomUsersFragmentMobile">شماره همراه</string>
-    <string name="RoomUsersFragmentType">موقعیت</string>
-    <string name="RoomUsersFragmentStatus">وضعیت</string>
-    <string name="RoomUsersFragmentAccepted">زمان پذیرش</string>
-    <string name="RoomUsersFragmentKicked">زمان تعلیق</string>
-    ///////////////
-
-    //////////////////////////////////////////////////////////////////////////////////////
 
     ///////////////
     <string name="BulkSampleFragmentEdit">ویرایش</string>
@@ -1198,14 +1218,10 @@
     <string name="BulkSampleFragmentReferencesHeader">اعضاء</string>
 
     ///////////////
-
-    ///////////////
     <string name="CaseFragmentSituation">مسئله</string>
 
     <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
     <string name="CaseFragmentReferencesHeader">مراجعین</string>
-
-    ///////////////
 
     ///////////////
     <string name="CenterFragmentRequest">درخواست پذیرش</string>
@@ -1258,15 +1274,6 @@
 
     <string name="SessionFragmentPsychologistsHeader">درمانگران</string>
     <string name="SessionFragmentReferencesHeader">مراجعین</string>
-
-    <string name="SessionFragmentPracticesHeader">کاربرگ‌ها</string>
-    <string name="SessionFragmentPracticesBodyEmpty">هنوز کاربرگی برای این جلسه ثبت نشده است.</string>
-
-    <string name="SessionFragmentPracticesSerial">سریال</string>
-    <string name="SessionFragmentPracticesName">عنوان</string>
-    <string name="SessionFragmentPracticesDescription">محتوا</string>
-    <string name="SessionFragmentPracticesAttachment">پیوست</string>
-    <string name="SessionFragmentPracticesPractice">تکلیف</string>
 
     ///////////////
 
