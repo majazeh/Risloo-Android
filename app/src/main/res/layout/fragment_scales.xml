@@ -20,8 +20,6 @@
             android:id="@+id/container_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -31,6 +29,7 @@
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -39,6 +38,8 @@
                 layout="@layout/component_main_index_search"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_28sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -48,6 +49,8 @@
                 android:id="@+id/index_containerLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_1sdp"
                 android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
