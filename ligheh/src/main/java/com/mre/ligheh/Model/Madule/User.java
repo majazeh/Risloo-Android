@@ -20,32 +20,61 @@ public class User extends Model {
         model = (UserModel) super.data;
     }
 
-    public static void list(HashMap<String, Object> data, HashMap<String, Object> header, Response response) throws IOException {
-        Model.list(endpoint, data, header, response, User.class);
+    public static void list(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.list(endpoint, data, header, response, UserModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public static void NoPersonalManagers(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.show(endpoint+ "?personal_clinic=no", data, header, response, UserModel.class);
+            Model.show(endpoint + "?personal_clinic=no", data, header, response, UserModel.class);
 
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) throws IOException {
-        Model.show(endpoint, data, header, response, User.class);
+    public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.show(endpoint, data, header, response, UserModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response) throws IOException {
-        Model.create(endpoint, data, header, response, User.class);
+    public static void dashboard(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.get(endpoint + "/" + data.get("user") + "/profile", data, header, response, UserModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void delete(HashMap<String, Object> data, HashMap<String, Object> header, Response response) throws IOException {
-        Model.delete(endpoint, data, header, response, User.class);
+
+    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.create(endpoint, data, header, response, UserModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    public static void register(HashMap<String, Object> data, HashMap<String, Object> header, Response response) throws IOException {
-        APIRequest.post("register", setData(data), setHeader(header), response, User.class);
+    public static void delete(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.delete(endpoint, data, header, response, UserModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void register(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            APIRequest.post("register", setData(data), setHeader(header), response, UserModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

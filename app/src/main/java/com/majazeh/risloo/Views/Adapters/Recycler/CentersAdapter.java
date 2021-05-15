@@ -14,7 +14,13 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCenterBinding;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersHolder> {
 
@@ -22,7 +28,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     private Activity activity;
 
     // Vars
-//    private ArrayList<Center> centers;
+    private ArrayList<TypeModel> centers;
 
     public CentersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -36,25 +42,24 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     @Override
     public void onBindViewHolder(@NonNull CentersHolder holder, int i) {
-//        Centers center = centers.get(i);
+        CenterModel center = (CenterModel) centers.get(i);
 
         detector(holder);
 
         listener(holder);
 
-        setData(holder);
+        setData(holder,center);
     }
 
     @Override
     public int getItemCount() {
-//        return centers.size();
-        return 4;
+        return centers.size();
     }
 
-//    public void setCenters(ArrayList<Center> centers) {
-//        this.centers = centers;
-//        notifyDataSetChanged();
-//    }
+    public void setCenters(ArrayList<TypeModel> centers) {
+        this.centers = centers;
+        notifyDataSetChanged();
+    }
 
     private void detector(CentersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -66,11 +71,15 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.centerFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(CentersHolder holder) {
-        holder.binding.nameTextView.setText("مرکز مشاوره ریلسو");
-        holder.binding.usernameTextView.setText("کلینیک شخصی");
+    private void setData(CentersHolder holder,CenterModel centerModel) {
+        try {
+            holder.binding.nameTextView.setText(centerModel.getDetail().getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        holder.binding.usernameTextView.setText(centerModel.getCenterType());
 
-        setAvatar(holder, "");
+        setAvatar(holder, centerModel.getManager().getAvatar().getMedium().getUrl());
     }
 
     private void setAvatar(CentersHolder holder, String url) {

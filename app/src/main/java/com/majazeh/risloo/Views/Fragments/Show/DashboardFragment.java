@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.UserManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,13 +14,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Main;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
+import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.SamplesAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import java.util.HashMap;
 
 public class DashboardFragment extends Fragment {
 
@@ -38,7 +47,7 @@ public class DashboardFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentDashboardBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -76,34 +85,56 @@ public class DashboardFragment extends Fragment {
     }
 
     private void setData() {
-//        samplesAdapter.setSamples(null);
-//        cases2Adapter.setCases(null);
-//        roomsAdapter.setRooms(null);
-//        centersAdapter.setCenters(null);
-        binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
-        binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
-        binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
-        binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
+        HashMap data = new HashMap();
+        data.put("user", ((MainActivity) requireActivity()).singleton.getUserId());
+        HashMap header = new HashMap();
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        User.dashboard(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                UserModel model = (UserModel) object;
 
-        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samplesAdapter.getItemCount() + ")");
-        binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
-        binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
-        binding.centersHeaderIncludeLayout.countTextView.setText("(" + centersAdapter.getItemCount() + ")");
+                requireActivity().runOnUiThread(() -> {
 
-        new Handler().postDelayed(() -> {
-            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
-            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                    samplesAdapter.setSamples(model.getSampleList().data());
+                    cases2Adapter.setCases(model.getCaseList().data());
+                    roomsAdapter.setRooms(model.getRoomList().data());
+                    centersAdapter.setCenters(model.getCenterList().data());
+                    new Handler().postDelayed(() -> {
+                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
-            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
-            binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
+                        binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+                        binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                    }, 1000);
+
+                    binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
+                    binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+                    binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+                    binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
+
+                    binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samplesAdapter.getItemCount() + ")");
+                    binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+                    binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+                    binding.centersHeaderIncludeLayout.countTextView.setText("(" + centersAdapter.getItemCount() + ")");
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
+
+
     }
 
     @Override

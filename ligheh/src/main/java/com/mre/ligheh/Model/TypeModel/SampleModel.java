@@ -17,7 +17,7 @@ public class SampleModel extends TypeModel {
     private String sampleScaleTitle;
     private String sampleDescription;
     private JSONArray items;
-    private JSONArray chain;
+    private String chain;
     private RoomModel SampleRoom;
     private JSONArray prerequisites;
     private JSONArray terms;
@@ -44,7 +44,7 @@ public class SampleModel extends TypeModel {
             if (!jsonObject.getJSONObject("scale").isNull("id"))
                 setSampleScaleId(jsonObject.getJSONObject("scale").getString("id"));
             if (!jsonObject.getJSONObject("scale").isNull("title"))
-                setSampleScaleId(jsonObject.getJSONObject("scale").getString("title"));
+                setSampleScaleTitle(jsonObject.getJSONObject("scale").getString("title"));
         }
         if (!jsonObject.isNull("description"))
             setSampleDescription(jsonObject.getString("description"));
@@ -55,10 +55,7 @@ public class SampleModel extends TypeModel {
             }
         }
         if (!jsonObject.isNull("chain")) {
-            chain = new JSONArray();
-            for (int i = 0; i < jsonObject.getJSONObject("chain").getJSONArray("list").length(); i++) {
-                chain.put(jsonObject.getJSONObject("chain").getJSONArray("list").get(i));
-            }
+                setChain(jsonObject.getString("chain"));
         }
         if (!jsonObject.isNull("prerequisites")) {
             prerequisites = new JSONArray();
@@ -188,11 +185,11 @@ public class SampleModel extends TypeModel {
         this.items = items;
     }
 
-    public JSONArray getChain() {
+    public String getChain() {
         return chain;
     }
 
-    public void setChain(JSONArray chain) {
+    public void setChain(String chain) {
         this.chain = chain;
     }
 

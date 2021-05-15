@@ -13,7 +13,11 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemRoomBinding;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder> {
 
@@ -21,7 +25,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     private Activity activity;
 
     // Vars
-//    private ArrayList<Room> rooms;
+    private ArrayList<TypeModel> rooms;
 
     public RoomsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,25 +39,24 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RoomsHolder holder, int i) {
-//        Rooms room = rooms.get(i);
+        RoomModel room = (RoomModel) rooms.get(i);
 
         detector(holder);
 
         listener(holder);
 
-        setData(holder);
+        setData(holder,room);
     }
 
     @Override
     public int getItemCount() {
-//        return rooms.size();
-        return 4;
+        return rooms.size();
     }
 
-//    public void setRooms(ArrayList<Room> rooms) {
-//        this.rooms = rooms;
-//        notifyDataSetChanged();
-//    }
+    public void setRooms(ArrayList<TypeModel> rooms) {
+        this.rooms = rooms;
+        notifyDataSetChanged();
+    }
 
     private void detector(RoomsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -65,10 +68,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.roomFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(RoomsHolder holder) {
-        holder.binding.nameTextView.setText("ریلسو");
+    private void setData(RoomsHolder holder,RoomModel roomModel) {
+        holder.binding.nameTextView.setText(roomModel.getRoomManager().getName());
 
-        setAvatar(holder, "");
+        setAvatar(holder, roomModel.getRoomManager().getAvatar().getMedium().getUrl());
     }
 
     private void setAvatar(RoomsHolder holder, String url) {

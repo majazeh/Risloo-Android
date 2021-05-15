@@ -25,6 +25,9 @@ public class UserModel extends TypeModel {
     private int userUpdated_at;
     private AvatarModel avatar;
     private List centerList;
+    private List roomList;
+    private List caseList;
+    private List sampleList;
 
     public UserModel() {
         super();
@@ -74,6 +77,33 @@ public class UserModel extends TypeModel {
             setCenterList(centers);
         } else {
             setCenterList(new List());
+        }
+        if (!jsonObject.isNull("rooms")) {
+            List rooms = new List();
+            for (int i = 0; i < jsonObject.getJSONArray("rooms").length(); i++) {
+                rooms.add(new RoomModel(jsonObject.getJSONArray("rooms").getJSONObject(i)));
+            }
+            setRoomList(rooms);
+        } else {
+            setRoomList(new List());
+        }
+        if (!jsonObject.isNull("cases")) {
+            List cases = new List();
+            for (int i = 0; i < jsonObject.getJSONArray("cases").length(); i++) {
+                cases.add(new CaseModel(jsonObject.getJSONArray("cases").getJSONObject(i)));
+            }
+            setCaseList(cases);
+        } else {
+            setCaseList(new List());
+        }
+        if (!jsonObject.isNull("samples")) {
+            List samples = new List();
+            for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++) {
+                samples.add(new SampleModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
+            }
+            setSampleList(samples);
+        } else {
+            setSampleList(new List());
         }
     }
 
@@ -219,6 +249,30 @@ public class UserModel extends TypeModel {
 
     public void setCreator(UserModel creator) {
         this.creator = creator;
+    }
+
+    public List getRoomList() {
+        return roomList;
+    }
+
+    public void setRoomList(List roomList) {
+        this.roomList = roomList;
+    }
+
+    public List getCaseList() {
+        return caseList;
+    }
+
+    public void setCaseList(List caseList) {
+        this.caseList = caseList;
+    }
+
+    public List getSampleList() {
+        return sampleList;
+    }
+
+    public void setSampleList(List sampleList) {
+        this.sampleList = sampleList;
     }
 
     @Override

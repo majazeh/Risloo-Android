@@ -29,6 +29,13 @@ public class Singleton {
         return "";
     }
 
+    public String getUserId() {
+        if (!sharedPreferences.getString("userId", "").equals("")) {
+            return sharedPreferences.getString("userId", "");
+        }
+        return "";
+    }
+
     public boolean getAuth() {
         return sharedPreferences.getBoolean("auth", true);
     }
@@ -215,6 +222,7 @@ public class Singleton {
 
     public void logout() {
         editor.remove("token");
+        editor.remove("userId");
         editor.remove("auth");
         editor.remove("notification");
         editor.remove("name");

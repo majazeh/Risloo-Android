@@ -14,6 +14,7 @@ import android.widget.EditText;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
@@ -51,6 +52,10 @@ public class AuthActivity extends AppCompatActivity {
         initializer();
 
         ExtendOnFailureException.activity = this;
+
+        if (!singleton.getToken().equals("")){
+            IntentManager.main(this);
+        }
     }
 
     private void decorator() {
@@ -93,9 +98,10 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     public void login(AuthModel object) {
-        UserModel user = ((AuthModel) object).getUser();
+        UserModel user = object.getUser();
         loadingDialog.dismiss();
-        if (((AuthModel) object).getToken() != null) singleton.editor.putString("token", ((AuthModel) object).getToken());
+        if (object.getToken() != null) singleton.editor.putString("token", object.getToken());
+        if (user.getUserId() != null) singleton.editor.putString("userId", user.getUserId());
         if (user.getName() != null) singleton.editor.putString("name", user.getName());
         if (user.getUsername() != null) singleton.editor.putString("username", user.getUsername());
         if (user.getBirthday() != null) singleton.editor.putString("birthday", user.getBirthday());

@@ -12,6 +12,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCase2Binding;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Holder> {
 
@@ -19,7 +23,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
     private Activity activity;
 
     // Vars
-//    private ArrayList<Case> cases;
+    private ArrayList<TypeModel> cases;
 
     public Cases2Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -33,25 +37,24 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
     @Override
     public void onBindViewHolder(@NonNull Cases2Holder holder, int i) {
-//        Cases case = cases.get(i);
+        CaseModel caseModel = (CaseModel) cases.get(i);
 
         detector(holder);
 
         listener(holder);
 
-        setData(holder);
+        setData(holder,caseModel);
     }
 
     @Override
     public int getItemCount() {
-//        return cases.size();
-        return 4;
+        return cases.size();
     }
 
-//    public void setCases(ArrayList<Case> cases) {
-//        this.cases = cases;
-//        notifyDataSetChanged();
-//    }
+    public void setCases(ArrayList<TypeModel> cases) {
+        this.cases = cases;
+        notifyDataSetChanged();
+    }
 
     private void detector(Cases2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -63,10 +66,10 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.caseFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(Cases2Holder holder) {
-        holder.binding.serialTextView.setText("RS96666DQ");
-        holder.binding.referenceTextView.setText("حسن حسینی");
-        holder.binding.dateTextView.setText("سه شنبه 19 اسفند 99");
+    private void setData(Cases2Holder holder,CaseModel caseModel) {
+        holder.binding.serialTextView.setText(caseModel.getCaseId());
+        holder.binding.referenceTextView.setText(caseModel.getCaseManager().getName());
+        holder.binding.dateTextView.setText(String.valueOf(caseModel.getCaseCreated_at()));
         holder.binding.sessionCountTextView.setText("1 جلسه");
     }
 

@@ -7,14 +7,14 @@ import org.json.JSONException;
 
 public class SampleForm {
     private JSONArray items;
-    private JSONArray chain;
+    private String chain;
     private JSONArray prerequisites;
     private String description;
     private JSONArray sampleForm;
     private JSONArray currentForm;
     private int position = 0;
 
-    public SampleForm(JSONArray items, @Nullable JSONArray chain, JSONArray prerequisites, String description) {
+    public SampleForm(JSONArray items, @Nullable String chain, JSONArray prerequisites, String description) {
         this.items = items;
         if (chain != null)
             this.chain = chain;
