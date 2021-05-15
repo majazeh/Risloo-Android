@@ -81,7 +81,6 @@ public class Singleton {
         }
         return "";
     }
-
     public String getMoney() {
         if (!sharedPreferences.getString("money", "").equals("")) {
             return sharedPreferences.getString("money", "");
@@ -131,6 +130,7 @@ public class Singleton {
         return "";
     }
 
+
     public String getPrivateKey() {
         if (!sharedPreferences.getString("private_key", "").equals("")) {
             return sharedPreferences.getString("private_key", "");
@@ -166,6 +166,7 @@ public class Singleton {
         return "";
     }
 
+
     public String getDuration() {
         if (!sharedPreferences.getString("duration", "").equals("")) {
             return sharedPreferences.getString("duration", "");
@@ -200,7 +201,6 @@ public class Singleton {
         }
         return -1;
     }
-
     public boolean getCreateCase() {
         return sharedPreferences.getBoolean("createCase", true);
     }
@@ -211,6 +211,39 @@ public class Singleton {
 
     public boolean getEndScheduleTime() {
         return sharedPreferences.getBoolean("endScheduleTime", false);
+    }
+
+    public void logout() {
+        editor.remove("token");
+        editor.remove("auth");
+        editor.remove("notification");
+        editor.remove("name");
+        editor.remove("username");
+        editor.remove("education");
+        editor.remove("birthday");
+        editor.remove("email");
+        editor.remove("mobile");
+        editor.remove("money");
+        editor.remove("status");
+        editor.remove("type");
+        editor.remove("gender");
+        editor.remove("avatar");
+        editor.remove("password");
+        editor.remove("public_key");
+        editor.remove("private_key");
+        editor.remove("owner");
+        editor.remove("description");
+        editor.remove("start_date");
+        editor.remove("start_time");
+        editor.remove("duration");
+        editor.remove("manager");
+        editor.remove("psychology");
+        editor.remove("address");
+        editor.remove("progress");
+        editor.remove("createCase");
+        editor.remove("bulkSession");
+        editor.remove("endScheduleTime");
+        editor.apply();
     }
 
 }

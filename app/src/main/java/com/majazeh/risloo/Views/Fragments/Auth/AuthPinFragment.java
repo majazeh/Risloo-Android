@@ -118,7 +118,7 @@ public class AuthPinFragment extends Fragment {
         clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                doWork("verification");
+//                doWork("verification");
             }
 
             @Override
@@ -249,10 +249,11 @@ public class AuthPinFragment extends Fragment {
 
         if (method.equals("pin")) {
             // TODO : call work method and place pin as it's input
-        } else if (method.equals("verification")) {
-            // TODO : call work method and place pin as it's input
-            showTimer(true);
         }
+//        else if (method.equals("verification")) {
+//            // TODO : call work method and place pin as it's input
+//            showTimer(true);
+//        }
     }
 
     @Override

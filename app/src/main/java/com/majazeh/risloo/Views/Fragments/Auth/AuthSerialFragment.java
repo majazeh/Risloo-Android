@@ -37,7 +37,7 @@ public class AuthSerialFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentAuthSerialBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -96,9 +96,23 @@ public class AuthSerialFragment extends Fragment {
         ClickManager.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardLinkTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            // TODO : call logout method
+            ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+            HashMap header = new HashMap();
+            header.put("Authorization", "Bearer " + ((AuthActivity) requireActivity()).singleton.getToken());
+            Auth.logout(new HashMap<>(), header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    ((AuthActivity) requireActivity()).singleton.logout();
+                    ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment);
+                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                }
 
-            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment);
+                @Override
+                public void onFailure(String response) {
+
+                }
+            });
+
         }).widget(binding.logoutLinkTextView.getRoot());
     }
 
@@ -128,7 +142,7 @@ public class AuthSerialFragment extends Fragment {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
-                if (((AuthModel) object).getUser()==null) {
+                if (((AuthModel) object).getUser() == null) {
                     Bundle extras = new Bundle();
                     extras.putString("key", model.getKey());
                     extras.putString("callback", model.getCallback());
@@ -140,7 +154,7 @@ public class AuthSerialFragment extends Fragment {
                             });
                             break;
                     }
-                }else{
+                } else {
                     //TODO : go to next activity
                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                     getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show());
