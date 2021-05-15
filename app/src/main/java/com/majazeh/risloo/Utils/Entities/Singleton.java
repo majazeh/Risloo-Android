@@ -208,6 +208,11 @@ public class Singleton {
         }
         return -1;
     }
+
+    public boolean getEnter() {
+        return sharedPreferences.getBoolean("enter", true);
+    }
+
     public boolean getCreateCase() {
         return sharedPreferences.getBoolean("createCase", true);
     }

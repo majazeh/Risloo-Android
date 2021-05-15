@@ -12,7 +12,6 @@
     tools:context=".Views.Fragments.Show.MeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -29,7 +28,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/info_constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/_12sdp"
@@ -53,29 +51,18 @@
                     android:layout_width="@dimen/_86sdp"
                     android:layout_height="@dimen/_86sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/background_imageView"
+                    app:layout_constraintBottom_toBottomOf="@id/background_imageView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/background_imageView" />
+                    app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
                 <include
-                    android:id="@+id/edit_textView"
-                    layout="@layout/component_main_button_rect_mid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_6sdp"
-                    app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintLeft_toRightOf="@id/enter_imageView"
-                    app:layout_constraintBottom_toBottomOf="@+id/avatar_includeLayout" />
-
-                <include
-                    android:id="@+id/enter_imageView"
+                    android:id="@+id/edit_imageView"
                     layout="@layout/component_main_button_oval_mid"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/edit_textView"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@+id/edit_textView" />
+                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
+                    app:layout_constraintLeft_toLeftOf="parent" />
 
                 <TextView
                     android:id="@+id/name_textView"
@@ -88,8 +75,8 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
-                    app:layout_constraintStart_toStartOf="@+id/avatar_includeLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout"
+                    app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+                    app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />
 
                 <ImageView
@@ -101,9 +88,9 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_badge_check_solid"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/name_textView"
-                    app:layout_constraintStart_toEndOf="@+id/name_textView"
-                    app:layout_constraintTop_toTopOf="@+id/name_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/name_textView"
+                    app:layout_constraintStart_toEndOf="@id/name_textView"
+                    app:layout_constraintTop_toTopOf="@id/name_textView"
                     app:tint="@color/Blue500"
                     tools:visibility="visible" />
 
@@ -118,8 +105,8 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toStartOf="@+id/name_textView"
-                    app:layout_constraintTop_toBottomOf="@+id/name_textView"
+                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintTop_toBottomOf="@id/name_textView"
                     tools:text="شناسه کاربری" />
 
                 <ImageView
@@ -129,9 +116,9 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_graduation_cap_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/education_textView"
-                    app:layout_constraintStart_toStartOf="@+id/username_textView"
-                    app:layout_constraintTop_toTopOf="@+id/education_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/education_textView"
+                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintTop_toTopOf="@id/education_textView"
                     app:tint="@color/Gray500" />
 
                 <TextView
@@ -146,8 +133,8 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/education_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/username_textView"
+                    app:layout_constraintStart_toEndOf="@id/education_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/username_textView"
                     tools:text="مدرک تحصیلی" />
 
                 <ImageView
@@ -159,9 +146,9 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_calendar_alt_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/birthday_textView"
-                    app:layout_constraintStart_toEndOf="@+id/education_textView"
-                    app:layout_constraintTop_toTopOf="@+id/birthday_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/birthday_textView"
+                    app:layout_constraintStart_toEndOf="@id/education_textView"
+                    app:layout_constraintTop_toTopOf="@id/birthday_textView"
                     app:layout_goneMarginStart="0dp"
                     app:tint="@color/Gray500" />
 
@@ -177,9 +164,16 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/birthday_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/username_textView"
+                    app:layout_constraintStart_toEndOf="@id/birthday_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/username_textView"
                     tools:text="تاریخ تولد" />
+
+                <androidx.constraintlayout.widget.Barrier
+                    android:id="@+id/barrier"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:barrierDirection="bottom"
+                    app:constraint_referenced_ids="education_imageView, education_textView, birthday_imageView, birthday_textView" />
 
                 <ImageView
                     android:id="@+id/email_imageView"
@@ -189,9 +183,9 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_envelope_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/email_textView"
-                    app:layout_constraintStart_toStartOf="@+id/education_imageView"
-                    app:layout_constraintTop_toTopOf="@+id/email_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/email_textView"
+                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintTop_toTopOf="@id/email_textView"
                     app:tint="@color/Gray500" />
 
                 <TextView
@@ -206,8 +200,8 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/email_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/barrier"
+                    app:layout_constraintStart_toEndOf="@id/email_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/barrier"
                     tools:text="ایمیل" />
 
                 <ImageView
@@ -219,9 +213,9 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_phone_light"
-                    app:layout_constraintBottom_toBottomOf="@+id/mobile_textView"
-                    app:layout_constraintStart_toEndOf="@+id/email_textView"
-                    app:layout_constraintTop_toTopOf="@+id/mobile_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/mobile_textView"
+                    app:layout_constraintStart_toEndOf="@id/email_textView"
+                    app:layout_constraintTop_toTopOf="@id/mobile_textView"
                     app:layout_goneMarginStart="0dp"
                     app:tint="@color/Gray500" />
 
@@ -237,16 +231,37 @@
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toEndOf="@+id/mobile_imageView"
-                    app:layout_constraintTop_toBottomOf="@+id/barrier"
-                    tools:text="شماره همراه" />
+                    app:layout_constraintStart_toEndOf="@id/mobile_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/barrier"
+                    tools:text="موبایل" />
 
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/barrier"
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/education_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:barrierDirection="bottom"
-                    app:constraint_referenced_ids="education_imageView,education_textView,birthday_imageView,birthday_textView" />
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="education_imageView, education_textView" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/birthday_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="birthday_imageView, birthday_textView" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/email_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="email_imageView, email_textView" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/mobile_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="mobile_imageView, mobile_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

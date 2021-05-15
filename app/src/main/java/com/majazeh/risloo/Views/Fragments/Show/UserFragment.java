@@ -42,17 +42,16 @@ public class UserFragment extends Fragment {
     }
 
     private void initializer() {
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.UserFragmentEdit), getResources().getColor(R.color.Gray500));
-
+        InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
         InitManager.imgResTint(requireActivity(), binding.enterImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Blue600);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
             binding.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
         } else {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
             binding.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
         }
     }
@@ -65,7 +64,7 @@ public class UserFragment extends Fragment {
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editUserFragment)).widget(binding.editTextView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editUserFragment)).widget(binding.editImageView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
@@ -73,6 +72,8 @@ public class UserFragment extends Fragment {
     }
 
     private void setData() {
+        // Todo : Place Code Here And set them to the below conditions
+
         if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         } else {
@@ -86,42 +87,47 @@ public class UserFragment extends Fragment {
         }
 
         if (((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
-            binding.educationTextView.setVisibility(View.GONE);
-            binding.educationImageView.setVisibility(View.GONE);
+            binding.educationGroup.setVisibility(View.GONE);
         } else {
+            binding.educationGroup.setVisibility(View.VISIBLE);
             binding.educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
         }
 
         if (((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-            binding.birthdayTextView.setVisibility(View.GONE);
-            binding.birthdayImageView.setVisibility(View.GONE);
+            binding.birthdayGroup.setVisibility(View.GONE);
         } else {
+            binding.birthdayGroup.setVisibility(View.VISIBLE);
             binding.birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
         }
 
         if (((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-            binding.emailTextView.setVisibility(View.GONE);
-            binding.emailImageView.setVisibility(View.GONE);
+            binding.emailGroup.setVisibility(View.GONE);
         } else {
+            binding.emailGroup.setVisibility(View.VISIBLE);
             binding.emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
         }
 
         if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            binding.mobileTextView.setVisibility(View.GONE);
-            binding.mobileImageView.setVisibility(View.GONE);
+            binding.mobileGroup.setVisibility(View.GONE);
         } else {
+            binding.mobileGroup.setVisibility(View.VISIBLE);
             binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
         }
 
-        if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+        }
 
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        if (!((MainActivity) requireActivity()).singleton.getEnter()) {
+            binding.enterImageView.getRoot().setVisibility(View.GONE);
+        } else {
+            binding.enterImageView.getRoot().setVisibility(View.VISIBLE);
         }
     }
 

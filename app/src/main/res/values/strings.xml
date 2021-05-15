@@ -1260,10 +1260,6 @@
     ///////////////
 
     ///////////////
-    <string name="MeFragmentEdit">ویرایش</string>
-    ///////////////
-
-    ///////////////
     <string name="SessionFragmentEdit">ویرایش</string>
 
     <string name="SessionFragmentReportHeader">گزارش</string>
@@ -1275,10 +1271,6 @@
     <string name="SessionFragmentPsychologistsHeader">درمانگران</string>
     <string name="SessionFragmentReferencesHeader">مراجعین</string>
 
-    ///////////////
-
-    ///////////////
-    <string name="UserFragmentEdit">ویرایش</string>
     ///////////////
 
 </resources>
