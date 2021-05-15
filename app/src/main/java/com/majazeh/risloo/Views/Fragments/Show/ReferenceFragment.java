@@ -23,13 +23,13 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases3Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples3Adapter;
-import com.majazeh.risloo.databinding.FragmentRoomUserBinding;
+import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.squareup.picasso.Picasso;
 
-public class RoomUserFragment extends Fragment {
+public class ReferenceFragment extends Fragment {
 
     // Binding
-    private FragmentRoomUserBinding binding;
+    private FragmentReferenceBinding binding;
 
     // Adapters
     private RoomsAdapter roomsAdapter;
@@ -38,12 +38,12 @@ public class RoomUserFragment extends Fragment {
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager roomsLayoutManager, casesLayoutManager, samplesLayoutManager;
+    private LinearLayoutManager roomsLayoutManager, cases3LayoutManager, samples3LayoutManager;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentRoomUserBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentReferenceBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -63,16 +63,16 @@ public class RoomUserFragment extends Fragment {
         itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
 
         roomsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        casesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        cases3LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        samples3LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        binding.roomsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferenceFragmentRoomsHeader));
+        binding.roomsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomsAdapterHeader));
         binding.casesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases3AdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples3AdapterHeader));
 
         InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, roomsLayoutManager);
-        InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration2, casesLayoutManager);
-        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samplesLayoutManager);
+        InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration2, cases3LayoutManager);
+        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samples3LayoutManager);
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -85,6 +85,8 @@ public class RoomUserFragment extends Fragment {
     }
 
     private void setData() {
+        // Todo : Place Code Here And set them to the below conditions
+
         if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         } else {
@@ -98,34 +100,32 @@ public class RoomUserFragment extends Fragment {
         }
 
         if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            binding.mobileTextView.setVisibility(View.GONE);
-            binding.mobileImageView.setVisibility(View.GONE);
+            binding.mobileGroup.setVisibility(View.GONE);
         } else {
+            binding.mobileGroup.setVisibility(View.VISIBLE);
             binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
         }
 
-        if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
-//        roomsAdapter.setRoom(null);
-//        cases3Adapter.setCase(null);
-//        samples3Adapter.setSample(null);
+//        roomsAdapter.setRooms(null);
+//        cases3Adapter.setCases(null);
+//        samples3Adapter.setSamples(null);
         binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
         binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
 
-        String dataSize = "5";
-        binding.roomsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.casesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+        binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
+        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -138,7 +138,7 @@ public class RoomUserFragment extends Fragment {
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

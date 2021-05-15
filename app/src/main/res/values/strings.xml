@@ -921,12 +921,6 @@
     <string name="CenterFragmentStatusKicked">رد شد</string>
 
     /*
-    ---------- CenterUser Fragment ----------
-    */
-
-    <string name="CenterUserFragmentTitle">کاربر مرکز درمانی</string>
-
-    /*
     ---------- Dashboard Fragment ----------
     */
 
@@ -944,16 +938,16 @@
     <string name="MeFragmentTitle">حساب من</string>
 
     /*
+    ---------- Reference Fragment ----------
+    */
+
+    <string name="ReferenceFragmentTitle">کاربر</string>
+
+    /*
     ---------- Room Fragment ----------
     */
 
     <string name="RoomFragmentTitle">اتاق درمانی</string>
-
-    /*
-    ---------- RoomUser Fragment ----------
-    */
-
-    <string name="RoomUserFragmentTitle">کاربر اتاق درمانی</string>
 
     /*
     ---------- Sample Fragment ----------
@@ -1241,26 +1235,12 @@
 
 
 
-    ///////////////
+
 
     <string name="BulkSampleFragmentEdit">ویرایش</string>
     <string name="BulkSampleFragmentLink">ثبت نام</string>
 
     <string name="BulkSampleFragmentReferencesHeader">اعضاء</string>
-
-    ///////////////
-
-    <string name="CaseFragmentSituation">مسئله</string>
-
-    <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
-    <string name="CaseFragmentReferencesHeader">مراجعین</string>
-
-    ///////////////
-
-    <string name="ReferenceFragmentRoomsHeader">اتاق‌های درمان</string>
-    <string name="ReferenceFragmentRoomsBodyEmpty">هنوز اتاق درمانی برای این کاربر ثبت نشده است.</string>
-
-    ///////////////
 
     ///////////////
 
@@ -1278,6 +1258,11 @@
     <string name="SampleFragmentFormAnswer">گویه‌ها</string>
 
     ///////////////
+
+    <string name="CaseFragmentSituation">مسئله</string>
+
+    <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
+    <string name="CaseFragmentReferencesHeader">مراجعین</string>
 
     ///////////////
 

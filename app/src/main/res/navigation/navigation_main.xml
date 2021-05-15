@@ -442,9 +442,9 @@
 
     <fragment
         android:id="@+id/referenceFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Show.CenterUserFragment"
-        android:label="@string/CenterUserFragmentTitle"
-        tools:layout="@layout/fragment_center_user" >
+        android:name="com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment"
+        android:label="@string/ReferenceFragmentTitle"
+        tools:layout="@layout/fragment_reference" >
         <action
             android:id="@+id/action_referenceFragment_to_caseFragment"
             app:destination="@id/caseFragment" />
