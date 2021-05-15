@@ -252,6 +252,18 @@
     </fragment>
 
     <fragment
+        android:id="@+id/centerSchedulesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment"
+        android:label="@string/CenterSchedulesFragmentTitle"
+        tools:layout="@layout/fragment_center_schedules" />
+
+    <fragment
+        android:id="@+id/roomSchedulesFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment"
+        android:label="@string/RoomSchedulesFragmentTitle"
+        tools:layout="@layout/fragment_room_schedules" />
+
+    <fragment
         android:id="@+id/centerUsersFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment"
         android:label="@string/CenterUsersFragmentTitle"

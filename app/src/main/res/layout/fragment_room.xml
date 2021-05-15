@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/White"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
@@ -12,7 +12,6 @@
     tools:context=".Views.Fragments.Show.RoomFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -29,7 +28,6 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/info_constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:paddingBottom="@dimen/_12sdp"
@@ -38,11 +36,11 @@
                 <ImageView
                     android:id="@+id/background_imageView"
                     android:layout_width="0dp"
-                    android:layout_height="@dimen/_64sdp"
+                    android:layout_height="@dimen/_84sdp"
                     android:layout_margin="@dimen/_1sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/gra_2sdp_solid_blue100_blue50_border_2dp_gray200"
+                    android:background="@drawable/gra_2sdp_solid_blue100_white_border_2dp_gray200"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
@@ -53,18 +51,28 @@
                     android:layout_width="@dimen/_86sdp"
                     android:layout_height="@dimen/_86sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/background_imageView"
+                    app:layout_constraintBottom_toBottomOf="@id/background_imageView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/background_imageView" />
+                    app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
                 <include
                     android:id="@+id/users_imageView"
                     layout="@layout/component_main_button_oval_mid"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
+                    app:layout_constraintLeft_toRightOf="@id/schedules_imageView" />
+
+                <include
+                    android:id="@+id/schedules_imageView"
+                    layout="@layout/component_main_button_oval_mid"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintBottom_toBottomOf="@+id/avatar_includeLayout" />
+                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
+                    app:layout_constraintLeft_toLeftOf="parent" />
 
                 <TextView
                     android:id="@+id/name_textView"
@@ -77,8 +85,8 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
-                    app:layout_constraintStart_toStartOf="@+id/avatar_includeLayout"
-                    app:layout_constraintTop_toBottomOf="@+id/avatar_includeLayout"
+                    app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+                    app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />
 
                 <ImageView
@@ -90,9 +98,9 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_badge_check_solid"
                     android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@+id/name_textView"
-                    app:layout_constraintStart_toEndOf="@+id/name_textView"
-                    app:layout_constraintTop_toTopOf="@+id/name_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/name_textView"
+                    app:layout_constraintStart_toEndOf="@id/name_textView"
+                    app:layout_constraintTop_toTopOf="@id/name_textView"
                     app:tint="@color/Blue500"
                     tools:visibility="visible" />
 
@@ -106,8 +114,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/info_cardView"
-            app:layout_constraintTop_toBottomOf="@+id/info_cardView" />
+            app:layout_constraintStart_toStartOf="@id/info_cardView"
+            app:layout_constraintTop_toBottomOf="@id/info_cardView" />
 
         <include
             android:id="@+id/search_includeLayout"
@@ -115,9 +123,9 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintLeft_toRightOf="@+id/add_schedule_imageView"
-            app:layout_constraintRight_toRightOf="@+id/header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/header_includeLayout" />
+            app:layout_constraintLeft_toRightOf="@id/add_schedule_imageView"
+            app:layout_constraintRight_toRightOf="@id/info_cardView"
+            app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
 
         <include
             android:id="@+id/add_schedule_imageView"
@@ -125,21 +133,22 @@
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/search_includeLayout"
-            app:layout_constraintLeft_toRightOf="@+id/add_imageView"
+            app:layout_constraintBottom_toBottomOf="@id/search_includeLayout"
+            app:layout_constraintLeft_toRightOf="@id/add_case_imageView"
             app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
-            app:layout_constraintTop_toTopOf="@+id/search_includeLayout" />
+            app:layout_constraintTop_toTopOf="@id/search_includeLayout" />
 
         <include
-            android:id="@+id/add_imageView"
+            android:id="@+id/add_case_imageView"
             layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
-            android:layout_marginRight="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/add_schedule_imageView"
-            app:layout_constraintLeft_toLeftOf="@+id/info_cardView"
+            android:layout_marginRight="@dimen/_4sdp"
+            app:layout_goneMarginRight="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="@id/search_includeLayout"
+            app:layout_constraintLeft_toLeftOf="@id/info_cardView"
             app:layout_constraintRight_toLeftOf="@id/add_schedule_imageView"
-            app:layout_constraintTop_toTopOf="@+id/add_schedule_imageView" />
+            app:layout_constraintTop_toTopOf="@id/search_includeLayout" />
 
         <include
             android:id="@+id/cases_shimmerLayout"
@@ -149,7 +158,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
             tools:visibility="gone" />
 
         <include
@@ -160,7 +169,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/search_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

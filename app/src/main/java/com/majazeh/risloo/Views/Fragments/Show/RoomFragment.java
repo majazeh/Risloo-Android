@@ -66,26 +66,29 @@ public class RoomFragment extends Fragment {
 
         handler = new Handler();
 
+        InitManager.imgResTint(requireActivity(), binding.schedulesImageView.getRoot(), R.drawable.ic_user_clock_light, R.color.Blue600);
         InitManager.imgResTint(requireActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
 
-        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomFragmentCasesHeader));
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
-        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addCaseImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.imgResTint(requireActivity(), binding.addScheduleImageView.getRoot(), R.drawable.ic_calendar_plus_light, R.color.Green700);
         InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            binding.schedulesImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
             binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
 
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
+            binding.schedulesImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
             binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
 
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -96,6 +99,8 @@ public class RoomFragment extends Fragment {
                 IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
+
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.roomSchedulesFragment)).widget(binding.schedulesImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment)).widget(binding.usersImageView.getRoot());
 
@@ -128,39 +133,46 @@ public class RoomFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseFragment)).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseFragment)).widget(binding.addCaseImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment)).widget(binding.addScheduleImageView.getRoot());
     }
 
     private void setData() {
+        // Todo : Place Code Here And set them to the below conditions
+
         if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         } else {
             binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
         }
 
-        if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
 
-//        cases2Adapter.setCase(null);
-        binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+        if (!((MainActivity) requireActivity()).singleton.getEnter()) {
+            binding.schedulesImageView.getRoot().setVisibility(View.GONE);
+            binding.usersImageView.getRoot().setVisibility(View.GONE);
+        } else {
+            binding.schedulesImageView.getRoot().setVisibility(View.VISIBLE);
+            binding.usersImageView.getRoot().setVisibility(View.VISIBLE);
+        }
 
-        String dataSize = "5";
-        binding.headerIncludeLayout.countTextView.setText("(" + dataSize + ")");
+//        cases2Adapter.setCases(null);
+        binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+        binding.headerIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

@@ -913,6 +913,13 @@
 
     <string name="CenterFragmentTitle">مرکز درمانی</string>
 
+    <string name="CenterFragmentStatusRequest">درخواست پذیرش</string>
+    <string name="CenterFragmentStatusOwner">شما مدیر این مرکز درمان هستید</string>
+    <string name="CenterFragmentStatusReference">شما مراجع این مرکز درمان هستید</string>
+    <string name="CenterFragmentStatusAccepted">پذیرفته شد</string>
+    <string name="CenterFragmentStatusAwaiting">در انتظار</string>
+    <string name="CenterFragmentStatusKicked">رد شد</string>
+
     /*
     ---------- CenterUser Fragment ----------
     */
@@ -976,6 +983,14 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
+    ---------- Cases2 Adapter ----------
+    */
+
+    <string name="Cases2AdapterHeader">پرونده‌ها</string>
+
+    <string name="Cases2AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
+
+    /*
     ---------- Cases3 Adapter ----------
     */
 
@@ -1000,6 +1015,14 @@
     <string name="PracticesAdapterWork">تکلیف</string>
 
     <string name="PracticesAdapterEmpty">هنوز کاربرگی ثبت نشده است.</string>
+
+    /*
+    ---------- Rooms Adapter ----------
+    */
+
+    <string name="RoomsAdapterHeader">اتاق‌های درمان</string>
+
+    <string name="RoomsAdapterEmpty">هنوز اتاق درمانی ثبت نشده است.</string>
 
     /*
     ---------- Samples2 Adapter ----------
@@ -1211,40 +1234,36 @@
 
 
 
+
+
+
+
+
+
+
     ///////////////
+
     <string name="BulkSampleFragmentEdit">ویرایش</string>
     <string name="BulkSampleFragmentLink">ثبت نام</string>
 
     <string name="BulkSampleFragmentReferencesHeader">اعضاء</string>
 
     ///////////////
+
     <string name="CaseFragmentSituation">مسئله</string>
 
     <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
     <string name="CaseFragmentReferencesHeader">مراجعین</string>
 
     ///////////////
-    <string name="CenterFragmentRequest">درخواست پذیرش</string>
-    <string name="CenterFragmentOwner">شما مدیر این مرکز درمان هستید</string>
-    <string name="CenterFragmentKicked">رد شد</string>
-    <string name="CenterFragmentAwaiting">در انتظار</string>
-    <string name="CenterFragmentAccepted">پذیرفته شد</string>
 
-    <string name="CenterFragmentRoomsHeader">اتاق‌های درمان</string>
-    ///////////////
-
-    ///////////////
     <string name="ReferenceFragmentRoomsHeader">اتاق‌های درمان</string>
     <string name="ReferenceFragmentRoomsBodyEmpty">هنوز اتاق درمانی برای این کاربر ثبت نشده است.</string>
+
     ///////////////
 
     ///////////////
-    <string name="RoomFragmentSession">جلسه</string>
 
-    <string name="RoomFragmentCasesHeader">پرونده‌ها</string>
-    ///////////////
-
-    ///////////////
     <string name="SampleFragmentClose">بستن آزمون</string>
     <string name="SampleFragmentFill">پرکردن</string>
     <string name="SampleFragmentScore">نمره‌دهی</string>
@@ -1257,9 +1276,11 @@
     <string name="SampleFragmentFormGeneral">عمومی</string>
     <string name="SampleFragmentFormPrerequisite">پیش نیاز‌ها</string>
     <string name="SampleFragmentFormAnswer">گویه‌ها</string>
+
     ///////////////
 
     ///////////////
+
     <string name="SessionFragmentEdit">ویرایش</string>
 
     <string name="SessionFragmentReportHeader">گزارش</string>
