@@ -42,8 +42,6 @@ public class SampleFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         setData();
@@ -64,9 +62,6 @@ public class SampleFragment extends Fragment {
         fieldsPrerequisiteLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         fieldsAnswerLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.Gray500));
-        InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.Gray500));
-
         binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
@@ -76,25 +71,11 @@ public class SampleFragment extends Fragment {
         InitManager.recyclerView(binding.fieldsAnswerRecyclerVIew, itemDecoration, fieldsAnswerLayoutManager);
     }
 
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-            binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-        } else {
-            binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-        }
-    }
-
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.primaryTextView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork("primary")).widget(binding.primaryTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.secondaryTextView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork("secondary")).widget(binding.secondaryTextView.getRoot());
 
         binding.fieldsEditableCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -120,26 +101,7 @@ public class SampleFragment extends Fragment {
         binding.referenceTextView.setText("دکتر مسعود جان\u200Cبزرگی");
         binding.statusTextView.setText("باز");
 
-        switch (binding.statusTextView.getText().toString()) {
-            case "seald":
-                // TODO ; Place code Here
-                break;
-            case "open":
-                // TODO ; Place code Here
-                break;
-            case "closed":
-                // TODO ; Place code Here
-                break;
-            case "scoring":
-                // TODO ; Place code Here
-                break;
-            case "creating_files":
-                // TODO ; Place code Here
-                break;
-            case "done":
-                // TODO ; Place code Here
-                break;
-        }
+        setStatus(binding.statusTextView.getText().toString());
 
 //        profilesAdapter.setProfiles(null);
 //        fieldsGeneralAdapter.setFields(null);
@@ -166,6 +128,106 @@ public class SampleFragment extends Fragment {
             binding.fieldsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.fieldsAnswerRecyclerVIew.setVisibility(View.VISIBLE);
         }, 1000);
+    }
+
+    private void doWork(String button) {
+        if (button.equals("primary")) {
+            switch (binding.statusTextView.getText().toString()) {
+                case "seald":
+                    // TODO ; Place code Here
+                    break;
+                case "open":
+                    // TODO ; Place code Here
+                    break;
+                case "closed":
+                    // TODO ; Place code Here
+                    break;
+                case "scoring":
+                    // TODO ; Place code Here
+                    break;
+                case "creating_files":
+                    // TODO ; Place code Here
+                    break;
+                case "done":
+                    // TODO ; Place code Here
+                    break;
+            }
+        } else {
+            switch (binding.statusTextView.getText().toString()) {
+                case "seald":
+                    // TODO ; Place code Here
+                    break;
+                case "open":
+                    // TODO ; Place code Here
+                    break;
+                case "closed":
+                    // TODO ; Place code Here
+                    break;
+                case "scoring":
+                    // TODO ; Place code Here
+                    break;
+                case "creating_files":
+                    // TODO ; Place code Here
+                    break;
+                case "done":
+                    // TODO ; Place code Here
+                    break;
+            }
+        }
+    }
+
+    private void setStatus(String status) {
+        switch (status) {
+            case "seald":
+            case "open":
+                InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.Gray500));
+                InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.Gray500));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+                    binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+                } else {
+                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+                    binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+                }
+
+                binding.scoringConstraintLayout.setVisibility(View.GONE);
+                break;
+            case "closed":
+                InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentOpen), getResources().getColor(R.color.Blue600));
+                InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                    binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+                } else {
+                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+                    binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+                }
+
+                binding.scoringConstraintLayout.setVisibility(View.GONE);
+                break;
+            case "scoring":
+                // TODO : Place the right condition
+
+                binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
+                break;
+            case "creating_files":
+            case "done":
+                InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Blue600));
+                InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                    binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+                } else {
+                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+                    binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+                }
+
+                binding.scoringConstraintLayout.setVisibility(View.GONE);
+                break;
+        }
     }
 
     @Override

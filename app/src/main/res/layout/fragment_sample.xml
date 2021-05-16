@@ -113,6 +113,49 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scoring_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout"
+            tools:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/scoring_progressBar"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:theme="@style/ProgressBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/Widget.AppCompat.ProgressBar"/>
+
+            <TextView
+                android:id="@+id/scoring_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/SampleFragmentScoring"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoring_progressBar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
         <include
             android:id="@+id/profiles_header_includeLayout"
             layout="@layout/component_main_index_header"
@@ -120,7 +163,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@id/scoring_constraintLayout" />
 
         <include
             android:id="@+id/profiles_shimmerLayout"

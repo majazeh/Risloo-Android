@@ -960,9 +960,13 @@
 
     <string name="SampleFragmentTitle">نمونه</string>
 
+    <string name="SampleFragmentOpen">باز کردن آزمون</string>
     <string name="SampleFragmentClose">بستن آزمون</string>
-    <string name="SampleFragmentFill">پرکردن</string>
     <string name="SampleFragmentScore">نمره‌دهی</string>
+    <string name="SampleFragmentFill">پرکردن</string>
+    <string name="SampleFragmentProfiles">خروجی‌ها</string>
+
+    <string name="SampleFragmentScoring">در حال نمره‌دهی …</string>
 
     <string name="SampleFragmentEditable">قابلیت ویرایش فرم</string>
 
