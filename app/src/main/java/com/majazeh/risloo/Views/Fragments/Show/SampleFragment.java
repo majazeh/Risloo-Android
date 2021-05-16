@@ -68,7 +68,7 @@ public class SampleFragment extends Fragment {
         InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.Gray500));
 
         binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
-        binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFormHeader));
+        binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
         InitManager.recyclerView(binding.profilesRecyclerView, itemDecoration, profilesLayoutManager);
         InitManager.recyclerView(binding.fieldsGeneralRecyclerView, itemDecoration, fieldsGeneralLayoutManager);
@@ -114,9 +114,32 @@ public class SampleFragment extends Fragment {
     }
 
     private void setData() {
+        // Todo : Place Code Here
+
         binding.nameTextView.setText("آزمون ریون");
         binding.referenceTextView.setText("دکتر مسعود جان\u200Cبزرگی");
         binding.statusTextView.setText("باز");
+
+        switch (binding.statusTextView.getText().toString()) {
+            case "seald":
+                // TODO ; Place code Here
+                break;
+            case "open":
+                // TODO ; Place code Here
+                break;
+            case "closed":
+                // TODO ; Place code Here
+                break;
+            case "scoring":
+                // TODO ; Place code Here
+                break;
+            case "creating_files":
+                // TODO ; Place code Here
+                break;
+            case "done":
+                // TODO ; Place code Here
+                break;
+        }
 
 //        profilesAdapter.setProfiles(null);
 //        fieldsGeneralAdapter.setFields(null);
@@ -127,9 +150,8 @@ public class SampleFragment extends Fragment {
         binding.fieldsPrerequisiteRecyclerView.setAdapter(fieldsPrerequisiteAdapter);
         binding.fieldsAnswerRecyclerVIew.setAdapter(fieldsAnswerAdapter);
 
-        String dataSize = "5";
-        binding.profilesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.fieldsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.profilesHeaderIncludeLayout.countTextView.setText("(" + profilesAdapter.getItemCount() + ")");
+        binding.fieldsHeaderIncludeLayout.countTextView.setText("(" + (fieldsGeneralAdapter.getItemCount() + fieldsPrerequisiteAdapter.getItemCount() + fieldsAnswerAdapter.getItemCount()) + ")");
 
         new Handler().postDelayed(() -> {
             binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -143,7 +165,7 @@ public class SampleFragment extends Fragment {
 
             binding.fieldsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.fieldsAnswerRecyclerVIew.setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

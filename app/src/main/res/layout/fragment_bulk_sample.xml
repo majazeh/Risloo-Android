@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/White"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
@@ -12,7 +12,6 @@
     tools:context=".Views.Fragments.Show.BulkSampleFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -53,7 +52,7 @@
                 android:textColor="@color/Blue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
-                app:layout_constraintEnd_toStartOf="@+id/serial_imageView"
+                app:layout_constraintEnd_toStartOf="@id/serial_imageView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="سریال" />
 
@@ -79,7 +78,7 @@
                 android:textColor="@color/Gray700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
-                app:layout_constraintStart_toEndOf="@+id/avatars_includeLayout"
+                app:layout_constraintStart_toEndOf="@id/avatars_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/serial_textView"
                 tools:text="مرکز درمانی" />
 
@@ -105,9 +104,9 @@
                 android:contentDescription="@string/AppImageContent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_clipboard_light"
-                app:layout_constraintTop_toTopOf="@id/case_textView"
                 app:layout_constraintBottom_toBottomOf="@id/case_textView"
                 app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
+                app:layout_constraintTop_toTopOf="@id/case_textView"
                 app:tint="@color/Gray500" />
 
             <TextView
@@ -123,7 +122,7 @@
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/case_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/avatars_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/avatars_includeLayout"
                 tools:text="پرونده" />
 
             <TextView
@@ -140,7 +139,7 @@
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toStartOf="@id/edit_textView"
                 app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
-                app:layout_constraintTop_toBottomOf="@+id/case_textView"
+                app:layout_constraintTop_toBottomOf="@id/case_textView"
                 tools:text="وضعیت" />
 
             <include
@@ -172,8 +171,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/info_constraintLayout" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
         <include
             android:id="@+id/references_shimmerLayout"
@@ -183,7 +182,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/references_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/references_header_includeLayout"
             tools:visibility="gone" />
 
         <include
@@ -194,7 +193,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/references_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/references_header_includeLayout"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -202,7 +201,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="references_shimmerLayout,references_singleLayout" />
+            app:constraint_referenced_ids="references_shimmerLayout, references_singleLayout" />
 
         <include
             android:id="@+id/scales_header_includeLayout"
@@ -210,8 +209,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/references_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/references_barrier" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/references_barrier" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/scales_containerLayout"
@@ -220,9 +219,9 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:padding="@dimen/_1sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/scales_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/scales_header_includeLayout">
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/scales_header_includeLayout">
 
             <include
                 android:id="@+id/scales_shimmerLayout"
@@ -254,7 +253,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/scales_headerLayout"
+                app:layout_constraintTop_toBottomOf="@id/scales_headerLayout"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -265,8 +264,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/scales_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/scales_containerLayout" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/scales_containerLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/samples_containerLayout"
@@ -277,9 +276,9 @@
             android:padding="@dimen/_1sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/samples_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/samples_header_includeLayout">
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/samples_header_includeLayout">
 
             <include
                 android:id="@+id/samples_shimmerLayout"
@@ -311,7 +310,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/samples_headerLayout"
+                app:layout_constraintTop_toBottomOf="@id/samples_headerLayout"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

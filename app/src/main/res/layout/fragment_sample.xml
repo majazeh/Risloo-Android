@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/White"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
@@ -12,7 +12,6 @@
     tools:context=".Views.Fragments.Show.SampleFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -42,7 +41,7 @@
                 android:fontFamily="@font/dana_bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="سریال" />
+                tools:text="مقیاس" />
 
             <ImageView
                 android:id="@+id/reference_imageView"
@@ -68,7 +67,7 @@
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                app:layout_constraintStart_toEndOf="@+id/reference_imageView"
+                app:layout_constraintStart_toEndOf="@id/reference_imageView"
                 app:layout_constraintTop_toBottomOf="@id/name_textView"
                 tools:text="مراجع" />
 
@@ -86,7 +85,7 @@
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toStartOf="@id/secondary_textView"
                 app:layout_constraintStart_toStartOf="@id/reference_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/reference_textView"
+                app:layout_constraintTop_toBottomOf="@id/reference_textView"
                 tools:text="وضعیت" />
 
             <include
@@ -120,8 +119,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/info_constraintLayout" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
         <include
             android:id="@+id/profiles_shimmerLayout"
@@ -131,7 +130,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profiles_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/profiles_header_includeLayout"
             tools:visibility="gone" />
 
         <androidx.recyclerview.widget.RecyclerView
@@ -139,11 +138,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:overScrollMode="never"
+            android:layoutDirection="rtl"
             android:visibility="gone"
             app:layout_constrainedHeight="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profiles_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/profiles_header_includeLayout"
+            tools:layout_marginBottom="@dimen/_8sdp"
+            tools:layout_marginEnd="@dimen/_12sdp"
+            tools:layout_marginStart="@dimen/_12sdp"
+            tools:layout_marginTop="@dimen/_8sdp"
             tools:listitem="@layout/single_item_profile"
             tools:itemCount="4"
             tools:visibility="visible" />
@@ -153,7 +157,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="profiles_shimmerLayout,profiles_recyclerView" />
+            app:constraint_referenced_ids="profiles_shimmerLayout, profiles_recyclerView" />
 
         <include
             android:id="@+id/fields_header_includeLayout"
@@ -161,8 +165,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/profiles_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/profiles_barrier" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/profiles_barrier" />
 
         <CheckBox
             android:id="@+id/fields_editable_checkBox"
@@ -173,16 +177,16 @@
             android:paddingEnd="@dimen/_6sdp"
             android:checked="false"
             android:gravity="center"
-            android:text="@string/SampleFragmentEdit"
+            android:text="@string/SampleFragmentEditable"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintBottom_toBottomOf="@+id/fields_header_includeLayout"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/fields_header_includeLayout" />
+            app:layout_constraintBottom_toBottomOf="@id/fields_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/fields_header_includeLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/fields_general_constraintLayout"
@@ -190,9 +194,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/fields_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/fields_header_includeLayout">
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/fields_header_includeLayout">
 
             <TextView
                 android:id="@+id/fields_general_textView"
@@ -201,7 +205,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:gravity="start"
-                android:text="@string/SampleFragmentFormGeneral"
+                android:text="@string/SampleFragmentFieldSubGeneral"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray700"
@@ -219,7 +223,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fields_general_textView"
+                app:layout_constraintTop_toBottomOf="@id/fields_general_textView"
                 tools:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -229,9 +233,14 @@
                 android:overScrollMode="never"
                 android:visibility="gone"
                 app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fields_general_textView"
+                app:layout_constraintTop_toBottomOf="@id/fields_general_textView"
+                tools:layout_marginBottom="@dimen/_8sdp"
+                tools:layout_marginEnd="@dimen/_12sdp"
+                tools:layout_marginStart="@dimen/_12sdp"
+                tools:layout_marginTop="@dimen/_8sdp"
                 tools:listitem="@layout/single_item_field"
                 tools:itemCount="4"
                 tools:visibility="visible" />
@@ -244,9 +253,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/fields_general_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/fields_general_constraintLayout">
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/fields_general_constraintLayout">
 
             <TextView
                 android:id="@+id/fields_prerequisite_textView"
@@ -255,7 +264,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:gravity="start"
-                android:text="@string/SampleFragmentFormPrerequisite"
+                android:text="@string/SampleFragmentFieldSubPrerequisite"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray700"
@@ -273,7 +282,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fields_prerequisite_textView"
+                app:layout_constraintTop_toBottomOf="@id/fields_prerequisite_textView"
                 tools:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -283,9 +292,14 @@
                 android:overScrollMode="never"
                 android:visibility="gone"
                 app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fields_prerequisite_textView"
+                app:layout_constraintTop_toBottomOf="@id/fields_prerequisite_textView"
+                tools:layout_marginBottom="@dimen/_8sdp"
+                tools:layout_marginEnd="@dimen/_12sdp"
+                tools:layout_marginStart="@dimen/_12sdp"
+                tools:layout_marginTop="@dimen/_8sdp"
                 tools:listitem="@layout/single_item_field"
                 tools:itemCount="4"
                 tools:visibility="visible" />
@@ -300,9 +314,9 @@
             android:layout_marginBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/fields_prerequisite_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/fields_prerequisite_constraintLayout">
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/fields_prerequisite_constraintLayout">
 
             <TextView
                 android:id="@+id/fields_answer_textView"
@@ -311,7 +325,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:gravity="start"
-                android:text="@string/SampleFragmentFormAnswer"
+                android:text="@string/SampleFragmentFieldSubAnswer"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray700"
@@ -329,7 +343,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fields_answer_textView"
+                app:layout_constraintTop_toBottomOf="@id/fields_answer_textView"
                 tools:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
@@ -339,9 +353,14 @@
                 android:overScrollMode="never"
                 android:visibility="gone"
                 app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/fields_answer_textView"
+                app:layout_constraintTop_toBottomOf="@id/fields_answer_textView"
+                tools:layout_marginBottom="@dimen/_8sdp"
+                tools:layout_marginEnd="@dimen/_12sdp"
+                tools:layout_marginStart="@dimen/_12sdp"
+                tools:layout_marginTop="@dimen/_8sdp"
                 tools:listitem="@layout/single_item_field"
                 tools:itemCount="4"
                 tools:visibility="visible" />

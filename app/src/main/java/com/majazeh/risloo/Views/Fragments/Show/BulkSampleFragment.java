@@ -39,7 +39,7 @@ public class BulkSampleFragment extends Fragment {
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager referencesLayoutManager, scalesLayoutManager, samplesLayoutManager;
+    private LinearLayoutManager referencesLayoutManager, scales2LayoutManager, samples4LayoutManager;
 
     @Nullable
     @Override
@@ -66,21 +66,21 @@ public class BulkSampleFragment extends Fragment {
         itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
 
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        scalesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        scales2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        samples4LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         InitManager.imgResTint(requireActivity(), binding.editTextView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
         InitManager.imgResTint(requireActivity(), binding.linkTextView.buttonImageView, R.drawable.ic_copy_light, R.color.Gray500);
 
         InitManager.txtTextColor(binding.linkTextView.buttonTextView, getResources().getString(R.string.BulkSampleFragmentLink), getResources().getColor(R.color.Gray500));
 
-        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.BulkSampleFragmentReferencesHeader));
+        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.scalesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
 
         InitManager.recyclerView(binding.referencesSingleLayout.recyclerView, itemDecoration, referencesLayoutManager);
-        InitManager.recyclerView(binding.scalesSingleLayout.recyclerView, itemDecoration2, scalesLayoutManager);
-        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samplesLayoutManager);
+        InitManager.recyclerView(binding.scalesSingleLayout.recyclerView, itemDecoration2, scales2LayoutManager);
+        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samples4LayoutManager);
     }
 
     private void detector() {
@@ -119,13 +119,21 @@ public class BulkSampleFragment extends Fragment {
     }
 
     private void setData() {
+        // Todo : Place Code Here
+
         binding.serialTextView.setText("BS966666W");
         binding.centerTextView.setText("کلینیک شخصی");
         binding.psychologyTextView.setText("محمد رضا سالاری فر");
         binding.caseTextView.setText("بدون پرونده");
         binding.statusTextView.setText("باز");
 
-        if (((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+            binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
+            binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
+
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+        } else {
             binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
             binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
@@ -133,25 +141,18 @@ public class BulkSampleFragment extends Fragment {
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
-        } else {
-            binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-            binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
         }
 
-//        referencesAdapter.setReference(null);
-//        scales2Adapter.setScale(null);
-//        samples4Adapter.setSample(null);
+//        referencesAdapter.setReferences(null);
+//        scales2Adapter.setScales(null);
+//        samples4Adapter.setSamples(null);
         binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
         binding.scalesSingleLayout.recyclerView.setAdapter(scales2Adapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples4Adapter);
 
-        String dataSize = "5";
-        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.scalesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
+        binding.scalesHeaderIncludeLayout.countTextView.setText("(" + scales2Adapter.getItemCount() + ")");
+        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples4Adapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -164,7 +165,7 @@ public class BulkSampleFragment extends Fragment {
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override
