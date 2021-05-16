@@ -907,6 +907,8 @@
 
     <string name="CaseFragmentTitle">پرونده</string>
 
+    <string name="CaseFragmentSituationHeader">مسئله</string>
+
     /*
     ---------- Center Fragment ----------
     */
@@ -961,6 +963,16 @@
 
     <string name="SessionFragmentTitle">جلسه</string>
 
+    <string name="SessionFragmentReportHeader">گزارش</string>
+    
+    <string name="SessionFragmentReportAdd">ثبت گزارش</string>
+    <string name="SessionFragmentReportEdit">ویرایش گزارش</string>
+
+    <string name="SessionFragmentReportBodyPrivacy">تنها درمان‌گران این پرونده قادر به ثبت و مشاهده گزارش می‌باشند.</string>
+    <string name="SessionFragmentReportBodyEmpty">هنوز گزارشی برای این جلسه ثبت نشده است.</string>
+
+    <string name="SessionFragmentEdit">ویرایش</string>
+
     /*
     ---------- Treasury Fragment ----------
     */
@@ -997,6 +1009,12 @@
     <string name="Cases3AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
 
     /*
+    ---------- Psychologists Adapter ----------
+    */
+
+    <string name="PsychologistsAdapterHeader">درمانگران</string>
+
+    /*
     ---------- Practices Adapter ----------
     */
 
@@ -1009,6 +1027,12 @@
     <string name="PracticesAdapterWork">تکلیف</string>
 
     <string name="PracticesAdapterEmpty">هنوز کاربرگی ثبت نشده است.</string>
+
+    /*
+    ---------- References Adapter ----------
+    */
+
+    <string name="ReferencesAdapterHeader">مراجعین</string>
 
     /*
     ---------- Rooms Adapter ----------
@@ -1235,7 +1259,7 @@
 
 
 
-
+    ///////////////
 
     <string name="BulkSampleFragmentEdit">ویرایش</string>
     <string name="BulkSampleFragmentLink">ثبت نام</string>
@@ -1256,26 +1280,6 @@
     <string name="SampleFragmentFormGeneral">عمومی</string>
     <string name="SampleFragmentFormPrerequisite">پیش نیاز‌ها</string>
     <string name="SampleFragmentFormAnswer">گویه‌ها</string>
-
-    ///////////////
-
-    <string name="CaseFragmentSituation">مسئله</string>
-
-    <string name="CaseFragmentPsychologistsHeader">درمانگران</string>
-    <string name="CaseFragmentReferencesHeader">مراجعین</string>
-
-    ///////////////
-
-    <string name="SessionFragmentEdit">ویرایش</string>
-
-    <string name="SessionFragmentReportHeader">گزارش</string>
-    <string name="SessionFragmentReportAdd">ثبت گزارش</string>
-    <string name="SessionFragmentReportEdit">ویرایش گزارش</string>
-    <string name="SessionFragmentReportBodyPrivacy">تنها درمان‌گران این پرونده قادر به ثبت و مشاهده گزارش می‌باشند.</string>
-    <string name="SessionFragmentReportBodyEmpty">هنوز گزارشی برای این جلسه ثبت نشده است.</string>
-
-    <string name="SessionFragmentPsychologistsHeader">درمانگران</string>
-    <string name="SessionFragmentReferencesHeader">مراجعین</string>
 
     ///////////////
 

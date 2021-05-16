@@ -38,7 +38,7 @@ public class CaseFragment extends Fragment {
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager, sessionsLayoutManager, samplesLayoutManager;
+    private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager, sessions2LayoutManager, samples2LayoutManager;
 
     @Nullable
     @Override
@@ -67,11 +67,11 @@ public class CaseFragment extends Fragment {
 
         psychologistsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        sessionsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        sessions2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        samples2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentPsychologistsHeader));
-        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.CaseFragmentReferencesHeader));
+        binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
+        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.sessionsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Sessions2AdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples2AdapterHeader));
 
@@ -81,19 +81,19 @@ public class CaseFragment extends Fragment {
 
         InitManager.recyclerView(binding.psychologistsSingleLayout.recyclerView, itemDecoration, psychologistsLayoutManager);
         InitManager.recyclerView(binding.referencesSingleLayout.recyclerView, itemDecoration, referencesLayoutManager);
-        InitManager.recyclerView(binding.sessionsSingleLayout.recyclerView, itemDecoration2, sessionsLayoutManager);
-        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samplesLayoutManager);
+        InitManager.recyclerView(binding.sessionsSingleLayout.recyclerView, itemDecoration2, sessions2LayoutManager);
+        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samples2LayoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -107,24 +107,25 @@ public class CaseFragment extends Fragment {
     }
 
     private void setData() {
+        // Todo : Place Code Here
+
         binding.serialTextView.setText("RS966666DK");
         binding.descriptionTextView.setText("ﻟﻮرم اﯾﭙﺴﻮم متن ﺳﺎﺧﺘﮕﯽ ﺑﺎ ﺗﻮﻟﯿﺪ ﺳﺎدﮔﯽ ﻧﺎﻣﻔﻬﻮم از ﺻﻨﻌﺖ ﭼﺎپ، و ﺑﺎ اﺳﺘﻔﺎده از ﻃﺮاﺣﺎن ﮔﺮاﻓﯿﮏ اﺳﺖ، ﭼﺎﭘﮕﺮﻫﺎ و ﻣﺘﻮن ﺑﻠﮑﻪ روزنامه و مجله در ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربرهای متنوع با هدف بهبود ابزراهای کاربردی می\u200Cباشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می\u200Cطلبد.");
         binding.dateTextView.setText("شنبه 11 بهمن 99 ساعت 16:00");
 
-//        psychologistsAdapter.setPsychology(null);
-//        referencesAdapter.setReference(null);
-//        sessions2Adapter.setSession(null);
-//        samples2Adapter.setSample(null);
+//        psychologistsAdapter.setPsychologists(null);
+//        referencesAdapter.setReferences(null);
+//        sessions2Adapter.setSessions(null);
+//        samples2Adapter.setSamples(null);
         binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
         binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
         binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
 
-        String dataSize = "5";
-        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.sessionsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
+        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
+        binding.sessionsHeaderIncludeLayout.countTextView.setText("(" + sessions2Adapter.getItemCount() + ")");
+        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples2Adapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -140,7 +141,7 @@ public class CaseFragment extends Fragment {
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

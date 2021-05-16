@@ -38,7 +38,10 @@ public class SessionFragment extends Fragment {
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager, practicesLayoutManager, samplesLayoutManager;
+    private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager, practicesLayoutManager, samples2LayoutManager;
+
+    // Vars
+    private String report = "privacy";
 
     @Nullable
     @Override
@@ -68,39 +71,39 @@ public class SessionFragment extends Fragment {
         psychologistsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         practicesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        samples2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.SessionFragmentEdit), getResources().getColor(R.color.Gray500));
-        InitManager.txtTextColor(binding.reportActionTextView.getRoot(), getResources().getString(R.string.SessionFragmentReportAdd), getResources().getColor(R.color.Green700));
 
         binding.reportHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReportHeader));
-        binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentPsychologistsHeader));
-        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReferencesHeader));
+        binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
+        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.practicesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples2AdapterHeader));
 
+        InitManager.imgResTint(requireActivity(), binding.referencesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.imgResTint(requireActivity(), binding.practicesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.imgResTint(requireActivity(), binding.samplesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
 
         InitManager.recyclerView(binding.psychologistsSingleLayout.recyclerView, itemDecoration, psychologistsLayoutManager);
         InitManager.recyclerView(binding.referencesSingleLayout.recyclerView, itemDecoration, referencesLayoutManager);
         InitManager.recyclerView(binding.practicesSingleLayout.recyclerView, itemDecoration2, practicesLayoutManager);
-        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samplesLayoutManager);
+        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samples2LayoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-            binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
 
-            binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
 
-            binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
     }
 
@@ -110,31 +113,64 @@ public class SessionFragment extends Fragment {
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createReportFragment)).widget(binding.reportActionTextView.getRoot());
 
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment)).widget(binding.referencesAddImageView.getRoot());
+
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createPracticeFragment)).widget(binding.practicesAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment)).widget(binding.samplesAddImageView.getRoot());
     }
 
     private void setData() {
+        // Todo : Place Code Here
+
         binding.serialTextView.setText("SE966666D");
         binding.dateTextView.setText("شنبه 11 بهمن 99 ساعت 16:00");
         binding.durationTextView.setText("60 دقیقه");
         binding.statusTextView.setText("در انتظار تشکیل جلسه");
 
-//        psychologistsAdapter.setPsychology(null);
-//        referencesAdapter.setReference(null);
-//        practicesAdapter.setPractice(null);
-//        samples2Adapter.setSample(null);
+        switch (report) {
+            case "add":
+                binding.reportTextView.setText(getResources().getString(R.string.SessionFragmentReportBodyEmpty));
+
+                binding.reportActionTextView.getRoot().setText(getResources().getString(R.string.SessionFragmentReportAdd));
+                binding.reportActionTextView.getRoot().setTextColor(getResources().getColor(R.color.White));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
+                else
+                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
+                break;
+            case "edit":
+                binding.reportTextView.setText("ﻟﻮرم اﯾﭙﺴﻮم متن ﺳﺎﺧﺘﮕﯽ ﺑﺎ ﺗﻮﻟﯿﺪ ﺳﺎدﮔﯽ ﻧﺎﻣﻔﻬﻮم از ﺻﻨﻌﺖ ﭼﺎپ، و ﺑﺎ اﺳﺘﻔﺎده از ﻃﺮاﺣﺎن ﮔﺮاﻓﯿﮏ اﺳﺖ، ﭼﺎﭘﮕﺮﻫﺎ و ﻣﺘﻮن ﺑﻠﮑﻪ روزنامه و مجله در ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربرهای متنوع با هدف بهبود ابزراهای کاربردی می\u200Cباشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می\u200Cطلبد.");
+
+                binding.reportActionTextView.getRoot().setText(getResources().getString(R.string.SessionFragmentReportEdit));
+                binding.reportActionTextView.getRoot().setTextColor(getResources().getColor(R.color.Green600));
+
+                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+                else
+                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+                break;
+            case "privacy":
+                binding.reportTextView.setText(getResources().getString(R.string.SessionFragmentReportBodyPrivacy));
+
+                binding.reportActionTextView.getRoot().setVisibility(View.GONE);
+                break;
+        }
+
+//        psychologistsAdapter.setPsychologists(null);
+//        referencesAdapter.setReferences(null);
+//        practicesAdapter.setPractices(null);
+//        samples2Adapter.setSamples(null);
         binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
         binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
         binding.practicesSingleLayout.recyclerView.setAdapter(practicesAdapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
 
-        String dataSize = "5";
-        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.practicesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
-        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + dataSize + ")");
+        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
+        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
+        binding.practicesHeaderIncludeLayout.countTextView.setText("(" + practicesAdapter.getItemCount() + ")");
+        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples2Adapter.getItemCount() + ")");
 
         new Handler().postDelayed(() -> {
             binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -150,7 +186,7 @@ public class SessionFragment extends Fragment {
             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 2000);
+        }, 1000);
     }
 
     @Override

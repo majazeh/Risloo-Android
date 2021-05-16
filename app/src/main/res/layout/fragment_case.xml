@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:background="@color/White"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
@@ -12,7 +12,6 @@
     tools:context=".Views.Fragments.Show.CaseFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -53,7 +52,7 @@
                 android:textColor="@color/Blue700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
-                app:layout_constraintEnd_toStartOf="@+id/serial_imageView"
+                app:layout_constraintEnd_toStartOf="@id/serial_imageView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="سریال" />
 
@@ -77,13 +76,13 @@
                 android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:gravity="start"
-                android:text="@string/CaseFragmentSituation"
+                android:text="@string/CaseFragmentSituationHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_demi_bold"
-                app:layout_constraintStart_toEndOf="@+id/situation_imageView"
+                app:layout_constraintStart_toEndOf="@id/situation_imageView"
                 app:layout_constraintTop_toBottomOf="@id/serial_textView" />
 
             <TextView
@@ -99,7 +98,7 @@
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintStart_toStartOf="@id/situation_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/situation_textView"
+                app:layout_constraintTop_toBottomOf="@id/situation_textView"
                 tools:text="ﻟﻮرم اﯾﭙﺴﻮم متن ﺳﺎﺧﺘﮕﯽ ﺑﺎ ﺗﻮﻟﯿﺪ ﺳﺎدﮔﯽ ﻧﺎﻣﻔﻬﻮم از ﺻﻨﻌﺖ ﭼﺎپ، و ﺑﺎ اﺳﺘﻔﺎده از ﻃﺮاﺣﺎن ﮔﺮاﻓﯿﮏ اﺳﺖ، ﭼﺎﭘﮕﺮﻫﺎ و ﻣﺘﻮن ﺑﻠﮑﻪ روزنامه و مجله در ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربرهای متنوع با هدف بهبود ابزراهای کاربردی می‌باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می‌طلبد." />
 
             <ImageView
@@ -127,7 +126,7 @@
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintStart_toEndOf="@id/date_imageView"
-                app:layout_constraintTop_toBottomOf="@+id/description_textView"
+                app:layout_constraintTop_toBottomOf="@id/description_textView"
                 tools:text="تاریخ ساخت پرونده" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -138,8 +137,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@+id/info_constraintLayout" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
         <include
             android:id="@+id/psychologists_shimmerLayout"
@@ -149,7 +148,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/psychologists_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/psychologists_header_includeLayout"
             tools:visibility="gone" />
 
         <include
@@ -160,7 +159,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/psychologists_header_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/psychologists_header_includeLayout"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -168,7 +167,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="psychologists_shimmerLayout,psychologists_singleLayout" />
+            app:constraint_referenced_ids="psychologists_shimmerLayout, psychologists_singleLayout" />
 
         <include
             android:id="@+id/references_header_includeLayout"
@@ -176,17 +175,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/psychologists_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/psychologists_barrier" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/psychologists_barrier" />
 
         <include
             android:id="@+id/references_add_imageView"
             layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/references_header_includeLayout"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/references_header_includeLayout" />
+            app:layout_constraintBottom_toBottomOf="@id/references_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/references_header_includeLayout" />
 
         <include
             android:id="@+id/references_shimmerLayout"
@@ -196,7 +195,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/references_add_imageView"
+            app:layout_constraintTop_toBottomOf="@id/references_add_imageView"
             tools:visibility="gone" />
 
         <include
@@ -207,7 +206,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/references_add_imageView"
+            app:layout_constraintTop_toBottomOf="@id/references_add_imageView"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Barrier
@@ -215,7 +214,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:barrierDirection="bottom"
-            app:constraint_referenced_ids="references_shimmerLayout,references_singleLayout" />
+            app:constraint_referenced_ids="references_shimmerLayout, references_singleLayout" />
 
         <include
             android:id="@+id/sessions_header_includeLayout"
@@ -223,17 +222,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/references_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/references_barrier" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/references_barrier" />
 
         <include
             android:id="@+id/sessions_add_imageView"
             layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/sessions_header_includeLayout"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/sessions_header_includeLayout" />
+            app:layout_constraintBottom_toBottomOf="@id/sessions_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/sessions_header_includeLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/sessions_containerLayout"
@@ -242,9 +241,9 @@
             android:layout_marginTop="@dimen/_12sdp"
             android:padding="@dimen/_1sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/sessions_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/sessions_add_imageView">
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/sessions_add_imageView">
 
             <include
                 android:id="@+id/sessions_shimmerLayout"
@@ -276,7 +275,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/sessions_headerLayout"
+                app:layout_constraintTop_toBottomOf="@id/sessions_headerLayout"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -287,17 +286,17 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@+id/sessions_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/sessions_containerLayout" />
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/sessions_containerLayout" />
 
         <include
             android:id="@+id/samples_add_imageView"
             layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
-            app:layout_constraintBottom_toBottomOf="@+id/samples_header_includeLayout"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintTop_toTopOf="@+id/samples_header_includeLayout" />
+            app:layout_constraintBottom_toBottomOf="@id/samples_header_includeLayout"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/samples_header_includeLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/samples_containerLayout"
@@ -308,9 +307,9 @@
             android:padding="@dimen/_1sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@+id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@+id/samples_header_includeLayout"
-            app:layout_constraintTop_toBottomOf="@+id/samples_add_imageView">
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/samples_add_imageView">
 
             <include
                 android:id="@+id/samples_shimmerLayout"
@@ -342,7 +341,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/samples_headerLayout"
+                app:layout_constraintTop_toBottomOf="@id/samples_headerLayout"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
