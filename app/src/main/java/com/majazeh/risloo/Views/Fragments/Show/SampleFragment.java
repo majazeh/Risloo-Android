@@ -7,9 +7,12 @@ import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.content.res.AppCompatResources;
+import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,10 +20,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Adapters.Recycler.FieldsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
+
+import java.util.ArrayList;
 
 public class SampleFragment extends Fragment {
 
@@ -76,6 +82,24 @@ public class SampleFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> doWork("primary")).widget(binding.primaryTextView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> doWork("secondary")).widget(binding.secondaryTextView.getRoot());
+
+         binding.profilesTextView.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String type = parent.getItemAtPosition(position).toString();
+
+                // TODO : Place the specified url of the current type in the below method to download it
+
+                IntentManager.download(requireContext(), "");
+
+                binding.profilesTextView.selectSpinner.setSelection(binding.profilesTextView.selectSpinner.getAdapter().getCount());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
         binding.fieldsEditableCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -180,6 +204,9 @@ public class SampleFragment extends Fragment {
         switch (status) {
             case "seald":
             case "open":
+                binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
+                binding.profilesTextView.getRoot().setVisibility(View.GONE);
+
                 InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.Gray500));
                 InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.Gray500));
 
@@ -194,6 +221,9 @@ public class SampleFragment extends Fragment {
                 binding.scoringConstraintLayout.setVisibility(View.GONE);
                 break;
             case "closed":
+                binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
+                binding.profilesTextView.getRoot().setVisibility(View.GONE);
+
                 InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentOpen), getResources().getColor(R.color.Blue600));
                 InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White));
 
@@ -208,20 +238,37 @@ public class SampleFragment extends Fragment {
                 binding.scoringConstraintLayout.setVisibility(View.GONE);
                 break;
             case "scoring":
+                binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
+                binding.profilesTextView.getRoot().setVisibility(View.GONE);
+
                 // TODO : Place the right condition
 
                 binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
                 break;
             case "creating_files":
             case "done":
-                InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Blue600));
+                ArrayList<String> profiles = new ArrayList<>();
+
+                profiles.add("");
+                profiles.add("");
+                profiles.add("");
+                profiles.add("");
+
+                InitManager.customizedSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profiles, "profiles");
+
+                binding.primaryTextView.getRoot().setVisibility(View.GONE);
+                binding.profilesTextView.getRoot().setVisibility(View.VISIBLE);
+
+                InitManager.txtTextColor(binding.profilesTextView.selectTextView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Blue600));
                 InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White));
 
+                ImageViewCompat.setImageTintList(binding.profilesTextView.angleImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue600));
+
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+                    binding.profilesTextView.selectTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
                     binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
                 } else {
-                    binding.primaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+                    binding.profilesTextView.selectTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
                     binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
                 }
 

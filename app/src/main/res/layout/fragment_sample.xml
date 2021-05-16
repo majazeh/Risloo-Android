@@ -93,11 +93,11 @@
                 layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginLeft="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 app:layout_goneMarginEnd="@dimen/_8sdp"
                 app:layout_goneMarginTop="@dimen/_8sdp"
-                app:layout_constraintEnd_toStartOf="@id/primary_textView"
+                app:layout_constraintLeft_toRightOf="@id/buttons_barrier"
                 app:layout_constraintTop_toBottomOf="@id/reference_textView" />
 
             <include
@@ -105,11 +105,31 @@
                 layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
                 android:layout_marginTop="@dimen/_8sdp"
+                android:visibility="visible"
                 app:layout_goneMarginTop="@dimen/_8sdp"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/reference_textView" />
+
+            <include
+                android:id="@+id/profiles_textView"
+                layout="@layout/component_main_button_rect_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:visibility="gone"
+                app:layout_goneMarginTop="@dimen/_8sdp"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_textView" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/buttons_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="primary_textView, profiles_textView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

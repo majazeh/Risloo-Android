@@ -372,6 +372,55 @@ public class InitManager {
                 spinner.setSelection(adapter.getCount());
                 break;
             }
+            case "profiles": {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
+
+                    private TextView dropdownTextView;
+
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        return super.getView(position, convertView, viewGroup);
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_main, viewGroup, false);
+
+                        initializer(view);
+
+                        detector(view, position);
+
+                        setData(position);
+
+                        return view;
+                    }
+
+                    private void initializer(View view) {
+                        dropdownTextView = view.findViewById(R.id.item_textView);
+                    }
+
+                    private void detector(View view, int position) {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                            view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                        }
+                    }
+
+                    private void setData(int position) {
+                        dropdownTextView.setText(arrayList.get(position));
+                        dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+                    }
+
+                    @Override
+                    public int getCount() {
+                        return super.getCount() - 1;
+                    }
+
+                };
+
+                spinner.setAdapter(adapter);
+                spinner.setSelection(adapter.getCount());
+                break;
+            }
         }
     }
 
