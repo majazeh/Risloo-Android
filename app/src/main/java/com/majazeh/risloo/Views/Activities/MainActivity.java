@@ -127,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
+        InitManager.imgResTint(this, binding.contentIncludeLayout.enterImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.Gray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
 
         InitManager.customizedSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
@@ -137,6 +138,7 @@ public class MainActivity extends AppCompatActivity {
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.contentIncludeLayout.menuImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
+            binding.contentIncludeLayout.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
             binding.contentIncludeLayout.notificationImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
 
             binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
@@ -145,6 +147,10 @@ public class MainActivity extends AppCompatActivity {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.contentIncludeLayout.menuImageView.getRoot());
+
+        ClickManager.onClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.contentIncludeLayout.enterImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             // TODO : Place Code Here
