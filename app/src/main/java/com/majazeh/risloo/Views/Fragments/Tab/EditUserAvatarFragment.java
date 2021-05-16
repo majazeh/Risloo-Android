@@ -23,7 +23,11 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.databinding.FragmentEditUserAvatarBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class EditUserAvatarFragment extends Fragment {
 
@@ -115,8 +119,24 @@ public class EditUserAvatarFragment extends Fragment {
 
     private void doWork() {
         FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        HashMap data = new HashMap();
+        data.put("avatar",  FileManager.readFileFromCache(requireActivity(), "image"));
+        HashMap header = new HashMap();
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        Auth.changeAvatar(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                FileManager.deleteFileFromCache(requireActivity(), "image");
+            }
 
-        // TODO : Call Work Method
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
     }
 
     @Override

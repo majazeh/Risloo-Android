@@ -68,8 +68,8 @@ public class Auth extends Model {
     public static void editPassword(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(header, "Authorization")) {
-                if (has(data, "id")) {
-                    Model.put("users/" + data.get("id") + "/change-password", data, header, response, AuthModel.class);
+                if (has(data, "user")) {
+                    Model.put("users/" + data.get("user") + "/change-password", data, header, response, null);
                 } else {
                     Exceptioner.make(response,"آیدی را وارد کنید");
                 }

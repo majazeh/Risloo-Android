@@ -95,6 +95,7 @@ public class DashboardFragment extends Fragment {
                 UserModel model = (UserModel) object;
 
                 requireActivity().runOnUiThread(() -> {
+                 ((MainActivity) requireActivity()).login(model);
 
 
                     samplesAdapter.setSamples(model.getSampleList().data());

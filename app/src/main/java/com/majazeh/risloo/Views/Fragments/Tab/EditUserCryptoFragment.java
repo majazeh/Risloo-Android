@@ -115,8 +115,12 @@ public class EditUserCryptoFragment extends Fragment {
     private void doWork() {
         publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
         privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
-
-        // TODO : Call Work Method
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        ((MainActivity) requireActivity()).singleton.editor.putString("public_key", publicKey);
+        ((MainActivity) requireActivity()).singleton.editor.putString("private_key", privateKey);
+        ((MainActivity) requireActivity()).singleton.editor.apply();
+        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+        ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
     }
 
     @Override

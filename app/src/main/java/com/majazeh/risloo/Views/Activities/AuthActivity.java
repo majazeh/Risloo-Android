@@ -113,7 +113,7 @@ public class AuthActivity extends AppCompatActivity {
         String url = null;
         if (user.getAvatar() != null) url = user.getAvatar().getMedium().getUrl();
         if (url != null) singleton.editor.putString("avatar", url);
-        if (user.getPublic_key() != null) singleton.editor.putString("publicKey", user.getPublic_key());
+        if (user.getPublic_key() != null) singleton.editor.putString("public_key", user.getPublic_key());
         singleton.editor.apply();
         navigator(R.id.authSerialFragment);
     }

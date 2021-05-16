@@ -23,6 +23,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -43,6 +44,8 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -85,6 +88,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
 
         initializer();
+
+        ExtendOnFailureException.activity = this;
 
         detector();
 
@@ -287,6 +292,23 @@ public class MainActivity extends AppCompatActivity {
             navController.popBackStack();
         }
         navController.navigate(destinationId);
+    }
+
+    public void login(UserModel user) {
+        if (user.getUserId() != null) singleton.editor.putString("userId", user.getUserId());
+        if (user.getName() != null) singleton.editor.putString("name", user.getName());
+        if (user.getUsername() != null) singleton.editor.putString("username", user.getUsername());
+        if (user.getBirthday() != null) singleton.editor.putString("birthday", user.getBirthday());
+        if (user.getEmail() != null) singleton.editor.putString("email", user.getEmail());
+        if (user.getMobile() != null) singleton.editor.putString("mobile", user.getMobile());
+        if (user.getUserStatus() != null) singleton.editor.putString("status", user.getUserStatus());
+        if (user.getUserType() != null) singleton.editor.putString("type", user.getUserType());
+        if (user.getGender() != null) singleton.editor.putString("gender", user.getGender());
+        String url = null;
+        if (user.getAvatar() != null && user.getAvatar().getMedium()!=null ) url = user.getAvatar().getMedium().getUrl();
+        if (url != null) singleton.editor.putString("avatar", url);
+        if (user.getPublic_key() != null) singleton.editor.putString("public_key", user.getPublic_key());
+        singleton.editor.apply();
     }
 
     @Override

@@ -21,7 +21,7 @@ public class AuthModel extends TypeModel {
             setCallback(jsonObject.getString("callback"));
         if (!jsonObject.isNull("token"))
             setToken(jsonObject.getString("token"));
-        if (!jsonObject.isNull("token"))
+        if (jsonObject.isNull("key"))
             setUser(new UserModel(jsonObject));
     }
 

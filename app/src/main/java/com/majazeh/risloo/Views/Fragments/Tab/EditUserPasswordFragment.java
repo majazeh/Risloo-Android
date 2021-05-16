@@ -24,6 +24,10 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditUserPasswordBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
+
+import java.util.HashMap;
 
 public class EditUserPasswordFragment extends Fragment {
 
@@ -153,8 +157,26 @@ public class EditUserPasswordFragment extends Fragment {
 
     private void doWork() {
         password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        HashMap data = new HashMap();
+        data.put("user",  ((MainActivity) requireActivity()).singleton.getUserId());
+        //TODO: this line need to delete
+        data.put("password",  "111111");
+        data.put("new_password", password);
+        HashMap header = new HashMap();
+        header.put("Authorization","Bearer "+((MainActivity) requireActivity()).singleton.getToken());
+        Auth.editPassword(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+            }
 
-        // TODO : Call Work Method
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
     }
 
     @Override

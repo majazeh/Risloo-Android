@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.widget.Toast;
 
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.API.onFailureException;
 
@@ -55,6 +56,9 @@ public class ExtendOnFailureException extends onFailureException {
             if (activity instanceof AuthActivity) {
                 if (((AuthActivity) activity).loadingDialog.isVisible())
                     ((AuthActivity) activity).loadingDialog.dismiss();
+            }else if (activity instanceof MainActivity){
+                if (((MainActivity) activity).loadingDialog.isVisible())
+                    ((MainActivity) activity).loadingDialog.dismiss();
             }
         });
     }

@@ -16,9 +16,17 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.databinding.FragmentEditUserPersonalBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import java.util.HashMap;
 
 public class EditUserPersonalFragment extends Fragment {
 
@@ -29,12 +37,12 @@ public class EditUserPersonalFragment extends Fragment {
     private DateBottomSheet birthdayBottomSheet;
 
     // Vars
-    private String name = "", mobile = "", username = "", email = "", birthday = "", status ="active", type = "admin", gender = "male";
+    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "admin", gender = "male";
     private int year, month, day;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentEditUserPersonalBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -163,20 +171,20 @@ public class EditUserPersonalFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
+//            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
+//                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+//            }
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
-            if (binding.usernameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
+//            if (binding.usernameIncludeLayout.inputEditText.length() == 0) {
+//                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+//            }
 
-            if (binding.nameIncludeLayout.inputEditText.length() != 0 && binding.mobileIncludeLayout.inputEditText.length() != 0 && binding.usernameIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
+            if (binding.mobileIncludeLayout.inputEditText.length() != 0) {
+//                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView);
+//                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -269,8 +277,25 @@ public class EditUserPersonalFragment extends Fragment {
         mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         username = binding.usernameIncludeLayout.inputEditText.getText().toString().trim();
         email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        HashMap data = new HashMap<>();
+        data.put("name", name);
+        data.put("gender", gender);
+        HashMap header = new HashMap<>();
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        Auth.editProfile(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                ((MainActivity) requireActivity()).login(((AuthModel) object).getUser());
+                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+            }
 
-        // TODO : Call Work Method
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
     }
 
     @Override
