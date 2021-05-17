@@ -17,7 +17,11 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.BottomSheetLogoutBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
@@ -57,9 +61,24 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
         ClickManager.onDelayedClickListener(() -> {
             dismiss();
 
-            // TODO : Place Code Here
+            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-            IntentManager.auth(requireActivity());
+            HashMap header = new HashMap();
+            header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+
+            Auth.logout(new HashMap<>(), header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    ((MainActivity) requireActivity()).singleton.logOut();
+                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                    IntentManager.auth(requireActivity());
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    // Place Code if Needed
+                }
+            });
         }).widget(binding.entryButton);
     }
 

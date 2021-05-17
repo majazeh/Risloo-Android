@@ -30,9 +30,11 @@ public class ExtendEvent extends APIEvents {
             } else {
                 callback.onOK(response);
             }
+
             Model.request = false;
         } catch (IOException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | JSONException e) {
             e.printStackTrace();
         }
     }
+
 }

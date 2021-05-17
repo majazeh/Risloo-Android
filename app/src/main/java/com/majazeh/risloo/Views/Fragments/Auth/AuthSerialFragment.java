@@ -86,9 +86,9 @@ public class AuthSerialFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.serialEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
@@ -97,22 +97,23 @@ public class AuthSerialFragment extends Fragment {
 
         ClickManager.onClickListener(() -> {
             ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
             HashMap header = new HashMap();
             header.put("Authorization", "Bearer " + ((AuthActivity) requireActivity()).singleton.getToken());
+
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    ((AuthActivity) requireActivity()).singleton.logout();
-                    ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment);
+                    ((AuthActivity) requireActivity()).singleton.logOut();
                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                    ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null);
                 }
 
                 @Override
                 public void onFailure(String response) {
-
+                    // Place Code if Needed
                 }
             });
-
         }).widget(binding.logoutLinkTextView.getRoot());
     }
 
@@ -133,39 +134,41 @@ public class AuthSerialFragment extends Fragment {
     private void doWork() {
         serial = binding.serialEditText.getRoot().getText().toString().trim();
 
-        // TODO : call work method and place mobile as it's input
-        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        HashMap data = new HashMap();
-        data.put("authorized_key", serial);
-        Auth.auth(data, new HashMap<>(), new Response() {
-            @Override
-            public void onOK(Object object) {
-                AuthModel model = (AuthModel) object;
-                if (((AuthModel) object).getUser() == null) {
-                    Bundle extras = new Bundle();
-                    extras.putString("key", model.getKey());
-                    extras.putString("callback", model.getCallback());
-                    switch (model.getTheory()) {
-                        case "password":
-                            getActivity().runOnUiThread(() -> {
-                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                            });
-                            break;
-                    }
-                } else {
-                    //TODO : go to next activity
-                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                    getActivity().runOnUiThread(() -> Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show());
-                }
-            }
-
-            @Override
-            public void onFailure(String response) {
-
-            }
-        });
+//        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//
+//        HashMap data = new HashMap();
+//        data.put("authorized_key", serial);
+//
+//        Auth.auth(data, new HashMap<>(), new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                AuthModel model = (AuthModel) object;
+//                if (((AuthModel) object).getUser() == null) {
+//                    Bundle extras = new Bundle();
+//
+//                    extras.putString("key", model.getKey());
+//                    extras.putString("callback", model.getCallback());
+//
+//                    switch (model.getTheory()) {
+//                        case "password":
+//                            requireActivity().runOnUiThread(() -> {
+//                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+//                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+//                            });
+//                            break;
+//                    }
+//                } else {
+//                    //TODO : go to next activity
+//                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+//                    requireActivity().runOnUiThread(() -> Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                // Place Code if Needed
+//            }
+//        });
     }
 
     @Override

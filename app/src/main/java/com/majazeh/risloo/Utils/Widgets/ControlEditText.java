@@ -9,6 +9,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -47,6 +48,53 @@ public class ControlEditText {
 
         hideKeyboard(activity, editText);
     }
+
+    public void error(Activity activity, EditText editText, ConstraintLayout constraintLayout, TextView textView, String value) {
+        editText.clearFocus();
+        if (activity instanceof AuthActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+        } else if (activity instanceof MainActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
+
+        constraintLayout.setVisibility(View.VISIBLE);
+
+        textView.setText(value);
+
+        hideKeyboard(activity, editText);
+    }
+
+    public void check(Activity activity, EditText editText, ConstraintLayout constraintLayout, TextView textView) {
+        editText.clearFocus();
+        if (activity instanceof AuthActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        } else if (activity instanceof MainActivity) {
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        constraintLayout.setVisibility(View.GONE);
+
+        textView.setText("");
+
+        hideKeyboard(activity, editText);
+    }
+
+    private void hideKeyboard(Activity activity, EditText editText) {
+        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(editText.getWindowToken(), 0);
+    }
+
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
 
     public void error(Activity activity, EditText editText, ImageView imageView, TextView textView, String value) {
         editText.clearFocus();
@@ -182,11 +230,6 @@ public class ControlEditText {
 
         textView.setVisibility(View.GONE);
         textView.setText("");
-    }
-
-    private void hideKeyboard(Activity activity, EditText editText) {
-        InputMethodManager inputMethodManager = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
-        Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
 }

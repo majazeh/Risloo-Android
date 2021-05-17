@@ -11,6 +11,7 @@ import com.mre.ligheh.API.onFailureException;
 import java.util.HashMap;
 
 public class ExtendOnFailureException extends onFailureException {
+
     public static Activity activity;
 
     public ExtendOnFailureException(Response callback,Object object) {
@@ -19,44 +20,55 @@ public class ExtendOnFailureException extends onFailureException {
 
     @Override
     public void onValidation(HashMap<String, Object> map) {
-        log("onValidation: " + map);
+        logError("onValidation: " + map);
         String text = "";
         for (String s : map.keySet()) {
             text += map.get(s) + " ";
         }
-        dismissLoading();
-        show(text);
+        dismissDialog();
+        widgetError(text);
     }
 
     @Override
     public void onClient(String s) {
-        log("onClient: " + s);
-        dismissLoading();
-        show(s);
+        logError("onClient: " + s);
+        dismissDialog();
+        toastError(s);
     }
 
     @Override
     public void onServerFail(String s) {
-        log("onServerFail: " + s);
-        dismissLoading();
-        show(s);
+        logError("onServerFail: " + s);
+        dismissDialog();
+        toastError(s);
     }
 
-
-    public void log(Object object) {
+    public void logError(Object object) {
         System.out.println(object);
     }
 
-    public void show(String error) {
-        activity.runOnUiThread(() -> Toast.makeText(activity.getApplicationContext(), error, Toast.LENGTH_SHORT).show());
+    public void toastError(String message) {
+        activity.runOnUiThread(() -> {
+            Toast.makeText(activity.getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        });
     }
 
-    public void dismissLoading() {
+    public void widgetError(String message) {
+        activity.runOnUiThread(() -> {
+            if (activity instanceof AuthActivity) {
+
+            } else if (activity instanceof MainActivity) {
+
+            }
+        });
+    }
+
+    public void dismissDialog() {
         activity.runOnUiThread(() -> {
             if (activity instanceof AuthActivity) {
                 if (((AuthActivity) activity).loadingDialog.isVisible())
                     ((AuthActivity) activity).loadingDialog.dismiss();
-            }else if (activity instanceof MainActivity){
+            } else if (activity instanceof MainActivity) {
                 if (((MainActivity) activity).loadingDialog.isVisible())
                     ((MainActivity) activity).loadingDialog.dismiss();
             }

@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +27,6 @@ import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -104,7 +102,7 @@ public class AuthPinFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.pinEditText.getRoot().length() == 6) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
+                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                     doWork("pin");
                 }
             }
@@ -145,31 +143,32 @@ public class AuthPinFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.pinEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 doWork("pin");
             }
         }).widget(binding.buttonTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment);
-        }).widget(binding.loginLinkTextView.getRoot()
-        );
+            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment,null);
+        }).widget(binding.loginLinkTextView.getRoot());
+
         ClickManager.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment, null);
         }).widget(binding.registerLinkTextView.getRoot());
+
         ClickManager.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment);
+            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment, null);
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setData() {
-        if (!((AuthActivity) requireActivity()).singleton.getMobile().equals("")) {
-            mobile = ((AuthActivity) requireActivity()).singleton.getMobile();
+        if (requireArguments().getString("mobile") != null) {
+            mobile = requireArguments().getString("mobile");
             binding.mobileTextView.getRoot().setText(mobile);
         } else {
             binding.mobileTextView.getRoot().setText(mobile);
@@ -203,14 +202,17 @@ public class AuthPinFragment extends Fragment {
 
     private void doWork(String method) {
         pin = binding.pinEditText.getRoot().getText().toString().trim();
+
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap();
         data.put("code", pin);
-        if (getArguments().getString("key") != null)
-            data.put("key", getArguments().getString("key"));
-        if (getArguments().getString("callback") != null)
-            data.put("callback", getArguments().getString("callback"));
+
+        if (requireArguments().getString("key") != null)
+            data.put("key", requireArguments().getString("key"));
+        if (requireArguments().getString("callback") != null)
+            data.put("callback", requireArguments().getString("callback"));
+
         Auth.auth_theory(data, new HashMap<>(), new Response() {
             @Override
             public void onOK(Object object) {
@@ -218,31 +220,36 @@ public class AuthPinFragment extends Fragment {
                 AuthModel model = (AuthModel) object;
                 if (((AuthModel) object).getUser() == null) {
                     Bundle extras = new Bundle();
+
+                    extras.putString("mobile", mobile);
                     extras.putString("key", model.getKey());
                     extras.putString("callback", model.getCallback());
+
                     switch (model.getTheory()) {
                         case "password":
-                            getActivity().runOnUiThread(() -> {
+                            requireActivity().runOnUiThread(() -> {
                                 ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                 ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
                             });
                             break;
                         case "recovery":
-                            getActivity().runOnUiThread(() -> {
+                            requireActivity().runOnUiThread(() -> {
                                 ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                 ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
                             });
                             break;
                     }
                 } else {
-                    getActivity().runOnUiThread(() -> ((AuthActivity) requireActivity()).login(model));
+                    requireActivity().runOnUiThread(() -> {
+                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                        ((AuthActivity) requireActivity()).login(model);
+                    });
                 }
             }
 
             @Override
             public void onFailure(String response) {
                 countDownTimer.cancel();
-
             }
         });
 

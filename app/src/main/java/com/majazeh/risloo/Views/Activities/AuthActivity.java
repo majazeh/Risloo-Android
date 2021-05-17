@@ -1,6 +1,5 @@
 package com.majazeh.risloo.Views.Activities;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
@@ -14,7 +13,6 @@ import android.widget.EditText;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
@@ -52,10 +50,6 @@ public class AuthActivity extends AppCompatActivity {
         initializer();
 
         ExtendOnFailureException.activity = this;
-
-        if (!singleton.getToken().equals("")){
-            IntentManager.main(this);
-        }
     }
 
     private void decorator() {
@@ -93,29 +87,46 @@ public class AuthActivity extends AppCompatActivity {
         navController.navigate(destinationId, extras);
     }
 
-    public void navigator(int destinationId) {
-        navigator(destinationId, null);
-    }
-
     public void login(AuthModel object) {
         UserModel user = object.getUser();
-        loadingDialog.dismiss();
-        if (object.getToken() != null) singleton.editor.putString("token", object.getToken());
-        if (user.getUserId() != null) singleton.editor.putString("userId", user.getUserId());
-        if (user.getName() != null) singleton.editor.putString("name", user.getName());
-        if (user.getUsername() != null) singleton.editor.putString("username", user.getUsername());
-        if (user.getBirthday() != null) singleton.editor.putString("birthday", user.getBirthday());
-        if (user.getEmail() != null) singleton.editor.putString("email", user.getEmail());
-        if (user.getMobile() != null) singleton.editor.putString("mobile", user.getMobile());
-        if (user.getUserStatus() != null) singleton.editor.putString("status", user.getUserStatus());
-        if (user.getUserType() != null) singleton.editor.putString("type", user.getUserType());
-        if (user.getGender() != null) singleton.editor.putString("gender", user.getGender());
-        String url = null;
-        if (user.getAvatar() != null) url = user.getAvatar().getMedium().getUrl();
-        if (url != null) singleton.editor.putString("avatar", url);
-        if (user.getPublic_key() != null) singleton.editor.putString("public_key", user.getPublic_key());
-        singleton.editor.apply();
-        navigator(R.id.authSerialFragment);
+
+        if (object.getToken() != null)
+            singleton.setToken(object.getToken());
+
+        if (user.getUserId() != null)
+            singleton.setUserId(user.getUserId());
+
+        if (user.getName() != null)
+            singleton.setName(user.getName());
+
+        if (user.getUsername() != null)
+            singleton.setUsername(user.getUsername());
+
+        if (user.getBirthday() != null)
+            singleton.setBirthday(user.getBirthday());
+
+        if (user.getEmail() != null)
+            singleton.setEmail(user.getEmail());
+
+        if (user.getMobile() != null)
+            singleton.setMobile(user.getMobile());
+
+        if (user.getUserStatus() != null)
+            singleton.setStatus(user.getUserStatus());
+
+        if (user.getUserType() != null)
+            singleton.setType(user.getUserType());
+
+        if (user.getGender() != null)
+            singleton.setGender(user.getGender());
+
+        if (user.getAvatar() != null)
+            singleton.setAvatar(user.getAvatar().getMedium().getUrl());
+
+        if (user.getPublic_key() != null)
+            singleton.setPublicKey(user.getPublic_key());
+
+        navigator(R.id.authSerialFragment, null);
     }
 
     @Override

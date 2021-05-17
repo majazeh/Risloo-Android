@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +26,6 @@ import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 
@@ -148,21 +146,21 @@ public class AuthPasswordChangeFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.errorImageView, binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment)).widget(binding.loginLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment)).widget(binding.registerLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment)).widget(binding.passwordRecoverLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null)).widget(binding.loginLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment,null)).widget(binding.registerLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment, null)).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void setData() {
-        if (!((AuthActivity) requireActivity()).singleton.getMobile().equals("")) {
-            mobile = ((AuthActivity) requireActivity()).singleton.getMobile();
+        if (requireArguments().getString("mobile") != null) {
+            mobile = requireArguments().getString("mobile");
             binding.mobileTextView.getRoot().setText(mobile);
         } else {
             binding.mobileTextView.getRoot().setText(mobile);
@@ -172,44 +170,53 @@ public class AuthPasswordChangeFragment extends Fragment {
 
     private void doWork() {
         password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
-        // TODO : call work method and place password as it's input
+
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         HashMap data = new HashMap();
         data.put("password", password);
-        if (getArguments().getString("key")!=null)
-            data.put("key", getArguments().getString("key"));
-        if (getArguments().getString("callback")!=null)
-            data.put("callback", getArguments().getString("callback"));
+
+        if (requireArguments().getString("key") != null)
+            data.put("key", requireArguments().getString("key"));
+        if (requireArguments().getString("callback") != null)
+            data.put("callback", requireArguments().getString("callback"));
+
         Auth.auth_theory(data, new HashMap<>(), new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
                 if (((AuthModel) object).getUser() == null) {
                     Bundle extras = new Bundle();
+
+                    extras.putString("mobile", mobile);
                     extras.putString("key", model.getKey());
                     extras.putString("callback", model.getCallback());
+
                     switch (model.getTheory()) {
                         case "mobileCode":
-                            getActivity().runOnUiThread(() -> {
+                            requireActivity().runOnUiThread(() -> {
                                 ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                 ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
                             });
                             break;
                         case "recovery":
-                            getActivity().runOnUiThread(() -> {
+                            requireActivity().runOnUiThread(() -> {
                                 ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                 ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
                             });
                             break;
                     }
                 }  else {
-                    getActivity().runOnUiThread(() -> ((AuthActivity) requireActivity()).login(model));
+                    requireActivity().runOnUiThread(() -> {
+                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                        ((AuthActivity) requireActivity()).login(model);
+                    });
                 }
             }
 
             @Override
             public void onFailure(String response) {
-
+                // Place Code if Needed
             }
         });
     }
