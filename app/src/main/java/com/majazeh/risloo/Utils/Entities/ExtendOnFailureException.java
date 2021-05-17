@@ -53,16 +53,6 @@ public class ExtendOnFailureException extends onFailureException {
         });
     }
 
-    public void widgetError(String message) {
-        activity.runOnUiThread(() -> {
-            if (activity instanceof AuthActivity) {
-
-            } else if (activity instanceof MainActivity) {
-
-            }
-        });
-    }
-
     public void dismissDialog() {
         activity.runOnUiThread(() -> {
             if (activity instanceof AuthActivity) {

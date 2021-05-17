@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -146,10 +145,14 @@ public class AuthRegisterFragment extends Fragment {
                         JSONObject jsonObject = new JSONObject(response);
                         if (!jsonObject.isNull("errors")) {
                             Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
                             while (keys.hasNext()) {
                                 String key = keys.next();
-                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++)
-                                    Toast.makeText(requireContext(), (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i), Toast.LENGTH_SHORT).show();
+                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                    if (key.equals("mobile")) {
+                                        ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    }
+                                }
                             }
                         }
                     } catch (JSONException e) {

@@ -13,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -260,10 +259,14 @@ public class AuthPinFragment extends Fragment {
                         JSONObject jsonObject = new JSONObject(response);
                         if (!jsonObject.isNull("errors")) {
                             Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
                             while (keys.hasNext()) {
                                 String key = keys.next();
-                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++)
-                                    Toast.makeText(requireContext(), (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i), Toast.LENGTH_SHORT).show();
+                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                    if (key.equals("code")) {
+                                        ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    }
+                                }
                             }
                         }
                     } catch (JSONException e) {
@@ -274,9 +277,9 @@ public class AuthPinFragment extends Fragment {
         });
 
 
-        if (method.equals("pin")) {
-            // TODO : call work method and place pin as it's input
-        }
+//        if (method.equals("pin")) {
+//            // TODO : call work method and place pin as it's input
+//        }
 //        else if (method.equals("verification")) {
 //            // TODO : call work method and place pin as it's input
 //            showTimer(true);

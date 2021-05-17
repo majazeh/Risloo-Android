@@ -27,7 +27,11 @@ import com.majazeh.risloo.databinding.FragmentEditUserPasswordBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class EditUserPasswordFragment extends Fragment {
 
@@ -244,7 +248,27 @@ public class EditUserPasswordFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
-                // Place Code if Needed
+                requireActivity().runOnUiThread(() -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (!jsonObject.isNull("errors")) {
+                            Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                    if (key.equals("password")) {
+                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    } else if (key.equals("new_password")) {
+                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    }
+                                }
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
     }

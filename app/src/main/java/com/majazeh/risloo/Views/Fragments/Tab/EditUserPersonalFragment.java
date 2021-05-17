@@ -23,7 +23,11 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class EditUserPersonalFragment extends Fragment {
 
@@ -292,7 +296,25 @@ public class EditUserPersonalFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
-                // Place Code if Needed
+                requireActivity().runOnUiThread(() -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (!jsonObject.isNull("errors")) {
+                            Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                    if (key.equals("name")) {
+                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    }
+                                }
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
     }
