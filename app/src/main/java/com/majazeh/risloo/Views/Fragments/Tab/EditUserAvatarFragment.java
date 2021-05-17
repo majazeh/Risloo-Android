@@ -134,9 +134,9 @@ public class EditUserAvatarFragment extends Fragment {
         Auth.changeAvatar(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                requireActivity().runOnUiThread(() -> {
-                    FileManager.deleteFileFromCache(requireActivity(), "image");
+                FileManager.deleteFileFromCache(requireActivity(), "image");
 
+                requireActivity().runOnUiThread(() -> {
                     ((MainActivity) requireActivity()).loadingDialog.dismiss();
                     ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
                 });

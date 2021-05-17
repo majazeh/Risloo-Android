@@ -176,7 +176,6 @@ public class EditUserPersonalFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
-
                 doWork();
             }
         }).widget(binding.editTextView.getRoot());
@@ -285,8 +284,10 @@ public class EditUserPersonalFragment extends Fragment {
         Auth.editProfile(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                AuthModel model = (AuthModel) object;
+
                 requireActivity().runOnUiThread(() -> {
-                    ((MainActivity) requireActivity()).login(((AuthModel) object).getUser());
+                    ((MainActivity) requireActivity()).login(model.getUser());
                     ((MainActivity) requireActivity()).setData();
 
                     ((MainActivity) requireActivity()).loadingDialog.dismiss();

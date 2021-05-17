@@ -85,7 +85,6 @@ public class EditUserCryptoFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
-
                 doWork("public");
             }
         }).widget(binding.publicEditTextView.getRoot());
@@ -95,7 +94,6 @@ public class EditUserCryptoFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
-
                 doWork("private");
             }
         }).widget(binding.privateEditTextView.getRoot());

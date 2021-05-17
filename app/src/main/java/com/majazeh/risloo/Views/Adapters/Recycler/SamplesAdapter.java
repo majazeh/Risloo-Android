@@ -45,7 +45,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
 
         listener(holder);
 
-        setData(holder,sample);
+        setData(holder, sample);
     }
 
     @Override
@@ -74,22 +74,25 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
         }).widget(holder.binding.bulkTextView);
     }
 
-    private void setData(SamplesHolder holder,SampleModel sampleModel) {
+    private void setData(SamplesHolder holder, SampleModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.serialTextView.setText(sampleModel.getSampleId());
-        holder.binding.nameTextView.setText(sampleModel.getSampleScaleTitle());
-        holder.binding.editionTextView.setText(String.valueOf(sampleModel.getSampleVersion()));
-        holder.binding.roomTextView.setText(sampleModel.getSampleRoom().getRoomManager().getName());
-//        holder.binding.caseTextView.setText("RS96666DT");
-        holder.binding.referenceTextView.setText(sampleModel.getSampleRoom().getRoomCenter().getAcceptation().getName());
+        holder.binding.serialTextView.setText(model.getSampleId());
+        holder.binding.nameTextView.setText(model.getSampleScaleTitle());
 
-            setAction(holder, sampleModel.getSampleStatus());
+        if (!model.getSampleEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        else
+            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
 
+        holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+        holder.binding.referenceTextView.setText(model.getSampleRoom().getRoomCenter().getAcceptation().getName());
+
+        setAction(holder, model.getSampleStatus());
     }
 
     private void setAction(SamplesHolder holder, String action) {
@@ -144,6 +147,14 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
                 holder.binding.statusTextView.setEnabled(false);
 
                 holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusDone));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
+                break;
+            default:
+                holder.binding.statusTextView.setEnabled(false);
+
+                holder.binding.statusTextView.setText(action);
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);

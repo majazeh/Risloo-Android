@@ -48,7 +48,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
         listener(holder);
 
-        setData(holder,center);
+        setData(holder, center);
     }
 
     @Override
@@ -71,15 +71,20 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.centerFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(CentersHolder holder,CenterModel centerModel) {
+    private void setData(CentersHolder holder, CenterModel model) {
         try {
-            holder.binding.nameTextView.setText(centerModel.getDetail().getString("title"));
+            if (model.getCenterType().equals("counseling_center")) {
+                holder.binding.nameTextView.setText(model.getDetail().getString("title"));
+                holder.binding.usernameTextView.setText(model.getManager().getName());
+            } else {
+                holder.binding.nameTextView.setText(model.getManager().getName());
+                holder.binding.usernameTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
+            }
+
+            setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        holder.binding.usernameTextView.setText(centerModel.getCenterType());
-
-        setAvatar(holder, centerModel.getManager().getAvatar().getMedium().getUrl());
     }
 
     private void setAvatar(CentersHolder holder, String url) {

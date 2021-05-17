@@ -104,9 +104,12 @@ public class AuthSerialFragment extends Fragment {
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    ((AuthActivity) requireActivity()).singleton.logOut();
-                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                    ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null);
+                    requireActivity().runOnUiThread(() -> {
+                        ((AuthActivity) requireActivity()).singleton.logOut();
+
+                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                        ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null);
+                    });
                 }
 
                 @Override

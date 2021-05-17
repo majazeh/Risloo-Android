@@ -736,6 +736,8 @@
 
     <string name="CentersFragmentTitle">مراکز درمانی</string>
 
+    <string name="CentersFragmentTypePersonalClinic">اتاق درمان شخصی</string>
+
     /*
     ---------- CenterSchedules Fragment ----------
     */
@@ -878,7 +880,7 @@
     ---------- Users Fragment ----------
     */
 
-    <string name="UsersFragmentTitle">کاربران</string>
+    <string name="UsersFragmentTitle">اعضاء</string>
 
     <string name="UsersFragmentSerial">سریال</string>
     <string name="UsersFragmentName">نام و نام خانوادگی</string>
@@ -935,9 +937,9 @@
 
     <string name="DashboardFragmentTitle">پیش‌خوان</string>
 
-    <string name="DashboardFragmentSamplesHeader">نمونه‌های من</string>
-    <string name="DashboardFragmentCasesHeader">پرونده‌های من</string>
-    <string name="DashboardFragmentRoomsHeader">اتاق‌های من</string>
+    <string name="DashboardFragmentCasesHeader">پرونده‌های درمانی من</string>
+    <string name="DashboardFragmentSamplesHeader">آزمون‌های انجام نشده‌ی من</string>
+    <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
     <string name="DashboardFragmentCentersHeader">مراکز درمانی من</string>
 
     /*

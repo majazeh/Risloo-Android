@@ -45,7 +45,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
         listener(holder);
 
-        setData(holder,room);
+        setData(holder, room);
     }
 
     @Override
@@ -68,10 +68,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.roomFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(RoomsHolder holder,RoomModel roomModel) {
-        holder.binding.nameTextView.setText(roomModel.getRoomManager().getName());
+    private void setData(RoomsHolder holder, RoomModel model) {
+        holder.binding.nameTextView.setText(model.getRoomManager().getName());
 
-        setAvatar(holder, roomModel.getRoomManager().getAvatar().getMedium().getUrl());
+        setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
     }
 
     private void setAvatar(RoomsHolder holder, String url) {

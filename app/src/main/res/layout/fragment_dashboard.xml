@@ -24,13 +24,51 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <include
-                android:id="@+id/samples_header_includeLayout"
+                android:id="@+id/cases_header_includeLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/cases_shimmerLayout"
+                layout="@layout/component_shimmer_case2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cases_header_includeLayout"
+                tools:visibility="gone" />
+
+            <include
+                android:id="@+id/cases_singleLayout"
+                layout="@layout/component_single_case2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cases_header_includeLayout"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/cases_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="cases_shimmerLayout, cases_singleLayout" />
+
+            <include
+                android:id="@+id/samples_header_includeLayout"
+                layout="@layout/component_main_index_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/cases_barrier" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/samples_containerLayout"
@@ -81,46 +119,6 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/cases_header_includeLayout"
-                layout="@layout/component_main_index_header"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_18sdp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/samples_containerLayout"
-                app:layout_goneMarginTop="@dimen/_12sdp" />
-
-            <include
-                android:id="@+id/cases_shimmerLayout"
-                layout="@layout/component_shimmer_case2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cases_header_includeLayout"
-                tools:visibility="gone" />
-
-            <include
-                android:id="@+id/cases_singleLayout"
-                layout="@layout/component_single_case2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cases_header_includeLayout"
-                tools:visibility="visible" />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/cases_barrier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="cases_shimmerLayout, cases_singleLayout" />
-
-            <include
                 android:id="@+id/rooms_header_includeLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
@@ -128,8 +126,8 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/cases_barrier"
-                app:layout_goneMarginTop="@dimen/_12sdp" />
+                app:layout_constraintTop_toBottomOf="@id/samples_containerLayout"
+                app:layout_goneMarginTop="0dp" />
 
             <include
                 android:id="@+id/rooms_shimmerLayout"
@@ -166,10 +164,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/rooms_barrier"
-                app:layout_goneMarginTop="@dimen/_12sdp" />
+                app:layout_constraintTop_toBottomOf="@id/rooms_barrier" />
 
             <include
                 android:id="@+id/centers_shimmerLayout"
@@ -194,6 +190,34 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/centers_header_includeLayout"
                 tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/cases_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="cases_header_includeLayout, cases_singleLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/samples_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="samples_header_includeLayout, samples_containerLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/rooms_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="rooms_header_includeLayout, rooms_singleLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/centers_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="centers_header_includeLayout, centers_singleLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -208,15 +208,16 @@ public class EditUserPasswordFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
             }
             if (binding.newPasswordIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
             }
 
             if (binding.currentPasswordIncludeLayout.inputEditText.length() != 0 && binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
-
                 doWork();
             }
         }).widget(binding.editTextView.getRoot());
