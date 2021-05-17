@@ -10,6 +10,9 @@
 
     <string name="AppImageContent">عکس</string>
 
+    <string name="AppImageNew">عکس جدیدی انتخاب نشده است.</string>
+    <string name="AppImageEmpty">عکس انتخاب نشده است.</string>
+
     <string name="AppInputEmpty">فیلد خالی است.</string>
 
     <string name="AppSearchHint">جستجو</string>

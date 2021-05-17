@@ -236,8 +236,10 @@ public class EditUserPasswordFragment extends Fragment {
         Auth.editPassword(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                requireActivity().runOnUiThread(() -> {
+                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                    ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                });
             }
 
             @Override

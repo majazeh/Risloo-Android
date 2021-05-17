@@ -82,7 +82,10 @@ public class EditUserAvatarFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (avatarBitmap == null) {
-                Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                if (!avatarPath.equals(""))
+                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageNew), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageEmpty), Toast.LENGTH_SHORT).show();
             } else {
                 doWork();
             }
@@ -131,10 +134,12 @@ public class EditUserAvatarFragment extends Fragment {
         Auth.changeAvatar(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                FileManager.deleteFileFromCache(requireActivity(), "image");
+                requireActivity().runOnUiThread(() -> {
+                    FileManager.deleteFileFromCache(requireActivity(), "image");
 
-                ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                    ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                });
             }
 
             @Override

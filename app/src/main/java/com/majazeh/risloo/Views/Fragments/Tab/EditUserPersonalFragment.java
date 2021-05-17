@@ -281,11 +281,13 @@ public class EditUserPersonalFragment extends Fragment {
         Auth.editProfile(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                ((MainActivity) requireActivity()).login(((AuthModel) object).getUser());
-                ((MainActivity) requireActivity()).setData();
+                requireActivity().runOnUiThread(() -> {
+                    ((MainActivity) requireActivity()).login(((AuthModel) object).getUser());
+                    ((MainActivity) requireActivity()).setData();
 
-                ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                    ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                });
             }
 
             @Override
