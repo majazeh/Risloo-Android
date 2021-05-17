@@ -328,6 +328,7 @@ public class MainActivity extends AppCompatActivity {
             singleton.setGender(user.getGender());
 
         if (user.getAvatar() != null)
+            if (user.getAvatar().getMedium() != null)
             singleton.setAvatar(user.getAvatar().getMedium().getUrl());
 
         if (user.getPublic_key() != null)

@@ -18,16 +18,16 @@ public class ExtendOnFailureException extends onFailureException {
         super(callback,object);
     }
 
-    @Override
-    public void onValidation(HashMap<String, Object> map) {
-        logError("onValidation: " + map);
-        String text = "";
-        for (String s : map.keySet()) {
-            text += map.get(s) + " ";
-        }
-        dismissDialog();
-        widgetError(text);
-    }
+//    @Override
+//    public void onValidation(HashMap<String, Object> map) {
+//        logError("onValidation: " + map);
+//        String text = "";
+//        for (String s : map.keySet()) {
+//            text += map.get(s) + " ";
+//        }
+//        dismissDialog();
+//        widgetError(text);
+//    }
 
     @Override
     public void onClient(String s) {

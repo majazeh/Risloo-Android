@@ -16,13 +16,13 @@ public abstract class onFailureException {
     public onFailureException(Response callback, Object object) {
         switch (object.getClass().getName()) {
             case "java.net.UnknownHostException":
+            case "java.net.SocketTimeoutException":
                 onClient("اینترنت خود را چک کنید!");
                 break;
             case "java.io.IOException":
             case "JSONException":
             case "IllegalAccessException":
             case "InstantiationException":
-            case "java.net.SocketTimeoutException":
             case "NoSuchMethodException":
             case "InvocationTargetException":
                 onClient((String) object);
@@ -80,13 +80,13 @@ public abstract class onFailureException {
                     validationData.put(key, jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                 }
             }
-            onValidation(validationData);
+//            onValidation(validationData);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public abstract void onValidation(HashMap<String, Object> map);
+//    public abstract void onValidation(HashMap<String, Object> map);
 
     public abstract void onClient(String s);
 

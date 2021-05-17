@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,7 +22,11 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class AuthRegisterFragment extends Fragment {
 
@@ -136,7 +141,21 @@ public class AuthRegisterFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
-                // Place Code if Needed
+                requireActivity().runOnUiThread(() -> {
+                    try {
+                        JSONObject jsonObject = new JSONObject(response);
+                        if (!jsonObject.isNull("errors")) {
+                            Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++)
+                                    Toast.makeText(requireContext(), (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i), Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
     }
