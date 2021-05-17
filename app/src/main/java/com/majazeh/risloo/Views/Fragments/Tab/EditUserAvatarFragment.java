@@ -119,22 +119,27 @@ public class EditUserAvatarFragment extends Fragment {
 
     private void doWork() {
         FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         HashMap data = new HashMap();
         data.put("avatar",  FileManager.readFileFromCache(requireActivity(), "image"));
+
         HashMap header = new HashMap();
         header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+
         Auth.changeAvatar(data, header, new Response() {
             @Override
             public void onOK(Object object) {
+                FileManager.deleteFileFromCache(requireActivity(), "image");
+
                 ((MainActivity) requireActivity()).loadingDialog.dismiss();
                 ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
-                FileManager.deleteFileFromCache(requireActivity(), "image");
             }
 
             @Override
             public void onFailure(String response) {
-
+                // Place Code if Needed
             }
         });
     }

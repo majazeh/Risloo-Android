@@ -110,32 +110,38 @@ public class AuthPasswordRecoverFragment extends Fragment {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
+                if (((AuthModel) object).getUser() == null) {
+                    Bundle extras = new Bundle();
 
-                Bundle extras = new Bundle();
+                    extras.putString("mobile", mobile);
+                    extras.putString("key", model.getKey());
+                    extras.putString("callback", model.getCallback());
 
-                extras.putString("mobile", mobile);
-                extras.putString("key", model.getKey());
-                extras.putString("callback", model.getCallback());
-
-                switch (model.getTheory()) {
-                    case "password":
-                        requireActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                        });
-                        break;
-                    case "mobileCode":
-                        requireActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                        });
-                        break;
-                    case "recovery":
-                        requireActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                        });
-                        break;
+                    switch (model.getTheory()) {
+                        case "password":
+                            requireActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+                            });
+                            break;
+                        case "mobileCode":
+                            requireActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
+                            });
+                            break;
+                        case "recovery":
+                            requireActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
+                            });
+                            break;
+                    }
+                } else {
+                    requireActivity().runOnUiThread(() -> {
+                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                        ((AuthActivity) requireActivity()).login(model);
+                    });
                 }
             }
 

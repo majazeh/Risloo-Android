@@ -647,9 +647,10 @@
 
     ---------- // EditUserPassword Tab
 
-    <string name="EditUserPasswordTabPasswordHeader">کلمه عبور جدید</string>
+    <string name="EditUserPasswordTabCurrentPasswordHeader">کلمه عبور فعلی</string>
+    <string name="EditUserPasswordTabNewPasswordHeader">کلمه عبور جدید</string>
 
-    <string name="EditUserPasswordTabPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
+    <string name="EditUserPasswordTabNewPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
 
     <string name="EditUserPasswordTabButton">تغییر</string>
 

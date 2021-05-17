@@ -166,8 +166,17 @@ public class Singleton {
         return "";
     }
 
+    public void setPrivateKey(String value) {
+        editor.putString("private_key", value);
+        editor.apply();
+    }
 
-
+    public String getPrivateKey() {
+        if (!sharedPreferences.getString("private_key", "").equals("")) {
+            return sharedPreferences.getString("private_key", "");
+        }
+        return "";
+    }
 
 
 
@@ -232,12 +241,7 @@ public class Singleton {
         return "";
     }
 
-    public String getPrivateKey() {
-        if (!sharedPreferences.getString("private_key", "").equals("")) {
-            return sharedPreferences.getString("private_key", "");
-        }
-        return "";
-    }
+
 
     public String getOwner() {
         if (!sharedPreferences.getString("owner", "").equals("")) {
@@ -266,7 +270,6 @@ public class Singleton {
         }
         return "";
     }
-
 
     public String getDuration() {
         if (!sharedPreferences.getString("duration", "").equals("")) {
@@ -318,7 +321,5 @@ public class Singleton {
     public boolean getEndScheduleTime() {
         return sharedPreferences.getBoolean("endScheduleTime", false);
     }
-
-
 
 }

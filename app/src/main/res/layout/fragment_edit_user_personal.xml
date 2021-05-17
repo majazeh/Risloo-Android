@@ -177,6 +177,13 @@
                 app:layout_constraintStart_toStartOf="@id/name_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/type_includeLayout" />
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/client_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:constraint_referenced_ids="mobile_includeLayout, username_includeLayout, username_guideLayout, email_includeLayout, birthday_includeLayout, status_includeLayout, type_includeLayout" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include

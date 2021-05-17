@@ -82,21 +82,21 @@ public class EditUserCryptoFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.publicIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.errorImageView, binding.publicErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.errorImageView, binding.publicErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
 
-                doWork();
+                doWork("public");
             }
         }).widget(binding.publicEditTextView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.privateIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.errorImageView, binding.privateErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.errorImageView, binding.privateErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
 
-                doWork();
+                doWork("private");
             }
         }).widget(binding.privateEditTextView.getRoot());
     }
@@ -112,14 +112,15 @@ public class EditUserCryptoFragment extends Fragment {
         }
     }
 
-    private void doWork() {
-        publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
-        privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-        ((MainActivity) requireActivity()).singleton.editor.putString("public_key", publicKey);
-        ((MainActivity) requireActivity()).singleton.editor.putString("private_key", privateKey);
-        ((MainActivity) requireActivity()).singleton.editor.apply();
-        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+    private void doWork(String key) {
+        if (key.equals("")) {
+            publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
+            ((MainActivity) requireActivity()).singleton.setPublicKey(publicKey);
+        } else {
+            privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
+            ((MainActivity) requireActivity()).singleton.setPrivateKey(privateKey);
+        }
+
         ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
     }
 

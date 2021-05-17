@@ -192,7 +192,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setData() {
+    public void setData() {
         if (!singleton.getName().equals("")) {
             binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
         } else {
@@ -329,7 +329,8 @@ public class MainActivity extends AppCompatActivity {
 
         if (user.getAvatar() != null)
             if (user.getAvatar().getMedium() != null)
-            singleton.setAvatar(user.getAvatar().getMedium().getUrl());
+                if (user.getAvatar().getMedium().getUrl() != null)
+                    singleton.setAvatar(user.getAvatar().getMedium().getUrl());
 
         if (user.getPublic_key() != null)
             singleton.setPublicKey(user.getPublic_key());
