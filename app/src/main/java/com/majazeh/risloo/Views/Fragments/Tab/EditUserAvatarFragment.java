@@ -146,7 +146,7 @@ public class EditUserAvatarFragment extends Fragment {
 
                 requireActivity().runOnUiThread(() -> {
                     ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                    ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                 });
             }
 

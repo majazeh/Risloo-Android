@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -111,7 +112,7 @@ public class EditUserCryptoFragment extends Fragment {
     }
 
     private void doWork(String key) {
-        if (key.equals("")) {
+        if (key.equals("public")) {
             publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
             ((MainActivity) requireActivity()).singleton.setPublicKey(publicKey);
         } else {
@@ -119,7 +120,7 @@ public class EditUserCryptoFragment extends Fragment {
             ((MainActivity) requireActivity()).singleton.setPrivateKey(privateKey);
         }
 
-        ((MainActivity) requireActivity()).navigator(R.id.dashboardFragment);
+        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
     }
 
     @Override

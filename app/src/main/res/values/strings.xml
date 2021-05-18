@@ -10,6 +10,8 @@
 
     <string name="AppImageContent">عکس</string>
 
+    <string name="AppChanged">تغییرات ثبت شد.</string>
+
     <string name="AppImageNew">عکس جدیدی انتخاب نشده است.</string>
     <string name="AppImageEmpty">عکس انتخاب نشده است.</string>
 

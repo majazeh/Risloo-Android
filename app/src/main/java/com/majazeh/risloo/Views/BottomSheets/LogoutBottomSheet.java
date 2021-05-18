@@ -59,8 +59,6 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            dismiss();
-
             ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
             HashMap header = new HashMap();
@@ -74,6 +72,8 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         IntentManager.auth(requireActivity());
+
+                        dismiss();
                     });
                 }
 
