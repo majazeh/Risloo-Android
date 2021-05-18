@@ -8,8 +8,6 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.API.onFailureException;
 
-import java.util.HashMap;
-
 public class ExtendOnFailureException extends onFailureException {
 
     public static Activity activity;
@@ -56,10 +54,10 @@ public class ExtendOnFailureException extends onFailureException {
     public void dismissDialog() {
         activity.runOnUiThread(() -> {
             if (activity instanceof AuthActivity) {
-                if (((AuthActivity) activity).loadingDialog.isVisible())
+                if (((AuthActivity) activity).loadingDialog != null)
                     ((AuthActivity) activity).loadingDialog.dismiss();
             } else if (activity instanceof MainActivity) {
-                if (((MainActivity) activity).loadingDialog.isVisible())
+                if (((MainActivity) activity).loadingDialog != null)
                     ((MainActivity) activity).loadingDialog.dismiss();
             }
         });

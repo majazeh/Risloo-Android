@@ -39,7 +39,7 @@ public class EditUserPersonalFragment extends Fragment {
     private DateBottomSheet birthdayBottomSheet;
 
     // Vars
-    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "admin", gender = "male";
+    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "client", gender = "male";
     private int year, month, day;
 
     @Nullable
@@ -233,7 +233,7 @@ public class EditUserPersonalFragment extends Fragment {
 
                     binding.clientGroup.setVisibility(View.VISIBLE);
                     break;
-                case "client":
+                default:
                     binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
                     binding.clientGroup.setVisibility(View.GONE);
