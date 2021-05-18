@@ -60,7 +60,7 @@ public class CreateCenterFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager phoneLayoutManager;
-    private Bitmap avatarBitmap;
+    private Bitmap avatarBitmap = null;
 
     // Vars
     public String center = "personal_clinic", managerId = "", managerName = "", name = "", address = "", description = "";
@@ -316,12 +316,20 @@ public class CreateCenterFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
+        ResultManager resultManager = new ResultManager();
+
         switch (method) {
             case "gallery":
-                ResultManager.galleryResult(requireActivity(), data, avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
+                resultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
+
+                avatarPath = resultManager.path;
+                avatarBitmap = resultManager.bitmap;
                 break;
             case "camera":
-                ResultManager.cameraResult(requireActivity(), avatarPath, avatarBitmap, binding.avatarIncludeLayout.selectCircleImageView, null);
+                resultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.selectCircleImageView, null);
+
+                avatarPath = resultManager.path;
+                avatarBitmap = resultManager.bitmap;
                 break;
         }
     }
@@ -333,13 +341,13 @@ public class CreateCenterFragment extends Fragment {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
             data.put("type", "personal_clinic");
         } else {
-//            FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+            FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
 
             name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-//            if (FileManager.readFileFromCache(requireActivity(), "image") != null)
-//                data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+            if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+                data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
             data.put("type", "counseling_center");
             data.put("title", name);
         }

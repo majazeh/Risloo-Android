@@ -71,7 +71,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
     private void setData(Cases2Holder holder, CaseModel model) {
         holder.binding.serialTextView.setText(model.getCaseId());
 
-        if (model.getClients() != null) {
+        if (!model.getClients().data().isEmpty()) {
             for (int i = 0; i < model.getClients().data().size(); i++) {
                 UserModel user = (UserModel) model.getClients().data().get(i);
                 if (user != null) {

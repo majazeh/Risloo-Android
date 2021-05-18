@@ -16,7 +16,10 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ResultManager {
 
-    public static void fileResult(Activity activity, Intent data, String path, TextView textView) {
+    public String path = "";
+    public Bitmap bitmap = null;
+
+    public void fileResult(Activity activity, Intent data, TextView textView) {
         Uri fileUri = data.getData();
 
         path = PathManager.localPath(activity, fileUri);
@@ -26,7 +29,7 @@ public class ResultManager {
         }
     }
 
-    public static void galleryResult(Activity activity, Intent data, String path, Bitmap bitmap, CircleImageView circleImageView, TextView textView) {
+    public void galleryResult(Activity activity, Intent data, CircleImageView circleImageView, TextView textView) {
         try {
             Uri imageUri = data.getData();
             InputStream imageStream = activity.getContentResolver().openInputStream(imageUri);
@@ -44,7 +47,9 @@ public class ResultManager {
         }
     }
 
-    public static void cameraResult(Activity activity, String path, Bitmap bitmap, CircleImageView circleImageView, TextView textView) {
+    public void cameraResult(Activity activity, String path, CircleImageView circleImageView, TextView textView) {
+        this.path = path;
+
         File imageFile = new File(path);
         IntentManager.mediaScan(activity, imageFile);
 

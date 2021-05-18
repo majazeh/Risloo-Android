@@ -127,9 +127,13 @@ public class CreateDocumentFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
+        ResultManager resultManager = new ResultManager();
+
         switch (method) {
             case "file":
-                ResultManager.fileResult(requireActivity(), data, filePath, binding.fileIncludeLayout.nameTextView);
+                resultManager.fileResult(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
+
+                filePath = resultManager.path;
                 break;
         }
     }

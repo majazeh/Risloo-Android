@@ -38,7 +38,7 @@ public class EditUserAvatarFragment extends Fragment {
     private ImageBottomSheet imageBottomSheet;
 
     // Objects
-    private Bitmap avatarBitmap;
+    private Bitmap avatarBitmap = null;
 
     // Vars
     public String avatarPath = "";
@@ -110,12 +110,20 @@ public class EditUserAvatarFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
+        ResultManager resultManager = new ResultManager();
+
         switch (method) {
             case "gallery":
-                ResultManager.galleryResult(requireActivity(), data, avatarPath, avatarBitmap, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                resultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+
+                avatarPath = resultManager.path;
+                avatarBitmap = resultManager.bitmap;
                 break;
             case "camera":
-                ResultManager.cameraResult(requireActivity(), avatarPath, avatarBitmap, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                resultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+
+                avatarPath = resultManager.path;
+                avatarBitmap = resultManager.bitmap;
                 break;
         }
     }
