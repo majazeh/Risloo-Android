@@ -10,10 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCase2Binding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
@@ -37,13 +39,13 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
     @Override
     public void onBindViewHolder(@NonNull Cases2Holder holder, int i) {
-        CaseModel caseModel = (CaseModel) cases.get(i);
+        CaseModel casse = (CaseModel) cases.get(i);
 
         detector(holder);
 
         listener(holder);
 
-        setData(holder,caseModel);
+        setData(holder, casse);
     }
 
     @Override
@@ -66,11 +68,20 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.caseFragment)).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(Cases2Holder holder,CaseModel caseModel) {
-        holder.binding.serialTextView.setText(caseModel.getCaseId());
-        holder.binding.referenceTextView.setText(caseModel.getCaseManager().getName());
-        holder.binding.dateTextView.setText(String.valueOf(caseModel.getCaseCreated_at()));
-        holder.binding.sessionCountTextView.setText("1 جلسه");
+    private void setData(Cases2Holder holder, CaseModel model) {
+        holder.binding.serialTextView.setText(model.getCaseId());
+
+        if (model.getClients() != null) {
+            for (int i = 0; i < model.getClients().data().size(); i++) {
+                UserModel user = (UserModel) model.getClients().data().get(i);
+                if (user != null) {
+                    holder.binding.referenceTextView.setText(user.getName());
+                }
+            }
+        }
+
+        holder.binding.dateTextView.setText(DateManager.gregorianToJalali2(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(model.getCaseCreated_at()))));
+        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " جلسه ");
     }
 
     public class Cases2Holder extends RecyclerView.ViewHolder {

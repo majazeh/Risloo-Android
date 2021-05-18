@@ -75,13 +75,14 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         try {
             if (model.getCenterType().equals("counseling_center")) {
                 holder.binding.nameTextView.setText(model.getDetail().getString("title"));
-                holder.binding.usernameTextView.setText(model.getManager().getName());
+                holder.binding.typeTextView.setText(model.getManager().getName());
             } else {
                 holder.binding.nameTextView.setText(model.getManager().getName());
-                holder.binding.usernameTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
+                holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
             }
+
             if (model.getDetail().getJSONArray("avatar") != null) {
-                if (model.getDetail().getJSONArray("avatar").length() !=0) {
+                if (model.getDetail().getJSONArray("avatar").length() != 0) {
                     setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                     return;
                 }

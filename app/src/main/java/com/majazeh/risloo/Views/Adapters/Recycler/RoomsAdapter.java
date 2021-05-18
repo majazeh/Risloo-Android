@@ -70,6 +70,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     private void setData(RoomsHolder holder, RoomModel model) {
         holder.binding.nameTextView.setText(model.getRoomManager().getName());
+        holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
 
         setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
     }

@@ -6,6 +6,8 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 
+import com.majazeh.risloo.Utils.Managers.DateManager;
+
 public class Singleton {
 
     // Objects
@@ -77,7 +79,7 @@ public class Singleton {
 
     public String getBirthday() {
         if (!sharedPreferences.getString("birthday", "").equals("")) {
-            return sharedPreferences.getString("birthday", "");
+            return DateManager.gregorianToJalali(sharedPreferences.getString("birthday", ""));
         }
         return "";
     }

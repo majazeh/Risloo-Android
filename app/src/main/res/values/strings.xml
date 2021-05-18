@@ -1066,6 +1066,8 @@
 
     <string name="RoomsAdapterHeader">اتاق‌های درمان</string>
 
+    <string name="RoomsAdapterTypePersonalClinic">اتاق درمان شخصی</string>
+
     <string name="RoomsAdapterEmpty">هنوز اتاق درمانی ثبت نشده است.</string>
 
     /*

@@ -92,71 +92,72 @@ public class DashboardFragment extends Fragment {
             public void onOK(Object object) {
                 UserModel model = (UserModel) object;
 
-                if (isAdded())
-                requireActivity().runOnUiThread(() -> {
-                    ((MainActivity) requireActivity()).login(model);
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).login(model);
 
-                    // Cases Data
+                        // Cases Data
 
-                    if (!model.getCaseList().data().isEmpty()) {
-                        cases2Adapter.setCases(model.getCaseList().data());
+                        if (!model.getCaseList().data().isEmpty()) {
+                            cases2Adapter.setCases(model.getCaseList().data());
 
-                        binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
-                        binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+                            binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+                            binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
 
-                        binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                    } else {
-                        binding.casesGroup.setVisibility(View.GONE);
-                    }
-                    binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.casesShimmerLayout.getRoot().stopShimmer();
+                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        } else {
+                            binding.casesGroup.setVisibility(View.GONE);
+                        }
+                        binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.casesShimmerLayout.getRoot().stopShimmer();
 
-                    // Samples Data
+                        // Samples Data
 
-                    if (!model.getSampleList().data().isEmpty()) {
-                        samplesAdapter.setSamples(model.getSampleList().data());
+                        if (!model.getSampleList().data().isEmpty()) {
+                            samplesAdapter.setSamples(model.getSampleList().data());
 
-                        binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
-                        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samplesAdapter.getItemCount() + ")");
+                            binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
+                            binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samplesAdapter.getItemCount() + ")");
 
-                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                    } else {
-                        binding.samplesGroup.setVisibility(View.GONE);
-                    }
-                    binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.samplesShimmerLayout.getRoot().stopShimmer();
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        } else {
+                            binding.samplesGroup.setVisibility(View.GONE);
+                        }
+                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.samplesShimmerLayout.getRoot().stopShimmer();
 
-                    // Rooms Data
+                        // Rooms Data
 
-                    if (!model.getRoomList().data().isEmpty()) {
-                        roomsAdapter.setRooms(model.getRoomList().data());
+                        if (!model.getRoomList().data().isEmpty()) {
+                            roomsAdapter.setRooms(model.getRoomList().data());
 
-                        binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
-                        binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+                            binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+                            binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
 
-                        binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                    } else {
-                        binding.roomsGroup.setVisibility(View.GONE);
-                    }
-                    binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.roomsShimmerLayout.getRoot().stopShimmer();
+                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        } else {
+                            binding.roomsGroup.setVisibility(View.GONE);
+                        }
+                        binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                    // Centers Data
+                        // Centers Data
 
-                    if (!model.getCenterList().data().isEmpty()) {
-                        centersAdapter.setCenters(model.getCenterList().data());
+                        if (!model.getCenterList().data().isEmpty()) {
+                            centersAdapter.setCenters(model.getCenterList().data());
 
-                        binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
-                        binding.centersHeaderIncludeLayout.countTextView.setText("(" + centersAdapter.getItemCount() + ")");
+                            binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
+                            binding.centersHeaderIncludeLayout.countTextView.setText("(" + centersAdapter.getItemCount() + ")");
 
-                        binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                    } else {
-                        binding.centersGroup.setVisibility(View.GONE);
-                    }
-                    binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.centersShimmerLayout.getRoot().stopShimmer();
-                });
+                            binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        } else {
+                            binding.centersGroup.setVisibility(View.GONE);
+                        }
+                        binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.centersShimmerLayout.getRoot().stopShimmer();
+                    });
+                }
             }
 
             @Override

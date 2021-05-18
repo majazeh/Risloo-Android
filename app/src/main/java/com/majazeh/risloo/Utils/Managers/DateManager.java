@@ -100,6 +100,17 @@ public class DateManager {
         }
     }
 
+    public static String gregorianToJalali2(String value) {
+        int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd", value)));
+        int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd", value)));
+        int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd", value)));
+
+        PersianDate persianDate = new PersianDate();
+        persianDate.initGrgDate(year, month, day);
+
+        return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + persianDate.getShYear();
+    }
+
     public static String jalaliToGregorian(String value) {
         int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd", value)));
         int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd", value)));
