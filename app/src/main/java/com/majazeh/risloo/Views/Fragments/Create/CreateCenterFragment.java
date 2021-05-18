@@ -57,7 +57,7 @@ public class CreateCenterFragment extends Fragment {
     private Bitmap avatarBitmap;
 
     // Vars
-    public String center = "personal", managerId = "", managerName = "", name = "", address = "", description ="";
+    public String center = "personal_clinic", managerId = "", managerName = "", name = "", address = "", description ="";
     public String avatarPath = "";
 
     @Nullable
@@ -122,12 +122,12 @@ public class CreateCenterFragment extends Fragment {
         binding.centerIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.first_radioButton:
-                    center = "personal";
+                    center = "personal_clinic";
 
                     binding.clinicGroup.setVisibility(View.GONE);
                     break;
                 case R.id.second_radioButton:
-                    center = "clinic";
+                    center = "counseling_center";
 
                     binding.clinicGroup.setVisibility(View.VISIBLE);
                     break;
@@ -179,7 +179,7 @@ public class CreateCenterFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (center.equals("personal")) {
+            if (center.equals("personal_clinic")) {
                 if (managerId.equals("")) {
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 }
@@ -219,12 +219,12 @@ public class CreateCenterFragment extends Fragment {
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             center = ((MainActivity) requireActivity()).singleton.getName();
             switch (center) {
-                case "personal":
+                case "personal_clinic":
                     binding.centerIncludeLayout.firstRadioButton.setChecked(true);
 
                     binding.clinicGroup.setVisibility(View.GONE);
                     break;
-                case "clinic":
+                case "counseling_center":
                     binding.centerIncludeLayout.secondRadioButton.setChecked(true);
 
                     binding.clinicGroup.setVisibility(View.VISIBLE);
@@ -318,7 +318,7 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void doWork() {
-        if (center.equals("personal")) {
+        if (center.equals("personal_clinic")) {
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 

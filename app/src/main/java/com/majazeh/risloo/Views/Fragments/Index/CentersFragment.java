@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.annotation.MainThread;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
@@ -24,6 +25,11 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 import com.majazeh.risloo.databinding.FragmentCentersBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.Madule.List;
+
+import java.util.HashMap;
 
 public class CentersFragment extends Fragment {
 
@@ -37,6 +43,10 @@ public class CentersFragment extends Fragment {
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
     private Handler handler;
+
+    HashMap data = new HashMap();
+    HashMap header = new HashMap();
+
 
     @Nullable
     @Override
@@ -98,7 +108,8 @@ public class CentersFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    // TODO : Place Code Here
+                    data.put("q", String.valueOf(s));
+                    setData();
                 }, 750);
             }
 
@@ -112,14 +123,27 @@ public class CentersFragment extends Fragment {
     }
 
     private void setData() {
-//        adapter.setCenters(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
 
-        new Handler().postDelayed(() -> {
-            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
+        Center.list(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded())
+                requireActivity().runOnUiThread(() -> {
+                    List centers = (List) object;
+                    adapter.setCenters(centers.data());
+                    binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                    binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+                    binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                    binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
     }
 
     @Override

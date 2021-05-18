@@ -92,6 +92,7 @@ public class DashboardFragment extends Fragment {
             public void onOK(Object object) {
                 UserModel model = (UserModel) object;
 
+                if (isAdded())
                 requireActivity().runOnUiThread(() -> {
                     ((MainActivity) requireActivity()).login(model);
 

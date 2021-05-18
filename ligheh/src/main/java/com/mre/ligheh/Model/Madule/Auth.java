@@ -120,7 +120,7 @@ public class Auth extends Model {
     public static void logout(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         if (has(header, "Authorization")) {
             try {
-                Model.post("logout", data, header, response, AuthModel.class);
+                Model.post("logout", data, header, response, null);
             } catch (IOException e) {
                 e.printStackTrace();
             }

@@ -46,11 +46,15 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Objects;
 
 public class SearchableDialog extends AppCompatDialogFragment {
@@ -189,7 +193,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    // TODO : Place Code Here
+                    setRecyclerView();
                 }, 750);
             }
 
@@ -267,8 +271,27 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterFragment != null) {
                     if (method.equals("managers")) {
+                        HashMap data = new HashMap();
+                        if (createCenterFragment.center.equals("personal_clinic"))
+                            data.put("personal_clinic", "yes");
+                        else
+                            data.put("personal_clinic", "no");
+                        HashMap header = new HashMap();
+                        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+
+                        User.list(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
                         searchableAdapter.setItems(values, method, null);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+
+                            }
+                        });
                     }
                 }
                 break;

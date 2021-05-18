@@ -80,8 +80,13 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
                 holder.binding.nameTextView.setText(model.getManager().getName());
                 holder.binding.usernameTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
             }
-
-            setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+            if (model.getDetail().getJSONArray("avatar") != null) {
+                if (model.getDetail().getJSONArray("avatar").length() !=0) {
+                    setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                    return;
+                }
+            }
+            setAvatar(holder, "");
         } catch (JSONException e) {
             e.printStackTrace();
         }

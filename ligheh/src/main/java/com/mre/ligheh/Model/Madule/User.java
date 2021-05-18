@@ -28,15 +28,6 @@ public class User extends Model {
         }
     }
 
-    public static void NoPersonalManagers(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
-        try {
-            Model.show(endpoint + "?personal_clinic=no", data, header, response, UserModel.class);
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             Model.show(endpoint, data, header, response, UserModel.class);

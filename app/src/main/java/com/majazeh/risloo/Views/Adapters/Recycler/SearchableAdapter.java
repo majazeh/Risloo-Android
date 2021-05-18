@@ -207,6 +207,8 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     break;
                 case "references":
                 case "managers":
+                    // TODO: write title
+                    break;
                 case "cases":
                 case "sessions":
                 case "psychologies":

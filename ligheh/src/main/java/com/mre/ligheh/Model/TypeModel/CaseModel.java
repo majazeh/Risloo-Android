@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import com.mre.ligheh.Model.Madule.List;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -8,7 +10,7 @@ public class CaseModel extends TypeModel {
     private String caseId;
     private UserModel caseManager;
     private RoomModel caseRoom;
-    private JSONArray clients;
+    private com.mre.ligheh.Model.Madule.List clients;
     private JSONObject detail;
     private int sessions_count;
     private int caseCreated_at;
@@ -16,23 +18,25 @@ public class CaseModel extends TypeModel {
     public CaseModel(JSONObject jsonObject) {
         try {
             setCaseId(jsonObject.getString("id"));
-        if (!jsonObject.isNull("manager"))
-            setCaseManager(new UserModel(jsonObject.getJSONObject("manager")));
-        if (!jsonObject.isNull("room"))
-            setCaseRoom(new RoomModel(jsonObject.getJSONObject("room")));
-        if (!jsonObject.isNull("clients")){
-            JSONArray jsonArray = new JSONArray();
-            for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++) {
-                jsonArray.put(new UserModel(jsonObject.getJSONArray("clients").getJSONObject(i)));
+            if (!jsonObject.isNull("manager"))
+                setCaseManager(new UserModel(jsonObject.getJSONObject("manager")));
+            if (!jsonObject.isNull("room"))
+                setCaseRoom(new RoomModel(jsonObject.getJSONObject("room")));
+            if (!jsonObject.isNull("clients")) {
+                com.mre.ligheh.Model.Madule.List users = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++) {
+                    users.add(new UserModel(jsonObject.getJSONArray("clients").getJSONObject(i)));
+                }
+                setClients(users);
+            } else {
+                setClients(new com.mre.ligheh.Model.Madule.List());
             }
-            setClients(jsonArray);
-        }
-        if (!jsonObject.isNull("detail"))
-            setDetail(jsonObject.getJSONObject("detail"));
-        if (!jsonObject.isNull("sessions_count"))
-            setSessions_count(jsonObject.getInt("sessions_count"));
-        if (!jsonObject.isNull("created_at"))
-            setCaseCreated_at(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("detail"))
+                setDetail(jsonObject.getJSONObject("detail"));
+            if (!jsonObject.isNull("sessions_count"))
+                setSessions_count(jsonObject.getInt("sessions_count"));
+            if (!jsonObject.isNull("created_at"))
+                setCaseCreated_at(jsonObject.getInt("created_at"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -62,11 +66,11 @@ public class CaseModel extends TypeModel {
         this.caseRoom = caseRoom;
     }
 
-    public JSONArray getClients() {
+    public List getClients() {
         return clients;
     }
 
-    public void setClients(JSONArray clients) {
+    public void setClients(List clients) {
         this.clients = clients;
     }
 
