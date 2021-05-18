@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -298,9 +298,9 @@ public class CreateSampleFragment extends Fragment {
 //
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    Model model = new Model(jsonObject);
+//                    TypeModel TypeModel = new TypeModel(jsonObject);
 //
-//                    scales.add(model);
+//                    scales.add(TypeModel);
 //                }
 //
 //                setRecyclerView(scales, "scales");
@@ -409,9 +409,9 @@ public class CreateSampleFragment extends Fragment {
 //
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    Model model = new Model(jsonObject);
+//                    TypeModel TypeModel = new TypeModel(jsonObject);
 //
-//                    references.add(model);
+//                    references.add(TypeModel);
 //                }
 //
 //                setRecyclerView(references, "references");
@@ -429,7 +429,7 @@ public class CreateSampleFragment extends Fragment {
 
     }
 
-    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         if (method.equals("scales")) {
             scalesAdapter.setItems(items, ids, method, binding.scaleIncludeLayout.countTextView);
             binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesAdapter);
@@ -439,11 +439,11 @@ public class CreateSampleFragment extends Fragment {
         }
     }
 
-    public void responseDialog(String method, Model item) {
+    public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
                 case "scales":
-                    int scalePosition = scalesAdapter.getIds().indexOf(item.get("id").toString());
+                    int scalePosition = scalesAdapter.getIds().indexOf(item.object.get("id").toString());
 
                     if (scalePosition == -1)
                         scalesAdapter.addItem(item);
@@ -460,14 +460,14 @@ public class CreateSampleFragment extends Fragment {
 
                     break;
                 case "rooms":
-                    if (!roomId.equals(item.get("id").toString())) {
-                        roomId = item.get("id").toString();
-                        roomName = item.get("title").toString();
-                        centerName = item.get("subtitle").toString();
+                    if (!roomId.equals(item.object.get("id").toString())) {
+                        roomId = item.object.get("id").toString();
+                        roomName = item.object.get("title").toString();
+                        centerName = item.object.get("subtitle").toString();
 
                         binding.roomIncludeLayout.primaryTextView.setText(roomName);
                         binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-                    } else if (roomId.equals(item.get("id").toString())) {
+                    } else if (roomId.equals(item.object.get("id").toString())) {
                         roomId = "";
                         roomName = "";
                         centerName = "";
@@ -479,7 +479,7 @@ public class CreateSampleFragment extends Fragment {
                     roomsDialog.dismiss();
                     break;
                 case "references":
-                    int referencePosition = referencesAdapter.getIds().indexOf(item.get("id").toString());
+                    int referencePosition = referencesAdapter.getIds().indexOf(item.object.get("id").toString());
 
                     if (referencePosition == -1)
                         referencesAdapter.addItem(item);
@@ -496,12 +496,12 @@ public class CreateSampleFragment extends Fragment {
 
                     break;
                 case "cases":
-                    if (!caseId.equals(item.get("id").toString())) {
-                        caseId = item.get("id").toString();
-                        caseName = item.get("title").toString();
+                    if (!caseId.equals(item.object.get("id").toString())) {
+                        caseId = item.object.get("id").toString();
+                        caseName = item.object.get("title").toString();
 
                         binding.caseIncludeLayout.selectTextView.setText(caseName);
-                    } else if (caseId.equals(item.get("id").toString())) {
+                    } else if (caseId.equals(item.object.get("id").toString())) {
                         caseId = "";
                         caseName = "";
 
@@ -511,12 +511,12 @@ public class CreateSampleFragment extends Fragment {
                     casesDialog.dismiss();
                     break;
                 case "sessions":
-                    if (!sessionId.equals(item.get("id").toString())) {
-                        sessionId = item.get("id").toString();
-                        sessionName = item.get("title").toString();
+                    if (!sessionId.equals(item.object.get("id").toString())) {
+                        sessionId = item.object.get("id").toString();
+                        sessionName = item.object.get("title").toString();
 
                         binding.sessionIncludeLayout.selectTextView.setText(sessionName);
-                    } else if (sessionId.equals(item.get("id").toString())) {
+                    } else if (sessionId.equals(item.object.get("id").toString())) {
                         sessionId = "";
                         sessionName = "";
 

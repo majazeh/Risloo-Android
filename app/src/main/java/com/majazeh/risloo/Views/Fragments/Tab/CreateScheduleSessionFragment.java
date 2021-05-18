@@ -27,6 +27,7 @@ import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleSessionBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
@@ -494,7 +495,7 @@ public class CreateScheduleSessionFragment extends Fragment {
 
     }
 
-    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         if (method.equals("axises")) {
             axisesAdapter.setItems(items, ids, method, binding.axisIncludeLayout.countTextView);
             binding.axisIncludeLayout.selectRecyclerView.setAdapter(axisesAdapter);

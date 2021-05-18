@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
@@ -42,7 +42,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     private TextView countTextView;
 
     // Vars
-    private ArrayList<Model> items;
+    private ArrayList<TypeModel> items;
     private ArrayList<String> ids;
     private String method;
 
@@ -58,7 +58,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
     @Override
     public void onBindViewHolder(@NonNull SelectedHolder holder, int i) {
-        Model item = items.get(i);
+        TypeModel item = items.get(i);
 
         detector(holder);
 
@@ -72,7 +72,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         return items.size();
     }
 
-    public ArrayList<Model> getItems() {
+    public ArrayList<TypeModel> getItems() {
         return items;
     }
 
@@ -80,7 +80,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         return ids;
     }
 
-    public void setItems(ArrayList<Model> items, ArrayList<String> ids, String method, TextView countTextView) {
+    public void setItems(ArrayList<TypeModel> items, ArrayList<String> ids, String method, TextView countTextView) {
         this.items = items;
         this.ids = ids;
         this.method = method;
@@ -98,10 +98,10 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         calculateCount();
     }
 
-    public void addItem(Model item) {
+    public void addItem(TypeModel item) {
         try {
             items.add(item);
-            ids.add(item.get("id").toString());
+            ids.add(item.object.getString("id"));
             notifyDataSetChanged();
 
             calculateCount();
@@ -110,10 +110,10 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         }
     }
 
-    public void replaceItem(int position, Model item) {
+    public void replaceItem(int position, TypeModel item) {
         try {
             items.set(position, item);
-            ids.set(position, item.get("id").toString());
+            ids.set(position, item.object.getString("id"));
             notifyItemChanged(position);
             notifyItemRangeChanged(position, getItemCount());
 
@@ -255,20 +255,20 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         }).widget(holder.binding.removeImageView);
     }
 
-    private void setData(SelectedHolder holder, Model item) {
+    private void setData(SelectedHolder holder, TypeModel item) {
         try {
             switch (method) {
                 case "scales":
-                    holder.binding.titleTextView.setText(item.get("title").toString());
+                    holder.binding.titleTextView.setText(item.object.getString("title"));
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(item.get("subtitle").toString());
+                    holder.binding.subTextView.setText(item.object.getString("subtitle"));
                     break;
                 case "references":
                 case "phones":
                 case "axises":
                 case "patternDays":
-                    holder.binding.titleTextView.setText(item.get("title").toString());
+                    holder.binding.titleTextView.setText(item.object.getString("title"));
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");

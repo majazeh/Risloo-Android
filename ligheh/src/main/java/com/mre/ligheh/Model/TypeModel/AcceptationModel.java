@@ -12,6 +12,7 @@ public class AcceptationModel extends TypeModel {
     private String kicked_at;
 
     public AcceptationModel(JSONObject jsonObject) {
+        super(jsonObject);
         try {
             setId(jsonObject.getString("id"));
         if (!jsonObject.isNull("name"))

@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -180,18 +180,18 @@ public class CreateCenterUserFragment extends Fragment {
         }
     }
 
-    public void responseDialog(String method, Model item) {
+    public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
                 case "rooms":
-                    if (!roomId.equals(item.get("id").toString())) {
-                        roomId = item.get("id").toString();
-                        roomName = item.get("title").toString();
-                        centerName = item.get("subtitle").toString();
+                    if (!roomId.equals(item.object.get("id").toString())) {
+                        roomId = item.object.get("id").toString();
+                        roomName = item.object.get("title").toString();
+                        centerName = item.object.get("subtitle").toString();
 
                         binding.roomIncludeLayout.primaryTextView.setText(roomName);
                         binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-                    } else if (roomId.equals(item.get("id").toString())) {
+                    } else if (roomId.equals(item.object.get("id").toString())) {
                         roomId = "";
                         roomName = "";
                         centerName = "";

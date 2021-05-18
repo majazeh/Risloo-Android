@@ -16,6 +16,7 @@ public class CaseModel extends TypeModel {
     private int caseCreated_at;
 
     public CaseModel(JSONObject jsonObject) {
+        super(jsonObject);
         try {
             setCaseId(jsonObject.getString("id"));
             if (!jsonObject.isNull("manager"))

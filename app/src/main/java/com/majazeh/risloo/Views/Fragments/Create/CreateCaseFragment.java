@@ -15,7 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
@@ -23,6 +24,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
@@ -151,9 +153,9 @@ public class CreateCaseFragment extends Fragment {
 //
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    Model model = new Model(jsonObject);
+//                    TypeModel TypeModel = new TypeModel(jsonObject);
 //
-//                    references.add(model);
+//                    references.add(TypeModel);
 //                }
 //
 //                setRecyclerView(references, "references");
@@ -170,25 +172,26 @@ public class CreateCaseFragment extends Fragment {
         }
     }
 
-    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         if (method.equals("references")) {
             referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
             binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
         }
     }
 
-    public void responseDialog(String method, Model item) {
+    public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
                 case "rooms":
-                    if (!roomId.equals(item.get("id").toString())) {
-                        roomId = item.get("id").toString();
-                        roomName = item.get("title").toString();
-                        centerName = item.get("subtitle").toString();
+                    item = (RoomModel) item;
+                    if (!roomId.equals(((RoomModel) item).getRoomId())) {
+                        roomId = ((RoomModel) item).getRoomId();
+                        roomName = ((RoomModel) item).getRoomCenter().getDetail().getString("name");
+                        centerName = ((RoomModel) item).getRoomCenter().getDetail().getString("name");
 
                         binding.roomIncludeLayout.primaryTextView.setText(roomName);
                         binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-                    } else if (roomId.equals(item.get("id").toString())) {
+                    } else if (roomId.equals(((RoomModel) item).getRoomId())) {
                         roomId = "";
                         roomName = "";
                         centerName = "";
@@ -200,7 +203,8 @@ public class CreateCaseFragment extends Fragment {
                     roomsDialog.dismiss();
                     break;
                 case "references":
-                    int position = referencesAdapter.getIds().indexOf(item.get("id").toString());
+                    item = (UserModel) item;
+                    int position = referencesAdapter.getIds().indexOf(((UserModel) item).getUserId());
 
                     if (position == -1)
                         referencesAdapter.addItem(item);

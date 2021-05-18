@@ -9,6 +9,7 @@ public class AvatarModel extends TypeModel {
     private AvatarDetail original;
 
     public AvatarModel(JSONArray jsonArray) throws JSONException {
+        super(jsonArray);
         for (int i = 0; i < jsonArray.length(); i++) {
             switch (jsonArray.getJSONObject(i).getString("mode")) {
                 case "small":
@@ -61,10 +62,6 @@ public class AvatarModel extends TypeModel {
     }
 
     private AvatarDetail small;
-
-    public AvatarModel() {
-        super();
-    }
 
 
 

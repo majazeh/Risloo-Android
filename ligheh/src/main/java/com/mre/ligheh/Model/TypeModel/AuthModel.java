@@ -13,6 +13,7 @@ public class AuthModel extends TypeModel {
     private UserModel user;
 
     public AuthModel(JSONObject jsonObject) throws JSONException {
+        super(jsonObject);
         if (!jsonObject.isNull("theory"))
             setTheory(jsonObject.getString("theory"));
         if (!jsonObject.isNull("key"))

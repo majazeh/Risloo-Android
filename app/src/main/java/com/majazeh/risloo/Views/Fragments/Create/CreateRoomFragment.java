@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -94,16 +94,16 @@ public class CreateRoomFragment extends Fragment {
         }
     }
 
-    public void responseDialog(String method, Model item) {
+    public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
                 case "psychologies":
-                    if (!psychologyId.equals(item.get("id").toString())) {
-                        psychologyId = item.get("id").toString();
-                        psychologyName = item.get("title").toString();
+                    if (!psychologyId.equals(item.object.get("id").toString())) {
+                        psychologyId = item.object.get("id").toString();
+                        psychologyName = item.object.get("title").toString();
 
                         binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
-                    } else if (psychologyId.equals(item.get("id").toString())) {
+                    } else if (psychologyId.equals(item.object.get("id").toString())) {
                         psychologyId = "";
                         psychologyName = "";
 

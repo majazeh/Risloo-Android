@@ -14,6 +14,7 @@ public class AvatarDetail {
     private String exec;
 
     public AvatarDetail(JSONObject jsonObject) {
+
         try {
             setId(jsonObject.getString("id"));
             setFile_name(jsonObject.getString("file_name"));

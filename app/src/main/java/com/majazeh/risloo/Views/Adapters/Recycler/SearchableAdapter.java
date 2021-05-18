@@ -11,7 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
@@ -30,6 +30,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
@@ -45,7 +46,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     private TextView countTextView;
 
     // Vars
-    private ArrayList<Model> items;
+    private ArrayList<TypeModel> items;
     private String method;
 
     public SearchableAdapter(@NonNull Activity activity) {
@@ -60,7 +61,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull SearchableHolder holder, int i) {
-        Model item = items.get(i);
+        TypeModel item = items.get(i);
 
         listener(holder, item);
 
@@ -74,11 +75,11 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         return items.size();
     }
 
-    public ArrayList<Model> getItems() {
+    public ArrayList<TypeModel> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Model> items, String method, TextView countTextView) {
+    public void setItems(ArrayList<TypeModel> items, String method, TextView countTextView) {
         this.items = items;
         this.method = method;
         if (countTextView != null) {
@@ -101,7 +102,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         }
     }
 
-    private void listener(SearchableHolder holder, Model item) {
+    private void listener(SearchableHolder holder, TypeModel item) {
         ClickManager.onDelayedClickListener(() -> {
             switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
                 case R.id.createCaseFragment:
@@ -195,25 +196,26 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(SearchableHolder holder, Model item) {
+    private void setData(SearchableHolder holder, TypeModel item) {
         try {
             switch (method) {
                 case "scales":
                 case "rooms":
-                    holder.binding.titleTextView.setText(item.get("title").toString());
+                    holder.binding.titleTextView.setText(item.object.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(item.get("subtitle").toString());
+                    holder.binding.subTextView.setText(item.object.get("subtitle").toString());
                     break;
                 case "references":
                 case "managers":
                     // TODO: write title
+                    holder.binding.titleTextView.setText(((UserModel)item).getName());
                     break;
                 case "cases":
                 case "sessions":
                 case "psychologies":
                 case "patternDays":
-                    holder.binding.titleTextView.setText(item.get("title").toString());
+                    holder.binding.titleTextView.setText(item.object.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
@@ -224,7 +226,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         }
     }
 
-    private void setActive(SearchableHolder holder, Model item) {
+    private void setActive(SearchableHolder holder, TypeModel item) {
         try {
             switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
                 case R.id.createCaseFragment:
@@ -232,11 +234,11 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     if (createCaseFragment != null) {
                         switch (method) {
                             case "references":
-                                detector(holder, createCaseFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                                detector(holder, createCaseFragment.referencesAdapter.getIds().contains(item.object.get("id").toString()));
                                 calculateCount(createCaseFragment.referencesAdapter.getIds().size());
                                 break;
                             case "rooms":
-                                detector(holder, createCaseFragment.roomId.equals(item.get("id").toString()));
+                                detector(holder, createCaseFragment.roomId.equals(item.object.get("id").toString()));
                                 break;
                         }
                     }
@@ -245,7 +247,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCaseUserFragment != null) {
                         if (method.equals("references")) {
-                            detector(holder, createCaseUserFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                            detector(holder, createCaseUserFragment.referencesAdapter.getIds().contains(item.object.get("id").toString()));
                             calculateCount(createCaseUserFragment.referencesAdapter.getIds().size());
                         }
                     }
@@ -254,7 +256,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCenterFragment != null) {
                         if (method.equals("managers")) {
-                            detector(holder, createCenterFragment.managerId.equals(item.get("id").toString()));
+                            detector(holder, createCenterFragment.managerId.equals(item.object.get("id").toString()));
                         }
                     }
                     break;
@@ -262,7 +264,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCenterUserFragment != null) {
                         if (method.equals("rooms")) {
-                            detector(holder, createCenterUserFragment.roomId.equals(item.get("id").toString()));
+                            detector(holder, createCenterUserFragment.roomId.equals(item.object.get("id").toString()));
                         }
                     }
                     break;
@@ -270,7 +272,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createRoomFragment != null) {
                         if (method.equals("psychologies")) {
-                            detector(holder, createRoomFragment.psychologyId.equals(item.get("id").toString()));
+                            detector(holder, createRoomFragment.psychologyId.equals(item.object.get("id").toString()));
                         }
                     }
                     break;
@@ -279,21 +281,21 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     if (createSampleFragment != null) {
                         switch (method) {
                             case "scales":
-                                detector(holder, createSampleFragment.scalesAdapter.getIds().contains(item.get("id").toString()));
+                                detector(holder, createSampleFragment.scalesAdapter.getIds().contains(item.object.get("id").toString()));
                                 calculateCount(createSampleFragment.scalesAdapter.getIds().size());
                                 break;
                             case "references":
-                                detector(holder, createSampleFragment.referencesAdapter.getIds().contains(item.get("id").toString()));
+                                detector(holder, createSampleFragment.referencesAdapter.getIds().contains(item.object.get("id").toString()));
                                 calculateCount(createSampleFragment.referencesAdapter.getIds().size());
                                 break;
                             case "rooms":
-                                detector(holder, createSampleFragment.roomId.equals(item.get("id").toString()));
+                                detector(holder, createSampleFragment.roomId.equals(item.object.get("id").toString()));
                                 break;
                             case "cases":
-                                detector(holder, createSampleFragment.caseId.equals(item.get("id").toString()));
+                                detector(holder, createSampleFragment.caseId.equals(item.object.get("id").toString()));
                                 break;
                             case "sessions":
-                                detector(holder, createSampleFragment.sessionId.equals(item.get("id").toString()));
+                                detector(holder, createSampleFragment.sessionId.equals(item.object.get("id").toString()));
                                 break;
                         }
                     }
@@ -305,13 +307,13 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             case "cases":
                                 CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
                                 if (createScheduleReferenceFragment != null) {
-                                    detector(holder, createScheduleReferenceFragment.caseId.equals(item.get("id").toString()));
+                                    detector(holder, createScheduleReferenceFragment.caseId.equals(item.object.get("id").toString()));
                                 }
                                 break;
                             case "patternDays":
                                 CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
                                 if (createScheduleTimeFragment != null) {
-                                    detector(holder, createScheduleTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                    detector(holder, createScheduleTimeFragment.patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
                                     calculateCount(createScheduleTimeFragment.patternDaysAdapter.getIds().size());
                                 }
                                 break;
@@ -324,7 +326,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         if (method.equals("patternDays")) {
                             CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (createSessionTimeFragment != null) {
-                                detector(holder, createSessionTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                detector(holder, createSessionTimeFragment.patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
                                 calculateCount(createSessionTimeFragment.patternDaysAdapter.getIds().size());
                             }
                         }
@@ -336,7 +338,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         if (method.equals("managers")) {
                             EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (editCenterDetailFragment != null) {
-                                detector(holder, editCenterDetailFragment.managerId.equals(item.get("id").toString()));
+                                detector(holder, editCenterDetailFragment.managerId.equals(item.object.get("id").toString()));
                             }
                         }
                     }
@@ -347,7 +349,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         if (method.equals("patternDays")) {
                             EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (editSessionTimeFragment != null) {
-                                detector(holder, editSessionTimeFragment.patternDaysAdapter.getIds().contains(item.get("id").toString()));
+                                detector(holder, editSessionTimeFragment.patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
                                 calculateCount(editSessionTimeFragment.patternDaysAdapter.getIds().size());
                             }
                         }

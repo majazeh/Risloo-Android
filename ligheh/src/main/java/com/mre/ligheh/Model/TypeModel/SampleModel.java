@@ -26,6 +26,7 @@ public class SampleModel extends TypeModel {
     private SampleForm sampleForm;
 
     public SampleModel(JSONObject jsonObject) throws JSONException {
+        super(jsonObject);
         if (!jsonObject.isNull("id"))
             setSampleId(jsonObject.getString("id"));
         if (!jsonObject.isNull("title"))

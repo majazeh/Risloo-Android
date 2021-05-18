@@ -17,7 +17,11 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.majazeh.risloo.Utils.Entities.Main;
+import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
@@ -30,11 +34,13 @@ import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class CreateCenterFragment extends Fragment {
 
@@ -57,12 +63,15 @@ public class CreateCenterFragment extends Fragment {
     private Bitmap avatarBitmap;
 
     // Vars
-    public String center = "personal_clinic", managerId = "", managerName = "", name = "", address = "", description ="";
+    public String center = "personal_clinic", managerId = "", managerName = "", name = "", address = "", description = "";
     public String avatarPath = "";
+
+    HashMap data = new HashMap();
+    HashMap header = new HashMap();
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCreateCenterBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -217,7 +226,7 @@ public class CreateCenterFragment extends Fragment {
 
     private void setData() {
         if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            center = ((MainActivity) requireActivity()).singleton.getName();
+//            center = ((MainActivity) requireActivity()).singleton.getType();
             switch (center) {
                 case "personal_clinic":
                     binding.centerIncludeLayout.firstRadioButton.setChecked(true);
@@ -256,9 +265,9 @@ public class CreateCenterFragment extends Fragment {
 //
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    Model model = new Model(jsonObject);
+//                    TypeModel TypeModel = new TypeModel(jsonObject);
 //
-//                    phones.add(model);
+//                    phones.add(TypeModel);
 //                }
 //
 //                setRecyclerView(phones, "phones");
@@ -266,7 +275,7 @@ public class CreateCenterFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
 //        }
 
         if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
@@ -275,23 +284,23 @@ public class CreateCenterFragment extends Fragment {
         }
     }
 
-    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         if (method.equals("phones")) {
             phonesAdapter.setItems(items, ids, method, binding.phonesIncludeLayout.countTextView);
             binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
         }
     }
 
-    public void responseDialog(String method, Model item) {
+    public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
                 case "managers":
-                    if (!managerId.equals(item.get("id").toString())) {
-                        managerId = item.get("id").toString();
-                        managerName = item.get("title").toString();
+                    if (!managerId.equals(((UserModel) item).getUserId())) {
+                        managerId = ((UserModel) item).getUserId();
+                        managerName = ((UserModel) item).getName();
 
                         binding.managerIncludeLayout.selectTextView.setText(managerName);
-                    } else if (managerId.equals(item.get("id").toString())) {
+                    } else if (managerId.equals(item.object.get("id").toString())) {
                         managerId = "";
                         managerName = "";
 
@@ -318,20 +327,43 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
         if (center.equals("personal_clinic")) {
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-            // TODO : Call Work Method
+            data.put("type", "personal_clinic");
         } else {
-            FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+//            FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
 
             name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
             address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-            // TODO : Call Work Method
+//            if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+//                data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+            data.put("type", "counseling_center");
+            data.put("title", name);
         }
+        data.put("manager_id", managerId);
+        data.put("address", address);
+        data.put("description", description);
+        data.put("phone_numbers", phonesAdapter.getIds());
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        Center.create(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded())
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
+                    });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                System.out.println(response);
+            }
+        });
+        FileManager.deleteFileFromCache(requireActivity(), "image");
     }
 
     @Override

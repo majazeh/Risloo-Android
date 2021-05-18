@@ -15,6 +15,7 @@ public class RoomModel extends TypeModel {
     private int RoomUpdated_at;
 
     public RoomModel(JSONObject jsonObject) throws JSONException {
+        super(jsonObject);
         setRoomId(jsonObject.getString("id"));
         if (!jsonObject.isNull("creator"))
             setRoomCreator(new UserModel(jsonObject.getJSONObject("creator")));

@@ -49,6 +49,7 @@ import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -72,6 +73,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
     // Vars
     private String method;
+
+    HashMap data = new HashMap();
+    HashMap header = new HashMap();
 
     @NonNull
     @Override
@@ -193,6 +197,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
+                    data.put("q", String.valueOf(s));
                     setRecyclerView();
                 }, 750);
             }
@@ -207,7 +212,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
     }
 
     private void setRecyclerView() {
-        ArrayList<Model> values = new ArrayList<>();
+        ArrayList<TypeModel> values = new ArrayList<>();
 
         if (method.equals("patternDays")) {
             String[] weekDays = requireActivity().getResources().getStringArray(R.array.WeekDays);
@@ -218,7 +223,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     jsonObject.put("id", weekDay);
                     jsonObject.put("title", weekDay);
 
-                    Model model = new Model(jsonObject);
+                    TypeModel model = new TypeModel(jsonObject);
 
                     values.add(model);
                 } catch (JSONException e) {
@@ -233,7 +238,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     jsonObject.put("title", "عنوان" + " " + i);
                     jsonObject.put("subtitle", "زیرنویس" + " " + i);
 
-                    Model model = new Model(jsonObject);
+                    TypeModel model = new TypeModel(jsonObject);
 
                     values.add(model);
                 } catch (JSONException e) {
@@ -271,20 +276,21 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterFragment != null) {
                     if (method.equals("managers")) {
-                        HashMap data = new HashMap();
                         if (createCenterFragment.center.equals("personal_clinic"))
                             data.put("personal_clinic", "yes");
                         else
                             data.put("personal_clinic", "no");
-                        HashMap header = new HashMap();
                         header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
 
                         User.list(data, header, new Response() {
                             @Override
                             public void onOK(Object object) {
                                 List list = (List) object;
-                        searchableAdapter.setItems(values, method, null);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                                if (isAdded())
+                                    requireActivity().runOnUiThread(() -> {
+                                        searchableAdapter.setItems(list.data(), method, null);
+                                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                                    });
                             }
 
                             @Override

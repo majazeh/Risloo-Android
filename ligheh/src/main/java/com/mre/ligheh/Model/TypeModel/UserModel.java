@@ -34,6 +34,7 @@ public class UserModel extends TypeModel {
     }
 
     public UserModel(JSONObject jsonObject) throws JSONException {
+        super(jsonObject);
         setUserId(jsonObject.getString("id"));
         if (!jsonObject.isNull("name"))
             setName(jsonObject.getString("name"));

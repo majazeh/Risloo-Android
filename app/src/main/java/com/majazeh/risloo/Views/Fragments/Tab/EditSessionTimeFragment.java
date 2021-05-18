@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -293,9 +293,9 @@ public class EditSessionTimeFragment extends Fragment {
 //
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    Model model = new Model(jsonObject);
+//                    TypeModel TypeModel = new TypeModel(jsonObject);
 //
-//                    patternDays.add(model);
+//                    patternDays.add(TypeModel);
 //                }
 //
 //                setRecyclerView(patternDays, "patternDays");
@@ -354,7 +354,7 @@ public class EditSessionTimeFragment extends Fragment {
         periodEndDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", periodEndDate)));
     }
 
-    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         if (method.equals("patternDays")) {
             patternDaysAdapter.setItems(items, ids, method, binding.patternDaysIncludeLayout.countTextView);
             binding.patternDaysIncludeLayout.selectRecyclerView.setAdapter(patternDaysAdapter);
@@ -401,11 +401,11 @@ public class EditSessionTimeFragment extends Fragment {
         }
     }
 
-    public void responseDialog(String method, Model item) {
+    public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
                 case "patternDays":
-                    int position = patternDaysAdapter.getIds().indexOf(item.get("id").toString());
+                    int position = patternDaysAdapter.getIds().indexOf(item.object.get("id").toString());
 
                     if (position == -1)
                         patternDaysAdapter.addItem(item);

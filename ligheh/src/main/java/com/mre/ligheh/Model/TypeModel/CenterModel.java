@@ -19,6 +19,7 @@ public class CenterModel extends TypeModel {
     }
 
     public CenterModel(JSONObject jsonObject) throws JSONException {
+        super(jsonObject);
         setCenterId(jsonObject.getString("id"));
         if (!jsonObject.isNull("manager"))
             setManager(new UserModel(jsonObject.getJSONObject("manager")));

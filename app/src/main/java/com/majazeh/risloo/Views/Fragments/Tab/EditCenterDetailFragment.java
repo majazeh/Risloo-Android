@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
@@ -189,9 +189,9 @@ public class EditCenterDetailFragment extends Fragment {
 //
 //                for (int i = 0; i < jsonArray.length(); i++) {
 //                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    Model model = new Model(jsonObject);
+//                    TypeModel TypeModel = new TypeModel(jsonObject);
 //
-//                    phones.add(model);
+//                    phones.add(TypeModel);
 //                }
 //
 //                setRecyclerView(phones, "phones");
@@ -208,23 +208,23 @@ public class EditCenterDetailFragment extends Fragment {
         }
     }
 
-    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids, String method) {
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         if (method.equals("phones")) {
             phonesAdapter.setItems(items, ids, method, binding.phonesIncludeLayout.countTextView);
             binding.phonesIncludeLayout.selectRecyclerView.setAdapter(phonesAdapter);
         }
     }
 
-    public void responseDialog(String method, Model item) {
+    public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
                 case "managers":
-                    if (!managerId.equals(item.get("id").toString())) {
-                        managerId = item.get("id").toString();
-                        managerName = item.get("title").toString();
+                    if (!managerId.equals(item.object.get("id").toString())) {
+                        managerId = item.object.get("id").toString();
+                        managerName = item.object.get("title").toString();
 
                         binding.managerIncludeLayout.selectTextView.setText(managerName);
-                    } else if (managerId.equals(item.get("id").toString())) {
+                    } else if (managerId.equals(item.object.get("id").toString())) {
                         managerId = "";
                         managerName = "";
 

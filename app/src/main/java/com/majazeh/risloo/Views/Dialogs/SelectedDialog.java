@@ -23,7 +23,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
@@ -142,12 +142,12 @@ public class SelectedDialog extends AppCompatDialogFragment {
             if (binding.inputEditText.length() != 0) {
                 try {
                     String value = binding.inputEditText.getText().toString().trim();
-                    Model item;
+                    TypeModel item;
 
                     if (method.equals("axises"))
-                        item = new Model(new JSONObject().put("id", "").put("title", value));
+                        item = new TypeModel(new JSONObject().put("id", "").put("title", value));
                     else
-                        item = new Model(new JSONObject().put("id", value).put("title", value));
+                        item = new TypeModel(new JSONObject().put("id", value).put("title", value));
 
                     switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
                         case R.id.createCenterFragment:

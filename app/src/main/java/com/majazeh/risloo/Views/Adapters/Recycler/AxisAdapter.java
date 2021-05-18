@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemAxisBinding;
 
@@ -24,7 +24,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
     private Activity activity;
 
     // Vars
-    private ArrayList<Model> items;
+    private ArrayList<TypeModel> items;
     private ArrayList<String> ids;
 
     public AxisAdapter(@NonNull Activity activity) {
@@ -39,7 +39,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull AxisHolder holder, int i) {
-        Model item = items.get(i);
+        TypeModel item = items.get(i);
 
         listener(holder, i);
 
@@ -51,7 +51,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         return items.size();
     }
 
-    public ArrayList<Model> getItems() {
+    public ArrayList<TypeModel> getItems() {
         return items;
     }
 
@@ -59,7 +59,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         return ids;
     }
 
-    public void setItems(ArrayList<Model> items, ArrayList<String> ids) {
+    public void setItems(ArrayList<TypeModel> items, ArrayList<String> ids) {
         this.items = items;
         this.ids = ids;
         notifyDataSetChanged();
@@ -71,20 +71,20 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         notifyDataSetChanged();
     }
 
-    public void addItem(Model item) {
+    public void addItem(TypeModel item) {
         try {
             items.add(item);
-            ids.add(item.get("id").toString());
+            ids.add(item.object.get("id").toString());
             notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void replaceItem(int position, Model item) {
+    public void replaceItem(int position, TypeModel item) {
         try {
             items.set(position, item);
-            ids.set(position, item.get("id").toString());
+            ids.set(position, item.object.get("id").toString());
             notifyItemChanged(position);
             notifyItemRangeChanged(position, getItemCount());
         } catch (JSONException e) {
@@ -117,9 +117,9 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         });
     }
 
-    private void setData(AxisHolder holder, Model item, int position) {
+    private void setData(AxisHolder holder, TypeModel item, int position) {
         try {
-            holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateSchedulePaymentTabAxisTotal) + " " + item.get("title").toString());
+            holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateSchedulePaymentTabAxisTotal) + " " + item.object.get("title").toString());
 
             if (!ids.get(position).equals("")) {
                 holder.binding.inputEditText.setText(ids.get(position));

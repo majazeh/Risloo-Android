@@ -1,20 +1,18 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
 public class TypeModel {
-//    private int code;
-//
-//    public TypeModel(int code) {
-//        this.code = code;
-//    }
-//
-//    public TypeModel() {
-//    }
-//
-//    public int getCode() {
-//        return code;
-//    }
-//
-//    public void setCode(int code) {
-//        this.code = code;
-//    }
+    public JSONObject object;
+    public JSONArray array;
+    public TypeModel(JSONObject jsonObject) {
+        this.object = jsonObject;
+    }
+    public TypeModel(JSONArray jsonArray) {
+        this.array = jsonArray;
+    }
+
+    public TypeModel() {
+    }
 }

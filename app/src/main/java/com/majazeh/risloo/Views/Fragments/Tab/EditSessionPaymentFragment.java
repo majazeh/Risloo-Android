@@ -22,6 +22,7 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.AxisAdapter;
 import com.majazeh.risloo.databinding.FragmentEditSessionPaymentBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
@@ -137,7 +138,7 @@ public class EditSessionPaymentFragment extends Fragment {
 //        }
     }
 
-    private void setRecyclerView(ArrayList<Model> items, ArrayList<String> ids) {
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids) {
         axisAdapter.setItems(items, ids);
         binding.axisRecyclerView.setAdapter(axisAdapter);
     }
