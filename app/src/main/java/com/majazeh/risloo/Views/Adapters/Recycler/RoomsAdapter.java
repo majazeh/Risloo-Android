@@ -50,7 +50,8 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     @Override
     public int getItemCount() {
-        return rooms.size();
+        return 0;
+//        return rooms.size();
     }
 
     public void setRooms(ArrayList<TypeModel> rooms) {

@@ -31,7 +31,7 @@ public class Center extends Model {
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.show(endpoint, data, header, response, CenterModel.class);
+                Model.show(endpoint +"/"+ data.get("id"), data, header, response, CenterModel.class);
             else
                 Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {

@@ -5,7 +5,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ItemAnswer {
-    private String type;
+    private String type="";
     private JSONArray options;
     private JSONArray images;
 

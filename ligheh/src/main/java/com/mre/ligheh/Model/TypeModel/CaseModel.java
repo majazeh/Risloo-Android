@@ -7,7 +7,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class CaseModel extends TypeModel {
-    private String caseId;
+    private String caseId="";
     private UserModel caseManager;
     private RoomModel caseRoom;
     private com.mre.ligheh.Model.Madule.List clients;

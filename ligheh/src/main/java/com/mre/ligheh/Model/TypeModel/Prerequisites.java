@@ -4,13 +4,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Prerequisites {
-    private String type;
-    private String text;
+    private String type="";
+    private String text="";
     private JSONObject answer;
-    private String alias;
-    private String label;
-    private String force;
-    private String user_answered;
+    private String alias="";
+    private String label="";
+    private String force="";
+    private String user_answered="";
 
     public Prerequisites(JSONObject jsonObject) {
         try {

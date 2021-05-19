@@ -283,7 +283,7 @@ public class MainActivity extends AppCompatActivity {
         navsAdapter.notifyDataSetChanged();
     }
 
-    public void navigator(int destinationId) {
+    public void navigator(int destinationId, Bundle extras) {
         try {
             if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
                 while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
@@ -296,7 +296,11 @@ public class MainActivity extends AppCompatActivity {
         if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment  && destinationId == R.id.meFragment) {
             navController.popBackStack();
         }
-        navController.navigate(destinationId);
+        navController.navigate(destinationId, extras);
+    }
+
+    public void navigator (int destinationId){
+        navigator(destinationId, null);
     }
 
     public void login(UserModel user) {

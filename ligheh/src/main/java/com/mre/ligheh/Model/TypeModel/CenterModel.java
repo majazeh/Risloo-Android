@@ -5,9 +5,9 @@ import org.json.JSONObject;
 
 
 public class CenterModel extends TypeModel {
-    private String CenterId;
-    private String centerStatus;
-    private String centerType;
+    private String CenterId="";
+    private String centerStatus="";
+    private String centerType="";
     private UserModel manager;
     private AcceptationModel acceptation;
     private JSONObject detail;

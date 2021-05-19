@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +47,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
         detector(holder);
 
-        listener(holder);
+        listener(holder,center);
 
         setData(holder, center);
     }
@@ -67,8 +68,10 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         }
     }
 
-    private void listener(CentersHolder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.centerFragment)).widget(holder.binding.containerConstraintLayout);
+    private void listener(CentersHolder holder,CenterModel model) {
+        Bundle extras = new Bundle();
+        extras.putString("id", model.getCenterId());
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.centerFragment,extras)).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(CentersHolder holder, CenterModel model) {

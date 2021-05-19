@@ -4,10 +4,10 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class Item {
-    private String type;
-    private String image_url;
+    private String type="";
+    private String image_url="";
     private ItemAnswer answer;
-    private String user_answered;
+    private String user_answered="";
 
     public Item(JSONObject jsonObject) {
         try {

@@ -7,20 +7,20 @@ import org.json.JSONObject;
 
 public class UserModel extends TypeModel {
 
-    private String userId;
-    private String name;
-    private String email;
-    private String mobile;
-    private String gender;
-    private String userStatus;
+    private String userId="";
+    private String name="";
+    private String email="";
+    private String mobile="";
+    private String gender="";
+    private String userStatus="";
     private boolean no_password;
-    private String position;
-    private String userType;
+    private String position="";
+    private String userType="";
     private JSONObject groups;
-    private String username;
+    private String username="";
     private UserModel creator;
-    private String public_key;
-    private String birthday;
+    private String public_key="";
+    private String birthday="";
     private int userCreated_at;
     private int userUpdated_at;
     private AvatarModel avatar;

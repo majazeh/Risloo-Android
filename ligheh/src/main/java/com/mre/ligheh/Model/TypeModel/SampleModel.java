@@ -7,22 +7,22 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SampleModel extends TypeModel {
-    private String sampleId;
-    private String sampleTitle;
+    private String sampleId="";
+    private String sampleTitle="";
     private int sampleVersion;
-    private String sampleEdition;
+    private String sampleEdition="";
     private int sampleEditionVersion;
-    private String filler;
-    private String sampleScaleId;
-    private String sampleScaleTitle;
-    private String sampleDescription;
+    private String filler="";
+    private String sampleScaleId="";
+    private String sampleScaleTitle="";
+    private String sampleDescription="";
     private JSONArray items;
-    private String chain;
+    private String chain="";
     private RoomModel SampleRoom;
     private JSONArray prerequisites;
     private JSONArray terms;
-    private String primaryTerm;
-    private String sampleStatus;
+    private String primaryTerm="";
+    private String sampleStatus="";
     private SampleForm sampleForm;
 
     public SampleModel(JSONObject jsonObject) throws JSONException {

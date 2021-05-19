@@ -27,7 +27,14 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+
+import java.util.HashMap;
 
 public class CenterFragment extends Fragment {
 
@@ -46,9 +53,12 @@ public class CenterFragment extends Fragment {
     // Vars
     private String status = "request", center = "clinic";
 
+    HashMap data = new HashMap();
+    HashMap header = new HashMap();
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCenterBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -200,139 +210,172 @@ public class CenterFragment extends Fragment {
 
     private void setData() {
         // Todo : Place Code Here And set them to the below conditions
+        data.put("id", requireArguments().getString("id"));
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
 
-        if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        } else {
-            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
-        }
+        Center.show(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                CenterModel centerModel = (CenterModel) object;
+                if (isAdded())
+                    requireActivity().runOnUiThread(() -> {
 
-        if (((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
-            binding.descriptionTextView.setVisibility(View.GONE);
-        } else {
-            binding.descriptionTextView.setText(((MainActivity) requireActivity()).singleton.getDescription());
-        }
 
-        if (((MainActivity) requireActivity()).singleton.getOwner().equals("")) {
-            binding.ownerGroup.setVisibility(View.GONE);
-        } else {
-            binding.ownerGroup.setVisibility(View.VISIBLE);
-            binding.ownerTextView.setText(((MainActivity) requireActivity()).singleton.getOwner());
-        }
+//                if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
+                        if (centerModel.getAcceptation() != null)
+                            binding.nameTextView.setText(centerModel.getAcceptation().getName());
+//                } else {
+//                    binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+//                }
 
-        if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            binding.mobileGroup.setVisibility(View.GONE);
-        } else {
-            binding.mobileGroup.setVisibility(View.VISIBLE);
-            binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
-        }
+//                if (((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
+//                    binding.descriptionTextView.setVisibility(View.GONE);
+//                } else {
+                        try {
+                            if (!centerModel.getDetail().isNull("description"))
+                                binding.descriptionTextView.setText(centerModel.getDetail().getString("description"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+//                }
 
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+//                if (((MainActivity) requireActivity()).singleton.getOwner().equals("")) {
+//                    binding.ownerGroup.setVisibility(View.GONE);
+//                } else {
+//                    binding.ownerGroup.setVisibility(View.VISIBLE);
+                        binding.ownerTextView.setText(centerModel.getManager().getName());
+//                }
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        }
+//                if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
+//                    binding.mobileGroup.setVisibility(View.GONE);
+//                } else {
+                        binding.mobileGroup.setVisibility(View.VISIBLE);
+                        try {
+                            if (!centerModel.getDetail().isNull("phone_numbers") && centerModel.getDetail().getJSONArray("phone_numbers").length() != 0) {
+                                binding.mobileTextView.setText(centerModel.getDetail().getJSONArray("phone_numbers").get(0).toString());
+                                binding.mobileGroup.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.mobileGroup.setVisibility(View.GONE);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+//                }
 
-        if (!((MainActivity) requireActivity()).singleton.getEnter()) {
-            binding.editImageView.getRoot().setVisibility(View.GONE);
-            binding.profileImageView.getRoot().setVisibility(View.GONE);
-            binding.schedulesImageView.getRoot().setVisibility(View.GONE);
-            binding.usersImageView.getRoot().setVisibility(View.GONE);
-        } else {
-            binding.editImageView.getRoot().setVisibility(View.VISIBLE);
-            binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
-            binding.schedulesImageView.getRoot().setVisibility(View.VISIBLE);
-            binding.usersImageView.getRoot().setVisibility(View.VISIBLE);
-        }
+                        if (centerModel.getManager().getAvatar() != null && centerModel.getManager().getAvatar().getMedium() != null) {
+                            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                            Picasso.get().load(centerModel.getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                        } else {
+                            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-        switch (status) {
-            case "request":
-                binding.statusTextView.getRoot().setEnabled(true);
+                            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                        }
 
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusRequest));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.White));
+                        if (!((MainActivity) requireActivity()).singleton.getEnter()) {
+                            binding.editImageView.getRoot().setVisibility(View.GONE);
+                            binding.profileImageView.getRoot().setVisibility(View.GONE);
+                            binding.schedulesImageView.getRoot().setVisibility(View.GONE);
+                            binding.usersImageView.getRoot().setVisibility(View.GONE);
+                        } else {
+                            binding.editImageView.getRoot().setVisibility(View.VISIBLE);
+                            binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
+                            binding.schedulesImageView.getRoot().setVisibility(View.VISIBLE);
+                            binding.usersImageView.getRoot().setVisibility(View.VISIBLE);
+                        }
+                        // TODO: set status from center Model (I don't know how status work from acceptation)
 
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
-                else
-                    binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
-                break;
-            case "owner":
-                binding.statusTextView.getRoot().setEnabled(false);
+                        switch (status) {
+                            case "request":
+                                binding.statusTextView.getRoot().setEnabled(true);
 
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusOwner));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
+                                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusRequest));
+                                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.White));
 
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-                break;
-            case "reference":
-                binding.statusTextView.getRoot().setEnabled(false);
+                                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                                    binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
+                                else
+                                    binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
+                                break;
+                            case "owner":
+                                binding.statusTextView.getRoot().setEnabled(false);
 
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusReference));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
+                                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusOwner));
+                                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-                break;
-            case "accepted":
-                binding.statusTextView.getRoot().setEnabled(false);
+                                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+                                break;
+                            case "reference":
+                                binding.statusTextView.getRoot().setEnabled(false);
 
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusAccepted));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
+                                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusReference));
+                                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-                break;
-            case "awaiting":
-                binding.statusTextView.getRoot().setEnabled(false);
+                                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+                                break;
+                            case "accepted":
+                                binding.statusTextView.getRoot().setEnabled(false);
 
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusAwaiting));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
+                                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusAccepted));
+                                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-                break;
-            case "kicked":
-                binding.statusTextView.getRoot().setEnabled(false);
+                                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+                                break;
+                            case "awaiting":
+                                binding.statusTextView.getRoot().setEnabled(false);
 
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusKicked));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
+                                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusAwaiting));
+                                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-                break;
-        }
+                                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+                                break;
+                            case "kicked":
+                                binding.statusTextView.getRoot().setEnabled(false);
 
-        switch (center) {
-            case "personal":
-                binding.casesGroup.setVisibility(View.VISIBLE);
-                binding.roomsGroup.setVisibility(View.GONE);
-                binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                                binding.statusTextView.getRoot().setText(getResources().getString(R.string.CenterFragmentStatusKicked));
+                                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
-                //        cases2Adapter.setCases(null);
-                binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
-                binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+                                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+                                break;
+                        }
+                        center = centerModel.getCenterType();
+                        switch (center) {
+                            case "personal":
+                                binding.casesGroup.setVisibility(View.VISIBLE);
+                                binding.roomsGroup.setVisibility(View.GONE);
+                                binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
 
-                new Handler().postDelayed(() -> {
-                    binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                }, 1000);
-                break;
-            case "clinic":
-                binding.roomsGroup.setVisibility(View.VISIBLE);
-                binding.casesGroup.setVisibility(View.GONE);
-                binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                                //        cases2Adapter.setCases(null);
+                                binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+                                binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
 
-                //        roomsAdapter.setRooms(null);
-                binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
-                binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+                                new Handler().postDelayed(() -> {
+                                    binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                                    binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                                }, 1000);
+                                break;
+                            case "clinic":
+                                binding.roomsGroup.setVisibility(View.VISIBLE);
+                                binding.casesGroup.setVisibility(View.GONE);
+                                binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
 
-                new Handler().postDelayed(() -> {
-                    binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                }, 1000);
-                break;
-        }
+                                //        roomsAdapter.setRooms(null);
+                                binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+                                binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+
+                                binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                                binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+                        }
+                    });
+            }
+
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
+
     }
 
     @Override

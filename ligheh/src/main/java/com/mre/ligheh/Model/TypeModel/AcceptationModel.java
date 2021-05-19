@@ -4,12 +4,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AcceptationModel extends TypeModel {
-    private String id;
-    private String name;
-    private String position;
+    private String id = "";
+    private String name="";
+    private String position="";
     private int created_at;
     private int accepted_at;
-    private String kicked_at;
+    private String kicked_at="";
 
     public AcceptationModel(JSONObject jsonObject) {
         super(jsonObject);

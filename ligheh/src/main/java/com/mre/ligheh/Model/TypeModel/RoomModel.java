@@ -4,13 +4,13 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class RoomModel extends TypeModel {
-    private String RoomId;
+    private String RoomId="";
     private UserModel RoomCreator;
     private UserModel RoomManager;
     private CenterModel RoomCenter;
     private AcceptationModel RoomAcceptation;
-    private String RoomStatus;
-    private String RoomType;
+    private String RoomStatus="";
+    private String RoomType="";
     private int RoomCreated_at;
     private int RoomUpdated_at;
 
