@@ -60,21 +60,50 @@ public class RoomSchedulesFragment extends Fragment {
 
         handler = new Handler();
 
+        InitManager.txtTextColor(binding.weekTextView.getRoot(), getResources().getString(R.string.AppDefaultWeek), getResources().getColor(R.color.Gray500));
+
+        InitManager.imgResTint(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Green700);
+        InitManager.imgResTintRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Green700, 180);
+
         InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.addConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_green300);
+
+            binding.weekTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+
+            binding.backwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.forwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+        } else {
+            binding.weekTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+
+            binding.backwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.forwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.weekTextView.getRoot());
+
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.backwardImageView.getRoot());
+
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.forwardImageView.getRoot());
+
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment)).widget(binding.addConstraintLayout);
     }
 
     private void setData() {
+        binding.weekTextView.getRoot().setText("02/31 تا 02/25");
+
         adapter.setSchedules(null, "room");
         binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
