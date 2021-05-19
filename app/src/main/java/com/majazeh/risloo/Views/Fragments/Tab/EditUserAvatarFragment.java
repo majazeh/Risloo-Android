@@ -146,6 +146,8 @@ public class EditUserAvatarFragment extends Fragment {
                 FileManager.deleteFileFromCache(requireActivity(), "image");
 
                 requireActivity().runOnUiThread(() -> {
+                    ((MainActivity) requireActivity()).setData();
+
                     ((MainActivity) requireActivity()).loadingDialog.dismiss();
                     Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                 });

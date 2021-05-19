@@ -241,7 +241,11 @@
         android:id="@+id/centerSchedulesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment"
         android:label="@string/CenterSchedulesFragmentTitle"
-        tools:layout="@layout/fragment_center_schedules" />
+        tools:layout="@layout/fragment_center_schedules" >
+        <action
+            android:id="@+id/action_centerSchedulesFragment_to_sessionFragment"
+            app:destination="@id/sessionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/centersFragment"
@@ -289,7 +293,14 @@
         android:id="@+id/roomSchedulesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment"
         android:label="@string/RoomSchedulesFragmentTitle"
-        tools:layout="@layout/fragment_room_schedules" />
+        tools:layout="@layout/fragment_room_schedules" >
+        <action
+            android:id="@+id/action_roomSchedulesFragment_to_createScheduleFragment"
+            app:destination="@id/createScheduleFragment" />
+        <action
+            android:id="@+id/action_roomSchedulesFragment_to_sessionFragment"
+            app:destination="@id/sessionFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/roomUsersFragment"

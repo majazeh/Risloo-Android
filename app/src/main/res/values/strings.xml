@@ -795,6 +795,8 @@
 
     <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمانی</string>
 
+    <string name="RoomSchedulesFragmentCreate">تعریف برنامه درمانی</string>
+
     /*
     ---------- RoomUsers Fragment ----------
     */
@@ -1127,6 +1129,13 @@
     <string name="Scales2AdapterEmpty">هنوز مقیاسی ثبت نشده است.</string>
 
     /*
+    ---------- Schedules Adapter ----------
+    */
+
+    <string name="SchedulesAdapterAxis">محور‌های جلسه</string>
+    <string name="SchedulesAdapterBulk">جلسه گروهی</string>
+
+    /*
     ---------- Sessions2 Adapter ----------
     */
 
@@ -1138,10 +1147,6 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- ??? Adapter ----------
-    */
 
     //////////////////////////////////////////////////////////////////////////////////////
 

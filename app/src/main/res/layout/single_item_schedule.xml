@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    app:cardCornerRadius="@dimen/_2sdp"
+    app:cardElevation="0dp"
+    tools:layout_marginBottom="@dimen/_4sdp"
+    tools:layout_marginTop="@dimen/_4sdp"
+    tools:context=".Views.Adapters.Recycler.SchedulesAdapter">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_constraintLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_8sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+
+        <TextView
+            android:id="@+id/date_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="center"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="bold"
+            android:textColor="@color/Gray700"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="تاریخ برنامه" />
+
+        <View
+            android:id="@+id/top_view"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:background="@color/Gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/date_textView" />
+
+        <include
+            android:id="@+id/avatar_includeLayout"
+            layout="@layout/component_main_avatar_borderless_too_small"
+            android:layout_width="@dimen/_36sdp"
+            android:layout_height="@dimen/_36sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintRight_toRightOf="@id/date_textView"
+            app:layout_constraintTop_toBottomOf="@id/top_view" />
+
+        <TextView
+            android:id="@+id/name_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
+            app:layout_constraintEnd_toEndOf="@id/date_textView"
+            app:layout_constraintStart_toEndOf="@id/avatar_includeLayout"
+            app:layout_constraintTop_toTopOf="@id/avatar_includeLayout"
+            tools:text="نام و نام خانوادگی" />
+
+        <ImageView
+            android:id="@+id/duration_imageView"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_clock_light"
+            app:layout_constraintBottom_toBottomOf="@id/duration_textView"
+            app:layout_constraintStart_toStartOf="@id/date_textView"
+            app:layout_constraintTop_toTopOf="@id/duration_textView"
+            app:tint="@color/Gray500" />
+
+        <TextView
+            android:id="@+id/duration_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintStart_toEndOf="@id/duration_imageView"
+            app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
+            tools:text="مدت‌زمان" />
+
+        <ImageView
+            android:id="@+id/count_imageView"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_marginStart="@dimen/_16sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_user_friends_light"
+            app:layout_constraintBottom_toBottomOf="@id/count_textView"
+            app:layout_constraintStart_toEndOf="@id/duration_textView"
+            app:layout_constraintTop_toTopOf="@id/count_textView"
+            app:layout_goneMarginStart="0dp"
+            app:tint="@color/Gray500" />
+
+        <TextView
+            android:id="@+id/count_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintStart_toEndOf="@id/count_imageView"
+            app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
+            tools:text="50" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="duration_imageView, duration_textView, count_imageView, count_textView" />
+
+        <TextView
+            android:id="@+id/axis_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="start"
+            android:text="@string/SchedulesAdapterAxis"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@id/date_textView"
+            app:layout_constraintStart_toStartOf="@id/date_textView"
+            app:layout_constraintTop_toBottomOf="@id/barrier" />
+
+        <TextView
+            android:id="@+id/point_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:padding="@dimen/_6sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:background="@drawable/draw_2sdp_solid_gray50"
+            app:layout_constraintEnd_toEndOf="@id/date_textView"
+            app:layout_constraintStart_toStartOf="@id/date_textView"
+            app:layout_constraintTop_toBottomOf="@id/axis_textView"
+            tools:text="عناوین" />
+
+        <TextView
+            android:id="@+id/bulk_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="start"
+            android:text="@string/SchedulesAdapterBulk"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@id/date_textView"
+            app:layout_constraintTop_toBottomOf="@id/point_textView" />
+
+        <TextView
+            android:id="@+id/status_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/date_textView"
+            app:layout_constraintTop_toBottomOf="@id/point_textView"
+            tools:text="وضعیت" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/duration_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="duration_imageView, duration_textView" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/count_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="count_imageView, count_textView" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>
