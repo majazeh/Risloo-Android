@@ -141,7 +141,7 @@
         android:layout_marginStart="@dimen/_4sdp"
         android:paddingStart="@dimen/_6sdp"
         android:gravity="center|right"
-        android:text="@string/Sessions2AdapterStatus"
+        android:text="@string/Users2AdapterStatus"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
