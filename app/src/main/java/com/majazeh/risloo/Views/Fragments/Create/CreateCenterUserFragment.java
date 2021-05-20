@@ -238,6 +238,7 @@ public class CreateCenterUserFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded())
                     requireActivity().runOnUiThread(() -> {
+                        // TODO: open authentication Dialog
                         try {
                             data.clear();
                             AuthModel model = new AuthModel((JSONObject) object);
