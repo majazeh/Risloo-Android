@@ -97,7 +97,7 @@
                 app:layout_constraintTop_toTopOf="@id/duration_textView"
                 app:tint="@color/Gray500" />
 
-             <TextView
+            <TextView
                 android:id="@+id/duration_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -530,7 +530,7 @@
             app:constraint_referenced_ids="psychologists_shimmerLayout, psychologists_singleLayout" />
 
         <include
-            android:id="@+id/references_header_includeLayout"
+            android:id="@+id/users_header_includeLayout"
             layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -539,42 +539,59 @@
             app:layout_constraintTop_toBottomOf="@id/psychologists_barrier" />
 
         <include
-            android:id="@+id/references_add_imageView"
+            android:id="@+id/users_add_imageView"
             layout="@layout/component_main_button_oval_mid"
             android:layout_width="@dimen/_28sdp"
             android:layout_height="@dimen/_28sdp"
-            app:layout_constraintBottom_toBottomOf="@id/references_header_includeLayout"
+            app:layout_constraintBottom_toBottomOf="@id/users_header_includeLayout"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toTopOf="@id/references_header_includeLayout" />
+            app:layout_constraintTop_toTopOf="@id/users_header_includeLayout" />
 
-        <include
-            android:id="@+id/references_shimmerLayout"
-            layout="@layout/component_shimmer_reference"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/users_containerLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/references_add_imageView"
-            tools:visibility="gone" />
+            android:layout_marginTop="@dimen/_12sdp"
+            android:padding="@dimen/_1sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/users_add_imageView">
 
-        <include
-            android:id="@+id/references_singleLayout"
-            layout="@layout/component_single_reference"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/references_add_imageView"
-            tools:visibility="visible" />
+            <include
+                android:id="@+id/users_shimmerLayout"
+                layout="@layout/component_shimmer_index"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="gone" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/references_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="references_shimmerLayout, references_singleLayout" />
+            <include
+                android:id="@+id/users_headerLayout"
+                layout="@layout/header_item_user2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <include
+                android:id="@+id/users_singleLayout"
+                layout="@layout/component_single_user2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/users_headerLayout"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
             android:id="@+id/practices_header_includeLayout"
@@ -583,7 +600,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/references_barrier" />
+            app:layout_constraintTop_toBottomOf="@id/users_containerLayout" />
 
         <include
             android:id="@+id/practices_add_imageView"

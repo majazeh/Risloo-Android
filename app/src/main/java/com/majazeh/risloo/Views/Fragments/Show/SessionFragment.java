@@ -21,8 +21,8 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PracticesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Users2Adapter;
 import com.majazeh.risloo.databinding.FragmentSessionBinding;
 
 public class SessionFragment extends Fragment {
@@ -32,13 +32,13 @@ public class SessionFragment extends Fragment {
 
     // Adapters
     private PsychologistsAdapter psychologistsAdapter;
-    private ReferencesAdapter referencesAdapter;
+    private Users2Adapter users2Adapter;
     private PracticesAdapter practicesAdapter;
     private Samples2Adapter samples2Adapter;
 
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager, practicesLayoutManager, samples2LayoutManager;
+    private LinearLayoutManager psychologistsLayoutManager, users2LayoutManager, practicesLayoutManager, samples2LayoutManager;
 
     // Vars
     private String report = "privacy";
@@ -61,7 +61,7 @@ public class SessionFragment extends Fragment {
 
     private void initializer() {
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
-        referencesAdapter = new ReferencesAdapter(requireActivity());
+        users2Adapter = new Users2Adapter(requireActivity());
         practicesAdapter = new PracticesAdapter(requireActivity());
         samples2Adapter = new Samples2Adapter(requireActivity());
 
@@ -69,7 +69,7 @@ public class SessionFragment extends Fragment {
         itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
 
         psychologistsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+        users2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         practicesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         samples2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
@@ -78,16 +78,16 @@ public class SessionFragment extends Fragment {
 
         binding.reportHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReportHeader));
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
-        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
+        binding.usersHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Users2AdapterHeader));
         binding.practicesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples2AdapterHeader));
 
-        InitManager.imgResTint(requireActivity(), binding.referencesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.usersAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.imgResTint(requireActivity(), binding.practicesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
         InitManager.imgResTint(requireActivity(), binding.samplesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
 
         InitManager.recyclerView(binding.psychologistsSingleLayout.recyclerView, itemDecoration, psychologistsLayoutManager);
-        InitManager.recyclerView(binding.referencesSingleLayout.recyclerView, itemDecoration, referencesLayoutManager);
+        InitManager.recyclerView(binding.usersSingleLayout.recyclerView, itemDecoration2, users2LayoutManager);
         InitManager.recyclerView(binding.practicesSingleLayout.recyclerView, itemDecoration2, practicesLayoutManager);
         InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samples2LayoutManager);
     }
@@ -97,14 +97,14 @@ public class SessionFragment extends Fragment {
             binding.reportsTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
             binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
 
-            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.usersAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
             binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             binding.reportsTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
             binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
 
-            binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.usersAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
             binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
@@ -118,7 +118,7 @@ public class SessionFragment extends Fragment {
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createReportFragment)).widget(binding.reportActionTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment)).widget(binding.referencesAddImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment)).widget(binding.usersAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createPracticeFragment)).widget(binding.practicesAddImageView.getRoot());
 
@@ -173,16 +173,16 @@ public class SessionFragment extends Fragment {
         }
 
 //        psychologistsAdapter.setPsychologists(null);
-//        referencesAdapter.setReferences(null);
+//        users2Adapter.setUsers(null);
 //        practicesAdapter.setPractices(null);
 //        samples2Adapter.setSamples(null);
         binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
-        binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+        binding.usersSingleLayout.recyclerView.setAdapter(users2Adapter);
         binding.practicesSingleLayout.recyclerView.setAdapter(practicesAdapter);
         binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
 
         binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
-        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
+        binding.usersHeaderIncludeLayout.countTextView.setText("(" + users2Adapter.getItemCount() + ")");
         binding.practicesHeaderIncludeLayout.countTextView.setText("(" + practicesAdapter.getItemCount() + ")");
         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples2Adapter.getItemCount() + ")");
 
@@ -190,8 +190,9 @@ public class SessionFragment extends Fragment {
             binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
-            binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.usersShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.usersHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+            binding.usersSingleLayout.getRoot().setVisibility(View.VISIBLE);
 
             binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.practicesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
