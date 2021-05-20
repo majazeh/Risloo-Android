@@ -64,6 +64,8 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     private void detector(Users2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+
+            holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -101,6 +103,12 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
         holder.binding.fieldTextView.setText("-");
         holder.binding.typeTextView.setText("- ");
         holder.binding.caseTextView.setText("-");
+
+        for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
+            if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase("مراجع")) {
+                holder.binding.statusSpinner.setSelection(i);
+            }
+        }
     }
 
     private void doWork(String status) {
