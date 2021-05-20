@@ -130,9 +130,9 @@ public class AuthActivity extends AppCompatActivity {
         if (user.getPublic_key() != null)
             singleton.setPublicKey(user.getPublic_key());
 
-        if (user.getTreasuries()!= null) {
+        if (user.getTreasuries() != null) {
             try {
-                singleton.setMoney(String.valueOf(user.getTreasuries().getJSONObject(0).getInt("balance") + user.getTreasuries().getJSONObject(1).getInt("balance")+user.getTreasuries().getJSONObject(2).getInt("balance")));
+                singleton.setMoney(String.valueOf(user.getTreasuries().getJSONObject(0).getInt("balance") + user.getTreasuries().getJSONObject(1).getInt("balance") + user.getTreasuries().getJSONObject(2).getInt("balance")));
             } catch (JSONException e) {
                 e.printStackTrace();
             }

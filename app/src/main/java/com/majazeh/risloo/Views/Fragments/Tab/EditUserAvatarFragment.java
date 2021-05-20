@@ -144,17 +144,19 @@ public class EditUserAvatarFragment extends Fragment {
         Auth.changeAvatar(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                FileManager.deleteFileFromCache(requireActivity(), "image");
+                AuthModel authModel = (AuthModel) object;
 
-                if (isAdded())
+                if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        AuthModel authModel = (AuthModel) object;
                         ((MainActivity) requireActivity()).singleton.setAvatar(authModel.getUser().getAvatar().getMedium().getUrl());
                         ((MainActivity) requireActivity()).setData();
 
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                     });
+                }
+
+                FileManager.deleteFileFromCache(requireActivity(), "image");
             }
 
             @Override

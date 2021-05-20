@@ -74,9 +74,9 @@
 
     <array name="MainRows">
         <item>مشاهده پروفایل</item>
-        <item>کیف پول‌ها</item>
-        <item>صورت حساب‌ها</item>
-        <item>شارژ حساب</item>
+<!--        <item>کیف پول‌ها</item>-->
+<!--        <item>صورت حساب‌ها</item>-->
+<!--        <item>شارژ حساب</item>-->
         <item>خروج</item>
         <item></item>
     </array>

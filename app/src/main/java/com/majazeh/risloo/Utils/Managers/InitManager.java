@@ -103,7 +103,8 @@ public class InitManager {
 
                     private void detector(View view, int position) {
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                            if (position == 4) {
+//                            if (position == 4) {
+                            if (position == 1) {
                                 view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_red300);
                             } else {
                                 view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
@@ -114,7 +115,8 @@ public class InitManager {
                     private void setData(int position) {
                         dropdownTextView.setText(list.get(position));
 
-                        if (position == 4) {
+//                        if (position == 4) {
+                        if (position == 1) {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
                         } else {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));

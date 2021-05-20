@@ -180,6 +180,17 @@ public class Singleton {
         return "";
     }
 
+    public void setMoney(String value) {
+        editor.putString("money", value);
+        editor.apply();
+    }
+
+    public String getMoney() {
+        if (!sharedPreferences.getString("money", "").equals("")) {
+            return sharedPreferences.getString("money", "");
+        }
+        return "";
+    }
 
     public void logOut() {
         editor.remove("token");
@@ -218,17 +229,9 @@ public class Singleton {
         return "";
     }
 
-    public String getMoney() {
-        if (!sharedPreferences.getString("money", "").equals("")) {
-            return sharedPreferences.getString("money", "");
-        }
-        return "";
-    }
 
-    public void setMoney(String money) {
-        editor.putString("money", money);
-        editor.apply();
-    }
+
+
 
     public String getPassword() {
         if (!sharedPreferences.getString("password", "").equals("")) {

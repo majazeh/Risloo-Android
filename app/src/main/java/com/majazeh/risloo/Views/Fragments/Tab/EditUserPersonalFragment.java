@@ -239,6 +239,10 @@ public class EditUserPersonalFragment extends Fragment {
                     binding.clientGroup.setVisibility(View.GONE);
                     break;
             }
+        } else {
+            binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+
+            binding.clientGroup.setVisibility(View.GONE);
         }
         if (!((MainActivity) requireActivity()).singleton.getGender().equals("")) {
             gender = ((MainActivity) requireActivity()).singleton.getGender();
@@ -287,36 +291,40 @@ public class EditUserPersonalFragment extends Fragment {
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
 
-                requireActivity().runOnUiThread(() -> {
-                    ((MainActivity) requireActivity()).login(model.getUser());
-                    ((MainActivity) requireActivity()).setData();
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).login(model.getUser());
+                        ((MainActivity) requireActivity()).setData();
 
-                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                });
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    });
+                }
             }
 
             @Override
             public void onFailure(String response) {
-                requireActivity().runOnUiThread(() -> {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        if (!jsonObject.isNull("errors")) {
-                            Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
 
-                            while (keys.hasNext()) {
-                                String key = keys.next();
-                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                    if (key.equals("name")) {
-                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        if (key.equals("name")) {
+                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        }
                                     }
                                 }
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                });
+                    });
+                }
             }
         });
     }
