@@ -48,6 +48,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -247,6 +248,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
             }
         }
 
+        if (isAdded())
         switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
             case R.id.createCaseFragment:
                 CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
@@ -305,8 +307,24 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterUserFragment != null) {
                     if (method.equals("rooms")) {
-                        searchableAdapter.setItems(values, method, null);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        data.put("center", createCenterUserFragment.getArguments().getString("id"));
+                        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+                        Room.list(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+                                if (isAdded())
+                                    requireActivity().runOnUiThread(() -> {
+                                        searchableAdapter.setItems(list.data(), method, null);
+                                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                                    });
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+
+                            }
+                        });
                     }
                 }
                 break;

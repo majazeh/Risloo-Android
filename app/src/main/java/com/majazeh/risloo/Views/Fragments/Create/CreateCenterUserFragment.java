@@ -14,6 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -22,6 +27,9 @@ import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class CreateCenterUserFragment extends Fragment {
 
@@ -37,7 +45,7 @@ public class CreateCenterUserFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCreateCenterUserBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -125,14 +133,14 @@ public class CreateCenterUserFragment extends Fragment {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             }
-            if (roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
+//            if (roomId.equals("")) {
+//                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+//            }
+//            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
+//                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+//            }
 
-            if (binding.mobileIncludeLayout.inputEditText.length() != 0 && !roomId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0) {
+            if (binding.mobileIncludeLayout.inputEditText.length() != 0 /*&& !roomId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0*/) {
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView);
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
@@ -149,7 +157,7 @@ public class CreateCenterUserFragment extends Fragment {
         }
         if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
             type = ((MainActivity) requireActivity()).singleton.getType();
-            for (int i=0; i<binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
+            for (int i = 0; i < binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.typeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
                     binding.typeIncludeLayout.selectSpinner.setSelection(i);
 
@@ -184,14 +192,14 @@ public class CreateCenterUserFragment extends Fragment {
         try {
             switch (method) {
                 case "rooms":
-                    if (!roomId.equals(item.object.get("id").toString())) {
-                        roomId = item.object.get("id").toString();
-                        roomName = item.object.get("title").toString();
-                        centerName = item.object.get("subtitle").toString();
+                    if (!roomId.equals(((RoomModel) item).getRoomId())) {
+                        roomId = ((RoomModel) item).getRoomId();
+                        roomName = ((RoomModel) item).getRoomManager().getName();
+                        centerName = ((RoomModel) item).getRoomCenter().getDetail().getString("title");
 
                         binding.roomIncludeLayout.primaryTextView.setText(roomName);
                         binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-                    } else if (roomId.equals(item.object.get("id").toString())) {
+                    } else if (roomId.equals(((RoomModel) item).getRoomId())) {
                         roomId = "";
                         roomName = "";
                         centerName = "";
@@ -211,8 +219,57 @@ public class CreateCenterUserFragment extends Fragment {
     private void doWork() {
         mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        HashMap data = new HashMap();
+        data.put("id", requireArguments().getString("id"));
+        data.put("mobile", mobile);
+        data.put("nickname", name);
+        data.put("position", type);
+        data.put("room_id", roomId);
+        if (createCase)
+            data.put("create_case", "1");
+        else if (data.containsKey("create_case"))
+            data.remove("create_case");
 
-        // TODO : Call Work Method
+        HashMap header = new HashMap();
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        Center.createUser(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded())
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            data.clear();
+                            AuthModel model = new AuthModel((JSONObject) object);
+                            data.put("key", model.getKey());
+                            Auth.auth_theory(data, header, new Response() {
+                                @Override
+                                public void onOK(Object object) {
+                                    if (isAdded())
+                                        requireActivity().runOnUiThread(() -> {
+                                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                            Bundle extras = new Bundle();
+                                            extras.putString("id", requireArguments().getString("id"));
+                                            ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
+                                        });
+                                }
+
+                                @Override
+                                public void onFailure(String response) {
+
+                                }
+                            });
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                System.out.println(response);
+            }
+        });
     }
 
     @Override

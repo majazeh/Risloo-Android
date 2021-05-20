@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -201,10 +202,10 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
             switch (method) {
                 case "scales":
                 case "rooms":
-                    holder.binding.titleTextView.setText(item.object.get("title").toString());
+                    holder.binding.titleTextView.setText(((RoomModel)item).getRoomManager().getName());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(item.object.get("subtitle").toString());
+                    holder.binding.subTextView.setText(((RoomModel)item).getRoomCenter().getDetail().getString("title"));
                     break;
                 case "references":
                 case "managers":

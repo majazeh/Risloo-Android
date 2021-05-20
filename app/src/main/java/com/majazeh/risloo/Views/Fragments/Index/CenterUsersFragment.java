@@ -118,7 +118,11 @@ public class CenterUsersFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment)).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            Bundle extras = new Bundle();
+            extras.putString("id", requireArguments().getString("id"));
+            ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment,extras);
+        }).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
