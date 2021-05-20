@@ -135,8 +135,8 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void doWork() {
-        serial = binding.serialEditText.getRoot().getText().toString().trim();
-
+//        serial = binding.serialEditText.getRoot().getText().toString().trim();
+//
 //        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 //
 //        HashMap data = new HashMap();
@@ -161,9 +161,10 @@ public class AuthSerialFragment extends Fragment {
 //                            break;
 //                    }
 //                } else {
-//                    //TODO : go to next activity
-//                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-//                    requireActivity().runOnUiThread(() -> Toast.makeText(getContext(), "done!", Toast.LENGTH_SHORT).show());
+//                    requireActivity().runOnUiThread(() -> {
+//                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAuthenticated), Toast.LENGTH_SHORT).show();
+//                    });
 //                }
 //            }
 //

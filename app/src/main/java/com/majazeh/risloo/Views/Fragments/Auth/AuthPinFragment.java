@@ -120,7 +120,7 @@ public class AuthPinFragment extends Fragment {
         clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-//                doWork("verification");
+                doWork("verification");
             }
 
             @Override
@@ -205,85 +205,85 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void doWork(String method) {
-        pin = binding.pinEditText.getRoot().getText().toString().trim();
-
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap();
-        data.put("code", pin);
+        if (method.equals("pin")) {
+            pin = binding.pinEditText.getRoot().getText().toString().trim();
 
-        if (requireArguments().getString("key") != null)
-            data.put("key", requireArguments().getString("key"));
-        if (requireArguments().getString("callback") != null)
-            data.put("callback", requireArguments().getString("callback"));
+            HashMap data = new HashMap();
+            data.put("code", pin);
 
-        Auth.auth_theory(data, new HashMap<>(), new Response() {
-            @Override
-            public void onOK(Object object) {
-                countDownTimer.cancel();
-                AuthModel model = (AuthModel) object;
-                if (((AuthModel) object).getUser() == null) {
-                    Bundle extras = new Bundle();
+            if (requireArguments().getString("key") != null)
+                data.put("key", requireArguments().getString("key"));
+            if (requireArguments().getString("callback") != null)
+                data.put("callback", requireArguments().getString("callback"));
 
-                    extras.putString("mobile", mobile);
-                    extras.putString("key", model.getKey());
-                    extras.putString("callback", model.getCallback());
+            Auth.auth_theory(data, new HashMap<>(), new Response() {
+                @Override
+                public void onOK(Object object) {
+                    countDownTimer.cancel();
 
-                    switch (model.getTheory()) {
-                        case "password":
-                            requireActivity().runOnUiThread(() -> {
-                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                            });
-                            break;
-                        case "recovery":
-                            requireActivity().runOnUiThread(() -> {
-                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                            });
-                            break;
+                    AuthModel model = (AuthModel) object;
+                    if (((AuthModel) object).getUser() == null) {
+                        Bundle extras = new Bundle();
+
+                        extras.putString("mobile", mobile);
+                        extras.putString("key", model.getKey());
+                        extras.putString("callback", model.getCallback());
+
+                        switch (model.getTheory()) {
+                            case "password":
+                                requireActivity().runOnUiThread(() -> {
+                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+                                });
+                                break;
+                            case "recovery":
+                                requireActivity().runOnUiThread(() -> {
+                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
+                                });
+                                break;
+                        }
+                    } else {
+                        requireActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).login(model);
+                        });
                     }
-                } else {
-                    requireActivity().runOnUiThread(() -> {
-                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                        ((AuthActivity) requireActivity()).login(model);
-                    });
                 }
-            }
 
-            @Override
-            public void onFailure(String response) {
-                countDownTimer.cancel();
-                requireActivity().runOnUiThread(() -> {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        if (!jsonObject.isNull("errors")) {
-                            Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                @Override
+                public void onFailure(String response) {
+                    countDownTimer.cancel();
 
-                            while (keys.hasNext()) {
-                                String key = keys.next();
-                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                    if (key.equals("code")) {
-                                        ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        if (key.equals("code")) {
+                                            ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        }
                                     }
                                 }
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                });
-            }
-        });
+                    });
+                }
+            });
+        } else if (method.equals("verification")) {
 
+            // TODO : Place Code if Needed
 
-//        if (method.equals("pin")) {
-//            // TODO : call work method and place pin as it's input
-//        }
-//        else if (method.equals("verification")) {
-//            // TODO : call work method and place pin as it's input
-//            showTimer(true);
-//        }
+            showTimer(true);
+        }
     }
 
     @Override
