@@ -73,7 +73,8 @@ public class SessionFragment extends Fragment {
         practicesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         samples2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.SessionFragmentEdit), getResources().getColor(R.color.Gray500));
+        InitManager.txtTextColor(binding.reportsTextView.getRoot(), getResources().getString(R.string.SessionFragmentReports), getResources().getColor(R.color.Blue600));
+        InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
 
         binding.reportHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReportHeader));
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
@@ -93,13 +94,15 @@ public class SessionFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
+            binding.reportsTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
 
             binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
             binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
+            binding.reportsTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
 
             binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
             binding.practicesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
@@ -109,7 +112,9 @@ public class SessionFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment)).widget(binding.editTextView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.sessionReportsFragment)).widget(binding.reportsTextView.getRoot());
+
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment)).widget(binding.editImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createReportFragment)).widget(binding.reportActionTextView.getRoot());
 
@@ -127,6 +132,15 @@ public class SessionFragment extends Fragment {
         binding.dateTextView.setText("شنبه 11 بهمن 99 ساعت 16:00");
         binding.durationTextView.setText("60 دقیقه");
         binding.statusTextView.setText("در انتظار تشکیل جلسه");
+
+        binding.sessionTypeTextView.setText("حضوری");
+        binding.referenceCountTextView.setText("10");
+        binding.paymentTypeTextView.setText("آنلاین");
+
+        binding.selectionTypeTextView.setText("اولین درخواست کننده");
+        binding.referenceTypeTextView.setText("اعضاء ریسلو");
+        binding.startTimeTextView.setText("1400/01/01");
+        binding.endTimeTextView.setText("1400/01/10");
 
         switch (report) {
             case "add":

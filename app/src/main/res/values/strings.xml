@@ -877,6 +877,17 @@
     <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ای ثبت نشده است.</string>
 
     /*
+    ---------- SessionReports Fragment ----------
+    */
+
+    <string name="SessionReportsFragmentTitle">گزارشات جلسه</string>
+
+    <string name="SessionReportsFragmentName">عنوان</string>
+    <string name="SessionReportsFragmentTime">زمان</string>
+    <string name="SessionReportsFragmentReference">مراجعین</string>
+    <string name="SessionReportsFragmentReaders">خوانندگان</string>
+
+    /*
     ---------- Treasuries Fragment ----------
     */
 
@@ -995,6 +1006,17 @@
 
     <string name="SessionFragmentTitle">جلسه</string>
 
+    <string name="SessionFragmentReports">گزارشات جلسه</string>
+
+    <string name="SessionFragmentSessionType">نوع جلسه</string>
+    <string name="SessionFragmentReferenceCount">تعداد حداکثر مراجعین</string>
+    <string name="SessionFragmentPaymentType">نوع پرداخت</string>
+
+    <string name="SessionFragmentSelectionType">نوع انتخاب مراجع</string>
+    <string name="SessionFragmentReferenceType">نوع مراجعین درخواست دهنده</string>
+    <string name="SessionFragmentStartTime">زمان شروع نوبت‌گیری</string>
+    <string name="SessionFragmentEndTime">زمان بستن نوبت‌گیری</string>
+
     <string name="SessionFragmentReportHeader">گزارش</string>
     
     <string name="SessionFragmentReportAdd">ثبت گزارش</string>
@@ -1002,8 +1024,6 @@
 
     <string name="SessionFragmentReportBodyPrivacy">تنها درمان‌گران این پرونده قادر به ثبت و مشاهده گزارش می‌باشند.</string>
     <string name="SessionFragmentReportBodyEmpty">هنوز گزارشی برای این جلسه ثبت نشده است.</string>
-
-    <string name="SessionFragmentEdit">ویرایش</string>
 
     /*
     ---------- Treasury Fragment ----------
@@ -1149,6 +1169,23 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
+
+    /*
+    ---------- Users2 Adapter ----------
+    */
+
+    <string name="Users2AdapterHeader">اعضاء</string>
+
+    <string name="Users2AdapterName">مراجع</string>
+    <string name="Users2AdapterMobile">موبایل</string>
+    <string name="Users2AdapterSituation">مسئله</string>
+    <string name="Users2AdapterDescription">	توضیحات</string>
+    <string name="Users2AdapterField">فیلد</string>
+    <string name="Users2AdapterType">نوع</string>
+    <string name="Users2AdapterCase">پرونده</string>
+    <string name="Users2AdapterStatus">وضعیت</string>
+
+    <string name="Users2AdapterEmpty">هنوز عضوی ثبت نشده است.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

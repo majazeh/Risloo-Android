@@ -355,6 +355,12 @@
     </fragment>
 
     <fragment
+        android:id="@+id/sessionReportsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.SessionReportsFragment"
+        android:label="@string/SessionReportsFragmentTitle"
+        tools:layout="@layout/fragment_session_reports" />
+
+    <fragment
         android:id="@+id/treasuriesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment"
         android:label="@string/TreasuriesFragmentTitle"
@@ -532,6 +538,9 @@
         <action
             android:id="@+id/action_sessionFragment_to_editSessionFragment"
             app:destination="@id/editSessionFragment" />
+        <action
+            android:id="@+id/action_sessionFragment_to_sessionReportsFragment"
+            app:destination="@id/sessionReportsFragment" />
         <action
             android:id="@+id/action_sessionFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />

@@ -114,31 +114,329 @@
 
             <TextView
                 android:id="@+id/status_textView"
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="start"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray400"
+                android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                app:layout_constraintEnd_toStartOf="@id/edit_textView"
-                app:layout_constraintStart_toStartOf="@id/date_imageView"
+                app:layout_constraintStart_toStartOf="@id/duration_imageView"
                 app:layout_constraintTop_toBottomOf="@id/duration_textView"
                 tools:text="وضعیت" />
 
             <include
-                android:id="@+id/edit_textView"
+                android:id="@+id/reports_textView"
                 layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
-                app:layout_goneMarginTop="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="@id/status_textView"
+                app:layout_constraintTop_toBottomOf="@id/status_textView" />
+
+            <include
+                android:id="@+id/edit_imageView"
+                layout="@layout/component_main_button_oval_mid"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintTop_toBottomOf="@id/status_textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info2_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:padding="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout">
+
+            <TextView
+                android:id="@+id/session_type_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/SessionFragmentSessionType"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/duration_textView" />
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/session_type_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_type_hint_textView"
+                tools:text="حضوری" />
+
+            <View
+                android:id="@+id/session_type_view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/Gray200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_type_textView" />
+
+            <TextView
+                android:id="@+id/reference_count_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentReferenceCount"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/session_type_view" />
+
+            <TextView
+                android:id="@+id/reference_count_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_count_hint_textView"
+                tools:text="10" />
+
+            <View
+                android:id="@+id/reference_count_view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/Gray200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_count_textView" />
+
+            <TextView
+                android:id="@+id/payment_type_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentPaymentType"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_count_view" />
+
+            <TextView
+                android:id="@+id/payment_type_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/payment_type_hint_textView"
+                tools:text="آنلاین" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info3_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:padding="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info2_constraintLayout">
+
+            <TextView
+                android:id="@+id/selection_type_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/SessionFragmentSelectionType"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/selection_type_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selection_type_hint_textView"
+                tools:text="-" />
+
+            <View
+                android:id="@+id/selection_type_view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/Gray200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selection_type_textView" />
+
+            <TextView
+                android:id="@+id/reference_type_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentReferenceType"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/selection_type_view" />
+
+            <TextView
+                android:id="@+id/reference_type_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_type_hint_textView"
+                tools:text="-" />
+
+            <View
+                android:id="@+id/reference_type_view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/Gray200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_type_textView" />
+
+            <TextView
+                android:id="@+id/start_time_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentStartTime"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reference_type_view" />
+
+            <TextView
+                android:id="@+id/start_time_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/start_time_hint_textView"
+                tools:text="-" />
+
+            <View
+                android:id="@+id/start_time_view"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:background="@color/Gray200"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/start_time_textView" />
+
+            <TextView
+                android:id="@+id/end_time_hint_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentEndTime"
+                android:textSize="@dimen/_8ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray400"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/start_time_view" />
+
+            <TextView
+                android:id="@+id/end_time_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray600"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/end_time_hint_textView"
+                tools:text="-" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -149,7 +447,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@id/info3_constraintLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/report_constraintLayout"
