@@ -57,7 +57,7 @@ public class ExtendOnFailureException extends onFailureException {
                 if (((AuthActivity) activity).loadingDialog != null && ((AuthActivity) activity).loadingDialog.isVisible())
                     ((AuthActivity) activity).loadingDialog.dismiss();
             } else if (activity instanceof MainActivity) {
-                if (((MainActivity) activity).loadingDialog != null && ((AuthActivity) activity).loadingDialog.isVisible())
+                if (((MainActivity) activity).loadingDialog != null && ((MainActivity) activity).loadingDialog.isVisible())
                     ((MainActivity) activity).loadingDialog.dismiss();
             }
         });

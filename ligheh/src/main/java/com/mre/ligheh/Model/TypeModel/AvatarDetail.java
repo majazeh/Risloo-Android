@@ -4,14 +4,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class AvatarDetail {
-    private String id;
-    private String file_name;
-    private String slug;
-    private String mode;
-    private String url;
-    private String type;
-    private String mime;
-    private String exec;
+    private String id="";
+    private String file_name="";
+    private String slug="";
+    private String mode="";
+    private String url="";
+    private String type="";
+    private String mime="";
+    private String exec="";
 
     public AvatarDetail(JSONObject jsonObject) {
 

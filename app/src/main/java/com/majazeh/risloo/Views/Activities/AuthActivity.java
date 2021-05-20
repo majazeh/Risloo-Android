@@ -20,6 +20,8 @@ import com.majazeh.risloo.databinding.ActivityAuthBinding;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import org.json.JSONException;
+
 import java.util.Objects;
 
 public class AuthActivity extends AppCompatActivity {
@@ -127,6 +129,14 @@ public class AuthActivity extends AppCompatActivity {
 
         if (user.getPublic_key() != null)
             singleton.setPublicKey(user.getPublic_key());
+
+        if (user.getTreasuries()!= null) {
+            try {
+                singleton.setMoney(String.valueOf(user.getTreasuries().getJSONObject(0).getInt("balance") + user.getTreasuries().getJSONObject(1).getInt("balance")+user.getTreasuries().getJSONObject(2).getInt("balance")));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
 
         navigator(R.id.authSerialFragment, null);
     }

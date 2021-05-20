@@ -5,6 +5,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -50,8 +51,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     @Override
     public int getItemCount() {
-        return 0;
-//        return rooms.size();
+        return rooms.size();
     }
 
     public void setRooms(ArrayList<TypeModel> rooms) {
@@ -72,8 +72,10 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     private void setData(RoomsHolder holder, RoomModel model) {
         holder.binding.nameTextView.setText(model.getRoomManager().getName());
         holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
-
-        setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
+        if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
+            setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
+        else
+            setAvatar(holder, "");
     }
 
     private void setAvatar(RoomsHolder holder, String url) {

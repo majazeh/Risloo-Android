@@ -25,6 +25,7 @@ import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.databinding.FragmentEditUserAvatarBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -45,7 +46,7 @@ public class EditUserAvatarFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentEditUserAvatarBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -135,7 +136,7 @@ public class EditUserAvatarFragment extends Fragment {
 
         HashMap data = new HashMap();
         data.put("id", ((MainActivity) requireActivity()).singleton.getUserId());
-        data.put("avatar",  FileManager.readFileFromCache(requireActivity(), "image"));
+        data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
 
         HashMap header = new HashMap();
         header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
@@ -145,12 +146,15 @@ public class EditUserAvatarFragment extends Fragment {
             public void onOK(Object object) {
                 FileManager.deleteFileFromCache(requireActivity(), "image");
 
-                requireActivity().runOnUiThread(() -> {
-                    ((MainActivity) requireActivity()).setData();
+                if (isAdded())
+                    requireActivity().runOnUiThread(() -> {
+                        AuthModel authModel = (AuthModel) object;
+                        ((MainActivity) requireActivity()).singleton.setAvatar(authModel.getUser().getAvatar().getMedium().getUrl());
+                        ((MainActivity) requireActivity()).setData();
 
-                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                });
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    });
             }
 
             @Override

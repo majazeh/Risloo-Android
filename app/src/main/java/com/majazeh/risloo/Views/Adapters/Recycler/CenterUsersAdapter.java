@@ -16,6 +16,8 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
@@ -25,7 +27,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private Activity activity;
 
     // Vars
-//    private ArrayList<User> users;
+    private ArrayList<TypeModel> users;
 
     public CenterUsersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -39,7 +41,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CenterUsersHolder holder, int i) {
-//        Users user = users.get(i);
+        UserModel user = (UserModel) users.get(i);
 
         initializer(holder);
 
@@ -47,19 +49,18 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
         listener(holder);
 
-        setData(holder);
+        setData(holder, user);
     }
 
     @Override
     public int getItemCount() {
-//        return users.size();
-        return 4;
+        return users.size();
     }
 
-//    public void setUsers(ArrayList<User> users) {
-//        this.users = users;
-//        notifyDataSetChanged();
-//    }
+    public void setUsers(ArrayList<TypeModel> users) {
+        this.users = users;
+        notifyDataSetChanged();
+    }
 
     private void initializer(CenterUsersHolder holder) {
         InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes, "adapter2");
@@ -121,22 +122,22 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         });
     }
 
-    private void setData(CenterUsersHolder holder) {
+    private void setData(CenterUsersHolder holder, UserModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.serialTextView.setText("GH96666DY");
-        holder.binding.nameTextView.setText("محمد نخلی");
-        holder.binding.mobileTextView.setText("+989905511926");
-        holder.binding.statusTexView.setText("پذیرش شده");
-        holder.binding.acceptedTextView.setText("99-12-26 10:55 ");
-        holder.binding.kickedTextView.setText("99-12-26 10:55 ");
+        holder.binding.serialTextView.setText(model.getUserId());
+        holder.binding.nameTextView.setText(model.getName());
+        holder.binding.mobileTextView.setText(model.getMobile());
+        holder.binding.statusTexView.setText(model.getUserStatus());
+        holder.binding.acceptedTextView.setText(String.valueOf(model.getUserAccepted_at()));
+        holder.binding.kickedTextView.setText(String.valueOf(model.getUserKicked_at()));
 
-        for (int i=0; i<holder.binding.typeSpinner.getCount(); i++) {
-            if (holder.binding.typeSpinner.getItemAtPosition(i).toString().equalsIgnoreCase("مراجع")) {
+        for (int i = 0; i < holder.binding.typeSpinner.getCount(); i++) {
+            if (holder.binding.typeSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(model.getPosition())) {
                 holder.binding.typeSpinner.setSelection(i);
             }
         }

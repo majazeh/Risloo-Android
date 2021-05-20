@@ -181,10 +181,6 @@ public class Singleton {
     }
 
 
-
-
-
-
     public void logOut() {
         editor.remove("token");
         editor.remove("userId");
@@ -202,13 +198,6 @@ public class Singleton {
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
 
 
     public boolean getAuth() {
@@ -236,13 +225,17 @@ public class Singleton {
         return "";
     }
 
+    public void setMoney(String money) {
+        editor.putString("money", money);
+        editor.apply();
+    }
+
     public String getPassword() {
         if (!sharedPreferences.getString("password", "").equals("")) {
             return sharedPreferences.getString("password", "");
         }
         return "";
     }
-
 
 
     public String getOwner() {

@@ -24,6 +24,11 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CenterUsersAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterUsersBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.Madule.List;
+
+import java.util.HashMap;
 
 public class CenterUsersFragment extends Fragment {
 
@@ -38,9 +43,12 @@ public class CenterUsersFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private Handler handler;
 
+    private HashMap data = new HashMap();
+    private HashMap header = new HashMap();
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCenterUsersBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -100,7 +108,7 @@ public class CenterUsersFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    // TODO : Place Code Here
+                    data.put("q", String.valueOf(s));
                 }, 750);
             }
 
@@ -114,15 +122,32 @@ public class CenterUsersFragment extends Fragment {
     }
 
     private void setData() {
-//        adapter.setUsers(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+        data.put("id", requireArguments().getString("id"));
+        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        Center.users(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded())
+                    requireActivity().runOnUiThread(() -> {
+                        List users = (List) object;
+                        adapter.setUsers(users.data());
+                        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
 
-        new Handler().postDelayed(() -> {
-            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+                    });
+
+            }
+
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
+
     }
 
     @Override

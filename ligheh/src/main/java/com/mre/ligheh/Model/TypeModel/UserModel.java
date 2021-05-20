@@ -2,6 +2,7 @@ package com.mre.ligheh.Model.TypeModel;
 
 import com.mre.ligheh.Model.Madule.List;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -23,11 +24,15 @@ public class UserModel extends TypeModel {
     private String birthday="";
     private int userCreated_at;
     private int userUpdated_at;
+    private int userAccepted_at;
+    private int userKicked_at;
+    private JSONObject meta;
     private AvatarModel avatar;
     private List centerList;
     private List roomList;
     private List caseList;
     private List sampleList;
+    private JSONArray treasuries;
 
     public UserModel() {
         super();
@@ -66,10 +71,17 @@ public class UserModel extends TypeModel {
             setUserCreated_at(jsonObject.getInt("created_at"));
         if (!jsonObject.isNull("updated_at"))
             setUserUpdated_at(jsonObject.getInt("updated_at"));
+        if (!jsonObject.isNull("accepted_at"))
+            setUserAccepted_at(jsonObject.getInt("accepted_at"));
+        if (!jsonObject.isNull("kicked_at"))
+            setUserKicked_at(jsonObject.getInt("kicked_at"));
+        if (!jsonObject.isNull("meta"))
+            setMeta(jsonObject.getJSONObject("meta"));
         if (!jsonObject.isNull("creator"))
             setCreator(new UserModel(jsonObject.getJSONObject("creator")));
         if (!jsonObject.isNull("avatar"))
             setAvatar(new AvatarModel(jsonObject.getJSONArray("avatar")));
+
         if (!jsonObject.isNull("centers")) {
             List centers = new List();
             for (int i = 0; i < jsonObject.getJSONArray("centers").length(); i++) {
@@ -105,6 +117,9 @@ public class UserModel extends TypeModel {
             setSampleList(samples);
         } else {
             setSampleList(new List());
+        }
+        if (!jsonObject.isNull("treasuries")){
+            setTreasuries(jsonObject.getJSONArray("treasuries"));
         }
     }
 
@@ -274,6 +289,38 @@ public class UserModel extends TypeModel {
 
     public void setSampleList(List sampleList) {
         this.sampleList = sampleList;
+    }
+
+    public JSONArray getTreasuries() {
+        return treasuries;
+    }
+
+    public void setTreasuries(JSONArray treasuries) {
+        this.treasuries = treasuries;
+    }
+
+    public int getUserAccepted_at() {
+        return userAccepted_at;
+    }
+
+    public void setUserAccepted_at(int userAccepted_at) {
+        this.userAccepted_at = userAccepted_at;
+    }
+
+    public int getUserKicked_at() {
+        return userKicked_at;
+    }
+
+    public void setUserKicked_at(int userKicked_at) {
+        this.userKicked_at = userKicked_at;
+    }
+
+    public JSONObject getMeta() {
+        return meta;
+    }
+
+    public void setMeta(JSONObject meta) {
+        this.meta = meta;
     }
 
     @Override

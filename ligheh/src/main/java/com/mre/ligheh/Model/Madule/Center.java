@@ -38,6 +38,18 @@ public class Center extends Model {
             e.printStackTrace();
         }
     }
+
+    public static void showDashboard(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.show(endpoint +"/"+ data.get("id") + "/dashboard", data, header, response, null);
+            else
+                Exceptioner.make(response,"آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void users(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))

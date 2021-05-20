@@ -38,6 +38,14 @@ public class Room extends Model {
         }
     }
 
+    public static void showDashboard(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.show(endpoint + "/" + data.get("id")+ "/dashboard", data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             Model.create(endpoint, data, header, response, RoomModel.class);
