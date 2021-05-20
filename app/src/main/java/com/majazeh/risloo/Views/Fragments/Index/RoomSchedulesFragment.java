@@ -33,7 +33,9 @@ public class RoomSchedulesFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
-    private Handler handler;
+
+    // Vars
+    private String week = "";
 
     @Nullable
     @Override
@@ -58,12 +60,10 @@ public class RoomSchedulesFragment extends Fragment {
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        handler = new Handler();
-
         InitManager.txtTextColor(binding.weekTextView.getRoot(), getResources().getString(R.string.AppDefaultWeek), getResources().getColor(R.color.Gray500));
 
-        InitManager.imgResTint(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Green700);
-        InitManager.imgResTintRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Green700, 180);
+        InitManager.imgResTint(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600);
+        InitManager.imgResTintRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600, 180);
 
         InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
@@ -74,13 +74,13 @@ public class RoomSchedulesFragment extends Fragment {
 
             binding.weekTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
 
-            binding.backwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
-            binding.forwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.backwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
+            binding.forwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
         } else {
             binding.weekTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
 
-            binding.backwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
-            binding.forwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.backwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
+            binding.forwardImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
         }
     }
 
@@ -90,19 +90,18 @@ public class RoomSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.backwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork("backward")).widget(binding.backwardImageView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.forwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork("forward")).widget(binding.forwardImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment)).widget(binding.addConstraintLayout);
     }
 
     private void setData() {
-        binding.weekTextView.getRoot().setText("02/31 تا 02/25");
+        // TODO : Place Code Here
+
+        week = "02/31 تا 02/25";
+        binding.weekTextView.getRoot().setText(week);
 
         adapter.setSchedules(null, "room");
         binding.indexSingleLayout.recyclerView.setAdapter(adapter);
@@ -111,6 +110,14 @@ public class RoomSchedulesFragment extends Fragment {
             binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
         }, 1000);
+    }
+
+    private void doWork(String type) {
+        if (type.equals("backward")) {
+            // TODO : Place Code Here
+        } else {
+            // TODO : Place Code Here
+        }
     }
 
     @Override

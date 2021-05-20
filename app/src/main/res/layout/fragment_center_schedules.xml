@@ -54,8 +54,51 @@
                 app:layout_constraintStart_toEndOf="@id/week_textView"
                 app:layout_constraintTop_toTopOf="@id/week_textView" />
 
+            <HorizontalScrollView
+                android:id="@+id/week_horizontalScrollView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:scrollbarSize="0dp"
+                android:overScrollMode="never"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/week_textView">
+
+                <RelativeLayout
+                    android:id="@+id/week_containerLayout"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                    <include
+                        android:id="@+id/weeks_shimmerLayout"
+                        layout="@layout/component_shimmer_week"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="visible"
+                        tools:visibility="gone" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/weeks_recyclerView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:overScrollMode="never"
+                        android:layoutDirection="rtl"
+                        android:visibility="gone"
+                        tools:layout_marginEnd="@dimen/_10sdp"
+                        tools:layout_marginStart="@dimen/_10sdp"
+                        tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        tools:listitem="@layout/single_item_week"
+                        tools:itemCount="7"
+                        tools:visibility="visible" />
+
+                </RelativeLayout>
+
+            </HorizontalScrollView>
+
             <include
-                android:id="@+id/index_shimmerLayout"
+                android:id="@+id/schedules_shimmerLayout"
                 layout="@layout/component_shimmer_schedule"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -63,11 +106,11 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/week_textView"
+                app:layout_constraintTop_toBottomOf="@id/week_horizontalScrollView"
                 tools:visibility="gone" />
 
             <include
-                android:id="@+id/index_singleLayout"
+                android:id="@+id/schedules_singleLayout"
                 layout="@layout/component_single_schedule"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -75,7 +118,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/week_textView"
+                app:layout_constraintTop_toBottomOf="@id/week_horizontalScrollView"
                 tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
