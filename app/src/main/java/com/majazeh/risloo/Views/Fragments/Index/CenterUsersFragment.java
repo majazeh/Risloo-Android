@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Widgets.EndlessScrollRecyclerView;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CenterUsersAdapter;
@@ -43,8 +44,9 @@ public class CenterUsersFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private Handler handler;
 
-    private HashMap data = new HashMap();
-    private HashMap header = new HashMap();
+    // Vars
+    private HashMap data, header;
+    private String id = "";
 
     @Nullable
     @Override
@@ -70,6 +72,9 @@ public class CenterUsersFragment extends Fragment {
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         handler = new Handler();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterUsersFragmentTitle));
 
@@ -108,7 +113,9 @@ public class CenterUsersFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
+                    binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("q", String.valueOf(s));
+                    setData();
                 }, 750);
             }
 
@@ -118,46 +125,78 @@ public class CenterUsersFragment extends Fragment {
             }
         });
 
+        binding.indexSingleLayout.recyclerView.addOnScrollListener(new EndlessScrollRecyclerView(layoutManager) {
+            @Override
+            public void onLoadMore(int currentPage) {
+                // TODO ; Talk With Me About this Place First
+            }
+        });
+
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", requireArguments().getString("id"));
-            ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment,extras);
+            extras.putString("id", id);
+
+            ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras);
         }).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
-        data.put("id", requireArguments().getString("id"));
-        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        if (requireArguments().getString("id") != null) {
+            id = requireArguments().getString("id");
+        }
+
+        data.put("id", id);
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         Center.users(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                if (isAdded())
+                List users = (List) object;
+
+                if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        List users = (List) object;
-                        adapter.setUsers(users.data());
-                        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+                        if (!users.data().isEmpty()) {
+                            adapter.setUsers(users.data());
 
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                            binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
+                        } else {
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                        }
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
 
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        }
                     });
-
+                }
             }
 
             @Override
             public void onFailure(String response) {
+                binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                binding.indexShimmerLayout.getRoot().stopShimmer();
 
+                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                    binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                }
             }
         });
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        handler.removeCallbacksAndMessages(null);
     }
 
 }

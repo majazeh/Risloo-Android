@@ -40,6 +40,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:importantForAutofill="no"
+        android:saveEnabled="false"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

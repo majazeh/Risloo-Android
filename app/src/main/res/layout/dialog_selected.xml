@@ -60,6 +60,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:importantForAutofill="no"
+        android:saveEnabled="false"
         android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
         app:layout_constraintBottom_toTopOf="@id/list_recyclerView"
         app:layout_constraintEnd_toEndOf="@id/title_textView"

@@ -117,6 +117,7 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
+                    app:layout_constraintWidth_max="@dimen/_124sdp"
                     app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
                     app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />
