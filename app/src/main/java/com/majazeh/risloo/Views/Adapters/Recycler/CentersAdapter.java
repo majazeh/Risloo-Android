@@ -71,9 +71,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     private void listener(CentersHolder holder, CenterModel model) {
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-
-            extras.putString("id", model.getCenterId());
-            extras.putString("type", model.getCenterType());
+            extras.putString("model", String.valueOf(model));
 
             ((MainActivity) activity).navigator(R.id.centerFragment, extras);
         }).widget(holder.binding.containerConstraintLayout);

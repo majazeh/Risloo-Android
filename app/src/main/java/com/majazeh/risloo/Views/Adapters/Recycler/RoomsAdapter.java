@@ -69,8 +69,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     private void listener(RoomsHolder holder, RoomModel model) {
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-
-            extras.putString("id", model.getRoomId());
+            extras.putString("model", String.valueOf(model));
 
             ((MainActivity) activity).navigator(R.id.roomFragment, extras);
         }).widget(holder.binding.containerConstraintLayout);
