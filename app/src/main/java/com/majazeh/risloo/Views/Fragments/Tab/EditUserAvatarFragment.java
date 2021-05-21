@@ -134,12 +134,12 @@ public class EditUserAvatarFragment extends Fragment {
 
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap();
+        HashMap data = new HashMap<>();
         data.put("id", ((MainActivity) requireActivity()).singleton.getUserId());
         data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
 
-        HashMap header = new HashMap();
-        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Auth.changeAvatar(data, header, new Response() {
             @Override

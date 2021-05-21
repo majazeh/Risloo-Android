@@ -98,18 +98,20 @@ public class AuthSerialFragment extends Fragment {
         ClickManager.onClickListener(() -> {
             ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-            HashMap header = new HashMap();
-            header.put("Authorization", "Bearer " + ((AuthActivity) requireActivity()).singleton.getToken());
+            HashMap header = new HashMap<>();
+            header.put("Authorization", ((AuthActivity) requireActivity()).singleton.getAuthorization());
 
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    requireActivity().runOnUiThread(() -> {
-                        ((AuthActivity) requireActivity()).singleton.logOut();
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).singleton.logOut();
 
-                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                        ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null);
-                    });
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null);
+                        });
+                    }
                 }
 
                 @Override

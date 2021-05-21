@@ -47,7 +47,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
         detector(holder);
 
-        listener(holder,center);
+        listener(holder, center);
 
         setData(holder, center);
     }
@@ -68,11 +68,15 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         }
     }
 
-    private void listener(CentersHolder holder,CenterModel model) {
-        Bundle extras = new Bundle();
-        extras.putString("id", model.getCenterId());
-        extras.putString("type", model.getCenterType());
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.centerFragment,extras)).widget(holder.binding.containerConstraintLayout);
+    private void listener(CentersHolder holder, CenterModel model) {
+        ClickManager.onClickListener(() -> {
+            Bundle extras = new Bundle();
+
+            extras.putString("id", model.getCenterId());
+            extras.putString("type", model.getCenterType());
+
+            ((MainActivity) activity).navigator(R.id.centerFragment, extras);
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(CentersHolder holder, CenterModel model) {

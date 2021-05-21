@@ -81,11 +81,11 @@ public class DashboardFragment extends Fragment {
     }
 
     private void setData() {
-        HashMap data = new HashMap();
+        HashMap data = new HashMap<>();
         data.put("user", ((MainActivity) requireActivity()).singleton.getUserId());
 
-        HashMap header = new HashMap();
-        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         User.dashboard(data, header, new Response() {
             @Override

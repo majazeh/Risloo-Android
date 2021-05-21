@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -44,7 +45,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, room);
 
         setData(holder, room);
     }
@@ -65,17 +66,25 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         }
     }
 
-    private void listener(RoomsHolder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.roomFragment)).widget(holder.binding.containerConstraintLayout);
+    private void listener(RoomsHolder holder, RoomModel model) {
+        ClickManager.onClickListener(() -> {
+            Bundle extras = new Bundle();
+
+            extras.putString("id", model.getRoomId());
+
+            ((MainActivity) activity).navigator(R.id.roomFragment, extras);
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(RoomsHolder holder, RoomModel model) {
         holder.binding.nameTextView.setText(model.getRoomManager().getName());
         holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
-        if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
+
+        if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null) {
             setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
-        else
+        } else {
             setAvatar(holder, "");
+        }
     }
 
     private void setAvatar(RoomsHolder holder, String url) {

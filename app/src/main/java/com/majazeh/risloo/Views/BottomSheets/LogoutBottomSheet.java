@@ -61,20 +61,22 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
         ClickManager.onDelayedClickListener(() -> {
             ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-            HashMap header = new HashMap();
-            header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+            HashMap header = new HashMap<>();
+            header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).singleton.logOut();
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            ((MainActivity) requireActivity()).singleton.logOut();
 
-                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        IntentManager.auth(requireActivity());
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            IntentManager.auth(requireActivity());
 
-                        dismiss();
-                    });
+                            dismiss();
+                        });
+                    }
                 }
 
                 @Override

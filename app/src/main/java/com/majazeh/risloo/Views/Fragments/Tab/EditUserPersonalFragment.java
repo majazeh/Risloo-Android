@@ -284,7 +284,7 @@ public class EditUserPersonalFragment extends Fragment {
         data.put("gender", gender);
 
         HashMap header = new HashMap<>();
-        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Auth.editProfile(data, header, new Response() {
             @Override

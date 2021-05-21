@@ -36,6 +36,18 @@ public class Singleton {
         return "";
     }
 
+    public void setAuthorization(String value) {
+        editor.putString("authorization", value);
+        editor.apply();
+    }
+
+    public String getAuthorization() {
+        if (!sharedPreferences.getString("authorization", "").equals("")) {
+            return sharedPreferences.getString("authorization", "");
+        }
+        return "";
+    }
+
     public void setUserId(String value) {
         editor.putString("userId", value);
         editor.apply();
@@ -194,6 +206,7 @@ public class Singleton {
 
     public void logOut() {
         editor.remove("token");
+        editor.remove("authorization");
         editor.remove("userId");
         editor.remove("name");
         editor.remove("username");
@@ -205,15 +218,24 @@ public class Singleton {
         editor.remove("gender");
         editor.remove("avatar");
         editor.remove("public_key");
+        editor.remove("private_key");
+        editor.remove("money");
         editor.apply();
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
-    public boolean getAuth() {
-        return sharedPreferences.getBoolean("auth", true);
-    }
+
+
+
+
+
+
+
+
+
+
 
     public String getNotification() {
         if (!sharedPreferences.getString("notification", "").equals("")) {
