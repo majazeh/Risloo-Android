@@ -218,11 +218,11 @@ public class AuthPinFragment extends Fragment {
             if (requireArguments().getString("callback") != null)
                 data.put("callback", requireArguments().getString("callback"));
 
+            countDownTimer.cancel();
+
             Auth.auth_theory(data, new HashMap<>(), new Response() {
                 @Override
                 public void onOK(Object object) {
-                    countDownTimer.cancel();
-
                     AuthModel model = (AuthModel) object;
                     if (((AuthModel) object).getUser() == null) {
                         Bundle extras = new Bundle();
@@ -233,49 +233,55 @@ public class AuthPinFragment extends Fragment {
 
                         switch (model.getTheory()) {
                             case "password":
-                                requireActivity().runOnUiThread(() -> {
-                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                                });
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+                                    });
+                                }
                                 break;
                             case "recovery":
-                                requireActivity().runOnUiThread(() -> {
-                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                                });
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
+                                    });
+                                }
                                 break;
                         }
                     } else {
-                        requireActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).login(model);
-                        });
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                ((AuthActivity) requireActivity()).login(model);
+                            });
+                        }
                     }
                 }
 
                 @Override
                 public void onFailure(String response) {
-                    countDownTimer.cancel();
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (!jsonObject.isNull("errors")) {
+                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
 
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (!jsonObject.isNull("errors")) {
-                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
-
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (key.equals("code")) {
-                                            ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                            if (key.equals("code")) {
+                                                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            }
                                         }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                 }
             });
         } else if (method.equals("verification")) {

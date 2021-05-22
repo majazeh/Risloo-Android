@@ -202,15 +202,17 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
             switch (method) {
                 case "scales":
                 case "rooms":
-                    holder.binding.titleTextView.setText(((RoomModel)item).getRoomManager().getName());
+                    holder.binding.titleTextView.setText(((RoomModel) item).getRoomManager().getName());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(((RoomModel)item).getRoomCenter().getDetail().getString("title"));
+                    holder.binding.subTextView.setText(((RoomModel) item).getRoomCenter().getDetail().getString("title"));
                     break;
                 case "references":
                 case "managers":
-                    // TODO: write title
-                    holder.binding.titleTextView.setText(((UserModel)item).getName());
+                    holder.binding.titleTextView.setText(((UserModel) item).getName());
+
+                    holder.binding.subTextView.setVisibility(View.GONE);
+                    holder.binding.subTextView.setText("");
                     break;
                 case "cases":
                 case "sessions":

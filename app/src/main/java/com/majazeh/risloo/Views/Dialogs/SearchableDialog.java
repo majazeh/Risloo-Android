@@ -23,7 +23,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
@@ -74,9 +73,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
     // Vars
     private String method;
-
-    HashMap data = new HashMap();
-    HashMap header = new HashMap();
+    private HashMap data, header;
 
     @NonNull
     @Override
@@ -124,6 +121,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         handler = new Handler();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
 
         switch (method) {
             case "scales":
@@ -198,6 +198,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
+                    binding.searchProgressBar.setVisibility(View.VISIBLE);
                     data.put("q", String.valueOf(s));
                     setRecyclerView();
                 }, 750);
@@ -248,7 +249,6 @@ public class SearchableDialog extends AppCompatDialogFragment {
             }
         }
 
-        if (isAdded())
         switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
             case R.id.createCaseFragment:
                 CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
@@ -278,26 +278,28 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterFragment != null) {
                     if (method.equals("managers")) {
-                        if (createCenterFragment.center.equals("personal_clinic"))
+                        if (createCenterFragment.type.equals("personal_clinic"))
                             data.put("personal_clinic", "yes");
                         else
                             data.put("personal_clinic", "no");
-                        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+                        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
                         User.list(data, header, new Response() {
                             @Override
                             public void onOK(Object object) {
                                 List list = (List) object;
-                                if (isAdded())
+
+                                if (isAdded()) {
                                     requireActivity().runOnUiThread(() -> {
                                         searchableAdapter.setItems(list.data(), method, null);
                                         binding.listRecyclerView.setAdapter(searchableAdapter);
                                     });
+                                }
                             }
 
                             @Override
                             public void onFailure(String response) {
-
+                                // TODO : Place Code if Needed
                             }
                         });
                     }
@@ -307,22 +309,25 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterUserFragment != null) {
                     if (method.equals("rooms")) {
-                        data.put("center", createCenterUserFragment.getArguments().getString("id"));
-                        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+                        data.put("center", createCenterUserFragment.requireArguments().getString("id"));
+                        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
                         Room.list(data, header, new Response() {
                             @Override
                             public void onOK(Object object) {
                                 List list = (List) object;
-                                if (isAdded())
+
+                                if (isAdded()) {
                                     requireActivity().runOnUiThread(() -> {
                                         searchableAdapter.setItems(list.data(), method, null);
                                         binding.listRecyclerView.setAdapter(searchableAdapter);
                                     });
+                                }
                             }
 
                             @Override
                             public void onFailure(String response) {
-
+                                // TODO : Place Code if Needed
                             }
                         });
                     }
@@ -421,6 +426,10 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     }
                 }
                 break;
+        }
+
+        if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
+            binding.searchProgressBar.setVisibility(View.GONE);
         }
     }
 

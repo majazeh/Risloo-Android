@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,8 +19,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Main;
-import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -37,10 +37,13 @@ import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateCenterFragment extends Fragment {
 
@@ -63,11 +66,8 @@ public class CreateCenterFragment extends Fragment {
     private Bitmap avatarBitmap = null;
 
     // Vars
-    public String center = "personal_clinic", managerId = "", managerName = "", name = "", address = "", description = "";
+    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
     public String avatarPath = "";
-
-    HashMap data = new HashMap();
-    HashMap header = new HashMap();
 
     @Nullable
     @Override
@@ -97,9 +97,9 @@ public class CreateCenterFragment extends Fragment {
 
         phoneLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        binding.centerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentCenterHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentTypeHeader));
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentManagerHeader));
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentNameHeader));
+        binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentTitleHeader));
         binding.avatarIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentAvatarHeader));
         binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentAddressHeader));
         binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentPhonesHeader));
@@ -110,8 +110,8 @@ public class CreateCenterFragment extends Fragment {
         binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentAddressHint));
         binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentDescriptionHint));
 
-        binding.centerIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCenterPersonal));
-        binding.centerIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCenterClinic));
+        binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentPersonalClinic));
+        binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCounselingCenter));
 
         InitManager.unfixedRecyclerView(binding.phonesIncludeLayout.selectRecyclerView, itemDecoration, phoneLayoutManager);
 
@@ -128,17 +128,17 @@ public class CreateCenterFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.centerIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
+        binding.typeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.first_radioButton:
-                    center = "personal_clinic";
+                    type = "personal_clinic";
 
-                    binding.clinicGroup.setVisibility(View.GONE);
+                    binding.counselingCenterGroup.setVisibility(View.GONE);
                     break;
                 case R.id.second_radioButton:
-                    center = "counseling_center";
+                    type = "counseling_center";
 
-                    binding.clinicGroup.setVisibility(View.VISIBLE);
+                    binding.counselingCenterGroup.setVisibility(View.VISIBLE);
                     break;
             }
         });
@@ -148,10 +148,10 @@ public class CreateCenterFragment extends Fragment {
             managersDialog.setData("managers");
         }).widget(binding.managerIncludeLayout.selectTextView);
 
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                if (!binding.titleIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -188,99 +188,102 @@ public class CreateCenterFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (center.equals("personal_clinic")) {
-                if (managerId.equals("")) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                }
-                if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                }
-
-                if (!managerId.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView);
-
-                    doWork();
-                }
+            if (managerId.equals("")) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                if (managerId.equals("")) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                }
-                if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                }
-                if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                }
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView);
+            }
+            if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView);
+            }
 
-                if (!managerId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView);
+            if (type.equals("counseling_center")) {
+                if (binding.titleIncludeLayout.inputEditText.length() == 0) {
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                } else {
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                }
+            }
 
+            if (type.equals("personal_clinic")) {
+                if (!managerId.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0)
                     doWork();
-                }
+            } else {
+                if (!managerId.equals("") && binding.titleIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0)
+                    doWork();
             }
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-//            center = ((MainActivity) requireActivity()).singleton.getType();
-            switch (center) {
-                case "personal_clinic":
-                    binding.centerIncludeLayout.firstRadioButton.setChecked(true);
+        if (getArguments() != null) {
+            if (getArguments().getString("type") != null) {
+                type = getArguments().getString("type");
+                switch (type) {
+                    case "personal_clinic":
+                        binding.typeIncludeLayout.firstRadioButton.setChecked(true);
 
-                    binding.clinicGroup.setVisibility(View.GONE);
-                    break;
-                case "counseling_center":
-                    binding.centerIncludeLayout.secondRadioButton.setChecked(true);
+                        binding.counselingCenterGroup.setVisibility(View.GONE);
+                        break;
+                    case "counseling_center":
+                        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
-                    binding.clinicGroup.setVisibility(View.VISIBLE);
-                    break;
+                        binding.counselingCenterGroup.setVisibility(View.VISIBLE);
+                        break;
+                }
             }
-        }
 
-        if (!((MainActivity) requireActivity()).singleton.getManager().equals("")) {
-            managerId = ((MainActivity) requireActivity()).singleton.getManager();
-            managerName = ((MainActivity) requireActivity()).singleton.getManager();
-            binding.managerIncludeLayout.selectTextView.setText(managerName);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
-            Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.selectCircleImageView);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            address = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.addressIncludeLayout.inputEditText.setText(address);
-        }
+            if (getArguments().getString("manager_id") != null) {
+                managerId = getArguments().getString("manager_id");
+                managerName = getArguments().getString("manager_name");
+                binding.managerIncludeLayout.selectTextView.setText(managerName);
+            }
 
-//        if (extras.getString("phones") != null) {
-//            try {
-//                JSONArray jsonArray = new JSONArray(extras.getString("phones"));
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    TypeModel TypeModel = new TypeModel(jsonObject);
-//
-//                    phones.add(TypeModel);
-//                }
-//
-//                setRecyclerView(phones, "phones");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
-//        }
+            if (getArguments().getString("title") != null) {
+                title = getArguments().getString("title");
+                binding.titleIncludeLayout.inputEditText.setText(title);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
-            description = ((MainActivity) requireActivity()).singleton.getDescription();
-            binding.descriptionIncludeLayout.inputEditText.setText(description);
+            if (getArguments().getString("avatar_path") != null) {
+                avatarPath = getArguments().getString("avatar_path");
+                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.selectCircleImageView);
+            }
+
+            if (getArguments().getString("address") != null) {
+                address = getArguments().getString("address");
+                binding.addressIncludeLayout.inputEditText.setText(address);
+            }
+
+            if (getArguments().getString("phones") != null) {
+                try {
+                    JSONArray jsonArray = new JSONArray(getArguments().getString("phones"));
+
+                    ArrayList<TypeModel> phones = new ArrayList<>();
+                    ArrayList<String> ids = new ArrayList<>();
+
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        TypeModel model = new TypeModel((JSONArray) jsonArray.get(i));
+
+                        phones.add(model);
+                        ids.add(model.object.getString("title"));
+                    }
+
+                    setRecyclerView(phones, ids, "phones");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+            }
+
+            if (getArguments().getString("description") != null) {
+                description = getArguments().getString("description");
+                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
+        } else {
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
         }
     }
 
@@ -292,26 +295,24 @@ public class CreateCenterFragment extends Fragment {
     }
 
     public void responseDialog(String method, TypeModel item) {
-        try {
-            switch (method) {
-                case "managers":
-                    if (!managerId.equals(((UserModel) item).getUserId())) {
-                        managerId = ((UserModel) item).getUserId();
-                        managerName = ((UserModel) item).getName();
+        switch (method) {
+            case "managers":
+                UserModel model = (UserModel) item;
 
-                        binding.managerIncludeLayout.selectTextView.setText(managerName);
-                    } else if (managerId.equals(item.object.get("id").toString())) {
-                        managerId = "";
-                        managerName = "";
+                if (!managerId.equals(model.getUserId())) {
+                    managerId = model.getUserId();
+                    managerName = model.getName();
 
-                        binding.managerIncludeLayout.selectTextView.setText("");
-                    }
+                    binding.managerIncludeLayout.selectTextView.setText(managerName);
+                } else if (managerId.equals(model.getUserId())) {
+                    managerId = "";
+                    managerName = "";
 
-                    managersDialog.dismiss();
-                    break;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+                    binding.managerIncludeLayout.selectTextView.setText("");
+                }
+
+                managersDialog.dismiss();
+                break;
         }
     }
 
@@ -335,43 +336,89 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-        if (center.equals("personal_clinic")) {
-            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
-            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-            data.put("type", "personal_clinic");
-        } else {
-            FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
+        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 
-            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
-            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-            if (FileManager.readFileFromCache(requireActivity(), "image") != null)
-                data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
-            data.put("type", "counseling_center");
-            data.put("title", name);
-        }
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        HashMap data = new HashMap<>();
+        data.put("type", type);
         data.put("manager_id", managerId);
         data.put("address", address);
-        data.put("description", description);
         data.put("phone_numbers", phonesAdapter.getIds());
-        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+        data.put("description", description);
+
+        if (type.equals("counseling_center")) {
+            data.put("title", title);
+
+            if (avatarBitmap != null) {
+                FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+                data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+            }
+        }
+
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         Center.create(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                if (isAdded())
+                if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
                         ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
                     });
+
+                    if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
+                        FileManager.deleteFileFromCache(requireActivity(), "image");
+                    }
+                }
             }
 
             @Override
             public void onFailure(String response) {
-                System.out.println(response);
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "manager_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "title":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "avatar":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "address":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.addressIncludeLayout.inputEditText, binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "phone_numbers":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "description":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
             }
         });
-        FileManager.deleteFileFromCache(requireActivity(), "image");
     }
 
     @Override

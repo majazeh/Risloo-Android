@@ -10,6 +10,7 @@
 
     <string name="AppImageContent">عکس</string>
 
+    <string name="AppAdded">مطلب ساخته شد.</string>
     <string name="AppChanged">تغییرات ثبت شد.</string>
     <string name="AppAuthenticated">ورود شما تمام شد.</string>
 
@@ -227,9 +228,9 @@
 
     <string name="CreateCenterFragmentTitle">ساخت مرکز درمانی</string>
 
-    <string name="CreateCenterFragmentCenterHeader">نوع مرکز درمانی</string>
+    <string name="CreateCenterFragmentTypeHeader">نوع مرکز درمانی</string>
     <string name="CreateCenterFragmentManagerHeader">مدیر</string>
-    <string name="CreateCenterFragmentNameHeader">عنوان</string>
+    <string name="CreateCenterFragmentTitleHeader">عنوان</string>
     <string name="CreateCenterFragmentAvatarHeader">تصویر نمایشی</string>
     <string name="CreateCenterFragmentAddressHeader">آدرس</string>
     <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
@@ -240,8 +241,8 @@
 
     <string name="CreateCenterFragmentAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
 
-    <string name="CreateCenterFragmentCenterPersonal">شخصی</string>
-    <string name="CreateCenterFragmentCenterClinic">مرکز مشاوره</string>
+    <string name="CreateCenterFragmentPersonalClinic">شخصی</string>
+    <string name="CreateCenterFragmentCounselingCenter">مرکز مشاوره</string>
 
     <string name="CreateCenterFragmentButton">ساخت</string>
 
@@ -252,11 +253,11 @@
     <string name="CreateCenterUserFragmentTitle">ثبت عضو جدید</string>
 
     <string name="CreateCenterUserFragmentMobileHeader">موبایل</string>
-    <string name="CreateCenterUserFragmentTypeHeader">موقعیت</string>
+    <string name="CreateCenterUserFragmentPositionHeader">موقعیت</string>
     <string name="CreateCenterUserFragmentRoomHeader">اتاق درمان</string>
-    <string name="CreateCenterUserFragmentNameHeader">نام مراجع</string>
+    <string name="CreateCenterUserFragmentNicknameHeader">نام مراجع</string>
 
-    <string name="CreateCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+    <string name="CreateCenterUserFragmentNicknameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
 
     <string name="CreateCenterUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
 
@@ -1195,7 +1196,7 @@
     <string name="BottomSheetBirthdayTitle">تاریخ تولد خود را انتخاب کنید.</string>
     <string name="BottomSheetBirthdayEntry">ثبت</string>
 
-    <string name="BottomSheetLogoutTitle">آیا تمایل به خروج از حساب کاربری دارید؟</string>
+    <string name="BottomSheetAuthEntry">ورود</string>
     <string name="BottomSheetLogoutEntry">خروج</string>
 
     <string name="BottomSheetStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>

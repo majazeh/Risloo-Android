@@ -14,8 +14,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.BottomSheets.AuthBottomSheet;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -30,6 +30,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateCenterUserFragment extends Fragment {
 
@@ -39,9 +40,11 @@ public class CreateCenterUserFragment extends Fragment {
     // Dialogs
     private SearchableDialog roomsDialog;
 
+    // BottomSheets
+    private AuthBottomSheet authBottomSheet;
+
     // Vars
-    public String centerId = "", mobile = "", type = "", roomId = "", roomName = "", centerName = "", name = "";
-    private boolean createCase = false;
+    public String mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
 
     @Nullable
     @Override
@@ -62,16 +65,18 @@ public class CreateCenterUserFragment extends Fragment {
     private void initializer() {
         roomsDialog = new SearchableDialog();
 
-        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentMobileHeader));
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentTypeHeader));
-        binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentRoomHeader));
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentNameHeader));
+        authBottomSheet = new AuthBottomSheet();
 
-        binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentNameGuide));
+        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentMobileHeader));
+        binding.positionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentPositionHeader));
+        binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentRoomHeader));
+        binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentNicknameHeader));
+
+        binding.nicknameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentNicknameGuide));
 
         binding.caseCheckBox.getRoot().setText(getResources().getString(R.string.CreateCenterUserFragmentCheckbox));
 
-        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.UserTypes, "main");
+        InitManager.spinner(requireActivity(), binding.positionIncludeLayout.selectSpinner, R.array.UserTypes, "main");
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterUserFragmentButton), getResources().getColor(R.color.White));
     }
@@ -95,10 +100,10 @@ public class CreateCenterUserFragment extends Fragment {
             return false;
         });
 
-        binding.typeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.positionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = parent.getItemAtPosition(position).toString();
+                CreateCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
 
                 if (position == 3) {
                     binding.clientGroup.setVisibility(View.VISIBLE);
@@ -118,73 +123,78 @@ public class CreateCenterUserFragment extends Fragment {
             roomsDialog.setData("rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                if (!binding.nicknameIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> createCase = isChecked);
+        binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                createCase = "1";
+            } else {
+                createCase = "";
+            }
+        });
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-//            if (roomId.equals("")) {
-//                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-//            }
-//            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-//                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-//            }
-
-            if (binding.mobileIncludeLayout.inputEditText.length() != 0 /*&& !roomId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0*/) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
-
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            mobile = ((MainActivity) requireActivity()).singleton.getMobile();
-            binding.mobileIncludeLayout.inputEditText.setText(mobile);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            type = ((MainActivity) requireActivity()).singleton.getType();
-            for (int i = 0; i < binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.typeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
-                    binding.typeIncludeLayout.selectSpinner.setSelection(i);
+        if (getArguments() != null) {
+            if (getArguments().getString("mobile") != null) {
+                mobile = getArguments().getString("mobile");
+                binding.mobileIncludeLayout.inputEditText.setText(mobile);
+            }
 
-                    if (i == 3) {
-                        binding.clientGroup.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.clientGroup.setVisibility(View.GONE);
+            if (getArguments().getString("position") != null) {
+                position = getArguments().getString("position");
+                for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
+                    if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
+                        binding.positionIncludeLayout.selectSpinner.setSelection(i);
+
+                        if (i == 3) {
+                            binding.clientGroup.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.clientGroup.setVisibility(View.GONE);
+                        }
                     }
                 }
             }
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            roomId = ((MainActivity) requireActivity()).singleton.getAddress();
-            roomName = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.primaryTextView.setText(roomName);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            centerName = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
-        if (((MainActivity) requireActivity()).singleton.getCreateCase()) {
-            createCase = true;
-            binding.caseCheckBox.getRoot().setChecked(true);
+
+            if (getArguments().getString("room_id") != null) {
+                roomId = getArguments().getString("room_id");
+                roomName = getArguments().getString("room_name");
+                binding.roomIncludeLayout.primaryTextView.setText(roomName);
+            }
+
+            if (getArguments().getString("center_name") != null) {
+                centerName = getArguments().getString("center_name");
+                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+            }
+
+            if (getArguments().getString("nickname") != null) {
+                nickname = getArguments().getString("nickname");
+                binding.nicknameIncludeLayout.inputEditText.setText(nickname);
+            }
+
+            if (getArguments().getString("create_case") != null) {
+                createCase = getArguments().getString("create_case");
+
+                if (createCase.equals("1")) {
+                    binding.caseCheckBox.getRoot().setChecked(true);
+                }
+            }
         }
     }
 
@@ -192,14 +202,16 @@ public class CreateCenterUserFragment extends Fragment {
         try {
             switch (method) {
                 case "rooms":
-                    if (!roomId.equals(((RoomModel) item).getRoomId())) {
-                        roomId = ((RoomModel) item).getRoomId();
-                        roomName = ((RoomModel) item).getRoomManager().getName();
-                        centerName = ((RoomModel) item).getRoomCenter().getDetail().getString("title");
+                    RoomModel model = (RoomModel) item;
+
+                    if (!roomId.equals(model.getRoomId())) {
+                        roomId = model.getRoomId();
+                        roomName = model.getRoomManager().getName();
+                        centerName = model.getRoomCenter().getDetail().getString("title");
 
                         binding.roomIncludeLayout.primaryTextView.setText(roomName);
                         binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-                    } else if (roomId.equals(((RoomModel) item).getRoomId())) {
+                    } else if (roomId.equals(model.getRoomId())) {
                         roomId = "";
                         roomName = "";
                         centerName = "";
@@ -218,57 +230,75 @@ public class CreateCenterUserFragment extends Fragment {
 
     private void doWork() {
         mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
+
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-        HashMap data = new HashMap();
+
+        HashMap data = new HashMap<>();
         data.put("id", requireArguments().getString("id"));
         data.put("mobile", mobile);
-        data.put("nickname", name);
-        data.put("position", type);
-        data.put("room_id", roomId);
-        if (createCase)
-            data.put("create_case", "1");
-        else if (data.containsKey("create_case"))
-            data.remove("create_case");
+        data.put("position", position);
 
-        HashMap header = new HashMap();
-        header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
+       if (position.equals("مراجع")) {
+           data.put("room_id", roomId);
+           data.put("nickname", nickname);
+           data.put("create_case", createCase);
+       }
+
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         Center.createUser(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                if (isAdded())
+                if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        // TODO: open authentication Dialog
                         try {
-                            data.clear();
                             AuthModel model = new AuthModel((JSONObject) object);
-                            data.put("key", model.getKey());
-                            Auth.auth_theory(data, header, new Response() {
-                                @Override
-                                public void onOK(Object object) {
-                                    if (isAdded())
-                                        requireActivity().runOnUiThread(() -> {
-                                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                                            Bundle extras = new Bundle();
-                                            extras.putString("id", requireArguments().getString("id"));
-                                            ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
-                                        });
-                                }
 
-                                @Override
-                                public void onFailure(String response) {
-
-                                }
-                            });
+                            authBottomSheet.show(requireActivity().getSupportFragmentManager(), "authBottomSheet");
+                            authBottomSheet.setData(requireArguments().getString("id"), model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     });
+                }
             }
 
             @Override
             public void onFailure(String response) {
-                System.out.println(response);
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "mobile":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "position":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.positionIncludeLayout.getRoot(), binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "room_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "nickname":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
             }
         });
     }

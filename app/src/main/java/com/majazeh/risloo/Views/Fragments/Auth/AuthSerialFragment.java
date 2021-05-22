@@ -156,17 +156,21 @@ public class AuthSerialFragment extends Fragment {
 //
 //                    switch (model.getTheory()) {
 //                        case "password":
-//                            requireActivity().runOnUiThread(() -> {
-//                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-//                                ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-//                            });
+//                            if (isAdded()) {
+//                                requireActivity().runOnUiThread(() -> {
+//                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+//                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
+//                                });
+//                            }
 //                            break;
 //                    }
 //                } else {
-//                    requireActivity().runOnUiThread(() -> {
-//                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAuthenticated), Toast.LENGTH_SHORT).show();
-//                    });
+//                    if (isAdded()) {
+//                        requireActivity().runOnUiThread(() -> {
+//                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+//                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAuthenticated), Toast.LENGTH_SHORT).show();
+//                        });
+//                    }
 //                }
 //            }
 //

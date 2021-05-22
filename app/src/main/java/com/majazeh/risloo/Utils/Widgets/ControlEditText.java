@@ -31,52 +31,170 @@ public class ControlEditText {
         this.editText = editText;
 
         editText.requestFocus();
-        if (activity instanceof AuthActivity) {
+        if (activity instanceof AuthActivity)
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue500);
-        } else if (activity instanceof MainActivity) {
+        else if (activity instanceof MainActivity)
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
-        }
     }
 
     public void clear(Activity activity, EditText editText) {
         editText.clearFocus();
-        if (activity instanceof AuthActivity) {
+        if (activity instanceof AuthActivity)
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-        } else if (activity instanceof MainActivity) {
+        else if (activity instanceof MainActivity)
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
-        }
 
         hideKeyboard(activity, editText);
     }
 
-    public void error(Activity activity, EditText editText, ConstraintLayout constraintLayout, TextView textView, String value) {
-        editText.clearFocus();
-        if (activity instanceof AuthActivity) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
-        } else if (activity instanceof MainActivity) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+    public void error(Activity activity, EditText widget, ConstraintLayout errorLayout, TextView errorTextView, String value) {
+        if (widget != null) {
+            widget.clearFocus();
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+
+            hideKeyboard(activity, widget);
         }
 
-        constraintLayout.setVisibility(View.VISIBLE);
-
-        textView.setText(value);
-
-        hideKeyboard(activity, editText);
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(value);
     }
 
-    public void check(Activity activity, EditText editText, ConstraintLayout constraintLayout, TextView textView) {
-        editText.clearFocus();
-        if (activity instanceof AuthActivity) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-        } else if (activity instanceof MainActivity) {
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+    public void error(Activity activity, TextView widget, ConstraintLayout errorLayout, TextView errorTextView, String value) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
         }
 
-        constraintLayout.setVisibility(View.GONE);
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(value);
+    }
 
-        textView.setText("");
+    public void error(Activity activity, Spinner widget, ConstraintLayout errorLayout, TextView errorTextView, String value) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
 
-        hideKeyboard(activity, editText);
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(value);
+    }
+
+    public void error(Activity activity, RecyclerView widget, ConstraintLayout errorLayout, TextView errorTextView, String value) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
+
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(value);
+    }
+
+    public void error(Activity activity, LinearLayout widget, ConstraintLayout errorLayout, TextView errorTextView, String value) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
+
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(value);
+    }
+
+    public void error(Activity activity, ConstraintLayout widget, ConstraintLayout errorLayout, TextView errorTextView, String value) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+        }
+
+        errorLayout.setVisibility(View.VISIBLE);
+        errorTextView.setText(value);
+    }
+
+    public void check(Activity activity, EditText widget, ConstraintLayout errorLayout, TextView errorTextView) {
+        if (widget != null) {
+            widget.clearFocus();
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
+            hideKeyboard(activity, widget);
+        }
+
+        errorLayout.setVisibility(View.GONE);
+        errorTextView.setText("");
+    }
+
+    public void check(Activity activity, TextView widget, ConstraintLayout errorLayout, TextView errorTextView) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        errorLayout.setVisibility(View.GONE);
+        errorTextView.setText("");
+    }
+
+    public void check(Activity activity, Spinner widget, ConstraintLayout errorLayout, TextView errorTextView) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        errorLayout.setVisibility(View.GONE);
+        errorTextView.setText("");
+    }
+
+    public void check(Activity activity, RecyclerView widget, ConstraintLayout errorLayout, TextView errorTextView) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        errorLayout.setVisibility(View.GONE);
+        errorTextView.setText("");
+    }
+
+    public void check(Activity activity, LinearLayout widget, ConstraintLayout errorLayout, TextView errorTextView) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        errorLayout.setVisibility(View.GONE);
+        errorTextView.setText("");
+    }
+
+    public void check(Activity activity, ConstraintLayout widget, ConstraintLayout errorLayout, TextView errorTextView) {
+        if (widget != null) {
+            if (activity instanceof AuthActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            else if (activity instanceof MainActivity)
+                widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        }
+
+        errorLayout.setVisibility(View.GONE);
+        errorTextView.setText("");
     }
 
     private void hideKeyboard(Activity activity, EditText editText) {
@@ -84,17 +202,7 @@ public class ControlEditText {
         Objects.requireNonNull(inputMethodManager).hideSoftInputFromWindow(editText.getWindowToken(), 0);
     }
 
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
+    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
     public void error(Activity activity, EditText editText, ImageView imageView, TextView textView, String value) {
         editText.clearFocus();
@@ -117,6 +225,7 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
         } else if (activity instanceof MainActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+
         }
 
         imageView.setVisibility(View.VISIBLE);
@@ -130,6 +239,7 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
         } else if (activity instanceof MainActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+
         }
 
         imageView.setVisibility(View.VISIBLE);
@@ -143,6 +253,7 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
         } else if (activity instanceof MainActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+
         }
 
         imageView.setVisibility(View.VISIBLE);
@@ -158,7 +269,9 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
         }
 
+
         imageView.setVisibility(View.VISIBLE);
+
 
         textView.setVisibility(View.VISIBLE);
         textView.setText(value);
@@ -185,6 +298,7 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         } else if (activity instanceof MainActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
         }
 
         imageView.setVisibility(View.GONE);
@@ -198,6 +312,7 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         } else if (activity instanceof MainActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
         }
 
         imageView.setVisibility(View.GONE);
@@ -211,6 +326,7 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         } else if (activity instanceof MainActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
         }
 
         imageView.setVisibility(View.GONE);
@@ -224,12 +340,14 @@ public class ControlEditText {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         } else if (activity instanceof MainActivity) {
             widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
         }
 
         imageView.setVisibility(View.GONE);
 
         textView.setVisibility(View.GONE);
         textView.setText("");
+
     }
 
 }

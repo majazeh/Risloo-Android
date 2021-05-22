@@ -198,41 +198,47 @@ public class AuthPasswordFragment extends Fragment {
 
                     switch (model.getTheory()) {
                         case "mobileCode":
-                            requireActivity().runOnUiThread(() -> {
-                                ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                            });
+                            if (isAdded()) {
+                                requireActivity().runOnUiThread(() -> {
+                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                    ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
+                                });
+                            }
                             break;
                     }
                 } else {
-                    requireActivity().runOnUiThread(() -> {
-                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                        ((AuthActivity) requireActivity()).login(model);
-                    });
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                            ((AuthActivity) requireActivity()).login(model);
+                        });
+                    }
                 }
             }
 
             @Override
             public void onFailure(String response) {
-                requireActivity().runOnUiThread(() -> {
-                    try {
-                        JSONObject jsonObject = new JSONObject(response);
-                        if (!jsonObject.isNull("errors")) {
-                            Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
 
-                            while (keys.hasNext()) {
-                                String key = keys.next();
-                                for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                    if (key.equals("password")) {
-                                        ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        if (key.equals("password")) {
+                                            ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        }
                                     }
                                 }
                             }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                });
+                    });
+                }
             }
         });
     }

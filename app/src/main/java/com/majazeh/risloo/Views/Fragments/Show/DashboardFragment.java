@@ -97,7 +97,6 @@ public class DashboardFragment extends Fragment {
                         ((MainActivity) requireActivity()).login(model);
 
                         // Cases Data
-
                         if (!model.getCaseList().data().isEmpty()) {
                             cases2Adapter.setCases(model.getCaseList().data());
 
@@ -112,7 +111,6 @@ public class DashboardFragment extends Fragment {
                         binding.casesShimmerLayout.getRoot().stopShimmer();
 
                         // Samples Data
-
                         if (!model.getSampleList().data().isEmpty()) {
                             samplesAdapter.setSamples(model.getSampleList().data());
 
@@ -128,7 +126,6 @@ public class DashboardFragment extends Fragment {
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
 
                         // Rooms Data
-
                         if (!model.getRoomList().data().isEmpty()) {
                             roomsAdapter.setRooms(model.getRoomList().data());
 
@@ -143,7 +140,6 @@ public class DashboardFragment extends Fragment {
                         binding.roomsShimmerLayout.getRoot().stopShimmer();
 
                         // Centers Data
-
                         if (!model.getCenterList().data().isEmpty()) {
                             centersAdapter.setCenters(model.getCenterList().data());
 
@@ -162,28 +158,24 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
-
-                // Cases Data
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        // Cases Data
                         binding.casesGroup.setVisibility(View.GONE);
                         binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.casesShimmerLayout.getRoot().stopShimmer();
 
                         // Samples Data
-
                         binding.samplesGroup.setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
 
                         // Rooms Data
-
                         binding.roomsGroup.setVisibility(View.GONE);
                         binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.roomsShimmerLayout.getRoot().stopShimmer();
 
                         // Centers Data
-
                         binding.centersGroup.setVisibility(View.GONE);
                         binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.centersShimmerLayout.getRoot().stopShimmer();
