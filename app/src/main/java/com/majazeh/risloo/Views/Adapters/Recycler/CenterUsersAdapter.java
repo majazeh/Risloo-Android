@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -91,7 +92,17 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     private void listener(CenterUsersHolder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment)).widget(holder.binding.getRoot());
+        ClickManager.onClickListener(() -> {
+            if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
+                CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (centerUsersFragment != null) {
+                    Bundle extras = new Bundle();
+                    extras.putString("id", centerUsersFragment.id);
+                    extras.putString("userId", holder.binding.serialTextView.getText().toString());
+                    ((MainActivity) activity).navigator(R.id.referenceFragment);
+                }
+            }
+        }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
