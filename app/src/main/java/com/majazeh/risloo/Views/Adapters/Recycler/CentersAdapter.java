@@ -65,7 +65,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         notifyDataSetChanged();
     }
 
-    public void clear() {
+    public void clearCenters() {
         if (this.centers != null) {
             this.centers.clear();
             notifyDataSetChanged();

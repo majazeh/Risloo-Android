@@ -17,12 +17,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
-import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -74,7 +72,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         notifyDataSetChanged();
     }
 
-    public void clear() {
+    public void clearUsers() {
         if (this.users != null) {
             this.users.clear();
             notifyDataSetChanged();
@@ -82,7 +80,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     private void initializer(CenterUsersHolder holder) {
-        InitManager.spinner(activity, holder.binding.typeSpinner, R.array.UserTypes, "adapter2");
+        InitManager.spinner(activity, holder.binding.positionSpinner, R.array.UserTypes, "adapter2");
     }
 
     private void detector(CenterUsersHolder holder) {
@@ -99,80 +97,34 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                     Bundle extras = new Bundle();
                     extras.putString("id", centerUsersFragment.id);
                     extras.putString("userId", holder.binding.serialTextView.getText().toString());
+
                     ((MainActivity) activity).navigator(R.id.referenceFragment);
                 }
             }
         }).widget(holder.binding.getRoot());
 
-        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        holder.binding.positionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String task = parent.getItemAtPosition(position).toString();
+                String pos = parent.getItemAtPosition(position).toString();
+
                 if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
                     CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (centerUsersFragment != null) {
-                        switch (task) {
-                            case "پذیرفتن":
-                                HashMap data = new HashMap();
-                                data.put("id", centerUsersFragment.id);
-                                data.put("userId", holder.binding.serialTextView.getText().toString());
-                                data.put("status", "accept");
-                                HashMap header = new HashMap();
-                                header.put("Authorization", "Bearer " + ((MainActivity) activity).singleton.getToken());
-                                Center.changeStatus(data, header, new Response() {
-                                    @Override
-                                    public void onOK(Object object) {
-                                        activity.runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Toast.makeText(activity, "DONE!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    }
-
-                                    @Override
-                                    public void onFailure(String response) {
-
-                                    }
-                                });
-                                Log.e("method", "accept");
+                        switch (pos) {
+                            case "مدیر":
+//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "manager", "position");
                                 break;
-                            case "تعلیق":
-                                HashMap data1 = new HashMap();
-                                data1.put("id", centerUsersFragment.id);
-                                data1.put("userId", holder.binding.serialTextView.getText().toString());
-                                data1.put("status", "kick");
-                                HashMap header1 = new HashMap();
-                                header1.put("Authorization", "Bearer " + ((MainActivity) activity).singleton.getToken());
-                                Center.changeStatus(data1, header1, new Response() {
-                                    @Override
-                                    public void onOK(Object object) {
-                                        activity.runOnUiThread(new Runnable() {
-                                            @Override
-                                            public void run() {
-                                                Toast.makeText(activity, "DONE!", Toast.LENGTH_SHORT).show();
-                                            }
-                                        });
-                                    }
-
-                                    @Override
-                                    public void onFailure(String response) {
-
-                                    }
-                                });
-                                Log.e("method", "kick");
+                            case "مراجع":
+//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "client", "position");
                                 break;
-                            case "ساختن اتاق درمان":
-                                Log.e("method", "create_room");
+                            case "اپراتور":
+//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "operator", "position");
                                 break;
-                            case "ویرایش کاربر":
-                                Log.e("method", "edit");
-                                break;
-                            case "ورود به کاربری":
-                                Log.e("method", "enter");
+                            case "روانشناس":
+//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "psychologist", "position");
                                 break;
                         }
-                        holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
                     }
                 }
             }
@@ -183,32 +135,38 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             }
         });
 
-        holder.binding.typeSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String type = parent.getItemAtPosition(position).toString();
+                String task = parent.getItemAtPosition(position).toString();
+
                 if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
                     CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (centerUsersFragment != null) {
-                        String enType = "";
-                        switch (type) {
-                            case "مدیر":
-                                enType = "manager";
+                        switch (task) {
+                            case "پذیرفتن":
+                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "accept", "status");
                                 break;
-                            case "مراجع":
-                                enType = "client";
+                            case "تعلیق":
+                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "kick", "status");
                                 break;
-                            case "اپراتور":
-                                enType = "operator";
+                            case "ساختن اتاق درمان":
+                                Log.e("method", "create_room");
                                 break;
-                            case "روانشناس":
-                                enType = "psychologist";
+                            case "اتاق درمان":
+                                Log.e("method", "room");
+                                break;
+                            case "ویرایش کاربر":
+                                Log.e("method", "edit");
+                                break;
+                            case "ورود به کاربری":
+                                Log.e("method", "enter");
                                 break;
                         }
-//                        TODO: do it
-//                        doWork(enType, centerUsersFragment.id, holder.binding.serialTextView.getText().toString());
                     }
                 }
+
+                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
             }
 
             @Override
@@ -229,71 +187,103 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
         holder.binding.statusTexView.setText(model.getUserStatus());
+
         holder.binding.acceptedTextView.setText(String.valueOf(model.getUserAccepted_at()));
         holder.binding.kickedTextView.setText(String.valueOf(model.getUserKicked_at()));
 
-        for (int i = 0; i < holder.binding.typeSpinner.getCount(); i++) {
-            if (holder.binding.typeSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(model.getPosition())) {
-                holder.binding.typeSpinner.setSelection(i);
+        for (int i = 0; i < holder.binding.positionSpinner.getCount(); i++) {
+            if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(model.getPosition())) {
+                holder.binding.positionSpinner.setSelection(i);
             }
         }
 
-        if (holder.getBindingAdapterPosition() == 0) {
-            setType(holder, true);
-        } else {
-            setType(holder, false);
-        }
+        setPosition(holder, true);
 
-        ArrayList<String> menuValues = new ArrayList<>();
+        ArrayList<String> list = new ArrayList<>();
 
-        if (model.getUserKicked_at() != 0 || model.getUserAccepted_at() == 0)
-            menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+        if (model.getUserAccepted_at() == 0)
+            list.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
         if (model.getUserKicked_at() == 0)
-            menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
-        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
-        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
-        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
-        menuValues.add("");
+            list.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+        list.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
+        list.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
+        list.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
+        list.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
+        list.add("");
 
-        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menuValues, "centerUsers");
+        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, list, "centerUsers");
     }
 
-    private void setType(CenterUsersHolder holder, boolean enable) {
+    private void setPosition(CenterUsersHolder holder, boolean enable) {
         if (enable) {
-            holder.binding.typeSpinner.setEnabled(true);
+            holder.binding.positionSpinner.setEnabled(true);
 
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             else
-                holder.binding.typeSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
 
-            holder.binding.typeAngleImageView.setVisibility(View.VISIBLE);
+            holder.binding.positionAngleImageView.setVisibility(View.VISIBLE);
         } else {
-            holder.binding.typeSpinner.setEnabled(false);
-            holder.binding.typeSpinner.setBackgroundResource(android.R.color.transparent);
+            holder.binding.positionSpinner.setEnabled(false);
+            holder.binding.positionSpinner.setBackgroundResource(android.R.color.transparent);
 
-            holder.binding.typeAngleImageView.setVisibility(View.GONE);
+            holder.binding.positionAngleImageView.setVisibility(View.GONE);
         }
     }
 
-    private void doWork(String position, String id, String userId) {
-        HashMap data = new HashMap();
-        data.put("position", position);
-        data.put("id", id);
-        data.put("userId", userId);
-        HashMap header = new HashMap();
-        header.put("Authorization", "Bearer " + ((MainActivity) activity).singleton.getToken());
-        Center.changePosition(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                activity.runOnUiThread(() -> Toast.makeText(activity, "done", Toast.LENGTH_SHORT).show());
-            }
+    private void doWork(String id, String userId, String value, String method) {
+        if (method.equals("position")) {
+            HashMap data = new HashMap();
+            data.put("id", id);
+            data.put("userId", userId);
+            data.put("position", value);
 
-            @Override
-            public void onFailure(String response) {
-                System.out.println(response);
-            }
-        });
+            HashMap header = new HashMap();
+            header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+
+            Center.changePosition(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    activity.runOnUiThread(() -> {
+                        // sdfnslkdafnksnfklasklfnlksfn
+
+                        ((MainActivity) activity).loadingDialog.dismiss();
+                        Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    // Place Code if Needed
+                }
+            });
+        } else {
+            HashMap data = new HashMap();
+            data.put("id", id);
+            data.put("userId", userId);
+            data.put("status", value);
+
+            HashMap header = new HashMap();
+            header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+
+            Center.changeStatus(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    activity.runOnUiThread(() -> {
+                        // sdfnslkdafnksnfklasklfnlksfn
+
+                        ((MainActivity) activity).loadingDialog.dismiss();
+                        Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    // Place Code if Needed
+                }
+            });
+        }
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

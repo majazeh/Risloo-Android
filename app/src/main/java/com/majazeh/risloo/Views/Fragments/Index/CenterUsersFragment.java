@@ -173,7 +173,7 @@ public class CenterUsersFragment extends Fragment {
 
         if (data.containsKey("page")) {
             if (data.get("page").equals(1)) {
-                adapter.clear();
+                adapter.clearUsers();
             }
         }
 

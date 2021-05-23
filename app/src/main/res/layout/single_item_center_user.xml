@@ -49,7 +49,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintEnd_toStartOf="@id/type_spinner"
+        app:layout_constraintEnd_toStartOf="@id/position_spinner"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="نام مستعار" />
@@ -72,7 +72,7 @@
         tools:text="موبایل" />
 
     <Spinner
-        android:id="@+id/type_spinner"
+        android:id="@+id/position_spinner"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
@@ -87,16 +87,16 @@
         app:layout_constraintTop_toBottomOf="@id/top_view" />
 
     <ImageView
-        android:id="@+id/type_angle_imageView"
+        android:id="@+id/position_angle_imageView"
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_2sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_angle_down_light"
-        app:layout_constraintBottom_toBottomOf="@id/type_spinner"
-        app:layout_constraintEnd_toEndOf="@id/type_spinner"
-        app:layout_constraintTop_toTopOf="@id/type_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/position_spinner"
+        app:layout_constraintEnd_toEndOf="@id/position_spinner"
+        app:layout_constraintTop_toTopOf="@id/position_spinner"
         app:tint="@color/Gray600" />
 
     <TextView
@@ -113,9 +113,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/type_spinner"
-        app:layout_constraintStart_toStartOf="@id/type_spinner"
-        app:layout_constraintTop_toBottomOf="@id/type_spinner"
+        app:layout_constraintEnd_toEndOf="@id/position_spinner"
+        app:layout_constraintStart_toStartOf="@id/position_spinner"
+        app:layout_constraintTop_toBottomOf="@id/position_spinner"
         tools:text="وضعیت" />
 
     <TextView
@@ -132,7 +132,7 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toStartOf="@id/menu_imageView"
-        app:layout_constraintStart_toEndOf="@id/type_spinner"
+        app:layout_constraintStart_toEndOf="@id/position_spinner"
         app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="زمان پذیرش" />
 
