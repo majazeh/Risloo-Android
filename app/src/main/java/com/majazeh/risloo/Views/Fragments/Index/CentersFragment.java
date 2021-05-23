@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.EndlessScrollRecyclerView;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
@@ -29,12 +28,7 @@ import com.majazeh.risloo.databinding.FragmentCentersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
-import com.mre.ligheh.Model.Madule.Model;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
 
-import org.jetbrains.annotations.NotNull;
-
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class CentersFragment extends Fragment {
@@ -130,16 +124,19 @@ public class CentersFragment extends Fragment {
 
             }
         });
+
         binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (scrollY > 0) {
                 int visibleItemCount = layoutManager.getChildCount();
                 int totalItemCount = layoutManager.getItemCount();
                 int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+
                 if (!loading) {
                     if (pastVisiblesItems + visibleItemCount >= totalItemCount) {
                         if (data.containsKey("page")) {
                             int page = (int) data.get("page");
                             page++;
+
                             data.put("page", page);
                         } else {
                             data.put("page", 1);
@@ -149,29 +146,31 @@ public class CentersFragment extends Fragment {
                     }
                 }
             }
-
         });
-
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterFragment)).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
-        loading = true;
         if (!((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
             binding.addImageView.getRoot().setVisibility(View.GONE);
         }
+
+        loading = true;
+
         if (data.containsKey("page")) {
             if (data.get("page").equals(1)) {
                 adapter.clear();
             }
         }
+
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Center.list(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 List centers = (List) object;
+
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (!centers.data().isEmpty()) {
@@ -188,28 +187,34 @@ public class CentersFragment extends Fragment {
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
-                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-                        }
                         if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE) {
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
                         }
-
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        }
                     });
+                    loading = false;
                 }
-                loading = false;
             }
 
             @Override
             public void onFailure(String response) {
-                binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                binding.indexShimmerLayout.getRoot().stopShimmer();
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
-                    binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE) {
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        }
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        }
+                    });
+                    loading = false;
                 }
-                loading = false;
             }
         });
     }

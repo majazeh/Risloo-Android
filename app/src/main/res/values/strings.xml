@@ -527,7 +527,7 @@
     ---------- // EditCenterDetail Tab
 
     <string name="EditCenterDetailTabManagerHeader">مدیر</string>
-    <string name="EditCenterDetailTabNameHeader">عنوان</string>
+    <string name="EditCenterDetailTabTitleHeader">عنوان</string>
     <string name="EditCenterDetailTabAddressHeader">آدرس</string>
     <string name="EditCenterDetailTabPhonesHeader">شماره تلفن(ها)</string>
     <string name="EditCenterDetailTabDescriptionHeader">توضیحات</string>
@@ -549,11 +549,11 @@
 
     <string name="EditCenterUserFragmentTitle">ویرایش عضو مرکز درمانی</string>
 
-    <string name="EditCenterUserFragmentTypeHeader">موقعیت</string>
-    <string name="EditCenterUserFragmentNameHeader">نام مراجع</string>
+    <string name="EditCenterUserFragmentPositionHeader">موقعیت</string>
+    <string name="EditCenterUserFragmentNicknameHeader">نام مراجع</string>
     <string name="EditCenterUserFragmentStatusHeader">وضعیت</string>
 
-    <string name="EditCenterUserFragmentNameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
+    <string name="EditCenterUserFragmentNicknameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
 
     <string name="EditCenterUserFragmentStatusAccept">پذیرفتن</string>
     <string name="EditCenterUserFragmentStatusKick">تعلیق</string>

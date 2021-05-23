@@ -52,7 +52,7 @@
                 app:layout_constraintTop_toBottomOf="@id/manager_includeLayout" />
 
             <include
-                android:id="@+id/name_includeLayout"
+                android:id="@+id/title_includeLayout"
                 layout="@layout/component_main_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -62,15 +62,15 @@
                 app:layout_constraintTop_toBottomOf="@id/manager_errorLayout" />
 
             <include
-                android:id="@+id/name_errorLayout"
+                android:id="@+id/title_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/name_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/name_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/title_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/title_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/title_includeLayout" />
 
             <include
                 android:id="@+id/address_includeLayout"
@@ -82,7 +82,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/title_errorLayout" />
 
             <include
                 android:id="@+id/address_errorLayout"
@@ -145,7 +145,7 @@
                 android:id="@+id/clinic_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:constraint_referenced_ids="manager_includeLayout, name_includeLayout" />
+                app:constraint_referenced_ids="manager_includeLayout, title_includeLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

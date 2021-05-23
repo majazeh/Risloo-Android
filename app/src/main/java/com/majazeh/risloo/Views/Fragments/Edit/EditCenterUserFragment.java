@@ -18,6 +18,14 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class EditCenterUserFragment extends Fragment {
 
@@ -25,7 +33,7 @@ public class EditCenterUserFragment extends Fragment {
     private FragmentEditCenterUserBinding binding;
 
     // Vars
-    private String type = "", name = "", status ="";
+    private String position = "", nickname = "", status ="";
 
     @Nullable
     @Override
@@ -44,16 +52,16 @@ public class EditCenterUserFragment extends Fragment {
     }
 
     private void initializer() {
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentTypeHeader));
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentNameHeader));
+        binding.positionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentPositionHeader));
+        binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentNicknameHeader));
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentStatusHeader));
 
-        binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterUserFragmentNameGuide));
+        binding.nicknameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterUserFragmentNicknameGuide));
 
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditCenterUserFragmentStatusAccept));
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditCenterUserFragmentStatusKick));
 
-        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.UserTypes, "main");
+        InitManager.spinner(requireActivity(), binding.positionIncludeLayout.selectSpinner, R.array.UserTypes, "main");
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterUserFragmentButton), getResources().getColor(R.color.White));
     }
@@ -68,10 +76,10 @@ public class EditCenterUserFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.typeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.positionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = parent.getItemAtPosition(position).toString();
+                EditCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
 
                 if (position == 3) {
                     binding.clientGroup.setVisibility(View.VISIBLE);
@@ -86,10 +94,10 @@ public class EditCenterUserFragment extends Fragment {
             }
         });
 
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                if (!binding.nicknameIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -107,55 +115,107 @@ public class EditCenterUserFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-
-            if (binding.nameIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
-
+            if (binding.nicknameIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            type = ((MainActivity) requireActivity()).singleton.getType();
-            for (int i=0; i<binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.typeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
-                    binding.typeIncludeLayout.selectSpinner.setSelection(i);
+        if (getArguments() != null) {
+            if (getArguments().getString("position") != null) {
+                position = getArguments().getString("position");
+                for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
+                    if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
+                        binding.positionIncludeLayout.selectSpinner.setSelection(i);
 
-                    if (i == 3) {
-                        binding.clientGroup.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.clientGroup.setVisibility(View.GONE);
+                        if (i == 3) {
+                            binding.clientGroup.setVisibility(View.VISIBLE);
+                        } else {
+                            binding.clientGroup.setVisibility(View.GONE);
+                        }
                     }
                 }
             }
-        }
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
 
-        if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-            status = ((MainActivity) requireActivity()).singleton.getStatus();
-            switch (status) {
-                case "accept":
-                    binding.statusIncludeLayout.firstRadioButton.setChecked(true);
-                    break;
-                case "kick":
-                    binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-                    break;
+            if (getArguments().getString("nickname") != null) {
+                nickname = getArguments().getString("nickname");
+                binding.nicknameIncludeLayout.inputEditText.setText(nickname);
+            }
+
+            if (getArguments().getString("status") != null) {
+                status = getArguments().getString("status");
+                switch (status) {
+                    case "accept":
+                        binding.statusIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "kick":
+                        binding.statusIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
+                }
             }
         }
     }
 
     private void doWork() {
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        HashMap data = new HashMap<>();
+        if (requireArguments().getString("id") != null) {
+            data.put("id", requireArguments().getString("id"));
+        }
+        data.put("position", position);
+        data.put("nickname", nickname);
+        data.put("status", status);
+
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        Center.editUser(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Todo : Place Code Here
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "position":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.positionIncludeLayout.selectSpinner, binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "nickname":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override

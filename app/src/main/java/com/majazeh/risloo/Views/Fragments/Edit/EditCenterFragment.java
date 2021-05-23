@@ -11,9 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditCenterAdapter;
 import com.majazeh.risloo.databinding.FragmentEditCenterBinding;
+
+import org.json.JSONArray;
+import org.json.JSONException;
 
 public class EditCenterFragment extends Fragment {
 
@@ -27,8 +29,10 @@ public class EditCenterFragment extends Fragment {
     private TabLayoutMediator tabLayoutMediator;
 
     // Vars
-    public String center = "personal";
     private String[] tabs;
+    public String centerId = "", type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
+    public JSONArray phones;
+    public String avatarPath = "";
 
     @Nullable
     @Override
@@ -48,19 +52,54 @@ public class EditCenterFragment extends Fragment {
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            center = ((MainActivity) requireActivity()).singleton.getName();
-            switch (center) {
-                case "personal":
-                    binding.tabLayout.getRoot().setVisibility(View.GONE);
-                    break;
-                case "clinic":
-                    binding.tabLayout.getRoot().setVisibility(View.VISIBLE);
-                    break;
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null) {
+                centerId = getArguments().getString("id");
+            }
+
+            if (requireArguments().getString("type") != null) {
+                type = requireArguments().getString("type");
+                switch (type) {
+                    case "personal_clinic":
+                        binding.tabLayout.getRoot().setVisibility(View.GONE);
+                        break;
+                    case "counseling_center":
+                        binding.tabLayout.getRoot().setVisibility(View.VISIBLE);
+                        break;
+                }
+            }
+
+            if (getArguments().getString("manager_id") != null) {
+                managerId = getArguments().getString("manager_id");
+                managerName = getArguments().getString("manager_name");
+            }
+
+            if (getArguments().getString("title") != null) {
+                title = getArguments().getString("title");
+            }
+
+            if (getArguments().getString("avatar_path") != null) {
+                avatarPath = getArguments().getString("avatar_path");
+            }
+
+            if (getArguments().getString("address") != null) {
+                address = getArguments().getString("address");
+            }
+
+            if (getArguments().getString("phones") != null) {
+                try {
+                    phones = new JSONArray(getArguments().getString("phones"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            if (getArguments().getString("description") != null) {
+                description = getArguments().getString("description");
             }
         }
 
-        adapter = new EditCenterAdapter(requireActivity(), center);
+        adapter = new EditCenterAdapter(requireActivity(), type);
 
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();

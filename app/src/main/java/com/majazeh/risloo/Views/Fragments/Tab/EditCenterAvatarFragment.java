@@ -19,11 +19,15 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
-import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
+import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterAvatarBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class EditCenterAvatarFragment extends Fragment {
 
@@ -78,7 +82,10 @@ public class EditCenterAvatarFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (avatarBitmap == null) {
-                Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
+                if (!avatarPath.equals(""))
+                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageNew), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageEmpty), Toast.LENGTH_SHORT).show();
             } else {
                 doWork();
             }
@@ -86,19 +93,12 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-
-            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
-            Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (((MainActivity) requireActivity()).singleton.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
-            else
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
-
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (editCenterFragment != null) {
+            if (!editCenterFragment.avatarPath.equals("")) {
+                avatarPath = editCenterFragment.avatarPath;
+                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            }
         }
     }
 
@@ -124,7 +124,39 @@ public class EditCenterAvatarFragment extends Fragment {
     private void doWork() {
         FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
 
-        // TODO : Call Work Method
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        HashMap data = new HashMap<>();
+
+        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (editCenterFragment != null) {
+            data.put("id", editCenterFragment.centerId);
+        }
+
+        data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        Center.edit(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
+                    });
+
+                    FileManager.deleteFileFromCache(requireActivity(), "image");
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                // Place Code if Needed
+            }
+        });
     }
 
     @Override

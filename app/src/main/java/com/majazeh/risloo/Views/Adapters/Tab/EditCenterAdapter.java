@@ -13,19 +13,19 @@ import java.util.HashMap;
 public class EditCenterAdapter extends FragmentStateAdapter {
 
     // Vars
-    private String center;
+    private String type;
 
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    public EditCenterAdapter(@NonNull FragmentActivity fragment, String center) {
+    public EditCenterAdapter(@NonNull FragmentActivity fragment, String type) {
         super(fragment);
-        this.center = center;
+        this.type = type;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        if (center.equals("personal")) {
+        if (type.equals("personal_clinic")) {
             if (position == 0) {
                 Fragment fragment0 = new EditCenterDetailFragment();
                 hashMap.put(position, fragment0);
@@ -50,7 +50,7 @@ public class EditCenterAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        if (center.equals("personal"))
+        if (type.equals("personal_clinic"))
             return 1;
         else
             return 2;

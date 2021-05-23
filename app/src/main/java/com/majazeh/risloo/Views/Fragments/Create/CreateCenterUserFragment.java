@@ -235,7 +235,9 @@ public class CreateCenterUserFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        data.put("id", requireArguments().getString("id"));
+        if (requireArguments().getString("id") != null) {
+            data.put("id", requireArguments().getString("id"));
+        }
         data.put("mobile", mobile);
         data.put("position", position);
 
@@ -256,6 +258,7 @@ public class CreateCenterUserFragment extends Fragment {
                         try {
                             AuthModel model = new AuthModel((JSONObject) object);
 
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             authBottomSheet.show(requireActivity().getSupportFragmentManager(), "authBottomSheet");
                             authBottomSheet.setData(requireArguments().getString("id"), model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
                         } catch (JSONException e) {

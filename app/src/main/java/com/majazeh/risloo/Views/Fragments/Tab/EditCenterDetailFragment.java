@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -25,10 +28,15 @@ import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class EditCenterDetailFragment extends Fragment {
 
@@ -47,7 +55,7 @@ public class EditCenterDetailFragment extends Fragment {
     private LinearLayoutManager phoneLayoutManager;
 
     // Vars
-    public String managerId = "", managerName = "", name = "", address = "", description = "";
+    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
 
     @Nullable
     @Override
@@ -76,7 +84,7 @@ public class EditCenterDetailFragment extends Fragment {
         phoneLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabManagerHeader));
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabNameHeader));
+        binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabTitleHeader));
         binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabAddressHeader));
         binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabPhonesHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabDescriptionHeader));
@@ -104,10 +112,10 @@ public class EditCenterDetailFragment extends Fragment {
             managersDialog.setData("managers");
         }).widget(binding.managerIncludeLayout.selectTextView);
 
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                if (!binding.titleIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -141,20 +149,17 @@ public class EditCenterDetailFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (managerId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView);
             }
             if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView);
             }
 
-            if (!managerId.equals("") && binding.nameIncludeLayout.inputEditText.length() != 0 && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.errorImageView, binding.managerErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.errorImageView, binding.phonesErrorLayout.errorTextView);
-
+            if (!managerId.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
                 doWork();
             }
         }).widget(binding.editTextView.getRoot());
@@ -163,48 +168,54 @@ public class EditCenterDetailFragment extends Fragment {
     private void setData() {
         EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (editCenterFragment != null) {
-            if (editCenterFragment.center.equals("personal"))
-                binding.clinicGroup.setVisibility(View.GONE);
-            else
-                binding.clinicGroup.setVisibility(View.VISIBLE);
-        }
+            if (!editCenterFragment.type.equals("")) {
+                type = editCenterFragment.type;
+                if (editCenterFragment.type.equals("personal_clinic"))
+                    binding.clinicGroup.setVisibility(View.GONE);
+                else
+                    binding.clinicGroup.setVisibility(View.VISIBLE);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getManager().equals("")) {
-            managerId = ((MainActivity) requireActivity()).singleton.getManager();
-            managerName = ((MainActivity) requireActivity()).singleton.getManager();
-            binding.managerIncludeLayout.selectTextView.setText(managerName);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            address = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.addressIncludeLayout.inputEditText.setText(address);
-        }
+            if (!editCenterFragment.managerId.equals("")) {
+                managerId = editCenterFragment.managerId;
+                managerName = editCenterFragment.managerName;
+                binding.managerIncludeLayout.selectTextView.setText(managerName);
+            }
 
-//        if (extras.getString("phones") != null) {
-//            try {
-//                JSONArray jsonArray = new JSONArray(extras.getString("phones"));
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    TypeModel TypeModel = new TypeModel(jsonObject);
-//
-//                    phones.add(TypeModel);
-//                }
-//
-//                setRecyclerView(phones, "phones");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-        setRecyclerView(new ArrayList<>(), new ArrayList<>(),"phones");
-//        }
+            if (!editCenterFragment.title.equals("")) {
+                title = editCenterFragment.title;
+                binding.titleIncludeLayout.inputEditText.setText(title);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
-            description = ((MainActivity) requireActivity()).singleton.getDescription();
-            binding.descriptionIncludeLayout.inputEditText.setText(description);
+            if (!editCenterFragment.address.equals("")) {
+                address = editCenterFragment.address;
+                binding.addressIncludeLayout.inputEditText.setText(address);
+            }
+
+            if (editCenterFragment.phones.length() != 0) {
+                try {
+                    ArrayList<TypeModel> phones = new ArrayList<>();
+                    ArrayList<String> ids = new ArrayList<>();
+
+                    for (int i = 0; i < editCenterFragment.phones.length(); i++) {
+                        TypeModel model = new TypeModel((JSONArray) editCenterFragment.phones.get(i));
+
+                        phones.add(model);
+                        ids.add(model.object.getString("title"));
+                    }
+
+                    setRecyclerView(phones, ids, "phones");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+            }
+
+            if (!editCenterFragment.description.equals("")) {
+                description = getArguments().getString("description");
+                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
         }
     }
 
@@ -216,35 +227,101 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     public void responseDialog(String method, TypeModel item) {
-        try {
-            switch (method) {
-                case "managers":
-                    if (!managerId.equals(item.object.get("id").toString())) {
-                        managerId = item.object.get("id").toString();
-                        managerName = item.object.get("title").toString();
+        switch (method) {
+            case "managers":
+                UserModel model = (UserModel) item;
 
-                        binding.managerIncludeLayout.selectTextView.setText(managerName);
-                    } else if (managerId.equals(item.object.get("id").toString())) {
-                        managerId = "";
-                        managerName = "";
+                if (!managerId.equals(model.getUserId())) {
+                    managerId = model.getUserId();
+                    managerName = model.getName();
 
-                        binding.managerIncludeLayout.selectTextView.setText("");
-                    }
+                    binding.managerIncludeLayout.selectTextView.setText(managerName);
+                } else if (managerId.equals(model.getUserId())) {
+                    managerId = "";
+                    managerName = "";
 
-                    managersDialog.dismiss();
-                    break;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+                    binding.managerIncludeLayout.selectTextView.setText("");
+                }
+
+                managersDialog.dismiss();
+                break;
         }
     }
 
     private void doWork() {
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
         address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        HashMap data = new HashMap<>();
+
+        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (editCenterFragment != null) {
+            data.put("id", editCenterFragment.centerId);
+        }
+
+        data.put("manager_id", managerId);
+        data.put("address", address);
+        data.put("phone_numbers", phonesAdapter.getIds());
+        data.put("description", description);
+
+        if (type.equals("counseling_center")) {
+            data.put("title", title);
+        }
+
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        Center.edit(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "title":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "address":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.addressIncludeLayout.inputEditText, binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "phone_numbers":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "description":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
