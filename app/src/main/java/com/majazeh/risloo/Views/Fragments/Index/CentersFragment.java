@@ -74,8 +74,9 @@ public class CentersFragment extends Fragment {
         handler = new Handler();
 
         data = new HashMap<>();
-        header = new HashMap<>();
         data.put("page", 1);
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
 
@@ -133,6 +134,7 @@ public class CentersFragment extends Fragment {
 
                 if (!loading) {
                     if (pastVisiblesItems + visibleItemCount >= totalItemCount) {
+                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
                         if (data.containsKey("page")) {
                             int page = (int) data.get("page");
                             page++;
@@ -141,7 +143,6 @@ public class CentersFragment extends Fragment {
                         } else {
                             data.put("page", 1);
                         }
-                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
                         setData();
                     }
                 }
@@ -163,8 +164,6 @@ public class CentersFragment extends Fragment {
                 adapter.clear();
             }
         }
-
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Center.list(data, header, new Response() {
             @Override

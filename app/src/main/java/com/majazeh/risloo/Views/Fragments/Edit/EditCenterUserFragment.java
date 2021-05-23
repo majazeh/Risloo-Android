@@ -166,9 +166,7 @@ public class EditCenterUserFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        if (requireArguments().getString("id") != null) {
-            data.put("id", requireArguments().getString("id"));
-        }
+        data.put("id", requireArguments().getString("id"));
         data.put("position", position);
         data.put("nickname", nickname);
         data.put("status", status);
@@ -181,7 +179,7 @@ public class EditCenterUserFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        // Todo : Place Code Here
+                        // Todo : Have a question Abut this
                     });
                 }
             }

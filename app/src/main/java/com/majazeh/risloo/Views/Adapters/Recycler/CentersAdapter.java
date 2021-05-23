@@ -82,24 +82,45 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         ClickManager.onClickListener(() -> {
             try {
                 Bundle extras = new Bundle();
-
                 extras.putString("id", model.getCenterId());
                 extras.putString("type", model.getCenterType());
-                if (!model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
-                    extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+
+                extras.putString("manager_id", model.getManager().getUserId());
+                extras.putString("manager_name", model.getManager().getName());
+
+                setAcceptation(model, extras);
+
+                if (!model.getDetail().isNull("title"))
+                    extras.putString("title", model.getDetail().getString("title"));
                 else
-                    extras.putString("avatar", "");
-                extras.putString("name", model.getDetail().getString("title"));
-                if (!model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
-                    extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").get(0).toString());
-                else
-                    extras.putString("phone_numbers", "");
+                    extras.putString("title", "");
+
                 if (!model.getDetail().isNull("description"))
                     extras.putString("description", model.getDetail().getString("description"));
                 else
                     extras.putString("description", "");
-                extras.putString("owner", model.getManager().getName());
-                ((MainActivity) activity).navigator(R.id.centerFragment, extras);
+
+                if (!model.getDetail().isNull("address"))
+                    extras.putString("address", model.getDetail().getString("address"));
+                else
+                    extras.putString("address", "");
+
+                if (!model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
+                    extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                else
+                    extras.putString("avatar", "");
+
+                if (!model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
+                    extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").get(0).toString());
+                else
+                    extras.putString("phone_numbers", "");
+
+                if (model.getCenterType().equals("counseling_center")) {
+                    ((MainActivity) activity).navigator(R.id.centerFragment, extras);
+                } else {
+                    ((MainActivity) activity).navigator(R.id.roomFragment, extras);
+                }
+
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -116,7 +137,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
                 holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
             }
 
-            if (model.getDetail().getJSONArray("avatar").length() != 0) {
+            if (!model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
                 setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
             } else {
                 setAvatar(holder, "");
@@ -135,6 +156,28 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+        }
+    }
+
+    private void setAcceptation(CenterModel model, Bundle extras) {
+        if (model.getAcceptation() != null) {
+            if (model.getAcceptation().getPosition().equals("manager")) {
+                extras.putString("status", "owner");
+            } else if (model.getAcceptation().getPosition().equals("client")) {
+                extras.putString("status", "client");
+            } else {
+                if (model.getAcceptation().getKicked_at() != null) {
+                    extras.putString("status", "kicked");
+                } else {
+                    if (model.getAcceptation().getAccepted_at() == 0) {
+                        extras.putString("status", "accepted");
+                    } else {
+                        extras.putString("status", "awaiting");
+                    }
+                }
+            }
+        } else {
+            extras.putString("status", "request");
         }
     }
 

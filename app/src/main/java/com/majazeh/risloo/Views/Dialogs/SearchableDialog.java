@@ -124,6 +124,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         switch (method) {
             case "scales":
@@ -282,11 +283,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterFragment != null) {
                     if (method.equals("managers")) {
+
                         if (createCenterFragment.type.equals("personal_clinic"))
                             data.put("personal_clinic", "yes");
                         else
                             data.put("personal_clinic", "no");
-                        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
                         User.list(data, header, new Response() {
                             @Override
@@ -324,7 +325,6 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 if (createCenterUserFragment != null) {
                     if (method.equals("rooms")) {
                         data.put("center", createCenterUserFragment.requireArguments().getString("id"));
-                        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
                         Room.list(data, header, new Response() {
                             @Override
@@ -430,10 +430,42 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (editCenterFragment != null) {
                     if (method.equals("managers")) {
+
+                        if (editCenterFragment.type.equals("personal_clinic"))
+                            data.put("personal_clinic", "yes");
+                        else
+                            data.put("personal_clinic", "no");
+
                         EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (editCenterDetailFragment != null) {
-                            searchableAdapter.setItems(values, method, null);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                            User.list(data, header, new Response() {
+                                @Override
+                                public void onOK(Object object) {
+                                    List list = (List) object;
+
+                                    if (isAdded()) {
+                                        requireActivity().runOnUiThread(() -> {
+                                            searchableAdapter.setItems(list.data(), method, null);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
+                                                binding.searchProgressBar.setVisibility(View.GONE);
+                                            }
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(String response) {
+                                    if (isAdded()) {
+                                        requireActivity().runOnUiThread(() -> {
+                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
+                                                binding.searchProgressBar.setVisibility(View.GONE);
+                                            }
+                                        });
+                                    }
+                                }
+                            });
                         }
                     }
                 }

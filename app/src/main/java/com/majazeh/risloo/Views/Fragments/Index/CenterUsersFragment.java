@@ -47,7 +47,7 @@ public class CenterUsersFragment extends Fragment {
     // Vars
     private HashMap data, header;
     private boolean loading = false;
-    public String centerId = "";
+    public String id = "";
 
     @Nullable
     @Override
@@ -75,8 +75,10 @@ public class CenterUsersFragment extends Fragment {
         handler = new Handler();
 
         data = new HashMap<>();
-        header = new HashMap<>();
+        data.put("id", id);
         data.put("page", 1);
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterUsersFragmentTitle));
 
@@ -136,6 +138,7 @@ public class CenterUsersFragment extends Fragment {
 
                 if (!loading) {
                     if (pastVisiblesItems + visibleItemCount >= totalItemCount) {
+                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
                         if (data.containsKey("page")) {
                             int page = (int) data.get("page");
                             page++;
@@ -144,7 +147,6 @@ public class CenterUsersFragment extends Fragment {
                         } else {
                             data.put("page", 1);
                         }
-                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
                         setData();
                     }
                 }
@@ -153,16 +155,18 @@ public class CenterUsersFragment extends Fragment {
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", centerId);
+            extras.putString("id", id);
 
             ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras);
         }).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
-        if (requireArguments().getString("id") != null) {
-            centerId = requireArguments().getString("id");
-            data.put("id", centerId);
+        if (getArguments() != null) {
+            if (requireArguments().getString("id") != null) {
+                id = requireArguments().getString("id");
+                data.put("id", id);
+            }
         }
 
         loading = true;
@@ -172,8 +176,6 @@ public class CenterUsersFragment extends Fragment {
                 adapter.clear();
             }
         }
-
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Center.users(data, header, new Response() {
             @Override

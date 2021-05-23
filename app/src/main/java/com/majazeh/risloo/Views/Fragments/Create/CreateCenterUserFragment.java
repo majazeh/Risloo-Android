@@ -235,9 +235,7 @@ public class CreateCenterUserFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        if (requireArguments().getString("id") != null) {
-            data.put("id", requireArguments().getString("id"));
-        }
+        data.put("id", requireArguments().getString("id"));
         data.put("mobile", mobile);
         data.put("position", position);
 
@@ -285,7 +283,7 @@ public class CreateCenterUserFragment extends Fragment {
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                             case "position":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.positionIncludeLayout.getRoot(), binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.positionIncludeLayout.selectSpinner, binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                             case "room_id":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
