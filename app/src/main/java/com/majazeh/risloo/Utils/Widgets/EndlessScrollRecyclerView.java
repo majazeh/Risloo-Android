@@ -21,11 +21,9 @@ public abstract class EndlessScrollRecyclerView extends RecyclerView.OnScrollLis
     @Override
     public void onScrolled(@NotNull RecyclerView recyclerView, int dx, int dy) {
         super.onScrolled(recyclerView, dx, dy);
-
-        int visibleItemCount = recyclerView.getChildCount();
+        int visibleItemCount = layoutManager.getChildCount();
         int totalItemCount = layoutManager.getItemCount();
-        int firstVisibleItem = layoutManager.findFirstVisibleItemPosition();
-
+        int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
         if (loading) {
             if (totalItemCount > previousTotal) {
                 loading = false;
@@ -33,7 +31,7 @@ public abstract class EndlessScrollRecyclerView extends RecyclerView.OnScrollLis
             }
         }
 
-        if (!loading && (totalItemCount - visibleItemCount) <= (firstVisibleItem + visibleThreshold)) {
+        if (!loading && (visibleItemCount + pastVisiblesItems) >= totalItemCount) {
             currentPage++;
             onLoadMore(currentPage);
             loading = true;

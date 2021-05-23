@@ -164,28 +164,31 @@ public class DashboardFragment extends Fragment {
             public void onFailure(String response) {
 
                 // Cases Data
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.casesGroup.setVisibility(View.GONE);
+                        binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.casesShimmerLayout.getRoot().stopShimmer();
 
-                binding.casesGroup.setVisibility(View.GONE);
-                binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                binding.casesShimmerLayout.getRoot().stopShimmer();
+                        // Samples Data
 
-                // Samples Data
+                        binding.samplesGroup.setVisibility(View.GONE);
+                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.samplesShimmerLayout.getRoot().stopShimmer();
 
-                binding.samplesGroup.setVisibility(View.GONE);
-                binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                binding.samplesShimmerLayout.getRoot().stopShimmer();
+                        // Rooms Data
 
-                // Rooms Data
+                        binding.roomsGroup.setVisibility(View.GONE);
+                        binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                binding.roomsGroup.setVisibility(View.GONE);
-                binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                binding.roomsShimmerLayout.getRoot().stopShimmer();
+                        // Centers Data
 
-                // Centers Data
-
-                binding.centersGroup.setVisibility(View.GONE);
-                binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
-                binding.centersShimmerLayout.getRoot().stopShimmer();
+                        binding.centersGroup.setVisibility(View.GONE);
+                        binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.centersShimmerLayout.getRoot().stopShimmer();
+                    });
+                }
             }
         });
     }

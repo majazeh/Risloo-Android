@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -46,7 +47,8 @@ public class CenterUsersFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String id = "";
+    public String id = "";
+    private boolean loading = false;
 
     @Nullable
     @Override
@@ -75,6 +77,7 @@ public class CenterUsersFragment extends Fragment {
 
         data = new HashMap<>();
         header = new HashMap<>();
+        data.put("page", 1);
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterUsersFragmentTitle));
 
@@ -114,6 +117,7 @@ public class CenterUsersFragment extends Fragment {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
+                    data.put("page", 1);
                     data.put("q", String.valueOf(s));
                     setData();
                 }, 750);
@@ -125,11 +129,32 @@ public class CenterUsersFragment extends Fragment {
             }
         });
 
-        binding.indexSingleLayout.recyclerView.addOnScrollListener(new EndlessScrollRecyclerView(layoutManager) {
-            @Override
-            public void onLoadMore(int currentPage) {
-                // TODO ; Talk With Me About this Place First
+//        binding.indexSingleLayout.recyclerView.addOnScrollListener(new EndlessScrollRecyclerView(layoutManager) {
+//            @Override
+//            public void onLoadMore(int currentPage) {
+//                // TODO ; Talk With Me About this Place First
+//            }
+//        });
+        binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > 0) {
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+                if (!loading) {
+                    if (pastVisiblesItems + visibleItemCount >= totalItemCount) {
+                        if (data.containsKey("page")) {
+                            int page = (int) data.get("page");
+                            page++;
+                            data.put("page", page);
+                        } else {
+                            data.put("page", 1);
+                        }
+                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                        setData();
+                    }
+                }
             }
+
         });
 
         ClickManager.onClickListener(() -> {
@@ -141,10 +166,15 @@ public class CenterUsersFragment extends Fragment {
     }
 
     private void setData() {
+        loading = true;
         if (requireArguments().getString("id") != null) {
             id = requireArguments().getString("id");
         }
-
+        if (data.containsKey("page")) {
+            if (data.get("page").equals(1)) {
+                adapter.clear();
+            }
+        }
         data.put("id", id);
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -174,8 +204,13 @@ public class CenterUsersFragment extends Fragment {
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                         }
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE) {
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        }
                     });
                 }
+                loading = false;
+
             }
 
             @Override
@@ -188,6 +223,11 @@ public class CenterUsersFragment extends Fragment {
                 if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                 }
+                if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE) {
+                    binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                }
+                loading = false;
+
             }
         });
     }

@@ -58,8 +58,18 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     }
 
     public void setCenters(ArrayList<TypeModel> centers) {
-        this.centers = centers;
+        if (this.centers == null)
+            this.centers = centers;
+        else
+            this.centers.addAll(centers);
         notifyDataSetChanged();
+    }
+
+    public void clear() {
+        if (this.centers != null) {
+            this.centers.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(CentersHolder holder) {
@@ -70,13 +80,29 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     private void listener(CentersHolder holder, CenterModel model) {
         ClickManager.onClickListener(() -> {
-            Bundle extras = new Bundle();
-//            extras.putString("center_model", String.valueOf(model));
+            try {
+                Bundle extras = new Bundle();
 
-            extras.putString("id", model.getCenterId());
-            extras.putString("type", model.getCenterType());
-
-            ((MainActivity) activity).navigator(R.id.centerFragment, extras);
+                extras.putString("id", model.getCenterId());
+                extras.putString("type", model.getCenterType());
+                if (!model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
+                    extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                else
+                    extras.putString("avatar", "");
+                extras.putString("name", model.getDetail().getString("title"));
+                if (!model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
+                    extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").get(0).toString());
+                else
+                    extras.putString("phone_numbers", "");
+                if (!model.getDetail().isNull("description"))
+                    extras.putString("description", model.getDetail().getString("description"));
+                else
+                    extras.putString("description", "");
+                extras.putString("owner", model.getManager().getName());
+                ((MainActivity) activity).navigator(R.id.centerFragment, extras);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }).widget(holder.binding.containerConstraintLayout);
     }
 

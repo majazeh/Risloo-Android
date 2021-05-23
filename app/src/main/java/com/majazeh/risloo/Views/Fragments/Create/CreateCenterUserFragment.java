@@ -40,7 +40,7 @@ public class CreateCenterUserFragment extends Fragment {
     private SearchableDialog roomsDialog;
 
     // Vars
-    public String mobile = "", type = "", roomId = "", roomName = "", centerName = "", name = "";
+    public String centerId = "", mobile = "", type = "", roomId = "", roomName = "", centerName = "", name = "";
     private boolean createCase = false;
 
     @Nullable

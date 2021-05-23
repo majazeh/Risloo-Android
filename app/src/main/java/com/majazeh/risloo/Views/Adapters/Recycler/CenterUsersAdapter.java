@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -15,11 +16,18 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
+import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 
 public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.CenterUsersHolder> {
 
@@ -58,8 +66,18 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     public void setUsers(ArrayList<TypeModel> users) {
-        this.users = users;
+        if (this.users == null)
+            this.users = users;
+        else
+            this.users.addAll(users);
         notifyDataSetChanged();
+    }
+
+    public void clear() {
+        if (this.users != null) {
+            this.users.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void initializer(CenterUsersHolder holder) {
@@ -79,26 +97,73 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String task = parent.getItemAtPosition(position).toString();
+                if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
+                    CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (centerUsersFragment != null) {
+                        switch (task) {
+                            case "پذیرفتن":
+                                HashMap data = new HashMap();
+                                data.put("id", centerUsersFragment.id);
+                                data.put("userId", holder.binding.serialTextView.getText().toString());
+                                data.put("status", "accept");
+                                HashMap header = new HashMap();
+                                header.put("Authorization", "Bearer " + ((MainActivity) activity).singleton.getToken());
+                                Center.changeStatus(data, header, new Response() {
+                                    @Override
+                                    public void onOK(Object object) {
+                                        activity.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(activity, "DONE!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
 
-                switch (task) {
-                    case "پذیرفتن":
-                        Log.e("method", "accept");
-                        break;
-                    case "تعلیق":
-                        Log.e("method", "kick");
-                        break;
-                    case "ساختن اتاق درمان":
-                        Log.e("method", "create_room");
-                        break;
-                    case "ویرایش کاربر":
-                        Log.e("method", "edit");
-                        break;
-                    case "ورود به کاربری":
-                        Log.e("method", "enter");
-                        break;
+                                    @Override
+                                    public void onFailure(String response) {
+
+                                    }
+                                });
+                                Log.e("method", "accept");
+                                break;
+                            case "تعلیق":
+                                HashMap data1 = new HashMap();
+                                data1.put("id", centerUsersFragment.id);
+                                data1.put("userId", holder.binding.serialTextView.getText().toString());
+                                data1.put("status", "kick");
+                                HashMap header1 = new HashMap();
+                                header1.put("Authorization", "Bearer " + ((MainActivity) activity).singleton.getToken());
+                                Center.changeStatus(data1, header1, new Response() {
+                                    @Override
+                                    public void onOK(Object object) {
+                                        activity.runOnUiThread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                Toast.makeText(activity, "DONE!", Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
+                                    }
+
+                                    @Override
+                                    public void onFailure(String response) {
+
+                                    }
+                                });
+                                Log.e("method", "kick");
+                                break;
+                            case "ساختن اتاق درمان":
+                                Log.e("method", "create_room");
+                                break;
+                            case "ویرایش کاربر":
+                                Log.e("method", "edit");
+                                break;
+                            case "ورود به کاربری":
+                                Log.e("method", "enter");
+                                break;
+                        }
+                        holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
+                    }
                 }
-
-                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
             }
 
             @Override
@@ -111,8 +176,28 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String type = parent.getItemAtPosition(position).toString();
-
-                doWork(type);
+                if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
+                    CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (centerUsersFragment != null) {
+                        String enType = "";
+                        switch (type) {
+                            case "مدیر":
+                                enType = "manager";
+                                break;
+                            case "مراجع":
+                                enType = "client";
+                                break;
+                            case "اپراتور":
+                                enType = "operator";
+                                break;
+                            case "روانشناس":
+                                enType = "psychologist";
+                                break;
+                        }
+//                        TODO: do it
+//                        doWork(enType, centerUsersFragment.id, holder.binding.serialTextView.getText().toString());
+                    }
+                }
             }
 
             @Override
@@ -150,8 +235,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
         ArrayList<String> menuValues = new ArrayList<>();
 
-        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
-        menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+        if (model.getUserKicked_at() != 0 || model.getUserAccepted_at() == 0)
+            menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+        if (model.getUserKicked_at() == 0)
+            menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
         menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
         menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
         menuValues.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
@@ -178,8 +265,24 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         }
     }
 
-    private void doWork(String status) {
+    private void doWork(String position, String id, String userId) {
+        HashMap data = new HashMap();
+        data.put("position", position);
+        data.put("id", id);
+        data.put("userId", userId);
+        HashMap header = new HashMap();
+        header.put("Authorization", "Bearer " + ((MainActivity) activity).singleton.getToken());
+        Center.changePosition(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                activity.runOnUiThread(() -> Toast.makeText(activity, "done", Toast.LENGTH_SHORT).show());
+            }
 
+            @Override
+            public void onFailure(String response) {
+                System.out.println(response);
+            }
+        });
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

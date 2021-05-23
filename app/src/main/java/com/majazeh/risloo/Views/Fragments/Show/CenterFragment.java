@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -145,11 +146,21 @@ public class CenterFragment extends Fragment {
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
             extras.putString("id", requireArguments().getString("id"));
-            ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment,extras);
+            ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
         }).widget(binding.usersImageView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            Center.request(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    if (isAdded())
+                        requireActivity().runOnUiThread(() -> Toast.makeText(requireContext(), "done", Toast.LENGTH_SHORT).show());
+                }
+
+                @Override
+                public void onFailure(String response) {
+                }
+            });
         }).widget(binding.statusTextView.getRoot());
 
         binding.roomsSearchIncludeLayout.editText.setOnTouchListener((v, event) -> {
@@ -180,7 +191,8 @@ public class CenterFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    // TODO : Place Code Here
+                    data.put("q", String.valueOf(s));
+                    setData();
                 }, 750);
             }
 
@@ -200,7 +212,8 @@ public class CenterFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    // TODO : Place Code Here
+                    data.put("q", String.valueOf(s));
+                    setData();
                 }, 750);
             }
 
@@ -218,6 +231,39 @@ public class CenterFragment extends Fragment {
     }
 
     private void setData() {
+        if (!getArguments().getString("name").equals("")) {
+            binding.nameTextView.setVisibility(View.VISIBLE);
+            binding.nameTextView.setText(getArguments().getString("name"));
+        } else {
+            binding.nameTextView.setVisibility(View.GONE);
+        }
+        if (!getArguments().getString("description").equals("")) {
+            binding.descriptionTextView.setVisibility(View.VISIBLE);
+            binding.descriptionTextView.setText(getArguments().getString("description"));
+        } else {
+            binding.descriptionTextView.setVisibility(View.GONE);
+        }
+        if (!getArguments().getString("owner").equals("")) {
+            binding.ownerTextView.setVisibility(View.VISIBLE);
+            binding.ownerTextView.setText(getArguments().getString("owner"));
+        } else {
+            binding.ownerTextView.setVisibility(View.GONE);
+        }
+        if (!getArguments().getString("phone_numbers").equals("")) {
+            binding.mobileTextView.setText(getArguments().getString("phone_numbers"));
+            binding.mobileGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.mobileGroup.setVisibility(View.GONE);
+        }
+        if (!getArguments().getString("avatar").equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(getArguments().getString("avatar")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        }
+
         data.put("id", requireArguments().getString("id"));
         header.put("Authorization", "Bearer " + ((MainActivity) requireActivity()).singleton.getToken());
         if (requireArguments().getString("type").equals("counseling_center"))
@@ -287,7 +333,6 @@ public class CenterFragment extends Fragment {
                                     binding.usersImageView.getRoot().setVisibility(View.VISIBLE);
                                 }
                                 // TODO: set status from center Model (I don't know how status work from acceptation)
-
                                 switch (status) {
                                     case "request":
                                         binding.statusTextView.getRoot().setEnabled(true);

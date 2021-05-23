@@ -31,9 +31,9 @@ public class Center extends Model {
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.show(endpoint +"/"+ data.get("id"), data, header, response, CenterModel.class);
+                Model.show(endpoint + "/" + data.get("id"), data, header, response, CenterModel.class);
             else
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -42,9 +42,9 @@ public class Center extends Model {
     public static void showDashboard(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.show(endpoint +"/"+ data.get("id") + "/dashboard", data, header, response, null);
+                Model.show(endpoint + "/" + data.get("id") + "/dashboard", data, header, response, null);
             else
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -55,17 +55,51 @@ public class Center extends Model {
             if (has(data, "id"))
                 Model.show(endpoint + "/" + data.get("id") + "/users", data, header, response, UserModel.class);
             else
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
     public static void createUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
                 Model.post(endpoint + "/" + data.get("id") + "/users", data, header, response, null);
             else
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void request(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.post(endpoint + "/" + data.get("id") + "/request", data, header, response, null);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void changePosition(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id") || has(data,"userId"))
+                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, null);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void changeStatus(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id") || has(data,"userId"))
+                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, null);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,7 +112,7 @@ public class Center extends Model {
                 data.remove("key");
                 Model.post("auth" + "/theory" + "/" + key, data, header, response, null);
             } else {
-                Exceptioner.make(response,"کلید را وارد کنید");
+                Exceptioner.make(response, "کلید را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -90,7 +124,7 @@ public class Center extends Model {
             if (has(data, "id") && has(data, "userId"))
                 Model.show(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
             else
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -101,7 +135,7 @@ public class Center extends Model {
             if (has(data, "id") && has(data, "userId"))
                 Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, null);
             else
-                Exceptioner.make(response,"آیدی را وارد کنید!");
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }

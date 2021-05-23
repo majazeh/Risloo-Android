@@ -10,6 +10,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
@@ -69,14 +70,18 @@ public class RequestData {
     public RequestBody multipartBody() {
         RequestBody requestBody;
         MultipartBody.Builder multiPart = new MultipartBody.Builder();
-        for (String key : data.keySet()) {
+        Iterator<String> iterator = data.keySet().iterator();
+        while (iterator.hasNext()){
+            String key = iterator.next();
             if (data.get(key).getClass().getSimpleName().equals("File")) {
                 File file = (File) data.get(key);
                 multiPart.setType(MultipartBody.FORM);
                 multiPart.addFormDataPart(key, key, RequestBody.create(file,MediaType.parse("image/png")));
+                iterator.remove();
             } else {
-                multiPart.addFormDataPart(key, (String) data.get(key));
+//                multiPart.addFormDataPart(key, (String) data.get(key));
             }
+                multiPart.addPart(RequestBody.create(new JSONObject(data).toString(),MediaType.get("application/json; charset=utf-8")));
         }
         requestBody = multiPart.build();
         return requestBody;
