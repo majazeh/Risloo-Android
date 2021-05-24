@@ -192,7 +192,7 @@ public class EditCenterDetailFragment extends Fragment {
                 binding.addressIncludeLayout.inputEditText.setText(address);
             }
 
-            if (editCenterFragment.phones.length() != 0) {
+            if (editCenterFragment.phones!=null &&editCenterFragment.phones.length() != 0) {
                 try {
                     ArrayList<TypeModel> phones = new ArrayList<>();
                     ArrayList<String> ids = new ArrayList<>();
@@ -211,9 +211,8 @@ public class EditCenterDetailFragment extends Fragment {
             } else {
                 setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
             }
-
             if (!editCenterFragment.description.equals("")) {
-                description = getArguments().getString("description");
+                description = editCenterFragment.description;
                 binding.descriptionIncludeLayout.inputEditText.setText(description);
             }
         }
@@ -261,7 +260,7 @@ public class EditCenterDetailFragment extends Fragment {
         if (editCenterFragment != null) {
             data.put("id", editCenterFragment.centerId);
         }
-
+        System.out.println(managerId);
         data.put("manager_id", managerId);
         data.put("address", address);
         data.put("phone_numbers", phonesAdapter.getIds());
@@ -288,6 +287,7 @@ public class EditCenterDetailFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
+                System.out.println(response);
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         try {

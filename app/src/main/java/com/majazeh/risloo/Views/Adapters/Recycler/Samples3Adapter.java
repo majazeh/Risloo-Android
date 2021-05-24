@@ -14,6 +14,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSample3Binding;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Samples3Holder> {
 
@@ -21,7 +25,7 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
     private Activity activity;
 
     // Vars
-//    private ArrayList<Sample> samples;
+    private ArrayList<TypeModel> samples;
 
     public Samples3Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,25 +39,24 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
 
     @Override
     public void onBindViewHolder(@NonNull Samples3Holder holder, int i) {
-//        Samples sample = samples.get(i);
+        SampleModel sample = (SampleModel) samples.get(i);
 
         detector(holder);
 
         listener(holder);
 
-        setData(holder);
+        setData(holder,sample);
     }
 
     @Override
     public int getItemCount() {
-//        return samples.size();
-        return 4;
+        return samples.size();
     }
 
-//    public void setSamples(ArrayList<Sample> samples) {
-//        this.samples = samples;
-//        notifyDataSetChanged();
-//    }
+    public void setSamples(ArrayList<TypeModel> samples) {
+        this.samples = samples;
+        notifyDataSetChanged();
+    }
 
     private void detector(Samples3Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -67,26 +70,22 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
         ClickManager.onClickListener(() -> IntentManager.test(activity, null)).widget(holder.binding.statusTextView);
     }
 
-    private void setData(Samples3Holder holder) {
+    private void setData(Samples3Holder holder,SampleModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.serialTextView.setText("$X1HQUQ71U");
-        holder.binding.nameTextView.setText("پرسشنامه 16 عاملی شخصیت کتل");
-        holder.binding.editionTextView.setText("ویرایش طلیعه سلامت - نسخه 4");
-        holder.binding.roomTextView.setText("اتاق درمان فاطمه عبدالملکی");
-        holder.binding.caseTextView.setText("RS96666DT");
+        holder.binding.serialTextView.setText(model.getSampleId());
+        holder.binding.nameTextView.setText(model.getSampleScaleTitle());
+        holder.binding.editionTextView.setText(String.valueOf(model.getSampleVersion()));
+        if (model.getSampleRoom() != null)
+        holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+        if (model.getSampleCase() != null)
+        holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
+            setAction(holder, model.getSampleStatus());
 
-        if (holder.getBindingAdapterPosition() == 0) {
-            setAction(holder, "seald");
-        } else if (holder.getBindingAdapterPosition() == 2) {
-            setAction(holder, "open");
-        } else {
-            setAction(holder, "closed");
-        }
     }
 
     private void setAction(Samples3Holder holder, String action) {

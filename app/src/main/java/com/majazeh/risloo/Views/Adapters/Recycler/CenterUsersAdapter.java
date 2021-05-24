@@ -98,7 +98,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                     extras.putString("id", centerUsersFragment.id);
                     extras.putString("userId", holder.binding.serialTextView.getText().toString());
 
-                    ((MainActivity) activity).navigator(R.id.referenceFragment);
+                    ((MainActivity) activity).navigator(R.id.referenceFragment,extras);
                 }
             }
         }).widget(holder.binding.getRoot());

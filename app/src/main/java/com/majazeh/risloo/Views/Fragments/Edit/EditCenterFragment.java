@@ -56,7 +56,6 @@ public class EditCenterFragment extends Fragment {
             if (getArguments().getString("id") != null) {
                 centerId = getArguments().getString("id");
             }
-
             if (requireArguments().getString("type") != null) {
                 type = requireArguments().getString("type");
                 switch (type) {
@@ -78,22 +77,21 @@ public class EditCenterFragment extends Fragment {
                 title = getArguments().getString("title");
             }
 
-            if (getArguments().getString("avatar_path") != null) {
-                avatarPath = getArguments().getString("avatar_path");
+            if (getArguments().getString("avatar") != null) {
+                avatarPath = getArguments().getString("avatar");
             }
 
             if (getArguments().getString("address") != null) {
                 address = getArguments().getString("address");
             }
 
-            if (getArguments().getString("phones") != null) {
+            if (getArguments().getString("phone_numbers") != null) {
                 try {
-                    phones = new JSONArray(getArguments().getString("phones"));
+                    phones = new JSONArray(getArguments().getString("phone_numbers"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
-
             if (getArguments().getString("description") != null) {
                 description = getArguments().getString("description");
             }

@@ -26,6 +26,9 @@ import com.majazeh.risloo.Views.Adapters.Recycler.Samples3Adapter;
 import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -46,7 +49,7 @@ public class ReferenceFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentReferenceBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -90,6 +93,7 @@ public class ReferenceFragment extends Fragment {
 
     private void setData() {
         HashMap data = new HashMap();
+        System.out.println(getArguments().getString("id"));
         data.put("id", getArguments().getString("id"));
         data.put("userId", getArguments().getString("userId"));
         HashMap header = new HashMap();
@@ -97,57 +101,66 @@ public class ReferenceFragment extends Fragment {
         Center.user(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
-                    binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-                } else {
-                    binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
-                }
+                if (isAdded())
+                    requireActivity().runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
 
-                if (((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-                    binding.statusTextView.setVisibility(View.GONE);
-                } else {
-                    binding.statusTextView.setText(((MainActivity) requireActivity()).singleton.getStatus());
-                }
 
-                if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-                    binding.mobileGroup.setVisibility(View.GONE);
-                } else {
-                    binding.mobileGroup.setVisibility(View.VISIBLE);
-                    binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
-                }
+                            UserModel model = (UserModel) object;
+                            if (model.getName().equals("")) {
+                                binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+                            } else {
+                                binding.nameTextView.setText(model.getName());
+                            }
 
-                if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                    Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                } else {
-                    binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+                            if (model.getPosition().equals("")) {
+                                binding.statusTextView.setVisibility(View.GONE);
+                            } else {
+                                binding.statusTextView.setText(model.getPosition());
+                            }
 
-                    Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                }
+                            if (model.getMobile().equals("")) {
+                                binding.mobileGroup.setVisibility(View.GONE);
+                            } else {
+                                binding.mobileGroup.setVisibility(View.VISIBLE);
+                                binding.mobileTextView.setText(model.getMobile());
+                            }
 
-//        roomsAdapter.setRooms(null);
-//        cases3Adapter.setCases(null);
-//        samples3Adapter.setSamples(null);
-                binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
-                binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
-                binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
+                            if (model.getAvatar() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+                                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                                Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                            } else {
+                                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-                binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
-                binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
-                binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
+                                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                            }
 
-                    binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            roomsAdapter.setRooms(model.getRoomList().data());
 
-                    binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            cases3Adapter.setCases(model.getCaseList().data());
+                            samples3Adapter.setSamples(model.getSampleList().data());
+                            binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+                            binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
+                            binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
 
-                    binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                    binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+                            binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
+                            binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
 
+                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+
+                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        }
+                    });
             }
 
             @Override

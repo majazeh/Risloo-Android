@@ -26,7 +26,18 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.databinding.FragmentRoomBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
 
 public class RoomFragment extends Fragment {
 
@@ -43,7 +54,7 @@ public class RoomFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentRoomBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -139,40 +150,63 @@ public class RoomFragment extends Fragment {
     }
 
     private void setData() {
-        // Todo : Place Code Here And set them to the below conditions
+        HashMap data = new HashMap();
+        HashMap header = new HashMap();
+        Room.show(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
 
-        if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        } else {
-            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
-        }
+                try {
+                    JSONObject jsonObject = (JSONObject) object;
+                    RoomModel roomModel = new RoomModel(jsonObject.getJSONObject("room"));
 
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+                    List cases = new List();
+                    for (int i = 0; i < jsonObject.getJSONArray("data").length(); i++) {
+                        cases.add(new CaseModel(jsonObject.getJSONArray("data").getJSONObject(i)));
+                    }
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        }
+                    if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
+                        binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+                    } else {
+                        binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+                    }
 
-        if (!((MainActivity) requireActivity()).singleton.getEnter()) {
-            binding.schedulesImageView.getRoot().setVisibility(View.GONE);
-            binding.usersImageView.getRoot().setVisibility(View.GONE);
-        } else {
-            binding.schedulesImageView.getRoot().setVisibility(View.VISIBLE);
-            binding.usersImageView.getRoot().setVisibility(View.VISIBLE);
-        }
+                    if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+                        binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                        Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    } else {
+                        binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-//        cases2Adapter.setCases(null);
-        binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
-        binding.headerIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+                        Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    }
 
-        new Handler().postDelayed(() -> {
-            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
+                    if (!((MainActivity) requireActivity()).singleton.getEnter()) {
+                        binding.schedulesImageView.getRoot().setVisibility(View.GONE);
+                        binding.usersImageView.getRoot().setVisibility(View.GONE);
+                    } else {
+                        binding.schedulesImageView.getRoot().setVisibility(View.VISIBLE);
+                        binding.usersImageView.getRoot().setVisibility(View.VISIBLE);
+                    }
+
+                    cases2Adapter.setCases(cases.data());
+
+                    binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+                    binding.headerIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+
+                    binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                    binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+
+            }
+        });
+
     }
 
     @Override

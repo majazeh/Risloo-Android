@@ -138,7 +138,7 @@ public class EditCenterAvatarFragment extends Fragment {
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        Center.edit(data, header, new Response() {
+        Center.editAvatar(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {

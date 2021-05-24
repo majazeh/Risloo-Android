@@ -19,6 +19,7 @@ public class SampleModel extends TypeModel {
     private JSONArray items;
     private String chain="";
     private RoomModel SampleRoom;
+    private CaseModel SampleCase;
     private JSONArray prerequisites;
     private JSONArray terms;
     private String primaryTerm="";
@@ -37,6 +38,8 @@ public class SampleModel extends TypeModel {
             setSampleEdition(jsonObject.getString("edition"));
         if (!jsonObject.isNull("room"))
             setSampleRoom(new RoomModel(jsonObject.getJSONObject("room")));
+        if (!jsonObject.isNull("case"))
+            setSampleCase(new CaseModel(jsonObject.getJSONObject("case")));
         if (!jsonObject.isNull("edition_version"))
             setSampleEditionVersion(jsonObject.getInt("edition_version"));
         if (!jsonObject.isNull("filler"))
@@ -208,6 +211,14 @@ public class SampleModel extends TypeModel {
 
     public void setSampleForm(SampleForm sampleForm) {
         this.sampleForm = sampleForm;
+    }
+
+    public CaseModel getSampleCase() {
+        return SampleCase;
+    }
+
+    public void setSampleCase(CaseModel sampleCase) {
+        SampleCase = sampleCase;
     }
 
     @Override

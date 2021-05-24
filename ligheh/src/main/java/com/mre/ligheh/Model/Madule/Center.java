@@ -123,7 +123,7 @@ public class Center extends Model {
     public static void user(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id") && has(data, "userId"))
-                Model.show(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
+                Model.show(endpoint + "/" + data.get("id") + "/users/" + data.get("userId") + "/profile", data, header, response, UserModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
@@ -153,6 +153,14 @@ public class Center extends Model {
     public static void edit(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             Model.put(endpoint + "/" + data.get("id"), data, header, response, CenterModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void editAvatar(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.post(endpoint + "/" + data.get("id")+ "/avatar", data, header, response, CenterModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -432,9 +432,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     if (method.equals("managers")) {
 
                         if (editCenterFragment.type.equals("personal_clinic"))
-                            data.put("personal_clinic", "yes");
-                        else
                             data.put("personal_clinic", "no");
+                        else
+                            data.put("personal_clinic", "yes");
 
                         EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                         if (editCenterDetailFragment != null) {

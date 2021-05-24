@@ -13,6 +13,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCase3Binding;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Holder> {
 
@@ -20,7 +24,7 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
     private Activity activity;
 
     // Vars
-//    private ArrayList<Case> cases;
+    private ArrayList<TypeModel> cases;
 
     public Cases3Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -34,25 +38,24 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
 
     @Override
     public void onBindViewHolder(@NonNull Cases3Holder holder, int i) {
-//        Cases case = cases.get(i);
+        CaseModel model = (CaseModel) cases.get(i);
 
         detector(holder);
 
         listener(holder);
 
-        setData(holder);
+        setData(holder,model);
     }
 
     @Override
     public int getItemCount() {
-//        return cases.size();
-        return 4;
+        return cases.size();
     }
 
-//    public void setCases(ArrayList<Case> cases) {
-//        this.cases = cases;
-//        notifyDataSetChanged();
-//    }
+    public void setCases(ArrayList<TypeModel> cases) {
+        this.cases = cases;
+        notifyDataSetChanged();
+    }
 
     private void detector(Cases3Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -64,16 +67,17 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.caseFragment)).widget(holder.binding.getRoot());
     }
 
-    private void setData(Cases3Holder holder) {
+    private void setData(Cases3Holder holder,CaseModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.serialTextView.setText("SE9666669");
-        holder.binding.roomTextView.setText("اتاق درمان محمدعلی نخلی");
-        holder.binding.sessionCountTextView.setText("4");
+        holder.binding.serialTextView.setText(model.getCaseId());
+        if (model.getCaseRoom() != null)
+        holder.binding.roomTextView.setText(model.getCaseRoom().getRoomManager().getName());
+        holder.binding.sessionCountTextView.setText(String.valueOf(model.getSessions_count()));
     }
 
     public class Cases3Holder extends RecyclerView.ViewHolder {

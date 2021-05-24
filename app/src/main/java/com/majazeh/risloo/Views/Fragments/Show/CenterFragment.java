@@ -129,6 +129,33 @@ public class CenterFragment extends Fragment {
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
             extras.putString("id", id);
+            if (getArguments().getString("address") != null)
+                extras.putString("address", getArguments().getString("address"));
+
+            if (getArguments().getString("manager_name") != null)
+                extras.putString("manager_name", getArguments().getString("manager_name"));
+
+            if (getArguments().getString("manager_id") != null)
+                extras.putString("manager_id", getArguments().getString("manager_id"));
+
+            if (getArguments().getString("phone_numbers") != null)
+                extras.putString("phone_numbers", getArguments().getString("phone_numbers"));
+
+            if (getArguments().getString("title") != null)
+                extras.putString("title", getArguments().getString("title"));
+
+
+            if (getArguments().getString("description") != null)
+                extras.putString("description", getArguments().getString("description"));
+
+
+            if (getArguments().getString("type") != null)
+                extras.putString("type", getArguments().getString("type"));
+
+
+            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals(""))
+                extras.putString("avatar", getArguments().getString("avatar"));
+
 
             ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment, extras);
         }).widget(binding.editImageView.getRoot());
@@ -236,9 +263,9 @@ public class CenterFragment extends Fragment {
                 data.put("id", id);
             }
 
-             if (getArguments().getString("status") != null) {
+            if (getArguments().getString("status") != null) {
                 setStatus(getArguments().getString("status"));
-             }
+            }
 
             if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
                 binding.nameTextView.setVisibility(View.VISIBLE);
