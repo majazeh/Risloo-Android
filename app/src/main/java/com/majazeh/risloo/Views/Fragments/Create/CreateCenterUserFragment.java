@@ -44,6 +44,7 @@ public class CreateCenterUserFragment extends Fragment {
     private AuthBottomSheet authBottomSheet;
 
     // Vars
+    private String centerId = "";
     public String mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
 
     @Nullable
@@ -152,6 +153,10 @@ public class CreateCenterUserFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
+            if (getArguments().getString("center_id") != null) {
+                centerId = getArguments().getString("center_id");
+            }
+
             if (getArguments().getString("mobile") != null) {
                 mobile = getArguments().getString("mobile");
                 binding.mobileIncludeLayout.inputEditText.setText(mobile);
@@ -235,7 +240,7 @@ public class CreateCenterUserFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        data.put("id", requireArguments().getString("id"));
+        data.put("id", centerId);
         data.put("mobile", mobile);
         data.put("position", position);
 

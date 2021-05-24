@@ -246,8 +246,8 @@ public class CreateCenterFragment extends Fragment {
                 binding.titleIncludeLayout.inputEditText.setText(title);
             }
 
-            if (getArguments().getString("avatar_path") != null) {
-                avatarPath = getArguments().getString("avatar_path");
+            if (getArguments().getString("avatar") != null) {
+                avatarPath = getArguments().getString("avatar");
                 Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.selectCircleImageView);
             }
 
@@ -258,13 +258,13 @@ public class CreateCenterFragment extends Fragment {
 
             if (getArguments().getString("phones") != null) {
                 try {
-                    JSONArray jsonArray = new JSONArray(getArguments().getString("phones"));
+                    JSONArray phonesArray = new JSONArray(getArguments().getString("phones"));
 
                     ArrayList<TypeModel> phones = new ArrayList<>();
                     ArrayList<String> ids = new ArrayList<>();
 
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        TypeModel model = new TypeModel((JSONArray) jsonArray.get(i));
+                    for (int i = 0; i < phonesArray.length(); i++) {
+                        TypeModel model = new TypeModel((JSONArray) phonesArray.get(i));
 
                         phones.add(model);
                         ids.add(model.object.getString("title"));
@@ -354,7 +354,9 @@ public class CreateCenterFragment extends Fragment {
 
             if (avatarBitmap != null) {
                 FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-                data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+
+                if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+                    data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
             }
         }
 
@@ -371,9 +373,8 @@ public class CreateCenterFragment extends Fragment {
                         ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
                     });
 
-                    if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
+                    if (FileManager.readFileFromCache(requireActivity(), "image") != null)
                         FileManager.deleteFileFromCache(requireActivity(), "image");
-                    }
                 }
             }
 

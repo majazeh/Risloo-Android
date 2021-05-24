@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -33,6 +34,7 @@ public class EditCenterUserFragment extends Fragment {
     private FragmentEditCenterUserBinding binding;
 
     // Vars
+    private String centerId = "", userId = "";
     private String position = "", nickname = "", status ="";
 
     @Nullable
@@ -126,6 +128,14 @@ public class EditCenterUserFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
+            if (getArguments().getString("center_id") != null) {
+                centerId = getArguments().getString("center_id");
+            }
+
+            if (getArguments().getString("user_id") != null) {
+                userId = getArguments().getString("user_id");
+            }
+
             if (getArguments().getString("position") != null) {
                 position = getArguments().getString("position");
                 for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
@@ -166,7 +176,8 @@ public class EditCenterUserFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        data.put("id", requireArguments().getString("id"));
+        data.put("id", centerId);
+        data.put("userId", userId);
         data.put("position", position);
         data.put("nickname", nickname);
         data.put("status", status);
@@ -179,7 +190,12 @@ public class EditCenterUserFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        // Todo : Have a question Abut this
+                        Bundle extras = new Bundle();
+                        extras.putString("center_id", centerId);
+
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
                     });
                 }
             }

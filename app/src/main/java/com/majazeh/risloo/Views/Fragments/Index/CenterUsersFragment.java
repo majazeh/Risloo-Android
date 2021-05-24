@@ -30,6 +30,7 @@ import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CenterUsersFragment extends Fragment {
 
@@ -47,7 +48,7 @@ public class CenterUsersFragment extends Fragment {
     // Vars
     private HashMap data, header;
     private boolean loading = false;
-    public String id = "";
+    public String centerId = "";
 
     @Nullable
     @Override
@@ -75,7 +76,7 @@ public class CenterUsersFragment extends Fragment {
         handler = new Handler();
 
         data = new HashMap<>();
-        data.put("id", id);
+        data.put("id", centerId);
         data.put("page", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -155,7 +156,7 @@ public class CenterUsersFragment extends Fragment {
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", id);
+            extras.putString("center_id", centerId);
 
             ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras);
         }).widget(binding.addImageView.getRoot());
@@ -163,19 +164,13 @@ public class CenterUsersFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (requireArguments().getString("id") != null) {
-                id = requireArguments().getString("id");
-                data.put("id", id);
+            if (getArguments().getString("center_id") != null) {
+                centerId = requireArguments().getString("center_id");
+                data.put("id", centerId);
             }
         }
 
         loading = true;
-
-        if (data.containsKey("page")) {
-            if (data.get("page").equals(1)) {
-                adapter.clearUsers();
-            }
-        }
 
         Center.users(data, header, new Response() {
             @Override
@@ -184,11 +179,12 @@ public class CenterUsersFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        if (Objects.equals(data.get("page"), 1))
+                            adapter.clearUsers();
+
                         if (!users.data().isEmpty()) {
                             adapter.setUsers(users.data());
-
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-                            binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
 
                             binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.indexSingleLayout.textView.setVisibility(View.GONE);
@@ -196,16 +192,16 @@ public class CenterUsersFragment extends Fragment {
                             binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
+                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE) {
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        }
-                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-                        }
                     });
                     loading = false;
                 }
@@ -220,12 +216,10 @@ public class CenterUsersFragment extends Fragment {
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE) {
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        }
-                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-                        }
                     });
                     loading = false;
                 }

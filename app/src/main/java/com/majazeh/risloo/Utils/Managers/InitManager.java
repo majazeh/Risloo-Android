@@ -308,17 +308,13 @@ public class InitManager {
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
                             switch (arrayList.get(position)) {
                                 case "پذیرفتن":
+                                case "ساختن اتاق درمان":
                                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_green300);
                                     break;
                                 case "تعلیق":
                                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_red300);
                                     break;
-                                case "ساختن اتاق درمان":
-                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_green300);
-                                    break;
                                 case "اتاق درمان":
-                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
-                                    break;
                                 case "ویرایش کاربر":
                                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
                                     break;
@@ -352,10 +348,10 @@ public class InitManager {
                                 ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Green600));
                                 break;
                             case "اتاق درمان":
-                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray500));
 
                                 dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_building_light, null));
-                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
                                 break;
                             case "ویرایش کاربر":
                                 dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));

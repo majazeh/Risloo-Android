@@ -763,6 +763,10 @@
     <string name="CenterUsersFragmentAccepted">زمان پذیرش</string>
     <string name="CenterUsersFragmentKicked">زمان تعلیق</string>
 
+    <string name="CenterUsersFragmentStatusAccepted">پذیرش شده</string>
+    <string name="CenterUsersFragmentStatusKicked">تعلیق شده</string>
+    <string name="CenterUsersFragmentStatusWaiting">در انتظار</string>
+
     <string name="CenterUsersFragmentAccept">پذیرفتن</string>
     <string name="CenterUsersFragmentKick">تعلیق</string>
     <string name="CenterUsersFragmentCreateRoom">ساختن اتاق درمان</string>

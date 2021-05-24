@@ -95,8 +95,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (centerUsersFragment != null) {
                     Bundle extras = new Bundle();
-                    extras.putString("id", centerUsersFragment.id);
-                    extras.putString("userId", holder.binding.serialTextView.getText().toString());
+                    extras.putString("center_id", centerUsersFragment.centerId);
+                    extras.putString("user_id", holder.binding.serialTextView.getText().toString());
 
                     ((MainActivity) activity).navigator(R.id.referenceFragment,extras);
                 }
@@ -145,10 +145,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                     if (centerUsersFragment != null) {
                         switch (task) {
                             case "پذیرفتن":
-                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "accept", "status");
+                                doWork(centerUsersFragment.centerId, holder.binding.serialTextView.getText().toString(), "accept", "status");
                                 break;
                             case "تعلیق":
-                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "kick", "status");
+                                doWork(centerUsersFragment.centerId, holder.binding.serialTextView.getText().toString(), "kick", "status");
                                 break;
                             case "ساختن اتاق درمان":
                                 Log.e("method", "create_room");
@@ -186,35 +186,36 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         holder.binding.serialTextView.setText(model.getUserId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
-        holder.binding.statusTexView.setText(model.getUserStatus());
 
-        holder.binding.acceptedTextView.setText(String.valueOf(model.getUserAccepted_at()));
-        holder.binding.kickedTextView.setText(String.valueOf(model.getUserKicked_at()));
+        setPosition(holder, model);
 
+        setAcceptation(holder, model);
+    }
+
+    private void setPosition(CenterUsersHolder holder, UserModel model) {
         for (int i = 0; i < holder.binding.positionSpinner.getCount(); i++) {
-            if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(model.getPosition())) {
-                holder.binding.positionSpinner.setSelection(i);
+            switch (model.getPosition()) {
+                case "مدیر":
+                case "manager":
+                    holder.binding.positionSpinner.setSelection(0);
+                    break;
+                case "اپراتور":
+                case "operator":
+                    holder.binding.positionSpinner.setSelection(1);
+                    break;
+                case "روان\u200Cشناس":
+                case "psychologist":
+                    holder.binding.positionSpinner.setSelection(2);
+                    break;
+                case "مراجع":
+                case "client":
+                    holder.binding.positionSpinner.setSelection(3);
+                    break;
             }
         }
 
-        setPosition(holder, true);
+        boolean enable = true;
 
-        ArrayList<String> list = new ArrayList<>();
-
-        if (model.getUserAccepted_at() == 0)
-            list.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
-        if (model.getUserKicked_at() == 0)
-            list.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
-        list.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
-        list.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
-        list.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
-        list.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
-        list.add("");
-
-        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, list, "centerUsers");
-    }
-
-    private void setPosition(CenterUsersHolder holder, boolean enable) {
         if (enable) {
             holder.binding.positionSpinner.setEnabled(true);
 
@@ -232,6 +233,36 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         }
     }
 
+    private void setAcceptation(CenterUsersHolder holder, UserModel model) {
+        ArrayList<String> menu = new ArrayList<>();
+
+        if (model.getUserAccepted_at() == 0) {
+            menu.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+        } else {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusAccepted));
+            holder.binding.acceptedTextView.setText(String.valueOf(model.getUserAccepted_at()));
+        }
+
+        if (model.getUserKicked_at() == 0) {
+            menu.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+        } else {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
+            holder.binding.kickedTextView.setText(String.valueOf(model.getUserKicked_at()));
+        }
+
+        if (model.getUserAccepted_at() == 0 && model.getUserKicked_at() == 0) {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusWaiting));
+        }
+
+        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
+        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
+        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
+        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
+        menu.add("");
+
+        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menu, "centerUsers");
+    }
+
     private void doWork(String id, String userId, String value, String method) {
         if (method.equals("position")) {
             HashMap data = new HashMap();
@@ -246,8 +277,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 @Override
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
-                        // sdfnslkdafnksnfklasklfnlksfn
-
+                        notifyDataSetChanged();
                         ((MainActivity) activity).loadingDialog.dismiss();
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                     });
@@ -271,8 +301,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 @Override
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
-                        // sdfnslkdafnksnfklasklfnlksfn
-
+                        notifyDataSetChanged();
                         ((MainActivity) activity).loadingDialog.dismiss();
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                     });

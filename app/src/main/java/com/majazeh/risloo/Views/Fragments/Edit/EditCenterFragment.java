@@ -30,8 +30,9 @@ public class EditCenterFragment extends Fragment {
 
     // Vars
     private String[] tabs;
-    public String centerId = "", type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
-    public JSONArray phones;
+    public String centerId = "";
+    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
+    public JSONArray phonesArray;
     public String avatarPath = "";
 
     @Nullable
@@ -53,11 +54,12 @@ public class EditCenterFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("id") != null) {
-                centerId = getArguments().getString("id");
+            if (getArguments().getString("center_id") != null) {
+                centerId = getArguments().getString("center_id");
             }
-            if (requireArguments().getString("type") != null) {
-                type = requireArguments().getString("type");
+
+            if (getArguments().getString("type") != null) {
+                type = getArguments().getString("type");
                 switch (type) {
                     case "personal_clinic":
                         binding.tabLayout.getRoot().setVisibility(View.GONE);
@@ -85,13 +87,14 @@ public class EditCenterFragment extends Fragment {
                 address = getArguments().getString("address");
             }
 
-            if (getArguments().getString("phone_numbers") != null) {
+            if (getArguments().getString("phones") != null) {
                 try {
-                    phones = new JSONArray(getArguments().getString("phone_numbers"));
+                    phonesArray = new JSONArray(getArguments().getString("phones"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
             }
+
             if (getArguments().getString("description") != null) {
                 description = getArguments().getString("description");
             }
