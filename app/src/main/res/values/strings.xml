@@ -948,11 +948,13 @@
     <string name="CenterFragmentTitle">مرکز درمانی</string>
 
     <string name="CenterFragmentStatusRequest">درخواست پذیرش</string>
-    <string name="CenterFragmentStatusOwner">شما مدیر این مرکز درمان هستید</string>
+    <string name="CenterFragmentStatusManager">شما مدیر این مرکز درمان هستید</string>
+    <string name="CenterFragmentStatusOperator">شما اپراتور این مرکز درمان هستید</string>
+    <string name="CenterFragmentStatusPsychologist">شما روان‌شناس این مرکز درمان هستید</string>
     <string name="CenterFragmentStatusClient">شما مراجع این مرکز درمان هستید</string>
+    <string name="CenterFragmentStatusKicked">رد شد</string>
     <string name="CenterFragmentStatusAccepted">پذیرفته شد</string>
     <string name="CenterFragmentStatusAwaiting">در انتظار</string>
-    <string name="CenterFragmentStatusKicked">رد شد</string>
 
     /*
     ---------- Dashboard Fragment ----------

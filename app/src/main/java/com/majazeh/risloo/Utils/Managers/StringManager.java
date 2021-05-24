@@ -39,14 +39,16 @@ public class StringManager {
     public static String firstChars(String value) {
         String cc = "";
 
-        if (value.contains(" ")) {
-            cc = value.charAt(0) + String.valueOf(value.substring(value.lastIndexOf(" ") + 1).charAt(0));
-        } else if (value.contains("-")) {
-            cc = value.charAt(0) + String.valueOf(value.substring(value.lastIndexOf("-") + 1).charAt(0));
-        } else if (value.contains("/")) {
-            cc = value.charAt(0) + String.valueOf(value.substring(value.lastIndexOf("/") + 1).charAt(0));
-        } else {
-            cc = value.charAt(0) + String.valueOf(value.charAt(1));
+        if (!cc.equals(value)) {
+            if (value.contains(" ")) {
+                cc = value.charAt(0) + String.valueOf(value.substring(value.lastIndexOf(" ") + 1).charAt(0));
+            } else if (value.contains("-")) {
+                cc = value.charAt(0) + String.valueOf(value.substring(value.lastIndexOf("-") + 1).charAt(0));
+            } else if (value.contains("/")) {
+                cc = value.charAt(0) + String.valueOf(value.substring(value.lastIndexOf("/") + 1).charAt(0));
+            } else {
+                cc = value.charAt(0) + String.valueOf(value.charAt(1));
+            }
         }
 
         return cc;

@@ -151,20 +151,24 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     private void setAcceptation(CenterModel model, Bundle extras) {
         if (model.getAcceptation() != null) {
-            if (model.getAcceptation().getPosition().equals("manager")) {
-                extras.putString("status", "owner");
-            } else if (model.getAcceptation().getPosition().equals("client")) {
-                extras.putString("status", "client");
-            } else {
-                if (!model.getAcceptation().getKicked_at().equals("")) {
-                    extras.putString("status", "kicked");
-                } else {
-                    if (model.getAcceptation().getAccepted_at() != 0) {
-                        extras.putString("status", "accepted");
+            switch (model.getAcceptation().getPosition()) {
+                case "manager":
+                case "operator":
+                case "psychologist":
+                case "client":
+                    extras.putString("status", model.getAcceptation().getPosition());
+                    break;
+                default:
+                    if (!model.getAcceptation().getKicked_at().equals("")) {
+                        extras.putString("status", "kicked");
                     } else {
-                        extras.putString("status", "awaiting");
+                        if (model.getAcceptation().getAccepted_at() != 0) {
+                            extras.putString("status", "accepted");
+                        } else {
+                            extras.putString("status", "awaiting");
+                        }
                     }
-                }
+                    break;
             }
         } else {
             extras.putString("status", "request");
