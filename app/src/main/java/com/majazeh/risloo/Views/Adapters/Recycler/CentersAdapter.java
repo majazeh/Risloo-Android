@@ -90,30 +90,20 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
                 setAcceptation(model, extras);
 
-                if (!model.getDetail().isNull("title"))
+                if (model.getDetail().has("title") && !model.getDetail().isNull("title"))
                     extras.putString("title", model.getDetail().getString("title"));
-                else
-                    extras.putString("title", "");
 
-                if (!model.getDetail().isNull("description"))
+                if (model.getDetail().has("description") && !model.getDetail().isNull("description"))
                     extras.putString("description", model.getDetail().getString("description"));
-                else
-                    extras.putString("description", "");
 
-                if (!model.getDetail().isNull("address"))
+                if (model.getDetail().has("address") && !model.getDetail().isNull("address"))
                     extras.putString("address", model.getDetail().getString("address"));
-                else
-                    extras.putString("address", "");
 
-                if (!model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
+                if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
                     extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
-                else
-                    extras.putString("avatar", "");
 
-                if (!model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
-                    extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").get(0).toString());
-                else
-                    extras.putString("phone_numbers", "");
+                if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
+                    extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").getString(0));
 
                 if (model.getCenterType().equals("counseling_center")) {
                     ((MainActivity) activity).navigator(R.id.centerFragment, extras);
@@ -137,7 +127,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
                 holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
             }
 
-            if (!model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
                 setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
             } else {
                 setAvatar(holder, "");
@@ -166,10 +156,10 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
             } else if (model.getAcceptation().getPosition().equals("client")) {
                 extras.putString("status", "client");
             } else {
-                if (model.getAcceptation().getKicked_at() != null) {
+                if (!model.getAcceptation().getKicked_at().equals("")) {
                     extras.putString("status", "kicked");
                 } else {
-                    if (model.getAcceptation().getAccepted_at() == 0) {
+                    if (model.getAcceptation().getAccepted_at() != 0) {
                         extras.putString("status", "accepted");
                     } else {
                         extras.putString("status", "awaiting");

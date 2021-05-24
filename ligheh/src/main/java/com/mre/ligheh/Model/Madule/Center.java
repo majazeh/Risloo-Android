@@ -76,7 +76,7 @@ public class Center extends Model {
     public static void request(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.post(endpoint + "/" + data.get("id") + "/request", data, header, response, null);
+                Model.post(endpoint + "/" + data.get("id") + "/request", data, header, response, CenterModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
@@ -87,7 +87,7 @@ public class Center extends Model {
     public static void changePosition(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id") || has(data,"userId"))
-                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, null);
+                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
@@ -98,7 +98,7 @@ public class Center extends Model {
     public static void changeStatus(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id") || has(data,"userId"))
-                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, null);
+                Model.put(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {

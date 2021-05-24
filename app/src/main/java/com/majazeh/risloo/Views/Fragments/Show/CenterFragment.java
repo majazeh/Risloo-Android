@@ -128,55 +128,28 @@ public class CenterFragment extends Fragment {
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", id);
-            if (getArguments().getString("address") != null)
-                extras.putString("address", getArguments().getString("address"));
-
-            if (getArguments().getString("manager_name") != null)
-                extras.putString("manager_name", getArguments().getString("manager_name"));
-
-            if (getArguments().getString("manager_id") != null)
-                extras.putString("manager_id", getArguments().getString("manager_id"));
-
-            if (getArguments().getString("phone_numbers") != null)
-                extras.putString("phone_numbers", getArguments().getString("phone_numbers"));
-
-            if (getArguments().getString("title") != null)
-                extras.putString("title", getArguments().getString("title"));
-
-
-            if (getArguments().getString("description") != null)
-                extras.putString("description", getArguments().getString("description"));
-
-
-            if (getArguments().getString("type") != null)
-                extras.putString("type", getArguments().getString("type"));
-
-
-            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals(""))
-                extras.putString("avatar", getArguments().getString("avatar"));
-
+            extras.putString("center_id", id);
 
             ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment, extras);
         }).widget(binding.editImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", id);
+            extras.putString("center_id", id);
 
             ((MainActivity) requireActivity()).navigator(R.id.userFragment, extras);
         }).widget(binding.profileImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", id);
+            extras.putString("center_id", id);
 
             ((MainActivity) requireActivity()).navigator(R.id.centerSchedulesFragment, extras);
         }).widget(binding.schedulesImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", id);
+            extras.putString("center_id", id);
 
             ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
         }).widget(binding.usersImageView.getRoot());
@@ -187,9 +160,11 @@ public class CenterFragment extends Fragment {
             Center.request(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
+                    CenterModel model = (CenterModel) object;
+
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            // sdfnslkdafnksnfklasklfnlksfn
+                            setAcceptation(model);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
@@ -237,14 +212,14 @@ public class CenterFragment extends Fragment {
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", id);
+            extras.putString("center_id", id);
 
             ((MainActivity) requireActivity()).navigator(R.id.createRoomFragment, extras);
         }).widget(binding.addRoomImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-            extras.putString("id", id);
+            extras.putString("center_id", id);
 
             ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment, extras);
         }).widget(binding.addScheduleImageView.getRoot());
@@ -255,6 +230,9 @@ public class CenterFragment extends Fragment {
             binding.editImageView.getRoot().setVisibility(View.GONE);
             binding.profileImageView.getRoot().setVisibility(View.GONE);
             binding.usersImageView.getRoot().setVisibility(View.GONE);
+            
+            binding.addRoomImageView.getRoot().setVisibility(View.GONE);
+            binding.addScheduleImageView.getRoot().setVisibility(View.GONE);
         }
 
         if (getArguments() != null) {
@@ -263,9 +241,9 @@ public class CenterFragment extends Fragment {
                 data.put("id", id);
             }
 
-            if (getArguments().getString("status") != null) {
+             if (getArguments().getString("status") != null) {
                 setStatus(getArguments().getString("status"));
-            }
+             }
 
             if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
                 binding.nameTextView.setVisibility(View.VISIBLE);
@@ -311,30 +289,28 @@ public class CenterFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        JSONObject jsonObject = (JSONObject) object;
-
                         try {
-                            CenterModel centerModel = new CenterModel(jsonObject.getJSONObject("center"));
+                            CenterModel model = new CenterModel(((JSONObject) object).getJSONObject("center"));
 
-                            setAcceptation(centerModel);
+                            setAcceptation(model);
 
-                            if (!centerModel.getDetail().isNull("title")) {
+                            if (model.getDetail().has("title") && !model.getDetail().isNull("title")) {
                                 binding.nameTextView.setVisibility(View.VISIBLE);
-                                binding.nameTextView.setText(centerModel.getDetail().getString("title"));
+                                binding.nameTextView.setText(model.getDetail().getString("title"));
                             } else {
                                 binding.nameTextView.setVisibility(View.GONE);
                             }
 
-                            if (!centerModel.getDetail().isNull("description")) {
+                            if (model.getDetail().has("description") && !model.getDetail().isNull("description")) {
                                 binding.descriptionTextView.setVisibility(View.VISIBLE);
-                                binding.descriptionTextView.setText(centerModel.getDetail().getString("description"));
+                                binding.descriptionTextView.setText(model.getDetail().getString("description"));
                             } else {
                                 binding.descriptionTextView.setVisibility(View.GONE);
                             }
 
-                            if (!centerModel.getDetail().isNull("avatar") && centerModel.getDetail().getJSONArray("avatar").length() != 0) {
+                            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
                                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                                Picasso.get().load(centerModel.getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                                Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                             } else {
                                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
@@ -342,42 +318,43 @@ public class CenterFragment extends Fragment {
                                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                             }
 
-                            if (centerModel.getManager().getName() != null) {
+                            if (model.getManager().getName() != null) {
                                 binding.ownerTextView.setVisibility(View.VISIBLE);
-                                binding.ownerTextView.setText(centerModel.getManager().getName());
+                                binding.ownerTextView.setText(model.getManager().getName());
                             } else {
                                 binding.ownerTextView.setVisibility(View.GONE);
                             }
 
-                            if (!centerModel.getDetail().isNull("phone_numbers") && centerModel.getDetail().getJSONArray("phone_numbers").length() != 0) {
+                            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
                                 binding.mobileGroup.setVisibility(View.VISIBLE);
-                                binding.mobileTextView.setText(centerModel.getDetail().getJSONArray("phone_numbers").get(0).toString());
+                                binding.mobileTextView.setText(model.getDetail().getJSONArray("phone_numbers").get(0).toString());
                             } else {
                                 binding.mobileGroup.setVisibility(View.GONE);
                             }
 
                             List rooms = new List();
-                            for (int i = 0; i < jsonObject.getJSONArray("data").length(); i++) {
-                                rooms.add(new RoomModel(jsonObject.getJSONArray("data").getJSONObject(i)));
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
+                                rooms.add(new RoomModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
                             }
 
                             if (!rooms.data().isEmpty()) {
                                 roomsAdapter.setRooms(rooms.data());
-
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
-                                binding.headerIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
 
                                 binding.roomsSingleLayout.textView.setVisibility(View.GONE);
                             } else {
+                                roomsAdapter.clearRooms();
+
                                 binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
+                            binding.headerIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-                            }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -393,9 +370,8 @@ public class CenterFragment extends Fragment {
                         binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE) {
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-                        }
                     });
                 }
             }
@@ -465,10 +441,10 @@ public class CenterFragment extends Fragment {
             } else if (model.getAcceptation().getPosition().equals("client")) {
                 setStatus("client");
             } else {
-                if (model.getAcceptation().getKicked_at() != null) {
+                if (!model.getAcceptation().getKicked_at().equals("")) {
                     setStatus("kicked");
                 } else {
-                    if (model.getAcceptation().getAccepted_at() == 0) {
+                    if (model.getAcceptation().getAccepted_at() != 0) {
                         setStatus("accepted");
                     } else {
                         setStatus("awaiting");
