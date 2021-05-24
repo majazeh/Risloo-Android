@@ -985,6 +985,15 @@
 
     <string name="RoomFragmentTitle">اتاق درمانی</string>
 
+    <string name="RoomFragmentStatusRequest">درخواست پذیرش</string>
+    <string name="RoomFragmentStatusManager">شما مدیر این اتاق درمان هستید</string>
+    <string name="RoomFragmentStatusOperator">شما اپراتور این اتاق درمان هستید</string>
+    <string name="RoomFragmentStatusPsychologist">شما روان‌شناس این اتاق درمان هستید</string>
+    <string name="RoomFragmentStatusClient">شما مراجع این اتاق درمان هستید</string>
+    <string name="RoomFragmentStatusKicked">رد شد</string>
+    <string name="RoomFragmentStatusAccepted">پذیرفته شد</string>
+    <string name="RoomFragmentStatusAwaiting">در انتظار</string>
+
     /*
     ---------- Sample Fragment ----------
     */

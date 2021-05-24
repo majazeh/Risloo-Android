@@ -70,9 +70,41 @@
                     layout="@layout/component_main_button_oval_mid"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="@+id/avatar_includeLayout"
+                    app:layout_constraintLeft_toRightOf="@id/profile_imageView" />
+
+                <include
+                    android:id="@+id/profile_imageView"
+                    layout="@layout/component_main_button_oval_mid"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
+                    app:layout_constraintLeft_toRightOf="@id/edit_imageView" />
+
+                <include
+                    android:id="@+id/edit_imageView"
+                    layout="@layout/component_main_button_oval_mid"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
                     app:layout_constraintLeft_toLeftOf="parent" />
+
+                <include
+                    android:id="@+id/status_textView"
+                    layout="@layout/component_main_button_rect_mid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    app:layout_constraintWidth_max="@dimen/_96sdp"
+                    app:layout_constraintHeight_min="@dimen/_28sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/name_textView"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/name_textView" />
 
                 <TextView
                     android:id="@+id/name_textView"
@@ -85,6 +117,7 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
+                    app:layout_constraintWidth_max="@dimen/_124sdp"
                     app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
                     app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />

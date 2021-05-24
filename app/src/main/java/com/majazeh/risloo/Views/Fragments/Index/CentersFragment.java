@@ -134,7 +134,7 @@ public class CentersFragment extends Fragment {
                 int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
 
                 if (!loading) {
-                    if (pastVisiblesItems + visibleItemCount >= totalItemCount) {
+                    if ((pastVisiblesItems + visibleItemCount) >= totalItemCount) {
                         binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
                         if (data.containsKey("page")) {
                             int page = (int) data.get("page");

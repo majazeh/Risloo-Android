@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
@@ -89,16 +90,24 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         }
     }
 
+
+
+
+
+
+
+
+
     private void listener(CenterUsersHolder holder) {
         ClickManager.onClickListener(() -> {
             if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
                 CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (centerUsersFragment != null) {
-                    Bundle extras = new Bundle();
-                    extras.putString("center_id", centerUsersFragment.centerId);
-                    extras.putString("user_id", holder.binding.serialTextView.getText().toString());
-
-                    ((MainActivity) activity).navigator(R.id.referenceFragment,extras);
+//                    Bundle extras = new Bundle();
+//                    extras.putString("id", centerUsersFragment.centerId);
+//                    extras.putString("user_id", holder.binding.serialTextView.getText().toString());
+//
+//                    ((MainActivity) activity).navigator(R.id.referenceFragment, extras);
                 }
             }
         }).widget(holder.binding.getRoot());
@@ -157,7 +166,20 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                                 Log.e("method", "room");
                                 break;
                             case "ویرایش کاربر":
-                                Log.e("method", "edit");
+                                Bundle extras = new Bundle();
+                                extras.putString("id", centerUsersFragment.centerId);
+                                extras.putString("user_id", holder.binding.serialTextView.getText().toString());
+                                extras.putString("position", holder.binding.positionSpinner.getSelectedItem().toString());
+                                extras.putString("nickname", holder.binding.nameTextView.getText().toString());
+
+                                if (holder.binding.serialTextView.getText().toString().equals("پذیرش شده"))
+                                    extras.putString("status", "accept");
+                                else if (holder.binding.serialTextView.getText().toString().equals("تعلیق شده"))
+                                    extras.putString("status", "kick");
+                                else
+                                    extras.putString("status", "none");
+
+                                ((MainActivity) activity).navigator(R.id.editCenterUserFragment);
                                 break;
                             case "ورود به کاربری":
                                 Log.e("method", "enter");
@@ -175,6 +197,20 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             }
         });
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void setData(CenterUsersHolder holder, UserModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
@@ -240,14 +276,14 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             menu.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusAccepted));
-            holder.binding.acceptedTextView.setText(String.valueOf(model.getUserAccepted_at()));
+            holder.binding.acceptedTextView.setText(DateManager.gregorianToJalali3(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getUserAccepted_at()))));
         }
 
         if (model.getUserKicked_at() == 0) {
             menu.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
-            holder.binding.kickedTextView.setText(String.valueOf(model.getUserKicked_at()));
+            holder.binding.kickedTextView.setText(DateManager.gregorianToJalali3(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getUserKicked_at()))));
         }
 
         if (model.getUserAccepted_at() == 0 && model.getUserKicked_at() == 0) {
@@ -265,12 +301,12 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     private void doWork(String id, String userId, String value, String method) {
         if (method.equals("position")) {
-            HashMap data = new HashMap();
+            HashMap data = new HashMap<>();
             data.put("id", id);
             data.put("userId", userId);
             data.put("position", value);
 
-            HashMap header = new HashMap();
+            HashMap header = new HashMap<>();
             header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
             Center.changePosition(data, header, new Response() {
@@ -289,12 +325,12 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 }
             });
         } else {
-            HashMap data = new HashMap();
+            HashMap data = new HashMap<>();
             data.put("id", id);
             data.put("userId", userId);
             data.put("status", value);
 
-            HashMap header = new HashMap();
+            HashMap header = new HashMap<>();
             header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
             Center.changeStatus(data, header, new Response() {

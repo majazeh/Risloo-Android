@@ -54,8 +54,18 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
     }
 
     public void setCases(ArrayList<TypeModel> cases) {
-        this.cases = cases;
+        if (this.cases == null)
+            this.cases = cases;
+        else
+            this.cases.addAll(cases);
         notifyDataSetChanged();
+    }
+
+    public void clearCases() {
+        if (this.cases != null) {
+            this.cases.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(Cases2Holder holder) {

@@ -111,6 +111,20 @@ public class DateManager {
         return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + persianDate.getShYear();
     }
 
+    public static String gregorianToJalali3(String value) {
+        int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
+        int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
+        int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
+        int hour = Integer.parseInt(dateToString("HH", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
+        int minute = Integer.parseInt(dateToString("mm", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
+        int second = Integer.parseInt(dateToString("ss", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
+
+        PersianDate persianDate = new PersianDate();
+        persianDate.initGrgDate(year, month, day, hour, minute, second);
+
+        return StringManager.lastChar(String.valueOf(persianDate.getShYear()))+ "-" + StringManager.lastChar(String.valueOf(persianDate.getShMonth())) + "-" + StringManager.lastChar(String.valueOf(persianDate.getShDay())) + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+    }
+
     public static String jalaliToGregorian(String value) {
         int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd", value)));
         int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd", value)));

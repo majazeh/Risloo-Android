@@ -93,11 +93,11 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
                 if (model.getDetail().has("title") && !model.getDetail().isNull("title"))
                     extras.putString("title", model.getDetail().getString("title"));
 
-                if (model.getDetail().has("description") && !model.getDetail().isNull("description"))
-                    extras.putString("description", model.getDetail().getString("description"));
-
                 if (model.getDetail().has("address") && !model.getDetail().isNull("address"))
                     extras.putString("address", model.getDetail().getString("address"));
+
+                if (model.getDetail().has("description") && !model.getDetail().isNull("description"))
+                    extras.putString("description", model.getDetail().getString("description"));
 
                 if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
                     extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));

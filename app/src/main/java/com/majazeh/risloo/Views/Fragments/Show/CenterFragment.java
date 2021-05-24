@@ -230,6 +230,10 @@ public class CenterFragment extends Fragment {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
+            if (getArguments().getString("address") != null) {
+                extras.putString("address", getArguments().getString("address"));
+            }
+
             if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
                 extras.putString("description", getArguments().getString("description"));
                 binding.descriptionTextView.setText(getArguments().getString("description"));
@@ -285,8 +289,12 @@ public class CenterFragment extends Fragment {
                                 binding.nameTextView.setVisibility(View.GONE);
                             }
 
+                            if (model.getDetail().has("address") && !model.getDetail().isNull("address")) {
+                                extras.putString("address", model.getDetail().getString("address"));
+                            }
+
                             if (model.getDetail().has("description") && !model.getDetail().isNull("description")) {
-                                extras.putString("title", model.getDetail().getString("description"));
+                                extras.putString("description", model.getDetail().getString("description"));
                                 binding.descriptionTextView.setText(model.getDetail().getString("description"));
                                 binding.descriptionTextView.setVisibility(View.VISIBLE);
                             } else {

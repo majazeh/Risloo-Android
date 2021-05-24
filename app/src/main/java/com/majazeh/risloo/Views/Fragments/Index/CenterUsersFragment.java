@@ -44,6 +44,7 @@ public class CenterUsersFragment extends Fragment {
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
     private Handler handler;
+    private Bundle extras;
 
     // Vars
     private HashMap data, header;
@@ -74,6 +75,8 @@ public class CenterUsersFragment extends Fragment {
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         handler = new Handler();
+
+        extras = new Bundle();
 
         data = new HashMap<>();
         data.put("id", centerId);
@@ -138,7 +141,7 @@ public class CenterUsersFragment extends Fragment {
                 int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
 
                 if (!loading) {
-                    if (pastVisiblesItems + visibleItemCount >= totalItemCount) {
+                    if ((pastVisiblesItems + visibleItemCount) >= totalItemCount) {
                         binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
                         if (data.containsKey("page")) {
                             int page = (int) data.get("page");
@@ -154,18 +157,14 @@ public class CenterUsersFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> {
-            Bundle extras = new Bundle();
-            extras.putString("center_id", centerId);
-
-            ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras);
-        }).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras)).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("center_id") != null) {
-                centerId = requireArguments().getString("center_id");
+            if (getArguments().getString("id") != null) {
+                centerId = requireArguments().getString("id");
+                extras.putString("id", centerId);
                 data.put("id", centerId);
             }
         }

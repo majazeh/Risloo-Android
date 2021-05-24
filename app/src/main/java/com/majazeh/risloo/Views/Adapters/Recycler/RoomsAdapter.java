@@ -56,8 +56,18 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     }
 
     public void setRooms(ArrayList<TypeModel> rooms) {
-        this.rooms = rooms;
+        if (this.rooms == null)
+            this.rooms = rooms;
+        else
+            this.rooms.addAll(rooms);
         notifyDataSetChanged();
+    }
+
+    public void clearRooms() {
+        if (this.rooms != null) {
+            this.rooms.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(RoomsHolder holder) {
@@ -69,9 +79,14 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     private void listener(RoomsHolder holder, RoomModel model) {
         ClickManager.onClickListener(() -> {
             Bundle extras = new Bundle();
-//            extras.putString("room_model", String.valueOf(model));
-
             extras.putString("id", model.getRoomId());
+            extras.putString("type", model.getRoomType());
+
+            extras.putString("manager_id", model.getRoomManager().getUserId());
+            extras.putString("manager_name", model.getRoomManager().getName());
+
+            if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
+                extras.putString("avatar", model.getRoomManager().getAvatar().getMedium().getUrl());
 
             ((MainActivity) activity).navigator(R.id.roomFragment, extras);
         }).widget(holder.binding.containerConstraintLayout);
@@ -79,7 +94,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     private void setData(RoomsHolder holder, RoomModel model) {
         holder.binding.nameTextView.setText(model.getRoomManager().getName());
-//        holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
+        holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
 
         if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null) {
             setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());

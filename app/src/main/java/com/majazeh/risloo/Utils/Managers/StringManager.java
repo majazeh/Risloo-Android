@@ -36,6 +36,10 @@ public class StringManager {
         return value.substring(position + 1);
     }
 
+    public static String lastChar(String value) {
+        return String.valueOf(value.charAt(value.length() - 1));
+    }
+
     public static String firstChars(String value) {
         String cc = "";
 
