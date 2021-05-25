@@ -814,16 +814,18 @@
     <string name="RoomUsersFragmentSerial">سریال</string>
     <string name="RoomUsersFragmentName">نام مستعار</string>
     <string name="RoomUsersFragmentMobile">موبایل</string>
-    <string name="RoomUsersFragmentType">موقعیت</string>
+    <string name="RoomUsersFragmentPosition">موقعیت</string>
     <string name="RoomUsersFragmentStatus">وضعیت</string>
     <string name="RoomUsersFragmentAccepted">زمان پذیرش</string>
-    <string name="RoomUsersFragmentKicked">زمان تعلیق</string>
 
-    <string name="RoomUsersFragmentAccept">پذیرفتن</string>
-    <string name="RoomUsersFragmentKick">تعلیق</string>
-    <string name="RoomUsersFragmentCreateRoom">ساختن اتاق درمان</string>
-    <string name="RoomUsersFragmentEdit">ویرایش کاربر</string>
-    <string name="RoomUsersFragmentEnter">ورود به کاربری</string>
+    <string name="RoomUsersFragmentPositionManager">مدیر</string>
+    <string name="RoomUsersFragmentPositionOperator">اپراتور</string>
+    <string name="RoomUsersFragmentPositionPsychologist">روان‌شناس</string>
+    <string name="RoomUsersFragmentPositionClient">مراجع</string>
+
+    <string name="RoomUsersFragmentStatusAccepted">پذیرش شده</string>
+    <string name="RoomUsersFragmentStatusKicked">تعلیق شده</string>
+    <string name="RoomUsersFragmentStatusWaiting">در انتظار</string>
 
     <string name="RoomUsersFragmentEmpty">هنوز کاربری برای این اتاق ثبت نشده است.</string>
 

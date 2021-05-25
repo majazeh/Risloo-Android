@@ -80,40 +80,10 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     private void listener(CentersHolder holder, CenterModel model) {
         ClickManager.onClickListener(() -> {
-            try {
-                Bundle extras = new Bundle();
-                extras.putString("id", model.getCenterId());
-                extras.putString("type", model.getCenterType());
-
-                extras.putString("manager_id", model.getManager().getUserId());
-                extras.putString("manager_name", model.getManager().getName());
-
-                setAcceptation(model, extras);
-
-                if (model.getDetail().has("title") && !model.getDetail().isNull("title"))
-                    extras.putString("title", model.getDetail().getString("title"));
-
-                if (model.getDetail().has("address") && !model.getDetail().isNull("address"))
-                    extras.putString("address", model.getDetail().getString("address"));
-
-                if (model.getDetail().has("description") && !model.getDetail().isNull("description"))
-                    extras.putString("description", model.getDetail().getString("description"));
-
-                if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
-                    extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
-
-                if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
-                    extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").getString(0));
-
-                if (model.getCenterType().equals("counseling_center")) {
-                    ((MainActivity) activity).navigator(R.id.centerFragment, extras);
-                } else {
-                    ((MainActivity) activity).navigator(R.id.roomFragment, extras);
-                }
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            if (model.getCenterType().equals("counseling_center"))
+                ((MainActivity) activity).navigator(R.id.centerFragment, getExtras(model));
+            else
+                ((MainActivity) activity).navigator(R.id.roomFragment, getExtras(model));
         }).widget(holder.binding.containerConstraintLayout);
     }
 
@@ -173,6 +143,37 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         } else {
             extras.putString("status", "request");
         }
+    }
+
+    private Bundle getExtras(CenterModel model) {
+        Bundle extras = new Bundle();
+        try {
+            extras.putString("id", model.getCenterId());
+            extras.putString("type", model.getCenterType());
+
+            extras.putString("manager_id", model.getManager().getUserId());
+            extras.putString("manager_name", model.getManager().getName());
+
+            setAcceptation(model, extras);
+
+            if (model.getDetail().has("title") && !model.getDetail().isNull("title"))
+                extras.putString("title", model.getDetail().getString("title"));
+
+            if (model.getDetail().has("address") && !model.getDetail().isNull("address"))
+                extras.putString("address", model.getDetail().getString("address"));
+
+            if (model.getDetail().has("description") && !model.getDetail().isNull("description"))
+                extras.putString("description", model.getDetail().getString("description"));
+
+            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
+                extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+
+            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
+                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").getString(0));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return extras;
     }
 
     public class CentersHolder extends RecyclerView.ViewHolder {

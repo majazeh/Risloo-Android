@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -24,6 +25,12 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomUsersAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomUsersBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Room;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class RoomUsersFragment extends Fragment {
 
@@ -37,6 +44,12 @@ public class RoomUsersFragment extends Fragment {
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
     private Handler handler;
+    private Bundle extras;
+
+    // Vars
+    private HashMap data, header;
+    private boolean loading = false;
+    public String roomId = "";
 
     @Nullable
     @Override
@@ -62,6 +75,14 @@ public class RoomUsersFragment extends Fragment {
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         handler = new Handler();
+
+        extras = new Bundle();
+
+        data = new HashMap<>();
+        data.put("id", roomId);
+        data.put("page", 1);
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomUsersFragmentTitle));
 
@@ -100,7 +121,10 @@ public class RoomUsersFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    // TODO : Place Code Here
+                    binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
+                    data.put("page", 1);
+                    data.put("q", String.valueOf(s));
+                    setData();
                 }, 750);
             }
 
@@ -110,25 +134,103 @@ public class RoomUsersFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createRoomUserFragment)).widget(binding.addImageView.getRoot());
+        binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > 0) {
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+
+                if (!loading) {
+                    if ((pastVisiblesItems + visibleItemCount) >= totalItemCount) {
+                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                        if (data.containsKey("page")) {
+                            int page = (int) data.get("page");
+                            page++;
+
+                            data.put("page", page);
+                        } else {
+                            data.put("page", 1);
+                        }
+                        setData();
+                    }
+                }
+            }
+        });
+
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createRoomUserFragment, extras)).widget(binding.addImageView.getRoot());
     }
 
     private void setData() {
-//        adapter.setUsers(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null) {
+                roomId = requireArguments().getString("id");
+                extras.putString("id", roomId);
+                data.put("id", roomId);
+            }
+        }
 
-        new Handler().postDelayed(() -> {
-            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
+        loading = true;
+
+        Room.users(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List users = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (Objects.equals(data.get("page"), 1))
+                            adapter.clearUsers();
+
+                        if (!users.data().isEmpty()) {
+                            adapter.setUsers(users.data());
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
+                        } else {
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                        }
+                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                    });
+                    loading = false;
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                    });
+                    loading = false;
+                }
+            }
+        });
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        handler.removeCallbacksAndMessages(null);
     }
 
 }

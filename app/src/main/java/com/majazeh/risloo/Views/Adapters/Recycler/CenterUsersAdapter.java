@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     // Vars
     private ArrayList<TypeModel> users;
+    private boolean userSelect = false;
 
     public CenterUsersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -55,7 +57,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, user);
 
         setData(holder, user);
     }
@@ -90,51 +92,37 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener(CenterUsersHolder holder, UserModel model) {
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(holder, model))).widget(holder.binding.getRoot());
 
-
-
-
-
-
-
-
-    private void listener(CenterUsersHolder holder) {
-        ClickManager.onClickListener(() -> {
-            if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
-                CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (centerUsersFragment != null) {
-//                    Bundle extras = new Bundle();
-//                    extras.putString("id", centerUsersFragment.centerId);
-//                    extras.putString("user_id", holder.binding.serialTextView.getText().toString());
-//
-//                    ((MainActivity) activity).navigator(R.id.referenceFragment, extras);
-                }
-            }
-        }).widget(holder.binding.getRoot());
+        holder.binding.positionSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
 
         holder.binding.positionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
-                    CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (centerUsersFragment != null) {
-                        switch (pos) {
-                            case "مدیر":
-//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "manager", "position");
-                                break;
-                            case "مراجع":
-//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "client", "position");
-                                break;
-                            case "اپراتور":
-//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "operator", "position");
-                                break;
-                            case "روانشناس":
-//                                doWork(centerUsersFragment.id, holder.binding.serialTextView.getText().toString(), "psychologist", "position");
-                                break;
-                        }
+                    switch (pos) {
+                        case "مدیر":
+                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "manager", "position");
+                            break;
+                        case "مراجع":
+                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "client", "position");
+                            break;
+                        case "اپراتور":
+                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "operator", "position");
+                            break;
+                        case "روان\u200Cشناس":
+                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "psychologist", "position");
+                            break;
                     }
+
+                    userSelect = false;
                 }
             }
 
@@ -149,43 +137,25 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String task = parent.getItemAtPosition(position).toString();
 
-                if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
-                    CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (centerUsersFragment != null) {
-                        switch (task) {
-                            case "پذیرفتن":
-                                doWork(centerUsersFragment.centerId, holder.binding.serialTextView.getText().toString(), "accept", "status");
-                                break;
-                            case "تعلیق":
-                                doWork(centerUsersFragment.centerId, holder.binding.serialTextView.getText().toString(), "kick", "status");
-                                break;
-                            case "ساختن اتاق درمان":
-                                Log.e("method", "create_room");
-                                break;
-                            case "اتاق درمان":
-                                Log.e("method", "room");
-                                break;
-                            case "ویرایش کاربر":
-                                Bundle extras = new Bundle();
-                                extras.putString("id", centerUsersFragment.centerId);
-                                extras.putString("user_id", holder.binding.serialTextView.getText().toString());
-                                extras.putString("position", holder.binding.positionSpinner.getSelectedItem().toString());
-                                extras.putString("nickname", holder.binding.nameTextView.getText().toString());
-
-                                if (holder.binding.serialTextView.getText().toString().equals("پذیرش شده"))
-                                    extras.putString("status", "accept");
-                                else if (holder.binding.serialTextView.getText().toString().equals("تعلیق شده"))
-                                    extras.putString("status", "kick");
-                                else
-                                    extras.putString("status", "none");
-
-                                ((MainActivity) activity).navigator(R.id.editCenterUserFragment);
-                                break;
-                            case "ورود به کاربری":
-                                Log.e("method", "enter");
-                                break;
-                        }
-                    }
+                switch (task) {
+                    case "پذیرفتن":
+                        doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "accept", "status");
+                        break;
+                    case "تعلیق":
+                        doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "kick", "status");
+                        break;
+                    case "ساختن اتاق درمان":
+                        ((MainActivity) activity).navigator(R.id.createRoomFragment, getExtras(holder, model));
+                        break;
+                    case "اتاق درمان":
+                        ((MainActivity) activity).navigator(R.id.roomFragment, getExtras(holder, model));
+                        break;
+                    case "ویرایش کاربر":
+                        ((MainActivity) activity).navigator(R.id.editCenterUserFragment, getExtras(holder, model));
+                        break;
+                    case "ورود به کاربری":
+                        Log.e("method", "enter");
+                        break;
                 }
 
                 holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
@@ -197,20 +167,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             }
         });
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void setData(CenterUsersHolder holder, UserModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
@@ -299,7 +255,9 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menu, "centerUsers");
     }
 
-    private void doWork(String id, String userId, String value, String method) {
+    private void doWork(CenterUsersHolder holder, String id, String userId, String value, String method) {
+        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+
         if (method.equals("position")) {
             HashMap data = new HashMap<>();
             data.put("id", id);
@@ -313,7 +271,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 @Override
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
-                        notifyDataSetChanged();
                         ((MainActivity) activity).loadingDialog.dismiss();
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                     });
@@ -336,8 +293,11 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             Center.changeStatus(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
+                    UserModel model = (UserModel) object;
+
                     activity.runOnUiThread(() -> {
-                        notifyDataSetChanged();
+                        setAcceptation(holder, model);
+
                         ((MainActivity) activity).loadingDialog.dismiss();
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                     });
@@ -349,6 +309,30 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 }
             });
         }
+    }
+
+    private Bundle getExtras(CenterUsersHolder holder, UserModel model) {
+        Bundle extras = new Bundle();
+
+        if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
+            CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+            if (centerUsersFragment != null)
+                extras.putString("id", centerUsersFragment.centerId);
+        }
+
+        extras.putString("user_id", model.getUserId());
+        extras.putString("position", holder.binding.positionSpinner.getSelectedItem().toString());
+        extras.putString("nickname", model.getName());
+        extras.putString("mobile", model.getMobile());
+
+        if (holder.binding.statusTexView.getText().toString().equals("پذیرش شده"))
+            extras.putString("status", "accept");
+        else if (holder.binding.statusTexView.getText().toString().equals("تعلیق شده"))
+            extras.putString("status", "kick");
+        else
+            extras.putString("status", "none");
+
+        return extras;
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

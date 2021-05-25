@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RoomFragment extends Fragment {
 
@@ -55,6 +57,7 @@ public class RoomFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private boolean loading = false;
 
     @Nullable
     @Override
@@ -85,6 +88,7 @@ public class RoomFragment extends Fragment {
 
         data = new HashMap<>();
         data.put("id", "");
+        data.put("page", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -134,7 +138,14 @@ public class RoomFragment extends Fragment {
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.roomSchedulesFragment, extras)).widget(binding.schedulesImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment, extras)).widget(binding.usersImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            if (getArguments() != null) {
+                if (getArguments().getString("type").equals("room"))
+                    ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment, extras);
+                else
+                    ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
+            }
+        }).widget(binding.usersImageView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
 //            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
@@ -182,6 +193,7 @@ public class RoomFragment extends Fragment {
                 handler.postDelayed(() -> {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("q", String.valueOf(s));
+                    data.put("page", 1);
                     setData();
                 }, 750);
             }
@@ -189,6 +201,29 @@ public class RoomFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > 0) {
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+
+                if (!loading) {
+                    if ((pastVisiblesItems + visibleItemCount) >= totalItemCount) {
+                        binding.casesSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                        if (data.containsKey("page")) {
+                            int page = (int) data.get("page");
+                            page++;
+
+                            data.put("page", page);
+                        } else {
+                            data.put("page", 1);
+                        }
+                        setData();
+                    }
+                }
             }
         });
 
@@ -269,6 +304,8 @@ public class RoomFragment extends Fragment {
             }
         }
 
+        loading = true;
+
         Room.show(data, header, new Response() {
             @Override
             public void onOK(Object object) {
@@ -284,14 +321,15 @@ public class RoomFragment extends Fragment {
 //                                cases.add(new CaseModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
 //                            }
 //
+//                            if (Objects.equals(data.get("page"), 1))
+//                                cases2Adapter.clearCases();
+//
 //                            if (!cases.data().isEmpty()) {
 //                                cases2Adapter.setCases(cases.data());
 //                                binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
 //
 //                                binding.casesSingleLayout.textView.setVisibility(View.GONE);
 //                            } else {
-//                                cases2Adapter.clearCases();
-//
 //                                binding.casesSingleLayout.textView.setVisibility(View.VISIBLE);
 //                            }
 //                            binding.headerIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
@@ -300,12 +338,15 @@ public class RoomFragment extends Fragment {
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
+                            if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();
 //                        }
                     });
+                    loading = false;
                 }
             }
 
@@ -317,9 +358,12 @@ public class RoomFragment extends Fragment {
                         binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.casesShimmerLayout.getRoot().stopShimmer();
 
+                        if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
+                    loading = false;
                 }
             }
         });

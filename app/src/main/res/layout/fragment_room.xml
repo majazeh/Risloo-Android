@@ -96,7 +96,7 @@
 
                 <include
                     android:id="@+id/status_textView"
-                    layout="@layout/component_main_button_rect_mid"
+                    layout="@layout/component_main_button_rect_wrap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_8sdp"

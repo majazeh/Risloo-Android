@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -38,6 +39,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CenterFragment extends Fragment {
 
@@ -55,6 +57,7 @@ public class CenterFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private boolean loading = false;
 
     @Nullable
     @Override
@@ -85,6 +88,7 @@ public class CenterFragment extends Fragment {
 
         data = new HashMap<>();
         data.put("id", "");
+        data.put("page", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -182,6 +186,7 @@ public class CenterFragment extends Fragment {
                 handler.postDelayed(() -> {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("q", String.valueOf(s));
+                    data.put("page", 1);
                     setData();
                 }, 750);
             }
@@ -189,6 +194,29 @@ public class CenterFragment extends Fragment {
             @Override
             public void afterTextChanged(Editable s) {
 
+            }
+        });
+
+        binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > 0) {
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+
+                if (!loading) {
+                    if ((pastVisiblesItems + visibleItemCount) >= totalItemCount) {
+                        binding.roomsSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                        if (data.containsKey("page")) {
+                            int page = (int) data.get("page");
+                            page++;
+
+                            data.put("page", page);
+                        } else {
+                            data.put("page", 1);
+                        }
+                        setData();
+                    }
+                }
             }
         });
 
@@ -271,6 +299,8 @@ public class CenterFragment extends Fragment {
             }
         }
 
+        loading = true;
+
         Center.showDashboard(data, header, new Response() {
             @Override
             public void onOK(Object object) {
@@ -334,14 +364,15 @@ public class CenterFragment extends Fragment {
                                 rooms.add(new RoomModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
                             }
 
+                            if (Objects.equals(data.get("page"), 1))
+                                roomsAdapter.clearRooms();
+
                             if (!rooms.data().isEmpty()) {
                                 roomsAdapter.setRooms(rooms.data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
                                 binding.roomsSingleLayout.textView.setVisibility(View.GONE);
                             } else {
-                                roomsAdapter.clearRooms();
-
                                 binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
                             binding.headerIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
@@ -350,12 +381,15 @@ public class CenterFragment extends Fragment {
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
+                            if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     });
+                    loading = false;
                 }
             }
 
@@ -367,9 +401,12 @@ public class CenterFragment extends Fragment {
                         binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.roomsShimmerLayout.getRoot().stopShimmer();
 
+                        if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
+                    loading = false;
                 }
             }
         });

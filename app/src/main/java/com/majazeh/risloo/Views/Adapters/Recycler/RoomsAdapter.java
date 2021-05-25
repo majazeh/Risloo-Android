@@ -77,19 +77,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     }
 
     private void listener(RoomsHolder holder, RoomModel model) {
-        ClickManager.onClickListener(() -> {
-            Bundle extras = new Bundle();
-            extras.putString("id", model.getRoomId());
-            extras.putString("type", model.getRoomType());
-
-            extras.putString("manager_id", model.getRoomManager().getUserId());
-            extras.putString("manager_name", model.getRoomManager().getName());
-
-            if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
-                extras.putString("avatar", model.getRoomManager().getAvatar().getMedium().getUrl());
-
-            ((MainActivity) activity).navigator(R.id.roomFragment, extras);
-        }).widget(holder.binding.containerConstraintLayout);
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.roomFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(RoomsHolder holder, RoomModel model) {
@@ -113,6 +101,21 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
+    }
+
+    private Bundle getExtras(RoomModel model) {
+        Bundle extras = new Bundle();
+
+        extras.putString("id", model.getRoomId());
+        extras.putString("type", model.getRoomType());
+
+        extras.putString("manager_id", model.getRoomManager().getUserId());
+        extras.putString("manager_name", model.getRoomManager().getName());
+
+        if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
+            extras.putString("avatar", model.getRoomManager().getAvatar().getMedium().getUrl());
+
+        return extras;
     }
 
     public class RoomsHolder extends RecyclerView.ViewHolder {
