@@ -216,7 +216,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     break;
                 case "references":
                 case "managers":
-                    holder.binding.titleTextView.setText(((UserModel) item).getName());
+                    UserModel model = (UserModel) item;
+
+                    holder.binding.titleTextView.setText(model.getName());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
@@ -266,7 +268,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCenterFragment != null) {
                         if (method.equals("managers")) {
-                            detector(holder, createCenterFragment.managerId.equals(item.object.get("id").toString()));
+                            UserModel model = (UserModel) item;
+
+                            detector(holder, createCenterFragment.managerId.equals(model.getUserId()));
                         }
                     }
                     break;
@@ -274,7 +278,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createCenterUserFragment != null) {
                         if (method.equals("rooms")) {
-                            detector(holder, createCenterUserFragment.roomId.equals(item.object.get("id").toString()));
+                            RoomModel model = (RoomModel) item;
+
+                            detector(holder, createCenterUserFragment.roomId.equals(model.getRoomId()));
                         }
                     }
                     break;
@@ -348,7 +354,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         if (method.equals("managers")) {
                             EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
                             if (editCenterDetailFragment != null) {
-                                detector(holder, editCenterDetailFragment.managerId.equals(item.object.get("id").toString()));
+                                UserModel model = (UserModel) item;
+
+                                detector(holder, editCenterDetailFragment.managerId.equals(model.getUserId()));
                             }
                         }
                     }

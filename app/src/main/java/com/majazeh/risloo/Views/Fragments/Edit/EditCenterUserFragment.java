@@ -128,15 +128,15 @@ public class EditCenterUserFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("center_id") != null) {
-                centerId = getArguments().getString("center_id");
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                centerId = getArguments().getString("id");
             }
 
-            if (getArguments().getString("user_id") != null) {
+            if (getArguments().getString("user_id") != null && !getArguments().getString("user_id").equals("")) {
                 userId = getArguments().getString("user_id");
             }
 
-            if (getArguments().getString("position") != null) {
+            if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
                 position = getArguments().getString("position");
                 for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
@@ -151,12 +151,12 @@ public class EditCenterUserFragment extends Fragment {
                 }
             }
 
-            if (getArguments().getString("nickname") != null) {
+            if (getArguments().getString("nickname") != null && !getArguments().getString("nickname").equals("")) {
                 nickname = getArguments().getString("nickname");
                 binding.nicknameIncludeLayout.inputEditText.setText(nickname);
             }
 
-            if (getArguments().getString("status") != null) {
+            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
                 status = getArguments().getString("status");
                 switch (status) {
                     case "accept":
@@ -191,7 +191,7 @@ public class EditCenterUserFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         Bundle extras = new Bundle();
-                        extras.putString("center_id", centerId);
+                        extras.putString("id", centerId);
 
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();

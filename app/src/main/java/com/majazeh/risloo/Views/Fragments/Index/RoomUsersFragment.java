@@ -162,7 +162,7 @@ public class RoomUsersFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("id") != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 roomId = requireArguments().getString("id");
                 extras.putString("id", roomId);
                 data.put("id", roomId);

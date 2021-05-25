@@ -44,7 +44,7 @@ public class CreateCenterUserFragment extends Fragment {
     private AuthBottomSheet authBottomSheet;
 
     // Vars
-    private String centerId = "";
+    public String centerId = "";
     public String mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
 
     @Nullable
@@ -153,16 +153,16 @@ public class CreateCenterUserFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("center_id") != null) {
-                centerId = getArguments().getString("center_id");
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                centerId = getArguments().getString("id");
             }
 
-            if (getArguments().getString("mobile") != null) {
+            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
                 mobile = getArguments().getString("mobile");
                 binding.mobileIncludeLayout.inputEditText.setText(mobile);
             }
 
-            if (getArguments().getString("position") != null) {
+            if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
                 position = getArguments().getString("position");
                 for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
@@ -177,23 +177,23 @@ public class CreateCenterUserFragment extends Fragment {
                 }
             }
 
-            if (getArguments().getString("room_id") != null) {
+            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("") && getArguments().getString("room_name") != null && !getArguments().getString("room_name").equals("")) {
                 roomId = getArguments().getString("room_id");
                 roomName = getArguments().getString("room_name");
                 binding.roomIncludeLayout.primaryTextView.setText(roomName);
             }
 
-            if (getArguments().getString("center_name") != null) {
+            if (getArguments().getString("center_name") != null && !getArguments().getString("center_name").equals("")) {
                 centerName = getArguments().getString("center_name");
                 binding.roomIncludeLayout.secondaryTextView.setText(centerName);
             }
 
-            if (getArguments().getString("nickname") != null) {
+            if (getArguments().getString("nickname") != null && !getArguments().getString("nickname").equals("")) {
                 nickname = getArguments().getString("nickname");
                 binding.nicknameIncludeLayout.inputEditText.setText(nickname);
             }
 
-            if (getArguments().getString("create_case") != null) {
+            if (getArguments().getString("create_case") != null && !getArguments().getString("create_case").equals("")) {
                 createCase = getArguments().getString("create_case");
 
                 if (createCase.equals("1")) {
@@ -263,7 +263,7 @@ public class CreateCenterUserFragment extends Fragment {
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             authBottomSheet.show(requireActivity().getSupportFragmentManager(), "authBottomSheet");
-                            authBottomSheet.setData(requireArguments().getString("id"), model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
+                            authBottomSheet.setData(centerId, model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

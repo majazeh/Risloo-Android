@@ -35,6 +35,7 @@ import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -236,16 +237,16 @@ public class CenterFragment extends Fragment {
         }
 
         if (getArguments() != null) {
-            if (getArguments().getString("id") != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 extras.putString("id", getArguments().getString("id"));
                 data.put("id", getArguments().getString("id"));
             }
 
-            if (getArguments().getString("type") != null) {
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
                 extras.putString("type", getArguments().getString("type"));
             }
 
-             if (getArguments().getString("status") != null) {
+            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
                  extras.putString("status", getArguments().getString("status"));
                  setStatus(getArguments().getString("status"));
              }
@@ -291,9 +292,13 @@ public class CenterFragment extends Fragment {
             }
 
             if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
-                extras.putString("phone_numbers", getArguments().getString("phone_numbers"));
-                binding.mobileTextView.setText(getArguments().getString("phone_numbers"));
-                binding.mobileGroup.setVisibility(View.VISIBLE);
+                try {
+                    extras.putString("phone_numbers", getArguments().getString("phone_numbers"));
+                    binding.mobileTextView.setText(new JSONArray(getArguments().getString("phone_numbers")).getString(0));
+                    binding.mobileGroup.setVisibility(View.VISIBLE);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             } else {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
@@ -352,7 +357,7 @@ public class CenterFragment extends Fragment {
                             }
 
                             if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
-                                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").get(0).toString());
+                                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").toString());
                                 binding.mobileTextView.setText(model.getDetail().getJSONArray("phone_numbers").get(0).toString());
                                 binding.mobileGroup.setVisibility(View.VISIBLE);
                             } else {

@@ -169,7 +169,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
                 extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
 
             if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
-                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").getString(0));
+                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").toString());
         } catch (JSONException e) {
             e.printStackTrace();
         }

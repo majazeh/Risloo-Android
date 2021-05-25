@@ -330,7 +330,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createCenterUserFragment != null) {
                     if (method.equals("rooms")) {
-                        data.put("center", createCenterUserFragment.requireArguments().getString("id"));
+                        data.put("center", createCenterUserFragment.centerId);
 
                         Room.list(data, header, new Response() {
                             @Override
@@ -339,8 +339,16 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
                                 if (isAdded()) {
                                     requireActivity().runOnUiThread(() -> {
-                                        searchableAdapter.setItems(list.data(), method, null);
-                                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, null);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
 
                                         if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
                                             binding.searchProgressBar.setVisibility(View.GONE);

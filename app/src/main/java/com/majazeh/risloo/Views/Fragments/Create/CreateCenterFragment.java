@@ -219,7 +219,7 @@ public class CreateCenterFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("type") != null) {
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
                 type = getArguments().getString("type");
                 switch (type) {
                     case "personal_clinic":
@@ -269,10 +269,10 @@ public class CreateCenterFragment extends Fragment {
                     ArrayList<String> ids = new ArrayList<>();
 
                     for (int i = 0; i < phoneNumbers.length(); i++) {
-                        TypeModel model = new TypeModel((JSONObject) phoneNumbers.get(i));
+                        TypeModel model = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
 
                         phones.add(model);
-                        ids.add(model.object.getString("title"));
+                        ids.add(model.object.getString("id"));
                     }
 
                     setRecyclerView(phones, ids, "phones");

@@ -6,20 +6,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateRoomFragment extends Fragment {
 
@@ -30,6 +38,7 @@ public class CreateRoomFragment extends Fragment {
     private SearchableDialog psychologiesDialog;
 
     // Vars
+    private String centerId = "";
     public String psychologyId = "", psychologyName = "";
 
     @Nullable
@@ -75,51 +84,97 @@ public class CreateRoomFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (psychologyId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.errorImageView, binding.psychologyErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-
-            if (!psychologyId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.errorImageView, binding.psychologyErrorLayout.errorTextView);
-
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getPsychology().equals("")) {
-            psychologyId = ((MainActivity) requireActivity()).singleton.getPsychology();
-            psychologyName = ((MainActivity) requireActivity()).singleton.getPsychology();
-            binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null) {
+                centerId = getArguments().getString("id");
+            }
+
+            if (getArguments().getString("psychology_id") != null && !getArguments().getString("psychology_id").equals("") && getArguments().getString("psychology_name") != null && !getArguments().getString("psychology_name").equals("")) {
+                psychologyId = getArguments().getString("psychology_id");
+                psychologyName = getArguments().getString("psychology_name");
+                binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+            }
         }
     }
 
     public void responseDialog(String method, TypeModel item) {
-        try {
-            switch (method) {
-                case "psychologies":
-                    if (!psychologyId.equals(item.object.get("id").toString())) {
-                        psychologyId = item.object.get("id").toString();
-                        psychologyName = item.object.get("title").toString();
+        switch (method) {
+            case "psychologies":
+                UserModel model = (UserModel) item;
 
-                        binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
-                    } else if (psychologyId.equals(item.object.get("id").toString())) {
-                        psychologyId = "";
-                        psychologyName = "";
+                if (!psychologyId.equals(model.getUserId())) {
+                    psychologyId = model.getUserId();
+                    psychologyName = model.getName();
 
-                        binding.psychologyIncludeLayout.selectTextView.setText("");
-                    }
+                    binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+                } else if (psychologyId.equals(model.getUserId())) {
+                    psychologyId = "";
+                    psychologyName = "";
 
-                    psychologiesDialog.dismiss();
-                    break;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+                    binding.psychologyIncludeLayout.selectTextView.setText("");
+                }
+
+                psychologiesDialog.dismiss();
+                break;
         }
     }
 
     private void doWork() {
-        // TODO : Call Work Method
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        HashMap data = new HashMap<>();
+        data.put("id", centerId);
+        data.put("psychology_id", psychologyId);
+
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        Room.create(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ((MainActivity) requireActivity()).navigator(R.id.centerFragment);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        if (key.equals("psychology_id")) {
+                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override

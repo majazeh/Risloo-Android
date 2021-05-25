@@ -50,11 +50,11 @@ public class EditCenterFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("center_id") != null) {
-                centerId = getArguments().getString("center_id");
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                centerId = getArguments().getString("id");
             }
 
-            if (getArguments().getString("type") != null) {
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
                 type = getArguments().getString("type");
                 switch (type) {
                     case "personal_clinic":

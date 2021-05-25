@@ -162,7 +162,7 @@ public class CenterUsersFragment extends Fragment {
 
     private void setData() {
         if (getArguments() != null) {
-            if (getArguments().getString("id") != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = requireArguments().getString("id");
                 extras.putString("id", centerId);
                 data.put("id", centerId);
