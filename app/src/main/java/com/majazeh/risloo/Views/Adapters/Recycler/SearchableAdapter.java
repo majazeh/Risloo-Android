@@ -89,6 +89,13 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         notifyDataSetChanged();
     }
 
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
+            notifyDataSetChanged();
+        }
+    }
+
     private void detector(SearchableHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (selected)

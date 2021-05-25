@@ -142,7 +142,7 @@
                 app:layout_constraintTop_toBottomOf="@id/description_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/clinic_group"
+                android:id="@+id/counseling_center_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:constraint_referenced_ids="manager_includeLayout, title_includeLayout" />

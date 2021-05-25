@@ -14,9 +14,6 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.EditCenterAdapter;
 import com.majazeh.risloo.databinding.FragmentEditCenterBinding;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-
 public class EditCenterFragment extends Fragment {
 
     // Binding
@@ -31,8 +28,7 @@ public class EditCenterFragment extends Fragment {
     // Vars
     private String[] tabs;
     public String centerId = "";
-    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
-    public JSONArray phonesArray;
+    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "", phoneNumbers = "";
     public String avatarPath = "";
 
     @Nullable
@@ -70,33 +66,29 @@ public class EditCenterFragment extends Fragment {
                 }
             }
 
-            if (getArguments().getString("manager_id") != null) {
+            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
                 managerId = getArguments().getString("manager_id");
                 managerName = getArguments().getString("manager_name");
             }
 
-            if (getArguments().getString("title") != null) {
+            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
                 title = getArguments().getString("title");
             }
 
-            if (getArguments().getString("avatar") != null) {
-                avatarPath = getArguments().getString("avatar");
-            }
-
-            if (getArguments().getString("address") != null) {
+            if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
                 address = getArguments().getString("address");
             }
 
-            if (getArguments().getString("phones") != null) {
-                try {
-                    phonesArray = new JSONArray(getArguments().getString("phones"));
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
+            if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
+                description = getArguments().getString("description");
             }
 
-            if (getArguments().getString("description") != null) {
-                description = getArguments().getString("description");
+            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
+                avatarPath = getArguments().getString("avatar");
+            }
+
+            if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
+                phoneNumbers = getArguments().getString("phone_numbers");
             }
         }
 

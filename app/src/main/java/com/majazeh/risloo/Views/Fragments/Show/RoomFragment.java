@@ -262,6 +262,16 @@ public class RoomFragment extends Fragment {
                 setStatus(getArguments().getString("status"));
             }
 
+            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
+                extras.putString("manager_id", getArguments().getString("manager_id"));
+                extras.putString("manager_name", getArguments().getString("manager_name"));
+
+                if (getArguments().getString("type").equals("room")) {
+                    binding.nameTextView.setText(getArguments().getString("manager_name"));
+                    binding.nameTextView.setVisibility(View.VISIBLE);
+                }
+            }
+
             if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
                 extras.putString("title", getArguments().getString("title"));
                 binding.nameTextView.setText(getArguments().getString("title"));
@@ -270,12 +280,16 @@ public class RoomFragment extends Fragment {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
-            if (getArguments().getString("address") != null) {
+            if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
                 extras.putString("address", getArguments().getString("address"));
             }
 
             if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
                 extras.putString("description", getArguments().getString("description"));
+                binding.descriptionTextView.setText(getArguments().getString("description"));
+                binding.descriptionTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.descriptionTextView.setVisibility(View.GONE);
             }
 
             if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
@@ -289,18 +303,12 @@ public class RoomFragment extends Fragment {
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
 
-            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
-                extras.putString("manager_id", getArguments().getString("manager_id"));
-                extras.putString("manager_name", getArguments().getString("manager_name"));
-
-                if (getArguments().getString("type").equals("room")) {
-                    binding.nameTextView.setText(getArguments().getString("manager_name"));
-                    binding.nameTextView.setVisibility(View.VISIBLE);
-                }
-            }
-
             if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
                 extras.putString("phone_numbers", getArguments().getString("phone_numbers"));
+                binding.mobileTextView.setText(getArguments().getString("phone_numbers"));
+                binding.mobileGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileGroup.setVisibility(View.GONE);
             }
         }
 

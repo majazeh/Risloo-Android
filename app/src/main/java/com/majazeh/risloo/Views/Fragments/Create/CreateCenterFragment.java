@@ -235,36 +235,41 @@ public class CreateCenterFragment extends Fragment {
                 }
             }
 
-            if (getArguments().getString("manager_id") != null) {
+            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
                 managerId = getArguments().getString("manager_id");
                 managerName = getArguments().getString("manager_name");
                 binding.managerIncludeLayout.selectTextView.setText(managerName);
             }
 
-            if (getArguments().getString("title") != null) {
+            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
                 title = getArguments().getString("title");
                 binding.titleIncludeLayout.inputEditText.setText(title);
             }
 
-            if (getArguments().getString("avatar") != null) {
-                avatarPath = getArguments().getString("avatar");
-                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.selectCircleImageView);
-            }
-
-            if (getArguments().getString("address") != null) {
+            if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
                 address = getArguments().getString("address");
                 binding.addressIncludeLayout.inputEditText.setText(address);
             }
 
-            if (getArguments().getString("phones") != null) {
+            if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
+                description = getArguments().getString("description");
+                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
+
+            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
+                avatarPath = getArguments().getString("avatar");
+                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.selectCircleImageView);
+            }
+
+            if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
                 try {
-                    JSONArray phonesArray = new JSONArray(getArguments().getString("phones"));
+                    JSONArray phoneNumbers = new JSONArray(getArguments().getString("phone_numbers"));
 
                     ArrayList<TypeModel> phones = new ArrayList<>();
                     ArrayList<String> ids = new ArrayList<>();
 
-                    for (int i = 0; i < phonesArray.length(); i++) {
-                        TypeModel model = new TypeModel((JSONArray) phonesArray.get(i));
+                    for (int i = 0; i < phoneNumbers.length(); i++) {
+                        TypeModel model = new TypeModel((JSONObject) phoneNumbers.get(i));
 
                         phones.add(model);
                         ids.add(model.object.getString("title"));
@@ -276,11 +281,6 @@ public class CreateCenterFragment extends Fragment {
                 }
             } else {
                 setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
-            }
-
-            if (getArguments().getString("description") != null) {
-                description = getArguments().getString("description");
-                binding.descriptionIncludeLayout.inputEditText.setText(description);
             }
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
@@ -346,8 +346,8 @@ public class CreateCenterFragment extends Fragment {
         data.put("type", type);
         data.put("manager_id", managerId);
         data.put("address", address);
-        data.put("phone_numbers", phonesAdapter.getIds());
         data.put("description", description);
+        data.put("phone_numbers", phonesAdapter.getIds());
 
         if (type.equals("counseling_center")) {
             data.put("title", title);
@@ -397,17 +397,17 @@ public class CreateCenterFragment extends Fragment {
                                             case "title":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
-                                            case "avatar":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                                break;
                                             case "address":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.addressIncludeLayout.inputEditText, binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
-                                            case "phone_numbers":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                                break;
                                             case "description":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "avatar":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "phone_numbers":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                         }
                                     }

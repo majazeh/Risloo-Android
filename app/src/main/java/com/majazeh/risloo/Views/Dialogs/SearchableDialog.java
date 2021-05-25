@@ -72,8 +72,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private Handler handler;
 
     // Vars
-    private String method;
     private HashMap data, header;
+    private String method;
 
     @NonNull
     @Override
@@ -285,9 +285,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     if (method.equals("managers")) {
 
                         if (createCenterFragment.type.equals("personal_clinic"))
-                            data.put("personal_clinic", "yes");
-                        else
                             data.put("personal_clinic", "no");
+                        else
+                            data.put("personal_clinic", "yes");
 
                         User.list(data, header, new Response() {
                             @Override
@@ -296,12 +296,19 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
                                 if (isAdded()) {
                                     requireActivity().runOnUiThread(() -> {
-                                        searchableAdapter.setItems(list.data(), method, null);
-                                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, null);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
 
-                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
-                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
                                         }
+
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
                                     });
                                 }
                             }
@@ -310,9 +317,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
                             public void onFailure(String response) {
                                 if (isAdded()) {
                                     requireActivity().runOnUiThread(() -> {
-                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
                                             binding.searchProgressBar.setVisibility(View.GONE);
-                                        }
                                     });
                                 }
                             }
@@ -336,9 +342,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
                                         searchableAdapter.setItems(list.data(), method, null);
                                         binding.listRecyclerView.setAdapter(searchableAdapter);
 
-                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
                                             binding.searchProgressBar.setVisibility(View.GONE);
-                                        }
                                     });
                                 }
                             }
@@ -347,9 +352,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
                             public void onFailure(String response) {
                                 if (isAdded()) {
                                     requireActivity().runOnUiThread(() -> {
-                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
                                             binding.searchProgressBar.setVisibility(View.GONE);
-                                        }
                                     });
                                 }
                             }
@@ -445,12 +449,19 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
                                     if (isAdded()) {
                                         requireActivity().runOnUiThread(() -> {
-                                            searchableAdapter.setItems(list.data(), method, null);
-                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                                            if (!list.data().isEmpty()) {
+                                                searchableAdapter.setItems(list.data(), method, null);
+                                                binding.listRecyclerView.setAdapter(searchableAdapter);
 
-                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
-                                                binding.searchProgressBar.setVisibility(View.GONE);
+                                                binding.emptyTextView.setVisibility(View.GONE);
+                                            } else {
+                                                searchableAdapter.clearItems();
+
+                                                binding.emptyTextView.setVisibility(View.VISIBLE);
                                             }
+
+                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                                binding.searchProgressBar.setVisibility(View.GONE);
                                         });
                                     }
                                 }
@@ -459,9 +470,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
                                 public void onFailure(String response) {
                                     if (isAdded()) {
                                         requireActivity().runOnUiThread(() -> {
-                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE) {
+                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
                                                 binding.searchProgressBar.setVisibility(View.GONE);
-                                            }
                                         });
                                     }
                                 }

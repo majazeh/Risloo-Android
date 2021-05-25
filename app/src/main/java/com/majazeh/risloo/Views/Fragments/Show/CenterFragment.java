@@ -250,6 +250,15 @@ public class CenterFragment extends Fragment {
                  setStatus(getArguments().getString("status"));
              }
 
+             if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
+                extras.putString("manager_id", getArguments().getString("manager_id"));
+                extras.putString("manager_name", getArguments().getString("manager_name"));
+                binding.ownerTextView.setText(getArguments().getString("manager_name"));
+                binding.ownerTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.ownerTextView.setVisibility(View.GONE);
+            }
+
             if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
                 extras.putString("title", getArguments().getString("title"));
                 binding.nameTextView.setText(getArguments().getString("title"));
@@ -258,7 +267,7 @@ public class CenterFragment extends Fragment {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
-            if (getArguments().getString("address") != null) {
+            if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
                 extras.putString("address", getArguments().getString("address"));
             }
 
@@ -281,15 +290,6 @@ public class CenterFragment extends Fragment {
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
 
-            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
-                extras.putString("manager_id", getArguments().getString("manager_id"));
-                extras.putString("manager_name", getArguments().getString("manager_name"));
-                binding.ownerTextView.setText(getArguments().getString("manager_name"));
-                binding.ownerTextView.setVisibility(View.VISIBLE);
-            } else {
-                binding.ownerTextView.setVisibility(View.GONE);
-            }
-
             if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
                 extras.putString("phone_numbers", getArguments().getString("phone_numbers"));
                 binding.mobileTextView.setText(getArguments().getString("phone_numbers"));
@@ -310,6 +310,15 @@ public class CenterFragment extends Fragment {
                             CenterModel model = new CenterModel(((JSONObject) object).getJSONObject("center"));
 
                             setAcceptation(model);
+
+                            if (model.getManager().getUserId() != null && model.getManager().getName() != null) {
+                                extras.putString("manager_id", model.getManager().getUserId());
+                                extras.putString("manager_name", model.getManager().getName());
+                                binding.ownerTextView.setText(model.getManager().getName());
+                                binding.ownerTextView.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.ownerTextView.setVisibility(View.GONE);
+                            }
 
                             if (model.getDetail().has("title") && !model.getDetail().isNull("title")) {
                                 extras.putString("title", model.getDetail().getString("title"));
@@ -340,15 +349,6 @@ public class CenterFragment extends Fragment {
                                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
                                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                            }
-
-                            if (model.getManager().getUserId() != null && model.getManager().getName() != null) {
-                                extras.putString("manager_id", model.getManager().getUserId());
-                                extras.putString("manager_name", model.getManager().getName());
-                                binding.ownerTextView.setText(model.getManager().getName());
-                                binding.ownerTextView.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.ownerTextView.setVisibility(View.GONE);
                             }
 
                             if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {

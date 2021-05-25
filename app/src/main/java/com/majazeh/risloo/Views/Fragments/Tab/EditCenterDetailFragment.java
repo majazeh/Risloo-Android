@@ -170,13 +170,17 @@ public class EditCenterDetailFragment extends Fragment {
         if (editCenterFragment != null) {
             if (!editCenterFragment.type.equals("")) {
                 type = editCenterFragment.type;
-                if (editCenterFragment.type.equals("personal_clinic"))
-                    binding.clinicGroup.setVisibility(View.GONE);
-                else
-                    binding.clinicGroup.setVisibility(View.VISIBLE);
+                switch (type) {
+                    case "personal_clinic":
+                        binding.counselingCenterGroup.setVisibility(View.GONE);
+                        break;
+                    case "counseling_center":
+                        binding.counselingCenterGroup.setVisibility(View.VISIBLE);
+                        break;
+                }
             }
 
-            if (!editCenterFragment.managerId.equals("")) {
+            if (!editCenterFragment.managerId.equals("") && !editCenterFragment.managerName.equals("")) {
                 managerId = editCenterFragment.managerId;
                 managerName = editCenterFragment.managerName;
                 binding.managerIncludeLayout.selectTextView.setText(managerName);
@@ -192,13 +196,20 @@ public class EditCenterDetailFragment extends Fragment {
                 binding.addressIncludeLayout.inputEditText.setText(address);
             }
 
-            if (editCenterFragment.phonesArray.length() != 0) {
+            if (!editCenterFragment.description.equals("")) {
+                description = editCenterFragment.description;
+                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
+
+            if (!editCenterFragment.phoneNumbers.equals("")) {
                 try {
+                    JSONArray phoneNumbers = new JSONArray(editCenterFragment.phoneNumbers);
+
                     ArrayList<TypeModel> phones = new ArrayList<>();
                     ArrayList<String> ids = new ArrayList<>();
 
-                    for (int i = 0; i < editCenterFragment.phonesArray.length(); i++) {
-                        TypeModel model = new TypeModel((JSONArray) editCenterFragment.phonesArray.get(i));
+                    for (int i = 0; i < phoneNumbers.length(); i++) {
+                        TypeModel model = new TypeModel((JSONObject) phoneNumbers.get(i));
 
                         phones.add(model);
                         ids.add(model.object.getString("title"));
@@ -211,11 +222,8 @@ public class EditCenterDetailFragment extends Fragment {
             } else {
                 setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
             }
-
-            if (!editCenterFragment.description.equals("")) {
-                description = getArguments().getString("description");
-                binding.descriptionIncludeLayout.inputEditText.setText(description);
-            }
+        } else {
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
         }
     }
 
@@ -264,8 +272,8 @@ public class EditCenterDetailFragment extends Fragment {
 
         data.put("manager_id", managerId);
         data.put("address", address);
-        data.put("phone_numbers", phonesAdapter.getIds());
         data.put("description", description);
+        data.put("phone_numbers", phonesAdapter.getIds());
 
         if (type.equals("counseling_center")) {
             data.put("title", title);
@@ -299,17 +307,20 @@ public class EditCenterDetailFragment extends Fragment {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
                                         switch (key) {
+                                            case "manager_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
                                             case "title":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                             case "address":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.addressIncludeLayout.inputEditText, binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
-                                            case "phone_numbers":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                                break;
                                             case "description":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "phone_numbers":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                         }
                                     }

@@ -136,7 +136,9 @@ public class EditUserAvatarFragment extends Fragment {
 
         HashMap data = new HashMap<>();
         data.put("id", ((MainActivity) requireActivity()).singleton.getUserId());
-        data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+            data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
 
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());

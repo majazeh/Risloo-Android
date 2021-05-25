@@ -19,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
@@ -96,8 +97,18 @@ public class EditCenterAvatarFragment extends Fragment {
         EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (editCenterFragment != null) {
             if (!editCenterFragment.avatarPath.equals("")) {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+
                 avatarPath = editCenterFragment.avatarPath;
                 Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                if (editCenterFragment.title.equals(""))
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
+                else
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(editCenterFragment.title));
+
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
         }
     }
@@ -133,7 +144,8 @@ public class EditCenterAvatarFragment extends Fragment {
             data.put("id", editCenterFragment.centerId);
         }
 
-        data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+            data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
 
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
