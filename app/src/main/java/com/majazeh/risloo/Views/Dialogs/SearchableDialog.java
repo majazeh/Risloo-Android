@@ -41,11 +41,11 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.Madule.User;
@@ -373,8 +373,44 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createRoomFragment != null) {
                     if (method.equals("psychologies")) {
-                        searchableAdapter.setItems(values, method, null);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        data.put("id", createRoomFragment.centerId);
+                        data.put("has_room", "no");
+                        data.put("position", "manager,operator,psychologist,under_supervision");
+
+                        Center.users(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, null);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
+
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+                        });
                     }
                 }
                 break;
@@ -448,43 +484,40 @@ public class SearchableDialog extends AppCompatDialogFragment {
                         else
                             data.put("personal_clinic", "yes");
 
-                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
-                        if (editCenterDetailFragment != null) {
-                            User.list(data, header, new Response() {
-                                @Override
-                                public void onOK(Object object) {
-                                    List list = (List) object;
+                        User.list(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
 
-                                    if (isAdded()) {
-                                        requireActivity().runOnUiThread(() -> {
-                                            if (!list.data().isEmpty()) {
-                                                searchableAdapter.setItems(list.data(), method, null);
-                                                binding.listRecyclerView.setAdapter(searchableAdapter);
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, null);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
 
-                                                binding.emptyTextView.setVisibility(View.GONE);
-                                            } else {
-                                                searchableAdapter.clearItems();
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
 
-                                                binding.emptyTextView.setVisibility(View.VISIBLE);
-                                            }
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
 
-                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
-                                                binding.searchProgressBar.setVisibility(View.GONE);
-                                        });
-                                    }
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
                                 }
+                            }
 
-                                @Override
-                                public void onFailure(String response) {
-                                    if (isAdded()) {
-                                        requireActivity().runOnUiThread(() -> {
-                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
-                                                binding.searchProgressBar.setVisibility(View.GONE);
-                                        });
-                                    }
+                            @Override
+                            public void onFailure(String response) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
                                 }
-                            });
-                        }
+                            }
+                        });
                     }
                 }
                 break;

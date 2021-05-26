@@ -55,7 +55,7 @@ public class EditCenterAvatarFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -93,7 +93,7 @@ public class EditCenterAvatarFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setData() {
+    private void setExtra() {
         EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (editCenterFragment != null) {
             if (!editCenterFragment.avatarPath.equals("")) {
@@ -103,10 +103,10 @@ public class EditCenterAvatarFragment extends Fragment {
                 Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                if (editCenterFragment.title.equals(""))
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
-                else
+                if (!editCenterFragment.title.equals(""))
                     binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(editCenterFragment.title));
+                else
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
 
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }

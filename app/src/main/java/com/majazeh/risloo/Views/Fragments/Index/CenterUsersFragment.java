@@ -62,7 +62,9 @@ public class CenterUsersFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
+
+        getData();
 
         return binding.getRoot();
     }
@@ -124,7 +126,7 @@ public class CenterUsersFragment extends Fragment {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("page", 1);
                     data.put("q", String.valueOf(s));
-                    setData();
+                    getData();
                 }, 750);
             }
 
@@ -151,7 +153,7 @@ public class CenterUsersFragment extends Fragment {
                         } else {
                             data.put("page", 1);
                         }
-                        setData();
+                        getData();
                     }
                 }
             }
@@ -160,7 +162,7 @@ public class CenterUsersFragment extends Fragment {
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras)).widget(binding.addImageView.getRoot());
     }
 
-    private void setData() {
+    private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = requireArguments().getString("id");
@@ -168,7 +170,9 @@ public class CenterUsersFragment extends Fragment {
                 data.put("id", centerId);
             }
         }
+    }
 
+    private void getData() {
         loading = true;
 
         Center.users(data, header, new Response() {
@@ -187,7 +191,7 @@ public class CenterUsersFragment extends Fragment {
 
                             binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.indexSingleLayout.textView.setVisibility(View.GONE);
-                        } else {
+                        } else if (adapter.getItemCount() == 0) {
                             binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
                         }

@@ -80,7 +80,7 @@ public class CreateCenterFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -217,7 +217,7 @@ public class CreateCenterFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setData() {
+    private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
                 type = getArguments().getString("type");
@@ -299,12 +299,12 @@ public class CreateCenterFragment extends Fragment {
             case "managers":
                 UserModel model = (UserModel) item;
 
-                if (!managerId.equals(model.getUserId())) {
-                    managerId = model.getUserId();
+                if (!managerId.equals(model.getId())) {
+                    managerId = model.getId();
                     managerName = model.getName();
 
                     binding.managerIncludeLayout.selectTextView.setText(managerName);
-                } else if (managerId.equals(model.getUserId())) {
+                } else if (managerId.equals(model.getId())) {
                     managerId = "";
                     managerName = "";
 

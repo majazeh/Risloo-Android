@@ -38,7 +38,7 @@ public class CreateRoomFragment extends Fragment {
     private SearchableDialog psychologiesDialog;
 
     // Vars
-    private String centerId = "";
+    public String centerId = "";
     public String psychologyId = "", psychologyName = "";
 
     @Nullable
@@ -52,7 +52,7 @@ public class CreateRoomFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -92,9 +92,9 @@ public class CreateRoomFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setData() {
+    private void setExtra() {
         if (getArguments() != null) {
-            if (getArguments().getString("id") != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = getArguments().getString("id");
             }
 
@@ -111,12 +111,12 @@ public class CreateRoomFragment extends Fragment {
             case "psychologies":
                 UserModel model = (UserModel) item;
 
-                if (!psychologyId.equals(model.getUserId())) {
-                    psychologyId = model.getUserId();
+                if (!psychologyId.equals(model.getId())) {
+                    psychologyId = model.getId();
                     psychologyName = model.getName();
 
                     binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
-                } else if (psychologyId.equals(model.getUserId())) {
+                } else if (psychologyId.equals(model.getId())) {
                     psychologyId = "";
                     psychologyName = "";
 
@@ -133,7 +133,7 @@ public class CreateRoomFragment extends Fragment {
 
         HashMap data = new HashMap<>();
         data.put("id", centerId);
-        data.put("psychology_id", psychologyId);
+        data.put("psychologist_id", psychologyId);
 
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -143,9 +143,12 @@ public class CreateRoomFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        Bundle extras = new Bundle();
+                        extras.putString("id", centerId);
+
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-                        ((MainActivity) requireActivity()).navigator(R.id.centerFragment);
+                        ((MainActivity) requireActivity()).navigator(R.id.centerFragment, extras);
                     });
                 }
             }
@@ -162,7 +165,7 @@ public class CreateRoomFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (key.equals("psychology_id")) {
+                                        if (key.equals("psychologist_id")) {
                                             ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                         }
                                     }

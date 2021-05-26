@@ -38,7 +38,7 @@ public class EditCenterFragment extends Fragment {
 
         initializer();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -48,7 +48,7 @@ public class EditCenterFragment extends Fragment {
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
     }
 
-    private void setData() {
+    private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = getArguments().getString("id");

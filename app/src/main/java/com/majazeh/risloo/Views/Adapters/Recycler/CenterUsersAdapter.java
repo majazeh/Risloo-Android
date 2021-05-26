@@ -64,7 +64,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     @Override
     public int getItemCount() {
-        return users.size();
+        if (this.users != null)
+            return users.size();
+        else
+            return 0;
     }
 
     public void setUsers(ArrayList<TypeModel> users) {
@@ -175,7 +178,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.serialTextView.setText(model.getUserId());
+        holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
 
@@ -320,7 +323,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 extras.putString("id", centerUsersFragment.centerId);
         }
 
-        extras.putString("user_id", model.getUserId());
+        extras.putString("user_id", model.getId());
         extras.putString("position", holder.binding.positionSpinner.getSelectedItem().toString());
         extras.putString("nickname", model.getName());
         extras.putString("mobile", model.getMobile());

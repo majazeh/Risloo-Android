@@ -68,7 +68,7 @@ public class EditCenterDetailFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -165,7 +165,7 @@ public class EditCenterDetailFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setData() {
+    private void setExtra() {
         EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (editCenterFragment != null) {
             if (!editCenterFragment.type.equals("")) {
@@ -239,12 +239,12 @@ public class EditCenterDetailFragment extends Fragment {
             case "managers":
                 UserModel model = (UserModel) item;
 
-                if (!managerId.equals(model.getUserId())) {
-                    managerId = model.getUserId();
+                if (!managerId.equals(model.getId())) {
+                    managerId = model.getId();
                     managerName = model.getName();
 
                     binding.managerIncludeLayout.selectTextView.setText(managerName);
-                } else if (managerId.equals(model.getUserId())) {
+                } else if (managerId.equals(model.getId())) {
                     managerId = "";
                     managerName = "";
 

@@ -73,7 +73,10 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if (this.items != null)
+            return items.size();
+        else
+            return 0;
     }
 
     public ArrayList<TypeModel> getItems() {
@@ -208,24 +211,28 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         try {
             switch (method) {
                 case "scales":
-                case "rooms":
-                    holder.binding.titleTextView.setText(((RoomModel) item).getRoomManager().getName());
+                case "rooms": {
+                    RoomModel model = (RoomModel) item;
+
+                    holder.binding.titleTextView.setText(model.getRoomManager().getName());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(((RoomModel) item).getRoomCenter().getDetail().getString("title"));
-                    break;
+                    holder.binding.subTextView.setText(model.getRoomCenter().getDetail().getString("title"));
+                }
+                break;
                 case "references":
-                case "managers":
+                case "psychologies":
+                case "managers": {
                     UserModel model = (UserModel) item;
 
                     holder.binding.titleTextView.setText(model.getName());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
-                    break;
+                }
+                break;
                 case "cases":
                 case "sessions":
-                case "psychologies":
                 case "patternDays":
                     holder.binding.titleTextView.setText(item.object.get("title").toString());
 
@@ -270,7 +277,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         if (method.equals("managers")) {
                             UserModel model = (UserModel) item;
 
-                            detector(holder, createCenterFragment.managerId.equals(model.getUserId()));
+                            detector(holder, createCenterFragment.managerId.equals(model.getId()));
                         }
                     }
                     break;
@@ -288,7 +295,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createRoomFragment != null) {
                         if (method.equals("psychologies")) {
-                            detector(holder, createRoomFragment.psychologyId.equals(item.object.get("id").toString()));
+                            UserModel model = (UserModel) item;
+
+                            detector(holder, createRoomFragment.psychologyId.equals(model.getId()));
                         }
                     }
                     break;
@@ -356,7 +365,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             if (editCenterDetailFragment != null) {
                                 UserModel model = (UserModel) item;
 
-                                detector(holder, editCenterDetailFragment.managerId.equals(model.getUserId()));
+                                detector(holder, editCenterDetailFragment.managerId.equals(model.getId()));
                             }
                         }
                     }
