@@ -7,24 +7,32 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.BottomSheets.AuthBottomSheet;
+import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateRoomUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
-import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -33,12 +41,18 @@ public class CreateRoomUserFragment extends Fragment {
     // Binding
     private FragmentCreateRoomUserBinding binding;
 
-    // BottomSheets
-    private AuthBottomSheet authBottomSheet;
+    // Adapters
+    public SelectedAdapter referencesAdapter;
+
+    // Dialogs
+    private SearchableDialog referencesDialog;
+
+    // Objects
+    private RecyclerView.ItemDecoration itemDecoration;
+    private LinearLayoutManager referencesLayoutManager;
 
     // Vars
     public String roomId = "";
-    private String mobile = "", nickname = "", createCase = "";
 
     @Nullable
     @Override
@@ -57,14 +71,17 @@ public class CreateRoomUserFragment extends Fragment {
     }
 
     private void initializer() {
-        authBottomSheet = new AuthBottomSheet();
+        referencesAdapter = new SelectedAdapter(requireActivity());
 
-        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomUserFragmentMobileHeader));
-        binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomUserFragmentNicknameHeader));
+        referencesDialog = new SearchableDialog();
 
-        binding.nicknameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateRoomUserFragmentNicknameGuide));
+        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
-        binding.caseCheckBox.getRoot().setText(getResources().getString(R.string.CreateRoomUserFragmentCheckbox));
+        referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomUserFragmentReferenceHeader));
+
+        InitManager.unfixedRecyclerView(binding.referenceIncludeLayout.selectRecyclerView, itemDecoration, referencesLayoutManager);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomUserFragmentButton), getResources().getColor(R.color.White));
     }
@@ -79,37 +96,19 @@ public class CreateRoomUserFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
-                }
+                referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
+                referencesDialog.setData("references");
             }
             return false;
-        });
-
-        binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nicknameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
-                }
-            }
-            return false;
-        });
-
-        binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                createCase = "1";
-            } else {
-                createCase = "";
-            }
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.referenceIncludeLayout.selectRecyclerView.getChildCount() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.createTextView.getRoot());
@@ -121,37 +120,69 @@ public class CreateRoomUserFragment extends Fragment {
                 roomId = getArguments().getString("id");
             }
 
-            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
-                mobile = getArguments().getString("mobile");
-                binding.mobileIncludeLayout.inputEditText.setText(mobile);
-            }
+            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
+                try {
+                    JSONArray clients = new JSONArray(getArguments().getString("clients"));
 
-            if (getArguments().getString("nickname") != null && !getArguments().getString("nickname").equals("")) {
-                nickname = getArguments().getString("nickname");
-                binding.nicknameIncludeLayout.inputEditText.setText(nickname);
-            }
+                    ArrayList<TypeModel> references = new ArrayList<>();
+                    ArrayList<String> ids = new ArrayList<>();
 
-            if (getArguments().getString("create_case") != null && !getArguments().getString("create_case").equals("")) {
-                createCase = getArguments().getString("create_case");
+                    for (int i = 0; i < clients.length(); i++) {
+                        TypeModel model = new TypeModel((JSONObject) clients.get(i));
 
-                if (createCase.equals("1")) {
-                    binding.caseCheckBox.getRoot().setChecked(true);
+                        references.add(model);
+                        ids.add(model.object.getString("id"));
+                    }
+
+                    setRecyclerView(references, ids, "references");
+                } catch (JSONException e) {
+                    e.printStackTrace();
                 }
+            } else {
+                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
             }
+        } else {
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+        }
+    }
+
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
+        if (method.equals("references")) {
+            referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
+            binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+        }
+    }
+
+    public void responseDialog(String method, TypeModel item) {
+        switch (method) {
+            case "references":
+                UserModel model = (UserModel) item;
+
+                int position = referencesAdapter.getIds().indexOf(model.getId());
+
+                if (position == -1)
+                    referencesAdapter.addItem(item);
+                else
+                    referencesAdapter.removeItem(position);
+
+                if (referencesAdapter.getIds().size() != 0) {
+                    binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
+                    binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                } else {
+                    binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
+                    binding.referenceIncludeLayout.countTextView.setText("");
+                }
+
+                break;
         }
     }
 
     private void doWork() {
-        mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
-        nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
-
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
         data.put("id", roomId);
-        data.put("mobile", mobile);
-        data.put("nickname", nickname);
-        data.put("create_case", createCase);
+        data.put("clients", referencesAdapter.getIds());
 
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -161,15 +192,12 @@ public class CreateRoomUserFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        try {
-                            AuthModel model = new AuthModel((JSONObject) object);
+                        Bundle extras = new Bundle();
+                        extras.putString("id", roomId);
 
-                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            authBottomSheet.show(requireActivity().getSupportFragmentManager(), "authBottomSheet");
-                            authBottomSheet.setData(roomId, model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment, extras);
                     });
                 }
             }
@@ -186,13 +214,8 @@ public class CreateRoomUserFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        switch (key) {
-                                            case "mobile":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                                break;
-                                            case "nickname":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                                break;
+                                        if (key.equals("clients")) {
+                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                         }
                                     }
                                 }

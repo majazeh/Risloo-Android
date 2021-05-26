@@ -34,6 +34,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
@@ -376,6 +377,49 @@ public class SearchableDialog extends AppCompatDialogFragment {
                         data.put("id", createRoomFragment.centerId);
                         data.put("has_room", "no");
                         data.put("position", "manager,operator,psychologist,under_supervision");
+
+                        Center.users(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, null);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
+
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+                        });
+                    }
+                }
+                break;
+            case R.id.createRoomUserFragment:
+                CreateRoomUserFragment createRoomUserFragment = (CreateRoomUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (createRoomUserFragment != null) {
+                    if (method.equals("references")) {
+                        data.put("id", createRoomUserFragment.roomId);
 
                         Center.users(data, header, new Response() {
                             @Override

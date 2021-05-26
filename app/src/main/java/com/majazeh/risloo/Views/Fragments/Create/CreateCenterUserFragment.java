@@ -44,7 +44,7 @@ public class CreateCenterUserFragment extends Fragment {
     private AuthBottomSheet authBottomSheet;
 
     // Vars
-    public String centerId = "";
+    public String centerId = "", type = "personal_clinic";
     public String mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
 
     @Nullable
@@ -107,8 +107,10 @@ public class CreateCenterUserFragment extends Fragment {
                 CreateCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
 
                 if (position == 3) {
+                    binding.roomIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     binding.clientGroup.setVisibility(View.VISIBLE);
                 } else {
+                    binding.roomIncludeLayout.getRoot().setVisibility(View.GONE);
                     binding.clientGroup.setVisibility(View.GONE);
                 }
             }
@@ -157,6 +159,20 @@ public class CreateCenterUserFragment extends Fragment {
                 centerId = getArguments().getString("id");
             }
 
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
+                type = getArguments().getString("type");
+                switch (type) {
+                    case "personal_clinic":
+                        binding.positionIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.clientGroup.setVisibility(View.VISIBLE);
+                        break;
+                    case "counseling_center":
+                        binding.positionIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.clientGroup.setVisibility(View.GONE);
+                        break;
+                }
+            }
+
             if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
                 mobile = getArguments().getString("mobile");
                 binding.mobileIncludeLayout.inputEditText.setText(mobile);
@@ -169,8 +185,10 @@ public class CreateCenterUserFragment extends Fragment {
                         binding.positionIncludeLayout.selectSpinner.setSelection(i);
 
                         if (i == 3) {
+                            binding.roomIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.clientGroup.setVisibility(View.VISIBLE);
                         } else {
+                            binding.roomIncludeLayout.getRoot().setVisibility(View.GONE);
                             binding.clientGroup.setVisibility(View.GONE);
                         }
                     }
@@ -242,13 +260,19 @@ public class CreateCenterUserFragment extends Fragment {
         HashMap data = new HashMap<>();
         data.put("id", centerId);
         data.put("mobile", mobile);
-        data.put("position", position);
 
-       if (position.equals("مراجع")) {
-           data.put("room_id", roomId);
-           data.put("nickname", nickname);
-           data.put("create_case", createCase);
-       }
+        if (type.equals("counseling_center")) {
+            data.put("position", position);
+
+            if (position.equals("مراجع")) {
+                data.put("room_id", roomId);
+                data.put("nickname", nickname);
+                data.put("create_case", createCase);
+            }
+        } else {
+            data.put("nickname", nickname);
+            data.put("create_case", createCase);
+        }
 
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());

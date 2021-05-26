@@ -78,6 +78,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/mobile_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/mobile_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/position_errorLayout" />
@@ -140,7 +141,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="room_includeLayout, nickname_includeLayout, nickname_guideLayout, case_checkBox" />
+                app:constraint_referenced_ids="nickname_includeLayout, nickname_guideLayout, case_checkBox" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

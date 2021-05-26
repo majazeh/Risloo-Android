@@ -322,12 +322,7 @@
 
     <string name="CreateRoomUserFragmentTitle">ثبت عضو جدید</string>
 
-    <string name="CreateRoomUserFragmentMobileHeader">موبایل</string>
-    <string name="CreateRoomUserFragmentNicknameHeader">نام مراجع</string>
-
-    <string name="CreateRoomUserFragmentNicknameGuide">این نام فقط در مرکز درمانی شما کاربرد دارد.</string>
-
-    <string name="CreateRoomUserFragmentCheckbox">ساخت پرونده برای این عضو</string>
+    <string name="CreateRoomUserFragmentReferenceHeader">عضو</string>
 
     <string name="CreateRoomUserFragmentButton">ثبت</string>
 

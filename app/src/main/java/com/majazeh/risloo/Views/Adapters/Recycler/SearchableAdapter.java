@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -144,6 +145,12 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
                     if (createRoomFragment != null) {
                         createRoomFragment.responseDialog(method, item);
+                    }
+                    break;
+                case R.id.createRoomUserFragment:
+                    CreateRoomUserFragment createRoomUserFragment = (CreateRoomUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (createRoomUserFragment != null) {
+                        createRoomUserFragment.responseDialog(method, item);
                     }
                     break;
                 case R.id.createSampleFragment:
@@ -298,6 +305,17 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                             UserModel model = (UserModel) item;
 
                             detector(holder, createRoomFragment.psychologyId.equals(model.getId()));
+                        }
+                    }
+                    break;
+                case R.id.createRoomUserFragment:
+                    CreateRoomUserFragment createRoomUserFragment = (CreateRoomUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (createRoomUserFragment != null) {
+                        if (method.equals("references")) {
+                            UserModel model = (UserModel) item;
+
+                            detector(holder, createRoomUserFragment.referencesAdapter.getIds().contains(model.getId()));
+                            calculateCount(createRoomUserFragment.referencesAdapter.getIds().size());
                         }
                     }
                     break;

@@ -169,6 +169,10 @@ public class CenterUsersFragment extends Fragment {
                 extras.putString("id", centerId);
                 data.put("id", centerId);
             }
+
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
+                extras.putString("type", getArguments().getString("type"));
+            }
         }
     }
 
