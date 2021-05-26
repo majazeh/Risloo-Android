@@ -231,7 +231,7 @@ public class EditUserPasswordFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        data.put("user",  ((MainActivity) requireActivity()).singleton.getUserId());
+        data.put("user",  ((MainActivity) requireActivity()).singleton.getId());
         data.put("password",  currentPassword);
         data.put("new_password", newPassword);
 

@@ -101,10 +101,10 @@ public class EditUserAvatarFragment extends Fragment {
             Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (((MainActivity) requireActivity()).singleton.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
-            else
+            if (!((MainActivity) requireActivity()).singleton.getName().equals(""))
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
+            else
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
@@ -135,7 +135,7 @@ public class EditUserAvatarFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        data.put("id", ((MainActivity) requireActivity()).singleton.getUserId());
+        data.put("id", ((MainActivity) requireActivity()).singleton.getId());
 
         if (FileManager.readFileFromCache(requireActivity(), "image") != null)
             data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));

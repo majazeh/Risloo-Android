@@ -11,10 +11,10 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemNavBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
@@ -26,7 +26,7 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
     private Activity activity;
 
     // Vars
-    private ArrayList<Model> items;
+    private ArrayList<TypeModel> items;
     private int selectedPosition = 0;
 
     public NavsAdapter(@NonNull Activity activity) {
@@ -41,7 +41,7 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NavsHolder holder, int i) {
-        Model item = items.get(i);
+        TypeModel item = items.get(i);
 
         detector(holder, i);
 
@@ -57,11 +57,11 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
         return items.size();
     }
 
-    public ArrayList<Model> getItems() {
+    public ArrayList<TypeModel> getItems() {
         return items;
     }
 
-    public void setItems(ArrayList<Model> items) {
+    public void setItems(ArrayList<TypeModel> items) {
         this.items = items;
         notifyDataSetChanged();
     }
@@ -87,12 +87,12 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(NavsHolder holder, Model item) {
+    private void setData(NavsHolder holder, TypeModel item) {
         try {
-            holder.binding.nameTextView.setText(item.get("title").toString());
-            holder.binding.descriptionTextView.setText(item.get("description").toString());
+            holder.binding.nameTextView.setText(item.object.get("title").toString());
+            holder.binding.descriptionTextView.setText(item.object.get("description").toString());
 
-            holder.binding.iconImageView.setImageResource((Integer) item.get("image"));
+            holder.binding.iconImageView.setImageResource((Integer) item.object.get("image"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

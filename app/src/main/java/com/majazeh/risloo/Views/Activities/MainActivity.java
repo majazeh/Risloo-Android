@@ -24,7 +24,6 @@ import android.widget.Toast;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
-import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -44,6 +43,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setRecyclerView() {
-        ArrayList<Model> values = new ArrayList<>();
+        ArrayList<TypeModel> values = new ArrayList<>();
 
         String[] titles = getResources().getStringArray(R.array.MainTitles);
         String[] description = getResources().getStringArray(R.array.MainDescriptions);
@@ -235,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 jsonObject.put("description", description[i]);
                 jsonObject.put("image", images[i]);
 
-                Model model = new Model(jsonObject);
+                TypeModel model = new TypeModel(jsonObject);
 
                 values.add(model);
             } catch (JSONException e) {
@@ -304,8 +304,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void login(UserModel user) {
-        if (user.getUserId() != null)
-            singleton.setUserId(user.getUserId());
+        if (user.getId() != null)
+            singleton.setId(user.getId());
 
         if (user.getName() != null)
             singleton.setName(user.getName());

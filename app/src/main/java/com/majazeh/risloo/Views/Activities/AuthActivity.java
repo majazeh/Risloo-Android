@@ -98,8 +98,8 @@ public class AuthActivity extends AppCompatActivity {
         if (object.getToken() != null)
             singleton.setAuthorization("Bearer " + object.getToken());
 
-        if (user.getUserId() != null)
-            singleton.setUserId(user.getUserId());
+        if (user.getId() != null)
+            singleton.setId(user.getId());
 
         if (user.getName() != null)
             singleton.setName(user.getName());

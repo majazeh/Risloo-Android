@@ -39,8 +39,8 @@ public class AuthPasswordChangeFragment extends Fragment {
     private FragmentAuthPasswordChangeBinding binding;
 
     // Vars
-    private String mobile = "";
-    private String password = "";
+    private String mobile = "", password = "";
+    private String key = "", callback = "";
     private boolean passwordVisibility = false;
 
     @Nullable
@@ -54,7 +54,7 @@ public class AuthPasswordChangeFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -162,13 +162,25 @@ public class AuthPasswordChangeFragment extends Fragment {
         ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment, null)).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
-    private void setData() {
-        if (requireArguments().getString("mobile") != null) {
-            mobile = requireArguments().getString("mobile");
-            binding.mobileTextView.getRoot().setText(mobile);
-        } else {
-            binding.mobileTextView.getRoot().setText(mobile);
-            binding.mobileTextView.getRoot().setVisibility(View.GONE);
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("mobile") != null) {
+                mobile = getArguments().getString("mobile");
+
+                binding.mobileTextView.getRoot().setText(mobile);
+                binding.mobileTextView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileTextView.getRoot().setText(mobile);
+                binding.mobileTextView.getRoot().setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("key") != null) {
+                key = requireArguments().getString("key");
+            }
+
+            if (getArguments().getString("callback") != null) {
+                callback = requireArguments().getString("callback");
+            }
         }
     }
 
@@ -177,50 +189,40 @@ public class AuthPasswordChangeFragment extends Fragment {
 
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap();
+        HashMap data = new HashMap<>();
         data.put("password", password);
-
-        if (requireArguments().getString("key") != null)
-            data.put("key", requireArguments().getString("key"));
-        if (requireArguments().getString("callback") != null)
-            data.put("callback", requireArguments().getString("callback"));
+        data.put("key", key);
+        data.put("callback", callback);
 
         Auth.auth_theory(data, new HashMap<>(), new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
-                if (((AuthModel) object).getUser() == null) {
-                    Bundle extras = new Bundle();
 
-                    extras.putString("mobile", mobile);
-                    extras.putString("key", model.getKey());
-                    extras.putString("callback", model.getCallback());
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (model.getUser() == null) {
+                            Bundle extras = new Bundle();
 
-                    switch (model.getTheory()) {
-                        case "mobileCode":
-                            if (isAdded()) {
-                                requireActivity().runOnUiThread(() -> {
+                            extras.putString("mobile", mobile);
+                            extras.putString("key", model.getKey());
+                            extras.putString("callback", model.getCallback());
+
+                            switch (model.getTheory()) {
+                                case "mobileCode":
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                                });
-                            }
-                            break;
-                        case "recovery":
-                            if (isAdded()) {
-                                requireActivity().runOnUiThread(() -> {
+                                    break;
+                                case "recovery":
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                                });
+                                    break;
                             }
-                            break;
-                    }
-                } else {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
+                        } else {
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                             ((AuthActivity) requireActivity()).login(model);
-                        });
-                    }
+                        }
+                    });
                 }
             }
 

@@ -102,45 +102,38 @@ public class AuthRegisterFragment extends Fragment {
 
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap();
+        HashMap data = new HashMap<>();
         data.put("mobile", mobile);
 
         Auth.register(data, new HashMap<>(), new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
-                if (((AuthModel) object).getUser() == null) {
-                    Bundle extras = new Bundle();
 
-                    extras.putString("mobile", mobile);
-                    extras.putString("key", model.getKey());
-                    extras.putString("callback", model.getCallback());
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (model.getUser() == null) {
+                            Bundle extras = new Bundle();
 
-                    switch (model.getTheory()) {
-                        case "password":
-                            if (isAdded()) {
-                                requireActivity().runOnUiThread(() -> {
+                            extras.putString("mobile", mobile);
+                            extras.putString("key", model.getKey());
+                            extras.putString("callback", model.getCallback());
+
+                            switch (model.getTheory()) {
+                                case "password":
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                                });
-                            }
-                            break;
-                        case "mobileCode":
-                            if (isAdded()) {
-                                requireActivity().runOnUiThread(() -> {
+                                    break;
+                                case "mobileCode":
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                                });
+                                    break;
                             }
-                            break;
-                    }
-                }  else {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
+                        } else {
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                             ((AuthActivity) requireActivity()).login(model);
-                        });
-                    }
+                        }
+                    });
                 }
             }
 

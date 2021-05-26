@@ -45,8 +45,8 @@ public class AuthPinFragment extends Fragment {
     private CountDownTimer countDownTimer;
 
     // Vars
-    private String mobile = "";
-    private String pin = "";
+    private String mobile = "", pin = "";
+    private String key = "", callback = "";
 
     @Nullable
     @Override
@@ -59,7 +59,9 @@ public class AuthPinFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
+
+        startCountDownTimer();
 
         return binding.getRoot();
     }
@@ -170,15 +172,29 @@ public class AuthPinFragment extends Fragment {
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
-    private void setData() {
-        if (requireArguments().getString("mobile") != null) {
-            mobile = requireArguments().getString("mobile");
-            binding.mobileTextView.getRoot().setText(mobile);
-        } else {
-            binding.mobileTextView.getRoot().setText(mobile);
-            binding.mobileTextView.getRoot().setVisibility(View.GONE);
-        }
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("mobile") != null) {
+                mobile = getArguments().getString("mobile");
 
+                binding.mobileTextView.getRoot().setText(mobile);
+                binding.mobileTextView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileTextView.getRoot().setText(mobile);
+                binding.mobileTextView.getRoot().setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("key") != null) {
+                key = requireArguments().getString("key");
+            }
+
+            if (getArguments().getString("callback") != null) {
+                callback = requireArguments().getString("callback");
+            }
+        }
+    }
+
+    private void startCountDownTimer() {
         binding.guideIncludeLayout.guideTextView.setText(requireActivity().getResources().getString(R.string.PinFragmentGuide1) + " " + mobile + " " + requireActivity().getResources().getString(R.string.PinFragmentGuide2));
 
         binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
@@ -205,57 +221,47 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void doWork(String method) {
+        countDownTimer.cancel();
+
+        pin = binding.pinEditText.getRoot().getText().toString().trim();
+
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         if (method.equals("pin")) {
-            pin = binding.pinEditText.getRoot().getText().toString().trim();
-
-            HashMap data = new HashMap();
+            HashMap data = new HashMap<>();
             data.put("code", pin);
-
-            if (requireArguments().getString("key") != null)
-                data.put("key", requireArguments().getString("key"));
-            if (requireArguments().getString("callback") != null)
-                data.put("callback", requireArguments().getString("callback"));
-
-            countDownTimer.cancel();
+            data.put("key", key);
+            data.put("callback", callback);
 
             Auth.auth_theory(data, new HashMap<>(), new Response() {
                 @Override
                 public void onOK(Object object) {
                     AuthModel model = (AuthModel) object;
-                    if (((AuthModel) object).getUser() == null) {
-                        Bundle extras = new Bundle();
 
-                        extras.putString("mobile", mobile);
-                        extras.putString("key", model.getKey());
-                        extras.putString("callback", model.getCallback());
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            if (model.getUser() == null) {
+                                Bundle extras = new Bundle();
 
-                        switch (model.getTheory()) {
-                            case "password":
-                                if (isAdded()) {
-                                    requireActivity().runOnUiThread(() -> {
+                                extras.putString("mobile", mobile);
+                                extras.putString("key", model.getKey());
+                                extras.putString("callback", model.getCallback());
+
+                                switch (model.getTheory()) {
+                                    case "password":
                                         ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                         ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                                    });
-                                }
-                                break;
-                            case "recovery":
-                                if (isAdded()) {
-                                    requireActivity().runOnUiThread(() -> {
+                                        break;
+                                    case "recovery":
                                         ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                         ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                                    });
+                                        break;
                                 }
-                                break;
-                        }
-                    } else {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
+                            } else {
                                 ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                 ((AuthActivity) requireActivity()).login(model);
-                            });
-                        }
+                            }
+                        });
                     }
                 }
 

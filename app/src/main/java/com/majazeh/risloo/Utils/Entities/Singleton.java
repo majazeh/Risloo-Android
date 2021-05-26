@@ -48,14 +48,14 @@ public class Singleton {
         return "";
     }
 
-    public void setUserId(String value) {
-        editor.putString("userId", value);
+    public void setId(String value) {
+        editor.putString("id", value);
         editor.apply();
     }
 
-    public String getUserId() {
-        if (!sharedPreferences.getString("userId", "").equals("")) {
-            return sharedPreferences.getString("userId", "");
+    public String getId() {
+        if (!sharedPreferences.getString("id", "").equals("")) {
+            return sharedPreferences.getString("id", "");
         }
         return "";
     }
@@ -251,17 +251,12 @@ public class Singleton {
         return "";
     }
 
-
-
-
-
     public String getPassword() {
         if (!sharedPreferences.getString("password", "").equals("")) {
             return sharedPreferences.getString("password", "");
         }
         return "";
     }
-
 
     public String getOwner() {
         if (!sharedPreferences.getString("owner", "").equals("")) {
@@ -294,20 +289,6 @@ public class Singleton {
     public String getDuration() {
         if (!sharedPreferences.getString("duration", "").equals("")) {
             return sharedPreferences.getString("duration", "");
-        }
-        return "";
-    }
-
-    public String getManager() {
-        if (!sharedPreferences.getString("manager", "").equals("")) {
-            return sharedPreferences.getString("manager", "");
-        }
-        return "";
-    }
-
-    public String getPsychology() {
-        if (!sharedPreferences.getString("psychology", "").equals("")) {
-            return sharedPreferences.getString("psychology", "");
         }
         return "";
     }

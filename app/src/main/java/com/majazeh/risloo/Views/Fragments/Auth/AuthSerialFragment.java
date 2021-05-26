@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,10 +18,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentAuthSerialBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
-import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -128,57 +127,25 @@ public class AuthSerialFragment extends Fragment {
             Picasso.get().load(((AuthActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.avatarIncludeLayout.avatarImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (((AuthActivity) requireActivity()).singleton.getName().equals("")) {
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
-            } else {
+            if (!((AuthActivity) requireActivity()).singleton.getName().equals(""))
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((AuthActivity) requireActivity()).singleton.getName()));
-            }
+            else
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
         }
     }
 
     private void doWork() {
-//        serial = binding.serialEditText.getRoot().getText().toString().trim();
-//
-//        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-//
-//        HashMap data = new HashMap();
-//        data.put("authorized_key", serial);
-//
-//        Auth.auth(data, new HashMap<>(), new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                AuthModel model = (AuthModel) object;
-//                if (((AuthModel) object).getUser() == null) {
-//                    Bundle extras = new Bundle();
-//
-//                    extras.putString("key", model.getKey());
-//                    extras.putString("callback", model.getCallback());
-//
-//                    switch (model.getTheory()) {
-//                        case "password":
-//                            if (isAdded()) {
-//                                requireActivity().runOnUiThread(() -> {
-//                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-//                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-//                                });
-//                            }
-//                            break;
-//                    }
-//                } else {
-//                    if (isAdded()) {
-//                        requireActivity().runOnUiThread(() -> {
-//                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-//                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAuthenticated), Toast.LENGTH_SHORT).show();
-//                        });
-//                    }
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                // Place Code if Needed
-//            }
-//        });
+        serial = binding.serialEditText.getRoot().getText().toString().trim();
+
+        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        HashMap data = new HashMap<>();
+        data.put("authorized_key", serial);
+
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        // Todo : Place Code Here
     }
 
     @Override

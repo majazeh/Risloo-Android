@@ -187,18 +187,22 @@ public class EditUserPersonalFragment extends Fragment {
             name = ((MainActivity) requireActivity()).singleton.getName();
             binding.nameIncludeLayout.inputEditText.setText(name);
         }
+
         if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
             mobile = ((MainActivity) requireActivity()).singleton.getMobile();
             binding.mobileIncludeLayout.inputEditText.setText(mobile);
         }
+
         if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
             username = ((MainActivity) requireActivity()).singleton.getUsername();
             binding.usernameIncludeLayout.inputEditText.setText(username);
         }
+
         if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
             email = ((MainActivity) requireActivity()).singleton.getEmail();
             binding.emailIncludeLayout.inputEditText.setText(email);
         }
+
         if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
             birthday = ((MainActivity) requireActivity()).singleton.getBirthday();
             binding.birthdayIncludeLayout.selectTextView.setText(birthday);
@@ -225,6 +229,7 @@ public class EditUserPersonalFragment extends Fragment {
                     break;
             }
         }
+
         if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
             type = ((MainActivity) requireActivity()).singleton.getType();
             switch (type) {
@@ -244,6 +249,7 @@ public class EditUserPersonalFragment extends Fragment {
 
             binding.clientGroup.setVisibility(View.GONE);
         }
+
         if (!((MainActivity) requireActivity()).singleton.getGender().equals("")) {
             gender = ((MainActivity) requireActivity()).singleton.getGender();
             switch (gender) {

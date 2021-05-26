@@ -105,6 +105,7 @@ public class EditUserCryptoFragment extends Fragment {
             publicKey = ((MainActivity) requireActivity()).singleton.getPublicKey();
             binding.publicIncludeLayout.inputEditText.setText(publicKey);
         }
+
         if (!((MainActivity) requireActivity()).singleton.getPrivateKey().equals("")) {
             privateKey = ((MainActivity) requireActivity()).singleton.getPrivateKey();
             binding.privateIncludeLayout.inputEditText.setText(privateKey);
