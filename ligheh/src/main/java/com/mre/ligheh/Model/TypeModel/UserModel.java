@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 public class UserModel extends TypeModel {
 
+    private String id="";
     private String userId="";
     private String name="";
     private String email="";
@@ -40,9 +41,11 @@ public class UserModel extends TypeModel {
 
     public UserModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
-        setUserId(jsonObject.getString("id"));
+        setId(jsonObject.getString("id"));
         if (!jsonObject.isNull("name"))
             setName(jsonObject.getString("name"));
+        if (!jsonObject.isNull("user_id"))
+            setUserId(jsonObject.getString("user_id"));
         if (!jsonObject.isNull("email"))
             setEmail(jsonObject.getString("email"));
         if (!jsonObject.isNull("mobile"))
@@ -81,6 +84,7 @@ public class UserModel extends TypeModel {
             setCreator(new UserModel(jsonObject.getJSONObject("creator")));
         if (!jsonObject.isNull("avatar"))
             setAvatar(new AvatarModel(jsonObject.getJSONArray("avatar")));
+
 
         if (!jsonObject.isNull("centers")) {
             List centers = new List();
@@ -121,6 +125,14 @@ public class UserModel extends TypeModel {
         if (!jsonObject.isNull("treasuries")){
             setTreasuries(jsonObject.getJSONArray("treasuries"));
         }
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getUserId() {
