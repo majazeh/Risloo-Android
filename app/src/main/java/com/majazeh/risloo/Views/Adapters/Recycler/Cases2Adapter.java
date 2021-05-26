@@ -50,7 +50,10 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
     @Override
     public int getItemCount() {
-        return cases.size();
+        if (this.cases != null)
+            return cases.size();
+        else
+            return 0;
     }
 
     public void setCases(ArrayList<TypeModel> cases) {

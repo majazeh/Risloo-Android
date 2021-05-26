@@ -50,7 +50,10 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
 
     @Override
     public int getItemCount() {
-        return samples.size();
+        if (this.samples != null)
+            return samples.size();
+        else
+            return 0;
     }
 
     public void setSamples(ArrayList<TypeModel> samples) {

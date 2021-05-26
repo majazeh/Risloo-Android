@@ -58,7 +58,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -151,7 +151,7 @@ public class CreateCenterUserFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setData() {
+    private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = getArguments().getString("id");

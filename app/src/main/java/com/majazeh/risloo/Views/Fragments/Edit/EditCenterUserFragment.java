@@ -48,7 +48,7 @@ public class EditCenterUserFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
@@ -126,7 +126,7 @@ public class EditCenterUserFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setData() {
+    private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = getArguments().getString("id");

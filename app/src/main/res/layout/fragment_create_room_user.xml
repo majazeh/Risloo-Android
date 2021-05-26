@@ -51,7 +51,7 @@
                 app:layout_constraintTop_toBottomOf="@id/mobile_includeLayout" />
 
             <include
-                android:id="@+id/name_includeLayout"
+                android:id="@+id/nickname_includeLayout"
                 layout="@layout/component_main_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -61,25 +61,25 @@
                 app:layout_constraintTop_toBottomOf="@id/mobile_errorLayout" />
 
             <include
-                android:id="@+id/name_errorLayout"
+                android:id="@+id/nickname_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/name_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/name_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/nickname_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/nickname_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/nickname_includeLayout" />
 
             <include
-                android:id="@+id/name_guideLayout"
+                android:id="@+id/nickname_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_goneMarginTop="@dimen/_6sdp"
-                app:layout_constraintEnd_toEndOf="@id/name_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/name_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_errorLayout" />
+                app:layout_constraintEnd_toEndOf="@id/nickname_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/nickname_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/nickname_errorLayout" />
 
             <include
                 android:id="@+id/case_checkBox"
@@ -91,7 +91,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/name_guideLayout" />
+                app:layout_constraintTop_toBottomOf="@id/nickname_guideLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
