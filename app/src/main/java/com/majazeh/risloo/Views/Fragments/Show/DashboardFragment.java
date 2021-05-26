@@ -48,7 +48,7 @@ public class DashboardFragment extends Fragment {
 
         initializer();
 
-        setData();
+        getData();
 
         return binding.getRoot();
     }
@@ -80,9 +80,9 @@ public class DashboardFragment extends Fragment {
         InitManager.recyclerView(binding.centersSingleLayout.recyclerView, itemDecoration, centersLayoutManager);
     }
 
-    private void setData() {
+    private void getData() {
         HashMap data = new HashMap<>();
-        data.put("user", ((MainActivity) requireActivity()).singleton.getUserId());
+        data.put("user", ((MainActivity) requireActivity()).singleton.getId());
 
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -104,7 +104,7 @@ public class DashboardFragment extends Fragment {
                             binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
 
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        } else {
+                        } else if (cases2Adapter.getItemCount() == 0) {
                             binding.casesGroup.setVisibility(View.GONE);
                         }
                         binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -119,7 +119,7 @@ public class DashboardFragment extends Fragment {
 
                             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        } else {
+                        } else if (samplesAdapter.getItemCount() == 0) {
                             binding.samplesGroup.setVisibility(View.GONE);
                         }
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -133,7 +133,7 @@ public class DashboardFragment extends Fragment {
                             binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
 
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        } else {
+                        } else if (roomsAdapter.getItemCount() == 0) {
                             binding.roomsGroup.setVisibility(View.GONE);
                         }
                         binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -147,7 +147,7 @@ public class DashboardFragment extends Fragment {
                             binding.centersHeaderIncludeLayout.countTextView.setText("(" + centersAdapter.getItemCount() + ")");
 
                             binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        } else {
+                        } else if (centersAdapter.getItemCount() == 0) {
                             binding.centersGroup.setVisibility(View.GONE);
                         }
                         binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);

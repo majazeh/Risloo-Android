@@ -60,7 +60,9 @@ public class CentersFragment extends Fragment {
 
         listener();
 
-        setData();
+        setPermission();
+
+        getData();
 
         return binding.getRoot();
     }
@@ -117,7 +119,7 @@ public class CentersFragment extends Fragment {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("page", 1);
                     data.put("q", String.valueOf(s));
-                    setData();
+                    getData();
                 }, 750);
             }
 
@@ -144,7 +146,7 @@ public class CentersFragment extends Fragment {
                         } else {
                             data.put("page", 1);
                         }
-                        setData();
+                        getData();
                     }
                 }
             }
@@ -153,11 +155,13 @@ public class CentersFragment extends Fragment {
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterFragment)).widget(binding.addImageView.getRoot());
     }
 
-    private void setData() {
+    private void setPermission() {
         if (!((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
             binding.addImageView.getRoot().setVisibility(View.GONE);
         }
+    }
 
+    private void getData() {
         loading = true;
 
         Center.list(data, header, new Response() {
@@ -175,7 +179,7 @@ public class CentersFragment extends Fragment {
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.indexSingleLayout.textView.setVisibility(View.GONE);
-                        } else {
+                        } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
                         binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");

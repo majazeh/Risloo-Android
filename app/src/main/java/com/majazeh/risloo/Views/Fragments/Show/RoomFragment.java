@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -71,7 +72,11 @@ public class RoomFragment extends Fragment {
 
         listener();
 
-        setData();
+        setPermission();
+
+        setExtra();
+
+        getData();
 
         return binding.getRoot();
     }
@@ -149,28 +154,28 @@ public class RoomFragment extends Fragment {
         }).widget(binding.usersImageView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-//            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-//
-//            Room.request(data, header, new Response() {
-//                @Override
-//                public void onOK(Object object) {
-//                    RoomModel model = (RoomModel) object;
-//
-//                    if (isAdded()) {
-//                        requireActivity().runOnUiThread(() -> {
-//                            setAcceptation(model);
-//
-//                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-//                        });
-//                    }
-//                }
-//
-//                @Override
-//                public void onFailure(String response) {
-//                    // Place Code if Needed
-//                }
-//            });
+            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+            Room.request(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    RoomModel model = (RoomModel) object;
+
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            setAcceptation(model);
+
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    // Place Code if Needed
+                }
+            });
         }).widget(binding.statusTextView.getRoot());
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
@@ -195,7 +200,7 @@ public class RoomFragment extends Fragment {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("q", String.valueOf(s));
                     data.put("page", 1);
-                    setData();
+                    getData();
                 }, 750);
             }
 
@@ -222,7 +227,7 @@ public class RoomFragment extends Fragment {
                         } else {
                             data.put("page", 1);
                         }
-                        setData();
+                        getData();
                     }
                 }
             }
@@ -233,7 +238,7 @@ public class RoomFragment extends Fragment {
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment, extras)).widget(binding.addScheduleImageView.getRoot());
     }
 
-    private void setData() {
+    private void setPermission() {
         if (!((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
             binding.editImageView.getRoot().setVisibility(View.GONE);
             binding.profileImageView.getRoot().setVisibility(View.GONE);
@@ -242,7 +247,9 @@ public class RoomFragment extends Fragment {
             binding.addCaseImageView.getRoot().setVisibility(View.GONE);
             binding.addScheduleImageView.getRoot().setVisibility(View.GONE);
         }
+    }
 
+    private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 extras.putString("id", getArguments().getString("id"));
@@ -263,6 +270,14 @@ public class RoomFragment extends Fragment {
                 setStatus(getArguments().getString("status"));
             }
 
+            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
+                extras.putString("title", getArguments().getString("title"));
+                binding.nameTextView.setText(getArguments().getString("title"));
+                binding.nameTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.nameTextView.setVisibility(View.GONE);
+            }
+
             if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
                 extras.putString("manager_id", getArguments().getString("manager_id"));
                 extras.putString("manager_name", getArguments().getString("manager_name"));
@@ -271,14 +286,6 @@ public class RoomFragment extends Fragment {
                     binding.nameTextView.setText(getArguments().getString("manager_name"));
                     binding.nameTextView.setVisibility(View.VISIBLE);
                 }
-            }
-
-            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
-                extras.putString("title", getArguments().getString("title"));
-                binding.nameTextView.setText(getArguments().getString("title"));
-                binding.nameTextView.setVisibility(View.VISIBLE);
-            } else {
-                binding.nameTextView.setVisibility(View.GONE);
             }
 
             if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
@@ -316,36 +323,87 @@ public class RoomFragment extends Fragment {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
         }
+    }
 
+    private void getData() {
         loading = true;
 
-        Room.show(data, header, new Response() {
+        Room.showDashboard(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            RoomModel model = new RoomModel(((JSONObject) object).getJSONObject("room"));
+                        try {
+                            RoomModel model = new RoomModel(((JSONObject) object).getJSONObject("room"));
+
+//                            setAcceptation(model);
 //
-//                            // TODO : Reset Data From Model
-//
-//                            List cases = new List();
-//                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
-//                                cases.add(new CaseModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
-//                            }
-//
-//                            if (Objects.equals(data.get("page"), 1))
-//                                cases2Adapter.clearCases();
-//
-//                            if (!cases.data().isEmpty()) {
-//                                cases2Adapter.setCases(cases.data());
-//                                binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
-//
-//                                binding.casesSingleLayout.textView.setVisibility(View.GONE);
+//                            if (model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title")) {
+//                                extras.putString("title", model.getRoomCenter().getDetail().getString("title"));
+//                                binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
+//                                binding.nameTextView.setVisibility(View.VISIBLE);
 //                            } else {
-//                                binding.casesSingleLayout.textView.setVisibility(View.VISIBLE);
+//                                binding.nameTextView.setVisibility(View.GONE);
 //                            }
-//                            binding.headerIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+
+                            if (model.getRoomManager().getUserId() != null && model.getRoomManager().getName() != null) {
+                                extras.putString("manager_id", model.getRoomManager().getUserId());
+                                extras.putString("manager_name", model.getRoomManager().getName());
+
+                                if (model.getRoomType().equals("room")) {
+                                    binding.nameTextView.setText(model.getRoomManager().getName());
+                                    binding.nameTextView.setVisibility(View.VISIBLE);
+                                }
+                            }
+
+//                            if (model.getRoomCenter().getDetail().has("address") && !model.getRoomCenter().getDetail().isNull("address")) {
+//                                extras.putString("address", model.getRoomCenter().getDetail().getString("address"));
+//                            }
+//
+//                            if (model.getRoomCenter().getDetail().has("description") && !model.getRoomCenter().getDetail().isNull("description")) {
+//                                extras.putString("description", model.getRoomCenter().getDetail().getString("description"));
+//                                binding.descriptionTextView.setText(model.getRoomCenter().getDetail().getString("description"));
+//                                binding.descriptionTextView.setVisibility(View.VISIBLE);
+//                            } else {
+//                                binding.descriptionTextView.setVisibility(View.GONE);
+//                            }
+//
+//                            if (model.getRoomCenter().getDetail().has("avatar") && !model.getRoomCenter().getDetail().isNull("avatar") && model.getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
+//                                extras.putString("avatar", model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url"));
+//                                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+//                                Picasso.get().load(model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+//                            } else {
+//                                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+//                                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+//
+//                                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+//                            }
+//
+//                            if (model.getRoomCenter().getDetail().has("phone_numbers") && !model.getRoomCenter().getDetail().isNull("phone_numbers") && model.getRoomCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
+//                                extras.putString("phone_numbers", model.getRoomCenter().getDetail().getJSONArray("phone_numbers").toString());
+//                                binding.mobileTextView.setText(model.getRoomCenter().getDetail().getJSONArray("phone_numbers").get(0).toString());
+//                                binding.mobileGroup.setVisibility(View.VISIBLE);
+//                            } else {
+//                                binding.mobileGroup.setVisibility(View.GONE);
+//                            }
+
+                            List cases = new List();
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
+                                cases.add(new CaseModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
+                            }
+
+                            if (Objects.equals(data.get("page"), 1))
+                                cases2Adapter.clearCases();
+
+                            if (!cases.data().isEmpty()) {
+                                cases2Adapter.setCases(cases.data());
+                                binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
+
+                                binding.casesSingleLayout.textView.setVisibility(View.GONE);
+                            } else if (cases2Adapter.getItemCount() == 0) {
+                                binding.casesSingleLayout.textView.setVisibility(View.VISIBLE);
+                            }
+                            binding.headerIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
 
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -355,9 +413,9 @@ public class RoomFragment extends Fragment {
                                 binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     });
                     loading = false;
                 }

@@ -46,9 +46,23 @@ public class Room extends Model {
         }
     }
 
+    public static void request(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.post(  "centers/" + data.get("id") + "/request", data, header, response, RoomModel.class);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.create(endpoint, data, header, response, RoomModel.class);
+            if (has(data, "id"))
+                Model.create("centers/" +data.get("id") + "/rooms", data, header, response, RoomModel.class);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -80,7 +94,7 @@ public class Room extends Model {
     public static void createUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
-                Model.post(endpoint + "/" + data.get("id") + "/users", data, header, response, null);
+                Model.post("centers/" + data.get("id") + "/users", data, header, response, null);
             else
                 Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {

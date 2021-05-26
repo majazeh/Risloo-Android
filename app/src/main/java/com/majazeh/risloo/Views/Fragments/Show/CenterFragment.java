@@ -71,7 +71,11 @@ public class CenterFragment extends Fragment {
 
         listener();
 
-        setData();
+        setPermission();
+
+        setExtra();
+
+        getData();
 
         return binding.getRoot();
     }
@@ -188,7 +192,7 @@ public class CenterFragment extends Fragment {
                     binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("q", String.valueOf(s));
                     data.put("page", 1);
-                    setData();
+                    getData();
                 }, 750);
             }
 
@@ -215,7 +219,7 @@ public class CenterFragment extends Fragment {
                         } else {
                             data.put("page", 1);
                         }
-                        setData();
+                        getData();
                     }
                 }
             }
@@ -226,16 +230,18 @@ public class CenterFragment extends Fragment {
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment, extras)).widget(binding.addScheduleImageView.getRoot());
     }
 
-    private void setData() {
+    private void setPermission() {
         if (!((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
             binding.editImageView.getRoot().setVisibility(View.GONE);
             binding.profileImageView.getRoot().setVisibility(View.GONE);
             binding.usersImageView.getRoot().setVisibility(View.GONE);
-            
+
             binding.addRoomImageView.getRoot().setVisibility(View.GONE);
             binding.addScheduleImageView.getRoot().setVisibility(View.GONE);
         }
+    }
 
+    private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 extras.putString("id", getArguments().getString("id"));
@@ -247,11 +253,11 @@ public class CenterFragment extends Fragment {
             }
 
             if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                 extras.putString("status", getArguments().getString("status"));
-                 setStatus(getArguments().getString("status"));
-             }
+                extras.putString("status", getArguments().getString("status"));
+                setStatus(getArguments().getString("status"));
+            }
 
-             if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
+            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
                 extras.putString("manager_id", getArguments().getString("manager_id"));
                 extras.putString("manager_name", getArguments().getString("manager_name"));
                 binding.ownerTextView.setText(getArguments().getString("manager_name"));
@@ -303,7 +309,9 @@ public class CenterFragment extends Fragment {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
         }
+    }
 
+    private void getData() {
         loading = true;
 
         Center.showDashboard(data, header, new Response() {
@@ -377,7 +385,7 @@ public class CenterFragment extends Fragment {
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
                                 binding.roomsSingleLayout.textView.setVisibility(View.GONE);
-                            } else {
+                            } else if (roomsAdapter.getItemCount() == 0) {
                                 binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
                             binding.headerIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
