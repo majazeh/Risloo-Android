@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -29,7 +30,6 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.CenterUsersHolder> {
 
@@ -110,6 +110,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
+
                     doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), SelectionManager.getPosition(activity, "en", pos), "position");
 
                     userSelect = false;
@@ -304,11 +305,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private Bundle getExtras(CenterUsersHolder holder, UserModel model) {
         Bundle extras = new Bundle();
 
-        if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.centerUsersFragment) {
-            CenterUsersFragment centerUsersFragment = (CenterUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (centerUsersFragment != null)
-                extras.putString("id", centerUsersFragment.centerId);
-        }
+        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof CenterUsersFragment)
+                extras.putString("id", ((CenterUsersFragment) fragment).centerId);
 
         extras.putString("user_id", model.getId());
         extras.putString("nickname", model.getName());

@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -21,7 +22,6 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.RoomUsersHolder> {
 
@@ -111,11 +111,10 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     private Bundle getExtras(RoomUsersHolder holder, UserModel model) {
         Bundle extras = new Bundle();
 
-        if (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId() == R.id.roomUsersFragment) {
-            RoomUsersFragment roomUsersFragment = (RoomUsersFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (roomUsersFragment != null)
-                extras.putString("id", roomUsersFragment.roomId);
-        }
+        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof RoomUsersFragment)
+                extras.putString("id", ((RoomUsersFragment) fragment).roomId);
 
         extras.putString("user_id", model.getId());
         extras.putString("nickname", model.getName());

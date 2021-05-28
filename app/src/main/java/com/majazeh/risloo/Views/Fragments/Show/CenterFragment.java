@@ -311,6 +311,62 @@ public class CenterFragment extends Fragment {
         }
     }
 
+    private void setData(CenterModel model) {
+        try {
+            setAcceptation(model);
+
+            if (model.getManager().getUserId() != null && model.getManager().getName() != null) {
+                extras.putString("manager_id", model.getManager().getUserId());
+                extras.putString("manager_name", model.getManager().getName());
+                binding.ownerTextView.setText(model.getManager().getName());
+                binding.ownerTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.ownerTextView.setVisibility(View.GONE);
+            }
+
+            if (model.getDetail().has("title") && !model.getDetail().isNull("title")) {
+                extras.putString("title", model.getDetail().getString("title"));
+                binding.nameTextView.setText(model.getDetail().getString("title"));
+                binding.nameTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.nameTextView.setVisibility(View.GONE);
+            }
+
+            if (model.getDetail().has("address") && !model.getDetail().isNull("address")) {
+                extras.putString("address", model.getDetail().getString("address"));
+            }
+
+            if (model.getDetail().has("description") && !model.getDetail().isNull("description")) {
+                extras.putString("description", model.getDetail().getString("description"));
+                binding.descriptionTextView.setText(model.getDetail().getString("description"));
+                binding.descriptionTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.descriptionTextView.setVisibility(View.GONE);
+            }
+
+            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+                extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(1).getString("url"));
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            }
+
+            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
+                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").toString());
+                binding.mobileTextView.setText(model.getDetail().getJSONArray("phone_numbers").get(0).toString());
+                binding.mobileGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileGroup.setVisibility(View.GONE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
     private void getData() {
         loading = true;
 
@@ -322,55 +378,7 @@ public class CenterFragment extends Fragment {
                         try {
                             CenterModel model = new CenterModel(((JSONObject) object).getJSONObject("center"));
 
-                            setAcceptation(model);
-
-                            if (model.getManager().getUserId() != null && model.getManager().getName() != null) {
-                                extras.putString("manager_id", model.getManager().getUserId());
-                                extras.putString("manager_name", model.getManager().getName());
-                                binding.ownerTextView.setText(model.getManager().getName());
-                                binding.ownerTextView.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.ownerTextView.setVisibility(View.GONE);
-                            }
-
-                            if (model.getDetail().has("title") && !model.getDetail().isNull("title")) {
-                                extras.putString("title", model.getDetail().getString("title"));
-                                binding.nameTextView.setText(model.getDetail().getString("title"));
-                                binding.nameTextView.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.nameTextView.setVisibility(View.GONE);
-                            }
-
-                            if (model.getDetail().has("address") && !model.getDetail().isNull("address")) {
-                                extras.putString("address", model.getDetail().getString("address"));
-                            }
-
-                            if (model.getDetail().has("description") && !model.getDetail().isNull("description")) {
-                                extras.putString("description", model.getDetail().getString("description"));
-                                binding.descriptionTextView.setText(model.getDetail().getString("description"));
-                                binding.descriptionTextView.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.descriptionTextView.setVisibility(View.GONE);
-                            }
-
-                            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
-                                extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(1).getString("url"));
-                                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                                Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                            } else {
-                                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
-
-                                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                            }
-
-                            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
-                                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").toString());
-                                binding.mobileTextView.setText(model.getDetail().getJSONArray("phone_numbers").get(0).toString());
-                                binding.mobileGroup.setVisibility(View.VISIBLE);
-                            } else {
-                                binding.mobileGroup.setVisibility(View.GONE);
-                            }
+                            setData(model);
 
                             List rooms = new List();
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
@@ -510,11 +518,10 @@ public class CenterFragment extends Fragment {
                     if (!model.getAcceptation().getKicked_at().equals("")) {
                         setStatus("kicked");
                     } else {
-                        if (model.getAcceptation().getAccepted_at() != 0) {
+                        if (model.getAcceptation().getAccepted_at() != 0)
                             setStatus("accepted");
-                        } else {
+                        else
                             setStatus("awaiting");
-                        }
                     }
                     break;
             }
