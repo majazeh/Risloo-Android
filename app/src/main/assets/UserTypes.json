@@ -1,0 +1,30 @@
+[
+    {
+        "fa_title": "سیستم",
+        "en_title": "system"
+    },
+    {
+        "fa_title": "ادمین",
+        "en_title": "admin"
+    },
+    {
+        "fa_title": "عضو",
+        "en_title": "user"
+    },
+    {
+        "fa_title": "مدیر",
+        "en_title": "manager"
+    },
+    {
+        "fa_title": "اپراتور",
+        "en_title": "operator"
+    },
+    {
+        "fa_title": "روان\u200Cشناس",
+        "en_title": "psychologist"
+    },
+    {
+        "fa_title": "مراجع",
+        "en_title": "client"
+    }
+]

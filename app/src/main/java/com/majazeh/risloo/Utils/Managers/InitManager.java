@@ -234,10 +234,13 @@ public class InitManager {
 
                     private void detector(View view, int position) {
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                            if (position == 0) {
-                                view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
-                            } else {
-                                view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                            switch (arrayList.get(position)) {
+                                case "ورود به کاربری":
+                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
+                                    break;
+                                default:
+                                    view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                                    break;
                             }
                         }
                     }
@@ -245,17 +248,18 @@ public class InitManager {
                     private void setData(int position) {
                         dropdownTextView.setText(arrayList.get(position));
 
-                        if (position == 0) {
+                        if (dropdownTextView.getText().toString().equals("ورود به کاربری")) {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_user_cog_light, null));
                             ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
-                        } else if (position == 1) {
+                        } else if (dropdownTextView.getText().toString().contains("989")) {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_mobile_light, null));
                             ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
-                        } else if (position == 2) {
+
+                        } else if (dropdownTextView.getText().toString().contains("@")) {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_envelope_light, null));
