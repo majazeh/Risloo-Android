@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
@@ -28,8 +29,6 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
-
-import java.util.Objects;
 
 public class DateBottomSheet extends BottomSheetDialogFragment {
 
@@ -119,100 +118,46 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-                case R.id.createSessionFragment:
-                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createSessionFragment != null) {
-                        switch (method) {
-                            case "startDate":
-                            case "specifiedDate":
-                            case "periodStartDate":
-                            case "periodEndDate":
-                                CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+            Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+            if (fragment != null) {
 
-                                if (createSessionTimeFragment != null) {
-                                    createSessionTimeFragment.responseBottomSheet(method, getDate());
-                                }
-                                break;
-                            case "startAccurateDate":
-                            case "endAccurateDate":
-                                CreateSessionSessionFragment createSessionSessionFragment = (CreateSessionSessionFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-
-                                if (createSessionSessionFragment != null) {
-                                    createSessionSessionFragment.responseBottomSheet(method, getDate());
-                                }
-                                break;
-                        }
+                if (fragment instanceof CreateSessionFragment) {
+                    Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null) {
+                        if (childFragment instanceof CreateSessionTimeFragment)
+                            ((CreateSessionTimeFragment) childFragment).responseBottomSheet(method, getDate());
+                        else if (childFragment instanceof CreateSessionSessionFragment)
+                            ((CreateSessionSessionFragment) childFragment).responseBottomSheet(method, getDate());
                     }
-                    break;
-                case R.id.createScheduleFragment:
-                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createScheduleFragment != null) {
-                        switch (method) {
-                            case "startDate":
-                            case "specifiedDate":
-                            case "periodStartDate":
-                            case "periodEndDate":
-                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                if (createScheduleTimeFragment != null) {
-                                    createScheduleTimeFragment.responseBottomSheet(method, getDate());
-                                }
-                                break;
-                            case "startAccurateDate":
-                            case "endAccurateDate":
-                                CreateScheduleSessionFragment createScheduleSessionFragment = (CreateScheduleSessionFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-
-                                if (createScheduleSessionFragment != null) {
-                                    createScheduleSessionFragment.responseBottomSheet(method, getDate());
-                                }
-                                break;
-                        }
+                } else if (fragment instanceof CreateScheduleFragment) {
+                    Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null) {
+                        if (childFragment instanceof CreateScheduleTimeFragment)
+                            ((CreateScheduleTimeFragment) childFragment).responseBottomSheet(method, getDate());
+                        else if (childFragment instanceof CreateScheduleSessionFragment)
+                            ((CreateScheduleSessionFragment) childFragment).responseBottomSheet(method, getDate());
                     }
-                    break;
-                case R.id.createUserFragment:
-                    CreateUserFragment createUserFragment = (CreateUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createUserFragment != null) {
-                        createUserFragment.responseBottomSheet(method, getDate());
-                    }
-                    break;
-                case R.id.editSessionFragment:
-                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editSessionFragment != null) {
-                        switch (method) {
-                            case "startDate":
-                            case "specifiedDate":
-                            case "periodStartDate":
-                            case "periodEndDate":
-                                EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                                if (editSessionTimeFragment != null) {
-                                    editSessionTimeFragment.responseBottomSheet(method, getDate());
-                                }
-                                break;
-                            case "startAccurateDate":
-                            case "endAccurateDate":
-                                EditSessionSessionFragment editSessionSessionFragment = (EditSessionSessionFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
+                } else if (fragment instanceof CreateUserFragment) {
+                    ((CreateUserFragment) fragment).responseBottomSheet(method, getDate());
 
-                                if (editSessionSessionFragment != null) {
-                                    editSessionSessionFragment.responseBottomSheet(method, getDate());
-                                }
-                                break;
-                        }
+                } else if (fragment instanceof EditSessionFragment) {
+                    Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null) {
+                        if (childFragment instanceof EditSessionTimeFragment)
+                            ((EditSessionTimeFragment) childFragment).responseBottomSheet(method, getDate());
+                        else if (childFragment instanceof EditSessionSessionFragment)
+                            ((EditSessionSessionFragment) childFragment).responseBottomSheet(method, getDate());
                     }
-                    break;
-                case R.id.editUserFragment:
-                    EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editUserFragment != null) {
-                        EditUserPersonalFragment editUserPersonalFragment = (EditUserPersonalFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                        if (editUserPersonalFragment != null) {
-                            editUserPersonalFragment.responseBottomSheet(method, getDate());
-                        }
-                    }
-                    break;
+                } else if (fragment instanceof EditUserFragment) {
+                    Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (childFragment instanceof EditUserPersonalFragment)
+                            ((EditUserPersonalFragment) childFragment).responseBottomSheet(method, getDate());
+                }
             }
-
             dismiss();
         }).widget(binding.entryButton);
     }

@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -37,7 +38,6 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.SearchableHolder> {
 
@@ -116,99 +116,58 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     private void listener(SearchableHolder holder, TypeModel item) {
         ClickManager.onDelayedClickListener(() -> {
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.createCaseFragment:
-                    CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCaseFragment != null) {
-                        createCaseFragment.responseDialog(method, item);
-                    }
-                    break;
-                case R.id.createCaseUserFragment:
-                    CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCaseUserFragment != null) {
-                        createCaseUserFragment.responseDialog(method, item);
-                    }
-                    break;
-                case R.id.createCenterFragment:
-                    CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCenterFragment != null) {
-                        createCenterFragment.responseDialog(method, item);
-                    }
-                    break;
-                case R.id.createCenterUserFragment:
-                    CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCenterUserFragment != null) {
-                        createCenterUserFragment.responseDialog(method, item);
-                    }
-                    break;
-                case R.id.createRoomFragment:
-                    CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createRoomFragment != null) {
-                        createRoomFragment.responseDialog(method, item);
-                    }
-                    break;
-                case R.id.createRoomUserFragment:
-                    CreateRoomUserFragment createRoomUserFragment = (CreateRoomUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createRoomUserFragment != null) {
-                        createRoomUserFragment.responseDialog(method, item);
-                    }
-                    break;
-                case R.id.createSampleFragment:
-                    CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createSampleFragment != null) {
-                        createSampleFragment.responseDialog(method, item);
-                    }
-                    break;
-                case R.id.createScheduleFragment:
-                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createScheduleFragment != null) {
-                        switch (method) {
-                            case "cases":
-                                CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-                                if (createScheduleReferenceFragment != null) {
-                                    createScheduleReferenceFragment.responseDialog(method, item);
-                                }
-                                break;
-                            case "patternDays":
-                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-                                if (createScheduleTimeFragment != null) {
-                                    createScheduleTimeFragment.responseDialog(method, item);
-                                }
-                                break;
-                        }
-                    }
-                    break;
-                case R.id.createSessionFragment:
-                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createSessionFragment != null) {
-                        if (method.equals("patternDays")) {
-                            CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                            if (createSessionTimeFragment != null) {
-                                createSessionTimeFragment.responseDialog(method, item);
-                            }
-                        }
-                    }
-                    break;
-                case R.id.editCenterFragment:
-                    EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editCenterFragment != null) {
-                        EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
-                        if (editCenterDetailFragment != null) {
-                            editCenterDetailFragment.responseDialog(method, item);
-                        }
-                    }
-                    break;
-                case R.id.editSessionFragment:
-                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editSessionFragment != null) {
-                        if (method.equals("patternDays")) {
-                            EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                            if (editSessionTimeFragment != null) {
-                                editSessionTimeFragment.responseDialog(method, item);
-                            }
-                        }
-                    }
-                    break;
+            Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+            if (fragment != null) {
+                if (fragment instanceof CreateCaseFragment)
+                    ((CreateCaseFragment) fragment).responseDialog(method, item);
+
+                else if (fragment instanceof CreateCaseUserFragment)
+                    ((CreateCaseUserFragment) fragment).responseDialog(method, item);
+
+                else if (fragment instanceof CreateCenterFragment)
+                    ((CreateCenterFragment) fragment).responseDialog(method, item);
+
+                else if (fragment instanceof CreateCenterUserFragment)
+                    ((CreateCenterUserFragment) fragment).responseDialog(method, item);
+
+                else if (fragment instanceof CreateRoomFragment)
+                    ((CreateRoomFragment) fragment).responseDialog(method, item);
+
+                else if (fragment instanceof CreateRoomUserFragment)
+                    ((CreateRoomUserFragment) fragment).responseDialog(method, item);
+
+                else if (fragment instanceof CreateSampleFragment)
+                    ((CreateSampleFragment) fragment).responseDialog(method, item);
+
+                else if (fragment instanceof CreateScheduleFragment) {
+                    Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (childFragment instanceof CreateScheduleReferenceFragment)
+                            ((CreateScheduleReferenceFragment) childFragment).responseDialog(method, item);
+                        else if (childFragment instanceof CreateScheduleTimeFragment)
+                            ((CreateScheduleTimeFragment) childFragment).responseDialog(method, item);
+                }
+
+                else if (fragment instanceof CreateSessionFragment) {
+                    Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (childFragment instanceof CreateSessionTimeFragment)
+                            ((CreateSessionTimeFragment) childFragment).responseDialog(method, item);
+                }
+
+                else if (fragment instanceof EditCenterFragment) {
+                    Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (childFragment instanceof EditCenterDetailFragment)
+                            ((EditCenterDetailFragment) childFragment).responseDialog(method, item);
+                }
+
+                else if (fragment instanceof EditSessionFragment) {
+                    Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (childFragment instanceof EditSessionTimeFragment)
+                            ((EditSessionTimeFragment) childFragment).responseDialog(method, item);
+                }
             }
             notifyDataSetChanged();
         }).widget(holder.binding.getRoot());
@@ -254,152 +213,130 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     private void setActive(SearchableHolder holder, TypeModel item) {
         try {
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.createCaseFragment:
-                    CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCaseFragment != null) {
-                        switch (method) {
-                            case "references":
-                                detector(holder, createCaseFragment.referencesAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(createCaseFragment.referencesAdapter.getIds().size());
-                                break;
-                            case "rooms":
-                                detector(holder, createCaseFragment.roomId.equals(item.object.get("id").toString()));
-                                break;
-                        }
+            Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+            if (fragment != null) {
+                if (fragment instanceof CreateCaseFragment)
+                    switch (method) {
+                        case "references":
+                            detector(holder, ((CreateCaseFragment) fragment).referencesAdapter.getIds().contains(item.object.get("id").toString()));
+                            calculateCount(((CreateCaseFragment) fragment).referencesAdapter.getIds().size());
+                            break;
+                        case "rooms":
+                            detector(holder, ((CreateCaseFragment) fragment).roomId.equals(item.object.get("id").toString()));
+                            break;
                     }
-                    break;
-                case R.id.createCaseUserFragment:
-                    CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCaseUserFragment != null) {
-                        if (method.equals("references")) {
-                            detector(holder, createCaseUserFragment.referencesAdapter.getIds().contains(item.object.get("id").toString()));
-                            calculateCount(createCaseUserFragment.referencesAdapter.getIds().size());
-                        }
+
+                else if (fragment instanceof CreateCaseUserFragment)
+                    switch (method) {
+                        case "references":
+                            detector(holder, ((CreateCaseUserFragment) fragment).referencesAdapter.getIds().contains(item.object.get("id").toString()));
+                            calculateCount(((CreateCaseUserFragment) fragment).referencesAdapter.getIds().size());
+                            break;
                     }
-                    break;
-                case R.id.createCenterFragment:
-                    CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCenterFragment != null) {
-                        if (method.equals("managers")) {
+
+                else if (fragment instanceof CreateCenterFragment)
+                    switch (method) {
+                        case "managers":
                             UserModel model = (UserModel) item;
 
-                            detector(holder, createCenterFragment.managerId.equals(model.getId()));
-                        }
+                            detector(holder, ((CreateCenterFragment) fragment).managerId.equals(model.getId()));
+                            break;
                     }
-                    break;
-                case R.id.createCenterUserFragment:
-                    CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCenterUserFragment != null) {
-                        if (method.equals("rooms")) {
+
+                else if (fragment instanceof CreateCenterUserFragment)
+                    switch (method) {
+                        case "rooms":
                             RoomModel model = (RoomModel) item;
 
-                            detector(holder, createCenterUserFragment.roomId.equals(model.getRoomId()));
-                        }
+                            detector(holder, ((CreateCenterUserFragment) fragment).roomId.equals(model.getRoomId()));
+                            break;
                     }
-                    break;
-                case R.id.createRoomFragment:
-                    CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createRoomFragment != null) {
-                        if (method.equals("psychologies")) {
+
+                else if (fragment instanceof CreateRoomFragment)
+                    switch (method) {
+                        case "psychologies":
                             UserModel model = (UserModel) item;
 
-                            detector(holder, createRoomFragment.psychologyId.equals(model.getId()));
-                        }
+                            detector(holder, ((CreateRoomFragment) fragment).psychologyId.equals(model.getId()));
+                            break;
                     }
-                    break;
-                case R.id.createRoomUserFragment:
-                    CreateRoomUserFragment createRoomUserFragment = (CreateRoomUserFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createRoomUserFragment != null) {
-                        if (method.equals("references")) {
+
+                else if (fragment instanceof CreateRoomUserFragment)
+                    switch (method) {
+                        case "references":
                             UserModel model = (UserModel) item;
 
-                            detector(holder, createRoomUserFragment.referencesAdapter.getIds().contains(model.getId()));
-                            calculateCount(createRoomUserFragment.referencesAdapter.getIds().size());
-                        }
+                            detector(holder, ((CreateRoomUserFragment) fragment).referencesAdapter.getIds().contains(model.getId()));
+                            calculateCount(((CreateRoomUserFragment) fragment).referencesAdapter.getIds().size());
+                            break;
                     }
-                    break;
-                case R.id.createSampleFragment:
-                    CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createSampleFragment != null) {
-                        switch (method) {
-                            case "scales":
-                                detector(holder, createSampleFragment.scalesAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(createSampleFragment.scalesAdapter.getIds().size());
-                                break;
-                            case "references":
-                                detector(holder, createSampleFragment.referencesAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(createSampleFragment.referencesAdapter.getIds().size());
-                                break;
-                            case "rooms":
-                                detector(holder, createSampleFragment.roomId.equals(item.object.get("id").toString()));
-                                break;
-                            case "cases":
-                                detector(holder, createSampleFragment.caseId.equals(item.object.get("id").toString()));
-                                break;
-                            case "sessions":
-                                detector(holder, createSampleFragment.sessionId.equals(item.object.get("id").toString()));
-                                break;
-                        }
+
+                else if (fragment instanceof CreateSampleFragment)
+                    switch (method) {
+                        case "scales":
+                            detector(holder, ((CreateSampleFragment) fragment).scalesAdapter.getIds().contains(item.object.get("id").toString()));
+                            calculateCount(((CreateSampleFragment) fragment).scalesAdapter.getIds().size());
+                            break;
+                        case "references":
+                            detector(holder, ((CreateSampleFragment) fragment).referencesAdapter.getIds().contains(item.object.get("id").toString()));
+                            calculateCount(((CreateSampleFragment) fragment).referencesAdapter.getIds().size());
+                            break;
+                        case "rooms":
+                            detector(holder, ((CreateSampleFragment) fragment).roomId.equals(item.object.get("id").toString()));
+                            break;
+                        case "cases":
+                            detector(holder, ((CreateSampleFragment) fragment).caseId.equals(item.object.get("id").toString()));
+                            break;
+                        case "sessions":
+                            detector(holder, ((CreateSampleFragment) fragment).sessionId.equals(item.object.get("id").toString()));
+                            break;
                     }
-                    break;
-                case R.id.createScheduleFragment:
-                    CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createScheduleFragment != null) {
-                        switch (method) {
-                            case "cases":
-                                CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-                                if (createScheduleReferenceFragment != null) {
-                                    detector(holder, createScheduleReferenceFragment.caseId.equals(item.object.get("id").toString()));
-                                }
-                                break;
-                            case "patternDays":
-                                CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-                                if (createScheduleTimeFragment != null) {
-                                    detector(holder, createScheduleTimeFragment.patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                                    calculateCount(createScheduleTimeFragment.patternDaysAdapter.getIds().size());
-                                }
-                                break;
-                        }
-                    }
-                    break;
-                case R.id.createSessionFragment:
-                    CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createSessionFragment != null) {
-                        if (method.equals("patternDays")) {
-                            CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                            if (createSessionTimeFragment != null) {
-                                detector(holder, createSessionTimeFragment.patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(createSessionTimeFragment.patternDaysAdapter.getIds().size());
+
+                else if (fragment instanceof CreateScheduleFragment) {
+                    Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null) {
+                        if (method.equals("cases")) {
+                            if (childFragment instanceof CreateScheduleReferenceFragment)
+                                detector(holder, ((CreateScheduleReferenceFragment) childFragment).caseId.equals(item.object.get("id").toString()));
+                        } else if (method.equals("patternDays")) {
+                            if (childFragment instanceof CreateScheduleTimeFragment) {
+                                detector(holder, ((CreateScheduleTimeFragment) childFragment).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                                calculateCount(((CreateScheduleTimeFragment) childFragment).patternDaysAdapter.getIds().size());
                             }
                         }
                     }
-                    break;
-                case R.id.editCenterFragment:
-                    EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editCenterFragment != null) {
-                        if (method.equals("managers")) {
-                            EditCenterDetailFragment editCenterDetailFragment = (EditCenterDetailFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
-                            if (editCenterDetailFragment != null) {
+                }
+
+                else if (fragment instanceof CreateSessionFragment) {
+                    Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (method.equals("patternDays"))
+                            if (childFragment instanceof CreateSessionTimeFragment) {
+                                detector(holder, ((CreateSessionTimeFragment) childFragment).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                                calculateCount(((CreateSessionTimeFragment) childFragment).patternDaysAdapter.getIds().size());
+                            }
+                }
+
+                else if (fragment instanceof EditCenterFragment) {
+                    Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (method.equals("managers"))
+                            if (childFragment instanceof EditCenterDetailFragment) {
                                 UserModel model = (UserModel) item;
 
-                                detector(holder, editCenterDetailFragment.managerId.equals(model.getId()));
+                                detector(holder, ((EditCenterDetailFragment) childFragment).managerId.equals(model.getId()));
                             }
-                        }
-                    }
-                    break;
-                case R.id.editSessionFragment:
-                    EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editSessionFragment != null) {
-                        if (method.equals("patternDays")) {
-                            EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                            if (editSessionTimeFragment != null) {
-                                detector(holder, editSessionTimeFragment.patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(editSessionTimeFragment.patternDaysAdapter.getIds().size());
+                }
+
+                else if (fragment instanceof EditSessionFragment) {
+                    Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null)
+                        if (method.equals("patternDays"))
+                            if (childFragment instanceof EditSessionTimeFragment) {
+                                detector(holder, ((EditSessionTimeFragment) childFragment).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                                calculateCount(((EditSessionTimeFragment) childFragment).patternDaysAdapter.getIds().size());
                             }
-                        }
-                    }
-                    break;
+                }
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -403,34 +404,29 @@ public class MainActivity extends AppCompatActivity {
                         return;
                     }
                 }
-                switch (Objects.requireNonNull(navController.getCurrentDestination()).getId()) {
-                    case R.id.createCenterFragment:
-                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                        if (createCenterFragment != null) {
-                            createCenterFragment.avatarPath = IntentManager.camera(this);
-                        }
-                        break;
-                    case R.id.editCenterFragment:
-                        EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                        if (editCenterFragment != null) {
-                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
 
-                            if (editCenterAvatarFragment != null) {
-                                editCenterAvatarFragment.avatarPath = IntentManager.camera(this);
-                            }
-                        }
-                        break;
-                    case R.id.editUserFragment:
-                        EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                        if (editUserFragment != null) {
-                            EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
+                Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (fragment != null) {
 
-                            if (editUserAvatarFragment != null) {
-                                editUserAvatarFragment.avatarPath = IntentManager.camera(this);
-                            }
+                    if (fragment instanceof CreateCenterFragment) {
+                        ((CreateCenterFragment) fragment).avatarPath = IntentManager.camera(this);
+
+                    } else if (fragment instanceof EditCenterFragment) {
+                        Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                        if (childFragment != null) {
+                            if (childFragment instanceof EditCenterAvatarFragment)
+                                ((EditCenterAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
                         }
-                        break;
+
+                    } else if (fragment instanceof EditUserFragment) {
+                        Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                        if (childFragment != null) {
+                            if (childFragment instanceof EditUserAvatarFragment)
+                                ((EditUserAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
+                        }
+                    }
                 }
+
             }
         }
     }
@@ -440,67 +436,58 @@ public class MainActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (resultCode == RESULT_OK) {
-            switch (Objects.requireNonNull(navController.getCurrentDestination()).getId()) {
-                case R.id.createCenterFragment:
-                    CreateCenterFragment createCenterFragment = (CreateCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createCenterFragment != null) {
-                        if (requestCode == 300) {
-                            createCenterFragment.responseAction("gallery", data);
-                        } else if (requestCode == 400) {
-                            createCenterFragment.responseAction("camera", data);
-                        }
+            Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+            if (fragment != null) {
+
+                if (fragment instanceof CreateCenterFragment) {
+                    if (requestCode == 300)
+                        ((CreateCenterFragment) fragment).responseAction("gallery", data);
+                     else if (requestCode == 400)
+                        ((CreateCenterFragment) fragment).responseAction("camera", data);
+
+                } else if (fragment instanceof EditCenterFragment) {
+                    Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null) {
+                        if (childFragment instanceof EditCenterAvatarFragment)
+                            if (requestCode == 300)
+                                ((EditCenterAvatarFragment) childFragment).responseAction("gallery", data);
+                            else if (requestCode == 400)
+                                ((EditCenterAvatarFragment) childFragment).responseAction("camera", data);
                     }
-                    break;
-                case R.id.editCenterFragment:
-                    EditCenterFragment editCenterFragment = (EditCenterFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editCenterFragment != null) {
-                        EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
-                        if (editCenterAvatarFragment != null) {
-                            if (requestCode == 300) {
-                                editCenterAvatarFragment.responseAction("gallery", data);
-                            } else if (requestCode == 400) {
-                                editCenterAvatarFragment.responseAction("camera", data);
-                            }
-                        }
+
+                } else if (fragment instanceof EditUserFragment) {
+                    Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                    if (childFragment != null) {
+                        if (childFragment instanceof EditUserAvatarFragment)
+                            if (requestCode == 300)
+                                ((EditUserAvatarFragment) childFragment).responseAction("gallery", data);
+                            else if (requestCode == 400)
+                                ((EditUserAvatarFragment) childFragment).responseAction("camera", data);
                     }
-                    break;
-                case R.id.editUserFragment:
-                    EditUserFragment editUserFragment = (EditUserFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (editUserFragment != null) {
-                        EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
-                        if (editUserAvatarFragment != null) {
-                            if (requestCode == 300) {
-                                editUserAvatarFragment.responseAction("gallery", data);
-                            } else if (requestCode == 400) {
-                                editUserAvatarFragment.responseAction("camera", data);
-                            }
-                        }
-                    }
-                    break;
-                case R.id.createDocumentFragment:
-                    CreateDocumentFragment createDocumentFragment = (CreateDocumentFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createDocumentFragment != null) {
-                        if (requestCode == 100) {
-                            createDocumentFragment.responseAction("file", data);
-                        }
-                    }
-                    break;
-                case R.id.createPracticeFragment:
-                    CreatePracticeFragment createPracticeFragment = (CreatePracticeFragment) navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (createPracticeFragment != null) {
-                        if (requestCode == 100) {
-                            createPracticeFragment.responseAction("file", data);
-                        }
-                    }
-                    break;
+
+                } else if (fragment instanceof CreateDocumentFragment) {
+                    if (requestCode == 100)
+                        ((CreateDocumentFragment) fragment).responseAction("file", data);
+
+                } else if (fragment instanceof CreatePracticeFragment) {
+                    if (requestCode == 100)
+                        ((CreatePracticeFragment) fragment).responseAction("file", data);
+                }
             }
         } else if (resultCode == RESULT_CANCELED) {
-            if (requestCode == 100) {
-                Toast.makeText(this, "File Exception", Toast.LENGTH_SHORT).show();
-            } else if (requestCode == 300) {
-                Toast.makeText(this, "Gallery Exception", Toast.LENGTH_SHORT).show();
-            } else if (requestCode == 400) {
-                Toast.makeText(this, "Camera Exception", Toast.LENGTH_SHORT).show();
+            switch (requestCode) {
+                case 100:
+                    Toast.makeText(this, "File Exception", Toast.LENGTH_SHORT).show();
+                    break;
+                case 200:
+                    Toast.makeText(this, "Storage Exception", Toast.LENGTH_SHORT).show();
+                    break;
+                case 300:
+                    Toast.makeText(this, "Gallery Exception", Toast.LENGTH_SHORT).show();
+                    break;
+                case 400:
+                    Toast.makeText(this, "Camera Exception", Toast.LENGTH_SHORT).show();
+                    break;
             }
         }
     }

@@ -19,6 +19,7 @@ import android.view.Window;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -43,6 +44,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
@@ -57,7 +59,6 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class SearchableDialog extends AppCompatDialogFragment {
 
@@ -255,37 +256,32 @@ public class SearchableDialog extends AppCompatDialogFragment {
             binding.searchProgressBar.setVisibility(View.VISIBLE);
         }
 
-        switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-            case R.id.createCaseFragment:
-                CreateCaseFragment createCaseFragment = (CreateCaseFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createCaseFragment != null) {
-                    switch (method) {
-                        case "references":
-                            searchableAdapter.setItems(values, method, binding.countTextView);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                        case "rooms":
-                            searchableAdapter.setItems(values, method, null);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                    }
-                }
-                break;
-            case R.id.createCaseUserFragment:
-                CreateCaseUserFragment createCaseUserFragment = (CreateCaseUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createCaseUserFragment != null) {
-                    if (method.equals("references")) {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof CreateCaseFragment)
+                switch (method) {
+                    case "references":
                         searchableAdapter.setItems(values, method, binding.countTextView);
                         binding.listRecyclerView.setAdapter(searchableAdapter);
-                    }
+                        break;
+                    case "rooms":
+                        searchableAdapter.setItems(values, method, null);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        break;
                 }
-                break;
-            case R.id.createCenterFragment:
-                CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createCenterFragment != null) {
-                    if (method.equals("managers")) {
 
-                        if (createCenterFragment.type.equals("personal_clinic"))
+            else if (fragment instanceof CreateCaseUserFragment)
+                switch (method) {
+                    case "references":
+                        searchableAdapter.setItems(values, method, binding.countTextView);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        break;
+                }
+
+            else if (fragment instanceof CreateCenterFragment)
+                switch (method) {
+                    case "managers":
+                        if (((CreateCenterFragment) fragment).type.equals("personal_clinic"))
                             data.put("personal_clinic", "no");
                         else
                             data.put("personal_clinic", "yes");
@@ -324,14 +320,13 @@ public class SearchableDialog extends AppCompatDialogFragment {
                                 }
                             }
                         });
-                    }
+                        break;
                 }
-                break;
-            case R.id.createCenterUserFragment:
-                CreateCenterUserFragment createCenterUserFragment = (CreateCenterUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createCenterUserFragment != null) {
-                    if (method.equals("rooms")) {
-                        data.put("center", createCenterUserFragment.centerId);
+
+            else if (fragment instanceof CreateCenterUserFragment)
+                switch (method) {
+                    case "rooms":
+                        data.put("center", ((CreateCenterUserFragment) fragment).centerId);
 
                         Room.list(data, header, new Response() {
                             @Override
@@ -367,14 +362,13 @@ public class SearchableDialog extends AppCompatDialogFragment {
                                 }
                             }
                         });
-                    }
+                        break;
                 }
-                break;
-            case R.id.createRoomFragment:
-                CreateRoomFragment createRoomFragment = (CreateRoomFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createRoomFragment != null) {
-                    if (method.equals("psychologies")) {
-                        data.put("id", createRoomFragment.centerId);
+
+            else if (fragment instanceof CreateRoomFragment)
+                switch (method) {
+                    case "psychologies":
+                        data.put("id", ((CreateRoomFragment) fragment).centerId);
                         data.put("has_room", "no");
                         data.put("position", "manager,operator,psychologist,under_supervision");
 
@@ -412,15 +406,14 @@ public class SearchableDialog extends AppCompatDialogFragment {
                                 }
                             }
                         });
-                    }
+                        break;
                 }
-                break;
-            case R.id.createRoomUserFragment:
-                CreateRoomUserFragment createRoomUserFragment = (CreateRoomUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createRoomUserFragment != null) {
-                    if (method.equals("references")) {
-                        data.put("id", createRoomUserFragment.centerId);
-                        data.put("acceptation_room", createRoomUserFragment.roomId);
+
+            else if (fragment instanceof CreateRoomUserFragment)
+                switch (method) {
+                    case "references":
+                        data.put("id", ((CreateRoomUserFragment) fragment).centerId);
+                        data.put("acceptation_room", ((CreateRoomUserFragment) fragment).roomId);
 
                         Center.users(data, header, new Response() {
                             @Override
@@ -456,128 +449,116 @@ public class SearchableDialog extends AppCompatDialogFragment {
                                 }
                             }
                         });
-                    }
+                        break;
                 }
-                break;
-            case R.id.createSampleFragment:
-                CreateSampleFragment createSampleFragment = (CreateSampleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createSampleFragment != null) {
-                    switch (method) {
-                        case "scales":
-                            searchableAdapter.setItems(values, method, binding.countTextView);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                        case "references":
-                            searchableAdapter.setItems(values, method, binding.countTextView);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                        case "rooms":
+
+            else if (fragment instanceof CreateSampleFragment)
+                switch (method) {
+                    case "scales":
+                        searchableAdapter.setItems(values, method, binding.countTextView);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        break;
+                    case "references":
+                        searchableAdapter.setItems(values, method, binding.countTextView);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        break;
+                    case "rooms":
+                        searchableAdapter.setItems(values, method, null);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        break;
+                    case "cases":
+                        searchableAdapter.setItems(values, method, null);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        break;
+                    case "sessions":
+                        searchableAdapter.setItems(values, method, null);
+                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        break;
+                }
+
+            else if (fragment instanceof CreateScheduleFragment) {
+                Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null) {
+                    if (method.equals("cases")) {
+                        if (childFragment instanceof CreateScheduleReferenceFragment) {
                             searchableAdapter.setItems(values, method, null);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                        case "cases":
-                            searchableAdapter.setItems(values, method, null);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                        case "sessions":
-                            searchableAdapter.setItems(values, method, null);
-                            binding.listRecyclerView.setAdapter(searchableAdapter);
-                            break;
-                    }
-                }
-                break;
-            case R.id.createScheduleFragment:
-                CreateScheduleFragment createScheduleFragment = (CreateScheduleFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createScheduleFragment != null) {
-                    switch (method) {
-                        case "cases":
-                            CreateScheduleReferenceFragment createScheduleReferenceFragment = (CreateScheduleReferenceFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-                            if (createScheduleReferenceFragment != null) {
-                                searchableAdapter.setItems(values, method, null);
-                                binding.listRecyclerView.setAdapter(searchableAdapter);
-                            }
-                            break;
-                        case "patternDays":
-                            CreateScheduleTimeFragment createScheduleTimeFragment = (CreateScheduleTimeFragment) createScheduleFragment.adapter.hashMap.get(createScheduleFragment.binding.viewPager.getRoot().getCurrentItem());
-                            if (createScheduleTimeFragment != null) {
-                                searchableAdapter.setItems(values, method, binding.countTextView);
-                                binding.listRecyclerView.setAdapter(searchableAdapter);
-                            }
-                            break;
-                    }
-                }
-                break;
-            case R.id.createSessionFragment:
-                CreateSessionFragment createSessionFragment = (CreateSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (createSessionFragment != null) {
-                    if (method.equals("patternDays")) {
-                        CreateSessionTimeFragment createSessionTimeFragment = (CreateSessionTimeFragment) createSessionFragment.adapter.hashMap.get(createSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                        if (createSessionTimeFragment != null) {
+                        }
+                    } else if (method.equals("patternDays")) {
+                        if (childFragment instanceof CreateScheduleTimeFragment) {
                             searchableAdapter.setItems(values, method, binding.countTextView);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                         }
                     }
                 }
-                break;
-            case R.id.editCenterFragment:
-                EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (editCenterFragment != null) {
-                    if (method.equals("managers")) {
+            }
 
-                        if (editCenterFragment.type.equals("personal_clinic"))
-                            data.put("personal_clinic", "no");
-                        else
-                            data.put("personal_clinic", "yes");
-
-                        User.list(data, header, new Response() {
-                            @Override
-                            public void onOK(Object object) {
-                                List list = (List) object;
-
-                                if (isAdded()) {
-                                    requireActivity().runOnUiThread(() -> {
-                                        if (!list.data().isEmpty()) {
-                                            searchableAdapter.setItems(list.data(), method, null);
-                                            binding.listRecyclerView.setAdapter(searchableAdapter);
-
-                                            binding.emptyTextView.setVisibility(View.GONE);
-                                        } else {
-                                            searchableAdapter.clearItems();
-
-                                            binding.emptyTextView.setVisibility(View.VISIBLE);
-                                        }
-
-                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
-                                            binding.searchProgressBar.setVisibility(View.GONE);
-                                    });
-                                }
-                            }
-
-                            @Override
-                            public void onFailure(String response) {
-                                if (isAdded()) {
-                                    requireActivity().runOnUiThread(() -> {
-                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
-                                            binding.searchProgressBar.setVisibility(View.GONE);
-                                    });
-                                }
-                            }
-                        });
-                    }
-                }
-                break;
-            case R.id.editSessionFragment:
-                EditSessionFragment editSessionFragment = (EditSessionFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (editSessionFragment != null) {
-                    if (method.equals("patternDays")) {
-                        EditSessionTimeFragment editSessionTimeFragment = (EditSessionTimeFragment) editSessionFragment.adapter.hashMap.get(editSessionFragment.binding.viewPager.getRoot().getCurrentItem());
-                        if (editSessionTimeFragment != null) {
+            else if (fragment instanceof CreateSessionFragment) {
+                Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (method.equals("patternDays"))
+                        if (childFragment instanceof CreateSessionTimeFragment) {
                             searchableAdapter.setItems(values, method, binding.countTextView);
                             binding.listRecyclerView.setAdapter(searchableAdapter);
                         }
-                    }
-                }
-                break;
+            }
+
+            else if (fragment instanceof EditCenterFragment) {
+                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (method.equals("managers"))
+                        if (childFragment instanceof EditCenterDetailFragment) {
+                            if (((EditCenterDetailFragment) childFragment).type.equals("personal_clinic"))
+                                data.put("personal_clinic", "no");
+                            else
+                                data.put("personal_clinic", "yes");
+
+                            User.list(data, header, new Response() {
+                                @Override
+                                public void onOK(Object object) {
+                                    List list = (List) object;
+
+                                    if (isAdded()) {
+                                        requireActivity().runOnUiThread(() -> {
+                                            if (!list.data().isEmpty()) {
+                                                searchableAdapter.setItems(list.data(), method, null);
+                                                binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                                binding.emptyTextView.setVisibility(View.GONE);
+                                            } else {
+                                                searchableAdapter.clearItems();
+
+                                                binding.emptyTextView.setVisibility(View.VISIBLE);
+                                            }
+
+                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                                binding.searchProgressBar.setVisibility(View.GONE);
+                                        });
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(String response) {
+                                    if (isAdded()) {
+                                        requireActivity().runOnUiThread(() -> {
+                                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                                binding.searchProgressBar.setVisibility(View.GONE);
+                                        });
+                                    }
+                                }
+                            });
+                        }
+            }
+
+            else if (fragment instanceof EditSessionFragment) {
+                Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (method.equals("patternDays"))
+                        if (childFragment instanceof EditSessionTimeFragment) {
+                            searchableAdapter.setItems(values, method, binding.countTextView);
+                            binding.listRecyclerView.setAdapter(searchableAdapter);
+                        }
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
@@ -22,8 +23,6 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetImageBinding;
-
-import java.util.Objects;
 
 public class ImageBottomSheet extends BottomSheetDialogFragment {
 
@@ -66,33 +65,26 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
-                switch (Objects.requireNonNull(((MainActivity) requireActivity()).navController.getCurrentDestination()).getId()) {
-                    case R.id.createCenterFragment:
-                        CreateCenterFragment createCenterFragment = (CreateCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                        if (createCenterFragment != null) {
-                            createCenterFragment.avatarPath = IntentManager.camera(requireActivity());
-                        }
-                        break;
-                    case R.id.editCenterFragment:
-                        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                        if (editCenterFragment != null) {
-                            EditCenterAvatarFragment editCenterAvatarFragment = (EditCenterAvatarFragment) editCenterFragment.adapter.hashMap.get(editCenterFragment.binding.viewPager.getRoot().getCurrentItem());
+                Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (fragment != null) {
 
-                            if (editCenterAvatarFragment != null) {
-                                editCenterAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
-                            }
-                        }
-                        break;
-                    case R.id.editUserFragment:
-                        EditUserFragment editUserFragment = (EditUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                        if (editUserFragment != null) {
-                            EditUserAvatarFragment editUserAvatarFragment = (EditUserAvatarFragment) editUserFragment.adapter.hashMap.get(editUserFragment.binding.viewPager.getRoot().getCurrentItem());
+                    if (fragment instanceof CreateCenterFragment) {
+                        ((CreateCenterFragment) fragment).avatarPath = IntentManager.camera(requireActivity());
 
-                            if (editUserAvatarFragment != null) {
-                                editUserAvatarFragment.avatarPath = IntentManager.camera(requireActivity());
-                            }
+                    } else if (fragment instanceof EditCenterFragment) {
+                        Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                        if (childFragment != null) {
+                            if (childFragment instanceof EditCenterAvatarFragment)
+                                ((EditCenterAvatarFragment) childFragment).avatarPath = IntentManager.camera(requireActivity());
                         }
-                        break;
+
+                    } else if (fragment instanceof EditUserFragment) {
+                        Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                        if (childFragment != null) {
+                            if (childFragment instanceof EditUserAvatarFragment)
+                                ((EditUserAvatarFragment) childFragment).avatarPath = IntentManager.camera(requireActivity());
+                        }
+                    }
                 }
             }
 
