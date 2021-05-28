@@ -52,7 +52,7 @@ public class CreateRoomUserFragment extends Fragment {
     private LinearLayoutManager referencesLayoutManager;
 
     // Vars
-    public String roomId = "";
+    public String roomId = "", centerId = "";
 
     @Nullable
     @Override
@@ -120,6 +120,10 @@ public class CreateRoomUserFragment extends Fragment {
                 roomId = getArguments().getString("id");
             }
 
+            if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
+                centerId = getArguments().getString("center_id");
+            }
+
             if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
                 try {
                     JSONArray clients = new JSONArray(getArguments().getString("clients"));
@@ -182,7 +186,7 @@ public class CreateRoomUserFragment extends Fragment {
 
         HashMap data = new HashMap<>();
         data.put("id", roomId);
-        data.put("clients", referencesAdapter.getIds());
+        data.put("user_id", referencesAdapter.getIds());
 
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());

@@ -419,7 +419,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 CreateRoomUserFragment createRoomUserFragment = (CreateRoomUserFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
                 if (createRoomUserFragment != null) {
                     if (method.equals("references")) {
-                        data.put("id", createRoomUserFragment.roomId);
+                        data.put("id", createRoomUserFragment.centerId);
+                        data.put("acceptation_room", createRoomUserFragment.roomId);
 
                         Center.users(data, header, new Response() {
                             @Override
@@ -429,7 +430,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                                 if (isAdded()) {
                                     requireActivity().runOnUiThread(() -> {
                                         if (!list.data().isEmpty()) {
-                                            searchableAdapter.setItems(list.data(), method, null);
+                                            searchableAdapter.setItems(list.data(), method, binding.countTextView);
                                             binding.listRecyclerView.setAdapter(searchableAdapter);
 
                                             binding.emptyTextView.setVisibility(View.GONE);

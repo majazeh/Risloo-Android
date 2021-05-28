@@ -337,14 +337,14 @@ public class RoomFragment extends Fragment {
                             RoomModel model = new RoomModel(((JSONObject) object).getJSONObject("room"));
 
 //                            setAcceptation(model);
-//
-//                            if (model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title")) {
-//                                extras.putString("title", model.getRoomCenter().getDetail().getString("title"));
-//                                binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
-//                                binding.nameTextView.setVisibility(View.VISIBLE);
-//                            } else {
-//                                binding.nameTextView.setVisibility(View.GONE);
-//                            }
+
+                            if (model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title")) {
+                                extras.putString("title", model.getRoomCenter().getDetail().getString("title"));
+                                binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
+                                binding.nameTextView.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.nameTextView.setVisibility(View.GONE);
+                            }
 
                             if (model.getRoomManager().getUserId() != null && model.getRoomManager().getName() != null) {
                                 extras.putString("manager_id", model.getRoomManager().getUserId());
@@ -356,36 +356,40 @@ public class RoomFragment extends Fragment {
                                 }
                             }
 
-//                            if (model.getRoomCenter().getDetail().has("address") && !model.getRoomCenter().getDetail().isNull("address")) {
-//                                extras.putString("address", model.getRoomCenter().getDetail().getString("address"));
-//                            }
-//
-//                            if (model.getRoomCenter().getDetail().has("description") && !model.getRoomCenter().getDetail().isNull("description")) {
-//                                extras.putString("description", model.getRoomCenter().getDetail().getString("description"));
-//                                binding.descriptionTextView.setText(model.getRoomCenter().getDetail().getString("description"));
-//                                binding.descriptionTextView.setVisibility(View.VISIBLE);
-//                            } else {
-//                                binding.descriptionTextView.setVisibility(View.GONE);
-//                            }
-//
-//                            if (model.getRoomCenter().getDetail().has("avatar") && !model.getRoomCenter().getDetail().isNull("avatar") && model.getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
-//                                extras.putString("avatar", model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url"));
-//                                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-//                                Picasso.get().load(model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-//                            } else {
-//                                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-//                                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
-//
-//                                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-//                            }
-//
-//                            if (model.getRoomCenter().getDetail().has("phone_numbers") && !model.getRoomCenter().getDetail().isNull("phone_numbers") && model.getRoomCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
-//                                extras.putString("phone_numbers", model.getRoomCenter().getDetail().getJSONArray("phone_numbers").toString());
-//                                binding.mobileTextView.setText(model.getRoomCenter().getDetail().getJSONArray("phone_numbers").get(0).toString());
-//                                binding.mobileGroup.setVisibility(View.VISIBLE);
-//                            } else {
-//                                binding.mobileGroup.setVisibility(View.GONE);
-//                            }
+                            if (model.getRoomCenter().getDetail().has("address") && !model.getRoomCenter().getDetail().isNull("address")) {
+                                extras.putString("address", model.getRoomCenter().getDetail().getString("address"));
+                            }
+
+                            if (model.getRoomCenter().getDetail().has("description") && !model.getRoomCenter().getDetail().isNull("description")) {
+                                extras.putString("description", model.getRoomCenter().getDetail().getString("description"));
+                                binding.descriptionTextView.setText(model.getRoomCenter().getDetail().getString("description"));
+                                binding.descriptionTextView.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.descriptionTextView.setVisibility(View.GONE);
+                            }
+
+                            if (model.getRoomCenter().getDetail().has("avatar") && !model.getRoomCenter().getDetail().isNull("avatar") && model.getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
+                                extras.putString("avatar", model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url"));
+                                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                                Picasso.get().load(model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                            } else {
+                                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+
+                                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                            }
+
+                            if (model.getRoomCenter().getDetail().has("phone_numbers") && !model.getRoomCenter().getDetail().isNull("phone_numbers") && model.getRoomCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
+                                extras.putString("phone_numbers", model.getRoomCenter().getDetail().getJSONArray("phone_numbers").toString());
+                                binding.mobileTextView.setText(model.getRoomCenter().getDetail().getJSONArray("phone_numbers").get(0).toString());
+                                binding.mobileGroup.setVisibility(View.VISIBLE);
+                            } else {
+                                binding.mobileGroup.setVisibility(View.GONE);
+                            }
+
+                            if (model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
+                                extras.putString("center_id", model.getRoomCenter().getCenterId());
+                            }
 
                             List cases = new List();
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {

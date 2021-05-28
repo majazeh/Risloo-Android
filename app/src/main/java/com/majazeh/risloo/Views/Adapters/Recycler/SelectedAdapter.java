@@ -27,6 +27,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
@@ -265,6 +266,12 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     holder.binding.subTextView.setText(item.object.getString("subtitle"));
                     break;
                 case "references":
+                    UserModel model = (UserModel) item;
+
+                    holder.binding.titleTextView.setText(model.getName());
+
+                    holder.binding.subTextView.setVisibility(View.GONE);
+                    holder.binding.subTextView.setText("");
                 case "phones":
                 case "axises":
                 case "patternDays":

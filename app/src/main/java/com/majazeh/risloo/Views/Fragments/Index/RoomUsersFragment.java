@@ -169,6 +169,10 @@ public class RoomUsersFragment extends Fragment {
                 extras.putString("id", roomId);
                 data.put("id", roomId);
             }
+
+            if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
+                extras.putString("center_id", getArguments().getString("center_id"));
+            }
         }
     }
 
