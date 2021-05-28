@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.mre.ligheh.API.Response;
@@ -137,7 +138,7 @@ public class EditCenterUserFragment extends Fragment {
             }
 
             if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
-                position = getArguments().getString("position");
+                position = SelectionManager.getPosition(requireActivity(), "fa", getArguments().getString("position"));
                 for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
                         binding.positionIncludeLayout.selectSpinner.setSelection(i);
@@ -178,7 +179,7 @@ public class EditCenterUserFragment extends Fragment {
         HashMap data = new HashMap<>();
         data.put("id", centerId);
         data.put("userId", userId);
-        data.put("position", position);
+        data.put("position", SelectionManager.getPosition(requireActivity(), "en", position));
         data.put("nickname", nickname);
         data.put("status", status);
 

@@ -18,6 +18,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
@@ -109,21 +110,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
-
-                    switch (pos) {
-                        case "مدیر":
-                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "manager", "position");
-                            break;
-                        case "مراجع":
-                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "client", "position");
-                            break;
-                        case "اپراتور":
-                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "operator", "position");
-                            break;
-                        case "روان\u200Cشناس":
-                            doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), "psychologist", "position");
-                            break;
-                    }
+                    doWork(holder, getExtras(holder, model).getString("id"), getExtras(holder, model).getString("user_id"), SelectionManager.getPosition(activity, "en", pos), "position");
 
                     userSelect = false;
                 }
@@ -324,16 +311,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         }
 
         extras.putString("user_id", model.getId());
-        extras.putString("position", holder.binding.positionSpinner.getSelectedItem().toString());
         extras.putString("nickname", model.getName());
         extras.putString("mobile", model.getMobile());
-
-        if (holder.binding.statusTexView.getText().toString().equals("پذیرش شده"))
-            extras.putString("status", "accept");
-        else if (holder.binding.statusTexView.getText().toString().equals("تعلیق شده"))
-            extras.putString("status", "kick");
-        else
-            extras.putString("status", "none");
+        extras.putString("position", SelectionManager.getPosition(activity, "en", holder.binding.positionSpinner.getSelectedItem().toString()));
+        extras.putString("status", SelectionManager.getAcceptation(activity, "en", holder.binding.statusTexView.getText().toString()));
 
         return extras;
     }

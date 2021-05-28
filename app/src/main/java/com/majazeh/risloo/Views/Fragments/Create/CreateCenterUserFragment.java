@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.BottomSheets.AuthBottomSheet;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -179,7 +180,7 @@ public class CreateCenterUserFragment extends Fragment {
             }
 
             if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
-                position = getArguments().getString("position");
+                position = SelectionManager.getPosition(requireActivity(), "fa", getArguments().getString("position"));
                 for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
                     if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
                         binding.positionIncludeLayout.selectSpinner.setSelection(i);
@@ -262,7 +263,7 @@ public class CreateCenterUserFragment extends Fragment {
         data.put("mobile", mobile);
 
         if (type.equals("counseling_center")) {
-            data.put("position", position);
+            data.put("position", SelectionManager.getPosition(requireActivity(), "en", position));
 
             if (position.equals("مراجع")) {
                 data.put("room_id", roomId);

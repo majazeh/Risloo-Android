@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomUserBinding;
@@ -95,30 +96,9 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
 
-        setPosition(holder, model);
+        holder.binding.positionTextView.setText(SelectionManager.getPosition(activity, "fa", model.getPosition()));
 
         setAcceptation(holder, model);
-    }
-
-    private void setPosition(RoomUsersHolder holder, UserModel model) {
-        switch (model.getPosition()) {
-            case "مدیر":
-            case "manager":
-                holder.binding.positionTextView.setText(activity.getResources().getString(R.string.RoomUsersFragmentPositionManager));
-                break;
-            case "اپراتور":
-            case "operator":
-                holder.binding.positionTextView.setText(activity.getResources().getString(R.string.RoomUsersFragmentPositionOperator));
-                break;
-            case "روان\u200Cشناس":
-            case "psychologist":
-                holder.binding.positionTextView.setText(activity.getResources().getString(R.string.RoomUsersFragmentPositionPsychologist));
-                break;
-            case "مراجع":
-            case "client":
-                holder.binding.positionTextView.setText(activity.getResources().getString(R.string.RoomUsersFragmentPositionClient));
-                break;
-        }
     }
 
     private void setAcceptation(RoomUsersHolder holder, UserModel model) {
@@ -138,16 +118,10 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
         }
 
         extras.putString("user_id", model.getId());
-        extras.putString("position", model.getPosition());
         extras.putString("nickname", model.getName());
         extras.putString("mobile", model.getMobile());
-
-        if (holder.binding.statusTexView.getText().toString().equals("پذیرش شده"))
-            extras.putString("status", "accept");
-        else if (holder.binding.statusTexView.getText().toString().equals("تعلیق شده"))
-            extras.putString("status", "kick");
-        else
-            extras.putString("status", "none");
+        extras.putString("position", model.getPosition());
+        extras.putString("status", SelectionManager.getAcceptation(activity, "en", holder.binding.statusTexView.getText().toString()));
 
         return extras;
     }
