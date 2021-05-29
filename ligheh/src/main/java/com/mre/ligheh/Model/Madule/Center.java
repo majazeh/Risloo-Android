@@ -3,6 +3,7 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -32,6 +33,17 @@ public class Center extends Model {
         try {
             if (has(data, "id"))
                 Model.show(endpoint + "/" + data.get("id"), data, header, response, CenterModel.class);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void schedule(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.show(endpoint + "/" + data.get("id") + "/schedules", data, header, response, ScheduleModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
