@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -22,6 +23,12 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ScalesAdapter;
 import com.majazeh.risloo.databinding.FragmentScalesBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Sample;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class ScalesFragment extends Fragment {
 
@@ -36,6 +43,10 @@ public class ScalesFragment extends Fragment {
     private LinearLayoutManager layoutManager;
     private Handler handler;
 
+    // Vars
+    private HashMap data, header;
+    private boolean loading = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -45,7 +56,7 @@ public class ScalesFragment extends Fragment {
 
         listener();
 
-        setData();
+        getData();
 
         return binding.getRoot();
     }
@@ -58,6 +69,11 @@ public class ScalesFragment extends Fragment {
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         handler = new Handler();
+
+        data = new HashMap<>();
+        data.put("page", 1);
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
 
@@ -87,7 +103,10 @@ public class ScalesFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    // TODO : Place Code Here
+                    binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
+                    data.put("page", 1);
+                    data.put("q", String.valueOf(s));
+                    getData();
                 }, 750);
             }
 
@@ -96,18 +115,87 @@ public class ScalesFragment extends Fragment {
 
             }
         });
+
+        binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (scrollY > 0) {
+                int visibleItemCount = layoutManager.getChildCount();
+                int totalItemCount = layoutManager.getItemCount();
+                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+
+                if (!loading) {
+                    if ((pastVisiblesItems + visibleItemCount) >= totalItemCount) {
+                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                        if (data.containsKey("page")) {
+                            int page = (int) data.get("page");
+                            page++;
+
+                            data.put("page", page);
+                        } else {
+                            data.put("page", 1);
+                        }
+                        getData();
+                    }
+                }
+            }
+        });
     }
 
-    private void setData() {
-//        adapter.setScales(null);
-        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+    private void getData() {
+        loading = true;
 
-        new Handler().postDelayed(() -> {
-            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
+        Sample.assessmentsList(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List scales = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (Objects.equals(data.get("page"), 1))
+                            adapter.clearScales();
+
+                        if (!scales.data().isEmpty()) {
+                            adapter.setScales(scales.data());
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (adapter.getItemCount() == 0) {
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                        }
+                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                    });
+                    loading = false;
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                    });
+                    loading = false;
+                }
+            }
+        });
     }
 
     @Override

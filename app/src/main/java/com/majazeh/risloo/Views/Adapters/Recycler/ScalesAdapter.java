@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +14,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHolder> {
 
@@ -20,7 +25,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
     private Activity activity;
 
     // Vars
-//    private ArrayList<Scale> scales;
+    private ArrayList<TypeModel> scales;
 
     public ScalesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -34,25 +39,37 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
     @Override
     public void onBindViewHolder(@NonNull ScalesHolder holder, int i) {
-//        Scales scale = scales.get(i);
+        SampleModel scale = (SampleModel) scales.get(i);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, scale);
 
-        setData(holder);
+        setData(holder, scale);
     }
 
     @Override
     public int getItemCount() {
-//        return scales.size();
-        return 4;
+        if (this.scales != null)
+            return scales.size();
+        else
+            return 0;
     }
 
-//    public void setScales(ArrayList<Scale> scales) {
-//        this.scales = scales;
-//        notifyDataSetChanged();
-//    }
+    public void setScales(ArrayList<TypeModel> scales) {
+        if (this.scales == null)
+            this.scales = scales;
+        else
+            this.scales.addAll(scales);
+        notifyDataSetChanged();
+    }
+
+    public void clearScales() {
+        if (this.scales != null) {
+            this.scales.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     private void detector(ScalesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -62,24 +79,38 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         }
     }
 
-    private void listener(ScalesHolder holder) {
+    private void listener(ScalesHolder holder, SampleModel model) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.createSampleFragment)).widget(holder.binding.createTextView);
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.createSampleFragment, getExtras(model))).widget(holder.binding.createTextView);
     }
 
-    private void setData(ScalesHolder holder) {
+    private void setData(ScalesHolder holder, SampleModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.serialTextView.setText("$Raven-9Q");
-        holder.binding.nameTextView.setText("آزمون ریون کودکان (5)");
-        holder.binding.editionTextView.setText("کودکان - 5");
+        holder.binding.serialTextView.setText(model.getSampleId());
+        holder.binding.nameTextView.setText(model.getSampleTitle());
+
+        if (!model.getSampleEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        else
+            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+    }
+
+    private Bundle getExtras(SampleModel model) {
+        Bundle extras = new Bundle();
+//        try {
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        return extras;
     }
 
     public class ScalesHolder extends RecyclerView.ViewHolder {
