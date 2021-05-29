@@ -21,9 +21,17 @@ public class Sample extends Model {
         model = (SampleModel) super.data;
     }
 
-    public static void list(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+    public static void assessmentsList(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             Model.list(endpoint, data, header, response, SampleModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void sampleList(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.list(endpoint + "/samples", data, header, response, SampleModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -21,7 +21,10 @@ import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.SamplesAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
@@ -158,29 +161,7 @@ public class DashboardFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        // Cases Data
-                        binding.casesGroup.setVisibility(View.GONE);
-                        binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.casesShimmerLayout.getRoot().stopShimmer();
 
-                        // Samples Data
-                        binding.samplesGroup.setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.samplesShimmerLayout.getRoot().stopShimmer();
-
-                        // Rooms Data
-                        binding.roomsGroup.setVisibility(View.GONE);
-                        binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.roomsShimmerLayout.getRoot().stopShimmer();
-
-                        // Centers Data
-                        binding.centersGroup.setVisibility(View.GONE);
-                        binding.centersShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.centersShimmerLayout.getRoot().stopShimmer();
-                    });
-                }
             }
         });
     }
