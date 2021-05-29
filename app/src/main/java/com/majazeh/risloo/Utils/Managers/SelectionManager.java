@@ -28,15 +28,15 @@ public class SelectionManager {
 
     public static String getAcceptation(Activity activity, String local, String value) {
         try {
-            JSONArray positions = new JSONArray(JsonManager.getJson(activity, "Acceptations.json"));
+            JSONArray acceptations = new JSONArray(JsonManager.getJson(activity, "Acceptations.json"));
 
-            for (int i = 0; i < positions.length(); i++) {
+            for (int i = 0; i < acceptations.length(); i++) {
                 if (local.equals("en")) {
-                    if (value.equals(positions.getJSONObject(i).getString("fa_title")))
-                        return positions.getJSONObject(i).getString("en_title");
+                    if (value.equals(acceptations.getJSONObject(i).getString("fa_title")))
+                        return acceptations.getJSONObject(i).getString("en_title");
                 } else {
-                    if (value.equals(positions.getJSONObject(i).getString("en_title")))
-                        return positions.getJSONObject(i).getString("fa_title");
+                    if (value.equals(acceptations.getJSONObject(i).getString("en_title")))
+                        return acceptations.getJSONObject(i).getString("fa_title");
                 }
             }
         } catch (JSONException e) {
@@ -47,15 +47,15 @@ public class SelectionManager {
 
     public static String getUserType(Activity activity, String local, String value) {
         try {
-            JSONArray positions = new JSONArray(JsonManager.getJson(activity, "UserTypes.json"));
+            JSONArray types = new JSONArray(JsonManager.getJson(activity, "UserTypes.json"));
 
-            for (int i = 0; i < positions.length(); i++) {
+            for (int i = 0; i < types.length(); i++) {
                 if (local.equals("en")) {
-                    if (value.equals(positions.getJSONObject(i).getString("fa_title")))
-                        return positions.getJSONObject(i).getString("en_title");
+                    if (value.equals(types.getJSONObject(i).getString("fa_title")))
+                        return types.getJSONObject(i).getString("en_title");
                 } else {
-                    if (value.equals(positions.getJSONObject(i).getString("en_title")))
-                        return positions.getJSONObject(i).getString("fa_title");
+                    if (value.equals(types.getJSONObject(i).getString("en_title")))
+                        return types.getJSONObject(i).getString("fa_title");
                 }
             }
         } catch (JSONException e) {
@@ -66,15 +66,34 @@ public class SelectionManager {
 
     public static String getUserStatus(Activity activity, String local, String value) {
         try {
-            JSONArray positions = new JSONArray(JsonManager.getJson(activity, "UserStatus.json"));
+            JSONArray status = new JSONArray(JsonManager.getJson(activity, "UserStatus.json"));
 
-            for (int i = 0; i < positions.length(); i++) {
+            for (int i = 0; i < status.length(); i++) {
                 if (local.equals("en")) {
-                    if (value.equals(positions.getJSONObject(i).getString("fa_title")))
-                        return positions.getJSONObject(i).getString("en_title");
+                    if (value.equals(status.getJSONObject(i).getString("fa_title")))
+                        return status.getJSONObject(i).getString("en_title");
                 } else {
-                    if (value.equals(positions.getJSONObject(i).getString("en_title")))
-                        return positions.getJSONObject(i).getString("fa_title");
+                    if (value.equals(status.getJSONObject(i).getString("en_title")))
+                        return status.getJSONObject(i).getString("fa_title");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
+    public static String getSessionStatus(Activity activity, String local, String value) {
+        try {
+            JSONArray status = new JSONArray(JsonManager.getJson(activity, "SessionStatus.json"));
+
+            for (int i = 0; i < status.length(); i++) {
+                if (local.equals("en")) {
+                    if (value.equals(status.getJSONObject(i).getString("fa_title")))
+                        return status.getJSONObject(i).getString("en_title");
+                } else {
+                    if (value.equals(status.getJSONObject(i).getString("en_title")))
+                        return status.getJSONObject(i).getString("fa_title");
                 }
             }
         } catch (JSONException e) {
