@@ -50,6 +50,17 @@ public class Room extends Model {
         }
     }
 
+    public static void createSchedule(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.post(endpoint + "/" + data.get("id") + "/schedules", data, header, response, ScheduleModel.class);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void showDashboard(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
