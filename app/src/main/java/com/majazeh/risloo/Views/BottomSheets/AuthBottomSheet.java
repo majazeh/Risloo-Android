@@ -18,7 +18,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.BottomSheetAuthBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.Madule.Center;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -67,7 +67,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
             HashMap header = new HashMap<>();
             header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-            Auth.auth_theory(data, header, new Response() {
+            Center.theory(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
                     if (isAdded()) {

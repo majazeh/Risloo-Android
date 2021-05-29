@@ -267,15 +267,10 @@ public class RoomFragment extends Fragment {
 
             if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
                 extras.putString("status", getArguments().getString("status"));
-                setStatus(getArguments().getString("status"));
-            }
 
-            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
-                extras.putString("title", getArguments().getString("title"));
-                binding.nameTextView.setText(getArguments().getString("title"));
-                binding.nameTextView.setVisibility(View.VISIBLE);
-            } else {
-                binding.nameTextView.setVisibility(View.GONE);
+                if (!getArguments().getString("type").equals("room")) {
+                    setStatus(getArguments().getString("status"));
+                }
             }
 
             if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
@@ -288,14 +283,29 @@ public class RoomFragment extends Fragment {
                 }
             }
 
+            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
+                extras.putString("title", getArguments().getString("title"));
+
+                if (!getArguments().getString("type").equals("room")) {
+                    binding.nameTextView.setText(getArguments().getString("title"));
+                    binding.nameTextView.setVisibility(View.VISIBLE);
+                }
+            } else {
+                if (!getArguments().getString("type").equals("room"))
+                    binding.nameTextView.setVisibility(View.GONE);
+            }
+
             if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
                 extras.putString("address", getArguments().getString("address"));
             }
 
             if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
                 extras.putString("description", getArguments().getString("description"));
-                binding.descriptionTextView.setText(getArguments().getString("description"));
-                binding.descriptionTextView.setVisibility(View.VISIBLE);
+
+                if (!getArguments().getString("type").equals("room")) {
+                    binding.descriptionTextView.setText(getArguments().getString("description"));
+                    binding.descriptionTextView.setVisibility(View.VISIBLE);
+                }
             } else {
                 binding.descriptionTextView.setVisibility(View.GONE);
             }
@@ -314,8 +324,11 @@ public class RoomFragment extends Fragment {
             if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
                 try {
                     extras.putString("phone_numbers", getArguments().getString("phone_numbers"));
-                    binding.mobileTextView.setText(new JSONArray(getArguments().getString("phone_numbers")).getString(0));
-                    binding.mobileGroup.setVisibility(View.VISIBLE);
+
+                    if (!getArguments().getString("type").equals("room")) {
+                        binding.mobileTextView.setText(new JSONArray(getArguments().getString("phone_numbers")).getString(0));
+                        binding.mobileGroup.setVisibility(View.VISIBLE);
+                    }
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -327,14 +340,8 @@ public class RoomFragment extends Fragment {
 
     private void setData(RoomModel model) {
         try {
-//            setAcceptation(model);
-
-            if (model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title")) {
-                extras.putString("title", model.getRoomCenter().getDetail().getString("title"));
-                binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
-                binding.nameTextView.setVisibility(View.VISIBLE);
-            } else {
-                binding.nameTextView.setVisibility(View.GONE);
+            if (!model.getRoomType().equals("room")) {
+                setAcceptation(model);
             }
 
             if (model.getRoomManager().getUserId() != null && model.getRoomManager().getName() != null) {
@@ -347,22 +354,40 @@ public class RoomFragment extends Fragment {
                 }
             }
 
+            if (model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title")) {
+                extras.putString("title", model.getRoomCenter().getDetail().getString("title"));
+
+                if (!model.getRoomType().equals("room")) {
+                    binding.nameTextView.setText(model.getRoomCenter().getDetail().getString("title"));
+                    binding.nameTextView.setVisibility(View.VISIBLE);
+                }
+            } else {
+                if (!model.getRoomType().equals("room"))
+                    binding.nameTextView.setVisibility(View.GONE);
+            }
+
             if (model.getRoomCenter().getDetail().has("address") && !model.getRoomCenter().getDetail().isNull("address")) {
                 extras.putString("address", model.getRoomCenter().getDetail().getString("address"));
             }
 
             if (model.getRoomCenter().getDetail().has("description") && !model.getRoomCenter().getDetail().isNull("description")) {
                 extras.putString("description", model.getRoomCenter().getDetail().getString("description"));
-                binding.descriptionTextView.setText(model.getRoomCenter().getDetail().getString("description"));
-                binding.descriptionTextView.setVisibility(View.VISIBLE);
+
+                if (!model.getRoomType().equals("room")) {
+                    binding.descriptionTextView.setText(model.getRoomCenter().getDetail().getString("description"));
+                    binding.descriptionTextView.setVisibility(View.VISIBLE);
+                }
             } else {
                 binding.descriptionTextView.setVisibility(View.GONE);
             }
 
             if (model.getRoomCenter().getDetail().has("avatar") && !model.getRoomCenter().getDetail().isNull("avatar") && model.getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
                 extras.putString("avatar", model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url"));
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+
+                if (!model.getRoomType().equals("room")) {
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                    Picasso.get().load(model.getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(1).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                }
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
@@ -372,8 +397,11 @@ public class RoomFragment extends Fragment {
 
             if (model.getRoomCenter().getDetail().has("phone_numbers") && !model.getRoomCenter().getDetail().isNull("phone_numbers") && model.getRoomCenter().getDetail().getJSONArray("phone_numbers").length() != 0) {
                 extras.putString("phone_numbers", model.getRoomCenter().getDetail().getJSONArray("phone_numbers").toString());
-                binding.mobileTextView.setText(model.getRoomCenter().getDetail().getJSONArray("phone_numbers").get(0).toString());
-                binding.mobileGroup.setVisibility(View.VISIBLE);
+
+                if (!model.getRoomType().equals("room")) {
+                    binding.mobileTextView.setText(model.getRoomCenter().getDetail().getJSONArray("phone_numbers").get(0).toString());
+                    binding.mobileGroup.setVisibility(View.VISIBLE);
+                }
             } else {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
