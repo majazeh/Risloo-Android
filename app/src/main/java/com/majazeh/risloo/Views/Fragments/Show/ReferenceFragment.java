@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -26,8 +26,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.Samples3Adapter;
 import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
-import com.mre.ligheh.Model.Madule.List;
-import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
@@ -46,6 +45,11 @@ public class ReferenceFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
     private LinearLayoutManager roomsLayoutManager, cases3LayoutManager, samples3LayoutManager;
+    private Bundle extras;
+
+    // Vars
+    private HashMap data, header;
+    private String type = "personal_clinic";
 
     @Nullable
     @Override
@@ -56,7 +60,9 @@ public class ReferenceFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
+
+        getData();
 
         return binding.getRoot();
     }
@@ -72,6 +78,13 @@ public class ReferenceFragment extends Fragment {
         roomsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         cases3LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         samples3LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        extras = new Bundle();
+
+        data = new HashMap<>();
+        data.put("id", "");
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.roomsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomsAdapterHeader));
         binding.casesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases3AdapterHeader));
@@ -91,83 +104,229 @@ public class ReferenceFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
     }
 
-    private void setData() {
-        HashMap data = new HashMap();
-        System.out.println(getArguments().getString("id"));
-        data.put("id", getArguments().getString("id"));
-        data.put("userId", getArguments().getString("userId"));
-        HashMap header = new HashMap();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-        Center.user(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                if (isAdded())
-                    requireActivity().runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                extras.putString("id", getArguments().getString("id"));
+                data.put("id", getArguments().getString("id"));
+            }
 
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
+                type = getArguments().getString("type");
+                extras.putString("type", type);
+            }
 
-                            UserModel model = (UserModel) object;
-                            if (model.getName().equals("")) {
-                                binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-                            } else {
-                                binding.nameTextView.setText(model.getName());
+            if (getArguments().getString("user_id") != null && !getArguments().getString("user_id").equals("")) {
+                extras.putString("user_id", getArguments().getString("user_id"));
+                data.put("userId", getArguments().getString("user_id"));
+            } else {
+                data.put("userId", ((MainActivity) requireActivity()).singleton.getId());
+            }
+
+            if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
+                extras.putString("position", getArguments().getString("position"));
+                binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", getArguments().getString("position")));
+                binding.statusTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.statusTextView.setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("nickname") != null && !getArguments().getString("nickname").equals("")) {
+                extras.putString("nickname", getArguments().getString("nickname"));
+                binding.nameTextView.setText(getArguments().getString("nickname"));
+                binding.nameTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.nameTextView.setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
+                extras.putString("avatar", getArguments().getString("avatar"));
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(getArguments().getString("avatar")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            }
+
+            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
+                extras.putString("mobile", getArguments().getString("mobile"));
+                binding.mobileTextView.setText(getArguments().getString("mobile"));
+                binding.mobileGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileGroup.setVisibility(View.GONE);
+            }
+        }
+    }
+
+    private void setData(UserModel model) {
+        if (!model.getPosition().equals("")) {
+            binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", model.getPosition()));
+            binding.statusTextView.setVisibility(View.VISIBLE);
+        } else {
+            binding.statusTextView.setVisibility(View.GONE);
+        }
+
+        if (!model.getName().equals("")) {
+            binding.nameTextView.setText(model.getName());
+            binding.nameTextView.setVisibility(View.VISIBLE);
+        } else {
+            binding.nameTextView.setVisibility(View.GONE);
+        }
+
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        } else {
+            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+
+            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+        }
+
+        if (!model.getMobile().equals("")) {
+            binding.mobileTextView.setText(model.getMobile());
+            binding.mobileGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.mobileGroup.setVisibility(View.GONE);
+        }
+    }
+
+    private void getData() {
+        if (!type.equals("room")) {
+            Center.user(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    UserModel model = (UserModel) object;
+
+                    if (isAdded())
+                        requireActivity().runOnUiThread(() -> {
+                            setData(model);
+
+                            if (!model.getRoomList().data().isEmpty()) {
+                                roomsAdapter.setRooms(model.getRoomList().data());
+                                binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
                             }
 
-                            if (model.getPosition().equals("")) {
-                                binding.statusTextView.setVisibility(View.GONE);
-                            } else {
-                                binding.statusTextView.setText(model.getPosition());
+                            if (!model.getCaseList().data().isEmpty()) {
+                                cases3Adapter.setCases(model.getCaseList().data());
+                                binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
                             }
 
-                            if (model.getMobile().equals("")) {
-                                binding.mobileGroup.setVisibility(View.GONE);
-                            } else {
-                                binding.mobileGroup.setVisibility(View.VISIBLE);
-                                binding.mobileTextView.setText(model.getMobile());
+                            if (!model.getSampleList().data().isEmpty()) {
+                                samples3Adapter.setSamples(model.getSampleList().data());
+                                binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
                             }
-
-                            if (model.getAvatar() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
-                                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                                Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                            } else {
-                                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
-
-                                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                            }
-
-                            roomsAdapter.setRooms(model.getRoomList().data());
-
-                            cases3Adapter.setCases(model.getCaseList().data());
-                            samples3Adapter.setSamples(model.getSampleList().data());
-                            binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
-                            binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
-                            binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
 
                             binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
                             binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
                             binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
 
-                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.casesShimmerLayout.getRoot().stopShimmer();
 
-                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        }
-                    });
-            }
+                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesShimmerLayout.getRoot().stopShimmer();
+                        });
+                }
 
-            @Override
-            public void onFailure(String response) {
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-            }
-        });
+                            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.casesShimmerLayout.getRoot().stopShimmer();
+
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesShimmerLayout.getRoot().stopShimmer();
+                        });
+                    }
+                }
+            });
+        } else {
+            Room.user(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    UserModel model = (UserModel) object;
+
+                    if (isAdded())
+                        requireActivity().runOnUiThread(() -> {
+                            setData(model);
+
+                            if (!model.getRoomList().data().isEmpty()) {
+                                roomsAdapter.setRooms(model.getRoomList().data());
+                                binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+                            }
+
+                            if (!model.getCaseList().data().isEmpty()) {
+                                cases3Adapter.setCases(model.getCaseList().data());
+                                binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
+                            }
+
+                            if (!model.getSampleList().data().isEmpty()) {
+                                samples3Adapter.setSamples(model.getSampleList().data());
+                                binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
+                            }
+
+                            binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+                            binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
+                            binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
+
+                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.roomsShimmerLayout.getRoot().stopShimmer();
+
+                            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.casesShimmerLayout.getRoot().stopShimmer();
+
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesShimmerLayout.getRoot().stopShimmer();
+                        });
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.roomsShimmerLayout.getRoot().stopShimmer();
+
+                            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.casesShimmerLayout.getRoot().stopShimmer();
+
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesShimmerLayout.getRoot().stopShimmer();
+                        });
+                    }
+                }
+            });
+        }
     }
 
     @Override

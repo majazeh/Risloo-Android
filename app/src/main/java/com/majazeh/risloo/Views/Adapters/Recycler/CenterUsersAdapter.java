@@ -307,8 +307,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
         Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null)
-            if (fragment instanceof CenterUsersFragment)
+            if (fragment instanceof CenterUsersFragment) {
                 extras.putString("id", ((CenterUsersFragment) fragment).centerId);
+                extras.putString("type", ((CenterUsersFragment) fragment).type);
+            }
 
         extras.putString("user_id", model.getId());
         extras.putString("nickname", model.getName());

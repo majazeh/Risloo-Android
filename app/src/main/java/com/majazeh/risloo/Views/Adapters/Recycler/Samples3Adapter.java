@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,19 +44,32 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, sample);
 
-        setData(holder,sample);
+        setData(holder, sample);
     }
 
     @Override
     public int getItemCount() {
-        return samples.size();
+        if (this.samples != null)
+            return samples.size();
+        else
+            return 0;
     }
 
     public void setSamples(ArrayList<TypeModel> samples) {
-        this.samples = samples;
+        if (this.samples == null)
+            this.samples = samples;
+        else
+            this.samples.addAll(samples);
         notifyDataSetChanged();
+    }
+
+    public void clearSamples() {
+        if (this.samples != null) {
+            this.samples.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(Samples3Holder holder) {
@@ -64,13 +78,13 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
         }
     }
 
-    private void listener(Samples3Holder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sampleFragment)).widget(holder.binding.getRoot());
+    private void listener(Samples3Holder holder, SampleModel model) {
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sampleFragment, getExtras(model))).widget(holder.binding.getRoot());
 
         ClickManager.onClickListener(() -> IntentManager.test(activity, null)).widget(holder.binding.statusTextView);
     }
 
-    private void setData(Samples3Holder holder,SampleModel model) {
+    private void setData(Samples3Holder holder, SampleModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
@@ -79,13 +93,21 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
 
         holder.binding.serialTextView.setText(model.getSampleId());
         holder.binding.nameTextView.setText(model.getSampleScaleTitle());
-        holder.binding.editionTextView.setText(String.valueOf(model.getSampleVersion()));
-        if (model.getSampleRoom() != null)
-        holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
-        if (model.getSampleCase() != null)
-        holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
-            setAction(holder, model.getSampleStatus());
 
+        if (!model.getSampleEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        else
+            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+
+        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
+            holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+        }
+
+        if (model.getSampleCase() != null && model.getSampleCase().getCaseId() != null) {
+            holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
+        }
+
+        setAction(holder, model.getSampleStatus());
     }
 
     private void setAction(Samples3Holder holder, String action) {
@@ -145,6 +167,16 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
         }
+    }
+
+    private Bundle getExtras(SampleModel model) {
+        Bundle extras = new Bundle();
+//        try {
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        return extras;
     }
 
     public class Samples3Holder extends RecyclerView.ViewHolder {

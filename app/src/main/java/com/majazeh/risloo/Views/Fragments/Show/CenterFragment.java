@@ -139,7 +139,7 @@ public class CenterFragment extends Fragment {
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment, extras)).widget(binding.editImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.userFragment, extras)).widget(binding.profileImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.referenceFragment, extras)).widget(binding.profileImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.centerSchedulesFragment, extras)).widget(binding.schedulesImageView.getRoot());
 
@@ -445,6 +445,8 @@ public class CenterFragment extends Fragment {
                     binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
                 else
                     binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
+
+                binding.profileImageView.getRoot().setVisibility(View.GONE);
                 break;
             case "manager":
                 binding.statusTextView.getRoot().setEnabled(false);
@@ -453,6 +455,8 @@ public class CenterFragment extends Fragment {
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+
+                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
                 break;
             case "operator":
                 binding.statusTextView.getRoot().setEnabled(false);
@@ -461,6 +465,8 @@ public class CenterFragment extends Fragment {
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+
+                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
                 break;
             case "psychologist":
                 binding.statusTextView.getRoot().setEnabled(false);
@@ -469,6 +475,8 @@ public class CenterFragment extends Fragment {
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+
+                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
                 break;
             case "client":
                 binding.statusTextView.getRoot().setEnabled(false);
@@ -477,6 +485,8 @@ public class CenterFragment extends Fragment {
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+
+                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
                 break;
             case "kicked":
                 binding.statusTextView.getRoot().setEnabled(false);
@@ -485,6 +495,8 @@ public class CenterFragment extends Fragment {
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+
+                binding.profileImageView.getRoot().setVisibility(View.GONE);
                 break;
             case "accepted":
                 binding.statusTextView.getRoot().setEnabled(false);
@@ -493,6 +505,8 @@ public class CenterFragment extends Fragment {
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+
+                binding.profileImageView.getRoot().setVisibility(View.GONE);
                 break;
             case "awaiting":
                 binding.statusTextView.getRoot().setEnabled(false);
@@ -501,6 +515,8 @@ public class CenterFragment extends Fragment {
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
+
+                binding.profileImageView.getRoot().setVisibility(View.GONE);
                 break;
         }
     }

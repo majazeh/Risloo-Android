@@ -49,7 +49,7 @@ public class RoomUsersFragment extends Fragment {
     // Vars
     private HashMap data, header;
     private boolean loading = false;
-    public String roomId = "";
+    public String roomId = "", type = "room";
 
     @Nullable
     @Override
@@ -171,7 +171,8 @@ public class RoomUsersFragment extends Fragment {
             }
 
             if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                extras.putString("type", getArguments().getString("type"));
+                type = getArguments().getString("type");
+                extras.putString("type", type);
             }
 
             if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {

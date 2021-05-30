@@ -49,7 +49,7 @@ public class CenterUsersFragment extends Fragment {
     // Vars
     private HashMap data, header;
     private boolean loading = false;
-    public String centerId = "";
+    public String centerId = "", type = "personal_clinic";
 
     @Nullable
     @Override
@@ -171,7 +171,8 @@ public class CenterUsersFragment extends Fragment {
             }
 
             if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                extras.putString("type", getArguments().getString("type"));
+                type = getArguments().getString("type");
+                extras.putString("type", type);
             }
         }
     }

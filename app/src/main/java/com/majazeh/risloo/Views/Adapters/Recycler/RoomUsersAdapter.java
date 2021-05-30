@@ -113,8 +113,10 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
 
         Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null)
-            if (fragment instanceof RoomUsersFragment)
+            if (fragment instanceof RoomUsersFragment) {
                 extras.putString("id", ((RoomUsersFragment) fragment).roomId);
+                extras.putString("type", ((RoomUsersFragment) fragment).type);
+            }
 
         extras.putString("user_id", model.getId());
         extras.putString("nickname", model.getName());
