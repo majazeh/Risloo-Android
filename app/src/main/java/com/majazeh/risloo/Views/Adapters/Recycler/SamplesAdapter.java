@@ -92,33 +92,33 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
 
     private void setData(SamplesHolder holder, SampleModel model) {
         try {
-        if (holder.getBindingAdapterPosition() == 0) {
-            holder.binding.topView.setVisibility(View.GONE);
-        } else {
-            holder.binding.topView.setVisibility(View.VISIBLE);
-        }
+            if (holder.getBindingAdapterPosition() == 0) {
+                holder.binding.topView.setVisibility(View.GONE);
+            } else {
+                holder.binding.topView.setVisibility(View.VISIBLE);
+            }
 
-        holder.binding.serialTextView.setText(model.getSampleId());
-        holder.binding.nameTextView.setText(model.getSampleScaleTitle());
+            holder.binding.serialTextView.setText(model.getSampleId());
+            holder.binding.nameTextView.setText(model.getSampleScaleTitle());
 
-        if (!model.getSampleEdition().equals(""))
-            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
-        else
-            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+            if (!model.getSampleEdition().equals(""))
+                holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+            else
+                holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
-            holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
-        }
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
+                holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+            }
 
-        if (model.getSampleCase() != null && model.getSampleCase().getCaseId() != null) {
-            holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
-        }
+            if (model.getSampleCase() != null && model.getSampleCase().getCaseId() != null) {
+                holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
+            }
 
-        if (model.getSampleCase() != null && model.getSampleCase().getClients() != null && !model.getSampleCase().getClients().data().isEmpty()) {
-            holder.binding.referenceTextView.setText(model.getSampleCase().getClients().data().get(0).object.getString("name"));
-        }
+            if (model.getSampleCase() != null && model.getSampleCase().getClients() != null && !model.getSampleCase().getClients().data().isEmpty()) {
+                holder.binding.referenceTextView.setText(model.getSampleCase().getClients().data().get(0).object.getString("name"));
+            }
 
-        setAction(holder, model.getSampleStatus());
+            setAction(holder, model.getSampleStatus());
         } catch (JSONException e) {
             e.printStackTrace();
         }

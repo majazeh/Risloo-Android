@@ -2,11 +2,13 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +16,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.BulkSamplesHolder> {
 
@@ -23,7 +33,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
     private Activity activity;
 
     // Vars
-//    private ArrayList<BulkSample> bulkSamples;
+    private ArrayList<TypeModel> bulkSamples;
 
     public BulkSamplesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -37,25 +47,37 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull BulkSamplesHolder holder, int i) {
-//        BulkSamples bulkSample = bulkSamples.get(i);
+        SampleModel bulkSample = (SampleModel) bulkSamples.get(i);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, bulkSample);
 
-        setData(holder);
+        setData(holder, bulkSample);
     }
 
     @Override
     public int getItemCount() {
-//        return bulkSamples.size();
-        return 4;
+        if (this.bulkSamples != null)
+            return bulkSamples.size();
+        else
+            return 0;
     }
 
-//    public void setBulkSamples(ArrayList<BulkSample> bulkSamples) {
-//        this.bulkSamples = bulkSamples;
-//        notifyDataSetChanged();
-//    }
+    public void setBulkSamples(ArrayList<TypeModel> bulkSamples) {
+        if (this.bulkSamples == null)
+            this.bulkSamples = bulkSamples;
+        else
+            this.bulkSamples.addAll(bulkSamples);
+        notifyDataSetChanged();
+    }
+
+    public void clearBulkSamples() {
+        if (this.bulkSamples != null) {
+            this.bulkSamples.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     private void detector(BulkSamplesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -65,8 +87,8 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         }
     }
 
-    private void listener(BulkSamplesHolder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.bulkSampleFragment)).widget(holder.binding.getRoot());
+    private void listener(BulkSamplesHolder holder, SampleModel model) {
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.bulkSampleFragment, getExtras(model))).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -78,7 +100,8 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
                         Log.e("method", "link");
                         break;
                     case 1:
-                        Log.e("method", "copy");
+                        IntentManager.clipboard((MainActivity) activity, task);
+                        Toast.makeText(activity, activity.getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
                         break;
                 }
 
@@ -96,22 +119,43 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         }).widget(holder.binding.editImageView);
     }
 
-    private void setData(BulkSamplesHolder holder) {
-        if (holder.getBindingAdapterPosition() == 0) {
-            holder.binding.topView.setVisibility(View.GONE);
-        } else {
-            holder.binding.topView.setVisibility(View.VISIBLE);
+    private void setData(BulkSamplesHolder holder, SampleModel model) {
+        try {
+            if (holder.getBindingAdapterPosition() == 0) {
+                holder.binding.topView.setVisibility(View.GONE);
+            } else {
+                holder.binding.topView.setVisibility(View.VISIBLE);
+            }
+
+            holder.binding.serialTextView.setText(model.getSampleId());
+            holder.binding.nameTextView.setText(model.getSampleTitle());
+            holder.binding.caseTextView.setText(""); // TODO : Place case_status here
+
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
+                holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+            }
+
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomCenter() != null && model.getSampleRoom().getRoomCenter().getDetail() != null && !model.getSampleRoom().getRoomCenter().getDetail().getString("title").equals("")) {
+                holder.binding.centerTextView.setText(model.getSampleRoom().getRoomCenter().getDetail().getString("title"));
+            }
+
+            holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getSampleStatus()));
+            holder.binding.referenceTextView.setText(""); // TODO : Place members_count / joined here
+
+            InitManager.customizedSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+    }
 
-        holder.binding.serialTextView.setText("BS966666W");
-        holder.binding.nameTextView.setText("تست چند نمونه");
-        holder.binding.caseTextView.setText("بدون پرونده");
-        holder.binding.roomTextView.setText("محمد رضا سالاری فر");
-        holder.binding.centerTextView.setText("کلینیک شخصی محمد رضا سالاری فر");
-        holder.binding.statusTextView.setText("بازنشده");
-        holder.binding.referenceTextView.setText("10 / 1");
-
-        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
+    private Bundle getExtras(SampleModel model) {
+        Bundle extras = new Bundle();
+//        try {
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        return extras;
     }
 
     public class BulkSamplesHolder extends RecyclerView.ViewHolder {

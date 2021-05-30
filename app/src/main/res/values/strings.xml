@@ -13,6 +13,7 @@
     <string name="AppAdded">مطلب ساخته شد.</string>
     <string name="AppChanged">تغییرات ثبت شد.</string>
     <string name="AppAuthenticated">ورود شما تمام شد.</string>
+    <string name="AppLinkSaved">لینک ذخیره شد.</string>
 
     <string name="AppImageNew">عکس جدیدی انتخاب نشده است.</string>
     <string name="AppImageEmpty">عکس انتخاب نشده است.</string>
