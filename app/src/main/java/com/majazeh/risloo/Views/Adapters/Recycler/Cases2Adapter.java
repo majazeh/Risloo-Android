@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -43,7 +44,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, casse);
 
         setData(holder, casse);
     }
@@ -77,14 +78,14 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
         }
     }
 
-    private void listener(Cases2Holder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.caseFragment)).widget(holder.binding.containerConstraintLayout);
+    private void listener(Cases2Holder holder, CaseModel model) {
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.caseFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(Cases2Holder holder, CaseModel model) {
         holder.binding.serialTextView.setText(model.getCaseId());
 
-        if (!model.getClients().data().isEmpty()) {
+        if (model.getClients() != null && !model.getClients().data().isEmpty()) {
             for (int i = 0; i < model.getClients().data().size(); i++) {
                 UserModel user = (UserModel) model.getClients().data().get(i);
                 if (user != null) {
@@ -95,6 +96,16 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
         holder.binding.dateTextView.setText(DateManager.gregorianToJalali2(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(model.getCaseCreated_at()))));
         holder.binding.sessionCountTextView.setText(model.getSessions_count() + " جلسه ");
+    }
+
+    private Bundle getExtras(CaseModel model) {
+        Bundle extras = new Bundle();
+//        try {
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        return extras;
     }
 
     public class Cases2Holder extends RecyclerView.ViewHolder {
