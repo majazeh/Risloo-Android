@@ -115,6 +115,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
         if (fragment != null)
             if (fragment instanceof RoomUsersFragment) {
                 extras.putString("id", ((RoomUsersFragment) fragment).roomId);
+                extras.putString("center_id", ((RoomUsersFragment) fragment).centerId);
                 extras.putString("type", ((RoomUsersFragment) fragment).type);
             }
 

@@ -114,6 +114,12 @@ public class ReferenceFragment extends Fragment {
             if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
                 type = getArguments().getString("type");
                 extras.putString("type", type);
+
+                if (getArguments().getString("type").equals("room")) {
+                    if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
+                        data.put("id", getArguments().getString("center_id"));
+                    }
+                }
             }
 
             if (getArguments().getString("user_id") != null && !getArguments().getString("user_id").equals("")) {
