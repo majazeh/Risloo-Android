@@ -119,13 +119,15 @@ public class ReferenceFragment extends Fragment {
             if (getArguments().getString("user_id") != null && !getArguments().getString("user_id").equals("")) {
                 extras.putString("user_id", getArguments().getString("user_id"));
                 data.put("userId", getArguments().getString("user_id"));
-            } else {
-                data.put("userId", ((MainActivity) requireActivity()).singleton.getId());
             }
 
             if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
                 extras.putString("position", getArguments().getString("position"));
                 binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", getArguments().getString("position")));
+                binding.statusTextView.setVisibility(View.VISIBLE);
+            } else if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
+                extras.putString("status", getArguments().getString("status"));
+                binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", getArguments().getString("status")));
                 binding.statusTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.statusTextView.setVisibility(View.GONE);
@@ -135,14 +137,18 @@ public class ReferenceFragment extends Fragment {
                 extras.putString("nickname", getArguments().getString("nickname"));
                 binding.nameTextView.setText(getArguments().getString("nickname"));
                 binding.nameTextView.setVisibility(View.VISIBLE);
+            } else if (getArguments().getString("user_name") != null && !getArguments().getString("user_name").equals("")) {
+                extras.putString("user_name", getArguments().getString("user_name"));
+                binding.nameTextView.setText(getArguments().getString("user_name"));
+                binding.nameTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
-            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
-                extras.putString("avatar", getArguments().getString("avatar"));
+            if (getArguments().getString("user_avatar") != null && !getArguments().getString("user_avatar").equals("")) {
+                extras.putString("user_avatar", getArguments().getString("user_avatar"));
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(getArguments().getString("avatar")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(getArguments().getString("user_avatar")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));

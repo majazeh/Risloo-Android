@@ -362,6 +362,14 @@ public class CenterFragment extends Fragment {
             } else {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
+
+            if (model.getAcceptation() != null && model.getAcceptation().getId() != null) {
+                extras.putString("user_id", model.getAcceptation().getId());
+            }
+
+            if (model.getAcceptation() != null && model.getAcceptation().getName() != null) {
+                extras.putString("user_name", model.getAcceptation().getName());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

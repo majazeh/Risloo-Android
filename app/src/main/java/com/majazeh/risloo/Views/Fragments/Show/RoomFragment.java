@@ -409,6 +409,14 @@ public class RoomFragment extends Fragment {
             if (model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
                 extras.putString("center_id", model.getRoomCenter().getCenterId());
             }
+
+            if (model.getRoomAcceptation() != null && model.getRoomAcceptation().getId() != null) {
+                extras.putString("user_id", model.getRoomAcceptation().getId());
+            }
+
+            if (model.getRoomAcceptation() != null && model.getRoomAcceptation().getName() != null) {
+                extras.putString("user_name", model.getRoomAcceptation().getName());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
