@@ -129,7 +129,7 @@ public class Room extends Model {
     public static void user(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id") && has(data, "userId"))
-                Model.show(endpoint + "/" + data.get("id") + "/users/" + data.get("userId"), data, header, response, UserModel.class);
+                Model.show( "centers/" + data.get("id") + "/users/" + data.get("userId") + "/profile", data, header, response, UserModel.class);
             else
                 Exceptioner.make(response,"آیدی را وارد کنید!");
         } catch (IOException e) {

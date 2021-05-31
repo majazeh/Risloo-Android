@@ -33,4 +33,21 @@ public class Session extends Model {
             e.printStackTrace();
         }
     }
+
+    public static void edit(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.put(endpoint + "/" + data.get("id"), data, header, response, SessionModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void reports(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.get(" client-reports/all/"+ data.get("id"), data, header, response, SessionModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }
