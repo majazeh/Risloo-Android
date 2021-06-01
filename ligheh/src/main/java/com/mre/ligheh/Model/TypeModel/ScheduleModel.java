@@ -70,7 +70,7 @@ public class ScheduleModel extends TypeModel {
             if (!jsonObject.isNull("fields")) {
                 fields = new JSONArray();
                 for (int i = 0; i < jsonObject.getJSONArray("fields").length(); i++) {
-                    fields.put(new Item(jsonObject.getJSONArray("fields").getJSONObject(i)));
+                    fields.put(jsonObject.getJSONArray("fields").getJSONObject(i));
                 }
             }
         } catch (JSONException e) {
