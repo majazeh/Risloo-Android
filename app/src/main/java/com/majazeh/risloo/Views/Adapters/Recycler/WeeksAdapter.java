@@ -79,7 +79,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
         ClickManager.onDelayedClickListener(() -> {
             CenterSchedulesFragment centerSchedulesFragment = (CenterSchedulesFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
             if (centerSchedulesFragment != null) {
-                centerSchedulesFragment.responseAdapter();
+                centerSchedulesFragment.responseAdapter("");
                 selectedPosition = position;
             }
 

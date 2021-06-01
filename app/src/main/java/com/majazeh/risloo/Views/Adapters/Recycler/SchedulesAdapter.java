@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,11 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemScheduleBinding;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 
@@ -40,24 +46,37 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
     @Override
     public void onBindViewHolder(@NonNull SchedulesHolder holder, int i) {
-//        ScheduleModel schedule = (ScheduleModel) schedules.get(i);
+        ScheduleModel schedule = (ScheduleModel) schedules.get(i);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, schedule);
 
-        setData(holder);
+        setData(holder, schedule);
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        if (this.schedules != null)
+            return schedules.size();
+        else
+            return 0;
     }
 
     public void setSchedules(ArrayList<TypeModel> schedules, String type) {
-        this.schedules = schedules;
+        if (this.schedules == null)
+            this.schedules = schedules;
+        else
+            this.schedules.addAll(schedules);
         this.type = type;
         notifyDataSetChanged();
+    }
+
+    public void clearSchedules() {
+        if (this.schedules != null) {
+            this.schedules.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(SchedulesHolder holder) {
@@ -66,24 +85,53 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
         }
     }
 
-    private void listener(SchedulesHolder holder) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sessionFragment)).widget(holder.binding.containerConstraintLayout);
+    private void listener(SchedulesHolder holder, ScheduleModel model) {
+        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sessionFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(SchedulesHolder holder) {
-        if (type.equals("center")) {
-            holder.binding.dateTextView.setText("ساعت 04:00");
-        } else {
-            holder.binding.dateTextView.setText("1400-02-29 - ساعت 04:00");
+    private void setData(SchedulesHolder holder, ScheduleModel model) {
+        try {
+            if (!type.equals("room")) {
+                holder.binding.dateTextView.setText(DateManager.gregorianToJalali7(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))));
+            } else {
+                holder.binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))));
+            }
+
+            holder.binding.nameTextView.setText(model.getRoom().getRoomManager().getName());
+            holder.binding.durationTextView.setText(model.getDuration() + " دقیقه");
+            holder.binding.countTextView.setText(String.valueOf(model.getClients_number()));
+
+            if (model.getFields() != null && model.getFields().length() != 0) {
+                for (int i = 0; i < model.getFields().length(); i++) {
+                    holder.binding.pointTextView.append(model.getFields().getJSONObject(i).getString("title"));
+                    if (i != model.getFields().length() -1) {
+                        holder.binding.pointTextView.append(" " + "|" + " ");
+                    }
+                }
+            }
+
+            if (model.isGroup_session()) {
+                holder.binding.bulkTextView.setVisibility(View.VISIBLE);
+            } else {
+                holder.binding.bulkTextView.setVisibility(View.GONE);
+            }
+
+            holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
+
+            if (model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null) {
+                setAvatar(holder, model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
+            } else {
+                setAvatar(holder, "");
+            }
+
+            if (!type.equals("room")) {
+                holder.binding.managerGroup.setVisibility(View.VISIBLE);
+            } else {
+                holder.binding.managerGroup.setVisibility(View.GONE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-        holder.binding.nameTextView.setText("محمد حسن صالحی");
-        holder.binding.durationTextView.setText("45" + " دقیقه");
-        holder.binding.countTextView.setText("50");
-        holder.binding.pointTextView.setText("موردی وجود ندارد.");
-        holder.binding.statusTextView.setText("پیش نویس");
-
-        setAvatar(holder, "");
     }
 
     private void setAvatar(SchedulesHolder holder, String url) {
@@ -96,6 +144,16 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
+    }
+
+    private Bundle getExtras(ScheduleModel model) {
+        Bundle extras = new Bundle();
+//        try {
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        return extras;
     }
 
     public class SchedulesHolder extends RecyclerView.ViewHolder {

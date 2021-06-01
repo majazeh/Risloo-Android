@@ -3,7 +3,6 @@ package com.majazeh.risloo.Views.Fragments.Index;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +20,11 @@ import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SchedulesAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomSchedulesBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Room;
+
+import java.util.HashMap;
 
 public class RoomSchedulesFragment extends Fragment {
 
@@ -33,9 +37,11 @@ public class RoomSchedulesFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration;
     private LinearLayoutManager layoutManager;
+    private Bundle extras;
 
     // Vars
-    private String week = "";
+    private HashMap data, header;
+    public String roomId = "", centerId = "", type = "room", week = "";
 
     @Nullable
     @Override
@@ -48,7 +54,9 @@ public class RoomSchedulesFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
+
+        getData("");
 
         return binding.getRoot();
     }
@@ -59,6 +67,13 @@ public class RoomSchedulesFragment extends Fragment {
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
 
         layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        extras = new Bundle();
+
+        data = new HashMap<>();
+        data.put("id", centerId);
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         InitManager.txtTextColor(binding.weekTextView.getRoot(), getResources().getString(R.string.AppDefaultWeek), getResources().getColor(R.color.Gray500));
 
@@ -90,34 +105,112 @@ public class RoomSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork("backward")).widget(binding.backwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork("")).widget(binding.backwardImageView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork("forward")).widget(binding.forwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork("")).widget(binding.forwardImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment)).widget(binding.addConstraintLayout);
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment, extras)).widget(binding.addConstraintLayout);
     }
 
-    private void setData() {
-        // TODO : Place Code Here
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                roomId = requireArguments().getString("id");
+                extras.putString("id", roomId);
+                data.put("id", roomId);
+            }
 
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
+                type = getArguments().getString("type");
+                extras.putString("type", type);
+            }
+
+            if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
+                centerId = getArguments().getString("center_id");
+                extras.putString("center_id", centerId);
+            }
+        }
+    }
+
+    ///////////////////////////////////// /////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+    private void setDate(String timestamp) {
         week = "02/31 تا 02/25";
         binding.weekTextView.getRoot().setText(week);
-
-        adapter.setSchedules(null, "room");
-        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-
-        new Handler().postDelayed(() -> {
-            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
     }
 
-    private void doWork(String type) {
-        if (type.equals("backward")) {
-            // TODO : Place Code Here
-        } else {
-            // TODO : Place Code Here
-        }
+
+
+
+
+
+
+
+
+
+
+
+
+    ///////////////////////////////////// /////////////////////////////////////
+
+    private void getData(String timestamp) {
+        data.put("time", timestamp);
+
+        setDate(timestamp);
+
+        Room.schedule(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List schedules = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (!schedules.data().isEmpty()) {
+                            adapter.setSchedules(schedules.data(), type);
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (adapter.getItemCount() == 0) {
+                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                        }
+
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                    });
+                }
+            }
+        });
+    }
+
+    private void doWork(String timestamp) {
+        binding.indexSingleLayout.getRoot().setVisibility(View.GONE);
+        binding.indexShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.indexShimmerLayout.getRoot().startShimmer();
+
+        getData(timestamp);
     }
 
     @Override
