@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -44,7 +45,8 @@ public class CenterSchedulesFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String centerId = "", type = "personal_clinic", week = "";
+    public String centerId = "", type = "personal_clinic";
+    private long currentTimestamp = DateManager.currentTimestamp();
 
     @Nullable
     @Override
@@ -59,9 +61,9 @@ public class CenterSchedulesFragment extends Fragment {
 
         setExtra();
 
-        setDate("");
+        setDate(currentTimestamp);
 
-        getData("");
+        getData(currentTimestamp);
 
         return binding.getRoot();
     }
@@ -112,9 +114,9 @@ public class CenterSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork("")).widget(binding.backwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork(DateManager.previeosJalaliFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork("")).widget(binding.forwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork(DateManager.nextJalaliSaturdayTimestamp(currentTimestamp))).widget(binding.forwardImageView.getRoot());
     }
 
     private void setExtra() {
@@ -132,59 +134,20 @@ public class CenterSchedulesFragment extends Fragment {
         }
     }
 
-    ///////////////////////////////////// /////////////////////////////////////
+    private void setDate(long timestamp) {
+        binding.weekTextView.getRoot().setText(DateManager.currentJalaliWeek(timestamp));
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    private void setDate(String timestamp) {
-        week = "02/31 تا 02/25";
-        binding.weekTextView.getRoot().setText(week);
-
-        weeksAdapter.setWeeks(null);
+        weeksAdapter.setWeek(DateManager.currentJalaliWeekTimestamps(timestamp));
         binding.weeksRecyclerView.setAdapter(weeksAdapter);
 
         new Handler().postDelayed(() -> {
-            binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.weeksRecyclerView.setVisibility(View.VISIBLE);
+            binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
+            binding.weeksShimmerLayout.getRoot().stopShimmer();
         }, 1000);
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ///////////////////////////////////// /////////////////////////////////////
-
-    private void getData(String timestamp) {
+    private void getData(long timestamp) {
         data.put("time", timestamp);
 
         Center.schedule(data, header, new Response() {
@@ -227,7 +190,7 @@ public class CenterSchedulesFragment extends Fragment {
         });
     }
 
-    private void doWork(String timestamp) {
+    private void doWork(long timestamp) {
         binding.weeksRecyclerView.setVisibility(View.GONE);
         binding.weeksShimmerLayout.getRoot().setVisibility(View.VISIBLE);
         binding.weeksShimmerLayout.getRoot().startShimmer();
@@ -236,17 +199,19 @@ public class CenterSchedulesFragment extends Fragment {
         binding.schedulesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
         binding.schedulesShimmerLayout.getRoot().startShimmer();
 
+        currentTimestamp = timestamp;
+
         setDate(timestamp);
 
         getData(timestamp);
     }
 
-    public void responseAdapter(String timestamp) {
-        binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);
-        binding.schedulesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
-        binding.schedulesShimmerLayout.getRoot().startShimmer();
+    public void responseAdapter() {
+//        binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);
+//        binding.schedulesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+//        binding.schedulesShimmerLayout.getRoot().startShimmer();
 
-        getData(timestamp);
+        // TODO : Refresh Data Here
     }
 
     @Override

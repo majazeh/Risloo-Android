@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -41,7 +42,8 @@ public class RoomSchedulesFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String roomId = "", centerId = "", type = "room", week = "";
+    public String roomId = "", centerId = "", type = "room";
+    private long currentTimestamp = DateManager.currentTimestamp();
 
     @Nullable
     @Override
@@ -56,7 +58,7 @@ public class RoomSchedulesFragment extends Fragment {
 
         setExtra();
 
-        getData("");
+        getData(currentTimestamp);
 
         return binding.getRoot();
     }
@@ -105,9 +107,9 @@ public class RoomSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork("")).widget(binding.backwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork(DateManager.previeosJalaliFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork("")).widget(binding.forwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork(DateManager.nextJalaliSaturdayTimestamp(currentTimestamp))).widget(binding.forwardImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment, extras)).widget(binding.addConstraintLayout);
     }
@@ -132,39 +134,11 @@ public class RoomSchedulesFragment extends Fragment {
         }
     }
 
-    ///////////////////////////////////// /////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-    private void setDate(String timestamp) {
-        week = "02/31 تا 02/25";
-        binding.weekTextView.getRoot().setText(week);
+    private void setDate(long timestamp) {
+        binding.weekTextView.getRoot().setText(DateManager.currentJalaliWeek(timestamp));
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-    ///////////////////////////////////// /////////////////////////////////////
-
-    private void getData(String timestamp) {
+    private void getData(long timestamp) {
         data.put("time", timestamp);
 
         setDate(timestamp);
@@ -205,12 +179,14 @@ public class RoomSchedulesFragment extends Fragment {
         });
     }
 
-    private void doWork(String timestamp) {
+    private void doWork(long timestamp) {
         binding.indexSingleLayout.getRoot().setVisibility(View.GONE);
         binding.indexShimmerLayout.getRoot().setVisibility(View.VISIBLE);
         binding.indexShimmerLayout.getRoot().startShimmer();
 
-        getData(timestamp);
+        currentTimestamp = timestamp;
+
+        getData(currentTimestamp);
     }
 
     @Override

@@ -10,10 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.databinding.SingleItemWeekBinding;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
@@ -23,8 +23,9 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> items;
-    public int selectedPosition = 3;
+    private ArrayList<Long> week;
+    private int selectedPosition = 0;
+    private boolean meSelected = false;
 
     public WeeksAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -38,22 +39,22 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     @Override
     public void onBindViewHolder(@NonNull WeeksHolder holder, int i) {
-//        TypeModel item = items.get(i);
+        long timestamp = week.get(i);
 
         listener(holder, i);
 
-        setData(holder);
+        setData(holder, timestamp, i);
 
         setActive(holder, i);
     }
 
     @Override
     public int getItemCount() {
-        return 7;
+        return week.size();
     }
 
-    public void setWeeks(ArrayList<TypeModel> items) {
-        this.items = items;
+    public void setWeek(ArrayList<Long> week) {
+        this.week = week;
         notifyDataSetChanged();
     }
 
@@ -79,17 +80,24 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
         ClickManager.onDelayedClickListener(() -> {
             CenterSchedulesFragment centerSchedulesFragment = (CenterSchedulesFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
             if (centerSchedulesFragment != null) {
-                centerSchedulesFragment.responseAdapter("");
+                centerSchedulesFragment.responseAdapter();
                 selectedPosition = position;
+                meSelected = true;
             }
 
             notifyDataSetChanged();
         }).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(WeeksHolder holder) {
-        holder.binding.titleTextView.setText("شنبه");
-        holder.binding.dateTextView.setText("1400/01/01");
+    private void setData(WeeksHolder holder, long timestamp, int position) {
+        holder.binding.titleTextView.setText(DateManager.gregorianToJalali11(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(timestamp))));
+        holder.binding.dateTextView.setText(DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(timestamp))));
+
+        if (!meSelected) {
+            if (DateManager.currentTimestamp() == timestamp) {
+                selectedPosition = position;
+            }
+        }
     }
 
     private void setActive(WeeksHolder holder, int position) {
