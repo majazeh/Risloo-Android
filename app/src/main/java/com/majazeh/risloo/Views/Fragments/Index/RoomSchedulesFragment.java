@@ -150,6 +150,8 @@ public class RoomSchedulesFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        adapter.clearSchedules();
+
                         if (!schedules.data().isEmpty()) {
                             adapter.setSchedules(schedules.data(), type);
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);

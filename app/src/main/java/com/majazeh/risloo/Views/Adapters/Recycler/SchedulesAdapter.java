@@ -33,6 +33,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
     // Vars
     private ArrayList<TypeModel> schedules;
     private String type = "";
+    private long selectedTimstamp = DateManager.currentTimestamp();
 
     public SchedulesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -72,6 +73,11 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
         notifyDataSetChanged();
     }
 
+    public void setTimestamp(long selectedTimstamp) {
+        this.selectedTimstamp = selectedTimstamp;
+        notifyDataSetChanged();
+    }
+
     public void clearSchedules() {
         if (this.schedules != null) {
             this.schedules.clear();
@@ -102,6 +108,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
             holder.binding.countTextView.setText(String.valueOf(model.getClients_number()));
 
             if (model.getFields() != null && model.getFields().length() != 0) {
+                holder.binding.pointTextView.setText("");
                 for (int i = 0; i < model.getFields().length(); i++) {
                     holder.binding.pointTextView.append(model.getFields().getJSONObject(i).getString("title"));
                     if (i != model.getFields().length() -1) {
@@ -126,6 +133,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
             if (!type.equals("room")) {
                 holder.binding.managerGroup.setVisibility(View.VISIBLE);
+                setShowableItems(holder, model);
             } else {
                 holder.binding.managerGroup.setVisibility(View.GONE);
             }
@@ -143,6 +151,17 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
+        }
+    }
+
+    private void setShowableItems(SchedulesHolder holder, ScheduleModel model) {
+        String selectedDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(selectedTimstamp)));
+        String modelDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(model.getStarted_at())));
+
+        if (selectedDate.equals(modelDate)) {
+            holder.binding.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.getRoot().setVisibility(View.GONE);
         }
     }
 

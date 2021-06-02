@@ -41,6 +41,7 @@ public class CenterSchedulesFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
     private LinearLayoutManager weeksLayoutManager, schedulesLayoutManager;
+    private Handler handler;
     private Bundle extras;
 
     // Vars
@@ -61,8 +62,6 @@ public class CenterSchedulesFragment extends Fragment {
 
         setExtra();
 
-        setDate(currentTimestamp);
-
         getData(currentTimestamp);
 
         return binding.getRoot();
@@ -77,6 +76,8 @@ public class CenterSchedulesFragment extends Fragment {
 
         weeksLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false);
         schedulesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        handler = new Handler();
 
         extras = new Bundle();
 
@@ -140,7 +141,7 @@ public class CenterSchedulesFragment extends Fragment {
         weeksAdapter.setWeek(DateManager.currentJalaliWeekTimestamps(timestamp));
         binding.weeksRecyclerView.setAdapter(weeksAdapter);
 
-        new Handler().postDelayed(() -> {
+        handler.postDelayed(() -> {
             binding.weeksRecyclerView.setVisibility(View.VISIBLE);
             binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
             binding.weeksShimmerLayout.getRoot().stopShimmer();
@@ -150,6 +151,8 @@ public class CenterSchedulesFragment extends Fragment {
     private void getData(long timestamp) {
         data.put("time", timestamp);
 
+        setDate(timestamp);
+
         Center.schedule(data, header, new Response() {
             @Override
             public void onOK(Object object) {
@@ -157,6 +160,8 @@ public class CenterSchedulesFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        schedulesAdapter.clearSchedules();
+
                         if (!schedules.data().isEmpty()) {
                             schedulesAdapter.setSchedules(schedules.data(), type);
                             binding.schedulesSingleLayout.recyclerView.setAdapter(schedulesAdapter);
@@ -201,23 +206,18 @@ public class CenterSchedulesFragment extends Fragment {
 
         currentTimestamp = timestamp;
 
-        setDate(timestamp);
-
         getData(timestamp);
     }
 
-    public void responseAdapter() {
-//        binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);
-//        binding.schedulesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
-//        binding.schedulesShimmerLayout.getRoot().startShimmer();
-
-        // TODO : Refresh Data Here
+    public void responseAdapter(long timestamp) {
+        schedulesAdapter.setTimestamp(timestamp);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        handler.removeCallbacksAndMessages(null);
     }
 
 }

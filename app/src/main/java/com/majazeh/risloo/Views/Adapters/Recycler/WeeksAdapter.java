@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -24,7 +25,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     // Vars
     private ArrayList<Long> week;
-    private int selectedPosition = 0;
+    private long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
     private boolean meSelected = false;
 
     public WeeksAdapter(@NonNull Activity activity) {
@@ -41,11 +42,11 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
     public void onBindViewHolder(@NonNull WeeksHolder holder, int i) {
         long timestamp = week.get(i);
 
-        listener(holder, i);
+        listener(holder, timestamp);
 
-        setData(holder, timestamp, i);
+        setData(holder, timestamp);
 
-        setActive(holder, i);
+        setActive(holder, timestamp);
     }
 
     @Override
@@ -58,56 +59,78 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
         notifyDataSetChanged();
     }
 
-    private void detector(WeeksHolder holder, int position) {
+    private void detector(WeeksHolder holder, long timestamp) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            if (selectedPosition == position)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
-            else if (selectedPosition > position)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
-            else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            if (currentTimestamp == timestamp) {
+                if (selectedTimestamp == timestamp)
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                else
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            } else if (currentTimestamp > timestamp) {
+                if (selectedTimestamp == timestamp)
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                else
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
+            } else {
+                if (selectedTimestamp == timestamp)
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                else
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            }
         } else {
-            if (selectedPosition == position)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
-            else if (selectedPosition > position)
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
-            else
-                holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            if (currentTimestamp == timestamp) {
+                if (selectedTimestamp == timestamp)
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
+                else
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            } else if (currentTimestamp > timestamp) {
+                if (selectedTimestamp == timestamp)
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
+                else
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
+            } else {
+                if (selectedTimestamp == timestamp)
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
+                else
+                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+            }
         }
     }
 
-    private void listener(WeeksHolder holder, int position) {
+    private void listener(WeeksHolder holder, long timestamp) {
         ClickManager.onDelayedClickListener(() -> {
-            CenterSchedulesFragment centerSchedulesFragment = (CenterSchedulesFragment) ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (centerSchedulesFragment != null) {
-                centerSchedulesFragment.responseAdapter();
-                selectedPosition = position;
-                meSelected = true;
+            Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+            if (fragment != null) {
+                if (fragment instanceof CenterSchedulesFragment) {
+                    ((CenterSchedulesFragment) fragment).responseAdapter(timestamp);
+                    selectedTimestamp = timestamp;
+                    meSelected = true;
+                }
             }
 
             notifyDataSetChanged();
         }).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(WeeksHolder holder, long timestamp, int position) {
+    private void setData(WeeksHolder holder, long timestamp) {
         holder.binding.titleTextView.setText(DateManager.gregorianToJalali11(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(timestamp))));
         holder.binding.dateTextView.setText(DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(timestamp))));
 
         if (!meSelected) {
-            if (DateManager.currentTimestamp() == timestamp) {
-                selectedPosition = position;
+            if (currentTimestamp == timestamp) {
+                selectedTimestamp = timestamp;
             }
         }
     }
 
-    private void setActive(WeeksHolder holder, int position) {
-        if (selectedPosition == position) {
-            detector(holder, position);
+    private void setActive(WeeksHolder holder, long timestamp) {
+        if (selectedTimestamp == timestamp) {
+            detector(holder, timestamp);
 
             holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.White));
             holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.White));
         } else {
-            detector(holder, position);
+            detector(holder, timestamp);
 
             holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
             holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
