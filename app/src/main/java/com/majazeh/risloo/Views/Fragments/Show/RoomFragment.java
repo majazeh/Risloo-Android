@@ -142,7 +142,14 @@ public class RoomFragment extends Fragment {
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.referenceFragment, extras)).widget(binding.profileImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.roomSchedulesFragment, extras)).widget(binding.schedulesImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            if (getArguments() != null) {
+                if (getArguments().getString("type").equals("room"))
+                    ((MainActivity) requireActivity()).navigator(R.id.roomSchedulesFragment, extras);
+                else
+                    ((MainActivity) requireActivity()).navigator(R.id.centerSchedulesFragment, extras);
+            }
+        }).widget(binding.schedulesImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             if (getArguments() != null) {
