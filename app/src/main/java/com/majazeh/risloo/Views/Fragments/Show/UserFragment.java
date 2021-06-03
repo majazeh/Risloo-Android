@@ -144,6 +144,22 @@ public class UserFragment extends Fragment {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
 
+            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
+                extras.putString("status", getArguments().getString("status"));
+            }
+
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
+                extras.putString("type", getArguments().getString("type"));
+            }
+
+            if (getArguments().getString("gender") != null && !getArguments().getString("gender").equals("")) {
+                extras.putString("gender", getArguments().getString("gender"));
+            }
+
+            if (getArguments().getString("public_key") != null && !getArguments().getString("public_key").equals("")) {
+                extras.putString("public_key", getArguments().getString("public_key"));
+            }
+
             if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
                 extras.putString("avatar", getArguments().getString("avatar"));
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
@@ -202,6 +218,22 @@ public class UserFragment extends Fragment {
             binding.mobileGroup.setVisibility(View.VISIBLE);
         } else {
             binding.mobileGroup.setVisibility(View.GONE);
+        }
+
+        if (model.getUserStatus() != null && !model.getUserStatus().equals("")) {
+            extras.putString("status", model.getUserStatus());
+        }
+
+        if (model.getUserType() != null && !model.getUserType().equals("")) {
+            extras.putString("type", model.getUserType());
+        }
+
+        if (model.getGender() != null && !model.getGender().equals("")) {
+            extras.putString("gender", model.getGender());
+        }
+
+        if (model.getPublic_key() != null && !model.getPublic_key().equals("")) {
+            extras.putString("public_key", model.getPublic_key());
         }
 
         if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {

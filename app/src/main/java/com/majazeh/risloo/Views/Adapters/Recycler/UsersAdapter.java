@@ -163,6 +163,10 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         extras.putString("birthday", model.getBirthday());
         extras.putString("email", model.getEmail());
         extras.putString("mobile", model.getMobile());
+        extras.putString("status", model.getUserStatus());
+        extras.putString("type", model.getUserType());
+        extras.putString("gender", model.getGender());
+        extras.putString("public_key", model.getPublic_key());
 
         if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null)
             extras.putString("avatar", model.getAvatar().getMedium().getUrl());
