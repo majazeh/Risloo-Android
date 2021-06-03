@@ -65,44 +65,44 @@ public class MeFragment extends Fragment {
     }
 
     private void setData() {
-        if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        } else {
+        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
             binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+        } else {
+            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         }
 
-        if (((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
-            binding.usernameTextView.setVisibility(View.GONE);
-        } else {
+        if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
             binding.usernameTextView.setText(((MainActivity) requireActivity()).singleton.getUsername());
+        } else {
+            binding.usernameTextView.setVisibility(View.GONE);
         }
 
-        if (((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
-            binding.educationGroup.setVisibility(View.GONE);
-        } else {
-            binding.educationGroup.setVisibility(View.VISIBLE);
+        if (!((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
             binding.educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
+            binding.educationGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.educationGroup.setVisibility(View.GONE);
         }
 
-        if (((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-            binding.birthdayGroup.setVisibility(View.GONE);
-        } else {
-            binding.birthdayGroup.setVisibility(View.VISIBLE);
+        if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
             binding.birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
+            binding.birthdayGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.birthdayGroup.setVisibility(View.GONE);
         }
 
-        if (((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-            binding.emailGroup.setVisibility(View.GONE);
-        } else {
-            binding.emailGroup.setVisibility(View.VISIBLE);
+        if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
             binding.emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
+            binding.emailGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.emailGroup.setVisibility(View.GONE);
         }
 
         if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            binding.mobileGroup.setVisibility(View.GONE);
-        } else {
-            binding.mobileGroup.setVisibility(View.VISIBLE);
             binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
+            binding.mobileGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.mobileGroup.setVisibility(View.GONE);
         }
 
         if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {

@@ -67,7 +67,7 @@ public class DateManager {
                 return new Date(today.getTime() - (4*86400000)).getTime() / 1000;
             case "چهارشنبه":
                 return new Date(today.getTime() - (5*86400000)).getTime() / 1000;
-            case "پنچشنبه":
+            case "پنج\u200Cشنبه":
                 return new Date(today.getTime() - (6*86400000)).getTime() / 1000;
             case "جمعه":
                 return new Date(today.getTime() - (7*86400000)).getTime() / 1000;
@@ -98,7 +98,7 @@ public class DateManager {
                 return new Date(today.getTime() + (4*86400000)).getTime() / 1000;
             case "چهارشنبه":
                 return new Date(today.getTime() + (3*86400000)).getTime() / 1000;
-            case "پنچشنبه":
+            case "پنج\u200Cشنبه":
                 return new Date(today.getTime() + (2*86400000)).getTime() / 1000;
             case "جمعه":
                 return new Date(today.getTime() + (86400000)).getTime() / 1000;
@@ -166,7 +166,7 @@ public class DateManager {
                 timestamps.add(new Date(today.getTime() + (86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() + (2*86400000)).getTime() / 1000);
                 return timestamps;
-            case "پنچشنبه":
+            case "پنج\u200Cشنبه":
                 timestamps.add(new Date(today.getTime() - (5*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() - (4*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() - (3*86400000)).getTime() / 1000);
@@ -248,7 +248,7 @@ public class DateManager {
                 timestamps.add(new Date(today.getTime() - (6*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() - (5*86400000)).getTime() / 1000);
                 return timestamps;
-            case "پنچشنبه":
+            case "پنج\u200Cشنبه":
                 timestamps.add(new Date(today.getTime() - (12*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() - (11*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() - (10*86400000)).getTime() / 1000);
@@ -330,7 +330,7 @@ public class DateManager {
                 timestamps.add(new Date(today.getTime() + (8*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() + (9*86400000)).getTime() / 1000);
                 return timestamps;
-            case "پنچشنبه":
+            case "پنج\u200Cشنبه":
                 timestamps.add(new Date(today.getTime() + (2*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() + (3*86400000)).getTime() / 1000);
                 timestamps.add(new Date(today.getTime() + (4*86400000)).getTime() / 1000);
@@ -449,7 +449,7 @@ public class DateManager {
 
                 return firstPersianDate.getShMonth() + "/" + firstPersianDate.getShDay()  + " تا " + lastPersianDate.getShMonth() + "/" +lastPersianDate.getShDay();
             }
-            case "پنچشنبه": {
+            case "پنج\u200Cشنبه": {
                 Date firstDay = new Date(today.getTime() - (5*86400000));
                 Date lastDay = new Date(today.getTime() + (86400000));
 

@@ -18,12 +18,23 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentUserBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
 
 public class UserFragment extends Fragment {
 
     // Binding
     private FragmentUserBinding binding;
+
+    // Objects
+    private Bundle extras;
+
+    // Vars
+    private HashMap data, header;
 
     @Nullable
     @Override
@@ -36,12 +47,21 @@ public class UserFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
+
+        getData();
 
         return binding.getRoot();
     }
 
     private void initializer() {
+        extras = new Bundle();
+
+        data = new HashMap<>();
+        data.put("id", "");
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
         InitManager.imgResTint(requireActivity(), binding.enterImageView.getRoot(), R.drawable.ic_user_cog_light, R.color.Blue600);
     }
@@ -64,71 +84,160 @@ public class UserFragment extends Fragment {
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editUserFragment)).widget(binding.editImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editUserFragment, extras)).widget(binding.editImageView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(binding.enterImageView.getRoot());
     }
 
-    private void setData() {
-        // Todo : Place Code Here And set them to the below conditions
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                extras.putString("id", getArguments().getString("id"));
+                data.put("id", getArguments().getString("id"));
+            }
 
-        if (((MainActivity) requireActivity()).singleton.getName().equals("")) {
+            if (getArguments().getString("name") != null && !getArguments().getString("name").equals("")) {
+                extras.putString("name", getArguments().getString("name"));
+                binding.nameTextView.setText(getArguments().getString("name"));
+            } else {
+                binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            }
+
+            if (getArguments().getString("username") != null && !getArguments().getString("username").equals("")) {
+                extras.putString("username", getArguments().getString("username"));
+                binding.usernameTextView.setText(getArguments().getString("username"));
+            } else {
+                binding.usernameTextView.setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("education") != null && !getArguments().getString("education").equals("")) {
+                extras.putString("education", getArguments().getString("education"));
+                binding.educationTextView.setText(getArguments().getString("education"));
+                binding.educationGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.educationGroup.setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("birthday") != null && !getArguments().getString("birthday").equals("")) {
+                extras.putString("birthday", getArguments().getString("birthday"));
+                binding.birthdayTextView.setText(getArguments().getString("birthday"));
+                binding.birthdayGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.birthdayGroup.setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("email") != null && !getArguments().getString("email").equals("")) {
+                extras.putString("email", getArguments().getString("email"));
+                binding.emailTextView.setText(getArguments().getString("email"));
+                binding.emailGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.emailGroup.setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
+                extras.putString("mobile", getArguments().getString("mobile"));
+                binding.mobileTextView.setText(getArguments().getString("mobile"));
+                binding.mobileGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileGroup.setVisibility(View.GONE);
+            }
+
+            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
+                extras.putString("avatar", getArguments().getString("avatar"));
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(getArguments().getString("avatar")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            }
+        }
+    }
+
+    private void setData(UserModel model) {
+        if (model.getName() != null && !model.getName().equals("")) {
+            extras.putString("name", model.getName());
+            binding.nameTextView.setText(model.getName());
+        } else {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        } else {
-            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
         }
 
-        if (((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
+        if (model.getUsername() != null && !model.getUsername().equals("")) {
+            extras.putString("username", model.getUsername());
+            binding.usernameTextView.setText(model.getUsername());
+        } else {
             binding.usernameTextView.setVisibility(View.GONE);
-        } else {
-            binding.usernameTextView.setText(((MainActivity) requireActivity()).singleton.getUsername());
         }
 
-        if (((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
+//        if (model.getEducation() != null && !model.getEducation().equals("")) {
+//            extras.putString("education", model.getEducation());
+//            binding.educationTextView.setText(model.getEducation());
+//            binding.educationGroup.setVisibility(View.VISIBLE);
+//        } else {
             binding.educationGroup.setVisibility(View.GONE);
-        } else {
-            binding.educationGroup.setVisibility(View.VISIBLE);
-            binding.educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
-        }
+//        }
 
-        if (((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-            binding.birthdayGroup.setVisibility(View.GONE);
-        } else {
+        if (model.getBirthday() != null && !model.getBirthday().equals("")) {
+            extras.putString("birthday", model.getBirthday());
+            binding.birthdayTextView.setText(model.getBirthday());
             binding.birthdayGroup.setVisibility(View.VISIBLE);
-            binding.birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
+        } else {
+            binding.birthdayGroup.setVisibility(View.GONE);
         }
 
-        if (((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-            binding.emailGroup.setVisibility(View.GONE);
-        } else {
+        if (model.getEmail() != null && !model.getEmail().equals("")) {
+            extras.putString("email", model.getEmail());
+            binding.emailTextView.setText(model.getEmail());
             binding.emailGroup.setVisibility(View.VISIBLE);
-            binding.emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
-        }
-
-        if (((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            binding.mobileGroup.setVisibility(View.GONE);
         } else {
-            binding.mobileGroup.setVisibility(View.VISIBLE);
-            binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
+            binding.emailGroup.setVisibility(View.GONE);
         }
 
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+        if (model.getMobile() != null && !model.getMobile().equals("")) {
+            extras.putString("mobile", model.getMobile());
+            binding.mobileTextView.setText(model.getMobile());
+            binding.mobileGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.mobileGroup.setVisibility(View.GONE);
+        }
+
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+            extras.putString("avatar", model.getAvatar().getMedium().getUrl());
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
+    }
 
-        if (!((MainActivity) requireActivity()).singleton.getEnter()) {
-            binding.enterImageView.getRoot().setVisibility(View.GONE);
-        } else {
-            binding.enterImageView.getRoot().setVisibility(View.VISIBLE);
-        }
+    private void getData() {
+        User.show(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        UserModel model = (UserModel) object;
+
+                        setData(model);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
     }
 
     @Override

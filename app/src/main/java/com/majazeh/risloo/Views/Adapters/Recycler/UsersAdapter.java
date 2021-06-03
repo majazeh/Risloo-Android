@@ -156,11 +156,17 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     private Bundle getExtras(UserModel model) {
         Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+
+        extras.putString("id", model.getId());
+        extras.putString("name", model.getName());
+        extras.putString("username", model.getUsername());
+        extras.putString("birthday", model.getBirthday());
+        extras.putString("email", model.getEmail());
+        extras.putString("mobile", model.getMobile());
+
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null)
+            extras.putString("avatar", model.getAvatar().getMedium().getUrl());
+
         return extras;
     }
 
