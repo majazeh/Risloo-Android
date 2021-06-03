@@ -30,7 +30,7 @@ public class User extends Model {
 
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.show(endpoint, data, header, response, UserModel.class);
+            Model.show(endpoint + "/" + data.get("id"), data, header, response, UserModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

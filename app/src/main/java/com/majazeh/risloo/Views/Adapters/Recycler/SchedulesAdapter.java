@@ -33,6 +33,9 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
     // Vars
     private ArrayList<TypeModel> schedules;
     private String type = "";
+
+    // Vars
+    private ArrayList<TypeModel> selectedSchedules = new ArrayList<>();
     private long selectedTimstamp = DateManager.currentTimestamp();
 
     public SchedulesAdapter(@NonNull Activity activity) {
@@ -47,7 +50,12 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
     @Override
     public void onBindViewHolder(@NonNull SchedulesHolder holder, int i) {
-        ScheduleModel schedule = (ScheduleModel) schedules.get(i);
+        ScheduleModel schedule;
+
+        if (!type.equals("room"))
+            schedule = (ScheduleModel) selectedSchedules.get(i);
+         else
+            schedule = (ScheduleModel) schedules.get(i);
 
         detector(holder);
 
@@ -58,29 +66,43 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
     @Override
     public int getItemCount() {
-        if (this.schedules != null)
-            return schedules.size();
-        else
-            return 0;
+        if (!type.equals("room")) {
+            if (this.selectedSchedules != null)
+                return selectedSchedules.size();
+            else
+                return 0;
+        } else {
+            if (this.schedules != null)
+                return schedules.size();
+            else
+                return 0;
+        }
     }
 
     public void setSchedules(ArrayList<TypeModel> schedules, String type) {
+        this.type = type;
+
         if (this.schedules == null)
             this.schedules = schedules;
         else
             this.schedules.addAll(schedules);
-        this.type = type;
+
+        if (!this.type.equals("room"))
+            setSelectedSchedules();
+
         notifyDataSetChanged();
     }
 
     public void setTimestamp(long selectedTimstamp) {
         this.selectedTimstamp = selectedTimstamp;
+        setSelectedSchedules();
         notifyDataSetChanged();
     }
 
     public void clearSchedules() {
         if (this.schedules != null) {
             this.schedules.clear();
+            this.selectedSchedules.clear();
             notifyDataSetChanged();
         }
     }
@@ -99,8 +121,10 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
         try {
             if (!type.equals("room")) {
                 holder.binding.dateTextView.setText(DateManager.gregorianToJalali7(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))));
+                holder.binding.managerGroup.setVisibility(View.VISIBLE);
             } else {
                 holder.binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))));
+                holder.binding.managerGroup.setVisibility(View.GONE);
             }
 
             holder.binding.nameTextView.setText(model.getRoom().getRoomManager().getName());
@@ -130,13 +154,6 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
             } else {
                 setAvatar(holder, "");
             }
-
-            if (!type.equals("room")) {
-                holder.binding.managerGroup.setVisibility(View.VISIBLE);
-                setShowableItems(holder, model);
-            } else {
-                holder.binding.managerGroup.setVisibility(View.GONE);
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -154,14 +171,20 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
         }
     }
 
-    private void setShowableItems(SchedulesHolder holder, ScheduleModel model) {
-        String selectedDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(selectedTimstamp)));
-        String modelDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(model.getStarted_at())));
+    private void setSelectedSchedules() {
+        if (!selectedSchedules.isEmpty()) {
+            selectedSchedules.clear();
+        }
 
-        if (selectedDate.equals(modelDate)) {
-            holder.binding.getRoot().setVisibility(View.VISIBLE);
-        } else {
-            holder.binding.getRoot().setVisibility(View.GONE);
+        for (int i = 0; i < schedules.size(); i++) {
+            ScheduleModel model = (ScheduleModel) schedules.get(i);
+
+            String selectedDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(selectedTimstamp)));
+            String modelDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(model.getStarted_at())));
+
+            if (selectedDate.equals(modelDate)) {
+                selectedSchedules.add(model);
+            }
         }
     }
 
