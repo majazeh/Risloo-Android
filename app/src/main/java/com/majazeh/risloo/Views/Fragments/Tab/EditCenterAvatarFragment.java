@@ -94,21 +94,23 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void setExtra() {
-        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (editCenterFragment != null) {
-            if (!editCenterFragment.avatarPath.equals("")) {
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditCenterFragment) {
+                if (!((EditCenterFragment) fragment).avatarPath.equals("")) {
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
 
-                avatarPath = editCenterFragment.avatarPath;
-                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-            } else {
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                if (!editCenterFragment.title.equals(""))
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(editCenterFragment.title));
-                else
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
+                    avatarPath = ((EditCenterFragment) fragment).avatarPath;
+                    Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                } else {
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                    if (!((EditCenterFragment) fragment).title.equals(""))
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((EditCenterFragment) fragment).title));
+                    else
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
 
-                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                }
             }
         }
     }
@@ -139,9 +141,10 @@ public class EditCenterAvatarFragment extends Fragment {
 
         HashMap data = new HashMap<>();
 
-        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (editCenterFragment != null) {
-            data.put("id", editCenterFragment.centerId);
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditCenterFragment)
+                data.put("id", ((EditCenterFragment) fragment).centerId);
         }
 
         if (FileManager.readFileFromCache(requireActivity(), "image") != null)

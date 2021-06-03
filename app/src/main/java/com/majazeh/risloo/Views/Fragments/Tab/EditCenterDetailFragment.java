@@ -166,64 +166,64 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void setExtra() {
-        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (editCenterFragment != null) {
-            if (!editCenterFragment.type.equals("")) {
-                type = editCenterFragment.type;
-                switch (type) {
-                    case "personal_clinic":
-                        binding.counselingCenterGroup.setVisibility(View.GONE);
-                        break;
-                    case "counseling_center":
-                        binding.counselingCenterGroup.setVisibility(View.VISIBLE);
-                        break;
-                }
-            }
-
-            if (!editCenterFragment.managerId.equals("") && !editCenterFragment.managerName.equals("")) {
-                managerId = editCenterFragment.managerId;
-                managerName = editCenterFragment.managerName;
-                binding.managerIncludeLayout.selectTextView.setText(managerName);
-            }
-
-            if (!editCenterFragment.title.equals("")) {
-                title = editCenterFragment.title;
-                binding.titleIncludeLayout.inputEditText.setText(title);
-            }
-
-            if (!editCenterFragment.address.equals("")) {
-                address = editCenterFragment.address;
-                binding.addressIncludeLayout.inputEditText.setText(address);
-            }
-
-            if (!editCenterFragment.description.equals("")) {
-                description = editCenterFragment.description;
-                binding.descriptionIncludeLayout.inputEditText.setText(description);
-            }
-
-            if (!editCenterFragment.phoneNumbers.equals("")) {
-                try {
-                    JSONArray phoneNumbers = new JSONArray(editCenterFragment.phoneNumbers);
-
-                    ArrayList<TypeModel> phones = new ArrayList<>();
-                    ArrayList<String> ids = new ArrayList<>();
-
-                    for (int i = 0; i < phoneNumbers.length(); i++) {
-                        TypeModel model = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
-
-                        phones.add(model);
-                        ids.add(model.object.getString("id"));
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditCenterFragment) {
+                if (!((EditCenterFragment) fragment).type.equals("")) {
+                    type = ((EditCenterFragment) fragment).type;
+                    switch (type) {
+                        case "personal_clinic":
+                            binding.counselingCenterGroup.setVisibility(View.GONE);
+                            break;
+                        case "counseling_center":
+                            binding.counselingCenterGroup.setVisibility(View.VISIBLE);
+                            break;
                     }
-
-                    setRecyclerView(phones, ids, "phones");
-                } catch (JSONException e) {
-                    e.printStackTrace();
                 }
-            } else {
-                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+
+                if (!((EditCenterFragment) fragment).managerId.equals("") && !((EditCenterFragment) fragment).managerName.equals("")) {
+                    managerId = ((EditCenterFragment) fragment).managerId;
+                    managerName = ((EditCenterFragment) fragment).managerName;
+                    binding.managerIncludeLayout.selectTextView.setText(managerName);
+                }
+
+                if (!((EditCenterFragment) fragment).title.equals("")) {
+                    title = ((EditCenterFragment) fragment).title;
+                    binding.titleIncludeLayout.inputEditText.setText(title);
+                }
+
+                if (!((EditCenterFragment) fragment).address.equals("")) {
+                    address = ((EditCenterFragment) fragment).address;
+                    binding.addressIncludeLayout.inputEditText.setText(address);
+                }
+
+                if (!((EditCenterFragment) fragment).description.equals("")) {
+                    description = ((EditCenterFragment) fragment).description;
+                    binding.descriptionIncludeLayout.inputEditText.setText(description);
+                }
+
+                if (!((EditCenterFragment) fragment).phoneNumbers.equals("")) {
+                    try {
+                        JSONArray phoneNumbers = new JSONArray(((EditCenterFragment) fragment).phoneNumbers);
+
+                        ArrayList<TypeModel> phones = new ArrayList<>();
+                        ArrayList<String> ids = new ArrayList<>();
+
+                        for (int i = 0; i < phoneNumbers.length(); i++) {
+                            TypeModel model = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
+
+                            phones.add(model);
+                            ids.add(model.object.getString("id"));
+                        }
+
+                        setRecyclerView(phones, ids, "phones");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+                }
             }
-        } else {
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
         }
     }
 
@@ -265,9 +265,10 @@ public class EditCenterDetailFragment extends Fragment {
 
         HashMap data = new HashMap<>();
 
-        EditCenterFragment editCenterFragment = (EditCenterFragment) ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (editCenterFragment != null) {
-            data.put("id", editCenterFragment.centerId);
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditCenterFragment)
+                data.put("id", ((EditCenterFragment) fragment).centerId);
         }
 
         data.put("manager_id", managerId);
