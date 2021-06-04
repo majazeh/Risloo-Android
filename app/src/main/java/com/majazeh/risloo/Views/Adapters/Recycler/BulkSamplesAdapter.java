@@ -82,8 +82,6 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
     private void detector(BulkSamplesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-
-            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
@@ -93,15 +91,18 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String task = parent.getItemAtPosition(position).toString();
+                String menu = parent.getItemAtPosition(position).toString();
 
-                switch (position) {
-                    case 0:
-                        Log.e("method", "link");
+                switch (menu) {
+                    case "لینک ثبت نام":
+                        Log.e("menu", "link");
                         break;
-                    case 1:
-                        IntentManager.clipboard((MainActivity) activity, task);
+                    case "کپی کردن لینک":
+                        IntentManager.clipboard(activity, menu);
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
+                        break;
+                    case "ویرایش نمونه":
+                        Log.e("menu", "edit");
                         break;
                 }
 
@@ -113,10 +114,6 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
             }
         });
-
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.editImageView);
     }
 
     private void setData(BulkSamplesHolder holder, SampleModel model) {
@@ -131,7 +128,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
             holder.binding.nameTextView.setText(model.getSampleTitle());
             holder.binding.caseTextView.setText(""); // TODO : Place case_status here
 
-            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
                 holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
             }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSampleBinding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -83,11 +84,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     private void listener(SamplesHolder holder, SampleModel model) {
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sampleFragment, getExtras(model))).widget(holder.binding.getRoot());
 
-        ClickManager.onClickListener(() -> IntentManager.test(activity, null)).widget(holder.binding.statusTextView);
-
-        ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.bulkTextView);
+        ClickManager.onClickListener(() -> IntentManager.test(activity, model.getSampleId())).widget(holder.binding.statusTextView);
     }
 
     private void setData(SamplesHolder holder, SampleModel model) {
@@ -106,7 +103,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
             else
                 holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
 
-            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
                 holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
             }
 
@@ -115,75 +112,31 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
             }
 
             if (model.getSampleCase() != null && model.getSampleCase().getClients() != null && !model.getSampleCase().getClients().data().isEmpty()) {
-                holder.binding.referenceTextView.setText(model.getSampleCase().getClients().data().get(0).object.getString("name"));
+                holder.binding.referenceTextView.setText(model.getSampleCase().getClients().data().get(0).object.getString("name")); // TODO : name return empty
             }
 
-            setAction(holder, model.getSampleStatus());
+            setStatus(holder, model.getSampleStatus());
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void setAction(SamplesHolder holder, String action) {
-        switch (action) {
+    private void setStatus(SamplesHolder holder, String status) {
+        holder.binding.statusTextView.setText(SelectionManager.getSampleStatus2(activity, "fa", status));
+
+        switch (status) {
             case "seald":
-                holder.binding.statusTextView.setEnabled(true);
-
-                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusSeald));
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
-
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-                else
-                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-                break;
             case "open":
                 holder.binding.statusTextView.setEnabled(true);
-
-                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusOpen));
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
 
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
                     holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
                 else
                     holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-                break;
-            case "closed":
-                holder.binding.statusTextView.setEnabled(false);
-
-                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusClosed));
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
-
-                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
-                break;
-            case "scoring":
-                holder.binding.statusTextView.setEnabled(false);
-
-                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusScoring));
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
-
-                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
-                break;
-            case "creating_files":
-                holder.binding.statusTextView.setEnabled(false);
-
-                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusCreatingFiles));
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
-
-                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
-                break;
-            case "done":
-                holder.binding.statusTextView.setEnabled(false);
-
-                holder.binding.statusTextView.setText(activity.getResources().getString(R.string.SamplesFragmentStatusDone));
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
-
-                holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);
-
-                holder.binding.statusTextView.setText(action);
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);

@@ -163,23 +163,35 @@ public class InitManager {
 
                     private void detector(View view, int position) {
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                            view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
+                            if (position == getCount() - 1)
+                                view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                            else
+                                view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
                         }
                     }
 
                     private void setData(int position) {
                         dropdownTextView.setText(list.get(position));
 
-                        if (position == 0) {
-                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+                        switch (dropdownTextView.getText().toString()) {
+                            case "لینک ثبت نام":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
 
-                            dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_link_light, null));
-                            ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
-                        } else if (position == 1) {
-                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_link_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                                break;
+                            case "کپی کردن لینک":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
 
-                            dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_copy_light, null));
-                            ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_copy_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                                break;
+                            case "ویرایش نمونه":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_edit_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
                         }
                     }
 

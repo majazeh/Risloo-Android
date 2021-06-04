@@ -140,4 +140,23 @@ public class SelectionManager {
         return value;
     }
 
+    public static String getSampleStatus2(Activity activity, String local, String value) {
+        try {
+            JSONArray status = new JSONArray(JsonManager.getJson(activity, "SampleStatus2.json"));
+
+            for (int i = 0; i < status.length(); i++) {
+                if (local.equals("en")) {
+                    if (value.equals(status.getJSONObject(i).getString("fa_title")))
+                        return status.getJSONObject(i).getString("en_title");
+                } else {
+                    if (value.equals(status.getJSONObject(i).getString("en_title")))
+                        return status.getJSONObject(i).getString("fa_title");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return value;
+    }
+
 }
