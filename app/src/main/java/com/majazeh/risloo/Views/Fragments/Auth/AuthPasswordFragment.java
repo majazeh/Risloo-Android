@@ -39,6 +39,7 @@ public class AuthPasswordFragment extends Fragment {
     private FragmentAuthPasswordBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String mobile = "", password = "";
     private String key = "", callback = "";
     private boolean passwordVisibility = false;
@@ -60,6 +61,9 @@ public class AuthPasswordFragment extends Fragment {
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentTitle));
 
         binding.passwordIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
@@ -185,16 +189,15 @@ public class AuthPasswordFragment extends Fragment {
     }
 
     private void doWork() {
-        password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
-
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
+        password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
+
         data.put("password", password);
         data.put("key", key);
         data.put("callback", callback);
 
-        Auth.auth_theory(data, new HashMap<>(), new Response() {
+        Auth.auth_theory(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;

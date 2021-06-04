@@ -45,6 +45,7 @@ public class AuthPinFragment extends Fragment {
     private CountDownTimer countDownTimer;
 
     // Vars
+    private HashMap data, header;
     private String mobile = "", pin = "";
     private String key = "", callback = "";
 
@@ -67,6 +68,9 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PinFragmentTitle));
 
         binding.pinEditText.getRoot().setHint(getResources().getString(R.string.PinFragmentInput));
@@ -221,19 +225,18 @@ public class AuthPinFragment extends Fragment {
     }
 
     private void doWork(String method) {
+        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         countDownTimer.cancel();
 
         pin = binding.pinEditText.getRoot().getText().toString().trim();
 
-        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
         if (method.equals("pin")) {
-            HashMap data = new HashMap<>();
             data.put("code", pin);
             data.put("key", key);
             data.put("callback", callback);
 
-            Auth.auth_theory(data, new HashMap<>(), new Response() {
+            Auth.auth_theory(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
                     AuthModel model = (AuthModel) object;

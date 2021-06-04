@@ -33,6 +33,7 @@ public class AuthRegisterFragment extends Fragment {
     private FragmentAuthRegisterBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String mobile = "";
 
     @Nullable
@@ -50,6 +51,9 @@ public class AuthRegisterFragment extends Fragment {
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.RegisterFragmentTitle));
 
         binding.mobileEditText.getRoot().setHint(getResources().getString(R.string.RegisterFragmentMobile));
@@ -98,14 +102,12 @@ public class AuthRegisterFragment extends Fragment {
     }
 
     private void doWork() {
-        mobile = binding.mobileEditText.getRoot().getText().toString().trim();
-
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
+        mobile = binding.mobileEditText.getRoot().getText().toString().trim();
         data.put("mobile", mobile);
 
-        Auth.register(data, new HashMap<>(), new Response() {
+        Auth.register(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;

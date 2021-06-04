@@ -18,7 +18,6 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentAuthSerialBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
@@ -32,6 +31,7 @@ public class AuthSerialFragment extends Fragment {
     private FragmentAuthSerialBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String serial = "";
 
     @Nullable
@@ -51,6 +51,10 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((AuthActivity) requireActivity()).singleton.getAuthorization());
+
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentTitle));
 
         binding.serialEditText.getRoot().setHint(getResources().getString(R.string.SerialFragmentInput));
@@ -97,9 +101,6 @@ public class AuthSerialFragment extends Fragment {
         ClickManager.onClickListener(() -> {
             ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-            HashMap header = new HashMap<>();
-            header.put("Authorization", ((AuthActivity) requireActivity()).singleton.getAuthorization());
-
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -135,15 +136,10 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void doWork() {
-        serial = binding.serialEditText.getRoot().getText().toString().trim();
-
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
+        serial = binding.serialEditText.getRoot().getText().toString().trim();
         data.put("authorized_key", serial);
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         // Todo : Place Code Here
     }

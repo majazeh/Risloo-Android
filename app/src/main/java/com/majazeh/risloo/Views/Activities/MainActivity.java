@@ -59,11 +59,11 @@ public class MainActivity extends AppCompatActivity {
     // Binding
     private ActivityMainBinding binding;
 
-    // Singleton
-    public Singleton singleton;
-
     // Adapters
     private NavsAdapter navsAdapter;
+
+    // Singleton
+    public Singleton singleton;
 
     // Dialogs
     public LoadingDialog loadingDialog;
@@ -108,9 +108,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializer() {
-        singleton = new Singleton(this);
-
         navsAdapter = new NavsAdapter(this);
+
+        singleton = new Singleton(this);
 
         loadingDialog = new LoadingDialog();
 
@@ -159,20 +159,22 @@ public class MainActivity extends AppCompatActivity {
         binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
+                String pos = parent.getItemAtPosition(position).toString();
+
+                switch (pos) {
+                    case "مشاهده پروفایل":
                         navigator(R.id.meFragment);
                         break;
-//                    case 1:
-//                        navigator(R.id.treasuriesFragment);
-//                        break;
-//                    case 2:
-//                        navigator(R.id.billingsFragment);
-//                        break;
-//                    case 3:
-//                        navigator(R.id.paymentsFragment);
-//                        break;
-                    case 1:
+                    case "کیف پول\u200Cها":
+                        navigator(R.id.treasuriesFragment);
+                        break;
+                    case "صورت حساب\u200Cها":
+                        navigator(R.id.billingsFragment);
+                        break;
+                    case "شارژ حساب":
+                        navigator(R.id.paymentsFragment);
+                        break;
+                    case "خروج":
                         logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
                         logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
                         break;
@@ -194,31 +196,33 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setData() {
-        if (!singleton.getName().equals("")) {
-            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
-        } else {
-            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        }
+        if (singleton != null) {
+            if (!singleton.getName().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
+            } else {
+                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            }
 
-        if (!singleton.getMoney().equals("")) {
-            binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman));
-        } else {
-            binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
-        }
+            if (!singleton.getMoney().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman));
+            } else {
+                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
+            }
 
-        if (!singleton.getNotification().equals("")) {
-            binding.contentIncludeLayout.badgeTextView.setVisibility(View.VISIBLE);
-            binding.contentIncludeLayout.badgeTextView.setText(singleton.getNotification());
-        } else {
-            binding.contentIncludeLayout.badgeTextView.setVisibility(View.GONE);
-        }
+            if (!singleton.getNotification().equals("")) {
+                binding.contentIncludeLayout.badgeTextView.setVisibility(View.VISIBLE);
+                binding.contentIncludeLayout.badgeTextView.setText(singleton.getNotification());
+            } else {
+                binding.contentIncludeLayout.badgeTextView.setVisibility(View.GONE);
+            }
 
-        if (!singleton.getAvatar().equals("")) {
-            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
-        } else {
-            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
+            if (!singleton.getAvatar().equals("")) {
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+            } else {
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
+            }
         }
     }
 
@@ -248,33 +252,33 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    public void responseAdapter(int position) {
-        switch (position) {
-            case 0:
+    public void responseAdapter(String item) {
+        switch (item) {
+            case "پیش\u200Cخوان":
                 navigator(R.id.dashboardFragment);
                 break;
-            case 1:
+            case "مراکز درمانی":
                 navigator(R.id.centersFragment);
                 break;
-            case 2:
+            case "پرونده\u200Cها":
                 navigator(R.id.casesFragment);
                 break;
-            case 3:
+            case "جلسات":
                 navigator(R.id.sessionsFragment);
                 break;
-            case 4:
+            case "کاربران":
                 navigator(R.id.usersFragment);
                 break;
-            case 5:
+            case "ارزیابی\u200Cها":
                 navigator(R.id.scalesFragment);
                 break;
-            case 6:
+            case "نمونه\u200Cها":
                 navigator(R.id.samplesFragment);
                 break;
-            case 7:
+            case "نمونه\u200Cهای گروهی":
                 navigator(R.id.bulkSamplesFragment);
                 break;
-            case 8:
+            case "اسناد و مدارک":
                 navigator(R.id.documentsFragment);
                 break;
         }
@@ -332,10 +336,8 @@ public class MainActivity extends AppCompatActivity {
         if (user.getGender() != null)
             singleton.setGender(user.getGender());
 
-        if (user.getAvatar() != null)
-            if (user.getAvatar().getMedium() != null)
-                if (user.getAvatar().getMedium().getUrl() != null)
-                    singleton.setAvatar(user.getAvatar().getMedium().getUrl());
+        if (user.getAvatar() != null && user.getAvatar().getMedium() != null && user.getAvatar().getMedium().getUrl() != null)
+            singleton.setAvatar(user.getAvatar().getMedium().getUrl());
 
         if (user.getPublic_key() != null)
             singleton.setPublicKey(user.getPublic_key());
@@ -473,6 +475,7 @@ public class MainActivity extends AppCompatActivity {
                     if (requestCode == 100)
                         ((CreatePracticeFragment) fragment).responseAction("file", data);
                 }
+
             }
         } else if (resultCode == RESULT_CANCELED) {
             switch (requestCode) {

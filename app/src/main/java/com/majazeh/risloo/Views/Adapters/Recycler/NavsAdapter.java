@@ -83,7 +83,7 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
     private void listener(NavsHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
-            ((MainActivity) activity).responseAdapter(position);
+            ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString());
             selectedPosition = position;
         }).widget(holder.binding.getRoot());
     }

@@ -125,10 +125,8 @@ public class AuthActivity extends AppCompatActivity {
         if (user.getGender() != null)
             singleton.setGender(user.getGender());
 
-        if (user.getAvatar() != null)
-            if (user.getAvatar().getMedium() != null)
-                if (user.getAvatar().getMedium().getUrl() != null)
-                    singleton.setAvatar(user.getAvatar().getMedium().getUrl());
+        if (user.getAvatar() != null && user.getAvatar().getMedium() != null && user.getAvatar().getMedium().getUrl() != null)
+            singleton.setAvatar(user.getAvatar().getMedium().getUrl());
 
         if (user.getPublic_key() != null)
             singleton.setPublicKey(user.getPublic_key());

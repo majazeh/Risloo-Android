@@ -34,6 +34,7 @@ public class AuthLoginFragment extends Fragment {
     private FragmentAuthLoginBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String mobile = "";
 
     @Nullable
@@ -55,6 +56,9 @@ public class AuthLoginFragment extends Fragment {
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.LoginFragmentTitle));
 
         binding.mobileEditText.getRoot().setHint(getResources().getString(R.string.LoginFragmentInput));
@@ -104,14 +108,12 @@ public class AuthLoginFragment extends Fragment {
     }
 
     private void doWork() {
-        mobile = binding.mobileEditText.getRoot().getText().toString().trim();
-
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
+        mobile = binding.mobileEditText.getRoot().getText().toString().trim();
         data.put("authorized_key", mobile);
 
-        Auth.auth(data, new HashMap<>(), new Response() {
+        Auth.auth(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel model = (AuthModel) object;
