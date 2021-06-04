@@ -79,8 +79,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     private void detector(UsersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-
-            holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
@@ -90,14 +88,16 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String task = parent.getItemAtPosition(position).toString();
+                String menu = parent.getItemAtPosition(position).toString();
 
-                if (task.equals("ورود به کاربری")) {
+                if (menu.equals("+989")) {
+                    IntentManager.phone(activity, menu);
+                } else if (menu.contains("@")) {
+                    IntentManager.email(activity, new String[]{menu}, "", "", "");
+                } else if (menu.contains("ورود به کاربری")) {
                     Log.e("method", "enter");
-                } else if (task.contains("+989")) {
-                    IntentManager.phone(activity, task);
-                } else if (task.contains("@")) {
-                    IntentManager.email(activity, new String[]{task}, "", "", "");
+                } else if (menu.equals("ویرایش کاربر")) {
+                    ((MainActivity) activity).navigator(R.id.editUserFragment, getExtras(model));
                 }
 
                 holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
@@ -108,8 +108,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
             }
         });
-
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.editUserFragment, getExtras(model))).widget(holder.binding.editImageView);
     }
 
     private void setData(UsersHolder holder, UserModel model) {
@@ -129,29 +127,27 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     }
 
     private void setMenu(UsersHolder holder, UserModel model) {
-        ArrayList<String> menuValues = new ArrayList<>();
+        ArrayList<String> menu = new ArrayList<>();
+
+        if (model.getMobile() != null && !model.getMobile().equals(""))
+            menu.add(model.getMobile());
+
+        if (model.getEmail() != null && !model.getEmail().equals(""))
+            menu.add(model.getEmail());
 
         if (model.getUserType() != null && !model.getUserType().equals("admin")) {
-            menuValues.add(activity.getResources().getString(R.string.UsersFragmentEnter));
+            menu.add(activity.getResources().getString(R.string.UsersFragmentEnter));
         }
 
-        if (model.getMobile() != null && !model.getMobile().equals("")) {
-            menuValues.add(model.getMobile());
-        }
+        menu.add(activity.getResources().getString(R.string.UsersFragmentEdit));
+        menu.add("");
 
-        if (model.getEmail() != null && !model.getEmail().equals("")) {
-            menuValues.add(model.getEmail());
-        }
-
-        menuValues.add("");
-
-        if (menuValues.size() != 1) {
+        if (menu.size() != 1)
             holder.binding.menuImageView.setVisibility(View.VISIBLE);
-        } else {
+        else
             holder.binding.menuImageView.setVisibility(View.INVISIBLE);
-        }
 
-        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menuValues, "users");
+        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menu, "users");
     }
 
     private Bundle getExtras(UserModel model) {

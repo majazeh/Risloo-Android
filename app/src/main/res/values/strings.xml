@@ -911,6 +911,7 @@
     <string name="UsersFragmentStatus">وضعیت</string>
 
     <string name="UsersFragmentEnter">ورود به کاربری</string>
+    <string name="UsersFragmentEdit">ویرایش کاربر</string>
 
     <string name="UsersFragmentEmpty">هنوز کاربری ثبت نشده است.</string>
 

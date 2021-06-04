@@ -229,7 +229,7 @@ public class InitManager {
                     }
 
                     private void detector(View view, int position) {
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
                             switch (arrayList.get(position)) {
                                 case "ورود به کاربری":
                                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_blue300);
@@ -238,27 +238,30 @@ public class InitManager {
                                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
                                     break;
                             }
-                        }
                     }
 
                     private void setData(int position) {
                         dropdownTextView.setText(arrayList.get(position));
 
-                        if (dropdownTextView.getText().toString().equals("ورود به کاربری")) {
-                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
-
-                            dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_user_cog_light, null));
-                            ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
-                        } else if (dropdownTextView.getText().toString().contains("989")) {
+                        if (dropdownTextView.getText().toString().contains("989")) {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_mobile_light, null));
                             ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
-
                         } else if (dropdownTextView.getText().toString().contains("@")) {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_envelope_light, null));
+                            ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                        } else if (dropdownTextView.getText().toString().equals("ورود به کاربری")) {
+                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
+
+                            dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_user_cog_light, null));
+                            ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+                        } else if (dropdownTextView.getText().toString().equals("ویرایش کاربر")) {
+                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                            dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_edit_light, null));
                             ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
                         }
                     }
