@@ -41,6 +41,9 @@ public class DashboardFragment extends Fragment {
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
     private LinearLayoutManager cases2LayoutManager, samplesLayoutManager, roomsLayoutManager, centersLayoutManager;
 
+    // Vars
+    private HashMap data, header;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
@@ -67,6 +70,11 @@ public class DashboardFragment extends Fragment {
         roomsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         centersLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
+        data = new HashMap<>();
+        data.put("user", ((MainActivity) requireActivity()).singleton.getId());
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         binding.casesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.DashboardFragmentCasesHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.DashboardFragmentSamplesHeader));
         binding.roomsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.DashboardFragmentRoomsHeader));
@@ -81,12 +89,6 @@ public class DashboardFragment extends Fragment {
     }
 
     private void getData() {
-        HashMap data = new HashMap<>();
-        data.put("user", ((MainActivity) requireActivity()).singleton.getId());
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-
         User.dashboard(data, header, new Response() {
             @Override
             public void onOK(Object object) {

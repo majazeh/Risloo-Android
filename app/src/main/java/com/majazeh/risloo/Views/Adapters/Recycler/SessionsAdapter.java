@@ -100,7 +100,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             holder.binding.serialTextView.setText(model.getId());
             holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
 
-            if (model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().isNull("title")) {
+            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().isNull("title")) {
                 holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
             }
 

@@ -83,15 +83,15 @@ public class CasesFragment extends Fragment {
 
         binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
-        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
         } else {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
         }
     }
 

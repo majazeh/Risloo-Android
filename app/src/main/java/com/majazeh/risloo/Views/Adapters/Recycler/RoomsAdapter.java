@@ -87,7 +87,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         holder.binding.nameTextView.setText(model.getRoomManager().getName());
         holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
 
-        if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null) {
+        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null) {
             setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
         } else {
             setAvatar(holder, "");
@@ -115,7 +115,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         extras.putString("manager_id", model.getRoomManager().getUserId());
         extras.putString("manager_name", model.getRoomManager().getName());
 
-        if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
+        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
             extras.putString("avatar", model.getRoomManager().getAvatar().getMedium().getUrl());
 
         return extras;

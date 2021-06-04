@@ -94,7 +94,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
             holder.binding.serialTextView.setText(model.getCaseId());
             holder.binding.roomTextView.setText(model.getCaseManager().getName());
 
-            if (model.getCaseRoom().getRoomCenter().getDetail().has("title") && !model.getCaseRoom().getRoomCenter().getDetail().isNull("title")) {
+            if (model.getCaseRoom() != null && model.getCaseRoom().getRoomCenter() != null && model.getCaseRoom().getRoomCenter().getDetail().has("title") && !model.getCaseRoom().getRoomCenter().getDetail().isNull("title")) {
                 holder.binding.centerTextView.setText(model.getCaseRoom().getRoomCenter().getDetail().getString("title"));
             }
 

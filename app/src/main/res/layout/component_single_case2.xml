@@ -45,12 +45,12 @@
 
     <ProgressBar
         android:id="@+id/progressBar"
-        android:layout_width="@dimen/_32sdp"
-        android:layout_height="@dimen/_32sdp"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:padding="@dimen/_7sdp"
-        android:theme="@style/ProgressBarTheme"
-        android:background="@drawable/draw_oval_solid_gray100"
+        android:layout_width="@dimen/_28sdp"
+        android:layout_height="@dimen/_28sdp"
+        android:layout_marginBottom="@dimen/_6sdp"
+        android:padding="@dimen/_6sdp"
+        android:theme="@style/ProgressBarTheme2"
+        android:background="@drawable/draw_oval_solid_blue600"
         android:visibility="gone"
         app:elevation="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
