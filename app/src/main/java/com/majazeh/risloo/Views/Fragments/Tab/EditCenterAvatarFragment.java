@@ -42,6 +42,7 @@ public class EditCenterAvatarFragment extends Fragment {
     private Bitmap avatarBitmap = null;
 
     // Vars
+    private HashMap data, header;
     public String avatarPath = "";
 
     @Nullable
@@ -62,6 +63,10 @@ public class EditCenterAvatarFragment extends Fragment {
 
     private void initializer() {
         imageBottomSheet = new ImageBottomSheet();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterAvatarTabAvatarGuide));
 
@@ -97,10 +102,14 @@ public class EditCenterAvatarFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditCenterFragment) {
-                if (!((EditCenterFragment) fragment).avatarPath.equals("")) {
-                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                if (!((EditCenterFragment) fragment).centerId.equals("")) {
+                    data.put("id", ((EditCenterFragment) fragment).centerId);
+                }
 
+                if (!((EditCenterFragment) fragment).avatarPath.equals("")) {
                     avatarPath = ((EditCenterFragment) fragment).avatarPath;
+
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
@@ -135,23 +144,12 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void doWork() {
-        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
-
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditCenterFragment)
-                data.put("id", ((EditCenterFragment) fragment).centerId);
-        }
-
-        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
             data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        }
 
         Center.editAvatar(data, header, new Response() {
             @Override

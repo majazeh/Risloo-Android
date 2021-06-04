@@ -27,7 +27,7 @@ public class EditUserFragment extends Fragment {
 
     // Vars
     private String[] tabs;
-    public String id = "", name = "", username = "", education = "", birthday = "", email = "", mobile = "", status = "", type = "", gender = "", publicKey = "";
+    public String userId = "", name = "", username = "", education = "", birthday = "", email = "", mobile = "", status = "", type = "", gender = "", publicKey = "", privateKey = "";
     public String avatarPath = "";
 
     @Nullable
@@ -52,7 +52,7 @@ public class EditUserFragment extends Fragment {
     private void setExtra() {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                id = getArguments().getString("id");
+                userId = getArguments().getString("id");
             }
 
             if (getArguments().getString("name") != null && !getArguments().getString("name").equals("")) {
@@ -93,6 +93,10 @@ public class EditUserFragment extends Fragment {
 
             if (getArguments().getString("public_key") != null && !getArguments().getString("public_key").equals("")) {
                 publicKey = getArguments().getString("public_key");
+            }
+
+            if (getArguments().getString("private_key") != null && !getArguments().getString("private_key").equals("")) {
+                publicKey = getArguments().getString("private_key");
             }
 
             if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {

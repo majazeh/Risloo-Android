@@ -84,6 +84,18 @@ public class Singleton {
         return "";
     }
 
+    public void setEducation(String value) {
+        editor.putString("education", value);
+        editor.apply();
+    }
+
+    public String getEducation() {
+        if (!sharedPreferences.getString("education", "").equals("")) {
+            return sharedPreferences.getString("education", "");
+        }
+        return "";
+    }
+
     public void setBirthday(String value) {
         editor.putString("birthday", value);
         editor.apply();
@@ -244,13 +256,6 @@ public class Singleton {
         return "";
     }
 
-    public String getEducation() {
-        if (!sharedPreferences.getString("education", "").equals("")) {
-            return sharedPreferences.getString("education", "");
-        }
-        return "";
-    }
-
     public String getPassword() {
         if (!sharedPreferences.getString("password", "").equals("")) {
             return sharedPreferences.getString("password", "");
@@ -305,14 +310,6 @@ public class Singleton {
             return sharedPreferences.getInt("address", 0);
         }
         return -1;
-    }
-
-    public boolean getEnter() {
-        return sharedPreferences.getBoolean("enter", true);
-    }
-
-    public boolean getCreateCase() {
-        return sharedPreferences.getBoolean("createCase", true);
     }
 
     public boolean getBulkSession() {

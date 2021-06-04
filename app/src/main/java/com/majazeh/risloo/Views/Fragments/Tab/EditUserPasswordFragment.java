@@ -24,6 +24,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserPasswordBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
@@ -40,6 +41,7 @@ public class EditUserPasswordFragment extends Fragment {
     private FragmentEditUserPasswordBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String currentPassword = "", newPassword = "";
     private boolean currentPasswordVisibility = false, newPasswordVisibility = false;
 
@@ -54,10 +56,16 @@ public class EditUserPasswordFragment extends Fragment {
 
         listener();
 
+        setExtra();
+
         return binding.getRoot();
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         binding.currentPasswordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPasswordTabCurrentPasswordHeader));
         binding.newPasswordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPasswordTabNewPasswordHeader));
 
@@ -207,16 +215,15 @@ public class EditUserPasswordFragment extends Fragment {
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0) {
+            if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0)
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
-            }
-            if (binding.newPasswordIncludeLayout.inputEditText.length() == 0) {
+
+            if (binding.newPasswordIncludeLayout.inputEditText.length() == 0)
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
-            }
 
             if (binding.currentPasswordIncludeLayout.inputEditText.length() != 0 && binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
                 doWork();
@@ -224,19 +231,25 @@ public class EditUserPasswordFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
+    private void setExtra() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditUserFragment) {
+                if (!((EditUserFragment) fragment).userId.equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).userId);
+                }
+            }
+        }
+    }
+
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         currentPassword = binding.currentPasswordIncludeLayout.inputEditText.getText().toString().trim();
         newPassword = binding.newPasswordIncludeLayout.inputEditText.getText().toString().trim();
 
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        HashMap data = new HashMap<>();
-        data.put("user",  ((MainActivity) requireActivity()).singleton.getId());
         data.put("password",  currentPassword);
         data.put("new_password", newPassword);
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Auth.editPassword(data, header, new Response() {
             @Override

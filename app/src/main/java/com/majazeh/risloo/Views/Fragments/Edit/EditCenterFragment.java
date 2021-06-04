@@ -27,8 +27,7 @@ public class EditCenterFragment extends Fragment {
 
     // Vars
     private String[] tabs;
-    public String centerId = "";
-    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "", phoneNumbers = "";
+    public String centerId = "", type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "", phoneNumbers = "";
     public String avatarPath = "";
 
     @Nullable

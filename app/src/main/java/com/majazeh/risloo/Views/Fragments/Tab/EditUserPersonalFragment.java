@@ -19,10 +19,12 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserPersonalBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +41,7 @@ public class EditUserPersonalFragment extends Fragment {
     private DateBottomSheet birthdayBottomSheet;
 
     // Vars
+    private HashMap data, header;
     private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "client", gender = "male";
     private int year, month, day;
 
@@ -53,13 +56,17 @@ public class EditUserPersonalFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
 
     private void initializer() {
         birthdayBottomSheet = new DateBottomSheet();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabMobileHeader));
@@ -182,83 +189,92 @@ public class EditUserPersonalFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
+    private void setExtra() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditUserFragment) {
+                if (!((EditUserFragment) fragment).userId.equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).userId);
+                }
 
-        if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            mobile = ((MainActivity) requireActivity()).singleton.getMobile();
-            binding.mobileIncludeLayout.inputEditText.setText(mobile);
-        }
+                if (!((EditUserFragment) fragment).name.equals("")) {
+                    name = ((EditUserFragment) fragment).name;
+                    binding.nameIncludeLayout.inputEditText.setText(name);
+                }
 
-        if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
-            username = ((MainActivity) requireActivity()).singleton.getUsername();
-            binding.usernameIncludeLayout.inputEditText.setText(username);
-        }
+                if (!((EditUserFragment) fragment).mobile.equals("")) {
+                    mobile = ((EditUserFragment) fragment).mobile;
+                    binding.mobileIncludeLayout.inputEditText.setText(mobile);
+                }
 
-        if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-            email = ((MainActivity) requireActivity()).singleton.getEmail();
-            binding.emailIncludeLayout.inputEditText.setText(email);
-        }
+                if (!((EditUserFragment) fragment).username.equals("")) {
+                    username = ((EditUserFragment) fragment).username;
+                    binding.usernameIncludeLayout.inputEditText.setText(username);
+                }
 
-        if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-            birthday = ((MainActivity) requireActivity()).singleton.getBirthday();
-            binding.birthdayIncludeLayout.selectTextView.setText(birthday);
-        } else {
-            birthday = getResources().getString(R.string.AppDefaultDate);
-            binding.birthdayIncludeLayout.selectTextView.setText(birthday);
-        }
+                if (!((EditUserFragment) fragment).email.equals("")) {
+                    email = ((EditUserFragment) fragment).email;
+                    binding.emailIncludeLayout.inputEditText.setText(email);
+                }
 
-        year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-        month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-        day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+                if (!((EditUserFragment) fragment).birthday.equals("")) {
+                    birthday = ((EditUserFragment) fragment).birthday;
+                    binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                } else {
+                    birthday = getResources().getString(R.string.AppDefaultDate);
+                    binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                }
 
-        if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-            status = ((MainActivity) requireActivity()).singleton.getStatus();
-            switch (status) {
-                case "active":
-                    binding.statusIncludeLayout.firstRadioButton.setChecked(true);
-                    break;
-                case "waiting":
-                    binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-                    break;
-                case "closed":
-                    binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
-                    break;
-            }
-        }
+                year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+                month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+                day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", birthday)));
 
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            type = ((MainActivity) requireActivity()).singleton.getType();
-            switch (type) {
-                case "admin":
-                    binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+                if (!((EditUserFragment) fragment).status.equals("")) {
+                    status = ((EditUserFragment) fragment).status;
+                    switch (status) {
+                        case "active":
+                            binding.statusIncludeLayout.firstRadioButton.setChecked(true);
+                            break;
+                        case "waiting":
+                            binding.statusIncludeLayout.secondRadioButton.setChecked(true);
+                            break;
+                        case "closed":
+                            binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
+                            break;
+                    }
+                }
 
-                    binding.clientGroup.setVisibility(View.VISIBLE);
-                    break;
-                default:
+                if (!((EditUserFragment) fragment).type.equals("")) {
+                    type = ((EditUserFragment) fragment).type;
+                    switch (type) {
+                        case "admin":
+                            binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+
+                            binding.clientGroup.setVisibility(View.VISIBLE);
+                            break;
+                        default:
+                            binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+
+                            binding.clientGroup.setVisibility(View.GONE);
+                            break;
+                    }
+                } else {
                     binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
                     binding.clientGroup.setVisibility(View.GONE);
-                    break;
-            }
-        } else {
-            binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+                }
 
-            binding.clientGroup.setVisibility(View.GONE);
-        }
-
-        if (!((MainActivity) requireActivity()).singleton.getGender().equals("")) {
-            gender = ((MainActivity) requireActivity()).singleton.getGender();
-            switch (gender) {
-                case "male":
-                    binding.genderIncludeLayout.firstRadioButton.setChecked(true);
-                    break;
-                case "female":
-                    binding.genderIncludeLayout.secondRadioButton.setChecked(true);
-                    break;
+                if (!((EditUserFragment) fragment).gender.equals("")) {
+                    gender = ((EditUserFragment) fragment).gender;
+                    switch (gender) {
+                        case "male":
+                            binding.genderIncludeLayout.firstRadioButton.setChecked(true);
+                            break;
+                        case "female":
+                            binding.genderIncludeLayout.secondRadioButton.setChecked(true);
+                            break;
+                    }
+                }
             }
         }
     }
@@ -278,29 +294,28 @@ public class EditUserPersonalFragment extends Fragment {
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         username = binding.usernameIncludeLayout.inputEditText.getText().toString().trim();
         email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
 
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        HashMap data = new HashMap<>();
         data.put("name", name);
         data.put("gender", gender);
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Auth.editProfile(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                AuthModel model = (AuthModel) object;
+                AuthModel authModel = (AuthModel) object;
+                UserModel userModel = authModel.getUser();
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).login(model.getUser());
-                        ((MainActivity) requireActivity()).setData();
+                        if (userModel.getId().equals(((MainActivity) requireActivity()).singleton.getId())) {
+                            ((MainActivity) requireActivity()).login(userModel);
+                            ((MainActivity) requireActivity()).setData();
+                        }
 
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();

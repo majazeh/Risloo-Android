@@ -22,10 +22,12 @@ import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserAvatarBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
@@ -42,6 +44,7 @@ public class EditUserAvatarFragment extends Fragment {
     private Bitmap avatarBitmap = null;
 
     // Vars
+    private HashMap data, header;
     public String avatarPath = "";
 
     @Nullable
@@ -55,13 +58,17 @@ public class EditUserAvatarFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
 
     private void initializer() {
         imageBottomSheet = new ImageBottomSheet();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserAvatarTabAvatarGuide));
 
@@ -93,20 +100,29 @@ public class EditUserAvatarFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+    private void setExtra() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditUserFragment) {
+                if (!((EditUserFragment) fragment).userId.equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).userId);
+                }
 
-            avatarPath = ((MainActivity) requireActivity()).singleton.getAvatar();
-            Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            if (!((MainActivity) requireActivity()).singleton.getName().equals(""))
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((MainActivity) requireActivity()).singleton.getName()));
-            else
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
+                if (!((EditUserFragment) fragment).avatarPath.equals("")) {
+                    avatarPath = ((EditUserFragment) fragment).avatarPath;
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                    Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                } else {
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                    if (!((EditUserFragment) fragment).name.equals(""))
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((EditUserFragment) fragment).name));
+                    else
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
+
+                    Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                }
+            }
         }
     }
 
@@ -130,28 +146,25 @@ public class EditUserAvatarFragment extends Fragment {
     }
 
     private void doWork() {
-        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
-        data.put("id", ((MainActivity) requireActivity()).singleton.getId());
-
-        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+        FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
             data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+        }
 
         Auth.changeAvatar(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 AuthModel authModel = (AuthModel) object;
+                UserModel userModel = authModel.getUser();
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).singleton.setAvatar(authModel.getUser().getAvatar().getMedium().getUrl());
-                        ((MainActivity) requireActivity()).setData();
+                        if (userModel.getId().equals(((MainActivity) requireActivity()).singleton.getId())) {
+                            ((MainActivity) requireActivity()).singleton.setAvatar(userModel.getAvatar().getMedium().getUrl());
+                            ((MainActivity) requireActivity()).setData();
+                        }
 
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();

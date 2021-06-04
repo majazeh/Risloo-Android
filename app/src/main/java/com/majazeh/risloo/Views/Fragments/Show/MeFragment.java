@@ -58,7 +58,6 @@ public class MeFragment extends Fragment {
         extras = new Bundle();
 
         data = new HashMap<>();
-        data.put("id", "");
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -85,82 +84,84 @@ public class MeFragment extends Fragment {
     }
 
     private void setExtra() {
-        if (!((MainActivity) requireActivity()).singleton.getId().equals("")) {
-            extras.putString("id", ((MainActivity) requireActivity()).singleton.getId());
-            data.put("id", ((MainActivity) requireActivity()).singleton.getId());
-        }
+        if (((MainActivity) requireActivity()).singleton != null) {
+            if (!((MainActivity) requireActivity()).singleton.getId().equals("")) {
+                extras.putString("id", ((MainActivity) requireActivity()).singleton.getId());
+                data.put("id", ((MainActivity) requireActivity()).singleton.getId());
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            extras.putString("name", ((MainActivity) requireActivity()).singleton.getName());
-            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
-        } else {
-            binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        }
+            if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
+                extras.putString("name", ((MainActivity) requireActivity()).singleton.getName());
+                binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+            } else {
+                binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
-            extras.putString("username", ((MainActivity) requireActivity()).singleton.getUsername());
-            binding.usernameTextView.setText(((MainActivity) requireActivity()).singleton.getUsername());
-        } else {
-            binding.usernameTextView.setVisibility(View.GONE);
-        }
+            if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
+                extras.putString("username", ((MainActivity) requireActivity()).singleton.getUsername());
+                binding.usernameTextView.setText(((MainActivity) requireActivity()).singleton.getUsername());
+            } else {
+                binding.usernameTextView.setVisibility(View.GONE);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
-            extras.putString("education", ((MainActivity) requireActivity()).singleton.getEducation());
-            binding.educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
-            binding.educationGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.educationGroup.setVisibility(View.GONE);
-        }
+            if (!((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
+                extras.putString("education", ((MainActivity) requireActivity()).singleton.getEducation());
+                binding.educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
+                binding.educationGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.educationGroup.setVisibility(View.GONE);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-            extras.putString("birthday", ((MainActivity) requireActivity()).singleton.getBirthday());
-            binding.birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
-            binding.birthdayGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.birthdayGroup.setVisibility(View.GONE);
-        }
+            if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
+                extras.putString("birthday", ((MainActivity) requireActivity()).singleton.getBirthday());
+                binding.birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
+                binding.birthdayGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.birthdayGroup.setVisibility(View.GONE);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-            extras.putString("email", ((MainActivity) requireActivity()).singleton.getEmail());
-            binding.emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
-            binding.emailGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.emailGroup.setVisibility(View.GONE);
-        }
+            if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
+                extras.putString("email", ((MainActivity) requireActivity()).singleton.getEmail());
+                binding.emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
+                binding.emailGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.emailGroup.setVisibility(View.GONE);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            extras.putString("mobile", ((MainActivity) requireActivity()).singleton.getMobile());
-            binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
-            binding.mobileGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.mobileGroup.setVisibility(View.GONE);
-        }
+            if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
+                extras.putString("mobile", ((MainActivity) requireActivity()).singleton.getMobile());
+                binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
+                binding.mobileGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileGroup.setVisibility(View.GONE);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-            extras.putString("status", ((MainActivity) requireActivity()).singleton.getStatus());
-        }
+            if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
+                extras.putString("status", ((MainActivity) requireActivity()).singleton.getStatus());
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            extras.putString("type", ((MainActivity) requireActivity()).singleton.getType());
-        }
+            if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
+                extras.putString("type", ((MainActivity) requireActivity()).singleton.getType());
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getGender().equals("")) {
-            extras.putString("gender", ((MainActivity) requireActivity()).singleton.getGender());
-        }
+            if (!((MainActivity) requireActivity()).singleton.getGender().equals("")) {
+                extras.putString("gender", ((MainActivity) requireActivity()).singleton.getGender());
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getPublicKey().equals("")) {
-            extras.putString("public_key", ((MainActivity) requireActivity()).singleton.getPublicKey());
-        }
+            if (!((MainActivity) requireActivity()).singleton.getPublicKey().equals("")) {
+                extras.putString("public_key", ((MainActivity) requireActivity()).singleton.getPublicKey());
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            extras.putString("avatar", ((MainActivity) requireActivity()).singleton.getAvatar());
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
+                extras.putString("avatar", ((MainActivity) requireActivity()).singleton.getAvatar());
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            }
         }
     }
 
@@ -229,6 +230,7 @@ public class MeFragment extends Fragment {
 
         if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
             extras.putString("avatar", model.getAvatar().getMedium().getUrl());
+
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {

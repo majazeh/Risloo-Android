@@ -55,6 +55,7 @@ public class EditCenterDetailFragment extends Fragment {
     private LinearLayoutManager phoneLayoutManager;
 
     // Vars
+    private HashMap data, header;
     public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
 
     @Nullable
@@ -82,6 +83,10 @@ public class EditCenterDetailFragment extends Fragment {
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         phoneLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabManagerHeader));
         binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabTitleHeader));
@@ -148,16 +153,15 @@ public class EditCenterDetailFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (managerId.equals("")) {
+            if (managerId.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView);
-            }
-            if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
+
+            if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0)
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView);
-            }
 
             if (!managerId.equals("") && binding.phonesIncludeLayout.selectRecyclerView.getChildCount() != 0) {
                 doWork();
@@ -169,6 +173,10 @@ public class EditCenterDetailFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditCenterFragment) {
+                if (!((EditCenterFragment) fragment).centerId.equals("")) {
+                    data.put("id", ((EditCenterFragment) fragment).centerId);
+                }
+
                 if (!((EditCenterFragment) fragment).type.equals("")) {
                     type = ((EditCenterFragment) fragment).type;
                     switch (type) {
@@ -257,19 +265,11 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
         address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        HashMap data = new HashMap<>();
-
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditCenterFragment)
-                data.put("id", ((EditCenterFragment) fragment).centerId);
-        }
 
         data.put("manager_id", managerId);
         data.put("address", address);
@@ -279,9 +279,6 @@ public class EditCenterDetailFragment extends Fragment {
         if (type.equals("counseling_center")) {
             data.put("title", title);
         }
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Center.edit(data, header, new Response() {
             @Override

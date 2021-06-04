@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,7 +16,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserCryptoBinding;
+
+import java.util.HashMap;
 
 public class EditUserCryptoFragment extends Fragment {
 
@@ -25,6 +27,7 @@ public class EditUserCryptoFragment extends Fragment {
     private FragmentEditUserCryptoBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String publicKey = "", privateKey = "";
 
     @Nullable
@@ -38,12 +41,16 @@ public class EditUserCryptoFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserCryptoTabPublicHeader));
         binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserCryptoTabPrivateHeader));
 
@@ -100,28 +107,39 @@ public class EditUserCryptoFragment extends Fragment {
         }).widget(binding.privateEditTextView.getRoot());
     }
 
-    private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getPublicKey().equals("")) {
-            publicKey = ((MainActivity) requireActivity()).singleton.getPublicKey();
-            binding.publicIncludeLayout.inputEditText.setText(publicKey);
-        }
+    private void setExtra() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null) {
+            if (fragment instanceof EditUserFragment) {
+                if (!((EditUserFragment) fragment).userId.equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).userId);
+                }
 
-        if (!((MainActivity) requireActivity()).singleton.getPrivateKey().equals("")) {
-            privateKey = ((MainActivity) requireActivity()).singleton.getPrivateKey();
-            binding.privateIncludeLayout.inputEditText.setText(privateKey);
+                if (!((EditUserFragment) fragment).publicKey.equals("")) {
+                    publicKey = ((EditUserFragment) fragment).publicKey;
+                    binding.publicIncludeLayout.inputEditText.setText(publicKey);
+                }
+
+                if (!((EditUserFragment) fragment).privateKey.equals("")) {
+                    privateKey = ((EditUserFragment) fragment).privateKey;
+                    binding.privateIncludeLayout.inputEditText.setText(privateKey);
+                }
+            }
         }
     }
 
     private void doWork(String key) {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         if (key.equals("public")) {
             publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
-            ((MainActivity) requireActivity()).singleton.setPublicKey(publicKey);
+
+            // TODO : Place Code Here
         } else {
             privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
-            ((MainActivity) requireActivity()).singleton.setPrivateKey(privateKey);
-        }
 
-        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+            // TODO : Place Code Here
+        }
     }
 
     @Override

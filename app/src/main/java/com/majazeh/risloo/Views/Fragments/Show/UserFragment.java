@@ -58,7 +58,6 @@ public class UserFragment extends Fragment {
         extras = new Bundle();
 
         data = new HashMap<>();
-        data.put("id", "");
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -162,6 +161,7 @@ public class UserFragment extends Fragment {
 
             if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
                 extras.putString("avatar", getArguments().getString("avatar"));
+
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                 Picasso.get().load(getArguments().getString("avatar")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
