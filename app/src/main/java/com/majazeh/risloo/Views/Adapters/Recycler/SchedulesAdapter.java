@@ -172,18 +172,20 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
     }
 
     private void setSelectedSchedules() {
-        if (!selectedSchedules.isEmpty()) {
-            selectedSchedules.clear();
-        }
+        if (schedules != null) {
+            if (!selectedSchedules.isEmpty()) {
+                selectedSchedules.clear();
+            }
 
-        for (int i = 0; i < schedules.size(); i++) {
-            ScheduleModel model = (ScheduleModel) schedules.get(i);
+            for (int i = 0; i < schedules.size(); i++) {
+                ScheduleModel model = (ScheduleModel) schedules.get(i);
 
-            String selectedDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(selectedTimstamp)));
-            String modelDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(model.getStarted_at())));
+                String selectedDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(selectedTimstamp)));
+                String modelDate = DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(model.getStarted_at())));
 
-            if (selectedDate.equals(modelDate)) {
-                selectedSchedules.add(model);
+                if (selectedDate.equals(modelDate)) {
+                    selectedSchedules.add(model);
+                }
             }
         }
     }
