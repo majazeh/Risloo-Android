@@ -38,8 +38,8 @@ public class CreateRoomFragment extends Fragment {
     private SearchableDialog psychologiesDialog;
 
     // Vars
-    public String centerId = "";
-    public String psychologyId = "", psychologyName = "";
+    private HashMap data, header;
+    public String centerId = "", psychologyId = "", psychologyName = "";
 
     @Nullable
     @Override
@@ -59,6 +59,10 @@ public class CreateRoomFragment extends Fragment {
 
     private void initializer() {
         psychologiesDialog = new SearchableDialog();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomFragmentPsychologyHeader));
 
@@ -96,6 +100,7 @@ public class CreateRoomFragment extends Fragment {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = getArguments().getString("id");
+                data.put("id", centerId);
             }
 
             if (getArguments().getString("psychology_id") != null && !getArguments().getString("psychology_id").equals("") && getArguments().getString("psychology_name") != null && !getArguments().getString("psychology_name").equals("")) {
@@ -131,12 +136,7 @@ public class CreateRoomFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
-        data.put("id", centerId);
         data.put("psychologist_id", psychologyId);
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Room.create(data, header, new Response() {
             @Override

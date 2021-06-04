@@ -82,7 +82,6 @@ public class ReferenceFragment extends Fragment {
         extras = new Bundle();
 
         data = new HashMap<>();
-        data.put("id", "");
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 

@@ -73,7 +73,6 @@ public class RoomSchedulesFragment extends Fragment {
         extras = new Bundle();
 
         data = new HashMap<>();
-        data.put("id", centerId);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -122,14 +121,14 @@ public class RoomSchedulesFragment extends Fragment {
                 data.put("id", roomId);
             }
 
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                extras.putString("type", type);
-            }
-
             if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
                 centerId = getArguments().getString("center_id");
                 extras.putString("center_id", centerId);
+            }
+
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
+                type = getArguments().getString("type");
+                extras.putString("type", type);
             }
         }
     }

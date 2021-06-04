@@ -66,6 +66,7 @@ public class CreateCenterFragment extends Fragment {
     private Bitmap avatarBitmap = null;
 
     // Vars
+    private HashMap data, header;
     public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
     public String avatarPath = "";
 
@@ -96,6 +97,10 @@ public class CreateCenterFragment extends Fragment {
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         phoneLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentTypeHeader));
         binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterFragmentManagerHeader));
@@ -188,23 +193,20 @@ public class CreateCenterFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (managerId.equals("")) {
+            if (managerId.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView);
-            }
-            if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0) {
+            if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0)
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView);
-            }
 
             if (type.equals("counseling_center")) {
-                if (binding.titleIncludeLayout.inputEditText.length() == 0) {
+                if (binding.titleIncludeLayout.inputEditText.length() == 0)
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                } else {
+                else
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
-                }
             }
 
             if (type.equals("personal_clinic")) {
@@ -336,13 +338,12 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
         address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        HashMap data = new HashMap<>();
         data.put("type", type);
         data.put("manager_id", managerId);
         data.put("address", address);
@@ -354,14 +355,11 @@ public class CreateCenterFragment extends Fragment {
 
             if (avatarBitmap != null) {
                 FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-
-                if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+                if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
                     data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
+                }
             }
         }
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Center.create(data, header, new Response() {
             @Override
@@ -373,8 +371,9 @@ public class CreateCenterFragment extends Fragment {
                         ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
                     });
 
-                    if (FileManager.readFileFromCache(requireActivity(), "image") != null)
+                    if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
                         FileManager.deleteFileFromCache(requireActivity(), "image");
+                    }
                 }
             }
 

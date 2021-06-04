@@ -149,7 +149,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
             holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
 
-            if (model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null) {
+            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null) {
                 setAvatar(holder, model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
             } else {
                 setAvatar(holder, "");

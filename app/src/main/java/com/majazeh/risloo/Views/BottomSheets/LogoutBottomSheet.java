@@ -29,6 +29,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetLogoutBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String name, avatar;
 
     @NonNull
@@ -42,6 +43,8 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = BottomSheetLogoutBinding.inflate(inflater, viewGroup, false);
 
+        initializer();
+
         listener();
 
         detector();
@@ -49,6 +52,12 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
         setWidget();
 
         return binding.getRoot();
+    }
+
+    private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
     }
 
     private void detector() {
@@ -61,10 +70,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
         ClickManager.onDelayedClickListener(() -> {
             ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-            HashMap header = new HashMap<>();
-            header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-
-            Auth.logout(new HashMap<>(), header, new Response() {
+            Auth.logout(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
                     if (isAdded()) {

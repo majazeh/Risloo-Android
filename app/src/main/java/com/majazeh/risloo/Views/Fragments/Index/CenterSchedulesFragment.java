@@ -3,7 +3,6 @@ package com.majazeh.risloo.Views.Fragments.Index;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -41,7 +40,6 @@ public class CenterSchedulesFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
     private LinearLayoutManager weeksLayoutManager, schedulesLayoutManager;
-    private Handler handler;
     private Bundle extras;
 
     // Vars
@@ -77,12 +75,9 @@ public class CenterSchedulesFragment extends Fragment {
         weeksLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false);
         schedulesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
-        handler = new Handler();
-
         extras = new Bundle();
 
         data = new HashMap<>();
-        data.put("id", centerId);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
@@ -140,12 +135,6 @@ public class CenterSchedulesFragment extends Fragment {
 
         weeksAdapter.setWeek(DateManager.currentJalaliWeekTimestamps(timestamp));
         binding.weeksRecyclerView.setAdapter(weeksAdapter);
-
-        handler.postDelayed(() -> {
-            binding.weeksRecyclerView.setVisibility(View.VISIBLE);
-            binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.weeksShimmerLayout.getRoot().stopShimmer();
-        }, 1000);
     }
 
     private void getData(long timestamp) {
@@ -170,6 +159,10 @@ public class CenterSchedulesFragment extends Fragment {
                         } else if (schedulesAdapter.getItemCount() == 0) {
                             binding.schedulesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
+
+                        binding.weeksRecyclerView.setVisibility(View.VISIBLE);
+                        binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.weeksShimmerLayout.getRoot().stopShimmer();
 
                         binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -217,7 +210,6 @@ public class CenterSchedulesFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
-        handler.removeCallbacksAndMessages(null);
     }
 
 }

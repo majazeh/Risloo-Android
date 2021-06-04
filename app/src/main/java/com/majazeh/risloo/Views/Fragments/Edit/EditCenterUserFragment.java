@@ -35,8 +35,8 @@ public class EditCenterUserFragment extends Fragment {
     private FragmentEditCenterUserBinding binding;
 
     // Vars
-    private String centerId = "", userId = "";
-    private String position = "", nickname = "", status ="";
+    private HashMap data, header;
+    private String centerId = "", userId = "", position = "", nickname = "", status ="";
 
     @Nullable
     @Override
@@ -55,6 +55,10 @@ public class EditCenterUserFragment extends Fragment {
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         binding.positionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentPositionHeader));
         binding.nicknameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentNicknameHeader));
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterUserFragmentStatusHeader));
@@ -131,10 +135,12 @@ public class EditCenterUserFragment extends Fragment {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = getArguments().getString("id");
+                data.put("id", centerId);
             }
 
             if (getArguments().getString("user_id") != null && !getArguments().getString("user_id").equals("")) {
                 userId = getArguments().getString("user_id");
+                data.put("userId", userId);
             }
 
             if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
@@ -172,19 +178,13 @@ public class EditCenterUserFragment extends Fragment {
     }
 
     private void doWork() {
-        nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
-
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
-        data.put("id", centerId);
-        data.put("userId", userId);
+        nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
+
         data.put("position", SelectionManager.getPosition(requireActivity(), "en", position));
         data.put("nickname", nickname);
         data.put("status", status);
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Center.editUser(data, header, new Response() {
             @Override

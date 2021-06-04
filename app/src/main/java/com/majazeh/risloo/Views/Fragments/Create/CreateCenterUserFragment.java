@@ -45,8 +45,8 @@ public class CreateCenterUserFragment extends Fragment {
     private AuthBottomSheet authBottomSheet;
 
     // Vars
-    public String centerId = "", type = "personal_clinic";
-    public String mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
+    private HashMap data, header;
+    public String centerId = "", type = "personal_clinic", mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
 
     @Nullable
     @Override
@@ -68,6 +68,10 @@ public class CreateCenterUserFragment extends Fragment {
         roomsDialog = new SearchableDialog();
 
         authBottomSheet = new AuthBottomSheet();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentMobileHeader));
         binding.positionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCenterUserFragmentPositionHeader));
@@ -158,6 +162,7 @@ public class CreateCenterUserFragment extends Fragment {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 centerId = getArguments().getString("id");
+                data.put("id", centerId);
             }
 
             if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
@@ -253,13 +258,11 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
 
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        HashMap data = new HashMap<>();
-        data.put("id", centerId);
         data.put("mobile", mobile);
 
         if (type.equals("counseling_center")) {
@@ -274,9 +277,6 @@ public class CreateCenterUserFragment extends Fragment {
             data.put("nickname", nickname);
             data.put("create_case", createCase);
         }
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Center.createUser(data, header, new Response() {
             @Override

@@ -52,6 +52,7 @@ public class CreateRoomUserFragment extends Fragment {
     private LinearLayoutManager referencesLayoutManager;
 
     // Vars
+    private HashMap data, header;
     public String roomId = "", centerId = "";
 
     @Nullable
@@ -78,6 +79,10 @@ public class CreateRoomUserFragment extends Fragment {
         itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
 
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomUserFragmentReferenceHeader));
 
@@ -118,6 +123,7 @@ public class CreateRoomUserFragment extends Fragment {
         if (getArguments() != null) {
             if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
                 roomId = getArguments().getString("id");
+                data.put("id", roomId);
             }
 
             if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
@@ -184,12 +190,7 @@ public class CreateRoomUserFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        HashMap data = new HashMap<>();
-        data.put("id", roomId);
         data.put("user_id", referencesAdapter.getIds());
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         Room.createUser(data, header, new Response() {
             @Override

@@ -29,6 +29,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetAuthBinding binding;
 
     // Vars
+    private HashMap data, header;
     private String id, key, name, avatar;
 
     @NonNull
@@ -42,6 +43,8 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = BottomSheetAuthBinding.inflate(inflater, viewGroup, false);
 
+        initializer();
+
         listener();
 
         detector();
@@ -49,6 +52,12 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
         setWidget();
 
         return binding.getRoot();
+    }
+
+    private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
     }
 
     private void detector() {
@@ -61,11 +70,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
         ClickManager.onDelayedClickListener(() -> {
             ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-            HashMap data = new HashMap<>();
             data.put("key", key);
-
-            HashMap header = new HashMap<>();
-            header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
             Center.theory(data, header, new Response() {
                 @Override
