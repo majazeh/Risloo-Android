@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -40,6 +42,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -59,7 +62,8 @@ public class RoomFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private boolean loading = false;
+    private boolean loading = false, userSelect = false;
+    private String type = "";
 
     @Nullable
     @Override
@@ -93,39 +97,23 @@ public class RoomFragment extends Fragment {
         extras = new Bundle();
 
         data = new HashMap<>();
-        data.put("id", "");
         data.put("page", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
-        InitManager.imgResTint(requireActivity(), binding.profileImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.Blue600);
-        InitManager.imgResTint(requireActivity(), binding.schedulesImageView.getRoot(), R.drawable.ic_calendar_alt_light, R.color.Blue600);
-        InitManager.imgResTint(requireActivity(), binding.usersImageView.getRoot(), R.drawable.ic_users_light, R.color.Blue600);
-
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
-        InitManager.imgResTint(requireActivity(), binding.addCaseImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addCaseImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.addScheduleImageView.getRoot(), R.drawable.ic_calendar_plus_light, R.color.Green700);
         InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, layoutManager);
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray500_ripple_gray300);
-            binding.profileImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
-            binding.schedulesImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
-            binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_blue600_ripple_blue300);
-
-            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
             binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
-            binding.editImageView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-            binding.profileImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
-            binding.schedulesImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
-            binding.usersImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_blue600);
-
-            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
             binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
     }
@@ -138,27 +126,49 @@ public class RoomFragment extends Fragment {
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment, extras)).widget(binding.editImageView.getRoot());
+        binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.referenceFragment, extras)).widget(binding.profileImageView.getRoot());
+        binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
 
-        ClickManager.onClickListener(() -> {
-            if (getArguments() != null) {
-                if (getArguments().getString("type").equals("room"))
-                    ((MainActivity) requireActivity()).navigator(R.id.roomSchedulesFragment, extras);
-                else
-                    ((MainActivity) requireActivity()).navigator(R.id.centerSchedulesFragment, extras);
+                    switch (pos) {
+                        case "اعضاء":
+                            if (type.equals("room"))
+                                ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment, extras);
+                            else
+                                ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
+                            break;
+                        case "برنامه درمانی":
+                            if (type.equals("room"))
+                                ((MainActivity) requireActivity()).navigator(R.id.roomSchedulesFragment, extras);
+                            else
+                                ((MainActivity) requireActivity()).navigator(R.id.centerSchedulesFragment, extras);
+                            break;
+                        case "پروفایل من":
+                            ((MainActivity) requireActivity()).navigator(R.id.referenceFragment, extras);
+                            break;
+                        case "ویرایش":
+                            ((MainActivity) requireActivity()).navigator(R.id.editCenterFragment, extras);
+                            break;
+                    }
+
+                    binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
+
+                    userSelect = false;
+                }
             }
-        }).widget(binding.schedulesImageView.getRoot());
 
-        ClickManager.onClickListener(() -> {
-            if (getArguments() != null) {
-                if (getArguments().getString("type").equals("room"))
-                    ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment, extras);
-                else
-                    ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
-        }).widget(binding.usersImageView.getRoot());
+        });
 
         ClickManager.onDelayedClickListener(() -> {
             ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
@@ -245,12 +255,29 @@ public class RoomFragment extends Fragment {
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createScheduleFragment, extras)).widget(binding.addScheduleImageView.getRoot());
     }
 
+    private void setDropdown(String status) {
+        ArrayList<String> menu = new ArrayList<>();
+
+        if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
+            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
+        }
+
+        menu.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
+
+        if (((MainActivity) requireActivity()).singleton.getType().equals("admin") && !type.equals("room")) {
+            if (!status.equals("request"))
+                menu.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
+
+            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
+        }
+
+        menu.add("");
+
+        InitManager.customizedSpinner(requireActivity(), binding.menuSpinner.selectSpinner, menu, "room");
+    }
+
     private void setPermission() {
         if (!((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            binding.editImageView.getRoot().setVisibility(View.GONE);
-            binding.profileImageView.getRoot().setVisibility(View.GONE);
-            binding.usersImageView.getRoot().setVisibility(View.GONE);
-
             binding.addCaseImageView.getRoot().setVisibility(View.GONE);
             binding.addScheduleImageView.getRoot().setVisibility(View.GONE);
         }
@@ -264,27 +291,25 @@ public class RoomFragment extends Fragment {
             }
 
             if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                extras.putString("type", getArguments().getString("type"));
-
-                if (getArguments().getString("type").equals("room")) {
-                    binding.editImageView.getRoot().setVisibility(View.GONE);
-                    binding.profileImageView.getRoot().setVisibility(View.GONE);
-                }
+                type = getArguments().getString("type");
+                extras.putString("type", type);
             }
 
             if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
                 extras.putString("status", getArguments().getString("status"));
 
-                if (!getArguments().getString("type").equals("room")) {
+                if (!type.equals("room")) {
                     setStatus(getArguments().getString("status"));
                 }
+            } else {
+                setDropdown("");
             }
 
             if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
                 extras.putString("manager_id", getArguments().getString("manager_id"));
                 extras.putString("manager_name", getArguments().getString("manager_name"));
 
-                if (getArguments().getString("type").equals("room")) {
+                if (type.equals("room")) {
                     binding.nameTextView.setText(getArguments().getString("manager_name"));
                     binding.nameTextView.setVisibility(View.VISIBLE);
                 }
@@ -293,12 +318,12 @@ public class RoomFragment extends Fragment {
             if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
                 extras.putString("title", getArguments().getString("title"));
 
-                if (!getArguments().getString("type").equals("room")) {
+                if (!type.equals("room")) {
                     binding.nameTextView.setText(getArguments().getString("title"));
                     binding.nameTextView.setVisibility(View.VISIBLE);
                 }
             } else {
-                if (!getArguments().getString("type").equals("room"))
+                if (!type.equals("room"))
                     binding.nameTextView.setVisibility(View.GONE);
             }
 
@@ -309,7 +334,7 @@ public class RoomFragment extends Fragment {
             if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
                 extras.putString("description", getArguments().getString("description"));
 
-                if (!getArguments().getString("type").equals("room")) {
+                if (!type.equals("room")) {
                     binding.descriptionTextView.setText(getArguments().getString("description"));
                     binding.descriptionTextView.setVisibility(View.VISIBLE);
                 }
@@ -496,91 +521,27 @@ public class RoomFragment extends Fragment {
     }
 
     private void setStatus(String status) {
+        binding.statusTextView.getRoot().setText(SelectionManager.getRoomStatus(requireActivity(), "fa", status));
+
         switch (status) {
             case "request":
                 binding.statusTextView.getRoot().setEnabled(true);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusRequest));
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.White));
 
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
                     binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
                 else
                     binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
-
-                binding.profileImageView.getRoot().setVisibility(View.GONE);
                 break;
-            case "manager":
+            default:
                 binding.statusTextView.getRoot().setEnabled(false);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusManager));
                 binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
 
                 binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-
-                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
-                break;
-            case "operator":
-                binding.statusTextView.getRoot().setEnabled(false);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusOperator));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
-
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-
-                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
-                break;
-            case "psychologist":
-                binding.statusTextView.getRoot().setEnabled(false);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusPsychologist));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
-
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-
-                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
-                break;
-            case "client":
-                binding.statusTextView.getRoot().setEnabled(false);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusClient));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
-
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-
-                binding.profileImageView.getRoot().setVisibility(View.VISIBLE);
-                break;
-            case "kicked":
-                binding.statusTextView.getRoot().setEnabled(false);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusKicked));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
-
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-
-                binding.profileImageView.getRoot().setVisibility(View.GONE);
-                break;
-            case "accepted":
-                binding.statusTextView.getRoot().setEnabled(false);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusAccepted));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
-
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-
-                binding.profileImageView.getRoot().setVisibility(View.GONE);
-                break;
-            case "awaiting":
-                binding.statusTextView.getRoot().setEnabled(false);
-
-                binding.statusTextView.getRoot().setText(getResources().getString(R.string.RoomFragmentStatusAwaiting));
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
-
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-
-                binding.profileImageView.getRoot().setVisibility(View.GONE);
                 break;
         }
+
+        setDropdown(status);
     }
 
     private void setAcceptation(RoomModel model) {

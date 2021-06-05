@@ -211,6 +211,83 @@ public class InitManager {
 
     public static void customizedSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, String dimension) {
         switch (dimension) {
+            case "room":
+            case "center": {
+                ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
+
+                    private TextView dropdownTextView;
+                    private ImageView dropdownImageView;
+
+                    @Override
+                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        return super.getView(position, convertView, viewGroup);
+                    }
+
+                    @Override
+                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
+                        View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_recycler, viewGroup, false);
+
+                        initializer(view);
+
+                        detector(view, position);
+
+                        setData(position);
+
+                        return view;
+                    }
+
+                    private void initializer(View view) {
+                        dropdownTextView = view.findViewById(R.id.item_textView);
+                        dropdownImageView = view.findViewById(R.id.item_imageView);
+                    }
+
+                    private void detector(View view, int position) {
+                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
+                            view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                    }
+
+                    private void setData(int position) {
+                        dropdownTextView.setText(arrayList.get(position));
+
+                        switch (arrayList.get(position)) {
+                            case "اعضاء":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_users_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
+                            case "برنامه درمانی":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_calendar_alt_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
+                            case "پروفایل من":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_user_crown_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
+                            case "ویرایش":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_edit_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
+                        }
+                    }
+
+                    @Override
+                    public int getCount() {
+                        return super.getCount() - 1;
+                    }
+
+                };
+
+                spinner.setAdapter(adapter);
+                spinner.setSelection(adapter.getCount());
+                break;
+            }
             case "users": {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
 

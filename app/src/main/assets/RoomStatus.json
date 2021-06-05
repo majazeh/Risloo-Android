@@ -1,0 +1,34 @@
+[
+  {
+    "fa_title": "درخواست پذیرش",
+    "en_title": "request"
+  },
+  {
+    "fa_title": "شما مدیر این اتاق درمان هستید",
+    "en_title": "manager"
+  },
+  {
+    "fa_title": "شما اپراتور این اتاق درمان هستید",
+    "en_title": "operator"
+  },
+  {
+    "fa_title": "شما روان\u200Cشناس این اتاق درمان هستید",
+    "en_title": "psychologist"
+  },
+  {
+    "fa_title": "شما مراجع این اتاق درمان هستید",
+    "en_title": "client"
+  },
+  {
+    "fa_title": "رد شد",
+    "en_title": "kicked"
+  },
+  {
+    "fa_title": "پذیرفته شد",
+    "en_title": "accepted"
+  },
+  {
+    "fa_title": "در انتظار",
+    "en_title": "awaiting"
+  }
+]

@@ -56,38 +56,8 @@
                     app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
                 <include
-                    android:id="@+id/users_imageView"
-                    layout="@layout/component_main_button_oval_mid"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_4sdp"
-                    app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
-                    app:layout_constraintLeft_toRightOf="@id/schedules_imageView" />
-
-                <include
-                    android:id="@+id/schedules_imageView"
-                    layout="@layout/component_main_button_oval_mid"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_4sdp"
-                    app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@+id/avatar_includeLayout"
-                    app:layout_constraintLeft_toRightOf="@id/profile_imageView" />
-
-                <include
-                    android:id="@+id/profile_imageView"
-                    layout="@layout/component_main_button_oval_mid"
-                    android:layout_width="@dimen/_28sdp"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_4sdp"
-                    app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
-                    app:layout_constraintLeft_toRightOf="@id/edit_imageView" />
-
-                <include
-                    android:id="@+id/edit_imageView"
-                    layout="@layout/component_main_button_oval_mid"
+                    android:id="@+id/menu_spinner"
+                    layout="@layout/component_main_button_oval_spinner"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_8sdp"
@@ -99,12 +69,12 @@
                     layout="@layout/component_main_button_rect_wrap"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="@dimen/_8sdp"
-                    app:layout_constraintWidth_max="@dimen/_96sdp"
+                    android:layout_marginLeft="@dimen/_4sdp"
+                    app:layout_goneMarginLeft="@dimen/_8sdp"
+                    app:layout_constraintWidth_max="@dimen/_104sdp"
                     app:layout_constraintHeight_min="@dimen/_28sdp"
-                    app:layout_constraintBottom_toBottomOf="@id/name_textView"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/name_textView" />
+                    app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
+                    app:layout_constraintLeft_toRightOf="@id/menu_spinner" />
 
                 <TextView
                     android:id="@+id/name_textView"
@@ -117,7 +87,7 @@
                     android:textColor="@color/Gray900"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
-                    app:layout_constraintWidth_max="@dimen/_124sdp"
+                    app:layout_constraintEnd_toEndOf="@id/menu_spinner"
                     app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
                     app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
                     tools:text="نام و نام خانوادگی" />
@@ -134,8 +104,7 @@
                     app:layout_constraintBottom_toBottomOf="@id/name_textView"
                     app:layout_constraintStart_toEndOf="@id/name_textView"
                     app:layout_constraintTop_toTopOf="@id/name_textView"
-                    app:tint="@color/Blue500"
-                    tools:visibility="visible" />
+                    app:tint="@color/Blue500" />
 
                 <TextView
                     android:id="@+id/description_textView"

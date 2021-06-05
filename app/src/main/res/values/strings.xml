@@ -945,14 +945,10 @@
 
     <string name="CenterFragmentTitle">مرکز درمانی</string>
 
-    <string name="CenterFragmentStatusRequest">درخواست پذیرش</string>
-    <string name="CenterFragmentStatusManager">شما مدیر این مرکز درمان هستید</string>
-    <string name="CenterFragmentStatusOperator">شما اپراتور این مرکز درمان هستید</string>
-    <string name="CenterFragmentStatusPsychologist">شما روان‌شناس این مرکز درمان هستید</string>
-    <string name="CenterFragmentStatusClient">شما مراجع این مرکز درمان هستید</string>
-    <string name="CenterFragmentStatusKicked">رد شد</string>
-    <string name="CenterFragmentStatusAccepted">پذیرفته شد</string>
-    <string name="CenterFragmentStatusAwaiting">در انتظار</string>
+    <string name="CenterFragmentUsers">اعضاء</string>
+    <string name="CenterFragmentSchedules">برنامه درمانی</string>
+    <string name="CenterFragmentProfile">پروفایل من</string>
+    <string name="CenterFragmentEdit">ویرایش</string>
 
     /*
     ---------- Dashboard Fragment ----------
@@ -983,14 +979,10 @@
 
     <string name="RoomFragmentTitle">اتاق درمانی</string>
 
-    <string name="RoomFragmentStatusRequest">درخواست پذیرش</string>
-    <string name="RoomFragmentStatusManager">شما مدیر این اتاق درمان هستید</string>
-    <string name="RoomFragmentStatusOperator">شما اپراتور این اتاق درمان هستید</string>
-    <string name="RoomFragmentStatusPsychologist">شما روان‌شناس این اتاق درمان هستید</string>
-    <string name="RoomFragmentStatusClient">شما مراجع این اتاق درمان هستید</string>
-    <string name="RoomFragmentStatusKicked">رد شد</string>
-    <string name="RoomFragmentStatusAccepted">پذیرفته شد</string>
-    <string name="RoomFragmentStatusAwaiting">در انتظار</string>
+    <string name="RoomFragmentUsers">اعضاء</string>
+    <string name="RoomFragmentSchedules">برنامه درمانی</string>
+    <string name="RoomFragmentProfile">پروفایل من</string>
+    <string name="RoomFragmentEdit">ویرایش</string>
 
     /*
     ---------- Sample Fragment ----------

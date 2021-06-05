@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +27,14 @@ import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.User;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateUserFragment extends Fragment {
 
@@ -36,7 +45,8 @@ public class CreateUserFragment extends Fragment {
     private DateBottomSheet birthdayBottomSheet;
 
     // Vars
-    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "admin", gender = "male";
+    private HashMap data, header;
+    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "client", gender = "male";
     private int year, month, day;
     private boolean passwordVisibility = false;
 
@@ -51,13 +61,17 @@ public class CreateUserFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
 
     private void initializer() {
         birthdayBottomSheet = new DateBottomSheet();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateUserFragmentNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateUserFragmentMobileHeader));
@@ -238,97 +252,91 @@ public class CreateUserFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
             if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (binding.usernameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordErrorLayout.errorImageView, binding.passwordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-
-            if (binding.nameIncludeLayout.inputEditText.length() != 0 && binding.mobileIncludeLayout.inputEditText.length() != 0 && binding.usernameIncludeLayout.inputEditText.length() != 0 && binding.passwordIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.errorImageView, binding.mobileErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.errorImageView, binding.usernameErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.passwordErrorLayout.errorImageView, binding.passwordErrorLayout.errorTextView);
-
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-            mobile = ((MainActivity) requireActivity()).singleton.getMobile();
-            binding.mobileIncludeLayout.inputEditText.setText(mobile);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
-            username = ((MainActivity) requireActivity()).singleton.getUsername();
-            binding.usernameIncludeLayout.inputEditText.setText(username);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-            email = ((MainActivity) requireActivity()).singleton.getEmail();
-            binding.emailIncludeLayout.inputEditText.setText(email);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getPassword().equals("")) {
-            password = ((MainActivity) requireActivity()).singleton.getPassword();
-            binding.passwordIncludeLayout.inputEditText.setText(password);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-            birthday = ((MainActivity) requireActivity()).singleton.getBirthday();
-            binding.birthdayIncludeLayout.selectTextView.setText(birthday);
-        } else {
-            birthday = getResources().getString(R.string.AppDefaultDate);
-            binding.birthdayIncludeLayout.selectTextView.setText(birthday);
-        }
-
-        year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-        month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-        day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-
-        if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-            status = ((MainActivity) requireActivity()).singleton.getStatus();
-            switch (status) {
-                case "active":
-                    binding.statusIncludeLayout.firstRadioButton.setChecked(true);
-                    break;
-                case "waiting":
-                    binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-                    break;
-                case "closed":
-                    binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
-                    break;
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("name") != null && !getArguments().getString("name").equals("")) {
+                name = getArguments().getString("name");
+                binding.nameIncludeLayout.inputEditText.setText(name);
             }
-        }
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            type = ((MainActivity) requireActivity()).singleton.getType();
-            switch (type) {
-                case "admin":
-                    binding.typeIncludeLayout.firstRadioButton.setChecked(true);
-                    break;
-                case "client":
-                    binding.typeIncludeLayout.secondRadioButton.setChecked(true);
-                    break;
+
+            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
+                mobile = getArguments().getString("mobile");
+                binding.mobileIncludeLayout.inputEditText.setText(mobile);
             }
-        }
-        if (!((MainActivity) requireActivity()).singleton.getGender().equals("")) {
-            gender = ((MainActivity) requireActivity()).singleton.getGender();
-            switch (gender) {
-                case "male":
-                    binding.genderIncludeLayout.firstRadioButton.setChecked(true);
-                    break;
-                case "female":
-                    binding.genderIncludeLayout.secondRadioButton.setChecked(true);
-                    break;
+
+            if (getArguments().getString("username") != null && !getArguments().getString("username").equals("")) {
+                username = getArguments().getString("username");
+                binding.usernameIncludeLayout.inputEditText.setText(username);
+            }
+
+            if (getArguments().getString("email") != null && !getArguments().getString("email").equals("")) {
+                email = getArguments().getString("email");
+                binding.emailIncludeLayout.inputEditText.setText(email);
+            }
+
+            if (getArguments().getString("password") != null && !getArguments().getString("password").equals("")) {
+                password = getArguments().getString("password");
+                binding.passwordIncludeLayout.inputEditText.setText(password);
+            }
+
+            if (getArguments().getString("birthday") != null && !getArguments().getString("birthday").equals("")) {
+                birthday = getArguments().getString("birthday");
+                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+            } else {
+                birthday = getResources().getString(R.string.AppDefaultDate);
+                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+            }
+
+            year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+            month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+            day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", birthday)));
+
+            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
+                status = getArguments().getString("status");
+                switch (status) {
+                    case "active":
+                        binding.statusIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "waiting":
+                        binding.statusIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
+                    case "closed":
+                        binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
+                        break;
+                }
+            }
+
+            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
+                type = getArguments().getString("type");
+                switch (type) {
+                    case "admin":
+                        binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "client":
+                        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
+                }
+            }
+
+            if (getArguments().getString("gender") != null && !getArguments().getString("gender").equals("")) {
+                gender = getArguments().getString("gender");
+                switch (gender) {
+                    case "male":
+                        binding.genderIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "female":
+                        binding.genderIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
+                }
             }
         }
     }
@@ -348,13 +356,74 @@ public class CreateUserFragment extends Fragment {
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         username = binding.usernameIncludeLayout.inputEditText.getText().toString().trim();
         email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
         password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        data.put("name", name);
+        data.put("mobile", mobile);
+        data.put("username", username);
+        data.put("email", email);
+        data.put("birthday", birthday);
+        data.put("status", status);
+        data.put("type", type);
+        data.put("gender", gender);
+
+        User.create(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "name":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "mobile":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "username":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.usernameIncludeLayout.inputEditText, binding.usernameErrorLayout.getRoot(), binding.usernameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "email":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.emailIncludeLayout.inputEditText, binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "birthday":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.birthdayIncludeLayout.selectTextView, binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
