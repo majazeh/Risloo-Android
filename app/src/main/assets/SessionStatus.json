@@ -16,7 +16,7 @@
     "en_title": "in_session"
   },
   {
-    "fa_title": "تمام شده",
+    "fa_title": "پایان یافته",
     "en_title": "finished"
   },
   {
@@ -34,5 +34,9 @@
   {
     "fa_title": "نام نویسی",
     "en_title": "registration"
+  },
+  {
+    "fa_title": "زمان\u200Cبندی شده",
+    "en_title": "scheduled"
   }
 ]

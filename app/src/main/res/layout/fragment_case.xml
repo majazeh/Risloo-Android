@@ -57,32 +57,32 @@
                 tools:text="سریال" />
 
             <ImageView
-                android:id="@+id/situation_imageView"
+                android:id="@+id/problem_imageView"
                 android:layout_width="@dimen/_14sdp"
                 android:layout_height="@dimen/_14sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:contentDescription="@string/AppImageContent"
                 android:scaleType="fitCenter"
                 android:src="@drawable/ic_file_alt_light"
-                app:layout_constraintBottom_toBottomOf="@id/situation_textView"
+                app:layout_constraintBottom_toBottomOf="@id/problem_textView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/situation_textView"
+                app:layout_constraintTop_toTopOf="@id/problem_textView"
                 app:tint="@color/Gray700" />
 
             <TextView
-                android:id="@+id/situation_textView"
+                android:id="@+id/problem_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_4sdp"
                 android:gravity="start"
-                android:text="@string/CaseFragmentSituationHeader"
+                android:text="@string/CaseFragmentProblemHeader"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray700"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_demi_bold"
-                app:layout_constraintStart_toEndOf="@id/situation_imageView"
+                app:layout_constraintStart_toEndOf="@id/problem_imageView"
                 app:layout_constraintTop_toBottomOf="@id/serial_textView" />
 
             <TextView
@@ -97,8 +97,8 @@
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                app:layout_constraintStart_toStartOf="@id/situation_imageView"
-                app:layout_constraintTop_toBottomOf="@id/situation_textView"
+                app:layout_constraintStart_toStartOf="@id/problem_imageView"
+                app:layout_constraintTop_toBottomOf="@id/problem_textView"
                 tools:text="ﻟﻮرم اﯾﭙﺴﻮم متن ﺳﺎﺧﺘﮕﯽ ﺑﺎ ﺗﻮﻟﯿﺪ ﺳﺎدﮔﯽ ﻧﺎﻣﻔﻬﻮم از ﺻﻨﻌﺖ ﭼﺎپ، و ﺑﺎ اﺳﺘﻔﺎده از ﻃﺮاﺣﺎن ﮔﺮاﻓﯿﮏ اﺳﺖ، ﭼﺎﭘﮕﺮﻫﺎ و ﻣﺘﻮن ﺑﻠﮑﻪ روزنامه و مجله در ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربرهای متنوع با هدف بهبود ابزراهای کاربردی می‌باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می‌طلبد." />
 
             <ImageView
@@ -110,7 +110,7 @@
                 android:src="@drawable/ic_calendar_alt_light"
                 app:layout_constraintTop_toTopOf="@id/date_textView"
                 app:layout_constraintBottom_toBottomOf="@id/date_textView"
-                app:layout_constraintStart_toStartOf="@id/situation_imageView"
+                app:layout_constraintStart_toStartOf="@id/problem_imageView"
                 app:tint="@color/Gray500" />
 
             <TextView

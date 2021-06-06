@@ -109,11 +109,23 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
 
     private Bundle getExtras(CaseModel model) {
         Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        try {
+            extras.putString("id", model.getCaseId());
+
+            extras.putString("manager_id", model.getCaseManager().getUserId());
+            extras.putString("manager_name", model.getCaseManager().getName());
+
+            extras.putString("clients", String.valueOf(model.getClients()));
+
+            if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem"))
+                extras.putString("problem", model.getDetail().getString("problem"));
+
+            extras.putString("session_count", String.valueOf(model.getSessions_count()));
+
+            extras.putInt("created_at", model.getCaseCreated_at());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
         return extras;
     }
 

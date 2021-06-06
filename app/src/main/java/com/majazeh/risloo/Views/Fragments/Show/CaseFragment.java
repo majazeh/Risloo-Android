@@ -3,7 +3,6 @@ package com.majazeh.risloo.Views.Fragments.Show;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -24,6 +24,13 @@ import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Sessions2Adapter;
 import com.majazeh.risloo.databinding.FragmentCaseBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Case;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+
+import org.json.JSONException;
+
+import java.util.HashMap;
 
 public class CaseFragment extends Fragment {
 
@@ -39,6 +46,10 @@ public class CaseFragment extends Fragment {
     // Objects
     private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
     private LinearLayoutManager psychologistsLayoutManager, referencesLayoutManager, sessions2LayoutManager, samples2LayoutManager;
+    private Bundle extras;
+
+    // Vars
+    private HashMap data, header;
 
     @Nullable
     @Override
@@ -51,7 +62,9 @@ public class CaseFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
+
+        getData();
 
         return binding.getRoot();
     }
@@ -70,13 +83,19 @@ public class CaseFragment extends Fragment {
         sessions2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         samples2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
+        extras = new Bundle();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
         binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.sessionsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Sessions2AdapterHeader));
         binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples2AdapterHeader));
 
         InitManager.imgResTint(requireActivity(), binding.referencesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
-        InitManager.imgResTint(requireActivity(), binding.sessionsAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.sessionsAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.samplesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
 
         InitManager.recyclerView(binding.psychologistsSingleLayout.recyclerView, itemDecoration, psychologistsLayoutManager);
@@ -88,60 +107,178 @@ public class CaseFragment extends Fragment {
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
-            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
             binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
-            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseUserFragment)).widget(binding.referencesAddImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseUserFragment, extras)).widget(binding.referencesAddImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSessionFragment)).widget(binding.sessionsAddImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSessionFragment, extras)).widget(binding.sessionsAddImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment)).widget(binding.samplesAddImageView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment, extras)).widget(binding.samplesAddImageView.getRoot());
     }
 
-    private void setData() {
-        // Todo : Place Code Here
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                extras.putString("id", getArguments().getString("id"));
+                data.put("id", getArguments().getString("id"));
+                binding.serialTextView.setText(getArguments().getString("id"));
+            }
 
-        binding.serialTextView.setText("RS966666DK");
-        binding.descriptionTextView.setText("ﻟﻮرم اﯾﭙﺴﻮم متن ﺳﺎﺧﺘﮕﯽ ﺑﺎ ﺗﻮﻟﯿﺪ ﺳﺎدﮔﯽ ﻧﺎﻣﻔﻬﻮم از ﺻﻨﻌﺖ ﭼﺎپ، و ﺑﺎ اﺳﺘﻔﺎده از ﻃﺮاﺣﺎن ﮔﺮاﻓﯿﮏ اﺳﺖ، ﭼﺎﭘﮕﺮﻫﺎ و ﻣﺘﻮن ﺑﻠﮑﻪ روزنامه و مجله در ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربرهای متنوع با هدف بهبود ابزراهای کاربردی می\u200Cباشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می\u200Cطلبد.");
-        binding.dateTextView.setText("شنبه 11 بهمن 99 ساعت 16:00");
+            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
+                extras.putString("manager_id", getArguments().getString("manager_id"));
+                extras.putString("manager_name", getArguments().getString("manager_name"));
+            }
 
-//        psychologistsAdapter.setPsychologists(null);
-//        referencesAdapter.setReferences(null);
-//        sessions2Adapter.setSessions(null);
-//        samples2Adapter.setSamples(null);
-        binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
-        binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
-        binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
-        binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
+            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
+                extras.putString("clients", getArguments().getString("clients"));
+            }
 
-        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
-        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
-        binding.sessionsHeaderIncludeLayout.countTextView.setText("(" + sessions2Adapter.getItemCount() + ")");
-        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples2Adapter.getItemCount() + ")");
+            if (getArguments().getString("problem") != null && !getArguments().getString("problem").equals("")) {
+                extras.putString("problem", getArguments().getString("problem"));
+                binding.descriptionTextView.setText(getArguments().getString("problem"));
+            }
 
-        new Handler().postDelayed(() -> {
-            binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            if (getArguments().getString("session_count") != null && !getArguments().getString("session_count").equals("")) {
+                extras.putString("session_count", getArguments().getString("session_count"));
+            }
 
-            binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+            if (getArguments().getInt("created_at") != 0) {
+                extras.putInt("created_at", getArguments().getInt("created_at"));
+                binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(getArguments().getInt("created_at")))));
+            }
+        }
+    }
 
-            binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+    private void setData(CaseModel model) {
+        try {
+            if (model.getCaseManager().getUserId() != null && model.getCaseManager().getName() != null) {
+                extras.putString("manager_id", model.getCaseManager().getUserId());
+                extras.putString("manager_name", model.getCaseManager().getName());
+            }
 
-            binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
-            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-            binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-        }, 1000);
+            if (model.getClients() != null && model.getClients().data().size() != 0) {
+                extras.putString("clients", String.valueOf(model.getClients()));
+            }
+
+            if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem")) {
+                extras.putString("problem", model.getDetail().getString("problem"));
+                binding.descriptionTextView.setText(model.getDetail().getString("problem"));
+            }
+
+            if (model.getSessions_count() != 0) {
+                extras.putString("session_count", String.valueOf(model.getSessions_count()));
+            }
+
+            if (model.getCaseCreated_at() != 0) {
+                extras.putInt("created_at", model.getCaseCreated_at());
+                binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getCaseCreated_at()))));
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void getData() {
+        Case.show(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                CaseModel model = (CaseModel) object;
+
+                if (isAdded())
+                    requireActivity().runOnUiThread(() -> {
+                        setData(model);
+
+//                        // Psychologists Data
+//                        if (!model.getPsychologistList().data().isEmpty()) {
+//                            psychologistsAdapter.setPsychologists(model.getPsychologistList().data());
+//                            binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
+//                        }
+//
+//                        // References Data
+//                        if (!model.getReferenceList().data().isEmpty()) {
+//                            referencesAdapter.setReferences(model.getReferenceList().data());
+//                            binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+//                        }
+//
+//                        // Sessions Data
+//                        if (!model.getSessionList().data().isEmpty()) {
+//                            sessions2Adapter.setSessions(model.getSessionList().data());
+//                            binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
+//                        }
+//
+//                        // Samples Data
+//                        if (!model.getSampleList().data().isEmpty()) {
+//                            samples2Adapter.setSamples(model.getSampleList().data());
+//                            binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
+//                        }
+
+                        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
+                        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
+                        binding.sessionsHeaderIncludeLayout.countTextView.setText("(" + sessions2Adapter.getItemCount() + ")");
+                        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples2Adapter.getItemCount() + ")");
+
+                        // Psychologists Data
+                        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
+
+                        // References Data
+                        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.referencesShimmerLayout.getRoot().stopShimmer();
+
+                        // Sessions Data
+                        binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.sessionsShimmerLayout.getRoot().stopShimmer();
+
+                        // Samples Data
+                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.samplesShimmerLayout.getRoot().stopShimmer();
+                    });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Psychologists Data
+                        binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.psychologistsShimmerLayout.getRoot().stopShimmer();
+
+                        // References Data
+                        binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.referencesShimmerLayout.getRoot().stopShimmer();
+
+                        // Sessions Data
+                        binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.sessionsShimmerLayout.getRoot().stopShimmer();
+
+                        // Samples Data
+                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.samplesShimmerLayout.getRoot().stopShimmer();
+                    });
+                }
+            }
+        });
     }
 
     @Override

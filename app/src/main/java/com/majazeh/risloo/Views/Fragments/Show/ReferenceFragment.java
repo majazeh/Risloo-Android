@@ -277,20 +277,23 @@ public class ReferenceFragment extends Fragment {
                 public void onOK(Object object) {
                     UserModel model = (UserModel) object;
 
-                    if (isAdded())
+                    if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             setData(model);
 
+                            // Rooms Data
                             if (!model.getRoomList().data().isEmpty()) {
                                 roomsAdapter.setRooms(model.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
                             }
 
+                            // Cases Data
                             if (!model.getCaseList().data().isEmpty()) {
                                 cases3Adapter.setCases(model.getCaseList().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
                             }
 
+                            // Samples Data
                             if (!model.getSampleList().data().isEmpty()) {
                                 samples3Adapter.setSamples(model.getSampleList().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
@@ -300,35 +303,42 @@ public class ReferenceFragment extends Fragment {
                             binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
                             binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
 
+                            // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
+                            // Cases Data
                             binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
+                            // Samples Data
                             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.samplesShimmerLayout.getRoot().stopShimmer();
                         });
+                    }
                 }
 
                 @Override
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
+                            // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
+                            // Cases Data
                             binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
+                            // Samples Data
                             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);

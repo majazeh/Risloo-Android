@@ -937,7 +937,7 @@
 
     <string name="CaseFragmentTitle">پرونده</string>
 
-    <string name="CaseFragmentSituationHeader">مسئله</string>
+    <string name="CaseFragmentProblemHeader">مسئله</string>
 
     /*
     ---------- Center Fragment ----------
