@@ -229,7 +229,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 else if (fragment instanceof CreateCaseUserFragment)
                     switch (method) {
                         case "references":
-                            detector(holder, ((CreateCaseUserFragment) fragment).referencesAdapter.getIds().contains(item.object.get("id").toString()));
+                            UserModel model = (UserModel) item;
+
+                            detector(holder, ((CreateCaseUserFragment) fragment).referencesAdapter.getIds().contains(model.getId()));
                             calculateCount(((CreateCaseUserFragment) fragment).referencesAdapter.getIds().size());
                             break;
                     }

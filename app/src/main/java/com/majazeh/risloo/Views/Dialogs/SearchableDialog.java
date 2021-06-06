@@ -48,6 +48,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Case;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Room;
@@ -273,8 +274,42 @@ public class SearchableDialog extends AppCompatDialogFragment {
             else if (fragment instanceof CreateCaseUserFragment)
                 switch (method) {
                     case "references":
-                        searchableAdapter.setItems(values, method, binding.countTextView);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        data.put("id", ((CreateCaseUserFragment) fragment).caseId);
+
+                        Case.users(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, binding.countTextView);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
+
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+                        });
                         break;
                 }
 
