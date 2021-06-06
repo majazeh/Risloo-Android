@@ -206,7 +206,7 @@
 
     <string name="CreateCaseFragmentRoomHeader">اتاق درمان</string>
     <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
-    <string name="CreateCaseFragmentSituationHeader">مسئله</string>
+    <string name="CreateCaseFragmentProblemHeader">مسئله</string>
 
     <string name="CreateCaseFragmentReferenceHint">انتخاب مراجع از طریق جستجوی موبایل یا نام</string>
 
