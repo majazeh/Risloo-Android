@@ -18,8 +18,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSampleBinding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-
-import org.json.JSONException;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
@@ -88,37 +87,38 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     }
 
     private void setData(SamplesHolder holder, SampleModel model) {
-        try {
-            if (holder.getBindingAdapterPosition() == 0) {
-                holder.binding.topView.setVisibility(View.GONE);
-            } else {
-                holder.binding.topView.setVisibility(View.VISIBLE);
-            }
-
-            holder.binding.serialTextView.setText(model.getSampleId());
-            holder.binding.nameTextView.setText(model.getSampleScaleTitle());
-
-            if (!model.getSampleEdition().equals(""))
-                holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
-            else
-                holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
-
-            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
-                holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
-            }
-
-            if (model.getSampleCase() != null && model.getSampleCase().getCaseId() != null) {
-                holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
-            }
-
-            if (model.getSampleCase() != null && model.getSampleCase().getClients() != null && !model.getSampleCase().getClients().data().isEmpty()) {
-                holder.binding.referenceTextView.setText(model.getSampleCase().getClients().data().get(0).object.getString("name")); // TODO : name return empty
-            }
-
-            setStatus(holder, model.getSampleStatus());
-        } catch (JSONException e) {
-            e.printStackTrace();
+        if (holder.getBindingAdapterPosition() == 0) {
+            holder.binding.topView.setVisibility(View.GONE);
+        } else {
+            holder.binding.topView.setVisibility(View.VISIBLE);
         }
+
+        holder.binding.serialTextView.setText(model.getSampleId());
+        holder.binding.nameTextView.setText(model.getSampleScaleTitle());
+
+        if (!model.getSampleEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        else
+            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+
+        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
+            holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+        }
+
+        if (model.getSampleCase() != null && model.getSampleCase().getCaseId() != null) {
+            holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
+        }
+
+        if (model.getSampleCase() != null && model.getSampleCase().getClients() != null && !model.getSampleCase().getClients().data().isEmpty()) {
+            for (int i = 0; i < model.getSampleCase().getClients().data().size(); i++) {
+                UserModel user = (UserModel) model.getSampleCase().getClients().data().get(i);
+                if (user != null) {
+                    holder.binding.referenceTextView.setText(user.getName());
+                }
+            }
+        }
+
+        setStatus(holder, model.getSampleStatus());
     }
 
     private void setStatus(SamplesHolder holder, String status) {

@@ -16,6 +16,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCaseBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
@@ -99,7 +100,12 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
             }
 
             if (model.getClients() != null && !model.getClients().data().isEmpty()) {
-                holder.binding.referenceTextView.setText(model.getClients().data().get(0).object.getString("name"));
+                for (int i = 0; i < model.getClients().data().size(); i++) {
+                    UserModel user = (UserModel) model.getClients().data().get(i);
+                    if (user != null) {
+                        holder.binding.referenceTextView.setText(user.getName());
+                    }
+                }
             }
 
         } catch (JSONException e) {

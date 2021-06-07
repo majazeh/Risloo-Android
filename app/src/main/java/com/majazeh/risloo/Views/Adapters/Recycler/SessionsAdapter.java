@@ -18,6 +18,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
@@ -109,7 +110,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             }
 
             if (model.getCaseModel() != null && model.getCaseModel().getClients() != null && !model.getCaseModel().getClients().data().isEmpty()) {
-                holder.binding.referenceTextView.setText(model.getCaseModel().getClients().data().get(0).object.getString("name"));
+                for (int i = 0; i < model.getCaseModel().getClients().data().size(); i++) {
+                    UserModel user = (UserModel) model.getCaseModel().getClients().data().get(i);
+                    if (user != null) {
+                        holder.binding.referenceTextView.setText(user.getName());
+                    }
+                }
             }
 
             holder.binding.startTimeTextView.setText(DateManager.gregorianToJalali5(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))));

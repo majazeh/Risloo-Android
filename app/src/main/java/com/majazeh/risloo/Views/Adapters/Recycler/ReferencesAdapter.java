@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -10,7 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemReferenceBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import java.util.ArrayList;
 
 public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.ReferencesHolder> {
 
@@ -18,7 +24,7 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
     private Activity activity;
 
     // Vars
-//    private ArrayList<Reference> references;
+    private ArrayList<TypeModel> references;
 
     public ReferencesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -32,25 +38,37 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
 
     @Override
     public void onBindViewHolder(@NonNull ReferencesHolder holder, int i) {
-//        References Reference = references.get(i);
+        UserModel reference = (UserModel) references.get(i);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, reference);
 
-        setData(holder);
+        setData(holder, reference);
     }
 
     @Override
     public int getItemCount() {
-//        return references.size();
-        return 4;
+        if (this.references != null)
+            return references.size();
+        else
+            return 0;
     }
 
-//    public void setReferences(ArrayList<Reference> references) {
-//        this.references = references;
-//        notifyDataSetChanged();
-//    }
+    public void setReferences(ArrayList<TypeModel> references) {
+        if (this.references == null)
+            this.references = references;
+        else
+            this.references.addAll(references);
+        notifyDataSetChanged();
+    }
+
+    public void clearReferences() {
+        if (this.references != null) {
+            this.references.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     private void detector(ReferencesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -58,14 +76,22 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
         }
     }
 
-    private void listener(ReferencesHolder holder) {
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.containerConstraintLayout);
+    private void listener(ReferencesHolder holder, UserModel model) {
+        ClickManager.onDelayedClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(ReferencesHolder holder) {
-        holder.binding.nameTextView.setText("ریلسو");
+    private void setData(ReferencesHolder holder, UserModel model) {
+        holder.binding.nameTextView.setText(model.getName());
+    }
+
+    private Bundle getExtras(UserModel model) {
+        Bundle extras = new Bundle();
+//        try {
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        return extras;
     }
 
     public class ReferencesHolder extends RecyclerView.ViewHolder {

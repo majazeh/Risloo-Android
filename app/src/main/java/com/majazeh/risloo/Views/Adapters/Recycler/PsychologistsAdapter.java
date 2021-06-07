@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +13,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemPsychologyBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
+
+import java.util.ArrayList;
 
 public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdapter.PsychologistsHolder> {
 
@@ -21,7 +27,7 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
     private Activity activity;
 
     // Vars
-//    private ArrayList<Psychology> psychologists;
+    private ArrayList<TypeModel> psychologists;
 
     public PsychologistsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,25 +41,37 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
 
     @Override
     public void onBindViewHolder(@NonNull PsychologistsHolder holder, int i) {
-//        Psychologists psychology = psychologists.get(i);
+        UserModel psychologist = (UserModel) psychologists.get(i);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, psychologist);
 
-        setData(holder);
+        setData(holder, psychologist);
     }
 
     @Override
     public int getItemCount() {
-//        return psychologists.size();
-        return 4;
+        if (this.psychologists != null)
+            return psychologists.size();
+        else
+            return 0;
     }
 
-//    public void setPsychologists(ArrayList<Psychology> psychologists) {
-//        this.psychologists = psychologists;
-//        notifyDataSetChanged();
-//    }
+    public void setPsychologists(ArrayList<TypeModel> psychologists) {
+        if (this.psychologists == null)
+            this.psychologists = psychologists;
+        else
+            this.psychologists.addAll(psychologists);
+        notifyDataSetChanged();
+    }
+
+    public void clearPsychologists() {
+        if (this.psychologists != null) {
+            this.psychologists.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     private void detector(PsychologistsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -61,16 +79,18 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
         }
     }
 
-    private void listener(PsychologistsHolder holder) {
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.containerConstraintLayout);
+    private void listener(PsychologistsHolder holder, UserModel model) {
+        ClickManager.onDelayedClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(PsychologistsHolder holder) {
-        holder.binding.nameTextView.setText("ریلسو");
+    private void setData(PsychologistsHolder holder, UserModel model) {
+        holder.binding.nameTextView.setText(model.getName());
 
-        setAvatar(holder, "");
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+            setAvatar(holder, model.getAvatar().getMedium().getUrl());
+        } else {
+            setAvatar(holder, "");
+        }
     }
 
     private void setAvatar(PsychologistsHolder holder, String url) {
@@ -83,6 +103,16 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
+    }
+
+    private Bundle getExtras(UserModel model) {
+        Bundle extras = new Bundle();
+//        try {
+//
+//        } catch (JSONException e) {
+//            e.printStackTrace();
+//        }
+        return extras;
     }
 
     public class PsychologistsHolder extends RecyclerView.ViewHolder {
