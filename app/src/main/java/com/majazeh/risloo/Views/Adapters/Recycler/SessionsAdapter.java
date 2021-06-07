@@ -129,11 +129,26 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
     private Bundle getExtras(SessionModel model) {
         Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+        extras.putString("id", model.getId());
+
+        extras.putInt("started_at", model.getStarted_at());
+        extras.putString("duration", String.valueOf(model.getDuration()));
+        extras.putString("status", model.getStatus());
+
+        extras.putString("type", model.getType());
+        extras.putString("clients_number", String.valueOf(model.getClients_number()));
+        extras.putString("payment_status", model.getPayment_status());
+
+        extras.putString("selection_type", model.getSelection_type());
+        extras.putString("clients_type", model.getClients_type());
+        extras.putInt("opens_at", model.getOpens_at());
+        extras.putInt("closed_at", model.getClosed_at());
+
+        extras.putString("report", model.getReport());
+
+        extras.putString("clients", String.valueOf(model.getClients()));
+
+        extras.putString("practices", String.valueOf(model.getPractices()));
         return extras;
     }
 

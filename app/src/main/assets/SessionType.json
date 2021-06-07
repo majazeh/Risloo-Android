@@ -1,0 +1,22 @@
+[
+    {
+        "fa_title": "حضوری",
+        "en_title": "face_to_face"
+    },
+    {
+        "fa_title": "تماس تلفنی",
+        "en_title": "phone_call"
+    },
+    {
+        "fa_title": "تماس صوتی آنلاین",
+        "en_title": "onlince_voice_call"
+    },
+    {
+        "fa_title": "ویدئو کنفرانس",
+        "en_title": "video_conference"
+    },
+    {
+        "fa_title": "انتخاب به عهده مراجع",
+        "en_title": "selection_by_client"
+    }
+]
