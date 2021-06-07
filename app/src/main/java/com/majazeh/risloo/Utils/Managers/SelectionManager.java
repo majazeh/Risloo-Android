@@ -241,6 +241,24 @@ public class SelectionManager {
         } return value;
     }
 
+    public static String getUserStatus2(Activity activity, String local, String value) {
+        try {
+            JSONArray list = new JSONArray(JsonManager.getJson(activity, "UserStatus2.json"));
+
+            for (int i = 0; i < list.length(); i++) {
+                if (local.equals("en")) {
+                    if (value.equals(list.getJSONObject(i).getString("fa_title")))
+                        return list.getJSONObject(i).getString("en_title");
+                } else {
+                    if (value.equals(list.getJSONObject(i).getString("en_title")))
+                        return list.getJSONObject(i).getString("fa_title");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return value;
+    }
+
     public static String getUserType(Activity activity, String local, String value) {
         try {
             JSONArray list = new JSONArray(JsonManager.getJson(activity, "UserTypes.json"));
