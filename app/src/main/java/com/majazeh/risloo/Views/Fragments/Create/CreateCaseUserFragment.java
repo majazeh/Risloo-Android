@@ -28,7 +28,6 @@ import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -53,7 +52,7 @@ public class CreateCaseUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String caseId = "";
+    public String caseId = "", roomId = "";
 
     @Nullable
     @Override
@@ -126,6 +125,10 @@ public class CreateCaseUserFragment extends Fragment {
                 data.put("id", caseId);
             }
 
+            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("")) {
+                roomId = getArguments().getString("room_id");
+            }
+
 //            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
 //                try {
 //                    JSONArray clients = new JSONArray(getArguments().getString("clients"));
@@ -186,7 +189,7 @@ public class CreateCaseUserFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        data.put("user_id", referencesAdapter.getIds());
+        data.put("client_id", referencesAdapter.getIds());
 
         Case.addClient(data, header, new Response() {
             @Override
@@ -215,7 +218,7 @@ public class CreateCaseUserFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (key.equals("user_id")) {
+                                        if (key.equals("client_id")) {
                                             ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                         }
                                     }

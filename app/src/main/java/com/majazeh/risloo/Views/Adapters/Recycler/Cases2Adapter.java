@@ -108,6 +108,8 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
             extras.putString("manager_id", model.getCaseManager().getUserId());
             extras.putString("manager_name", model.getCaseManager().getName());
 
+            extras.putString("room_id", model.getCaseRoom().getRoomId());
+
             extras.putString("clients", String.valueOf(model.getClients()));
 
             if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem"))

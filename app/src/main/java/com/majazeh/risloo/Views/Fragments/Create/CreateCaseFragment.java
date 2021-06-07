@@ -244,7 +244,7 @@ public class CreateCaseFragment extends Fragment {
         problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
 
         data.put("room_id", roomId);
-        data.put("user_id", referencesAdapter.getIds());
+        data.put("client_id", referencesAdapter.getIds());
         data.put("problem", problem);
 
 //        Case.create(data, header, new Response() {

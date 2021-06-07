@@ -262,7 +262,10 @@ public class SearchableDialog extends AppCompatDialogFragment {
             if (fragment instanceof CreateCaseFragment)
                 switch (method) {
                     case "references":
-                        Case.users(data, header, new Response() {
+                        data.put("id", ((CreateCaseFragment) fragment).roomId);
+                        data.put("usage", "create_case");
+
+                        Room.users(data, header, new Response() {
                             @Override
                             public void onOK(Object object) {
                                 List list = (List) object;
@@ -298,6 +301,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
                         });
                         break;
                     case "rooms":
+                        data.put("my_management", "1");
+
                         Room.list(data, header, new Response() {
                             @Override
                             public void onOK(Object object) {
@@ -338,9 +343,10 @@ public class SearchableDialog extends AppCompatDialogFragment {
             else if (fragment instanceof CreateCaseUserFragment)
                 switch (method) {
                     case "references":
-                        data.put("id", ((CreateCaseUserFragment) fragment).caseId);
+                        data.put("id", ((CreateCaseUserFragment) fragment).roomId);
+                        data.put("not_in_case", ((CreateCaseUserFragment) fragment).caseId);
 
-                        Case.users(data, header, new Response() {
+                        Room.users(data, header, new Response() {
                             @Override
                             public void onOK(Object object) {
                                 List list = (List) object;

@@ -46,7 +46,7 @@ public class CreateUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "client", gender = "male";
+    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "user", gender = "male";
     private int year, month, day;
     private boolean passwordVisibility = false;
 
@@ -235,7 +235,7 @@ public class CreateUserFragment extends Fragment {
                     type = "admin";
                     break;
                 case R.id.second_radioButton:
-                    type = "client";
+                    type = "user";
                     break;
             }
         });
@@ -321,7 +321,7 @@ public class CreateUserFragment extends Fragment {
                     case "admin":
                         binding.typeIncludeLayout.firstRadioButton.setChecked(true);
                         break;
-                    case "client":
+                    default:
                         binding.typeIncludeLayout.secondRadioButton.setChecked(true);
                         break;
                 }

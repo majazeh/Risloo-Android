@@ -138,6 +138,10 @@ public class CaseFragment extends Fragment {
                 extras.putString("manager_name", getArguments().getString("manager_name"));
             }
 
+            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("")) {
+                extras.putString("room_id", getArguments().getString("room_id"));
+            }
+
             if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
                 extras.putString("clients", getArguments().getString("clients"));
             }
@@ -163,6 +167,10 @@ public class CaseFragment extends Fragment {
             if (model.getCaseManager().getUserId() != null && model.getCaseManager().getName() != null) {
                 extras.putString("manager_id", model.getCaseManager().getUserId());
                 extras.putString("manager_name", model.getCaseManager().getName());
+            }
+
+            if (model.getCaseRoom() != null && model.getCaseRoom().getRoomId() != null) {
+                extras.putString("room_id", model.getCaseRoom().getRoomId());
             }
 
             if (model.getClients() != null && model.getClients().data().size() != 0) {

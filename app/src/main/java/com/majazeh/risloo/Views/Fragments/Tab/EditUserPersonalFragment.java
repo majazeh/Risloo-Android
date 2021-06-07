@@ -42,7 +42,7 @@ public class EditUserPersonalFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "client", gender = "male";
+    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "user", gender = "male";
     private int year, month, day;
 
     @Nullable
@@ -163,7 +163,7 @@ public class EditUserPersonalFragment extends Fragment {
                     type = "admin";
                     break;
                 case R.id.second_radioButton:
-                    type = "client";
+                    type = "user";
                     break;
             }
         });
