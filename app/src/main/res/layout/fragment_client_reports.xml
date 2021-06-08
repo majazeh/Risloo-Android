@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Index.SessionReportsFragment">
+    tools:context=".Views.Fragments.Index.ClientReportsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,6 +33,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
+            <include
+                android:id="@+id/search_includeLayout"
+                layout="@layout/component_main_index_search"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginRight="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_goneMarginLeft="@dimen/_12sdp"
+                app:layout_constraintLeft_toRightOf="@id/add_imageView"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
+
+            <include
+                android:id="@+id/add_imageView"
+                layout="@layout/component_main_button_oval_mid"
+                android:layout_width="@dimen/_28sdp"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
+                android:layout_marginRight="@dimen/_6sdp"
+                app:layout_constraintBottom_toBottomOf="@id/search_includeLayout"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
+                app:layout_constraintTop_toTopOf="@id/search_includeLayout" />
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/index_containerLayout"
                 android:layout_width="0dp"
@@ -45,7 +69,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/header_includeLayout">
+                app:layout_constraintTop_toBottomOf="@id/search_includeLayout">
 
                 <include
                     android:id="@+id/index_shimmerLayout"
@@ -60,7 +84,7 @@
 
                 <include
                     android:id="@+id/index_headerLayout"
-                    layout="@layout/header_item_session_report"
+                    layout="@layout/header_item_client_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -71,7 +95,7 @@
 
                 <include
                     android:id="@+id/index_singleLayout"
-                    layout="@layout/component_single_session_report"
+                    layout="@layout/component_single_client_report"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"

@@ -115,19 +115,31 @@
 
             <TextView
                 android:id="@+id/date_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_8sdp"
                 android:layout_marginStart="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="start"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
+                app:layout_constraintBottom_toBottomOf="@id/reports_textView"
+                app:layout_constraintEnd_toStartOf="@id/reports_textView"
                 app:layout_constraintStart_toEndOf="@id/date_imageView"
-                app:layout_constraintTop_toBottomOf="@id/description_textView"
+                app:layout_constraintTop_toTopOf="@id/reports_textView"
                 tools:text="تاریخ ساخت پرونده" />
+
+            <include
+                android:id="@+id/reports_textView"
+                layout="@layout/component_main_button_rect_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintTop_toBottomOf="@id/description_textView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

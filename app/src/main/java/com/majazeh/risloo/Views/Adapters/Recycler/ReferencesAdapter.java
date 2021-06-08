@@ -77,7 +77,9 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
     }
 
     private void listener(ReferencesHolder holder, UserModel model) {
-        ClickManager.onDelayedClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
+        ClickManager.onDelayedClickListener(() -> {
+//            ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model));
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(ReferencesHolder holder, UserModel model) {

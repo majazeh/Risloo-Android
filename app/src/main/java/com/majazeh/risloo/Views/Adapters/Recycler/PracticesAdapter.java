@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.databinding.SingleItemPracticeBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.PracticesHolder> {
 
@@ -19,7 +22,7 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
     private Activity activity;
 
     // Vars
-//    private ArrayList<Practice> practices;
+    private ArrayList<TypeModel> practices;
 
     public PracticesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -33,25 +36,37 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
 
     @Override
     public void onBindViewHolder(@NonNull PracticesHolder holder, int i) {
-//        Practices practice = practices.get(i);
-
-        detector(holder);
-
-        listener(holder);
-
-        setData(holder);
+//        PracticeModel practice = (PracticeModel) practices.get(i);
+//
+//        detector(holder);
+//
+//        listener(holder, practice);
+//
+//        setData(holder, practice);
     }
 
     @Override
     public int getItemCount() {
-//        return practices.size();
-        return 4;
+        if (this.practices != null)
+            return practices.size();
+        else
+            return 0;
     }
 
-//    public void setPractices(ArrayList<Practice> practices) {
-//        this.practices = practices;
-//        notifyDataSetChanged();
-//    }
+    public void setPractices(ArrayList<TypeModel> practices) {
+        if (this.practices == null)
+            this.practices = practices;
+        else
+            this.practices.addAll(practices);
+        notifyDataSetChanged();
+    }
+
+    public void clearPractices() {
+        if (this.practices != null) {
+            this.practices.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     private void detector(PracticesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -87,6 +102,12 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
         holder.binding.nameTextView.setText("تمرین abc");
         holder.binding.descriptionTextView.setText("چرا عاقل کند کاری که بازآید به کنعان غم مخور");
     }
+
+//    private Bundle getExtras(PracticeModel model) {
+//        Bundle extras = new Bundle();
+//
+//        return extras;
+//    }
 
     public class PracticesHolder extends RecyclerView.ViewHolder {
 

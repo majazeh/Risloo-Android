@@ -6,17 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:background="@color/White"
-    tools:context=".Views.Adapters.Recycler.SessionReportsAdapter">
-
-    <View
-        android:id="@+id/top_view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/Gray200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray200">
 
     <TextView
         android:id="@+id/name_textView"
@@ -26,6 +16,7 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:text="@string/ClientReportsFragmentName"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -35,8 +26,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/time_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="عنوان" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/time_textView"
@@ -44,6 +34,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
         android:gravity="center|right"
+        android:text="@string/ClientReportsFragmentTime"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -53,8 +44,7 @@
         app:layout_constraintBottom_toBottomOf="@id/name_textView"
         app:layout_constraintEnd_toStartOf="@id/reference_textView"
         app:layout_constraintStart_toEndOf="@id/name_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
-        tools:text="زمان" />
+        app:layout_constraintTop_toTopOf="@id/name_textView" />
 
     <TextView
         android:id="@+id/reference_textView"
@@ -62,6 +52,7 @@
         android:layout_height="0dp"
         android:layout_marginStart="@dimen/_4sdp"
         android:gravity="center|right"
+        android:text="@string/ClientReportsFragmentReference"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -71,8 +62,7 @@
         app:layout_constraintBottom_toBottomOf="@id/name_textView"
         app:layout_constraintEnd_toStartOf="@id/readers_textView"
         app:layout_constraintStart_toEndOf="@id/time_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
-        tools:text="مراجعین" />
+        app:layout_constraintTop_toTopOf="@id/name_textView" />
 
     <TextView
         android:id="@+id/readers_textView"
@@ -81,6 +71,7 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:gravity="center|right"
+        android:text="@string/ClientReportsFragmentReaders"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -90,7 +81,6 @@
         app:layout_constraintBottom_toBottomOf="@id/name_textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/reference_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
-        tools:text="خوانندگان" />
+        app:layout_constraintTop_toTopOf="@id/name_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -80,7 +80,9 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
     }
 
     private void listener(PsychologistsHolder holder, UserModel model) {
-        ClickManager.onDelayedClickListener(() -> ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
+        ClickManager.onDelayedClickListener(() -> {
+//            ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model));
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(PsychologistsHolder holder, UserModel model) {

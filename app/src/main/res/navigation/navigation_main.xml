@@ -274,6 +274,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/clientReportsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragment"
+        android:label="@string/ClientReportsFragmentTitle"
+        tools:layout="@layout/fragment_client_reports" >
+        <action
+            android:id="@+id/action_clientReportsFragment_to_createReportFragment"
+            app:destination="@id/createReportFragment" />
+    </fragment>
+
+    <fragment
         android:id="@+id/documentsFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.DocumentsFragment"
         android:label="@string/DocumentsFragmentTitle"
@@ -355,12 +365,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/sessionReportsFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Index.SessionReportsFragment"
-        android:label="@string/SessionReportsFragmentTitle"
-        tools:layout="@layout/fragment_session_reports" />
-
-    <fragment
         android:id="@+id/treasuriesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment"
         android:label="@string/TreasuriesFragmentTitle"
@@ -422,6 +426,9 @@
         <action
             android:id="@+id/action_caseFragment_to_createSampleFragment"
             app:destination="@id/createSampleFragment" />
+        <action
+            android:id="@+id/action_caseFragment_to_clientReportsFragment"
+            app:destination="@id/clientReportsFragment" />
         <action
             android:id="@+id/action_caseFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />
@@ -524,9 +531,6 @@
         android:label="@string/SessionFragmentTitle"
         tools:layout="@layout/fragment_session" >
         <action
-            android:id="@+id/action_sessionFragment_to_createReportFragment"
-            app:destination="@id/createReportFragment" />
-        <action
             android:id="@+id/action_sessionFragment_to_createCenterUserFragment"
             app:destination="@id/createCenterUserFragment" />
         <action
@@ -539,8 +543,8 @@
             android:id="@+id/action_sessionFragment_to_editSessionFragment"
             app:destination="@id/editSessionFragment" />
         <action
-            android:id="@+id/action_sessionFragment_to_sessionReportsFragment"
-            app:destination="@id/sessionReportsFragment" />
+            android:id="@+id/action_sessionFragment_to_clientReportsFragment"
+            app:destination="@id/clientReportsFragment" />
         <action
             android:id="@+id/action_sessionFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />

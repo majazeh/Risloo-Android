@@ -26,6 +26,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.Samples2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Users2Adapter;
 import com.majazeh.risloo.databinding.FragmentSessionBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
@@ -91,7 +92,6 @@ public class SessionFragment extends Fragment {
         InitManager.txtTextColor(binding.reportsTextView.getRoot(), getResources().getString(R.string.SessionFragmentReports), getResources().getColor(R.color.Blue600));
         InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
 
-        binding.reportHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SessionFragmentReportHeader));
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
         binding.usersHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Users2AdapterHeader));
         binding.practicesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
@@ -127,11 +127,9 @@ public class SessionFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.sessionReportsFragment, extras)).widget(binding.reportsTextView.getRoot());
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.clientReportsFragment, extras)).widget(binding.reportsTextView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment, extras)).widget(binding.editImageView.getRoot());
-
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createReportFragment, extras)).widget(binding.reportActionTextView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras)).widget(binding.usersAddImageView.getRoot());
 
@@ -198,11 +196,6 @@ public class SessionFragment extends Fragment {
                 binding.endTimeTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(getArguments().getInt("closed_at")))));
             }
 
-            if (getArguments().getString("report") != null && !getArguments().getString("report").equals("")) {
-                extras.putString("report", getArguments().getString("report"));
-                setReport(getArguments().getString("report"));
-            }
-
             if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
                 extras.putString("clients", getArguments().getString("clients"));
             }
@@ -264,11 +257,6 @@ public class SessionFragment extends Fragment {
             binding.endTimeTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getClosed_at()))));
         }
 
-        if (model.getReport() != null && !model.getReport().equals("")) {
-            extras.putString("report", model.getReport());
-            setReport(model.getReport());
-        }
-
         if (model.getClients() != null && model.getClients().data().size() != 0) {
             extras.putString("clients", String.valueOf(model.getClients()));
         }
@@ -288,27 +276,31 @@ public class SessionFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         setData(model);
 
-//                        // Psychologists Data
-//                        if (!model.getPsychologistList().data().isEmpty()) {
-//                            psychologistsAdapter.setPsychologists(model.getPsychologistList().data());
-//                            binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
-//                        }
-//
-//                        // Users Data
-//                        if (!model.getUserList().data().isEmpty()) {
-//                            users2Adapter.setUsers(model.getUserList().data());
-//                            binding.usersSingleLayout.recyclerView.setAdapter(users2Adapter);
-//                        }
-//
+                        List psychologists = new List();
+                        if (model.getRoom() != null && model.getRoom().getRoomManager() != null)
+                            psychologists.add(model.getRoom().getRoomManager());
+
+                        // Psychologists Data
+                        if (!psychologists.data().isEmpty()) {
+                            psychologistsAdapter.setPsychologists(psychologists.data());
+                            binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
+                        }
+
+                        // Users Data
+                        if (model.getClients() != null && model.getClients().data().size() != 0) {
+                            users2Adapter.setUsers(model.getClients().data());
+                            binding.usersSingleLayout.recyclerView.setAdapter(users2Adapter);
+                        }
+
 //                        // Practices Data
-//                        if (!model.getPracticeList().data().isEmpty()) {
-//                            practicesAdapter.setPractices(model.getSessionList().data());
+//                        if (!model.getPractices().data().isEmpty()) {
+//                            practicesAdapter.setPractices(model.getPractices().data());
 //                            binding.practicesSingleLayout.recyclerView.setAdapter(practicesAdapter);
 //                        }
-//
+
 //                        // Samples Data
-//                        if (!model.getSampleList().data().isEmpty()) {
-//                            samples2Adapter.setSamples(model.getSampleList().data());
+//                        if (!model.getSamples().data().isEmpty()) {
+//                            samples2Adapter.setSamples(model.getSamples().data());
 //                            binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
 //                        }
 
@@ -372,41 +364,6 @@ public class SessionFragment extends Fragment {
                 }
             }
         });
-    }
-
-    private void setReport(String report) {
-        switch (report) {
-            case "add":
-                binding.reportTextView.setText(getResources().getString(R.string.SessionFragmentReportBodyEmpty));
-
-                binding.reportActionTextView.getRoot().setEnabled(true);
-                binding.reportActionTextView.getRoot().setText(getResources().getString(R.string.SessionFragmentReportAdd));
-                binding.reportActionTextView.getRoot().setTextColor(getResources().getColor(R.color.White));
-
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
-                else
-                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
-                break;
-            case "edit":
-                binding.reportTextView.setText("ﻟﻮرم اﯾﭙﺴﻮم متن ﺳﺎﺧﺘﮕﯽ ﺑﺎ ﺗﻮﻟﯿﺪ ﺳﺎدﮔﯽ ﻧﺎﻣﻔﻬﻮم از ﺻﻨﻌﺖ ﭼﺎپ، و ﺑﺎ اﺳﺘﻔﺎده از ﻃﺮاﺣﺎن ﮔﺮاﻓﯿﮏ اﺳﺖ، ﭼﺎﭘﮕﺮﻫﺎ و ﻣﺘﻮن ﺑﻠﮑﻪ روزنامه و مجله در ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربرهای متنوع با هدف بهبود ابزراهای کاربردی می\u200Cباشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می\u200Cطلبد.");
-
-                binding.reportActionTextView.getRoot().setEnabled(true);
-                binding.reportActionTextView.getRoot().setText(getResources().getString(R.string.SessionFragmentReportEdit));
-                binding.reportActionTextView.getRoot().setTextColor(getResources().getColor(R.color.Green600));
-
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-                else
-                    binding.reportActionTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-                break;
-            case "privacy":
-                binding.reportTextView.setText(getResources().getString(R.string.SessionFragmentReportBodyPrivacy));
-
-                binding.reportActionTextView.getRoot().setEnabled(false);
-                binding.reportActionTextView.getRoot().setVisibility(View.GONE);
-                break;
-        }
     }
 
     @Override

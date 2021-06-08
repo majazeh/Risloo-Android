@@ -774,6 +774,17 @@
     <string name="CenterUsersFragmentEmpty">هنوز کاربری برای این مرکز ثبت نشده است.</string>
 
     /*
+    ---------- ClientReports Fragment ----------
+    */
+
+    <string name="ClientReportsFragmentTitle">گزارشات</string>
+
+    <string name="ClientReportsFragmentName">عنوان</string>
+    <string name="ClientReportsFragmentTime">زمان</string>
+    <string name="ClientReportsFragmentReference">مراجعین</string>
+    <string name="ClientReportsFragmentReaders">خوانندگان</string>
+
+    /*
     ---------- Documents Fragment ----------
     */
 
@@ -880,17 +891,6 @@
     <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ای ثبت نشده است.</string>
 
     /*
-    ---------- SessionReports Fragment ----------
-    */
-
-    <string name="SessionReportsFragmentTitle">گزارشات جلسه</string>
-
-    <string name="SessionReportsFragmentName">عنوان</string>
-    <string name="SessionReportsFragmentTime">زمان</string>
-    <string name="SessionReportsFragmentReference">مراجعین</string>
-    <string name="SessionReportsFragmentReaders">خوانندگان</string>
-
-    /*
     ---------- Treasuries Fragment ----------
     */
 
@@ -938,6 +938,8 @@
     <string name="CaseFragmentTitle">پرونده</string>
 
     <string name="CaseFragmentProblemHeader">مسئله</string>
+
+    <string name="CaseFragmentReports">گزارشات</string>
 
     /*
     ---------- Center Fragment ----------
@@ -1013,7 +1015,7 @@
 
     <string name="SessionFragmentTitle">جلسه</string>
 
-    <string name="SessionFragmentReports">گزارشات جلسه</string>
+    <string name="SessionFragmentReports">گزارشات</string>
 
     <string name="SessionFragmentSessionType">نوع جلسه</string>
     <string name="SessionFragmentReferenceCount">تعداد حداکثر مراجعین</string>
@@ -1023,14 +1025,6 @@
     <string name="SessionFragmentReferenceType">نوع مراجعین درخواست دهنده</string>
     <string name="SessionFragmentStartTime">زمان شروع نوبت‌گیری</string>
     <string name="SessionFragmentEndTime">زمان بستن نوبت‌گیری</string>
-
-    <string name="SessionFragmentReportHeader">گزارش</string>
-    
-    <string name="SessionFragmentReportAdd">ثبت گزارش</string>
-    <string name="SessionFragmentReportEdit">ویرایش گزارش</string>
-
-    <string name="SessionFragmentReportBodyPrivacy">تنها درمان‌گران این پرونده قادر به ثبت و مشاهده گزارش می‌باشند.</string>
-    <string name="SessionFragmentReportBodyEmpty">هنوز گزارشی برای این جلسه ثبت نشده است.</string>
 
     /*
     ---------- Treasury Fragment ----------

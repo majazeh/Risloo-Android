@@ -71,7 +71,7 @@
 
             <TextView
                 android:id="@+id/date_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_4sdp"
@@ -81,6 +81,7 @@
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintStart_toEndOf="@id/date_imageView"
                 app:layout_constraintTop_toBottomOf="@id/serial_textView"
                 tools:text="تاریخ جلسه" />
@@ -99,7 +100,7 @@
 
             <TextView
                 android:id="@+id/duration_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="start"
@@ -108,13 +109,14 @@
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintStart_toStartOf="@id/date_textView"
                 app:layout_constraintTop_toBottomOf="@id/date_textView"
                 tools:text="مدت‌زمان جلسه" />
 
             <TextView
                 android:id="@+id/status_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="start"
@@ -123,6 +125,7 @@
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintStart_toStartOf="@id/duration_imageView"
                 app:layout_constraintTop_toBottomOf="@id/duration_textView"
                 tools:text="وضعیت" />
@@ -132,7 +135,7 @@
                 layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="@id/status_textView"
                 app:layout_constraintTop_toBottomOf="@id/status_textView" />
@@ -142,7 +145,7 @@
                 layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintTop_toBottomOf="@id/status_textView" />
@@ -441,64 +444,13 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
-            android:id="@+id/report_header_includeLayout"
-            layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/info3_constraintLayout" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/report_constraintLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:paddingBottom="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/report_header_includeLayout">
-
-            <TextView
-                android:id="@+id/report_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:gravity="start"
-                android:text="@string/SessionFragmentReportBodyEmpty"
-                android:textSize="@dimen/_9ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray600"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <include
-                android:id="@+id/report_action_textView"
-                layout="@layout/component_main_button_rect_mid"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/report_textView" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <include
             android:id="@+id/psychologists_header_includeLayout"
             layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/report_constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@id/info3_constraintLayout" />
 
         <include
             android:id="@+id/psychologists_shimmerLayout"

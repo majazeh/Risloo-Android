@@ -26,6 +26,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.Sessions2Adapter;
 import com.majazeh.risloo.databinding.FragmentCaseBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 
 import org.json.JSONException;
@@ -89,6 +90,8 @@ public class CaseFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
+        InitManager.txtTextColor(binding.reportsTextView.getRoot(), getResources().getString(R.string.CaseFragmentReports), getResources().getColor(R.color.Blue600));
+
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
         binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.sessionsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Sessions2AdapterHeader));
@@ -106,10 +109,14 @@ public class CaseFragment extends Fragment {
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            binding.reportsTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
+
             binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
             binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
         } else {
+            binding.reportsTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
+
             binding.referencesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
             binding.sessionsAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
             binding.samplesAddImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
@@ -118,6 +125,8 @@ public class CaseFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.clientReportsFragment, extras)).widget(binding.reportsTextView.getRoot());
+
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseUserFragment, extras)).widget(binding.referencesAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSessionFragment, extras)).widget(binding.sessionsAddImageView.getRoot());
@@ -196,7 +205,7 @@ public class CaseFragment extends Fragment {
     }
 
     private void getData() {
-        Case.show(data, header, new Response() {
+        Case.showDashborad(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 CaseModel model = (CaseModel) object;
@@ -205,29 +214,33 @@ public class CaseFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         setData(model);
 
-//                        // Psychologists Data
-//                        if (!model.getPsychologistList().data().isEmpty()) {
-//                            psychologistsAdapter.setPsychologists(model.getPsychologistList().data());
-//                            binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
-//                        }
-//
-//                        // References Data
-//                        if (!model.getReferenceList().data().isEmpty()) {
-//                            referencesAdapter.setReferences(model.getReferenceList().data());
-//                            binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
-//                        }
-//
-//                        // Sessions Data
-//                        if (!model.getSessionList().data().isEmpty()) {
-//                            sessions2Adapter.setSessions(model.getSessionList().data());
-//                            binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
-//                        }
-//
-//                        // Samples Data
-//                        if (!model.getSampleList().data().isEmpty()) {
-//                            samples2Adapter.setSamples(model.getSampleList().data());
-//                            binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
-//                        }
+                        List psychologists = new List();
+                        if (model.getCaseManager() != null)
+                            psychologists.add(model.getCaseManager());
+
+                        // Psychologists Data
+                        if (!psychologists.data().isEmpty()) {
+                            psychologistsAdapter.setPsychologists(psychologists.data());
+                            binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
+                        }
+
+                        // References Data
+                        if (model.getClients() != null && model.getClients().data().size() != 0) {
+                            referencesAdapter.setReferences(model.getClients().data());
+                            binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+                        }
+
+                        // Sessions Data
+                        if (!model.getSessions().data().isEmpty()) {
+                            sessions2Adapter.setSessions(model.getSessions().data());
+                            binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
+                        }
+
+                        // Samples Data
+                        if (!model.getSamples().data().isEmpty()) {
+                            samples2Adapter.setSamples(model.getSamples().data());
+                            binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
+                        }
 
                         binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
                         binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
