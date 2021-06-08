@@ -17,6 +17,9 @@ public class SampleModel extends TypeModel {
     private String sampleScaleTitle="";
     private String sampleDescription="";
     private JSONArray items;
+    private String caseStatus = "";
+    private int membersCount;
+    private int joined;
     private String chain="";
     private RoomModel SampleRoom;
     private CaseModel SampleCase;
@@ -57,6 +60,8 @@ public class SampleModel extends TypeModel {
             setCreated_at(jsonObject.getInt("created_at"));
         if (!jsonObject.isNull("case_id"))
             setCaseId(jsonObject.getString("case_id"));
+        if (!jsonObject.isNull("caseStatus"))
+            setCaseStatus(jsonObject.getString("caseStatus"));
         if (!jsonObject.isNull("session_id"))
             setSessionId(jsonObject.getString("session_id"));
         if (!jsonObject.isNull("started_at"))
@@ -65,6 +70,10 @@ public class SampleModel extends TypeModel {
             setScored_at(jsonObject.getInt("scored_at"));
         if (!jsonObject.isNull("closed_at"))
             setClosed_at(jsonObject.getInt("closed_at"));
+        if (!jsonObject.isNull("membersCount"))
+            setMembersCount(jsonObject.getInt("membersCount"));
+        if (!jsonObject.isNull("joined"))
+            setJoined(jsonObject.getInt("joined"));
         if (!jsonObject.isNull("code"))
             setCode(jsonObject.getInt("code"));
         if (!jsonObject.isNull("filler"))
@@ -110,6 +119,30 @@ public class SampleModel extends TypeModel {
 
     public void setSampleId(String sampleId) {
         this.sampleId = sampleId;
+    }
+
+    public String getCaseStatus() {
+        return caseStatus;
+    }
+
+    public void setCaseStatus(String caseStatus) {
+        this.caseStatus = caseStatus;
+    }
+
+    public int getMembersCount() {
+        return membersCount;
+    }
+
+    public void setMembersCount(int membersCount) {
+        this.membersCount = membersCount;
+    }
+
+    public int getJoined() {
+        return joined;
+    }
+
+    public void setJoined(int joined) {
+        this.joined = joined;
     }
 
     public String getSampleTitle() {
