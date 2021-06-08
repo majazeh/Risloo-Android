@@ -24,6 +24,8 @@ public class SampleModel extends TypeModel {
     private JSONArray terms;
     private String primaryTerm="";
     private String sampleStatus="";
+    private String caseId = "";
+    private String sessionId = "";
     private SampleForm sampleForm;
     private UserModel client;
     private String psychologist_description = "";
@@ -53,6 +55,10 @@ public class SampleModel extends TypeModel {
             setSampleEditionVersion(jsonObject.getInt("edition_version"));
         if (!jsonObject.isNull("created_at"))
             setCreated_at(jsonObject.getInt("created_at"));
+        if (!jsonObject.isNull("case_id"))
+            setCaseId(jsonObject.getString("case_id"));
+        if (!jsonObject.isNull("session_id"))
+            setSessionId(jsonObject.getString("session_id"));
         if (!jsonObject.isNull("started_at"))
             setStarted_at(jsonObject.getInt("started_at"));
         if (!jsonObject.isNull("scored_at"))
@@ -224,6 +230,22 @@ public class SampleModel extends TypeModel {
 
     public void setChain(String chain) {
         this.chain = chain;
+    }
+
+    public String getCaseId() {
+        return caseId;
+    }
+
+    public void setCaseId(String caseId) {
+        this.caseId = caseId;
+    }
+
+    public String getSessionId() {
+        return sessionId;
+    }
+
+    public void setSessionId(String sessionId) {
+        this.sessionId = sessionId;
     }
 
     public JSONArray getPrerequisites() {
