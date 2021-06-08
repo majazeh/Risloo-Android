@@ -96,15 +96,10 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
         holder.binding.serialTextView.setText(model.getSampleId());
         holder.binding.nameTextView.setText(model.getSampleScaleTitle());
 
-        holder.binding.sessionTextView.setText(""); // TODO : Place session_id here
+        holder.binding.sessionTextView.setText(model.getSessionId());
 
-        if (model.getSampleCase() != null && model.getSampleCase().getClients() != null && !model.getSampleCase().getClients().data().isEmpty()) {
-            for (int i = 0; i < model.getSampleCase().getClients().data().size(); i++) {
-                UserModel user = (UserModel) model.getSampleCase().getClients().data().get(i);
-                if (user != null) {
-                    holder.binding.referenceTextView.setText(user.getName());
-                }
-            }
+        if (model.getClient() != null) {
+            holder.binding.referenceTextView.setText(model.getClient().getName());
         }
 
         setStatus(holder, model.getSampleStatus());

@@ -126,7 +126,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
             holder.binding.serialTextView.setText(model.getSampleId());
             holder.binding.nameTextView.setText(model.getSampleTitle());
-            holder.binding.caseTextView.setText(""); // TODO : Place case_status here
+            holder.binding.caseTextView.setText(model.getCaseStatus());
 
             if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
                 holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
@@ -137,7 +137,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
             }
 
             holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getSampleStatus()));
-            holder.binding.referenceTextView.setText(""); // TODO : Place members_count / joined here
+            holder.binding.referenceTextView.setText(model.getMembersCount() + " / " + model.getJoined());
 
             InitManager.customizedSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
         } catch (JSONException e) {

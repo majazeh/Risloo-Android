@@ -367,6 +367,12 @@ public class RoomFragment extends Fragment {
             } else {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
+
+            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("")) {
+                extras.putString("room_id", getArguments().getString("room_id"));
+                extras.putString("room_name", getArguments().getString("room_name"));
+                extras.putString("center_name", getArguments().getString("center_name"));
+            }
         }
     }
 

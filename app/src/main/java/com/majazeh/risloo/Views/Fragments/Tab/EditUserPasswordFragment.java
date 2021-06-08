@@ -28,6 +28,7 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserPasswordBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.Madule.User;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -215,18 +216,29 @@ public class EditUserPasswordFragment extends Fragment {
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
+            if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+                if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0)
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                else
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
 
-            if (binding.newPasswordIncludeLayout.inputEditText.length() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+                if (binding.newPasswordIncludeLayout.inputEditText.length() == 0)
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                else
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
-            if (binding.currentPasswordIncludeLayout.inputEditText.length() != 0 && binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
-                doWork();
+                if (binding.currentPasswordIncludeLayout.inputEditText.length() != 0 && binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
+                    doWork();
+                }
+            } else {
+                if (binding.newPasswordIncludeLayout.inputEditText.length() == 0)
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                else
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+
+                if (binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
+                    doWork();
+                }
             }
         }).widget(binding.editTextView.getRoot());
     }
@@ -237,6 +249,11 @@ public class EditUserPasswordFragment extends Fragment {
             if (fragment instanceof EditUserFragment) {
                 if (!((EditUserFragment) fragment).userId.equals("")) {
                     data.put("id", ((EditUserFragment) fragment).userId);
+
+                    if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId()))
+                        binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    else
+                        binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.GONE);
                 }
             }
         }
@@ -248,47 +265,89 @@ public class EditUserPasswordFragment extends Fragment {
         currentPassword = binding.currentPasswordIncludeLayout.inputEditText.getText().toString().trim();
         newPassword = binding.newPasswordIncludeLayout.inputEditText.getText().toString().trim();
 
-        data.put("password",  currentPassword);
-        data.put("new_password", newPassword);
+        if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+            data.put("password",  currentPassword);
+            data.put("new_password", newPassword);
 
-        Auth.editPassword(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                    });
+            Auth.editPassword(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (!jsonObject.isNull("errors")) {
-                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (!jsonObject.isNull("errors")) {
+                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
 
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (key.equals("password")) {
-                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                        } else if (key.equals("new_password")) {
-                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                            if (key.equals("password")) {
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            } else if (key.equals("new_password")) {
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            }
                                         }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            data.put("new_password", newPassword);
+
+            User.editPassword(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (!jsonObject.isNull("errors")) {
+                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                            if (key.equals("new_password")) {
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
 
     @Override

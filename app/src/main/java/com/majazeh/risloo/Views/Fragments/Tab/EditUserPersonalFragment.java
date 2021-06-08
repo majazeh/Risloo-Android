@@ -23,6 +23,7 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserPersonalBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -180,10 +181,10 @@ public class EditUserPersonalFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.mobileIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.editTextView.getRoot());
@@ -304,50 +305,88 @@ public class EditUserPersonalFragment extends Fragment {
         data.put("name", name);
         data.put("gender", gender);
 
-        Auth.editProfile(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                AuthModel authModel = (AuthModel) object;
-                UserModel userModel = authModel.getUser();
+        if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+            Auth.editProfile(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    AuthModel authModel = (AuthModel) object;
+                    UserModel userModel = authModel.getUser();
 
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        if (userModel.getId().equals(((MainActivity) requireActivity()).singleton.getId())) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).login(userModel);
                             ((MainActivity) requireActivity()).setData();
-                        }
 
-                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                    });
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        });
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(String response) {
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (!jsonObject.isNull("errors")) {
-                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (!jsonObject.isNull("errors")) {
+                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
 
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (key.equals("name")) {
-                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                            if (key.equals("name")) {
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            }
                                         }
                                     }
                                 }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
                             }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    });
+                        });
+                    }
                 }
-            }
-        });
+            });
+        } else {
+            User.editProfile(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (!jsonObject.isNull("errors")) {
+                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                            if (key.equals("name")) {
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        });
+                    }
+                }
+            });
+        }
     }
 
     @Override

@@ -198,24 +198,24 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
         HashMap header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-//        Session.changeStatus(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                SessionModel model = (SessionModel) object;
-//
-//                activity.runOnUiThread(() -> {
-//                    setStatus(holder, model);
-//
-//                    ((MainActivity) activity).loadingDialog.dismiss();
-//                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-//                });
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                // Place Code if Needed
-//            }
-//        });
+        Session.edit(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                SessionModel model = (SessionModel) object;
+
+                activity.runOnUiThread(() -> {
+                    setStatus(holder, model);
+
+                    ((MainActivity) activity).loadingDialog.dismiss();
+                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                // Place Code if Needed
+            }
+        });
     }
 
     private Bundle getExtras(SessionModel model) {

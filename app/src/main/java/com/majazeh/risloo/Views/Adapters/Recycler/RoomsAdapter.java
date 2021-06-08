@@ -118,6 +118,12 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
             extras.putString("avatar", model.getRoomManager().getAvatar().getMedium().getUrl());
 
+        if (model.getRoomType().equals("room")) {
+            extras.putString("room_id", model.getRoomId());
+            extras.putString("room_name", model.getRoomManager().getName());
+            extras.putString("center_name", "اتاق");
+        }
+
         return extras;
     }
 

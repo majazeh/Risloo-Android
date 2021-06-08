@@ -109,13 +109,8 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
             holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
         }
 
-        if (model.getSampleCase() != null && model.getSampleCase().getClients() != null && !model.getSampleCase().getClients().data().isEmpty()) {
-            for (int i = 0; i < model.getSampleCase().getClients().data().size(); i++) {
-                UserModel user = (UserModel) model.getSampleCase().getClients().data().get(i);
-                if (user != null) {
-                    holder.binding.referenceTextView.setText(user.getName());
-                }
-            }
+        if (model.getClient() != null) {
+            holder.binding.referenceTextView.setText(model.getClient().getName());
         }
 
         setStatus(holder, model.getSampleStatus());

@@ -173,6 +173,12 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
             if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
                 extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").toString());
+
+            if (model.getCenterType().equals("personal_clinic")) {
+                extras.putString("room_id", model.getCenterId());
+                extras.putString("room_name", model.getManager().getName());
+                extras.putString("center_name", "کلینیک شخصی");
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }

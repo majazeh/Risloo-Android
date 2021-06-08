@@ -26,6 +26,7 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserAvatarBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
+import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
@@ -153,32 +154,52 @@ public class EditUserAvatarFragment extends Fragment {
             data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
         }
 
-        Auth.changeAvatar(data, header, new Response() {
-            @Override
-            public void onOK(Object object) {
-                AuthModel authModel = (AuthModel) object;
-                UserModel userModel = authModel.getUser();
+        if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+            Auth.changeAvatar(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    AuthModel authModel = (AuthModel) object;
+                    UserModel userModel = authModel.getUser();
 
-                if (isAdded()) {
-                    requireActivity().runOnUiThread(() -> {
-                        if (userModel.getId().equals(((MainActivity) requireActivity()).singleton.getId())) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).singleton.setAvatar(userModel.getAvatar().getMedium().getUrl());
                             ((MainActivity) requireActivity()).setData();
-                        }
 
-                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                    });
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        });
 
-                    FileManager.deleteFileFromCache(requireActivity(), "image");
+                        FileManager.deleteFileFromCache(requireActivity(), "image");
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(String response) {
-                // Place Code if Needed
-            }
-        });
+                @Override
+                public void onFailure(String response) {
+                    // Place Code if Needed
+                }
+            });
+        } else {
+            User.changeAvatar(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
+                        });
+
+                        FileManager.deleteFileFromCache(requireActivity(), "image");
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    // Place Code if Needed
+                }
+            });
+        }
     }
 
     @Override
