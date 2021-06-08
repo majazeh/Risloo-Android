@@ -25,6 +25,7 @@ public class SampleModel extends TypeModel {
     private String primaryTerm="";
     private String sampleStatus="";
     private SampleForm sampleForm;
+    private UserModel client;
     private String psychologist_description = "";
     private int created_at;
     private int started_at;
@@ -70,6 +71,8 @@ public class SampleModel extends TypeModel {
         }
         if (!jsonObject.isNull("description"))
             setSampleDescription(jsonObject.getString("description"));
+        if (!jsonObject.isNull("client"))
+            setClient(new UserModel(jsonObject.getJSONObject("client")));
         if (!jsonObject.isNull("items")) {
             items = new JSONArray();
             for (int i = 0; i < jsonObject.getJSONArray("items").length(); i++) {
@@ -133,6 +136,14 @@ public class SampleModel extends TypeModel {
 
     public void setSampleEditionVersion(int sampleEditionVersion) {
         this.sampleEditionVersion = sampleEditionVersion;
+    }
+
+    public UserModel getClient() {
+        return client;
+    }
+
+    public void setClient(UserModel client) {
+        this.client = client;
     }
 
     public RoomModel getSampleRoom() {
