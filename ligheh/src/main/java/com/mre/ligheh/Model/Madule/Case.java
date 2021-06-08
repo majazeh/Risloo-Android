@@ -29,6 +29,14 @@ public class Case extends Model {
         }
     }
 
+    public static void showDashborad(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.show(endpoint + "/" + data.get("id") + "/dashboard", data, header, response, CaseModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
             Model.show(endpoint + "/" + data.get("id"), data, header, response, CaseModel.class);

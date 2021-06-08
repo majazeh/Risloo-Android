@@ -36,7 +36,15 @@ public class Session extends Model {
 
     public static void edit(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
-            Model.put(endpoint + "/" + data.get("id"), data, header, response, SessionModel.class);
+            Model.put(endpoint + "/" + data.get("id"), data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void editUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.put(endpoint + "/" + data.get("id") + "/users" + data.get("userId"), data, header, response, null);
         } catch (IOException e) {
             e.printStackTrace();
         }
