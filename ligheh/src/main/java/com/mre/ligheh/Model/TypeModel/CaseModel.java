@@ -14,6 +14,8 @@ public class CaseModel extends TypeModel {
     private JSONObject detail;
     private int sessions_count;
     private int caseCreated_at;
+    private List sessions;
+    private List samples;
 
     public CaseModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -31,6 +33,24 @@ public class CaseModel extends TypeModel {
                 setClients(users);
             } else {
                 setClients(new com.mre.ligheh.Model.Madule.List());
+            }
+            if (!jsonObject.isNull("sessions")) {
+                com.mre.ligheh.Model.Madule.List sessions = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("sessions").length(); i++) {
+                    sessions.add(new SessionModel(jsonObject.getJSONArray("sessions").getJSONObject(i)));
+                }
+                setSessions(sessions);
+            } else {
+                setSessions(new com.mre.ligheh.Model.Madule.List());
+            }
+            if (!jsonObject.isNull("samples")) {
+                com.mre.ligheh.Model.Madule.List samples = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++) {
+                    samples.add(new SampleModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
+                }
+                setSamples(samples);
+            } else {
+                setSamples(new com.mre.ligheh.Model.Madule.List());
             }
             if (!jsonObject.isNull("detail"))
                 setDetail(jsonObject.getJSONObject("detail"));
@@ -97,5 +117,21 @@ public class CaseModel extends TypeModel {
 
     public void setCaseCreated_at(int caseCreated_at) {
         this.caseCreated_at = caseCreated_at;
+    }
+
+    public List getSessions() {
+        return sessions;
+    }
+
+    public void setSessions(List sessions) {
+        this.sessions = sessions;
+    }
+
+    public List getSamples() {
+        return samples;
+    }
+
+    public void setSamples(List samples) {
+        this.samples = samples;
     }
 }

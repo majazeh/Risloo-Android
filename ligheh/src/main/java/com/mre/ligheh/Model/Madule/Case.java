@@ -37,6 +37,14 @@ public class Case extends Model {
         }
     }
 
+    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.post("rooms/" + data.get("id")+ "/cases", data, header, response, CaseModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void users(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))

@@ -25,6 +25,12 @@ public class SampleModel extends TypeModel {
     private String primaryTerm="";
     private String sampleStatus="";
     private SampleForm sampleForm;
+    private String psychologist_description = "";
+    private int created_at;
+    private int started_at;
+    private int scored_at;
+    private int closed_at;
+    private int code;
 
     public SampleModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
@@ -36,12 +42,24 @@ public class SampleModel extends TypeModel {
             setSampleVersion(jsonObject.getInt("version"));
         if (!jsonObject.isNull("edition"))
             setSampleEdition(jsonObject.getString("edition"));
+        if (!jsonObject.isNull("psychologist_description"))
+            setPsychologist_description(jsonObject.getString("psychologist_description"));
         if (!jsonObject.isNull("room"))
             setSampleRoom(new RoomModel(jsonObject.getJSONObject("room")));
         if (!jsonObject.isNull("case"))
             setSampleCase(new CaseModel(jsonObject.getJSONObject("case")));
         if (!jsonObject.isNull("edition_version"))
             setSampleEditionVersion(jsonObject.getInt("edition_version"));
+        if (!jsonObject.isNull("created_at"))
+            setCreated_at(jsonObject.getInt("created_at"));
+        if (!jsonObject.isNull("started_at"))
+            setStarted_at(jsonObject.getInt("started_at"));
+        if (!jsonObject.isNull("scored_at"))
+            setScored_at(jsonObject.getInt("scored_at"));
+        if (!jsonObject.isNull("closed_at"))
+            setClosed_at(jsonObject.getInt("closed_at"));
+        if (!jsonObject.isNull("code"))
+            setCode(jsonObject.getInt("code"));
         if (!jsonObject.isNull("filler"))
             setFiller(jsonObject.getString("filler"));
         if (!jsonObject.isNull("scale")) {
@@ -219,6 +237,54 @@ public class SampleModel extends TypeModel {
 
     public void setSampleCase(CaseModel sampleCase) {
         SampleCase = sampleCase;
+    }
+
+    public String getPsychologist_description() {
+        return psychologist_description;
+    }
+
+    public void setPsychologist_description(String psychologist_description) {
+        this.psychologist_description = psychologist_description;
+    }
+
+    public int getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(int created_at) {
+        this.created_at = created_at;
+    }
+
+    public int getStarted_at() {
+        return started_at;
+    }
+
+    public void setStarted_at(int started_at) {
+        this.started_at = started_at;
+    }
+
+    public int getScored_at() {
+        return scored_at;
+    }
+
+    public void setScored_at(int scored_at) {
+        this.scored_at = scored_at;
+    }
+
+    public int getClosed_at() {
+        return closed_at;
+    }
+
+    public void setClosed_at(int closed_at) {
+        this.closed_at = closed_at;
+    }
+
+    public int getCode() {
+        return code;
+    }
+
+    public void setCode(int code) {
+        this.code = code;
     }
 
     @Override

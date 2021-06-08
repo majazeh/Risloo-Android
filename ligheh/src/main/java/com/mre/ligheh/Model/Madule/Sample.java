@@ -8,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
@@ -44,7 +45,7 @@ public class Sample extends Model {
                 data.remove("key");
                 Model.post("auth" + "/theory" + "/" + key, data, header, response, null);
             } else {
-                Exceptioner.make(response,"کلید را وارد کنید");
+                Exceptioner.make(response, "کلید را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -73,7 +74,7 @@ public class Sample extends Model {
             if (data.containsKey("id")) {
                 Model.show(endpoint + "/samples/" + data.get("id") + "/dashboard", data, header, response, SampleModel.class);
             } else {
-                Exceptioner.make(response,"آیدی را وارد کنید");
+                Exceptioner.make(response, "آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -85,7 +86,7 @@ public class Sample extends Model {
             if (data.containsKey("id")) {
                 Model.show("bulk-samples/" + data.get("id"), data, header, response, SampleModel.class);
             } else {
-                Exceptioner.make(response,"آیدی را وارد کنید");
+                Exceptioner.make(response, "آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -100,7 +101,7 @@ public class Sample extends Model {
                 data.remove("id");
                 Model.put(endpoint + "/samples/" + id + "/close", data, header, response, null);
             } else {
-                Exceptioner.make(response,"آیدی را وارد کنید");
+                Exceptioner.make(response, "آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -130,7 +131,7 @@ public class Sample extends Model {
                     }
                 }, SampleModel.class);
             } else {
-                Exceptioner.make(response,"آیدی را وارد کنید");
+                Exceptioner.make(response, "آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -169,7 +170,7 @@ public class Sample extends Model {
                         }
                         , SampleModel.class);
             } else {
-                Exceptioner.make(response,"لیست خالی است");
+                Exceptioner.make(response, "لیست خالی است");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -185,30 +186,11 @@ public class Sample extends Model {
     }
 
     public static void items(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
-        try {
-            if (data.containsKey("id")) {
-                String id = (String) data.get("id");
-                if (!request) {
-                    request = true;
-                    Model.post(endpoint + "/samples/" + id + "/items", data, header, new Response() {
-                        @Override
-                        public void onOK(Object object) {
-                            if (data.containsKey("items"))
-                                data.remove("items");
-                            response.onOK(object);
-                        }
-
-                        @Override
-                        public void onFailure(String response) {
-
-                        }
-                    }, null);
-                }
-            } else {
-                Exceptioner.make(response,"آیدی را وارد کنید");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (data.containsKey("id")) {
+            SampleAnswers sampleAnswers = new SampleAnswers();
+        SampleAnswers.sendRequest(data,header,response);
+        } else {
+            Exceptioner.make(response, "آیدی را وارد کنید");
         }
     }
 }

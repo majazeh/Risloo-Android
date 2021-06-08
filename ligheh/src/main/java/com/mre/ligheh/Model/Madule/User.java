@@ -1,7 +1,9 @@
 package com.mre.ligheh.Model.Madule;
 
 import com.mre.ligheh.API.APIRequest;
+import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -68,4 +70,49 @@ public class User extends Model {
             e.printStackTrace();
         }
     }
+
+    public static void editProfile(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(header, "Authorization")) {
+                Model.put(endpoint +"/"+ data.get("user"), data, header, response, AuthModel.class);
+            } else {
+                Exceptioner.make(response,"شما لاگین نیستید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void editPassword(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(header, "Authorization")) {
+                if (has(data, "user")) {
+                    Model.put(endpoint + "/" + data.get("user") + "/change-password", data, header, response, null);
+                } else {
+                    Exceptioner.make(response,"آیدی را وارد کنید");
+                }
+            } else {
+                Exceptioner.make(response,"شما لاگین نیستید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void changeAvatar(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        if (has(header, "Authorization")) {
+            if (has(data, "id")) {
+                try {
+                    Model.post(endpoint + "/" + data.get("id") + "/avatar", data, header, response, AuthModel.class);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }else{
+                Exceptioner.make(response,"آیدی را وارد کنید!");
+            }
+        } else {
+            Exceptioner.make(response,"شما لاگین نیستید!");
+        }
+    }
+
 }
