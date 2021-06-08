@@ -60,8 +60,8 @@ public class SampleModel extends TypeModel {
             setCreated_at(jsonObject.getInt("created_at"));
         if (!jsonObject.isNull("case_id"))
             setCaseId(jsonObject.getString("case_id"));
-        if (!jsonObject.isNull("caseStatus"))
-            setCaseStatus(jsonObject.getString("caseStatus"));
+        if (!jsonObject.isNull("case_status"))
+            setCaseStatus(jsonObject.getString("case_status"));
         if (!jsonObject.isNull("session_id"))
             setSessionId(jsonObject.getString("session_id"));
         if (!jsonObject.isNull("started_at"))
@@ -70,8 +70,8 @@ public class SampleModel extends TypeModel {
             setScored_at(jsonObject.getInt("scored_at"));
         if (!jsonObject.isNull("closed_at"))
             setClosed_at(jsonObject.getInt("closed_at"));
-        if (!jsonObject.isNull("membersCount"))
-            setMembersCount(jsonObject.getInt("membersCount"));
+        if (!jsonObject.isNull("members_count"))
+            setMembersCount(jsonObject.getInt("members_count"));
         if (!jsonObject.isNull("joined"))
             setJoined(jsonObject.getInt("joined"));
         if (!jsonObject.isNull("code"))
