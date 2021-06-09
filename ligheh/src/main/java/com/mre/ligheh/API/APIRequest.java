@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import androidx.annotation.Nullable;
 
+import com.mre.ligheh.Model.Madule.Model;
 import com.mre.ligheh.Model.Res;
 
 import org.json.JSONException;
@@ -29,6 +30,7 @@ public class APIRequest extends APIEvents {
 
     @SuppressLint("NewApi")
     static void exec(String endpoint, String method, RequestData data, RequestHeader headers, Response callback, Class aClass) throws IOException {
+        Model.request = true;
         Request.Builder builder = new Request.Builder();
         String url = baseUrl + endpoint;
 
@@ -90,6 +92,7 @@ public class APIRequest extends APIEvents {
                 APIRequest.code =  code;
                 Res res = new Res(jsonObject, aClass);
                 callback.onOK(res.Build());
+                Model.request = false;
             } catch (IOException | InstantiationException | InvocationTargetException | NoSuchMethodException | IllegalAccessException | JSONException e) {
                 e.printStackTrace();
             }

@@ -186,11 +186,14 @@ public class Sample extends Model {
     }
 
     public static void items(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
-        if (data.containsKey("id")) {
-            SampleAnswers sampleAnswers = new SampleAnswers();
-        SampleAnswers.sendRequest(data,header,response);
-        } else {
-            Exceptioner.make(response, "آیدی را وارد کنید");
+        try {
+            if (data.containsKey("id")) {
+                Model.post(Sample.endpoint + "/samples/" + data.get("id") + "/items", data, header, response, null);
+            } else {
+                Exceptioner.make(response, "آیدی را وارد کنید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

@@ -3,6 +3,7 @@ package com.majazeh.risloo.Utils.Entities;
 import com.mre.ligheh.API.APIEvents;
 import com.mre.ligheh.API.APIRequest;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Model;
 import com.mre.ligheh.Model.Res;
 
 import org.json.JSONException;
