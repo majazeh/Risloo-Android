@@ -18,7 +18,6 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSample2Binding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
@@ -98,7 +97,7 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
 
         holder.binding.sessionTextView.setText(model.getSessionId());
 
-        if (model.getClient() != null) {
+        if (model.getClient() != null && model.getClient().getName() != null) {
             holder.binding.referenceTextView.setText(model.getClient().getName());
         }
 
@@ -130,11 +129,38 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
 
     private Bundle getExtras(SampleModel model) {
         Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+
+        extras.putString("id", model.getSampleId());
+
+        extras.putString("scale_id", model.getSampleScaleId());
+        extras.putString("scale_title", model.getSampleScaleTitle());
+
+        extras.putString("edition", model.getSampleEdition());
+        extras.putString("version", String.valueOf(model.getSampleVersion()));
+
+        if (model.getSampleRoom() != null) {
+            extras.putString("room_id", model.getSampleRoom().getRoomId());
+
+            if (model.getSampleRoom().getRoomManager() != null) {
+                extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
+
+                if (model.getSampleRoom().getRoomCenter() != null) {
+                    extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
+
+                    if (model.getSampleRoom().getRoomCenter().getManager() != null)
+                        extras.putString("center_name", model.getSampleRoom().getRoomCenter().getManager().getName());
+                }
+            }
+        }
+
+        extras.putString("case_id", model.getCaseId());
+        extras.putString("session_id", model.getSessionId());
+
+        if (model.getClient() != null)
+            extras.putString("client", model.getClient().getName());
+
+        extras.putString("status", model.getSampleStatus());
+
         return extras;
     }
 

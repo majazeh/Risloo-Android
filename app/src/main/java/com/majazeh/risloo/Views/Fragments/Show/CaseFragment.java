@@ -210,7 +210,7 @@ public class CaseFragment extends Fragment {
             public void onOK(Object object) {
                 CaseModel model = (CaseModel) object;
 
-                if (isAdded())
+                if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         setData(model);
 
@@ -269,6 +269,7 @@ public class CaseFragment extends Fragment {
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
                     });
+                }
             }
 
             @Override

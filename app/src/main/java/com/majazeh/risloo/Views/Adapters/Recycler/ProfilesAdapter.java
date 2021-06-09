@@ -15,13 +15,15 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemProfileBinding;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.ProfilesHolder> {
 
     // Objects
     private Activity activity;
 
     // Vars
-//    private ArrayList<Profile> profiles;
+    private ArrayList<String> profiles;
 
     public ProfilesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,25 +37,37 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
 
     @Override
     public void onBindViewHolder(@NonNull ProfilesHolder holder, int i) {
-//        Profiles profile = profiles.get(i);
+        String profile = profiles.get(i);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, profile);
 
-        setData(holder);
+        setData(holder, profile);
     }
 
     @Override
     public int getItemCount() {
-//        return profiles.size();
-        return 1;
+        if (this.profiles != null)
+            return profiles.size();
+        else
+            return 0;
     }
 
-//    public void setProfile(ArrayList<Profile> profiles) {
-//        this.profiles = profiles;
-//        notifyDataSetChanged();
-//    }
+    public void setProfiles(ArrayList<String> profiles) {
+        if (this.profiles == null)
+            this.profiles = profiles;
+        else
+            this.profiles.addAll(profiles);
+        notifyDataSetChanged();
+    }
+
+    public void clearProfiles() {
+        if (this.profiles != null) {
+            this.profiles.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     private void detector(ProfilesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -61,16 +75,16 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
         }
     }
 
-    private void listener(ProfilesHolder holder) {
+    private void listener(ProfilesHolder holder, String profile) {
         ClickManager.onDelayedClickListener(() -> {
             if (!((MainActivity) activity).singleton.getAvatar().equals("")) {
-                IntentManager.display(activity, "", "", ((MainActivity) activity).singleton.getAvatar());
+                IntentManager.display(activity, "", "", profile);
             }
         }).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(ProfilesHolder holder) {
-        Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(holder.binding.avatarZoomageView);
+    private void setData(ProfilesHolder holder, String profile) {
+        Picasso.get().load(profile).placeholder(R.color.Gray100).into(holder.binding.avatarZoomageView);
     }
 
     public class ProfilesHolder extends RecyclerView.ViewHolder {

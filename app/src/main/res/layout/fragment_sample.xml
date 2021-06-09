@@ -29,8 +29,9 @@
 
             <TextView
                 android:id="@+id/name_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="start"
@@ -39,6 +40,7 @@
                 android:textColor="@color/Gray900"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_bold"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="مقیاس" />
@@ -57,16 +59,17 @@
 
             <TextView
                 android:id="@+id/reference_textView"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="start"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/name_textView"
                 app:layout_constraintStart_toEndOf="@id/reference_imageView"
                 app:layout_constraintTop_toBottomOf="@id/name_textView"
                 tools:text="مراجع" />
@@ -95,7 +98,8 @@
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginLeft="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_8sdp"
-                app:layout_goneMarginEnd="@dimen/_8sdp"
+                android:visibility="visible"
+                app:layout_goneMarginEnd="@dimen/_6sdp"
                 app:layout_goneMarginTop="@dimen/_8sdp"
                 app:layout_constraintLeft_toRightOf="@id/buttons_barrier"
                 app:layout_constraintTop_toBottomOf="@id/reference_textView" />
@@ -105,7 +109,7 @@
                 layout="@layout/component_main_button_rect_mid"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:visibility="visible"
                 app:layout_goneMarginTop="@dimen/_8sdp"
@@ -117,7 +121,7 @@
                 layout="@layout/component_main_button_rect_spinner"
                 android:layout_width="wrap_content"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:visibility="gone"
                 app:layout_goneMarginTop="@dimen/_8sdp"
@@ -410,7 +414,7 @@
                 tools:visibility="gone" />
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/fields_answer_recyclerVIew"
+                android:id="@+id/fields_answer_recyclerView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:overScrollMode="never"

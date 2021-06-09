@@ -272,7 +272,7 @@ public class SessionFragment extends Fragment {
             public void onOK(Object object) {
                 SessionModel model = (SessionModel) object;
 
-                if (isAdded())
+                if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         setData(model);
 
@@ -332,6 +332,7 @@ public class SessionFragment extends Fragment {
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
                     });
+                }
             }
 
             @Override
