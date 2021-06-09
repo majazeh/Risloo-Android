@@ -180,7 +180,7 @@ public class CreatePracticeFragment extends Fragment {
 //
 //                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
 //                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.clientReportsFragment, extras);
+//                        ((MainActivity) requireActivity()).navigator(R.id.sessionFragment, extras);
 //                    });
 //                }
 //            }

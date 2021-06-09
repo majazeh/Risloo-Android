@@ -139,6 +139,10 @@ public class CreateCaseFragment extends Fragment {
 
     private void setExtra() {
         if (getArguments() != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                data.put("id", getArguments().getString("id"));
+            }
+
             if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("") && getArguments().getString("room_name") != null && !getArguments().getString("room_name").equals("")) {
                 roomId = getArguments().getString("room_id");
                 roomName = getArguments().getString("room_name");
