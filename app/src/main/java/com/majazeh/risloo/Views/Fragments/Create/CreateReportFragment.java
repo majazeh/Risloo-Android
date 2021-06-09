@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,8 +17,17 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateReportBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Session;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateReportFragment extends Fragment {
 
@@ -25,7 +35,8 @@ public class CreateReportFragment extends Fragment {
     private FragmentCreateReportBinding binding;
 
     // Vars
-    private String encryption = "", description = "";
+    private HashMap data, header;
+    private String sessionId = "", encryption = "", description = "";
 
     @Nullable
     @Override
@@ -38,12 +49,16 @@ public class CreateReportFragment extends Fragment {
 
         listener();
 
-        setData();
+        setExtra();
 
         return binding.getRoot();
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentEncryptionHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentDescriptionHeader));
 
@@ -70,11 +85,10 @@ public class CreateReportFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 encryption = parent.getItemAtPosition(position).toString();
 
-                if (position == 0) {
+                if (position == 0)
                     binding.cryptoConstraintLayout.setVisibility(View.GONE);
-                } else {
+                else
                     binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
-                }
             }
 
             @Override
@@ -98,42 +112,95 @@ public class CreateReportFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.descriptionIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-
-            if (binding.descriptionIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.errorImageView, binding.descriptionErrorLayout.errorTextView);
-
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            encryption = ((MainActivity) requireActivity()).singleton.getAddress();
-            for (int i=0; i<binding.encryptionIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.encryptionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(encryption)) {
-                    binding.encryptionIncludeLayout.selectSpinner.setSelection(i);
+    private void setExtra() {
+        if (getArguments() != null) {
+            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
+                sessionId = getArguments().getString("id");
+                data.put("id", sessionId);
+            }
 
-                    if (i == 0) {
-                        binding.cryptoConstraintLayout.setVisibility(View.GONE);
-                    } else {
-                        binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
+            if (getArguments().getString("encryption") != null && !getArguments().getString("encryption").equals("")) {
+                encryption = SelectionManager.getEncryption(requireActivity(), "fa", getArguments().getString("encryption"));
+                for (int i=0; i<binding.encryptionIncludeLayout.selectSpinner.getCount(); i++) {
+                    if (binding.encryptionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(encryption)) {
+                        binding.encryptionIncludeLayout.selectSpinner.setSelection(i);
+
+                        if (i == 0)
+                            binding.cryptoConstraintLayout.setVisibility(View.GONE);
+                        else
+                            binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
                     }
                 }
             }
-        }
-        if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
-            description = ((MainActivity) requireActivity()).singleton.getDescription();
-            binding.descriptionIncludeLayout.inputEditText.setText(description);
+
+            if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
+                description = getArguments().getString("description");
+                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
         }
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        data.put("encryption", SelectionManager.getEncryption(requireActivity(), "en", encryption));
+        data.put("description", description);
+
+//        Session.addReport(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        Bundle extras = new Bundle();
+//                        extras.putString("id", sessionId);
+//
+//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+//                        ((MainActivity) requireActivity()).navigator(R.id.clientReportsFragment, extras);
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            if (!jsonObject.isNull("errors")) {
+//                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+//
+//                                while (keys.hasNext()) {
+//                                    String key = keys.next();
+//                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+//                                        switch (key) {
+//                                            case "encryption":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                                break;
+//                                            case "description":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionIncludeLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                                break;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
     @Override
