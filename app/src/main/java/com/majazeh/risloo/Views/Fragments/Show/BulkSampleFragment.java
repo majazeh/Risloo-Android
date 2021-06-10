@@ -30,6 +30,8 @@ import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+
 import java.util.HashMap;
 
 public class BulkSampleFragment extends Fragment {
@@ -155,9 +157,15 @@ public class BulkSampleFragment extends Fragment {
                 binding.psychologyTextView.setText(getArguments().getString("room_name"));
             }
 
+            if (getArguments().getInt("members_count") != -1 && getArguments().getInt("joined") != -1) {
+                extras.putInt("members_count", getArguments().getInt("members_count"));
+                extras.putInt("joined", getArguments().getInt("joined"));
+                binding.referencesHeaderIncludeLayout.countTextView.setText("(" + getArguments().getInt("members_count") + " / " + getArguments().getInt("joined") + ")");
+            }
+
             if (getArguments().getString("case_status") != null && !getArguments().getString("case_status").equals("")) {
                 extras.putString("case_status", getArguments().getString("case_status"));
-                binding.caseTextView.setText(getArguments().getString("case_status"));
+                binding.caseTextView.setText(SelectionManager.getCaseStatus(requireActivity(), "fa", getArguments().getString("case_status")));
             }
 
             if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
@@ -190,48 +198,58 @@ public class BulkSampleFragment extends Fragment {
     }
 
     private void setData(SampleModel model) {
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomCenter() != null && model.getSampleRoom().getRoomCenter().getManager() != null && model.getSampleRoom().getRoomCenter().getManager().getName() != null) {
-            extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
-            extras.putString("center_name", model.getSampleRoom().getRoomCenter().getManager().getName());
-            binding.centerTextView.setText(model.getSampleRoom().getRoomCenter().getManager().getName());
-        }
+        try {
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomCenter() != null && model.getSampleRoom().getRoomCenter().getDetail() != null && model.getSampleRoom().getRoomCenter().getDetail().has("title") && !model.getSampleRoom().getRoomCenter().getDetail().getString("title").equals("")) {
+                extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
+                extras.putString("center_name", model.getSampleRoom().getRoomCenter().getDetail().getString("title"));
+                binding.centerTextView.setText(model.getSampleRoom().getRoomCenter().getDetail().getString("title"));
+            }
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
-            extras.putString("room_id", model.getSampleRoom().getRoomId());
-            extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
-            binding.psychologyTextView.setText(model.getSampleRoom().getRoomManager().getName());
-        }
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
+                extras.putString("room_id", model.getSampleRoom().getRoomId());
+                extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
+                binding.psychologyTextView.setText(model.getSampleRoom().getRoomManager().getName());
+            }
 
-        if (model.getCaseStatus() != null && !model.getCaseStatus().equals("")) {
-            extras.putString("case_status", model.getCaseStatus());
-            binding.caseTextView.setText(model.getCaseStatus());
-        }
+            if (model.getMembersCount() != -1 && model.getJoined() != -1) {
+                extras.putInt("members_count", model.getMembersCount());
+                extras.putInt("joined", model.getJoined());
+                binding.referencesHeaderIncludeLayout.countTextView.setText("(" + model.getMembersCount() + " / " + model.getJoined() + ")");
+            }
 
-        if (model.getSampleStatus() != null && !model.getSampleStatus().equals("")) {
-            extras.putString("status", model.getSampleStatus());
-            binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", model.getSampleStatus()));
-        }
+            if (model.getCaseStatus() != null && !model.getCaseStatus().equals("")) {
+                extras.putString("case_status", model.getCaseStatus());
+                binding.caseTextView.setText(SelectionManager.getCaseStatus(requireActivity(), "fa", model.getCaseStatus()));
+            }
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomCenter() != null && model.getSampleRoom().getRoomCenter().getManager() != null && model.getSampleRoom().getRoomCenter().getManager().getAvatar() != null && model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium() != null && model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium().getUrl() != null) {
-            extras.putString("center_avatar", model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium().getUrl());
-            binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
-        } else {
-            binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-            binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
+            if (model.getSampleStatus() != null && !model.getSampleStatus().equals("")) {
+                extras.putString("status", model.getSampleStatus());
+                binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", model.getSampleStatus()));
+            }
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
-        }
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomCenter() != null && model.getSampleRoom().getRoomCenter().getDetail() != null && model.getSampleRoom().getRoomCenter().getDetail().has("avatar") && !model.getSampleRoom().getRoomCenter().getDetail().getString("avatar").equals("") && model.getSampleRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
+                extras.putString("center_avatar", model.getSampleRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(model.getSampleRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getAvatar() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
-            extras.putString("room_avater", model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl());
-            binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-            Picasso.get().load(model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
-        } else {
-            binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
-            binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+            }
 
-            Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getAvatar() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
+                extras.putString("room_avater", model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl());
+                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
+                Picasso.get().load(model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+            } else {
+                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
+                binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
+
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -263,7 +281,6 @@ public class BulkSampleFragment extends Fragment {
 //                            binding.samplesSingleLayout.recyclerView.setAdapter(samples4Adapter);
 //                        }
 
-                        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
                         binding.scalesHeaderIncludeLayout.countTextView.setText("(" + scales2Adapter.getItemCount() + ")");
                         binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples4Adapter.getItemCount() + ")");
 

@@ -126,7 +126,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
             holder.binding.serialTextView.setText(model.getSampleId());
             holder.binding.nameTextView.setText(model.getSampleTitle());
-            holder.binding.caseTextView.setText(model.getCaseStatus());
+            holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCaseStatus()));
 
             if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
                 holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
@@ -147,37 +147,45 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     private Bundle getExtras(SampleModel model) {
         Bundle extras = new Bundle();
+        try {
+            extras.putString("id", model.getSampleId());
 
-        extras.putString("id", model.getSampleId());
+            extras.putString("scale_id", model.getSampleScaleId());
+            extras.putString("scale_title", model.getSampleScaleTitle());
 
-        extras.putString("scale_id", model.getSampleScaleId());
-        extras.putString("scale_title", model.getSampleScaleTitle());
+            if (model.getSampleRoom() != null) {
+                extras.putString("room_id", model.getSampleRoom().getRoomId());
 
-        if (model.getSampleRoom() != null) {
-            extras.putString("room_id", model.getSampleRoom().getRoomId());
+                if (model.getSampleRoom().getRoomManager() != null) {
+                    extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
 
-            if (model.getSampleRoom().getRoomManager() != null) {
-                extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
+                    if (model.getSampleRoom().getRoomManager().getAvatar() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium() != null)
+                        extras.putString("room_avatar", model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl());
+                }
+            }
 
-                if (model.getSampleRoom().getRoomManager().getAvatar() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl() != null)
-                    extras.putString("room_avatar", model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl());
-
+            if (model.getSampleRoom() != null) {
                 if (model.getSampleRoom().getRoomCenter() != null) {
                     extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
 
-                    if (model.getSampleRoom().getRoomCenter().getManager() != null) {
-                        extras.putString("center_name", model.getSampleRoom().getRoomCenter().getManager().getName());
+                    if (model.getSampleRoom().getRoomCenter().getDetail() != null) {
+                        if (model.getSampleRoom().getRoomCenter().getDetail().has("title") && !model.getSampleRoom().getRoomCenter().getDetail().getString("title").equals(""))
+                            extras.putString("center_name", model.getSampleRoom().getRoomCenter().getDetail().getString("title"));
 
-                        if (model.getSampleRoom().getRoomCenter().getManager().getAvatar() != null && model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium() != null && model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium().getUrl() != null)
-                            extras.putString("center_avatar", model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium().getUrl());
+                        if (model.getSampleRoom().getRoomCenter().getDetail().has("avatar") && !model.getSampleRoom().getRoomCenter().getDetail().isNull("avatar") && model.getSampleRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0)
+                            extras.putString("center_avatar", model.getSampleRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                     }
                 }
             }
+
+            extras.putInt("members_count", model.getMembersCount());
+            extras.putInt("joined", model.getJoined());
+
+            extras.putString("case_status", model.getCaseStatus());
+            extras.putString("status", model.getSampleStatus());
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
-
-        extras.putString("case_status", model.getCaseStatus());
-        extras.putString("status", model.getSampleStatus());
-
         return extras;
     }
 
