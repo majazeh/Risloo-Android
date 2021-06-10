@@ -202,8 +202,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    binding.searchProgressBar.setVisibility(View.VISIBLE);
                     data.put("q", String.valueOf(s));
+
+                    if (binding.searchProgressBar.getVisibility() == View.GONE)
+                        binding.searchProgressBar.setVisibility(View.VISIBLE);
+
                     setRecyclerView();
                 }, 750);
             }
@@ -679,6 +682,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        handler.removeCallbacksAndMessages(null);
     }
 
 }
