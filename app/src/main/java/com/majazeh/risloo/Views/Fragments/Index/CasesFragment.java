@@ -47,7 +47,7 @@ public class CasesFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private boolean loading = false;
+    private boolean isLoading = true;
 
     @Nullable
     @Override
@@ -116,9 +116,12 @@ public class CasesFragment extends Fragment {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 handler.removeCallbacksAndMessages(null);
                 handler.postDelayed(() -> {
-                    binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
                     data.put("page", 1);
                     data.put("q", String.valueOf(s));
+
+                    if (binding.searchIncludeLayout.progressBar.getVisibility() == View.GONE)
+                        binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
+
                     getData();
                 }, 750);
             }
@@ -130,24 +133,19 @@ public class CasesFragment extends Fragment {
         });
 
         binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (scrollY > 0) {
-                int visibleItemCount = layoutManager.getChildCount();
-                int totalItemCount = layoutManager.getItemCount();
-                int pastVisiblesItems = layoutManager.findFirstVisibleItemPosition();
+            if (!isLoading) {
+                if (!binding.getRoot().canScrollVertically(1)) {
+                    isLoading = true;
 
-                if (!loading) {
-                    if ((pastVisiblesItems + visibleItemCount) >= totalItemCount) {
+                    if (data.containsKey("page"))
+                        data.put("page", ((int) data.get("page")) + 1);
+                    else
+                        data.put("page", 1);
+
+                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
                         binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
-                        if (data.containsKey("page")) {
-                            int page = (int) data.get("page");
-                            page++;
 
-                            data.put("page", page);
-                        } else {
-                            data.put("page", 1);
-                        }
-                        getData();
-                    }
+                    getData();
                 }
             }
         });
@@ -156,8 +154,6 @@ public class CasesFragment extends Fragment {
     }
 
     private void getData() {
-        loading = true;
-
         Case.list(data, header, new Response() {
             @Override
             public void onOK(Object object) {
@@ -189,7 +185,7 @@ public class CasesFragment extends Fragment {
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
-                    loading = false;
+                    isLoading = false;
                 }
             }
 
@@ -207,7 +203,7 @@ public class CasesFragment extends Fragment {
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
-                    loading = false;
+                    isLoading = false;
                 }
             }
         });
@@ -217,6 +213,7 @@ public class CasesFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        handler.removeCallbacksAndMessages(null);
     }
 
 }
