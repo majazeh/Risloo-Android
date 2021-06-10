@@ -147,11 +147,37 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     private Bundle getExtras(SampleModel model) {
         Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
+
+        extras.putString("id", model.getSampleId());
+
+        extras.putString("scale_id", model.getSampleScaleId());
+        extras.putString("scale_title", model.getSampleScaleTitle());
+
+        if (model.getSampleRoom() != null) {
+            extras.putString("room_id", model.getSampleRoom().getRoomId());
+
+            if (model.getSampleRoom().getRoomManager() != null) {
+                extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
+
+                if (model.getSampleRoom().getRoomManager().getAvatar() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl() != null)
+                    extras.putString("room_avatar", model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl());
+
+                if (model.getSampleRoom().getRoomCenter() != null) {
+                    extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
+
+                    if (model.getSampleRoom().getRoomCenter().getManager() != null) {
+                        extras.putString("center_name", model.getSampleRoom().getRoomCenter().getManager().getName());
+
+                        if (model.getSampleRoom().getRoomCenter().getManager().getAvatar() != null && model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium() != null && model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium().getUrl() != null)
+                            extras.putString("center_avatar", model.getSampleRoom().getRoomCenter().getManager().getAvatar().getMedium().getUrl());
+                    }
+                }
+            }
+        }
+
+        extras.putString("case_status", model.getCaseStatus());
+        extras.putString("status", model.getSampleStatus());
+
         return extras;
     }
 
