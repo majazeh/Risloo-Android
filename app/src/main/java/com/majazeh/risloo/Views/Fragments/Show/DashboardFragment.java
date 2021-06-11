@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
@@ -37,10 +34,6 @@ public class DashboardFragment extends Fragment {
     private RoomsAdapter roomsAdapter;
     private CentersAdapter centersAdapter;
 
-    // Objects
-    private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager cases2LayoutManager, samplesLayoutManager, roomsLayoutManager, centersLayoutManager;
-
     // Vars
     private HashMap data, header;
 
@@ -62,14 +55,6 @@ public class DashboardFragment extends Fragment {
         roomsAdapter = new RoomsAdapter(requireActivity());
         centersAdapter = new CentersAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._18sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-        itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
-
-        cases2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        samplesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        roomsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        centersLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         data = new HashMap<>();
         data.put("user", ((MainActivity) requireActivity()).singleton.getId());
         header = new HashMap<>();
@@ -82,10 +67,10 @@ public class DashboardFragment extends Fragment {
 
         binding.samplesShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
-        InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, cases2LayoutManager);
-        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samplesLayoutManager);
-        InitManager.recyclerView(binding.roomsSingleLayout.recyclerView, itemDecoration, roomsLayoutManager);
-        InitManager.recyclerView(binding.centersSingleLayout.recyclerView, itemDecoration, centersLayoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._18sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._18sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.centersSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._18sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void getData() {

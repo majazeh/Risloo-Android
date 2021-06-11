@@ -10,14 +10,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SchedulesAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomSchedulesBinding;
@@ -36,8 +33,6 @@ public class RoomSchedulesFragment extends Fragment {
     private SchedulesAdapter adapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
     private Bundle extras;
 
     // Vars
@@ -66,10 +61,6 @@ public class RoomSchedulesFragment extends Fragment {
     private void initializer() {
         adapter = new SchedulesAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         extras = new Bundle();
 
         data = new HashMap<>();
@@ -81,7 +72,7 @@ public class RoomSchedulesFragment extends Fragment {
         InitManager.imgResTint(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600);
         InitManager.imgResTintRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600, 180);
 
-        InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {

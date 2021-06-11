@@ -8,13 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Adapters.Recycler.PictoralsAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPictoralBinding;
 import com.squareup.picasso.Picasso;
@@ -26,10 +22,6 @@ public class TestPictoralFragment extends Fragment {
 
     // Adapters
     private PictoralsAdapter pictoralsAdapter;
-
-    // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private GridLayoutManager layoutManager;
 
     @Nullable
     @Override
@@ -46,11 +38,7 @@ public class TestPictoralFragment extends Fragment {
     private void initializer() {
         pictoralsAdapter = new PictoralsAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("gridLayout", (int) getResources().getDimension(R.dimen._16sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-
-        layoutManager = new GridLayoutManager(requireActivity(), 2, LinearLayoutManager.VERTICAL, false);
-
-        InitManager.recyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setData() {

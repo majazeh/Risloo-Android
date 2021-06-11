@@ -11,14 +11,10 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.AxisAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateSessionPaymentBinding;
@@ -33,10 +29,6 @@ public class CreateSessionPaymentFragment extends Fragment {
 
     // Adapters
     public AxisAdapter axisAdapter;
-
-    // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager axisLayoutManager;
 
     // Vars
     private String payment = "";
@@ -60,15 +52,11 @@ public class CreateSessionPaymentFragment extends Fragment {
     private void initializer() {
         axisAdapter = new AxisAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), 0, (int) getResources().getDimension(R.dimen._4sdp), 0);
-
-        axisLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionPaymentTabPaymentHeader));
 
-        InitManager.spinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes, "main");
 
-        InitManager.unfixedRecyclerView(binding.axisRecyclerView, itemDecoration, axisLayoutManager);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionPaymentTabButton), getResources().getColor(R.color.White));
     }

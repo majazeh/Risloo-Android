@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,8 +18,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemUser2Binding;
-import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -83,7 +80,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     private void initializer(Users2Holder holder) {
-        InitManager.spinner(activity, holder.binding.statusSpinner, R.array.UserStatus, "adapter");
+        InitManager.fixedSpinner(activity, holder.binding.statusSpinner, R.array.UserStatus, "adapter");
     }
 
     private void detector(Users2Holder holder) {

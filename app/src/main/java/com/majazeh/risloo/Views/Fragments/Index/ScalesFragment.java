@@ -14,12 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ScalesAdapter;
 import com.majazeh.risloo.databinding.FragmentScalesBinding;
@@ -39,8 +36,6 @@ public class ScalesFragment extends Fragment {
     private ScalesAdapter adapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
     private Handler handler;
 
     // Vars
@@ -64,10 +59,6 @@ public class ScalesFragment extends Fragment {
     private void initializer() {
         adapter = new ScalesAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         handler = new Handler();
 
         data = new HashMap<>();
@@ -79,7 +70,7 @@ public class ScalesFragment extends Fragment {
 
         binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
-        InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     @SuppressLint("ClickableViewAccessibility")

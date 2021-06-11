@@ -15,13 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CasesAdapter;
 import com.majazeh.risloo.databinding.FragmentCasesBinding;
@@ -41,8 +38,6 @@ public class CasesFragment extends Fragment {
     private CasesAdapter adapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
     private Handler handler;
 
     // Vars
@@ -68,10 +63,6 @@ public class CasesFragment extends Fragment {
     private void initializer() {
         adapter = new CasesAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         handler = new Handler();
 
         data = new HashMap<>();
@@ -84,7 +75,7 @@ public class CasesFragment extends Fragment {
         binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-        InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     private void detector() {

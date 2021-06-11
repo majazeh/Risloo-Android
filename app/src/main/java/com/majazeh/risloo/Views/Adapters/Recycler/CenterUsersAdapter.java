@@ -87,7 +87,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     private void initializer(CenterUsersHolder holder) {
-        InitManager.spinner(activity, holder.binding.positionSpinner, R.array.UserTypes, "adapter2");
+        InitManager.fixedSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes, "adapter2");
     }
 
     private void detector(CenterUsersHolder holder) {
@@ -243,7 +243,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
         menu.add("");
 
-        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menu, "centerUsers");
+        InitManager.unfixedCustomSpinner(activity, holder.binding.menuSpinner, menu, "centerUsers");
     }
 
     private void doWork(CenterUsersHolder holder, String id, String userId, String value, String method) {

@@ -11,8 +11,6 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -20,7 +18,6 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
@@ -47,10 +44,6 @@ public class CreateSessionTimeFragment extends Fragment {
     private TimeBottomSheet startTimeBottomSheet;
     private DateBottomSheet specifiedDateBottomSheet, periodStartDateBottomSheet, periodEndDateBottomSheet;
 
-    // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager patternDaysLayoutManager;
-
     // Vars
     private String startTime = "", duration = "60", dateType = "", patternType = "", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
     private int startHour, startMinute, specifiedYear, periodStartYear, periodEndYear, specifiedMonth, periodStartMonth, periodEndMonth, specifiedDay, periodStartDay, periodEndDay;
@@ -76,10 +69,6 @@ public class CreateSessionTimeFragment extends Fragment {
 
         patternDaysDialog = new SearchableDialog();
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
-
-        patternDaysLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         startTimeBottomSheet = new TimeBottomSheet();
         specifiedDateBottomSheet = new DateBottomSheet();
         periodStartDateBottomSheet = new DateBottomSheet();
@@ -104,7 +93,7 @@ public class CreateSessionTimeFragment extends Fragment {
         binding.durationIncludeLayout.inputEditText.setText(duration);
         binding.repeatWeeksIncludeLayout.inputEditText.setText(repeatWeeks);
 
-        InitManager.unfixedRecyclerView(binding.patternDaysIncludeLayout.selectRecyclerView, itemDecoration, patternDaysLayoutManager);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.patternDaysIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTimeTabButton), getResources().getColor(R.color.White));
     }

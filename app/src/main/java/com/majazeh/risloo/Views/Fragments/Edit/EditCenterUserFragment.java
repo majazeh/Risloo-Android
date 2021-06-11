@@ -68,7 +68,7 @@ public class EditCenterUserFragment extends Fragment {
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditCenterUserFragmentStatusAccept));
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditCenterUserFragmentStatusKick));
 
-        InitManager.spinner(requireActivity(), binding.positionIncludeLayout.selectSpinner, R.array.UserTypes, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.positionIncludeLayout.selectSpinner, R.array.UserTypes, "main");
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterUserFragmentButton), getResources().getColor(R.color.White));
     }

@@ -61,8 +61,8 @@ public class CreateScheduleReferenceFragment extends Fragment {
 
         binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.CreateScheduleReferenceTabCheckbox));
 
-        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.RequestTypes, "main");
-        InitManager.spinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.RequestTypes, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes, "main");
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleReferenceTabButton), getResources().getColor(R.color.White));
     }

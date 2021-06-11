@@ -147,7 +147,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         else
             holder.binding.menuImageView.setVisibility(View.INVISIBLE);
 
-        InitManager.customizedSpinner(activity, holder.binding.menuSpinner, menu, "users");
+        InitManager.unfixedCustomSpinner(activity, holder.binding.menuSpinner, menu, "users");
     }
 
     private Bundle getExtras(UserModel model) {

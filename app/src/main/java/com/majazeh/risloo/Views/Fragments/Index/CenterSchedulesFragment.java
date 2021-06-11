@@ -10,14 +10,11 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SchedulesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.WeeksAdapter;
@@ -38,8 +35,6 @@ public class CenterSchedulesFragment extends Fragment {
     private SchedulesAdapter schedulesAdapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager weeksLayoutManager, schedulesLayoutManager;
     private Bundle extras;
 
     // Vars
@@ -69,12 +64,6 @@ public class CenterSchedulesFragment extends Fragment {
         weeksAdapter = new WeeksAdapter(requireActivity());
         schedulesAdapter = new SchedulesAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("horizontalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), (int) getResources().getDimension(R.dimen._12sdp));
-        itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-
-        weeksLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.HORIZONTAL, false);
-        schedulesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         extras = new Bundle();
 
         data = new HashMap<>();
@@ -86,8 +75,8 @@ public class CenterSchedulesFragment extends Fragment {
         InitManager.imgResTint(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600);
         InitManager.imgResTintRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600, 180);
 
-        InitManager.recyclerView(binding.weeksRecyclerView, itemDecoration, weeksLayoutManager);
-        InitManager.recyclerView(binding.schedulesSingleLayout.recyclerView, itemDecoration2, schedulesLayoutManager);
+        InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.weeksRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.schedulesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {

@@ -15,13 +15,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 import com.majazeh.risloo.databinding.FragmentCentersBinding;
@@ -41,8 +38,6 @@ public class CentersFragment extends Fragment {
     private CentersAdapter adapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
     private Handler handler;
 
     // Vars
@@ -70,10 +65,6 @@ public class CentersFragment extends Fragment {
     private void initializer() {
         adapter = new CentersAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         handler = new Handler();
 
         data = new HashMap<>();
@@ -84,7 +75,7 @@ public class CentersFragment extends Fragment {
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CentersFragmentTitle));
 
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-        InitManager.recyclerView(binding.indexSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {

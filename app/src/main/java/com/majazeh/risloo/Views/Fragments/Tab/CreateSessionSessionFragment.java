@@ -12,15 +12,11 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Model;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
@@ -45,10 +41,6 @@ public class CreateSessionSessionFragment extends Fragment {
     // BottomSheets
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
     private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
-
-    // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager axisLayoutManager;
 
     // Vars
     private String type = "", status = "", description = "", coordination = "";
@@ -83,10 +75,6 @@ public class CreateSessionSessionFragment extends Fragment {
         startAccurateDateBottomSheet = new DateBottomSheet();
         endAccurateDateBottomSheet = new DateBottomSheet();
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
-
-        axisLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabTypeHeader));
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabStatusHeader));
         binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabAxisHeader));
@@ -96,10 +84,10 @@ public class CreateSessionSessionFragment extends Fragment {
         binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSessionSessionTabAxisGuide));
         binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSessionSessionTabCoordinationGuide));
 
-        InitManager.spinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.SessionTypes, "main");
-        InitManager.spinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.SessionTypes, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
 
-        InitManager.unfixedRecyclerView(binding.axisIncludeLayout.selectRecyclerView, itemDecoration, axisLayoutManager);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionSessionTabButton), getResources().getColor(R.color.White));
     }

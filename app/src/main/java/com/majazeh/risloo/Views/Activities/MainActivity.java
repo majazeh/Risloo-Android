@@ -7,8 +7,6 @@ import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -32,7 +30,6 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
@@ -72,8 +69,6 @@ public class MainActivity extends AppCompatActivity {
     private LogoutBottomSheet logoutBottomSheet;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
     public ControlEditText controlEditText;
     public NavHostFragment navHostFragment;
     public NavController navController;
@@ -116,10 +111,6 @@ public class MainActivity extends AppCompatActivity {
 
         logoutBottomSheet = new LogoutBottomSheet();
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._8sdp));
-
-        layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
-
         controlEditText = new ControlEditText();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
@@ -130,9 +121,9 @@ public class MainActivity extends AppCompatActivity {
         InitManager.imgResTint(this, binding.contentIncludeLayout.enterImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.Gray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
 
-        InitManager.customizedSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
+        InitManager.fixedCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
 
-        InitManager.recyclerView(binding.navIncludeLayout.listRecyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._8sdp));
     }
 
     private void detector() {

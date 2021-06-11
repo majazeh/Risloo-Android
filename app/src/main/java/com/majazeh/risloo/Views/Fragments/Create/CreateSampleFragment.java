@@ -16,8 +16,6 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
@@ -31,7 +29,6 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
@@ -57,8 +54,6 @@ public class CreateSampleFragment extends Fragment {
     private SearchableDialog scalesDialog, roomsDialog, referencesDialog, casesDialog, sessionsDialog;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager scalesLayoutManager, referencesLayoutManager;
     private ClickableSpan assessmentLinkSpan;
 
     // Vars
@@ -93,11 +88,6 @@ public class CreateSampleFragment extends Fragment {
         casesDialog = new SearchableDialog();
         sessionsDialog = new SearchableDialog();
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
-
-        scalesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -121,10 +111,10 @@ public class CreateSampleFragment extends Fragment {
         binding.userCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountGuide));
         binding.psychologyGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionGuide));
 
-        InitManager.unfixedRecyclerView(binding.scaleIncludeLayout.selectRecyclerView, itemDecoration, scalesLayoutManager);
-        InitManager.unfixedRecyclerView(binding.referenceIncludeLayout.selectRecyclerView, itemDecoration, referencesLayoutManager);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.spinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CaseTypes, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CaseTypes, "main");
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }

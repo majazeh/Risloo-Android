@@ -8,12 +8,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Adapters.Recycler.BulksAdapter;
 import com.majazeh.risloo.databinding.FragmentTestBulkBinding;
 
@@ -24,10 +21,6 @@ public class TestBulkFragment extends Fragment {
 
     // Adapters
     private BulksAdapter bulksAdapter;
-
-    // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
 
     @Nullable
     @Override
@@ -44,13 +37,9 @@ public class TestBulkFragment extends Fragment {
     private void initializer() {
         bulksAdapter = new BulksAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._16sdp), (int) getResources().getDimension(R.dimen._12sdp), 0, (int) getResources().getDimension(R.dimen._12sdp));
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.BulkFragmentTitle));
 
-        InitManager.recyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setData() {

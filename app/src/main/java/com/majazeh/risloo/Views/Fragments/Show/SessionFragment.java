@@ -10,15 +10,12 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PracticesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
@@ -44,8 +41,6 @@ public class SessionFragment extends Fragment {
     private Samples2Adapter samples2Adapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration, itemDecoration2;
-    private LinearLayoutManager psychologistsLayoutManager, users2LayoutManager, practicesLayoutManager, samples2LayoutManager;
     private Bundle extras;
 
     // Vars
@@ -75,14 +70,6 @@ public class SessionFragment extends Fragment {
         practicesAdapter = new PracticesAdapter(requireActivity());
         samples2Adapter = new Samples2Adapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-        itemDecoration2 = new ItemDecorateRecyclerView("verticalLayout", 0, 0, 0, 0);
-
-        psychologistsLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        users2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        practicesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        samples2LayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         extras = new Bundle();
 
         data = new HashMap<>();
@@ -101,10 +88,10 @@ public class SessionFragment extends Fragment {
         InitManager.imgResTint(requireActivity(), binding.practicesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.samplesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
 
-        InitManager.recyclerView(binding.psychologistsSingleLayout.recyclerView, itemDecoration, psychologistsLayoutManager);
-        InitManager.recyclerView(binding.usersSingleLayout.recyclerView, itemDecoration2, users2LayoutManager);
-        InitManager.recyclerView(binding.practicesSingleLayout.recyclerView, itemDecoration2, practicesLayoutManager);
-        InitManager.recyclerView(binding.samplesSingleLayout.recyclerView, itemDecoration2, samples2LayoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.practicesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     private void detector() {

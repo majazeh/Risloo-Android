@@ -17,8 +17,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -26,7 +24,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.databinding.FragmentRoomBinding;
@@ -55,8 +52,6 @@ public class RoomFragment extends Fragment {
     private Cases2Adapter cases2Adapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
     private Handler handler;
     private Bundle extras;
 
@@ -88,10 +83,6 @@ public class RoomFragment extends Fragment {
     private void initializer() {
         cases2Adapter = new Cases2Adapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         handler = new Handler();
 
         extras = new Bundle();
@@ -105,7 +96,7 @@ public class RoomFragment extends Fragment {
 
         InitManager.imgResTint(requireActivity(), binding.addCaseImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.addScheduleImageView.getRoot(), R.drawable.ic_calendar_plus_light, R.color.Green700);
-        InitManager.recyclerView(binding.casesSingleLayout.recyclerView, itemDecoration, layoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {
@@ -271,7 +262,7 @@ public class RoomFragment extends Fragment {
 
         menu.add("");
 
-        InitManager.customizedSpinner(requireActivity(), binding.menuSpinner.selectSpinner, menu, "room");
+        InitManager.unfixedCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, menu, "room");
     }
 
     private void setPermission() {

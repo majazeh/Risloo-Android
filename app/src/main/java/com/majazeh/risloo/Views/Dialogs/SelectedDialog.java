@@ -19,15 +19,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
@@ -52,10 +49,6 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
     // Binding
     private DialogSelectedBinding binding;
-
-    // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
 
     // Vars
     private String method;
@@ -99,10 +92,6 @@ public class SelectedDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._16sdp), 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         switch (method) {
             case "phones":
                 binding.titleTextView.setText(getResources().getString(R.string.DialogPhoneTitle));
@@ -118,7 +107,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 break;
         }
 
-        InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
 
     private void detector() {

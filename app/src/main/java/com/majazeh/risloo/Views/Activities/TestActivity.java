@@ -82,7 +82,7 @@ public class TestActivity extends AppCompatActivity {
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
-        InitManager.spinner(this, binding.locationIncludeLayout.selectSpinner, R.array.TestStages, "test");
+        InitManager.fixedSpinner(this, binding.locationIncludeLayout.selectSpinner, R.array.TestStages, "test");
 
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);

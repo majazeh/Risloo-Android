@@ -8,7 +8,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,14 +19,8 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateReportBinding;
-import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Session;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class CreateReportFragment extends Fragment {
 
@@ -62,7 +55,7 @@ public class CreateReportFragment extends Fragment {
         binding.encryptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentEncryptionHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateReportFragmentDescriptionHeader));
 
-        InitManager.spinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, R.array.EncryptionStates, "main");
 
         InitManager.txtTextColor(binding.cryptoTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentCryptoButton), getResources().getColor(R.color.Blue600));
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateReportFragmentButton), getResources().getColor(R.color.White));

@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -41,7 +42,11 @@ public class InitManager {
         img.setRotation(img.getRotation() + degree);
     }
 
-    public static void spinner(Activity activity, Spinner spinner, int arrayRes, String dimension) {
+    /*
+    ---------- Spinner Codes ----------
+    */
+
+    public static void fixedSpinner(Activity activity, Spinner spinner, int arrayRes, String dimension) {
         switch (dimension) {
             case "main": {
                 ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity, arrayRes, R.layout.spinner_item_background_main);
@@ -70,7 +75,7 @@ public class InitManager {
         }
     }
 
-    public static void customizedSpinner(Activity activity, Spinner spinner, int arrayRes, String dimension) {
+    public static void fixedCustomSpinner(Activity activity, Spinner spinner, int arrayRes, String dimension) {
         switch (dimension) {
             case "toolbar": {
                 ArrayList<String> list = new ArrayList<>();
@@ -209,7 +214,7 @@ public class InitManager {
         }
     }
 
-    public static void customizedSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, String dimension) {
+    public static void unfixedCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, String dimension) {
         switch (dimension) {
             case "room":
             case "center": {
@@ -523,16 +528,27 @@ public class InitManager {
         }
     }
 
-    public static void recyclerView(RecyclerView recyclerView, RecyclerView.ItemDecoration itemDecoration, LinearLayoutManager layoutManager) {
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setLayoutManager(layoutManager);
+    /*
+    ---------- RecyclerView Codes ----------
+    */
+
+    public static void fixedHorizontalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
     }
 
-    public static void unfixedRecyclerView(RecyclerView recyclerView, RecyclerView.ItemDecoration itemDecoration, LinearLayoutManager layoutManager) {
-        recyclerView.addItemDecoration(itemDecoration);
-        recyclerView.setLayoutManager(layoutManager);
+    public static void fixedVerticalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+    }
+
+    public static void unfixedVerticalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(false);
     }

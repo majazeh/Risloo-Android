@@ -139,7 +139,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
             holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getSampleStatus()));
             holder.binding.referenceTextView.setText(model.getMembersCount() + " / " + model.getJoined());
 
-            InitManager.customizedSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
+            InitManager.fixedCustomSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
         } catch (JSONException e) {
             e.printStackTrace();
         }

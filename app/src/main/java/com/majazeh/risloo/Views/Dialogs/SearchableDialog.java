@@ -20,14 +20,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SearchableAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
@@ -70,8 +67,6 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private SearchableAdapter searchableAdapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager layoutManager;
     private Handler handler;
 
     // Vars
@@ -118,10 +113,6 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
     private void initializer() {
         searchableAdapter = new SearchableAdapter(requireActivity());
-
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", 0, 0, (int) getResources().getDimension(R.dimen._2sdp), 0);
-
-        layoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
 
         handler = new Handler();
 
@@ -172,7 +163,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 break;
         }
 
-        InitManager.unfixedRecyclerView(binding.listRecyclerView, itemDecoration, layoutManager);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
 
     private void detector() {

@@ -84,7 +84,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     }
 
     private void initializer(Sessions2Holder holder) {
-        InitManager.spinner(activity, holder.binding.statusSpinner, R.array.SessionStatus, "adapter");
+        InitManager.fixedSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus, "adapter");
     }
 
     private void detector(Sessions2Holder holder) {

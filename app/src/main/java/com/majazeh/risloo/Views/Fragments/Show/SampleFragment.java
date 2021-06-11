@@ -13,15 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.FieldsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
@@ -43,8 +40,6 @@ public class SampleFragment extends Fragment {
     private FieldsAdapter fieldsGeneralAdapter, fieldsPrerequisiteAdapter, fieldsAnswerAdapter;
 
     // Objects
-    private RecyclerView.ItemDecoration itemDecoration;
-    private LinearLayoutManager profilesLayoutManager, fieldsGeneralLayoutManager, fieldsPrerequisiteLayoutManager, fieldsAnswerLayoutManager;
     private Bundle extras;
 
     // Vars
@@ -74,13 +69,6 @@ public class SampleFragment extends Fragment {
         fieldsPrerequisiteAdapter = new FieldsAdapter(requireActivity());
         fieldsAnswerAdapter = new FieldsAdapter(requireActivity());
 
-        itemDecoration = new ItemDecorateRecyclerView("verticalLayout", (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._12sdp), (int) getResources().getDimension(R.dimen._4sdp), (int) getResources().getDimension(R.dimen._12sdp));
-
-        profilesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        fieldsGeneralLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        fieldsPrerequisiteLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-        fieldsAnswerLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
-
         extras = new Bundle();
 
         data = new HashMap<>();
@@ -92,10 +80,10 @@ public class SampleFragment extends Fragment {
         binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
-        InitManager.recyclerView(binding.profilesRecyclerView, itemDecoration, profilesLayoutManager);
-        InitManager.recyclerView(binding.fieldsGeneralRecyclerView, itemDecoration, fieldsGeneralLayoutManager);
-        InitManager.recyclerView(binding.fieldsPrerequisiteRecyclerView, itemDecoration, fieldsPrerequisiteLayoutManager);
-        InitManager.recyclerView(binding.fieldsAnswerRecyclerView, itemDecoration, fieldsAnswerLayoutManager);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profilesRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.fieldsGeneralRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.fieldsPrerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.fieldsAnswerRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -329,7 +317,7 @@ public class SampleFragment extends Fragment {
         profiles.add("");
         profiles.add("");
 
-        InitManager.customizedSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profiles, "profiles");
+        InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profiles, "profiles");
     }
 
     private void getData() {
