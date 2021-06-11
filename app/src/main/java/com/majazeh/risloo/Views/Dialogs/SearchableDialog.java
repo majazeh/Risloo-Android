@@ -48,10 +48,10 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Case;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -563,16 +563,118 @@ public class SearchableDialog extends AppCompatDialogFragment {
             else if (fragment instanceof CreateSampleFragment)
                 switch (method) {
                     case "scales":
-                        searchableAdapter.setItems(values, method, binding.countTextView);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        Sample.listInstance(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, binding.countTextView);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
+
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+                        });
                         break;
                     case "references":
-                        searchableAdapter.setItems(values, method, binding.countTextView);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        data.put("id", ((CreateSampleFragment) fragment).roomId);
+                        data.put("usage", "create_case");
+
+                        Room.users(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, binding.countTextView);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
+
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+                        });
                         break;
                     case "rooms":
-                        searchableAdapter.setItems(values, method, null);
-                        binding.listRecyclerView.setAdapter(searchableAdapter);
+                        data.put("my_management", "1");
+                        data.put("instance", "1");
+
+                        Room.list(data, header, new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                List list = (List) object;
+
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (!list.data().isEmpty()) {
+                                            searchableAdapter.setItems(list.data(), method, null);
+                                            binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                            binding.emptyTextView.setVisibility(View.GONE);
+                                        } else {
+                                            searchableAdapter.clearItems();
+
+                                            binding.emptyTextView.setVisibility(View.VISIBLE);
+                                        }
+
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+                                if (isAdded()) {
+                                    requireActivity().runOnUiThread(() -> {
+                                        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                            binding.searchProgressBar.setVisibility(View.GONE);
+                                    });
+                                }
+                            }
+                        });
                         break;
                     case "cases":
                         searchableAdapter.setItems(values, method, null);

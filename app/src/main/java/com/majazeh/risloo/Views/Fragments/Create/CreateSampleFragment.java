@@ -11,6 +11,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -29,10 +36,14 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateSampleFragment extends Fragment {
 
@@ -51,6 +62,7 @@ public class CreateSampleFragment extends Fragment {
     private ClickableSpan assessmentLinkSpan;
 
     // Vars
+    private HashMap data, header;
     public String roomId = "", roomName = "", centerName = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "", caseName = "",  sessionId = "", sessionName = "", psychologyDescription = "";
 
     @Nullable
@@ -64,7 +76,9 @@ public class CreateSampleFragment extends Fragment {
 
         listener();
 
-        setData();
+        setClickableSpan();
+
+        setExtra();
 
         return binding.getRoot();
     }
@@ -83,6 +97,10 @@ public class CreateSampleFragment extends Fragment {
 
         scalesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
         referencesLayoutManager = new LinearLayoutManager(requireActivity(), LinearLayoutManager.VERTICAL, false);
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.scaleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentScaleHeader));
         binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentRoomHeader));
@@ -273,26 +291,36 @@ public class CreateSampleFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.errorImageView, binding.scaleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
+            if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() == 0)
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView);
 
-            if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() != 0 && !roomId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.errorImageView, binding.scaleErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.errorImageView, binding.roomErrorLayout.errorTextView);
+            if (roomId.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView);
 
+            if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() != 0 && !roomId.equals(""))
                 doWork();
-            }
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setData() {
+    private void setClickableSpan() {
         binding.scaleGuideLayout.guideTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
+    }
 
-//        if (extras.getString("scales") != null) {
+    ///////////////////////////////////////////////////
+
+    private void setExtra() {
+        if (getArguments() != null) {
+
+
+
+
+
+
+            //        if (extras.getString("scales") != null) {
 //            try {
 //                JSONArray jsonArray = new JSONArray(extras.getString("phones"));
 //
@@ -311,97 +339,97 @@ public class CreateSampleFragment extends Fragment {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
 //        }
 
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            roomId = ((MainActivity) requireActivity()).singleton.getAddress();
-            roomName = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.primaryTextView.setText(roomName);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            centerName = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-        }
-
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            type = ((MainActivity) requireActivity()).singleton.getType();
-            switch (type) {
-                case "case":
-                    binding.typeTabLayout.getTabAt(0);
-
-                    binding.caseGroup.setVisibility(View.VISIBLE);
-                    binding.roomGroup.setVisibility(View.GONE);
-                    binding.bulkSampleGroup.setVisibility(View.GONE);
-
-                    binding.caseIncludeLayout.selectTextView.setEnabled(true);
-                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
-                    break;
-                case "room":
-                    binding.typeTabLayout.getTabAt(1);
-
-                    binding.caseGroup.setVisibility(View.GONE);
-                    binding.roomGroup.setVisibility(View.VISIBLE);
-                    binding.bulkSampleGroup.setVisibility(View.GONE);
-                    break;
-                case "scale":
-                    binding.typeTabLayout.getTabAt(2);
-
-                    binding.caseGroup.setVisibility(View.GONE);
-                    binding.roomGroup.setVisibility(View.GONE);
-                    binding.bulkSampleGroup.setVisibility(View.VISIBLE);
-
-                    binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
-                    break;
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                roomId = ((MainActivity) requireActivity()).singleton.getAddress();
+                roomName = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.roomIncludeLayout.primaryTextView.setText(roomName);
             }
-        }
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                centerName = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+            }
 
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            userCount = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.userCountIncludeLayout.inputEditText.setText(userCount);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            caseType = ((MainActivity) requireActivity()).singleton.getAddress();
-            for (int i=0; i<binding.caseTypeIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.caseTypeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(caseType)) {
-                    binding.caseTypeIncludeLayout.selectSpinner.setSelection(i);
+            if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
+                type = ((MainActivity) requireActivity()).singleton.getType();
+                switch (type) {
+                    case "case":
+                        binding.typeTabLayout.getTabAt(0);
 
-                    if (i == 0) {
-                        binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                        binding.caseGroup.setVisibility(View.VISIBLE);
+                        binding.roomGroup.setVisibility(View.GONE);
+                        binding.bulkSampleGroup.setVisibility(View.GONE);
 
-                        binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
-                    } else if (i == 1 || i == 2) {
-                        binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
-
-                        binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    } else {
                         binding.caseIncludeLayout.selectTextView.setEnabled(true);
                         binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                        break;
+                    case "room":
+                        binding.typeTabLayout.getTabAt(1);
 
-                        binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.caseGroup.setVisibility(View.GONE);
+                        binding.roomGroup.setVisibility(View.VISIBLE);
+                        binding.bulkSampleGroup.setVisibility(View.GONE);
+                        break;
+                    case "scale":
+                        binding.typeTabLayout.getTabAt(2);
+
+                        binding.caseGroup.setVisibility(View.GONE);
+                        binding.roomGroup.setVisibility(View.GONE);
+                        binding.bulkSampleGroup.setVisibility(View.VISIBLE);
+
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                        break;
+                }
+            }
+
+            if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
+                name = ((MainActivity) requireActivity()).singleton.getName();
+                binding.nameIncludeLayout.inputEditText.setText(name);
+            }
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                userCount = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.userCountIncludeLayout.inputEditText.setText(userCount);
+            }
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                caseType = ((MainActivity) requireActivity()).singleton.getAddress();
+                for (int i=0; i<binding.caseTypeIncludeLayout.selectSpinner.getCount(); i++) {
+                    if (binding.caseTypeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(caseType)) {
+                        binding.caseTypeIncludeLayout.selectSpinner.setSelection(i);
+
+                        if (i == 0) {
+                            binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                            binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                            binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                        } else if (i == 1 || i == 2) {
+                            binding.caseIncludeLayout.selectTextView.setEnabled(false);
+                            binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                            binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        } else {
+                            binding.caseIncludeLayout.selectTextView.setEnabled(true);
+                            binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
+                            binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                        }
                     }
                 }
             }
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            situation = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.situationIncludeLayout.inputEditText.setText(situation);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            caseId = ((MainActivity) requireActivity()).singleton.getAddress();
-            caseName = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.caseIncludeLayout.selectTextView.setText(caseName);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            sessionId = ((MainActivity) requireActivity()).singleton.getAddress();
-            sessionName = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.sessionIncludeLayout.selectTextView.setText(sessionName);
-        }
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                situation = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.situationIncludeLayout.inputEditText.setText(situation);
+            }
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                caseId = ((MainActivity) requireActivity()).singleton.getAddress();
+                caseName = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.caseIncludeLayout.selectTextView.setText(caseName);
+            }
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                sessionId = ((MainActivity) requireActivity()).singleton.getAddress();
+                sessionName = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.sessionIncludeLayout.selectTextView.setText(sessionName);
+            }
 
 //        if (extras.getString("references") != null) {
 //            try {
@@ -422,12 +450,21 @@ public class CreateSampleFragment extends Fragment {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
 //        }
 
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            psychologyDescription = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.psychologyIncludeLayout.inputEditText.setText(psychologyDescription);
-        }
+            if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
+                psychologyDescription = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.psychologyIncludeLayout.inputEditText.setText(psychologyDescription);
+            }
 
+
+
+
+
+
+
+        }
     }
+
+    ///////////////////////////////////////////////////
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         if (method.equals("scales")) {
@@ -442,13 +479,15 @@ public class CreateSampleFragment extends Fragment {
     public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
-                case "scales":
-                    int scalePosition = scalesAdapter.getIds().indexOf(item.object.get("id").toString());
+                case "scales": {
+                    SampleModel model = (SampleModel) item;
 
-                    if (scalePosition == -1)
+                    int position = scalesAdapter.getIds().indexOf(model.getSampleId());
+
+                    if (position == -1)
                         scalesAdapter.addItem(item);
                     else
-                        scalesAdapter.removeItem(scalePosition);
+                        scalesAdapter.removeItem(position);
 
                     if (scalesAdapter.getIds().size() != 0) {
                         binding.scaleIncludeLayout.countTextView.setVisibility(View.VISIBLE);
@@ -457,17 +496,19 @@ public class CreateSampleFragment extends Fragment {
                         binding.scaleIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.scaleIncludeLayout.countTextView.setText("");
                     }
+                }
+                break;
+                case "rooms": {
+                    RoomModel model = (RoomModel) item;
 
-                    break;
-                case "rooms":
-                    if (!roomId.equals(item.object.get("id").toString())) {
-                        roomId = item.object.get("id").toString();
-                        roomName = item.object.get("title").toString();
-                        centerName = item.object.get("subtitle").toString();
+                    if (!roomId.equals(model.getRoomId())) {
+                        roomId = model.getRoomId();
+                        roomName = model.getRoomManager().getName();
+                        centerName = model.getRoomCenter().getDetail().getString("title");
 
                         binding.roomIncludeLayout.primaryTextView.setText(roomName);
                         binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-                    } else if (roomId.equals(item.object.get("id").toString())) {
+                    } else if (roomId.equals(model.getRoomId())) {
                         roomId = "";
                         roomName = "";
                         centerName = "";
@@ -477,14 +518,17 @@ public class CreateSampleFragment extends Fragment {
                     }
 
                     roomsDialog.dismiss();
-                    break;
-                case "references":
-                    int referencePosition = referencesAdapter.getIds().indexOf(item.object.get("id").toString());
+                }
+                break;
+                case "references": {
+                    UserModel model = (UserModel) item;
 
-                    if (referencePosition == -1)
+                    int position = referencesAdapter.getIds().indexOf(model.getId());
+
+                    if (position == -1)
                         referencesAdapter.addItem(item);
                     else
-                        referencesAdapter.removeItem(referencePosition);
+                        referencesAdapter.removeItem(position);
 
                     if (referencesAdapter.getIds().size() != 0) {
                         binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
@@ -493,15 +537,17 @@ public class CreateSampleFragment extends Fragment {
                         binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.referenceIncludeLayout.countTextView.setText("");
                     }
+                }
+                break;
+                case "cases": {
+                    CaseModel model = (CaseModel) item;
 
-                    break;
-                case "cases":
-                    if (!caseId.equals(item.object.get("id").toString())) {
-                        caseId = item.object.get("id").toString();
-                        caseName = item.object.get("title").toString();
+                    if (!caseId.equals(model.getCaseId())) {
+                        caseId = model.getCaseId();
+                        caseName = model.getCaseId();
 
                         binding.caseIncludeLayout.selectTextView.setText(caseName);
-                    } else if (caseId.equals(item.object.get("id").toString())) {
+                    } else if (caseId.equals(model.getCaseId())) {
                         caseId = "";
                         caseName = "";
 
@@ -509,14 +555,17 @@ public class CreateSampleFragment extends Fragment {
                     }
 
                     casesDialog.dismiss();
-                    break;
-                case "sessions":
-                    if (!sessionId.equals(item.object.get("id").toString())) {
-                        sessionId = item.object.get("id").toString();
-                        sessionName = item.object.get("title").toString();
+                }
+                break;
+                case "sessions": {
+                    SessionModel model = (SessionModel) item;
+
+                    if (!sessionId.equals(model.getId())) {
+                        sessionId = model.getId();
+                        sessionName = model.getId();
 
                         binding.sessionIncludeLayout.selectTextView.setText(sessionName);
-                    } else if (sessionId.equals(item.object.get("id").toString())) {
+                    } else if (sessionId.equals(model.getId())) {
                         sessionId = "";
                         sessionName = "";
 
@@ -524,7 +573,8 @@ public class CreateSampleFragment extends Fragment {
                     }
 
                     sessionsDialog.dismiss();
-                    break;
+                }
+                break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -532,12 +582,58 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void doWork() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
         name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         userCount = binding.userCountIncludeLayout.inputEditText.getText().toString().trim();
         situation = binding.situationIncludeLayout.inputEditText.getText().toString().trim();
         psychologyDescription = binding.psychologyIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        data.put("scale_id", scalesAdapter.getIds());
+        data.put("room_id", roomId);
+
+        Sample.create(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ((MainActivity) requireActivity()).navigator(R.id.samplesFragment);
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "scale_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "room_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override

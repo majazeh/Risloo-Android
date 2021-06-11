@@ -13,7 +13,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -176,7 +179,18 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     private void setData(SearchableHolder holder, TypeModel item) {
         try {
             switch (method) {
-                case "scales":
+                case "scales": {
+                    SampleModel model = (SampleModel) item;
+
+                    holder.binding.titleTextView.setText(model.getSampleScaleTitle());
+
+                    holder.binding.subTextView.setVisibility(View.VISIBLE);
+                    if (!model.getSampleEdition().equals(""))
+                        holder.binding.subTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+                    else
+                        holder.binding.subTextView.setText("نسخه " + model.getSampleVersion());
+                }
+                break;
                 case "rooms": {
                     RoomModel model = (RoomModel) item;
 
@@ -281,23 +295,38 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
                 else if (fragment instanceof CreateSampleFragment)
                     switch (method) {
-                        case "scales":
-                            detector(holder, ((CreateSampleFragment) fragment).scalesAdapter.getIds().contains(item.object.get("id").toString()));
+                        case "scales": {
+                            SampleModel model = (SampleModel) item;
+
+                            detector(holder, ((CreateSampleFragment) fragment).scalesAdapter.getIds().contains(model.getSampleId()));
                             calculateCount(((CreateSampleFragment) fragment).scalesAdapter.getIds().size());
-                            break;
-                        case "references":
-                            detector(holder, ((CreateSampleFragment) fragment).referencesAdapter.getIds().contains(item.object.get("id").toString()));
+                        }
+                        break;
+                        case "references": {
+                            UserModel model = (UserModel) item;
+
+                            detector(holder, ((CreateSampleFragment) fragment).referencesAdapter.getIds().contains(model.getId()));
                             calculateCount(((CreateSampleFragment) fragment).referencesAdapter.getIds().size());
-                            break;
-                        case "rooms":
-                            detector(holder, ((CreateSampleFragment) fragment).roomId.equals(item.object.get("id").toString()));
-                            break;
-                        case "cases":
-                            detector(holder, ((CreateSampleFragment) fragment).caseId.equals(item.object.get("id").toString()));
-                            break;
-                        case "sessions":
-                            detector(holder, ((CreateSampleFragment) fragment).sessionId.equals(item.object.get("id").toString()));
-                            break;
+                        }
+                        break;
+                        case "rooms": {
+                            RoomModel model = (RoomModel) item;
+
+                            detector(holder, ((CreateSampleFragment) fragment).roomId.equals(model.getRoomId()));
+                        }
+                        break;
+                        case "cases": {
+                            CaseModel model = (CaseModel) item;
+
+                            detector(holder, ((CreateSampleFragment) fragment).caseId.equals(model.getCaseId()));
+                        }
+                        break;
+                        case "sessions": {
+                            SessionModel model = (SessionModel) item;
+
+                            detector(holder, ((CreateSampleFragment) fragment).sessionId.equals(model.getId()));
+                        }
+                        break;
                     }
 
                 else if (fragment instanceof CreateScheduleFragment) {

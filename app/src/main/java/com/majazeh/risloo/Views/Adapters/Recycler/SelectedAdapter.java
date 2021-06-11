@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -237,19 +238,27 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     private void setData(SelectedHolder holder, TypeModel item) {
         try {
             switch (method) {
-                case "scales":
-                    holder.binding.titleTextView.setText(item.object.getString("title"));
+                case "scales": {
+                    SampleModel model = (SampleModel) item;
+
+                    holder.binding.titleTextView.setText(model.getSampleScaleTitle());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(item.object.getString("subtitle"));
-                    break;
-                case "references":
+                    if (!model.getSampleEdition().equals(""))
+                        holder.binding.subTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+                    else
+                        holder.binding.subTextView.setText("نسخه " + model.getSampleVersion());
+                }
+                break;
+                case "references": {
                     UserModel model = (UserModel) item;
 
                     holder.binding.titleTextView.setText(model.getName());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
+                }
+                break;
                 case "phones":
                 case "axises":
                 case "patternDays":
