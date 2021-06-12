@@ -617,7 +617,9 @@ public class CreateSampleFragment extends Fragment {
                 data.put("title", title);
                 data.put("members_count", membersCount);
                 data.put("case_status", SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus));
-                data.put("problem", problem);
+
+                if (data.get("case_status").equals("group") || data.get("case_status").equals("personal"))
+                    data.put("problem", problem);
                 break;
         }
 
