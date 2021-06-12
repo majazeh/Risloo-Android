@@ -141,7 +141,12 @@ public class BulkSamplesFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment)).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            Bundle extras = new Bundle();
+            extras.putString("type", "bulk");
+
+            ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment, extras);
+        }).widget(binding.addImageView.getRoot());
     }
 
     private void getData() {

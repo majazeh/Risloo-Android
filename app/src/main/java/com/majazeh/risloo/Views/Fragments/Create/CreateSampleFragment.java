@@ -342,7 +342,7 @@ public class CreateSampleFragment extends Fragment {
                 type = getArguments().getString("type");
                 switch (type) {
                     case "case_user":
-                        binding.typeTabLayout.getTabAt(0);
+                        binding.typeTabLayout.getTabAt(0).select();
 
                         binding.caseUserGroup.setVisibility(View.VISIBLE);
                         binding.roomUserGroup.setVisibility(View.GONE);
@@ -352,14 +352,14 @@ public class CreateSampleFragment extends Fragment {
                         binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
                         break;
                     case "room_user":
-                        binding.typeTabLayout.getTabAt(1);
+                        binding.typeTabLayout.getTabAt(1).select();
 
                         binding.caseUserGroup.setVisibility(View.GONE);
                         binding.roomUserGroup.setVisibility(View.VISIBLE);
                         binding.bulkGroup.setVisibility(View.GONE);
                         break;
                     case "bulk":
-                        binding.typeTabLayout.getTabAt(2);
+                        binding.typeTabLayout.getTabAt(2).select();
 
                         binding.caseUserGroup.setVisibility(View.GONE);
                         binding.roomUserGroup.setVisibility(View.GONE);
