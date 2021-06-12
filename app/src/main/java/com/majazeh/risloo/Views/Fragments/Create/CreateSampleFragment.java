@@ -60,7 +60,7 @@ public class CreateSampleFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String roomId = "", roomName = "", centerName = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "",  sessionId = "", psychologyDescription = "";
+    public String roomId = "", roomName = "", centerName = "", type = "case_user", title = "", membersCount = "", caseStatus = "", problem = "", caseId = "",  sessionId = "", psychologyDescription = "";
 
     @Nullable
     @Override
@@ -96,27 +96,27 @@ public class CreateSampleFragment extends Fragment {
 
         binding.scaleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentScaleHeader));
         binding.roomIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentRoomHeader));
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentNameHeader));
-        binding.userCountIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountHeader));
-        binding.caseTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseTypeHeader));
-        binding.situationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentSituationHeader));
+        binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentTitleHeader));
+        binding.membersCountIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentMembersCountHeader));
+        binding.caseStatusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseStatusHeader));
+        binding.problemIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentProblemHeader));
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseHeader));
         binding.sessionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentSessionHeader));
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentReferenceHeader));
-        binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionHeader));
+        binding.psychologyDescriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionHeader));
 
-        binding.nameIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateSampleFragmentNameHint));
+        binding.titleIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateSampleFragmentTitleHint));
 
         binding.scaleGuideLayout.guideTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
-        binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentNameGuide));
-        binding.userCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentUserCountGuide));
-        binding.psychologyGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionGuide));
+        binding.titleGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentTitleGuide));
+        binding.membersCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentMembersCountGuide));
+        binding.psychologyDescriptionGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionGuide));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.fixedSpinner(requireActivity(), binding.caseTypeIncludeLayout.selectSpinner, R.array.CaseTypes, "main");
+        InitManager.fixedSpinner(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, R.array.CaseTypes, "main");
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }
@@ -161,26 +161,26 @@ public class CreateSampleFragment extends Fragment {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
-                    type = "case";
+                    type = "case_user";
 
-                    binding.caseGroup.setVisibility(View.VISIBLE);
-                    binding.roomGroup.setVisibility(View.GONE);
-                    binding.bulkSampleGroup.setVisibility(View.GONE);
+                    binding.caseUserGroup.setVisibility(View.VISIBLE);
+                    binding.roomUserGroup.setVisibility(View.GONE);
+                    binding.bulkGroup.setVisibility(View.GONE);
 
                     binding.caseIncludeLayout.selectContainer.setEnabled(true);
                     binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
                 } else if (tab.getPosition() == 1) {
-                    type = "room";
+                    type = "room_user";
 
-                    binding.caseGroup.setVisibility(View.GONE);
-                    binding.roomGroup.setVisibility(View.VISIBLE);
-                    binding.bulkSampleGroup.setVisibility(View.GONE);
+                    binding.caseUserGroup.setVisibility(View.GONE);
+                    binding.roomUserGroup.setVisibility(View.VISIBLE);
+                    binding.bulkGroup.setVisibility(View.GONE);
                 } else {
                     type = "bulk";
 
-                    binding.caseGroup.setVisibility(View.GONE);
-                    binding.roomGroup.setVisibility(View.GONE);
-                    binding.bulkSampleGroup.setVisibility(View.VISIBLE);
+                    binding.caseUserGroup.setVisibility(View.GONE);
+                    binding.roomUserGroup.setVisibility(View.GONE);
+                    binding.bulkGroup.setVisibility(View.VISIBLE);
 
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     binding.caseIncludeLayout.selectContainer.setEnabled(false);
@@ -199,44 +199,44 @@ public class CreateSampleFragment extends Fragment {
             }
         });
 
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                if (!binding.titleIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        binding.userCountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.membersCountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.userCountIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.userCountIncludeLayout.inputEditText);
+                if (!binding.membersCountIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.membersCountIncludeLayout.inputEditText);
                 }
             }
             return false;
         });
 
-        binding.caseTypeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        binding.caseStatusIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                caseType = parent.getItemAtPosition(position).toString();
+                caseStatus = parent.getItemAtPosition(position).toString();
 
                 if (position == 0) {
                     binding.caseIncludeLayout.selectContainer.setEnabled(false);
                     binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
-                    binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                 } else if (position == 1 || position == 2) {
                     binding.caseIncludeLayout.selectContainer.setEnabled(false);
                     binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
-                    binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                 } else {
                     binding.caseIncludeLayout.selectContainer.setEnabled(true);
                     binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
 
-                    binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                 }
             }
 
@@ -246,10 +246,10 @@ public class CreateSampleFragment extends Fragment {
             }
         });
 
-        binding.situationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.situationIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.situationIncludeLayout.inputEditText);
+                if (!binding.problemIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -273,10 +273,10 @@ public class CreateSampleFragment extends Fragment {
             return false;
         });
 
-        binding.psychologyIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+        binding.psychologyDescriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.psychologyIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.psychologyIncludeLayout.inputEditText);
+                if (!binding.psychologyDescriptionIncludeLayout.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText);
                 }
             }
             return false;
@@ -305,6 +305,10 @@ public class CreateSampleFragment extends Fragment {
     ///////////////////////////////////////////////////
 
     private void setExtra() {
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
+
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+
         if (getArguments() != null) {
 
 
@@ -328,7 +332,7 @@ public class CreateSampleFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
+//            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
 //        }
 
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
@@ -347,9 +351,9 @@ public class CreateSampleFragment extends Fragment {
                     case "case":
                         binding.typeTabLayout.getTabAt(0);
 
-                        binding.caseGroup.setVisibility(View.VISIBLE);
-                        binding.roomGroup.setVisibility(View.GONE);
-                        binding.bulkSampleGroup.setVisibility(View.GONE);
+                        binding.caseUserGroup.setVisibility(View.VISIBLE);
+                        binding.roomUserGroup.setVisibility(View.GONE);
+                        binding.bulkGroup.setVisibility(View.GONE);
 
                         binding.caseIncludeLayout.selectContainer.setEnabled(true);
                         binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
@@ -357,16 +361,16 @@ public class CreateSampleFragment extends Fragment {
                     case "room":
                         binding.typeTabLayout.getTabAt(1);
 
-                        binding.caseGroup.setVisibility(View.GONE);
-                        binding.roomGroup.setVisibility(View.VISIBLE);
-                        binding.bulkSampleGroup.setVisibility(View.GONE);
+                        binding.caseUserGroup.setVisibility(View.GONE);
+                        binding.roomUserGroup.setVisibility(View.VISIBLE);
+                        binding.bulkGroup.setVisibility(View.GONE);
                         break;
                     case "scale":
                         binding.typeTabLayout.getTabAt(2);
 
-                        binding.caseGroup.setVisibility(View.GONE);
-                        binding.roomGroup.setVisibility(View.GONE);
-                        binding.bulkSampleGroup.setVisibility(View.VISIBLE);
+                        binding.caseUserGroup.setVisibility(View.GONE);
+                        binding.roomUserGroup.setVisibility(View.GONE);
+                        binding.bulkGroup.setVisibility(View.VISIBLE);
 
                         binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.caseIncludeLayout.selectContainer.setEnabled(false);
@@ -376,41 +380,41 @@ public class CreateSampleFragment extends Fragment {
             }
 
             if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-                name = ((MainActivity) requireActivity()).singleton.getName();
-                binding.nameIncludeLayout.inputEditText.setText(name);
+                title = ((MainActivity) requireActivity()).singleton.getName();
+                binding.titleIncludeLayout.inputEditText.setText(title);
             }
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-                userCount = ((MainActivity) requireActivity()).singleton.getAddress();
-                binding.userCountIncludeLayout.inputEditText.setText(userCount);
+                membersCount = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.membersCountIncludeLayout.inputEditText.setText(membersCount);
             }
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-                caseType = ((MainActivity) requireActivity()).singleton.getAddress();
-                for (int i=0; i<binding.caseTypeIncludeLayout.selectSpinner.getCount(); i++) {
-                    if (binding.caseTypeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(caseType)) {
-                        binding.caseTypeIncludeLayout.selectSpinner.setSelection(i);
+                caseStatus = ((MainActivity) requireActivity()).singleton.getAddress();
+                for (int i=0; i<binding.caseStatusIncludeLayout.selectSpinner.getCount(); i++) {
+                    if (binding.caseStatusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(caseStatus)) {
+                        binding.caseStatusIncludeLayout.selectSpinner.setSelection(i);
 
                         if (i == 0) {
                             binding.caseIncludeLayout.selectContainer.setEnabled(false);
                             binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
-                            binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                         } else if (i == 1 || i == 2) {
                             binding.caseIncludeLayout.selectContainer.setEnabled(false);
                             binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
-                            binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                         } else {
                             binding.caseIncludeLayout.selectContainer.setEnabled(true);
                             binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
 
-                            binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                         }
                     }
                 }
             }
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-                situation = ((MainActivity) requireActivity()).singleton.getAddress();
-                binding.situationIncludeLayout.inputEditText.setText(situation);
+                problem = ((MainActivity) requireActivity()).singleton.getAddress();
+                binding.problemIncludeLayout.inputEditText.setText(problem);
             }
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
                 caseId = ((MainActivity) requireActivity()).singleton.getAddress();
@@ -439,12 +443,12 @@ public class CreateSampleFragment extends Fragment {
 //                e.printStackTrace();
 //            }
 //        } else {
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+//            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
 //        }
 
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
                 psychologyDescription = ((MainActivity) requireActivity()).singleton.getAddress();
-                binding.psychologyIncludeLayout.inputEditText.setText(psychologyDescription);
+                binding.psychologyDescriptionIncludeLayout.inputEditText.setText(psychologyDescription);
             }
 
 
@@ -589,13 +593,33 @@ public class CreateSampleFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        userCount = binding.userCountIncludeLayout.inputEditText.getText().toString().trim();
-        situation = binding.situationIncludeLayout.inputEditText.getText().toString().trim();
-        psychologyDescription = binding.psychologyIncludeLayout.inputEditText.getText().toString().trim();
+        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        membersCount = binding.membersCountIncludeLayout.inputEditText.getText().toString().trim();
+        problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
+        psychologyDescription = binding.psychologyDescriptionIncludeLayout.inputEditText.getText().toString().trim();
 
         data.put("scale_id", scalesAdapter.getIds());
         data.put("room_id", roomId);
+
+        data.put("type", type);
+        data.put("psychologist_description", psychologyDescription);
+
+        switch (type) {
+            case "case_user":
+                data.put("case_id", caseId);
+                data.put("client_id", "");
+                data.put("session_id", sessionId);
+                break;
+            case "room_user":
+                data.put("client_id", referencesAdapter.getIds());
+                break;
+            case "bulk":
+                data.put("title", title);
+                data.put("members_count", membersCount);
+                data.put("case_status", SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus));
+                data.put("problem", problem);
+                break;
+        }
 
         Sample.create(data, header, new Response() {
             @Override
@@ -627,6 +651,30 @@ public class CreateSampleFragment extends Fragment {
                                                 break;
                                             case "room_id":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "title":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "members_count":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.membersCountIncludeLayout.inputEditText, binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "case_status":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "problem":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "case_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseIncludeLayout.selectContainer, binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "session_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionIncludeLayout.selectContainer, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "client_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "psychologist_description":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText, binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                         }
                                     }

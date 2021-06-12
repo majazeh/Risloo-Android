@@ -104,28 +104,28 @@
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/CreateSampleFragmentTabCase" />
+                    android:text="@string/CreateSampleFragmentTabCaseUser" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/CreateSampleFragmentTabRoom" />
+                    android:text="@string/CreateSampleFragmentTabRoomUser" />
 
                 <com.google.android.material.tabs.TabItem
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/CreateSampleFragmentTabBulkSample" />
+                    android:text="@string/CreateSampleFragmentTabBulk" />
 
             </com.google.android.material.tabs.TabLayout>
 
             <TextView
-                android:id="@+id/bulk_sample_textView"
+                android:id="@+id/bulk_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_8sdp"
                 android:gravity="start"
-                android:text="@string/CreateSampleFragmentBulkSampleGuide"
+                android:text="@string/CreateSampleFragmentBulkGuide"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray700"
@@ -137,17 +137,17 @@
                 app:layout_constraintTop_toBottomOf="@id/type_tabLayout" />
 
             <include
-                android:id="@+id/name_includeLayout"
+                android:id="@+id/title_includeLayout"
                 layout="@layout/component_main_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/bulk_sample_textView" />
+                app:layout_constraintTop_toBottomOf="@id/bulk_textView" />
 
             <include
-                android:id="@+id/name_errorLayout"
+                android:id="@+id/title_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -155,30 +155,30 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/title_includeLayout" />
 
             <include
-                android:id="@+id/name_guideLayout"
+                android:id="@+id/title_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/title_errorLayout" />
 
             <include
-                android:id="@+id/user_count_includeLayout"
+                android:id="@+id/members_count_includeLayout"
                 layout="@layout/component_main_input_number"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/name_guideLayout" />
+                app:layout_constraintTop_toBottomOf="@id/title_guideLayout" />
 
             <include
-                android:id="@+id/user_count_errorLayout"
+                android:id="@+id/members_count_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -186,30 +186,30 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/user_count_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/members_count_includeLayout" />
 
             <include
-                android:id="@+id/user_count_guideLayout"
+                android:id="@+id/members_count_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/user_count_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/members_count_errorLayout" />
 
             <include
-                android:id="@+id/case_type_includeLayout"
+                android:id="@+id/case_status_includeLayout"
                 layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/user_count_guideLayout" />
+                app:layout_constraintTop_toBottomOf="@id/members_count_guideLayout" />
 
             <include
-                android:id="@+id/case_type_errorLayout"
+                android:id="@+id/case_status_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -217,10 +217,10 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/case_type_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/case_status_includeLayout" />
 
             <include
-                android:id="@+id/situation_includeLayout"
+                android:id="@+id/problem_includeLayout"
                 layout="@layout/component_main_input_multi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -228,10 +228,10 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/case_type_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/case_status_errorLayout" />
 
             <include
-                android:id="@+id/situation_errorLayout"
+                android:id="@+id/problem_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -239,7 +239,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/situation_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/problem_includeLayout" />
 
             <include
                 android:id="@+id/case_includeLayout"
@@ -249,7 +249,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/situation_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/problem_errorLayout" />
 
             <include
                 android:id="@+id/case_errorLayout"
@@ -305,7 +305,7 @@
                 app:layout_constraintTop_toBottomOf="@id/reference_includeLayout" />
 
             <include
-                android:id="@+id/psychology_includeLayout"
+                android:id="@+id/psychology_description_includeLayout"
                 layout="@layout/component_main_input_multi"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -315,7 +315,7 @@
                 app:layout_constraintTop_toBottomOf="@id/reference_errorLayout" />
 
             <include
-                android:id="@+id/psychology_errorLayout"
+                android:id="@+id/psychology_description_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -323,10 +323,10 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/psychology_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/psychology_description_includeLayout" />
 
             <include
-                android:id="@+id/psychology_guideLayout"
+                android:id="@+id/psychology_description_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -335,28 +335,28 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/psychology_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/psychology_description_errorLayout" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/case_group"
+                android:id="@+id/case_user_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
                 app:constraint_referenced_ids="case_includeLayout, session_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/room_group"
+                android:id="@+id/room_user_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
                 app:constraint_referenced_ids="reference_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/bulk_sample_group"
+                android:id="@+id/bulk_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="bulk_sample_textView, name_includeLayout, name_guideLayout, user_count_includeLayout, user_count_guideLayout, case_type_includeLayout" />
+                app:constraint_referenced_ids="bulk_textView, title_includeLayout, title_guideLayout, members_count_includeLayout, members_count_guideLayout, case_status_includeLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
