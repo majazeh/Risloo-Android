@@ -254,7 +254,7 @@ public class SessionFragment extends Fragment {
     }
 
     private void getData() {
-        Session.show(data, header, new Response() {
+        Session.showDashborad(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 SessionModel model = (SessionModel) object;
@@ -285,11 +285,11 @@ public class SessionFragment extends Fragment {
 //                            binding.practicesSingleLayout.recyclerView.setAdapter(practicesAdapter);
 //                        }
 
-//                        // Samples Data
-//                        if (!model.getSamples().data().isEmpty()) {
-//                            samples2Adapter.setSamples(model.getSamples().data());
-//                            binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
-//                        }
+                        // Samples Data
+                        if (!model.getSamples().data().isEmpty()) {
+                            samples2Adapter.setSamples(model.getSamples().data());
+                            binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
+                        }
 
                         binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
                         binding.usersHeaderIncludeLayout.countTextView.setText("(" + users2Adapter.getItemCount() + ")");

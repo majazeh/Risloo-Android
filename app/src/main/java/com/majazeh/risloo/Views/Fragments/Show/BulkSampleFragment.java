@@ -251,18 +251,18 @@ public class BulkSampleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         setData(model);
 
-//                        // References Data
-//                        if (model.getClients() != null && model.getClients().data().size() != 0) {
-//                            referencesAdapter.setReferences(model.getClients().data());
-//                            binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
-//                        }
-//
+                        // References Data
+                        if (model.getMembers() != null && model.getMembers().data().size() != 0) {
+                            referencesAdapter.setReferences(model.getMembers().data());
+                            binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+                        }
+
 //                        // Scales Data
 //                        if (!model.getScales().data().isEmpty()) {
 //                            scales2Adapter.setScales(model.getScales().data());
 //                            binding.scalesSingleLayout.recyclerView.setAdapter(scales2Adapter);
 //                        }
-//
+
 //                        // Samples Data
 //                        if (!model.getSamples().data().isEmpty()) {
 //                            samples4Adapter.setSamples(model.getSamples().data());

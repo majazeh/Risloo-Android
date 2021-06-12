@@ -283,6 +283,8 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.GONE);
                 binding.profilesTextView.getRoot().setVisibility(View.GONE);
+                
+//                doWork("getScore");
 
                 binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
                 break;
@@ -412,16 +414,109 @@ public class SampleFragment extends Fragment {
     private void doWork(String method) {
         switch (method) {
             case "fill":
+                Sample.fill(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
 
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
                 break;
             case "close":
+                Sample.close(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
 
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
                 break;
             case "open":
+                Sample.open(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
 
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
                 break;
             case "score":
+                Sample.score(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
 
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "getScore":
+                Sample.getScore(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
                 break;
         }
     }

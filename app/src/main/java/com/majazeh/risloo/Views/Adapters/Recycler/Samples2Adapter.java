@@ -93,7 +93,7 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
         }
 
         holder.binding.serialTextView.setText(model.getSampleId());
-        holder.binding.nameTextView.setText(model.getSampleScaleTitle());
+        holder.binding.nameTextView.setText(model.getSampleTitle());
 
         holder.binding.sessionTextView.setText(model.getSessionId());
 
