@@ -89,6 +89,16 @@ public class SessionModel extends TypeModel {
                     practices.put(jsonObject.getJSONArray("practices").getJSONObject(i));
                 }
             }
+
+            if (!jsonObject.isNull("samples")) {
+                com.mre.ligheh.Model.Madule.List samples = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("samples").length(); i++) {
+                    samples.add(new UserModel(jsonObject.getJSONArray("samples").getJSONObject(i)));
+                }
+                setSamples(samples);
+            } else {
+                setSamples(new com.mre.ligheh.Model.Madule.List());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
