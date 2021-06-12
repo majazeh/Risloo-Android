@@ -108,6 +108,34 @@ public class Sample extends Model {
         }
     }
 
+    public static void open(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (data.containsKey("id")) {
+                String id = (String) data.get("id");
+                data.remove("id");
+                Model.put(endpoint + "/samples/" + id + "/open", data, header, response, null);
+            } else {
+                Exceptioner.make(response, "آیدی را وارد کنید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void fill(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (data.containsKey("id")) {
+                String id = (String) data.get("id");
+                data.remove("id");
+                Model.put("command/assessment/fill/"+data.get("id")+"replace=on", data, header, response, null);
+            } else {
+                Exceptioner.make(response, "آیدی را وارد کنید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void score(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (data.containsKey("id")) {
