@@ -74,7 +74,7 @@ public class User extends Model {
     public static void editProfile(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(header, "Authorization")) {
-                Model.put(endpoint +"/"+ data.get("user"), data, header, response, AuthModel.class);
+                Model.put(endpoint +"/"+ data.get("id"), data, header, response, AuthModel.class);
             } else {
                 Exceptioner.make(response,"شما لاگین نیستید");
             }
@@ -87,7 +87,7 @@ public class User extends Model {
         try {
             if (has(header, "Authorization")) {
                 if (has(data, "user")) {
-                    Model.put(endpoint + "/" + data.get("user") + "/change-password", data, header, response, null);
+                    Model.put(endpoint + "/" + data.get("id") + "/change-password", data, header, response, null);
                 } else {
                     Exceptioner.make(response,"آیدی را وارد کنید");
                 }

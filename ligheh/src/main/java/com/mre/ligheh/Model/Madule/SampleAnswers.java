@@ -46,6 +46,13 @@ public class SampleAnswers {
         }
     }
 
+    public void remoteToLocal(ArrayList remote) {
+        for (int i = 0; i < remote.size(); i++) {
+            localAnswers.add((ArrayList<String>) remote.get(i));
+        }
+    }
+
+
     public void localToRemote() {
         for (int i = 0; i < localAnswers.size(); i++) {
             remoteAnswers.add(localAnswers.get(i));
@@ -53,10 +60,5 @@ public class SampleAnswers {
         localAnswers.clear();
     }
 
-    public void remoteToLocal(ArrayList remote) {
-        for (int i = 0; i < remote.size(); i++) {
-            localAnswers.add((ArrayList<String>) remote.get(i));
-        }
-    }
 
 }
