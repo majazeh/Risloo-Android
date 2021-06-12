@@ -1,5 +1,6 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.SampleForm;
 
 import org.json.JSONArray;
@@ -31,6 +32,7 @@ public class SampleModel extends TypeModel {
     private String sessionId = "";
     private SampleForm sampleForm;
     private UserModel client;
+    private List members;
     private String psychologist_description = "";
     private int created_at;
     private int started_at;
@@ -83,6 +85,15 @@ public class SampleModel extends TypeModel {
                 setSampleScaleId(jsonObject.getJSONObject("scale").getString("id"));
             if (!jsonObject.getJSONObject("scale").isNull("title"))
                 setSampleScaleTitle(jsonObject.getJSONObject("scale").getString("title"));
+        }
+        if (!jsonObject.isNull("members")) {
+            com.mre.ligheh.Model.Madule.List members = new com.mre.ligheh.Model.Madule.List();
+            for (int i = 0; i < jsonObject.getJSONArray("members").length(); i++) {
+                members.add(new UserModel(jsonObject.getJSONArray("members").getJSONObject(i)));
+            }
+            setMembers(members);
+        } else {
+            setMembers(new com.mre.ligheh.Model.Madule.List());
         }
         if (!jsonObject.isNull("description"))
             setSampleDescription(jsonObject.getString("description"));
@@ -159,6 +170,14 @@ public class SampleModel extends TypeModel {
 
     public void setSampleVersion(int sampleVersion) {
         this.sampleVersion = sampleVersion;
+    }
+
+    public List getMembers() {
+        return members;
+    }
+
+    public void setMembers(List members) {
+        this.members = members;
     }
 
     public String getSampleEdition() {
