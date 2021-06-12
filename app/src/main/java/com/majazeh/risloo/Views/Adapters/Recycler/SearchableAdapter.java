@@ -12,6 +12,9 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -211,14 +214,43 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     holder.binding.subTextView.setText("");
                 }
                 break;
-                case "cases":
-                case "sessions":
-                case "patternDays":
+                case "cases": {
+                    CaseModel model = (CaseModel) item;
+
+                    holder.binding.titleTextView.setText(model.getCaseId());
+
+                    if (model.getClients() != null && !model.getClients().data().isEmpty()) {
+                        holder.binding.subTextView.setVisibility(View.VISIBLE);
+
+                        for (int i = 0; i < model.getClients().data().size(); i++) {
+                            UserModel user = (UserModel) model.getClients().data().get(i);
+                            holder.binding.subTextView.append(user.getName());
+                            if (i != model.getClients().size() -1) {
+                                holder.binding.subTextView.append(" - ");
+                            }
+                        }
+                    } else {
+                        holder.binding.subTextView.setVisibility(View.GONE);
+                    }
+                }
+                break;
+                case "sessions": {
+                    SessionModel model = (SessionModel) item;
+
+                    String name = model.getId() + " " + "(" + SelectionManager.getSessionStatus(activity, "fa", model.getStatus()) + ")";
+                    holder.binding.titleTextView.setText(StringManager.foregroundSize(name, 10, name.length(), activity.getResources().getColor(R.color.Gray600), (int) activity.getResources().getDimension(R.dimen._8ssp)));
+
+                    holder.binding.subTextView.setVisibility(View.VISIBLE);
+                    holder.binding.subTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))) + " / " + model.getDuration() + " " + "دقیقه");
+                }
+                break;
+                case "patternDays": {
                     holder.binding.titleTextView.setText(item.object.get("title").toString());
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
-                    break;
+                }
+                break;
             }
         } catch (JSONException e) {
             e.printStackTrace();

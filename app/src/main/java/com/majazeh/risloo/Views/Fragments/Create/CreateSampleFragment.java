@@ -19,6 +19,8 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -58,7 +60,7 @@ public class CreateSampleFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String roomId = "", roomName = "", centerName = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "", caseName = "",  sessionId = "", sessionName = "", psychologyDescription = "";
+    public String roomId = "", roomName = "", centerName = "", type = "case", name = "", userCount = "", caseType = "", situation = "", caseId = "",  sessionId = "", psychologyDescription = "";
 
     @Nullable
     @Override
@@ -165,8 +167,8 @@ public class CreateSampleFragment extends Fragment {
                     binding.roomGroup.setVisibility(View.GONE);
                     binding.bulkSampleGroup.setVisibility(View.GONE);
 
-                    binding.caseIncludeLayout.selectTextView.setEnabled(true);
-                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                    binding.caseIncludeLayout.selectContainer.setEnabled(true);
+                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
                 } else if (tab.getPosition() == 1) {
                     type = "room";
 
@@ -181,8 +183,8 @@ public class CreateSampleFragment extends Fragment {
                     binding.bulkSampleGroup.setVisibility(View.VISIBLE);
 
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                    binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
                 }
             }
 
@@ -221,18 +223,18 @@ public class CreateSampleFragment extends Fragment {
                 caseType = parent.getItemAtPosition(position).toString();
 
                 if (position == 0) {
-                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                    binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
                     binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
                 } else if (position == 1 || position == 2) {
-                    binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                    binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
                     binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                 } else {
-                    binding.caseIncludeLayout.selectTextView.setEnabled(true);
-                    binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                    binding.caseIncludeLayout.selectContainer.setEnabled(true);
+                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
 
                     binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
                 }
@@ -256,12 +258,12 @@ public class CreateSampleFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
             casesDialog.setData("cases");
-        }).widget(binding.caseIncludeLayout.selectTextView);
+        }).widget(binding.caseIncludeLayout.selectContainer);
 
         ClickManager.onDelayedClickListener(() -> {
             sessionsDialog.show(requireActivity().getSupportFragmentManager(), "sessionsDialog");
             sessionsDialog.setData("sessions");
-        }).widget(binding.sessionIncludeLayout.selectTextView);
+        }).widget(binding.sessionIncludeLayout.selectContainer);
 
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -349,8 +351,8 @@ public class CreateSampleFragment extends Fragment {
                         binding.roomGroup.setVisibility(View.GONE);
                         binding.bulkSampleGroup.setVisibility(View.GONE);
 
-                        binding.caseIncludeLayout.selectTextView.setEnabled(true);
-                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                        binding.caseIncludeLayout.selectContainer.setEnabled(true);
+                        binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
                         break;
                     case "room":
                         binding.typeTabLayout.getTabAt(1);
@@ -367,8 +369,8 @@ public class CreateSampleFragment extends Fragment {
                         binding.bulkSampleGroup.setVisibility(View.VISIBLE);
 
                         binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                        binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                        binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                        binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
                         break;
                 }
             }
@@ -388,18 +390,18 @@ public class CreateSampleFragment extends Fragment {
                         binding.caseTypeIncludeLayout.selectSpinner.setSelection(i);
 
                         if (i == 0) {
-                            binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                            binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                            binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
                             binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
                         } else if (i == 1 || i == 2) {
-                            binding.caseIncludeLayout.selectTextView.setEnabled(false);
-                            binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                            binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
                             binding.situationIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                         } else {
-                            binding.caseIncludeLayout.selectTextView.setEnabled(true);
-                            binding.caseIncludeLayout.selectTextView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                            binding.caseIncludeLayout.selectContainer.setEnabled(true);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
 
                             binding.situationIncludeLayout.getRoot().setVisibility(View.GONE);
                         }
@@ -412,13 +414,13 @@ public class CreateSampleFragment extends Fragment {
             }
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
                 caseId = ((MainActivity) requireActivity()).singleton.getAddress();
-                caseName = ((MainActivity) requireActivity()).singleton.getAddress();
-                binding.caseIncludeLayout.selectTextView.setText(caseName);
+//                caseName = ((MainActivity) requireActivity()).singleton.getAddress();
+//                binding.caseIncludeLayout.selectTextView.setText(caseName);
             }
             if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
                 sessionId = ((MainActivity) requireActivity()).singleton.getAddress();
-                sessionName = ((MainActivity) requireActivity()).singleton.getAddress();
-                binding.sessionIncludeLayout.selectTextView.setText(sessionName);
+//                sessionName = ((MainActivity) requireActivity()).singleton.getAddress();
+//                binding.sessionIncludeLayout.selectTextView.setText(sessionName);
             }
 
 //        if (extras.getString("references") != null) {
@@ -534,14 +536,25 @@ public class CreateSampleFragment extends Fragment {
 
                     if (!caseId.equals(model.getCaseId())) {
                         caseId = model.getCaseId();
-                        caseName = model.getCaseId();
 
-                        binding.caseIncludeLayout.selectTextView.setText(caseName);
+                        binding.caseIncludeLayout.primaryTextView.setText(caseId);
+                        if (model.getClients() != null && !model.getClients().data().isEmpty()) {
+                            binding.caseIncludeLayout.secondaryTextView.setText("");
+                            for (int i = 0; i < model.getClients().data().size(); i++) {
+                                UserModel user = (UserModel) model.getClients().data().get(i);
+                                binding.caseIncludeLayout.secondaryTextView.append(user.getName());
+                                if (i != model.getClients().size() -1) {
+                                    binding.caseIncludeLayout.secondaryTextView.append(" - ");
+                                }
+                            }
+                        } else {
+                            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
+                        }
                     } else if (caseId.equals(model.getCaseId())) {
                         caseId = "";
-                        caseName = "";
 
-                        binding.caseIncludeLayout.selectTextView.setText("");
+                        binding.caseIncludeLayout.primaryTextView.setText("");
+                        binding.caseIncludeLayout.secondaryTextView.setText("");
                     }
 
                     casesDialog.dismiss();
@@ -552,14 +565,16 @@ public class CreateSampleFragment extends Fragment {
 
                     if (!sessionId.equals(model.getId())) {
                         sessionId = model.getId();
-                        sessionName = model.getId();
 
-                        binding.sessionIncludeLayout.selectTextView.setText(sessionName);
+                        String name = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
+
+                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(name, 10, name.length(), getResources().getColor(R.color.Gray600), (int) getResources().getDimension(R.dimen._8ssp)));
+                        binding.sessionIncludeLayout.secondaryTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))) + " / " + model.getDuration() + " " + "دقیقه");
                     } else if (sessionId.equals(model.getId())) {
                         sessionId = "";
-                        sessionName = "";
 
-                        binding.sessionIncludeLayout.selectTextView.setText("");
+                        binding.sessionIncludeLayout.primaryTextView.setText("");
+                        binding.sessionIncludeLayout.secondaryTextView.setText("");
                     }
 
                     sessionsDialog.dismiss();
