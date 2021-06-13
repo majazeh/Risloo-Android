@@ -86,7 +86,7 @@ public class Sample extends Model {
     public static void bulkShow(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (data.containsKey("id")) {
-                Model.show("bulk-samples/" + data.get("id"), data, header, response, SampleModel.class);
+                Model.show("bulk-samples/" + data.get("id"), data, header, response, BulkSampleModel.class);
             } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
             }
