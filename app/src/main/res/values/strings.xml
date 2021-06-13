@@ -340,6 +340,7 @@
     <string name="CreateSampleFragmentCaseStatusHeader">وضعیت پرونده</string>
     <string name="CreateSampleFragmentProblemHeader">مسئله</string>
     <string name="CreateSampleFragmentCaseHeader">پرونده</string>
+    <string name="CreateSampleFragmentClientHeader">انتخاب مراجع</string>
     <string name="CreateSampleFragmentSessionHeader">جلسه</string>
     <string name="CreateSampleFragmentReferenceHeader">مراجع</string>
     <string name="CreateSampleFragmentPsychologyDescriptionHeader">توضیحات روان‌شناس</string>

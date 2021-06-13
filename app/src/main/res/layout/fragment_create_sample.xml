@@ -263,6 +263,28 @@
                 app:layout_constraintTop_toBottomOf="@id/case_includeLayout" />
 
             <include
+                android:id="@+id/client_includeLayout"
+                layout="@layout/component_main_input_recycler2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_errorLayout" />
+
+            <include
+                android:id="@+id/client_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
+                app:layout_constraintStart_toStartOf="@id/type_tabLayout"
+                app:layout_constraintTop_toBottomOf="@id/client_includeLayout" />
+
+            <include
                 android:id="@+id/session_includeLayout"
                 layout="@layout/component_main_input_select2"
                 android:layout_width="0dp"
@@ -270,7 +292,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
-                app:layout_constraintTop_toBottomOf="@id/case_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/client_errorLayout" />
 
             <include
                 android:id="@+id/session_errorLayout"

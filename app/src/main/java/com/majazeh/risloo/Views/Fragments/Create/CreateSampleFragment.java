@@ -16,11 +16,13 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -52,6 +54,7 @@ public class CreateSampleFragment extends Fragment {
 
     // Adapters
     public SelectedAdapter scalesAdapter, referencesAdapter;
+    public CheckedAdapter clientsAdapter;
 
     // Dialogs
     private SearchableDialog scalesDialog, roomsDialog, referencesDialog, casesDialog, sessionsDialog;
@@ -84,6 +87,7 @@ public class CreateSampleFragment extends Fragment {
     private void initializer() {
         scalesAdapter = new SelectedAdapter(requireActivity());
         referencesAdapter = new SelectedAdapter(requireActivity());
+        clientsAdapter = new CheckedAdapter(requireActivity());
 
         scalesDialog = new SearchableDialog();
         roomsDialog = new SearchableDialog();
@@ -102,6 +106,7 @@ public class CreateSampleFragment extends Fragment {
         binding.caseStatusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseStatusHeader));
         binding.problemIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentProblemHeader));
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentCaseHeader));
+        binding.clientIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentClientHeader));
         binding.sessionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentSessionHeader));
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentReferenceHeader));
         binding.psychologyDescriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionHeader));
@@ -116,6 +121,7 @@ public class CreateSampleFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.fixedSpinner(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, R.array.CaseTypes, "main");
 
@@ -457,12 +463,35 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
-        if (method.equals("scales")) {
-            scalesAdapter.setItems(items, ids, method, binding.scaleIncludeLayout.countTextView);
-            binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesAdapter);
-        } else if (method.equals("references")) {
-            referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
-            binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+        switch (method) {
+            case "scales":
+                scalesAdapter.setItems(items, ids, method, binding.scaleIncludeLayout.countTextView);
+                binding.scaleIncludeLayout.selectRecyclerView.setAdapter(scalesAdapter);
+                break;
+            case "references":
+                referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
+                binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+                break;
+            case "clients":
+                clientsAdapter.setItems(items, ids, binding.clientIncludeLayout.countTextView);
+                binding.clientIncludeLayout.selectRecyclerView.setAdapter(clientsAdapter);
+                break;
+        }
+    }
+
+    private void setCheckedList(com.mre.ligheh.Model.Madule.List clients) {
+        if (clients != null && !clients.data().isEmpty()) {
+            ArrayList<TypeModel> items = new ArrayList<>();
+
+            for (int i = 0; i < clients.data().size(); i++) {
+                items.add(new TypeModel(clients.data().get(i).object));
+            }
+
+            setRecyclerView(items, new ArrayList<>(), "clients");
+            binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            clientsAdapter.clearItems();
+            binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
         }
     }
 
@@ -548,11 +577,15 @@ public class CreateSampleFragment extends Fragment {
                         } else {
                             binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
                         }
+
+                        setCheckedList(model.getClients());
                     } else if (caseId.equals(model.getCaseId())) {
                         caseId = "";
 
                         binding.caseIncludeLayout.primaryTextView.setText("");
                         binding.caseIncludeLayout.secondaryTextView.setText("");
+
+                        setCheckedList(null);
                     }
 
                     casesDialog.dismiss();
@@ -601,7 +634,7 @@ public class CreateSampleFragment extends Fragment {
         switch (type) {
             case "case_user":
                 data.put("case_id", caseId);
-                data.put("client_id", "");
+                data.put("client_id", clientsAdapter.getIds());
                 data.put("session_id", sessionId);
                 break;
             case "room_user":
@@ -667,7 +700,10 @@ public class CreateSampleFragment extends Fragment {
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionIncludeLayout.selectContainer, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                             case "client_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                if (type.equals("case_user"))
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (RecyclerView) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                else if (type.equals("room_user"))
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                             case "psychologist_description":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText, binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
