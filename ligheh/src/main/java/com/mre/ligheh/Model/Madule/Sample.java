@@ -2,7 +2,9 @@ package com.mre.ligheh.Model.Madule;
 
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.ScaleModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -24,7 +26,7 @@ public class Sample extends Model {
 
     public static void assessmentsList(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.list(endpoint, data, header, response, SampleModel.class);
+            Model.list(endpoint, data, header, response, ScaleModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -54,7 +56,7 @@ public class Sample extends Model {
 
     public static void bulkList(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.list("bulk-samples", data, header, response, SampleModel.class);
+            Model.list("bulk-samples", data, header, response, BulkSampleModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

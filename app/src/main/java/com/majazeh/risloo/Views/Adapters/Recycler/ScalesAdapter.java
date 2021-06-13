@@ -14,7 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
-import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
     @Override
     public void onBindViewHolder(@NonNull ScalesHolder holder, int i) {
-        SampleModel scale = (SampleModel) scales.get(i);
+        ScaleModel scale = (ScaleModel) scales.get(i);
 
         detector(holder);
 
@@ -79,7 +79,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         }
     }
 
-    private void listener(ScalesHolder holder, SampleModel model) {
+    private void listener(ScalesHolder holder, ScaleModel model) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -87,23 +87,23 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.createSampleFragment, getExtras(model))).widget(holder.binding.createTextView);
     }
 
-    private void setData(ScalesHolder holder, SampleModel model) {
+    private void setData(ScalesHolder holder, ScaleModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
             holder.binding.topView.setVisibility(View.VISIBLE);
         }
 
-        holder.binding.serialTextView.setText(model.getSampleId());
-        holder.binding.nameTextView.setText(model.getSampleTitle());
+        holder.binding.serialTextView.setText(model.getId());
+        holder.binding.nameTextView.setText(model.getTitle());
 
-        if (!model.getSampleEdition().equals(""))
-            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        if (!model.getEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
         else
-            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+            holder.binding.editionTextView.setText("نسخه " + model.getVersion());
     }
 
-    private Bundle getExtras(SampleModel model) {
+    private Bundle getExtras(ScaleModel model) {
         Bundle extras = new Bundle();
 //        try {
 //

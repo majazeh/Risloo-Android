@@ -20,7 +20,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
-import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
@@ -47,7 +47,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull BulkSamplesHolder holder, int i) {
-        SampleModel bulkSample = (SampleModel) bulkSamples.get(i);
+        BulkSampleModel bulkSample = (BulkSampleModel) bulkSamples.get(i);
 
         detector(holder);
 
@@ -85,7 +85,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         }
     }
 
-    private void listener(BulkSamplesHolder holder, SampleModel model) {
+    private void listener(BulkSamplesHolder holder, BulkSampleModel model) {
         ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.bulkSampleFragment, getExtras(model))).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -95,14 +95,14 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
                 switch (menu) {
                     case "لینک ثبت نام":
-                        Log.e("menu", "link");
+                        Log.e("link", model.getLink());
                         break;
                     case "کپی کردن لینک":
-                        IntentManager.clipboard(activity, menu);
+                        IntentManager.clipboard(activity, model.getLink());
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
                         break;
                     case "ویرایش نمونه":
-                        Log.e("menu", "edit");
+                        Log.e("edit", "");
                         break;
                 }
 
@@ -116,7 +116,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         });
     }
 
-    private void setData(BulkSamplesHolder holder, SampleModel model) {
+    private void setData(BulkSamplesHolder holder, BulkSampleModel model) {
         try {
             if (holder.getBindingAdapterPosition() == 0) {
                 holder.binding.topView.setVisibility(View.GONE);
@@ -124,20 +124,20 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
                 holder.binding.topView.setVisibility(View.VISIBLE);
             }
 
-            holder.binding.serialTextView.setText(model.getSampleId());
-            holder.binding.nameTextView.setText(model.getSampleTitle());
-            holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCaseStatus()));
+            holder.binding.serialTextView.setText(model.getId());
+            holder.binding.nameTextView.setText(model.getTitle());
+            holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCase_status()));
 
-            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
-                holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
+            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getName() != null) {
+                holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
             }
 
-            if (model.getSampleRoom() != null && model.getSampleRoom().getRoomCenter() != null && model.getSampleRoom().getRoomCenter().getDetail() != null && !model.getSampleRoom().getRoomCenter().getDetail().getString("title").equals("")) {
-                holder.binding.centerTextView.setText(model.getSampleRoom().getRoomCenter().getDetail().getString("title"));
+            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && !model.getRoom().getRoomCenter().getDetail().getString("title").equals("")) {
+                holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
             }
 
-            holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getSampleStatus()));
-            holder.binding.referenceTextView.setText(model.getMembersCount() + " / " + model.getJoined());
+            holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getStatus()));
+            holder.binding.referenceTextView.setText(model.getMembers_count() + " / " + model.getJoined());
 
             InitManager.fixedCustomSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
         } catch (JSONException e) {
@@ -145,44 +145,41 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         }
     }
 
-    private Bundle getExtras(SampleModel model) {
+    private Bundle getExtras(BulkSampleModel model) {
         Bundle extras = new Bundle();
         try {
-            extras.putString("id", model.getSampleId());
+            extras.putString("id", model.getId());
 
-            extras.putString("scale_id", model.getSampleScaleId());
-            extras.putString("scale_title", model.getSampleScaleTitle());
+            if (model.getRoom() != null) {
+                extras.putString("room_id", model.getRoom().getRoomId());
 
-            if (model.getSampleRoom() != null) {
-                extras.putString("room_id", model.getSampleRoom().getRoomId());
+                if (model.getRoom().getRoomManager() != null) {
+                    extras.putString("room_name", model.getRoom().getRoomManager().getName());
 
-                if (model.getSampleRoom().getRoomManager() != null) {
-                    extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
-
-                    if (model.getSampleRoom().getRoomManager().getAvatar() != null && model.getSampleRoom().getRoomManager().getAvatar().getMedium() != null)
-                        extras.putString("room_avatar", model.getSampleRoom().getRoomManager().getAvatar().getMedium().getUrl());
+                    if (model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null)
+                        extras.putString("room_avatar", model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
                 }
             }
 
-            if (model.getSampleRoom() != null) {
-                if (model.getSampleRoom().getRoomCenter() != null) {
-                    extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
+            if (model.getRoom() != null) {
+                if (model.getRoom().getRoomCenter() != null) {
+                    extras.putString("center_id", model.getRoom().getRoomCenter().getCenterId());
 
-                    if (model.getSampleRoom().getRoomCenter().getDetail() != null) {
-                        if (model.getSampleRoom().getRoomCenter().getDetail().has("title") && !model.getSampleRoom().getRoomCenter().getDetail().getString("title").equals(""))
-                            extras.putString("center_name", model.getSampleRoom().getRoomCenter().getDetail().getString("title"));
+                    if (model.getRoom().getRoomCenter().getDetail() != null) {
+                        if (model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals(""))
+                            extras.putString("center_name", model.getRoom().getRoomCenter().getDetail().getString("title"));
 
-                        if (model.getSampleRoom().getRoomCenter().getDetail().has("avatar") && !model.getSampleRoom().getRoomCenter().getDetail().isNull("avatar") && model.getSampleRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0)
-                            extras.putString("center_avatar", model.getSampleRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                        if (model.getRoom().getRoomCenter().getDetail().has("avatar") && !model.getRoom().getRoomCenter().getDetail().isNull("avatar") && model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0)
+                            extras.putString("center_avatar", model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                     }
                 }
             }
 
-            extras.putInt("members_count", model.getMembersCount());
+            extras.putInt("members_count", model.getMembers_count());
             extras.putInt("joined", model.getJoined());
 
-            extras.putString("case_status", model.getCaseStatus());
-            extras.putString("status", model.getSampleStatus());
+            extras.putString("case_status", model.getCase_status());
+            extras.putString("status", model.getStatus());
         } catch (JSONException e) {
             e.printStackTrace();
         }
