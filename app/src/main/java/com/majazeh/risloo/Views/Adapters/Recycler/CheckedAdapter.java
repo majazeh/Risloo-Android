@@ -49,7 +49,10 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedH
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if (this.items != null)
+            return items.size();
+        else
+            return 0;
     }
 
     public ArrayList<TypeModel> getItems() {

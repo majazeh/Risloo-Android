@@ -176,12 +176,20 @@ public class CreateSampleFragment extends Fragment {
 
                     binding.caseIncludeLayout.selectContainer.setEnabled(true);
                     binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+
+                    if (clientsAdapter.getItemCount() != 0)
+                        binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    else
+                        binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
                 } else if (tab.getPosition() == 1) {
                     type = "room_user";
 
                     binding.caseUserGroup.setVisibility(View.GONE);
                     binding.roomUserGroup.setVisibility(View.VISIBLE);
                     binding.bulkGroup.setVisibility(View.GONE);
+
+                    if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                        binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
                 } else {
                     type = "bulk";
 
@@ -192,6 +200,9 @@ public class CreateSampleFragment extends Fragment {
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     binding.caseIncludeLayout.selectContainer.setEnabled(false);
                     binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                    if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                        binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
                 }
             }
 
