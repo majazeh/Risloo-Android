@@ -3,13 +3,14 @@ package com.mre.ligheh.Model.TypeModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Item {
+public class Item extends TypeModel{
     private String type="";
     private String image_url="";
     private ItemAnswer answer;
     private String user_answered="";
 
     public Item(JSONObject jsonObject) {
+        super(jsonObject);
         try {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));

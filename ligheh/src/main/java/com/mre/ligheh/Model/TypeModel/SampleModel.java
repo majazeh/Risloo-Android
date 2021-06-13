@@ -17,14 +17,14 @@ public class SampleModel extends TypeModel {
     private String sampleScaleId="";
     private String sampleScaleTitle="";
     private String sampleDescription="";
-    private JSONArray items;
+    private List items;
     private String caseStatus = "";
     private int membersCount;
     private int joined;
     private String chain="";
     private RoomModel SampleRoom;
     private CaseModel SampleCase;
-    private JSONArray prerequisites;
+    private List prerequisites;
     private JSONArray terms;
     private String primaryTerm="";
     private String sampleStatus="";
@@ -99,20 +99,30 @@ public class SampleModel extends TypeModel {
             setSampleDescription(jsonObject.getString("description"));
         if (!jsonObject.isNull("client"))
             setClient(new UserModel(jsonObject.getJSONObject("client")));
+
         if (!jsonObject.isNull("items")) {
-            items = new JSONArray();
+            com.mre.ligheh.Model.Madule.List items = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("items").length(); i++) {
-                items.put(new Item(jsonObject.getJSONArray("items").getJSONObject(i)));
+                items.add(new UserModel(jsonObject.getJSONArray("items").getJSONObject(i)));
             }
+            setItems(items);
+        } else {
+            setItems(new com.mre.ligheh.Model.Madule.List());
         }
+
+
         if (!jsonObject.isNull("chain")) {
                 setChain(jsonObject.getString("chain"));
         }
+
         if (!jsonObject.isNull("prerequisites")) {
-            prerequisites = new JSONArray();
+            com.mre.ligheh.Model.Madule.List prerequisites = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("prerequisites").length(); i++) {
-                prerequisites.put(new Prerequisites(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
+                prerequisites.add(new SampleModel(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
             }
+            setPrerequisites(prerequisites);
+        } else {
+            setPrerequisites(new com.mre.ligheh.Model.Madule.List());
         }
         if (!jsonObject.isNull("items") && !jsonObject.isNull("prerequisites"))
             sampleForm = new SampleForm(items, chain, prerequisites, getSampleDescription());
@@ -268,11 +278,11 @@ public class SampleModel extends TypeModel {
         this.sampleStatus = sampleStatus;
     }
 
-    public JSONArray getItems() {
+    public List getItems() {
         return items;
     }
 
-    public void setItems(JSONArray items) {
+    public void setItems(List items) {
         this.items = items;
     }
 
@@ -300,11 +310,11 @@ public class SampleModel extends TypeModel {
         this.sessionId = sessionId;
     }
 
-    public JSONArray getPrerequisites() {
+    public List getPrerequisites() {
         return prerequisites;
     }
 
-    public void setPrerequisites(JSONArray prerequisites) {
+    public void setPrerequisites(List prerequisites) {
         this.prerequisites = prerequisites;
     }
 

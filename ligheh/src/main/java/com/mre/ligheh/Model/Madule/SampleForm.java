@@ -6,15 +6,15 @@ import org.json.JSONArray;
 import org.json.JSONException;
 
 public class SampleForm {
-    private JSONArray items;
+    private List items;
     private String chain;
-    private JSONArray prerequisites;
+    private List prerequisites;
     private String description;
     private JSONArray sampleForm;
     private JSONArray currentForm;
     private int position = 0;
 
-    public SampleForm(JSONArray items, @Nullable String chain, JSONArray prerequisites, String description) {
+    public SampleForm(List items, @Nullable String chain, List prerequisites, String description) {
         this.items = items;
         if (chain != null)
             this.chain = chain;
@@ -30,12 +30,8 @@ public class SampleForm {
             addForm(chain, "زنجیره");
         addForm(prerequisites, "اطلاعات");
         addForm(description, "توضیحات");
-        for (int i = 0; i < items.length(); i++) {
-            try {
-                addForm(items.get(i), String.valueOf(i + 1));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+        for (int i = 0; i < items.size(); i++) {
+            addForm(items.data().get(i), String.valueOf(i + 1));
         }
         addForm("Close", "پایان");
     }

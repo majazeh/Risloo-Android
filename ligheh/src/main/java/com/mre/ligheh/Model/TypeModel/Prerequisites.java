@@ -3,7 +3,7 @@ package com.mre.ligheh.Model.TypeModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Prerequisites {
+public class Prerequisites extends TypeModel {
     private String type="";
     private String text="";
     private JSONObject answer;
@@ -13,6 +13,7 @@ public class Prerequisites {
     private String user_answered="";
 
     public Prerequisites(JSONObject jsonObject) {
+        super(jsonObject);
         try {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));

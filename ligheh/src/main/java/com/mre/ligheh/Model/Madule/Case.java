@@ -4,6 +4,7 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.ReportModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONObject;
@@ -44,6 +45,16 @@ public class Case extends Model {
             e.printStackTrace();
         }
     }
+
+    public static void reports(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.show("client-reports/all/" + data.get("id"), data, header, response, ReportModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {

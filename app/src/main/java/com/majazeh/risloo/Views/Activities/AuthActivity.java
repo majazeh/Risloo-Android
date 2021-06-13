@@ -133,7 +133,13 @@ public class AuthActivity extends AppCompatActivity {
 
         if (user.getTreasuries() != null) {
             try {
-                singleton.setMoney(String.valueOf(user.getTreasuries().getJSONObject(0).getInt("balance") + user.getTreasuries().getJSONObject(1).getInt("balance") + user.getTreasuries().getJSONObject(2).getInt("balance")));
+                int money = 0;
+                for (int i = 0; i < user.getTreasuries().length(); i++) {
+                    if (user.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") ||user.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") ){
+                        money+= user.getTreasuries().getJSONObject(i).getInt("balance");
+                    }
+                }
+                singleton.setMoney(String.valueOf(money));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
