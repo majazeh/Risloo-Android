@@ -207,7 +207,7 @@ public class Sample extends Model {
 
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.create(endpoint, data, header, response, SampleModel.class);
+            Model.create(endpoint + "/samples", data, header, response, SampleModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
