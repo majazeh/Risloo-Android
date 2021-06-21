@@ -4,9 +4,7 @@ import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.CountDownTimer;
-import android.text.Editable;
 import android.text.TextPaint;
-import android.text.TextWatcher;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.LayoutInflater;
@@ -18,6 +16,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -46,8 +45,7 @@ public class AuthPinFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String mobile = "", pin = "";
-    private String key = "", callback = "";
+    private String pin = "", mobile = "", key = "", callback = "";
 
     @Nullable
     @Override
@@ -60,7 +58,7 @@ public class AuthPinFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         startCountDownTimer();
 
@@ -103,26 +101,6 @@ public class AuthPinFragment extends Fragment {
             return false;
         });
 
-        binding.pinEditText.getRoot().addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (binding.pinEditText.getRoot().length() == 6) {
-                    ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
-                    doWork("pin");
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
         clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
@@ -162,40 +140,35 @@ public class AuthPinFragment extends Fragment {
 
         ClickManager.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment,null);
+
+            NavDirections action = AuthPinFragmentDirections.actionAuthPinFragmentToAuthLoginFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.loginLinkTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment, null);
+
+            NavDirections action = AuthPinFragmentDirections.actionAuthPinFragmentToAuthRegisterFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.registerLinkTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
             countDownTimer.cancel();
-            ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment, null);
+
+            NavDirections action = AuthPinFragmentDirections.actionAuthPinFragmentToAuthPasswordRecoverFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("mobile") != null) {
-                mobile = getArguments().getString("mobile");
+    private void setArgs() {
+        mobile = AuthPinFragmentArgs.fromBundle(getArguments()).getMobile();
+        binding.mobileTextView.getRoot().setText(mobile);
 
-                binding.mobileTextView.getRoot().setText(mobile);
-                binding.mobileTextView.getRoot().setVisibility(View.VISIBLE);
-            } else {
-                binding.mobileTextView.getRoot().setText(mobile);
-                binding.mobileTextView.getRoot().setVisibility(View.GONE);
-            }
+        if (AuthPinFragmentArgs.fromBundle(getArguments()).getKey() != null)
+            key = AuthPinFragmentArgs.fromBundle(getArguments()).getKey();
 
-            if (getArguments().getString("key") != null) {
-                key = requireArguments().getString("key");
-            }
-
-            if (getArguments().getString("callback") != null) {
-                callback = requireArguments().getString("callback");
-            }
-        }
+        if (AuthPinFragmentArgs.fromBundle(getArguments()).getCallback() != null)
+            callback = AuthPinFragmentArgs.fromBundle(getArguments()).getCallback();
     }
 
     private void startCountDownTimer() {
@@ -244,25 +217,26 @@ public class AuthPinFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             if (model.getUser() == null) {
-                                Bundle extras = new Bundle();
-
-                                extras.putString("mobile", mobile);
-                                extras.putString("key", model.getKey());
-                                extras.putString("callback", model.getCallback());
-
                                 switch (model.getTheory()) {
-                                    case "password":
+                                    case "password": {
+                                        NavDirections action = AuthPinFragmentDirections.actionAuthPinFragmentToAuthPasswordFragment(mobile, model.getKey(), model.getCallback());
+
                                         ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                                        break;
-                                    case "recovery":
+                                        ((AuthActivity) requireActivity()).navController.navigate(action);
+                                    } break;
+                                    case "recovery": {
+                                        NavDirections action = AuthPinFragmentDirections.actionAuthPinFragmentToAuthPasswordChangeFragment(mobile, model.getKey(), model.getCallback());
+
                                         ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                        ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                                        break;
+                                        ((AuthActivity) requireActivity()).navController.navigate(action);
+                                    } break;
                                 }
                             } else {
+                                NavDirections action = AuthPinFragmentDirections.actionAuthPinFragmentToAuthSerialFragment();
+
+                                ((AuthActivity) requireActivity()).singleton.login(model);
                                 ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                ((AuthActivity) requireActivity()).login(model);
+                                ((AuthActivity) requireActivity()).navController.navigate(action);
                             }
                         });
                     }

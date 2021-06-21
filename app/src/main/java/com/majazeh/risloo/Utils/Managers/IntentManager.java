@@ -51,9 +51,9 @@ public class IntentManager {
         activity.startActivity(intent);
     }
 
-    public static void test(Activity activity, String test) {
+    public static void test(Activity activity, String id) {
         Intent intent = new Intent(activity, TestActivity.class);
-        intent.putExtra("test", test);
+        intent.putExtra("id", id);
 
         activity.startActivity(intent);
     }

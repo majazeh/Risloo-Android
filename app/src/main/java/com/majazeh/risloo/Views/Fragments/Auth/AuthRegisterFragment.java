@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -97,8 +98,15 @@ public class AuthRegisterFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null)).widget(binding.loginLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment, null)).widget(binding.passwordRecoverLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthLoginFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.loginLinkTextView.getRoot());
+
+        ClickManager.onClickListener(() -> {
+            NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPasswordRecoverFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void doWork() {
@@ -115,25 +123,26 @@ public class AuthRegisterFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
-                            Bundle extras = new Bundle();
-
-                            extras.putString("mobile", mobile);
-                            extras.putString("key", model.getKey());
-                            extras.putString("callback", model.getCallback());
-
                             switch (model.getTheory()) {
-                                case "password":
+                                case "password": {
+                                    NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPasswordFragment(mobile, model.getKey(), model.getCallback());
+
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                                    break;
-                                case "mobileCode":
+                                    ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
+                                case "mobileCode": {
+                                    NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPinFragment(mobile, model.getKey(), model.getCallback());
+
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                                    break;
+                                    ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
                             }
                         } else {
+                            NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthSerialFragment();
+
+                            ((AuthActivity) requireActivity()).singleton.login(model);
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).login(model);
+                            ((AuthActivity) requireActivity()).navController.navigate(action);
                         }
                     });
                 }

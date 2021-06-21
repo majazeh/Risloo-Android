@@ -3,7 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_auth"
-    app:startDestination="@id/authLoginFragment">
+    app:startDestination="@id/authLoginFragment"
+    tools:ignore="ExtraText">
+
+    /*
+    ---------- Login Destinations ----------
+    */
 
     <fragment
         android:id="@+id/authLoginFragment"
@@ -11,59 +16,224 @@
         android:label="@string/LoginFragmentTitle"
         tools:layout="@layout/fragment_auth_login" >
         <action
-            android:id="@+id/action_authLoginFragment_to_authPasswordChangeFragment"
-            app:destination="@id/authPasswordChangeFragment" />
+            android:id="@+id/action_authLoginFragment_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+        <action
+            android:id="@+id/action_authLoginFragment_to_authPasswordRecoverFragment"
+            app:destination="@id/authPasswordRecoverFragment" />
+
         <action
             android:id="@+id/action_authLoginFragment_to_authPasswordFragment"
             app:destination="@id/authPasswordFragment" />
         <action
-            android:id="@+id/action_authLoginFragment_to_authPasswordRecoverFragment"
-            app:destination="@id/authPasswordRecoverFragment" />
-        <action
             android:id="@+id/action_authLoginFragment_to_authPinFragment"
             app:destination="@id/authPinFragment" />
-        <action
-            android:id="@+id/action_authLoginFragment_to_authRegisterFragment"
-            app:destination="@id/authRegisterFragment" />
         <action
             android:id="@+id/action_authLoginFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />
     </fragment>
 
-    <fragment
-        android:id="@+id/authPasswordChangeFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordChangeFragment"
-        android:label="@string/PasswordChangeFragmentTitle"
-        tools:layout="@layout/fragment_auth_password_change" />
-
-    <fragment
-        android:id="@+id/authPasswordFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordFragment"
-        android:label="@string/PasswordFragmentTitle"
-        tools:layout="@layout/fragment_auth_password" />
-
-    <fragment
-        android:id="@+id/authPasswordRecoverFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordRecoverFragment"
-        android:label="@string/PasswordRecoverFragmentTitle"
-        tools:layout="@layout/fragment_auth_password_recover" />
-
-    <fragment
-        android:id="@+id/authPinFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPinFragment"
-        android:label="@string/PinFragmentTitle"
-        tools:layout="@layout/fragment_auth_pin" />
+    /*
+    ---------- Register Destinations ----------
+    */
 
     <fragment
         android:id="@+id/authRegisterFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthRegisterFragment"
         android:label="@string/RegisterFragmentTitle"
-        tools:layout="@layout/fragment_auth_register" />
+        tools:layout="@layout/fragment_auth_register" >
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment"
+            app:popUpTo="@id/authLoginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authPasswordRecoverFragment"
+            app:destination="@id/authPasswordRecoverFragment" />
+
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authPasswordFragment"
+            app:destination="@id/authPasswordFragment" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authPinFragment"
+            app:destination="@id/authPinFragment" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authSerialFragment"
+            app:destination="@id/authSerialFragment" />
+    </fragment>
+
+    /*
+    ---------- PasswordRecover Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/authPasswordRecoverFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordRecoverFragment"
+        android:label="@string/PasswordRecoverFragmentTitle"
+        tools:layout="@layout/fragment_auth_password_recover" >
+        <action
+            android:id="@+id/action_authPasswordRecoverFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment"
+            app:popUpTo="@id/authLoginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authPasswordRecoverFragment_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+
+        <action
+            android:id="@+id/action_authPasswordRecoverFragment_to_authPasswordFragment"
+            app:destination="@id/authPasswordFragment" />
+        <action
+            android:id="@+id/action_authPasswordRecoverFragment_to_authPinFragment"
+            app:destination="@id/authPinFragment" />
+        <action
+            android:id="@+id/action_authPasswordRecoverFragment_to_authPasswordChangeFragment"
+            app:destination="@id/authPasswordChangeFragment" />
+        <action
+            android:id="@+id/action_authPasswordRecoverFragment_to_authSerialFragment"
+            app:destination="@id/authSerialFragment" />
+    </fragment>
+
+    /*
+    ---------- Password Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/authPasswordFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordFragment"
+        android:label="@string/PasswordFragmentTitle"
+        tools:layout="@layout/fragment_auth_password" >
+        <argument
+            android:name="mobile"
+            app:argType="string" />
+        <argument
+            android:name="key"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="callback"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_authPasswordFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment"
+            app:popUpTo="@id/authLoginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authPasswordFragment_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+        <action
+            android:id="@+id/action_authPasswordFragment_to_authPasswordRecoverFragment"
+            app:destination="@id/authPasswordRecoverFragment" />
+
+        <action
+            android:id="@+id/action_authPasswordFragment_to_authPinFragment"
+            app:destination="@id/authPinFragment" />
+        <action
+            android:id="@+id/action_authPasswordFragment_to_authSerialFragment"
+            app:destination="@id/authSerialFragment" />
+    </fragment>
+
+    /*
+    ---------- Pin Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/authPinFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPinFragment"
+        android:label="@string/PinFragmentTitle"
+        tools:layout="@layout/fragment_auth_pin" >
+        <argument
+            android:name="mobile"
+            app:argType="string" />
+        <argument
+            android:name="key"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="callback"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_authPinFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment"
+            app:popUpTo="@id/authLoginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authPinFragment_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+        <action
+            android:id="@+id/action_authPinFragment_to_authPasswordRecoverFragment"
+            app:destination="@id/authPasswordRecoverFragment" />
+
+        <action
+            android:id="@+id/action_authPinFragment_to_authPasswordFragment"
+            app:destination="@id/authPasswordFragment" />
+        <action
+            android:id="@+id/action_authPinFragment_to_authPasswordChangeFragment"
+            app:destination="@id/authPasswordChangeFragment" />
+        <action
+            android:id="@+id/action_authPinFragment_to_authSerialFragment"
+            app:destination="@id/authSerialFragment" />
+    </fragment>
+
+    /*
+    ---------- Password Change Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/authPasswordChangeFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthPasswordChangeFragment"
+        android:label="@string/PasswordChangeFragmentTitle"
+        tools:layout="@layout/fragment_auth_password_change" >
+        <argument
+            android:name="mobile"
+            app:argType="string" />
+        <argument
+            android:name="key"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="callback"
+            app:nullable="true"
+            app:argType="string" />
+
+        <action
+            android:id="@+id/action_authPasswordChangeFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment"
+            app:popUpTo="@id/authLoginFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_authPasswordChangeFragment_to_authRegisterFragment"
+            app:destination="@id/authRegisterFragment" />
+        <action
+            android:id="@+id/action_authPasswordChangeFragment_to_authPasswordRecoverFragment"
+            app:destination="@id/authPasswordRecoverFragment" />
+
+        <action
+            android:id="@+id/action_authPasswordChangeFragment_to_authPinFragment"
+            app:destination="@id/authPinFragment" />
+        <action
+            android:id="@+id/action_authPasswordChangeFragment_to_authSerialFragment"
+            app:destination="@id/authSerialFragment" />
+    </fragment>
+
+    /*
+    ---------- Serial Destinations ----------
+    */
 
     <fragment
         android:id="@+id/authSerialFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Auth.AuthSerialFragment"
         android:label="@string/SerialFragmentTitle"
-        tools:layout="@layout/fragment_auth_serial" />
+        tools:layout="@layout/fragment_auth_serial" >
+        <action
+            android:id="@+id/action_authSerialFragment_to_authLoginFragment"
+            app:destination="@id/authLoginFragment"
+            app:popUpTo="@id/authLoginFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
 
 </navigation>

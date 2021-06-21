@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -106,17 +107,22 @@ public class AuthSerialFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((AuthActivity) requireActivity()).singleton.logOut();
+                            NavDirections action = AuthSerialFragmentDirections.actionAuthSerialFragmentToAuthLoginFragment();
 
+                            ((AuthActivity) requireActivity()).singleton.logout();
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null);
+                            ((AuthActivity) requireActivity()).navController.navigate(action);
                         });
                     }
                 }
 
                 @Override
                 public void onFailure(String response) {
-                    // Place Code if Needed
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            // Place Code if Needed
+                        });
+                    }
                 }
             });
         }).widget(binding.logoutLinkTextView.getRoot());

@@ -5,13 +5,13 @@ import android.content.pm.PackageInfo;
 
 public class PackageManager {
 
-    public static String versionCode(Activity activity) {
+    public static int versionCode(Activity activity) {
         try {
             PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
-            return String.valueOf(packageInfo.versionCode);
+            return packageInfo.versionCode;
         } catch (android.content.pm.PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-        } return "";
+        } return -1;
     }
 
     public static String versionName(Activity activity) {

@@ -17,10 +17,6 @@ import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
-import com.mre.ligheh.Model.TypeModel.AuthModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
-
-import org.json.JSONException;
 
 import java.util.Objects;
 
@@ -73,81 +69,6 @@ public class AuthActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
     }
 
-    public void navigator(int destinationId, Bundle extras) {
-        try {
-            if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
-                while (Objects.requireNonNull(navController.getCurrentDestination()).getId() != destinationId) {
-                    navController.popBackStack();
-                }
-                if (destinationId == navController.getGraph().getStartDestination()) {
-                    navController.popBackStack();
-                }
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        navController.navigate(destinationId, extras);
-    }
-
-    public void login(AuthModel object) {
-        UserModel user = object.getUser();
-
-        if (object.getToken() != null)
-            singleton.setToken(object.getToken());
-
-        if (object.getToken() != null)
-            singleton.setAuthorization("Bearer " + object.getToken());
-
-        if (user.getId() != null)
-            singleton.setId(user.getId());
-
-        if (user.getName() != null)
-            singleton.setName(user.getName());
-
-        if (user.getUsername() != null)
-            singleton.setUsername(user.getUsername());
-
-        if (user.getBirthday() != null)
-            singleton.setBirthday(user.getBirthday());
-
-        if (user.getEmail() != null)
-            singleton.setEmail(user.getEmail());
-
-        if (user.getMobile() != null)
-            singleton.setMobile(user.getMobile());
-
-        if (user.getUserStatus() != null)
-            singleton.setStatus(user.getUserStatus());
-
-        if (user.getUserType() != null)
-            singleton.setType(user.getUserType());
-
-        if (user.getGender() != null)
-            singleton.setGender(user.getGender());
-
-        if (user.getAvatar() != null && user.getAvatar().getMedium() != null && user.getAvatar().getMedium().getUrl() != null)
-            singleton.setAvatar(user.getAvatar().getMedium().getUrl());
-
-        if (user.getPublic_key() != null)
-            singleton.setPublicKey(user.getPublic_key());
-
-        if (user.getTreasuries() != null) {
-            try {
-                int money = 0;
-                for (int i = 0; i < user.getTreasuries().length(); i++) {
-                    if (user.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") ||user.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") ){
-                        money+= user.getTreasuries().getJSONObject(i).getInt("balance");
-                    }
-                }
-                singleton.setMoney(String.valueOf(money));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        navigator(R.id.authSerialFragment, null);
-    }
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -163,13 +84,6 @@ public class AuthActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
-    }
-
-    @Override
-    public void onBackPressed() {
-        if (!navController.popBackStack()) {
-            finish();
-        }
     }
 
 }

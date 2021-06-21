@@ -17,6 +17,7 @@ import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -40,8 +41,7 @@ public class AuthPasswordChangeFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String mobile = "", password = "";
-    private String key = "", callback = "";
+    private String password = "", mobile = "", key = "", callback = "";
     private boolean passwordVisibility = false;
 
     @Nullable
@@ -55,7 +55,7 @@ public class AuthPasswordChangeFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -161,31 +161,31 @@ public class AuthPasswordChangeFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authLoginFragment, null)).widget(binding.loginLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment,null)).widget(binding.registerLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment, null)).widget(binding.passwordRecoverLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthLoginFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.loginLinkTextView.getRoot());
+
+        ClickManager.onClickListener(() -> {
+            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthRegisterFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.registerLinkTextView.getRoot());
+
+        ClickManager.onClickListener(() -> {
+            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthPasswordRecoverFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("mobile") != null) {
-                mobile = getArguments().getString("mobile");
+    private void setArgs() {
+        mobile = AuthPasswordChangeFragmentArgs.fromBundle(getArguments()).getMobile();
+        binding.mobileTextView.getRoot().setText(mobile);
 
-                binding.mobileTextView.getRoot().setText(mobile);
-                binding.mobileTextView.getRoot().setVisibility(View.VISIBLE);
-            } else {
-                binding.mobileTextView.getRoot().setText(mobile);
-                binding.mobileTextView.getRoot().setVisibility(View.GONE);
-            }
+        if (AuthPasswordChangeFragmentArgs.fromBundle(getArguments()).getKey() != null)
+            key = AuthPasswordChangeFragmentArgs.fromBundle(getArguments()).getKey();
 
-            if (getArguments().getString("key") != null) {
-                key = requireArguments().getString("key");
-            }
-
-            if (getArguments().getString("callback") != null) {
-                callback = requireArguments().getString("callback");
-            }
-        }
+        if (AuthPasswordChangeFragmentArgs.fromBundle(getArguments()).getCallback() != null)
+            callback = AuthPasswordChangeFragmentArgs.fromBundle(getArguments()).getCallback();
     }
 
     private void doWork() {
@@ -205,25 +205,20 @@ public class AuthPasswordChangeFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
-                            Bundle extras = new Bundle();
-
-                            extras.putString("mobile", mobile);
-                            extras.putString("key", model.getKey());
-                            extras.putString("callback", model.getCallback());
-
                             switch (model.getTheory()) {
-                                case "mobileCode":
+                                case "mobileCode": {
+                                    NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthPinFragment(mobile, model.getKey(), model.getCallback());
+
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                                    break;
-                                case "recovery":
-                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordChangeFragment, extras);
-                                    break;
+                                    ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
                             }
                         } else {
+                            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthSerialFragment();
+
+                            ((AuthActivity) requireActivity()).singleton.login(model);
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).login(model);
+                            ((AuthActivity) requireActivity()).navController.navigate(action);
                         }
                     });
                 }

@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -43,7 +44,8 @@ public class AuthLoginFragment extends Fragment {
         binding = FragmentAuthLoginBinding.inflate(inflater, viewGroup, false);
 
         if (!((AuthActivity) requireActivity()).singleton.getToken().equals("")) {
-            ((AuthActivity) requireActivity()).navigator(R.id.authSerialFragment, null);
+            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthSerialFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
         } else {
             initializer();
 
@@ -103,8 +105,15 @@ public class AuthLoginFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authRegisterFragment, null)).widget(binding.registerLinkTextView.getRoot());
-        ClickManager.onClickListener(() -> ((AuthActivity) requireActivity()).navigator(R.id.authPasswordRecoverFragment, null)).widget(binding.passwordRecoverLinkTextView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthRegisterFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.registerLinkTextView.getRoot());
+
+        ClickManager.onClickListener(() -> {
+            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthPasswordRecoverFragment();
+            ((AuthActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
 
     private void doWork() {
@@ -121,25 +130,26 @@ public class AuthLoginFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (model.getUser() == null) {
-                            Bundle extras = new Bundle();
-
-                            extras.putString("mobile", mobile);
-                            extras.putString("key", model.getKey());
-                            extras.putString("callback", model.getCallback());
-
                             switch (model.getTheory()) {
-                                case "password":
+                                case "password": {
+                                    NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthPasswordFragment(mobile, model.getKey(), model.getCallback());
+
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPasswordFragment, extras);
-                                    break;
-                                case "mobileCode":
+                                    ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
+                                case "mobileCode": {
+                                    NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthPinFragment(mobile, model.getKey(), model.getCallback());
+
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                                    ((AuthActivity) requireActivity()).navigator(R.id.authPinFragment, extras);
-                                    break;
+                                    ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
                             }
                         } else {
+                            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthSerialFragment();
+
+                            ((AuthActivity) requireActivity()).singleton.login(model);
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
-                            ((AuthActivity) requireActivity()).login(model);
+                            ((AuthActivity) requireActivity()).navController.navigate(action);
                         }
                     });
                 }

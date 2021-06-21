@@ -75,7 +75,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.logOut();
+                            ((MainActivity) requireActivity()).singleton.logout();
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             IntentManager.auth(requireActivity());

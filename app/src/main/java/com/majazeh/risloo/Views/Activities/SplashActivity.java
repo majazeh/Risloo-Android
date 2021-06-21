@@ -2,12 +2,10 @@ package com.majazeh.risloo.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
@@ -17,9 +15,6 @@ public class SplashActivity extends AppCompatActivity {
 
     // Binding
     private ActivitySplashBinding binding;
-
-    // Singleton
-    private Singleton singleton;
 
     // Objects
     private Handler handler;
@@ -35,10 +30,6 @@ public class SplashActivity extends AppCompatActivity {
 
         initializer();
 
-        detector();
-
-        listener();
-
         setData();
 
         navigator();
@@ -52,23 +43,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initializer() {
-        singleton = new Singleton(this);
-
         handler = new Handler();
     }
 
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            // TODO : Place Code Here
-        }
-    }
-
-    private void listener() {
-        // TODO : Place Code Here
-    }
-
     private void setData() {
-        binding.versionTextView.setText(getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this));
+        String version = getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this);
+        binding.versionTextView.setText(version);
     }
 
     private void navigator() {
