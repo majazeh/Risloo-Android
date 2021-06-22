@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 
+import com.google.gson.Gson;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -36,117 +37,19 @@ public class Singleton {
         if (object.getToken() != null)
             setAuthorization("Bearer " + object.getToken());
 
-        if (user.getId() != null)
-            setId(user.getId());
-
-        if (user.getName() != null)
-            setName(user.getName());
-
-        if (user.getUsername() != null)
-            setUsername(user.getUsername());
-
-        if (user.getBirthday() != null)
-            setBirthday(user.getBirthday());
-
-        if (user.getEmail() != null)
-            setEmail(user.getEmail());
-
-        if (user.getMobile() != null)
-            setMobile(user.getMobile());
-
-        if (user.getUserStatus() != null)
-            setStatus(user.getUserStatus());
-
-        if (user.getUserType() != null)
-            setType(user.getUserType());
-
-        if (user.getGender() != null)
-            setGender(user.getGender());
-
-        if (user.getAvatar() != null && user.getAvatar().getMedium() != null && user.getAvatar().getMedium().getUrl() != null)
-            setAvatar(user.getAvatar().getMedium().getUrl());
-
-        if (user.getPublic_key() != null)
-            setPublicKey(user.getPublic_key());
-
-        if (user.getTreasuries() != null) {
-            try {
-                int money = 0;
-                for (int i = 0; i < user.getTreasuries().length(); i++) {
-                    if (user.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || user.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
-                        money += user.getTreasuries().getJSONObject(i).getInt("balance");
-                }
-                setMoney(String.valueOf(money));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+        if (user != null)
+            setUserModel(user);
     }
 
     public void update(UserModel object) {
-        if (object.getId() != null)
-            setId(object.getId());
-
-        if (object.getName() != null)
-            setName(object.getName());
-
-        if (object.getUsername() != null)
-            setUsername(object.getUsername());
-
-        if (object.getBirthday() != null)
-            setBirthday(object.getBirthday());
-
-        if (object.getEmail() != null)
-            setEmail(object.getEmail());
-
-        if (object.getMobile() != null)
-            setMobile(object.getMobile());
-
-        if (object.getUserStatus() != null)
-            setStatus(object.getUserStatus());
-
-        if (object.getUserType() != null)
-            setType(object.getUserType());
-
-        if (object.getGender() != null)
-            setGender(object.getGender());
-
-        if (object.getAvatar() != null && object.getAvatar().getMedium() != null && object.getAvatar().getMedium().getUrl() != null)
-            setAvatar(object.getAvatar().getMedium().getUrl());
-
-        if (object.getPublic_key() != null)
-            setPublicKey(object.getPublic_key());
-
-        if (object.getTreasuries() != null) {
-            try {
-                int money = 0;
-                for (int i = 0; i < object.getTreasuries().length(); i++) {
-                    if (object.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || object.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
-                        money += object.getTreasuries().getJSONObject(i).getInt("balance");
-                }
-                setMoney(String.valueOf(money));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+        if (object != null)
+            setUserModel(object);
     }
 
     public void logout() {
         editor.remove("token");
         editor.remove("authorization");
-        editor.remove("userId");
-        editor.remove("name");
-        editor.remove("username");
-        editor.remove("birthday");
-        editor.remove("email");
-        editor.remove("mobile");
-        editor.remove("status");
-        editor.remove("type");
-        editor.remove("gender");
-        editor.remove("avatar");
-        editor.remove("public_key");
-        editor.remove("private_key");
-        editor.remove("money");
+        editor.remove("usermodel");
         editor.apply();
     }
 
@@ -160,73 +63,8 @@ public class Singleton {
         editor.apply();
     }
 
-    public void setId(String value) {
-        editor.putString("id", value);
-        editor.apply();
-    }
-
-    public void setName(String value) {
-        editor.putString("name", value);
-        editor.apply();
-    }
-
-    public void setUsername(String value) {
-        editor.putString("username", value);
-        editor.apply();
-    }
-
-    public void setEducation(String value) {
-        editor.putString("education", value);
-        editor.apply();
-    }
-
-    public void setBirthday(String value) {
-        editor.putString("birthday", value);
-        editor.apply();
-    }
-
-    public void setEmail(String value) {
-        editor.putString("email", value);
-        editor.apply();
-    }
-
-    public void setMobile(String value) {
-        editor.putString("mobile", value);
-        editor.apply();
-    }
-
-    public void setStatus(String value) {
-        editor.putString("status", value);
-        editor.apply();
-    }
-
-    public void setType(String value) {
-        editor.putString("type", value);
-        editor.apply();
-    }
-
-    public void setGender(String value) {
-        editor.putString("gender", value);
-        editor.apply();
-    }
-
-    public void setAvatar(String value) {
-        editor.putString("avatar", value);
-        editor.apply();
-    }
-
-    public void setPublicKey(String value) {
-        editor.putString("public_key", value);
-        editor.apply();
-    }
-
-    public void setPrivateKey(String value) {
-        editor.putString("private_key", value);
-        editor.apply();
-    }
-
-    public void setMoney(String value) {
-        editor.putString("money", value);
+    public void setUserModel(UserModel userModel) {
+        editor.putString("usermodel", new Gson().toJson(userModel));
         editor.apply();
     }
 
@@ -244,100 +82,102 @@ public class Singleton {
         return "";
     }
 
+    public UserModel getUserModel() {
+        if (!sharedPreferences.getString("usermodel", "").equals("")) {
+            return new Gson().fromJson(sharedPreferences.getString("usermodel", ""), UserModel.class);
+        }
+        return null;
+    }
+
     public String getId() {
-        if (!sharedPreferences.getString("id", "").equals("")) {
-            return sharedPreferences.getString("id", "");
+        if (getUserModel().getId() != null) {
+            return getUserModel().getId();
         }
         return "";
     }
 
     public String getName() {
-        if (!sharedPreferences.getString("name", "").equals("")) {
-            return sharedPreferences.getString("name", "");
+        if (getUserModel().getName() != null) {
+            return getUserModel().getName();
         }
         return "";
     }
 
     public String getUsername() {
-        if (!sharedPreferences.getString("username", "").equals("")) {
-            return sharedPreferences.getString("username", "");
-        }
-        return "";
-    }
-
-    public String getEducation() {
-        if (!sharedPreferences.getString("education", "").equals("")) {
-            return sharedPreferences.getString("education", "");
+        if (getUserModel().getUsername() != null) {
+            return getUserModel().getUsername();
         }
         return "";
     }
 
     public String getBirthday() {
-        if (!sharedPreferences.getString("birthday", "").equals("")) {
-            return sharedPreferences.getString("birthday", "");
+        if (getUserModel().getBirthday() != null) {
+            return getUserModel().getBirthday();
         }
         return "";
     }
 
     public String getEmail() {
-        if (!sharedPreferences.getString("email", "").equals("")) {
-            return sharedPreferences.getString("email", "");
+        if (getUserModel().getEmail() != null) {
+            return getUserModel().getEmail();
         }
         return "";
     }
 
     public String getMobile() {
-        if (!sharedPreferences.getString("mobile", "").equals("")) {
-            return sharedPreferences.getString("mobile", "");
+        if (getUserModel().getMobile() != null) {
+            return getUserModel().getMobile();
         }
         return "";
     }
 
     public String getStatus() {
-        if (!sharedPreferences.getString("status", "").equals("")) {
-            return sharedPreferences.getString("status", "");
+        if (getUserModel().getUserStatus() != null) {
+            return getUserModel().getUserStatus();
         }
         return "";
     }
 
     public String getType() {
-        if (!sharedPreferences.getString("type", "").equals("")) {
-            return sharedPreferences.getString("type", "");
+        if (getUserModel().getUserType() != null) {
+            return getUserModel().getUserType();
         }
         return "";
     }
 
     public String getGender() {
-        if (!sharedPreferences.getString("gender", "").equals("")) {
-            return sharedPreferences.getString("gender", "");
+        if (getUserModel().getGender() != null) {
+            return getUserModel().getGender();
         }
         return "";
     }
 
     public String getAvatar() {
-        if (!sharedPreferences.getString("avatar", "").equals("")) {
-            return sharedPreferences.getString("avatar", "");
+        if (getUserModel().getAvatar() != null && getUserModel().getAvatar().getMedium() != null && getUserModel().getAvatar().getMedium().getUrl() != null) {
+            return getUserModel().getAvatar().getMedium().getUrl();
         }
         return "";
     }
 
     public String getPublicKey() {
-        if (!sharedPreferences.getString("public_key", "").equals("")) {
-            return sharedPreferences.getString("public_key", "");
-        }
-        return "";
-    }
-
-    public String getPrivateKey() {
-        if (!sharedPreferences.getString("private_key", "").equals("")) {
-            return sharedPreferences.getString("private_key", "");
+        if (getUserModel().getPublic_key() != null) {
+            return getUserModel().getPublic_key();
         }
         return "";
     }
 
     public String getMoney() {
-        if (!sharedPreferences.getString("money", "").equals("")) {
-            return sharedPreferences.getString("money", "");
+        if (getUserModel().getTreasuries() != null) {
+            try {
+                int money = 0;
+                for (int i = 0; i < getUserModel().getTreasuries().length(); i++) {
+                    if (getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
+                        money += getUserModel().getTreasuries().getJSONObject(i).getInt("balance");
+                }
+                return String.valueOf(money);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
         }
         return "";
     }
@@ -346,17 +186,7 @@ public class Singleton {
 
 
 
-
-
-
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public String getNotification() {
-        if (!sharedPreferences.getString("notification", "").equals("")) {
-            return sharedPreferences.getString("notification", "");
-        }
-        return "";
-    }
 
     public String getDescription() {
         if (!sharedPreferences.getString("description", "").equals("")) {

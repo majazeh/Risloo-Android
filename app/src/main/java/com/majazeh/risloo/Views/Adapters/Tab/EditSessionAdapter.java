@@ -23,18 +23,21 @@ public class EditSessionAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 0:
-                Fragment fragment0 = new EditSessionTimeFragment();
-                hashMap.put(position, fragment0);
-                return fragment0;
-            case 1:
-                Fragment fragment1 = new EditSessionSessionFragment();
-                hashMap.put(position, fragment1);
-                return fragment1;
-            case 2:
-                Fragment fragment2 = new EditSessionPaymentFragment();
-                hashMap.put(position, fragment2);
-                return fragment2;
+            case 0: {
+                Fragment fragment = new EditSessionTimeFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
+            case 1: {
+                Fragment fragment = new EditSessionSessionFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
+            case 2: {
+                Fragment fragment = new EditSessionPaymentFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
             default:
                 return null;
         }

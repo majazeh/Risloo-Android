@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.EditUserAdapter;
 import com.majazeh.risloo.databinding.FragmentEditUserBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class EditUserFragment extends Fragment {
 
@@ -27,8 +28,7 @@ public class EditUserFragment extends Fragment {
 
     // Vars
     private String[] tabs;
-    public String userId = "", name = "", username = "", education = "", birthday = "", email = "", mobile = "", status = "", type = "", gender = "", publicKey = "", privateKey = "";
-    public String avatarPath = "";
+    public UserModel model;
 
     @Nullable
     @Override
@@ -37,7 +37,7 @@ public class EditUserFragment extends Fragment {
 
         initializer();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -49,60 +49,8 @@ public class EditUserFragment extends Fragment {
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                userId = getArguments().getString("id");
-            }
-
-            if (getArguments().getString("name") != null && !getArguments().getString("name").equals("")) {
-                name = getArguments().getString("name");
-            }
-
-            if (getArguments().getString("username") != null && !getArguments().getString("username").equals("")) {
-                username = getArguments().getString("username");
-            }
-
-            if (getArguments().getString("education") != null && !getArguments().getString("education").equals("")) {
-                education = getArguments().getString("education");
-            }
-
-            if (getArguments().getString("birthday") != null && !getArguments().getString("birthday").equals("")) {
-                birthday = getArguments().getString("birthday");
-            }
-
-            if (getArguments().getString("email") != null && !getArguments().getString("email").equals("")) {
-                email = getArguments().getString("email");
-            }
-
-            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
-                mobile = getArguments().getString("mobile");
-            }
-
-            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                status = getArguments().getString("status");
-            }
-
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-            }
-
-            if (getArguments().getString("gender") != null && !getArguments().getString("gender").equals("")) {
-                gender = getArguments().getString("gender");
-            }
-
-            if (getArguments().getString("public_key") != null && !getArguments().getString("public_key").equals("")) {
-                publicKey = getArguments().getString("public_key");
-            }
-
-            if (getArguments().getString("private_key") != null && !getArguments().getString("private_key").equals("")) {
-                publicKey = getArguments().getString("private_key");
-            }
-
-            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
-                avatarPath = getArguments().getString("avatar");
-            }
-        }
+    private void setArgs() {
+        model = EditUserFragmentArgs.fromBundle(getArguments()).getUserModel();
 
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();

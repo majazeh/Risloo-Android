@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
@@ -81,14 +82,14 @@ public class DashboardFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).login(model);
+                        ((MainActivity) requireActivity()).singleton.update(model);
 
                         // Cases Data
                         if (!model.getCaseList().data().isEmpty()) {
                             cases2Adapter.setCases(model.getCaseList().data());
 
                             binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
-                            binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases2Adapter.getItemCount() + ")");
+                            binding.casesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
 
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         } else if (cases2Adapter.getItemCount() == 0) {
@@ -102,7 +103,7 @@ public class DashboardFragment extends Fragment {
                             samplesAdapter.setSamples(model.getSampleList().data());
 
                             binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
-                            binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samplesAdapter.getItemCount() + ")");
+                            binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samplesAdapter.getItemCount()));
 
                             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -117,7 +118,7 @@ public class DashboardFragment extends Fragment {
                             roomsAdapter.setRooms(model.getRoomList().data());
 
                             binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
-                            binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
+                            binding.roomsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
 
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         } else if (roomsAdapter.getItemCount() == 0) {
@@ -131,7 +132,7 @@ public class DashboardFragment extends Fragment {
                             centersAdapter.setCenters(model.getCenterList().data());
 
                             binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
-                            binding.centersHeaderIncludeLayout.countTextView.setText("(" + centersAdapter.getItemCount() + ")");
+                            binding.centersHeaderIncludeLayout.countTextView.setText(StringManager.bracing(centersAdapter.getItemCount()));
 
                             binding.centersSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         } else if (centersAdapter.getItemCount() == 0) {
@@ -147,6 +148,7 @@ public class DashboardFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
                         // Cases Data
                         binding.casesGroup.setVisibility(View.GONE);
                         binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);

@@ -27,21 +27,23 @@ public class EditCenterAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         if (type.equals("personal_clinic")) {
             if (position == 0) {
-                Fragment fragment0 = new EditCenterDetailFragment();
-                hashMap.put(position, fragment0);
-                return fragment0;
+                Fragment fragment = new EditCenterDetailFragment();
+                hashMap.put(position, fragment);
+                return fragment;
             }
             return null;
         } else {
             switch (position) {
-                case 0:
-                    Fragment fragment0 = new EditCenterDetailFragment();
-                    hashMap.put(position, fragment0);
-                    return fragment0;
-                case 1:
-                    Fragment fragment1 = new EditCenterAvatarFragment();
-                    hashMap.put(position, fragment1);
-                    return fragment1;
+                case 0: {
+                    Fragment fragment = new EditCenterDetailFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 1: {
+                    Fragment fragment = new EditCenterAvatarFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
                 default:
                     return null;
             }

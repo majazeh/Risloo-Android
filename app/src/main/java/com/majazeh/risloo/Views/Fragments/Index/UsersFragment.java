@@ -15,10 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.UsersAdapter;
 import com.majazeh.risloo.databinding.FragmentUsersBinding;
@@ -141,7 +143,10 @@ public class UsersFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createUserFragment)).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = UsersFragmentDirections.actionUsersFragmentToCreateUserFragment();
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.addImageView.getRoot());
     }
 
     private void getData() {
@@ -165,7 +170,7 @@ public class UsersFragment extends Fragment {
                             binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
-                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);

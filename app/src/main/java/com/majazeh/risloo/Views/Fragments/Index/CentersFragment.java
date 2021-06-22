@@ -15,10 +15,12 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 import com.majazeh.risloo.databinding.FragmentCentersBinding;
@@ -54,8 +56,6 @@ public class CentersFragment extends Fragment {
         detector();
 
         listener();
-
-        setPermission();
 
         getData();
 
@@ -141,13 +141,10 @@ public class CentersFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterFragment)).widget(binding.addImageView.getRoot());
-    }
-
-    private void setPermission() {
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            binding.addImageView.getRoot().setVisibility(View.GONE);
-        }
+        ClickManager.onClickListener(() -> {
+            NavDirections action = CentersFragmentDirections.actionCentersFragmentToCreateCenterFragment();
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.addImageView.getRoot());
     }
 
     private void getData() {
@@ -169,7 +166,7 @@ public class CentersFragment extends Fragment {
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
-                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);

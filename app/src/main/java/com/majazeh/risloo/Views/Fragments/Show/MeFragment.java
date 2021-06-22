@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -30,11 +31,9 @@ public class MeFragment extends Fragment {
     // Binding
     private FragmentMeBinding binding;
 
-    // Objects
-    private Bundle extras;
-
     // Vars
     private HashMap data, header;
+    private UserModel model;
 
     @Nullable
     @Override
@@ -47,7 +46,7 @@ public class MeFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -55,8 +54,6 @@ public class MeFragment extends Fragment {
     }
 
     private void initializer() {
-        extras = new Bundle();
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -80,116 +77,38 @@ public class MeFragment extends Fragment {
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editUserFragment, extras)).widget(binding.editImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = MeFragmentDirections.actionMeFragmentToEditUserFragment(model);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.editImageView.getRoot());
     }
 
-    private void setExtra() {
-        if (((MainActivity) requireActivity()).singleton != null) {
-            if (!((MainActivity) requireActivity()).singleton.getId().equals("")) {
-                extras.putString("id", ((MainActivity) requireActivity()).singleton.getId());
-                data.put("id", ((MainActivity) requireActivity()).singleton.getId());
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-                extras.putString("name", ((MainActivity) requireActivity()).singleton.getName());
-                binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
-            } else {
-                binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getUsername().equals("")) {
-                extras.putString("username", ((MainActivity) requireActivity()).singleton.getUsername());
-                binding.usernameTextView.setText(((MainActivity) requireActivity()).singleton.getUsername());
-            } else {
-                binding.usernameTextView.setVisibility(View.GONE);
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getEducation().equals("")) {
-                extras.putString("education", ((MainActivity) requireActivity()).singleton.getEducation());
-                binding.educationTextView.setText(((MainActivity) requireActivity()).singleton.getEducation());
-                binding.educationGroup.setVisibility(View.VISIBLE);
-            } else {
-                binding.educationGroup.setVisibility(View.GONE);
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getBirthday().equals("")) {
-                extras.putString("birthday", ((MainActivity) requireActivity()).singleton.getBirthday());
-                binding.birthdayTextView.setText(((MainActivity) requireActivity()).singleton.getBirthday());
-                binding.birthdayGroup.setVisibility(View.VISIBLE);
-            } else {
-                binding.birthdayGroup.setVisibility(View.GONE);
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getEmail().equals("")) {
-                extras.putString("email", ((MainActivity) requireActivity()).singleton.getEmail());
-                binding.emailTextView.setText(((MainActivity) requireActivity()).singleton.getEmail());
-                binding.emailGroup.setVisibility(View.VISIBLE);
-            } else {
-                binding.emailGroup.setVisibility(View.GONE);
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getMobile().equals("")) {
-                extras.putString("mobile", ((MainActivity) requireActivity()).singleton.getMobile());
-                binding.mobileTextView.setText(((MainActivity) requireActivity()).singleton.getMobile());
-                binding.mobileGroup.setVisibility(View.VISIBLE);
-            } else {
-                binding.mobileGroup.setVisibility(View.GONE);
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-                extras.putString("status", ((MainActivity) requireActivity()).singleton.getStatus());
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-                extras.putString("type", ((MainActivity) requireActivity()).singleton.getType());
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getGender().equals("")) {
-                extras.putString("gender", ((MainActivity) requireActivity()).singleton.getGender());
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getPublicKey().equals("")) {
-                extras.putString("public_key", ((MainActivity) requireActivity()).singleton.getPublicKey());
-            }
-
-            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                extras.putString("avatar", ((MainActivity) requireActivity()).singleton.getAvatar());
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-            } else {
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
-
-                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-            }
-        }
+    private void setArgs() {
+        setData(MeFragmentArgs.fromBundle(getArguments()).getUserModel());
     }
 
     private void setData(UserModel model) {
+        this.model = model;
+
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
+        }
+
         if (model.getName() != null && !model.getName().equals("")) {
-            extras.putString("name", model.getName());
             binding.nameTextView.setText(model.getName());
         } else {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         }
 
         if (model.getUsername() != null && !model.getUsername().equals("")) {
-            extras.putString("username", model.getUsername());
             binding.usernameTextView.setText(model.getUsername());
         } else {
             binding.usernameTextView.setVisibility(View.GONE);
         }
 
-//        if (model.getEducation() != null && !model.getEducation().equals("")) {
-//            extras.putString("education", model.getEducation());
-//            binding.educationTextView.setText(model.getEducation());
-//            binding.educationGroup.setVisibility(View.VISIBLE);
-//        } else {
         binding.educationGroup.setVisibility(View.GONE);
-//        }
 
         if (model.getBirthday() != null && !model.getBirthday().equals("")) {
-            extras.putString("birthday", model.getBirthday());
             binding.birthdayTextView.setText(model.getBirthday());
             binding.birthdayGroup.setVisibility(View.VISIBLE);
         } else {
@@ -197,7 +116,6 @@ public class MeFragment extends Fragment {
         }
 
         if (model.getEmail() != null && !model.getEmail().equals("")) {
-            extras.putString("email", model.getEmail());
             binding.emailTextView.setText(model.getEmail());
             binding.emailGroup.setVisibility(View.VISIBLE);
         } else {
@@ -205,32 +123,13 @@ public class MeFragment extends Fragment {
         }
 
         if (model.getMobile() != null && !model.getMobile().equals("")) {
-            extras.putString("mobile", model.getMobile());
             binding.mobileTextView.setText(model.getMobile());
             binding.mobileGroup.setVisibility(View.VISIBLE);
         } else {
             binding.mobileGroup.setVisibility(View.GONE);
         }
 
-        if (model.getUserStatus() != null && !model.getUserStatus().equals("")) {
-            extras.putString("status", model.getUserStatus());
-        }
-
-        if (model.getUserType() != null && !model.getUserType().equals("")) {
-            extras.putString("type", model.getUserType());
-        }
-
-        if (model.getGender() != null && !model.getGender().equals("")) {
-            extras.putString("gender", model.getGender());
-        }
-
-        if (model.getPublic_key() != null && !model.getPublic_key().equals("")) {
-            extras.putString("public_key", model.getPublic_key());
-        }
-
         if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
-            extras.putString("avatar", model.getAvatar().getMedium().getUrl());
-
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {

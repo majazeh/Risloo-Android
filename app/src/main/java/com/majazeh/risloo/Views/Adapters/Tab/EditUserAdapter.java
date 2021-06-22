@@ -24,22 +24,26 @@ public class EditUserAdapter extends FragmentStateAdapter {
     @Override
     public Fragment createFragment(int position) {
         switch (position) {
-            case 0:
-                Fragment fragment0 = new EditUserPersonalFragment();
-                hashMap.put(position, fragment0);
-                return fragment0;
-            case 1:
-                Fragment fragment1 = new EditUserPasswordFragment();
-                hashMap.put(position, fragment1);
-                return fragment1;
-            case 2:
-                Fragment fragment2 = new EditUserAvatarFragment();
-                hashMap.put(position, fragment2);
-                return fragment2;
-            case 3:
-                Fragment fragment3 = new EditUserCryptoFragment();
-                hashMap.put(position, fragment3);
-                return fragment3;
+            case 0: {
+                Fragment fragment = new EditUserPersonalFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
+            case 1: {
+                Fragment fragment = new EditUserPasswordFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
+            case 2: {
+                Fragment fragment = new EditUserAvatarFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
+            case 3: {
+                Fragment fragment = new EditUserCryptoFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
             default:
                 return null;
         }
