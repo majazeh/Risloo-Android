@@ -73,8 +73,56 @@ public class Singleton {
             try {
                 int money = 0;
                 for (int i = 0; i < user.getTreasuries().length(); i++) {
-                    if (user.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") ||user.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
+                    if (user.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || user.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
                         money += user.getTreasuries().getJSONObject(i).getInt("balance");
+                }
+                setMoney(String.valueOf(money));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void update(UserModel object) {
+        if (object.getId() != null)
+            setId(object.getId());
+
+        if (object.getName() != null)
+            setName(object.getName());
+
+        if (object.getUsername() != null)
+            setUsername(object.getUsername());
+
+        if (object.getBirthday() != null)
+            setBirthday(object.getBirthday());
+
+        if (object.getEmail() != null)
+            setEmail(object.getEmail());
+
+        if (object.getMobile() != null)
+            setMobile(object.getMobile());
+
+        if (object.getUserStatus() != null)
+            setStatus(object.getUserStatus());
+
+        if (object.getUserType() != null)
+            setType(object.getUserType());
+
+        if (object.getGender() != null)
+            setGender(object.getGender());
+
+        if (object.getAvatar() != null && object.getAvatar().getMedium() != null && object.getAvatar().getMedium().getUrl() != null)
+            setAvatar(object.getAvatar().getMedium().getUrl());
+
+        if (object.getPublic_key() != null)
+            setPublicKey(object.getPublic_key());
+
+        if (object.getTreasuries() != null) {
+            try {
+                int money = 0;
+                for (int i = 0; i < object.getTreasuries().length(); i++) {
+                    if (object.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || object.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
+                        money += object.getTreasuries().getJSONObject(i).getInt("balance");
                 }
                 setMoney(String.valueOf(money));
             } catch (JSONException e) {

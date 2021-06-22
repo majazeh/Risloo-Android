@@ -76,7 +76,6 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).singleton.logout();
-
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             IntentManager.auth(requireActivity());
 
@@ -87,7 +86,11 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
                 @Override
                 public void onFailure(String response) {
-                    // Place Code if Needed
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            // Place Code if Needed
+                        });
+                    }
                 }
             });
         }).widget(binding.entryButton);
