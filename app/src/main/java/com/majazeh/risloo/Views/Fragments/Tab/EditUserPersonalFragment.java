@@ -220,10 +220,10 @@ public class EditUserPersonalFragment extends Fragment {
 
                 if (((EditUserFragment) fragment).model.getBirthday() != null && !((EditUserFragment) fragment).model.getBirthday().equals("")) {
                     birthday = ((EditUserFragment) fragment).model.getBirthday();
-                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.getYYYYsMMsDD(birthday, "-"));
+                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
                 } else {
                     birthday = String.valueOf(DateManager.currentTimestamp());
-                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.getYYYYsMMsDD(birthday, "-"));
+                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
                 }
 
                 if (((EditUserFragment) fragment).model.getUserStatus() != null && !((EditUserFragment) fragment).model.getUserStatus().equals("")) {
@@ -280,7 +280,7 @@ public class EditUserPersonalFragment extends Fragment {
         switch (method) {
             case "birthday":
                 birthday = data;
-                binding.birthdayIncludeLayout.selectTextView.setText(DateManager.getYYYYsMMsDD(birthday, "-"));
+                binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
                 break;
         }
     }

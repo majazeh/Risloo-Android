@@ -33,6 +33,8 @@ import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
 import java.util.Date;
 
+import saman.zamani.persiandate.PersianDate;
+
 public class DateBottomSheet extends BottomSheetDialogFragment {
 
     // Binding
@@ -191,7 +193,8 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
         month = binding.monthNumberPicker.getValue();
         day = binding.dayNumberPicker.getValue();
 
-        Date date = DateManager.createDate(year, month, day, hour, minute, second);
+        PersianDate persianDate = DateManager.createPersianDate(year, month, day, hour, minute, second);
+        Date date = DateManager.persianToDate(persianDate);
         long timestamp = DateManager.dateToTimestamp(date);
 
         return String.valueOf(timestamp);
@@ -202,13 +205,14 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
 
         long value = Long.parseLong(timestamp);
         Date date = DateManager.timestampToDate(value);
+        PersianDate persianDate = DateManager.dateToPersian(date);
 
-        year = Integer.parseInt(DateManager.dateToString("yyyy", date));
-        month = Integer.parseInt(DateManager.dateToString("MM", date));
-        day = Integer.parseInt(DateManager.dateToString("dd", date));
-        hour = Integer.parseInt(DateManager.dateToString("HH", date));
-        minute = Integer.parseInt(DateManager.dateToString("mm", date));
-        second = Integer.parseInt(DateManager.dateToString("ss", date));
+        year = persianDate.getShYear();
+        month = persianDate.getShMonth();
+        day = persianDate.getShDay();
+        hour = persianDate.getHour();
+        minute = persianDate.getMinute();
+        second = persianDate.getSecond();
     }
 
     @Override

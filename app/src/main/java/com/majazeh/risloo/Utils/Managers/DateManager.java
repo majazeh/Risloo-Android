@@ -8,10 +8,15 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 
 import saman.zamani.persiandate.PersianDate;
 
 public class DateManager {
+
+     /*
+    ---------- String & Date ----------
+    */
 
     @SuppressLint("SimpleDateFormat")
     public static Date stringToDate(String pattern, String value) {
@@ -29,6 +34,10 @@ public class DateManager {
         return simpleDateFormat.format(value);
     }
 
+    /*
+    ---------- Timestamp & Date ----------
+    */
+
     public static Date timestampToDate(long value) {
         Timestamp timestamp = new Timestamp(value * 1000);
         return new Date(timestamp.getTime());
@@ -38,10 +47,81 @@ public class DateManager {
         return value.getTime() / 1000;
     }
 
-    public static long currentTimestamp() {
-        Date value = Calendar.getInstance().getTime();
-        return value.getTime() / 1000;
+    /*
+    ---------- PersianDate & Date ----------
+    */
+
+    public static Date persianToDate(PersianDate value) {
+        GregorianCalendar gregorianCalendar = new GregorianCalendar();
+        gregorianCalendar.set(value.getGrgYear(), value.getGrgMonth() - 1, value.getGrgDay(), value.getHour(), value.getMinute(), value.getSecond());
+
+        return gregorianCalendar.getTime();
     }
+
+    public static PersianDate dateToPersian(Date value) {
+        int year = Integer.parseInt(dateToString("yyyy", value));
+        int month = Integer.parseInt(dateToString("MM", value));
+        int day = Integer.parseInt(dateToString("dd", value));
+        int hour = Integer.parseInt(dateToString("HH", value));
+        int minute = Integer.parseInt(dateToString("mm", value));
+        int second = Integer.parseInt(dateToString("ss", value));
+
+        PersianDate persianDate = new PersianDate();
+        persianDate.initGrgDate(year, month, day, hour, minute, second);
+
+        return persianDate;
+    }
+
+    /*
+    ---------- Current Time ----------
+    */
+
+    public static Date currentDate() {
+        return Calendar.getInstance().getTime();
+    }
+
+    public static long currentTimestamp() {
+        Date date = Calendar.getInstance().getTime();
+        return date.getTime() / 1000;
+    }
+
+    /*
+    ---------- Create PersianDate & Date ----------
+    */
+
+    public static Date createDate(int year, int month, int day, int hour, int minute, int second) {
+        return new GregorianCalendar(year, month - 1, day, hour, minute, second).getTime();
+    }
+
+    public static PersianDate createPersianDate(int year, int month, int day, int hour, int minute, int second) {
+        return new PersianDate().initJalaliDate(year, month, day, hour, minute, second);
+    }
+
+    /*
+    ---------- Persian Date's ----------
+    */
+
+    public static String jalYYYYsMMsDD(String timestamp, String seperator) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        if (persianDate.getShMonth() < 10) {
+            if (persianDate.getShDay() < 10)
+                return persianDate.getShYear() + seperator + "0" + persianDate.getShMonth() + seperator + "0" + persianDate.getShDay();
+            else
+                return persianDate.getShYear() + seperator + "0" + persianDate.getShMonth() + seperator + persianDate.getShDay();
+        } else {
+            if (persianDate.getShDay() < 10)
+                return persianDate.getShYear() + seperator + persianDate.getShMonth() + seperator + "0" + persianDate.getShDay();
+            else
+                return persianDate.getShYear() + seperator + persianDate.getShMonth() + seperator + persianDate.getShDay();
+        }
+    }
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -509,7 +589,7 @@ public class DateManager {
         }
     }
 
-    public static String gregorianToJalali(String value) {
+    public static String gregorianToJalali0(String value) {
         int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd", value)));
         int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd", value)));
         int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd", value)));
