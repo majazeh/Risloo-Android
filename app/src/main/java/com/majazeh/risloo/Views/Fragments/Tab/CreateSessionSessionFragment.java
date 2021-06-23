@@ -199,13 +199,13 @@ public class CreateSessionSessionFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            startAccurateTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startAccurateTimeBottomSheet");
-            startAccurateTimeBottomSheet.setTime(startAccurateHour, startAccurateMinute, "startAccurateTime");
+//            startAccurateTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startAccurateTimeBottomSheet");
+//            startAccurateTimeBottomSheet.setTime(startAccurateHour, startAccurateMinute, "startAccurateTime");
         }).widget(binding.scheduledIncludeLayout.startAccurateTimeTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            startAccurateDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startAccurateDateBottomSheet");
-            startAccurateDateBottomSheet.setDate(startAccurateYear, startAccurateMonth, startAccurateDay, "startAccurateDate");
+//            startAccurateDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startAccurateDateBottomSheet");
+//            startAccurateDateBottomSheet.setDate(startAccurateYear, startAccurateMonth, startAccurateDay, "startAccurateDate");
         }).widget(binding.scheduledIncludeLayout.startAccurateDateTextView);
 
         binding.scheduledIncludeLayout.endRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -271,13 +271,13 @@ public class CreateSessionSessionFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            endAccurateTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "endAccurateTimeBottomSheet");
-            endAccurateTimeBottomSheet.setTime(endAccurateHour, endAccurateMinute, "endAccurateTime");
+//            endAccurateTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "endAccurateTimeBottomSheet");
+//            endAccurateTimeBottomSheet.setTime(endAccurateHour, endAccurateMinute, "endAccurateTime");
         }).widget(binding.scheduledIncludeLayout.endAccurateTimeTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            endAccurateDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "endAccurateDateBottomSheet");
-            endAccurateDateBottomSheet.setDate(endAccurateYear, endAccurateMonth, endAccurateDay, "endAccurateDate");
+//            endAccurateDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "endAccurateDateBottomSheet");
+//            endAccurateDateBottomSheet.setDate(endAccurateYear, endAccurateMonth, endAccurateDay, "endAccurateDate");
         }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -502,34 +502,34 @@ public class CreateSessionSessionFragment extends Fragment {
             case "startAccurateTime":
                 startAccurateTime = data;
 
-                startAccurateHour = startAccurateTimeBottomSheet.hour;
-                startAccurateMinute = startAccurateTimeBottomSheet.minute;
+//                startAccurateHour = startAccurateTimeBottomSheet.hour;
+//                startAccurateMinute = startAccurateTimeBottomSheet.minute;
 
                 binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(startAccurateTime);
                 break;
             case "startAccurateDate":
                 startAccurateDate = data;
 
-                startAccurateYear = startAccurateDateBottomSheet.year;
-                startAccurateMonth = startAccurateDateBottomSheet.month;
-                startAccurateDay = startAccurateDateBottomSheet.day;
+//                startAccurateYear = startAccurateDateBottomSheet.year;
+//                startAccurateMonth = startAccurateDateBottomSheet.month;
+//                startAccurateDay = startAccurateDateBottomSheet.day;
 
                 binding.scheduledIncludeLayout.startAccurateDateTextView.setText(startAccurateDate);
                 break;
             case "endAccurateTime":
                 endAccurateTime = data;
 
-                endAccurateHour = endAccurateTimeBottomSheet.hour;
-                endAccurateMinute = endAccurateTimeBottomSheet.minute;
+//                endAccurateHour = endAccurateTimeBottomSheet.hour;
+//                endAccurateMinute = endAccurateTimeBottomSheet.minute;
 
                 binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(endAccurateTime);
                 break;
             case "endAccurateDate":
                 endAccurateDate = data;
 
-                endAccurateYear = endAccurateDateBottomSheet.year;
-                endAccurateMonth = endAccurateDateBottomSheet.month;
-                endAccurateDay = endAccurateDateBottomSheet.day;
+//                endAccurateYear = endAccurateDateBottomSheet.year;
+//                endAccurateMonth = endAccurateDateBottomSheet.month;
+//                endAccurateDay = endAccurateDateBottomSheet.day;
 
                 binding.scheduledIncludeLayout.endAccurateDateTextView.setText(endAccurateDate);
                 break;

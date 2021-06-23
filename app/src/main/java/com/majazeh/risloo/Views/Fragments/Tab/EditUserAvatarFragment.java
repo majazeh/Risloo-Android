@@ -32,6 +32,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class EditUserAvatarFragment extends Fragment {
 
@@ -59,7 +60,7 @@ public class EditUserAvatarFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setData();
 
         return binding.getRoot();
     }
@@ -101,23 +102,23 @@ public class EditUserAvatarFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setExtra() {
+    private void setData() {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (!((EditUserFragment) fragment).userId.equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).userId);
+                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).model.getId());
                 }
 
-                if (!((EditUserFragment) fragment).avatarPath.equals("")) {
-                    avatarPath = ((EditUserFragment) fragment).avatarPath;
+                if (((EditUserFragment) fragment).model.getAvatar() != null && ((EditUserFragment) fragment).model.getAvatar().getMedium() != null && ((EditUserFragment) fragment).model.getAvatar() .getMedium().getUrl() != null && !((EditUserFragment) fragment).model.getAvatar().getMedium().getUrl().equals("")) {
+                    avatarPath = ((EditUserFragment) fragment).model.getAvatar().getMedium().getUrl();
 
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                    if (!((EditUserFragment) fragment).name.equals(""))
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((EditUserFragment) fragment).name));
+                    if (!((EditUserFragment) fragment).model.getName().equals(""))
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((EditUserFragment) fragment).model.getName()));
                     else
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
 
@@ -154,7 +155,7 @@ public class EditUserAvatarFragment extends Fragment {
             data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
         }
 
-        if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             Auth.changeAvatar(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -163,9 +164,7 @@ public class EditUserAvatarFragment extends Fragment {
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.setAvatar(userModel.getAvatar().getMedium().getUrl());
-                            ((MainActivity) requireActivity()).setData();
-
+                            ((MainActivity) requireActivity()).singleton.update(userModel);
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                         });
@@ -176,7 +175,11 @@ public class EditUserAvatarFragment extends Fragment {
 
                 @Override
                 public void onFailure(String response) {
-                    // Place Code if Needed
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            // Place Code if Needed
+                        });
+                    }
                 }
             });
         } else {
@@ -187,7 +190,6 @@ public class EditUserAvatarFragment extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                            ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
                         });
 
                         FileManager.deleteFileFromCache(requireActivity(), "image");
@@ -196,7 +198,11 @@ public class EditUserAvatarFragment extends Fragment {
 
                 @Override
                 public void onFailure(String response) {
-                    // Place Code if Needed
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            // Place Code if Needed
+                        });
+                    }
                 }
             });
         }

@@ -109,8 +109,8 @@ public class EditSessionTimeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
-            startTimeBottomSheet.setTime(startHour, startMinute, "startTime");
+//            startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
+//            startTimeBottomSheet.setTime(startHour, startMinute, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -152,8 +152,8 @@ public class EditSessionTimeFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            specifiedDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "specifiedDateBottomSheet");
-            specifiedDateBottomSheet.setDate(specifiedYear, specifiedMonth, specifiedDay, "specifiedDate");
+//            specifiedDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "specifiedDateBottomSheet");
+//            specifiedDateBottomSheet.setDate(specifiedYear, specifiedMonth, specifiedDay, "specifiedDate");
         }).widget(binding.specifiedDateIncludeLayout.selectTextView);
 
         binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -191,13 +191,13 @@ public class EditSessionTimeFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            periodStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodStartDateBottomSheet");
-            periodStartDateBottomSheet.setDate(periodStartYear, periodStartMonth, periodStartDay, "periodStartDate");
+//            periodStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodStartDateBottomSheet");
+//            periodStartDateBottomSheet.setDate(periodStartYear, periodStartMonth, periodStartDay, "periodStartDate");
         }).widget(binding.periodStartDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            periodEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodEndDateBottomSheet");
-            periodEndDateBottomSheet.setDate(periodEndYear, periodEndMonth, periodEndDay, "periodEndDate");
+//            periodEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodEndDateBottomSheet");
+//            periodEndDateBottomSheet.setDate(periodEndYear, periodEndMonth, periodEndDay, "periodEndDate");
         }).widget(binding.periodEndDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -355,35 +355,35 @@ public class EditSessionTimeFragment extends Fragment {
             case "startTime":
                 startTime = data;
 
-                startHour = startTimeBottomSheet.hour;
-                startMinute = startTimeBottomSheet.minute;
+//                startHour = startTimeBottomSheet.hour;
+//                startMinute = startTimeBottomSheet.minute;
 
                 binding.startTimeIncludeLayout.selectTextView.setText(startTime);
                 break;
             case "specifiedDate":
                 specifiedDate = data;
 
-                specifiedYear = specifiedDateBottomSheet.year;
-                specifiedMonth = specifiedDateBottomSheet.month;
-                specifiedDay = specifiedDateBottomSheet.day;
+//                specifiedYear = specifiedDateBottomSheet.year;
+//                specifiedMonth = specifiedDateBottomSheet.month;
+//                specifiedDay = specifiedDateBottomSheet.day;
 
                 binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
                 break;
             case "periodStartDate":
                 periodStartDate = data;
 
-                periodStartYear = periodStartDateBottomSheet.year;
-                periodStartMonth = periodStartDateBottomSheet.month;
-                periodStartDay = periodStartDateBottomSheet.day;
+//                periodStartYear = periodStartDateBottomSheet.year;
+//                periodStartMonth = periodStartDateBottomSheet.month;
+//                periodStartDay = periodStartDateBottomSheet.day;
 
                 binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
                 break;
             case "periodEndDate":
                 periodEndDate = data;
 
-                periodEndYear = periodEndDateBottomSheet.year;
-                periodEndMonth = periodEndDateBottomSheet.month;
-                periodEndDay = periodEndDateBottomSheet.day;
+//                periodEndYear = periodEndDateBottomSheet.year;
+//                periodEndMonth = periodEndDateBottomSheet.month;
+//                periodEndDay = periodEndDateBottomSheet.day;
 
                 binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
                 break;

@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
@@ -30,13 +31,15 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
+import java.util.Date;
+
 public class DateBottomSheet extends BottomSheetDialogFragment {
 
     // Binding
     private BottomSheetDateBinding binding;
 
     // Vars
-    public int year, month, day;
+    private int year, month, day, hour, minute, second;
     private String method;
 
     @NonNull
@@ -188,24 +191,24 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
         month = binding.monthNumberPicker.getValue();
         day = binding.dayNumberPicker.getValue();
 
-        if (month < 10) {
-            if (day < 10)
-                return year + "-" + "0" + month + "-" + "0" + day;
-            else
-                return year + "-" + "0" + month + "-" + day;
-        } else {
-            if (day < 10)
-                return year + "-" + month + "-" + "0" + day;
-            else
-                return year + "-" + month + "-" + day;
-        }
+        Date date = DateManager.createDate(year, month, day, hour, minute, second);
+        long timestamp = DateManager.dateToTimestamp(date);
+
+        return String.valueOf(timestamp);
     }
 
-    public void setDate(int year, int month, int day, String method) {
-        this.year = year;
-        this.month = month;
-        this.day = day;
+    public void setDate(String timestamp, String method) {
         this.method = method;
+
+        long value = Long.parseLong(timestamp);
+        Date date = DateManager.timestampToDate(value);
+
+        year = Integer.parseInt(DateManager.dateToString("yyyy", date));
+        month = Integer.parseInt(DateManager.dateToString("MM", date));
+        day = Integer.parseInt(DateManager.dateToString("dd", date));
+        hour = Integer.parseInt(DateManager.dateToString("HH", date));
+        minute = Integer.parseInt(DateManager.dateToString("mm", date));
+        second = Integer.parseInt(DateManager.dateToString("ss", date));
     }
 
     @Override

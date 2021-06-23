@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
+import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.content.Intent;
@@ -36,13 +37,14 @@ import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
+import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Show.UserFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -59,14 +61,14 @@ public class MainActivity extends AppCompatActivity {
     // Adapters
     private NavsAdapter navsAdapter;
 
+    // BottomSheets
+    private LogoutBottomSheet logoutBottomSheet;
+
     // Singleton
     public Singleton singleton;
 
     // Dialogs
     public LoadingDialog loadingDialog;
-
-    // BottomSheets
-    private LogoutBottomSheet logoutBottomSheet;
 
     // Objects
     public ControlEditText controlEditText;
@@ -92,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
 
         setData();
 
-        setRecyclerView();
+        setDrawer();
     }
 
     private void decorator() {
@@ -105,11 +107,11 @@ public class MainActivity extends AppCompatActivity {
     private void initializer() {
         navsAdapter = new NavsAdapter(this);
 
+        logoutBottomSheet = new LogoutBottomSheet();
+
         singleton = new Singleton(this);
 
         loadingDialog = new LoadingDialog();
-
-        logoutBottomSheet = new LogoutBottomSheet();
 
         controlEditText = new ControlEditText();
 
@@ -136,6 +138,69 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    public void setData() {
+        if (!singleton.getName().equals("")) {
+            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
+        } else {
+            binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+        }
+
+        if (!singleton.getMoney().equals("")) {
+            String money = StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman);
+            binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
+        } else {
+            String money = "0" + " " + getResources().getString(R.string.MainToman);
+            binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(money);
+        }
+
+        if (!singleton.getAvatar().equals("")) {
+            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
+            Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
+        } else {
+            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+            binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
+        }
+    }
+
+    private void setDrawer() {
+        ArrayList<TypeModel> values = new ArrayList<>();
+
+        String[] titles = getResources().getStringArray(R.array.MainTitles);
+        String[] description = getResources().getStringArray(R.array.MainDescriptions);
+        int[] images = new int[]{R.drawable.ic_tachometer_alt_light, R.drawable.ic_building_light, R.drawable.ic_folders_light, R.drawable.ic_user_friends_light, R.drawable.ic_users_light, R.drawable.ic_balance_scale_light, R.drawable.ic_vial_light, R.drawable.ic_users_medical_light, R.drawable.ic_file_certificate_light};
+
+        for (int i = 0; i < titles.length; i++) {
+            try {
+                JSONObject object = new JSONObject();
+                object.put("title", titles[i]);
+                object.put("description", description[i]);
+                object.put("image", images[i]);
+
+                TypeModel model = new TypeModel(object);
+
+                values.add(model);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+            navsAdapter.setItems(values);
+            binding.navIncludeLayout.listRecyclerView.setAdapter(navsAdapter);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
+
     private void listener() {
         ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
@@ -154,7 +219,8 @@ public class MainActivity extends AppCompatActivity {
 
                 switch (pos) {
                     case "مشاهده پروفایل":
-                        navigator(R.id.meFragment);
+                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToMeFragment(singleton.getUserModel());
+                        navController.navigate(action);
                         break;
                     case "کیف پول\u200Cها":
                         navigator(R.id.treasuriesFragment);
@@ -181,66 +247,9 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            binding.contentIncludeLayout.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
-            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+//            binding.contentIncludeLayout.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
+//            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
         });
-    }
-
-    public void setData() {
-        if (singleton != null) {
-            if (!singleton.getName().equals("")) {
-                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
-            } else {
-                binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-            }
-
-            if (!singleton.getMoney().equals("")) {
-                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText(StringManager.separate(singleton.getMoney()) + " " + getResources().getString(R.string.MainToman));
-            } else {
-                binding.contentIncludeLayout.toolbarIncludeLayout.moneyTextView.setText("0" + " " + getResources().getString(R.string.MainToman));
-            }
-
-            if (!singleton.getNotification().equals("")) {
-                binding.contentIncludeLayout.badgeTextView.setVisibility(View.VISIBLE);
-                binding.contentIncludeLayout.badgeTextView.setText(singleton.getNotification());
-            } else {
-                binding.contentIncludeLayout.badgeTextView.setVisibility(View.GONE);
-            }
-
-            if (!singleton.getAvatar().equals("")) {
-                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(singleton.getAvatar()).placeholder(R.color.Blue500).into(binding.contentIncludeLayout.toolbarIncludeLayout.avatarImageView);
-            } else {
-                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
-            }
-        }
-    }
-
-    private void setRecyclerView() {
-        ArrayList<TypeModel> values = new ArrayList<>();
-
-        String[] titles = getResources().getStringArray(R.array.MainTitles);
-        String[] description = getResources().getStringArray(R.array.MainDescriptions);
-        int[] images = new int[]{R.drawable.ic_tachometer_alt_light, R.drawable.ic_building_light, R.drawable.ic_folders_light, R.drawable.ic_user_friends_light, R.drawable.ic_users_light, R.drawable.ic_balance_scale_light, R.drawable.ic_vial_light, R.drawable.ic_users_medical_light, R.drawable.ic_file_certificate_light};
-
-        for (int i = 0; i < titles.length; i++) {
-            try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("title", titles[i]);
-                jsonObject.put("description", description[i]);
-                jsonObject.put("image", images[i]);
-
-                TypeModel model = new TypeModel(jsonObject);
-
-                values.add(model);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-            navsAdapter.setItems(values);
-            binding.navIncludeLayout.listRecyclerView.setAdapter(navsAdapter);
-        }
     }
 
     public void responseAdapter(String item) {
@@ -299,54 +308,31 @@ public class MainActivity extends AppCompatActivity {
         navigator(destinationId, null);
     }
 
-    public void login(UserModel user) {
-        if (user.getId() != null)
-            singleton.setId(user.getId());
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-        if (user.getName() != null)
-            singleton.setName(user.getName());
+    // ---------------------------------------------------------------------------------------------------------------------------------------------------
 
-        if (user.getUsername() != null)
-            singleton.setUsername(user.getUsername());
 
-        if (user.getBirthday() != null)
-            singleton.setBirthday(user.getBirthday());
 
-        if (user.getEmail() != null)
-            singleton.setEmail(user.getEmail());
 
-        if (user.getMobile() != null)
-            singleton.setMobile(user.getMobile());
 
-        if (user.getUserStatus() != null)
-            singleton.setStatus(user.getUserStatus());
 
-        if (user.getUserType() != null)
-            singleton.setType(user.getUserType());
 
-        if (user.getGender() != null)
-            singleton.setGender(user.getGender());
 
-        if (user.getAvatar() != null && user.getAvatar().getMedium() != null && user.getAvatar().getMedium().getUrl() != null)
-            singleton.setAvatar(user.getAvatar().getMedium().getUrl());
 
-        if (user.getPublic_key() != null)
-            singleton.setPublicKey(user.getPublic_key());
 
-        if (user.getTreasuries() != null) {
-            try {
-                int money = 0;
-                for (int i = 0; i < user.getTreasuries().length(); i++) {
-                    if (user.getTreasuries().getJSONObject(i).getString("symbol").equals("gift") ||user.getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") ){
-                        money+= user.getTreasuries().getJSONObject(i).getInt("balance");
-                    }
-                }
-                singleton.setMoney(String.valueOf(money));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-    }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
@@ -366,67 +352,64 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    public void onBackPressed() {
-        if (binding.getRoot().isDrawerOpen(GravityCompat.START)) {
-            binding.getRoot().closeDrawer(GravityCompat.START);
-        } else {
-            if (!navController.popBackStack()) {
-                finish();
-            }
-        }
-    }
-
-    @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        if (requestCode == 100) {
-            if (grantResults.length > 0) {
-                for (int grantResult : grantResults) {
-                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                }
-                IntentManager.file(this);
-            }
-        } else if (requestCode == 300) {
-            if (grantResults.length > 0) {
-                for (int grantResult : grantResults) {
-                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                }
-                IntentManager.gallery(this);
-            }
-        } else if (requestCode == 400) {
-            if (grantResults.length > 0) {
-                for (int grantResult : grantResults) {
-                    if (grantResult != PackageManager.PERMISSION_GRANTED) {
-                        return;
-                    }
-                }
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 
-                Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (fragment != null) {
+        switch (requestCode) {
+            case 100:
+                if (grantResults.length > 0) {
+                    for (int grantResult : grantResults) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED)
+                            return;
+                    }
 
-                    if (fragment instanceof CreateCenterFragment) {
-                        ((CreateCenterFragment) fragment).avatarPath = IntentManager.camera(this);
+                    IntentManager.file(this);
+                }
+                break;
+            case 300:
+                if (grantResults.length > 0) {
+                    for (int grantResult : grantResults) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED)
+                            return;
+                    }
 
-                    } else if (fragment instanceof EditCenterFragment) {
-                        Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                        if (childFragment != null) {
-                            if (childFragment instanceof EditCenterAvatarFragment)
-                                ((EditCenterAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
+                    IntentManager.gallery(this);
+                }
+                break;
+            case 400:
+                if (grantResults.length > 0) {
+                    for (int grantResult : grantResults) {
+                        if (grantResult != PackageManager.PERMISSION_GRANTED)
+                            return;
+                    }
+
+                    Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+                    if (fragment != null) {
+
+                        // CreateCenterFragment
+                        if (fragment instanceof CreateCenterFragment) {
+                            ((CreateCenterFragment) fragment).avatarPath = IntentManager.camera(this);
+
+                            // EditCenterFragment
+                        } else if (fragment instanceof EditCenterFragment) {
+                            Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                            if (childFragment != null) {
+                                if (childFragment instanceof EditCenterAvatarFragment)
+                                    ((EditCenterAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
+                            }
+
+                            // EditUserFragment
+                        } else if (fragment instanceof EditUserFragment) {
+                            Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                            if (childFragment != null) {
+                                if (childFragment instanceof EditUserAvatarFragment)
+                                    ((EditUserAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
+                            }
                         }
 
-                    } else if (fragment instanceof EditUserFragment) {
-                        Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                        if (childFragment != null) {
-                            if (childFragment instanceof EditUserAvatarFragment)
-                                ((EditUserAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
-                        }
                     }
                 }
-
-            }
+                break;
         }
     }
 
@@ -434,61 +417,76 @@ public class MainActivity extends AppCompatActivity {
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode == RESULT_OK) {
-            Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (fragment != null) {
+        switch (resultCode) {
+            case RESULT_OK: {
+                Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+                if (fragment != null) {
 
-                if (fragment instanceof CreateCenterFragment) {
-                    if (requestCode == 300)
-                        ((CreateCenterFragment) fragment).responseAction("gallery", data);
-                     else if (requestCode == 400)
-                        ((CreateCenterFragment) fragment).responseAction("camera", data);
+                    // CreateCenterFragment
+                    if (fragment instanceof CreateCenterFragment) {
+                        if (requestCode == 300)
+                            ((CreateCenterFragment) fragment).responseAction("gallery", data);
+                        else if (requestCode == 400)
+                            ((CreateCenterFragment) fragment).responseAction("camera", data);
 
-                } else if (fragment instanceof EditCenterFragment) {
-                    Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null) {
-                        if (childFragment instanceof EditCenterAvatarFragment)
-                            if (requestCode == 300)
-                                ((EditCenterAvatarFragment) childFragment).responseAction("gallery", data);
-                            else if (requestCode == 400)
-                                ((EditCenterAvatarFragment) childFragment).responseAction("camera", data);
+                        // EditCenterFragment
+                    } else if (fragment instanceof EditCenterFragment) {
+                        Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                        if (childFragment != null) {
+                            if (childFragment instanceof EditCenterAvatarFragment)
+                                if (requestCode == 300)
+                                    ((EditCenterAvatarFragment) childFragment).responseAction("gallery", data);
+                                else if (requestCode == 400)
+                                    ((EditCenterAvatarFragment) childFragment).responseAction("camera", data);
+                        }
+
+                        // EditUserFragment
+                    } else if (fragment instanceof EditUserFragment) {
+                        Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                        if (childFragment != null) {
+                            if (childFragment instanceof EditUserAvatarFragment)
+                                if (requestCode == 300)
+                                    ((EditUserAvatarFragment) childFragment).responseAction("gallery", data);
+                                else if (requestCode == 400)
+                                    ((EditUserAvatarFragment) childFragment).responseAction("camera", data);
+                        }
+
+                        // CreateDocumentFragment
+                    } else if (fragment instanceof CreateDocumentFragment) {
+                        if (requestCode == 100)
+                            ((CreateDocumentFragment) fragment).responseAction("file", data);
+
+                        // CreatePracticeFragment
+                    } else if (fragment instanceof CreatePracticeFragment) {
+                        if (requestCode == 100)
+                            ((CreatePracticeFragment) fragment).responseAction("file", data);
                     }
 
-                } else if (fragment instanceof EditUserFragment) {
-                    Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null) {
-                        if (childFragment instanceof EditUserAvatarFragment)
-                            if (requestCode == 300)
-                                ((EditUserAvatarFragment) childFragment).responseAction("gallery", data);
-                            else if (requestCode == 400)
-                                ((EditUserAvatarFragment) childFragment).responseAction("camera", data);
-                    }
-
-                } else if (fragment instanceof CreateDocumentFragment) {
-                    if (requestCode == 100)
-                        ((CreateDocumentFragment) fragment).responseAction("file", data);
-
-                } else if (fragment instanceof CreatePracticeFragment) {
-                    if (requestCode == 100)
-                        ((CreatePracticeFragment) fragment).responseAction("file", data);
                 }
+            } break;
+            case RESULT_CANCELED: {
+                switch (requestCode) {
+                    case 100:
+                        Toast.makeText(this, "File Exception", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 200:
+                        Toast.makeText(this, "Storage Exception", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 300:
+                        Toast.makeText(this, "Gallery Exception", Toast.LENGTH_SHORT).show();
+                        break;
+                    case 400:
+                        Toast.makeText(this, "Camera Exception", Toast.LENGTH_SHORT).show();
+                        break;
+                }
+            } break;
+        }
+    }
 
-            }
-        } else if (resultCode == RESULT_CANCELED) {
-            switch (requestCode) {
-                case 100:
-                    Toast.makeText(this, "File Exception", Toast.LENGTH_SHORT).show();
-                    break;
-                case 200:
-                    Toast.makeText(this, "Storage Exception", Toast.LENGTH_SHORT).show();
-                    break;
-                case 300:
-                    Toast.makeText(this, "Gallery Exception", Toast.LENGTH_SHORT).show();
-                    break;
-                case 400:
-                    Toast.makeText(this, "Camera Exception", Toast.LENGTH_SHORT).show();
-                    break;
-            }
+    @Override
+    public void onBackPressed() {
+        if (binding.getRoot().isDrawerOpen(GravityCompat.START)) {
+            binding.getRoot().closeDrawer(GravityCompat.START);
         }
     }
 

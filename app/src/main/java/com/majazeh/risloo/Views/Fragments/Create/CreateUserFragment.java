@@ -146,8 +146,8 @@ public class CreateUserFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
-            birthdayBottomSheet.setDate(year, month, day, "birthday");
+//            birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
+//            birthdayBottomSheet.setDate(year, month, day, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -346,9 +346,9 @@ public class CreateUserFragment extends Fragment {
             case "birthday":
                 birthday = data;
 
-                year = birthdayBottomSheet.year;
-                month = birthdayBottomSheet.month;
-                day = birthdayBottomSheet.day;
+//                year = birthdayBottomSheet.year;
+//                month = birthdayBottomSheet.month;
+//                day = birthdayBottomSheet.day;
 
                 binding.birthdayIncludeLayout.selectTextView.setText(birthday);
                 break;

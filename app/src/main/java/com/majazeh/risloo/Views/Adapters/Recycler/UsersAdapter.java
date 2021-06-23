@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -18,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.UsersFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -83,21 +84,25 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     }
 
     private void listener(UsersHolder holder, UserModel model) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.userFragment, getExtras(model))).widget(holder.binding.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = UsersFragmentDirections.actionUsersFragmentToUserFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
+        }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String menu = parent.getItemAtPosition(position).toString();
+                String pos = parent.getItemAtPosition(position).toString();
 
-                if (menu.equals("+989")) {
-                    IntentManager.phone(activity, menu);
-                } else if (menu.contains("@")) {
-                    IntentManager.email(activity, new String[]{menu}, "", "", "");
-                } else if (menu.contains("ورود به کاربری")) {
+                if (pos.equals("+989")) {
+                    IntentManager.phone(activity, pos);
+                } else if (pos.contains("@")) {
+                    IntentManager.email(activity, new String[]{pos}, "", "", "");
+                } else if (pos.contains("ورود به کاربری")) {
                     Log.e("method", "enter");
-                } else if (menu.equals("ویرایش کاربر")) {
-                    ((MainActivity) activity).navigator(R.id.editUserFragment, getExtras(model));
+                } else if (pos.equals("ویرایش کاربر")) {
+                    NavDirections action = UsersFragmentDirections.actionUsersFragmentToEditUserFragment(model);
+                    ((MainActivity) activity).navController.navigate(action);
                 }
 
                 holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
@@ -148,26 +153,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
             holder.binding.menuImageView.setVisibility(View.INVISIBLE);
 
         InitManager.unfixedCustomSpinner(activity, holder.binding.menuSpinner, menu, "users");
-    }
-
-    private Bundle getExtras(UserModel model) {
-        Bundle extras = new Bundle();
-
-        extras.putString("id", model.getId());
-        extras.putString("name", model.getName());
-        extras.putString("username", model.getUsername());
-        extras.putString("birthday", model.getBirthday());
-        extras.putString("email", model.getEmail());
-        extras.putString("mobile", model.getMobile());
-        extras.putString("status", model.getUserStatus());
-        extras.putString("type", model.getUserType());
-        extras.putString("gender", model.getGender());
-        extras.putString("public_key", model.getPublic_key());
-
-        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null)
-            extras.putString("avatar", model.getAvatar().getMedium().getUrl());
-
-        return extras;
     }
 
     public class UsersHolder extends RecyclerView.ViewHolder {

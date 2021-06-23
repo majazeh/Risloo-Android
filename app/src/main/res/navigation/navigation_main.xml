@@ -138,6 +138,11 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment"
         android:label="@string/CreateSampleFragmentTitle"
         tools:layout="@layout/fragment_create_sample" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+
         <action
             android:id="@+id/action_createSampleFragment_to_scalesFragment"
             app:destination="@id/scalesFragment" />
@@ -199,7 +204,11 @@
         android:id="@+id/editUserFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment"
         android:label="@string/EditUserFragmentTitle"
-        tools:layout="@layout/fragment_edit_user" />
+        tools:layout="@layout/fragment_edit_user" >
+        <argument
+            android:name="userModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.UserModel" />
+    </fragment>
 
     /*
     ---------- Index Destinations ----------
@@ -479,6 +488,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.MeFragment"
         android:label="@string/MeFragmentTitle"
         tools:layout="@layout/fragment_me">
+        <argument
+            android:name="userModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.UserModel" />
+
         <action
             android:id="@+id/action_meFragment_to_editUserFragment"
             app:destination="@id/editUserFragment" />
@@ -564,6 +577,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.UserFragment"
         android:label="@string/UserFragmentTitle"
         tools:layout="@layout/fragment_user" >
+        <argument
+            android:name="userModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.UserModel" />
+
         <action
             android:id="@+id/action_userFragment_to_editUserFragment"
             app:destination="@id/editUserFragment" />

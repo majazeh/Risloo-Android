@@ -32,6 +32,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class EditUserPersonalFragment extends Fragment {
 
@@ -44,7 +45,6 @@ public class EditUserPersonalFragment extends Fragment {
     // Vars
     private HashMap data, header;
     private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "user", gender = "male";
-    private int year, month, day;
 
     @Nullable
     @Override
@@ -57,7 +57,7 @@ public class EditUserPersonalFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setData();
 
         return binding.getRoot();
     }
@@ -141,7 +141,7 @@ public class EditUserPersonalFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
-            birthdayBottomSheet.setDate(year, month, day, "birthday");
+            birthdayBottomSheet.setDate(birthday, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
@@ -190,48 +190,44 @@ public class EditUserPersonalFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setExtra() {
+    private void setData() {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (!((EditUserFragment) fragment).userId.equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).userId);
+                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).model.getId());
                 }
 
-                if (!((EditUserFragment) fragment).name.equals("")) {
-                    name = ((EditUserFragment) fragment).name;
+                if (((EditUserFragment) fragment).model.getName() != null && !((EditUserFragment) fragment).model.getName().equals("")) {
+                    name = ((EditUserFragment) fragment).model.getName();
                     binding.nameIncludeLayout.inputEditText.setText(name);
                 }
 
-                if (!((EditUserFragment) fragment).mobile.equals("")) {
-                    mobile = ((EditUserFragment) fragment).mobile;
+                if (((EditUserFragment) fragment).model.getMobile() != null && !((EditUserFragment) fragment).model.getMobile().equals("")) {
+                    mobile = ((EditUserFragment) fragment).model.getMobile();
                     binding.mobileIncludeLayout.inputEditText.setText(mobile);
                 }
 
-                if (!((EditUserFragment) fragment).username.equals("")) {
-                    username = ((EditUserFragment) fragment).username;
+                if (((EditUserFragment) fragment).model.getUsername() != null && !((EditUserFragment) fragment).model.getUsername().equals("")) {
+                    username = ((EditUserFragment) fragment).model.getUsername();
                     binding.usernameIncludeLayout.inputEditText.setText(username);
                 }
 
-                if (!((EditUserFragment) fragment).email.equals("")) {
-                    email = ((EditUserFragment) fragment).email;
+                if (((EditUserFragment) fragment).model.getEmail() != null && !((EditUserFragment) fragment).model.getEmail().equals("")) {
+                    email = ((EditUserFragment) fragment).model.getEmail();
                     binding.emailIncludeLayout.inputEditText.setText(email);
                 }
 
-                if (!((EditUserFragment) fragment).birthday.equals("")) {
-                    birthday = ((EditUserFragment) fragment).birthday;
-                    binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                if (((EditUserFragment) fragment).model.getBirthday() != null && !((EditUserFragment) fragment).model.getBirthday().equals("")) {
+                    birthday = ((EditUserFragment) fragment).model.getBirthday();
+                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.getYYYYsMMsDD(birthday, "-"));
                 } else {
-                    birthday = getResources().getString(R.string.AppDefaultDate);
-                    binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                    birthday = String.valueOf(DateManager.currentTimestamp());
+                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.getYYYYsMMsDD(birthday, "-"));
                 }
 
-                year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-                month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-                day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-
-                if (!((EditUserFragment) fragment).status.equals("")) {
-                    status = ((EditUserFragment) fragment).status;
+                if (((EditUserFragment) fragment).model.getUserStatus() != null && !((EditUserFragment) fragment).model.getUserStatus().equals("")) {
+                    status = ((EditUserFragment) fragment).model.getUserStatus();
                     switch (status) {
                         case "active":
                             binding.statusIncludeLayout.firstRadioButton.setChecked(true);
@@ -245,8 +241,8 @@ public class EditUserPersonalFragment extends Fragment {
                     }
                 }
 
-                if (!((EditUserFragment) fragment).type.equals("")) {
-                    type = ((EditUserFragment) fragment).type;
+                if (((EditUserFragment) fragment).model.getUserType() != null && !((EditUserFragment) fragment).model.getUserType().equals("")) {
+                    type = ((EditUserFragment) fragment).model.getUserType();
                     switch (type) {
                         case "admin":
                             binding.typeIncludeLayout.firstRadioButton.setChecked(true);
@@ -265,8 +261,8 @@ public class EditUserPersonalFragment extends Fragment {
                     binding.clientGroup.setVisibility(View.GONE);
                 }
 
-                if (!((EditUserFragment) fragment).gender.equals("")) {
-                    gender = ((EditUserFragment) fragment).gender;
+                if (((EditUserFragment) fragment).model.getGender() != null && !((EditUserFragment) fragment).model.getGender().equals("")) {
+                    gender = ((EditUserFragment) fragment).model.getGender();
                     switch (gender) {
                         case "male":
                             binding.genderIncludeLayout.firstRadioButton.setChecked(true);
@@ -284,12 +280,7 @@ public class EditUserPersonalFragment extends Fragment {
         switch (method) {
             case "birthday":
                 birthday = data;
-
-                year = birthdayBottomSheet.year;
-                month = birthdayBottomSheet.month;
-                day = birthdayBottomSheet.day;
-
-                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                binding.birthdayIncludeLayout.selectTextView.setText(DateManager.getYYYYsMMsDD(birthday, "-"));
                 break;
         }
     }
@@ -305,7 +296,7 @@ public class EditUserPersonalFragment extends Fragment {
         data.put("name", name);
         data.put("gender", gender);
 
-        if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             Auth.editProfile(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
@@ -314,9 +305,7 @@ public class EditUserPersonalFragment extends Fragment {
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).login(userModel);
-                            ((MainActivity) requireActivity()).setData();
-
+                            ((MainActivity) requireActivity()).singleton.update(userModel);
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                         });
@@ -356,7 +345,6 @@ public class EditUserPersonalFragment extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                            ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
                         });
                     }
                 }

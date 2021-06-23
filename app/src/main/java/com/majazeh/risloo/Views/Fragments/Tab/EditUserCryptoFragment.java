@@ -41,7 +41,7 @@ public class EditUserCryptoFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setData();
 
         return binding.getRoot();
     }
@@ -107,23 +107,23 @@ public class EditUserCryptoFragment extends Fragment {
         }).widget(binding.privateEditTextView.getRoot());
     }
 
-    private void setExtra() {
+    private void setData() {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (!((EditUserFragment) fragment).userId.equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).userId);
+                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).model.getId());
                 }
 
-                if (!((EditUserFragment) fragment).publicKey.equals("")) {
-                    publicKey = ((EditUserFragment) fragment).publicKey;
+                if (((EditUserFragment) fragment).model.getPublic_key() != null && !((EditUserFragment) fragment).model.getPublic_key().equals("")) {
+                    publicKey = ((EditUserFragment) fragment).model.getPublic_key();
                     binding.publicIncludeLayout.inputEditText.setText(publicKey);
                 }
 
-                if (!((EditUserFragment) fragment).privateKey.equals("")) {
-                    privateKey = ((EditUserFragment) fragment).privateKey;
-                    binding.privateIncludeLayout.inputEditText.setText(privateKey);
-                }
+//                if (((EditUserFragment) fragment).model.getPrivate_key() != null && !((EditUserFragment) fragment).model.getPrivate_key().equals("")) {
+//                    privateKey = ((EditUserFragment) fragment).getPrivate_key;
+//                    binding.privateIncludeLayout.inputEditText.setText(privateKey);
+//                }
             }
         }
     }

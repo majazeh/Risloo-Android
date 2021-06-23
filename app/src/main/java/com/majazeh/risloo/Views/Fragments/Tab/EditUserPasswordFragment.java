@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Objects;
 
 public class EditUserPasswordFragment extends Fragment {
 
@@ -57,7 +58,7 @@ public class EditUserPasswordFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setData();
 
         return binding.getRoot();
     }
@@ -216,7 +217,7 @@ public class EditUserPasswordFragment extends Fragment {
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+            if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
                 if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0)
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 else
@@ -243,14 +244,14 @@ public class EditUserPasswordFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setExtra() {
+    private void setData() {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (!((EditUserFragment) fragment).userId.equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).userId);
+                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
+                    data.put("id", ((EditUserFragment) fragment).model.getId());
 
-                    if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId()))
+                    if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId()))
                         binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     else
                         binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.GONE);
@@ -265,7 +266,7 @@ public class EditUserPasswordFragment extends Fragment {
         currentPassword = binding.currentPasswordIncludeLayout.inputEditText.getText().toString().trim();
         newPassword = binding.newPasswordIncludeLayout.inputEditText.getText().toString().trim();
 
-        if (data.get("id").equals(((MainActivity) requireActivity()).singleton.getId())) {
+        if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             data.put("password",  currentPassword);
             data.put("new_password", newPassword);
 
@@ -317,7 +318,6 @@ public class EditUserPasswordFragment extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                            ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
                         });
                     }
                 }

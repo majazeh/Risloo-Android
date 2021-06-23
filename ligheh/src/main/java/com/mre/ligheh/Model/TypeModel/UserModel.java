@@ -1,12 +1,15 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.mre.ligheh.Model.Madule.List;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class UserModel extends TypeModel {
+public class UserModel extends TypeModel implements Parcelable {
 
     private String id="";
     private String userId="";
@@ -356,4 +359,69 @@ public class UserModel extends TypeModel {
                 ", centerList=" + centerList +
                 '}';
     }
+
+    /*
+    ---------- Parcelable Implements ----------
+    */
+
+    protected UserModel(Parcel in) {
+        id = in.readString();
+        userId = in.readString();
+        name = in.readString();
+        email = in.readString();
+        mobile = in.readString();
+        gender = in.readString();
+        userStatus = in.readString();
+        no_password = in.readByte() != 0;
+        position = in.readString();
+        userType = in.readString();
+        username = in.readString();
+        creator = in.readParcelable(UserModel.class.getClassLoader());
+        public_key = in.readString();
+        birthday = in.readString();
+        userCreated_at = in.readInt();
+        userUpdated_at = in.readInt();
+        userAccepted_at = in.readInt();
+        userKicked_at = in.readInt();
+    }
+
+    public static final Creator<UserModel> CREATOR = new Creator<UserModel>() {
+        @Override
+        public UserModel createFromParcel(Parcel in) {
+            return new UserModel(in);
+        }
+
+        @Override
+        public UserModel[] newArray(int size) {
+            return new UserModel[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(id);
+        dest.writeString(userId);
+        dest.writeString(name);
+        dest.writeString(email);
+        dest.writeString(mobile);
+        dest.writeString(gender);
+        dest.writeString(userStatus);
+        dest.writeByte((byte) (no_password ? 1 : 0));
+        dest.writeString(position);
+        dest.writeString(userType);
+        dest.writeString(username);
+        dest.writeParcelable(creator, flags);
+        dest.writeString(public_key);
+        dest.writeString(birthday);
+        dest.writeInt(userCreated_at);
+        dest.writeInt(userUpdated_at);
+        dest.writeInt(userAccepted_at);
+        dest.writeInt(userKicked_at);
+    }
+
 }
