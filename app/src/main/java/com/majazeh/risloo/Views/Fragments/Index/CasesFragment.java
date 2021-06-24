@@ -144,8 +144,8 @@ public class CasesFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CasesFragmentDirections.actionCasesFragmentToCreateCaseFragment();
-            ((MainActivity) requireActivity()).navController.navigate(action);
+//            NavDirections action = CasesFragmentDirections.actionCasesFragmentToCreateCaseFragment();
+//            ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }
 

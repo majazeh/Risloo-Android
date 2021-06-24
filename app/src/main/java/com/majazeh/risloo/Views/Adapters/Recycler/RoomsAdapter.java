@@ -2,24 +2,28 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Show.CenterFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Show.ReferenceFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemRoomBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder> {
 
@@ -45,7 +49,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
         detector(holder);
 
-        listener(holder, room);
+        listener(holder, i);
 
         setData(holder, room);
     }
@@ -79,19 +83,33 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         }
     }
 
-    private void listener(RoomsHolder holder, RoomModel model) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.roomFragment, getExtras(model))).widget(holder.binding.containerConstraintLayout);
+    private void listener(RoomsHolder holder, int position) {
+        ClickManager.onClickListener(() -> {
+            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                case R.id.dashboardFragment: {
+                    NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("room", rooms.get(position));
+                    ((MainActivity) activity).navController.navigate(action);
+                } break;
+                case R.id.centerFragment: {
+                    NavDirections action = CenterFragmentDirections.actionCenterFragmentToRoomFragment("room", rooms.get(position));
+                    ((MainActivity) activity).navController.navigate(action);
+                } break;
+                case R.id.referenceFragment: {
+                    NavDirections action = ReferenceFragmentDirections.actionReferenceFragmentToRoomFragment("room", rooms.get(position));
+                    ((MainActivity) activity).navController.navigate(action);
+                } break;
+            }
+        }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(RoomsHolder holder, RoomModel model) {
         holder.binding.nameTextView.setText(model.getRoomManager().getName());
         holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
 
-        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null) {
+        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
             setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());
-        } else {
+        else
             setAvatar(holder, "");
-        }
     }
 
     private void setAvatar(RoomsHolder holder, String url) {
@@ -104,27 +122,6 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
-    }
-
-    private Bundle getExtras(RoomModel model) {
-        Bundle extras = new Bundle();
-
-        extras.putString("id", model.getRoomId());
-        extras.putString("type", model.getRoomType());
-
-        extras.putString("manager_id", model.getRoomManager().getUserId());
-        extras.putString("manager_name", model.getRoomManager().getName());
-
-        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
-            extras.putString("avatar", model.getRoomManager().getAvatar().getMedium().getUrl());
-
-        if (model.getRoomType().equals("room")) {
-            extras.putString("room_id", model.getRoomId());
-            extras.putString("room_name", model.getRoomManager().getName());
-            extras.putString("center_name", "اتاق");
-        }
-
-        return extras;
     }
 
     public class RoomsHolder extends RecyclerView.ViewHolder {

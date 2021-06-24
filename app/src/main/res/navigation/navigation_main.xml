@@ -83,7 +83,11 @@
         android:id="@+id/createCaseFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment"
         android:label="@string/CreateCaseFragmentTitle"
-        tools:layout="@layout/fragment_create_case" />
+        tools:layout="@layout/fragment_create_case" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createCaseUserFragment"
@@ -125,7 +129,11 @@
         android:id="@+id/createRoomFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment"
         android:label="@string/CreateRoomFragmentTitle"
-        tools:layout="@layout/fragment_create_room" />
+        tools:layout="@layout/fragment_create_room" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createRoomUserFragment"
@@ -152,7 +160,11 @@
         android:id="@+id/createScheduleFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment"
         android:label="@string/CreateScheduleFragmentTitle"
-        tools:layout="@layout/fragment_create_schedule" />
+        tools:layout="@layout/fragment_create_schedule" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createSessionFragment"
@@ -180,7 +192,11 @@
         android:id="@+id/editCenterFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment"
         android:label="@string/EditCenterFragmentTitle"
-        tools:layout="@layout/fragment_edit_center" />
+        tools:layout="@layout/fragment_edit_center" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/editCenterUserFragment"
@@ -251,6 +267,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment"
         android:label="@string/CenterSchedulesFragmentTitle"
         tools:layout="@layout/fragment_center_schedules" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_centerSchedulesFragment_to_sessionFragment"
             app:destination="@id/sessionFragment" />
@@ -267,6 +287,9 @@
         <action
             android:id="@+id/action_centersFragment_to_centerFragment"
             app:destination="@id/centerFragment" />
+        <action
+            android:id="@+id/action_centersFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
     </fragment>
 
     <fragment
@@ -274,6 +297,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment"
         android:label="@string/CenterUsersFragmentTitle"
         tools:layout="@layout/fragment_center_users" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_centerUsersFragment_to_createCenterUserFragment"
             app:destination="@id/createCenterUserFragment" />
@@ -313,6 +340,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment"
         android:label="@string/RoomSchedulesFragmentTitle"
         tools:layout="@layout/fragment_room_schedules" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_roomSchedulesFragment_to_createScheduleFragment"
             app:destination="@id/createScheduleFragment" />
@@ -326,6 +357,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment"
         android:label="@string/RoomUsersFragmentTitle"
         tools:layout="@layout/fragment_room_users" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_roomUsersFragment_to_createRoomUserFragment"
             app:destination="@id/createRoomUserFragment" />
@@ -454,6 +489,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.CenterFragment"
         android:label="@string/CenterFragmentTitle"
         tools:layout="@layout/fragment_center" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_centerFragment_to_createRoomFragment"
             app:destination="@id/createRoomFragment" />
@@ -469,6 +508,9 @@
         <action
             android:id="@+id/action_centerFragment_to_userFragment"
             app:destination="@id/userFragment" />
+        <action
+            android:id="@+id/action_centerFragment_to_referenceFragment"
+            app:destination="@id/referenceFragment" />
         <action
             android:id="@+id/action_centerFragment_to_centerUsersFragment"
             app:destination="@id/centerUsersFragment" />
@@ -502,6 +544,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment"
         android:label="@string/ReferenceFragmentTitle"
         tools:layout="@layout/fragment_reference" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_referenceFragment_to_roomFragment"
             app:destination="@id/roomFragment" />
@@ -518,6 +564,13 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.RoomFragment"
         android:label="@string/RoomFragmentTitle"
         tools:layout="@layout/fragment_room" >
+        <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_roomFragment_to_createCaseFragment"
             app:destination="@id/createCaseFragment" />
@@ -525,8 +578,23 @@
             android:id="@+id/action_roomFragment_to_createScheduleFragment"
             app:destination="@id/createScheduleFragment" />
         <action
+            android:id="@+id/action_roomFragment_to_editCenterFragment"
+            app:destination="@id/editCenterFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_referenceFragment"
+            app:destination="@id/referenceFragment" />
+        <action
             android:id="@+id/action_roomFragment_to_roomUsersFragment"
             app:destination="@id/roomUsersFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_centerUsersFragment"
+            app:destination="@id/centerUsersFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_roomSchedulesFragment"
+            app:destination="@id/roomSchedulesFragment" />
+        <action
+            android:id="@+id/action_roomFragment_to_centerSchedulesFragment"
+            app:destination="@id/centerSchedulesFragment" />
         <action
             android:id="@+id/action_roomFragment_to_caseFragment"
             app:destination="@id/caseFragment" />
@@ -561,6 +629,9 @@
         <action
             android:id="@+id/action_sessionFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />
+        <action
+            android:id="@+id/action_sessionFragment_to_userFragment"
+            app:destination="@id/userFragment" />
         <action
             android:id="@+id/action_sessionFragment_to_sampleFragment"
             app:destination="@id/sampleFragment" />

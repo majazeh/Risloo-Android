@@ -121,20 +121,11 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
          else
             holder.binding.topView.setVisibility(View.VISIBLE);
 
-        if (model.getId() != null && !model.getId().equals(""))
-            holder.binding.serialTextView.setText(model.getId());
-
-        if (model.getName() != null && !model.getName().equals(""))
-            holder.binding.nameTextView.setText(model.getName());
-
-        if (model.getUsername() != null && !model.getUsername().equals(""))
-            holder.binding.usernameTextView.setText(model.getUsername());
-
-        if (model.getUserType() != null && !model.getUserType().equals(""))
-            holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
-
-        if (model.getUserStatus() != null && !model.getUserStatus().equals(""))
-            holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getUserStatus()));
+        holder.binding.serialTextView.setText(model.getId());
+        holder.binding.nameTextView.setText(model.getName());
+        holder.binding.usernameTextView.setText(model.getUsername());
+        holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
+        holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getUserStatus()));
 
         setMenu(holder, model);
     }
@@ -142,13 +133,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     private void setMenu(UsersHolder holder, UserModel model) {
         ArrayList<String> menu = new ArrayList<>();
 
-        if (model.getMobile() != null && !model.getMobile().equals(""))
+        if (!model.getMobile().equals(""))
             menu.add(model.getMobile());
 
-        if (model.getEmail() != null && !model.getEmail().equals(""))
+        if (!model.getEmail().equals(""))
             menu.add(model.getEmail());
 
-        if (model.getUserType() != null && !model.getUserType().equals("admin"))
+        if (!model.getUserType().equals("admin"))
             menu.add(activity.getResources().getString(R.string.UsersFragmentEnter));
 
         menu.add(activity.getResources().getString(R.string.UsersFragmentEdit));

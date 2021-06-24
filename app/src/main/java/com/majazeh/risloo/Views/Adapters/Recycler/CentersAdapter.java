@@ -2,18 +2,20 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.CentersFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemCenterBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -22,6 +24,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersHolder> {
 
@@ -47,7 +50,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
         detector(holder);
 
-        listener(holder, center);
+        listener(holder, center, i);
 
         setData(holder, center);
     }
@@ -81,12 +84,30 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         }
     }
 
-    private void listener(CentersHolder holder, CenterModel model) {
+    private void listener(CentersHolder holder, CenterModel model, int position) {
         ClickManager.onClickListener(() -> {
             if (model.getCenterType().equals("counseling_center"))
-                ((MainActivity) activity).navigator(R.id.centerFragment, getExtras(model));
+                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                    case R.id.dashboardFragment: {
+                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToCenterFragment(centers.get(position));
+                        ((MainActivity) activity).navController.navigate(action);
+                    } break;
+                    case R.id.centersFragment: {
+                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToCenterFragment(centers.get(position));
+                        ((MainActivity) activity).navController.navigate(action);
+                    } break;
+                }
             else
-                ((MainActivity) activity).navigator(R.id.roomFragment, getExtras(model));
+                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                    case R.id.dashboardFragment: {
+                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("personal_clinic", centers.get(position));
+                        ((MainActivity) activity).navController.navigate(action);
+                    } break;
+                    case R.id.centersFragment: {
+                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToRoomFragment("personal_clinic", centers.get(position));
+                        ((MainActivity) activity).navController.navigate(action);
+                    } break;
+                }
         }).widget(holder.binding.containerConstraintLayout);
     }
 
@@ -100,11 +121,10 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
                 holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
             }
 
-            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
                 setAvatar(holder, model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
-            } else {
+            else
                 setAvatar(holder, "");
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -120,69 +140,6 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
-    }
-
-    private void setAcceptation(CenterModel model, Bundle extras) {
-        if (model.getAcceptation() != null) {
-            switch (model.getAcceptation().getPosition()) {
-                case "manager":
-                case "operator":
-                case "psychologist":
-                case "client":
-                    extras.putString("status", model.getAcceptation().getPosition());
-                    break;
-                default:
-                    if (!model.getAcceptation().getKicked_at().equals("")) {
-                        extras.putString("status", "kicked");
-                    } else {
-                        if (model.getAcceptation().getAccepted_at() != 0) {
-                            extras.putString("status", "accepted");
-                        } else {
-                            extras.putString("status", "awaiting");
-                        }
-                    }
-                    break;
-            }
-        } else {
-            extras.putString("status", "request");
-        }
-    }
-
-    private Bundle getExtras(CenterModel model) {
-        Bundle extras = new Bundle();
-        try {
-            extras.putString("id", model.getCenterId());
-            extras.putString("type", model.getCenterType());
-
-            extras.putString("manager_id", model.getManager().getUserId());
-            extras.putString("manager_name", model.getManager().getName());
-
-            setAcceptation(model, extras);
-
-            if (model.getDetail().has("title") && !model.getDetail().isNull("title"))
-                extras.putString("title", model.getDetail().getString("title"));
-
-            if (model.getDetail().has("address") && !model.getDetail().isNull("address"))
-                extras.putString("address", model.getDetail().getString("address"));
-
-            if (model.getDetail().has("description") && !model.getDetail().isNull("description"))
-                extras.putString("description", model.getDetail().getString("description"));
-
-            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)
-                extras.putString("avatar", model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
-
-            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0)
-                extras.putString("phone_numbers", model.getDetail().getJSONArray("phone_numbers").toString());
-
-            if (model.getCenterType().equals("personal_clinic")) {
-                extras.putString("room_id", model.getCenterId());
-                extras.putString("room_name", model.getManager().getName());
-                extras.putString("center_name", "کلینیک شخصی");
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return extras;
     }
 
     public class CentersHolder extends RecyclerView.ViewHolder {

@@ -3,13 +3,14 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -17,7 +18,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Show.SessionFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemUser2Binding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.User;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -39,8 +43,8 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
 
     @NonNull
     @Override
-    public Users2Adapter.Users2Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Users2Adapter.Users2Holder(SingleItemUser2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public Users2Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new Users2Holder(SingleItemUser2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -51,7 +55,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
 
         detector(holder);
 
-        listener(holder, user);
+        listener(holder, user, i);
 
         setData(holder, user);
     }
@@ -90,8 +94,11 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(Users2Holder holder, UserModel model) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.userFragment, getExtras(model))).widget(holder.binding.getRoot());
+    private void listener(Users2Holder holder, UserModel model, int position) {
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionFragmentDirections.actionSessionFragmentToUserFragment(users.get(position));
+            ((MainActivity) activity).navController.navigate(action);
+        }).widget(holder.binding.getRoot());
 
         holder.binding.statusSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
@@ -102,9 +109,9 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String status = parent.getItemAtPosition(position).toString();
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model.getId(), SelectionManager.getUserStatus2(activity, "en", status));
+                    doWork(holder, model, SelectionManager.getUserStatus2(activity, "en", pos));
 
                     userSelect = false;
                 }
@@ -118,11 +125,10 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     private void setData(Users2Holder holder, UserModel model) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+        else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
@@ -169,11 +175,11 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
         }
     }
 
-    private void doWork(Users2Holder holder, String id, String status) {
+    private void doWork(Users2Holder holder, UserModel model, String status) {
         ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
 
         HashMap data = new HashMap<>();
-        data.put("id", id);
+        data.put("id", model.getId());
         data.put("status", status);
 
         HashMap header = new HashMap<>();
@@ -194,29 +200,11 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
 //
 //            @Override
 //            public void onFailure(String response) {
-//                // Place Code if Needed
+//                activity.runOnUiThread(() -> {
+//                    // Place Code if Needed
+//                });
 //            }
 //        });
-    }
-
-    private Bundle getExtras(UserModel model) {
-        Bundle extras = new Bundle();
-
-        extras.putString("id", model.getId());
-        extras.putString("name", model.getName());
-        extras.putString("username", model.getUsername());
-        extras.putString("birthday", model.getBirthday());
-        extras.putString("email", model.getEmail());
-        extras.putString("mobile", model.getMobile());
-        extras.putString("status", model.getUserStatus());
-        extras.putString("type", model.getUserType());
-        extras.putString("gender", model.getGender());
-        extras.putString("public_key", model.getPublic_key());
-
-        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null)
-            extras.putString("avatar", model.getAvatar().getMedium().getUrl());
-
-        return extras;
     }
 
     public class Users2Holder extends RecyclerView.ViewHolder {
