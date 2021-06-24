@@ -106,19 +106,21 @@ public class EditUserAvatarFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).model.getId());
+                UserModel model = (UserModel) ((EditUserFragment) fragment).typeModel;
+
+                if (model.getId() != null && !model.getId().equals("")) {
+                    data.put("id", model.getId());
                 }
 
-                if (((EditUserFragment) fragment).model.getAvatar() != null && ((EditUserFragment) fragment).model.getAvatar().getMedium() != null && ((EditUserFragment) fragment).model.getAvatar() .getMedium().getUrl() != null && !((EditUserFragment) fragment).model.getAvatar().getMedium().getUrl().equals("")) {
-                    avatarPath = ((EditUserFragment) fragment).model.getAvatar().getMedium().getUrl();
+                if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar() .getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+                    avatarPath = model.getAvatar().getMedium().getUrl();
 
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                     Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                    if (!((EditUserFragment) fragment).model.getName().equals(""))
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((EditUserFragment) fragment).model.getName()));
+                    if (!model.getName().equals(""))
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getName()));
                     else
                         binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
 
@@ -160,11 +162,12 @@ public class EditUserAvatarFragment extends Fragment {
                 @Override
                 public void onOK(Object object) {
                     AuthModel authModel = (AuthModel) object;
-                    UserModel userModel = authModel.getUser();
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.update(userModel);
+                            ((MainActivity) requireActivity()).singleton.update(authModel.getUser());
+                            ((MainActivity) requireActivity()).setData();
+
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                         });

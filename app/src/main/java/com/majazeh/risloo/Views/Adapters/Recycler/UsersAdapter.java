@@ -49,7 +49,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
         detector(holder);
 
-        listener(holder, user);
+        listener(holder, i);
 
         setData(holder, user);
     }
@@ -83,9 +83,9 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         }
     }
 
-    private void listener(UsersHolder holder, UserModel model) {
+    private void listener(UsersHolder holder, int position) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = UsersFragmentDirections.actionUsersFragmentToUserFragment(model);
+            NavDirections action = UsersFragmentDirections.actionUsersFragmentToUserFragment(users.get(position));
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
@@ -101,7 +101,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
                 } else if (pos.contains("ورود به کاربری")) {
                     Log.e("method", "enter");
                 } else if (pos.equals("ویرایش کاربر")) {
-                    NavDirections action = UsersFragmentDirections.actionUsersFragmentToEditUserFragment(model);
+                    NavDirections action = UsersFragmentDirections.actionUsersFragmentToEditUserFragment(users.get(position));
                     ((MainActivity) activity).navController.navigate(action);
                 }
 
@@ -116,17 +116,25 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     }
 
     private void setData(UsersHolder holder, UserModel model) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+         else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
-        holder.binding.serialTextView.setText(model.getId());
-        holder.binding.nameTextView.setText(model.getName());
-        holder.binding.usernameTextView.setText(model.getUsername());
-        holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
-        holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getUserStatus()));
+        if (model.getId() != null && !model.getId().equals(""))
+            holder.binding.serialTextView.setText(model.getId());
+
+        if (model.getName() != null && !model.getName().equals(""))
+            holder.binding.nameTextView.setText(model.getName());
+
+        if (model.getUsername() != null && !model.getUsername().equals(""))
+            holder.binding.usernameTextView.setText(model.getUsername());
+
+        if (model.getUserType() != null && !model.getUserType().equals(""))
+            holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
+
+        if (model.getUserStatus() != null && !model.getUserStatus().equals(""))
+            holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getUserStatus()));
 
         setMenu(holder, model);
     }
@@ -140,9 +148,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         if (model.getEmail() != null && !model.getEmail().equals(""))
             menu.add(model.getEmail());
 
-        if (model.getUserType() != null && !model.getUserType().equals("admin")) {
+        if (model.getUserType() != null && !model.getUserType().equals("admin"))
             menu.add(activity.getResources().getString(R.string.UsersFragmentEnter));
-        }
 
         menu.add(activity.getResources().getString(R.string.UsersFragmentEdit));
         menu.add("");

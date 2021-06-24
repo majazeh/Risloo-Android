@@ -206,8 +206,8 @@
         android:label="@string/EditUserFragmentTitle"
         tools:layout="@layout/fragment_edit_user" >
         <argument
-            android:name="userModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.UserModel" />
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 
     /*
@@ -489,8 +489,8 @@
         android:label="@string/MeFragmentTitle"
         tools:layout="@layout/fragment_me">
         <argument
-            android:name="userModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.UserModel" />
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
 
         <action
             android:id="@+id/action_meFragment_to_editUserFragment"
@@ -578,8 +578,8 @@
         android:label="@string/UserFragmentTitle"
         tools:layout="@layout/fragment_user" >
         <argument
-            android:name="userModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.UserModel" />
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
 
         <action
             android:id="@+id/action_userFragment_to_editUserFragment"

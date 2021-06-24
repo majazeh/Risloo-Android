@@ -29,6 +29,7 @@ import com.majazeh.risloo.databinding.FragmentEditUserPasswordBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -248,8 +249,10 @@ public class EditUserPasswordFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).model.getId());
+                UserModel model = (UserModel) ((EditUserFragment) fragment).typeModel;
+
+                if (model.getId() != null && !model.getId().equals("")) {
+                    data.put("id", model.getId());
 
                     if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId()))
                         binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);

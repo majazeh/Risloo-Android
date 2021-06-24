@@ -194,40 +194,42 @@ public class EditUserPersonalFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).model.getId());
+                UserModel model = (UserModel) ((EditUserFragment) fragment).typeModel;
+
+                if (model.getId() != null && !model.getId().equals("")) {
+                    data.put("id", model.getId());
                 }
 
-                if (((EditUserFragment) fragment).model.getName() != null && !((EditUserFragment) fragment).model.getName().equals("")) {
-                    name = ((EditUserFragment) fragment).model.getName();
+                if (model.getName() != null && !model.getName().equals("")) {
+                    name = model.getName();
                     binding.nameIncludeLayout.inputEditText.setText(name);
                 }
 
-                if (((EditUserFragment) fragment).model.getMobile() != null && !((EditUserFragment) fragment).model.getMobile().equals("")) {
-                    mobile = ((EditUserFragment) fragment).model.getMobile();
+                if (model.getMobile() != null && !model.getMobile().equals("")) {
+                    mobile = model.getMobile();
                     binding.mobileIncludeLayout.inputEditText.setText(mobile);
                 }
 
-                if (((EditUserFragment) fragment).model.getUsername() != null && !((EditUserFragment) fragment).model.getUsername().equals("")) {
-                    username = ((EditUserFragment) fragment).model.getUsername();
+                if (model.getUsername() != null && !model.getUsername().equals("")) {
+                    username = model.getUsername();
                     binding.usernameIncludeLayout.inputEditText.setText(username);
                 }
 
-                if (((EditUserFragment) fragment).model.getEmail() != null && !((EditUserFragment) fragment).model.getEmail().equals("")) {
-                    email = ((EditUserFragment) fragment).model.getEmail();
+                if (model.getEmail() != null && !model.getEmail().equals("")) {
+                    email = model.getEmail();
                     binding.emailIncludeLayout.inputEditText.setText(email);
                 }
 
-                if (((EditUserFragment) fragment).model.getBirthday() != null && !((EditUserFragment) fragment).model.getBirthday().equals("")) {
-                    birthday = ((EditUserFragment) fragment).model.getBirthday();
+                if (model.getBirthday() != null && !model.getBirthday().equals("")) {
+                    birthday = model.getBirthday();
                     binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
                 } else {
                     birthday = String.valueOf(DateManager.currentTimestamp());
                     binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
                 }
 
-                if (((EditUserFragment) fragment).model.getUserStatus() != null && !((EditUserFragment) fragment).model.getUserStatus().equals("")) {
-                    status = ((EditUserFragment) fragment).model.getUserStatus();
+                if (model.getUserStatus() != null && !model.getUserStatus().equals("")) {
+                    status = model.getUserStatus();
                     switch (status) {
                         case "active":
                             binding.statusIncludeLayout.firstRadioButton.setChecked(true);
@@ -241,8 +243,8 @@ public class EditUserPersonalFragment extends Fragment {
                     }
                 }
 
-                if (((EditUserFragment) fragment).model.getUserType() != null && !((EditUserFragment) fragment).model.getUserType().equals("")) {
-                    type = ((EditUserFragment) fragment).model.getUserType();
+                if (model.getUserType() != null && !model.getUserType().equals("")) {
+                    type = model.getUserType();
                     switch (type) {
                         case "admin":
                             binding.typeIncludeLayout.firstRadioButton.setChecked(true);
@@ -261,8 +263,8 @@ public class EditUserPersonalFragment extends Fragment {
                     binding.clientGroup.setVisibility(View.GONE);
                 }
 
-                if (((EditUserFragment) fragment).model.getGender() != null && !((EditUserFragment) fragment).model.getGender().equals("")) {
-                    gender = ((EditUserFragment) fragment).model.getGender();
+                if (model.getGender() != null && !model.getGender().equals("")) {
+                    gender = model.getGender();
                     switch (gender) {
                         case "male":
                             binding.genderIncludeLayout.firstRadioButton.setChecked(true);
@@ -301,11 +303,12 @@ public class EditUserPersonalFragment extends Fragment {
                 @Override
                 public void onOK(Object object) {
                     AuthModel authModel = (AuthModel) object;
-                    UserModel userModel = authModel.getUser();
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.update(userModel);
+                            ((MainActivity) requireActivity()).singleton.update(authModel.getUser());
+                            ((MainActivity) requireActivity()).setData();
+
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
                         });

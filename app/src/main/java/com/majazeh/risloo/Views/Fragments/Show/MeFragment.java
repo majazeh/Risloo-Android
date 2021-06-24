@@ -21,6 +21,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentMeBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
@@ -33,7 +34,7 @@ public class MeFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private UserModel model;
+    private TypeModel typeModel;
 
     @Nullable
     @Override
@@ -78,18 +79,18 @@ public class MeFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = MeFragmentDirections.actionMeFragmentToEditUserFragment(model);
+            NavDirections action = MeFragmentDirections.actionMeFragmentToEditUserFragment(typeModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.editImageView.getRoot());
     }
 
     private void setArgs() {
-        setData(MeFragmentArgs.fromBundle(getArguments()).getUserModel());
+        typeModel = MeFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        setData((UserModel) typeModel);
     }
 
     private void setData(UserModel model) {
-        this.model = model;
-
         if (model.getId() != null && !model.getId().equals("")) {
             data.put("id", model.getId());
         }
@@ -146,9 +147,9 @@ public class MeFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        UserModel model = (UserModel) object;
+                        typeModel = (TypeModel) object;
 
-                        setData(model);
+                        setData((UserModel) typeModel);
                     });
                 }
             }

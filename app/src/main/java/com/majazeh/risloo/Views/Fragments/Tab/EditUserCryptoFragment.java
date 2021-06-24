@@ -18,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserCryptoBinding;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 
@@ -111,17 +112,19 @@ public class EditUserCryptoFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                if (((EditUserFragment) fragment).model.getId() != null && !((EditUserFragment) fragment).model.getId().equals("")) {
-                    data.put("id", ((EditUserFragment) fragment).model.getId());
+                UserModel model = (UserModel) ((EditUserFragment) fragment).typeModel;
+
+                if (model.getId() != null && !model.getId().equals("")) {
+                    data.put("id", model.getId());
                 }
 
-                if (((EditUserFragment) fragment).model.getPublic_key() != null && !((EditUserFragment) fragment).model.getPublic_key().equals("")) {
-                    publicKey = ((EditUserFragment) fragment).model.getPublic_key();
+                if (model.getPublic_key() != null && !model.getPublic_key().equals("")) {
+                    publicKey = model.getPublic_key();
                     binding.publicIncludeLayout.inputEditText.setText(publicKey);
                 }
 
-//                if (((EditUserFragment) fragment).model.getPrivate_key() != null && !((EditUserFragment) fragment).model.getPrivate_key().equals("")) {
-//                    privateKey = ((EditUserFragment) fragment).getPrivate_key;
+//                if (model.getPrivate_key() != null && !model.getPrivate_key().equals("")) {
+//                    privateKey = model.getPrivate_key();
 //                    binding.privateIncludeLayout.inputEditText.setText(privateKey);
 //                }
             }
