@@ -75,9 +75,8 @@ public class UserFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
-            }
+            if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
+                IntentManager.display(requireActivity(), "", "", userModel.getAvatar().getMedium().getUrl());
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         ClickManager.onClickListener(() -> {

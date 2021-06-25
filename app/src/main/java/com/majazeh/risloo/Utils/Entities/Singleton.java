@@ -28,22 +28,22 @@ public class Singleton {
         editor.apply();
     }
 
-    public void login(AuthModel object) {
-        UserModel user = object.getUser();
+    public void login(AuthModel authModel) {
+        UserModel userModel = authModel.getUser();
 
-        if (object.getToken() != null)
-            setToken(object.getToken());
+        if (authModel.getToken() != null)
+            setToken(authModel.getToken());
 
-        if (object.getToken() != null)
-            setAuthorization("Bearer " + object.getToken());
+        if (authModel.getToken() != null)
+            setAuthorization("Bearer " + authModel.getToken());
 
-        if (user != null)
-            setUserModel(user);
+        if (userModel != null)
+            setUserModel(userModel);
     }
 
-    public void update(UserModel object) {
-        if (object != null)
-            setUserModel(object);
+    public void update(UserModel userModel) {
+        if (userModel != null)
+            setUserModel(userModel);
     }
 
     public void logout() {
