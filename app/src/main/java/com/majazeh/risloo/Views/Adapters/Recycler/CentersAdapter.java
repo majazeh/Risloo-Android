@@ -50,7 +50,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
         detector(holder);
 
-        listener(holder, center, i);
+        listener(holder, center);
 
         setData(holder, center);
     }
@@ -84,27 +84,27 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
         }
     }
 
-    private void listener(CentersHolder holder, CenterModel model, int position) {
+    private void listener(CentersHolder holder, CenterModel model) {
         ClickManager.onClickListener(() -> {
             if (model.getCenterType().equals("counseling_center"))
                 switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
                     case R.id.dashboardFragment: {
-                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToCenterFragment(centers.get(position));
+                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToCenterFragment(model);
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                     case R.id.centersFragment: {
-                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToCenterFragment(centers.get(position));
+                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToCenterFragment(model);
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                 }
             else
                 switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
                     case R.id.dashboardFragment: {
-                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("personal_clinic", centers.get(position));
+                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("personal_clinic", model);
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                     case R.id.centersFragment: {
-                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToRoomFragment("personal_clinic", centers.get(position));
+                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToRoomFragment("personal_clinic", model);
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                 }

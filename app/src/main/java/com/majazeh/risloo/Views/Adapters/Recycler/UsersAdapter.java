@@ -49,7 +49,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
         detector(holder);
 
-        listener(holder, i);
+        listener(holder, user);
 
         setData(holder, user);
     }
@@ -83,25 +83,25 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         }
     }
 
-    private void listener(UsersHolder holder, int position) {
+    private void listener(UsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = UsersFragmentDirections.actionUsersFragmentToUserFragment(users.get(position));
+            NavDirections action = UsersFragmentDirections.actionUsersFragmentToUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
+                String item = parent.getItemAtPosition(position).toString();
 
-                if (pos.equals("+989")) {
-                    IntentManager.phone(activity, pos);
-                } else if (pos.contains("@")) {
-                    IntentManager.email(activity, new String[]{pos}, "", "", "");
-                } else if (pos.contains("ورود به کاربری")) {
+                if (item.contains("+989")) {
+                    IntentManager.phone(activity, item);
+                } else if (item.contains("@")) {
+                    IntentManager.email(activity, new String[]{item}, "", "", "");
+                } else if (item.equals("ورود به کاربری")) {
                     Log.e("method", "enter");
-                } else if (pos.equals("ویرایش کاربر")) {
-                    NavDirections action = UsersFragmentDirections.actionUsersFragmentToEditUserFragment(users.get(position));
+                } else if (item.equals("ویرایش کاربر")) {
+                    NavDirections action = UsersFragmentDirections.actionUsersFragmentToEditUserFragment(model);
                     ((MainActivity) activity).navController.navigate(action);
                 }
 

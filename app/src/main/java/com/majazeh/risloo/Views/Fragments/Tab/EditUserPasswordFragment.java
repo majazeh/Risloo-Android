@@ -249,7 +249,7 @@ public class EditUserPasswordFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                UserModel model = (UserModel) ((EditUserFragment) fragment).typeModel;
+                UserModel model = ((EditUserFragment) fragment).userModel;
 
                 if (model.getId() != null && !model.getId().equals("")) {
                     data.put("id", model.getId());

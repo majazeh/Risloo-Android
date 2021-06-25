@@ -49,7 +49,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
         detector(holder);
 
-        listener(holder, i);
+        listener(holder, room);
 
         setData(holder, room);
     }
@@ -83,19 +83,19 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
         }
     }
 
-    private void listener(RoomsHolder holder, int position) {
+    private void listener(RoomsHolder holder, RoomModel model) {
         ClickManager.onClickListener(() -> {
             switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
                 case R.id.dashboardFragment: {
-                    NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("room", rooms.get(position));
+                    NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("room", model);
                     ((MainActivity) activity).navController.navigate(action);
                 } break;
                 case R.id.centerFragment: {
-                    NavDirections action = CenterFragmentDirections.actionCenterFragmentToRoomFragment("room", rooms.get(position));
+                    NavDirections action = CenterFragmentDirections.actionCenterFragmentToRoomFragment("room", model);
                     ((MainActivity) activity).navController.navigate(action);
                 } break;
                 case R.id.referenceFragment: {
-                    NavDirections action = ReferenceFragmentDirections.actionReferenceFragmentToRoomFragment("room", rooms.get(position));
+                    NavDirections action = ReferenceFragmentDirections.actionReferenceFragmentToRoomFragment("room", model);
                     ((MainActivity) activity).navController.navigate(action);
                 } break;
             }

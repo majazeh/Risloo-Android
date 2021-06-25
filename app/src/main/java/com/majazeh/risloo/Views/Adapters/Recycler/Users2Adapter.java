@@ -35,6 +35,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
 
     // Vars
     private ArrayList<TypeModel> users;
+    private HashMap data, header;
     private boolean userSelect = false;
 
     public Users2Adapter(@NonNull Activity activity) {
@@ -55,7 +56,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
 
         detector(holder);
 
-        listener(holder, user, i);
+        listener(holder, user);
 
         setData(holder, user);
     }
@@ -84,6 +85,10 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     private void initializer(Users2Holder holder) {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+
         InitManager.fixedSpinner(activity, holder.binding.statusSpinner, R.array.UserStatus, "adapter");
     }
 
@@ -94,9 +99,9 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(Users2Holder holder, UserModel model, int position) {
+    private void listener(Users2Holder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToUserFragment(users.get(position));
+            NavDirections action = SessionFragmentDirections.actionSessionFragmentToUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
@@ -109,9 +114,9 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
+                    String status = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getUserStatus2(activity, "en", pos));
+                    doWork(holder, model, SelectionManager.getUserStatus2(activity, "en", status));
 
                     userSelect = false;
                 }
@@ -176,15 +181,11 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     private void doWork(Users2Holder holder, UserModel model, String status) {
-        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
-
-        HashMap data = new HashMap<>();
-        data.put("id", model.getId());
-        data.put("status", status);
-
-        HashMap header = new HashMap<>();
-        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
-
+//        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+//
+//        data.put("id", model.getId());
+//        data.put("status", status);
+//
 //        User.changeStatus(data, header, new Response() {
 //            @Override
 //            public void onOK(Object object) {

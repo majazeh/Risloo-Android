@@ -194,7 +194,7 @@ public class EditUserPersonalFragment extends Fragment {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null) {
             if (fragment instanceof EditUserFragment) {
-                UserModel model = (UserModel) ((EditUserFragment) fragment).typeModel;
+                UserModel model = ((EditUserFragment) fragment).userModel;
 
                 if (model.getId() != null && !model.getId().equals("")) {
                     data.put("id", model.getId());
@@ -303,10 +303,11 @@ public class EditUserPersonalFragment extends Fragment {
                 @Override
                 public void onOK(Object object) {
                     AuthModel authModel = (AuthModel) object;
+                    UserModel userModel = authModel.getUser();
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.update(authModel.getUser());
+                            ((MainActivity) requireActivity()).singleton.update(userModel);
                             ((MainActivity) requireActivity()).setData();
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();

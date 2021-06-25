@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.EditUserAdapter;
 import com.majazeh.risloo.databinding.FragmentEditUserBinding;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class EditUserFragment extends Fragment {
 
@@ -28,7 +28,7 @@ public class EditUserFragment extends Fragment {
 
     // Vars
     private String[] tabs;
-    public TypeModel typeModel;
+    public UserModel userModel;
 
     @Nullable
     @Override
@@ -50,7 +50,7 @@ public class EditUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        typeModel = EditUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        userModel = (UserModel) EditUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
