@@ -987,6 +987,8 @@
     <string name="RoomFragmentProfile">پروفایل من</string>
     <string name="RoomFragmentEdit">ویرایش</string>
 
+    <string name="RoomFragmentPersonalClinic">کلینیک شخصی</string>
+
     /*
     ---------- Sample Fragment ----------
     */

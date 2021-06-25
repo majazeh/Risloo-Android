@@ -110,8 +110,16 @@ public class RoomFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
+            if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE) {
+                if (!type.equals("room")) {
+                    try {
+                        IntentManager.display(requireActivity(), "", "", ((CenterModel) typeModel).getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                } else {
+                    IntentManager.display(requireActivity(), "", "", ((RoomModel) typeModel).getRoomManager().getAvatar() .getMedium().getUrl());
+                }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
@@ -124,9 +132,9 @@ public class RoomFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
+                    String item = parent.getItemAtPosition(position).toString();
 
-                    switch (pos) {
+                    switch (item) {
                         case "اعضاء":
                             if (!type.equals("room")) {
                                 NavDirections action = RoomFragmentDirections.actionRoomFragmentToCenterUsersFragment(typeModel);
@@ -173,9 +181,10 @@ public class RoomFragment extends Fragment {
             Room.request(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
+                    typeModel = (TypeModel) object;
+
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            typeModel = (TypeModel) object;
                             setAcceptation((RoomModel) typeModel);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
@@ -281,12 +290,14 @@ public class RoomFragment extends Fragment {
 
             if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
                 binding.nameTextView.setText(model.getDetail().getString("title"));
+                binding.nameTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
             if (model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
                 binding.descriptionTextView.setText(model.getDetail().getString("description"));
+                binding.descriptionTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.descriptionTextView.setVisibility(View.GONE);
             }
@@ -324,7 +335,14 @@ public class RoomFragment extends Fragment {
         }
 
         if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
-            binding.nameTextView.setText(model.getRoomManager().getName());
+            if (!type.equals("room")) {
+                String name = requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName();
+                binding.nameTextView.setText(name);
+            } else {
+                binding.nameTextView.setText(model.getRoomManager().getName());
+            }
+
+            binding.nameTextView.setVisibility(View.VISIBLE);
         } else {
             binding.nameTextView.setVisibility(View.GONE);
         }

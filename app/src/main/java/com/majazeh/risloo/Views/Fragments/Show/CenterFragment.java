@@ -33,7 +33,6 @@ import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -56,7 +55,7 @@ public class CenterFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private TypeModel typeModel;
+    private CenterModel centerModel;
     private boolean isLoading = true, userSelect = false;
 
     @Nullable
@@ -107,8 +106,12 @@ public class CenterFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
+            if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE) {
+                try {
+                    IntentManager.display(requireActivity(), "", "", centerModel.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
@@ -121,23 +124,23 @@ public class CenterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
+                    String item = parent.getItemAtPosition(position).toString();
 
-                    switch (pos) {
+                    switch (item) {
                         case "اعضاء": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCenterUsersFragment(typeModel);
+                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCenterUsersFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "برنامه درمانی": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCenterSchedulesFragment(typeModel);
+                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCenterSchedulesFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "پروفایل من": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToReferenceFragment(typeModel);
+                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToReferenceFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToEditCenterFragment(typeModel);
+                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToEditCenterFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                     }
@@ -160,10 +163,11 @@ public class CenterFragment extends Fragment {
             Center.request(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
+                    centerModel = (CenterModel) object;
+
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            typeModel = (TypeModel) object;
-                            setAcceptation((CenterModel) typeModel);
+                            setAcceptation(centerModel);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
@@ -236,20 +240,20 @@ public class CenterFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCreateRoomFragment(typeModel);
+            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCreateRoomFragment(centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addRoomImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCreateScheduleFragment(typeModel);
+            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCreateScheduleFragment(centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addScheduleImageView.getRoot());
     }
 
     private void setArgs() {
-        typeModel = CenterFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        centerModel = (CenterModel) CenterFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        setData((CenterModel) typeModel);
+        setData(centerModel);
     }
 
     private void setData(CenterModel model) {
@@ -260,12 +264,14 @@ public class CenterFragment extends Fragment {
 
             if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
                 binding.nameTextView.setText(model.getDetail().getString("title"));
+                binding.nameTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
             if (model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
                 binding.descriptionTextView.setText(model.getDetail().getString("description"));
+                binding.descriptionTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.descriptionTextView.setVisibility(View.GONE);
             }
@@ -377,9 +383,9 @@ public class CenterFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         try {
-                            typeModel = new CenterModel(((JSONObject) object).getJSONObject("center"));
+                            centerModel = new CenterModel(((JSONObject) object).getJSONObject("center"));
 
-                            setData((CenterModel) typeModel);
+                            setData(centerModel);
 
                             List rooms = new List();
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
