@@ -29,6 +29,10 @@
             android:id="@+id/action_authLoginFragment_to_authPinFragment"
             app:destination="@id/authPinFragment" />
         <action
+            android:id="@+id/action_authLoginFragment_to_authPasswordChangeFragment"
+            app:destination="@id/authPasswordChangeFragment" />
+
+        <action
             android:id="@+id/action_authLoginFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />
     </fragment>
@@ -57,6 +61,10 @@
         <action
             android:id="@+id/action_authRegisterFragment_to_authPinFragment"
             app:destination="@id/authPinFragment" />
+        <action
+            android:id="@+id/action_authRegisterFragment_to_authPasswordChangeFragment"
+            app:destination="@id/authPasswordChangeFragment" />
+
         <action
             android:id="@+id/action_authRegisterFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />
@@ -89,6 +97,7 @@
         <action
             android:id="@+id/action_authPasswordRecoverFragment_to_authPasswordChangeFragment"
             app:destination="@id/authPasswordChangeFragment" />
+
         <action
             android:id="@+id/action_authPasswordRecoverFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />
@@ -107,13 +116,8 @@
             android:name="mobile"
             app:argType="string" />
         <argument
-            android:name="key"
-            app:nullable="true"
-            app:argType="string" />
-        <argument
-            android:name="callback"
-            app:nullable="true"
-            app:argType="string" />
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
 
         <action
             android:id="@+id/action_authPasswordFragment_to_authLoginFragment"
@@ -130,6 +134,10 @@
         <action
             android:id="@+id/action_authPasswordFragment_to_authPinFragment"
             app:destination="@id/authPinFragment" />
+        <action
+            android:id="@+id/action_authPasswordFragment_to_authPasswordChangeFragment"
+            app:destination="@id/authPasswordChangeFragment" />
+
         <action
             android:id="@+id/action_authPasswordFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />
@@ -148,13 +156,8 @@
             android:name="mobile"
             app:argType="string" />
         <argument
-            android:name="key"
-            app:nullable="true"
-            app:argType="string" />
-        <argument
-            android:name="callback"
-            app:nullable="true"
-            app:argType="string" />
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
 
         <action
             android:id="@+id/action_authPinFragment_to_authLoginFragment"
@@ -174,6 +177,7 @@
         <action
             android:id="@+id/action_authPinFragment_to_authPasswordChangeFragment"
             app:destination="@id/authPasswordChangeFragment" />
+
         <action
             android:id="@+id/action_authPinFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />
@@ -192,13 +196,8 @@
             android:name="mobile"
             app:argType="string" />
         <argument
-            android:name="key"
-            app:nullable="true"
-            app:argType="string" />
-        <argument
-            android:name="callback"
-            app:nullable="true"
-            app:argType="string" />
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
 
         <action
             android:id="@+id/action_authPasswordChangeFragment_to_authLoginFragment"
@@ -213,8 +212,12 @@
             app:destination="@id/authPasswordRecoverFragment" />
 
         <action
+            android:id="@+id/action_authPasswordChangeFragment_to_authPasswordFragment"
+            app:destination="@id/authPasswordFragment" />
+        <action
             android:id="@+id/action_authPasswordChangeFragment_to_authPinFragment"
             app:destination="@id/authPinFragment" />
+
         <action
             android:id="@+id/action_authPasswordChangeFragment_to_authSerialFragment"
             app:destination="@id/authSerialFragment" />

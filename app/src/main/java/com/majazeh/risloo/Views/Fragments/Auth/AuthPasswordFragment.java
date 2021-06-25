@@ -41,7 +41,8 @@ public class AuthPasswordFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String password = "", mobile = "", key = "", callback = "";
+    private AuthModel authModel;
+    private String password = "", mobile = "";
     private boolean passwordVisibility = false;
 
     @Nullable
@@ -181,21 +182,20 @@ public class AuthPasswordFragment extends Fragment {
         mobile = AuthPasswordFragmentArgs.fromBundle(getArguments()).getMobile();
         binding.mobileTextView.getRoot().setText(mobile);
 
-        if (AuthPasswordFragmentArgs.fromBundle(getArguments()).getKey() != null)
-            key = AuthPasswordFragmentArgs.fromBundle(getArguments()).getKey();
-
-        if (AuthPasswordFragmentArgs.fromBundle(getArguments()).getCallback() != null)
-            callback = AuthPasswordFragmentArgs.fromBundle(getArguments()).getCallback();
+        authModel = (AuthModel) AuthPasswordFragmentArgs.fromBundle(getArguments()).getTypeModel();
     }
 
     private void doWork() {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
-
         data.put("password", password);
-        data.put("key", key);
-        data.put("callback", callback);
+
+        if (authModel.getKey() != null)
+            data.put("key", authModel.getKey());
+
+        if (authModel.getCallback() != null)
+            data.put("callback", authModel.getCallback());
 
         Auth.auth_theory(data, header, new Response() {
             @Override
@@ -207,7 +207,13 @@ public class AuthPasswordFragment extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "mobileCode": {
-                                    NavDirections action = AuthPasswordFragmentDirections.actionAuthPasswordFragmentToAuthPinFragment(mobile, model.getKey(), model.getCallback());
+                                    NavDirections action = AuthPasswordFragmentDirections.actionAuthPasswordFragmentToAuthPinFragment(mobile, model);
+
+                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                    ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
+                                case "recovery": {
+                                    NavDirections action = AuthPasswordFragmentDirections.actionAuthPasswordFragmentToAuthPasswordChangeFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);

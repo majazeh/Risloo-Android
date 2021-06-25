@@ -125,19 +125,19 @@ public class AuthPasswordRecoverFragment extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "password": {
-                                    NavDirections action = AuthPasswordRecoverFragmentDirections.actionAuthPasswordRecoverFragmentToAuthPasswordFragment(mobile, model.getKey(), model.getCallback());
+                                    NavDirections action = AuthPasswordRecoverFragmentDirections.actionAuthPasswordRecoverFragmentToAuthPasswordFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                                 case "mobileCode": {
-                                    NavDirections action = AuthPasswordRecoverFragmentDirections.actionAuthPasswordRecoverFragmentToAuthPinFragment(mobile, model.getKey(), model.getCallback());
+                                    NavDirections action = AuthPasswordRecoverFragmentDirections.actionAuthPasswordRecoverFragmentToAuthPinFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                                 case "recovery": {
-                                    NavDirections action = AuthPasswordRecoverFragmentDirections.actionAuthPasswordRecoverFragmentToAuthPasswordChangeFragment(mobile, model.getKey(), model.getCallback());
+                                    NavDirections action = AuthPasswordRecoverFragmentDirections.actionAuthPasswordRecoverFragmentToAuthPasswordChangeFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);

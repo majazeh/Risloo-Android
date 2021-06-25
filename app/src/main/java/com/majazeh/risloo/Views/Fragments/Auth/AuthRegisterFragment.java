@@ -125,13 +125,19 @@ public class AuthRegisterFragment extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "password": {
-                                    NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPasswordFragment(mobile, model.getKey(), model.getCallback());
+                                    NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPasswordFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                                 case "mobileCode": {
-                                    NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPinFragment(mobile, model.getKey(), model.getCallback());
+                                    NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPinFragment(mobile, model);
+
+                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
+                                    ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
+                                case "recovery": {
+                                    NavDirections action = AuthRegisterFragmentDirections.actionAuthRegisterFragmentToAuthPasswordChangeFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
