@@ -105,8 +105,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     @SuppressLint("ClickableViewAccessibility")
     private void listener(CenterUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = CenterUsersFragmentDirections.actionCenterUsersFragmentToReferenceFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            if (getParent() != null) {
+                NavDirections action = CenterUsersFragmentDirections.actionCenterUsersFragmentToReferenceFragment(getParent().type, getParent().centerId, null, model);
+                ((MainActivity) activity).navController.navigate(action);
+            }
         }).widget(holder.binding.getRoot());
 
         holder.binding.positionSpinner.setOnTouchListener((v, event) -> {

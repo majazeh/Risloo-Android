@@ -24,6 +24,7 @@ import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
@@ -39,12 +40,10 @@ public class ReferenceFragment extends Fragment {
     private Cases3Adapter cases3Adapter;
     private Samples3Adapter samples3Adapter;
 
-    // Objects
-    private Bundle extras;
-
     // Vars
     private HashMap data, header;
-    private String type = "personal_clinic";
+    private UserModel userModel;
+    private String type = "", centerId = "", userId = "";
 
     @Nullable
     @Override
@@ -55,7 +54,7 @@ public class ReferenceFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -66,8 +65,6 @@ public class ReferenceFragment extends Fragment {
         roomsAdapter = new RoomsAdapter(requireActivity());
         cases3Adapter = new Cases3Adapter(requireActivity());
         samples3Adapter = new Samples3Adapter(requireActivity());
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -85,96 +82,66 @@ public class ReferenceFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
-            }
+            if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
+                IntentManager.display(requireActivity(), "", "", userModel.getAvatar().getMedium().getUrl());
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                extras.putString("id", getArguments().getString("id"));
-                data.put("id", getArguments().getString("id"));
+    private void setArgs() {
+        type = ReferenceFragmentArgs.fromBundle(getArguments()).getType();
+
+        if (ReferenceFragmentArgs.fromBundle(getArguments()).getCenterId() != null) {
+            centerId = ReferenceFragmentArgs.fromBundle(getArguments()).getCenterId();
+            data.put("id", centerId);
+
+            userModel = (UserModel) ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+            if (userModel.getId() != null && !userModel.getId().equals("")) {
+                userId = userModel.getId();
+                data.put("userId", userId);
             }
 
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                extras.putString("type", type);
+            setData(userModel);
+        }
 
-                if (getArguments().getString("type").equals("room")) {
-                    if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
-                        data.put("id", getArguments().getString("center_id"));
-                    }
-                }
+        if (ReferenceFragmentArgs.fromBundle(getArguments()).getUserId() != null) {
+            userId = ReferenceFragmentArgs.fromBundle(getArguments()).getUserId();
+            data.put("userId", userId);
+
+            CenterModel centerModel = (CenterModel) ReferenceFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+            if (centerModel.getCenterId() != null && !centerModel.getCenterId().equals("")) {
+                centerId = centerModel.getCenterId();
+                data.put("id", centerId);
             }
 
-            if (getArguments().getString("user_id") != null && !getArguments().getString("user_id").equals("")) {
-                extras.putString("user_id", getArguments().getString("user_id"));
-                data.put("userId", getArguments().getString("user_id"));
-            }
-
-            if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
-                extras.putString("position", getArguments().getString("position"));
-                binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", getArguments().getString("position")));
-                binding.statusTextView.setVisibility(View.VISIBLE);
-            } else if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                extras.putString("status", getArguments().getString("status"));
-                binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", getArguments().getString("status")));
-                binding.statusTextView.setVisibility(View.VISIBLE);
-            } else {
-                binding.statusTextView.setVisibility(View.GONE);
-            }
-
-            if (getArguments().getString("nickname") != null && !getArguments().getString("nickname").equals("")) {
-                extras.putString("nickname", getArguments().getString("nickname"));
-                binding.nameTextView.setText(getArguments().getString("nickname"));
-                binding.nameTextView.setVisibility(View.VISIBLE);
-            } else if (getArguments().getString("user_name") != null && !getArguments().getString("user_name").equals("")) {
-                extras.putString("user_name", getArguments().getString("user_name"));
-                binding.nameTextView.setText(getArguments().getString("user_name"));
-                binding.nameTextView.setVisibility(View.VISIBLE);
-            } else {
-                binding.nameTextView.setVisibility(View.GONE);
-            }
-
-            if (getArguments().getString("user_avatar") != null && !getArguments().getString("user_avatar").equals("")) {
-                extras.putString("user_avatar", getArguments().getString("user_avatar"));
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(getArguments().getString("user_avatar")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-            } else {
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
-
-                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-            }
-
-            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
-                extras.putString("mobile", getArguments().getString("mobile"));
-                binding.mobileTextView.setText(getArguments().getString("mobile"));
-                binding.mobileGroup.setVisibility(View.VISIBLE);
-            } else {
-                binding.mobileGroup.setVisibility(View.GONE);
-            }
+            setData(((MainActivity) requireActivity()).singleton.getUserModel());
         }
     }
 
     private void setData(UserModel model) {
-        if (!model.getPosition().equals("")) {
+        if (model.getPosition() != null && !model.getPosition().equals("")) {
             binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", model.getPosition()));
             binding.statusTextView.setVisibility(View.VISIBLE);
         } else {
             binding.statusTextView.setVisibility(View.GONE);
         }
 
-        if (!model.getName().equals("")) {
+        if (model.getName() != null && !model.getName().equals("")) {
             binding.nameTextView.setText(model.getName());
             binding.nameTextView.setVisibility(View.VISIBLE);
         } else {
             binding.nameTextView.setVisibility(View.GONE);
         }
 
-        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+        if (model.getMobile() != null && !model.getMobile().equals("")) {
+            binding.mobileTextView.setText(model.getMobile());
+            binding.mobileGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.mobileGroup.setVisibility(View.GONE);
+        }
+
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
@@ -183,13 +150,6 @@ public class ReferenceFragment extends Fragment {
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
-
-        if (!model.getMobile().equals("")) {
-            binding.mobileTextView.setText(model.getMobile());
-            binding.mobileGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.mobileGroup.setVisibility(View.GONE);
-        }
     }
 
     private void getData() {
@@ -197,30 +157,30 @@ public class ReferenceFragment extends Fragment {
             Center.user(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    UserModel model = (UserModel) object;
+                    userModel = (UserModel) object;
 
                     if (isAdded())
                         requireActivity().runOnUiThread(() -> {
-                            setData(model);
+                            setData(userModel);
 
-                            if (!model.getRoomList().data().isEmpty()) {
-                                roomsAdapter.setRooms(model.getRoomList().data());
+                            if (!userModel.getRoomList().data().isEmpty()) {
+                                roomsAdapter.setRooms(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
                             }
 
-                            if (!model.getCaseList().data().isEmpty()) {
-                                cases3Adapter.setCases(model.getCaseList().data());
+                            if (!userModel.getCaseList().data().isEmpty()) {
+                                cases3Adapter.setCases(userModel.getCaseList().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
                             }
 
-                            if (!model.getSampleList().data().isEmpty()) {
-                                samples3Adapter.setSamples(model.getSampleList().data());
+                            if (!userModel.getSampleList().data().isEmpty()) {
+                                samples3Adapter.setSamples(userModel.getSampleList().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
                             }
 
-                            binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
-                            binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
-                            binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
+                            binding.roomsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
+                            binding.casesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(cases3Adapter.getItemCount()));
+                            binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples3Adapter.getItemCount()));
 
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -263,33 +223,33 @@ public class ReferenceFragment extends Fragment {
             Room.user(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    UserModel model = (UserModel) object;
+                    userModel = (UserModel) object;
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            setData(model);
+                            setData(userModel);
 
                             // Rooms Data
-                            if (!model.getRoomList().data().isEmpty()) {
-                                roomsAdapter.setRooms(model.getRoomList().data());
+                            if (!userModel.getRoomList().data().isEmpty()) {
+                                roomsAdapter.setRooms(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
                             }
 
                             // Cases Data
-                            if (!model.getCaseList().data().isEmpty()) {
-                                cases3Adapter.setCases(model.getCaseList().data());
+                            if (!userModel.getCaseList().data().isEmpty()) {
+                                cases3Adapter.setCases(userModel.getCaseList().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
                             }
 
                             // Samples Data
-                            if (!model.getSampleList().data().isEmpty()) {
-                                samples3Adapter.setSamples(model.getSampleList().data());
+                            if (!userModel.getSampleList().data().isEmpty()) {
+                                samples3Adapter.setSamples(userModel.getSampleList().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
                             }
 
-                            binding.roomsHeaderIncludeLayout.countTextView.setText("(" + roomsAdapter.getItemCount() + ")");
-                            binding.casesHeaderIncludeLayout.countTextView.setText("(" + cases3Adapter.getItemCount() + ")");
-                            binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples3Adapter.getItemCount() + ")");
+                            binding.roomsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
+                            binding.casesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(cases3Adapter.getItemCount()));
+                            binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples3Adapter.getItemCount()));
 
                             // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);

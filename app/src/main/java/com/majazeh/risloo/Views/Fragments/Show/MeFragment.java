@@ -101,6 +101,7 @@ public class MeFragment extends Fragment {
 
         if (model.getUsername() != null && !model.getUsername().equals("")) {
             binding.usernameTextView.setText(model.getUsername());
+            binding.usernameTextView.setVisibility(View.VISIBLE);
         } else {
             binding.usernameTextView.setVisibility(View.GONE);
         }

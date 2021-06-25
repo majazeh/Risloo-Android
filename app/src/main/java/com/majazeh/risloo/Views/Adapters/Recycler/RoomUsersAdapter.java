@@ -84,8 +84,10 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
 
     private void listener(RoomUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = RoomUsersFragmentDirections.actionRoomUsersFragmentToReferenceFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            if (getParent() != null) {
+                NavDirections action = RoomUsersFragmentDirections.actionRoomUsersFragmentToReferenceFragment(getParent().type, getParent().centerId, null, model);
+                ((MainActivity) activity).navController.navigate(action);
+            }
         }).widget(holder.binding.getRoot());
     }
 

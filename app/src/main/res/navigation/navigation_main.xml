@@ -567,6 +567,17 @@
         android:label="@string/ReferenceFragmentTitle"
         tools:layout="@layout/fragment_reference" >
         <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
+            android:name="centerId"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="userId"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
 

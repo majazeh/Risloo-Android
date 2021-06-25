@@ -56,6 +56,7 @@ public class CenterFragment extends Fragment {
     // Vars
     private HashMap data, header;
     private CenterModel centerModel;
+    private String type = "counseling_center";
     private boolean isLoading = true, userSelect = false;
 
     @Nullable
@@ -136,7 +137,7 @@ public class CenterFragment extends Fragment {
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "پروفایل من": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToReferenceFragment(centerModel);
+                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
@@ -260,6 +261,10 @@ public class CenterFragment extends Fragment {
         try {
             if (model.getCenterId() != null && !model.getCenterId().equals("")) {
                 data.put("id", model.getCenterId());
+            }
+
+            if (model.getCenterType() != null && !model.getCenterType().equals("")) {
+                type = model.getCenterType();
             }
 
             if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {

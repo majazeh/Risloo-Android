@@ -154,7 +154,7 @@ public class RoomFragment extends Fragment {
                             }
                             break;
                         case "پروفایل من": {
-                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToReferenceFragment(typeModel);
+                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToReferenceFragment(type, null, ((CenterModel) typeModel).getAcceptation().getId(), typeModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
