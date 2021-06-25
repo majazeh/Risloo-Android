@@ -15,16 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CenterUsersAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterUsersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -39,12 +42,12 @@ public class CenterUsersFragment extends Fragment {
 
     // Objects
     private Handler handler;
-    private Bundle extras;
 
     // Vars
     private HashMap data, header;
+    private CenterModel centerModel;
     private boolean isLoading = true;
-    public String centerId = "", type = "personal_clinic";
+    public String centerId = "", type = "";
 
     @Nullable
     @Override
@@ -57,7 +60,7 @@ public class CenterUsersFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -68,8 +71,6 @@ public class CenterUsersFragment extends Fragment {
         adapter = new CenterUsersAdapter(requireActivity());
 
         handler = new Handler();
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -147,21 +148,26 @@ public class CenterUsersFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras)).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = CenterUsersFragmentDirections.actionCenterUsersFragmentToCreateCenterUserFragment(centerModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.addImageView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                centerId = requireArguments().getString("id");
-                extras.putString("id", centerId);
-                data.put("id", centerId);
-            }
+    private void setArgs() {
+        centerModel = (CenterModel) CenterUsersFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                extras.putString("type", type);
-            }
+        setData(centerModel);
+    }
+
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            centerId = model.getCenterId();
+            data.put("id", centerId);
+        }
+
+        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
+            type = model.getCenterType();
         }
     }
 
@@ -186,7 +192,7 @@ public class CenterUsersFragment extends Fragment {
                             binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
-                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
