@@ -119,6 +119,24 @@ public class DateManager {
         }
     }
 
+    public static String jalHHoMMoYYoMMoDD(String timestamp) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        if (persianDate.getShMonth() < 10) {
+            if (persianDate.getShDay() < 10)
+                return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+            else
+                return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+        } else {
+            if (persianDate.getShDay() < 10)
+                return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+            else
+                return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
+        }
+    }
+
     //////////////////////////////////////////////////////////////////////////////////////
 
 

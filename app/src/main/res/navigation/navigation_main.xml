@@ -105,7 +105,12 @@
         android:id="@+id/createCenterUserFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment"
         android:label="@string/CreateCenterUserFragmentTitle"
-        tools:layout="@layout/fragment_create_center_user" />
+        tools:layout="@layout/fragment_create_center_user" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
+    </fragment>
 
     <fragment
         android:id="@+id/createDocumentFragment"
@@ -139,7 +144,11 @@
         android:id="@+id/createRoomUserFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment"
         android:label="@string/CreateRoomUserFragmentTitle"
-        tools:layout="@layout/fragment_create_room_user" />
+        tools:layout="@layout/fragment_create_room_user" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createSampleFragment"
@@ -202,7 +211,11 @@
         android:id="@+id/editCenterUserFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragment"
         android:label="@string/EditCenterUserFragmentTitle"
-        tools:layout="@layout/fragment_edit_center_user" />
+        tools:layout="@layout/fragment_edit_center_user" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/editSessionFragment"
@@ -304,6 +317,15 @@
         <action
             android:id="@+id/action_centerUsersFragment_to_createCenterUserFragment"
             app:destination="@id/createCenterUserFragment" />
+        <action
+            android:id="@+id/action_centerUsersFragment_to_editCenterUserFragment"
+            app:destination="@id/editCenterUserFragment" />
+        <action
+            android:id="@+id/action_centerUsersFragment_to_createRoomFragment"
+            app:destination="@id/createRoomFragment" />
+        <action
+            android:id="@+id/action_centerUsersFragment_to_roomFragment"
+            app:destination="@id/roomFragment" />
         <action
             android:id="@+id/action_centerUsersFragment_to_referenceFragment"
             app:destination="@id/referenceFragment" />

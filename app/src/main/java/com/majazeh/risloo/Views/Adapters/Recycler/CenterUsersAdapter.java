@@ -237,14 +237,14 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             menu.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusAccepted));
-            holder.binding.acceptedTextView.setText(DateManager.gregorianToJalali3(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getUserAccepted_at()))));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
         }
 
         if (model.getUserKicked_at() == 0) {
             menu.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
-            holder.binding.kickedTextView.setText(DateManager.gregorianToJalali3(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getUserKicked_at()))));
+            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
         }
 
         if (model.getUserAccepted_at() == 0 && model.getUserKicked_at() == 0) {

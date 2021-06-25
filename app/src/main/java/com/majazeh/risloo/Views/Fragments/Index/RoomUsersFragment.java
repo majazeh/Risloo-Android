@@ -15,16 +15,19 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomUsersAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomUsersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -39,12 +42,12 @@ public class RoomUsersFragment extends Fragment {
 
     // Objects
     private Handler handler;
-    private Bundle extras;
 
     // Vars
     private HashMap data, header;
+    private RoomModel roomModel;
     private boolean isLoading = true;
-    public String roomId = "", centerId = "", type = "room";
+    public String roomId = "", centerId = "", type = "";
 
     @Nullable
     @Override
@@ -57,7 +60,7 @@ public class RoomUsersFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -68,8 +71,6 @@ public class RoomUsersFragment extends Fragment {
         adapter = new RoomUsersAdapter(requireActivity());
 
         handler = new Handler();
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -147,26 +148,30 @@ public class RoomUsersFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createRoomUserFragment, extras)).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = RoomUsersFragmentDirections.actionRoomUsersFragmentToCreateRoomUserFragment(roomModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.addImageView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                roomId = requireArguments().getString("id");
-                extras.putString("id", roomId);
-                data.put("id", roomId);
-            }
+    private void setArgs() {
+        roomModel = (RoomModel) RoomUsersFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
-                centerId = getArguments().getString("center_id");
-                extras.putString("center_id", centerId);
-            }
+        setData(roomModel);
+    }
 
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                extras.putString("type", type);
-            }
+    private void setData(RoomModel model) {
+        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
+            roomId = model.getRoomId();
+            data.put("id", roomId);
+        }
+
+        if (model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
+            centerId = model.getRoomCenter().getCenterId();
+        }
+
+        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
+            type = model.getRoomType();
         }
     }
 
@@ -191,7 +196,7 @@ public class RoomUsersFragment extends Fragment {
                             binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
-                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
