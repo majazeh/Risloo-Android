@@ -21,7 +21,7 @@ public class SampleModel extends TypeModel {
     private String caseStatus = "";
     private int membersCount;
     private int joined;
-    private String chain="";
+    private JSONArray chain;
     private RoomModel SampleRoom;
     private CaseModel SampleCase;
     private List prerequisites;
@@ -112,7 +112,7 @@ public class SampleModel extends TypeModel {
 
 
         if (!jsonObject.isNull("chain")) {
-                setChain(jsonObject.getString("chain"));
+                setChain(jsonObject.getJSONObject("chain").getJSONArray("list"));
         }
 
         if (!jsonObject.isNull("prerequisites")) {
@@ -286,11 +286,11 @@ public class SampleModel extends TypeModel {
         this.items = items;
     }
 
-    public String getChain() {
+    public JSONArray getChain() {
         return chain;
     }
 
-    public void setChain(String chain) {
+    public void setChain(JSONArray chain) {
         this.chain = chain;
     }
 

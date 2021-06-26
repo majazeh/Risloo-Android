@@ -7,14 +7,14 @@ import org.json.JSONException;
 
 public class SampleForm {
     private List items;
-    private String chain;
+    private JSONArray chain;
     private List prerequisites;
     private String description;
     private JSONArray sampleForm;
-    private JSONArray currentForm;
+    public JSONArray currentForm;
     private int position = 0;
 
-    public SampleForm(List items, @Nullable String chain, List prerequisites, String description) {
+    public SampleForm(List items, @Nullable JSONArray chain, List prerequisites, String description) {
         this.items = items;
         if (chain != null)
             this.chain = chain;
@@ -27,25 +27,13 @@ public class SampleForm {
 
     private void sampleFormInitializer() {
         if (chain != null)
-            addForm(chain, "زنجیره");
-        addForm(prerequisites, "اطلاعات");
-        addForm(description, "توضیحات");
+            addForm("زنجیره", chain);
+        addForm("اطلاعات", prerequisites);
+        addForm("توضیحات", description);
         for (int i = 0; i < items.size(); i++) {
-            addForm(items.data().get(i), String.valueOf(i + 1));
+            addForm(String.valueOf(i + 1), items.data().get(i));
         }
-        addForm("Close", "پایان");
-    }
-
-    public JSONArray getForm(int position) {
-        if (sampleForm.length() > position) {
-            try {
-                return sampleForm.getJSONArray(position);
-            } catch (JSONException e) {
-                e.printStackTrace();
-                return null;
-            }
-        } else
-            return null;
+        addForm("پایان", "Close");
     }
 
     public JSONArray getCurrentForm() {
@@ -97,10 +85,10 @@ public class SampleForm {
         }
     }
 
-    public void addForm(Object object, String title) {
+    public void addForm(String title, Object object) {
         JSONArray jsonArray = new JSONArray();
-        jsonArray.put(object);
         jsonArray.put(title);
+        jsonArray.put(object);
         sampleForm.put(jsonArray);
     }
 
