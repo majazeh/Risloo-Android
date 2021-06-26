@@ -41,6 +41,7 @@ android {
             manifestPlaceholders.appIcon = "@mipmap/ic_logo_debug"
             manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_debug_round"
             manifestPlaceholders.appLabel = "ریسلو آزمایشی"
+            manifestPlaceholders.appAuthorities = "com.majazeh.risloo.debug.fileprovider"
         }
 
         beta {
@@ -52,6 +53,7 @@ android {
             manifestPlaceholders.appIcon = "@mipmap/ic_logo_beta"
             manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_beta_round"
             manifestPlaceholders.appLabel = "ریسلو بتا"
+            manifestPlaceholders.appAuthorities = "com.majazeh.risloo.beta.fileprovider"
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -63,6 +65,7 @@ android {
             manifestPlaceholders.appIcon = "@mipmap/ic_logo_release"
             manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_release_round"
             manifestPlaceholders.appLabel = "ریسلو"
+            manifestPlaceholders.appAuthorities = "com.majazeh.risloo.fileprovider"
             signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }

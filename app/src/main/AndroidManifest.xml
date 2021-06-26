@@ -31,7 +31,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.majazeh.risloo.debug.fileprovider"
+            android:authorities="${appAuthorities}"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
