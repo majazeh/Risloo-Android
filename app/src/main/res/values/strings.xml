@@ -4,10 +4,6 @@
     // App Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="AppName">ریسلو</string>
-    <string name="AppAlpha">ریسلو آلفا</string>
-    <string name="AppDebug">ریسلو دیباگ</string>
-
     <string name="AppImageContent">عکس</string>
 
     <string name="AppAdded">مطلب ساخته شد.</string>

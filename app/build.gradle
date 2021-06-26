@@ -3,6 +3,9 @@ plugins {
     id 'androidx.navigation.safeargs' // Navigation SafeArgs
 }
 
+//def keystorePropertiesFile = rootProject.file("keystore.properties") // Initialize RootProject File
+//def keystoreProperties = new Properties() // Initialize New Properties()
+
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
@@ -17,13 +20,46 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
+//    signingConfigs {
+//        config {
+//            storeFile file(keystoreProperties['storeFile'])
+//            storePassword keystoreProperties['storePassword']
+//            keyAlias keystoreProperties['keyAlias']
+//            keyPassword keystoreProperties['keyPassword']
+//        }
+//    }
+
     buildTypes {
-        debug {
+        debug{
             debuggable true
             minifyEnabled false
             shrinkResources false
             applicationIdSuffix ".debug"
-            versionNameSuffix ".debug"
+            versionNameSuffix "-debug"
+            manifestPlaceholders.appIcon = "@mipmap/ic_logo_debug"
+            manifestPlaceholders.appLabel = "ریسلو آزمایشی"
+        }
+
+        beta {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            applicationIdSuffix ".beta"
+            versionNameSuffix "-beta"
+            manifestPlaceholders.appIcon = "@mipmap/ic_logo_beta"
+            manifestPlaceholders.appLabel = "ریسلو بتا"
+//            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            manifestPlaceholders.appIcon = "@mipmap/ic_logo"
+            manifestPlaceholders.appLabel = "ریسلو"
+//            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
 
