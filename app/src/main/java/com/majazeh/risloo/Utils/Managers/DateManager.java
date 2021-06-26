@@ -271,7 +271,7 @@ public class DateManager {
                 Date lastDay = new Date(date.getTime() + (6*86400000));
                 PersianDate lastPersianDate = dateToPersian(lastDay);
 
-                return persianDate.getShMonth() + "/" + persianDate.getShDay()  + " تا " + lastPersianDate.getShMonth() + "/" + lastPersianDate.getShDay();
+                return dateCorrector(persianDate.getShMonth(), persianDate.getShDay(), lastPersianDate.getShMonth(), lastPersianDate.getShDay());
             }
             case "یکشنبه": {
                 Date firstDay = new Date(date.getTime() - (86400000));
@@ -280,7 +280,7 @@ public class DateManager {
                 PersianDate firstPersianDate = dateToPersian(firstDay);
                 PersianDate lastPersianDate = dateToPersian(lastDay);
 
-                return firstPersianDate.getShMonth() + "/" + firstPersianDate.getShDay()  + " تا " + lastPersianDate.getShMonth() + "/" + lastPersianDate.getShDay();
+                return dateCorrector(firstPersianDate.getShMonth(), firstPersianDate.getShDay(), lastPersianDate.getShMonth(), lastPersianDate.getShDay());
             }
             case "دوشنبه": {
                 Date firstDay = new Date(date.getTime() - (2*86400000));
@@ -289,7 +289,7 @@ public class DateManager {
                 PersianDate firstPersianDate = dateToPersian(firstDay);
                 PersianDate lastPersianDate = dateToPersian(lastDay);
 
-                return firstPersianDate.getShMonth() + "/" + firstPersianDate.getShDay()  + " تا " + lastPersianDate.getShMonth() + "/" + lastPersianDate.getShDay();
+                return dateCorrector(firstPersianDate.getShMonth(), firstPersianDate.getShDay(), lastPersianDate.getShMonth(), lastPersianDate.getShDay());
             }
             case "سه\u200Cشنبه": {
                 Date firstDay = new Date(date.getTime() - (3*86400000));
@@ -298,7 +298,7 @@ public class DateManager {
                 PersianDate firstPersianDate = dateToPersian(firstDay);
                 PersianDate lastPersianDate = dateToPersian(lastDay);
 
-                return firstPersianDate.getShMonth() + "/" + firstPersianDate.getShDay()  + " تا " + lastPersianDate.getShMonth() + "/" + lastPersianDate.getShDay();
+                return dateCorrector(firstPersianDate.getShMonth(), firstPersianDate.getShDay(), lastPersianDate.getShMonth(), lastPersianDate.getShDay());
             }
             case "چهارشنبه": {
                 Date firstDay = new Date(date.getTime() - (4*86400000));
@@ -307,7 +307,7 @@ public class DateManager {
                 PersianDate firstPersianDate = dateToPersian(firstDay);
                 PersianDate lastPersianDate = dateToPersian(lastDay);
 
-                return firstPersianDate.getShMonth() + "/" + firstPersianDate.getShDay()  + " تا " + lastPersianDate.getShMonth() + "/" + lastPersianDate.getShDay();
+                return dateCorrector(firstPersianDate.getShMonth(), firstPersianDate.getShDay(), lastPersianDate.getShMonth(), lastPersianDate.getShDay());
             }
             case "پنج\u200Cشنبه": {
                 Date firstDay = new Date(date.getTime() - (5*86400000));
@@ -316,13 +316,13 @@ public class DateManager {
                 PersianDate firstPersianDate = dateToPersian(firstDay);
                 PersianDate lastPersianDate = dateToPersian(lastDay);
 
-                return firstPersianDate.getShMonth() + "/" + firstPersianDate.getShDay()  + " تا " + lastPersianDate.getShMonth() + "/" + lastPersianDate.getShDay();
+                return dateCorrector(firstPersianDate.getShMonth(), firstPersianDate.getShDay(), lastPersianDate.getShMonth(), lastPersianDate.getShDay());
             }
             case "جمعه": {
                 Date firstDay = new Date(date.getTime() - (6*86400000));
                 PersianDate firstPersianDate = dateToPersian(firstDay);
 
-                return persianDate.getShMonth() + "/" + persianDate.getShDay()  + " تا " + firstPersianDate.getShMonth() + "/" + firstPersianDate.getShDay();
+                return dateCorrector(firstPersianDate.getShMonth(), firstPersianDate.getShDay(), persianDate.getShMonth(), persianDate.getShDay());
             }
             default:
                 return "";
@@ -404,210 +404,83 @@ public class DateManager {
         }
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////
+    /*
+    ---------- Date Corrector ----------
+    */
 
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    public static ArrayList<Long> previeosJalaliWeekTimestamps(long value) {
-        Timestamp timestamp = new Timestamp(value * 1000);
-        Date today = new Date(timestamp.getTime());
-
-        int year = Integer.parseInt(dateToString("yyyy", today));
-        int month = Integer.parseInt(dateToString("MM", today));
-        int day = Integer.parseInt(dateToString("dd", today));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day);
-
-        ArrayList<Long> timestamps = new ArrayList<>();
-
-        switch (persianDate.dayName()) {
-            case "شنبه":
-                timestamps.add(new Date(today.getTime() - (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (4*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (3*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (2*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (86400000)).getTime() / 1000);
-                return timestamps;
-            case "یکشنبه":
-                timestamps.add(new Date(today.getTime() - (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (4*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (3*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (2*86400000)).getTime() / 1000);
-                return timestamps;
-            case "دوشنبه":
-                timestamps.add(new Date(today.getTime() - (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (4*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (3*86400000)).getTime() / 1000);
-                return timestamps;
-            case "سه\u200Cشنبه":
-                timestamps.add(new Date(today.getTime() - (10*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (4*86400000)).getTime() / 1000);
-                return timestamps;
-            case "چهارشنبه":
-                timestamps.add(new Date(today.getTime() - (11*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (10*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (5*86400000)).getTime() / 1000);
-                return timestamps;
-            case "پنج\u200Cشنبه":
-                timestamps.add(new Date(today.getTime() - (12*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (11*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (10*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (6*86400000)).getTime() / 1000);
-                return timestamps;
-            case "جمعه":
-                timestamps.add(new Date(today.getTime() - (13*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (12*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (11*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (10*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() - (7*86400000)).getTime() / 1000);
-                return timestamps;
-            default:
-                return timestamps;
-        }
-    }
-
-    public static ArrayList<Long> nextJalaliWeekTimestamps(long value) {
-        Timestamp timestamp = new Timestamp(value * 1000);
-        Date today = new Date(timestamp.getTime());
-
-        int year = Integer.parseInt(dateToString("yyyy", today));
-        int month = Integer.parseInt(dateToString("MM", today));
-        int day = Integer.parseInt(dateToString("dd", today));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day);
-
-        ArrayList<Long> timestamps = new ArrayList<>();
-
-        switch (persianDate.dayName()) {
-            case "شنبه":
-                timestamps.add(new Date(today.getTime() + (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (10*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (11*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (12*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (13*86400000)).getTime() / 1000);
-                return timestamps;
-            case "یکشنبه":
-                timestamps.add(new Date(today.getTime() + (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (10*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (11*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (12*86400000)).getTime() / 1000);
-                return timestamps;
-            case "دوشنبه":
-                timestamps.add(new Date(today.getTime() + (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (10*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (11*86400000)).getTime() / 1000);
-                return timestamps;
-            case "سه\u200Cشنبه":
-                timestamps.add(new Date(today.getTime() + (4*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (9*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (10*86400000)).getTime() / 1000);
-                return timestamps;
-            case "چهارشنبه":
-                timestamps.add(new Date(today.getTime() + (3*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (4*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (8*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (9*86400000)).getTime() / 1000);
-                return timestamps;
-            case "پنج\u200Cشنبه":
-                timestamps.add(new Date(today.getTime() + (2*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (3*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (4*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (7*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (8*86400000)).getTime() / 1000);
-                return timestamps;
-            case "جمعه":
-                timestamps.add(new Date(today.getTime() + (86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (2*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (3*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (4*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (5*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (6*86400000)).getTime() / 1000);
-                timestamps.add(new Date(today.getTime() + (7*86400000)).getTime() / 1000);
-                return timestamps;
-            default:
-                return timestamps;
-        }
-    }
-
-    public static String currentJalaliDate() {
-        Date value = Calendar.getInstance().getTime();
-
-        int year = Integer.parseInt(dateToString("yyyy", value));
-        int month = Integer.parseInt(dateToString("MM", value));
-        int day = Integer.parseInt(dateToString("dd", value));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day);
-
-        if (persianDate.getShMonth() < 10) {
-            if (persianDate.getShDay() < 10)
-                return persianDate.getShYear() + "-" + "0" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay();
-            else
-                return persianDate.getShYear() + "-" + "0" + persianDate.getShMonth() + "-" + persianDate.getShDay();
+    public static String dateCorrector(int firstMonth, int firstDay, int lastMonth, int lastDay) {
+        if (firstMonth < 10) {
+            if (firstDay < 10) {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            } else {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return "0" + firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return "0" + firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            }
         } else {
-            if (persianDate.getShDay() < 10)
-                return persianDate.getShYear() + "-" + persianDate.getShMonth() + "-" + "0" + persianDate.getShDay();
-            else
-                return persianDate.getShYear() + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay();
+            if (firstDay < 10) {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" + "0" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" + "0" + firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            } else {
+                if (lastMonth < 10) {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" + firstDay + " تا " + "0" + lastMonth + "/" + lastDay;
+                } else {
+                    if (lastDay < 10)
+                        return firstMonth + "/" + firstDay + " تا " + lastMonth + "/" + "0" + lastDay;
+                    else
+                        return firstMonth + "/" +firstDay + " تا " + lastMonth + "/" + lastDay;
+                }
+            }
         }
     }
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+
+
+    //////////////////////////////////////////////////////////////////////////////////////
 
     public static String gregorianToJalali2(String value) {
         int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd", value)));
@@ -618,34 +491,6 @@ public class DateManager {
         persianDate.initGrgDate(year, month, day);
 
         return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + persianDate.getShYear();
-    }
-
-    public static String gregorianToJalali3(String value) {
-        int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int hour = Integer.parseInt(dateToString("HH", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int minute = Integer.parseInt(dateToString("mm", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int second = Integer.parseInt(dateToString("ss", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day, hour, minute, second);
-
-        return StringManager.lastChar(String.valueOf(persianDate.getShYear()))+ "-" + StringManager.lastChar(String.valueOf(persianDate.getShMonth())) + "-" + StringManager.lastChar(String.valueOf(persianDate.getShDay())) + " " + persianDate.getHour() + ":" + persianDate.getMinute();
-    }
-
-    public static String gregorianToJalali4(String value) {
-        int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int hour = Integer.parseInt(dateToString("HH", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int minute = Integer.parseInt(dateToString("mm", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int second = Integer.parseInt(dateToString("ss", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day, hour, minute, second);
-
-        return StringManager.substring(String.valueOf(persianDate.getShYear()), 2)+ "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
     }
 
     public static String gregorianToJalali5(String value) {

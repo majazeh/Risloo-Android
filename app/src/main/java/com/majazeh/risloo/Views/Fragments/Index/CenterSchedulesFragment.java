@@ -140,10 +140,8 @@ public class CenterSchedulesFragment extends Fragment {
                         schedulesAdapter.clearSchedules();
 
                         if (!schedules.data().isEmpty()) {
-                            schedulesAdapter.setSchedules(schedules.data(), type);
+                            schedulesAdapter.setSchedules(schedules.data(), type, binding.schedulesSingleLayout.textView);
                             binding.schedulesSingleLayout.recyclerView.setAdapter(schedulesAdapter);
-
-                            binding.schedulesSingleLayout.textView.setVisibility(View.GONE);
                         } else if (schedulesAdapter.getItemCount() == 0) {
                             binding.schedulesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }

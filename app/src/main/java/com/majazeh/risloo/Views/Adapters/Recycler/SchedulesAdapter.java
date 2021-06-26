@@ -5,6 +5,7 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
@@ -32,6 +33,9 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
     // Objects
     private Activity activity;
+
+    // Widget
+    private TextView emptyTextView;
 
     // Vars
     private ArrayList<TypeModel> schedules;
@@ -70,13 +74,17 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
             return 0;
     }
 
-    public void setSchedules(ArrayList<TypeModel> schedules, String type) {
+    public void setSchedules(ArrayList<TypeModel> schedules, String type, TextView emptyTextView) {
         this.type = type;
 
         if (this.schedules == null)
             this.schedules = schedules;
         else
             this.schedules.addAll(schedules);
+
+        if (emptyTextView != null) {
+            this.emptyTextView = emptyTextView;
+        }
 
         setSelectedSchedules();
         notifyDataSetChanged();
@@ -186,6 +194,11 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
                 if (selectedDate.equals(modelDate))
                     selectedSchedules.add(model);
             }
+
+            if (selectedSchedules.size() != 0)
+                emptyTextView.setVisibility(View.GONE);
+            else
+                emptyTextView.setVisibility(View.VISIBLE);
         }
     }
 
