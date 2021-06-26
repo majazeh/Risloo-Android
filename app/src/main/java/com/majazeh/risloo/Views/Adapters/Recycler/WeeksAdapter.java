@@ -14,6 +14,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.SingleItemWeekBinding;
 
 import java.util.ArrayList;
@@ -105,7 +106,13 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
                     ((CenterSchedulesFragment) fragment).responseAdapter(timestamp);
                     selectedTimestamp = timestamp;
                     meSelected = true;
+
+                } else if (fragment instanceof RoomSchedulesFragment) {
+                    ((RoomSchedulesFragment) fragment).responseAdapter(timestamp);
+                    selectedTimestamp = timestamp;
+                    meSelected = true;
                 }
+
             }
 
             notifyDataSetChanged();
@@ -113,8 +120,8 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
     }
 
     private void setData(WeeksHolder holder, long timestamp) {
-        holder.binding.titleTextView.setText(DateManager.gregorianToJalali11(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(timestamp))));
-        holder.binding.dateTextView.setText(DateManager.gregorianToJalali1(DateManager.dateToString("yyyy-MM-dd", DateManager.timestampToDate(timestamp))));
+        holder.binding.titleTextView.setText(DateManager.jalDayName(String.valueOf(timestamp)));
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(timestamp), "/"));
 
         if (!meSelected) {
             if (currentTimestamp == timestamp) {

@@ -644,6 +644,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.SessionFragment"
         android:label="@string/SessionFragmentTitle"
         tools:layout="@layout/fragment_session" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_sessionFragment_to_createCenterUserFragment"
             app:destination="@id/createCenterUserFragment" />
