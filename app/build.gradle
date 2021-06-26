@@ -3,8 +3,10 @@ plugins {
     id 'androidx.navigation.safeargs' // Navigation SafeArgs
 }
 
-//def keystorePropertiesFile = rootProject.file("keystore.properties") // Initialize RootProject File
-//def keystoreProperties = new Properties() // Initialize New Properties()
+def keystorePropertiesFile = rootProject.file("keystore.properties") // Initialize RootProject File
+def keystoreProperties = new Properties() // Initialize New Properties()
+
+keystoreProperties.load(new FileInputStream(keystorePropertiesFile)) // Set KeystoreProperties Object.
 
 android {
     compileSdkVersion 30
@@ -20,14 +22,14 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-//    signingConfigs {
-//        config {
-//            storeFile file(keystoreProperties['storeFile'])
-//            storePassword keystoreProperties['storePassword']
-//            keyAlias keystoreProperties['keyAlias']
-//            keyPassword keystoreProperties['keyPassword']
-//        }
-//    }
+    signingConfigs {
+        config {
+            storeFile file(keystoreProperties['storeFile'])
+            storePassword keystoreProperties['storePassword']
+            keyAlias keystoreProperties['keyAlias']
+            keyPassword keystoreProperties['keyPassword']
+        }
+    }
 
     buildTypes {
         debug{
@@ -50,7 +52,7 @@ android {
             manifestPlaceholders.appIcon = "@mipmap/ic_logo_beta"
             manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_beta_round"
             manifestPlaceholders.appLabel = "ریسلو بتا"
-//            signingConfig signingConfigs.config
+            signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
 
@@ -61,7 +63,7 @@ android {
             manifestPlaceholders.appIcon = "@mipmap/ic_logo_release"
             manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_release_round"
             manifestPlaceholders.appLabel = "ریسلو"
-//            signingConfig signingConfigs.config
+            signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
