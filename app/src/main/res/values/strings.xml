@@ -812,8 +812,6 @@
 
     <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمانی</string>
 
-    <string name="RoomSchedulesFragmentCreate">تعریف برنامه درمانی</string>
-
     /*
     ---------- RoomUsers Fragment ----------
     */

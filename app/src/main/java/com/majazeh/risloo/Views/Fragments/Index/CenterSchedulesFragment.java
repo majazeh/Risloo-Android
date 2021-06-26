@@ -22,6 +22,7 @@ import com.majazeh.risloo.databinding.FragmentCenterSchedulesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.HashMap;
 
@@ -34,13 +35,11 @@ public class CenterSchedulesFragment extends Fragment {
     private WeeksAdapter weeksAdapter;
     private SchedulesAdapter schedulesAdapter;
 
-    // Objects
-    private Bundle extras;
-
     // Vars
     private HashMap data, header;
-    public String centerId = "", type = "personal_clinic";
+    private CenterModel centerModel;
     private long currentTimestamp = DateManager.currentTimestamp();
+    public String centerId = "", type = "";
 
     @Nullable
     @Override
@@ -53,7 +52,7 @@ public class CenterSchedulesFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData(currentTimestamp);
 
@@ -63,8 +62,6 @@ public class CenterSchedulesFragment extends Fragment {
     private void initializer() {
         weeksAdapter = new WeeksAdapter(requireActivity());
         schedulesAdapter = new SchedulesAdapter(requireActivity());
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -99,37 +96,39 @@ public class CenterSchedulesFragment extends Fragment {
             // TODO : Place Code Here
         }).widget(binding.weekTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork(DateManager.previeosJalaliFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork(DateManager.preJalFridayTimestamp(currentTimestamp))).widget(binding.backwardImageView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> doWork(DateManager.nextJalaliSaturdayTimestamp(currentTimestamp))).widget(binding.forwardImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> doWork(DateManager.nxtJalSaturdayTimestamp(currentTimestamp))).widget(binding.forwardImageView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                centerId = requireArguments().getString("id");
-                extras.putString("id", centerId);
-                data.put("id", centerId);
-            }
+    private void setArgs() {
+        centerModel = (CenterModel) CenterSchedulesFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                extras.putString("type", type);
-            }
+        setData(centerModel);
+    }
+
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            centerId = model.getCenterId();
+            data.put("id", centerId);
+        }
+
+        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
+            type = model.getCenterType();
         }
     }
 
-    private void setDate(long timestamp) {
-        binding.weekTextView.getRoot().setText(DateManager.currentJalaliWeek(timestamp));
+    private void setSchedules(long timestamp) {
+        binding.weekTextView.getRoot().setText(DateManager.currentJalWeekString(timestamp));
 
-        weeksAdapter.setWeek(DateManager.currentJalaliWeekTimestamps(timestamp));
+        weeksAdapter.setWeek(DateManager.currentJalWeekTimestamps(timestamp));
         binding.weeksRecyclerView.setAdapter(weeksAdapter);
     }
 
     private void getData(long timestamp) {
         data.put("time", timestamp);
 
-        setDate(timestamp);
+        setSchedules(timestamp);
 
         Center.schedule(data, header, new Response() {
             @Override
