@@ -35,7 +35,6 @@ import com.mre.ligheh.Model.TypeModel.CaseModel;
 
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
@@ -58,9 +57,10 @@ public class RoomFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private TypeModel typeModel;
+    private RoomModel roomModel;
+    private CenterModel centerModel;
     private String type = "";
-    private boolean isLoading = true, userSelect = false;
+    private boolean isLoading = true, userSelect = false, succesRequest = false;
 
     @Nullable
     @Override
@@ -112,13 +112,17 @@ public class RoomFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE) {
                 if (!type.equals("room")) {
-                    try {
-                        IntentManager.display(requireActivity(), "", "", ((CenterModel) typeModel).getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
-                    } catch (JSONException e) {
-                        e.printStackTrace();
+                    if (!succesRequest) {
+                        try {
+                            IntentManager.display(requireActivity(), "", "", (centerModel).getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    } else {
+                        IntentManager.display(requireActivity(), "", "", (roomModel).getRoomManager().getAvatar() .getMedium().getUrl());
                     }
                 } else {
-                    IntentManager.display(requireActivity(), "", "", ((RoomModel) typeModel).getRoomManager().getAvatar() .getMedium().getUrl());
+                    IntentManager.display(requireActivity(), "", "", (roomModel).getRoomManager().getAvatar() .getMedium().getUrl());
                 }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
@@ -137,28 +141,28 @@ public class RoomFragment extends Fragment {
                     switch (item) {
                         case "اعضاء":
                             if (!type.equals("room")) {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToCenterUsersFragment(typeModel);
+                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToCenterUsersFragment(centerModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToRoomUsersFragment(typeModel);
+                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToRoomUsersFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                             break;
                         case "برنامه درمانی":
                             if (!type.equals("room")) {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToCenterSchedulesFragment(typeModel);
+                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToCenterSchedulesFragment(centerModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToRoomSchedulesFragment(typeModel);
+                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToRoomSchedulesFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                             break;
                         case "پروفایل من": {
-                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToReferenceFragment(type, null, ((CenterModel) typeModel).getAcceptation().getId(), typeModel);
+                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
-                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToEditCenterFragment(typeModel);
+                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToEditCenterFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                     }
@@ -181,11 +185,11 @@ public class RoomFragment extends Fragment {
             Room.request(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
-                    typeModel = (TypeModel) object;
+                    roomModel = (RoomModel) object;
 
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            setAcceptation((RoomModel) typeModel);
+                            setAcceptation(roomModel);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
@@ -258,24 +262,28 @@ public class RoomFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = RoomFragmentDirections.actionRoomFragmentToCreateCaseFragment(typeModel);
+            NavDirections action = RoomFragmentDirections.actionRoomFragmentToCreateCaseFragment(roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addCaseImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = RoomFragmentDirections.actionRoomFragmentToCreateScheduleFragment(typeModel);
+            NavDirections action = RoomFragmentDirections.actionRoomFragmentToCreateScheduleFragment(roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addScheduleImageView.getRoot());
     }
 
     private void setArgs() {
         type = RoomFragmentArgs.fromBundle(getArguments()).getType();
-        typeModel = RoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        if (!type.equals("room"))
-            setData((CenterModel) typeModel);
-        else
-            setData((RoomModel) typeModel);
+        if (!type.equals("room")) {
+            centerModel = (CenterModel) RoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+            setData(centerModel);
+        } else {
+            roomModel = (RoomModel) RoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+            setData(roomModel);
+        }
     }
 
     private void setData(CenterModel model) {
@@ -466,9 +474,9 @@ public class RoomFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         try {
-                            typeModel = new RoomModel(((JSONObject) object).getJSONObject("room"));
+                            roomModel = new RoomModel(((JSONObject) object).getJSONObject("room"));
 
-                            setData((RoomModel) typeModel);
+                            setData(roomModel);
 
                             List cases = new List();
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
@@ -501,6 +509,7 @@ public class RoomFragment extends Fragment {
                         }
                     });
                     isLoading = false;
+                    succesRequest = true;
                 }
             }
 
