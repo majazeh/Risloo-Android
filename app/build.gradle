@@ -37,6 +37,7 @@ android {
             applicationIdSuffix ".debug"
             versionNameSuffix "-debug"
             manifestPlaceholders.appIcon = "@mipmap/ic_logo_debug"
+            manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_debug_round"
             manifestPlaceholders.appLabel = "ریسلو آزمایشی"
         }
 
@@ -47,6 +48,7 @@ android {
             applicationIdSuffix ".beta"
             versionNameSuffix "-beta"
             manifestPlaceholders.appIcon = "@mipmap/ic_logo_beta"
+            manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_beta_round"
             manifestPlaceholders.appLabel = "ریسلو بتا"
 //            signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
@@ -56,7 +58,8 @@ android {
             debuggable false
             minifyEnabled true
             shrinkResources true
-            manifestPlaceholders.appIcon = "@mipmap/ic_logo"
+            manifestPlaceholders.appIcon = "@mipmap/ic_logo_release"
+            manifestPlaceholders.appRoundIcon = "@mipmap/ic_logo_release_round"
             manifestPlaceholders.appLabel = "ریسلو"
 //            signingConfig signingConfigs.config
             proguardFiles getDefaultProguardFile ('proguard-android-optimize.txt'), 'proguard-rules.pro'
