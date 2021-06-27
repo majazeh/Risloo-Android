@@ -63,7 +63,6 @@
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="0sp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_barrier" />
@@ -76,7 +75,6 @@
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_angle_down_light"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
@@ -88,6 +86,13 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="input_editText, select_spinner" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/select_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="select_spinner, angle_imageView" />
 
     <ImageView
         android:id="@+id/error_imageView"

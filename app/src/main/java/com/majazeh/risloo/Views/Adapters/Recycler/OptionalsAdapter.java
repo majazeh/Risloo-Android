@@ -12,13 +12,15 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.databinding.SingleItemOptionalBinding;
 
+import java.util.ArrayList;
+
 public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.OptionalsHolder> {
 
     // Objects
     private Activity activity;
 
     // Vars
-//    private ArrayList<Optional> optionals;
+    private ArrayList<String> titles;
 
     public OptionalsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -32,23 +34,22 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
 
     @Override
     public void onBindViewHolder(@NonNull OptionalsHolder holder, int i) {
-//        Optionals optional = optionals.get(i);
+        String title = titles.get(i);
 
-        listener(holder);
+        listener(holder, title);
 
-        setData(holder);
+        setData(holder, title);
     }
 
     @Override
     public int getItemCount() {
-//        return optionals.size();
-        return 4;
+        return titles.size();
     }
 
-//    public void setOptionals(ArrayList<Optional> optionals) {
-//        this.optionals = optionals;
-//        notifyDataSetChanged();
-//    }
+    public void setItems(ArrayList<String> titles) {
+        this.titles = titles;
+        notifyDataSetChanged();
+    }
 
     private void detector(OptionalsHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -64,16 +65,20 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
         }
     }
 
-    private void listener(OptionalsHolder holder) {
+    private void listener(OptionalsHolder holder, String title) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.itemView);
     }
 
-    private void setData(OptionalsHolder holder) {
+    private void setData(OptionalsHolder holder, String title) {
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
-        holder.binding.answerTextView.setText("مطمئن نیستم");
+        holder.binding.answerTextView.setText(title);
 
+        setActive(holder, title);
+    }
+
+    private void setActive(OptionalsHolder holder, String title) {
         if (holder.getBindingAdapterPosition() == 0) {
             detector(holder, true);
 

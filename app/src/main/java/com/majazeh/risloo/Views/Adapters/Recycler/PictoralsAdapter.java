@@ -13,13 +13,15 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.databinding.SingleItemPictoralBinding;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
+
 public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.PictoralsHolder> {
 
     // Objects
     private Activity activity;
 
     // Vars
-//    private ArrayList<Pictoral> pictorals;
+    private ArrayList<String> urls;
 
     public PictoralsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -33,23 +35,22 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
 
     @Override
     public void onBindViewHolder(@NonNull PictoralsHolder holder, int i) {
-//        Pictorals pictoral = pictorals.get(i);
+        String url = urls.get(i);
 
-        listener(holder);
+        listener(holder, url);
 
-        setData(holder);
+        setData(holder, url);
     }
 
     @Override
     public int getItemCount() {
-//        return pictorals.size();
-        return 4;
+        return urls.size();
     }
 
-//    public void setPictorals(ArrayList<Pictoral> pictorals) {
-//        this.pictorals = pictorals;
-//        notifyDataSetChanged();
-//    }
+    public void setItems(ArrayList<String> urls) {
+        this.urls = urls;
+        notifyDataSetChanged();
+    }
 
     private void detector(PictoralsHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -65,16 +66,20 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
         }
     }
 
-    private void listener(PictoralsHolder holder) {
+    private void listener(PictoralsHolder holder, String url) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.itemView);
     }
 
-    private void setData(PictoralsHolder holder) {
+    private void setData(PictoralsHolder holder, String url) {
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
-        Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(holder.binding.answerImageView);
+        Picasso.get().load(url).placeholder(R.color.Gray100).into(holder.binding.answerImageView);
 
+        setActive(holder, url);
+    }
+
+    private void setActive(PictoralsHolder holder, String url) {
         if (holder.getBindingAdapterPosition() == 0) {
             detector(holder, true);
 
