@@ -10,29 +10,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.databinding.SingleItemFormBinding;
+import com.majazeh.risloo.databinding.SingleItemPrerequisiteBinding;
 
-public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder> {
+public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdapter.PrerequisitesHolder> {
 
     // Objects
     private Activity activity;
 
     // Vars
-//    private ArrayList<Form> forms;
+//    private ArrayList<Prerequisite> forms;
 
-    public FormsAdapter(@NonNull Activity activity) {
+    public PrerequisitesAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public FormsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new FormsHolder(SingleItemFormBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public PrerequisitesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new PrerequisitesHolder(SingleItemPrerequisiteBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull FormsHolder holder, int i) {
-//        Forms form = forms.get(i);
+    public void onBindViewHolder(@NonNull PrerequisitesHolder holder, int i) {
+//        Prerequisites prerequisite = prerequisites.get(i);
 
         listener(holder);
 
@@ -41,17 +41,17 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
 
     @Override
     public int getItemCount() {
-//        return forms.size();
+//        return prerequisites.size();
         return 4;
     }
 
-//    public void setForms(ArrayList<Form> forms) {
-//        this.forms = forms;
+//    public void setPrerequisites(ArrayList<Prerequisite> prerequisites) {
+//        this.prerequisites = prerequisites;
 //        notifyDataSetChanged();
 //    }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(FormsHolder holder) {
+    private void listener(PrerequisitesHolder holder) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!holder.binding.inputEditText.hasFocus()) {
@@ -62,15 +62,15 @@ public class FormsAdapter extends RecyclerView.Adapter<FormsAdapter.FormsHolder>
         });
     }
 
-    private void setData(FormsHolder holder) {
+    private void setData(PrerequisitesHolder holder) {
         holder.binding.headerTextView.setText("عنوان");
     }
 
-    public class FormsHolder extends RecyclerView.ViewHolder {
+    public class PrerequisitesHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemFormBinding binding;
+        private SingleItemPrerequisiteBinding binding;
 
-        public FormsHolder(SingleItemFormBinding binding) {
+        public PrerequisitesHolder(SingleItemPrerequisiteBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

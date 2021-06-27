@@ -12,45 +12,45 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.databinding.SingleItemBulkBinding;
+import com.majazeh.risloo.databinding.SingleItemChainBinding;
 
-public class BulksAdapter extends RecyclerView.Adapter<BulksAdapter.BulksHolder> {
+public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHolder> {
 
     // Objects
     private Activity activity;
 
     // Vars
-//    private ArrayList<Bulk> bulks;
+//    private ArrayList<Chain> chains;
 
-    public BulksAdapter(@NonNull Activity activity) {
+    public ChainsAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public BulksHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new BulksHolder(SingleItemBulkBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public ChainsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new ChainsHolder(SingleItemChainBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BulksHolder holder, int i) {
-//        Bulks bulk = bulks.get(i);
+    public void onBindViewHolder(@NonNull ChainsHolder holder, int i) {
+//        Chains chain = chains.get(i);
 
         setData(holder);
     }
 
     @Override
     public int getItemCount() {
-//        return bulks.size();
+//        return chains.size();
         return 4;
     }
 
-//    public void setBulks(ArrayList<Bulk> bulks) {
-//        this.bulks = bulks;
+//    public void setChains(ArrayList<Chain> chains) {
+//        this.chains = chains;
 //        notifyDataSetChanged();
 //    }
 
-    private void setData(BulksHolder holder) {
+    private void setData(ChainsHolder holder) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.topView.setVisibility(View.GONE);
         } else {
@@ -76,11 +76,11 @@ public class BulksAdapter extends RecyclerView.Adapter<BulksAdapter.BulksHolder>
         }
     }
 
-    public class BulksHolder extends RecyclerView.ViewHolder {
+    public class ChainsHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemBulkBinding binding;
+        private SingleItemChainBinding binding;
 
-        public BulksHolder(SingleItemBulkBinding binding) {
+        public ChainsHolder(SingleItemChainBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }

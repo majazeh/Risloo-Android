@@ -11,21 +11,21 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Adapters.Recycler.BulksAdapter;
-import com.majazeh.risloo.databinding.FragmentTestBulkBinding;
+import com.majazeh.risloo.Views.Adapters.Recycler.ChainsAdapter;
+import com.majazeh.risloo.databinding.FragmentTestChainBinding;
 
-public class TestBulkFragment extends Fragment {
+public class TestChainFragment extends Fragment {
 
     // Binding
-    private FragmentTestBulkBinding binding;
+    private FragmentTestChainBinding binding;
 
     // Adapters
-    private BulksAdapter bulksAdapter;
+    private ChainsAdapter chainsAdapter;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentTestBulkBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentTestChainBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -35,16 +35,16 @@ public class TestBulkFragment extends Fragment {
     }
 
     private void initializer() {
-        bulksAdapter = new BulksAdapter(requireActivity());
+        chainsAdapter = new ChainsAdapter(requireActivity());
 
-        binding.titleTextView.getRoot().setText(getResources().getString(R.string.BulkFragmentTitle));
+        binding.titleTextView.getRoot().setText(getResources().getString(R.string.ChainFragmentTitle));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
     }
 
     private void setData() {
-//        bulksAdapter.setBulks(null);
-        binding.listRecyclerView.setAdapter(bulksAdapter);
+//        chainsAdapter.setChains(null);
+        binding.listRecyclerView.setAdapter(chainsAdapter);
     }
 
     @Override

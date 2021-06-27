@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     tools:layout_margin="0dp"
-    tools:context=".Views.Adapters.Recycler.BulksAdapter">
+    tools:context=".Views.Adapters.Recycler.ChainsAdapter">
 
     <View
         android:id="@+id/top_view"

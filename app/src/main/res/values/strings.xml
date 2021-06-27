@@ -139,10 +139,10 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
-    ---------- Bulk Fragment ----------
+    ---------- Chain Fragment ----------
     */
 
-    <string name="BulkFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
+    <string name="ChainFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
 
     /*
     ---------- Description Fragment ----------
@@ -162,11 +162,11 @@
     <string name="EndFragmentButtonBulk">اتمام نمونه زنجیره‌ای</string>
 
     /*
-    ----------  Form Fragment ----------
+    ----------  Prerequisite Fragment ----------
     */
 
-    <string name="FormFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
-    <string name="FormFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
+    <string name="PrerequisiteFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
+    <string name="PrerequisiteFragmentDescription">بعد از تکمیل اطلاعات زیر به صفحه بعد رفته و پاسخ‌دهی را شروع کنید.</string>
 
     /*
     ----------  Optional Fragment ----------
