@@ -98,14 +98,14 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
     private void setWidget() {
         if (!name.equals("")) {
-            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+            binding.nameTextView.setText(name);
         } else {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         }
 
         if (!avatar.equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(avatar).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));

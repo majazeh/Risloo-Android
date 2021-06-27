@@ -53,4 +53,29 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible" />
 
+    <TextView
+        android:id="@+id/title_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_16sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:paddingBottom="@dimen/_6sdp"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp"
+        android:paddingTop="@dimen/_6sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="bold"
+        android:textColor="@color/Gray200"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        android:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray300"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="نام و نام خانوادگی"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

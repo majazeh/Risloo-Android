@@ -30,7 +30,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
 
     // Vars
     private HashMap data, header;
-    private String id, key, name, avatar;
+    private String key, name, avatar;
 
     @NonNull
     @Override
@@ -77,12 +77,8 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            Bundle extras = new Bundle();
-                            extras.putString("id", id);
-
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-                            ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
 
                             dismiss();
                         });
@@ -91,7 +87,11 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
 
                 @Override
                 public void onFailure(String response) {
-                    // Place Code if Needed
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            // Place Code if Needed
+                        });
+                    }
                 }
             });
         }).widget(binding.entryButton);
@@ -99,14 +99,14 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
 
     private void setWidget() {
         if (!name.equals("")) {
-            binding.nameTextView.setText(((MainActivity) requireActivity()).singleton.getName());
+            binding.nameTextView.setText(name);
         } else {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
         }
 
         if (!avatar.equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-            Picasso.get().load(((MainActivity) requireActivity()).singleton.getAvatar()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            Picasso.get().load(avatar).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
@@ -115,8 +115,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setData(String id, String key, String name, String avatar) {
-        this.id = id;
+    public void setData(String key, String name, String avatar) {
         this.key = key;
         this.name = name;
         this.avatar = avatar;

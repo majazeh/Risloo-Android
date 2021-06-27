@@ -76,7 +76,7 @@ public class UserFragment extends Fragment {
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
-                IntentManager.display(requireActivity(), "", "", userModel.getAvatar().getMedium().getUrl());
+                IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), "", userModel.getAvatar().getMedium().getUrl());
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         ClickManager.onClickListener(() -> {

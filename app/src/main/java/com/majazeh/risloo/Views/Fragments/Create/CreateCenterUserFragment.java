@@ -288,7 +288,7 @@ public class CreateCenterUserFragment extends Fragment {
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             authBottomSheet.show(requireActivity().getSupportFragmentManager(), "authBottomSheet");
-                            authBottomSheet.setData(centerId, model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
+                            authBottomSheet.setData(model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

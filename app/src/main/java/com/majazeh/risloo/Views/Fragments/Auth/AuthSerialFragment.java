@@ -81,7 +81,7 @@ public class AuthSerialFragment extends Fragment {
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
-                IntentManager.display(requireActivity(), "", "", ((AuthActivity) requireActivity()).singleton.getAvatar());
+                IntentManager.display(requireActivity(), ((AuthActivity) requireActivity()).singleton.getName(), "", ((AuthActivity) requireActivity()).singleton.getAvatar());
         }).widget(binding.avatarIncludeLayout.avatarImageView);
 
         binding.serialEditText.getRoot().setOnTouchListener((v, event) -> {

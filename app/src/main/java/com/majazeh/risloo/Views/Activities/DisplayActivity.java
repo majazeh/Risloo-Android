@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.FileManager;
@@ -41,11 +42,13 @@ public class DisplayActivity extends AppCompatActivity {
 
         initializer();
 
+        ExtendOnFailureException.activity = this;
+
         detector();
 
         listener();
 
-        setData();
+        setExtra();
     }
 
     private void decorator() {
@@ -66,6 +69,8 @@ public class DisplayActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.returnImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
             binding.downloadImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
+
+            binding.titleTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_gray900_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -73,34 +78,40 @@ public class DisplayActivity extends AppCompatActivity {
         ClickManager.onClickListener(this::finish).widget(binding.returnImageView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            if (PermissionManager.storagePermission(this)) {
-                IntentManager.download(this, bitmap);
-            }
+            if (PermissionManager.storagePermission(this))
+                IntentManager.download(this, path);
         }).widget(binding.downloadImageView.getRoot());
     }
 
-    private void setData() {
-        if (!extras.getString("title").equals("")) {
-            title = extras.getString("title");
+    private void setExtra() {
+        if (extras != null) {
+            if (!extras.getString("title").equals("")) {
+                title = extras.getString("title");
 
-            // TODO ; Place Code If Needed
-        }
-        if (!extras.getString("bitmap").equals("")) {
-            bitmap = extras.getString("bitmap");
+                binding.titleTextView.setText(title);
+                binding.titleTextView.setVisibility(View.VISIBLE);
+            }
 
-            binding.avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), bitmap));
-            FileManager.deleteFileFromCache(this, "bitmap");
-        }
-        if (!extras.getString("path").equals("")) {
-            path = extras.getString("path");
+            if (!extras.getString("bitmap").equals("")) {
+                bitmap = extras.getString("bitmap");
 
-            Picasso.get().load(path).placeholder(R.color.Gray900).into(binding.avatarZoomageView);
-            binding.avatarZoomageView.setVisibility(View.VISIBLE);
+                binding.avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), bitmap));
+                FileManager.deleteFileFromCache(this, "bitmap");
+            }
+
+            if (!extras.getString("path").equals("")) {
+                path = extras.getString("path");
+
+                Picasso.get().load(path).placeholder(R.color.Gray900).into(binding.avatarZoomageView);
+                binding.downloadImageView.getRoot().setVisibility(View.VISIBLE);
+            }
         }
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
         if (requestCode == 200) {
             if (grantResults.length > 0) {
                 for (int grantResult : grantResults) {
