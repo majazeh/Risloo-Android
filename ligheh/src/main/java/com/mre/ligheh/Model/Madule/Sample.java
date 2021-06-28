@@ -74,7 +74,7 @@ public class Sample extends Model {
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (data.containsKey("id")) {
-                Model.show(endpoint + "/samples/" + data.get("id") + "/dashboard", data, header, response, SampleModel.class);
+                Model.show(endpoint + "/samples/" + data.get("id"), data, header, response, SampleModel.class);
             } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
             }

@@ -20,7 +20,7 @@ public class TestChainFragment extends Fragment {
     private FragmentTestChainBinding binding;
 
     // Adapters
-    private ChainsAdapter chainsAdapter;
+//    private ChainsAdapter chainsAdapter;
 
     @Nullable
     @Override
@@ -35,7 +35,7 @@ public class TestChainFragment extends Fragment {
     }
 
     private void initializer() {
-        chainsAdapter = new ChainsAdapter(requireActivity());
+//        chainsAdapter = new ChainsAdapter(requireActivity());
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.ChainFragmentTitle));
 
@@ -44,7 +44,7 @@ public class TestChainFragment extends Fragment {
 
     private void setData() {
 //        chainsAdapter.setChains(null);
-        binding.listRecyclerView.setAdapter(chainsAdapter);
+//        binding.listRecyclerView.setAdapter(chainsAdapter);
     }
 
     @Override

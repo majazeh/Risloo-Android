@@ -181,24 +181,24 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void doWork(String location) {
-        switch (location) {
-            case "prev": {
-                FormModel model = sampleModel.getSampleForm().prev();
-                loadFragment(model);
-            } break;
-            case "next": {
-                FormModel model = sampleModel.getSampleForm().next();
-                loadFragment(model);
-            } break;
-            case "last": {
-                FormModel model = sampleModel.getSampleForm().last();
-                loadFragment(model);
-            } break;
-            default: {
-                FormModel model = sampleModel.getSampleForm().goTo(Integer.parseInt(location));
-                loadFragment(model);
-            } break;
-        }
+//        switch (location) {
+//            case "prev": {
+//                FormModel model = sampleModel.getSampleForm().prev();
+//                loadFragment(model);
+//            } break;
+//            case "next": {
+//                FormModel model = sampleModel.getSampleForm().next();
+//                loadFragment(model);
+//            } break;
+//            case "last": {
+//                FormModel model = sampleModel.getSampleForm().last();
+//                loadFragment(model);
+//            } break;
+//            default: {
+//                FormModel model = sampleModel.getSampleForm().goTo(Integer.parseInt(location));
+//                loadFragment(model);
+//            } break;
+//        }
     }
 
     @Override
@@ -284,7 +284,7 @@ public class TestActivity extends AppCompatActivity {
             case R.id.testDescriptionFragment:
                 switch (model.getType()) {
                     case "chain": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment();
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment(model);
                         navController.navigate(action);
                     } break;
                     case "description": {
@@ -315,7 +315,7 @@ public class TestActivity extends AppCompatActivity {
             case R.id.testEndFragment:
                 switch (model.getType()) {
                     case "chain": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment();
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment(model);
                         navController.navigate(action);
                     } break;
                     case "description": {
@@ -346,7 +346,7 @@ public class TestActivity extends AppCompatActivity {
             case R.id.testPrerequisiteFragment:
                 switch (model.getType()) {
                     case "chain": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestChainFragment();
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestChainFragment(model);
                         navController.navigate(action);
                     } break;
                     case "description": {
@@ -374,7 +374,7 @@ public class TestActivity extends AppCompatActivity {
             case R.id.testOptionalFragment:
                 switch (model.getType()) {
                     case "chain": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestChainFragment();
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestChainFragment(model);
                         navController.navigate(action);
                     } break;
                     case "description": {
@@ -405,7 +405,7 @@ public class TestActivity extends AppCompatActivity {
             case R.id.testPictoralFragment:
                 switch (model.getType()) {
                     case "chain": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestChainFragment();
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestChainFragment(model);
                         navController.navigate(action);
                     } break;
                     case "description": {
