@@ -3,24 +3,30 @@ package com.mre.ligheh.Model.TypeModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Item extends TypeModel{
+public class PrerequisitesModel extends TypeModel {
     private String type="";
-    private String image_url="";
-    private String text;
-    private ItemAnswer answer;
+    private String text="";
+    private JSONObject answer;
+    private String alias="";
+    private String label="";
+    private String force="";
     private String user_answered="";
 
-    public Item(JSONObject jsonObject) {
+    public PrerequisitesModel(JSONObject jsonObject) {
         super(jsonObject);
         try {
             if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
-            if (!jsonObject.isNull("image_url"))
-                setImage_url(jsonObject.getString("image_url"));
             if (!jsonObject.isNull("text"))
                 setText(jsonObject.getString("text"));
             if (!jsonObject.isNull("answer"))
-                setAnswer(new ItemAnswer(jsonObject.getJSONObject("answer")));
+                setAnswer(jsonObject.getJSONObject("answer"));
+            if (!jsonObject.isNull("alias"))
+                setAlias(jsonObject.getString("alias"));
+            if (!jsonObject.isNull("label"))
+                setLabel(jsonObject.getString("label"));
+            if (!jsonObject.isNull("force"))
+                setForce(jsonObject.getString("force"));
             if (!jsonObject.isNull("user_answered"))
                 setUser_answered(jsonObject.getString("user_answered"));
         } catch (JSONException e) {
@@ -36,10 +42,6 @@ public class Item extends TypeModel{
         this.type = type;
     }
 
-    public String getImage_url() {
-        return image_url;
-    }
-
     public String getText() {
         return text;
     }
@@ -48,16 +50,36 @@ public class Item extends TypeModel{
         this.text = text;
     }
 
-    public void setImage_url(String image_url) {
-        this.image_url = image_url;
-    }
-
-    public ItemAnswer getAnswer() {
+    public JSONObject getAnswer() {
         return answer;
     }
 
-    public void setAnswer(ItemAnswer answer) {
+    public void setAnswer(JSONObject answer) {
         this.answer = answer;
+    }
+
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label;
+    }
+
+    public String getForce() {
+        return force;
+    }
+
+    public void setForce(String force) {
+        this.force = force;
     }
 
     public String getUser_answered() {
@@ -70,10 +92,13 @@ public class Item extends TypeModel{
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "Prerequisites{" +
                 "type='" + type + '\'' +
-                ", image_url='" + image_url + '\'' +
+                ", text='" + text + '\'' +
                 ", answer=" + answer +
+                ", alias='" + alias + '\'' +
+                ", label='" + label + '\'' +
+                ", force='" + force + '\'' +
                 ", user_answered='" + user_answered + '\'' +
                 '}';
     }

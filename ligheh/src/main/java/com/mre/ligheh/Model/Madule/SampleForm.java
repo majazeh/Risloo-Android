@@ -33,7 +33,7 @@ public class SampleForm {
     private void sampleFormInitializer() {
         if (chain != null)
             addForm(new FormModel("زنجیره", "chain", chain));
-        addForm(new FormModel("اطلاعات", "description", prerequisites));
+        addForm(new FormModel("اطلاعات", "prerequisites", prerequisites));
         addForm(new FormModel("توضیحات", "description", description));
         for (int i = 0; i < items.size(); i++) {
             for (int j = 0; j < entities.size(); j++) {
