@@ -113,7 +113,7 @@ public class SampleModel extends TypeModel {
         if (!jsonObject.isNull("items")) {
             com.mre.ligheh.Model.Madule.List items = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("items").length(); i++) {
-                items.add(new UserModel(jsonObject.getJSONArray("items").getJSONObject(i)));
+                items.add(new ItemModel(jsonObject.getJSONArray("items").getJSONObject(i)));
             }
             setItems(items);
         } else {

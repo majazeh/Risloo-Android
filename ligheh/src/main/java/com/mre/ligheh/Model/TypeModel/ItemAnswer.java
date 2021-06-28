@@ -11,11 +11,11 @@ public class ItemAnswer {
 
     public ItemAnswer(JSONObject jsonObject) {
         try {
-            if (jsonObject.isNull("type"))
+            if (!jsonObject.isNull("type"))
                 setType(jsonObject.getString("type"));
-            if (jsonObject.isNull("options"))
+            if (!jsonObject.isNull("options"))
                 setOptions(jsonObject.getJSONArray("options"));
-            if (jsonObject.isNull("images"))
+            if (!jsonObject.isNull("images"))
                 setImages(jsonObject.getJSONArray("images"));
         } catch (JSONException e) {
             e.printStackTrace();
