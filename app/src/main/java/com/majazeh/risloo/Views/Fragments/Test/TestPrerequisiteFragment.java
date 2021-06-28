@@ -13,6 +13,8 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.PrerequisitesAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPrerequisiteBinding;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.FormModel;
 
 public class TestPrerequisiteFragment extends Fragment {
 
@@ -20,7 +22,10 @@ public class TestPrerequisiteFragment extends Fragment {
     private FragmentTestPrerequisiteBinding binding;
 
     // Adapters
-    private PrerequisitesAdapter prerequisitesAdapter;
+    private PrerequisitesAdapter adapter;
+
+    // Vars
+    private FormModel formModel;
 
     @Nullable
     @Override
@@ -29,13 +34,13 @@ public class TestPrerequisiteFragment extends Fragment {
 
         initializer();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
 
     private void initializer() {
-        prerequisitesAdapter = new PrerequisitesAdapter(requireActivity());
+        adapter = new PrerequisitesAdapter(requireActivity());
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentTitle));
         binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentDescription));
@@ -43,9 +48,21 @@ public class TestPrerequisiteFragment extends Fragment {
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
-    private void setData() {
-//        prerequisitesAdapter.setPrerequisites(null);
-        binding.listRecyclerView.setAdapter(prerequisitesAdapter);
+    private void setArgs() {
+        formModel = (FormModel) TestPrerequisiteFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        setData(formModel);
+    }
+
+    private void setData(FormModel model) {
+        List prerequisites = (List) model.getObject();
+
+        if (!prerequisites.data().isEmpty()) {
+            adapter.setItems(prerequisites.data());
+            binding.listRecyclerView.setAdapter(adapter);
+        } else if (adapter.getItemCount() == 0) {
+
+        }
     }
 
     @Override

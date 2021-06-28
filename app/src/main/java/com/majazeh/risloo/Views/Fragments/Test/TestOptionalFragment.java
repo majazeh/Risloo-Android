@@ -13,6 +13,12 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.OptionalsAdapter;
 import com.majazeh.risloo.databinding.FragmentTestOptionalBinding;
+import com.mre.ligheh.Model.TypeModel.FormModel;
+import com.mre.ligheh.Model.TypeModel.ItemModel;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class TestOptionalFragment extends Fragment {
 
@@ -20,7 +26,10 @@ public class TestOptionalFragment extends Fragment {
     private FragmentTestOptionalBinding binding;
 
     // Adapters
-    private OptionalsAdapter optionalsAdapter;
+    private OptionalsAdapter adapter;
+
+    // Vars
+    private FormModel formModel;
 
     @Nullable
     @Override
@@ -29,22 +38,43 @@ public class TestOptionalFragment extends Fragment {
 
         initializer();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
 
     private void initializer() {
-        optionalsAdapter = new OptionalsAdapter(requireActivity());
+        adapter = new OptionalsAdapter(requireActivity());
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
-    private void setData() {
-        binding.questionTextView.getRoot().setText("به مردم کنایه\u200Cهای تند و نیشدار می\u200Cزنم اگر فکر کنم که حقشان همین است.");
+    private void setArgs() {
+        formModel = (FormModel) TestOptionalFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-//        optionalsAdapter.setOptionals(null);
-        binding.listRecyclerView.setAdapter(optionalsAdapter);
+        setData(formModel);
+    }
+
+    private void setData(FormModel model) {
+        try {
+            ItemModel item = (ItemModel) model.getObject();
+
+            binding.questionTextView.getRoot().setText(item.getText());
+
+            ArrayList<String> options = new ArrayList<>();
+            for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {
+                options.add(item.getAnswer().getAnswer().get(i).toString());
+            }
+
+            if (options.size() != 0) {
+                adapter.setItems(options);
+                binding.listRecyclerView.setAdapter(adapter);
+            } else if (adapter.getItemCount() == 0) {
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

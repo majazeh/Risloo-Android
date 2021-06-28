@@ -13,6 +13,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.databinding.SingleItemChainBinding;
+import com.mre.ligheh.Model.TypeModel.ChainModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
     private Activity activity;
 
     // Vars
-    private ArrayList<String> samples;
+    private ArrayList<TypeModel> chains;
 
     public ChainsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -36,33 +38,33 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
 
     @Override
     public void onBindViewHolder(@NonNull ChainsHolder holder, int i) {
-        String sample = samples.get(i);
+        ChainModel chain = (ChainModel) chains.get(i);
 
-        setData(holder, sample);
+        setData(holder, chain);
     }
 
     @Override
     public int getItemCount() {
-        return samples.size();
+        return chains.size();
     }
 
-    public void setItems(ArrayList<String> samples) {
-        this.samples = samples;
+    public void setItems(ArrayList<TypeModel> chains) {
+        this.chains = chains;
         notifyDataSetChanged();
     }
 
-    private void setData(ChainsHolder holder, String sample) {
+    private void setData(ChainsHolder holder, ChainModel model) {
         if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
         else
             holder.binding.topView.setVisibility(View.VISIBLE);
 
-        holder.binding.nameTextView.setText(sample);
+        holder.binding.nameTextView.setText(model.getTitle());
 
-        setActive(holder, sample);
+        setActive(holder, model);
     }
 
-    private void setActive(ChainsHolder holder, String sample) {
+    private void setActive(ChainsHolder holder, ChainModel model) {
         if (holder.getBindingAdapterPosition() == 0) {
             holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
             holder.binding.nameTextView.setTextAppearance(activity, R.style.danaDemiBoldTextStyle);

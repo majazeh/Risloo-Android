@@ -15,10 +15,6 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestChainFragment"
         android:label="@string/ChainFragmentTitle"
         tools:layout="@layout/fragment_test_chain" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-
         <action
             android:id="@+id/action_testChainFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
@@ -45,10 +41,6 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragment"
         android:label="@string/DescriptionFragmentTitle"
         tools:layout="@layout/fragment_test_description" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-
         <action
             android:id="@+id/action_testDescriptionFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
@@ -75,10 +67,6 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestEndFragment"
         android:label="@string/EndFragmentTitle"
         tools:layout="@layout/fragment_test_end" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-
         <action
             android:id="@+id/action_testEndFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />

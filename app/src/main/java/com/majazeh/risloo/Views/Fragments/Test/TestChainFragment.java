@@ -11,8 +11,11 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ChainsAdapter;
 import com.majazeh.risloo.databinding.FragmentTestChainBinding;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.FormModel;
 
 public class TestChainFragment extends Fragment {
 
@@ -20,7 +23,10 @@ public class TestChainFragment extends Fragment {
     private FragmentTestChainBinding binding;
 
     // Adapters
-//    private ChainsAdapter chainsAdapter;
+    private ChainsAdapter adapter;
+
+    // Vars
+    private FormModel formModel;
 
     @Nullable
     @Override
@@ -29,22 +35,34 @@ public class TestChainFragment extends Fragment {
 
         initializer();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
 
     private void initializer() {
-//        chainsAdapter = new ChainsAdapter(requireActivity());
+        adapter = new ChainsAdapter(requireActivity());
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.ChainFragmentTitle));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._12sdp));
     }
 
-    private void setData() {
-//        chainsAdapter.setChains(null);
-//        binding.listRecyclerView.setAdapter(chainsAdapter);
+    private void setArgs() {
+        formModel = ((TestActivity) requireActivity()).sampleModel.getSampleForm().getCurrentForm();
+
+        setData(formModel);
+    }
+
+    private void setData(FormModel model) {
+        List chains = (List) model.getObject();
+
+        if (!chains.data().isEmpty()) {
+            adapter.setItems(chains.data());
+            binding.listRecyclerView.setAdapter(adapter);
+        } else if (adapter.getItemCount() == 0) {
+
+        }
     }
 
     @Override

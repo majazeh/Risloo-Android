@@ -13,7 +13,13 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.PictoralsAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPictoralBinding;
+import com.mre.ligheh.Model.TypeModel.FormModel;
+import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class TestPictoralFragment extends Fragment {
 
@@ -21,7 +27,10 @@ public class TestPictoralFragment extends Fragment {
     private FragmentTestPictoralBinding binding;
 
     // Adapters
-    private PictoralsAdapter pictoralsAdapter;
+    private PictoralsAdapter adapter;
+
+    // Vars
+    private FormModel formModel;
 
     @Nullable
     @Override
@@ -30,22 +39,43 @@ public class TestPictoralFragment extends Fragment {
 
         initializer();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
 
     private void initializer() {
-        pictoralsAdapter = new PictoralsAdapter(requireActivity());
+        adapter = new PictoralsAdapter(requireActivity());
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
-    private void setData() {
-        Picasso.get().load(R.color.Gray100).placeholder(R.color.Gray100).into(binding.questionImageView);
+    private void setArgs() {
+        formModel = (FormModel) TestPictoralFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-//        pictoralsAdapter.setPictorals(null);
-        binding.listRecyclerView.setAdapter(pictoralsAdapter);
+        setData(formModel);
+    }
+
+    private void setData(FormModel model) {
+        try {
+            ItemModel item = (ItemModel) model.getObject();
+
+            Picasso.get().load(item.getImage_url()).placeholder(R.color.Gray100).into(binding.questionImageView);
+
+            ArrayList<String> images = new ArrayList<>();
+            for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {
+                images.add(item.getAnswer().getAnswer().get(i).toString());
+            }
+
+            if (images.size() != 0) {
+                adapter.setItems(images);
+                binding.listRecyclerView.setAdapter(adapter);
+            } else if (adapter.getItemCount() == 0) {
+
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
