@@ -6,6 +6,7 @@ import org.json.JSONObject;
 public class Item extends TypeModel{
     private String type="";
     private String image_url="";
+    private String text;
     private ItemAnswer answer;
     private String user_answered="";
 
@@ -16,6 +17,8 @@ public class Item extends TypeModel{
                 setType(jsonObject.getString("type"));
             if (!jsonObject.isNull("image_url"))
                 setImage_url(jsonObject.getString("image_url"));
+            if (!jsonObject.isNull("text"))
+                setText(jsonObject.getString("text"));
             if (!jsonObject.isNull("answer"))
                 setAnswer(new ItemAnswer(jsonObject.getJSONObject("answer")));
             if (!jsonObject.isNull("user_answered"))
@@ -35,6 +38,14 @@ public class Item extends TypeModel{
 
     public String getImage_url() {
         return image_url;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 
     public void setImage_url(String image_url) {

@@ -21,7 +21,7 @@ public class SampleModel extends TypeModel {
     private String caseStatus = "";
     private int membersCount;
     private int joined;
-    private JSONArray chain;
+    private List chain;
     private RoomModel SampleRoom;
     private CaseModel SampleCase;
     private List prerequisites;
@@ -32,6 +32,7 @@ public class SampleModel extends TypeModel {
     private String sessionId = "";
     private SampleForm sampleForm;
     private UserModel client;
+    private List entities;
     private List members;
     private String psychologist_description = "";
     private int created_at;
@@ -95,6 +96,15 @@ public class SampleModel extends TypeModel {
         } else {
             setMembers(new com.mre.ligheh.Model.Madule.List());
         }
+        if (!jsonObject.isNull("entities")) {
+            com.mre.ligheh.Model.Madule.List entities = new com.mre.ligheh.Model.Madule.List();
+            for (int i = 0; i < jsonObject.getJSONArray("entities").length(); i++) {
+                entities.add(new EntityModel(jsonObject.getJSONArray("entities").getJSONObject(i)));
+            }
+            setEntities(entities);
+        } else {
+            setEntities(new com.mre.ligheh.Model.Madule.List());
+        }
         if (!jsonObject.isNull("description"))
             setSampleDescription(jsonObject.getString("description"));
         if (!jsonObject.isNull("client"))
@@ -111,9 +121,9 @@ public class SampleModel extends TypeModel {
         }
 
 
-        if (!jsonObject.isNull("chain")) {
-                setChain(jsonObject.getJSONObject("chain").getJSONArray("list"));
-        }
+//        if (!jsonObject.isNull("chain")) {
+//                setChain(jsonObject.getJSONObject("chain").getJSONArray("list"));
+//        }
 
         if (!jsonObject.isNull("prerequisites")) {
             com.mre.ligheh.Model.Madule.List prerequisites = new com.mre.ligheh.Model.Madule.List();
@@ -125,7 +135,7 @@ public class SampleModel extends TypeModel {
             setPrerequisites(new com.mre.ligheh.Model.Madule.List());
         }
         if (!jsonObject.isNull("items") && !jsonObject.isNull("prerequisites"))
-            sampleForm = new SampleForm(items, chain, prerequisites, getSampleDescription());
+            sampleForm = new SampleForm(items, chain,entities, prerequisites, getSampleDescription());
         if (!jsonObject.isNull("terms"))
             setTerms(jsonObject.getJSONArray("terms"));
         if (!jsonObject.isNull("primary_term"))
@@ -152,6 +162,14 @@ public class SampleModel extends TypeModel {
 
     public int getMembersCount() {
         return membersCount;
+    }
+
+    public List getEntities() {
+        return entities;
+    }
+
+    public void setEntities(List entities) {
+        this.entities = entities;
     }
 
     public void setMembersCount(int membersCount) {
@@ -286,11 +304,11 @@ public class SampleModel extends TypeModel {
         this.items = items;
     }
 
-    public JSONArray getChain() {
+    public List getChain() {
         return chain;
     }
 
-    public void setChain(JSONArray chain) {
+    public void setChain(List chain) {
         this.chain = chain;
     }
 
