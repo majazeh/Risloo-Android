@@ -58,6 +58,10 @@ public class IntentManager {
         activity.startActivity(intent);
     }
 
+    public static void finish(Activity activity) {
+        activity.finish();
+    }
+
     public static void file(Activity activity) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
         intent.addCategory(Intent.CATEGORY_DEFAULT);

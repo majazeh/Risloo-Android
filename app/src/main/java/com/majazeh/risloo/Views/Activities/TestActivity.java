@@ -12,6 +12,7 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
+import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.R;
@@ -19,6 +20,7 @@ import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Fragments.Test.TestChainFragmentDirections;
@@ -50,10 +52,12 @@ public class TestActivity extends AppCompatActivity {
     public ControlEditText controlEditText;
     public NavHostFragment navHostFragment;
     public NavController navController;
+    public NavGraph navGraph;
 
     // Vars
     private HashMap data, header;
-    private SampleModel sampleModel;
+    public SampleModel sampleModel;
+    public FormModel formModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +102,8 @@ public class TestActivity extends AppCompatActivity {
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
+        navGraph = navController.getNavInflater().inflate(R.navigation.navigation_test);
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", singleton.getAuthorization());
@@ -119,16 +125,24 @@ public class TestActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onClickListener(() -> doWork("prev")).widget(binding.backwardImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            formModel = sampleModel.getSampleForm().prev();
+            navigateFragment(formModel);
+        }).widget(binding.backwardImageView.getRoot());
 
-        ClickManager.onClickListener(() -> doWork("next")).widget(binding.forwardImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            formModel = sampleModel.getSampleForm().next();
+            navigateFragment(formModel);
+        }).widget(binding.forwardImageView.getRoot());
 
         binding.locationIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String pos = parent.getItemAtPosition(position).toString();
 
-                doWork(pos);
+//                loadFragment();
+
+                binding.locationIncludeLayout.selectSpinner.setSelection(binding.locationIncludeLayout.selectSpinner.getAdapter().getCount());
             }
 
             @Override
@@ -153,6 +167,17 @@ public class TestActivity extends AppCompatActivity {
 
         if (model.getSampleEdition() != null && !model.getSampleEdition().equals("")) {
             binding.headerIncludeLayout.typeTextView.setText(model.getSampleEdition());
+        }
+
+        if (model.getSampleForm() != null && model.getSampleForm().getCurrentForm() != null) {
+            formModel = model.getSampleForm().getCurrentForm();
+
+            if (formModel.getType().equals("chain"))
+                navGraph.setStartDestination(R.id.testChainFragment);
+            else
+                navGraph.setStartDestination(R.id.testDescriptionFragment);
+
+            navController.setGraph(navGraph);
         }
     }
 
@@ -180,25 +205,193 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    private void doWork(String location) {
-//        switch (location) {
-//            case "prev": {
-//                FormModel model = sampleModel.getSampleForm().prev();
-//                loadFragment(model);
-//            } break;
-//            case "next": {
-//                FormModel model = sampleModel.getSampleForm().next();
-//                loadFragment(model);
-//            } break;
-//            case "last": {
-//                FormModel model = sampleModel.getSampleForm().last();
-//                loadFragment(model);
-//            } break;
-//            default: {
-//                FormModel model = sampleModel.getSampleForm().goTo(Integer.parseInt(location));
-//                loadFragment(model);
-//            } break;
-//        }
+    private void navigateFragment(FormModel model) {
+        switch (navController.getCurrentDestination().getId()) {
+            case R.id.testChainFragment:
+                switch (model.getType()) {
+                    case "chain": {
+                        IntentManager.finish(this);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "close": {
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) model.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image")) {
+                            NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                }
+                break;
+
+            case R.id.testDescriptionFragment:
+                switch (model.getType()) {
+                    case "chain": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        IntentManager.finish(this);
+                    } break;
+                    case "close": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) model.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image")) {
+                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                }
+                break;
+
+            case R.id.testEndFragment:
+                switch (model.getType()) {
+                    case "chain": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "close": {
+                        IntentManager.main(this);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) model.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image")) {
+                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                }
+                break;
+
+            case R.id.testPrerequisiteFragment:
+                switch (model.getType()) {
+                    case "chain": {
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "close": {
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) model.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image")) {
+                            NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                }
+                break;
+
+            case R.id.testOptionalFragment:
+                switch (model.getType()) {
+                    case "chain": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "close": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) model.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image")) {
+                            NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                }
+                break;
+
+            case R.id.testPictoralFragment:
+                switch (model.getType()) {
+                    case "chain": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "close": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) model.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image")) {
+                            NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                }
+                break;
+        }
     }
 
     @Override
@@ -220,7 +413,8 @@ public class TestActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        doWork("prev");
+        formModel = sampleModel.getSampleForm().prev();
+        navigateFragment(formModel);
     }
 
 
@@ -248,194 +442,19 @@ public class TestActivity extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    private void loadFragment(FormModel model) {
-        switch (navController.getCurrentDestination().getId()) {
-            case R.id.testChainFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        // Exit of the Sample in backward mode
-                    } break;
-                    case "description": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestDescriptionFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEndFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPrerequisiteFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestOptionalFragment(model);
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
-                            NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPictoralFragment(model);
-                            navController.navigate(action);
-                        }
-                    } break;
-                }
-                break;
-
-            case R.id.testDescriptionFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        // Exit of the Sample in backward mode
-                    } break;
-                    case "close": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestEndFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPrerequisiteFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestOptionalFragment(model);
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
-                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPictoralFragment(model);
-                            navController.navigate(action);
-                        }
-                    } break;
-                }
-                break;
-
-            case R.id.testEndFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestDescriptionFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        // End of the Sample in forward mode
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPrerequisiteFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestOptionalFragment(model);
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
-                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPictoralFragment(model);
-                            navController.navigate(action);
-                        }
-                    } break;
-                }
-                break;
-
-            case R.id.testPrerequisiteFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestChainFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestDescriptionFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEndFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestOptionalFragment(model);
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
-                            NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestPictoralFragment(model);
-                            navController.navigate(action);
-                        }
-                    } break;
-                }
-                break;
-
-            case R.id.testOptionalFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestChainFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestDescriptionFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestEndFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPrerequisiteFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            // Referesh with new data
-                        } else if (itemModel.getType().equals("image")) {
-                            NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPictoralFragment(model);
-                            navController.navigate(action);
-                        }
-                    } break;
-                }
-                break;
-
-            case R.id.testPictoralFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestChainFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestDescriptionFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestEndFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPrerequisiteFragment(model);
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestOptionalFragment(model);
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
-                            // Referesh with new data
-                        }
-                    } break;
-                }
-                break;
-        }
-    }
-
-    private void setWidgets(boolean spinner, boolean textView) {
+//    private void setWidgets(boolean spinner, boolean textView) {
+//        if (model.getSampleForm() != null && model.getSampleForm().getFormCount() != null &&) {
+//            String locationSum = model.getSampleForm().getFormCount() + " / " + 0;
+//
+//            binding.headerIncludeLayout.answeredProgressBar.setProgress(0);
+//
+//
+//            binding.locationSumTextView.getRoot().setText(locationSum);
+//        }
+//
+//        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+//
+//
 //        if (spinner) {
 //            for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
 //                if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
@@ -449,11 +468,6 @@ public class TestActivity extends AppCompatActivity {
 //            binding.locationSumTextView.getRoot().setText(locationSum);
 //        }
 //
-//        binding.headerIncludeLayout.answeredProgressBar.setProgress(0);
-//
-//        status = getResources().getString(R.string.TestFixed);
-//        binding.statusTextView.getRoot().setText(status);
-//
 //        location = "زنجیره";
 //        for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
 //            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
@@ -463,22 +477,6 @@ public class TestActivity extends AppCompatActivity {
 //
 //        locationSum = "185" + " / "  + location;
 //        binding.locationSumTextView.getRoot().setText(locationSum);
-    }
-
-    public void navigator(int destinationId) {
-        try {
-            if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
-                while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
-                    navController.popBackStack();
-                }
-                if (destinationId == navController.getGraph().getStartDestination()){
-                    navController.popBackStack();
-                }
-            }
-        } catch(IllegalArgumentException e){
-            System.out.println(e.getMessage());
-        }
-        navController.navigate(destinationId);
-    }
+//    }
 
 }

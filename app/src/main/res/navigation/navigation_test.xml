@@ -93,10 +93,6 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragment"
         android:label="@string/PrerequisiteFragmentTitle"
         tools:layout="@layout/fragment_test_prerequisite" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-
         <action
             android:id="@+id/action_testPrerequisiteFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
@@ -123,10 +119,6 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragment"
         android:label="@string/OptionalFragmentTitle"
         tools:layout="@layout/fragment_test_optional" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-
         <action
             android:id="@+id/action_testOptionalFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
@@ -139,6 +131,9 @@
         <action
             android:id="@+id/action_testOptionalFragment_to_testPrerequisiteFragment"
             app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testOptionalFragment_to_testOptionalFragment"
+            app:destination="@id/testOptionalFragment" />
         <action
             android:id="@+id/action_testOptionalFragment_to_testPictoralFragment"
             app:destination="@id/testPictoralFragment" />
@@ -153,10 +148,6 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragment"
         android:label="@string/PictoralFragmentTitle"
         tools:layout="@layout/fragment_test_pictoral" >
-        <argument
-            android:name="typeModel"
-            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
-
         <action
             android:id="@+id/action_testPictoralFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
@@ -172,6 +163,9 @@
         <action
             android:id="@+id/action_testPictoralFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
+        <action
+            android:id="@+id/action_testPictoralFragment_to_testPictoralFragment"
+            app:destination="@id/testPictoralFragment" />
     </fragment>
 
 </navigation>
