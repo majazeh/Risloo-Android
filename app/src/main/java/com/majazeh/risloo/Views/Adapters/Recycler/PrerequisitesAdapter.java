@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.SingleItemPrerequisiteBinding;
-import com.mre.ligheh.Model.TypeModel.Prerequisites;
+import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
@@ -43,7 +43,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
 
     @Override
     public void onBindViewHolder(@NonNull PrerequisitesHolder holder, int i) {
-        Prerequisites prerequisite = (Prerequisites) prerequisites.get(i);
+        PrerequisitesModel prerequisite = (PrerequisitesModel) prerequisites.get(i);
 
         listener(holder, prerequisite);
 
@@ -61,7 +61,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(PrerequisitesHolder holder, Prerequisites model) {
+    private void listener(PrerequisitesHolder holder, PrerequisitesModel model) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!holder.binding.inputEditText.hasFocus()) {
@@ -95,13 +95,13 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
         });
     }
 
-    private void setData(PrerequisitesHolder holder, Prerequisites model) {
+    private void setData(PrerequisitesHolder holder, PrerequisitesModel model) {
         holder.binding.headerTextView.setText(model.getText());
 
         setType(holder, model);
     }
 
-    private void setType(PrerequisitesHolder holder, Prerequisites model) {
+    private void setType(PrerequisitesHolder holder, PrerequisitesModel model) {
         try {
             switch (model.getAnswer().getString("type")) {
                 case "text":
@@ -146,7 +146,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
         }
     }
 
-    private void setSpinner(PrerequisitesHolder holder, Prerequisites model) {
+    private void setSpinner(PrerequisitesHolder holder, PrerequisitesModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
 

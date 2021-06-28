@@ -167,18 +167,18 @@ public class Singleton {
     }
 
     public String getMoney() {
-        if (getUserModel().getTreasuries() != null) {
-            try {
-                int money = 0;
-                for (int i = 0; i < getUserModel().getTreasuries().length(); i++) {
-                    if (getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
-                        money += getUserModel().getTreasuries().getJSONObject(i).getInt("balance");
-                }
-                return String.valueOf(money);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
+//        if (getUserModel().getTreasuries() != null) {
+//            try {
+//                int money = 0;
+//                for (int i = 0; i < getUserModel().getTreasuries().length(); i++) {
+//                    if (getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
+//                        money += getUserModel().getTreasuries().getJSONObject(i).getInt("balance");
+//                }
+//                return String.valueOf(money);
+//            } catch (JSONException e) {
+//                e.printStackTrace();
+//            }
+//        }
         return "";
     }
 

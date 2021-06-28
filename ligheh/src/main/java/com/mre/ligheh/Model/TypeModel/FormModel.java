@@ -1,6 +1,6 @@
 package com.mre.ligheh.Model.TypeModel;
 
-public class FormModel extends TypeModel {
+public class FormModel {
     private String title;
     private String type;
     private Object object;
@@ -37,4 +37,5 @@ public class FormModel extends TypeModel {
     public void setObject(Object object) {
         this.object = object;
     }
+
 }
