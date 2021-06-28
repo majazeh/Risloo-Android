@@ -12,6 +12,7 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.SingleItemPrerequisiteBinding;
 import com.mre.ligheh.Model.TypeModel.Prerequisites;
@@ -155,7 +156,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
 
             options.add("");
 
-            // Set Spinner Here
+            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "prerequisite");
         } catch (JSONException e) {
             e.printStackTrace();
         }
