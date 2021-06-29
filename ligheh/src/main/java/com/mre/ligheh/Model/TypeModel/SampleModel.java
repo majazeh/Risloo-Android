@@ -134,7 +134,7 @@ public class SampleModel extends TypeModel {
         } else {
             setPrerequisites(new com.mre.ligheh.Model.Madule.List());
         }
-        if (!jsonObject.isNull("items") && !jsonObject.isNull("prerequisites") &&!jsonObject.isNull("entities"))
+//        if (!jsonObject.isNull("items") && !jsonObject.isNull("prerequisites") &&!jsonObject.isNull("entities"))
             sampleForm = new SampleForm(items, chain,entities, prerequisites, getSampleDescription());
         if (!jsonObject.isNull("terms"))
             setTerms(jsonObject.getJSONArray("terms"));

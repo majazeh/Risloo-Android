@@ -1,6 +1,6 @@
 package com.mre.ligheh.Model.TypeModel;
 
-public class FormModel extends TypeModel {
+public class FormModel {
     private transient String title;
     private transient String type;
     private transient Object object;
