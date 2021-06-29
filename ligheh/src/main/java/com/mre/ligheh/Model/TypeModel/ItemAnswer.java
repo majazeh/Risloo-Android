@@ -7,7 +7,7 @@ import org.json.JSONObject;
 public class ItemAnswer {
     private String type="";
     private JSONArray options;
-    private JSONArray images;
+    private String tiles
 
     public ItemAnswer(JSONObject jsonObject) {
         try {
@@ -15,8 +15,8 @@ public class ItemAnswer {
                 setType(jsonObject.getString("type"));
             if (!jsonObject.isNull("options"))
                 setOptions(jsonObject.getJSONArray("options"));
-            if (!jsonObject.isNull("images"))
-                setImages(jsonObject.getJSONArray("images"));
+            if (!jsonObject.isNull("tiles"))
+                setTiles(jsonObject.getString("tiles"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -35,7 +35,7 @@ public class ItemAnswer {
             case "optional":
                 return options;
             case "optional_images":
-                return images;
+                return options;
             default:
                 return null;
         }
@@ -45,7 +45,11 @@ public class ItemAnswer {
         this.options = options;
     }
 
-    public void setImages(JSONArray images) {
-        this.images = images;
+    public String getTiles() {
+        return tiles;
+    }
+
+    public void setTiles(String tiles) {
+        this.tiles = tiles;
     }
 }
