@@ -17,6 +17,7 @@ public class SampleForm {
     private JSONArray sampleForm;
     public FormModel currentForm;
     private JSONArray itemIndexs;
+    private JSONArray forms;
     private int position = 0;
     private int indexPosition = 0;
 
@@ -38,6 +39,7 @@ public class SampleForm {
             this.entities = new List();
         sampleForm = new JSONArray();
         itemIndexs = new JSONArray();
+        forms = new JSONArray();
         currentForm = new FormModel();
         sampleFormInitializer();
     }
@@ -137,9 +139,14 @@ public class SampleForm {
         return indexPosition;
     }
 
+    public JSONArray forms(){
+        return forms;
+    }
+
 
 
     public void addForm(FormModel formModel) {
+        forms.put(formModel.getTitle());
         sampleForm.put(formModel);
     }
 

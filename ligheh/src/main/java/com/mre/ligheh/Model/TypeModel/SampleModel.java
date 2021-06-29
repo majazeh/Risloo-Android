@@ -128,7 +128,7 @@ public class SampleModel extends TypeModel {
         if (!jsonObject.isNull("prerequisites")) {
             com.mre.ligheh.Model.Madule.List prerequisites = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("prerequisites").length(); i++) {
-                prerequisites.add(new SampleModel(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
+                prerequisites.add(new PrerequisitesModel(jsonObject.getJSONArray("prerequisites").getJSONObject(i)));
             }
             setPrerequisites(prerequisites);
         } else {
