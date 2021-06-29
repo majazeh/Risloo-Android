@@ -43,7 +43,7 @@ public class ItemAnswer {
                         e.printStackTrace();
                     }
                 }
-                return options;
+                return jsonArray;
             default:
                 return null;
         }
