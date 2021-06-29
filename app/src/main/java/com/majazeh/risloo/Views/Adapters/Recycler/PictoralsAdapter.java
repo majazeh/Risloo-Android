@@ -44,12 +44,25 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
 
     @Override
     public int getItemCount() {
-        return urls.size();
+        if (this.urls != null)
+            return urls.size();
+        else
+            return 0;
     }
 
     public void setItems(ArrayList<String> urls) {
-        this.urls = urls;
+        if (this.urls == null)
+            this.urls = urls;
+        else
+            this.urls.addAll(urls);
         notifyDataSetChanged();
+    }
+
+    public void clearItems() {
+        if (this.urls != null) {
+            this.urls.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(PictoralsHolder holder, boolean selected) {

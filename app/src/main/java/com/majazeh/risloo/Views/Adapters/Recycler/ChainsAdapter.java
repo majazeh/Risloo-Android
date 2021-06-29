@@ -45,12 +45,25 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
 
     @Override
     public int getItemCount() {
-        return chains.size();
+        if (this.chains != null)
+            return chains.size();
+        else
+            return 0;
     }
 
     public void setItems(ArrayList<TypeModel> chains) {
-        this.chains = chains;
+        if (this.chains == null)
+            this.chains = chains;
+        else
+            this.chains.addAll(chains);
         notifyDataSetChanged();
+    }
+
+    public void clearItems() {
+        if (this.chains != null) {
+            this.chains.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void setData(ChainsHolder holder, ChainModel model) {

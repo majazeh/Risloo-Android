@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -32,6 +33,7 @@ import com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragmentDirection
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.Madule.SampleForm;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -142,7 +144,7 @@ public class TestActivity extends AppCompatActivity {
 
 //                loadFragment();
 
-                binding.locationIncludeLayout.selectSpinner.setSelection(binding.locationIncludeLayout.selectSpinner.getAdapter().getCount());
+//                binding.locationIncludeLayout.selectSpinner.setSelection(binding.locationIncludeLayout.selectSpinner.getAdapter().getCount());
             }
 
             @Override
@@ -172,10 +174,17 @@ public class TestActivity extends AppCompatActivity {
         if (model.getSampleForm() != null && model.getSampleForm().getCurrentForm() != null) {
             formModel = model.getSampleForm().getCurrentForm();
 
-            if (formModel.getType().equals("chain"))
-                navGraph.setStartDestination(R.id.testChainFragment);
-            else
-                navGraph.setStartDestination(R.id.testDescriptionFragment);
+            switch (formModel.getType()) {
+                case "chain":
+                    navGraph.setStartDestination(R.id.testChainFragment);
+                    break;
+                case "description":
+                    navGraph.setStartDestination(R.id.testDescriptionFragment);
+                    break;
+                case "prerequisites":
+                    navGraph.setStartDestination(R.id.testPrerequisiteFragment);
+                    break;
+            }
 
             navController.setGraph(navGraph);
         }
@@ -230,7 +239,7 @@ public class TestActivity extends AppCompatActivity {
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestOptionalFragment();
                             navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
+                        } else if (itemModel.getType().equals("image_url")) {
                             NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPictoralFragment();
                             navController.navigate(action);
                         }
@@ -261,7 +270,7 @@ public class TestActivity extends AppCompatActivity {
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestOptionalFragment();
                             navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
+                        } else if (itemModel.getType().equals("image_url")) {
                             NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPictoralFragment();
                             navController.navigate(action);
                         }
@@ -292,7 +301,7 @@ public class TestActivity extends AppCompatActivity {
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestOptionalFragment();
                             navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
+                        } else if (itemModel.getType().equals("image_url")) {
                             NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPictoralFragment();
                             navController.navigate(action);
                         }
@@ -314,13 +323,16 @@ public class TestActivity extends AppCompatActivity {
                         NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEndFragment();
                         navController.navigate(action);
                     } break;
+                    case "prerequisites": {
+                        IntentManager.finish(this);
+                    } break;
                     case "item": {
                         ItemModel itemModel = (ItemModel) model.getObject();
 
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestOptionalFragment();
                             navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
+                        } else if (itemModel.getType().equals("image_url")) {
                             NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestPictoralFragment();
                             navController.navigate(action);
                         }
@@ -352,7 +364,7 @@ public class TestActivity extends AppCompatActivity {
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestOptionalFragment();
                             navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
+                        } else if (itemModel.getType().equals("image_url")) {
                             NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPictoralFragment();
                             navController.navigate(action);
                         }
@@ -384,7 +396,7 @@ public class TestActivity extends AppCompatActivity {
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestOptionalFragment();
                             navController.navigate(action);
-                        } else if (itemModel.getType().equals("image")) {
+                        } else if (itemModel.getType().equals("image_url")) {
                             NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPictoralFragment();
                             navController.navigate(action);
                         }
@@ -442,8 +454,10 @@ public class TestActivity extends AppCompatActivity {
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-//    private void setWidgets(boolean spinner, boolean textView) {
-//        if (model.getSampleForm() != null && model.getSampleForm().getFormCount() != null &&) {
+//    private void setWidgets(SampleForm sampleForm) {
+//        if (sampleForm.itemSize() != 0) {
+//
+//
 //            String locationSum = model.getSampleForm().getFormCount() + " / " + 0;
 //
 //            binding.headerIncludeLayout.answeredProgressBar.setProgress(0);

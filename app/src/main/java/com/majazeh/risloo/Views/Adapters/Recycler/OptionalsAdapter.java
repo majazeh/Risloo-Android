@@ -43,12 +43,25 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
 
     @Override
     public int getItemCount() {
-        return titles.size();
+        if (this.titles != null)
+            return titles.size();
+        else
+            return 0;
     }
 
     public void setItems(ArrayList<String> titles) {
-        this.titles = titles;
+        if (this.titles == null)
+            this.titles = titles;
+        else
+            this.titles.addAll(titles);
         notifyDataSetChanged();
+    }
+
+    public void clearItems() {
+        if (this.titles != null) {
+            this.titles.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(OptionalsHolder holder, boolean selected) {

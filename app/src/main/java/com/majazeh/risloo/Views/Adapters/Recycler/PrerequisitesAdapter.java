@@ -52,12 +52,25 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
 
     @Override
     public int getItemCount() {
-        return prerequisites.size();
+        if (this.prerequisites != null)
+            return prerequisites.size();
+        else
+            return 0;
     }
 
     public void setItems(ArrayList<TypeModel> prerequisites) {
-        this.prerequisites = prerequisites;
+        if (this.prerequisites == null)
+            this.prerequisites = prerequisites;
+        else
+            this.prerequisites.addAll(prerequisites);
         notifyDataSetChanged();
+    }
+
+    public void clearItems() {
+        if (this.prerequisites != null) {
+            this.prerequisites.clear();
+            notifyDataSetChanged();
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
