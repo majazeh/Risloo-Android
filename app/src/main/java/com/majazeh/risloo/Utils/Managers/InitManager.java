@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.content.res.AppCompatResources;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.widget.ImageViewCompat;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -632,6 +633,13 @@ public class InitManager {
     /*
     ---------- RecyclerView Codes ----------
     */
+
+    public static void fixedGridRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
+        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("gridLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setNestedScrollingEnabled(false);
+        recyclerView.setHasFixedSize(true);
+    }
 
     public static void fixedHorizontalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
         recyclerView.addItemDecoration(new ItemDecorateRecyclerView("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
