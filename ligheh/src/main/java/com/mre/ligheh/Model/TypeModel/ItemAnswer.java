@@ -7,7 +7,7 @@ import org.json.JSONObject;
 public class ItemAnswer {
     private String type="";
     private JSONArray options;
-    private String tiles
+    private String tiles;
 
     public ItemAnswer(JSONObject jsonObject) {
         try {
