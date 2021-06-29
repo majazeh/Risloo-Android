@@ -121,7 +121,7 @@ public class SampleForm {
         return forms;
     }
 
-    public int getItemPosition(int position) {
+    public int getItemPosition() {
         try {
             return  itemPositions.getInt(position);
         } catch (JSONException e) {
