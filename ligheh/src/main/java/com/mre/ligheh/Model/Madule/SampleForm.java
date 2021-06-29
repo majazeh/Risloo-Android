@@ -15,11 +15,11 @@ public class SampleForm {
     private List entities;
     private String description = "";
     private JSONArray sampleForm;
+    private JSONArray itemPositions;
     public FormModel currentForm;
-    private JSONArray itemIndexs;
     private JSONArray forms;
     private int position = 0;
-    private int indexPosition = 0;
+    private int itemPosition = 1;
 
     public SampleForm(List items, @Nullable List chain, List entities, List prerequisites, String description) {
         this.items = items;
@@ -29,43 +29,39 @@ public class SampleForm {
             this.prerequisites = prerequisites;
         if (description != null)
             this.description = description;
-        if (entities!= null)
-        this.entities = entities;
+        if (entities != null)
+            this.entities = entities;
         sampleForm = new JSONArray();
-        itemIndexs = new JSONArray();
         forms = new JSONArray();
         currentForm = new FormModel();
+        itemPositions = new JSONArray();
         sampleFormInitializer();
     }
 
     private void sampleFormInitializer() {
         if (chain != null) {
             addForm(new FormModel("زنجیره", "chain", chain));
-            itemIndexs.put(1);
         }
-        if (prerequisites!= null) {
+        if (prerequisites != null) {
             addForm(new FormModel("اطلاعات", "prerequisites", prerequisites));
-            itemIndexs.put(1);
         }
-        if (description!= null) {
+        if (description != null) {
             addForm(new FormModel("توضیحات", "description", description));
-            itemIndexs.put(1);
         }
         for (int i = 0; i < items.size(); i++) {
             for (int j = 0; j < entities.size(); j++) {
                 if (entities.size() != 0) {
                     if (((EntityModel) entities.data().get(j)).getOffset() == i) {
                         addForm(new FormModel(((EntityModel) entities.data().get(j)).getTitle(), "entities", ((EntityModel) entities.data().get(j))));
-                        itemIndexs.put(i+1);
                     }
                 }
 
             }
             addForm(new FormModel(String.valueOf(i + 1), "item", items.data().get(i)));
-            itemIndexs.put(i+1);
+            itemPosition++;
         }
+        itemPosition--;
         addForm(new FormModel("پایان", "close", "close"));
-        itemIndexs.put(sampleForm.length());
     }
 
     public FormModel getCurrentForm() {
@@ -79,29 +75,21 @@ public class SampleForm {
 
     public FormModel next() {
         position = Math.min(sampleForm.length() - 1, position + 1);
-        indexPosition =  Math.min(itemIndexs.length() - 1, indexPosition + 1);
         return getCurrentForm();
     }
 
     public FormModel prev() {
         position = Math.max(0, position - 1);
-        indexPosition =  Math.max(0, indexPosition - 1);
         return getCurrentForm();
     }
 
     public FormModel first() {
         position = 0;
-        try {
-            indexPosition = itemIndexs.getInt(0);
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
         return getCurrentForm();
     }
 
     public FormModel last() {
         position = sampleForm.length() - 1;
-        indexPosition = itemIndexs.length() -1;
         return getCurrentForm();
     }
 
@@ -129,18 +117,17 @@ public class SampleForm {
             return 0;
     }
 
-    public int currentItemIndex(){
-        return indexPosition;
-    }
-
-    public JSONArray forms(){
+    public JSONArray getForms() {
         return forms;
     }
 
-
+    public JSONArray getItemPositions() {
+        return itemPositions;
+    }
 
     public void addForm(FormModel formModel) {
         forms.put(formModel.getTitle());
+        itemPositions.put(itemPosition);
         sampleForm.put(formModel);
     }
 

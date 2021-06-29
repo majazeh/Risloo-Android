@@ -10,11 +10,11 @@ public class EntityModel extends TypeModel {
 
     public EntityModel(JSONObject jsonObject) {
         try {
-            if (jsonObject.isNull("offset"))
+            if (!jsonObject.isNull("offset"))
                 setOffset(jsonObject.getInt("offset"));
-            if (jsonObject.isNull("title"))
+            if (!jsonObject.isNull("title"))
                 setTitle(jsonObject.getString("title"));
-            if (jsonObject.isNull("description"))
+            if (!jsonObject.isNull("description"))
                 setDescription(jsonObject.getString("description"));
         } catch (JSONException e) {
             e.printStackTrace();
