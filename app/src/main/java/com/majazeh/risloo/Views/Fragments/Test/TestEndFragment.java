@@ -16,6 +16,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
 
 public class TestEndFragment extends Fragment {
 
@@ -23,7 +24,7 @@ public class TestEndFragment extends Fragment {
     private FragmentTestEndBinding binding;
 
     // Vars
-    private FormModel formModel;
+    private SampleModel sampleModel;
 
     @Nullable
     @Override
@@ -54,29 +55,22 @@ public class TestEndFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Call Close Method
-        }).widget(binding.endTextView);
+        ClickManager.onDelayedClickListener(() -> ((TestActivity) requireActivity()).closeSample()).widget(binding.endTextView);
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).formModel;
+        sampleModel = ((TestActivity) requireActivity()).sampleModel;
 
-        setData(formModel);
+        setData(sampleModel);
     }
 
-    private void setData(FormModel model) {
-//        switch (status) {
-//            case "sample":
-//                binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
-//                break;
-//            case "next":
-//                binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonNext));
-//                break;
-//            case "bulk":
-//                binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonBulk));
-//                break;
-//        }
+    private void setData(SampleModel model) {
+        FormModel form = model.getSampleForm().first();
+
+        if (!form.getType().equals("chain"))
+            binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
+        else
+            binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonChain));
     }
 
     @Override

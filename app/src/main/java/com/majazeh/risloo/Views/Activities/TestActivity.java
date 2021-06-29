@@ -23,6 +23,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Test.TestChainFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestEndFragmentDirections;
@@ -49,6 +50,9 @@ public class TestActivity extends AppCompatActivity {
 
     // Singleton
     public Singleton singleton;
+
+    // Dialogs
+    private LoadingDialog loadingDialog;
 
     // Objects
     private Bundle extras;
@@ -97,6 +101,8 @@ public class TestActivity extends AppCompatActivity {
 
     private void initializer() {
         singleton = new Singleton(this);
+
+        loadingDialog = new LoadingDialog();
 
         extras = getIntent().getExtras();
 
@@ -212,6 +218,8 @@ public class TestActivity extends AppCompatActivity {
 
             navController.setGraph(navGraph);
         }
+
+        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
 
         setWidgets();
     }
@@ -422,7 +430,7 @@ public class TestActivity extends AppCompatActivity {
                         }
                     } break;
                     case "close": {
-                        // TODO : Call Close Method
+                        closeSample();
                     } break;
                 }
                 break;
@@ -446,6 +454,27 @@ public class TestActivity extends AppCompatActivity {
                 binding.locationIncludeLayout.selectSpinner.setSelection(0);
             }
         }
+    }
+
+    public void closeSample() {
+        loadingDialog.show(this.getSupportFragmentManager(), "loadingDialog");
+
+        Sample.close(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                runOnUiThread(() -> {
+                    loadingDialog.dismiss();
+                    IntentManager.main(TestActivity.this);
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                runOnUiThread(() -> {
+                    // Place Code if Needed
+                });
+            }
+        });
     }
 
     @Override
