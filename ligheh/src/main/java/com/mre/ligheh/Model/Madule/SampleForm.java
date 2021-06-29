@@ -25,18 +25,12 @@ public class SampleForm {
         this.items = items;
         if (chain != null)
             this.chain = chain;
-        else
-            this.chain = new List();
         if (prerequisites != null)
             this.prerequisites = prerequisites;
-        else
-            this.prerequisites = new List();
         if (description != null)
             this.description = description;
         if (entities!= null)
         this.entities = entities;
-        else
-            this.entities = new List();
         sampleForm = new JSONArray();
         itemIndexs = new JSONArray();
         forms = new JSONArray();
