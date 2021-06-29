@@ -34,7 +34,7 @@ public class ItemAnswer {
         switch (type) {
             case "optional":
                 return options;
-            case "image":
+            case "optional_images":
                 return images;
             default:
                 return null;
