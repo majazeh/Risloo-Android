@@ -49,7 +49,7 @@ public class ItemModel extends TypeModel{
     }
 
     public void setImage_url(String image_url) {
-        this.image_url = image_url;
+        this.image_url = image_url + ".png";
     }
 
     public ItemAnswer getAnswer() {
