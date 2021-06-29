@@ -100,6 +100,7 @@ public class SampleForm {
             try {
                 FormModel formModel = (FormModel) sampleForm.get(i);
                 if (title.equals(formModel.getTitle())) {
+                    position = i;
                     return formModel;
                 }
             } catch (JSONException e) {
