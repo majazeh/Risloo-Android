@@ -16,72 +16,20 @@
         android:label="@string/ChainFragmentTitle"
         tools:layout="@layout/fragment_test_chain" >
         <action
-            android:id="@+id/action_testChainFragment_to_testDescriptionFragment"
-            app:destination="@id/testDescriptionFragment" />
-        <action
-            android:id="@+id/action_testChainFragment_to_testEndFragment"
-            app:destination="@id/testEndFragment" />
-        <action
             android:id="@+id/action_testChainFragment_to_testPrerequisiteFragment"
             app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testChainFragment_to_testDescriptionFragment"
+            app:destination="@id/testDescriptionFragment" />
         <action
             android:id="@+id/action_testChainFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
         <action
             android:id="@+id/action_testChainFragment_to_testPictoralFragment"
             app:destination="@id/testPictoralFragment" />
-    </fragment>
-
-    /*
-    ---------- Description Destinations ----------
-    */
-
-    <fragment
-        android:id="@+id/testDescriptionFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragment"
-        android:label="@string/DescriptionFragmentTitle"
-        tools:layout="@layout/fragment_test_description" >
         <action
-            android:id="@+id/action_testDescriptionFragment_to_testChainFragment"
-            app:destination="@id/testChainFragment" />
-        <action
-            android:id="@+id/action_testDescriptionFragment_to_testEndFragment"
+            android:id="@+id/action_testChainFragment_to_testEndFragment"
             app:destination="@id/testEndFragment" />
-        <action
-            android:id="@+id/action_testDescriptionFragment_to_testPrerequisiteFragment"
-            app:destination="@id/testPrerequisiteFragment" />
-        <action
-            android:id="@+id/action_testDescriptionFragment_to_testOptionalFragment"
-            app:destination="@id/testOptionalFragment" />
-        <action
-            android:id="@+id/action_testDescriptionFragment_to_testPictoralFragment"
-            app:destination="@id/testPictoralFragment" />
-    </fragment>
-
-    /*
-    ---------- End Destinations ----------
-    */
-
-    <fragment
-        android:id="@+id/testEndFragment"
-        android:name="com.majazeh.risloo.Views.Fragments.Test.TestEndFragment"
-        android:label="@string/EndFragmentTitle"
-        tools:layout="@layout/fragment_test_end" >
-        <action
-            android:id="@+id/action_testEndFragment_to_testChainFragment"
-            app:destination="@id/testChainFragment" />
-        <action
-            android:id="@+id/action_testEndFragment_to_testDescriptionFragment"
-            app:destination="@id/testDescriptionFragment" />
-        <action
-            android:id="@+id/action_testEndFragment_to_testPrerequisiteFragment"
-            app:destination="@id/testPrerequisiteFragment" />
-        <action
-            android:id="@+id/action_testEndFragment_to_testOptionalFragment"
-            app:destination="@id/testOptionalFragment" />
-        <action
-            android:id="@+id/action_testEndFragment_to_testPictoralFragment"
-            app:destination="@id/testPictoralFragment" />
     </fragment>
 
     /*
@@ -100,14 +48,40 @@
             android:id="@+id/action_testPrerequisiteFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
         <action
-            android:id="@+id/action_testPrerequisiteFragment_to_testEndFragment"
-            app:destination="@id/testEndFragment" />
-        <action
             android:id="@+id/action_testPrerequisiteFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
         <action
             android:id="@+id/action_testPrerequisiteFragment_to_testPictoralFragment"
             app:destination="@id/testPictoralFragment" />
+        <action
+            android:id="@+id/action_testPrerequisiteFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
+    </fragment>
+
+    /*
+    ---------- Description Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/testDescriptionFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragment"
+        android:label="@string/DescriptionFragmentTitle"
+        tools:layout="@layout/fragment_test_description" >
+        <action
+            android:id="@+id/action_testDescriptionFragment_to_testChainFragment"
+            app:destination="@id/testChainFragment" />
+        <action
+            android:id="@+id/action_testDescriptionFragment_to_testPrerequisiteFragment"
+            app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testDescriptionFragment_to_testOptionalFragment"
+            app:destination="@id/testOptionalFragment" />
+        <action
+            android:id="@+id/action_testDescriptionFragment_to_testPictoralFragment"
+            app:destination="@id/testPictoralFragment" />
+        <action
+            android:id="@+id/action_testDescriptionFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
     </fragment>
 
     /*
@@ -123,20 +97,20 @@
             android:id="@+id/action_testOptionalFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
         <action
-            android:id="@+id/action_testOptionalFragment_to_testDescriptionFragment"
-            app:destination="@id/testDescriptionFragment" />
-        <action
-            android:id="@+id/action_testOptionalFragment_to_testEndFragment"
-            app:destination="@id/testEndFragment" />
-        <action
             android:id="@+id/action_testOptionalFragment_to_testPrerequisiteFragment"
             app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testOptionalFragment_to_testDescriptionFragment"
+            app:destination="@id/testDescriptionFragment" />
         <action
             android:id="@+id/action_testOptionalFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
         <action
             android:id="@+id/action_testOptionalFragment_to_testPictoralFragment"
             app:destination="@id/testPictoralFragment" />
+        <action
+            android:id="@+id/action_testOptionalFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
     </fragment>
 
     /*
@@ -152,19 +126,45 @@
             android:id="@+id/action_testPictoralFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
         <action
-            android:id="@+id/action_testPictoralFragment_to_testDescriptionFragment"
-            app:destination="@id/testDescriptionFragment" />
-        <action
-            android:id="@+id/action_testPictoralFragment_to_testEndFragment"
-            app:destination="@id/testEndFragment" />
-        <action
             android:id="@+id/action_testPictoralFragment_to_testPrerequisiteFragment"
             app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testPictoralFragment_to_testDescriptionFragment"
+            app:destination="@id/testDescriptionFragment" />
         <action
             android:id="@+id/action_testPictoralFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
         <action
             android:id="@+id/action_testPictoralFragment_to_testPictoralFragment"
+            app:destination="@id/testPictoralFragment" />
+        <action
+            android:id="@+id/action_testPictoralFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
+    </fragment>
+
+    /*
+    ---------- End Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/testEndFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestEndFragment"
+        android:label="@string/EndFragmentTitle"
+        tools:layout="@layout/fragment_test_end" >
+        <action
+            android:id="@+id/action_testEndFragment_to_testChainFragment"
+            app:destination="@id/testChainFragment" />
+        <action
+            android:id="@+id/action_testEndFragment_to_testPrerequisiteFragment"
+            app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testEndFragment_to_testDescriptionFragment"
+            app:destination="@id/testDescriptionFragment" />
+        <action
+            android:id="@+id/action_testEndFragment_to_testOptionalFragment"
+            app:destination="@id/testOptionalFragment" />
+        <action
+            android:id="@+id/action_testEndFragment_to_testPictoralFragment"
             app:destination="@id/testPictoralFragment" />
     </fragment>
 

@@ -145,11 +145,15 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
 
                     if (!model.getUser_answered().equals("")) {
                         for (int i = 0; i < holder.binding.selectSpinner.getCount(); i++) {
-                            if (holder.binding.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(model.getUser_answered()))
+                            if (holder.binding.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(model.getUser_answered())) {
                                 holder.binding.selectSpinner.setSelection(i);
-                            else
+                                break;
+                            } else {
                                 holder.binding.selectSpinner.setSelection(0);
+                            }
                         }
+                    } else {
+                        holder.binding.selectSpinner.setSelection(0);
                     }
 
                     break;

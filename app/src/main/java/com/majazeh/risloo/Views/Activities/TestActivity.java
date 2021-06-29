@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -33,11 +32,13 @@ import com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragmentDirection
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
-import com.mre.ligheh.Model.Madule.SampleForm;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 
+import org.json.JSONException;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -60,6 +61,7 @@ public class TestActivity extends AppCompatActivity {
     private HashMap data, header;
     public SampleModel sampleModel;
     public FormModel formModel;
+    private boolean userSelect = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,8 +112,6 @@ public class TestActivity extends AppCompatActivity {
         header = new HashMap<>();
         header.put("Authorization", singleton.getAuthorization());
 
-        InitManager.fixedSpinner(this, binding.locationIncludeLayout.selectSpinner, R.array.TestStages, "test");
-
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);
     }
@@ -129,22 +129,30 @@ public class TestActivity extends AppCompatActivity {
     private void listener() {
         ClickManager.onClickListener(() -> {
             formModel = sampleModel.getSampleForm().prev();
-            navigateFragment(formModel);
+            navigateFragment();
         }).widget(binding.backwardImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             formModel = sampleModel.getSampleForm().next();
-            navigateFragment(formModel);
+            navigateFragment();
         }).widget(binding.forwardImageView.getRoot());
+
+        binding.locationIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
 
         binding.locationIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
 
-//                loadFragment();
+                    formModel = sampleModel.getSampleForm().goTo(pos);
+                    navigateFragment();
 
-//                binding.locationIncludeLayout.selectSpinner.setSelection(binding.locationIncludeLayout.selectSpinner.getAdapter().getCount());
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -171,6 +179,22 @@ public class TestActivity extends AppCompatActivity {
             binding.headerIncludeLayout.typeTextView.setText(model.getSampleEdition());
         }
 
+        if (model.getSampleForm() != null && model.getSampleForm().getForms() != null && model.getSampleForm().getForms().length() != 0) {
+            try {
+                ArrayList<String> titles = new ArrayList<>();
+
+                for (int i = 0; i < model.getSampleForm().getForms().length(); i++) {
+                    titles.add(model.getSampleForm().getForms().get(i).toString());
+                }
+
+                titles.add("");
+
+                InitManager.unfixedSpinner(this, binding.locationIncludeLayout.selectSpinner, titles, "test");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         if (model.getSampleForm() != null && model.getSampleForm().getCurrentForm() != null) {
             formModel = model.getSampleForm().getCurrentForm();
 
@@ -178,16 +202,18 @@ public class TestActivity extends AppCompatActivity {
                 case "chain":
                     navGraph.setStartDestination(R.id.testChainFragment);
                     break;
-                case "description":
-                    navGraph.setStartDestination(R.id.testDescriptionFragment);
-                    break;
                 case "prerequisites":
                     navGraph.setStartDestination(R.id.testPrerequisiteFragment);
+                    break;
+                case "description":
+                    navGraph.setStartDestination(R.id.testDescriptionFragment);
                     break;
             }
 
             navController.setGraph(navGraph);
         }
+
+        setWidgets();
     }
 
     private void getData() {
@@ -206,35 +232,28 @@ public class TestActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String response) {
-                runOnUiThread(() -> {
-                    binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
-                    decorator(false);
-                });
+                runOnUiThread(() -> IntentManager.finish(TestActivity.this));
             }
         });
     }
 
-    private void navigateFragment(FormModel model) {
+    private void navigateFragment() {
         switch (navController.getCurrentDestination().getId()) {
             case R.id.testChainFragment:
-                switch (model.getType()) {
+                switch (formModel.getType()) {
                     case "chain": {
                         IntentManager.finish(this);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEndFragment();
-                        navController.navigate(action);
                     } break;
                     case "prerequisites": {
                         NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPrerequisiteFragment();
                         navController.navigate(action);
                     } break;
+                    case "description": {
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
                     case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
 
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestOptionalFragment();
@@ -244,90 +263,28 @@ public class TestActivity extends AppCompatActivity {
                             navController.navigate(action);
                         }
                     } break;
-                }
-                break;
-
-            case R.id.testDescriptionFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        IntentManager.finish(this);
-                    } break;
                     case "close": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestEndFragment();
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEndFragment();
                         navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                }
-                break;
-
-            case R.id.testEndFragment:
-                switch (model.getType()) {
-                    case "chain": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        IntentManager.main(this);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
                     } break;
                 }
                 break;
 
             case R.id.testPrerequisiteFragment:
-                switch (model.getType()) {
+                switch (formModel.getType()) {
                     case "chain": {
                         NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEndFragment();
                         navController.navigate(action);
                     } break;
                     case "prerequisites": {
                         IntentManager.finish(this);
                     } break;
+                    case "description": {
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
                     case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
 
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestOptionalFragment();
@@ -337,29 +294,60 @@ public class TestActivity extends AppCompatActivity {
                             navController.navigate(action);
                         }
                     } break;
+                    case "close": {
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                }
+                break;
+
+            case R.id.testDescriptionFragment:
+                switch (formModel.getType()) {
+                    case "chain": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        IntentManager.finish(this);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image_url")) {
+                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                    case "close": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
                 }
                 break;
 
             case R.id.testOptionalFragment:
-                switch (model.getType()) {
+                switch (formModel.getType()) {
                     case "chain": {
                         NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestEndFragment();
                         navController.navigate(action);
                     } break;
                     case "prerequisites": {
                         NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPrerequisiteFragment();
                         navController.navigate(action);
                     } break;
+                    case "description": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
                     case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
 
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestOptionalFragment();
@@ -369,29 +357,29 @@ public class TestActivity extends AppCompatActivity {
                             navController.navigate(action);
                         }
                     } break;
+                    case "close": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
                 }
                 break;
 
             case R.id.testPictoralFragment:
-                switch (model.getType()) {
+                switch (formModel.getType()) {
                     case "chain": {
                         NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "close": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestEndFragment();
                         navController.navigate(action);
                     } break;
                     case "prerequisites": {
                         NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPrerequisiteFragment();
                         navController.navigate(action);
                     } break;
+                    case "description": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
                     case "item": {
-                        ItemModel itemModel = (ItemModel) model.getObject();
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
 
                         if (itemModel.getType().equals("text")) {
                             NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestOptionalFragment();
@@ -401,9 +389,69 @@ public class TestActivity extends AppCompatActivity {
                             navController.navigate(action);
                         }
                     } break;
+                    case "close": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                }
+                break;
+
+            case R.id.testEndFragment:
+                switch (formModel.getType()) {
+                    case "chain": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image_url")) {
+                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                    case "close": {
+                        // TODO : Call Close Method
+                    } break;
                 }
                 break;
         }
+
+        setWidgets();
+    }
+
+    private void setWidgets() {
+        String locationSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
+        binding.locationSumTextView.getRoot().setText(locationSum);
+
+        binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
+        binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());
+
+        for (int i = 0; i < binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
+            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
+                binding.locationIncludeLayout.selectSpinner.setSelection(i);
+                break;
+            } else {
+                binding.locationIncludeLayout.selectSpinner.setSelection(0);
+            }
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        formModel = sampleModel.getSampleForm().prev();
+        navigateFragment();
     }
 
     @Override
@@ -422,75 +470,5 @@ public class TestActivity extends AppCompatActivity {
         }
         return super.dispatchTouchEvent(event);
     }
-
-    @Override
-    public void onBackPressed() {
-        formModel = sampleModel.getSampleForm().prev();
-        navigateFragment(formModel);
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-//    private void setWidgets(SampleForm sampleForm) {
-//        if (sampleForm.itemSize() != 0) {
-//
-//
-//            String locationSum = model.getSampleForm().getFormCount() + " / " + 0;
-//
-//            binding.headerIncludeLayout.answeredProgressBar.setProgress(0);
-//
-//
-//            binding.locationSumTextView.getRoot().setText(locationSum);
-//        }
-//
-//        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-//
-//
-//        if (spinner) {
-//            for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
-//                if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
-//                    binding.locationIncludeLayout.selectSpinner.setSelection(i);
-//                }
-//            }
-//        }
-//
-//        if (textView) {
-//            locationSum = "185" + " / "  + location;
-//            binding.locationSumTextView.getRoot().setText(locationSum);
-//        }
-//
-//        location = "زنجیره";
-//        for (int i=0; i<binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
-//            if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(location)) {
-//                binding.locationIncludeLayout.selectSpinner.setSelection(i);
-//            }
-//        }
-//
-//        locationSum = "185" + " / "  + location;
-//        binding.locationSumTextView.getRoot().setText(locationSum);
-//    }
 
 }

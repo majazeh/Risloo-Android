@@ -13,7 +13,6 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
@@ -55,7 +54,9 @@ public class TestEndFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> IntentManager.main(requireActivity())).widget(binding.endTextView);
+        ClickManager.onDelayedClickListener(() -> {
+            // TODO : Call Close Method
+        }).widget(binding.endTextView);
     }
 
     private void setArgs() {
