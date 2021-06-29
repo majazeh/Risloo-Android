@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.OptionalsAdapter;
 import com.majazeh.risloo.databinding.FragmentTestOptionalBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
@@ -50,7 +51,7 @@ public class TestOptionalFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = (FormModel) TestOptionalFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        formModel = ((TestActivity) requireActivity()).formModel;
 
         setData(formModel);
     }

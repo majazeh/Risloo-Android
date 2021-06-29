@@ -34,7 +34,7 @@ public class TestDescriptionFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).sampleModel.getSampleForm().getCurrentForm();
+        formModel = ((TestActivity) requireActivity()).formModel;
 
         setData(formModel);
     }

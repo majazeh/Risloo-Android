@@ -16,6 +16,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
+import com.mre.ligheh.Model.TypeModel.FormModel;
 
 public class TestEndFragment extends Fragment {
 
@@ -23,7 +24,7 @@ public class TestEndFragment extends Fragment {
     private FragmentTestEndBinding binding;
 
     // Vars
-    private String status = "sample";
+    private FormModel formModel;
 
     @Nullable
     @Override
@@ -36,7 +37,7 @@ public class TestEndFragment extends Fragment {
 
         listener();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -54,29 +55,27 @@ public class TestEndFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(this::doWork).widget(binding.endTextView);
+        ClickManager.onDelayedClickListener(() -> IntentManager.main(requireActivity())).widget(binding.endTextView);
     }
 
-    private void setData() {
-        if (!((TestActivity) requireActivity()).singleton.getStatus().equals("")) {
-            status = ((TestActivity) requireActivity()).singleton.getStatus();
+    private void setArgs() {
+        formModel = ((TestActivity) requireActivity()).formModel;
 
-            switch (status) {
-                case "sample":
-                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
-                    break;
-                case "next":
-                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonNext));
-                    break;
-                case "bulk":
-                    binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonBulk));
-                    break;
-            }
-        }
+        setData(formModel);
     }
 
-    private void doWork() {
-        IntentManager.main(requireActivity());
+    private void setData(FormModel model) {
+//        switch (status) {
+//            case "sample":
+//                binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
+//                break;
+//            case "next":
+//                binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonNext));
+//                break;
+//            case "bulk":
+//                binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonBulk));
+//                break;
+//        }
     }
 
     @Override

@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PrerequisitesAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPrerequisiteBinding;
 import com.mre.ligheh.Model.Madule.List;
@@ -49,7 +50,7 @@ public class TestPrerequisiteFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = (FormModel) TestPrerequisiteFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        formModel = ((TestActivity) requireActivity()).formModel;
 
         setData(formModel);
     }
