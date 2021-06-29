@@ -61,7 +61,7 @@
         android:layout_height="@dimen/_36sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
-        android:dropDownVerticalOffset="0sp"
+        android:dropDownVerticalOffset="@dimen/_40sdp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
