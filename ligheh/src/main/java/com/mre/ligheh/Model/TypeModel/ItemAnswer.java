@@ -35,6 +35,14 @@ public class ItemAnswer {
             case "optional":
                 return options;
             case "optional_images":
+                JSONArray jsonArray = new JSONArray();
+                for (int i = 0; i < options.length(); i++) {
+                    try {
+                        jsonArray.put(options.getString(i) + ".png");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
                 return options;
             default:
                 return null;
