@@ -121,8 +121,8 @@ public class SampleForm {
         return forms;
     }
 
-    public JSONArray getItemPositions() {
-        return itemPositions;
+    public int getItemPosition() {
+        return itemPosition;
     }
 
     public void addForm(FormModel formModel) {
