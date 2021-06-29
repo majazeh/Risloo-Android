@@ -69,7 +69,7 @@ public class TestPictoralFragment extends Fragment {
             }
 
             if (images.size() != 0) {
-                adapter.setItems(images);
+                adapter.setItems(images, item.getUser_answered());
                 binding.listRecyclerView.setAdapter(adapter);
             } else if (adapter.getItemCount() == 0) {
 

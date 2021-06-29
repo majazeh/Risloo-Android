@@ -68,7 +68,7 @@ public class TestOptionalFragment extends Fragment {
             }
 
             if (options.size() != 0) {
-                adapter.setItems(options);
+                adapter.setItems(options, item.getUser_answered());
                 binding.listRecyclerView.setAdapter(adapter);
             } else if (adapter.getItemCount() == 0) {
 

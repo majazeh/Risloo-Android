@@ -22,6 +22,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
 
     // Vars
     private ArrayList<String> urls;
+    private int answer = -1;
 
     public PictoralsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -37,9 +38,9 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
     public void onBindViewHolder(@NonNull PictoralsHolder holder, int i) {
         String url = urls.get(i);
 
-        listener(holder, url);
+        listener(holder, url, i);
 
-        setData(holder, url);
+        setData(holder, url, i);
     }
 
     @Override
@@ -50,11 +51,15 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
             return 0;
     }
 
-    public void setItems(ArrayList<String> urls) {
+    public void setItems(ArrayList<String> urls, String answer) {
         if (this.urls == null)
             this.urls = urls;
         else
             this.urls.addAll(urls);
+
+        if (!answer.equals(""))
+            this.answer = Integer.parseInt(answer);
+
         notifyDataSetChanged();
     }
 
@@ -79,21 +84,21 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
         }
     }
 
-    private void listener(PictoralsHolder holder, String url) {
+    private void listener(PictoralsHolder holder, String url, int position) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.itemView);
     }
 
-    private void setData(PictoralsHolder holder, String url) {
+    private void setData(PictoralsHolder holder, String url, int position) {
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
         Picasso.get().load(url).placeholder(R.color.Gray100).into(holder.binding.answerImageView);
 
-        setActive(holder, url);
+        setActive(holder, position + 1);
     }
 
-    private void setActive(PictoralsHolder holder, String url) {
-        if (holder.getBindingAdapterPosition() == 0) {
+    private void setActive(PictoralsHolder holder, int position) {
+        if (position == answer) {
             detector(holder, true);
 
             holder.itemView.setEnabled(true);

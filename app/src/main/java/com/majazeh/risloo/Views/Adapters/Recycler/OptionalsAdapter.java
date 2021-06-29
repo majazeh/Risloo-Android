@@ -21,6 +21,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
 
     // Vars
     private ArrayList<String> titles;
+    private int answer = -1;
 
     public OptionalsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -36,9 +37,9 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     public void onBindViewHolder(@NonNull OptionalsHolder holder, int i) {
         String title = titles.get(i);
 
-        listener(holder, title);
+        listener(holder, title, i);
 
-        setData(holder, title);
+        setData(holder, title, i);
     }
 
     @Override
@@ -49,11 +50,15 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
             return 0;
     }
 
-    public void setItems(ArrayList<String> titles) {
+    public void setItems(ArrayList<String> titles, String answer) {
         if (this.titles == null)
             this.titles = titles;
         else
             this.titles.addAll(titles);
+
+        if (!answer.equals(""))
+            this.answer = Integer.parseInt(answer);
+
         notifyDataSetChanged();
     }
 
@@ -78,21 +83,21 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
         }
     }
 
-    private void listener(OptionalsHolder holder, String title) {
+    private void listener(OptionalsHolder holder, String title, int position) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.itemView);
     }
 
-    private void setData(OptionalsHolder holder, String title) {
+    private void setData(OptionalsHolder holder, String title, int position) {
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
         holder.binding.answerTextView.setText(title);
 
-        setActive(holder, title);
+        setActive(holder, position + 1);
     }
 
-    private void setActive(OptionalsHolder holder, String title) {
-        if (holder.getBindingAdapterPosition() == 0) {
+    private void setActive(OptionalsHolder holder, int position) {
+        if (position == answer) {
             detector(holder, true);
 
             holder.itemView.setEnabled(true);
