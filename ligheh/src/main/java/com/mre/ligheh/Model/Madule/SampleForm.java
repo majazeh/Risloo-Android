@@ -127,6 +127,7 @@ public class SampleForm {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return 0;
     }
 
     public void addForm(FormModel formModel) {
