@@ -95,8 +95,6 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    // Do Work Here
-
                     userSelect = false;
                 }
             }

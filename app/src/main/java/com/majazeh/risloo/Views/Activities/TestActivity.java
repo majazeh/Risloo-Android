@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -454,6 +455,37 @@ public class TestActivity extends AppCompatActivity {
                 binding.locationIncludeLayout.selectSpinner.setSelection(0);
             }
         }
+    }
+
+    public void sendItem() {
+        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
+        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
+
+//        Sample.items(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                runOnUiThread(() -> {
+//                    formModel = sampleModel.getSampleForm().next();
+//                    navigateFragment();
+//
+//                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+//                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+//                });
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                runOnUiThread(() -> {
+//                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+//                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+//                });
+//            }
+//        });
+
+        new Handler().postDelayed(() -> {
+            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+        }, 1000);
     }
 
     public void closeSample() {

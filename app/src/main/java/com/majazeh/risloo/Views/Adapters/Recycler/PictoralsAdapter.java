@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.SingleItemPictoralBinding;
 import com.squareup.picasso.Picasso;
 
@@ -58,7 +59,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
             this.urls.addAll(urls);
 
         if (!answer.equals(""))
-            this.answer = Integer.parseInt(answer);
+            this.answer = Integer.parseInt(answer) - 1;
 
         notifyDataSetChanged();
     }
@@ -86,7 +87,10 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
 
     private void listener(PictoralsHolder holder, String url, int position) {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            answer = position;
+            notifyDataSetChanged();
+
+            ((TestActivity) activity).sendItem();
         }).widget(holder.itemView);
     }
 
@@ -94,23 +98,23 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
         Picasso.get().load(url).placeholder(R.color.Gray100).into(holder.binding.answerImageView);
 
-        setActive(holder, position + 1);
+        setActive(holder, position);
     }
 
     private void setActive(PictoralsHolder holder, int position) {
         if (position == answer) {
             detector(holder, true);
 
-            holder.itemView.setEnabled(true);
-            holder.itemView.setClickable(true);
+//            holder.itemView.setEnabled(true);
+//            holder.itemView.setClickable(true);
 
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.White));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
         } else {
             detector(holder, false);
 
-            holder.itemView.setEnabled(false);
-            holder.itemView.setClickable(false);
+//            holder.itemView.setEnabled(false);
+//            holder.itemView.setClickable(false);
 
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
