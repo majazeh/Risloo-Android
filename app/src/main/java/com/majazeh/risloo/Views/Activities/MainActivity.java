@@ -15,13 +15,13 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -38,7 +38,6 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
 import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Show.UserFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
@@ -79,10 +78,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        decorator();
-
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        decorator();
 
         initializer();
 
@@ -98,10 +97,19 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator();
+        WindowDecorator windowDecorator = new WindowDecorator(this);
 
-        windowDecorator.lightNavShowSystemUI(this);
-        windowDecorator.lightSetSystemUIColor(this, Color.TRANSPARENT, getResources().getColor(R.color.Gray50));
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            windowDecorator.navShowSystemUI(false, true);
+            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+
+            binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            windowDecorator.navShowSystemUI(true, true);
+            windowDecorator.setSystemUIColor(Color.TRANSPARENT, getResources().getColor(R.color.Gray50));
+
+            binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.GONE);
+        }
     }
 
     private void initializer() {

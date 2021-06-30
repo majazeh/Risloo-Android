@@ -16,6 +16,7 @@ import androidx.navigation.NavDirections;
 import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
+import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -73,10 +74,10 @@ public class TestActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        decorator(true);
-
         binding = ActivityTestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        decorator(true);
 
         initializer();
 
@@ -92,13 +93,24 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void decorator(boolean dark) {
-        WindowDecorator windowDecorator = new WindowDecorator();
+        WindowDecorator windowDecorator = new WindowDecorator(this);
 
-        windowDecorator.lightShowSystemUI(this);
-        if (dark)
-            windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Blue600), getResources().getColor(R.color.Gray50));
-        else
-            windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+        if (dark) {
+            windowDecorator.showSystemUI(false, true);
+            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Blue600), getResources().getColor(R.color.Gray50));
+        } else {
+            if (BuildConfig.BUILD_TYPE.equals("debug")) {
+                windowDecorator.showSystemUI(false, true);
+                windowDecorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+
+                binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                windowDecorator.showSystemUI(true, true);
+                windowDecorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+
+                binding.debugTextView.getRoot().setVisibility(View.GONE);
+            }
+        }
     }
 
     private void initializer() {

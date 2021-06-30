@@ -23,10 +23,10 @@ public class SplashActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        decorator();
-
         binding = ActivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        decorator();
 
         initializer();
 
@@ -36,10 +36,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator();
+        WindowDecorator windowDecorator = new WindowDecorator(this);
 
-        windowDecorator.darkShowSystemUI(this);
-        windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
+        windowDecorator.showSystemUI(false, false);
+        windowDecorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
     }
 
     private void initializer() {

@@ -8,46 +8,85 @@ import android.view.WindowManager;
 
 public class WindowDecorator {
 
-    public void darkShowSystemUI(Activity activity) {
-        activity.getWindow().getDecorView().setSystemUiVisibility(
-                // Codes For Making The Content Appear Under System Bars.
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+    // Objects
+    private Activity activity;
+    private boolean lightStatus, lightNav;
+
+    public WindowDecorator(Activity activity) {
+        this.activity = activity;
     }
 
-    public void darkNavShowSystemUI(Activity activity) {
-        activity.getWindow().getDecorView().setSystemUiVisibility(
-                // Codes For Making The Content Appear Under System Bars.
-                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
-    }
+    /*
+    ---------- Show System UI ----------
+    */
 
-    public void darkSetSystemUIColor(Activity activity, int statusColor, int navColor) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().setStatusBarColor(statusColor);
-            activity.getWindow().setNavigationBarColor(navColor);
-        }
-    }
+    public void showSystemUI(boolean lightStatus, boolean lightNav) {
+        this.lightStatus = lightStatus;
+        this.lightNav = lightNav;
 
-    public void lightShowSystemUI(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(
-                    // Codes For Making The Content Appear Under System Bars.
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            // Codes For Making The Status And Navigation Bars Icons Light.
-                            | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                            | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(
-                    // Codes For Making The Content Appear Under System Bars.
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            // Codes For Making The Status Bars Icons Light.
-                            | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+        if (lightStatus && lightNav) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making The Status And Navigation Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making The Status Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+
+        } else if (lightNav) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making Navigation Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+            } else {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+
+        } else if (lightStatus) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making The Status Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+
         } else {
             activity.getWindow().getDecorView().setSystemUiVisibility(
                     // Codes For Making The Content Appear Under System Bars.
@@ -57,22 +96,66 @@ public class WindowDecorator {
         }
     }
 
-    public void lightNavShowSystemUI(Activity activity) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(
-                    // Codes For Making The Content Appear Under System Bars.
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            // Codes For Making The Status And Navigation Bars Icons Light.
-                            | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                            | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.getWindow().getDecorView().setSystemUiVisibility(
-                    // Codes For Making The Content Appear Under System Bars.
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                            | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                            // Codes For Making The Status Bars Icons Light.
-                            | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+    public void navShowSystemUI(boolean lightStatus, boolean lightNav) {
+        this.lightStatus = lightStatus;
+        this.lightNav = lightNav;
+
+        if (lightStatus && lightNav) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making The Status And Navigation Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+                                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making The Status Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+
+        } else if (lightNav) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making Navigation Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
+            } else {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+
+        } else if (lightStatus) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                                // Codes For Making The Status Bars Icons Light.
+                                | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            } else {
+                activity.getWindow().getDecorView().setSystemUiVisibility(
+                        // Codes For Making The Content Appear Under System Bars.
+                        View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                                | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
+            }
+
         } else {
             activity.getWindow().getDecorView().setSystemUiVisibility(
                     // Codes For Making The Content Appear Under System Bars.
@@ -81,33 +164,85 @@ public class WindowDecorator {
         }
     }
 
-    public void lightSetSystemUIColor(Activity activity, int statusColor, int navColor) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            activity.getWindow().clearFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
-                            | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+    /*
+    ---------- System UI Colors ----------
+    */
 
-            activity.getWindow().addFlags(
-                    WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+    public void setSystemUIColor(int statusColor, int navColor) {
+        if (lightStatus && lightNav) {
 
-            activity.getWindow().setStatusBarColor(statusColor);
-            activity.getWindow().setNavigationBarColor(navColor);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.getWindow().clearFlags(
-                    WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS
+                                | WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
 
-            activity.getWindow().addFlags(
-                    WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+                activity.getWindow().addFlags(
+                        WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 
-            activity.getWindow().setStatusBarColor(statusColor);
-            activity.getWindow().setNavigationBarColor(Color.BLACK);
-        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            activity.getWindow().setStatusBarColor(Color.BLACK);
-            activity.getWindow().setNavigationBarColor(Color.BLACK);
+                activity.getWindow().setStatusBarColor(statusColor);
+                activity.getWindow().setNavigationBarColor(navColor);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+                activity.getWindow().addFlags(
+                        WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+                activity.getWindow().setStatusBarColor(statusColor);
+                activity.getWindow().setNavigationBarColor(Color.BLACK);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(Color.BLACK);
+                activity.getWindow().setNavigationBarColor(Color.BLACK);
+            }
+
+        } else if (lightNav) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                activity.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+
+                activity.getWindow().addFlags(
+                        WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+                activity.getWindow().setNavigationBarColor(navColor);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setNavigationBarColor(Color.BLACK);
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(statusColor);
+            }
+
+        } else if (lightStatus) {
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                activity.getWindow().clearFlags(
+                        WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+
+                activity.getWindow().addFlags(
+                        WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+
+                activity.getWindow().setStatusBarColor(statusColor);
+            } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(Color.BLACK);
+            }
+
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setNavigationBarColor(navColor);
+            }
+
+        } else {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                activity.getWindow().setStatusBarColor(statusColor);
+                activity.getWindow().setNavigationBarColor(navColor);
+            }
         }
     }
 
-    public void leanBackHideSystemUI(Activity activity) {
+    /*
+    ---------- System UI Extras ----------
+    */
+
+    public void leanBackHideSystemUI() {
         activity.getWindow().getDecorView().setSystemUiVisibility(
                 // Codes For Making The Content Appear Under System Bars.
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -118,7 +253,7 @@ public class WindowDecorator {
                         | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION);
     }
 
-    public void immersiveHideSystemUI(Activity activity) {
+    public void immersiveHideSystemUI() {
         activity.getWindow().getDecorView().setSystemUiVisibility(
                 // Codes For Making The Content Appear Under System Bars.
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE
@@ -131,7 +266,7 @@ public class WindowDecorator {
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
-    public void immersiveStickyHideSystemUI(Activity activity) {
+    public void immersiveStickyHideSystemUI() {
         activity.getWindow().getDecorView().setSystemUiVisibility(
                 // Codes For Making The Content Appear Under System Bars.
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE

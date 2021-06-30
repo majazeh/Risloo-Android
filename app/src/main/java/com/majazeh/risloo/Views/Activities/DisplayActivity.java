@@ -35,10 +35,10 @@ public class DisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        decorator();
-
         binding = ActivityDisplayBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        decorator();
 
         initializer();
 
@@ -52,10 +52,10 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator();
+        WindowDecorator windowDecorator = new WindowDecorator(this);
 
-        windowDecorator.darkShowSystemUI(this);
-        windowDecorator.darkSetSystemUIColor(this, getResources().getColor(R.color.Gray900), getResources().getColor(R.color.Gray900));
+        windowDecorator.showSystemUI(false, false);
+        windowDecorator.setSystemUIColor(getResources().getColor(R.color.Gray900), getResources().getColor(R.color.Gray900));
     }
 
     private void initializer() {

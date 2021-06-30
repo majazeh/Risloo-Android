@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 
+import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -40,10 +41,10 @@ public class AuthActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        decorator();
-
         binding = ActivityAuthBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+
+        decorator();
 
         initializer();
 
@@ -51,10 +52,19 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator();
+        WindowDecorator windowDecorator = new WindowDecorator(this);
 
-        windowDecorator.lightShowSystemUI(this);
-        windowDecorator.lightSetSystemUIColor(this, getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
+        if (BuildConfig.BUILD_TYPE.equals("debug")) {
+            windowDecorator.showSystemUI(false, true);
+            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+
+            binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            windowDecorator.showSystemUI(true, true);
+            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
+
+            binding.debugTextView.getRoot().setVisibility(View.GONE);
+        }
     }
 
     private void initializer() {
