@@ -16,20 +16,33 @@
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/_12sdp">
 
+        <include
+            android:id="@+id/entity_textView"
+            layout="@layout/component_test_entity"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/container_constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@id/entity_textView"
+            app:layout_goneMarginTop="@dimen/_12sdp">
 
             <include
-                android:id="@+id/question_textView"
+                android:id="@+id/title_textView"
                 layout="@layout/component_test_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -39,6 +52,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/description_textView"
+                layout="@layout/component_test_description"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                app:layout_constraintEnd_toEndOf="@id/title_textView"
+                app:layout_constraintStart_toStartOf="@id/title_textView"
+                app:layout_constraintTop_toBottomOf="@id/title_textView" />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/list_recyclerView"
@@ -50,7 +73,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/question_textView"
+                app:layout_constraintTop_toBottomOf="@id/description_textView"
                 tools:layout_marginBottom="@dimen/_8sdp"
                 tools:layout_marginEnd="@dimen/_12sdp"
                 tools:layout_marginStart="@dimen/_12sdp"

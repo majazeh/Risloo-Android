@@ -60,7 +60,10 @@ public class TestOptionalFragment extends Fragment {
         try {
             ItemModel item = (ItemModel) model.getObject();
 
-            binding.questionTextView.getRoot().setText(item.getText());
+            binding.entityTextView.getRoot().setVisibility(View.GONE);
+
+            binding.titleTextView.getRoot().setText(item.getText());
+            binding.descriptionTextView.getRoot().setVisibility(View.GONE);
 
             ArrayList<String> options = new ArrayList<>();
             for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {
