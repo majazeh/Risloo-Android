@@ -22,6 +22,9 @@
             android:id="@+id/action_testChainFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
         <action
+            android:id="@+id/action_testChainFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
+        <action
             android:id="@+id/action_testChainFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
         <action
@@ -47,6 +50,9 @@
         <action
             android:id="@+id/action_testPrerequisiteFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
+        <action
+            android:id="@+id/action_testPrerequisiteFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
         <action
             android:id="@+id/action_testPrerequisiteFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
@@ -74,6 +80,9 @@
             android:id="@+id/action_testDescriptionFragment_to_testPrerequisiteFragment"
             app:destination="@id/testPrerequisiteFragment" />
         <action
+            android:id="@+id/action_testDescriptionFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
+        <action
             android:id="@+id/action_testDescriptionFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
         <action
@@ -81,6 +90,38 @@
             app:destination="@id/testPictoralFragment" />
         <action
             android:id="@+id/action_testDescriptionFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
+    </fragment>
+
+    /*
+    ---------- Entity Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/testEntityFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestEntityFragment"
+        android:label="@string/EntityFragmentTitle"
+        tools:layout="@layout/fragment_test_entity" >
+        <action
+            android:id="@+id/action_testEntityFragment_to_testChainFragment"
+            app:destination="@id/testChainFragment" />
+        <action
+            android:id="@+id/action_testEntityFragment_to_testPrerequisiteFragment"
+            app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testEntityFragment_to_testDescriptionFragment"
+            app:destination="@id/testDescriptionFragment" />
+        <action
+            android:id="@+id/action_testEntityFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
+        <action
+            android:id="@+id/action_testEntityFragment_to_testOptionalFragment"
+            app:destination="@id/testOptionalFragment" />
+        <action
+            android:id="@+id/action_testEntityFragment_to_testPictoralFragment"
+            app:destination="@id/testPictoralFragment" />
+        <action
+            android:id="@+id/action_testEntityFragment_to_testEndFragment"
             app:destination="@id/testEndFragment" />
     </fragment>
 
@@ -102,6 +143,9 @@
         <action
             android:id="@+id/action_testOptionalFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
+        <action
+            android:id="@+id/action_testOptionalFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
         <action
             android:id="@+id/action_testOptionalFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
@@ -132,6 +176,9 @@
             android:id="@+id/action_testPictoralFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
         <action
+            android:id="@+id/action_testPictoralFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
+        <action
             android:id="@+id/action_testPictoralFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />
         <action
@@ -160,6 +207,9 @@
         <action
             android:id="@+id/action_testEndFragment_to_testDescriptionFragment"
             app:destination="@id/testDescriptionFragment" />
+        <action
+            android:id="@+id/action_testEndFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
         <action
             android:id="@+id/action_testEndFragment_to_testOptionalFragment"
             app:destination="@id/testOptionalFragment" />

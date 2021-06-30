@@ -28,6 +28,7 @@ import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Test.TestChainFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestEndFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Test.TestEntityFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragmentDirections;
@@ -261,6 +262,10 @@ public class TestActivity extends AppCompatActivity {
                         NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestDescriptionFragment();
                         navController.navigate(action);
                     } break;
+                    case "entities": {
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEntityFragment();
+                        navController.navigate(action);
+                    } break;
                     case "item": {
                         ItemModel itemModel = (ItemModel) formModel.getObject();
 
@@ -290,6 +295,10 @@ public class TestActivity extends AppCompatActivity {
                     } break;
                     case "description": {
                         NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "entities": {
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEntityFragment();
                         navController.navigate(action);
                     } break;
                     case "item": {
@@ -323,6 +332,10 @@ public class TestActivity extends AppCompatActivity {
                     case "description": {
                         IntentManager.finish(this);
                     } break;
+                    case "entities": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestEntityFragment();
+                        navController.navigate(action);
+                    } break;
                     case "item": {
                         ItemModel itemModel = (ItemModel) formModel.getObject();
 
@@ -341,6 +354,42 @@ public class TestActivity extends AppCompatActivity {
                 }
                 break;
 
+            case R.id.testEntityFragment:
+                switch (formModel.getType()) {
+                    case "chain": {
+                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "entities": {
+                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestEntityFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image_url")) {
+                            NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                    case "close": {
+                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                }
+                break;
+
             case R.id.testOptionalFragment:
                 switch (formModel.getType()) {
                     case "chain": {
@@ -353,6 +402,10 @@ public class TestActivity extends AppCompatActivity {
                     } break;
                     case "description": {
                         NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "entities": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestEntityFragment();
                         navController.navigate(action);
                     } break;
                     case "item": {
@@ -387,6 +440,10 @@ public class TestActivity extends AppCompatActivity {
                         NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestDescriptionFragment();
                         navController.navigate(action);
                     } break;
+                    case "entities": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestEntityFragment();
+                        navController.navigate(action);
+                    } break;
                     case "item": {
                         ItemModel itemModel = (ItemModel) formModel.getObject();
 
@@ -417,6 +474,10 @@ public class TestActivity extends AppCompatActivity {
                     } break;
                     case "description": {
                         NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "entities": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestEntityFragment();
                         navController.navigate(action);
                     } break;
                     case "item": {

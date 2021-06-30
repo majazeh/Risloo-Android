@@ -158,6 +158,12 @@
     <string name="DescriptionFragmentTitle">توضیحات</string>
 
     /*
+    ---------- Entity Fragment ----------
+    */
+
+    <string name="EntityFragmentTitle">بخش</string>
+
+    /*
     ----------  Optional Fragment ----------
     */
 
