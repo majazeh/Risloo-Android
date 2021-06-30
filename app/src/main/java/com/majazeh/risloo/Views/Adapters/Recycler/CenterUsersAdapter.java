@@ -181,7 +181,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         else
             holder.binding.topView.setVisibility(View.VISIBLE);
 
-
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());

@@ -637,7 +637,11 @@
         android:id="@+id/sampleFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Show.SampleFragment"
         android:label="@string/SampleFragmentTitle"
-        tools:layout="@layout/fragment_sample" />
+        tools:layout="@layout/fragment_sample" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/sessionFragment"

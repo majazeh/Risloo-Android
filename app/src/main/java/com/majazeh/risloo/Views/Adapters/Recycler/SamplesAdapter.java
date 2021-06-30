@@ -2,12 +2,12 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -15,11 +15,14 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.SamplesFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemSampleBinding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesHolder> {
 
@@ -80,17 +83,27 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     }
 
     private void listener(SamplesHolder holder, SampleModel model) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sampleFragment, getExtras(model))).widget(holder.binding.getRoot());
+        ClickManager.onClickListener(() -> {
+            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
+                case R.id.dashboardFragment: {
+                    NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToSampleFragment(model);
+                    ((MainActivity) activity).navController.navigate(action);
+                } break;
+                case R.id.samplesFragment: {
+                    NavDirections action = SamplesFragmentDirections.actionSamplesFragmentToSampleFragment(model);
+                    ((MainActivity) activity).navController.navigate(action);
+                } break;
+            }
+        }).widget(holder.binding.getRoot());
 
         ClickManager.onClickListener(() -> IntentManager.test(activity, model.getSampleId())).widget(holder.binding.statusTextView);
     }
 
     private void setData(SamplesHolder holder, SampleModel model) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+         else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
         holder.binding.serialTextView.setText(model.getSampleId());
         holder.binding.nameTextView.setText(model.getSampleScaleTitle());
@@ -136,43 +149,6 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
         }
-    }
-
-    private Bundle getExtras(SampleModel model) {
-        Bundle extras = new Bundle();
-
-        extras.putString("id", model.getSampleId());
-
-        extras.putString("scale_id", model.getSampleScaleId());
-        extras.putString("scale_title", model.getSampleScaleTitle());
-
-        extras.putString("edition", model.getSampleEdition());
-        extras.putString("version", String.valueOf(model.getSampleVersion()));
-
-        if (model.getSampleRoom() != null) {
-            extras.putString("room_id", model.getSampleRoom().getRoomId());
-
-            if (model.getSampleRoom().getRoomManager() != null) {
-                extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
-
-                if (model.getSampleRoom().getRoomCenter() != null) {
-                    extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
-
-                    if (model.getSampleRoom().getRoomCenter().getManager() != null)
-                        extras.putString("center_name", model.getSampleRoom().getRoomCenter().getManager().getName());
-                }
-            }
-        }
-
-        extras.putString("case_id", model.getCaseId());
-        extras.putString("session_id", model.getSessionId());
-
-        if (model.getClient() != null)
-            extras.putString("client", model.getClient().getName());
-
-        extras.putString("status", model.getSampleStatus());
-
-        return extras;
     }
 
     public class SamplesHolder extends RecyclerView.ViewHolder {
