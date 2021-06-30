@@ -18,6 +18,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
+        <include
+            android:id="@+id/debug_textView"
+            layout="@layout/component_debug_note"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="visible" />
+
         <androidx.fragment.app.FragmentContainerView
             android:id="@+id/fragment_navHostFragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
@@ -26,7 +37,7 @@
             app:layout_constraintBottom_toTopOf="@id/bottom_view"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/debug_textView"
             app:defaultNavHost="true"
             app:navGraph="@navigation/navigation_auth" />
 

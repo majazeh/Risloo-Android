@@ -4,6 +4,8 @@
     // App Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <string name="AppDebugNote">شما هم اکنون در نسخه آزمایشی ریسلو هستید. هیچ اطلاعاتی در این نسخه حقیقی و ماندگار نیست.</string>
+
     <string name="AppImageContent">عکس</string>
 
     <string name="AppAdded">مطلب ساخته شد.</string>
