@@ -144,7 +144,7 @@ public class BulkSamplesFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = BulkSamplesFragmentDirections.actionBulkSamplesFragmentToCreateSampleFragment("bulk");
+            NavDirections action = BulkSamplesFragmentDirections.actionBulkSamplesFragmentToCreateSampleFragment("bulk", null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

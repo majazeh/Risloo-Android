@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemFieldBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
@@ -20,7 +21,7 @@ public class FieldsAdapter extends RecyclerView.Adapter<FieldsAdapter.FieldsHold
     private Activity activity;
 
     // Vars
-    private ArrayList<String> fields;
+    private ArrayList<TypeModel> fields;
     private boolean editable = false;
 
     public FieldsAdapter(@NonNull Activity activity) {
@@ -35,11 +36,11 @@ public class FieldsAdapter extends RecyclerView.Adapter<FieldsAdapter.FieldsHold
 
     @Override
     public void onBindViewHolder(@NonNull FieldsHolder holder, int i) {
-        String field = fields.get(i);
-
-        listener(holder, field);
-
-        setData(holder, field);
+//        String field = fields.get(i);
+//
+//        listener(holder, field);
+//
+//        setData(holder, field);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class FieldsAdapter extends RecyclerView.Adapter<FieldsAdapter.FieldsHold
             return 0;
     }
 
-    public void setFields(ArrayList<String> fields) {
+    public void setItems(ArrayList<TypeModel> fields) {
         if (this.fields == null)
             this.fields = fields;
         else

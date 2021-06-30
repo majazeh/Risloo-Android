@@ -19,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.FieldsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
@@ -37,14 +38,11 @@ public class SampleFragment extends Fragment {
 
     // Adapters
     private ProfilesAdapter profilesAdapter;
-    private FieldsAdapter fieldsGeneralAdapter, fieldsPrerequisiteAdapter, fieldsAnswerAdapter;
-
-    // Objects
-    private Bundle extras;
+    private FieldsAdapter fieldsGeneralAdapter, fieldsPrerequisiteAdapter, fieldsItemAdapter;
 
     // Vars
     private HashMap data, header;
-    private ArrayList<String> urls;
+    private SampleModel sampleModel;
     private boolean userSelect = false;
 
     @Nullable
@@ -56,7 +54,7 @@ public class SampleFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -67,15 +65,11 @@ public class SampleFragment extends Fragment {
         profilesAdapter = new ProfilesAdapter(requireActivity());
         fieldsGeneralAdapter = new FieldsAdapter(requireActivity());
         fieldsPrerequisiteAdapter = new FieldsAdapter(requireActivity());
-        fieldsAnswerAdapter = new FieldsAdapter(requireActivity());
-
-        extras = new Bundle();
+        fieldsItemAdapter = new FieldsAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-
-        urls = new ArrayList<>();
 
         binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
@@ -144,97 +138,37 @@ public class SampleFragment extends Fragment {
 
                 fieldsGeneralAdapter.setEditable(true);
                 fieldsPrerequisiteAdapter.setEditable(true);
-                fieldsAnswerAdapter.setEditable(true);
+                fieldsItemAdapter.setEditable(true);
             } else {
                 binding.fieldsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray600));
 
                 fieldsGeneralAdapter.setEditable(false);
                 fieldsPrerequisiteAdapter.setEditable(false);
-                fieldsAnswerAdapter.setEditable(false);
+                fieldsItemAdapter.setEditable(false);
             }
         });
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                extras.putString("id", getArguments().getString("id"));
-                data.put("id", getArguments().getString("id"));
-            }
+    private void setArgs() {
+        sampleModel = (SampleModel) SampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("scale_id") != null && !getArguments().getString("scale_id").equals("")) {
-                extras.putString("scale_id", getArguments().getString("scale_id"));
-            }
-
-            if (getArguments().getString("scale_title") != null && !getArguments().getString("scale_title").equals("")) {
-                extras.putString("scale_title", getArguments().getString("scale_title"));
-                binding.nameTextView.setText(getArguments().getString("scale_title"));
-            }
-
-            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("") && getArguments().getString("room_name") != null && !getArguments().getString("room_name").equals("")) {
-                extras.putString("room_id", getArguments().getString("room_id"));
-                extras.putString("room_name", getArguments().getString("room_name"));
-            }
-
-            if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("") && getArguments().getString("center_name") != null && !getArguments().getString("center_name").equals("")) {
-                extras.putString("center_id", getArguments().getString("center_id"));
-                extras.putString("center_name", getArguments().getString("center_name"));
-            }
-
-            if (getArguments().getString("case_id") != null && !getArguments().getString("case_id").equals("")) {
-                extras.putString("case_id", getArguments().getString("case_id"));
-            }
-
-            if (getArguments().getString("session_id") != null && !getArguments().getString("session_id").equals("")) {
-                extras.putString("session_id", getArguments().getString("session_id"));
-            }
-
-            if (getArguments().getString("client") != null && !getArguments().getString("client").equals("")) {
-                extras.putString("client", getArguments().getString("client"));
-                binding.referenceTextView.setText(getArguments().getString("client"));
-            }
-
-            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                extras.putString("status", getArguments().getString("status"));
-                setStatus(getArguments().getString("status"));
-            }
-        }
+        setData(sampleModel);
     }
 
     private void setData(SampleModel model) {
-        if (model.getSampleScaleId() != null && !model.getSampleScaleId().equals("")) {
-            extras.putString("scale_id", model.getSampleScaleId());
+        if (model.getSampleId() != null && !model.getSampleId().equals("")) {
+            data.put("id", model.getSampleId());
         }
 
         if (model.getSampleScaleTitle() != null && !model.getSampleScaleTitle().equals("")) {
-            extras.putString("scale_title", model.getSampleScaleTitle());
             binding.nameTextView.setText(model.getSampleScaleTitle());
         }
 
-        if (model.getSampleRoom() != null) {
-            extras.putString("room_id", model.getSampleRoom().getRoomId());
-
-            if (model.getSampleRoom().getRoomManager() != null) {
-                extras.putString("room_name", model.getSampleRoom().getRoomManager().getName());
-
-                if (model.getSampleRoom().getRoomCenter() != null) {
-                    extras.putString("center_id", model.getSampleRoom().getRoomCenter().getCenterId());
-
-                    if (model.getSampleRoom().getRoomCenter().getManager() != null)
-                        extras.putString("center_name", model.getSampleRoom().getRoomCenter().getManager().getName());
-                }
-            }
-        }
-
-        if (model.getClient() != null && model.getClient().getName() != null && !model.getClient().getName().equals("")) {
-            extras.putString("client", model.getClient().getName());
+        if (model.getClient() != null && model.getClient().getName() != null) {
             binding.referenceTextView.setText(model.getClient().getName());
         }
 
-        if (model.getSampleStatus() != null && !model.getSampleStatus().equals("")) {
-            extras.putString("status", model.getSampleStatus());
-            setStatus(model.getSampleStatus());
-        }
+        setStatus(model.getSampleStatus());
     }
 
     private void setStatus(String status) {
@@ -283,8 +217,8 @@ public class SampleFragment extends Fragment {
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.GONE);
                 binding.profilesTextView.getRoot().setVisibility(View.GONE);
-                
-//                doWork("getScore");
+
+                doWork("getScore");
 
                 binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
                 break;
@@ -326,11 +260,11 @@ public class SampleFragment extends Fragment {
         Sample.show(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                SampleModel model = (SampleModel) object;
+                sampleModel = (SampleModel) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        setData(model);
+                        setData(sampleModel);
 
 //                        // Profiles Data
 //                        if (!model.getProfiles().data().isEmpty()) {
@@ -356,8 +290,8 @@ public class SampleFragment extends Fragment {
 //                            binding.fieldsAnswerRecyclerView.setAdapter(fieldsAnswerAdapter);
 //                        }
 
-                        binding.profilesHeaderIncludeLayout.countTextView.setText("(" + profilesAdapter.getItemCount() + ")");
-                        binding.fieldsHeaderIncludeLayout.countTextView.setText("(" + (fieldsGeneralAdapter.getItemCount() + fieldsPrerequisiteAdapter.getItemCount() + fieldsAnswerAdapter.getItemCount()) + ")");
+                        binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
+                        binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(fieldsGeneralAdapter.getItemCount() + fieldsPrerequisiteAdapter.getItemCount() + fieldsItemAdapter.getItemCount()));
 
                         // Profiles Data
                         binding.profilesRecyclerView.setVisibility(View.VISIBLE);
@@ -412,113 +346,113 @@ public class SampleFragment extends Fragment {
     }
 
     private void doWork(String method) {
-        switch (method) {
-            case "fill":
-                Sample.fill(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "close":
-                Sample.close(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "open":
-                Sample.open(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "score":
-                Sample.score(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "getScore":
-                Sample.getScore(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-
-                            });
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-        }
+//        switch (method) {
+//            case "fill":
+//                Sample.fill(data, header, new Response() {
+//                    @Override
+//                    public void onOK(Object object) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//
+//                            });
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String response) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//                                // TODO : Place Code If Needed
+//                            });
+//                        }
+//                    }
+//                });
+//                break;
+//            case "close":
+//                Sample.close(data, header, new Response() {
+//                    @Override
+//                    public void onOK(Object object) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//
+//                            });
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String response) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//                                // TODO : Place Code If Needed
+//                            });
+//                        }
+//                    }
+//                });
+//                break;
+//            case "open":
+//                Sample.open(data, header, new Response() {
+//                    @Override
+//                    public void onOK(Object object) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//
+//                            });
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String response) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//                                // TODO : Place Code If Needed
+//                            });
+//                        }
+//                    }
+//                });
+//                break;
+//            case "score":
+//                Sample.score(data, header, new Response() {
+//                    @Override
+//                    public void onOK(Object object) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//
+//                            });
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String response) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//                                // TODO : Place Code If Needed
+//                            });
+//                        }
+//                    }
+//                });
+//                break;
+//            case "getScore":
+//                Sample.getScore(data, header, new Response() {
+//                    @Override
+//                    public void onOK(Object object) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//
+//                            });
+//                        }
+//                    }
+//
+//                    @Override
+//                    public void onFailure(String response) {
+//                        if (isAdded()) {
+//                            requireActivity().runOnUiThread(() -> {
+//                                // TODO : Place Code If Needed
+//                            });
+//                        }
+//                    }
+//                });
+//                break;
+//        }
     }
 
     @Override

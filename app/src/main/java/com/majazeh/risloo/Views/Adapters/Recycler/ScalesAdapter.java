@@ -2,17 +2,18 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.ScalesFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -84,15 +85,17 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.createSampleFragment, getExtras(model))).widget(holder.binding.createTextView);
+        ClickManager.onClickListener(() -> {
+            NavDirections action = ScalesFragmentDirections.actionScalesFragmentToCreateSampleFragment(null, model);
+            ((MainActivity) activity).navController.navigate(action);
+        }).widget(holder.binding.createTextView);
     }
 
     private void setData(ScalesHolder holder, ScaleModel model) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+        else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getTitle());
@@ -101,16 +104,6 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
             holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
         else
             holder.binding.editionTextView.setText("نسخه " + model.getVersion());
-    }
-
-    private Bundle getExtras(ScaleModel model) {
-        Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        return extras;
     }
 
     public class ScalesHolder extends RecyclerView.ViewHolder {

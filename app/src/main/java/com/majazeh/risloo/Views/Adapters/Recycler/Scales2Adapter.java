@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -83,11 +82,10 @@ public class Scales2Adapter extends RecyclerView.Adapter<Scales2Adapter.Scales2H
     }
 
     private void setData(Scales2Holder holder, ScaleModel model) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+         else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getTitle());
@@ -96,16 +94,6 @@ public class Scales2Adapter extends RecyclerView.Adapter<Scales2Adapter.Scales2H
             holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
         else
             holder.binding.editionTextView.setText("نسخه " + model.getVersion());
-    }
-
-    private Bundle getExtras(ScaleModel model) {
-        Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        return extras;
     }
 
     public class Scales2Holder extends RecyclerView.ViewHolder {

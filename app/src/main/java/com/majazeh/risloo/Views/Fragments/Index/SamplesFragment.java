@@ -144,7 +144,7 @@ public class SamplesFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SamplesFragmentDirections.actionSamplesFragmentToCreateSampleFragment(null);
+            NavDirections action = SamplesFragmentDirections.actionSamplesFragmentToCreateSampleFragment(null, null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }
