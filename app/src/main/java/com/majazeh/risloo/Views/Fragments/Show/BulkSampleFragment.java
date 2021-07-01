@@ -42,11 +42,9 @@ public class BulkSampleFragment extends Fragment {
     private Scales2Adapter scales2Adapter;
     private Samples4Adapter samples4Adapter;
 
-    // Objects
-    private Bundle extras;
-
     // Vars
     private HashMap data, header;
+    private BulkSampleModel bulkSampleModel;
 
     @Nullable
     @Override
@@ -59,7 +57,7 @@ public class BulkSampleFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -70,8 +68,6 @@ public class BulkSampleFragment extends Fragment {
         referencesAdapter = new ReferencesAdapter(requireActivity());
         scales2Adapter = new Scales2Adapter(requireActivity());
         samples4Adapter = new Samples4Adapter(requireActivity());
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -102,127 +98,69 @@ public class BulkSampleFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
+            if (binding.avatarsIncludeLayout.charTextView.getVisibility() == View.GONE) {
+                try {
+                    IntentManager.display(requireActivity(), binding.centerTextView.getText().toString(), "", bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
             }
         }).widget(binding.avatarsIncludeLayout.avatarCircleImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-                IntentManager.display(requireActivity(), "", "", ((MainActivity) requireActivity()).singleton.getAvatar());
+            if (binding.avatarsIncludeLayout.charSubTextView.getVisibility() == View.GONE) {
+                IntentManager.display(requireActivity(), binding.psychologyTextView.getText().toString(), "", bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
             }
         }).widget(binding.avatarsIncludeLayout.avatarSubCircleImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            // TODO : Place Code If Needed
         }).widget(binding.editTextView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            IntentManager.clipboard(requireActivity(), extras.getString("link"));
+            IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
             Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
         }).widget(binding.linkTextView.buttonImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            // TODO : Place Code If Needed
         }).widget(binding.linkTextView.buttonTextView);
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                extras.putString("id", getArguments().getString("id"));
-                data.put("id", getArguments().getString("id"));
-                binding.serialTextView.setText(getArguments().getString("id"));
-            }
+    private void setArgs() {
+        bulkSampleModel = (BulkSampleModel) BulkSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("") && getArguments().getString("center_name") != null && !getArguments().getString("center_name").equals("")) {
-                extras.putString("center_id", getArguments().getString("center_id"));
-                extras.putString("center_name", getArguments().getString("center_name"));
-                binding.centerTextView.setText(getArguments().getString("center_name"));
-            }
-
-            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("") && getArguments().getString("room_name") != null && !getArguments().getString("room_name").equals("")) {
-                extras.putString("room_id", getArguments().getString("room_id"));
-                extras.putString("room_name", getArguments().getString("room_name"));
-                binding.psychologyTextView.setText(getArguments().getString("room_name"));
-            }
-
-            if (getArguments().getInt("members_count") != -1 && getArguments().getInt("joined") != -1) {
-                extras.putInt("members_count", getArguments().getInt("members_count"));
-                extras.putInt("joined", getArguments().getInt("joined"));
-                binding.referencesHeaderIncludeLayout.countTextView.setText("(" + getArguments().getInt("members_count") + " / " + getArguments().getInt("joined") + ")");
-            }
-
-            if (getArguments().getString("case_status") != null && !getArguments().getString("case_status").equals("")) {
-                extras.putString("case_status", getArguments().getString("case_status"));
-                binding.caseTextView.setText(SelectionManager.getCaseStatus(requireActivity(), "fa", getArguments().getString("case_status")));
-            }
-
-            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                extras.putString("status", getArguments().getString("status"));
-                binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", getArguments().getString("status")));
-            }
-
-            if (getArguments().getString("center_avatar") != null && !getArguments().getString("center_avatar").equals("")) {
-                extras.putString("center_avatar", getArguments().getString("center_avatar"));
-                binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(getArguments().getString("center_avatar")).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
-            } else {
-                binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
-
-                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
-            }
-
-            if (getArguments().getString("room_avater") != null && !getArguments().getString("room_avater").equals("")) {
-                extras.putString("room_avater", getArguments().getString("room_avater"));
-                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-                Picasso.get().load(getArguments().getString("room_avater")).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
-            } else {
-                binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
-                binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
-
-                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
-            }
-
-            if (getArguments().getString("link") != null && !getArguments().getString("link").equals("")) {
-                extras.putString("link", getArguments().getString("link"));
-            }
-        }
+        setData(bulkSampleModel);
     }
 
     private void setData(BulkSampleModel model) {
         try {
+            if (model.getId() != null && !model.getId().equals("")) {
+                binding.serialTextView.setText(model.getId());
+                data.put("id", model.getId());
+            }
+
             if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals("")) {
-                extras.putString("center_id", model.getRoom().getRoomCenter().getCenterId());
-                extras.putString("center_name", model.getRoom().getRoomCenter().getDetail().getString("title"));
                 binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
             }
 
             if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getName() != null) {
-                extras.putString("room_id", model.getRoom().getRoomId());
-                extras.putString("room_name", model.getRoom().getRoomManager().getName());
                 binding.psychologyTextView.setText(model.getRoom().getRoomManager().getName());
             }
 
             if (model.getMembers_count() != -1 && model.getJoined() != -1) {
-                extras.putInt("members_count", model.getMembers_count());
-                extras.putInt("joined", model.getJoined());
                 binding.referencesHeaderIncludeLayout.countTextView.setText("(" + model.getMembers_count() + " / " + model.getJoined() + ")");
             }
 
             if (model.getCase_status() != null && !model.getCase_status().equals("")) {
-                extras.putString("case_status", model.getCase_status());
                 binding.caseTextView.setText(SelectionManager.getCaseStatus(requireActivity(), "fa", model.getCase_status()));
             }
 
             if (model.getStatus() != null && !model.getStatus().equals("")) {
-                extras.putString("status", model.getStatus());
                 binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", model.getStatus()));
             }
 
             if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("avatar") && !model.getRoom().getRoomCenter().getDetail().getString("avatar").equals("") && model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
-                extras.putString("center_avatar", model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
                 Picasso.get().load(model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             } else {
@@ -233,7 +171,6 @@ public class BulkSampleFragment extends Fragment {
             }
 
             if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null && model.getRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
-                extras.putString("room_avater", model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
                 Picasso.get().load(model.getRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             } else {
@@ -241,10 +178,6 @@ public class BulkSampleFragment extends Fragment {
                 binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
 
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
-            }
-
-            if (model.getLink() != null && !model.getLink().equals("")) {
-                extras.putString("link", model.getLink());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -255,32 +188,32 @@ public class BulkSampleFragment extends Fragment {
         Sample.bulkShow(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                BulkSampleModel model = (BulkSampleModel) object;
+                bulkSampleModel = (BulkSampleModel) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        setData(model);
+                        setData(bulkSampleModel);
 
                         // References Data
-                        if (model.getMembers() != null && model.getMembers().data().size() != 0) {
-                            referencesAdapter.setReferences(model.getMembers().data());
+                        if (bulkSampleModel.getMembers() != null && bulkSampleModel.getMembers().data().size() != 0) {
+                            referencesAdapter.setReferences(bulkSampleModel.getMembers().data());
                             binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
                         }
 
                         // Scales Data
-                        if (!model.getScales().data().isEmpty()) {
-                            scales2Adapter.setScales(model.getScales().data());
+                        if (!bulkSampleModel.getScales().data().isEmpty()) {
+                            scales2Adapter.setScales(bulkSampleModel.getScales().data());
                             binding.scalesSingleLayout.recyclerView.setAdapter(scales2Adapter);
                         }
 
                         // Samples Data
-                        if (!model.getSamples().data().isEmpty()) {
-                            samples4Adapter.setSamples(model.getSamples().data());
+                        if (!bulkSampleModel.getSamples().data().isEmpty()) {
+                            samples4Adapter.setSamples(bulkSampleModel.getSamples().data());
                             binding.samplesSingleLayout.recyclerView.setAdapter(samples4Adapter);
                         }
 
-                        binding.scalesHeaderIncludeLayout.countTextView.setText("(" + scales2Adapter.getItemCount() + ")");
-                        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples4Adapter.getItemCount() + ")");
+                        binding.scalesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(scales2Adapter.getItemCount()));
+                        binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples4Adapter.getItemCount()));
 
                         // References Data
                         binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -306,6 +239,7 @@ public class BulkSampleFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
                         // References Data
                         binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.referencesShimmerLayout.getRoot().setVisibility(View.GONE);

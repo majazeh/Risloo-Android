@@ -320,6 +320,7 @@ public class SampleFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
                         // Profiles Data
                         binding.profilesRecyclerView.setVisibility(View.VISIBLE);
                         binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);

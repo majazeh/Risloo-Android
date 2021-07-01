@@ -275,6 +275,7 @@ public class ReferenceFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
+
                             // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);

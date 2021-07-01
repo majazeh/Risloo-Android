@@ -2,8 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -19,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.BulkSamplesFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -86,23 +86,26 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
     }
 
     private void listener(BulkSamplesHolder holder, BulkSampleModel model) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.bulkSampleFragment, getExtras(model))).widget(holder.binding.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = BulkSamplesFragmentDirections.actionBulkSamplesFragmentToBulkSampleFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
+        }).widget(holder.binding.getRoot());
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String menu = parent.getItemAtPosition(position).toString();
+                String item = parent.getItemAtPosition(position).toString();
 
-                switch (menu) {
+                switch (item) {
                     case "لینک ثبت نام":
-                        Log.e("link", model.getLink());
+                        // TODO : Place Code If Needed
                         break;
                     case "کپی کردن لینک":
                         IntentManager.clipboard(activity, model.getLink());
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
                         break;
                     case "ویرایش نمونه":
-                        Log.e("edit", "");
+                        // TODO : Place Code If Needed
                         break;
                 }
 
@@ -118,11 +121,10 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     private void setData(BulkSamplesHolder holder, BulkSampleModel model) {
         try {
-            if (holder.getBindingAdapterPosition() == 0) {
+            if (holder.getBindingAdapterPosition() == 0)
                 holder.binding.topView.setVisibility(View.GONE);
-            } else {
+            else
                 holder.binding.topView.setVisibility(View.VISIBLE);
-            }
 
             holder.binding.serialTextView.setText(model.getId());
             holder.binding.nameTextView.setText(model.getTitle());
@@ -143,47 +145,6 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private Bundle getExtras(BulkSampleModel model) {
-        Bundle extras = new Bundle();
-        try {
-            extras.putString("id", model.getId());
-
-            if (model.getRoom() != null) {
-                extras.putString("room_id", model.getRoom().getRoomId());
-
-                if (model.getRoom().getRoomManager() != null) {
-                    extras.putString("room_name", model.getRoom().getRoomManager().getName());
-
-                    if (model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null)
-                        extras.putString("room_avatar", model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
-                }
-            }
-
-            if (model.getRoom() != null) {
-                if (model.getRoom().getRoomCenter() != null) {
-                    extras.putString("center_id", model.getRoom().getRoomCenter().getCenterId());
-
-                    if (model.getRoom().getRoomCenter().getDetail() != null) {
-                        if (model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals(""))
-                            extras.putString("center_name", model.getRoom().getRoomCenter().getDetail().getString("title"));
-
-                        if (model.getRoom().getRoomCenter().getDetail().has("avatar") && !model.getRoom().getRoomCenter().getDetail().isNull("avatar") && model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0)
-                            extras.putString("center_avatar", model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
-                    }
-                }
-            }
-
-            extras.putInt("members_count", model.getMembers_count());
-            extras.putInt("joined", model.getJoined());
-
-            extras.putString("case_status", model.getCase_status());
-            extras.putString("status", model.getStatus());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return extras;
     }
 
     public class BulkSamplesHolder extends RecyclerView.ViewHolder {
