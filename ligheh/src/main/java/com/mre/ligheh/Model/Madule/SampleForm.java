@@ -76,6 +76,7 @@ public class SampleForm {
     }
 
     public FormModel next() {
+        System.out.println(position);
         position = Math.min(sampleForm.length() - 1, position + 1);
         return getCurrentForm();
     }
@@ -111,6 +112,15 @@ public class SampleForm {
             }
         }
         return null;
+    }
+
+    public FormModel getFirst(){
+        try {
+            return (FormModel) sampleForm.get(0);
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     public int itemSize() {

@@ -10,8 +10,9 @@ import java.util.HashMap;
 import okhttp3.Headers;
 
 public class SampleAnswers {
-    private ArrayList<ArrayList<String>> localAnswers;
+    public ArrayList<ArrayList<String>> localAnswers;
     public ArrayList<ArrayList<String>> remoteAnswers;
+    public ArrayList<ArrayList<String>> prerequisites;
     public String id;
 
     public SampleAnswers() {
@@ -40,18 +41,52 @@ public class SampleAnswers {
 
                     @Override
                     public void onFailure(String response) {
-
+                        try {
+                            Thread.sleep(300);
+                            sendRequest(authorization, null);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
             }
         }
     }
 
+    public void sendPrerequisites(String authorization,Response response){
+        if (!prerequisites.isEmpty()) {
+                HashMap data = new HashMap();
+                HashMap header = new HashMap();
+                data.put("prerequisites", prerequisites);
+                data.put("id", id);
+                header.put("Authorization", "Bearer " + authorization);
+                Sample.items(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        response.onOK(null);
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+
+                    }
+                });
+
+        }
+    }
+
     public void addToRemote(int key,Object value){
         ArrayList arrayList = new ArrayList<String>();
-        arrayList.add(key-1);
+        arrayList.add(key);
         arrayList.add(value);
         remoteAnswers.add(arrayList);
+    }
+
+    public void addToPrerequisites(int key,Object value){
+        ArrayList arrayList = new ArrayList<String>();
+        arrayList.add(key);
+        arrayList.add(value);
+        prerequisites.add(arrayList);
     }
 
     private void remoteToLocal(ArrayList remote) {

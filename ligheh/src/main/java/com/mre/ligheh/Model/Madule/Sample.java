@@ -96,14 +96,36 @@ public class Sample extends Model {
     }
 
 
-    public static void close(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+    public static void close(SampleAnswers sampleAnswers, HashMap<String, Object> data, HashMap<String, Object> header, Response response1) {
         try {
             if (data.containsKey("id")) {
                 String id = (String) data.get("id");
                 data.remove("id");
-                Model.put(endpoint + "/samples/" + id + "/close", data, header, response, null);
+                if (sampleAnswers != null) {
+                    if (!sampleAnswers.localAnswers.isEmpty() && !sampleAnswers.remoteAnswers.isEmpty()) {
+                        sampleAnswers.sendRequest((String) header.get("Authorization"), new Response() {
+                            @Override
+                            public void onOK(Object object) {
+                                try {
+                                    Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(String response) {
+                                response1.onFailure(response);
+                            }
+                        });
+                    } else {
+                        Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
+                    }
+                } else {
+                    Model.put(endpoint + "/samples/" + id + "/close", data, header, response1, null);
+                }
             } else {
-                Exceptioner.make(response, "آیدی را وارد کنید");
+                Exceptioner.make(response1, "آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -129,7 +151,7 @@ public class Sample extends Model {
             if (data.containsKey("id")) {
                 String id = (String) data.get("id");
                 data.remove("id");
-                Model.put("command/assessment/fill/"+data.get("id")+"replace=on", data, header, response, null);
+                Model.put("command/assessment/fill/" + data.get("id") + "replace=on", data, header, response, null);
             } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
             }

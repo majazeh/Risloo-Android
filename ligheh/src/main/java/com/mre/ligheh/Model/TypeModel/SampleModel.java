@@ -22,6 +22,7 @@ public class SampleModel extends TypeModel {
     private int membersCount;
     private int joined;
     private List chain;
+    private String chainId;
     private RoomModel SampleRoom;
     private CaseModel SampleCase;
     private List prerequisites;
@@ -121,9 +122,20 @@ public class SampleModel extends TypeModel {
         }
 
 
-//        if (!jsonObject.isNull("chain")) {
-//                setChain(jsonObject.getJSONObject("chain").getJSONArray("list"));
-//        }
+        if (!jsonObject.isNull("chain")) {
+            if (!jsonObject.get("chain").getClass().getName().equals("org.json.JSONObject")){
+                JSONObject jsonObject1 = jsonObject.getJSONObject("chain");
+                com.mre.ligheh.Model.Madule.List chains = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject1.getJSONArray("list").length(); i++) {
+                    chains.add(new ChainModel(jsonObject1.getJSONArray("list").getJSONObject(i)));
+                }
+                setChain(chains);
+                setChainId(jsonObject1.getString("id"));
+            }else{
+            setChainId(jsonObject.getString("chain"));
+            }
+
+        }
 
         if (!jsonObject.isNull("prerequisites")) {
             com.mre.ligheh.Model.Madule.List prerequisites = new com.mre.ligheh.Model.Madule.List();
@@ -206,6 +218,14 @@ public class SampleModel extends TypeModel {
 
     public void setMembers(List members) {
         this.members = members;
+    }
+
+    public String getChainId() {
+        return chainId;
+    }
+
+    public void setChainId(String chainId) {
+        this.chainId = chainId;
     }
 
     public String getSampleEdition() {
