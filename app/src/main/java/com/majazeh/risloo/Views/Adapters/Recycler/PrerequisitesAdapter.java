@@ -45,7 +45,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
     public void onBindViewHolder(@NonNull PrerequisitesHolder holder, int i) {
         PrerequisitesModel prerequisite = (PrerequisitesModel) prerequisites.get(i);
 
-        listener(holder, prerequisite);
+        listener(holder, i);
 
         setData(holder, prerequisite);
     }
@@ -74,13 +74,18 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(PrerequisitesHolder holder, PrerequisitesModel model) {
+    private void listener(PrerequisitesHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!holder.binding.inputEditText.hasFocus()) {
                     ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
                 }
             }
+            return false;
+        });
+
+        holder.binding.inputEditText.setOnKeyListener((v, keyCode, event) -> {
+            ((TestActivity) activity).sendPre(item, holder.binding.inputEditText.getText().toString());
             return false;
         });
 
@@ -94,6 +99,8 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
+
+                    ((TestActivity) activity).sendPre(item, pos);
 
                     userSelect = false;
                 }

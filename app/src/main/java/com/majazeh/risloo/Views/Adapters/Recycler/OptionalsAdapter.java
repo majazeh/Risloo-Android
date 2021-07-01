@@ -91,7 +91,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
             answer = position;
             notifyDataSetChanged();
 
-            ((TestActivity) activity).sendItem(getParent().formModel.getTitle(), String.valueOf(answer + 1));
+            ((TestActivity) activity).sendItem(Integer.parseInt(getParent().formModel.getTitle()), String.valueOf(answer + 1));
         }).widget(holder.itemView);
     }
 

@@ -534,12 +534,39 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    public void sendItem(String key, String value) {
+    public void sendPre(int key, String value) {
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
         binding.statusTextView.getRoot().requestLayout();
 
-        sampleAnswers.addToRemote(Integer.parseInt(key), value);
+        sampleAnswers.addToPrerequisites(key, value);
+        sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                runOnUiThread(() -> {
+                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().requestLayout();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                runOnUiThread(() -> {
+                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().requestLayout();
+                });
+            }
+        });
+    }
+
+    public void sendItem(int key, String value) {
+        binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
+        binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
+        binding.statusTextView.getRoot().requestLayout();
+
+        sampleAnswers.addToRemote(key, value);
         sampleAnswers.sendRequest(singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
@@ -567,7 +594,7 @@ public class TestActivity extends AppCompatActivity {
     public void closeSample() {
         loadingDialog.show(this.getSupportFragmentManager(), "loadingDialog");
 
-        Sample.close(data, header, new Response() {
+        Sample.close(sampleAnswers, data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
@@ -579,7 +606,7 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onFailure(String response) {
                 runOnUiThread(() -> {
-                    // Place Code if Needed
+                    loadingDialog.dismiss();
                 });
             }
         });
