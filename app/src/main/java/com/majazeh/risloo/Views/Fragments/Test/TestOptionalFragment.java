@@ -30,7 +30,7 @@ public class TestOptionalFragment extends Fragment {
     private OptionalsAdapter adapter;
 
     // Vars
-    private FormModel formModel;
+    public FormModel formModel;
 
     @Nullable
     @Override
@@ -60,10 +60,21 @@ public class TestOptionalFragment extends Fragment {
         try {
             ItemModel item = (ItemModel) model.getObject();
 
-            binding.entityTextView.getRoot().setVisibility(View.GONE);
+            if (item.getCategory() != null && !item.getCategory().equals("")) {
+                binding.entityTextView.getRoot().setText(item.getCategory());
+                binding.entityTextView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                binding.entityTextView.getRoot().setVisibility(View.GONE);
+            }
 
             binding.titleTextView.getRoot().setText(item.getText());
-            binding.descriptionTextView.getRoot().setVisibility(View.GONE);
+
+            if (item.getDescription() != null && !item.getDescription().equals("")) {
+                binding.descriptionTextView.getRoot().setText(item.getDescription());
+                binding.descriptionTextView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                binding.descriptionTextView.getRoot().setVisibility(View.GONE);
+            }
 
             ArrayList<String> options = new ArrayList<>();
             for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {

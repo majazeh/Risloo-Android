@@ -16,6 +16,6 @@
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_bold"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray100_border_1sdp_gray200"
+    android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200"
     tools:text="بخش"
     tools:layout_margin="@dimen/_12sdp" />

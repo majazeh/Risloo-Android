@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragment;
 import com.majazeh.risloo.databinding.SingleItemPictoralBinding;
 import com.squareup.picasso.Picasso;
 
@@ -39,7 +41,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
     public void onBindViewHolder(@NonNull PictoralsHolder holder, int i) {
         String url = urls.get(i);
 
-        listener(holder, url, i);
+        listener(holder, i);
 
         setData(holder, url, i);
     }
@@ -85,12 +87,12 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
         }
     }
 
-    private void listener(PictoralsHolder holder, String url, int position) {
+    private void listener(PictoralsHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
             answer = position;
             notifyDataSetChanged();
 
-            ((TestActivity) activity).sendItem();
+            ((TestActivity) activity).sendItem(getParent().formModel.getTitle(), String.valueOf(answer + 1));
         }).widget(holder.itemView);
     }
 
@@ -119,6 +121,15 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
         }
+    }
+
+    private TestPictoralFragment getParent() {
+        Fragment fragment = ((TestActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof TestPictoralFragment)
+                return (TestPictoralFragment) fragment;
+
+        return null;
     }
 
     public class PictoralsHolder extends RecyclerView.ViewHolder {

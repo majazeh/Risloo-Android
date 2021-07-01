@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -36,6 +35,7 @@ import com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragmentDirection
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.Madule.SampleAnswers;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -66,6 +66,7 @@ public class TestActivity extends AppCompatActivity {
 
     // Vars
     private HashMap data, header;
+    private SampleAnswers sampleAnswers;
     public SampleModel sampleModel;
     public FormModel formModel;
     private boolean userSelect = false;
@@ -132,6 +133,8 @@ public class TestActivity extends AppCompatActivity {
         header = new HashMap<>();
         header.put("Authorization", singleton.getAuthorization());
 
+        sampleAnswers = new SampleAnswers();
+
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);
     }
@@ -186,6 +189,7 @@ public class TestActivity extends AppCompatActivity {
         if (extras != null) {
             if (extras.getString("id") != null) {
                 data.put("id", extras.getString("id"));
+                sampleAnswers.id = extras.getString("id");
             }
         }
     }
@@ -530,35 +534,34 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    public void sendItem() {
+    public void sendItem(String key, String value) {
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
+        binding.statusTextView.getRoot().requestLayout();
 
-//        Sample.items(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                runOnUiThread(() -> {
-//                    formModel = sampleModel.getSampleForm().next();
-//                    navigateFragment();
-//
-//                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-//                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
-//                });
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                runOnUiThread(() -> {
-//                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-//                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
-//                });
-//            }
-//        });
+        sampleAnswers.addToRemote(Integer.parseInt(key), value);
+        sampleAnswers.sendRequest(singleton.getToken(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                runOnUiThread(() -> {
+                    formModel = sampleModel.getSampleForm().next();
+                    navigateFragment();
 
-        new Handler().postDelayed(() -> {
-            binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
-            binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
-        }, 1000);
+                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().requestLayout();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                runOnUiThread(() -> {
+                    binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
+                    binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                    binding.statusTextView.getRoot().requestLayout();
+                });
+            }
+        });
     }
 
     public void closeSample() {

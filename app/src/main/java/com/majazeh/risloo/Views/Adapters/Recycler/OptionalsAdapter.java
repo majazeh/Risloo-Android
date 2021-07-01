@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragment;
 import com.majazeh.risloo.databinding.SingleItemOptionalBinding;
 
 import java.util.ArrayList;
@@ -38,7 +40,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     public void onBindViewHolder(@NonNull OptionalsHolder holder, int i) {
         String title = titles.get(i);
 
-        listener(holder, title, i);
+        listener(holder, i);
 
         setData(holder, title, i);
     }
@@ -84,12 +86,12 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
         }
     }
 
-    private void listener(OptionalsHolder holder, String title, int position) {
+    private void listener(OptionalsHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
             answer = position;
             notifyDataSetChanged();
 
-            ((TestActivity) activity).sendItem();
+            ((TestActivity) activity).sendItem(getParent().formModel.getTitle(), String.valueOf(answer + 1));
         }).widget(holder.itemView);
     }
 
@@ -118,6 +120,15 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
         }
+    }
+
+    private TestOptionalFragment getParent() {
+        Fragment fragment = ((TestActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof TestOptionalFragment)
+                return (TestOptionalFragment) fragment;
+
+        return null;
     }
 
     public class OptionalsHolder extends RecyclerView.ViewHolder {

@@ -41,7 +41,19 @@ public class TestEntityFragment extends Fragment {
     private void setData(FormModel model) {
         EntityModel entity = (EntityModel) model.getObject();
 
-        binding.entityTextView.setText(entity.getDescription());
+        if (entity.getTitle() != null && !entity.getTitle().equals("") && !entity.getTitle().equals("بخش")) {
+            binding.titleTextView.getRoot().setText(entity.getTitle());
+            binding.titleTextView.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            binding.titleTextView.getRoot().setVisibility(View.GONE);
+        }
+
+        if (entity.getDescription() != null && !entity.getDescription().equals("")) {
+            binding.descriptionTextView.getRoot().setText(entity.getDescription());
+            binding.descriptionTextView.getRoot().setVisibility(View.VISIBLE);
+        } else {
+            binding.descriptionTextView.getRoot().setVisibility(View.GONE);
+        }
     }
 
     @Override

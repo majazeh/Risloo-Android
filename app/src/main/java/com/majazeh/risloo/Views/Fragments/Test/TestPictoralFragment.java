@@ -31,7 +31,7 @@ public class TestPictoralFragment extends Fragment {
     private PictoralsAdapter adapter;
 
     // Vars
-    private FormModel formModel;
+    public FormModel formModel;
 
     @Nullable
     @Override
