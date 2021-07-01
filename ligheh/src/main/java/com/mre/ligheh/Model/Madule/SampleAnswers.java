@@ -10,7 +10,7 @@ import java.util.HashMap;
 import okhttp3.Headers;
 
 public class SampleAnswers {
-    public ArrayList<ArrayList<String>> localAnswers;
+    private ArrayList<ArrayList<String>> localAnswers;
     public ArrayList<ArrayList<String>> remoteAnswers;
     public String id;
 
@@ -19,15 +19,15 @@ public class SampleAnswers {
         remoteAnswers = new ArrayList<>();
     }
 
-    public void sendRequest(ArrayList<ArrayList<String>> remote, String authorization, Response response) {
-        if (!remote.isEmpty()) {
+    public void sendRequest( String authorization, Response response) {
+        if (!remoteAnswers.isEmpty()) {
             if (Model.request) {
-                remoteToLocal(remote);
+                remoteToLocal(remoteAnswers);
             } else {
                 HashMap data = new HashMap();
                 HashMap header = new HashMap();
                 localToRemote();
-                remoteAnswers.addAll(remote);
+                remoteAnswers.addAll(remoteAnswers);
                 data.put("items", remoteAnswers);
                 data.put("id", id);
                 header.put("Authorization", "Bearer " + authorization);
@@ -40,20 +40,28 @@ public class SampleAnswers {
 
                     @Override
                     public void onFailure(String response) {
+
                     }
                 });
             }
         }
     }
 
-    public void remoteToLocal(ArrayList remote) {
+    public void addToRemote(int key,Object value){
+        ArrayList arrayList = new ArrayList<String>();
+        arrayList.add(key-1);
+        arrayList.add(value);
+        remoteAnswers.add(arrayList);
+    }
+
+    private void remoteToLocal(ArrayList remote) {
         for (int i = 0; i < remote.size(); i++) {
             localAnswers.add((ArrayList<String>) remote.get(i));
         }
     }
 
 
-    public void localToRemote() {
+    private void localToRemote() {
         for (int i = 0; i < localAnswers.size(); i++) {
             remoteAnswers.add(localAnswers.get(i));
         }

@@ -14,6 +14,8 @@ public class EntityModel extends TypeModel {
                 setOffset(jsonObject.getInt("offset"));
             if (!jsonObject.isNull("title"))
                 setTitle(jsonObject.getString("title"));
+            else
+                setTitle("بخش");
             if (!jsonObject.isNull("description"))
                 setDescription(jsonObject.getString("description"));
         } catch (JSONException e) {

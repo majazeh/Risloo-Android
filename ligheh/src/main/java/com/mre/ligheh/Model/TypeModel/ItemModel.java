@@ -8,6 +8,8 @@ public class ItemModel extends TypeModel{
     private String image_url="";
     private String text;
     private ItemAnswer answer;
+    private String category;
+    private String description;
     private String user_answered="";
 
     public ItemModel(JSONObject jsonObject) {
@@ -23,6 +25,10 @@ public class ItemModel extends TypeModel{
                 setAnswer(new ItemAnswer(jsonObject.getJSONObject("answer")));
             if (!jsonObject.isNull("user_answered"))
                 setUser_answered(jsonObject.getString("user_answered"));
+            if (!jsonObject.isNull("category"))
+                setCategory(jsonObject.getString("category"));
+            if (!jsonObject.isNull("description"))
+                setDescription(jsonObject.getString("description"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -66,6 +72,22 @@ public class ItemModel extends TypeModel{
 
     public void setUser_answered(String user_answered) {
         this.user_answered = user_answered;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @Override

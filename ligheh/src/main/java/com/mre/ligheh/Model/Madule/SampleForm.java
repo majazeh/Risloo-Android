@@ -52,6 +52,8 @@ public class SampleForm {
             for (int j = 0; j < entities.size(); j++) {
                 if (entities.size() != 0) {
                     if (((EntityModel) entities.data().get(j)).getOffset() == i) {
+                        System.out.println(i);
+                        System.out.println(((EntityModel) entities.data().get(j)).getOffset());
                         addForm(new FormModel(((EntityModel) entities.data().get(j)).getTitle(), "entities", ((EntityModel) entities.data().get(j))));
                     }
                 }
@@ -120,6 +122,10 @@ public class SampleForm {
 
     public JSONArray getForms() {
         return forms;
+    }
+
+    public JSONArray getSampleForm() {
+        return sampleForm;
     }
 
     public int getItemPosition() {
