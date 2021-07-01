@@ -18,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Index.BulkSamplesFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
@@ -31,6 +32,9 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     // Objects
     private Activity activity;
+
+    // BottomSheets
+    private ChainBottomSheet chainBottomSheet;
 
     // Vars
     private ArrayList<TypeModel> bulkSamples;
@@ -48,6 +52,8 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
     @Override
     public void onBindViewHolder(@NonNull BulkSamplesHolder holder, int i) {
         BulkSampleModel bulkSample = (BulkSampleModel) bulkSamples.get(i);
+
+        initializer();
 
         detector(holder);
 
@@ -79,6 +85,10 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         }
     }
 
+    private void initializer() {
+        chainBottomSheet = new ChainBottomSheet();
+    }
+
     private void detector(BulkSamplesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
@@ -98,7 +108,8 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
                 switch (item) {
                     case "لینک ثبت نام":
-                        // TODO : Place Code If Needed
+                        chainBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
+                        chainBottomSheet.setData(((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), model);
                         break;
                     case "کپی کردن لینک":
                         IntentManager.clipboard(activity, model.getLink());

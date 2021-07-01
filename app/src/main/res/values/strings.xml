@@ -1204,6 +1204,12 @@
     <string name="BottomSheetAuthEntry">ورود</string>
     <string name="BottomSheetLogoutEntry">خروج</string>
 
+    <string name="BottomSheetChainList">لیست آزمون‌ها</string>
+    <string name="BottomSheetChainDescription1">در این فرایند، آزمون‌های فوق برای شما فعال شده و می‌توانید آن‌ها را تکمیل کنید.</string>
+    <string name="BottomSheetChainDescription2">پس از این مرحله، شما عضو این مرکز درمانی و اتاق درمان خواهید شد و مدیران قادر به دیدن شماره تماس شما می‌باشند.</string>
+    <string name="BottomSheetChainNickname">نام مستعار من در این مرکز</string>
+    <string name="BottomSheetChainEntry">تأیید و ادامه</string>
+
     <string name="BottomSheetStartDateTitle">تاریخ شروع جلسه را انتخاب کنید.</string>
     <string name="BottomSheetStartDateEntry">ثبت</string>
 

@@ -1,0 +1,189 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
+    tools:context=".Views.BottomSheets.ChainBottomSheet">
+
+    <ImageView
+        android:id="@+id/background_imageView"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_64sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:background="@drawable/gra_2sdp_solid_gray200_gray100_border_2dp_gray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/avatar_includeLayout"
+        layout="@layout/component_main_avatar_border_big"
+        android:layout_width="@dimen/_86sdp"
+        android:layout_height="@dimen/_86sdp"
+        app:layout_constraintBottom_toBottomOf="@id/background_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/background_imageView" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/info_constraintLayout"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout">
+
+        <include
+            android:id="@+id/avatars_includeLayout"
+            layout="@layout/component_main_avatar_multi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/center_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_bold"
+            app:layout_constraintBottom_toTopOf="@id/psychology_textView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/avatars_includeLayout"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="مرکز درمانی" />
+
+        <TextView
+            android:id="@+id/psychology_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_8sdp"
+            android:gravity="start"
+            android:textSize="@dimen/_8ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/center_textView"
+            app:layout_constraintStart_toStartOf="@id/center_textView"
+            app:layout_constraintTop_toBottomOf="@id/center_textView"
+            tools:text="روان‌شناس" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/list_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="start"
+        android:text="@string/BottomSheetChainList"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintEnd_toEndOf="@id/entry_button"
+        app:layout_constraintStart_toStartOf="@id/entry_button"
+        app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+
+    <TextView
+        android:id="@+id/description1_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:gravity="start"
+        android:text="@string/BottomSheetChainDescription1"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintEnd_toEndOf="@id/entry_button"
+        app:layout_constraintStart_toStartOf="@id/entry_button"
+        app:layout_constraintTop_toBottomOf="@id/list_textView" />
+
+    <TextView
+        android:id="@+id/description2_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:gravity="start"
+        android:text="@string/BottomSheetChainDescription2"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintEnd_toEndOf="@id/entry_button"
+        app:layout_constraintStart_toStartOf="@id/entry_button"
+        app:layout_constraintTop_toBottomOf="@id/description1_textView" />
+
+    <TextView
+        android:id="@+id/name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_16sdp"
+        android:gravity="start"
+        android:text="@string/BottomSheetChainNickname"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="bold"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintEnd_toEndOf="@id/entry_button"
+        app:layout_constraintStart_toStartOf="@id/entry_button"
+        app:layout_constraintTop_toBottomOf="@id/description2_textView" />
+
+    <include
+        android:id="@+id/nickname_editText"
+        layout="@layout/component_auth_input_text"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_6sdp"
+        app:layout_constraintEnd_toEndOf="@id/entry_button"
+        app:layout_constraintStart_toStartOf="@id/entry_button"
+        app:layout_constraintTop_toBottomOf="@id/name_textView" />
+
+    <TextView
+        android:id="@+id/entry_button"
+        android:layout_width="0dp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginBottom="@dimen/_18sdp"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_18sdp"
+        android:gravity="center"
+        android:text="@string/BottomSheetChainEntry"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/White"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:background="@drawable/draw_16sdp_solid_blue500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nickname_editText" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

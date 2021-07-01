@@ -22,6 +22,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples4Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Scales2Adapter;
+import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -41,6 +42,9 @@ public class BulkSampleFragment extends Fragment {
     private ReferencesAdapter referencesAdapter;
     private Scales2Adapter scales2Adapter;
     private Samples4Adapter samples4Adapter;
+
+    // BottomSheets
+    private ChainBottomSheet chainBottomSheet;
 
     // Vars
     private HashMap data, header;
@@ -68,6 +72,8 @@ public class BulkSampleFragment extends Fragment {
         referencesAdapter = new ReferencesAdapter(requireActivity());
         scales2Adapter = new Scales2Adapter(requireActivity());
         samples4Adapter = new Samples4Adapter(requireActivity());
+
+        chainBottomSheet = new ChainBottomSheet();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -123,7 +129,8 @@ public class BulkSampleFragment extends Fragment {
         }).widget(binding.linkTextView.buttonImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code If Needed
+            chainBottomSheet.show(requireActivity().getSupportFragmentManager(), "chainBottomSheet");
+            chainBottomSheet.setData(((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
         }).widget(binding.linkTextView.buttonTextView);
     }
 
