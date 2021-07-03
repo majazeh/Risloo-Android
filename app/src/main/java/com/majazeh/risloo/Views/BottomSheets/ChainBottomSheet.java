@@ -13,8 +13,10 @@ import androidx.annotation.Nullable;
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.TestsAdapter;
 import com.majazeh.risloo.databinding.BottomSheetChainBinding;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.squareup.picasso.Picasso;
@@ -27,6 +29,9 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
 
     // Binding
     private BottomSheetChainBinding binding;
+
+    // Adapters
+    private TestsAdapter testAdapter;
 
     // Vars
     private HashMap data, header;
@@ -56,9 +61,13 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
+        testAdapter = new TestsAdapter(requireActivity());
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
 
     private void detector() {
@@ -76,9 +85,9 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     private void setWidget() {
         try {
             if (!name.equals("")) {
-                binding.nameTextView.setText(name);
+                binding.nicknameEditText.getRoot().setText(name);
             } else {
-                binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
+                binding.nicknameEditText.getRoot().setText(getResources().getString(R.string.AppDefaultName));
             }
 
             if (!avatar.equals("")) {
@@ -118,8 +127,14 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
 
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             }
-        } catch (
-                JSONException e) {
+
+            if (model.getScales() != null) {
+                testAdapter.setTests(model.getScales().data());
+                binding.listRecyclerView.setAdapter(testAdapter);
+            }
+
+            binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
+        } catch (JSONException e) {
             e.printStackTrace();
         }
     }
