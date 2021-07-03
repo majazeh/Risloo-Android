@@ -34,8 +34,10 @@ import com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragmentDirections;
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.Madule.SampleAnswers;
+import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -598,8 +600,34 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    loadingDialog.dismiss();
-                    IntentManager.main(TestActivity.this);
+                    FormModel form = sampleModel.getSampleForm().getFirst();
+
+                    if (!form.getType().equals("chain")) {
+                        loadingDialog.dismiss();
+                        IntentManager.main(TestActivity.this);
+                    } else {
+                        List chains = (List) form.getObject();
+
+                        for (int i = 0; i < chains.data().size(); i++) {
+                            ChainModel chainModel = (ChainModel) chains.data().get(i);
+
+                            if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != chains.data().size() && !chainModel.getId().equals(data.get("id"))) {
+                                loadingDialog.dismiss();
+
+                                data.put("id", chainModel.getId());
+                                sampleAnswers.id = chainModel.getId();
+
+                                binding.loadingIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                                decorator(true);
+
+                                getData();
+                                break;
+                            } else {
+                                loadingDialog.dismiss();
+                                IntentManager.main(TestActivity.this);
+                            }
+                        }
+                    }
                 });
             }
 
@@ -614,8 +642,10 @@ public class TestActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        formModel = sampleModel.getSampleForm().prev();
-        navigateFragment();
+        if (formModel != null) {
+            formModel = sampleModel.getSampleForm().prev();
+            navigateFragment();
+        }
     }
 
     @Override

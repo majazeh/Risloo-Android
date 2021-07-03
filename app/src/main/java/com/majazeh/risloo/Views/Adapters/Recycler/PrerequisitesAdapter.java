@@ -85,7 +85,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            ((TestActivity) activity).sendPre(item, holder.binding.inputEditText.getText().toString());
+            ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString());
             return false;
         });
 
@@ -100,7 +100,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    ((TestActivity) activity).sendPre(item, pos);
+                    ((TestActivity) activity).sendPre(item + 1, String.valueOf(position + 1));
 
                     userSelect = false;
                 }
@@ -126,7 +126,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
                     holder.binding.selectGroup.setVisibility(View.GONE);
 
                     holder.binding.inputEditText.setVisibility(View.VISIBLE);
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
 
                     if (!model.getUser_answered().equals(""))
                         holder.binding.inputEditText.setText(model.getUser_answered());
@@ -136,7 +136,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
                     holder.binding.selectGroup.setVisibility(View.GONE);
 
                     holder.binding.inputEditText.setVisibility(View.VISIBLE);
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
                     if (!model.getUser_answered().equals(""))
                         holder.binding.inputEditText.setText(model.getUser_answered());
@@ -148,18 +148,10 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
                     holder.binding.selectGroup.setVisibility(View.VISIBLE);
                     setSpinner(holder, model);
 
-                    if (!model.getUser_answered().equals("")) {
-                        for (int i = 0; i < holder.binding.selectSpinner.getCount(); i++) {
-                            if (holder.binding.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(model.getUser_answered())) {
-                                holder.binding.selectSpinner.setSelection(i);
-                                break;
-                            } else {
-                                holder.binding.selectSpinner.setSelection(0);
-                            }
-                        }
-                    } else {
+                    if (!model.getUser_answered().equals(""))
+                        holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
+                    else
                         holder.binding.selectSpinner.setSelection(0);
-                    }
 
                     break;
             }

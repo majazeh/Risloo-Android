@@ -86,6 +86,13 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
             holder.binding.activeImageView.setBackgroundResource(0);
             holder.binding.activeImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_chevron_circle_left_solid, null));
             ImageViewCompat.setImageTintList(holder.binding.activeImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
+        } else if (!model.getStatus().equals("seald") && !model.getStatus().equals("open")) {
+            holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Gray300));
+            holder.binding.nameTextView.setTextAppearance(activity, R.style.danaMediumTextStyle);
+
+            holder.binding.activeImageView.setBackgroundResource(0);
+            holder.binding.activeImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_check_circle_light, null));
+            ImageViewCompat.setImageTintList(holder.binding.activeImageView, AppCompatResources.getColorStateList(activity, R.color.Gray300));
         } else {
             holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Gray500));
             holder.binding.nameTextView.setTextAppearance(activity, R.style.danaMediumTextStyle);
