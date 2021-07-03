@@ -10,11 +10,11 @@ public class ChainModel extends TypeModel {
 
     public ChainModel(JSONObject jsonObject) {
         try {
-            if (jsonObject.isNull("id"))
+            if (!jsonObject.isNull("id"))
                 setId(jsonObject.getString("id"));
-            if (jsonObject.isNull("title"))
+            if (!jsonObject.isNull("title"))
                 setTitle(jsonObject.getString("title"));
-            if (jsonObject.isNull("status"))
+            if (!jsonObject.isNull("status"))
                 setStatus(jsonObject.getString("status"));
         } catch (JSONException e) {
             e.printStackTrace();
