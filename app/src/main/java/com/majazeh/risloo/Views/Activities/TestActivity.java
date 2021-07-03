@@ -65,7 +65,7 @@ public class TestActivity extends AppCompatActivity {
     public NavGraph navGraph;
 
     // Vars
-    private HashMap data, header;
+    public HashMap data, header;
     private SampleAnswers sampleAnswers;
     public SampleModel sampleModel;
     public FormModel formModel;

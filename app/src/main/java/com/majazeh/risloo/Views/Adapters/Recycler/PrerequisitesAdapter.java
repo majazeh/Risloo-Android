@@ -84,7 +84,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
             return false;
         });
 
-        holder.binding.inputEditText.setOnKeyListener((v, keyCode, event) -> {
+        holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
             ((TestActivity) activity).sendPre(item, holder.binding.inputEditText.getText().toString());
             return false;
         });

@@ -12,6 +12,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.SingleItemChainBinding;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -78,7 +79,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
     }
 
     private void setActive(ChainsHolder holder, ChainModel model) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (model.getId().equals(((TestActivity) activity).data.get("id"))) {
             holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
             holder.binding.nameTextView.setTextAppearance(activity, R.style.danaDemiBoldTextStyle);
 
