@@ -100,7 +100,6 @@ public class Sample extends Model {
         try {
             if (data.containsKey("id")) {
                 String id = (String) data.get("id");
-                data.remove("id");
                 if (sampleAnswers != null) {
                     if (!sampleAnswers.localAnswers.isEmpty() && !sampleAnswers.remoteAnswers.isEmpty()) {
                         sampleAnswers.sendRequest((String) header.get("Authorization"), new Response() {
@@ -154,6 +153,20 @@ public class Sample extends Model {
                 Model.put("command/assessment/fill/" + data.get("id") + "replace=on", data, header, response, null);
             } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void chain(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (data.containsKey("chain")) {
+                String id = (String) data.get("id");
+                data.remove("id");
+                Model.put(endpoint + "/samples" + data.get("chain"), data, header, response, SampleModel.class);
+            } else {
+                Exceptioner.make(response, "آیدی زنجیره را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();

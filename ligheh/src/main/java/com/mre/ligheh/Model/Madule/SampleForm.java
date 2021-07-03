@@ -52,8 +52,6 @@ public class SampleForm {
             for (int j = 0; j < entities.size(); j++) {
                 if (entities.size() != 0) {
                     if (((EntityModel) entities.data().get(j)).getOffset() == i) {
-                        System.out.println(i);
-                        System.out.println(((EntityModel) entities.data().get(j)).getOffset());
                         addForm(new FormModel(((EntityModel) entities.data().get(j)).getTitle(), "entities", ((EntityModel) entities.data().get(j))));
                     }
                 }
@@ -114,7 +112,7 @@ public class SampleForm {
         return null;
     }
 
-    public FormModel getFirst(){
+    public FormModel getFirst() {
         try {
             return (FormModel) sampleForm.get(0);
         } catch (JSONException e) {
@@ -140,7 +138,7 @@ public class SampleForm {
 
     public int getItemPosition() {
         try {
-            return  itemPositions.getInt(position);
+            return itemPositions.getInt(position);
         } catch (JSONException e) {
             e.printStackTrace();
         }

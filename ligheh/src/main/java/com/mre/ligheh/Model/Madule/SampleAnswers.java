@@ -18,6 +18,7 @@ public class SampleAnswers {
     public SampleAnswers() {
         localAnswers = new ArrayList<>();
         remoteAnswers = new ArrayList<>();
+        prerequisites = new ArrayList<>();
     }
 
     public void sendRequest( String authorization, Response response) {
@@ -63,6 +64,7 @@ public class SampleAnswers {
                 Sample.items(data, header, new Response() {
                     @Override
                     public void onOK(Object object) {
+                        prerequisites.clear();
                         response.onOK(null);
                     }
 
