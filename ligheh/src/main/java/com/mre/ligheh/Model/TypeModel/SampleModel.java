@@ -100,6 +100,7 @@ public class SampleModel extends TypeModel {
         if (!jsonObject.isNull("entities")) {
             com.mre.ligheh.Model.Madule.List entities = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("entities").length(); i++) {
+                jsonObject.getJSONArray("entities").getJSONObject(i).put("position", i+1);
                 entities.add(new EntityModel(jsonObject.getJSONArray("entities").getJSONObject(i)));
             }
             setEntities(entities);
