@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_4sdp"
-        android:gravity="center"
+        android:gravity="start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -35,7 +35,8 @@
     <EditText
         android:id="@+id/input_editText"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_36sdp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingStart="@dimen/_12sdp"
         android:imeOptions="actionDone"
@@ -57,7 +58,8 @@
     <Spinner
         android:id="@+id/select_spinner"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_36sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_40sdp"

@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -17,60 +16,60 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSaBinding;
-import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
+import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHolder> {
+public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsHolder> {
 
     // Objects
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> prerequisites;
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false, editable = false;
 
-    public SaPresAdapter(@NonNull Activity activity) {
+    public SaItemsAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SaPresHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SaPresHolder(SingleItemSaBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public SaItemsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new SaItemsHolder(SingleItemSaBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SaPresHolder holder, int i) {
-        PrerequisitesModel prerequisite = (PrerequisitesModel) prerequisites.get(i);
+    public void onBindViewHolder(@NonNull SaItemsHolder holder, int i) {
+        ItemModel item = (ItemModel) items.get(i);
 
         listener(holder, i);
 
-        setData(holder, prerequisite);
+        setData(holder, item);
     }
 
     @Override
     public int getItemCount() {
-        if (this.prerequisites != null)
-            return prerequisites.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setItems(ArrayList<TypeModel> prerequisites) {
-        if (this.prerequisites == null)
-            this.prerequisites = prerequisites;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.prerequisites.addAll(prerequisites);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        if (this.prerequisites != null) {
-            this.prerequisites.clear();
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -81,7 +80,7 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(SaPresHolder holder, int item) {
+    private void listener(SaItemsHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!holder.binding.inputEditText.hasFocus()) {
@@ -124,7 +123,7 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
         });
     }
 
-    private void setData(SaPresHolder holder, PrerequisitesModel model) {
+    private void setData(SaItemsHolder holder, ItemModel model) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition() + 1) + " - " + model.getText());
 
         setType(holder, model);
@@ -132,48 +131,44 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
         setClickable(holder);
     }
 
-    private void setType(SaPresHolder holder, PrerequisitesModel model) {
-        try {
-            switch (model.getAnswer().getString("type")) {
-                case "text":
-                    holder.binding.selectGroup.setVisibility(View.GONE);
+    private void setType(SaItemsHolder holder, ItemModel model) {
+//        switch (model.getAnswer().getType()) {
+//            case "text":
+//                holder.binding.selectGroup.setVisibility(View.GONE);
+//
+//                holder.binding.inputEditText.setVisibility(View.VISIBLE);
+//                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+//
+//                if (!model.getUser_answered().equals(""))
+//                    holder.binding.inputEditText.setText(model.getUser_answered());
+//
+//                break;
+//            case "number":
+//                holder.binding.selectGroup.setVisibility(View.GONE);
+//
+//                holder.binding.inputEditText.setVisibility(View.VISIBLE);
+//                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+//
+//                if (!model.getUser_answered().equals(""))
+//                    holder.binding.inputEditText.setText(model.getUser_answered());
+//
+//                break;
+//            case "select":
+                holder.binding.inputEditText.setVisibility(View.GONE);
 
-                    holder.binding.inputEditText.setVisibility(View.VISIBLE);
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+                holder.binding.selectGroup.setVisibility(View.VISIBLE);
+                setSpinner(holder, model);
 
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
-
-                    break;
-                case "number":
-                    holder.binding.selectGroup.setVisibility(View.GONE);
-
-                    holder.binding.inputEditText.setVisibility(View.VISIBLE);
-                    holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.inputEditText.setText(model.getUser_answered());
-
-                    break;
-                case "select":
-                    holder.binding.inputEditText.setVisibility(View.GONE);
-
-                    holder.binding.selectGroup.setVisibility(View.VISIBLE);
-                    setSpinner(holder, model);
-
-                    if (!model.getUser_answered().equals(""))
-                        holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
-                    else
-                        holder.binding.selectSpinner.setSelection(0);
-
-                    break;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
+                if (!model.getUser_answered().equals(""))
+                    holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
+                else
+                    holder.binding.selectSpinner.setSelection(0);
+//
+//                break;
+//        }
     }
 
-    private void setClickable(SaPresHolder holder) {
+    private void setClickable(SaItemsHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.selectSpinner.setEnabled(true);
@@ -183,17 +178,17 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
         }
     }
 
-    private void setSpinner(SaPresHolder holder, PrerequisitesModel model) {
+    private void setSpinner(SaItemsHolder holder, ItemModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
 
-            for (int i = 0; i < model.getAnswer().getJSONArray("options").length(); i++) {
-                options.add(model.getAnswer().getJSONArray("options").get(i).toString());
+            for (int i = 0; i < model.getAnswer().getAnswer().length(); i++) {
+                options.add(model.getAnswer().getAnswer().get(i).toString());
             }
 
             options.add("");
 
-            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "prerequisite");
+            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "item");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -208,11 +203,11 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
         return null;
     }
 
-    public class SaPresHolder extends RecyclerView.ViewHolder {
+    public class SaItemsHolder extends RecyclerView.ViewHolder {
 
         private SingleItemSaBinding binding;
 
-        public SaPresHolder(SingleItemSaBinding binding) {
+        public SaItemsHolder(SingleItemSaBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
