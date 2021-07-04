@@ -164,7 +164,7 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
                 if (!model.getUser_answered().equals(""))
                     holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
                 else
-                    holder.binding.selectSpinner.setSelection(0);
+                    holder.binding.selectSpinner.setSelection(holder.binding.selectSpinner.getCount());
 //
 //                break;
 //        }
