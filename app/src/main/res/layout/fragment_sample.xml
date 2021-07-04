@@ -284,7 +284,7 @@
 
             <include
                 android:id="@+id/general_shimmerLayout"
-                layout="@layout/component_shimmer_field"
+                layout="@layout/component_shimmer_sa"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
@@ -343,7 +343,7 @@
 
             <include
                 android:id="@+id/prerequisite_shimmerLayout"
-                layout="@layout/component_shimmer_field"
+                layout="@layout/component_shimmer_sa"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
@@ -404,7 +404,7 @@
 
             <include
                 android:id="@+id/item_shimmerLayout"
-                layout="@layout/component_shimmer_field"
+                layout="@layout/component_shimmer_sa"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
