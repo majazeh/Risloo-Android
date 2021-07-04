@@ -22,6 +22,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.SaGensAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.SaItemsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.SaPresAdapter;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
@@ -44,6 +45,7 @@ public class SampleFragment extends Fragment {
 
     // Adapters
     private ProfilesAdapter profilesAdapter;
+    private SaGensAdapter saGensAdapter;
     private SaPresAdapter saPresAdapter;
     private SaItemsAdapter saItemsAdapter;
 
@@ -70,6 +72,7 @@ public class SampleFragment extends Fragment {
 
     private void initializer() {
         profilesAdapter = new ProfilesAdapter(requireActivity());
+        saGensAdapter = new SaGensAdapter(requireActivity());
         saPresAdapter = new SaPresAdapter(requireActivity());
         saItemsAdapter = new SaItemsAdapter(requireActivity());
 
@@ -142,11 +145,13 @@ public class SampleFragment extends Fragment {
             if (isChecked) {
                 binding.fieldsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray900));
 
+                saGensAdapter.setEditable(true);
                 saPresAdapter.setEditable(true);
                 saItemsAdapter.setEditable(true);
             } else {
                 binding.fieldsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray600));
 
+                saGensAdapter.setEditable(false);
                 saPresAdapter.setEditable(false);
                 saItemsAdapter.setEditable(false);
             }
@@ -276,6 +281,10 @@ public class SampleFragment extends Fragment {
 //                            profilesAdapter.setProfiles(model.getProfiles().data());
 //                            binding.profilesRecyclerView.setAdapter(profilesAdapter);
 //                        }
+
+                            // Gens Data
+                            saGensAdapter.setItems(null);
+                            binding.generalRecyclerView.setAdapter(saGensAdapter);
 
                             List prerequisites = new List();
                             List items = new List();
@@ -469,6 +478,10 @@ public class SampleFragment extends Fragment {
 //                });
 //                break;
 //        }
+    }
+
+    public void sendGen(String key, String value) {
+
     }
 
     public void sendPre(int key, String value) {

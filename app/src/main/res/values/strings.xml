@@ -1014,6 +1014,8 @@
     <string name="SampleFragmentSubPrerequisite">پیش نیاز‌ها</string>
     <string name="SampleFragmentSubItem">گویه‌ها</string>
 
+    <string name="SampleFragmentSubGeneralTime">زمان انجام (دقیقه)</string>
+
     /*
     ---------- Session Fragment ----------
     */
