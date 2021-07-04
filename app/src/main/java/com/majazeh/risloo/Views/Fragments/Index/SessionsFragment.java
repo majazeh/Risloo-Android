@@ -144,7 +144,7 @@ public class SessionsFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionsFragmentDirections.actionSessionsFragmentToCreateSessionFragment();
+            NavDirections action = SessionsFragmentDirections.actionSessionsFragmentToCreateSessionFragment(null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

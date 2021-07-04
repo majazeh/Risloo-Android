@@ -86,6 +86,7 @@
         tools:layout="@layout/fragment_create_case" >
         <argument
             android:name="typeModel"
+            app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 
@@ -93,7 +94,11 @@
         android:id="@+id/createCaseUserFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment"
         android:label="@string/CreateCaseUserFragmentTitle"
-        tools:layout="@layout/fragment_create_case_user" />
+        tools:layout="@layout/fragment_create_case_user" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createCenterFragment"
@@ -183,7 +188,11 @@
         android:id="@+id/createSessionFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment"
         android:label="@string/CreateSessionFragmentTitle"
-        tools:layout="@layout/fragment_create_session" />
+        tools:layout="@layout/fragment_create_session" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createTreasuryFragment"
@@ -225,7 +234,11 @@
         android:id="@+id/editSessionFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment"
         android:label="@string/EditSessionFragmentTitle"
-        tools:layout="@layout/fragment_edit_session" />
+        tools:layout="@layout/fragment_edit_session" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/editTreasuryFragment"
@@ -340,6 +353,9 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragment"
         android:label="@string/ClientReportsFragmentTitle"
         tools:layout="@layout/fragment_client_reports" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
         <action
             android:id="@+id/action_clientReportsFragment_to_createReportFragment"
             app:destination="@id/createReportFragment" />
@@ -491,6 +507,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Show.CaseFragment"
         android:label="@string/CaseFragmentTitle"
         tools:layout="@layout/fragment_case" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+
         <action
             android:id="@+id/action_caseFragment_to_createCaseUserFragment"
             app:destination="@id/createCaseUserFragment" />

@@ -127,6 +127,50 @@ public class DateManager {
         }
     }
 
+    public static String jalYYYYsNMMsDDsNDD(String timestamp, String seperator) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear();
+    }
+
+    public static String jalYYYYsNMMsDDsNDDsHHsMM(String timestamp, String seperator) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        if (persianDate.getHour() < 10) {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+        } else {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + persianDate.getHour() + ":" + persianDate.getMinute();
+        }
+    }
+
+    public static String jalYYYYsNMMsDDsNDDnlHHsMM(String timestamp, String seperator) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        if (persianDate.getHour() < 10) {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+        } else {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + persianDate.getMinute();
+        }
+    }
+
     public static String jalYYYYsMMsDD(String timestamp, String seperator) {
         long value = Long.parseLong(timestamp);
         Date date = timestampToDate(value);
@@ -481,17 +525,6 @@ public class DateManager {
 
 
     //////////////////////////////////////////////////////////////////////////////////////
-
-    public static String gregorianToJalali2(String value) {
-        int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd", value)));
-        int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd", value)));
-        int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd", value)));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day);
-
-        return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + persianDate.getShYear();
-    }
 
     public static String gregorianToJalali5(String value) {
         int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd HH:mm:ss", value)));

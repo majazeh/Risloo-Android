@@ -163,16 +163,19 @@ public class ReferenceFragment extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             setData(userModel);
 
+                            // Rooms Data
                             if (!userModel.getRoomList().data().isEmpty()) {
                                 roomsAdapter.setRooms(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
                             }
 
+                            // Cases Data
                             if (!userModel.getCaseList().data().isEmpty()) {
                                 cases3Adapter.setCases(userModel.getCaseList().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
                             }
 
+                            // Samples Data
                             if (!userModel.getSampleList().data().isEmpty()) {
                                 samples3Adapter.setSamples(userModel.getSampleList().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
@@ -182,15 +185,18 @@ public class ReferenceFragment extends Fragment {
                             binding.casesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(cases3Adapter.getItemCount()));
                             binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples3Adapter.getItemCount()));
 
+                            // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
+                            // Cases Data
                             binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
+                            // Samples Data
                             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -202,15 +208,19 @@ public class ReferenceFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
+
+                            // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
+                            // Cases Data
                             binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
+                            // Samples Data
                             binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);

@@ -10,11 +10,13 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
@@ -41,11 +43,9 @@ public class CaseFragment extends Fragment {
     private Sessions2Adapter sessions2Adapter;
     private Samples2Adapter samples2Adapter;
 
-    // Objects
-    private Bundle extras;
-
     // Vars
     private HashMap data, header;
+    private CaseModel caseModel;
 
     @Nullable
     @Override
@@ -58,7 +58,7 @@ public class CaseFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -70,8 +70,6 @@ public class CaseFragment extends Fragment {
         referencesAdapter = new ReferencesAdapter(requireActivity());
         sessions2Adapter = new Sessions2Adapter(requireActivity());
         samples2Adapter = new Samples2Adapter(requireActivity());
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -112,79 +110,46 @@ public class CaseFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.clientReportsFragment, extras)).widget(binding.reportsTextView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = CaseFragmentDirections.actionCaseFragmentToClientReportsFragment(caseModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.reportsTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCaseUserFragment, extras)).widget(binding.referencesAddImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = CaseFragmentDirections.actionCaseFragmentToCreateCaseUserFragment(caseModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.referencesAddImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSessionFragment, extras)).widget(binding.sessionsAddImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = CaseFragmentDirections.actionCaseFragmentToCreateSessionFragment(caseModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.sessionsAddImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment, extras)).widget(binding.samplesAddImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = CaseFragmentDirections.actionCaseFragmentToCreateSampleFragment(null, caseModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.samplesAddImageView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                extras.putString("id", getArguments().getString("id"));
-                data.put("id", getArguments().getString("id"));
-                binding.serialTextView.setText(getArguments().getString("id"));
-            }
+    private void setArgs() {
+        caseModel = (CaseModel) CaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
-                extras.putString("manager_id", getArguments().getString("manager_id"));
-                extras.putString("manager_name", getArguments().getString("manager_name"));
-            }
-
-            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("")) {
-                extras.putString("room_id", getArguments().getString("room_id"));
-            }
-
-            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
-                extras.putString("clients", getArguments().getString("clients"));
-            }
-
-            if (getArguments().getString("problem") != null && !getArguments().getString("problem").equals("")) {
-                extras.putString("problem", getArguments().getString("problem"));
-                binding.descriptionTextView.setText(getArguments().getString("problem"));
-            }
-
-            if (getArguments().getString("session_count") != null && !getArguments().getString("session_count").equals("")) {
-                extras.putString("session_count", getArguments().getString("session_count"));
-            }
-
-            if (getArguments().getInt("created_at") != 0) {
-                extras.putInt("created_at", getArguments().getInt("created_at"));
-                binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(getArguments().getInt("created_at")))));
-            }
-        }
+        setData(caseModel);
     }
 
     private void setData(CaseModel model) {
         try {
-            if (model.getCaseManager().getUserId() != null && model.getCaseManager().getName() != null) {
-                extras.putString("manager_id", model.getCaseManager().getUserId());
-                extras.putString("manager_name", model.getCaseManager().getName());
-            }
-
-            if (model.getCaseRoom() != null && model.getCaseRoom().getRoomId() != null) {
-                extras.putString("room_id", model.getCaseRoom().getRoomId());
-            }
-
-            if (model.getClients() != null && model.getClients().data().size() != 0) {
-                extras.putString("clients", String.valueOf(model.getClients()));
+            if (model.getCaseId() != null && !model.getCaseId().equals("")) {
+                binding.serialTextView.setText(model.getCaseId());
+                data.put("id", model.getCaseId());
             }
 
             if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem")) {
-                extras.putString("problem", model.getDetail().getString("problem"));
                 binding.descriptionTextView.setText(model.getDetail().getString("problem"));
             }
 
-            if (model.getSessions_count() != 0) {
-                extras.putString("session_count", String.valueOf(model.getSessions_count()));
-            }
-
             if (model.getCaseCreated_at() != 0) {
-                extras.putInt("created_at", model.getCaseCreated_at());
-                binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getCaseCreated_at()))));
+                binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCaseCreated_at()), " "));
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -195,15 +160,15 @@ public class CaseFragment extends Fragment {
         Case.showDashborad(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                CaseModel model = (CaseModel) object;
+                caseModel = (CaseModel) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        setData(model);
+                        setData(caseModel);
 
                         List psychologists = new List();
-                        if (model.getCaseManager() != null)
-                            psychologists.add(model.getCaseManager());
+                        if (caseModel.getCaseManager() != null)
+                            psychologists.add(caseModel.getCaseManager());
 
                         // Psychologists Data
                         if (!psychologists.data().isEmpty()) {
@@ -212,27 +177,27 @@ public class CaseFragment extends Fragment {
                         }
 
                         // References Data
-                        if (model.getClients() != null && model.getClients().data().size() != 0) {
-                            referencesAdapter.setReferences(model.getClients().data());
+                        if (caseModel.getClients() != null && caseModel.getClients().data().size() != 0) {
+                            referencesAdapter.setReferences(caseModel.getClients().data());
                             binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
                         }
 
                         // Sessions Data
-                        if (!model.getSessions().data().isEmpty()) {
-                            sessions2Adapter.setSessions(model.getSessions().data());
+                        if (!caseModel.getSessions().data().isEmpty()) {
+                            sessions2Adapter.setSessions(caseModel.getSessions().data());
                             binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
                         }
 
                         // Samples Data
-                        if (!model.getSamples().data().isEmpty()) {
-                            samples2Adapter.setSamples(model.getSamples().data());
+                        if (!caseModel.getSamples().data().isEmpty()) {
+                            samples2Adapter.setSamples(caseModel.getSamples().data());
                             binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
                         }
 
-                        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
-                        binding.referencesHeaderIncludeLayout.countTextView.setText("(" + referencesAdapter.getItemCount() + ")");
-                        binding.sessionsHeaderIncludeLayout.countTextView.setText("(" + sessions2Adapter.getItemCount() + ")");
-                        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples2Adapter.getItemCount() + ")");
+                        binding.psychologistsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
+                        binding.referencesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getItemCount()));
+                        binding.sessionsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(sessions2Adapter.getItemCount()));
+                        binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples2Adapter.getItemCount()));
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -263,6 +228,7 @@ public class CaseFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);
