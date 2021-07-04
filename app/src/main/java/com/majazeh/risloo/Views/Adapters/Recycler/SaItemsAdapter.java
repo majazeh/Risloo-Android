@@ -82,9 +82,11 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
     @SuppressLint("ClickableViewAccessibility")
     private void listener(SaItemsHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!holder.binding.inputEditText.hasFocus()) {
-                    ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+            if (editable) {
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    if (!holder.binding.inputEditText.hasFocus()) {
+                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                    }
                 }
             }
             return false;

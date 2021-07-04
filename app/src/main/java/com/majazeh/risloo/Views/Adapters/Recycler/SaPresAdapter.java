@@ -83,9 +83,11 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
     @SuppressLint("ClickableViewAccessibility")
     private void listener(SaPresHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!holder.binding.inputEditText.hasFocus()) {
-                    ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+            if (editable) {
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    if (!holder.binding.inputEditText.hasFocus()) {
+                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                    }
                 }
             }
             return false;
