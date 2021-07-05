@@ -10,12 +10,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.PracticesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
@@ -40,11 +42,9 @@ public class SessionFragment extends Fragment {
     private PracticesAdapter practicesAdapter;
     private Samples2Adapter samples2Adapter;
 
-    // Objects
-    private Bundle extras;
-
     // Vars
     private HashMap data, header;
+    private SessionModel sessionModel;
 
     @Nullable
     @Override
@@ -57,7 +57,7 @@ public class SessionFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -69,8 +69,6 @@ public class SessionFragment extends Fragment {
         users2Adapter = new Users2Adapter(requireActivity());
         practicesAdapter = new PracticesAdapter(requireActivity());
         samples2Adapter = new Samples2Adapter(requireActivity());
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -114,142 +112,82 @@ public class SessionFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.clientReportsFragment, extras)).widget(binding.reportsTextView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionFragmentDirections.actionSessionFragmentToClientReportsFragment("session", sessionModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.reportsTextView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.editSessionFragment, extras)).widget(binding.editImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionFragmentDirections.actionSessionFragmentToEditSessionFragment(sessionModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.editImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createCenterUserFragment, extras)).widget(binding.usersAddImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionFragmentDirections.actionSessionFragmentToCreateCenterUserFragment(sessionModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.usersAddImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createPracticeFragment, extras)).widget(binding.practicesAddImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionFragmentDirections.actionSessionFragmentToCreatePracticeFragment(sessionModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.practicesAddImageView.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createSampleFragment, extras)).widget(binding.samplesAddImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionFragmentDirections.actionSessionFragmentToCreateSampleFragment(null, sessionModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
+        }).widget(binding.samplesAddImageView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                extras.putString("id", getArguments().getString("id"));
-                data.put("id", getArguments().getString("id"));
-                binding.serialTextView.setText(getArguments().getString("id"));
-            }
+    private void setArgs() {
+        sessionModel = (SessionModel) SessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getInt("started_at") != 0) {
-                extras.putInt("started_at", getArguments().getInt("started_at"));
-                binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(getArguments().getInt("started_at")))));
-            }
-
-            if (getArguments().getString("duration") != null && !getArguments().getString("duration").equals("")) {
-                extras.putString("duration", getArguments().getString("duration"));
-                binding.durationTextView.setText(getArguments().getString("duration") + " " + "دقیقه");
-            }
-
-            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                extras.putString("status", getArguments().getString("status"));
-                binding.statusTextView.setText(SelectionManager.getSessionStatus(requireActivity(), "fa", getArguments().getString("status")));
-            }
-
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                extras.putString("type", getArguments().getString("type"));
-                binding.sessionTypeTextView.setText(SelectionManager.getSessionType(requireActivity(), "fa", getArguments().getString("type")));
-            }
-
-            if (getArguments().getString("clients_number") != null && !getArguments().getString("clients_number").equals("")) {
-                extras.putString("clients_number", getArguments().getString("clients_number"));
-                binding.referenceCountTextView.setText(getArguments().getString("clients_number"));
-            }
-
-            if (getArguments().getString("payment_status") != null && !getArguments().getString("payment_status").equals("")) {
-                extras.putString("payment_status", getArguments().getString("payment_status"));
-                binding.paymentTypeTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", getArguments().getString("payment_status")));
-            }
-
-            if (getArguments().getString("selection_type") != null && !getArguments().getString("selection_type").equals("")) {
-                extras.putString("selection_type", getArguments().getString("selection_type"));
-                binding.selectionTypeTextView.setText(SelectionManager.getSelectionType(requireActivity(), "fa", getArguments().getString("selection_type")));
-            }
-
-            if (getArguments().getString("clients_type") != null && !getArguments().getString("clients_type").equals("")) {
-                extras.putString("clients_type", getArguments().getString("clients_type"));
-                binding.referenceTypeTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", getArguments().getString("clients_type")));
-            }
-
-            if (getArguments().getInt("opens_at") != 0) {
-                extras.putInt("opens_at", getArguments().getInt("opens_at"));
-                binding.startTimeTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(getArguments().getInt("opens_at")))));
-            }
-
-            if (getArguments().getInt("closed_at") != 0) {
-                extras.putInt("closed_at", getArguments().getInt("closed_at"));
-                binding.endTimeTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(getArguments().getInt("closed_at")))));
-            }
-
-            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
-                extras.putString("clients", getArguments().getString("clients"));
-            }
-
-            if (getArguments().getString("practices") != null && !getArguments().getString("practices").equals("")) {
-                extras.putString("practices", getArguments().getString("practices"));
-            }
-        }
+        setData(sessionModel);
     }
 
     private void setData(SessionModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            binding.serialTextView.setText(model.getId());
+            data.put("id", model.getId());
+        }
+
         if (model.getStarted_at() != 0) {
-            extras.putInt("started_at", model.getStarted_at());
-            binding.dateTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))));
+            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStarted_at()), " "));
         }
 
         if (model.getDuration() != 0) {
-            extras.putString("duration", String.valueOf(model.getDuration()));
             binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
         }
 
         if (model.getStatus() != null && !model.getStatus().equals("")) {
-            extras.putString("status", model.getStatus());
             binding.statusTextView.setText(SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()));
         }
 
         if (model.getType() != null && !model.getType().equals("")) {
-            extras.putString("type", model.getType());
             binding.sessionTypeTextView.setText(SelectionManager.getSessionType(requireActivity(), "fa", model.getType()));
         }
 
         if (model.getClients_number() != 0) {
-            extras.putString("clients_number", String.valueOf(model.getClients_number()));
             binding.referenceCountTextView.setText(String.valueOf(model.getClients_number()));
         }
 
         if (model.getPayment_status() != null && !model.getPayment_status().equals("")) {
-            extras.putString("payment_status", model.getPayment_status());
             binding.paymentTypeTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPayment_status()));
         }
 
         if (model.getSelection_type() != null && !model.getSelection_type().equals("")) {
-            extras.putString("selection_type", model.getSelection_type());
             binding.selectionTypeTextView.setText(SelectionManager.getSelectionType(requireActivity(), "fa", model.getSelection_type()));
         }
 
         if (model.getClients_type() != null && !model.getClients_type().equals("")) {
-            extras.putString("clients_type", model.getClients_type());
             binding.referenceTypeTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClients_type()));
         }
 
         if (model.getOpens_at() != 0) {
-            extras.putInt("opens_at", model.getOpens_at());
-            binding.startTimeTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getOpens_at()))));
+            binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getOpens_at()), " "));
         }
 
         if (model.getClosed_at() != 0) {
-            extras.putInt("closed_at", model.getClosed_at());
-            binding.endTimeTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getClosed_at()))));
-        }
-
-        if (model.getClients() != null && model.getClients().data().size() != 0) {
-            extras.putString("clients", String.valueOf(model.getClients()));
-        }
-
-        if (model.getPractices() != null && model.getPractices().length() != 0) {
-            extras.putString("practices", String.valueOf(model.getPractices()));
+            binding.endTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getClosed_at()), " "));
         }
     }
 
@@ -257,15 +195,15 @@ public class SessionFragment extends Fragment {
         Session.showDashborad(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                SessionModel model = (SessionModel) object;
+                sessionModel = (SessionModel) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        setData(model);
+                        setData(sessionModel);
 
                         List psychologists = new List();
-                        if (model.getRoom() != null && model.getRoom().getRoomManager() != null)
-                            psychologists.add(model.getRoom().getRoomManager());
+                        if (sessionModel.getRoom() != null && sessionModel.getRoom().getRoomManager() != null)
+                            psychologists.add(sessionModel.getRoom().getRoomManager());
 
                         // Psychologists Data
                         if (!psychologists.data().isEmpty()) {
@@ -274,27 +212,27 @@ public class SessionFragment extends Fragment {
                         }
 
                         // Users Data
-                        if (model.getClients() != null && model.getClients().data().size() != 0) {
-                            users2Adapter.setUsers(model.getClients().data());
+                        if (sessionModel.getClients() != null && sessionModel.getClients().data().size() != 0) {
+                            users2Adapter.setUsers(sessionModel.getClients().data());
                             binding.usersSingleLayout.recyclerView.setAdapter(users2Adapter);
                         }
 
 //                        // Practices Data
-//                        if (!model.getPractices().data().isEmpty()) {
-//                            practicesAdapter.setPractices(model.getPractices().data());
+//                        if (!sessionModel.getPractices().data().isEmpty()) {
+//                            practicesAdapter.setPractices(sessionModel.getPractices().data());
 //                            binding.practicesSingleLayout.recyclerView.setAdapter(practicesAdapter);
 //                        }
 
                         // Samples Data
-                        if (!model.getSamples().data().isEmpty()) {
-                            samples2Adapter.setSamples(model.getSamples().data());
+                        if (!sessionModel.getSamples().data().isEmpty()) {
+                            samples2Adapter.setSamples(sessionModel.getSamples().data());
                             binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
                         }
 
-                        binding.psychologistsHeaderIncludeLayout.countTextView.setText("(" + psychologistsAdapter.getItemCount() + ")");
-                        binding.usersHeaderIncludeLayout.countTextView.setText("(" + users2Adapter.getItemCount() + ")");
-                        binding.practicesHeaderIncludeLayout.countTextView.setText("(" + practicesAdapter.getItemCount() + ")");
-                        binding.samplesHeaderIncludeLayout.countTextView.setText("(" + samples2Adapter.getItemCount() + ")");
+                        binding.psychologistsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
+                        binding.usersHeaderIncludeLayout.countTextView.setText(StringManager.bracing(users2Adapter.getItemCount()));
+                        binding.practicesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(practicesAdapter.getItemCount()));
+                        binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples2Adapter.getItemCount()));
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -326,6 +264,7 @@ public class SessionFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.psychologistsShimmerLayout.getRoot().setVisibility(View.GONE);

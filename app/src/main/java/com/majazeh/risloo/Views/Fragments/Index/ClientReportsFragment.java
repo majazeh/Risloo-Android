@@ -15,15 +15,22 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ClientReportsAdapter;
 import com.majazeh.risloo.databinding.FragmentClientReportsBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ClientReportsFragment extends Fragment {
 
@@ -35,10 +42,12 @@ public class ClientReportsFragment extends Fragment {
 
     // Objects
     private Handler handler;
-    private Bundle extras;
 
     // Vars
     private HashMap data, header;
+    private CaseModel caseModel;
+    private SessionModel sessionModel;
+    private String type = "";
     private boolean isLoading = true;
 
     @Nullable
@@ -52,7 +61,7 @@ public class ClientReportsFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         getData();
 
@@ -63,8 +72,6 @@ public class ClientReportsFragment extends Fragment {
         adapter = new ClientReportsAdapter(requireActivity());
 
         handler = new Handler();
-
-        extras = new Bundle();
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -142,17 +149,40 @@ public class ClientReportsFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> ((MainActivity) requireActivity()).navigator(R.id.createReportFragment, extras)).widget(binding.addImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+            if (type.equals("case")) {
+                NavDirections action = ClientReportsFragmentDirections.actionClientReportsFragmentToCreateReportFragment(caseModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            } else {
+                NavDirections action = ClientReportsFragmentDirections.actionClientReportsFragmentToCreateReportFragment(sessionModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
+        }).widget(binding.addImageView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                extras.putString("id", requireArguments().getString("id"));
-                data.put("id", requireArguments().getString("id"));
-            }
+    private void setArgs() {
+        type = ClientReportsFragmentArgs.fromBundle(getArguments()).getType();
 
+        if (type.equals("case")) {
+            caseModel = (CaseModel) ClientReportsFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
+            setData(caseModel);
+        } else {
+            sessionModel = (SessionModel) ClientReportsFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+            setData(sessionModel);
+        }
+    }
+
+    private void setData(CaseModel model) {
+        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
+            data.put("id", model.getCaseId());
+        }
+    }
+
+    private void setData(SessionModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
         }
     }
 
@@ -174,10 +204,10 @@ public class ClientReportsFragment extends Fragment {
 //                            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
 //                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
 //                        } else if (adapter.getItemCount() == 0) {
-//                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
-//                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
 //                        }
-//                        binding.headerIncludeLayout.countTextView.setText("(" + adapter.getItemCount() + ")");
+//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);

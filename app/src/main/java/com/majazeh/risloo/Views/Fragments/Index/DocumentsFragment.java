@@ -166,15 +166,15 @@ public class DocumentsFragment extends Fragment {
 //                            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
 //                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
 //                        } else if (adapter.getItemCount() == 0) {
-//                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
-//                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
 //                        }
 //                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
-//
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
-//
+
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
 //                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
 //                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
 //                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)

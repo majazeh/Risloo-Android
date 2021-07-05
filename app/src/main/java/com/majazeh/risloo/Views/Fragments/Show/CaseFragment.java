@@ -111,7 +111,7 @@ public class CaseFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onClickListener(() -> {
-            NavDirections action = CaseFragmentDirections.actionCaseFragmentToClientReportsFragment(caseModel);
+            NavDirections action = CaseFragmentDirections.actionCaseFragmentToClientReportsFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.reportsTextView.getRoot());
 

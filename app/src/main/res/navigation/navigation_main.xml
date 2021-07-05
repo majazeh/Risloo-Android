@@ -127,13 +127,21 @@
         android:id="@+id/createPracticeFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment"
         android:label="@string/CreatePracticeFragmentTitle"
-        tools:layout="@layout/fragment_create_practice" />
+        tools:layout="@layout/fragment_create_practice" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createReportFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateReportFragment"
         android:label="@string/CreateReportFragmentTitle"
-        tools:layout="@layout/fragment_create_report" />
+        tools:layout="@layout/fragment_create_report" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
 
     <fragment
         android:id="@+id/createRoomFragment"
@@ -353,6 +361,9 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragment"
         android:label="@string/ClientReportsFragmentTitle"
         tools:layout="@layout/fragment_client_reports" >
+        <argument
+            android:name="type"
+            app:argType="string" />
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
