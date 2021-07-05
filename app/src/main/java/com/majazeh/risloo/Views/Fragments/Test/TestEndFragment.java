@@ -67,9 +67,9 @@ public class TestEndFragment extends Fragment {
     }
 
     private void setData(SampleModel model) {
-        FormModel form = model.getSampleForm().getFirst();
+        FormModel form = model.getSampleForm().getModel("زنجیره");
 
-        if (!form.getType().equals("chain"))
+        if (form == null)
             binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
         else {
             List chains = (List) form.getObject();

@@ -11,8 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemProfileBinding;
+import com.mre.ligheh.Model.TypeModel.ProfileModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,7 +24,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
     private Activity activity;
 
     // Vars
-    private ArrayList<String> profiles;
+    private ArrayList<TypeModel> profiles;
 
     public ProfilesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -37,7 +38,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
 
     @Override
     public void onBindViewHolder(@NonNull ProfilesHolder holder, int i) {
-        String profile = profiles.get(i);
+        ProfileModel profile = (ProfileModel) profiles.get(i);
 
         detector(holder);
 
@@ -54,7 +55,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
             return 0;
     }
 
-    public void setProfiles(ArrayList<String> profiles) {
+    public void setProfiles(ArrayList<TypeModel> profiles) {
         if (this.profiles == null)
             this.profiles = profiles;
         else
@@ -75,16 +76,14 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
         }
     }
 
-    private void listener(ProfilesHolder holder, String profile) {
+    private void listener(ProfilesHolder holder, ProfileModel profile) {
         ClickManager.onDelayedClickListener(() -> {
-            if (!((MainActivity) activity).singleton.getAvatar().equals("")) {
-                IntentManager.display(activity, "", "", profile);
-            }
+            IntentManager.display(activity, profile.getFile_name(), "", profile.getUrl());
         }).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(ProfilesHolder holder, String profile) {
-        Picasso.get().load(profile).placeholder(R.color.Gray100).into(holder.binding.avatarZoomageView);
+    private void setData(ProfilesHolder holder, ProfileModel profile) {
+        Picasso.get().load(profile.getUrl()).placeholder(R.color.Gray100).into(holder.binding.avatarZoomageView);
     }
 
     public class ProfilesHolder extends RecyclerView.ViewHolder {

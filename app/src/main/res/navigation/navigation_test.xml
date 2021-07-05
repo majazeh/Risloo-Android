@@ -7,6 +7,38 @@
     tools:ignore="ExtraText">
 
     /*
+    ---------- PsyDesc Destinations ----------
+    */
+
+    <fragment
+        android:id="@+id/testPsyDescFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Test.TestPsyDescFragment"
+        android:label="@string/PsyDescFragmentTitle"
+        tools:layout="@layout/fragment_test_psy_desc" >
+        <action
+            android:id="@+id/action_testPsyDescFragment_to_testChainFragment"
+            app:destination="@id/testChainFragment" />
+        <action
+            android:id="@+id/action_testPsyDescFragment_to_testPrerequisiteFragment"
+            app:destination="@id/testPrerequisiteFragment" />
+        <action
+            android:id="@+id/action_testPsyDescFragment_to_testDescriptionFragment"
+            app:destination="@id/testDescriptionFragment" />
+        <action
+            android:id="@+id/action_testPsyDescFragment_to_testEntityFragment"
+            app:destination="@id/testEntityFragment" />
+        <action
+            android:id="@+id/action_testPsyDescFragment_to_testOptionalFragment"
+            app:destination="@id/testOptionalFragment" />
+        <action
+            android:id="@+id/action_testPsyDescFragment_to_testPictoralFragment"
+            app:destination="@id/testPictoralFragment" />
+        <action
+            android:id="@+id/action_testPsyDescFragment_to_testEndFragment"
+            app:destination="@id/testEndFragment" />
+    </fragment>
+
+    /*
     ---------- Chain Destinations ----------
     */
 
@@ -15,6 +47,9 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestChainFragment"
         android:label="@string/ChainFragmentTitle"
         tools:layout="@layout/fragment_test_chain" >
+        <action
+            android:id="@+id/action_testChainFragment_to_testPsyDescFragment"
+            app:destination="@id/testPsyDescFragment" />
         <action
             android:id="@+id/action_testChainFragment_to_testPrerequisiteFragment"
             app:destination="@id/testPrerequisiteFragment" />
@@ -45,6 +80,9 @@
         android:label="@string/PrerequisiteFragmentTitle"
         tools:layout="@layout/fragment_test_prerequisite" >
         <action
+            android:id="@+id/action_testPrerequisiteFragment_to_testPsyDescFragment"
+            app:destination="@id/testPsyDescFragment" />
+        <action
             android:id="@+id/action_testPrerequisiteFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
         <action
@@ -74,6 +112,9 @@
         android:label="@string/DescriptionFragmentTitle"
         tools:layout="@layout/fragment_test_description" >
         <action
+            android:id="@+id/action_testDescriptionFragment_to_testPsyDescFragment"
+            app:destination="@id/testPsyDescFragment" />
+        <action
             android:id="@+id/action_testDescriptionFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
         <action
@@ -102,6 +143,9 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestEntityFragment"
         android:label="@string/EntityFragmentTitle"
         tools:layout="@layout/fragment_test_entity" >
+        <action
+            android:id="@+id/action_testEntityFragment_to_testPsyDescFragment"
+            app:destination="@id/testPsyDescFragment" />
         <action
             android:id="@+id/action_testEntityFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
@@ -135,6 +179,9 @@
         android:label="@string/OptionalFragmentTitle"
         tools:layout="@layout/fragment_test_optional" >
         <action
+            android:id="@+id/action_testOptionalFragment_to_testPsyDescFragment"
+            app:destination="@id/testPsyDescFragment" />
+        <action
             android:id="@+id/action_testOptionalFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
         <action
@@ -167,6 +214,9 @@
         android:label="@string/PictoralFragmentTitle"
         tools:layout="@layout/fragment_test_pictoral" >
         <action
+            android:id="@+id/action_testPictoralFragment_to_testPsyDescFragment"
+            app:destination="@id/testPsyDescFragment" />
+        <action
             android:id="@+id/action_testPictoralFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />
         <action
@@ -198,6 +248,9 @@
         android:name="com.majazeh.risloo.Views.Fragments.Test.TestEndFragment"
         android:label="@string/EndFragmentTitle"
         tools:layout="@layout/fragment_test_end" >
+        <action
+            android:id="@+id/action_testEndFragment_to_testPsyDescFragment"
+            app:destination="@id/testPsyDescFragment" />
         <action
             android:id="@+id/action_testEndFragment_to_testChainFragment"
             app:destination="@id/testChainFragment" />

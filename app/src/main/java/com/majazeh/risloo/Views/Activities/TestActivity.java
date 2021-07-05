@@ -33,6 +33,7 @@ import com.majazeh.risloo.Views.Fragments.Test.TestEntityFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Test.TestPsyDescFragmentDirections;
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -229,6 +230,9 @@ public class TestActivity extends AppCompatActivity {
             formModel = model.getSampleForm().getCurrentForm();
 
             switch (formModel.getType()) {
+                case "psychologist_description":
+                    navGraph.setStartDestination(R.id.testPsyDescFragment);
+                    break;
                 case "chain":
                     navGraph.setStartDestination(R.id.testChainFragment);
                     break;
@@ -271,8 +275,51 @@ public class TestActivity extends AppCompatActivity {
 
     private void navigateFragment() {
         switch (navController.getCurrentDestination().getId()) {
+            case R.id.testPsyDescFragment:
+                switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        IntentManager.finish(this);
+                    } break;
+                    case "chain": {
+                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestChainFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "prerequisites": {
+                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestPrerequisiteFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "description": {
+                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestDescriptionFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "entities": {
+                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestEntityFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "item": {
+                        ItemModel itemModel = (ItemModel) formModel.getObject();
+
+                        if (itemModel.getType().equals("text")) {
+                            NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestOptionalFragment();
+                            navController.navigate(action);
+                        } else if (itemModel.getType().equals("image_url")) {
+                            NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestPictoralFragment();
+                            navController.navigate(action);
+                        }
+                    } break;
+                    case "close": {
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEndFragment();
+                        navController.navigate(action);
+                    } break;
+                }
+                break;
+
             case R.id.testChainFragment:
                 switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPsyDescFragment();
+                        navController.navigate(action);
+                    } break;
                     case "chain": {
                         IntentManager.finish(this);
                     } break;
@@ -308,6 +355,10 @@ public class TestActivity extends AppCompatActivity {
 
             case R.id.testPrerequisiteFragment:
                 switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestPsyDescFragment();
+                        navController.navigate(action);
+                    } break;
                     case "chain": {
                         NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestChainFragment();
                         navController.navigate(action);
@@ -343,6 +394,10 @@ public class TestActivity extends AppCompatActivity {
 
             case R.id.testDescriptionFragment:
                 switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPsyDescFragment();
+                        navController.navigate(action);
+                    } break;
                     case "chain": {
                         NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment();
                         navController.navigate(action);
@@ -378,6 +433,10 @@ public class TestActivity extends AppCompatActivity {
 
             case R.id.testEntityFragment:
                 switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestPsyDescFragment();
+                        navController.navigate(action);
+                    } break;
                     case "chain": {
                         NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestChainFragment();
                         navController.navigate(action);
@@ -414,6 +473,10 @@ public class TestActivity extends AppCompatActivity {
 
             case R.id.testOptionalFragment:
                 switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPsyDescFragment();
+                        navController.navigate(action);
+                    } break;
                     case "chain": {
                         NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestChainFragment();
                         navController.navigate(action);
@@ -450,6 +513,10 @@ public class TestActivity extends AppCompatActivity {
 
             case R.id.testPictoralFragment:
                 switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPsyDescFragment();
+                        navController.navigate(action);
+                    } break;
                     case "chain": {
                         NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestChainFragment();
                         navController.navigate(action);
@@ -486,6 +553,10 @@ public class TestActivity extends AppCompatActivity {
 
             case R.id.testEndFragment:
                 switch (formModel.getType()) {
+                    case "psychologist_description": {
+                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPsyDescFragment();
+                        navController.navigate(action);
+                    } break;
                     case "chain": {
                         NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment();
                         navController.navigate(action);
@@ -606,9 +677,9 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    FormModel form = sampleModel.getSampleForm().getFirst();
+                    FormModel form = sampleModel.getSampleForm().getModel("زنجیره");
 
-                    if (!form.getType().equals("chain")) {
+                    if (form == null) {
                         loadingDialog.dismiss();
                         IntentManager.main(TestActivity.this);
                     } else {
