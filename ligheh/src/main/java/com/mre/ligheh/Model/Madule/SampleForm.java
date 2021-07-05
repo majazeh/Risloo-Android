@@ -14,6 +14,7 @@ public class SampleForm {
     private List prerequisites;
     private List entities;
     private String description = "";
+    private String psychologist_description = "";
     private JSONArray sampleForm;
     private JSONArray itemPositions;
     public FormModel currentForm;
@@ -21,7 +22,7 @@ public class SampleForm {
     private int position = 0;
     private int itemPosition = 1;
 
-    public SampleForm(List items, @Nullable List chain, List entities, List prerequisites, String description) {
+    public SampleForm(List items,String psychologist_description, @Nullable List chain, List entities, List prerequisites, String description) {
         this.items = items;
         if (chain != null)
             this.chain = chain;
@@ -29,6 +30,8 @@ public class SampleForm {
             this.prerequisites = prerequisites;
         if (description != null)
             this.description = description;
+        if (psychologist_description != null)
+            this.psychologist_description = psychologist_description;
         if (entities != null)
             this.entities = entities;
         sampleForm = new JSONArray();
@@ -47,6 +50,9 @@ public class SampleForm {
         }
         if (description != null) {
             addForm(new FormModel("توضیحات", "description", description));
+        }
+        if (psychologist_description != null) {
+            addForm(new FormModel("توضیحات روان\u200Cشناس", "psychologist_description", psychologist_description));
         }
         for (int i = 0; i < items.size(); i++) {
             for (int j = 0; j < entities.size(); j++) {
@@ -96,7 +102,6 @@ public class SampleForm {
 
 
     public FormModel goTo(String title) {
-//        this.position = Math.min(sampleForm.length() - 1, Math.max(0, position));
         for (int i = 0; i < sampleForm.length(); i++) {
             try {
                 FormModel formModel = (FormModel) sampleForm.get(i);
@@ -119,6 +124,21 @@ public class SampleForm {
             e.printStackTrace();
             return null;
         }
+    }
+
+    public FormModel getModel(String title) {
+        for (int i = 0; i < sampleForm.length(); i++) {
+            try {
+                FormModel formModel = (FormModel) sampleForm.get(i);
+                if (title.equals(formModel.getTitle())) {
+                    return formModel;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+                return null;
+            }
+        }
+        return null;
     }
 
     public int itemSize() {

@@ -35,11 +35,13 @@ public class SampleModel extends TypeModel {
     private UserModel client;
     private List entities;
     private List members;
+    private List profiles;
     private String psychologist_description = "";
     private int created_at;
     private int started_at;
     private int scored_at;
     private int closed_at;
+    private int cornometer;
     private int code;
 
     public SampleModel(JSONObject jsonObject) throws JSONException {
@@ -147,9 +149,22 @@ public class SampleModel extends TypeModel {
         } else {
             setPrerequisites(new com.mre.ligheh.Model.Madule.List());
         }
-            sampleForm = new SampleForm(items, chain,entities, prerequisites, getSampleDescription());
+            sampleForm = new SampleForm(items,psychologist_description, chain,entities, prerequisites, getSampleDescription());
+
+        if (!jsonObject.isNull("profiles")) {
+            com.mre.ligheh.Model.Madule.List profiles = new com.mre.ligheh.Model.Madule.List();
+            for (int i = 0; i < jsonObject.getJSONArray("profiles").length(); i++) {
+                profiles.add(new SampleProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+            }
+            setProfiles(profiles);
+        } else {
+            setProfiles(new com.mre.ligheh.Model.Madule.List());
+        }
+
         if (!jsonObject.isNull("terms"))
             setTerms(jsonObject.getJSONArray("terms"));
+        if (!jsonObject.isNull("cornometer"))
+            setCornometer(jsonObject.getInt("cornometer"));
         if (!jsonObject.isNull("primary_term"))
             setPrimaryTerm(jsonObject.getString("primary_term"));
         if (!jsonObject.isNull("status"))
@@ -224,6 +239,14 @@ public class SampleModel extends TypeModel {
         return chainId;
     }
 
+    public List getProfiles() {
+        return profiles;
+    }
+
+    public void setProfiles(List profiles) {
+        this.profiles = profiles;
+    }
+
     public void setChainId(String chainId) {
         this.chainId = chainId;
     }
@@ -254,6 +277,14 @@ public class SampleModel extends TypeModel {
 
     public RoomModel getSampleRoom() {
         return SampleRoom;
+    }
+
+    public int getCornometer() {
+        return cornometer;
+    }
+
+    public void setCornometer(int cornometer) {
+        this.cornometer = cornometer;
     }
 
     public void setSampleRoom(RoomModel sampleRoom) {
