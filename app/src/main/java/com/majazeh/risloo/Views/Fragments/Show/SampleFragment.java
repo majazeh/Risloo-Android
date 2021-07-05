@@ -21,12 +21,19 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.FieldsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.SaGensAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.SaItemsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.SaPresAdapter;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +45,9 @@ public class SampleFragment extends Fragment {
 
     // Adapters
     private ProfilesAdapter profilesAdapter;
-    private FieldsAdapter fieldsGeneralAdapter, fieldsPrerequisiteAdapter, fieldsItemAdapter;
+    private SaGensAdapter saGensAdapter;
+    private SaPresAdapter saPresAdapter;
+    private SaItemsAdapter saItemsAdapter;
 
     // Vars
     private HashMap data, header;
@@ -63,9 +72,9 @@ public class SampleFragment extends Fragment {
 
     private void initializer() {
         profilesAdapter = new ProfilesAdapter(requireActivity());
-        fieldsGeneralAdapter = new FieldsAdapter(requireActivity());
-        fieldsPrerequisiteAdapter = new FieldsAdapter(requireActivity());
-        fieldsItemAdapter = new FieldsAdapter(requireActivity());
+        saGensAdapter = new SaGensAdapter(requireActivity());
+        saPresAdapter = new SaPresAdapter(requireActivity());
+        saItemsAdapter = new SaItemsAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -75,9 +84,9 @@ public class SampleFragment extends Fragment {
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profilesRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.fieldsGeneralRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.fieldsPrerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.fieldsAnswerRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -136,15 +145,15 @@ public class SampleFragment extends Fragment {
             if (isChecked) {
                 binding.fieldsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray900));
 
-                fieldsGeneralAdapter.setEditable(true);
-                fieldsPrerequisiteAdapter.setEditable(true);
-                fieldsItemAdapter.setEditable(true);
+                saGensAdapter.setEditable(true);
+                saPresAdapter.setEditable(true);
+                saItemsAdapter.setEditable(true);
             } else {
                 binding.fieldsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray600));
 
-                fieldsGeneralAdapter.setEditable(false);
-                fieldsPrerequisiteAdapter.setEditable(false);
-                fieldsItemAdapter.setEditable(false);
+                saGensAdapter.setEditable(false);
+                saPresAdapter.setEditable(false);
+                saItemsAdapter.setEditable(false);
             }
         });
     }
@@ -264,54 +273,69 @@ public class SampleFragment extends Fragment {
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        setData(sampleModel);
+                        try {
+                            setData(sampleModel);
 
 //                        // Profiles Data
 //                        if (!model.getProfiles().data().isEmpty()) {
 //                            profilesAdapter.setProfiles(model.getProfiles().data());
 //                            binding.profilesRecyclerView.setAdapter(profilesAdapter);
 //                        }
-//
-//                        // Fields General Data
-//                        if (!model.getGenerals().data().isEmpty()) {
-//                            fieldsGeneralAdapter.setFields(model.getGenerals().data());
-//                            binding.fieldsGeneralRecyclerView.setAdapter(fieldsGeneralAdapter);
-//                        }
-//
-//                        // Fields Prerequisite Data
-//                        if (!model.getPrerequisites().data().isEmpty()) {
-//                            fieldsPrerequisiteAdapter.setFields(model.getPrerequisites().data());
-//                            binding.fieldsPrerequisiteRecyclerView.setAdapter(fieldsPrerequisiteAdapter);
-//                        }
-//
-//                        // Fields Answer Data
-//                        if (!model.getAnswers().data().isEmpty()) {
-//                            fieldsAnswerAdapter.setFields(model.getAnswers().data());
-//                            binding.fieldsAnswerRecyclerView.setAdapter(fieldsAnswerAdapter);
-//                        }
 
-                        binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
-                        binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(fieldsGeneralAdapter.getItemCount() + fieldsPrerequisiteAdapter.getItemCount() + fieldsItemAdapter.getItemCount()));
+                            // Gens Data
+                            saGensAdapter.setItems(null);
+                            binding.generalRecyclerView.setAdapter(saGensAdapter);
 
-                        // Profiles Data
-                        binding.profilesRecyclerView.setVisibility(View.VISIBLE);
-                        binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.profilesShimmerLayout.getRoot().stopShimmer();
+                            List prerequisites = new List();
+                            List items = new List();
 
-                        // Fields General Data
-                        binding.fieldsGeneralRecyclerView.setVisibility(View.VISIBLE);
-                        binding.fieldsGeneralShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.fieldsGeneralShimmerLayout.getRoot().stopShimmer();
+                            for (int i = 0; i < sampleModel.getSampleForm().getSampleForm().length(); i++) {
+                                FormModel model = (FormModel) sampleModel.getSampleForm().getSampleForm().get(i);
 
-                        // Fields Prerequisite Data
-                        binding.fieldsPrerequisiteRecyclerView.setVisibility(View.VISIBLE);
-                        binding.fieldsPrerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.fieldsPrerequisiteShimmerLayout.getRoot().stopShimmer();
+                                if (model.getType().equals("prerequisites"))
+                                    prerequisites = (List) model.getObject();
+                                else if (model.getType().equals("item"))
+                                    items.add((TypeModel) model.getObject());
+                            }
 
-                        // Fields Answer Data
-                        binding.fieldsAnswerRecyclerView.setVisibility(View.VISIBLE);
-                        binding.fieldsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.fieldsAnswerShimmerLayout.getRoot().stopShimmer();
+                            // Prerequisite Data
+                            if (!prerequisites.data().isEmpty()) {
+                                saPresAdapter.setItems(prerequisites.data());
+                                binding.prerequisiteRecyclerView.setAdapter(saPresAdapter);
+                            }
+
+                            // Items Data
+                            if (!items.data().isEmpty()) {
+                                saItemsAdapter.setItems(items.data());
+                                binding.itemRecyclerView.setAdapter(saItemsAdapter);
+                            }
+
+                            binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
+                            binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(saPresAdapter.getItemCount() + saItemsAdapter.getItemCount()));
+
+                            // Profiles Data
+                            binding.profilesRecyclerView.setVisibility(View.VISIBLE);
+                            binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.profilesShimmerLayout.getRoot().stopShimmer();
+
+                            // Generals Data
+                            binding.generalRecyclerView.setVisibility(View.VISIBLE);
+                            binding.generalShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.generalShimmerLayout.getRoot().stopShimmer();
+
+                            // Prerequisites Data
+                            binding.prerequisiteRecyclerView.setVisibility(View.VISIBLE);
+                            binding.prerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.prerequisiteShimmerLayout.getRoot().stopShimmer();
+
+                            // Items Data
+                            binding.itemRecyclerView.setVisibility(View.VISIBLE);
+                            binding.itemShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.itemShimmerLayout.getRoot().stopShimmer();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     });
                 }
             }
@@ -326,20 +350,20 @@ public class SampleFragment extends Fragment {
                         binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.profilesShimmerLayout.getRoot().stopShimmer();
 
-                        // Fields General Data
-                        binding.fieldsGeneralRecyclerView.setVisibility(View.VISIBLE);
-                        binding.fieldsGeneralShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.fieldsGeneralShimmerLayout.getRoot().stopShimmer();
+                        // Generals Data
+                        binding.generalRecyclerView.setVisibility(View.VISIBLE);
+                        binding.generalShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.generalShimmerLayout.getRoot().stopShimmer();
 
-                        // Fields Prerequisite Data
-                        binding.fieldsPrerequisiteRecyclerView.setVisibility(View.VISIBLE);
-                        binding.fieldsPrerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.fieldsPrerequisiteShimmerLayout.getRoot().stopShimmer();
+                        // Prerequisites Data
+                        binding.prerequisiteRecyclerView.setVisibility(View.VISIBLE);
+                        binding.prerequisiteShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.prerequisiteShimmerLayout.getRoot().stopShimmer();
 
-                        // Fields Answer Data
-                        binding.fieldsAnswerRecyclerView.setVisibility(View.VISIBLE);
-                        binding.fieldsAnswerShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.fieldsAnswerShimmerLayout.getRoot().stopShimmer();
+                        // Items Data
+                        binding.itemRecyclerView.setVisibility(View.VISIBLE);
+                        binding.itemShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.itemShimmerLayout.getRoot().stopShimmer();
                     });
                 }
             }
@@ -454,6 +478,18 @@ public class SampleFragment extends Fragment {
 //                });
 //                break;
 //        }
+    }
+
+    public void sendGen(String key, String value) {
+
+    }
+
+    public void sendPre(int key, String value) {
+
+    }
+
+    public void sendItem(int key, String value) {
+
     }
 
     @Override

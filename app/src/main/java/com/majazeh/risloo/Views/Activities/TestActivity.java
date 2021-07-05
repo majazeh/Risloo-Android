@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -61,6 +62,7 @@ public class TestActivity extends AppCompatActivity {
 
     // Objects
     private Bundle extras;
+    private Handler handler;
     public ControlEditText controlEditText;
     public NavHostFragment navHostFragment;
     public NavController navController;
@@ -122,6 +124,8 @@ public class TestActivity extends AppCompatActivity {
         loadingDialog = new LoadingDialog();
 
         extras = getIntent().getExtras();
+
+        handler = new Handler();
 
         controlEditText = new ControlEditText();
 
@@ -573,9 +577,6 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    formModel = sampleModel.getSampleForm().next();
-                    navigateFragment();
-
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
                     binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
                     binding.statusTextView.getRoot().requestLayout();
@@ -591,6 +592,11 @@ public class TestActivity extends AppCompatActivity {
                 });
             }
         });
+
+        handler.postDelayed(() -> {
+            formModel = sampleModel.getSampleForm().next();
+            navigateFragment();
+        }, 1000);
     }
 
     public void closeSample() {
@@ -663,6 +669,12 @@ public class TestActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
+    }
+
+    @Override
+    public void finish() {
+        super.finish();
+        handler.removeCallbacksAndMessages(null);
     }
 
 }

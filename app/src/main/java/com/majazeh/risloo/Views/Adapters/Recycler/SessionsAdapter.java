@@ -2,12 +2,12 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -15,6 +15,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.SessionsFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -85,21 +86,29 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     }
 
     private void listener(SessionsHolder holder, SessionModel model) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.sessionFragment, getExtras(model))).widget(holder.binding.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionsFragmentDirections.actionSessionsFragmentToSessionFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
+        }).widget(holder.binding.getRoot());
 
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.editSessionFragment, getExtras(model))).widget(holder.binding.editImageView);
+        ClickManager.onClickListener(() -> {
+            NavDirections action = SessionsFragmentDirections.actionSessionsFragmentToEditSessionFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
+        }).widget(holder.binding.editImageView);
     }
 
     private void setData(SessionsHolder holder, SessionModel model) {
         try {
-            if (holder.getBindingAdapterPosition() == 0) {
+            if (holder.getBindingAdapterPosition() == 0)
                 holder.binding.topView.setVisibility(View.GONE);
-            } else {
+             else
                 holder.binding.topView.setVisibility(View.VISIBLE);
-            }
 
             holder.binding.serialTextView.setText(model.getId());
-            holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
+
+            if (model.getRoom() != null && model.getRoom().getRoomManager() != null) {
+                holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
+            }
 
             if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().isNull("title")) {
                 holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
@@ -118,38 +127,13 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
                 }
             }
 
-            holder.binding.startTimeTextView.setText(DateManager.gregorianToJalali5(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))));
+            holder.binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getStarted_at()), " "));
             holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
             holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private Bundle getExtras(SessionModel model) {
-        Bundle extras = new Bundle();
-        extras.putString("id", model.getId());
-
-        extras.putInt("started_at", model.getStarted_at());
-        extras.putString("duration", String.valueOf(model.getDuration()));
-        extras.putString("status", model.getStatus());
-
-        extras.putString("type", model.getType());
-        extras.putString("clients_number", String.valueOf(model.getClients_number()));
-        extras.putString("payment_status", model.getPayment_status());
-
-        extras.putString("selection_type", model.getSelection_type());
-        extras.putString("clients_type", model.getClients_type());
-        extras.putInt("opens_at", model.getOpens_at());
-        extras.putInt("closed_at", model.getClosed_at());
-
-        extras.putString("report", model.getReport());
-
-        extras.putString("clients", String.valueOf(model.getClients()));
-
-        extras.putString("practices", String.valueOf(model.getPractices()));
-        return extras;
     }
 
     public class SessionsHolder extends RecyclerView.ViewHolder {

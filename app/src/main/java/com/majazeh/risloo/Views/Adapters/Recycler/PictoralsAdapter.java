@@ -26,6 +26,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
     // Vars
     private ArrayList<String> urls;
     private int answer = -1;
+    private boolean userSelect = false;
 
     public PictoralsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -90,6 +91,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
     private void listener(PictoralsHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
             answer = position;
+            userSelect = true;
             notifyDataSetChanged();
 
             ((TestActivity) activity).sendItem(Integer.parseInt(getParent().formModel.getTitle()), String.valueOf(answer + 1));
@@ -101,25 +103,34 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
         Picasso.get().load(url).placeholder(R.color.Gray100).into(holder.binding.answerImageView);
 
         setActive(holder, position);
+
+        setClickable(holder);
     }
 
     private void setActive(PictoralsHolder holder, int position) {
         if (position == answer) {
             detector(holder, true);
 
-//            holder.itemView.setEnabled(true);
-//            holder.itemView.setClickable(true);
-
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.White));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
         } else {
             detector(holder, false);
 
-//            holder.itemView.setEnabled(false);
-//            holder.itemView.setClickable(false);
-
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
+
+            if (userSelect)
+                holder.binding.getRoot().setAlpha((float) 0.4);
+        }
+    }
+
+    private void setClickable(PictoralsHolder holder) {
+        if (userSelect) {
+            holder.itemView.setEnabled(false);
+            holder.itemView.setClickable(false);
+        } else {
+            holder.itemView.setEnabled(true);
+            holder.itemView.setClickable(true);
         }
     }
 

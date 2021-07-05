@@ -2,17 +2,18 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.CasesFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemCaseBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -81,19 +82,24 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
     }
 
     private void listener(CasesHolder holder, CaseModel model) {
-        ClickManager.onClickListener(() -> ((MainActivity) activity).navigator(R.id.caseFragment, getExtras(model))).widget(holder.binding.getRoot());
+        ClickManager.onClickListener(() -> {
+            NavDirections action = CasesFragmentDirections.actionCasesFragmentToCaseFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(CasesHolder holder, CaseModel model) {
         try {
-            if (holder.getBindingAdapterPosition() == 0) {
+            if (holder.getBindingAdapterPosition() == 0)
                 holder.binding.topView.setVisibility(View.GONE);
-            } else {
+            else
                 holder.binding.topView.setVisibility(View.VISIBLE);
-            }
 
             holder.binding.serialTextView.setText(model.getCaseId());
-            holder.binding.roomTextView.setText(model.getCaseManager().getName());
+
+            if (model.getCaseManager() != null) {
+                holder.binding.roomTextView.setText(model.getCaseManager().getName());
+            }
 
             if (model.getCaseRoom() != null && model.getCaseRoom().getRoomCenter() != null && model.getCaseRoom().getRoomCenter().getDetail().has("title") && !model.getCaseRoom().getRoomCenter().getDetail().isNull("title")) {
                 holder.binding.centerTextView.setText(model.getCaseRoom().getRoomCenter().getDetail().getString("title"));
@@ -107,34 +113,9 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
                     }
                 }
             }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private Bundle getExtras(CaseModel model) {
-        Bundle extras = new Bundle();
-        try {
-            extras.putString("id", model.getCaseId());
-
-            extras.putString("manager_id", model.getCaseManager().getUserId());
-            extras.putString("manager_name", model.getCaseManager().getName());
-
-            extras.putString("room_id", model.getCaseRoom().getRoomId());
-
-            extras.putString("clients", String.valueOf(model.getClients()));
-
-            if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem"))
-                extras.putString("problem", model.getDetail().getString("problem"));
-
-            extras.putString("session_count", String.valueOf(model.getSessions_count()));
-
-            extras.putInt("created_at", model.getCaseCreated_at());
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-        return extras;
     }
 
     public class CasesHolder extends RecyclerView.ViewHolder {

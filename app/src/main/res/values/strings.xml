@@ -1010,9 +1010,11 @@
     <string name="SampleFragmentProfileHeader">نیم‌رخ</string>
     <string name="SampleFragmentFieldHeader">مواد نمونه</string>
 
-    <string name="SampleFragmentFieldSubGeneral">عمومی</string>
-    <string name="SampleFragmentFieldSubPrerequisite">پیش نیاز‌ها</string>
-    <string name="SampleFragmentFieldSubAnswer">گویه‌ها</string>
+    <string name="SampleFragmentSubGeneral">عمومی</string>
+    <string name="SampleFragmentSubPrerequisite">پیش نیاز‌ها</string>
+    <string name="SampleFragmentSubItem">گویه‌ها</string>
+
+    <string name="SampleFragmentSubGeneralTime">زمان انجام (دقیقه)</string>
 
     /*
     ---------- Session Fragment ----------

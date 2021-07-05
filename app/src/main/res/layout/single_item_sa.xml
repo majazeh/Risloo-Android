@@ -7,18 +7,17 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     tools:layout_marginBottom="@dimen/_4sdp"
-    tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.FieldsAdapter">
+    tools:layout_marginTop="@dimen/_4sdp">
 
     <TextView
         android:id="@+id/header_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_4sdp"
-        android:gravity="center"
-        android:textSize="@dimen/_11ssp"
+        android:gravity="start"
+        android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray800"
+        android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         app:layout_constraintBottom_toTopOf="@id/top_barrier"
@@ -36,14 +35,15 @@
     <EditText
         android:id="@+id/input_editText"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_36sdp"
         android:paddingEnd="@dimen/_12sdp"
         android:paddingStart="@dimen/_12sdp"
         android:imeOptions="actionDone"
         android:gravity="center|start"
-        android:textSize="@dimen/_12ssp"
+        android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray700"
+        android:textColor="@color/Gray600"
         android:textColorHint="@color/Gray400"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
@@ -58,12 +58,12 @@
     <Spinner
         android:id="@+id/select_spinner"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
+        android:layout_height="wrap_content"
+        android:minHeight="@dimen/_36sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
-        android:dropDownVerticalOffset="0sp"
+        android:dropDownVerticalOffset="@dimen/_40sdp"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
-        android:visibility="gone"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_barrier" />
@@ -76,7 +76,6 @@
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_angle_down_light"
-        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="@id/select_spinner"
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
@@ -88,6 +87,13 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="input_editText, select_spinner" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/select_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="select_spinner, angle_imageView" />
 
     <ImageView
         android:id="@+id/error_imageView"
@@ -111,7 +117,7 @@
         android:gravity="start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
-        android:textColor="@color/Red500"
+        android:textColor="@color/Red600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_light"
         android:visibility="gone"

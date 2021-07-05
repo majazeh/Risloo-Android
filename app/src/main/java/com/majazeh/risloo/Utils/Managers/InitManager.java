@@ -78,7 +78,8 @@ public class InitManager {
 
     public static void unfixedSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, String dimension) {
         switch (dimension) {
-            case "prerequisite": {
+            case "prerequisite":
+            case "item": {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_prerequisite, arrayList) {
 
                     private TextView dropdownTextView;

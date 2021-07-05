@@ -25,6 +25,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     // Vars
     private ArrayList<String> titles;
     private int answer = -1;
+    private boolean userSelect = false;
 
     public OptionalsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -89,6 +90,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     private void listener(OptionalsHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
             answer = position;
+            userSelect = true;
             notifyDataSetChanged();
 
             ((TestActivity) activity).sendItem(Integer.parseInt(getParent().formModel.getTitle()), String.valueOf(answer + 1));
@@ -100,25 +102,34 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
         holder.binding.answerTextView.setText(title);
 
         setActive(holder, position);
+
+        setClickable(holder);
     }
 
     private void setActive(OptionalsHolder holder, int position) {
         if (position == answer) {
             detector(holder, true);
 
-//            holder.itemView.setEnabled(true);
-//            holder.itemView.setClickable(true);
-
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.White));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
         } else {
             detector(holder, false);
 
-//            holder.itemView.setEnabled(false);
-//            holder.itemView.setClickable(false);
-
             holder.binding.numberTextView.setTextColor(activity.getResources().getColor(R.color.Gray800));
             holder.binding.numberTextView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray200);
+
+            if (userSelect)
+                holder.binding.getRoot().setAlpha((float) 0.4);
+        }
+    }
+
+    private void setClickable(OptionalsHolder holder) {
+        if (userSelect) {
+            holder.itemView.setEnabled(false);
+            holder.itemView.setClickable(false);
+        } else {
+            holder.itemView.setEnabled(true);
+            holder.itemView.setClickable(true);
         }
     }
 
