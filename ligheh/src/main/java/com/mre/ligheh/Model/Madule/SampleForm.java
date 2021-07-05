@@ -42,6 +42,9 @@ public class SampleForm {
     }
 
     private void sampleFormInitializer() {
+        if (psychologist_description != null) {
+            addForm(new FormModel("توضیحات روان\u200Cشناس", "psychologist_description", psychologist_description));
+        }
         if (chain != null) {
             addForm(new FormModel("زنجیره", "chain", chain));
         }
@@ -50,9 +53,6 @@ public class SampleForm {
         }
         if (description != null) {
             addForm(new FormModel("توضیحات", "description", description));
-        }
-        if (psychologist_description != null) {
-            addForm(new FormModel("توضیحات روان\u200Cشناس", "psychologist_description", psychologist_description));
         }
         for (int i = 0; i < items.size(); i++) {
             for (int j = 0; j < entities.size(); j++) {
