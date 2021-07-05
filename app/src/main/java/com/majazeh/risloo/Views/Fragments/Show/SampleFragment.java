@@ -30,6 +30,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.FormModel;
+import com.mre.ligheh.Model.TypeModel.ProfileModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -53,6 +54,7 @@ public class SampleFragment extends Fragment {
     private HashMap data, header;
     private SampleModel sampleModel;
     private boolean userSelect = false;
+    private ArrayList<String> profileUrls;
 
     @Nullable
     @Override
@@ -83,7 +85,7 @@ public class SampleFragment extends Fragment {
         binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profilesRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profilesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -125,9 +127,7 @@ public class SampleFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String profile = parent.getItemAtPosition(position).toString();
-
-                    IntentManager.download(requireContext(), profile);
+                    IntentManager.download(requireContext(), profileUrls.get(position));
 
                     binding.profilesTextView.selectSpinner.setSelection(binding.profilesTextView.selectSpinner.getAdapter().getCount());
 
@@ -202,6 +202,10 @@ public class SampleFragment extends Fragment {
                 }
 
                 binding.scoringConstraintLayout.setVisibility(View.GONE);
+
+                binding.profilesGroup.setVisibility(View.GONE);
+
+                binding.fieldsEditableCheckBox.setVisibility(View.VISIBLE);
                 break;
             case "closed":
                 binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
@@ -220,6 +224,10 @@ public class SampleFragment extends Fragment {
                 }
 
                 binding.scoringConstraintLayout.setVisibility(View.GONE);
+
+                binding.profilesGroup.setVisibility(View.GONE);
+
+                binding.fieldsEditableCheckBox.setVisibility(View.GONE);
                 break;
             case "scoring":
             case "creating_files":
@@ -230,6 +238,10 @@ public class SampleFragment extends Fragment {
                 doWork("getScore");
 
                 binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
+
+                binding.profilesGroup.setVisibility(View.GONE);
+
+                binding.fieldsEditableCheckBox.setVisibility(View.GONE);
                 break;
             case "done":
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
@@ -250,19 +262,44 @@ public class SampleFragment extends Fragment {
                 }
 
                 binding.scoringConstraintLayout.setVisibility(View.GONE);
+
+                setProfiles();
+
+                binding.fieldsEditableCheckBox.setVisibility(View.GONE);
                 break;
         }
     }
 
-    private void setProfiles(SampleModel model) {
-        ArrayList<String> profiles = new ArrayList<>();
+    private void setProfiles() {
+        List profilesPngs = new List();
+        ArrayList<String> profilesExecs = new ArrayList<>();
+        profileUrls = new ArrayList<>();
 
-        profiles.add("");
-        profiles.add("");
-        profiles.add("");
-        profiles.add("");
+        for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
+            ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
 
-        InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profiles, "profiles");
+            if (profile.getExec().equals("png"))
+                profilesPngs.add(profile);
+
+            profilesExecs.add(profile.getExec());
+            profileUrls.add(profile.getUrl());
+        }
+
+        profilesExecs.add("");
+
+        InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profilesExecs, "profiles");
+
+        if (!profilesPngs.data().isEmpty()) {
+            profilesAdapter.setProfiles(profilesPngs.data());
+            binding.profilesSingleLayout.recyclerView.setAdapter(profilesAdapter);
+
+            binding.profilesSingleLayout.textView.setVisibility(View.GONE);
+        } else {
+            binding.profilesSingleLayout.textView.setVisibility(View.VISIBLE);
+        }
+        binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
+
+        binding.profilesGroup.setVisibility(View.VISIBLE);
     }
 
     private void getData() {
@@ -275,12 +312,6 @@ public class SampleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             setData(sampleModel);
-
-//                        // Profiles Data
-//                        if (!model.getProfiles().data().isEmpty()) {
-//                            profilesAdapter.setProfiles(model.getProfiles().data());
-//                            binding.profilesRecyclerView.setAdapter(profilesAdapter);
-//                        }
 
                             ArrayList<String> generals = new ArrayList<>();
                             generals.add(String.valueOf(sampleModel.getCornometer()));
@@ -315,13 +346,7 @@ public class SampleFragment extends Fragment {
                                 binding.itemRecyclerView.setAdapter(saItemsAdapter);
                             }
 
-                            binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
                             binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(saGensAdapter.getItemCount() + saPresAdapter.getItemCount() + saItemsAdapter.getItemCount()));
-
-                            // Profiles Data
-                            binding.profilesRecyclerView.setVisibility(View.VISIBLE);
-                            binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
-                            binding.profilesShimmerLayout.getRoot().stopShimmer();
 
                             // Generals Data
                             binding.generalRecyclerView.setVisibility(View.VISIBLE);
@@ -349,11 +374,6 @@ public class SampleFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        // Profiles Data
-                        binding.profilesRecyclerView.setVisibility(View.VISIBLE);
-                        binding.profilesShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.profilesShimmerLayout.getRoot().stopShimmer();
 
                         // Generals Data
                         binding.generalRecyclerView.setVisibility(View.VISIBLE);

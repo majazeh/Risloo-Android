@@ -190,41 +190,21 @@
             app:layout_constraintTop_toBottomOf="@id/scoring_constraintLayout" />
 
         <include
-            android:id="@+id/profiles_shimmerLayout"
-            layout="@layout/component_shimmer_profile"
+            android:id="@+id/profiles_singleLayout"
+            layout="@layout/component_single_profile"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profiles_header_includeLayout"
-            tools:visibility="gone" />
+            app:layout_constraintTop_toBottomOf="@id/profiles_header_includeLayout" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/profiles_recyclerView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:overScrollMode="never"
-            android:layoutDirection="rtl"
-            android:visibility="gone"
-            app:layout_constrainedHeight="true"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/profiles_header_includeLayout"
-            tools:layout_marginBottom="@dimen/_8sdp"
-            tools:layout_marginEnd="@dimen/_12sdp"
-            tools:layout_marginStart="@dimen/_12sdp"
-            tools:layout_marginTop="@dimen/_8sdp"
-            tools:listitem="@layout/single_item_profile"
-            tools:itemCount="4"
-            tools:visibility="visible" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/profiles_barrier"
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/profiles_group"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="profiles_shimmerLayout, profiles_recyclerView" />
+            android:visibility="gone"
+            app:constraint_referenced_ids="profiles_header_includeLayout, profiles_singleLayout"
+            tools:visibility="visible" />
 
         <include
             android:id="@+id/fields_header_includeLayout"
@@ -233,7 +213,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/profiles_barrier" />
+            app:layout_constraintTop_toBottomOf="@id/profiles_singleLayout" />
 
         <CheckBox
             android:id="@+id/fields_editable_checkBox"
