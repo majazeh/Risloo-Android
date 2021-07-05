@@ -206,7 +206,7 @@ public class InitManager {
                     }
 
                     private void initializer(View view) {
-                        dropdownTextView = view.findViewById(R.id.textView);
+                        dropdownTextView = view.findViewById(R.id.dropdown_textView);
                     }
 
                     private void detector(View view, int position) {
@@ -603,7 +603,7 @@ public class InitManager {
                     }
 
                     private void initializer(View view) {
-                        dropdownTextView = view.findViewById(R.id.item_textView);
+                        dropdownTextView = view.findViewById(R.id.dropdown_textView);
                     }
 
                     private void detector(View view, int position) {
