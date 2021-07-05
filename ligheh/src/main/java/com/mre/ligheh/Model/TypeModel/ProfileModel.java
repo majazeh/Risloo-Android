@@ -1,9 +1,10 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class SampleProfileModel extends TypeModel {
+public class ProfileModel extends TypeModel {
     private String id;
     private String file_name;
     private String slug;
@@ -14,7 +15,7 @@ public class SampleProfileModel extends TypeModel {
     private String exec;
 
 
-    public SampleProfileModel(JSONObject jsonObject) {
+    public ProfileModel(JSONObject jsonObject) {
         super(jsonObject);
             try {
         if (!jsonObject.isNull("id"))

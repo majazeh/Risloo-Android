@@ -8,15 +8,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class SampleModel extends TypeModel {
-    private String sampleId="";
-    private String sampleTitle="";
+    private String sampleId = "";
+    private String sampleTitle = "";
     private int sampleVersion;
-    private String sampleEdition="";
+    private String sampleEdition = "";
     private int sampleEditionVersion;
-    private String filler="";
-    private String sampleScaleId="";
-    private String sampleScaleTitle="";
-    private String sampleDescription="";
+    private String filler = "";
+    private String sampleScaleId = "";
+    private String sampleScaleTitle = "";
+    private String sampleDescription = "";
     private List items;
     private String caseStatus = "";
     private int membersCount;
@@ -27,8 +27,8 @@ public class SampleModel extends TypeModel {
     private CaseModel SampleCase;
     private List prerequisites;
     private JSONArray terms;
-    private String primaryTerm="";
-    private String sampleStatus="";
+    private String primaryTerm = "";
+    private String sampleStatus = "";
     private String caseId = "";
     private String sessionId = "";
     private SampleForm sampleForm;
@@ -102,7 +102,7 @@ public class SampleModel extends TypeModel {
         if (!jsonObject.isNull("entities")) {
             com.mre.ligheh.Model.Madule.List entities = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("entities").length(); i++) {
-                jsonObject.getJSONArray("entities").getJSONObject(i).put("position", i+1);
+                jsonObject.getJSONArray("entities").getJSONObject(i).put("position", i + 1);
                 entities.add(new EntityModel(jsonObject.getJSONArray("entities").getJSONObject(i)));
             }
             setEntities(entities);
@@ -126,7 +126,7 @@ public class SampleModel extends TypeModel {
 
 
         if (!jsonObject.isNull("chain")) {
-            if (jsonObject.get("chain").getClass().getName().equals("org.json.JSONObject")){
+            if (jsonObject.get("chain").getClass().getName().equals("org.json.JSONObject")) {
                 JSONObject jsonObject1 = jsonObject.getJSONObject("chain");
                 com.mre.ligheh.Model.Madule.List chains = new com.mre.ligheh.Model.Madule.List();
                 for (int i = 0; i < jsonObject1.getJSONArray("list").length(); i++) {
@@ -134,8 +134,8 @@ public class SampleModel extends TypeModel {
                 }
                 setChain(chains);
                 setChainId(jsonObject1.getString("id"));
-            }else{
-            setChainId(jsonObject.getString("chain"));
+            } else {
+                setChainId(jsonObject.getString("chain"));
             }
 
         }
@@ -149,25 +149,30 @@ public class SampleModel extends TypeModel {
         } else {
             setPrerequisites(new com.mre.ligheh.Model.Madule.List());
         }
-            sampleForm = new SampleForm(items,psychologist_description, chain,entities, prerequisites, getSampleDescription());
+        sampleForm = new SampleForm(items, psychologist_description, chain, entities, prerequisites, getSampleDescription());
 
         if (!jsonObject.isNull("profiles")) {
             com.mre.ligheh.Model.Madule.List profiles = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("profiles").length(); i++) {
-                profiles.add(new SampleProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+                profiles.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
             }
             setProfiles(profiles);
         } else {
             setProfiles(new com.mre.ligheh.Model.Madule.List());
         }
 
+
         if (!jsonObject.isNull("terms"))
+
             setTerms(jsonObject.getJSONArray("terms"));
         if (!jsonObject.isNull("cornometer"))
+
             setCornometer(jsonObject.getInt("cornometer"));
         if (!jsonObject.isNull("primary_term"))
+
             setPrimaryTerm(jsonObject.getString("primary_term"));
         if (!jsonObject.isNull("status"))
+
             setSampleStatus(jsonObject.getString("status"));
     }
 
@@ -246,6 +251,7 @@ public class SampleModel extends TypeModel {
     public void setProfiles(List profiles) {
         this.profiles = profiles;
     }
+    
 
     public void setChainId(String chainId) {
         this.chainId = chainId;
