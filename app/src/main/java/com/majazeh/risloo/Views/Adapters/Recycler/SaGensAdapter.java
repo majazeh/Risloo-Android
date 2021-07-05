@@ -17,7 +17,6 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSaBinding;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
@@ -27,7 +26,7 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> items;
+    private ArrayList<String> items;
     private boolean userSelect = false, editable = false;
 
     public SaGensAdapter(@NonNull Activity activity) {
@@ -42,9 +41,11 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
 
     @Override
     public void onBindViewHolder(@NonNull SaGensHolder holder, int i) {
-        listener(holder);
+        String item = items.get(i);
 
-        setData(holder);
+        listener(holder, i);
+
+        setData(holder, item);
     }
 
     @Override
@@ -52,10 +53,10 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
         if (this.items != null)
             return items.size();
         else
-            return 1;
+            return 0;
     }
 
-    public void setItems(ArrayList<TypeModel> items) {
+    public void setItems(ArrayList<String> items) {
         if (this.items == null)
             this.items = items;
         else
@@ -76,7 +77,7 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(SaGensHolder holder) {
+    private void listener(SaGensHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable) {
                 if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -121,19 +122,22 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
         });
     }
 
-    private void setData(SaGensHolder holder) {
+    private void setData(SaGensHolder holder, String item) {
         holder.binding.headerTextView.setText(activity.getResources().getString(R.string.SampleFragmentSubGeneralTime));
 
-        setType(holder);
+        setType(holder, item);
 
         setClickable(holder);
     }
 
-    private void setType(SaGensHolder holder) {
+    private void setType(SaGensHolder holder, String item) {
         holder.binding.selectGroup.setVisibility(View.GONE);
 
         holder.binding.inputEditText.setVisibility(View.VISIBLE);
         holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+
+        if (!item.equals(""))
+            holder.binding.inputEditText.setText(item);
     }
 
     private void setClickable(SaGensHolder holder) {

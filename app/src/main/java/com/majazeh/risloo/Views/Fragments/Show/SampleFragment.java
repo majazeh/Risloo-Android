@@ -282,9 +282,14 @@ public class SampleFragment extends Fragment {
 //                            binding.profilesRecyclerView.setAdapter(profilesAdapter);
 //                        }
 
+                            ArrayList<String> generals = new ArrayList<>();
+                            generals.add(String.valueOf(sampleModel.getCornometer()));
+
                             // Gens Data
-                            saGensAdapter.setItems(null);
-                            binding.generalRecyclerView.setAdapter(saGensAdapter);
+                            if (generals.size() != 0) {
+                                saGensAdapter.setItems(generals);
+                                binding.generalRecyclerView.setAdapter(saGensAdapter);
+                            }
 
                             List prerequisites = new List();
                             List items = new List();
@@ -311,7 +316,7 @@ public class SampleFragment extends Fragment {
                             }
 
                             binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
-                            binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(saPresAdapter.getItemCount() + saItemsAdapter.getItemCount()));
+                            binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(saGensAdapter.getItemCount() + saPresAdapter.getItemCount() + saItemsAdapter.getItemCount()));
 
                             // Profiles Data
                             binding.profilesRecyclerView.setVisibility(View.VISIBLE);
