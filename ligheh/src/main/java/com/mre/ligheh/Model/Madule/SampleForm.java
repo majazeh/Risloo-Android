@@ -14,7 +14,7 @@ public class SampleForm {
     private List prerequisites;
     private List entities;
     private String description = "";
-    private String psychologist_description = "";
+    private String psychologist_description;
     private JSONArray sampleForm;
     private JSONArray itemPositions;
     public FormModel currentForm;

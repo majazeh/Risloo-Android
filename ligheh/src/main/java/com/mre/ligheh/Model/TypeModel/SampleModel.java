@@ -36,7 +36,7 @@ public class SampleModel extends TypeModel {
     private List entities;
     private List members;
     private List profiles;
-    private String psychologist_description = "";
+    private String psychologist_description;
     private int created_at;
     private int started_at;
     private int scored_at;
@@ -251,7 +251,7 @@ public class SampleModel extends TypeModel {
     public void setProfiles(List profiles) {
         this.profiles = profiles;
     }
-    
+
 
     public void setChainId(String chainId) {
         this.chainId = chainId;
