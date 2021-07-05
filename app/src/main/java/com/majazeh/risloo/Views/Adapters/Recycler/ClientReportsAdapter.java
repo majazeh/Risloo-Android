@@ -81,23 +81,16 @@ public class ClientReportsAdapter extends RecyclerView.Adapter<ClientReportsAdap
     }
 
     private void setData(ClientReportsHolder holder) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+        else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
         holder.binding.nameTextView.setText("مشکلی موجود نمی باشد.");
         holder.binding.timeTextView.setText("1400/01/01\n20/00");
         holder.binding.referenceTextView.setText("محمد حسن صالحی");
         holder.binding.readersTextView.setText("محمد علی نخلی");
     }
-
-//    private Bundle getExtras(ReportModel model) {
-//        Bundle extras = new Bundle();
-//
-//        return extras;
-//    }
 
     public class ClientReportsHolder extends RecyclerView.ViewHolder {
 

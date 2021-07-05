@@ -92,22 +92,15 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesAdapter.Prac
     }
 
     private void setData(PracticesHolder holder) {
-        if (holder.getAbsoluteAdapterPosition() == 0) {
+        if (holder.getAbsoluteAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+        else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
         holder.binding.serialTextView.setText("P966663D");
         holder.binding.nameTextView.setText("تمرین abc");
         holder.binding.descriptionTextView.setText("چرا عاقل کند کاری که بازآید به کنعان غم مخور");
     }
-
-//    private Bundle getExtras(PracticeModel model) {
-//        Bundle extras = new Bundle();
-//
-//        return extras;
-//    }
 
     public class PracticesHolder extends RecyclerView.ViewHolder {
 

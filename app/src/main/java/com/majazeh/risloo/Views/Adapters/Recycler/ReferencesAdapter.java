@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -11,7 +10,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -78,22 +76,12 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
 
     private void listener(ReferencesHolder holder, UserModel model) {
         ClickManager.onDelayedClickListener(() -> {
-//            ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model));
+            // TODO : Place Code Here
         }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(ReferencesHolder holder, UserModel model) {
         holder.binding.nameTextView.setText(model.getName());
-    }
-
-    private Bundle getExtras(UserModel model) {
-        Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        return extras;
     }
 
     public class ReferencesHolder extends RecyclerView.ViewHolder {

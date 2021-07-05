@@ -2,7 +2,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.app.Activity;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemPsychologyBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -81,18 +79,17 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
 
     private void listener(PsychologistsHolder holder, UserModel model) {
         ClickManager.onDelayedClickListener(() -> {
-//            ((MainActivity) activity).navigator(R.id.referenceFragment, getExtras(model));
+            // TODO : Place Code Here
         }).widget(holder.binding.containerConstraintLayout);
     }
 
     private void setData(PsychologistsHolder holder, UserModel model) {
         holder.binding.nameTextView.setText(model.getName());
 
-        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals(""))
             setAvatar(holder, model.getAvatar().getMedium().getUrl());
-        } else {
+        else
             setAvatar(holder, "");
-        }
     }
 
     private void setAvatar(PsychologistsHolder holder, String url) {
@@ -105,16 +102,6 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
         }
-    }
-
-    private Bundle getExtras(UserModel model) {
-        Bundle extras = new Bundle();
-//        try {
-//
-//        } catch (JSONException e) {
-//            e.printStackTrace();
-//        }
-        return extras;
     }
 
     public class PsychologistsHolder extends RecyclerView.ViewHolder {

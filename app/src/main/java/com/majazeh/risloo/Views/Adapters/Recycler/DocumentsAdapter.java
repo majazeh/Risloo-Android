@@ -12,6 +12,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.databinding.SingleItemDocumentBinding;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.DocumentsHolder> {
 
@@ -19,7 +22,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     private Activity activity;
 
     // Vars
-//    private ArrayList<Document> documents;
+    private ArrayList<TypeModel> documents;
 
     public DocumentsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -33,25 +36,37 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
 
     @Override
     public void onBindViewHolder(@NonNull DocumentsHolder holder, int i) {
-//        Documents document = documents.get(i);
-
-        detector(holder);
-
-        listener(holder);
-
-        setData(holder);
+//        DocumentModel document = (DocumentModel) documents.get(i);
+//
+//        detector(holder);
+//
+//        listener(holder, document);
+//
+//        setData(holder, document);
     }
 
     @Override
     public int getItemCount() {
-//        return documents.size();
-        return 4;
+        if (this.documents != null)
+            return documents.size();
+        else
+            return 0;
     }
 
-//    public void setDocuments(ArrayList<Document> documents) {
-//        this.documents = documents;
-//        notifyDataSetChanged();
-//    }
+    public void setDocuments(ArrayList<TypeModel> documents) {
+        if (this.documents == null)
+            this.documents = documents;
+        else
+            this.documents.addAll(documents);
+        notifyDataSetChanged();
+    }
+
+    public void clearDocuments() {
+        if (this.documents != null) {
+            this.documents.clear();
+            notifyDataSetChanged();
+        }
+    }
 
     private void detector(DocumentsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
@@ -76,23 +91,21 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     }
 
     private void setData(DocumentsHolder holder) {
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-        } else {
+        else
             holder.binding.topView.setVisibility(View.VISIBLE);
-        }
 
         holder.binding.serialTextView.setText("P-96666DD");
         holder.binding.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
         holder.binding.statusTextView.setText("تأیید شده");
 
-        if (holder.getBindingAdapterPosition() == 0) {
+        if (holder.getBindingAdapterPosition() == 0)
             setAction(holder, "none");
-        } else if (holder.getBindingAdapterPosition() == 2) {
+        else if (holder.getBindingAdapterPosition() == 2)
             setAction(holder, "kick");
-        } else {
+        else
             setAction(holder, "accept");
-        }
     }
 
     private void setAction(DocumentsHolder holder, String action) {
