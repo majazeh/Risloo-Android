@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.EditCenterAdapter;
 import com.majazeh.risloo.databinding.FragmentEditCenterBinding;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 public class EditCenterFragment extends Fragment {
 
@@ -27,8 +28,7 @@ public class EditCenterFragment extends Fragment {
 
     // Vars
     private String[] tabs;
-    public String centerId = "", type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "", phoneNumbers = "";
-    public String avatarPath = "";
+    public CenterModel centerModel;
 
     @Nullable
     @Override
@@ -37,7 +37,7 @@ public class EditCenterFragment extends Fragment {
 
         initializer();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -47,54 +47,22 @@ public class EditCenterFragment extends Fragment {
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                centerId = getArguments().getString("id");
-            }
+    private void setArgs() {
+        centerModel = (CenterModel) EditCenterFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                switch (type) {
-                    case "personal_clinic":
-                        binding.tabLayout.getRoot().setVisibility(View.GONE);
-                        break;
-                    case "counseling_center":
-                        binding.tabLayout.getRoot().setVisibility(View.VISIBLE);
-                        break;
-                }
-            }
-
-            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
-                managerId = getArguments().getString("manager_id");
-                managerName = getArguments().getString("manager_name");
-            }
-
-            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
-                title = getArguments().getString("title");
-            }
-
-            if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
-                address = getArguments().getString("address");
-            }
-
-            if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
-                description = getArguments().getString("description");
-            }
-
-            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
-                avatarPath = getArguments().getString("avatar");
-            }
-
-            if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
-                phoneNumbers = getArguments().getString("phone_numbers");
-            }
-        }
-
-        adapter = new EditCenterAdapter(requireActivity(), type);
+        adapter = new EditCenterAdapter(requireActivity(), centerModel.getCenterType());
 
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
+
+        setData();
+    }
+
+    private void setData() {
+        if (centerModel.getCenterType().equals("personal_clinic"))
+            binding.tabLayout.getRoot().setVisibility(View.GONE);
+        else
+            binding.tabLayout.getRoot().setVisibility(View.VISIBLE);
     }
 
     @Override

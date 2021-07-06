@@ -26,7 +26,10 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.databinding.FragmentEditCenterAvatarBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.squareup.picasso.Picasso;
+
+import org.json.JSONException;
 
 import java.util.HashMap;
 
@@ -56,7 +59,7 @@ public class EditCenterAvatarFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setData();
 
         return binding.getRoot();
     }
@@ -98,25 +101,29 @@ public class EditCenterAvatarFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setExtra() {
+    private void setData() {
         if (getParent() != null) {
-            if (!getParent().centerId.equals("")) {
-                data.put("id", getParent().centerId);
-            }
+            CenterModel model = getParent().centerModel;
 
-            if (!getParent().avatarPath.equals("")) {
-                avatarPath = getParent().avatarPath;
+            try {
+                if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+                    data.put("id", model.getCenterId());
+                }
 
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-            } else {
-                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                if (!getParent().title.equals(""))
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getParent().title));
-                else
-                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
+                if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                    Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                } else {
+                    binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                    if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getDetail().getString("title")));
+                    else
+                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
 
-                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -164,7 +171,6 @@ public class EditCenterAvatarFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
                     });
 
                     FileManager.deleteFileFromCache(requireActivity(), "image");
@@ -173,7 +179,11 @@ public class EditCenterAvatarFragment extends Fragment {
 
             @Override
             public void onFailure(String response) {
-                // Place Code if Needed
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Place Code if Needed
+                    });
+                }
             }
         });
     }

@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -49,7 +50,7 @@ public class EditCenterDetailFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
+    public String type = "", managerId = "", managerName = "", title = "", address = "", description = "";
 
     @Nullable
     @Override
@@ -62,7 +63,7 @@ public class EditCenterDetailFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setData();
 
         return binding.getRoot();
     }
@@ -158,65 +159,67 @@ public class EditCenterDetailFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setExtra() {
+    private void setData() {
         if (getParent() != null) {
-            if (!getParent().centerId.equals("")) {
-                data.put("id", getParent().centerId);
-            }
+            CenterModel model = getParent().centerModel;
 
-            if (!getParent().type.equals("")) {
-                type = getParent().type;
-                switch (type) {
-                    case "personal_clinic":
-                        binding.counselingCenterGroup.setVisibility(View.GONE);
-                        break;
-                    case "counseling_center":
-                        binding.counselingCenterGroup.setVisibility(View.VISIBLE);
-                        break;
+            try {
+                if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+                    data.put("id", model.getCenterId());
                 }
-            }
 
-            if (!getParent().managerId.equals("") && !getParent().managerName.equals("")) {
-                managerId = getParent().managerId;
-                managerName = getParent().managerName;
-                binding.managerIncludeLayout.selectTextView.setText(managerName);
-            }
+                if (model.getCenterType() != null && !model.getCenterType().equals("")) {
+                    type = model.getCenterType();
+                    switch (type) {
+                        case "personal_clinic":
+                            binding.counselingCenterGroup.setVisibility(View.GONE);
+                            break;
+                        case "counseling_center":
+                            binding.counselingCenterGroup.setVisibility(View.VISIBLE);
+                            break;
+                    }
+                }
 
-            if (!getParent().title.equals("")) {
-                title = getParent().title;
-                binding.titleIncludeLayout.inputEditText.setText(title);
-            }
+                if (model.getManager().getId() != null && !model.getManager().getId().equals("") && model.getManager().getName() != null && !model.getManager().getName().equals("")) {
+                    managerId = model.getManager().getUserId();
+                    managerName = model.getManager().getName();
+                    binding.managerIncludeLayout.selectTextView.setText(managerName);
+                }
 
-            if (!getParent().address.equals("")) {
-                address = getParent().address;
-                binding.addressIncludeLayout.inputEditText.setText(address);
-            }
+                if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
+                    title = model.getDetail().getString("title");
+                    binding.titleIncludeLayout.inputEditText.setText(title);
+                }
 
-            if (!getParent().description.equals("")) {
-                description = getParent().description;
-                binding.descriptionIncludeLayout.inputEditText.setText(description);
-            }
+                if (model.getDetail().has("address") && !model.getDetail().isNull("address") && !model.getDetail().getString("address").equals("")) {
+                    address = model.getDetail().getString("address");
+                    binding.addressIncludeLayout.inputEditText.setText(address);
+                }
 
-            if (!getParent().phoneNumbers.equals("")) {
-                try {
-                    JSONArray phoneNumbers = new JSONArray(getParent().phoneNumbers);
+                if (model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
+                    description = model.getDetail().getString("description");
+                    binding.descriptionIncludeLayout.inputEditText.setText(description);
+                }
+
+                if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
+                    JSONArray phoneNumbers = model.getDetail().getJSONArray("phone_numbers");
 
                     ArrayList<TypeModel> phones = new ArrayList<>();
                     ArrayList<String> ids = new ArrayList<>();
 
                     for (int i = 0; i < phoneNumbers.length(); i++) {
-                        TypeModel model = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
+                        TypeModel typeModel = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
 
-                        phones.add(model);
-                        ids.add(model.object.getString("id"));
+                        phones.add(typeModel);
+                        ids.add(typeModel.object.getString("id"));
                     }
 
                     setRecyclerView(phones, ids, "phones");
-                } catch (JSONException e) {
-                    e.printStackTrace();
+                } else {
+                    setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
                 }
-            } else {
-                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
         }
     }
@@ -271,9 +274,8 @@ public class EditCenterDetailFragment extends Fragment {
         data.put("description", description);
         data.put("phone_numbers", phonesAdapter.getIds());
 
-        if (type.equals("counseling_center")) {
+        if (type.equals("counseling_center"))
             data.put("title", title);
-        }
 
         Center.edit(data, header, new Response() {
             @Override
@@ -282,7 +284,6 @@ public class EditCenterDetailFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
                     });
                 }
             }
