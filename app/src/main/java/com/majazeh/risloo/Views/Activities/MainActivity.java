@@ -446,9 +446,12 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (binding.getRoot().isDrawerOpen(GravityCompat.START)) {
+        if (binding.getRoot().isDrawerOpen(GravityCompat.START))
             binding.getRoot().closeDrawer(GravityCompat.START);
-        }
+        else if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment)
+            navController.navigateUp();
+        else
+            finish();
     }
 
 }

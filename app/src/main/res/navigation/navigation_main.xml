@@ -122,7 +122,9 @@
 
     <action
         android:id="@+id/action_global_dashboardFragment"
-        app:destination="@id/dashboardFragment" />
+        app:destination="@id/dashboardFragment"
+        app:popUpTo="@id/dashboardFragment"
+        app:popUpToInclusive="true" />
 
     <action
         android:id="@+id/action_global_centersFragment"

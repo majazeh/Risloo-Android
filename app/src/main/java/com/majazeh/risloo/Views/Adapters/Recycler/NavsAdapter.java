@@ -66,10 +66,7 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        if (this.items == null)
-            this.items = items;
-        else
-            this.items.addAll(items);
+        this.items = items;
         notifyDataSetChanged();
     }
 
