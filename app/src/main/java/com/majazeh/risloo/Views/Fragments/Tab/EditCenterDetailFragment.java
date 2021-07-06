@@ -159,69 +159,75 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void setExtra() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditCenterFragment) {
-                if (!((EditCenterFragment) fragment).centerId.equals("")) {
-                    data.put("id", ((EditCenterFragment) fragment).centerId);
-                }
+        if (getParent() != null) {
+            if (!getParent().centerId.equals("")) {
+                data.put("id", getParent().centerId);
+            }
 
-                if (!((EditCenterFragment) fragment).type.equals("")) {
-                    type = ((EditCenterFragment) fragment).type;
-                    switch (type) {
-                        case "personal_clinic":
-                            binding.counselingCenterGroup.setVisibility(View.GONE);
-                            break;
-                        case "counseling_center":
-                            binding.counselingCenterGroup.setVisibility(View.VISIBLE);
-                            break;
-                    }
-                }
-
-                if (!((EditCenterFragment) fragment).managerId.equals("") && !((EditCenterFragment) fragment).managerName.equals("")) {
-                    managerId = ((EditCenterFragment) fragment).managerId;
-                    managerName = ((EditCenterFragment) fragment).managerName;
-                    binding.managerIncludeLayout.selectTextView.setText(managerName);
-                }
-
-                if (!((EditCenterFragment) fragment).title.equals("")) {
-                    title = ((EditCenterFragment) fragment).title;
-                    binding.titleIncludeLayout.inputEditText.setText(title);
-                }
-
-                if (!((EditCenterFragment) fragment).address.equals("")) {
-                    address = ((EditCenterFragment) fragment).address;
-                    binding.addressIncludeLayout.inputEditText.setText(address);
-                }
-
-                if (!((EditCenterFragment) fragment).description.equals("")) {
-                    description = ((EditCenterFragment) fragment).description;
-                    binding.descriptionIncludeLayout.inputEditText.setText(description);
-                }
-
-                if (!((EditCenterFragment) fragment).phoneNumbers.equals("")) {
-                    try {
-                        JSONArray phoneNumbers = new JSONArray(((EditCenterFragment) fragment).phoneNumbers);
-
-                        ArrayList<TypeModel> phones = new ArrayList<>();
-                        ArrayList<String> ids = new ArrayList<>();
-
-                        for (int i = 0; i < phoneNumbers.length(); i++) {
-                            TypeModel model = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
-
-                            phones.add(model);
-                            ids.add(model.object.getString("id"));
-                        }
-
-                        setRecyclerView(phones, ids, "phones");
-                    } catch (JSONException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+            if (!getParent().type.equals("")) {
+                type = getParent().type;
+                switch (type) {
+                    case "personal_clinic":
+                        binding.counselingCenterGroup.setVisibility(View.GONE);
+                        break;
+                    case "counseling_center":
+                        binding.counselingCenterGroup.setVisibility(View.VISIBLE);
+                        break;
                 }
             }
+
+            if (!getParent().managerId.equals("") && !getParent().managerName.equals("")) {
+                managerId = getParent().managerId;
+                managerName = getParent().managerName;
+                binding.managerIncludeLayout.selectTextView.setText(managerName);
+            }
+
+            if (!getParent().title.equals("")) {
+                title = getParent().title;
+                binding.titleIncludeLayout.inputEditText.setText(title);
+            }
+
+            if (!getParent().address.equals("")) {
+                address = getParent().address;
+                binding.addressIncludeLayout.inputEditText.setText(address);
+            }
+
+            if (!getParent().description.equals("")) {
+                description = getParent().description;
+                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
+
+            if (!getParent().phoneNumbers.equals("")) {
+                try {
+                    JSONArray phoneNumbers = new JSONArray(getParent().phoneNumbers);
+
+                    ArrayList<TypeModel> phones = new ArrayList<>();
+                    ArrayList<String> ids = new ArrayList<>();
+
+                    for (int i = 0; i < phoneNumbers.length(); i++) {
+                        TypeModel model = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
+
+                        phones.add(model);
+                        ids.add(model.object.getString("id"));
+                    }
+
+                    setRecyclerView(phones, ids, "phones");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+            }
         }
+    }
+
+    private EditCenterFragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof EditCenterFragment)
+                return (EditCenterFragment) fragment;
+
+        return null;
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {

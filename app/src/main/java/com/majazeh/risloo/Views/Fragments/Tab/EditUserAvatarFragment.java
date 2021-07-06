@@ -103,31 +103,37 @@ public class EditUserAvatarFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditUserFragment) {
-                UserModel model = ((EditUserFragment) fragment).userModel;
+        if (getParent() != null) {
+            UserModel model = getParent().userModel;
 
-                if (model.getId() != null && !model.getId().equals("")) {
-                    data.put("id", model.getId());
-                }
+            if (model.getId() != null && !model.getId().equals("")) {
+                data.put("id", model.getId());
+            }
 
-                if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar() .getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
-                    avatarPath = model.getAvatar().getMedium().getUrl();
+            if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar() .getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
+                avatarPath = model.getAvatar().getMedium().getUrl();
 
-                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                    Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                } else {
-                    binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                    if (!model.getName().equals(""))
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getName()));
-                    else
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                if (!model.getName().equals(""))
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(model.getName()));
+                else
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultName)));
 
-                    Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                }
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
         }
+    }
+
+    private EditUserFragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof EditUserFragment)
+                return (EditUserFragment) fragment;
+
+        return null;
     }
 
     public void responseAction(String method, Intent data) {

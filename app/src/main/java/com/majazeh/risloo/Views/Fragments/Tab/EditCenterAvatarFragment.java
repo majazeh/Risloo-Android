@@ -99,29 +99,35 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void setExtra() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditCenterFragment) {
-                if (!((EditCenterFragment) fragment).centerId.equals("")) {
-                    data.put("id", ((EditCenterFragment) fragment).centerId);
-                }
+        if (getParent() != null) {
+            if (!getParent().centerId.equals("")) {
+                data.put("id", getParent().centerId);
+            }
 
-                if (!((EditCenterFragment) fragment).avatarPath.equals("")) {
-                    avatarPath = ((EditCenterFragment) fragment).avatarPath;
+            if (!getParent().avatarPath.equals("")) {
+                avatarPath = getParent().avatarPath;
 
-                    binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                    Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                } else {
-                    binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                    if (!((EditCenterFragment) fragment).title.equals(""))
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(((EditCenterFragment) fragment).title));
-                    else
-                        binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
+                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+            } else {
+                binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
+                if (!getParent().title.equals(""))
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getParent().title));
+                else
+                    binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(getResources().getString(R.string.AppDefaultCenter)));
 
-                    Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-                }
+                Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
         }
+    }
+
+    private EditCenterFragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof EditCenterFragment)
+                return (EditCenterFragment) fragment;
+
+        return null;
     }
 
     public void responseAction(String method, Intent data) {

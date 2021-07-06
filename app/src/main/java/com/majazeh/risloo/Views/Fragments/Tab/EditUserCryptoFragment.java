@@ -109,26 +109,32 @@ public class EditUserCryptoFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditUserFragment) {
-                UserModel model = ((EditUserFragment) fragment).userModel;
+        if (getParent() != null) {
+            UserModel model = getParent().userModel;
 
-                if (model.getId() != null && !model.getId().equals("")) {
-                    data.put("id", model.getId());
-                }
-
-                if (model.getPublic_key() != null && !model.getPublic_key().equals("")) {
-                    publicKey = model.getPublic_key();
-                    binding.publicIncludeLayout.inputEditText.setText(publicKey);
-                }
-
-//                if (model.getPrivate_key() != null && !model.getPrivate_key().equals("")) {
-//                    privateKey = model.getPrivate_key();
-//                    binding.privateIncludeLayout.inputEditText.setText(privateKey);
-//                }
+            if (model.getId() != null && !model.getId().equals("")) {
+                data.put("id", model.getId());
             }
+
+            if (model.getPublic_key() != null && !model.getPublic_key().equals("")) {
+                publicKey = model.getPublic_key();
+                binding.publicIncludeLayout.inputEditText.setText(publicKey);
+            }
+
+//            if (model.getPrivate_key() != null && !model.getPrivate_key().equals("")) {
+//                privateKey = model.getPrivate_key();
+//                binding.privateIncludeLayout.inputEditText.setText(privateKey);
+//            }
         }
+    }
+
+    private EditUserFragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof EditUserFragment)
+                return (EditUserFragment) fragment;
+
+        return null;
     }
 
     private void doWork(String key) {

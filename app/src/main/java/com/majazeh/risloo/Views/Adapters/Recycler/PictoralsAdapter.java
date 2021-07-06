@@ -94,7 +94,8 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
             userSelect = true;
             notifyDataSetChanged();
 
-            ((TestActivity) activity).sendItem(Integer.parseInt(getParent().formModel.getTitle()), String.valueOf(answer + 1));
+            if (getParent() != null)
+                ((TestActivity) activity).sendItem(Integer.parseInt(getParent().formModel.getTitle()), String.valueOf(answer + 1));
         }).widget(holder.itemView);
     }
 

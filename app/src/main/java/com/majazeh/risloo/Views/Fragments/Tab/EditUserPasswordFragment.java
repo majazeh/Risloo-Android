@@ -246,21 +246,27 @@ public class EditUserPasswordFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditUserFragment) {
-                UserModel model = ((EditUserFragment) fragment).userModel;
+        if (getParent() != null) {
+            UserModel model = getParent().userModel;
 
-                if (model.getId() != null && !model.getId().equals("")) {
-                    data.put("id", model.getId());
+            if (model.getId() != null && !model.getId().equals("")) {
+                data.put("id", model.getId());
 
-                    if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId()))
-                        binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    else
-                        binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.GONE);
-                }
+                if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId()))
+                    binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                else
+                    binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.GONE);
             }
         }
+    }
+
+    private EditUserFragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof EditUserFragment)
+                return (EditUserFragment) fragment;
+
+        return null;
     }
 
     private void doWork() {

@@ -94,39 +94,59 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (fragment != null) {
+            if (getParent() != null) {
+                if (getParent() instanceof CreateSessionTimeFragment)
+                    ((CreateSessionTimeFragment) getParent()).responseBottomSheet(method, getTime());
 
-                if (fragment instanceof CreateSessionFragment) {
-                    Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null) {
-                        if (childFragment instanceof CreateSessionTimeFragment)
-                            ((CreateSessionTimeFragment) childFragment).responseBottomSheet(method, getTime());
-                        else if (childFragment instanceof CreateSessionSessionFragment)
-                            ((CreateSessionSessionFragment) childFragment).responseBottomSheet(method, getTime());
-                    }
+                else if (getParent() instanceof CreateSessionSessionFragment)
+                    ((CreateSessionSessionFragment) getParent()).responseBottomSheet(method, getTime());
 
-                } else if (fragment instanceof CreateScheduleFragment) {
-                    Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null) {
-                        if (childFragment instanceof CreateScheduleTimeFragment)
-                            ((CreateScheduleTimeFragment) childFragment).responseBottomSheet(method, getTime());
-                        else if (childFragment instanceof CreateScheduleSessionFragment)
-                            ((CreateScheduleSessionFragment) childFragment).responseBottomSheet(method, getTime());
-                    }
+                else if (getParent() instanceof CreateScheduleTimeFragment)
+                    ((CreateScheduleTimeFragment) getParent()).responseBottomSheet(method, getTime());
 
-                } else if (fragment instanceof EditSessionFragment) {
-                    Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null) {
-                        if (childFragment instanceof EditSessionTimeFragment)
-                            ((EditSessionTimeFragment) childFragment).responseBottomSheet(method, getTime());
-                        else if (childFragment instanceof EditSessionSessionFragment)
-                            ((EditSessionSessionFragment) childFragment).responseBottomSheet(method, getTime());
-                    }
-                }
+                else if (getParent() instanceof CreateScheduleSessionFragment)
+                    ((CreateScheduleSessionFragment) getParent()).responseBottomSheet(method, getTime());
+
+                else if (getParent() instanceof EditSessionTimeFragment)
+                    ((EditSessionTimeFragment) getParent()).responseBottomSheet(method, getTime());
+
+                else if (getParent() instanceof EditSessionSessionFragment)
+                    ((EditSessionSessionFragment) getParent()).responseBottomSheet(method, getTime());
             }
+
             dismiss();
         }).widget(binding.entryButton);
+    }
+
+    private Fragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof CreateSessionFragment) {
+                Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof CreateSessionTimeFragment)
+                        return (CreateSessionTimeFragment) childFragment;
+                    else if (childFragment instanceof CreateSessionSessionFragment)
+                        return (CreateSessionSessionFragment) childFragment;
+
+            } else if (fragment instanceof CreateScheduleFragment) {
+                Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof CreateScheduleTimeFragment)
+                        return (CreateScheduleTimeFragment) childFragment;
+                    else if (childFragment instanceof CreateScheduleSessionFragment)
+                        return (CreateScheduleSessionFragment) childFragment;
+
+            } else if (fragment instanceof EditSessionFragment) {
+                Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof EditSessionTimeFragment)
+                        return (EditSessionTimeFragment) childFragment;
+                    else if (childFragment instanceof EditSessionSessionFragment)
+                        return (EditSessionSessionFragment) childFragment;
+            }
+
+        return null;
     }
 
     private void setNumberPicker() {

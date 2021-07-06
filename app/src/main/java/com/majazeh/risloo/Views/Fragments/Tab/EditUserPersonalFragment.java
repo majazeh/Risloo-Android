@@ -191,91 +191,97 @@ public class EditUserPersonalFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-            if (fragment instanceof EditUserFragment) {
-                UserModel model = ((EditUserFragment) fragment).userModel;
+        if (getParent() != null) {
+            UserModel model = getParent().userModel;
 
-                if (model.getId() != null && !model.getId().equals("")) {
-                    data.put("id", model.getId());
+            if (model.getId() != null && !model.getId().equals("")) {
+                data.put("id", model.getId());
+            }
+
+            if (model.getName() != null && !model.getName().equals("")) {
+                name = model.getName();
+                binding.nameIncludeLayout.inputEditText.setText(name);
+            }
+
+            if (model.getMobile() != null && !model.getMobile().equals("")) {
+                mobile = model.getMobile();
+                binding.mobileIncludeLayout.inputEditText.setText(mobile);
+            }
+
+            if (model.getUsername() != null && !model.getUsername().equals("")) {
+                username = model.getUsername();
+                binding.usernameIncludeLayout.inputEditText.setText(username);
+            }
+
+            if (model.getEmail() != null && !model.getEmail().equals("")) {
+                email = model.getEmail();
+                binding.emailIncludeLayout.inputEditText.setText(email);
+            }
+
+            if (model.getBirthday() != null && !model.getBirthday().equals("")) {
+                birthday = model.getBirthday();
+                binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
+            } else {
+                birthday = String.valueOf(DateManager.currentTimestamp());
+                binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
+            }
+
+            if (model.getUserStatus() != null && !model.getUserStatus().equals("")) {
+                status = model.getUserStatus();
+                switch (status) {
+                    case "active":
+                        binding.statusIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "waiting":
+                        binding.statusIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
+                    case "closed":
+                        binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
+                        break;
                 }
+            }
 
-                if (model.getName() != null && !model.getName().equals("")) {
-                    name = model.getName();
-                    binding.nameIncludeLayout.inputEditText.setText(name);
+            if (model.getUserType() != null && !model.getUserType().equals("")) {
+                type = model.getUserType();
+                switch (type) {
+                    case "admin":
+                        binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+
+                        binding.clientGroup.setVisibility(View.VISIBLE);
+                        break;
+                    default:
+                        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+
+                        binding.clientGroup.setVisibility(View.GONE);
+                        break;
                 }
+            } else {
+                binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
-                if (model.getMobile() != null && !model.getMobile().equals("")) {
-                    mobile = model.getMobile();
-                    binding.mobileIncludeLayout.inputEditText.setText(mobile);
-                }
+                binding.clientGroup.setVisibility(View.GONE);
+            }
 
-                if (model.getUsername() != null && !model.getUsername().equals("")) {
-                    username = model.getUsername();
-                    binding.usernameIncludeLayout.inputEditText.setText(username);
-                }
-
-                if (model.getEmail() != null && !model.getEmail().equals("")) {
-                    email = model.getEmail();
-                    binding.emailIncludeLayout.inputEditText.setText(email);
-                }
-
-                if (model.getBirthday() != null && !model.getBirthday().equals("")) {
-                    birthday = model.getBirthday();
-                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
-                } else {
-                    birthday = String.valueOf(DateManager.currentTimestamp());
-                    binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
-                }
-
-                if (model.getUserStatus() != null && !model.getUserStatus().equals("")) {
-                    status = model.getUserStatus();
-                    switch (status) {
-                        case "active":
-                            binding.statusIncludeLayout.firstRadioButton.setChecked(true);
-                            break;
-                        case "waiting":
-                            binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-                            break;
-                        case "closed":
-                            binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
-                            break;
-                    }
-                }
-
-                if (model.getUserType() != null && !model.getUserType().equals("")) {
-                    type = model.getUserType();
-                    switch (type) {
-                        case "admin":
-                            binding.typeIncludeLayout.firstRadioButton.setChecked(true);
-
-                            binding.clientGroup.setVisibility(View.VISIBLE);
-                            break;
-                        default:
-                            binding.typeIncludeLayout.secondRadioButton.setChecked(true);
-
-                            binding.clientGroup.setVisibility(View.GONE);
-                            break;
-                    }
-                } else {
-                    binding.typeIncludeLayout.secondRadioButton.setChecked(true);
-
-                    binding.clientGroup.setVisibility(View.GONE);
-                }
-
-                if (model.getGender() != null && !model.getGender().equals("")) {
-                    gender = model.getGender();
-                    switch (gender) {
-                        case "male":
-                            binding.genderIncludeLayout.firstRadioButton.setChecked(true);
-                            break;
-                        case "female":
-                            binding.genderIncludeLayout.secondRadioButton.setChecked(true);
-                            break;
-                    }
+            if (model.getGender() != null && !model.getGender().equals("")) {
+                gender = model.getGender();
+                switch (gender) {
+                    case "male":
+                        binding.genderIncludeLayout.firstRadioButton.setChecked(true);
+                        break;
+                    case "female":
+                        binding.genderIncludeLayout.secondRadioButton.setChecked(true);
+                        break;
                 }
             }
         }
+    }
+
+    private EditUserFragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof EditUserFragment)
+                return (EditUserFragment) fragment;
+
+        return null;
     }
 
     public void responseBottomSheet(String method, String data) {
