@@ -295,6 +295,34 @@ public class MainActivity extends AppCompatActivity {
         navsAdapter.notifyDataSetChanged();
     }
 
+    private Fragment getCurrent() {
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof CreateCenterFragment)
+                return (CreateCenterFragment) fragment;
+
+            else if (fragment instanceof EditCenterFragment) {
+                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof EditCenterAvatarFragment)
+                        return (EditCenterAvatarFragment) childFragment;
+
+            } else if (fragment instanceof EditUserFragment) {
+                Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof EditUserAvatarFragment)
+                        return (EditUserAvatarFragment) childFragment;
+            }
+
+            else if (fragment instanceof CreateDocumentFragment)
+                return (CreateDocumentFragment) fragment;
+
+            else if (fragment instanceof CreatePracticeFragment)
+                return (CreatePracticeFragment) fragment;
+
+        return null;
+    }
+
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -344,30 +372,15 @@ public class MainActivity extends AppCompatActivity {
                             return;
                     }
 
-                    Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (fragment != null) {
+                    if (getCurrent() != null) {
+                        if (getCurrent() instanceof CreateCenterFragment)
+                            ((CreateCenterFragment) getCurrent()).avatarPath = IntentManager.camera(this);
 
-                        // CreateCenterFragment
-                        if (fragment instanceof CreateCenterFragment) {
-                            ((CreateCenterFragment) fragment).avatarPath = IntentManager.camera(this);
+                        else if (getCurrent() instanceof EditCenterAvatarFragment)
+                            ((EditCenterAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(this);
 
-                            // EditCenterFragment
-                        } else if (fragment instanceof EditCenterFragment) {
-                            Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                            if (childFragment != null) {
-                                if (childFragment instanceof EditCenterAvatarFragment)
-                                    ((EditCenterAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
-                            }
-
-                            // EditUserFragment
-                        } else if (fragment instanceof EditUserFragment) {
-                            Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                            if (childFragment != null) {
-                                if (childFragment instanceof EditUserAvatarFragment)
-                                    ((EditUserAvatarFragment) childFragment).avatarPath = IntentManager.camera(this);
-                            }
-                        }
-
+                        else if (getCurrent() instanceof EditUserAvatarFragment)
+                            ((EditUserAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(this);
                     }
                 }
                 break;
@@ -380,49 +393,33 @@ public class MainActivity extends AppCompatActivity {
 
         switch (resultCode) {
             case RESULT_OK: {
-                Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
-                if (fragment != null) {
-
-                    // CreateCenterFragment
-                    if (fragment instanceof CreateCenterFragment) {
+                if (getCurrent() != null) {
+                    if (getCurrent() instanceof CreateCenterFragment) {
                         if (requestCode == 300)
-                            ((CreateCenterFragment) fragment).responseAction("gallery", data);
+                            ((CreateCenterFragment) getCurrent()).responseAction("gallery", data);
                         else if (requestCode == 400)
-                            ((CreateCenterFragment) fragment).responseAction("camera", data);
+                            ((CreateCenterFragment) getCurrent()).responseAction("camera", data);
 
-                        // EditCenterFragment
-                    } else if (fragment instanceof EditCenterFragment) {
-                        Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                        if (childFragment != null) {
-                            if (childFragment instanceof EditCenterAvatarFragment)
-                                if (requestCode == 300)
-                                    ((EditCenterAvatarFragment) childFragment).responseAction("gallery", data);
-                                else if (requestCode == 400)
-                                    ((EditCenterAvatarFragment) childFragment).responseAction("camera", data);
-                        }
+                    } else if (getCurrent() instanceof EditCenterAvatarFragment) {
+                        if (requestCode == 300)
+                            ((EditCenterAvatarFragment) getCurrent()).responseAction("gallery", data);
+                        else if (requestCode == 400)
+                            ((EditCenterAvatarFragment) getCurrent()).responseAction("camera", data);
 
-                        // EditUserFragment
-                    } else if (fragment instanceof EditUserFragment) {
-                        Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                        if (childFragment != null) {
-                            if (childFragment instanceof EditUserAvatarFragment)
-                                if (requestCode == 300)
-                                    ((EditUserAvatarFragment) childFragment).responseAction("gallery", data);
-                                else if (requestCode == 400)
-                                    ((EditUserAvatarFragment) childFragment).responseAction("camera", data);
-                        }
+                    } else if (getCurrent() instanceof EditUserAvatarFragment) {
+                        if (requestCode == 300)
+                            ((EditUserAvatarFragment) getCurrent()).responseAction("gallery", data);
+                        else if (requestCode == 400)
+                            ((EditUserAvatarFragment) getCurrent()).responseAction("camera", data);
 
-                        // CreateDocumentFragment
-                    } else if (fragment instanceof CreateDocumentFragment) {
+                    } else if (getCurrent() instanceof CreateDocumentFragment) {
                         if (requestCode == 100)
-                            ((CreateDocumentFragment) fragment).responseAction("file", data);
+                            ((CreateDocumentFragment) getCurrent()).responseAction("file", data);
 
-                        // CreatePracticeFragment
-                    } else if (fragment instanceof CreatePracticeFragment) {
+                    } else if (getCurrent() instanceof CreatePracticeFragment) {
                         if (requestCode == 100)
-                            ((CreatePracticeFragment) fragment).responseAction("file", data);
+                            ((CreatePracticeFragment) getCurrent()).responseAction("file", data);
                     }
-
                 }
             } break;
             case RESULT_CANCELED: {
