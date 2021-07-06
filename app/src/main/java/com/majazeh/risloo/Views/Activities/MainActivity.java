@@ -22,6 +22,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.majazeh.risloo.BuildConfig;
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -37,7 +38,6 @@ import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
-import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
@@ -146,6 +146,60 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void listener() {
+        ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.contentIncludeLayout.menuImageView.getRoot());
+
+        ClickManager.onClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.contentIncludeLayout.enterImageView.getRoot());
+
+        ClickManager.onClickListener(() -> {
+            // TODO : Place Code Here
+        }).widget(binding.contentIncludeLayout.notificationImageView.getRoot());
+
+        binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String pos = parent.getItemAtPosition(position).toString();
+
+                switch (pos) {
+                    case "مشاهده پروفایل": {
+                        NavDirections action = NavigationMainDirections.actionGlobalMeFragment(singleton.getUserModel());
+                        navController.navigate(action);
+                    } break;
+                    case "کیف پول\u200Cها": {
+                        NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "صورت حساب\u200Cها": {
+                        NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "شارژ حساب": {
+                        NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment();
+                        navController.navigate(action);
+                    } break;
+                    case "خروج": {
+                        logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
+                        logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
+                    } break;
+                }
+
+                binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setSelection(binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.getAdapter().getCount());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
+//            binding.contentIncludeLayout.breadcumpTextView.setText();
+//            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        });
+    }
+
     public void setData() {
         if (!singleton.getName().equals("")) {
             binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
@@ -196,151 +250,50 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
-
-
-
-    // ---------------------------------------------------------------------------------------------------------------------------------------------------
-
-    // ---------------------------------------------------------------------------------------------------------------------------------------------------
-
-    private void listener() {
-        ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.contentIncludeLayout.menuImageView.getRoot());
-
-        ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.contentIncludeLayout.enterImageView.getRoot());
-
-        ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.contentIncludeLayout.notificationImageView.getRoot());
-
-        binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
-
-                switch (pos) {
-                    case "مشاهده پروفایل":
-                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToMeFragment(singleton.getUserModel());
-                        navController.navigate(action);
-                        break;
-                    case "کیف پول\u200Cها":
-                        navigator(R.id.treasuriesFragment);
-                        break;
-                    case "صورت حساب\u200Cها":
-                        navigator(R.id.billingsFragment);
-                        break;
-                    case "شارژ حساب":
-                        navigator(R.id.paymentsFragment);
-                        break;
-                    case "خروج":
-                        logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
-                        logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
-                        break;
-                }
-
-                binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setSelection(binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.getAdapter().getCount());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
-
-        navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-//            binding.contentIncludeLayout.breadcumpTextView.setText(StringManager.clickableNavBackStack(this, controller));
-//            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
-        });
-    }
-
     public void responseAdapter(String item) {
         switch (item) {
-            case "پیش\u200Cخوان":
-                navigator(R.id.dashboardFragment);
-                break;
-            case "مراکز درمانی":
-                navigator(R.id.centersFragment);
-                break;
-            case "پرونده\u200Cها":
-                navigator(R.id.casesFragment);
-                break;
-            case "جلسات":
-                navigator(R.id.sessionsFragment);
-                break;
-            case "کاربران":
-                navigator(R.id.usersFragment);
-                break;
-            case "ارزیابی\u200Cها":
-                navigator(R.id.scalesFragment);
-                break;
-            case "نمونه\u200Cها":
-                navigator(R.id.samplesFragment);
-                break;
-            case "نمونه\u200Cهای گروهی":
-                navigator(R.id.bulkSamplesFragment);
-                break;
-            case "اسناد و مدارک":
-                navigator(R.id.documentsFragment);
-                break;
+            case "پیش\u200Cخوان": {
+                NavDirections action = NavigationMainDirections.actionGlobalDashboardFragment();
+                navController.navigate(action);
+            } break;
+            case "مراکز درمانی": {
+                NavDirections action = NavigationMainDirections.actionGlobalCentersFragment();
+                navController.navigate(action);
+            } break;
+            case "پرونده\u200Cها": {
+                NavDirections action = NavigationMainDirections.actionGlobalCasesFragment();
+                navController.navigate(action);
+            } break;
+            case "جلسات": {
+                NavDirections action = NavigationMainDirections.actionGlobalSessionsFragment();
+                navController.navigate(action);
+            } break;
+            case "کاربران": {
+                NavDirections action = NavigationMainDirections.actionGlobalUsersFragment();
+                navController.navigate(action);
+            } break;
+            case "ارزیابی\u200Cها": {
+                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
+                navController.navigate(action);
+            } break;
+            case "نمونه\u200Cها": {
+                NavDirections action = NavigationMainDirections.actionGlobalSamplesFragment();
+                navController.navigate(action);
+            } break;
+            case "نمونه\u200Cهای گروهی": {
+                NavDirections action = NavigationMainDirections.actionGlobalBulkSamplesFragment();
+                navController.navigate(action);
+            } break;
+            case "اسناد و مدارک": {
+                NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
+                navController.navigate(action);
+            } break;
         }
 
         binding.getRoot().closeDrawer(GravityCompat.START);
 
         navsAdapter.notifyDataSetChanged();
     }
-
-    public void navigator(int destinationId, Bundle extras) {
-        try {
-            if (navController.getBackStackEntry(destinationId).getDestination() != navController.getCurrentDestination()) {
-                while (Objects.requireNonNull(navController.getCurrentDestination()).getId()!=destinationId) {
-                    navController.popBackStack();
-                }
-            }
-        } catch (IllegalArgumentException e) {
-            System.out.println(e.getMessage());
-        }
-        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment  && destinationId == R.id.meFragment) {
-            navController.popBackStack();
-        }
-        navController.navigate(destinationId, extras);
-    }
-
-    public void navigator (int destinationId) {
-        navigator(destinationId, null);
-    }
-
-    // ---------------------------------------------------------------------------------------------------------------------------------------------------
-
-    // ---------------------------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {

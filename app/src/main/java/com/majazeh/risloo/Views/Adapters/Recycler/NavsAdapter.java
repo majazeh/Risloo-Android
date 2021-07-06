@@ -55,7 +55,10 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
     @Override
     public int getItemCount() {
-        return items.size();
+        if (this.items != null)
+            return items.size();
+        else
+            return 0;
     }
 
     public ArrayList<TypeModel> getItems() {
@@ -63,8 +66,18 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
     }
 
     public void setItems(ArrayList<TypeModel> items) {
-        this.items = items;
+        if (this.items == null)
+            this.items = items;
+        else
+            this.items.addAll(items);
         notifyDataSetChanged();
+    }
+
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
+            notifyDataSetChanged();
+        }
     }
 
     private void detector(NavsHolder holder, int position) {
@@ -90,11 +103,10 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
     private void setData(NavsHolder holder, TypeModel item) {
         try {
-            if (holder.getBindingAdapterPosition() == 8) {
+            if (holder.getBindingAdapterPosition() == 8)
                 holder.binding.getRoot().setVisibility(View.GONE);
-            } else {
+             else
                 holder.binding.getRoot().setVisibility(View.VISIBLE);
-            }
 
             holder.binding.nameTextView.setText(item.object.get("title").toString());
             holder.binding.descriptionTextView.setText(item.object.get("description").toString());

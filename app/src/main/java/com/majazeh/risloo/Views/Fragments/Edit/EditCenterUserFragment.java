@@ -196,7 +196,7 @@ public class EditCenterUserFragment extends Fragment {
 
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                        ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
+//                        ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
                     });
                 }
             }

@@ -158,7 +158,7 @@ public class EditCenterAvatarFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
+//                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
                     });
 
                     FileManager.deleteFileFromCache(requireActivity(), "image");

@@ -247,7 +247,7 @@ public class CreateCaseFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-                        ((MainActivity) requireActivity()).navigator(R.id.casesFragment);
+//                        ((MainActivity) requireActivity()).navigator(R.id.casesFragment);
                     });
                 }
             }

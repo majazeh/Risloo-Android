@@ -149,7 +149,7 @@ public class CreateSampleFragment extends Fragment {
         assessmentLinkSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-                ((MainActivity) requireActivity()).navigator(R.id.scalesFragment);
+//                ((MainActivity) requireActivity()).navigator(R.id.scalesFragment);
             }
 
             @Override
@@ -668,7 +668,7 @@ public class CreateSampleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-                        ((MainActivity) requireActivity()).navigator(R.id.samplesFragment);
+//                        ((MainActivity) requireActivity()).navigator(R.id.samplesFragment);
                     });
                 }
             }

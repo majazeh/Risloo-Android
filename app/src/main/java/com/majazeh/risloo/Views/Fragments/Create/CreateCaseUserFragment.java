@@ -190,7 +190,7 @@ public class CreateCaseUserFragment extends Fragment {
 
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-                        ((MainActivity) requireActivity()).navigator(R.id.caseFragment, extras);
+//                        ((MainActivity) requireActivity()).navigator(R.id.caseFragment, extras);
                     });
                 }
             }
