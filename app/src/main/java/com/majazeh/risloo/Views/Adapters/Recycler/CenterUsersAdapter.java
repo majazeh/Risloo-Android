@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -22,7 +23,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
-import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -106,7 +106,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private void listener(CenterUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
             if (getParent() != null) {
-                NavDirections action = CenterUsersFragmentDirections.actionCenterUsersFragmentToReferenceFragment(getParent().type, getParent().centerId, null, model);
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(getParent().type, getParent().centerId, null, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());
@@ -147,17 +147,17 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         doWork(holder, model, "kick", "status");
                         break;
                     case "ساختن اتاق درمان": {
-                        NavDirections action = CenterUsersFragmentDirections.actionCenterUsersFragmentToCreateRoomFragment(model);
+                        NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", model);
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                     case "اتاق درمان": {
                         if (getParent() != null) {
-                            NavDirections action = CenterUsersFragmentDirections.actionCenterUsersFragmentToRoomFragment(getParent().type, model);
+                            NavDirections action = NavigationMainDirections.actionGlobalRoomFragment(getParent().type, model);
                             ((MainActivity) activity).navController.navigate(action);
                         }
                     } break;
                     case "ویرایش کاربر": {
-                        NavDirections action = CenterUsersFragmentDirections.actionCenterUsersFragmentToEditCenterUserFragment(model);
+                        NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(model);
                         ((MainActivity) activity).navController.navigate(action);
                     } break;
                     case "ورود به کاربری":

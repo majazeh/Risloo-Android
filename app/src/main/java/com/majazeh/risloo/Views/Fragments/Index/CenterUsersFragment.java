@@ -150,7 +150,7 @@ public class CenterUsersFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterUserFragment(centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterUserFragment("center", centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

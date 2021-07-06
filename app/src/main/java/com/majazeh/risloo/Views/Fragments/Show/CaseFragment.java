@@ -117,12 +117,12 @@ public class CaseFragment extends Fragment {
         }).widget(binding.reportsTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment(caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.referencesAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment(caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.sessionsAddImageView.getRoot());
 

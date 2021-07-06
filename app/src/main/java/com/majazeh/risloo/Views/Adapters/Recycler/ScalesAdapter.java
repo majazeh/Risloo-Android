@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Index.ScalesFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -86,7 +86,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
         }).widget(holder.binding.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = ScalesFragmentDirections.actionScalesFragmentToCreateSampleFragment(null, model);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("scale", model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.createTextView);
     }

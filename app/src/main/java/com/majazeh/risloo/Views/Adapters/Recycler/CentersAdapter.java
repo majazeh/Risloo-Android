@@ -10,12 +10,11 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Index.CentersFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemCenterBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -24,7 +23,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersHolder> {
 
@@ -86,28 +84,13 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     private void listener(CentersHolder holder, CenterModel model) {
         ClickManager.onClickListener(() -> {
-            if (model.getCenterType().equals("counseling_center"))
-                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                    case R.id.dashboardFragment: {
-                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToCenterFragment(model);
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                    case R.id.centersFragment: {
-                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToCenterFragment(model);
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                }
-            else
-                switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                    case R.id.dashboardFragment: {
-                        NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("personal_clinic", model);
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                    case R.id.centersFragment: {
-                        NavDirections action = CentersFragmentDirections.actionCentersFragmentToRoomFragment("personal_clinic", model);
-                        ((MainActivity) activity).navController.navigate(action);
-                    } break;
-                }
+            if (model.getCenterType().equals("counseling_center")) {
+                NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(model);
+                ((MainActivity) activity).navController.navigate(action);
+            } else {
+                NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("personal_clinic", model);
+                ((MainActivity) activity).navController.navigate(action);
+            }
         }).widget(holder.binding.containerConstraintLayout);
     }
 

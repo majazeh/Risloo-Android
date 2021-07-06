@@ -144,7 +144,7 @@ public class DocumentsFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateDocumentFragment(null);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateDocumentFragment("document", null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

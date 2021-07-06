@@ -242,12 +242,12 @@ public class CenterFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("center", centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addRoomImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment("center", centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addScheduleImageView.getRoot());
     }

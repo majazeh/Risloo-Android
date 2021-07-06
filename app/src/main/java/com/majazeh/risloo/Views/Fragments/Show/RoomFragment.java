@@ -263,12 +263,12 @@ public class RoomFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(roomModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment("room", roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addCaseImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment("room", roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addScheduleImageView.getRoot());
     }

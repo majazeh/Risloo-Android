@@ -124,12 +124,12 @@ public class SessionFragment extends Fragment {
         }).widget(binding.editImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterUserFragment(sessionModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterUserFragment("session", sessionModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.usersAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment(sessionModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment("session", sessionModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.practicesAddImageView.getRoot());
 

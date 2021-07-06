@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -101,7 +102,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     @SuppressLint("ClickableViewAccessibility")
     private void listener(Users2Holder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToUserFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 

@@ -10,12 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Show.ReferenceFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemSample3Binding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -82,7 +82,7 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
 
     private void listener(Samples3Holder holder, SampleModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = ReferenceFragmentDirections.actionReferenceFragmentToSampleFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 

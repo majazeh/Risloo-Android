@@ -11,13 +11,13 @@ import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
-import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemRoomUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -85,7 +85,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
     private void listener(RoomUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
             if (getParent() != null) {
-                NavDirections action = RoomUsersFragmentDirections.actionRoomUsersFragmentToReferenceFragment(getParent().type, getParent().centerId, null, model);
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(getParent().type, getParent().centerId, null, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());

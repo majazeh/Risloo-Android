@@ -10,20 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Show.CenterFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Show.ReferenceFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemRoomBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder> {
 
@@ -85,20 +82,8 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     private void listener(RoomsHolder holder, RoomModel model) {
         ClickManager.onClickListener(() -> {
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.dashboardFragment: {
-                    NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToRoomFragment("room", model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-                case R.id.centerFragment: {
-                    NavDirections action = CenterFragmentDirections.actionCenterFragmentToRoomFragment("room", model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-                case R.id.referenceFragment: {
-                    NavDirections action = ReferenceFragmentDirections.actionReferenceFragmentToRoomFragment("room", model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-            }
+            NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("room", model);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.containerConstraintLayout);
     }
 

@@ -10,19 +10,17 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Index.SamplesFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemSampleBinding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesHolder> {
 
@@ -84,16 +82,8 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
 
     private void listener(SamplesHolder holder, SampleModel model) {
         ClickManager.onClickListener(() -> {
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.dashboardFragment: {
-                    NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToSampleFragment(model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-                case R.id.samplesFragment: {
-                    NavDirections action = SamplesFragmentDirections.actionSamplesFragmentToSampleFragment(model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-            }
+            NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
         ClickManager.onClickListener(() -> IntentManager.test(activity, model.getSampleId())).widget(holder.binding.statusTextView);

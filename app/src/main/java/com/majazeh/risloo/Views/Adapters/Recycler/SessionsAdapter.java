@@ -10,12 +10,12 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Index.SessionsFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -87,12 +87,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
     private void listener(SessionsHolder holder, SessionModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionsFragmentDirections.actionSessionsFragmentToSessionFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionsFragmentDirections.actionSessionsFragmentToEditSessionFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.editImageView);
     }

@@ -10,10 +10,10 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Index.CasesFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemCaseBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -83,7 +83,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
 
     private void listener(CasesHolder holder, CaseModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = CasesFragmentDirections.actionCasesFragmentToCaseFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
     }

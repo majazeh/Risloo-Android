@@ -8,7 +8,6 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -16,9 +15,6 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemScheduleBinding;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -27,7 +23,6 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.SchedulesHolder> {
 
@@ -113,16 +108,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
 
     private void listener(SchedulesHolder holder, ScheduleModel model) {
         ClickManager.onClickListener(() -> {
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.centerSchedulesFragment: {
-                    NavDirections action = CenterSchedulesFragmentDirections.actionCenterSchedulesFragmentToSessionFragment(model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-                case R.id.roomSchedulesFragment: {
-                    NavDirections action = RoomSchedulesFragmentDirections.actionRoomSchedulesFragmentToSessionFragment(model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-            }
+            // TODO : Place Code Here
         }).widget(holder.binding.containerConstraintLayout);
     }
 

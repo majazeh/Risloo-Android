@@ -12,13 +12,13 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Index.UsersFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -85,7 +85,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     private void listener(UsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = UsersFragmentDirections.actionUsersFragmentToUserFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
@@ -101,7 +101,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
                 } else if (item.equals("ورود به کاربری")) {
                     Log.e("method", "enter");
                 } else if (item.equals("ویرایش کاربر")) {
-                    NavDirections action = UsersFragmentDirections.actionUsersFragmentToEditUserFragment(model);
+                    NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
                     ((MainActivity) activity).navController.navigate(action);
                 }
 

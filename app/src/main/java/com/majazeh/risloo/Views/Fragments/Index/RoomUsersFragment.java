@@ -150,7 +150,7 @@ public class RoomUsersFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomUserFragment(roomModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomUserFragment("room", roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

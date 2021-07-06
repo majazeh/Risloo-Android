@@ -9,19 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Show.DashboardFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Show.RoomFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemCase2Binding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Holder> {
 
@@ -83,16 +81,8 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
     private void listener(Cases2Holder holder, CaseModel model) {
         ClickManager.onClickListener(() -> {
-            switch (Objects.requireNonNull(((MainActivity) activity).navController.getCurrentDestination()).getId()) {
-                case R.id.dashboardFragment: {
-                    NavDirections action = DashboardFragmentDirections.actionDashboardFragmentToCaseFragment(model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-                case R.id.roomFragment: {
-                    NavDirections action = RoomFragmentDirections.actionRoomFragmentToCaseFragment(model);
-                    ((MainActivity) activity).navController.navigate(action);
-                } break;
-            }
+            NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.containerConstraintLayout);
     }
 

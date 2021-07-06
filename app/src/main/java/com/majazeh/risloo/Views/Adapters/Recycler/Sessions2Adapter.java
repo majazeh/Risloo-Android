@@ -13,14 +13,13 @@ import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Show.CaseFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Show.SessionFragmentDirections;
 import com.majazeh.risloo.databinding.SingleItemSession2Binding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
@@ -105,7 +104,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     @SuppressLint("ClickableViewAccessibility")
     private void listener(Sessions2Holder holder, SessionModel model) {
         ClickManager.onClickListener(() -> {
-            NavDirections action = CaseFragmentDirections.actionCaseFragmentToSessionFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
@@ -133,7 +132,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToEditSessionFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.editImageView);
     }
