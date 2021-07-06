@@ -96,4 +96,12 @@ public class AuthActivity extends AppCompatActivity {
         return super.dispatchTouchEvent(event);
     }
 
+    @Override
+    public void onBackPressed() {
+        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authLoginFragment)
+            navController.navigateUp();
+        else
+            finish();
+    }
+
 }

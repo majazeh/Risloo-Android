@@ -17,6 +17,7 @@ import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
 import com.majazeh.risloo.BuildConfig;
+import com.majazeh.risloo.NavigationTestDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -26,14 +27,6 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
-import com.majazeh.risloo.Views.Fragments.Test.TestChainFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Test.TestDescriptionFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Test.TestEndFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Test.TestEntityFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Test.TestPrerequisiteFragmentDirections;
-import com.majazeh.risloo.Views.Fragments.Test.TestPsyDescFragmentDirections;
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -274,321 +267,58 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void navigateFragment() {
-        switch (navController.getCurrentDestination().getId()) {
-            case R.id.testPsyDescFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        IntentManager.finish(this);
-                    } break;
-                    case "chain": {
-                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestPsyDescFragmentDirections.actionTestPsyDescFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEndFragment();
-                        navController.navigate(action);
-                    } break;
+        switch (formModel.getType()) {
+            case "psychologist_description": {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testPsyDescFragment) {
+                    NavDirections action = NavigationTestDirections.actionGlobalTestPsyDescFragment();
+                    navController.navigate(action);
+                } else {
+                    finish();
                 }
-                break;
-
-            case R.id.testChainFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPsyDescFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "chain": {
-                        IntentManager.finish(this);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        NavDirections action = TestChainFragmentDirections.actionTestChainFragmentToTestEndFragment();
-                        navController.navigate(action);
-                    } break;
+            } break;
+            case "chain": {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testChainFragment) {
+                    NavDirections action = NavigationTestDirections.actionGlobalTestChainFragment();
+                    navController.navigate(action);
+                } else {
+                    finish();
                 }
-                break;
-
-            case R.id.testPrerequisiteFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestPsyDescFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "chain": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        IntentManager.finish(this);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        NavDirections action = TestPrerequisiteFragmentDirections.actionTestPrerequisiteFragmentToTestEndFragment();
-                        navController.navigate(action);
-                    } break;
+            } break;
+            case "prerequisites": {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testPrerequisiteFragment) {
+                    NavDirections action = NavigationTestDirections.actionGlobalTestPrerequisiteFragment();
+                    navController.navigate(action);
+                } else {
+                    finish();
                 }
-                break;
-
-            case R.id.testDescriptionFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPsyDescFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "chain": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        IntentManager.finish(this);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        NavDirections action = TestDescriptionFragmentDirections.actionTestDescriptionFragmentToTestEndFragment();
-                        navController.navigate(action);
-                    } break;
+            } break;
+            case "description": {
+                if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testDescriptionFragment) {
+                    NavDirections action = NavigationTestDirections.actionGlobalTestDescriptionFragment();
+                    navController.navigate(action);
+                } else {
+                    finish();
                 }
-                break;
+            } break;
+            case "entities": {
+                NavDirections action = NavigationTestDirections.actionGlobalTestEntityFragment();
+                navController.navigate(action);
+            } break;
+            case "item": {
+                ItemModel itemModel = (ItemModel) formModel.getObject();
 
-            case R.id.testEntityFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestPsyDescFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "chain": {
-                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        NavDirections action = TestEntityFragmentDirections.actionTestEntityFragmentToTestEndFragment();
-                        navController.navigate(action);
-                    } break;
+                if (itemModel.getType().equals("text")) {
+                    NavDirections action = NavigationTestDirections.actionGlobalTestOptionalFragment();
+                    navController.navigate(action);
+                } else if (itemModel.getType().equals("image_url")) {
+                    NavDirections action = NavigationTestDirections.actionGlobalTestPictoralFragment();
+                    navController.navigate(action);
                 }
-                break;
-
-            case R.id.testOptionalFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPsyDescFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "chain": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        NavDirections action = TestOptionalFragmentDirections.actionTestOptionalFragmentToTestEndFragment();
-                        navController.navigate(action);
-                    } break;
-                }
-                break;
-
-            case R.id.testPictoralFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPsyDescFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "chain": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        NavDirections action = TestPictoralFragmentDirections.actionTestPictoralFragmentToTestEndFragment();
-                        navController.navigate(action);
-                    } break;
-                }
-                break;
-
-            case R.id.testEndFragment:
-                switch (formModel.getType()) {
-                    case "psychologist_description": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPsyDescFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "chain": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestChainFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "prerequisites": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPrerequisiteFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "description": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestDescriptionFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "entities": {
-                        NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestEntityFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "item": {
-                        ItemModel itemModel = (ItemModel) formModel.getObject();
-
-                        if (itemModel.getType().equals("text")) {
-                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestOptionalFragment();
-                            navController.navigate(action);
-                        } else if (itemModel.getType().equals("image_url")) {
-                            NavDirections action = TestEndFragmentDirections.actionTestEndFragmentToTestPictoralFragment();
-                            navController.navigate(action);
-                        }
-                    } break;
-                    case "close": {
-                        closeSample();
-                    } break;
-                }
-                break;
+            } break;
+            case "close": {
+                NavDirections action = NavigationTestDirections.actionGlobalTestEndFragment();
+                navController.navigate(action);
+            } break;
         }
 
         setWidgets();

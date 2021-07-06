@@ -14,6 +14,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -44,7 +45,7 @@ public class AuthLoginFragment extends Fragment {
         binding = FragmentAuthLoginBinding.inflate(inflater, viewGroup, false);
 
         if (!((AuthActivity) requireActivity()).singleton.getToken().equals("")) {
-            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthSerialFragment();
+            NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         } else {
             initializer();
@@ -106,12 +107,12 @@ public class AuthLoginFragment extends Fragment {
         }).widget(binding.buttonTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthRegisterFragment();
+            NavDirections action = NavigationAuthDirections.actionGlobalAuthRegisterFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.registerLinkTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthPasswordRecoverFragment();
+            NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordRecoverFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
@@ -132,26 +133,26 @@ public class AuthLoginFragment extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "password": {
-                                    NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthPasswordFragment(mobile, model);
+                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                                 case "mobileCode": {
-                                    NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthPinFragment(mobile, model);
+                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                                 case "recovery": {
-                                    NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthPasswordChangeFragment(mobile, model);
+                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                             }
                         } else {
-                            NavDirections action = AuthLoginFragmentDirections.actionAuthLoginFragmentToAuthSerialFragment();
+                            NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
 
                             ((AuthActivity) requireActivity()).singleton.login(model);
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();

@@ -14,6 +14,7 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -112,7 +113,7 @@ public class AuthSerialFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            NavDirections action = AuthSerialFragmentDirections.actionAuthSerialFragmentToAuthLoginFragment();
+                            NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
 
                             ((AuthActivity) requireActivity()).singleton.logout();
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();

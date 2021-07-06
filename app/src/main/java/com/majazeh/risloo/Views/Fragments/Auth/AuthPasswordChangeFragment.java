@@ -19,6 +19,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
@@ -163,17 +164,17 @@ public class AuthPasswordChangeFragment extends Fragment {
         }).widget(binding.buttonTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthLoginFragment();
+            NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.loginLinkTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthRegisterFragment();
+            NavDirections action = NavigationAuthDirections.actionGlobalAuthRegisterFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.registerLinkTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthPasswordRecoverFragment();
+            NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordRecoverFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.passwordRecoverLinkTextView.getRoot());
     }
@@ -207,20 +208,20 @@ public class AuthPasswordChangeFragment extends Fragment {
                         if (model.getUser() == null) {
                             switch (model.getTheory()) {
                                 case "password": {
-                                    NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthPasswordFragment(mobile, model);
+                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                                 case "mobileCode": {
-                                    NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthPinFragment(mobile, model);
+                                    NavDirections action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
                                 } break;
                             }
                         } else {
-                            NavDirections action = AuthPasswordChangeFragmentDirections.actionAuthPasswordChangeFragmentToAuthSerialFragment();
+                            NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
 
                             ((AuthActivity) requireActivity()).singleton.login(model);
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
