@@ -19,6 +19,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -141,28 +142,28 @@ public class RoomFragment extends Fragment {
                     switch (item) {
                         case "اعضاء":
                             if (!type.equals("room")) {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToCenterUsersFragment(centerModel);
+                                NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToRoomUsersFragment(roomModel);
+                                NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                             break;
                         case "برنامه درمانی":
                             if (!type.equals("room")) {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToCenterSchedulesFragment(centerModel);
+                                NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             } else {
-                                NavDirections action = RoomFragmentDirections.actionRoomFragmentToRoomSchedulesFragment(roomModel);
+                                NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                             break;
                         case "پروفایل من": {
-                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
-                            NavDirections action = RoomFragmentDirections.actionRoomFragmentToEditCenterFragment(centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                     }
@@ -262,12 +263,12 @@ public class RoomFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = RoomFragmentDirections.actionRoomFragmentToCreateCaseFragment(roomModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addCaseImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = RoomFragmentDirections.actionRoomFragmentToCreateScheduleFragment(roomModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addScheduleImageView.getRoot());
     }

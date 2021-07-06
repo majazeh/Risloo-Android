@@ -17,6 +17,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -151,10 +152,10 @@ public class ClientReportsFragment extends Fragment {
 
         ClickManager.onClickListener(() -> {
             if (type.equals("case")) {
-                NavDirections action = ClientReportsFragmentDirections.actionClientReportsFragmentToCreateReportFragment(caseModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment("case", caseModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             } else {
-                NavDirections action = ClientReportsFragmentDirections.actionClientReportsFragmentToCreateReportFragment(sessionModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment("session", sessionModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
         }).widget(binding.addImageView.getRoot());

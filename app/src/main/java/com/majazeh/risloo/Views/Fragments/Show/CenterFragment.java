@@ -19,6 +19,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -129,19 +130,19 @@ public class CenterFragment extends Fragment {
 
                     switch (item) {
                         case "اعضاء": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCenterUsersFragment(centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "برنامه درمانی": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCenterSchedulesFragment(centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "پروفایل من": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
-                            NavDirections action = CenterFragmentDirections.actionCenterFragmentToEditCenterFragment(centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                     }
@@ -241,12 +242,12 @@ public class CenterFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCreateRoomFragment(centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addRoomImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CenterFragmentDirections.actionCenterFragmentToCreateScheduleFragment(centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addScheduleImageView.getRoot());
     }

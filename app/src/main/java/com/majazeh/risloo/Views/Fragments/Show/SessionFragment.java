@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -113,27 +114,27 @@ public class SessionFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToClientReportsFragment("session", sessionModel);
+            NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("session", sessionModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.reportsTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToEditSessionFragment(sessionModel);
+            NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(sessionModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.editImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToCreateCenterUserFragment(sessionModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterUserFragment(sessionModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.usersAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToCreatePracticeFragment(sessionModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment(sessionModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.practicesAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SessionFragmentDirections.actionSessionFragmentToCreateSampleFragment(null, sessionModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("session", sessionModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.samplesAddImageView.getRoot());
     }

@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -111,22 +112,22 @@ public class CaseFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onClickListener(() -> {
-            NavDirections action = CaseFragmentDirections.actionCaseFragmentToClientReportsFragment("case", caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.reportsTextView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CaseFragmentDirections.actionCaseFragmentToCreateCaseUserFragment(caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment(caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.referencesAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CaseFragmentDirections.actionCaseFragmentToCreateSessionFragment(caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment(caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.sessionsAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = CaseFragmentDirections.actionCaseFragmentToCreateSampleFragment(null, caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.samplesAddImageView.getRoot());
     }

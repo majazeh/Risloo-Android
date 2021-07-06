@@ -168,6 +168,10 @@
         android:label="@string/CreateCaseFragmentTitle"
         tools:layout="@layout/fragment_create_case" >
         <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -178,6 +182,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment"
         android:label="@string/CreateCaseUserFragmentTitle"
         tools:layout="@layout/fragment_create_case_user" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -190,6 +198,10 @@
         android:label="@string/CreateCenterFragmentTitle"
         tools:layout="@layout/fragment_create_center" >
         <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -200,6 +212,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment"
         android:label="@string/CreateCenterUserFragmentTitle"
         tools:layout="@layout/fragment_create_center_user" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -212,6 +228,10 @@
         android:label="@string/CreateDocumentFragmentTitle"
         tools:layout="@layout/fragment_create_document" >
         <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -222,6 +242,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment"
         android:label="@string/CreatePracticeFragmentTitle"
         tools:layout="@layout/fragment_create_practice" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -234,6 +258,10 @@
         android:label="@string/CreateReportFragmentTitle"
         tools:layout="@layout/fragment_create_report" >
         <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -245,6 +273,10 @@
         android:label="@string/CreateRoomFragmentTitle"
         tools:layout="@layout/fragment_create_room" >
         <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -255,6 +287,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment"
         android:label="@string/CreateRoomUserFragmentTitle"
         tools:layout="@layout/fragment_create_room_user" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -282,6 +318,10 @@
         android:label="@string/CreateScheduleFragmentTitle"
         tools:layout="@layout/fragment_create_schedule" >
         <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -292,6 +332,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment"
         android:label="@string/CreateSessionFragmentTitle"
         tools:layout="@layout/fragment_create_session" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
         <argument
             android:name="typeModel"
             app:nullable="true"
@@ -304,6 +348,10 @@
         android:label="@string/CreateTreasuryFragmentTitle"
         tools:layout="@layout/fragment_create_treasury" >
         <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -314,6 +362,10 @@
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment"
         android:label="@string/CreateUserFragmentTitle"
         tools:layout="@layout/fragment_create_user" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
         <argument
             android:name="typeModel"
             app:nullable="true"
