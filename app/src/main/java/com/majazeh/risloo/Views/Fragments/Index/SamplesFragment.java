@@ -17,6 +17,7 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -144,7 +145,7 @@ public class SamplesFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = SamplesFragmentDirections.actionSamplesFragmentToCreateSampleFragment(null, null);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("sample", null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }
