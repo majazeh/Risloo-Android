@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +23,13 @@ import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateDocumentBinding;
+import com.mre.ligheh.API.Response;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateDocumentFragment extends Fragment {
 
@@ -29,8 +37,8 @@ public class CreateDocumentFragment extends Fragment {
     private FragmentCreateDocumentBinding binding;
 
     // Vars
-    private String name = "", description = "";
-    private String filePath = "";
+    private HashMap data, header;
+    private String name = "", description = "", filePath = "";
 
     @Nullable
     @Override
@@ -43,12 +51,16 @@ public class CreateDocumentFragment extends Fragment {
 
         listener();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
 
     private void initializer() {
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateDocumentFragmentNameHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateDocumentFragmentDescriptionHeader));
         binding.fileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateDocumentFragmentFileHeader));
@@ -89,41 +101,28 @@ public class CreateDocumentFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (PermissionManager.filePermission(requireActivity())) {
+            if (PermissionManager.filePermission(requireActivity()))
                 IntentManager.file(requireActivity());
-            }
         }).widget(binding.fileIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (filePath.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.errorImageView, binding.fileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
+            if (binding.nameIncludeLayout.inputEditText.length() == 0)
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
 
-            if (binding.nameIncludeLayout.inputEditText.length() != 0 && !filePath.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.errorImageView, binding.nameErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.errorImageView, binding.fileErrorLayout.errorTextView);
+            if (filePath.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView);
 
+            if (binding.nameIncludeLayout.inputEditText.length() != 0 && !filePath.equals(""))
                 doWork();
-            }
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getName().equals("")) {
-            name = ((MainActivity) requireActivity()).singleton.getName();
-            binding.nameIncludeLayout.inputEditText.setText(name);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getDescription().equals("")) {
-            description = ((MainActivity) requireActivity()).singleton.getDescription();
-            binding.descriptionIncludeLayout.inputEditText.setText(description);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAvatar().equals("")) {
-            filePath = ((MainActivity) requireActivity()).singleton.getAvatar();
-            binding.fileIncludeLayout.nameTextView.setText(filePath);
-        }
+    private void setArgs() {
+        // TODO : Place Code If Needed
     }
 
     public void responseAction(String method, Intent data) {
@@ -139,10 +138,59 @@ public class CreateDocumentFragment extends Fragment {
     }
 
     private void doWork() {
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-        // TODO : Call Work Method
+//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//
+//        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+//        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+//
+//        data.put("name", name);
+//        data.put("description", description);
+//        data.put("file", filePath);
+//
+//        Document.create(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        try {
+//                            JSONObject jsonObject = new JSONObject(response);
+//                            if (!jsonObject.isNull("errors")) {
+//                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+//
+//                                while (keys.hasNext()) {
+//                                    String key = keys.next();
+//                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+//                                        switch (key) {
+//                                            case "name":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                                break;
+//                                            case "description":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                                break;
+//                                            case "file":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                                break;
+//                                        }
+//                                    }
+//                                }
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
     @Override

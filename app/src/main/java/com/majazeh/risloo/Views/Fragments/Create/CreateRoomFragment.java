@@ -40,8 +40,6 @@ public class CreateRoomFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private CenterModel centerModel;
-    private UserModel userModel;
     public String centerId = "";
     public String psychologyId = "", psychologyName = "";
 
@@ -106,14 +104,14 @@ public class CreateRoomFragment extends Fragment {
 
         if (typeModel != null) {
             if (type.equals("center")) {
-                centerModel = (CenterModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                CenterModel centerModel = (CenterModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(centerModel);
 
             } else if (type.equals("user")) {
                 centerId = CreateRoomFragmentArgs.fromBundle(getArguments()).getCenterId();
                 data.put("id", centerId);
 
-                userModel = (UserModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                UserModel userModel = (UserModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(userModel);
             }
         }

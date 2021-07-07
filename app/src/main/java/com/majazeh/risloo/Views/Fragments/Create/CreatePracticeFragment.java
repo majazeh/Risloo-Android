@@ -25,6 +25,8 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreatePracticeBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,7 +41,7 @@ public class CreatePracticeFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String sessionId = "", name = "", description = "", filePath = "";
+    private String name = "", description = "", filePath = "";
 
     @Nullable
     @Override
@@ -52,7 +54,7 @@ public class CreatePracticeFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -100,9 +102,8 @@ public class CreatePracticeFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (PermissionManager.filePermission(requireActivity())) {
+            if (PermissionManager.filePermission(requireActivity()))
                 IntentManager.file(requireActivity());
-            }
         }).widget(binding.fileIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -110,10 +111,12 @@ public class CreatePracticeFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+
             if (binding.descriptionIncludeLayout.inputEditText.length() == 0)
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-             else
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+
             if (filePath.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.fileIncludeLayout.selectTextView, binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
              else
@@ -124,27 +127,21 @@ public class CreatePracticeFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                sessionId = getArguments().getString("id");
-                data.put("id", sessionId);
-            }
+    private void setArgs() {
+        String type = CreatePracticeFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreatePracticeFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("name") != null && !getArguments().getString("name").equals("")) {
-                name = getArguments().getString("name");
-                binding.nameIncludeLayout.inputEditText.setText(name);
+        if (typeModel != null) {
+            if (type.equals("session")) {
+                SessionModel sessionModel = (SessionModel) CreatePracticeFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(sessionModel);
             }
+        }
+    }
 
-            if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
-                description = getArguments().getString("description");
-                binding.descriptionIncludeLayout.inputEditText.setText(description);
-            }
-
-            if (getArguments().getString("file") != null && !getArguments().getString("file").equals("")) {
-                filePath = getArguments().getString("file");
-                binding.fileIncludeLayout.nameTextView.setText(filePath);
-            }
+    private void setData(SessionModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
         }
     }
 
@@ -161,26 +158,22 @@ public class CreatePracticeFragment extends Fragment {
     }
 
     private void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-        data.put("name", name);
-        data.put("description", description);
-        data.put("file", filePath);
-
+//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//
+//        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+//        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+//
+//        data.put("name", name);
+//        data.put("description", description);
+//        data.put("file", filePath);
+//
 //        Session.addPractice(data, header, new Response() {
 //            @Override
 //            public void onOK(Object object) {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
-//                        Bundle extras = new Bundle();
-//                        extras.putString("id", sessionId);
-//
 //                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
 //                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.sessionFragment, extras);
 //                    });
 //                }
 //            }
