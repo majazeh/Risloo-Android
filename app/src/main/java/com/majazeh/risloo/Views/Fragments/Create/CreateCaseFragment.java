@@ -48,8 +48,6 @@ public class CreateCaseFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private CenterModel centerModel;
-    private RoomModel roomModel;
     public String roomId = "", roomName = "", centerName = "", problem = "";
 
     @Nullable
@@ -135,11 +133,11 @@ public class CreateCaseFragment extends Fragment {
 
         if (typeModel != null) {
             if (type.equals("center")) {
-                centerModel = (CenterModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                CenterModel centerModel = (CenterModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(centerModel);
 
             } else if (type.equals("room")) {
-                roomModel = (RoomModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                RoomModel roomModel = (RoomModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(roomModel);
             }
         } else {
@@ -163,12 +161,12 @@ public class CreateCaseFragment extends Fragment {
                 data.put("id", roomId);
             }
 
-            if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
+            if (model.getRoomManager() != null && model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
                 roomName = model.getRoomManager().getName();
                 binding.roomIncludeLayout.primaryTextView.setText(roomName);
             }
 
-            if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && !model.getRoomCenter().getDetail().getString("title").equals("")) {
+            if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals("")) {
                 centerName = model.getRoomCenter().getDetail().getString("title");
                 binding.roomIncludeLayout.secondaryTextView.setText(centerName);
             }

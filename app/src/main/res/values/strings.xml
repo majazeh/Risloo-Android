@@ -8,7 +8,7 @@
 
     <string name="AppImageContent">عکس</string>
 
-    <string name="AppAdded">مطلب ساخته شد.</string>
+    <string name="AppAdded">ساخته شد.</string>
     <string name="AppChanged">تغییرات ثبت شد.</string>
     <string name="AppAuthenticated">ورود شما تمام شد.</string>
     <string name="AppLinkSaved">لینک ذخیره شد.</string>
