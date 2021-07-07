@@ -39,11 +39,11 @@ public class CreateCenterUserFragment extends Fragment {
     // Binding
     private FragmentCreateCenterUserBinding binding;
 
-    // Dialogs
-    private SearchableDialog roomsDialog;
-
     // BottomSheets
     private AuthBottomSheet authBottomSheet;
+
+    // Dialogs
+    private SearchableDialog roomsDialog;
 
     // Vars
     private HashMap data, header;
@@ -67,9 +67,9 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void initializer() {
-        roomsDialog = new SearchableDialog();
-
         authBottomSheet = new AuthBottomSheet();
+
+        roomsDialog = new SearchableDialog();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -160,9 +160,15 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        centerModel = (CenterModel) CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        String type = CreateCenterUserFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        setData(centerModel);
+        if (typeModel != null) {
+            if (type.equals("center")) {
+                centerModel = (CenterModel) CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(centerModel);
+            }
+        }
     }
 
     private void setData(CenterModel model) {

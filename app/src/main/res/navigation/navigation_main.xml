@@ -279,6 +279,10 @@
             app:nullable="true"
             app:argType="string" />
         <argument
+            android:name="centerId"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:nullable="true"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />

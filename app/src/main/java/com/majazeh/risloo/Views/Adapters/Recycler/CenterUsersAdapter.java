@@ -147,8 +147,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         doWork(holder, model, "kick", "status");
                         break;
                     case "ساختن اتاق درمان": {
-                        NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", model);
-                        ((MainActivity) activity).navController.navigate(action);
+                        if (getParent() != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", getParent().centerId, model);
+                            ((MainActivity) activity).navController.navigate(action);
+                        }
                     } break;
                     case "اتاق درمان": {
                         if (getParent() != null) {

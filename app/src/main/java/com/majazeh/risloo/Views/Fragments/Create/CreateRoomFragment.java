@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -39,6 +40,8 @@ public class CreateRoomFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private CenterModel centerModel;
+    private UserModel userModel;
     public String centerId = "", psychologyId = "", psychologyName = "";
 
     @Nullable
@@ -52,7 +55,7 @@ public class CreateRoomFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -96,18 +99,37 @@ public class CreateRoomFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                centerId = getArguments().getString("id");
-                data.put("id", centerId);
-            }
+    private void setArgs() {
+        String type = CreateRoomFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("psychology_id") != null && !getArguments().getString("psychology_id").equals("") && getArguments().getString("psychology_name") != null && !getArguments().getString("psychology_name").equals("")) {
-                psychologyId = getArguments().getString("psychology_id");
-                psychologyName = getArguments().getString("psychology_name");
-                binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+        if (typeModel != null) {
+            if (type.equals("center")) {
+                centerModel = (CenterModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(centerModel);
+
+            } else if (type.equals("user")) {
+                centerId = CreateRoomFragmentArgs.fromBundle(getArguments()).getCenterId();
+                data.put("id", centerId);
+
+                userModel = (UserModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(userModel);
             }
+        }
+    }
+
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            centerId = model.getCenterId();
+            data.put("id", centerId);
+        }
+    }
+
+    private void setData(UserModel model) {
+        if (model.getId() != null && !model.getId().equals("") && model.getName() != null && !model.getName().equals("")) {
+            psychologyId = model.getId();
+            psychologyName = model.getName();
+            binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
         }
     }
 
@@ -143,12 +165,8 @@ public class CreateRoomFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        Bundle extras = new Bundle();
-                        extras.putString("id", centerId);
-
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.centerFragment, extras);
                     });
                 }
             }
