@@ -44,7 +44,7 @@ public class EditUserPersonalFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "active", type = "user", gender = "male";
+    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "", type = "", gender = "";
 
     @Nullable
     @Override
@@ -249,16 +249,12 @@ public class EditUserPersonalFragment extends Fragment {
 
                         binding.clientGroup.setVisibility(View.VISIBLE);
                         break;
-                    default:
+                    case "user":
                         binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
                         binding.clientGroup.setVisibility(View.GONE);
                         break;
                 }
-            } else {
-                binding.typeIncludeLayout.secondRadioButton.setChecked(true);
-
-                binding.clientGroup.setVisibility(View.GONE);
             }
 
             if (model.getGender() != null && !model.getGender().equals("")) {

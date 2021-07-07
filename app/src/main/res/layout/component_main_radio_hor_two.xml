@@ -27,7 +27,6 @@
         android:id="@+id/first_radioButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checked="true"
         android:gravity="center|start"
         android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
@@ -35,7 +34,8 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         android:layoutDirection="rtl"
-        tools:text="گزینه اول" />
+        tools:text="گزینه اول"
+        tools:checked="true" />
 
     <TextView
         android:id="@+id/header_textView"

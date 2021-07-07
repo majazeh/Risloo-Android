@@ -46,8 +46,7 @@ public class CreateUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status ="active", type = "user", gender = "male";
-    private int year, month, day;
+    private String name = "", mobile = "", username = "", email = "", birthday = "", password = "", status = "", type = "", gender = "";
     private boolean passwordVisibility = false;
 
     @Nullable
@@ -61,7 +60,7 @@ public class CreateUserFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -146,8 +145,8 @@ public class CreateUserFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-//            birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
-//            birthdayBottomSheet.setDate(year, month, day, "birthday");
+            birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
+            birthdayBottomSheet.setDate(birthday, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -261,96 +260,15 @@ public class CreateUserFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("name") != null && !getArguments().getString("name").equals("")) {
-                name = getArguments().getString("name");
-                binding.nameIncludeLayout.inputEditText.setText(name);
-            }
-
-            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
-                mobile = getArguments().getString("mobile");
-                binding.mobileIncludeLayout.inputEditText.setText(mobile);
-            }
-
-            if (getArguments().getString("username") != null && !getArguments().getString("username").equals("")) {
-                username = getArguments().getString("username");
-                binding.usernameIncludeLayout.inputEditText.setText(username);
-            }
-
-            if (getArguments().getString("email") != null && !getArguments().getString("email").equals("")) {
-                email = getArguments().getString("email");
-                binding.emailIncludeLayout.inputEditText.setText(email);
-            }
-
-            if (getArguments().getString("password") != null && !getArguments().getString("password").equals("")) {
-                password = getArguments().getString("password");
-                binding.passwordIncludeLayout.inputEditText.setText(password);
-            }
-
-            if (getArguments().getString("birthday") != null && !getArguments().getString("birthday").equals("")) {
-                birthday = getArguments().getString("birthday");
-                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
-            } else {
-                birthday = getResources().getString(R.string.AppDefaultDate);
-                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
-            }
-
-            year = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-            month = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-            day = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", birthday)));
-
-            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                status = getArguments().getString("status");
-                switch (status) {
-                    case "active":
-                        binding.statusIncludeLayout.firstRadioButton.setChecked(true);
-                        break;
-                    case "waiting":
-                        binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-                        break;
-                    case "closed":
-                        binding.statusIncludeLayout.thirdRadioButton.setChecked(true);
-                        break;
-                }
-            }
-
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                switch (type) {
-                    case "admin":
-                        binding.typeIncludeLayout.firstRadioButton.setChecked(true);
-                        break;
-                    default:
-                        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
-                        break;
-                }
-            }
-
-            if (getArguments().getString("gender") != null && !getArguments().getString("gender").equals("")) {
-                gender = getArguments().getString("gender");
-                switch (gender) {
-                    case "male":
-                        binding.genderIncludeLayout.firstRadioButton.setChecked(true);
-                        break;
-                    case "female":
-                        binding.genderIncludeLayout.secondRadioButton.setChecked(true);
-                        break;
-                }
-            }
-        }
+    private void setArgs() {
+        // TODO : Place Code IF Needed
     }
 
     public void responseBottomSheet(String method, String data) {
         switch (method) {
             case "birthday":
                 birthday = data;
-
-//                year = birthdayBottomSheet.year;
-//                month = birthdayBottomSheet.month;
-//                day = birthdayBottomSheet.day;
-
-                binding.birthdayIncludeLayout.selectTextView.setText(birthday);
+                binding.birthdayIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(birthday, "-"));
                 break;
         }
     }
@@ -380,7 +298,6 @@ public class CreateUserFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.usersFragment);
                     });
                 }
             }

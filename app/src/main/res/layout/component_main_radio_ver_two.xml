@@ -28,14 +28,14 @@
         android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_4sdp"
         android:paddingTop="@dimen/_4sdp"
-        android:checked="true"
         android:gravity="center|start"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        tools:text="گزینه اول" />
+        tools:text="گزینه اول"
+        tools:checked="true" />
 
     <RadioButton
         android:id="@+id/second_radioButton"
