@@ -19,6 +19,7 @@ import com.majazeh.risloo.Views.BottomSheets.AuthBottomSheet;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -46,7 +47,8 @@ public class CreateCenterUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String centerId = "", type = "personal_clinic", mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
+    private CenterModel centerModel;
+    public String centerId = "", type = "", mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
 
     @Nullable
     @Override
@@ -59,7 +61,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -141,11 +143,10 @@ public class CreateCenterUserFragment extends Fragment {
         });
 
         binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
+            if (isChecked)
                 createCase = "1";
-            } else {
+            else
                 createCase = "";
-            }
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -158,71 +159,29 @@ public class CreateCenterUserFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                centerId = getArguments().getString("id");
-                data.put("id", centerId);
-            }
+    private void setArgs() {
+        centerModel = (CenterModel) CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                switch (type) {
-                    case "personal_clinic":
-                        binding.positionIncludeLayout.getRoot().setVisibility(View.GONE);
-                        binding.clientGroup.setVisibility(View.VISIBLE);
-                        break;
-                    case "counseling_center":
-                        binding.positionIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.clientGroup.setVisibility(View.GONE);
-                        break;
-                }
-            }
+        setData(centerModel);
+    }
 
-            if (getArguments().getString("mobile") != null && !getArguments().getString("mobile").equals("")) {
-                mobile = getArguments().getString("mobile");
-                binding.mobileIncludeLayout.inputEditText.setText(mobile);
-            }
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            centerId = model.getCenterId();
+            data.put("id", centerId);
+        }
 
-            if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
-                position = SelectionManager.getPosition(requireActivity(), "fa", getArguments().getString("position"));
-                for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
-                    if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
-                        binding.positionIncludeLayout.selectSpinner.setSelection(i);
-
-                        if (i == 3) {
-                            binding.roomIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.clientGroup.setVisibility(View.VISIBLE);
-                        } else {
-                            binding.roomIncludeLayout.getRoot().setVisibility(View.GONE);
-                            binding.clientGroup.setVisibility(View.GONE);
-                        }
-                    }
-                }
-            }
-
-            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("") && getArguments().getString("room_name") != null && !getArguments().getString("room_name").equals("")) {
-                roomId = getArguments().getString("room_id");
-                roomName = getArguments().getString("room_name");
-                binding.roomIncludeLayout.primaryTextView.setText(roomName);
-            }
-
-            if (getArguments().getString("center_name") != null && !getArguments().getString("center_name").equals("")) {
-                centerName = getArguments().getString("center_name");
-                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-            }
-
-            if (getArguments().getString("nickname") != null && !getArguments().getString("nickname").equals("")) {
-                nickname = getArguments().getString("nickname");
-                binding.nicknameIncludeLayout.inputEditText.setText(nickname);
-            }
-
-            if (getArguments().getString("create_case") != null && !getArguments().getString("create_case").equals("")) {
-                createCase = getArguments().getString("create_case");
-
-                if (createCase.equals("1")) {
-                    binding.caseCheckBox.getRoot().setChecked(true);
-                }
+        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
+            type = model.getCenterType();
+            switch (type) {
+                case "personal_clinic":
+                    binding.positionIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.clientGroup.setVisibility(View.VISIBLE);
+                    break;
+                case "counseling_center":
+                    binding.positionIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.clientGroup.setVisibility(View.GONE);
+                    break;
             }
         }
     }
@@ -287,6 +246,7 @@ public class CreateCenterUserFragment extends Fragment {
                             AuthModel model = new AuthModel((JSONObject) object);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
+
                             authBottomSheet.show(requireActivity().getSupportFragmentManager(), "authBottomSheet");
                             authBottomSheet.setData(model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
                         } catch (JSONException e) {

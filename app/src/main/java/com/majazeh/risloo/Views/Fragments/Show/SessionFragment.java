@@ -124,8 +124,7 @@ public class SessionFragment extends Fragment {
         }).widget(binding.editImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterUserFragment("session", sessionModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            // TODO : Place Code Here
         }).widget(binding.usersAddImageView.getRoot());
 
         ClickManager.onClickListener(() -> {

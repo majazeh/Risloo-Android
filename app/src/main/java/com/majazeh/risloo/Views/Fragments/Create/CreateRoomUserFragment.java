@@ -16,16 +16,17 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateRoomUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -46,6 +47,7 @@ public class CreateRoomUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private RoomModel roomModel;
     public String roomId = "", centerId = "";
 
     @Nullable
@@ -59,7 +61,7 @@ public class CreateRoomUserFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -108,41 +110,23 @@ public class CreateRoomUserFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                roomId = getArguments().getString("id");
-                data.put("id", roomId);
-            }
+    private void setArgs() {
+        roomModel = (RoomModel) CreateRoomUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("center_id") != null && !getArguments().getString("center_id").equals("")) {
-                centerId = getArguments().getString("center_id");
-            }
+        setData(roomModel);
+    }
 
-            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
-                try {
-                    JSONArray clients = new JSONArray(getArguments().getString("clients"));
-
-                    ArrayList<TypeModel> references = new ArrayList<>();
-                    ArrayList<String> ids = new ArrayList<>();
-
-                    for (int i = 0; i < clients.length(); i++) {
-                        TypeModel model = new TypeModel((JSONObject) clients.get(i));
-
-                        references.add(model);
-                        ids.add(model.object.getString("id"));
-                    }
-
-                    setRecyclerView(references, ids, "references");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
-            }
-        } else {
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+    private void setData(RoomModel model) {
+        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
+            roomId = model.getRoomId();
+            data.put("id", roomId);
         }
+
+        if (model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
+            centerId = model.getRoomCenter().getCenterId();
+        }
+
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
@@ -166,7 +150,7 @@ public class CreateRoomUserFragment extends Fragment {
 
                 if (referencesAdapter.getIds().size() != 0) {
                     binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
-                    binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                    binding.referenceIncludeLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getIds().size()));
                 } else {
                     binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                     binding.referenceIncludeLayout.countTextView.setText("");
@@ -186,12 +170,8 @@ public class CreateRoomUserFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        Bundle extras = new Bundle();
-                        extras.putString("id", roomId);
-
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.roomUsersFragment, extras);
                     });
                 }
             }

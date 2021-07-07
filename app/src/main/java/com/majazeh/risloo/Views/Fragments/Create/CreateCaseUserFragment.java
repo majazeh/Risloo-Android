@@ -14,8 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -45,6 +47,7 @@ public class CreateCaseUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private CaseModel caseModel;
     public String caseId = "", roomId = "";
 
     @Nullable
@@ -58,7 +61,7 @@ public class CreateCaseUserFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -107,41 +110,23 @@ public class CreateCaseUserFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                caseId = getArguments().getString("id");
-                data.put("id", caseId);
-            }
+    private void setArgs() {
+        caseModel = (CaseModel) CreateCaseUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("")) {
-                roomId = getArguments().getString("room_id");
-            }
+        setData(caseModel);
+    }
 
-//            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
-//                try {
-//                    JSONArray clients = new JSONArray(getArguments().getString("clients"));
-//
-//                    ArrayList<TypeModel> references = new ArrayList<>();
-//                    ArrayList<String> ids = new ArrayList<>();
-//
-//                    for (int i = 0; i < clients.length(); i++) {
-//                        TypeModel model = new TypeModel((JSONObject) clients.get(i));
-//
-//                        references.add(model);
-//                        ids.add(model.object.getString("id"));
-//                    }
-//
-//                    setRecyclerView(references, ids, "references");
-//                } catch (JSONException e) {
-//                    e.printStackTrace();
-//                }
-//            } else {
-//                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
-//            }
-//        } else {
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+    private void setData(CaseModel model) {
+        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
+            caseId = model.getCaseId();
+            data.put("id", caseId);
         }
+
+        if (model.getCaseRoom().getRoomId() != null && !model.getCaseRoom().getRoomId().equals("")) {
+            roomId = model.getCaseRoom().getRoomId();
+        }
+
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
@@ -165,7 +150,7 @@ public class CreateCaseUserFragment extends Fragment {
 
                 if (referencesAdapter.getIds().size() != 0) {
                     binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
-                    binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                    binding.referenceIncludeLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getIds().size()));
                 } else {
                     binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                     binding.referenceIncludeLayout.countTextView.setText("");
@@ -185,12 +170,8 @@ public class CreateCaseUserFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        Bundle extras = new Bundle();
-                        extras.putString("id", caseId);
-
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.caseFragment, extras);
                     });
                 }
             }
