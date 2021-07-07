@@ -42,7 +42,8 @@ public class CreateRoomFragment extends Fragment {
     private HashMap data, header;
     private CenterModel centerModel;
     private UserModel userModel;
-    public String centerId = "", psychologyId = "", psychologyName = "";
+    public String centerId = "";
+    public String psychologyId = "", psychologyName = "";
 
     @Nullable
     @Override
@@ -126,10 +127,12 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void setData(UserModel model) {
-        if (model.getId() != null && !model.getId().equals("") && model.getName() != null && !model.getName().equals("")) {
+        if (model.getId() != null && !model.getId().equals("")) {
             psychologyId = model.getId();
-            psychologyName = model.getName();
+        }
 
+        if (model.getName() != null && !model.getName().equals("")) {
+            psychologyName = model.getName();
             binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
         }
     }
