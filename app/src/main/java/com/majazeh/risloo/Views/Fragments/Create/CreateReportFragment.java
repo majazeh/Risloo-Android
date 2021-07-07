@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -19,8 +20,17 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateReportBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Session;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateReportFragment extends Fragment {
 
@@ -29,7 +39,7 @@ public class CreateReportFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String sessionId = "", encryption = "", description = "";
+    private String encryption = "", description = "";
 
     @Nullable
     @Override
@@ -42,7 +52,7 @@ public class CreateReportFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -113,53 +123,49 @@ public class CreateReportFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                sessionId = getArguments().getString("id");
-                data.put("id", sessionId);
-            }
+    private void setArgs() {
+        String type = CreateReportFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("encryption") != null && !getArguments().getString("encryption").equals("")) {
-                encryption = SelectionManager.getEncryption(requireActivity(), "fa", getArguments().getString("encryption"));
-                for (int i=0; i<binding.encryptionIncludeLayout.selectSpinner.getCount(); i++) {
-                    if (binding.encryptionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(encryption)) {
-                        binding.encryptionIncludeLayout.selectSpinner.setSelection(i);
+        if (typeModel != null) {
+            if (type.equals("case")) {
+                CaseModel caseModel = (CaseModel) CreateReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(caseModel);
 
-                        if (i == 0)
-                            binding.cryptoConstraintLayout.setVisibility(View.GONE);
-                        else
-                            binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
-                    }
-                }
-            }
-
-            if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
-                description = getArguments().getString("description");
-                binding.descriptionIncludeLayout.inputEditText.setText(description);
+            } else if (type.equals("session")) {
+                SessionModel sessionModel = (SessionModel) CreateReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(sessionModel);
             }
         }
     }
 
+    private void setData(CaseModel model) {
+        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
+            data.put("id", model.getCaseId());
+        }
+    }
+
+    private void setData(SessionModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
+        }
+    }
+
     private void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
-        data.put("encryption", SelectionManager.getEncryption(requireActivity(), "en", encryption));
-        data.put("description", description);
-
+//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//
+//        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+//
+//        data.put("encryption", SelectionManager.getEncryption(requireActivity(), "en", encryption));
+//        data.put("description", description);
+//
 //        Session.addReport(data, header, new Response() {
 //            @Override
 //            public void onOK(Object object) {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
-//                        Bundle extras = new Bundle();
-//                        extras.putString("id", sessionId);
-//
 //                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
 //                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.clientReportsFragment, extras);
 //                    });
 //                }
 //            }
