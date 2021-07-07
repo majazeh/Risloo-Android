@@ -47,7 +47,6 @@ public class CreateRoomUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private RoomModel roomModel;
     public String roomId = "", centerId = "";
 
     @Nullable
@@ -116,7 +115,7 @@ public class CreateRoomUserFragment extends Fragment {
 
         if (typeModel != null) {
             if (type.equals("room")) {
-                roomModel = (RoomModel) CreateRoomUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                RoomModel roomModel = (RoomModel) CreateRoomUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(roomModel);
             }
         } else {

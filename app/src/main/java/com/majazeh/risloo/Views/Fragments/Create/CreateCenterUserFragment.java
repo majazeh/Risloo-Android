@@ -47,7 +47,6 @@ public class CreateCenterUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private CenterModel centerModel;
     public String centerId = "", type = "", mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
 
     @Nullable
@@ -115,9 +114,11 @@ public class CreateCenterUserFragment extends Fragment {
 
                 if (position == 3) {
                     binding.roomIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
                     binding.clientGroup.setVisibility(View.VISIBLE);
                 } else {
                     binding.roomIncludeLayout.getRoot().setVisibility(View.GONE);
+
                     binding.clientGroup.setVisibility(View.GONE);
                 }
             }
@@ -165,7 +166,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         if (typeModel != null) {
             if (type.equals("center")) {
-                centerModel = (CenterModel) CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                CenterModel centerModel = (CenterModel) CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(centerModel);
             }
         }
@@ -182,10 +183,12 @@ public class CreateCenterUserFragment extends Fragment {
             switch (type) {
                 case "personal_clinic":
                     binding.positionIncludeLayout.getRoot().setVisibility(View.GONE);
+
                     binding.clientGroup.setVisibility(View.VISIBLE);
                     break;
                 case "counseling_center":
                     binding.positionIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
                     binding.clientGroup.setVisibility(View.GONE);
                     break;
             }

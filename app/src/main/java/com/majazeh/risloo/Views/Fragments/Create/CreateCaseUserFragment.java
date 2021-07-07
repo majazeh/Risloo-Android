@@ -47,7 +47,6 @@ public class CreateCaseUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private CaseModel caseModel;
     public String caseId = "", roomId = "";
 
     @Nullable
@@ -116,7 +115,7 @@ public class CreateCaseUserFragment extends Fragment {
 
         if (typeModel != null) {
             if (type.equals("case")) {
-                caseModel = (CaseModel) CreateCaseUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                CaseModel caseModel = (CaseModel) CreateCaseUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(caseModel);
             }
         } else {
