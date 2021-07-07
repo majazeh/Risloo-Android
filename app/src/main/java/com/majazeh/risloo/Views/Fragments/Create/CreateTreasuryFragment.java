@@ -19,7 +19,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateTreasuryBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +33,6 @@ public class CreateTreasuryFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-//    private TreasuryModel treasuryModel;
     private String name = "";
 
     @Nullable
@@ -97,23 +95,8 @@ public class CreateTreasuryFragment extends Fragment {
     }
 
     private void setArgs() {
-//        String type = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getType();
-//        TypeModel typeModel = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//
-//        if (typeModel != null) {
-//            if (type.equals("treasury")) {
-//                treasuryModel = (TreasuryModel) CreateTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//                setData(treasuryModel);
-//            }
-//        }
+        // TODO : Place Code If Needed
     }
-
-//    private void setData(TreasuryModel model) {
-//        if (model.getName() != null && !model.getName().equals("")) {
-//            name = model.getName();
-//            binding.nameIncludeLayout.inputEditText.setText(name);
-//        }
-//    }
 
     private void doWork() {
 //        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");

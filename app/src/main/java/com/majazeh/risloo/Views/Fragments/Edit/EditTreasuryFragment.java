@@ -34,7 +34,7 @@ public class EditTreasuryFragment extends Fragment {
     // Vars
     private HashMap data, header;
 //    private TreasuryModel treasuryModel;
-    private String id = "", name = "";
+    private String name = "";
 
     @Nullable
     @Override
@@ -103,8 +103,7 @@ public class EditTreasuryFragment extends Fragment {
 
 //    private void setData(TreasuryModel model) {
 //        if (model.getId() != null && !model.getId().equals("")) {
-//            id = model.getId();
-//            data.put("id", id);
+//            data.put("id", model.getId());
 //        }
 //
 //        if (model.getName() != null && !model.getName().equals("")) {
