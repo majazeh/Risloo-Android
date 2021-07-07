@@ -180,8 +180,11 @@ public class EditCenterDetailFragment extends Fragment {
                     }
                 }
 
-                if (model.getManager().getId() != null && !model.getManager().getId().equals("") && model.getManager().getName() != null && !model.getManager().getName().equals("")) {
+                if (model.getManager().getId() != null && !model.getManager().getId().equals("")) {
                     managerId = model.getManager().getUserId();
+                }
+
+                if (model.getManager().getName() != null && !model.getManager().getName().equals("")) {
                     managerName = model.getManager().getName();
                     binding.managerIncludeLayout.selectTextView.setText(managerName);
                 }

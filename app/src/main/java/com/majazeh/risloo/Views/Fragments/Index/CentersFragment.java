@@ -143,7 +143,7 @@ public class CentersFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterFragment("center", null);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCenterFragment(null, null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

@@ -32,9 +32,7 @@ import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
-import com.squareup.picasso.Picasso;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -62,8 +60,7 @@ public class CreateCenterFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "";
-    public String avatarPath = "";
+    public String type = "", managerId = "", managerName = "", title = "", address = "", description = "", avatarPath = "";
 
     @Nullable
     @Override
@@ -76,7 +73,7 @@ public class CreateCenterFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -210,74 +207,14 @@ public class CreateCenterFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                switch (type) {
-                    case "personal_clinic":
-                        binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+    private void setArgs() {
+        // TODO : Place Code If Needed
 
-                        binding.counselingCenterGroup.setVisibility(View.GONE);
-                        break;
-                    case "counseling_center":
-                        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+        setData();
+    }
 
-                        binding.counselingCenterGroup.setVisibility(View.VISIBLE);
-                        break;
-                }
-            }
-
-            if (getArguments().getString("manager_id") != null && !getArguments().getString("manager_id").equals("") && getArguments().getString("manager_name") != null && !getArguments().getString("manager_name").equals("")) {
-                managerId = getArguments().getString("manager_id");
-                managerName = getArguments().getString("manager_name");
-                binding.managerIncludeLayout.selectTextView.setText(managerName);
-            }
-
-            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
-                title = getArguments().getString("title");
-                binding.titleIncludeLayout.inputEditText.setText(title);
-            }
-
-            if (getArguments().getString("address") != null && !getArguments().getString("address").equals("")) {
-                address = getArguments().getString("address");
-                binding.addressIncludeLayout.inputEditText.setText(address);
-            }
-
-            if (getArguments().getString("description") != null && !getArguments().getString("description").equals("")) {
-                description = getArguments().getString("description");
-                binding.descriptionIncludeLayout.inputEditText.setText(description);
-            }
-
-            if (getArguments().getString("avatar") != null && !getArguments().getString("avatar").equals("")) {
-                avatarPath = getArguments().getString("avatar");
-                Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.selectCircleImageView);
-            }
-
-            if (getArguments().getString("phone_numbers") != null && !getArguments().getString("phone_numbers").equals("")) {
-                try {
-                    JSONArray phoneNumbers = new JSONArray(getArguments().getString("phone_numbers"));
-
-                    ArrayList<TypeModel> phones = new ArrayList<>();
-                    ArrayList<String> ids = new ArrayList<>();
-
-                    for (int i = 0; i < phoneNumbers.length(); i++) {
-                        TypeModel model = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
-
-                        phones.add(model);
-                        ids.add(model.object.getString("id"));
-                    }
-
-                    setRecyclerView(phones, ids, "phones");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
-            }
-        } else {
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
-        }
+    private void setData() {
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
@@ -359,7 +296,6 @@ public class CreateCenterFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.centersFragment);
                     });
 
                     if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
