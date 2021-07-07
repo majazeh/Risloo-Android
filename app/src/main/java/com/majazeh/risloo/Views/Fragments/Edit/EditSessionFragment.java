@@ -13,6 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.EditSessionAdapter;
 import com.majazeh.risloo.databinding.FragmentEditSessionBinding;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
 
 public class EditSessionFragment extends Fragment {
 
@@ -27,6 +28,7 @@ public class EditSessionFragment extends Fragment {
 
     // Vars
     private String[] tabs;
+    public SessionModel sessionModel;
 
     @Nullable
     @Override
@@ -35,7 +37,7 @@ public class EditSessionFragment extends Fragment {
 
         initializer();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -47,7 +49,9 @@ public class EditSessionFragment extends Fragment {
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
     }
 
-    private void setData() {
+    private void setArgs() {
+        sessionModel = (SessionModel) EditSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
     }

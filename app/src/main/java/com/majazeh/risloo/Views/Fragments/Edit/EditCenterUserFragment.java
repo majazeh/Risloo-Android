@@ -22,6 +22,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -36,6 +37,7 @@ public class EditCenterUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private UserModel userModel;
     private String centerId = "", userId = "", position = "", nickname = "", status ="";
 
     @Nullable
@@ -49,7 +51,7 @@ public class EditCenterUserFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -88,11 +90,10 @@ public class EditCenterUserFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 EditCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
 
-                if (position == 3) {
+                if (position == 3)
                     binding.clientGroup.setVisibility(View.VISIBLE);
-                } else {
+                else
                     binding.clientGroup.setVisibility(View.GONE);
-                }
             }
 
             @Override
@@ -131,49 +132,49 @@ public class EditCenterUserFragment extends Fragment {
         }).widget(binding.editTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                centerId = getArguments().getString("id");
-                data.put("id", centerId);
-            }
+    private void setArgs() {
+        centerId = EditCenterUserFragmentArgs.fromBundle(getArguments()).getCenterId();
+        data.put("id", centerId);
 
-            if (getArguments().getString("user_id") != null && !getArguments().getString("user_id").equals("")) {
-                userId = getArguments().getString("user_id");
-                data.put("userId", userId);
-            }
+        userModel = (UserModel) EditCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("position") != null && !getArguments().getString("position").equals("")) {
-                position = SelectionManager.getPosition(requireActivity(), "fa", getArguments().getString("position"));
-                for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
-                    if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
-                        binding.positionIncludeLayout.selectSpinner.setSelection(i);
+        setData(userModel);
+    }
 
-                        if (i == 3) {
-                            binding.clientGroup.setVisibility(View.VISIBLE);
-                        } else {
-                            binding.clientGroup.setVisibility(View.GONE);
-                        }
-                    }
+    private void setData(UserModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            userId = model.getId();
+            data.put("userId", userId);
+        }
+
+        if (model.getPosition() != null && !model.getPosition().equals("")) {
+            position = SelectionManager.getPosition(requireActivity(), "fa", model.getPosition());
+            for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
+                if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
+                    binding.positionIncludeLayout.selectSpinner.setSelection(i);
+
+                    if (i == 3)
+                        binding.clientGroup.setVisibility(View.VISIBLE);
+                    else
+                        binding.clientGroup.setVisibility(View.GONE);
                 }
             }
+        }
 
-            if (getArguments().getString("nickname") != null && !getArguments().getString("nickname").equals("")) {
-                nickname = getArguments().getString("nickname");
-                binding.nicknameIncludeLayout.inputEditText.setText(nickname);
-            }
+        if (model.getName() != null && !model.getName().equals("")) {
+            nickname = model.getName();
+            binding.nicknameIncludeLayout.inputEditText.setText(nickname);
+        }
 
-            if (getArguments().getString("status") != null && !getArguments().getString("status").equals("")) {
-                status = getArguments().getString("status");
-                switch (status) {
-                    case "accept":
-                        binding.statusIncludeLayout.firstRadioButton.setChecked(true);
-                        break;
-                    case "kick":
-                        binding.statusIncludeLayout.secondRadioButton.setChecked(true);
-                        break;
-                }
-            }
+        if (model.getUserKicked_at() != 0) {
+            status = "kick";
+            binding.statusIncludeLayout.secondRadioButton.setChecked(true);
+        } else if (model.getUserAccepted_at() != 0) {
+            status = "accept";
+            binding.statusIncludeLayout.firstRadioButton.setChecked(true);
+        } else {
+            status = "";
+            binding.statusIncludeLayout.getRoot().clearCheck();
         }
     }
 
@@ -184,19 +185,17 @@ public class EditCenterUserFragment extends Fragment {
 
         data.put("position", SelectionManager.getPosition(requireActivity(), "en", position));
         data.put("nickname", nickname);
-        data.put("status", status);
+
+        if (!status.equals(""))
+            data.put("status", status);
 
         Center.editUser(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        Bundle extras = new Bundle();
-                        extras.putString("id", centerId);
-
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.centerUsersFragment, extras);
                     });
                 }
             }

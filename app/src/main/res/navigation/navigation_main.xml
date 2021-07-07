@@ -454,6 +454,9 @@
         android:label="@string/EditCenterUserFragmentTitle"
         tools:layout="@layout/fragment_edit_center_user" >
         <argument
+            android:name="centerId"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>

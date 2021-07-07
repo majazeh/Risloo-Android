@@ -157,8 +157,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         }
                     } break;
                     case "ویرایش کاربر": {
-                        NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(model);
-                        ((MainActivity) activity).navController.navigate(action);
+                        if (getParent() != null) {
+                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(getParent().centerId, model);
+                            ((MainActivity) activity).navController.navigate(action);
+                        }
                     } break;
                     case "ورود به کاربری":
                         Log.e("method", "enter");
