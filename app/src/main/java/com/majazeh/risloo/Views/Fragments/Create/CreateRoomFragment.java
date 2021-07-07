@@ -129,6 +129,7 @@ public class CreateRoomFragment extends Fragment {
         if (model.getId() != null && !model.getId().equals("") && model.getName() != null && !model.getName().equals("")) {
             psychologyId = model.getId();
             psychologyName = model.getName();
+
             binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
         }
     }

@@ -130,7 +130,7 @@ public class CreateCaseUserFragment extends Fragment {
             data.put("id", caseId);
         }
 
-        if (model.getCaseRoom().getRoomId() != null && !model.getCaseRoom().getRoomId().equals("")) {
+        if (model.getCaseRoom() != null && model.getCaseRoom().getRoomId() != null && !model.getCaseRoom().getRoomId().equals("")) {
             roomId = model.getCaseRoom().getRoomId();
         }
 

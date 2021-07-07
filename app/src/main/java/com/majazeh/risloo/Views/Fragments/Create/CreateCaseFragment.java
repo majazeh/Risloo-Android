@@ -14,8 +14,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -26,7 +28,6 @@ import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -47,6 +48,8 @@ public class CreateCaseFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private CenterModel centerModel;
+    private RoomModel roomModel;
     public String roomId = "", roomName = "", centerName = "", problem = "";
 
     @Nullable
@@ -60,7 +63,7 @@ public class CreateCaseFragment extends Fragment {
 
         listener();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -126,51 +129,53 @@ public class CreateCaseFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("id") != null && !getArguments().getString("id").equals("")) {
-                data.put("id", getArguments().getString("id"));
-            }
+    private void setArgs() {
+        String type = CreateCaseFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("") && getArguments().getString("room_name") != null && !getArguments().getString("room_name").equals("")) {
-                roomId = getArguments().getString("room_id");
-                roomName = getArguments().getString("room_name");
-                binding.roomIncludeLayout.primaryTextView.setText(roomName);
-            }
+        if (typeModel != null) {
+            if (type.equals("center")) {
+                centerModel = (CenterModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(centerModel);
 
-            if (getArguments().getString("center_name") != null && !getArguments().getString("center_name").equals("")) {
-                centerName = getArguments().getString("center_name");
-                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-            }
-
-            if (getArguments().getString("problem") != null && !getArguments().getString("problem").equals("")) {
-                problem = getArguments().getString("problem");
-                binding.problemIncludeLayout.inputEditText.setText(problem);
-            }
-
-            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
-                try {
-                    JSONArray clients = new JSONArray(getArguments().getString("clients"));
-
-                    ArrayList<TypeModel> references = new ArrayList<>();
-                    ArrayList<String> ids = new ArrayList<>();
-
-                    for (int i = 0; i < clients.length(); i++) {
-                        TypeModel model = new TypeModel((JSONObject) clients.get(i));
-
-                        references.add(model);
-                        ids.add(model.object.getString("id"));
-                    }
-
-                    setRecyclerView(references, ids, "references");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+            } else if (type.equals("room")) {
+                roomModel = (RoomModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(roomModel);
             }
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+        }
+    }
+
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            roomId = model.getCenterId();
+            data.put("id", roomId);
+        }
+
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+    }
+
+    private void setData(RoomModel model) {
+        try {
+            if (model.getRoomId() != null && !model.getRoomId().equals("")) {
+                roomId = model.getRoomId();
+                data.put("id", roomId);
+            }
+
+            if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
+                roomName = model.getRoomManager().getName();
+                binding.roomIncludeLayout.primaryTextView.setText(roomName);
+            }
+
+            if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && !model.getRoomCenter().getDetail().getString("title").equals("")) {
+                centerName = model.getRoomCenter().getDetail().getString("title");
+                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+            }
+
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -218,7 +223,7 @@ public class CreateCaseFragment extends Fragment {
 
                     if (referencesAdapter.getIds().size() != 0) {
                         binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
-                        binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                        binding.referenceIncludeLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getIds().size()));
                     } else {
                         binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.referenceIncludeLayout.countTextView.setText("");
@@ -247,7 +252,6 @@ public class CreateCaseFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.casesFragment);
                     });
                 }
             }

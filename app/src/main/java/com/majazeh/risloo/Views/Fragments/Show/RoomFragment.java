@@ -263,8 +263,13 @@ public class RoomFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment("room", roomModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            if (roomModel == null) {
+                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment("center", centerModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            } else {
+                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment("room", roomModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
         }).widget(binding.addCaseImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
