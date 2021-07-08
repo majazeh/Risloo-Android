@@ -209,24 +209,46 @@ public class SessionFragment extends Fragment {
                         if (!psychologists.data().isEmpty()) {
                             psychologistsAdapter.setPsychologists(psychologists.data());
                             binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
+
+                            binding.psychologistsSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (psychologistsAdapter.getItemCount() == 0) {
+                            binding.psychologistsSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         // Users Data
                         if (sessionModel.getClients() != null && sessionModel.getClients().data().size() != 0) {
                             users2Adapter.setUsers(sessionModel.getClients().data());
                             binding.usersSingleLayout.recyclerView.setAdapter(users2Adapter);
+
+                            binding.usersHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.usersSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (users2Adapter.getItemCount() == 0) {
+                            binding.usersHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.usersSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
 //                        // Practices Data
 //                        if (!sessionModel.getPractices().data().isEmpty()) {
 //                            practicesAdapter.setPractices(sessionModel.getPractices().data());
 //                            binding.practicesSingleLayout.recyclerView.setAdapter(practicesAdapter);
+//
+//                            binding.practicesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+//                            binding.practicesSingleLayout.textView.setVisibility(View.GONE);
+//                        } else if (practicesAdapter.getItemCount() == 0) {
+                            binding.practicesHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.practicesSingleLayout.textView.setVisibility(View.VISIBLE);
 //                        }
 
                         // Samples Data
                         if (!sessionModel.getSamples().data().isEmpty()) {
                             samples2Adapter.setSamples(sessionModel.getSamples().data());
                             binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
+
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (samples2Adapter.getItemCount() == 0) {
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         binding.psychologistsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
@@ -240,19 +262,16 @@ public class SessionFragment extends Fragment {
                         binding.psychologistsShimmerLayout.getRoot().stopShimmer();
 
                         // Users Data
-                        binding.usersHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.usersSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.usersShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.usersShimmerLayout.getRoot().stopShimmer();
 
                         // Practices Data
-                        binding.practicesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.practicesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.practicesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.practicesShimmerLayout.getRoot().stopShimmer();
 
                         // Samples Data
-                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();

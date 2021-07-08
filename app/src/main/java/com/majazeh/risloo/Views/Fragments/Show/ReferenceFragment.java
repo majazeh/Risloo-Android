@@ -167,18 +167,34 @@ public class ReferenceFragment extends Fragment {
                             if (!userModel.getRoomList().data().isEmpty()) {
                                 roomsAdapter.setRooms(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+
+                                binding.roomsSingleLayout.textView.setVisibility(View.GONE);
+                            } else if (roomsAdapter.getItemCount() == 0) {
+                                binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
 
                             // Cases Data
                             if (!userModel.getCaseList().data().isEmpty()) {
                                 cases3Adapter.setCases(userModel.getCaseList().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
+
+                                binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                                binding.casesSingleLayout.textView.setVisibility(View.GONE);
+                            } else if (cases3Adapter.getItemCount() == 0) {
+                                binding.casesHeaderLayout.getRoot().setVisibility(View.GONE);
+                                binding.casesSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
 
                             // Samples Data
                             if (!userModel.getSampleList().data().isEmpty()) {
                                 samples3Adapter.setSamples(userModel.getSampleList().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
+
+                                binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                                binding.samplesSingleLayout.textView.setVisibility(View.GONE);
+                            } else if (samples3Adapter.getItemCount() == 0) {
+                                binding.samplesHeaderLayout.getRoot().setVisibility(View.GONE);
+                                binding.samplesSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
 
                             binding.roomsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
@@ -191,13 +207,11 @@ public class ReferenceFragment extends Fragment {
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
                             // Cases Data
-                            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
                             // Samples Data
-                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.samplesShimmerLayout.getRoot().stopShimmer();
@@ -243,18 +257,34 @@ public class ReferenceFragment extends Fragment {
                             if (!userModel.getRoomList().data().isEmpty()) {
                                 roomsAdapter.setRooms(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
+
+                                binding.roomsSingleLayout.textView.setVisibility(View.GONE);
+                            } else if (roomsAdapter.getItemCount() == 0) {
+                                binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
 
                             // Cases Data
                             if (!userModel.getCaseList().data().isEmpty()) {
                                 cases3Adapter.setCases(userModel.getCaseList().data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(cases3Adapter);
+
+                                binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                                binding.casesSingleLayout.textView.setVisibility(View.GONE);
+                            } else if (cases3Adapter.getItemCount() == 0) {
+                                binding.casesHeaderLayout.getRoot().setVisibility(View.GONE);
+                                binding.casesSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
 
                             // Samples Data
                             if (!userModel.getSampleList().data().isEmpty()) {
                                 samples3Adapter.setSamples(userModel.getSampleList().data());
                                 binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
+
+                                binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                                binding.samplesSingleLayout.textView.setVisibility(View.GONE);
+                            } else if (samples3Adapter.getItemCount() == 0) {
+                                binding.samplesHeaderLayout.getRoot().setVisibility(View.GONE);
+                                binding.samplesSingleLayout.textView.setVisibility(View.VISIBLE);
                             }
 
                             binding.roomsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
@@ -267,13 +297,11 @@ public class ReferenceFragment extends Fragment {
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
                             // Cases Data
-                            binding.casesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
                             // Samples Data
-                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.samplesShimmerLayout.getRoot().stopShimmer();

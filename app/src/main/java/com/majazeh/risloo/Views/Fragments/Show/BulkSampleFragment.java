@@ -240,18 +240,34 @@ public class BulkSampleFragment extends Fragment {
                         if (bulkSampleModel.getMembers() != null && bulkSampleModel.getMembers().data().size() != 0) {
                             referencesAdapter.setReferences(bulkSampleModel.getMembers().data());
                             binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+
+                            binding.referencesSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (referencesAdapter.getItemCount() == 0) {
+                            binding.referencesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         // Scales Data
                         if (!bulkSampleModel.getScales().data().isEmpty()) {
                             scales2Adapter.setScales(bulkSampleModel.getScales().data());
                             binding.scalesSingleLayout.recyclerView.setAdapter(scales2Adapter);
+
+                            binding.scalesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.scalesSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (scales2Adapter.getItemCount() == 0) {
+                            binding.scalesHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.scalesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         // Samples Data
                         if (!bulkSampleModel.getSamples().data().isEmpty()) {
                             samples4Adapter.setSamples(bulkSampleModel.getSamples().data());
                             binding.samplesSingleLayout.recyclerView.setAdapter(samples4Adapter);
+
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (samples4Adapter.getItemCount() == 0) {
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         binding.scalesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(scales2Adapter.getItemCount()));
@@ -263,13 +279,11 @@ public class BulkSampleFragment extends Fragment {
                         binding.referencesShimmerLayout.getRoot().stopShimmer();
 
                         // Scales Data
-                        binding.scalesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.scalesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.scalesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.scalesShimmerLayout.getRoot().stopShimmer();
 
                         // Samples Data
-                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();

@@ -175,24 +175,44 @@ public class CaseFragment extends Fragment {
                         if (!psychologists.data().isEmpty()) {
                             psychologistsAdapter.setPsychologists(psychologists.data());
                             binding.psychologistsSingleLayout.recyclerView.setAdapter(psychologistsAdapter);
+
+                            binding.psychologistsSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (psychologistsAdapter.getItemCount() == 0) {
+                            binding.psychologistsSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         // References Data
                         if (caseModel.getClients() != null && caseModel.getClients().data().size() != 0) {
                             referencesAdapter.setReferences(caseModel.getClients().data());
                             binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
+
+                            binding.referencesSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (referencesAdapter.getItemCount() == 0) {
+                            binding.referencesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         // Sessions Data
                         if (!caseModel.getSessions().data().isEmpty()) {
                             sessions2Adapter.setSessions(caseModel.getSessions().data());
                             binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
+
+                            binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.sessionsSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (sessions2Adapter.getItemCount() == 0) {
+                            binding.sessionsHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.sessionsSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         // Samples Data
                         if (!caseModel.getSamples().data().isEmpty()) {
                             samples2Adapter.setSamples(caseModel.getSamples().data());
                             binding.samplesSingleLayout.recyclerView.setAdapter(samples2Adapter);
+
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (samples2Adapter.getItemCount() == 0) {
+                            binding.samplesHeaderLayout.getRoot().setVisibility(View.GONE);
+                            binding.samplesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
                         binding.psychologistsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
@@ -211,13 +231,11 @@ public class CaseFragment extends Fragment {
                         binding.referencesShimmerLayout.getRoot().stopShimmer();
 
                         // Sessions Data
-                        binding.sessionsHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.sessionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.sessionsShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.sessionsShimmerLayout.getRoot().stopShimmer();
 
                         // Samples Data
-                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();

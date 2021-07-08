@@ -13,309 +13,319 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/info_constraintLayout"
-            android:layout_width="0dp"
+            android:id="@+id/container_constraintLayout"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:paddingBottom="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
-                android:id="@+id/serial_imageView"
-                android:layout_width="@dimen/_16sdp"
-                android:layout_height="@dimen/_16sdp"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/info_constraintLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:contentDescription="@string/AppImageContent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_copy_light"
-                app:layout_constraintBottom_toBottomOf="@id/serial_textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@id/serial_textView"
-                app:tint="@color/Blue700" />
-
-            <TextView
-                android:id="@+id/serial_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:gravity="start"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Blue700"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_bold"
-                app:layout_constraintEnd_toStartOf="@id/serial_imageView"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="سریال" />
-
-            <include
-                android:id="@+id/avatars_includeLayout"
-                layout="@layout/component_main_avatar_multi"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_12sdp"
-                app:layout_constraintBottom_toBottomOf="@id/psychology_textView"
+                android:paddingBottom="@dimen/_12sdp"
+                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@id/center_textView" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <TextView
-                android:id="@+id/center_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_4sdp"
-                android:gravity="start"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray700"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_bold"
-                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                app:layout_constraintStart_toEndOf="@id/avatars_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/serial_textView"
-                tools:text="مرکز درمانی" />
+                <ImageView
+                    android:id="@+id/serial_imageView"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:contentDescription="@string/AppImageContent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_copy_light"
+                    app:layout_constraintBottom_toBottomOf="@id/serial_textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/serial_textView"
+                    app:tint="@color/Blue700" />
 
-            <TextView
-                android:id="@+id/psychology_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_2sdp"
-                android:gravity="start"
-                android:textSize="@dimen/_9ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray500"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintEnd_toEndOf="@id/center_textView"
-                app:layout_constraintStart_toStartOf="@id/center_textView"
-                app:layout_constraintTop_toBottomOf="@id/center_textView"
-                tools:text="روان‌شناس" />
+                <TextView
+                    android:id="@+id/serial_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:gravity="start"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Blue700"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_bold"
+                    app:layout_constraintEnd_toStartOf="@id/serial_imageView"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="سریال" />
 
-            <ImageView
-                android:id="@+id/case_imageView"
-                android:layout_width="@dimen/_14sdp"
-                android:layout_height="@dimen/_14sdp"
-                android:contentDescription="@string/AppImageContent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_clipboard_light"
-                app:layout_constraintBottom_toBottomOf="@id/case_textView"
-                app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
-                app:layout_constraintTop_toTopOf="@id/case_textView"
-                app:tint="@color/Gray500" />
+                <include
+                    android:id="@+id/avatars_includeLayout"
+                    layout="@layout/component_main_avatar_multi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/psychology_textView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/center_textView" />
 
-            <TextView
-                android:id="@+id/case_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:layout_marginStart="@dimen/_6sdp"
-                android:gravity="start"
-                android:textSize="@dimen/_9ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray500"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                app:layout_constraintStart_toEndOf="@id/case_imageView"
-                app:layout_constraintTop_toBottomOf="@id/avatars_includeLayout"
-                tools:text="پرونده" />
+                <TextView
+                    android:id="@+id/center_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="start"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray700"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_bold"
+                    app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                    app:layout_constraintStart_toEndOf="@id/avatars_includeLayout"
+                    app:layout_constraintTop_toBottomOf="@id/serial_textView"
+                    tools:text="مرکز درمانی" />
 
-            <TextView
-                android:id="@+id/status_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:gravity="start"
-                android:textSize="@dimen/_9ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray400"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintEnd_toStartOf="@id/edit_textView"
-                app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/case_textView"
-                tools:text="وضعیت" />
+                <TextView
+                    android:id="@+id/psychology_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_2sdp"
+                    android:gravity="start"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray500"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular"
+                    app:layout_constraintEnd_toEndOf="@id/center_textView"
+                    app:layout_constraintStart_toStartOf="@id/center_textView"
+                    app:layout_constraintTop_toBottomOf="@id/center_textView"
+                    tools:text="روان‌شناس" />
+
+                <ImageView
+                    android:id="@+id/case_imageView"
+                    android:layout_width="@dimen/_14sdp"
+                    android:layout_height="@dimen/_14sdp"
+                    android:contentDescription="@string/AppImageContent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_clipboard_light"
+                    app:layout_constraintBottom_toBottomOf="@id/case_textView"
+                    app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
+                    app:layout_constraintTop_toTopOf="@id/case_textView"
+                    app:tint="@color/Gray500" />
+
+                <TextView
+                    android:id="@+id/case_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:gravity="start"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray500"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular"
+                    app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                    app:layout_constraintStart_toEndOf="@id/case_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/avatars_includeLayout"
+                    tools:text="پرونده" />
+
+                <TextView
+                    android:id="@+id/status_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:gravity="start"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray400"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular"
+                    app:layout_constraintEnd_toStartOf="@id/edit_textView"
+                    app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
+                    app:layout_constraintTop_toBottomOf="@id/case_textView"
+                    tools:text="وضعیت" />
+
+                <include
+                    android:id="@+id/edit_textView"
+                    layout="@layout/component_main_button_oval_mid"
+                    android:layout_width="@dimen/_28sdp"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginEnd="@dimen/_4sdp"
+                    app:layout_constraintBottom_toBottomOf="@id/link_textView"
+                    app:layout_constraintEnd_toStartOf="@id/link_textView"
+                    app:layout_constraintTop_toTopOf="@id/link_textView" />
+
+                <include
+                    android:id="@+id/link_textView"
+                    layout="@layout/component_main_button_multi_mid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    app:layout_goneMarginTop="@dimen/_8sdp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/case_textView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/edit_textView"
-                layout="@layout/component_main_button_oval_mid"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_4sdp"
-                app:layout_constraintBottom_toBottomOf="@id/link_textView"
-                app:layout_constraintEnd_toStartOf="@id/link_textView"
-                app:layout_constraintTop_toTopOf="@id/link_textView" />
+                android:id="@+id/references_header_includeLayout"
+                layout="@layout/component_main_index_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
             <include
-                android:id="@+id/link_textView"
-                layout="@layout/component_main_button_multi_mid"
+                android:id="@+id/references_shimmerLayout"
+                layout="@layout/component_shimmer_reference"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/references_header_includeLayout"
+                tools:visibility="gone" />
+
+            <include
+                android:id="@+id/references_singleLayout"
+                layout="@layout/component_single_reference"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/references_header_includeLayout"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/references_barrier"
                 android:layout_width="wrap_content"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                app:layout_goneMarginTop="@dimen/_8sdp"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="references_shimmerLayout, references_singleLayout" />
+
+            <include
+                android:id="@+id/scales_header_includeLayout"
+                layout="@layout/component_main_index_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/references_barrier" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/scales_containerLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:padding="@dimen/_1sdp"
+                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/scales_header_includeLayout">
+
+                <include
+                    android:id="@+id/scales_shimmerLayout"
+                    layout="@layout/component_shimmer_index"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
+
+                <include
+                    android:id="@+id/scales_headerLayout"
+                    layout="@layout/header_item_scale2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
+
+                <include
+                    android:id="@+id/scales_singleLayout"
+                    layout="@layout/component_single_scale2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/scales_headerLayout"
+                    tools:visibility="visible" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <include
+                android:id="@+id/samples_header_includeLayout"
+                layout="@layout/component_main_index_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/scales_containerLayout" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/samples_containerLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:padding="@dimen/_1sdp"
+                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/case_textView" />
+                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/samples_header_includeLayout">
 
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <include
+                    android:id="@+id/samples_shimmerLayout"
+                    layout="@layout/component_shimmer_index"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="gone" />
 
-        <include
-            android:id="@+id/references_header_includeLayout"
-            layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+                <include
+                    android:id="@+id/samples_headerLayout"
+                    layout="@layout/header_item_sample4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:visibility="visible" />
 
-        <include
-            android:id="@+id/references_shimmerLayout"
-            layout="@layout/component_shimmer_reference"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/references_header_includeLayout"
-            tools:visibility="gone" />
+                <include
+                    android:id="@+id/samples_singleLayout"
+                    layout="@layout/component_single_sample4"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/samples_headerLayout"
+                    tools:visibility="visible" />
 
-        <include
-            android:id="@+id/references_singleLayout"
-            layout="@layout/component_single_reference"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/references_header_includeLayout"
-            tools:visibility="visible" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/references_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="references_shimmerLayout, references_singleLayout" />
-
-        <include
-            android:id="@+id/scales_header_includeLayout"
-            layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/references_barrier" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/scales_containerLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:padding="@dimen/_1sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/scales_header_includeLayout">
-
-            <include
-                android:id="@+id/scales_shimmerLayout"
-                layout="@layout/component_shimmer_index"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="gone" />
-
-            <include
-                android:id="@+id/scales_headerLayout"
-                layout="@layout/header_item_scale2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
-            <include
-                android:id="@+id/scales_singleLayout"
-                layout="@layout/component_single_scale2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/scales_headerLayout"
-                tools:visibility="visible" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <include
-            android:id="@+id/samples_header_includeLayout"
-            layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/scales_containerLayout" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/samples_containerLayout"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:layout_marginBottom="@dimen/_12sdp"
-            android:padding="@dimen/_1sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/samples_header_includeLayout">
-
-            <include
-                android:id="@+id/samples_shimmerLayout"
-                layout="@layout/component_shimmer_index"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="gone" />
-
-            <include
-                android:id="@+id/samples_headerLayout"
-                layout="@layout/header_item_sample4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
-            <include
-                android:id="@+id/samples_singleLayout"
-                layout="@layout/component_single_sample4"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/samples_headerLayout"
-                tools:visibility="visible" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
