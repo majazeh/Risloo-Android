@@ -3,133 +3,167 @@ package com.mre.ligheh.Model.Madule;
 import java.util.HashMap;
 
 public class BreadCrumb {
-    public HashMap breadCrumb = new HashMap();
+    public HashMap breadCrumbFa = new HashMap();
+    public HashMap breadCrumbEn = new HashMap();
 
     public HashMap dashboard() {
-        breadCrumb.put("dashboard", "dashboard");
-        return breadCrumb;
+        breadCrumbFa.put("dashboard", "dashboard");
+        breadCrumbEn.put("id", "dashboardFragment");
+        return breadCrumbFa;
     }
 
     // user
     public HashMap users(){
         dashboard().put("users", "users");
-        return breadCrumb;
+        breadCrumbEn.put("id", "usersFragment");
+        return breadCrumbFa;
     }
 
     public HashMap user(String id){
         users().put(id, "fragment_account");
-        return breadCrumb;
+        breadCrumbEn.put("id", "usersFragment");
+        return breadCrumbFa;
     }
 
     public HashMap editUser(String id){
         user(id).put(id, "editAccountFragment");
-        return breadCrumb;
+        breadCrumbEn.put("id", "editUserFragment");
+        return breadCrumbFa;
     }
 
-    public HashMap createUser(){
-        users().put("createUser","createDocumentFragment");
-        return breadCrumb;
-    }
     // end of user
 
     // center
     public HashMap centers(){
         dashboard().put("centers", "centers");
-        return breadCrumb;
+        breadCrumbEn.put("id", "centersFragment");
+        return breadCrumbFa;
     }
 
     public HashMap center(String id){
         centers().put("center", id);
-        return breadCrumb;
+        breadCrumbEn.put("id", "centerFragment");
+        return breadCrumbFa;
     }
 
     public HashMap centerUsers(String id){
         center(id).put("centerUsers","centerUsers");
-        return breadCrumb;
+        breadCrumbEn.put("id", "editCenterFragment");
+        return breadCrumbFa;
     }
 
-    public HashMap addCenterUser(String id){
+    public HashMap createCenterUser(String id){
         center(id).put("addCenterUser", "addCenterUser");
-        return breadCrumb;
+        breadCrumbEn.put("id", "createCenterFragment");
+        return breadCrumbFa;
     }
     // end of center
 
-    // room
-    public HashMap rooms(){
-        dashboard().put("rooms", "rooms");
-        return breadCrumb;
-    }
+//    // room
+//    public HashMap rooms(){
+//        dashboard().put("rooms", "rooms");
+//        breadCrumbEn.put("id", "createCenterFragment");
+//        return breadCrumbFa;
+//    }
 
     public HashMap room(String centerId,String roomId){
         center(centerId).put("room", roomId);
-        return breadCrumb;
+        breadCrumbEn.put("id", "roomFragment");
+        return breadCrumbFa;
     }
 
     public HashMap roomUsers(String centerId,String roomId){
         room(centerId,roomId).put("roomUsers","roomUsers");
-        return breadCrumb;
+        breadCrumbEn.put("id", "roomUsersFragment");
+        return breadCrumbFa;
     }
 
-    public HashMap addRoomUsers(String centerId,String roomId){
+    public HashMap createRoomUsers(String centerId,String roomId){
         roomUsers(centerId,roomId).put("addRoomUsers","addRoomUsers");
-        return breadCrumb;
+        breadCrumbEn.put("id", "createRoomUserFragment");
+        return breadCrumbFa;
     }
     // end of room
 
-    // case
-    public HashMap cases(){
-        dashboard().put("cases", "cases");
-        return breadCrumb;
-    }
+//    // case
+//    public HashMap cases(){
+//        dashboard().put("cases", "cases");
+//        return breadCrumbFa;
+//    }
 
     public HashMap Case(String centerId,String roomId,String caseId){
         room(centerId,roomId).put("case", caseId);
-        return breadCrumb;
+        breadCrumbEn.put("id", "caseFragment");
+        return breadCrumbFa;
     }
 
-    public HashMap addCaseUser(String centerId,String roomId,String caseId){
+    public HashMap createCaseUser(String centerId,String roomId,String caseId){
         Case(centerId,roomId,caseId).put("addCaseUser", "addCaseuser");
-        return breadCrumb;
+        breadCrumbEn.put("id", "createCaseFragment");
+        return breadCrumbFa;
     }
     // end of case
 
     // session
     public HashMap sessions(){
         dashboard().put("sessions","sessions");
-        return breadCrumb;
+        breadCrumbEn.put("id", "sessionsFragment");
+        return breadCrumbFa;
     }
 
     public HashMap session(String centerId,String roomId,String caseId,String sessionId){
         Case(centerId,roomId,caseId).put("session",sessionId);
-        return breadCrumb;
+        breadCrumbEn.put("id", "sessionFragment");
+        return breadCrumbFa;
     }
 
     // sample
     public HashMap assessments(){
-        dashboard().put("assessments", "assessments");
-        return breadCrumb;
+        dashboard().put("scales", "scales");
+        breadCrumbEn.put("id", "scalesFragment");
+        return breadCrumbFa;
     }
 
     public HashMap samples(){
         assessments().put("samples", "samples");
-        return breadCrumb;
+        breadCrumbEn.put("id", "samplesFragment");
+        return breadCrumbFa;
+    }
+
+    public HashMap sample(){
+        assessments().put("sample", "sample");
+        breadCrumbEn.put("id", "sampleFragment");
+        return breadCrumbFa;
     }
 
     public HashMap createSample(){
         samples().put("createSample", "createSample");
-        return breadCrumb;
+        breadCrumbEn.put("id", "createSampleFragment");
+        return breadCrumbFa;
+    }
+
+    public HashMap bulkSamples(){
+        assessments().put("bulkSamples", "bulkSamples");
+        breadCrumbEn.put("id", "bulkSamplesFragment");
+        return breadCrumbFa;
+    }
+
+    public HashMap bulkSample(){
+        assessments().put("bulkSample", "bulkSample");
+        breadCrumbEn.put("id", "bulkSampleFragment");
+        return breadCrumbFa;
     }
     // end of sample
 
-    // document
-    public HashMap documents(){
-        dashboard().put("documents","documents");
-        return breadCrumb;
-    }
-
-    public HashMap createDocument(){
-        documents().put("createDocuments","createDocuments");
-        return breadCrumb;
-    }
+//    // document
+//    public HashMap documents(){
+//        dashboard().put("documents","documents");
+//        return breadCrumbFa;
+//    }
+//
+//    public HashMap createDocument(){
+//        documents().put("createDocuments","createDocuments");
+//        return breadCrumbFa;
+//    }
 
 }

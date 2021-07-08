@@ -2,6 +2,7 @@ package com.mre.ligheh.Model.Madule;
 
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
@@ -45,7 +46,7 @@ public class Sample extends Model {
             if (has(data, "key")) {
                 String key = (String) data.get("key");
                 data.remove("key");
-                Model.post("auth" + "/theory" + "/" + key, data, header, response, null);
+                Model.post("auth" + "/theory" + "/" + key, data, header, response, SampleModel.class);
             } else {
                 Exceptioner.make(response, "کلید را وارد کنید");
             }
@@ -256,6 +257,18 @@ public class Sample extends Model {
                 Model.post(Sample.endpoint + "/samples/" + data.get("id") + "/items", data, header, response, null);
             } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "authorized_key")) {
+                Model.post("auth" , data, header, response, AuthModel.class);
+            } else {
+                Exceptioner.make(response, "کلید را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
