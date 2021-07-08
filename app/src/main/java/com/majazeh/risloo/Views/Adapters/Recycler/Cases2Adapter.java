@@ -89,11 +89,15 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
     private void setData(Cases2Holder holder, CaseModel model) {
         holder.binding.serialTextView.setText(model.getCaseId());
 
-        if (model.getClients() != null && !model.getClients().data().isEmpty()) {
+        if (model.getClients() != null && model.getClients().data().size() != 0) {
+            holder.binding.referenceTextView.setText("");
             for (int i = 0; i < model.getClients().data().size(); i++) {
                 UserModel user = (UserModel) model.getClients().data().get(i);
                 if (user != null) {
-                    holder.binding.referenceTextView.setText(user.getName());
+                    holder.binding.referenceTextView.append(user.getName());
+                    if (i != model.getClients().data().size() - 1) {
+                        holder.binding.referenceTextView.append("  -  ");
+                    }
                 }
             }
         }

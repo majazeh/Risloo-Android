@@ -232,7 +232,7 @@
             android:fontFamily="@font/dana_regular"
             android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintBottom_toBottomOf="@id/fields_header_includeLayout"
-            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintLeft_toLeftOf="@id/info_constraintLayout"
             app:layout_constraintTop_toTopOf="@id/fields_header_includeLayout" />
 
         <androidx.constraintlayout.widget.ConstraintLayout

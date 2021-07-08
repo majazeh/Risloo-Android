@@ -455,7 +455,7 @@ public class InitManager {
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_user_cog_light, null));
                             ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Blue600));
-                        } else if (dropdownTextView.getText().toString().equals("ویرایش کاربر")) {
+                        } else if (dropdownTextView.getText().toString().equals("ویرایش عضو")) {
                             dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_edit_light, null));
@@ -515,7 +515,7 @@ public class InitManager {
                                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_red300);
                                     break;
                                 case "اتاق درمان":
-                                case "ویرایش کاربر":
+                                case "ویرایش عضو":
                                     view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
                                     break;
                                 case "ورود به کاربری":
@@ -553,7 +553,7 @@ public class InitManager {
                                 dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_building_light, null));
                                 ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
                                 break;
-                            case "ویرایش کاربر":
+                            case "ویرایش عضو":
                                 dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
 
                                 dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_edit_light, null));

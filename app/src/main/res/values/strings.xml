@@ -24,7 +24,7 @@
     <string name="AppFileSelect">انتخاب فايل</string>
     <string name="AppFileEmpty">فايل انتخاب نشده است.</string>
 
-    <string name="AppDefaultName">کاربر آزمایشی</string>
+    <string name="AppDefaultName">عضو آزمایشی</string>
     <string name="AppDefaultCenter">مرکز آزمایشی</string>
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
     <string name="AppDefaultDate">1400-01-01</string>
@@ -496,7 +496,7 @@
     ---------- CreateUser Fragment ----------
     */
 
-    <string name="CreateUserFragmentTitle">ثبت کاربر جدید</string>
+    <string name="CreateUserFragmentTitle">ثبت عضو جدید</string>
 
     <string name="CreateUserFragmentNameHeader">نام و نام خانوادگی</string>
     <string name="CreateUserFragmentMobileHeader">موبایل</string>
@@ -505,7 +505,7 @@
     <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
     <string name="CreateUserFragmentPasswordHeader">کلمه عبور</string>
     <string name="CreateUserFragmentStatusHeader">وضعیت</string>
-    <string name="CreateUserFragmentTypeHeader">نوع کاربر</string>
+    <string name="CreateUserFragmentTypeHeader">نوع عضو</string>
     <string name="CreateUserFragmentGenderHeader">جنسیت</string>
 
     <string name="CreateUserFragmentUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
@@ -516,7 +516,7 @@
     <string name="CreateUserFragmentStatusClosed">بسته شده</string>
 
     <string name="CreateUserFragmentTypeAdmin">ادمین</string>
-    <string name="CreateUserFragmentTypeClient">کاربر</string>
+    <string name="CreateUserFragmentTypeClient">عضو</string>
 
     <string name="CreateUserFragmentGenderMale">مرد</string>
     <string name="CreateUserFragmentGenderFemale">زن</string>
@@ -634,7 +634,7 @@
     ---------- EditUser Fragment ----------
     */
 
-    <string name="EditUserFragmentTitle">ویرایش کاربر</string>
+    <string name="EditUserFragmentTitle">ویرایش عضو</string>
 
     ---------- // EditUserPersonal Tab
 
@@ -644,7 +644,7 @@
     <string name="EditUserPersonalTabEmailHeader">رایانامه</string>
     <string name="EditUserPersonalTabBirthdayHeader">تاریخ تولد</string>
     <string name="EditUserPersonalTabStatusHeader">وضعیت</string>
-    <string name="EditUserPersonalTabTypeHeader">نوع کاربر</string>
+    <string name="EditUserPersonalTabTypeHeader">نوع عضو</string>
     <string name="EditUserPersonalTabGenderHeader">جنسیت</string>
 
     <string name="EditUserPersonalTabUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
@@ -654,7 +654,7 @@
     <string name="EditUserPersonalTabStatusClosed">بسته شده</string>
 
     <string name="EditUserPersonalTabTypeAdmin">ادمین</string>
-    <string name="EditUserPersonalTabTypeClient">کاربر</string>
+    <string name="EditUserPersonalTabTypeClient">عضو</string>
 
     <string name="EditUserPersonalTabGenderMale">مرد</string>
     <string name="EditUserPersonalTabGenderFemale">زن</string>
@@ -761,7 +761,7 @@
     ---------- CenterUsers Fragment ----------
     */
 
-    <string name="CenterUsersFragmentTitle">کاربران مرکز درمانی</string>
+    <string name="CenterUsersFragmentTitle">اعضاء مرکز درمانی</string>
 
     <string name="CenterUsersFragmentSerial">سریال</string>
     <string name="CenterUsersFragmentName">نام مستعار</string>
@@ -779,10 +779,10 @@
     <string name="CenterUsersFragmentKick">تعلیق</string>
     <string name="CenterUsersFragmentCreateRoom">ساختن اتاق درمان</string>
     <string name="CenterUsersFragmentRoom">اتاق درمان</string>
-    <string name="CenterUsersFragmentEdit">ویرایش کاربر</string>
+    <string name="CenterUsersFragmentEdit">ویرایش عضو</string>
     <string name="CenterUsersFragmentEnter">ورود به کاربری</string>
 
-    <string name="CenterUsersFragmentEmpty">هنوز کاربری برای این مرکز ثبت نشده است.</string>
+    <string name="CenterUsersFragmentEmpty">هنوز عضویی برای این مرکز ثبت نشده است.</string>
 
     /*
     ---------- ClientReports Fragment ----------
@@ -826,7 +826,7 @@
     ---------- RoomUsers Fragment ----------
     */
 
-    <string name="RoomUsersFragmentTitle">کاربران اتاق درمانی</string>
+    <string name="RoomUsersFragmentTitle">اعضاء اتاق درمانی</string>
 
     <string name="RoomUsersFragmentSerial">سریال</string>
     <string name="RoomUsersFragmentName">نام مستعار</string>
@@ -844,7 +844,7 @@
     <string name="RoomUsersFragmentStatusKicked">تعلیق شده</string>
     <string name="RoomUsersFragmentStatusWaiting">در انتظار</string>
 
-    <string name="RoomUsersFragmentEmpty">هنوز کاربری برای این اتاق ثبت نشده است.</string>
+    <string name="RoomUsersFragmentEmpty">هنوز عضوی برای این اتاق ثبت نشده است.</string>
 
     /*
     ---------- Samples Fragment ----------
@@ -918,9 +918,9 @@
     <string name="UsersFragmentStatus">وضعیت</string>
 
     <string name="UsersFragmentEnter">ورود به کاربری</string>
-    <string name="UsersFragmentEdit">ویرایش کاربر</string>
+    <string name="UsersFragmentEdit">ویرایش عضو</string>
 
-    <string name="UsersFragmentEmpty">هنوز کاربری ثبت نشده است.</string>
+    <string name="UsersFragmentEmpty">هنوز عضوی ثبت نشده است.</string>
 
     // Show Fragments
     //////////////////////////////////////////////////////////////////////////////////////
@@ -982,7 +982,7 @@
     ---------- Reference Fragment ----------
     */
 
-    <string name="ReferenceFragmentTitle">کاربر</string>
+    <string name="ReferenceFragmentTitle">عضو</string>
 
     /*
     ---------- Room Fragment ----------
@@ -1049,7 +1049,7 @@
     ---------- User Fragment ----------
     */
 
-    <string name="UserFragmentTitle">کاربر</string>
+    <string name="UserFragmentTitle">عضو</string>
 
     // Adapter Strings
     //////////////////////////////////////////////////////////////////////////////////////

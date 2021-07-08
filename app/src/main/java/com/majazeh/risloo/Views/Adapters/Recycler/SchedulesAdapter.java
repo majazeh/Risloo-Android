@@ -132,8 +132,8 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
                 holder.binding.pointTextView.setText("");
                 for (int i = 0; i < model.getFields().length(); i++) {
                     holder.binding.pointTextView.append(model.getFields().getJSONObject(i).getString("title"));
-                    if (i != model.getFields().length() -1) {
-                        holder.binding.pointTextView.append(" " + "|" + " ");
+                    if (i != model.getFields().length() - 1) {
+                        holder.binding.pointTextView.append("  |  ");
                     }
                 }
             }

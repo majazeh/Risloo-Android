@@ -3,7 +3,6 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -100,11 +99,6 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
     private void setData(NavsHolder holder, TypeModel item) {
         try {
-            if (holder.getBindingAdapterPosition() == 8)
-                holder.binding.getRoot().setVisibility(View.GONE);
-             else
-                holder.binding.getRoot().setVisibility(View.VISIBLE);
-
             holder.binding.nameTextView.setText(item.object.get("title").toString());
             holder.binding.descriptionTextView.setText(item.object.get("description").toString());
 

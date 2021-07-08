@@ -100,7 +100,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
                     IntentManager.email(activity, new String[]{item}, "", "", "");
                 } else if (item.equals("ورود به کاربری")) {
                     Log.e("method", "enter");
-                } else if (item.equals("ویرایش کاربر")) {
+                } else if (item.equals("ویرایش عضو")) {
                     NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
                     ((MainActivity) activity).navController.navigate(action);
                 }

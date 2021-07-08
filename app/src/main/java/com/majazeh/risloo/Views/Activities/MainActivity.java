@@ -229,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
 
         String[] titles = getResources().getStringArray(R.array.MainTitles);
         String[] description = getResources().getStringArray(R.array.MainDescriptions);
-        int[] images = new int[]{R.drawable.ic_tachometer_alt_light, R.drawable.ic_building_light, R.drawable.ic_folders_light, R.drawable.ic_user_friends_light, R.drawable.ic_users_light, R.drawable.ic_balance_scale_light, R.drawable.ic_vial_light, R.drawable.ic_users_medical_light, R.drawable.ic_file_certificate_light};
+        int[] images = new int[]{R.drawable.ic_tachometer_alt_light, R.drawable.ic_building_light, R.drawable.ic_user_friends_light, R.drawable.ic_users_light, R.drawable.ic_balance_scale_light, R.drawable.ic_vial_light, R.drawable.ic_users_medical_light};
 
         for (int i = 0; i < titles.length; i++) {
             try {
@@ -268,7 +268,7 @@ public class MainActivity extends AppCompatActivity {
                 NavDirections action = NavigationMainDirections.actionGlobalSessionsFragment();
                 navController.navigate(action);
             } break;
-            case "کاربران": {
+            case "اعضاء": {
                 NavDirections action = NavigationMainDirections.actionGlobalUsersFragment();
                 navController.navigate(action);
             } break;

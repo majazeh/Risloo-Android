@@ -105,11 +105,15 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
                 holder.binding.centerTextView.setText(model.getCaseRoom().getRoomCenter().getDetail().getString("title"));
             }
 
-            if (model.getClients() != null && !model.getClients().data().isEmpty()) {
+            if (model.getClients() != null && model.getClients().data().size() != 0) {
+                holder.binding.referenceTextView.setText("");
                 for (int i = 0; i < model.getClients().data().size(); i++) {
                     UserModel user = (UserModel) model.getClients().data().get(i);
                     if (user != null) {
-                        holder.binding.referenceTextView.setText(user.getName());
+                        holder.binding.referenceTextView.append(user.getName());
+                        if (i != model.getClients().data().size() - 1) {
+                            holder.binding.referenceTextView.append("\n");
+                        }
                     }
                 }
             }
