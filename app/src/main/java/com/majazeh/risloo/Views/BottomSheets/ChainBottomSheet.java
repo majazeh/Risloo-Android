@@ -14,16 +14,24 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.TestsAdapter;
 import com.majazeh.risloo.databinding.BottomSheetChainBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
+import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class ChainBottomSheet extends BottomSheetDialogFragment {
 
@@ -36,7 +44,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     // Vars
     private HashMap data, header;
     private BulkSampleModel model;
-    private String name, avatar;
+    private String key, id, name, avatar;
 
     @NonNull
     @Override
@@ -78,7 +86,41 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
+            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+            data.put("key", key);
+
+            if (binding.nicknameGroup.getVisibility() == View.VISIBLE) {
+                name = binding.nicknameEditText.getRoot().getText().toString().trim();
+                data.put("nickname", name);
+            }
+
+            Sample.theory(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    AuthModel model = (AuthModel) object;
+
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            key = model.getKey();
+
+                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            IntentManager.test(requireActivity(), key);
+
+                            dismiss();
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            // TODO : Place Code If Needed
+                        });
+                    }
+                }
+            });
         }).widget(binding.entryButton);
     }
 
@@ -95,7 +137,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(avatar).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
-                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
+                binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nicknameEditText.getRoot().getText().toString()));
 
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
@@ -133,13 +175,35 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                 binding.listRecyclerView.setAdapter(testAdapter);
             }
 
-            binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
+            if (model.getMembers() != null) {
+                List members = model.getMembers();
+
+                if (!members.data().isEmpty()) {
+                    for (int i = 0 ; i < members.size() ; i++) {
+                        UserModel userModel = (UserModel) members.data().get(i);
+
+                        if (Objects.equals(userModel.getUserId(), id)) {
+                            binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1) + "\n" + getResources().getString(R.string.BottomSheetChainDescription2));
+                            binding.nicknameGroup.setVisibility(View.VISIBLE);
+                            break;
+                        } else {
+                            binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
+                            binding.nicknameGroup.setVisibility(View.GONE);
+                        }
+                    }
+                } else {
+                    binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
+                    binding.nicknameGroup.setVisibility(View.GONE);
+                }
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    public void setData(String name, String avatar, BulkSampleModel model) {
+    public void setData(String key, String id, String name, String avatar, BulkSampleModel model) {
+        this.key = key;
+        this.id = id;
         this.name = name;
         this.avatar = avatar;
         this.model = model;

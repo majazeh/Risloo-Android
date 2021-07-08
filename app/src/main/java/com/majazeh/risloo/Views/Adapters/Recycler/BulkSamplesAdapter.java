@@ -21,12 +21,16 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.BulkSamplesHolder> {
 
@@ -38,6 +42,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     // Vars
     private ArrayList<TypeModel> bulkSamples;
+    private HashMap data, header;
 
     public BulkSamplesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -87,6 +92,10 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     private void initializer() {
         chainBottomSheet = new ChainBottomSheet();
+
+        data = new HashMap<>();
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
     private void detector(BulkSamplesHolder holder) {
@@ -108,8 +117,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
                 switch (item) {
                     case "لینک ثبت نام":
-                        chainBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
-                        chainBottomSheet.setData(((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), model);
+                        doWork(model);
                         break;
                     case "کپی کردن لینک":
                         IntentManager.clipboard(activity, model.getLink());
@@ -156,6 +164,40 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void doWork(BulkSampleModel model) {
+        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+
+        data.put("authorized_key", model.getLink());
+
+        Sample.auth(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                AuthModel authModel = (AuthModel) object;
+
+                activity.runOnUiThread(() -> {
+                    String key = authModel.getKey();
+
+                    if (key.startsWith("$")) {
+                        ((MainActivity) activity).loadingDialog.dismiss();
+                        IntentManager.test(activity, key);
+                    } else {
+                        ((MainActivity) activity).loadingDialog.dismiss();
+
+                        chainBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
+                        chainBottomSheet.setData(key, ((MainActivity) activity).singleton.getId(), ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), model);
+                    }
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    // TODO : Place Code If Needed
+                });
+            }
+        });
     }
 
     public class BulkSamplesHolder extends RecyclerView.ViewHolder {

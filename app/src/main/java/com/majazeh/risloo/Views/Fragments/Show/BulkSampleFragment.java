@@ -26,6 +26,7 @@ import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.squareup.picasso.Picasso;
 
@@ -129,8 +130,42 @@ public class BulkSampleFragment extends Fragment {
         }).widget(binding.linkTextView.buttonImageView);
 
         ClickManager.onDelayedClickListener(() -> {
-            chainBottomSheet.show(requireActivity().getSupportFragmentManager(), "chainBottomSheet");
-            chainBottomSheet.setData(((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+            HashMap authData = new HashMap<>();
+            authData.put("authorized_key", bulkSampleModel.getLink());
+
+            Sample.auth(authData, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    AuthModel model = (AuthModel) object;
+
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            String key = model.getKey();
+
+                            if (key.startsWith("$")) {
+                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                IntentManager.test(requireActivity(), key);
+                            } else {
+                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+
+                                chainBottomSheet.show(requireActivity().getSupportFragmentManager(), "chainBottomSheet");
+                                chainBottomSheet.setData(key, ((MainActivity) requireActivity()).singleton.getId(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+                            }
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            // TODO : Place Code If Needed
+                        });
+                    }
+                }
+            });
         }).widget(binding.linkTextView.buttonTextView);
     }
 
