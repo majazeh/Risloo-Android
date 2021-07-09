@@ -1,60 +1,61 @@
 package com.mre.ligheh.Model.Madule;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BreadCrumb {
-    public HashMap breadCrumbFa = new HashMap();
-    public HashMap breadCrumbEn = new HashMap();
+    public ArrayList<String> breadCrumbFa = new ArrayList<>();
+    public ArrayList<String> breadCrumbEn = new ArrayList<>();
 
-    public HashMap dashboard() {
-        breadCrumbFa.put("dashboard", "dashboard");
-        breadCrumbEn.put("id", "dashboardFragment");
+    public ArrayList<String> dashboard() {
+        breadCrumbFa.add("dashboard");
+        breadCrumbEn.add( "dashboardFragment");
         return breadCrumbFa;
     }
 
     // user
-    public HashMap users(){
-        dashboard().put("users", "users");
-        breadCrumbEn.put("id", "usersFragment");
+    public ArrayList<String> users(){
+        dashboard().add("users");
+        breadCrumbEn.add("usersFragment");
         return breadCrumbFa;
     }
 
-    public HashMap user(String id){
-        users().put(id, "fragment_account");
-        breadCrumbEn.put("id", "usersFragment");
+    public ArrayList<String> user(String id){
+        users().add(id);
+        breadCrumbEn.add( "usersFragment");
         return breadCrumbFa;
     }
 
-    public HashMap editUser(String id){
-        user(id).put(id, "editAccountFragment");
-        breadCrumbEn.put("id", "editUserFragment");
+    public ArrayList<String> editUser(String id){
+        user(id).add(id);
+        breadCrumbEn.add("editUserFragment");
         return breadCrumbFa;
     }
 
     // end of user
 
     // center
-    public HashMap centers(){
-        dashboard().put("centers", "centers");
-        breadCrumbEn.put("id", "centersFragment");
+    public ArrayList<String> centers(){
+        dashboard().add( "centers");
+        breadCrumbEn.add( "centersFragment");
         return breadCrumbFa;
     }
 
-    public HashMap center(String id){
-        centers().put("center", id);
-        breadCrumbEn.put("id", "centerFragment");
+    public ArrayList<String> center(String id){
+        centers().add( id);
+        breadCrumbEn.add( "centerFragment");
         return breadCrumbFa;
     }
 
-    public HashMap centerUsers(String id){
-        center(id).put("centerUsers","centerUsers");
-        breadCrumbEn.put("id", "editCenterFragment");
+    public ArrayList<String> centerUsers(String id){
+        center(id).add("centerUsers");
+        breadCrumbEn.add("editCenterFragment");
         return breadCrumbFa;
     }
 
-    public HashMap createCenterUser(String id){
-        center(id).put("addCenterUser", "addCenterUser");
-        breadCrumbEn.put("id", "createCenterFragment");
+    public ArrayList<String> createCenterUser(String id){
+        center(id).add( "addCenterUser");
+        breadCrumbEn.add("createCenterFragment");
         return breadCrumbFa;
     }
     // end of center
@@ -66,21 +67,21 @@ public class BreadCrumb {
 //        return breadCrumbFa;
 //    }
 
-    public HashMap room(String centerId,String roomId){
-        center(centerId).put("room", roomId);
-        breadCrumbEn.put("id", "roomFragment");
+    public ArrayList<String> room(String centerId,String roomId){
+        center(centerId).add( roomId);
+        breadCrumbEn.add("roomFragment");
         return breadCrumbFa;
     }
 
-    public HashMap roomUsers(String centerId,String roomId){
-        room(centerId,roomId).put("roomUsers","roomUsers");
-        breadCrumbEn.put("id", "roomUsersFragment");
+    public ArrayList<String> roomUsers(String centerId,String roomId){
+        room(centerId,roomId).add("roomUsers");
+        breadCrumbEn.add("roomUsersFragment");
         return breadCrumbFa;
     }
 
-    public HashMap createRoomUsers(String centerId,String roomId){
-        roomUsers(centerId,roomId).put("addRoomUsers","addRoomUsers");
-        breadCrumbEn.put("id", "createRoomUserFragment");
+    public ArrayList<String> createRoomUsers(String centerId,String roomId){
+        roomUsers(centerId,roomId).add("addRoomUsers");
+        breadCrumbEn.add("createRoomUserFragment");
         return breadCrumbFa;
     }
     // end of room
@@ -91,69 +92,81 @@ public class BreadCrumb {
 //        return breadCrumbFa;
 //    }
 
-    public HashMap Case(String centerId,String roomId,String caseId){
-        room(centerId,roomId).put("case", caseId);
-        breadCrumbEn.put("id", "caseFragment");
+    public ArrayList<String> Case(String centerId,String roomId,String caseId){
+        room(centerId,roomId).add( caseId);
+        breadCrumbEn.add( "caseFragment");
         return breadCrumbFa;
     }
 
-    public HashMap createCaseUser(String centerId,String roomId,String caseId){
-        Case(centerId,roomId,caseId).put("addCaseUser", "addCaseuser");
-        breadCrumbEn.put("id", "createCaseFragment");
+    public ArrayList<String> createCaseUser(String centerId,String roomId,String caseId){
+        Case(centerId,roomId,caseId).add("addCaseuser");
+        breadCrumbEn.add("createCaseFragment");
         return breadCrumbFa;
     }
     // end of case
 
     // session
-    public HashMap sessions(){
-        dashboard().put("sessions","sessions");
-        breadCrumbEn.put("id", "sessionsFragment");
+    public ArrayList<String> sessions(){
+        dashboard().add("sessions");
+        breadCrumbEn.add("sessionsFragment");
         return breadCrumbFa;
     }
 
-    public HashMap session(String centerId,String roomId,String caseId,String sessionId){
-        Case(centerId,roomId,caseId).put("session",sessionId);
-        breadCrumbEn.put("id", "sessionFragment");
+    public ArrayList<String> session(String centerId,String roomId,String caseId,String sessionId){
+        Case(centerId,roomId,caseId).add(sessionId);
+        breadCrumbEn.add("sessionFragment");
         return breadCrumbFa;
     }
 
     // sample
-    public HashMap assessments(){
-        dashboard().put("scales", "scales");
-        breadCrumbEn.put("id", "scalesFragment");
+    public ArrayList<String> assessments(){
+        dashboard().add( "scales");
+        breadCrumbEn.add("scalesFragment");
         return breadCrumbFa;
     }
 
-    public HashMap samples(){
-        assessments().put("samples", "samples");
-        breadCrumbEn.put("id", "samplesFragment");
+    public ArrayList<String> samples(){
+        assessments().add( "samples");
+        breadCrumbEn.add( "samplesFragment");
         return breadCrumbFa;
     }
 
-    public HashMap sample(){
-        assessments().put("sample", "sample");
-        breadCrumbEn.put("id", "sampleFragment");
+    public ArrayList<String> sample(){
+        assessments().add( "sample");
+        breadCrumbEn.add( "sampleFragment");
         return breadCrumbFa;
     }
 
-    public HashMap createSample(){
-        samples().put("createSample", "createSample");
-        breadCrumbEn.put("id", "createSampleFragment");
+    public ArrayList<String> createSample(){
+        samples().add("createSample");
+        breadCrumbEn.add( "createSampleFragment");
         return breadCrumbFa;
     }
 
-    public HashMap bulkSamples(){
-        assessments().put("bulkSamples", "bulkSamples");
-        breadCrumbEn.put("id", "bulkSamplesFragment");
+    public ArrayList<String> bulkSamples(){
+        assessments().add( "bulkSamples");
+        breadCrumbEn.add("bulkSamplesFragment");
         return breadCrumbFa;
     }
 
-    public HashMap bulkSample(){
-        assessments().put("bulkSample", "bulkSample");
-        breadCrumbEn.put("id", "bulkSampleFragment");
+    public ArrayList<String> bulkSample(){
+        assessments().add( "bulkSample");
+        breadCrumbEn.add("bulkSampleFragment");
         return breadCrumbFa;
     }
     // end of sample
+
+    public ArrayList<String> getBreadCrumbFa() {
+        return breadCrumbFa;
+    }
+
+    public ArrayList<String> getBreadCrumbEn() {
+        if (!breadCrumbEn.isEmpty()){
+            breadCrumbEn.remove(breadCrumbEn.size()-1);
+        }
+        return breadCrumbEn;
+    }
+
 
 //    // document
 //    public HashMap documents(){

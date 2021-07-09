@@ -178,24 +178,7 @@ public class Sample extends Model {
         try {
             if (data.containsKey("id")) {
                 String id = (String) data.get("id");
-                Model.post(endpoint + "/samples/" + id + "/scoring", data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        data.remove("id");
-                        data.put("samples", id);
-                        try {
-                            TimeUnit.SECONDS.sleep(3);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-                        getScore(data, header, response);
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-
-                    }
-                }, SampleModel.class);
+                Model.post(endpoint + "/samples/" + id + "/scoring", data, header,response, SampleModel.class);
             } else {
                 Exceptioner.make(response, "آیدی را وارد کنید");
             }
@@ -206,17 +189,16 @@ public class Sample extends Model {
 
     public static void getScore(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            if (data.containsKey("samples")) {
-                Model.get("live/samples-status-check", data, header, new Response() {
+            if (data.containsKey("id")) {
+                Model.get(endpoint + "/samples/" + data.get("id") + "/scoring", data, header, new Response() {
                             @Override
                             public void onOK(Object object) {
-                                List list = (List) object;
                                 boolean repeat = false;
-                                for (int i = 0; i < list.size(); i++) {
-                                    if (((SampleModel) list.data().get(i)).getSampleStatus().equals("scoring") || ((SampleModel) list.data().get(i)).getSampleStatus().equals("creating_files")) {
+                                SampleModel sampleModel = (SampleModel) object;
+                                    if (sampleModel.getSampleStatus().equals("scoring") || (sampleModel.getSampleStatus().equals("creating_files"))) {
                                         repeat = true;
                                     }
-                                }
+
                                 if (repeat) {
                                     try {
                                         TimeUnit.SECONDS.sleep(3);
@@ -235,8 +217,8 @@ public class Sample extends Model {
                             }
                         }
                         , SampleModel.class);
-            } else {
-                Exceptioner.make(response, "لیست خالی است");
+            }else{
+                Exceptioner.make(response, "آیدی را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
