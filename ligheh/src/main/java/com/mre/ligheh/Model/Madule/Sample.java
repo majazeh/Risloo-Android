@@ -245,6 +245,18 @@ public class Sample extends Model {
         }
     }
 
+    public static void publicItems(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (data.containsKey("id")) {
+                Model.put(Sample.endpoint + "/samples/" + data.get("id"), data, header, response, null);
+            } else {
+                Exceptioner.make(response, "آیدی را وارد کنید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "authorized_key")) {
