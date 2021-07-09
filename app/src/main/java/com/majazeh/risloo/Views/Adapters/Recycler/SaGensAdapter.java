@@ -144,9 +144,13 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.selectSpinner.setEnabled(true);
+
+            holder.binding.getRoot().setAlpha((float) 1);
         } else {
             holder.binding.inputEditText.setFocusableInTouchMode(false);
             holder.binding.selectSpinner.setEnabled(false);
+
+            holder.binding.getRoot().setAlpha((float) 0.5);
         }
     }
 

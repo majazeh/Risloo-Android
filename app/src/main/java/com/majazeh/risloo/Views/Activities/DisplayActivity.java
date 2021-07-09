@@ -119,7 +119,7 @@ public class DisplayActivity extends AppCompatActivity {
                         return;
                     }
                 }
-                IntentManager.download(this, bitmap);
+                IntentManager.download(this, path);
             }
         }
     }

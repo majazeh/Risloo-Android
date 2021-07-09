@@ -272,7 +272,7 @@ public class SampleFragment extends Fragment {
     }
 
     private void setEditable(String status) {
-        if (status.equals("open")) {
+        if (status.equals("seald") || status.equals("open")) {
             binding.fieldsEditableCheckBox.setVisibility(View.VISIBLE);
         } else {
             binding.fieldsEditableCheckBox.setVisibility(View.GONE);
@@ -548,7 +548,7 @@ public class SampleFragment extends Fragment {
         newData.put("id", data.get("id"));
         newData.put(key, value);
 
-        Sample.items(newData, header, new Response() {
+        Sample.publicItems(newData, header, new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {
