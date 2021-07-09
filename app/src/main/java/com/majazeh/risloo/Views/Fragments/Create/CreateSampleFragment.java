@@ -16,9 +16,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -27,7 +29,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
-import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -39,7 +41,6 @@ import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -77,9 +78,9 @@ public class CreateSampleFragment extends Fragment {
 
         listener();
 
-        setClickableSpan();
+        setClickSpan();
 
-        setExtra();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -149,7 +150,8 @@ public class CreateSampleFragment extends Fragment {
         assessmentLinkSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
-//                ((MainActivity) requireActivity()).navigator(R.id.scalesFragment);
+                NavDirections action = NavigationMainDirections.actionGlobalScalesFragment();
+                ((MainActivity) requireActivity()).navController.navigate(action);
             }
 
             @Override
@@ -169,40 +171,13 @@ public class CreateSampleFragment extends Fragment {
             public void onTabSelected(TabLayout.Tab tab) {
                 if (tab.getPosition() == 0) {
                     type = "case_user";
-
-                    binding.caseUserGroup.setVisibility(View.VISIBLE);
-                    binding.roomUserGroup.setVisibility(View.GONE);
-                    binding.bulkGroup.setVisibility(View.GONE);
-
-                    binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
-
-                    if (clientsAdapter.getItemCount() != 0)
-                        binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    else
-                        binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                    setType(type);
                 } else if (tab.getPosition() == 1) {
                     type = "room_user";
-
-                    binding.caseUserGroup.setVisibility(View.GONE);
-                    binding.roomUserGroup.setVisibility(View.VISIBLE);
-                    binding.bulkGroup.setVisibility(View.GONE);
-
-                    if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                        binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                    setType(type);
                 } else {
                     type = "bulk";
-
-                    binding.caseUserGroup.setVisibility(View.GONE);
-                    binding.roomUserGroup.setVisibility(View.GONE);
-                    binding.bulkGroup.setVisibility(View.VISIBLE);
-
-                    binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
-
-                    if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                        binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                    setType(type);
                 }
             }
 
@@ -316,161 +291,154 @@ public class CreateSampleFragment extends Fragment {
         }).widget(binding.createTextView.getRoot());
     }
 
-    private void setClickableSpan() {
+    private void setClickSpan() {
         binding.scaleGuideLayout.guideTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.CreateSampleFragmentScaleGuide), 220, 228, assessmentLinkSpan));
     }
 
-    private void setExtra() {
-        if (getArguments() != null) {
-            if (getArguments().getString("scales") != null && !getArguments().getString("scales").equals("")) {
-                try {
-                    JSONArray list = new JSONArray(getArguments().getString("scales"));
+    private void setType(String type) {
+        switch (type) {
+            case "case_user":
+                binding.caseUserGroup.setVisibility(View.VISIBLE);
+                binding.roomUserGroup.setVisibility(View.GONE);
+                binding.bulkGroup.setVisibility(View.GONE);
 
-                    ArrayList<TypeModel> scales = new ArrayList<>();
-                    ArrayList<String> ids = new ArrayList<>();
+                binding.caseIncludeLayout.selectContainer.setEnabled(true);
+                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
 
-                    for (int i = 0; i < list.length(); i++) {
-                        TypeModel model = new TypeModel((JSONObject) list.get(i));
+                if (clientsAdapter.getItemCount() != 0)
+                    binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                else
+                    binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                break;
+            case "room_user":
+                binding.caseUserGroup.setVisibility(View.GONE);
+                binding.roomUserGroup.setVisibility(View.VISIBLE);
+                binding.bulkGroup.setVisibility(View.GONE);
 
-                        scales.add(model);
-                        ids.add(model.object.getString("id"));
-                    }
+                if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                    binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                break;
+            case "bulk":
+                binding.caseUserGroup.setVisibility(View.GONE);
+                binding.roomUserGroup.setVisibility(View.GONE);
+                binding.bulkGroup.setVisibility(View.VISIBLE);
 
-                    setRecyclerView(scales, ids, "scales");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
+                binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+
+                if (binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                    binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                break;
+        }
+    }
+
+    private void setArgs() {
+        String type = CreateSampleFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        if (typeModel != null) {
+            switch (type) {
+                case "scale":
+                    ScaleModel scaleModel = (ScaleModel) CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                    setData(scaleModel);
+                    break;
+                case "case":
+                    CaseModel caseModel = (CaseModel) CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                    setData(caseModel);
+                    break;
+                case "session":
+                    SessionModel sessionModel = (SessionModel) CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                    setData(sessionModel);
+                    break;
             }
-
-            if (getArguments().getString("room_id") != null && !getArguments().getString("room_id").equals("") && getArguments().getString("room_name") != null && !getArguments().getString("room_name").equals("")) {
-                roomId = getArguments().getString("room_id");
-                roomName = getArguments().getString("room_name");
-                binding.roomIncludeLayout.primaryTextView.setText(roomName);
-            }
-
-            if (getArguments().getString("center_name") != null && !getArguments().getString("center_name").equals("")) {
-                centerName = getArguments().getString("center_name");
-                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-            }
-
-            if (getArguments().getString("type") != null && !getArguments().getString("type").equals("")) {
-                type = getArguments().getString("type");
-                switch (type) {
-                    case "case_user":
-                        binding.typeTabLayout.getTabAt(0).select();
-
-                        binding.caseUserGroup.setVisibility(View.VISIBLE);
-                        binding.roomUserGroup.setVisibility(View.GONE);
-                        binding.bulkGroup.setVisibility(View.GONE);
-
-                        binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                        binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
-                        break;
-                    case "room_user":
-                        binding.typeTabLayout.getTabAt(1).select();
-
-                        binding.caseUserGroup.setVisibility(View.GONE);
-                        binding.roomUserGroup.setVisibility(View.VISIBLE);
-                        binding.bulkGroup.setVisibility(View.GONE);
-                        break;
-                    case "bulk":
-                        binding.typeTabLayout.getTabAt(2).select();
-
-                        binding.caseUserGroup.setVisibility(View.GONE);
-                        binding.roomUserGroup.setVisibility(View.GONE);
-                        binding.bulkGroup.setVisibility(View.VISIBLE);
-
-                        binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                        binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
-                        break;
-                }
-            }
-
-            if (getArguments().getString("title") != null && !getArguments().getString("title").equals("")) {
-                title = getArguments().getString("title");
-                binding.titleIncludeLayout.inputEditText.setText(title);
-            }
-
-            if (getArguments().getString("members_count") != null && !getArguments().getString("members_count").equals("")) {
-                membersCount = getArguments().getString("members_count");
-                binding.membersCountIncludeLayout.inputEditText.setText(membersCount);
-            }
-
-            if (getArguments().getString("case_status") != null && !getArguments().getString("case_status").equals("")) {
-                caseStatus = SelectionManager.getCaseStatus2(requireActivity(), "fa", getArguments().getString("case_status"));
-                for (int i=0; i<binding.caseStatusIncludeLayout.selectSpinner.getCount(); i++) {
-                    if (binding.caseStatusIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(caseStatus)) {
-                        binding.caseStatusIncludeLayout.selectSpinner.setSelection(i);
-
-                        if (i == 0) {
-                            binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
-
-                            binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
-                        } else if (i == 1 || i == 2) {
-                            binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
-
-                            binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                        } else {
-                            binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
-
-                            binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
-                        }
-                    }
-                }
-            }
-
-            if (getArguments().getString("problem") != null && !getArguments().getString("problem").equals("")) {
-                problem = getArguments().getString("problem");
-                binding.problemIncludeLayout.inputEditText.setText(problem);
-            }
-
-            if (getArguments().getString("case_id") != null && !getArguments().getString("case_id").equals("")) {
-                caseId = getArguments().getString("case_id");
-                binding.caseIncludeLayout.primaryTextView.setText(caseId);
-            }
-
-            if (getArguments().getString("session_id") != null && !getArguments().getString("session_id").equals("")) {
-                sessionId = getArguments().getString("session_id");
-                binding.sessionIncludeLayout.primaryTextView.setText(sessionId);
-            }
-
-            if (getArguments().getString("clients") != null && !getArguments().getString("clients").equals("")) {
-                try {
-                    JSONArray clients = new JSONArray(getArguments().getString("clients"));
-
-                    ArrayList<TypeModel> references = new ArrayList<>();
-                    ArrayList<String> ids = new ArrayList<>();
-
-                    for (int i = 0; i < clients.length(); i++) {
-                        TypeModel model = new TypeModel((JSONObject) clients.get(i));
-
-                        references.add(model);
-                        ids.add(model.object.getString("id"));
-                    }
-
-                    setRecyclerView(references, ids, "references");
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
-            }
-
-            if (getArguments().getString("psychologist_description") != null && !getArguments().getString("psychologist_description").equals("")) {
-                psychologyDescription = getArguments().getString("psychologist_description");
-                binding.psychologyDescriptionIncludeLayout.inputEditText.setText(psychologyDescription);
-            }
-
         } else {
+            switch (type) {
+                case "sample":
+                    binding.typeTabLayout.getTabAt(0).select();
+
+                    this.type = "case_user";
+                    setType(this.type);
+                    break;
+                case "bulk":
+                    binding.typeTabLayout.getTabAt(2).select();
+
+                    this.type = "bulk";
+                    setType(this.type);
+                    break;
+            }
+
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
         }
+    }
+
+    private void setData(ScaleModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            ArrayList<TypeModel> scales = new ArrayList<>();
+            ArrayList<String> ids = new ArrayList<>();
+
+            scales.add(model);
+            ids.add(model.getId());
+
+            setRecyclerView(scales, ids, "scales");
+        } else {
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
+        }
+
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+    }
+
+    private void setData(CaseModel model) {
+        if (model.getCaseRoom() != null && model.getCaseRoom().getRoomId() != null && !model.getCaseRoom().getRoomId().equals("")) {
+            roomId = model.getCaseRoom().getRoomId();
+            roomName = model.getCaseRoom().getRoomManager().getName();
+            binding.roomIncludeLayout.primaryTextView.setText(roomName);
+        }
+
+        try {
+            if (model.getCaseRoom() != null && model.getCaseRoom().getRoomCenter() != null && model.getCaseRoom().getRoomCenter().getDetail() != null && model.getCaseRoom().getRoomCenter().getDetail().has("title") && !model.getCaseRoom().getRoomCenter().getDetail().getString("title").equals("")) {
+                centerName = model.getCaseRoom().getRoomCenter().getDetail().getString("title");
+                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (model.getCaseId() != null && !model.getCaseId().equals("")) {
+            caseId = model.getCaseId();
+
+            binding.caseIncludeLayout.primaryTextView.setText(caseId);
+            setClients(model.getClients());
+        }
+
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+    }
+
+    private void setData(SessionModel model) {
+        if (model.getCaseModel() != null && model.getCaseModel().getCaseId() != null && !model.getCaseModel().getCaseId().equals("")) {
+            caseId = model.getCaseModel().getCaseId();
+
+            binding.caseIncludeLayout.primaryTextView.setText(caseId);
+            if (model.getCaseModel() != null)
+                setClients(model.getCaseModel().getClients());
+            else
+                binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
+        }
+
+        if (model.getId() != null && !model.getId().equals("")) {
+            sessionId = model.getId();
+
+            String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
+            String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
+
+            binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.Gray600), (int) getResources().getDimension(R.dimen._8ssp)));
+            binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
+        }
+
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "scales");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
@@ -490,17 +458,29 @@ public class CreateSampleFragment extends Fragment {
         }
     }
 
-    private void setCheckedList(com.mre.ligheh.Model.Madule.List clients) {
-        if (clients != null && !clients.data().isEmpty()) {
+    private void setClients(com.mre.ligheh.Model.Madule.List clients) {
+        if (clients != null && clients.data().size() != 0) {
+            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
+
             ArrayList<TypeModel> items = new ArrayList<>();
 
+            binding.caseIncludeLayout.secondaryTextView.setText("");
             for (int i = 0; i < clients.data().size(); i++) {
-                items.add(new TypeModel(clients.data().get(i).object));
+                UserModel user = (UserModel) clients.data().get(i);
+                if (user != null) {
+                    binding.caseIncludeLayout.secondaryTextView.append(user.getName());
+                    if (i != clients.data().size() - 1) {
+                        binding.caseIncludeLayout.secondaryTextView.append("  -  ");
+                    }
+                    items.add(new TypeModel(clients.data().get(i).object));
+                }
             }
 
             setRecyclerView(items, new ArrayList<>(), "clients");
             binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
         } else {
+            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
+
             clientsAdapter.clearItems();
             binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
         }
@@ -510,9 +490,9 @@ public class CreateSampleFragment extends Fragment {
         try {
             switch (method) {
                 case "scales": {
-                    SampleModel model = (SampleModel) item;
+                    ScaleModel model = (ScaleModel) item;
 
-                    int position = scalesAdapter.getIds().indexOf(model.getSampleId());
+                    int position = scalesAdapter.getIds().indexOf(model.getId());
 
                     if (position == -1)
                         scalesAdapter.addItem(item);
@@ -521,7 +501,7 @@ public class CreateSampleFragment extends Fragment {
 
                     if (scalesAdapter.getIds().size() != 0) {
                         binding.scaleIncludeLayout.countTextView.setVisibility(View.VISIBLE);
-                        binding.scaleIncludeLayout.countTextView.setText("(" + scalesAdapter.getIds().size() + ")");
+                        binding.scaleIncludeLayout.countTextView.setText(StringManager.bracing(scalesAdapter.getIds().size()));
                     } else {
                         binding.scaleIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.scaleIncludeLayout.countTextView.setText("");
@@ -562,7 +542,7 @@ public class CreateSampleFragment extends Fragment {
 
                     if (referencesAdapter.getIds().size() != 0) {
                         binding.referenceIncludeLayout.countTextView.setVisibility(View.VISIBLE);
-                        binding.referenceIncludeLayout.countTextView.setText("(" + referencesAdapter.getIds().size() + ")");
+                        binding.referenceIncludeLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getIds().size()));
                     } else {
                         binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.referenceIncludeLayout.countTextView.setText("");
@@ -576,27 +556,14 @@ public class CreateSampleFragment extends Fragment {
                         caseId = model.getCaseId();
 
                         binding.caseIncludeLayout.primaryTextView.setText(caseId);
-                        if (model.getClients() != null && !model.getClients().data().isEmpty()) {
-                            binding.caseIncludeLayout.secondaryTextView.setText("");
-                            for (int i = 0; i < model.getClients().data().size(); i++) {
-                                UserModel user = (UserModel) model.getClients().data().get(i);
-                                binding.caseIncludeLayout.secondaryTextView.append(user.getName());
-                                if (i != model.getClients().size() -1) {
-                                    binding.caseIncludeLayout.secondaryTextView.append(" - ");
-                                }
-                            }
-                        } else {
-                            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
-                        }
-
-                        setCheckedList(model.getClients());
+                        setClients(model.getClients());
                     } else if (caseId.equals(model.getCaseId())) {
                         caseId = "";
 
                         binding.caseIncludeLayout.primaryTextView.setText("");
                         binding.caseIncludeLayout.secondaryTextView.setText("");
 
-                        setCheckedList(null);
+                        setClients(null);
                     }
 
                     casesDialog.dismiss();
@@ -608,10 +575,11 @@ public class CreateSampleFragment extends Fragment {
                     if (!sessionId.equals(model.getId())) {
                         sessionId = model.getId();
 
-                        String name = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
+                        String primaryText = sessionId + " " + "(" + SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()) + ")";
+                        String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
 
-                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(name, 10, name.length(), getResources().getColor(R.color.Gray600), (int) getResources().getDimension(R.dimen._8ssp)));
-                        binding.sessionIncludeLayout.secondaryTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))) + " / " + model.getDuration() + " " + "دقیقه");
+                        binding.sessionIncludeLayout.primaryTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), getResources().getColor(R.color.Gray600), (int) getResources().getDimension(R.dimen._8ssp)));
+                        binding.sessionIncludeLayout.secondaryTextView.setText(secondaryText);
                     } else if (sessionId.equals(model.getId())) {
                         sessionId = "";
 
@@ -638,9 +606,7 @@ public class CreateSampleFragment extends Fragment {
 
         data.put("scale_id", scalesAdapter.getIds());
         data.put("room_id", roomId);
-
         data.put("type", type);
-        data.put("psychologist_description", psychologyDescription);
 
         switch (type) {
             case "case_user":
@@ -654,12 +620,19 @@ public class CreateSampleFragment extends Fragment {
             case "bulk":
                 data.put("title", title);
                 data.put("members_count", membersCount);
-                data.put("case_status", SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus));
 
-                if (data.get("case_status").equals("group") || data.get("case_status").equals("personal"))
+                String casseStatus = SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus);
+                data.put("case_status", casseStatus);
+
+                if (casseStatus.equals("group") || casseStatus.equals("personal"))
                     data.put("problem", problem);
+                else if (casseStatus.equals("exist"))
+                    data.put("case_id", caseId);
                 break;
         }
+
+        if (!psychologyDescription.equals(""))
+            data.put("psychologist_description", psychologyDescription);
 
         Sample.create(data, header, new Response() {
             @Override
@@ -668,7 +641,6 @@ public class CreateSampleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                        ((MainActivity) requireActivity()).navigator(R.id.samplesFragment);
                     });
                 }
             }

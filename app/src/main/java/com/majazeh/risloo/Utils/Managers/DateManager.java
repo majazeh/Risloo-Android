@@ -526,23 +526,6 @@ public class DateManager {
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    public static String gregorianToJalali5(String value) {
-        int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int hour = Integer.parseInt(dateToString("HH", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int minute = Integer.parseInt(dateToString("mm", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int second = Integer.parseInt(dateToString("ss", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day, hour, minute, second);
-
-        if (persianDate.getMinute() < 10)
-            return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "\n" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
-        else
-            return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "\n" + persianDate.getHour() + ":" + persianDate.getMinute();
-    }
-
     public static String gregorianToJalali6(String value) {
         int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
         int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
