@@ -36,6 +36,8 @@ public class SampleModel extends TypeModel {
     private List entities;
     private List members;
     private List profiles;
+    private List profilesHalf;
+    private List profilesExtra;
     private String psychologist_description;
     private int created_at;
     private int started_at;
@@ -155,10 +157,20 @@ public class SampleModel extends TypeModel {
 
         if (!jsonObject.isNull("profiles")) {
             com.mre.ligheh.Model.Madule.List profiles = new com.mre.ligheh.Model.Madule.List();
+            com.mre.ligheh.Model.Madule.List profilesHalf = new com.mre.ligheh.Model.Madule.List();
+            com.mre.ligheh.Model.Madule.List profilesExtra = new com.mre.ligheh.Model.Madule.List();
             for (int i = 0; i < jsonObject.getJSONArray("profiles").length(); i++) {
                 profiles.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+                if (jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").equals("profile_png")){
+                    profilesHalf.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+                }
+                if (!jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").startsWith("profile_png") && jsonObject.getJSONArray("profiles").getJSONObject(i).getString("mode").endsWith("png")){
+                    profilesExtra.add(new ProfileModel(jsonObject.getJSONArray("profiles").getJSONObject(i)));
+                }
             }
             setProfiles(profiles);
+            setProfilesHalf(profilesHalf);
+            setProfilesExtra(profilesExtra);
         } else {
             setProfiles(new com.mre.ligheh.Model.Madule.List());
         }
@@ -254,6 +266,21 @@ public class SampleModel extends TypeModel {
         this.profiles = profiles;
     }
 
+    public List getProfilesHalf() {
+        return profilesHalf;
+    }
+
+    public void setProfilesHalf(List profilesHalf) {
+        this.profilesHalf = profilesHalf;
+    }
+
+    public List getProfilesExtra() {
+        return profilesExtra;
+    }
+
+    public void setProfilesExtra(List profilesExtra) {
+        this.profilesExtra = profilesExtra;
+    }
 
     public void setChainId(String chainId) {
         this.chainId = chainId;
