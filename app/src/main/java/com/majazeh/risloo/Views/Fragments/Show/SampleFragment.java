@@ -29,6 +29,7 @@ import com.majazeh.risloo.databinding.FragmentSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.Madule.SampleAnswers;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ProfileModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -52,6 +53,7 @@ public class SampleFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private SampleAnswers sampleAnswers;
     private SampleModel sampleModel;
     private boolean userSelect = false;
     private ArrayList<String> profileUrls;
@@ -81,6 +83,8 @@ public class SampleFragment extends Fragment {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        sampleAnswers = new SampleAnswers();
 
         binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
@@ -167,6 +171,7 @@ public class SampleFragment extends Fragment {
     private void setData(SampleModel model) {
         if (model.getSampleId() != null && !model.getSampleId().equals("")) {
             data.put("id", model.getSampleId());
+            sampleAnswers.id = model.getSampleId();
         }
 
         if (model.getSampleScaleTitle() != null && !model.getSampleScaleTitle().equals("")) {
@@ -183,6 +188,16 @@ public class SampleFragment extends Fragment {
     private void setStatus(String status) {
         binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", status));
 
+        setButtons(status);
+
+        setScoring(status);
+
+        setEditable(status);
+
+        setProfiles(status);
+    }
+
+    private void setButtons(String status) {
         switch (status) {
             case "seald":
             case "open":
@@ -201,11 +216,6 @@ public class SampleFragment extends Fragment {
                     binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
                 }
 
-                binding.scoringConstraintLayout.setVisibility(View.GONE);
-
-                binding.profilesGroup.setVisibility(View.GONE);
-
-                binding.fieldsEditableCheckBox.setVisibility(View.VISIBLE);
                 break;
             case "closed":
                 binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
@@ -223,25 +233,12 @@ public class SampleFragment extends Fragment {
                     binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
                 }
 
-                binding.scoringConstraintLayout.setVisibility(View.GONE);
-
-                binding.profilesGroup.setVisibility(View.GONE);
-
-                binding.fieldsEditableCheckBox.setVisibility(View.GONE);
                 break;
             case "scoring":
             case "creating_files":
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.GONE);
                 binding.profilesTextView.getRoot().setVisibility(View.GONE);
-
-                doWork("getScore");
-
-                binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
-
-                binding.profilesGroup.setVisibility(View.GONE);
-
-                binding.fieldsEditableCheckBox.setVisibility(View.GONE);
                 break;
             case "done":
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
@@ -261,45 +258,70 @@ public class SampleFragment extends Fragment {
                     binding.secondaryTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
                 }
 
-                binding.scoringConstraintLayout.setVisibility(View.GONE);
-
-                setProfiles();
-
-                binding.fieldsEditableCheckBox.setVisibility(View.GONE);
                 break;
         }
     }
 
-    private void setProfiles() {
-        List profilesPngs = new List();
-        ArrayList<String> profilesExecs = new ArrayList<>();
-        profileUrls = new ArrayList<>();
-
-        for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
-            ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
-
-            if (profile.getExec().equals("png"))
-                profilesPngs.add(profile);
-
-            profilesExecs.add(profile.getExec());
-            profileUrls.add(profile.getUrl());
-        }
-
-        profilesExecs.add("");
-
-        InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profilesExecs, "profiles");
-
-        if (!profilesPngs.data().isEmpty()) {
-            profilesAdapter.setProfiles(profilesPngs.data());
-            binding.profilesSingleLayout.recyclerView.setAdapter(profilesAdapter);
-
-            binding.profilesSingleLayout.textView.setVisibility(View.GONE);
+    private void setScoring(String status) {
+        if (status.equals("scoring") || status.equals("creating_files")) {
+            binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
+            doWork("getScore");
         } else {
-            binding.profilesSingleLayout.textView.setVisibility(View.VISIBLE);
+            binding.scoringConstraintLayout.setVisibility(View.GONE);
         }
-        binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
+    }
 
-        binding.profilesGroup.setVisibility(View.VISIBLE);
+    private void setEditable(String status) {
+        if (status.equals("open")) {
+            binding.fieldsEditableCheckBox.setVisibility(View.VISIBLE);
+        } else {
+            binding.fieldsEditableCheckBox.setVisibility(View.GONE);
+
+            if (binding.fieldsEditableCheckBox.isChecked()) {
+                binding.fieldsEditableCheckBox.setChecked(false);
+
+                saGensAdapter.setEditable(false);
+                saPresAdapter.setEditable(false);
+                saItemsAdapter.setEditable(false);
+            }
+        }
+    }
+
+    private void setProfiles(String status) {
+        if (status.equals("done")) {
+            List profilesPngs = new List();
+            ArrayList<String> profilesExecs = new ArrayList<>();
+            profileUrls = new ArrayList<>();
+
+            for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
+                ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
+
+                if (profile.getExec().equals("png"))
+                    profilesPngs.add(profile);
+
+                profilesExecs.add(profile.getExec());
+                profileUrls.add(profile.getUrl());
+            }
+
+            profilesExecs.add("");
+
+            InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profilesExecs, "profiles");
+
+            if (!profilesPngs.data().isEmpty()) {
+                profilesAdapter.setProfiles(profilesPngs.data());
+                binding.profilesSingleLayout.recyclerView.setAdapter(profilesAdapter);
+
+                binding.profilesSingleLayout.textView.setVisibility(View.GONE);
+            } else if (profilesAdapter.getItemCount() == 0) {
+                binding.profilesSingleLayout.textView.setVisibility(View.VISIBLE);
+            }
+
+            binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
+
+            binding.profilesGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.profilesGroup.setVisibility(View.GONE);
+        }
     }
 
     private void getData() {
@@ -320,6 +342,8 @@ public class SampleFragment extends Fragment {
                             if (generals.size() != 0) {
                                 saGensAdapter.setItems(generals);
                                 binding.generalRecyclerView.setAdapter(saGensAdapter);
+                            } else if (saGensAdapter.getItemCount() == 0) {
+                                binding.generalConstraintLayout.setVisibility(View.GONE);
                             }
 
                             List prerequisites = new List();
@@ -338,12 +362,16 @@ public class SampleFragment extends Fragment {
                             if (!prerequisites.data().isEmpty()) {
                                 saPresAdapter.setItems(prerequisites.data());
                                 binding.prerequisiteRecyclerView.setAdapter(saPresAdapter);
+                            } else if (saPresAdapter.getItemCount() == 0) {
+                                binding.prerequisiteConstraintLayout.setVisibility(View.GONE);
                             }
 
                             // Items Data
                             if (!items.data().isEmpty()) {
                                 saItemsAdapter.setItems(items.data());
                                 binding.itemRecyclerView.setAdapter(saItemsAdapter);
+                            } else if (saItemsAdapter.getItemCount() == 0) {
+                                binding.itemConstraintLayout.setVisibility(View.GONE);
                             }
 
                             binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(saGensAdapter.getItemCount() + saPresAdapter.getItemCount() + saItemsAdapter.getItemCount()));
@@ -396,125 +424,195 @@ public class SampleFragment extends Fragment {
     }
 
     private void doWork(String method) {
-//        switch (method) {
-//            case "fill":
-//                Sample.fill(data, header, new Response() {
-//                    @Override
-//                    public void onOK(Object object) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//
-//                            });
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String response) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//                                // TODO : Place Code If Needed
-//                            });
-//                        }
-//                    }
-//                });
-//                break;
-//            case "close":
-//                Sample.close(data, header, new Response() {
-//                    @Override
-//                    public void onOK(Object object) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//
-//                            });
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String response) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//                                // TODO : Place Code If Needed
-//                            });
-//                        }
-//                    }
-//                });
-//                break;
-//            case "open":
-//                Sample.open(data, header, new Response() {
-//                    @Override
-//                    public void onOK(Object object) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//
-//                            });
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String response) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//                                // TODO : Place Code If Needed
-//                            });
-//                        }
-//                    }
-//                });
-//                break;
-//            case "score":
-//                Sample.score(data, header, new Response() {
-//                    @Override
-//                    public void onOK(Object object) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//
-//                            });
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String response) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//                                // TODO : Place Code If Needed
-//                            });
-//                        }
-//                    }
-//                });
-//                break;
-//            case "getScore":
-//                Sample.getScore(data, header, new Response() {
-//                    @Override
-//                    public void onOK(Object object) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//
-//                            });
-//                        }
-//                    }
-//
-//                    @Override
-//                    public void onFailure(String response) {
-//                        if (isAdded()) {
-//                            requireActivity().runOnUiThread(() -> {
-//                                // TODO : Place Code If Needed
-//                            });
-//                        }
-//                    }
-//                });
-//                break;
-//        }
+        if (!method.equals("getScore"))
+            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        switch (method) {
+            case "fill":
+                Sample.fill(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "close":
+                Sample.close(sampleAnswers, data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                setStatus("closed");
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "open":
+                Sample.open(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                setStatus("open");
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "score":
+                Sample.score(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        sampleModel = (SampleModel) object;
+
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                setStatus(sampleModel.getSampleStatus());
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+            case "getScore":
+                Sample.getScore(data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                setStatus("done");
+                            });
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        if (isAdded()) {
+                            requireActivity().runOnUiThread(() -> {
+                                // TODO : Place Code If Needed
+                            });
+                        }
+                    }
+                });
+                break;
+        }
     }
 
     public void sendGen(String key, String value) {
+        HashMap newData = new HashMap<>();
 
+        newData.put("id", data.get("id"));
+        newData.put(key, value);
+
+        Sample.items(newData, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
     }
 
     public void sendPre(int key, String value) {
+        sampleAnswers.addToPrerequisites(key, value);
+        sampleAnswers.sendPrerequisites(((MainActivity) requireActivity()).singleton.getToken(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
 
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
     }
 
     public void sendItem(int key, String value) {
+        sampleAnswers.addToRemote(key, value);
+        sampleAnswers.sendRequest(((MainActivity) requireActivity()).singleton.getToken(), new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
 
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
     }
 
     @Override
