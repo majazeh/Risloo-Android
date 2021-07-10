@@ -21,6 +21,7 @@ import androidx.appcompat.app.AppCompatDialogFragment;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -88,7 +89,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
     @Override
     public void onDismiss(@NonNull DialogInterface dialog) {
         super.onDismiss(dialog);
-        clearEditText();
+        binding.inputEditText.getText().clear();
     }
 
     private void initializer() {
@@ -128,159 +129,211 @@ public class SelectedDialog extends AppCompatDialogFragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.inputEditText.length() != 0) {
-                try {
-                    String value = binding.inputEditText.getText().toString().trim();
-                    TypeModel item;
+            String text = binding.inputEditText.getText().toString().trim();
 
-                    if (method.equals("axises"))
-                        item = new TypeModel(new JSONObject().put("id", "").put("title", value));
-                    else
-                        item = new TypeModel(new JSONObject().put("id", value).put("title", value));
-
-                    Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-                    if (fragment != null) {
-
-                        if (fragment instanceof CreateCenterFragment) {
-                            if (method.equals("phones"))
-                                if (!((CreateCenterFragment) fragment).phonesAdapter.getIds().contains(value))
-                                    ((CreateCenterFragment) fragment).phonesAdapter.addItem(item);
-                                else
-                                    Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
-
-                        } else if (fragment instanceof CreateScheduleFragment) {
-                            Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                            if (childFragment != null) {
-                                if (method.equals("axises"))
-                                    if (childFragment instanceof CreateScheduleSessionFragment)
-                                        if (!((CreateScheduleSessionFragment) childFragment).axisesAdapter.getIds().contains(value)) {
-                                            ((CreateScheduleSessionFragment) childFragment).axisesAdapter.addItem(item);
-
-                                            CreateSchedulePaymentFragment paymentFragment = (CreateSchedulePaymentFragment) ((CreateScheduleFragment) fragment).adapter.hashMap.get(3);
-                                            if (paymentFragment != null)
-                                                paymentFragment.axisAdapter.addItem(item);
-                                        } else
-                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
-                            }
-
-                        } else if (fragment instanceof CreateSessionFragment) {
-                            Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                            if (childFragment != null) {
-                                if (method.equals("axises"))
-                                    if (childFragment instanceof CreateSessionSessionFragment)
-                                        if (!((CreateSessionSessionFragment) childFragment).axisesAdapter.getIds().contains(value)) {
-                                            ((CreateSessionSessionFragment) childFragment).axisesAdapter.addItem(item);
-
-                                            CreateSessionPaymentFragment paymentFragment = (CreateSessionPaymentFragment) ((CreateSessionFragment) fragment).adapter.hashMap.get(2);
-                                            if (paymentFragment != null)
-                                                paymentFragment.axisAdapter.addItem(item);
-                                        } else
-                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
-                            }
-
-                        } else if (fragment instanceof EditCenterFragment) {
-                            Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                            if (childFragment != null) {
-                                if (method.equals("phones"))
-                                    if (childFragment instanceof EditCenterDetailFragment)
-                                        if (!((EditCenterDetailFragment) childFragment).phonesAdapter.getIds().contains(value))
-                                            ((EditCenterDetailFragment) childFragment).phonesAdapter.addItem(item);
-                                        else
-                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
-                            }
-
-                        } else if (fragment instanceof EditSessionFragment) {
-                            Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                            if (childFragment != null) {
-                                if (method.equals("axises"))
-                                    if (childFragment instanceof EditSessionSessionFragment)
-                                        if (!((EditSessionSessionFragment) childFragment).axisesAdapter.getIds().contains(value)) {
-                                            ((EditSessionSessionFragment) childFragment).axisesAdapter.addItem(item);
-
-                                            EditSessionPaymentFragment paymentFragment = (EditSessionPaymentFragment) ((EditSessionFragment) fragment).adapter.hashMap.get(2);
-                                            if (paymentFragment != null)
-                                                paymentFragment.axisAdapter.addItem(item);
-                                        } else
-                                            Toast.makeText(requireActivity(), "exception", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    }
-
-                    calculateCount();
-
-                    ((MainActivity) requireActivity()).controlEditText.clear(requireActivity(), ((MainActivity) requireActivity()).controlEditText.input());
-                    clearEditText();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            } else {
+            if (!text.equals("")) {
+                refreshList(createItem(text));
+            } else
                 dismiss();
-            }
         }).widget(binding.entryButton);
     }
 
     private void setRecyclerView() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null) {
-
-            if (fragment instanceof CreateCenterFragment) {
+        if (getCurrent() != null) {
+            if (getCurrent() instanceof CreateCenterFragment) {
                 if (method.equals("phones"))
-                    binding.listRecyclerView.setAdapter(((CreateCenterFragment) fragment).phonesAdapter);
+                    binding.listRecyclerView.setAdapter(((CreateCenterFragment) getCurrent()).phonesAdapter);
 
-            } else if (fragment instanceof CreateScheduleFragment) {
-                Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null) {
-                    if (method.equals("axises"))
-                        if (childFragment instanceof CreateScheduleSessionFragment)
-                            binding.listRecyclerView.setAdapter(((CreateScheduleSessionFragment) childFragment).axisesAdapter);
-                }
+            } else if (getCurrent() instanceof CreateScheduleSessionFragment) {
+                if (method.equals("axises"))
+                    binding.listRecyclerView.setAdapter(((CreateScheduleSessionFragment) getCurrent()).axisesAdapter);
 
-            } else if (fragment instanceof CreateSessionFragment) {
-                Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null) {
-                    if (method.equals("axises"))
-                        if (childFragment instanceof CreateSessionSessionFragment)
-                            binding.listRecyclerView.setAdapter(((CreateSessionSessionFragment) childFragment).axisesAdapter);
-                }
+            } else if (getCurrent() instanceof CreateSessionSessionFragment) {
+                if (method.equals("axises"))
+                    binding.listRecyclerView.setAdapter(((CreateSessionSessionFragment) getCurrent()).axisesAdapter);
 
-            } else if (fragment instanceof EditCenterFragment) {
-                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null) {
-                    if (method.equals("phones"))
-                        if (childFragment instanceof EditCenterDetailFragment)
-                            binding.listRecyclerView.setAdapter(((EditCenterDetailFragment) childFragment).phonesAdapter);
-                }
+            } else if (getCurrent() instanceof EditCenterDetailFragment) {
+                if (method.equals("phones"))
+                    binding.listRecyclerView.setAdapter(((EditCenterDetailFragment) getCurrent()).phonesAdapter);
 
-            } else if (fragment instanceof EditSessionFragment) {
-                Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null) {
-                    if (method.equals("axises"))
-                        if (childFragment instanceof EditSessionSessionFragment)
-                            binding.listRecyclerView.setAdapter(((EditSessionSessionFragment) childFragment).axisesAdapter);
-                }
+            } else if (getCurrent() instanceof EditSessionSessionFragment) {
+                if (method.equals("axises"))
+                    binding.listRecyclerView.setAdapter(((EditSessionSessionFragment) getCurrent()).axisesAdapter);
             }
         }
+
         calculateCount();
     }
 
-    private void clearEditText() {
-        binding.inputEditText.getText().clear();
+    private TypeModel createItem(String text) {
+        try {
+            if (method.equals("axises"))
+                return new TypeModel(new JSONObject().put("id", "").put("title", text));
+            else
+                return new TypeModel(new JSONObject().put("id", text).put("title", text));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return null;
     }
 
-    public void setData(String method) {
-        this.method = method;
+    private void addPayment(TypeModel item) {
+        if (getPayment() != null) {
+            if (getPayment() instanceof CreateSchedulePaymentFragment)
+                ((CreateSchedulePaymentFragment) getPayment()).axisAdapter.addItem(item);
+
+            else if (getPayment() instanceof CreateSessionPaymentFragment)
+                ((CreateSessionPaymentFragment) getPayment()).axisAdapter.addItem(item);
+
+            else if (getPayment() instanceof EditSessionPaymentFragment)
+                ((EditSessionPaymentFragment) getPayment()).axisAdapter.addItem(item);
+        }
+    }
+
+    private void refreshList(TypeModel item) {
+        try {
+            if (getCurrent() != null) {
+                if (getCurrent() instanceof CreateCenterFragment) {
+                    if (method.equals("phones"))
+                        if (!((CreateCenterFragment) getCurrent()).phonesAdapter.getIds().contains(item.object.getString("id")))
+                            ((CreateCenterFragment) getCurrent()).phonesAdapter.addItem(item);
+                        else
+                            Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+
+                } else if (getCurrent() instanceof CreateScheduleSessionFragment) {
+                    if (method.equals("axises"))
+                        if (!((CreateScheduleSessionFragment) getCurrent()).axisesAdapter.getIds().contains(item.object.getString("id"))) {
+                            ((CreateScheduleSessionFragment) getCurrent()).axisesAdapter.addItem(item);
+
+                            addPayment(item);
+                        } else
+                            Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+
+                } else if (getCurrent() instanceof CreateSessionSessionFragment) {
+                    if (method.equals("axises"))
+                        if (!((CreateSessionSessionFragment) getCurrent()).axisesAdapter.getIds().contains(item.object.getString("id"))) {
+                            ((CreateSessionSessionFragment) getCurrent()).axisesAdapter.addItem(item);
+
+                            addPayment(item);
+                        } else
+                            Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+
+                } else if (getCurrent() instanceof EditCenterDetailFragment) {
+                    if (method.equals("phones"))
+                        if (!((EditCenterDetailFragment) getCurrent()).phonesAdapter.getIds().contains(item.object.getString("id")))
+                            ((EditCenterDetailFragment) getCurrent()).phonesAdapter.addItem(item);
+                        else
+                            Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+
+                } else if (getCurrent() instanceof EditSessionSessionFragment) {
+                    if (method.equals("axises"))
+                        if (!((EditSessionSessionFragment) getCurrent()).axisesAdapter.getIds().contains(item.object.getString("id"))) {
+                            ((EditSessionSessionFragment) getCurrent()).axisesAdapter.addItem(item);
+
+                            addPayment(item);
+                        } else
+                            Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+                }
+
+                calculateCount();
+
+                ((MainActivity) requireActivity()).controlEditText.clear(requireActivity(), ((MainActivity) requireActivity()).controlEditText.input());
+                binding.inputEditText.getText().clear();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void calculateCount() {
         if (Objects.requireNonNull(binding.listRecyclerView.getAdapter()).getItemCount() != 0) {
-            String count = "(" + binding.listRecyclerView.getAdapter().getItemCount() + ")";
-
             binding.countTextView.setVisibility(View.VISIBLE);
-            binding.countTextView.setText(count);
+            binding.countTextView.setText(StringManager.bracing(binding.listRecyclerView.getAdapter().getItemCount()));
         } else {
             binding.countTextView.setVisibility(View.GONE);
             binding.countTextView.setText("");
         }
+    }
+
+    private Fragment getCurrent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof CreateCenterFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateScheduleFragment) {
+                Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof CreateScheduleSessionFragment)
+                        return childFragment;
+
+            } else if (fragment instanceof CreateSessionFragment) {
+                Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof CreateSessionSessionFragment)
+                        return childFragment;
+
+            } else if (fragment instanceof EditCenterFragment) {
+                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof EditCenterDetailFragment)
+                        return childFragment;
+
+            } else if (fragment instanceof EditSessionFragment) {
+                Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof EditSessionSessionFragment)
+                        return childFragment;
+            }
+
+        return null;
+    }
+
+    private Fragment getParent() {
+        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof CreateScheduleFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateSessionFragment)
+                return fragment;
+
+            else if (fragment instanceof EditCenterFragment)
+                return fragment;
+
+            else if (fragment instanceof EditSessionFragment)
+                return fragment;
+
+        return null;
+    }
+
+    private Fragment getPayment() {
+        Fragment fragment = getParent();
+        if (fragment != null)
+            if (fragment instanceof CreateScheduleFragment) {
+                Fragment paymentFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(3);
+                if (paymentFragment != null)
+                    if (paymentFragment instanceof CreateSchedulePaymentFragment)
+                        return paymentFragment;
+
+            } else if (fragment instanceof CreateSessionFragment) {
+                Fragment paymentFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(2);
+                if (paymentFragment != null)
+                    if (paymentFragment instanceof CreateSessionPaymentFragment)
+                        return paymentFragment;
+
+            } else if (fragment instanceof EditSessionFragment) {
+                Fragment paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
+                if (paymentFragment != null)
+                    if (paymentFragment instanceof EditSessionPaymentFragment)
+                        return paymentFragment;
+            }
+
+        return null;
+    }
+
+    public void setData(String method) {
+        this.method = method;
     }
 
     @Override
