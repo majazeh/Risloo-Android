@@ -41,12 +41,44 @@ public class Sample extends Model {
         }
     }
 
+    public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response1) {
+        try {
+            if (has(data, "authorized_key")) {
+                Model.post("auth", data, header, new Response() {
+                    @Override
+                    public void onOK(Object object) {
+                        try {
+                            JSONObject jsonObject = (JSONObject) object;
+                        AuthModel authModel = new AuthModel(jsonObject);
+                        if (authModel.getTheory().equals("sample")){
+                            response1.onOK(authModel);
+                        }else{
+                            response1.onOK(jsonObject);
+                        }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(String response) {
+                        response1.onFailure(response);
+                    }
+                }, null);
+            } else {
+                Exceptioner.make(response1, "کلید را وارد کنید");
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void theory(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "key")) {
                 String key = (String) data.get("key");
                 data.remove("key");
-                Model.post("auth" + "/theory" + "/" + key, data, header, response, SampleModel.class);
+                Model.post("auth" + "/theory" + "/" + key, data, header, response, AuthModel.class);
             } else {
                 Exceptioner.make(response, "کلید را وارد کنید");
             }
@@ -253,15 +285,5 @@ public class Sample extends Model {
         }
     }
 
-    public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
-        try {
-            if (has(data, "authorized_key")) {
-                Model.post("auth" , data, header, response, AuthModel.class);
-            } else {
-                Exceptioner.make(response, "کلید را وارد کنید");
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+
 }
