@@ -190,7 +190,7 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/profiles_header_includeLayout"
+                android:id="@+id/profile_halfs_header_includeLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -199,20 +199,46 @@
                 app:layout_constraintTop_toBottomOf="@id/scoring_constraintLayout" />
 
             <include
-                android:id="@+id/profiles_singleLayout"
+                android:id="@+id/profile_halfs_singleLayout"
                 layout="@layout/component_single_profile"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profiles_header_includeLayout" />
+                app:layout_constraintTop_toBottomOf="@id/profile_halfs_header_includeLayout" />
 
             <androidx.constraintlayout.widget.Group
-                android:id="@+id/profiles_group"
+                android:id="@+id/profile_halfs_group"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:constraint_referenced_ids="profiles_header_includeLayout, profiles_singleLayout"
+                app:constraint_referenced_ids="profile_halfs_header_includeLayout, profile_halfs_singleLayout"
+                tools:visibility="visible" />
+
+            <include
+                android:id="@+id/profile_extras_header_includeLayout"
+                layout="@layout/component_main_index_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/profile_halfs_singleLayout" />
+
+            <include
+                android:id="@+id/profile_extras_singleLayout"
+                layout="@layout/component_single_profile"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/profile_extras_header_includeLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/profile_extras_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="profile_extras_header_includeLayout, profile_extras_singleLayout"
                 tools:visibility="visible" />
 
             <include
@@ -222,7 +248,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/profiles_singleLayout" />
+                app:layout_constraintTop_toBottomOf="@id/profile_extras_singleLayout" />
 
             <CheckBox
                 android:id="@+id/fields_editable_checkBox"
@@ -240,9 +266,11 @@
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/fields_header_includeLayout"
                 app:layout_constraintLeft_toLeftOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/fields_header_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/fields_header_includeLayout"
+                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/general_constraintLayout"

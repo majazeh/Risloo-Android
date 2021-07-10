@@ -46,7 +46,7 @@ public class SampleFragment extends Fragment {
     private FragmentSampleBinding binding;
 
     // Adapters
-    private ProfilesAdapter profilesAdapter;
+    private ProfilesAdapter profileHalfsAdapter, profileExtrasAdapter;
     private SaGensAdapter saGensAdapter;
     private SaPresAdapter saPresAdapter;
     private SaItemsAdapter saItemsAdapter;
@@ -55,7 +55,7 @@ public class SampleFragment extends Fragment {
     private HashMap data, header;
     private SampleAnswers sampleAnswers;
     private SampleModel sampleModel;
-    private boolean userSelect = false;
+    private boolean isLoading = true, userSelect = false;
     private ArrayList<String> profileUrls;
 
     @Nullable
@@ -75,7 +75,8 @@ public class SampleFragment extends Fragment {
     }
 
     private void initializer() {
-        profilesAdapter = new ProfilesAdapter(requireActivity());
+        profileHalfsAdapter = new ProfilesAdapter(requireActivity());
+        profileExtrasAdapter = new ProfilesAdapter(requireActivity());
         saGensAdapter = new SaGensAdapter(requireActivity());
         saPresAdapter = new SaPresAdapter(requireActivity());
         saItemsAdapter = new SaItemsAdapter(requireActivity());
@@ -86,10 +87,12 @@ public class SampleFragment extends Fragment {
 
         sampleAnswers = new SampleAnswers();
 
-        binding.profilesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHeader));
+        binding.profileHalfsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHalfHeader));
+        binding.profileExtrasHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profilesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileHalfsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileExtrasSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -192,9 +195,11 @@ public class SampleFragment extends Fragment {
 
         setScoring(status);
 
-        setEditable(status);
+        if (!isLoading) {
+            setEditable(status);
 
-        setProfiles(status);
+            setProfiles(status);
+        }
     }
 
     private void setButtons(String status) {
@@ -289,17 +294,13 @@ public class SampleFragment extends Fragment {
 
     private void setProfiles(String status) {
         if (status.equals("done")) {
-            List profilesPngs = new List();
             ArrayList<String> profilesExecs = new ArrayList<>();
             profileUrls = new ArrayList<>();
 
             for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
                 ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
 
-                if (profile.getExec().equals("png"))
-                    profilesPngs.add(profile);
-
-                profilesExecs.add(profile.getExec());
+                profilesExecs.add(profile.getFile_name());
                 profileUrls.add(profile.getUrl());
             }
 
@@ -307,20 +308,33 @@ public class SampleFragment extends Fragment {
 
             InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profilesExecs, "profiles");
 
-            if (!profilesPngs.data().isEmpty()) {
-                profilesAdapter.setProfiles(profilesPngs.data());
-                binding.profilesSingleLayout.recyclerView.setAdapter(profilesAdapter);
+            // Profile Half
+            if (!sampleModel.getProfilesHalf().data().isEmpty()) {
+                profileHalfsAdapter.setProfiles(sampleModel.getProfilesHalf().data(), false);
+                binding.profileHalfsSingleLayout.recyclerView.setAdapter(profileHalfsAdapter);
 
-                binding.profilesSingleLayout.textView.setVisibility(View.GONE);
-            } else if (profilesAdapter.getItemCount() == 0) {
-                binding.profilesSingleLayout.textView.setVisibility(View.VISIBLE);
+                binding.profileHalfsSingleLayout.textView.setVisibility(View.GONE);
+            } else if (profileHalfsAdapter.getItemCount() == 0) {
+                binding.profileHalfsSingleLayout.textView.setVisibility(View.VISIBLE);
             }
 
-            binding.profilesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profilesAdapter.getItemCount()));
+            binding.profileHalfsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
+            binding.profileHalfsGroup.setVisibility(View.VISIBLE);
 
-            binding.profilesGroup.setVisibility(View.VISIBLE);
+            // Profile Extra
+            if (!sampleModel.getProfilesExtra().data().isEmpty()) {
+                profileExtrasAdapter.setProfiles(sampleModel.getProfilesExtra().data(), true);
+                binding.profileExtrasSingleLayout.recyclerView.setAdapter(profileExtrasAdapter);
+
+                binding.profileExtrasGroup.setVisibility(View.VISIBLE);
+            } else if (profileExtrasAdapter.getItemCount() == 0) {
+                binding.profileExtrasGroup.setVisibility(View.GONE);
+            }
+
+            binding.profileExtrasHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
         } else {
-            binding.profilesGroup.setVisibility(View.GONE);
+            binding.profileHalfsGroup.setVisibility(View.GONE);
+            binding.profileExtrasGroup.setVisibility(View.GONE);
         }
     }
 
@@ -329,6 +343,8 @@ public class SampleFragment extends Fragment {
             @Override
             public void onOK(Object object) {
                 sampleModel = (SampleModel) object;
+
+                isLoading = false;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
@@ -402,6 +418,7 @@ public class SampleFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        isLoading = false;
 
                         // Generals Data
                         binding.generalRecyclerView.setVisibility(View.VISIBLE);

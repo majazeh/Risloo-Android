@@ -1013,7 +1013,8 @@
 
     <string name="SampleFragmentEditable">قابلیت ویرایش فرم</string>
 
-    <string name="SampleFragmentProfileHeader">نیم‌رخ</string>
+    <string name="SampleFragmentProfileHalfHeader">نیم‌رخ‌ها</string>
+    <string name="SampleFragmentProfileExtraHeader">مقیاس‌های افزوده شده</string>
     <string name="SampleFragmentFieldHeader">مواد نمونه</string>
 
     <string name="SampleFragmentSubGeneral">عمومی</string>

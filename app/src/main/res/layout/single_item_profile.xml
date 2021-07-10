@@ -9,8 +9,7 @@
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
     tools:layout_marginBottom="@dimen/_4sdp"
-    tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.ProfilesAdapter">
+    tools:layout_marginTop="@dimen/_4sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
@@ -18,27 +17,42 @@
         android:layout_height="match_parent"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
-        <com.jsibbold.zoomage.ZoomageView
-            android:id="@+id/avatar_zoomageView"
+        <ImageView
+            android:id="@+id/avatar_imageView"
             android:layout_width="0dp"
             android:layout_height="@dimen/_200sdp"
-            android:layout_margin="@dimen/_6sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:scaleType="fitCenter"
+            app:layout_goneMarginBottom="@dimen/_6sdp"
+            app:layout_constraintBottom_toTopOf="@id/avatar_textView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:zoomage_maxScale="8"
-            app:zoomage_minScale="0.5"
-            app:zoomage_zoomable="false"
-            app:zoomage_translatable="false"
-            app:zoomage_autoCenter="true"
-            app:zoomage_restrictBounds="false"
-            app:zoomage_animateOnReset="false"
-            app:zoomage_doubleTapToZoom="false"
-            app:zoomage_autoResetMode="UNDER"
-            app:zoomage_doubleTapToZoomScaleFactor="3"
-            tools:layout_height="@dimen/_200sdp"
             tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+        <TextView
+            android:id="@+id/avatar_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/_6sdp"
+            android:layout_marginEnd="@dimen/_6sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/avatar_imageView"
+            tools:text="عنوان" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -25,6 +26,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
 
     // Vars
     private ArrayList<TypeModel> profiles;
+    private boolean showTitle = false;
 
     public ProfilesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -55,7 +57,9 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
             return 0;
     }
 
-    public void setProfiles(ArrayList<TypeModel> profiles) {
+    public void setProfiles(ArrayList<TypeModel> profiles, boolean showTitle) {
+        this.showTitle = showTitle;
+
         if (this.profiles == null)
             this.profiles = profiles;
         else
@@ -83,7 +87,15 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
     }
 
     private void setData(ProfilesHolder holder, ProfileModel profile) {
-        Picasso.get().load(profile.getUrl()).placeholder(R.color.Gray100).into(holder.binding.avatarZoomageView);
+        Picasso.get().load(profile.getUrl()).placeholder(R.color.Gray100).into(holder.binding.avatarImageView);
+
+        if (showTitle) {
+            holder.binding.avatarTextView.setText(profile.getMode());
+            holder.binding.avatarTextView.setVisibility(View.VISIBLE);
+        } else {
+            holder.binding.avatarTextView.setText("");
+            holder.binding.avatarTextView.setVisibility(View.GONE);
+        }
     }
 
     public class ProfilesHolder extends RecyclerView.ViewHolder {
