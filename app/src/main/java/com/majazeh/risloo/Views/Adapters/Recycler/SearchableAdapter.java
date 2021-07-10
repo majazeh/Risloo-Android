@@ -19,6 +19,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -54,7 +55,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     private TextView countTextView;
 
     // Vars
-    private ArrayList<TypeModel> items;
+    private ArrayList<TypeModel> items = new ArrayList<>();
     private String method;
 
     public SearchableAdapter(@NonNull Activity activity) {
@@ -93,9 +94,8 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     public void setItems(ArrayList<TypeModel> items, String method, TextView countTextView) {
         this.items = items;
         this.method = method;
-        if (countTextView != null) {
+        if (countTextView != null)
             this.countTextView = countTextView;
-        }
         notifyDataSetChanged();
     }
 
@@ -122,59 +122,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     private void listener(SearchableHolder holder, TypeModel item) {
         ClickManager.onDelayedClickListener(() -> {
-            Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (fragment != null) {
-                if (fragment instanceof CreateCaseFragment)
-                    ((CreateCaseFragment) fragment).responseDialog(method, item);
-
-                else if (fragment instanceof CreateCaseUserFragment)
-                    ((CreateCaseUserFragment) fragment).responseDialog(method, item);
-
-                else if (fragment instanceof CreateCenterFragment)
-                    ((CreateCenterFragment) fragment).responseDialog(method, item);
-
-                else if (fragment instanceof CreateCenterUserFragment)
-                    ((CreateCenterUserFragment) fragment).responseDialog(method, item);
-
-                else if (fragment instanceof CreateRoomFragment)
-                    ((CreateRoomFragment) fragment).responseDialog(method, item);
-
-                else if (fragment instanceof CreateRoomUserFragment)
-                    ((CreateRoomUserFragment) fragment).responseDialog(method, item);
-
-                else if (fragment instanceof CreateSampleFragment)
-                    ((CreateSampleFragment) fragment).responseDialog(method, item);
-
-                else if (fragment instanceof CreateScheduleFragment) {
-                    Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null)
-                        if (childFragment instanceof CreateScheduleReferenceFragment)
-                            ((CreateScheduleReferenceFragment) childFragment).responseDialog(method, item);
-                        else if (childFragment instanceof CreateScheduleTimeFragment)
-                            ((CreateScheduleTimeFragment) childFragment).responseDialog(method, item);
-                }
-
-                else if (fragment instanceof CreateSessionFragment) {
-                    Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null)
-                        if (childFragment instanceof CreateSessionTimeFragment)
-                            ((CreateSessionTimeFragment) childFragment).responseDialog(method, item);
-                }
-
-                else if (fragment instanceof EditCenterFragment) {
-                    Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null)
-                        if (childFragment instanceof EditCenterDetailFragment)
-                            ((EditCenterDetailFragment) childFragment).responseDialog(method, item);
-                }
-
-                else if (fragment instanceof EditSessionFragment) {
-                    Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null)
-                        if (childFragment instanceof EditSessionTimeFragment)
-                            ((EditSessionTimeFragment) childFragment).responseDialog(method, item);
-                }
-            }
+            responseDialog(item);
             notifyDataSetChanged();
         }).widget(holder.binding.getRoot());
     }
@@ -183,17 +131,16 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         try {
             switch (method) {
                 case "scales": {
-                    SampleModel model = (SampleModel) item;
+                    ScaleModel model = (ScaleModel) item;
 
-                    holder.binding.titleTextView.setText(model.getSampleScaleTitle());
+                    holder.binding.titleTextView.setText(model.getTitle());
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    if (!model.getSampleEdition().equals(""))
-                        holder.binding.subTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+                    if (!model.getEdition().equals(""))
+                        holder.binding.subTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
                     else
-                        holder.binding.subTextView.setText("نسخه " + model.getSampleVersion());
-                }
-                break;
+                        holder.binding.subTextView.setText("نسخه " + model.getVersion());
+                } break;
                 case "rooms": {
                     RoomModel model = (RoomModel) item;
 
@@ -201,8 +148,40 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
                     holder.binding.subTextView.setVisibility(View.VISIBLE);
                     holder.binding.subTextView.setText(model.getRoomCenter().getDetail().getString("title"));
-                }
-                break;
+                } break;
+                case "cases": {
+                    CaseModel model = (CaseModel) item;
+
+                    holder.binding.titleTextView.setText(model.getCaseId());
+
+                    if (model.getClients() != null && !model.getClients().data().isEmpty()) {
+                        holder.binding.subTextView.setVisibility(View.VISIBLE);
+
+                        holder.binding.subTextView.setText("");
+                        for (int i = 0; i < model.getClients().data().size(); i++) {
+                            UserModel user = (UserModel) model.getClients().data().get(i);
+                            if (user != null) {
+                                holder.binding.subTextView.append(user.getName());
+                                if (i != model.getClients().size() -1) {
+                                    holder.binding.subTextView.append("  -  ");
+                                }
+                            }
+                        }
+                    } else
+                        holder.binding.subTextView.setVisibility(View.GONE);
+
+                } break;
+                case "sessions": {
+                    SessionModel model = (SessionModel) item;
+
+                    String primaryText = model.getId() + " " + "(" + SelectionManager.getSessionStatus(activity, "fa", model.getStatus()) + ")";
+                    String secondaryText = DateManager.jalDayName(String.valueOf(model.getStarted_at())) + " " + DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), ".") + " / " + "ساعت" + " " + DateManager.jalHHsMM(String.valueOf(model.getStarted_at())) + " / " + model.getDuration() + " " + "دقیقه";
+
+                    holder.binding.titleTextView.setText(StringManager.foregroundSize(primaryText, 10, primaryText.length(), activity.getResources().getColor(R.color.Gray600), (int) activity.getResources().getDimension(R.dimen._8ssp)));
+
+                    holder.binding.subTextView.setVisibility(View.VISIBLE);
+                    holder.binding.subTextView.setText(secondaryText);
+                } break;
                 case "references":
                 case "psychologies":
                 case "managers": {
@@ -212,45 +191,13 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
-                }
-                break;
-                case "cases": {
-                    CaseModel model = (CaseModel) item;
-
-                    holder.binding.titleTextView.setText(model.getCaseId());
-
-                    if (model.getClients() != null && !model.getClients().data().isEmpty()) {
-                        holder.binding.subTextView.setVisibility(View.VISIBLE);
-
-                        for (int i = 0; i < model.getClients().data().size(); i++) {
-                            UserModel user = (UserModel) model.getClients().data().get(i);
-                            holder.binding.subTextView.append(user.getName());
-                            if (i != model.getClients().size() -1) {
-                                holder.binding.subTextView.append(" - ");
-                            }
-                        }
-                    } else {
-                        holder.binding.subTextView.setVisibility(View.GONE);
-                    }
-                }
-                break;
-                case "sessions": {
-                    SessionModel model = (SessionModel) item;
-
-                    String name = model.getId() + " " + "(" + SelectionManager.getSessionStatus(activity, "fa", model.getStatus()) + ")";
-                    holder.binding.titleTextView.setText(StringManager.foregroundSize(name, 10, name.length(), activity.getResources().getColor(R.color.Gray600), (int) activity.getResources().getDimension(R.dimen._8ssp)));
-
-                    holder.binding.subTextView.setVisibility(View.VISIBLE);
-                    holder.binding.subTextView.setText(DateManager.gregorianToJalali6(DateManager.dateToString("yyyy-MM-dd HH:mm:ss", DateManager.timestampToDate(model.getStarted_at()))) + " / " + model.getDuration() + " " + "دقیقه");
-                }
-                break;
+                } break;
                 case "patternDays": {
-                    holder.binding.titleTextView.setText(item.object.get("title").toString());
+                    holder.binding.titleTextView.setText(item.object.getString("title"));
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
-                }
-                break;
+                } break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -259,169 +206,231 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     private void setActive(SearchableHolder holder, TypeModel item) {
         try {
-            Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-            if (fragment != null) {
-                if (fragment instanceof CreateCaseFragment)
+            if (getCurrent() != null) {
+                if (getCurrent() instanceof CreateCaseFragment) {
                     switch (method) {
-                        case "references": {
-                            UserModel model = (UserModel) item;
-
-                            detector(holder, ((CreateCaseFragment) fragment).referencesAdapter.getIds().contains(model.getId()));
-                            calculateCount(((CreateCaseFragment) fragment).referencesAdapter.getIds().size());
-                        }
-                        break;
                         case "rooms": {
                             RoomModel model = (RoomModel) item;
 
-                            detector(holder, ((CreateCaseFragment) fragment).roomId.equals(model.getRoomId()));
-                        }
-                        break;
-                    }
-
-                else if (fragment instanceof CreateCaseUserFragment)
-                    switch (method) {
-                        case "references":
+                            detector(holder, ((CreateCaseFragment) getCurrent()).roomId.equals(model.getRoomId()));
+                        } break;
+                        case "references": {
                             UserModel model = (UserModel) item;
 
-                            detector(holder, ((CreateCaseUserFragment) fragment).referencesAdapter.getIds().contains(model.getId()));
-                            calculateCount(((CreateCaseUserFragment) fragment).referencesAdapter.getIds().size());
-                            break;
+                            detector(holder, ((CreateCaseFragment) getCurrent()).referencesAdapter.getIds().contains(model.getId()));
+                            calculateCount(((CreateCaseFragment) getCurrent()).referencesAdapter.getIds().size());
+                        } break;
                     }
 
-                else if (fragment instanceof CreateCenterFragment)
-                    switch (method) {
-                        case "managers":
-                            UserModel model = (UserModel) item;
+                } else if (getCurrent() instanceof CreateCaseUserFragment) {
+                    if (method.equals("references")) {
+                        UserModel model = (UserModel) item;
 
-                            detector(holder, ((CreateCenterFragment) fragment).managerId.equals(model.getId()));
-                            break;
+                        detector(holder, ((CreateCaseUserFragment) getCurrent()).referencesAdapter.getIds().contains(model.getId()));
+                        calculateCount(((CreateCaseUserFragment) getCurrent()).referencesAdapter.getIds().size());
                     }
 
-                else if (fragment instanceof CreateCenterUserFragment)
-                    switch (method) {
-                        case "rooms":
-                            RoomModel model = (RoomModel) item;
+                } else if (getCurrent() instanceof CreateCenterFragment) {
+                    if (method.equals("managers")) {
+                        UserModel model = (UserModel) item;
 
-                            detector(holder, ((CreateCenterUserFragment) fragment).roomId.equals(model.getRoomId()));
-                            break;
+                        detector(holder, ((CreateCenterFragment) getCurrent()).managerId.equals(model.getId()));
                     }
 
-                else if (fragment instanceof CreateRoomFragment)
-                    switch (method) {
-                        case "psychologies":
-                            UserModel model = (UserModel) item;
+                } else if (getCurrent() instanceof CreateCenterUserFragment) {
+                    if (method.equals("rooms")) {
+                        RoomModel model = (RoomModel) item;
 
-                            detector(holder, ((CreateRoomFragment) fragment).psychologyId.equals(model.getId()));
-                            break;
+                        detector(holder, ((CreateCenterUserFragment) getCurrent()).roomId.equals(model.getRoomId()));
                     }
 
-                else if (fragment instanceof CreateRoomUserFragment)
-                    switch (method) {
-                        case "references":
-                            UserModel model = (UserModel) item;
+                } else if (getCurrent() instanceof CreateRoomFragment){
+                    if (method.equals("psychologies")) {
+                        UserModel model = (UserModel) item;
 
-                            detector(holder, ((CreateRoomUserFragment) fragment).referencesAdapter.getIds().contains(model.getId()));
-                            calculateCount(((CreateRoomUserFragment) fragment).referencesAdapter.getIds().size());
-                            break;
+                        detector(holder, ((CreateRoomFragment) getCurrent()).psychologyId.equals(model.getId()));
                     }
 
-                else if (fragment instanceof CreateSampleFragment)
+                } else if (getCurrent() instanceof CreateRoomUserFragment){
+                    if (method.equals("references")) {
+                        UserModel model = (UserModel) item;
+
+                        detector(holder, ((CreateRoomUserFragment) getCurrent()).referencesAdapter.getIds().contains(model.getId()));
+                        calculateCount(((CreateRoomUserFragment) getCurrent()).referencesAdapter.getIds().size());
+                    }
+
+                } else if (getCurrent() instanceof CreateSampleFragment){
                     switch (method) {
                         case "scales": {
                             SampleModel model = (SampleModel) item;
 
-                            detector(holder, ((CreateSampleFragment) fragment).scalesAdapter.getIds().contains(model.getSampleId()));
-                            calculateCount(((CreateSampleFragment) fragment).scalesAdapter.getIds().size());
-                        }
-                        break;
+                            detector(holder, ((CreateSampleFragment) getCurrent()).scalesAdapter.getIds().contains(model.getSampleId()));
+                            calculateCount(((CreateSampleFragment) getCurrent()).scalesAdapter.getIds().size());
+                        } break;
                         case "references": {
                             UserModel model = (UserModel) item;
 
-                            detector(holder, ((CreateSampleFragment) fragment).referencesAdapter.getIds().contains(model.getId()));
-                            calculateCount(((CreateSampleFragment) fragment).referencesAdapter.getIds().size());
-                        }
-                        break;
+                            detector(holder, ((CreateSampleFragment) getCurrent()).referencesAdapter.getIds().contains(model.getId()));
+                            calculateCount(((CreateSampleFragment) getCurrent()).referencesAdapter.getIds().size());
+                        } break;
                         case "rooms": {
                             RoomModel model = (RoomModel) item;
 
-                            detector(holder, ((CreateSampleFragment) fragment).roomId.equals(model.getRoomId()));
-                        }
-                        break;
+                            detector(holder, ((CreateSampleFragment) getCurrent()).roomId.equals(model.getRoomId()));
+                        } break;
                         case "cases": {
                             CaseModel model = (CaseModel) item;
 
-                            detector(holder, ((CreateSampleFragment) fragment).caseId.equals(model.getCaseId()));
-                        }
-                        break;
+                            detector(holder, ((CreateSampleFragment) getCurrent()).caseId.equals(model.getCaseId()));
+                        } break;
                         case "sessions": {
                             SessionModel model = (SessionModel) item;
 
-                            detector(holder, ((CreateSampleFragment) fragment).sessionId.equals(model.getId()));
-                        }
-                        break;
+                            detector(holder, ((CreateSampleFragment) getCurrent()).sessionId.equals(model.getId()));
+                        } break;
                     }
 
-                else if (fragment instanceof CreateScheduleFragment) {
-                    Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null) {
-                        if (method.equals("cases")) {
-                            if (childFragment instanceof CreateScheduleReferenceFragment)
-                                detector(holder, ((CreateScheduleReferenceFragment) childFragment).caseId.equals(item.object.get("id").toString()));
-                        } else if (method.equals("patternDays")) {
-                            if (childFragment instanceof CreateScheduleTimeFragment) {
-                                detector(holder, ((CreateScheduleTimeFragment) childFragment).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(((CreateScheduleTimeFragment) childFragment).patternDaysAdapter.getIds().size());
-                            }
-                        }
+                } else if (getCurrent() instanceof CreateScheduleReferenceFragment){
+                    if (method.equals("cases")) {
+                        CaseModel model = (CaseModel) item;
+
+                        detector(holder, ((CreateScheduleReferenceFragment) getCurrent()).caseId.equals(model.getCaseId()));
+                    }
+
+                } else if (getCurrent() instanceof CreateScheduleTimeFragment) {
+                    if (method.equals("patternDays")) {
+                        detector(holder, ((CreateScheduleTimeFragment) getCurrent()).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                        calculateCount(((CreateScheduleTimeFragment) getCurrent()).patternDaysAdapter.getIds().size());
+                    }
+
+                } else if (getCurrent() instanceof CreateSessionTimeFragment) {
+                    if (method.equals("patternDays")) {
+                        detector(holder, ((CreateSessionTimeFragment) getCurrent()).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                        calculateCount(((CreateSessionTimeFragment) getCurrent()).patternDaysAdapter.getIds().size());
+                    }
+
+                } else if (getCurrent() instanceof EditCenterDetailFragment) {
+                    if (method.equals("managers")) {
+                        UserModel model = (UserModel) item;
+
+                        detector(holder, ((EditCenterDetailFragment) getCurrent()).managerId.equals(model.getId()));
+                    }
+
+                } else if (getCurrent() instanceof EditSessionTimeFragment) {
+                    if (method.equals("patternDays")) {
+                        detector(holder, ((EditSessionTimeFragment) getCurrent()).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                        calculateCount(((EditSessionTimeFragment) getCurrent()).patternDaysAdapter.getIds().size());
                     }
                 }
 
-                else if (fragment instanceof CreateSessionFragment) {
-                    Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null)
-                        if (method.equals("patternDays"))
-                            if (childFragment instanceof CreateSessionTimeFragment) {
-                                detector(holder, ((CreateSessionTimeFragment) childFragment).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(((CreateSessionTimeFragment) childFragment).patternDaysAdapter.getIds().size());
-                            }
-                }
-
-                else if (fragment instanceof EditCenterFragment) {
-                    Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null)
-                        if (method.equals("managers"))
-                            if (childFragment instanceof EditCenterDetailFragment) {
-                                UserModel model = (UserModel) item;
-
-                                detector(holder, ((EditCenterDetailFragment) childFragment).managerId.equals(model.getId()));
-                            }
-                }
-
-                else if (fragment instanceof EditSessionFragment) {
-                    Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                    if (childFragment != null)
-                        if (method.equals("patternDays"))
-                            if (childFragment instanceof EditSessionTimeFragment) {
-                                detector(holder, ((EditSessionTimeFragment) childFragment).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                                calculateCount(((EditSessionTimeFragment) childFragment).patternDaysAdapter.getIds().size());
-                            }
-                }
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-    private void calculateCount(int listSize) {
-        if (listSize != 0) {
-            String count = "(" + listSize + ")";
+    private void responseDialog(TypeModel item) {
+        if (getCurrent() != null) {
+            if (getCurrent() instanceof CreateCaseFragment)
+                ((CreateCaseFragment) getCurrent()).responseDialog(method, item);
 
+            else if (getCurrent() instanceof CreateCaseUserFragment)
+                ((CreateCaseUserFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateCenterFragment)
+                ((CreateCenterFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateCenterUserFragment)
+                ((CreateCenterUserFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateRoomFragment)
+                ((CreateRoomFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateRoomUserFragment)
+                ((CreateRoomUserFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateSampleFragment)
+                ((CreateSampleFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateScheduleReferenceFragment)
+                ((CreateScheduleReferenceFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateScheduleTimeFragment)
+                ((CreateScheduleTimeFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof CreateSessionTimeFragment)
+                ((CreateSessionTimeFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof EditCenterDetailFragment)
+                ((EditCenterDetailFragment) getCurrent()).responseDialog(method, item);
+
+            else if (getCurrent() instanceof EditSessionTimeFragment)
+                ((EditSessionTimeFragment) getCurrent()).responseDialog(method, item);
+        }
+    }
+
+    private void calculateCount(int count) {
+        if (count != 0) {
             countTextView.setVisibility(View.VISIBLE);
-            countTextView.setText(count);
+            countTextView.setText(StringManager.bracing(count));
         } else {
             countTextView.setVisibility(View.GONE);
             countTextView.setText("");
         }
+    }
+
+    private Fragment getCurrent() {
+        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
+        if (fragment != null)
+            if (fragment instanceof CreateCaseFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateCaseUserFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateCenterFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateCenterUserFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateRoomFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateRoomUserFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateSampleFragment)
+                return fragment;
+
+            else if (fragment instanceof CreateScheduleFragment) {
+                Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof CreateScheduleReferenceFragment)
+                        return childFragment;
+                    else if (childFragment instanceof CreateScheduleTimeFragment)
+                        return childFragment;
+
+            } else if (fragment instanceof CreateSessionFragment) {
+                Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof CreateSessionTimeFragment)
+                        return childFragment;
+
+            } else if (fragment instanceof EditCenterFragment) {
+                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof EditCenterDetailFragment)
+                        return childFragment;
+
+            } else if (fragment instanceof EditSessionFragment) {
+                Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+                if (childFragment != null)
+                    if (childFragment instanceof EditSessionTimeFragment)
+                        return childFragment;
+            }
+
+        return null;
     }
 
     public class SearchableHolder extends RecyclerView.ViewHolder {
