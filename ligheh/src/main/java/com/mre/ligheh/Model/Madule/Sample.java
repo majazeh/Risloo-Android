@@ -41,32 +41,12 @@ public class Sample extends Model {
         }
     }
 
-    public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response1) {
+    public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "authorized_key")) {
-                Model.post("auth", data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        try {
-                            JSONObject jsonObject = (JSONObject) object;
-                        AuthModel authModel = new AuthModel(jsonObject);
-                        if (authModel.getTheory().equals("sample")){
-                            response1.onOK(authModel);
-                        }else{
-                            response1.onOK(jsonObject);
-                        }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-
-                    @Override
-                    public void onFailure(String response) {
-                        response1.onFailure(response);
-                    }
-                }, null);
+                Model.post("auth", data, header, response, null);
             } else {
-                Exceptioner.make(response1, "کلید را وارد کنید");
+                Exceptioner.make(response, "کلید را وارد کنید");
             }
         } catch (IOException e) {
             e.printStackTrace();
