@@ -45,8 +45,8 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     private TextView countTextView;
 
     // Vars
-    private ArrayList<TypeModel> items = new ArrayList<>();
-    private ArrayList<String> ids = new ArrayList<>();
+    private ArrayList<TypeModel> items;
+    private ArrayList<String> ids;
     private String method;
 
     public SelectedAdapter(@NonNull Activity activity) {

@@ -55,7 +55,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     private TextView countTextView;
 
     // Vars
-    private ArrayList<TypeModel> items = new ArrayList<>();
+    private ArrayList<TypeModel> items;
     private String method;
 
     public SearchableAdapter(@NonNull Activity activity) {
