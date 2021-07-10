@@ -1009,7 +1009,7 @@
     <string name="SampleFragmentFill">پرکردن</string>
     <string name="SampleFragmentProfiles">خروجی‌ها</string>
 
-    <string name="SampleFragmentScoring">در حال نمره‌دهی …</string>
+    <string name="SampleFragmentScoring">درحال نمره‌دهی و ساخت فایل‌ها …</string>
 
     <string name="SampleFragmentEditable">قابلیت ویرایش فرم</string>
 
@@ -1255,7 +1255,7 @@
     // Dialog Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="DialogLoadingTitle">در حال بارگذاري …</string>
+    <string name="DialogLoadingTitle">لطفا منتظر بمانید …</string>
 
     <string name="DialogDayTitle">روز(ها) هفته را انتخاب کنید.</string>
     <string name="DialogDayEntry">ثبت</string>

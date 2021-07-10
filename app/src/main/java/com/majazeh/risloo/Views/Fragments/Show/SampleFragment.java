@@ -208,7 +208,6 @@ public class SampleFragment extends Fragment {
             case "open":
                 binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
-                binding.profilesTextView.getRoot().setVisibility(View.GONE);
 
                 InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentFill), getResources().getColor(R.color.Gray500));
                 InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentClose), getResources().getColor(R.color.Gray500));
@@ -225,7 +224,6 @@ public class SampleFragment extends Fragment {
             case "closed":
                 binding.primaryTextView.getRoot().setVisibility(View.VISIBLE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
-                binding.profilesTextView.getRoot().setVisibility(View.GONE);
 
                 InitManager.txtTextColor(binding.primaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentOpen), getResources().getColor(R.color.Blue600));
                 InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White));
@@ -243,12 +241,10 @@ public class SampleFragment extends Fragment {
             case "creating_files":
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.GONE);
-                binding.profilesTextView.getRoot().setVisibility(View.GONE);
                 break;
             case "done":
                 binding.primaryTextView.getRoot().setVisibility(View.GONE);
                 binding.secondaryTextView.getRoot().setVisibility(View.VISIBLE);
-                binding.profilesTextView.getRoot().setVisibility(View.VISIBLE);
 
                 InitManager.txtTextColor(binding.profilesTextView.selectTextView, getResources().getString(R.string.SampleFragmentProfiles), getResources().getColor(R.color.Blue600));
                 InitManager.txtTextColor(binding.secondaryTextView.getRoot(), getResources().getString(R.string.SampleFragmentScore), getResources().getColor(R.color.White));
@@ -294,6 +290,8 @@ public class SampleFragment extends Fragment {
 
     private void setProfiles(String status) {
         if (status.equals("done")) {
+            binding.profilesTextView.getRoot().setVisibility(View.VISIBLE);
+
             ArrayList<String> profilesExecs = new ArrayList<>();
             profileUrls = new ArrayList<>();
 
@@ -309,7 +307,7 @@ public class SampleFragment extends Fragment {
             InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profilesExecs, "profiles");
 
             // Profile Half
-            if (!sampleModel.getProfilesHalf().data().isEmpty()) {
+            if (sampleModel.getProfilesHalf() != null && !sampleModel.getProfilesHalf().data().isEmpty()) {
                 profileHalfsAdapter.setProfiles(sampleModel.getProfilesHalf().data(), false);
                 binding.profileHalfsSingleLayout.recyclerView.setAdapter(profileHalfsAdapter);
 
@@ -322,7 +320,7 @@ public class SampleFragment extends Fragment {
             binding.profileHalfsGroup.setVisibility(View.VISIBLE);
 
             // Profile Extra
-            if (!sampleModel.getProfilesExtra().data().isEmpty()) {
+            if (sampleModel.getProfilesExtra() != null && !sampleModel.getProfilesExtra().data().isEmpty()) {
                 profileExtrasAdapter.setProfiles(sampleModel.getProfilesExtra().data(), true);
                 binding.profileExtrasSingleLayout.recyclerView.setAdapter(profileExtrasAdapter);
 
@@ -333,6 +331,8 @@ public class SampleFragment extends Fragment {
 
             binding.profileExtrasHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
         } else {
+            binding.profilesTextView.getRoot().setVisibility(View.GONE);
+
             binding.profileHalfsGroup.setVisibility(View.GONE);
             binding.profileExtrasGroup.setVisibility(View.GONE);
         }
