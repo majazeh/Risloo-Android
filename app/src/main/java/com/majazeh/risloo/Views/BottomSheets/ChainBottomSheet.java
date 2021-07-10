@@ -20,18 +20,14 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.TestsAdapter;
 import com.majazeh.risloo.databinding.BottomSheetChainBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
-import com.mre.ligheh.Model.TypeModel.SampleModel;
-import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
 
 import java.util.HashMap;
-import java.util.Objects;
 
 public class ChainBottomSheet extends BottomSheetDialogFragment {
 
@@ -175,26 +171,12 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                 binding.listRecyclerView.setAdapter(testAdapter);
             }
 
-            if (model.getMembers() != null) {
-                List members = model.getMembers();
-
-                if (!members.data().isEmpty()) {
-                    for (int i = 0 ; i < members.size() ; i++) {
-                        UserModel userModel = (UserModel) members.data().get(i);
-
-                        if (Objects.equals(userModel.getUserId(), id)) {
-                            binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1) + "\n" + getResources().getString(R.string.BottomSheetChainDescription2));
-                            binding.nicknameGroup.setVisibility(View.VISIBLE);
-                            break;
-                        } else {
-                            binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
-                            binding.nicknameGroup.setVisibility(View.GONE);
-                        }
-                    }
-                } else {
-                    binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
-                    binding.nicknameGroup.setVisibility(View.GONE);
-                }
+            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getAcceptation() != null) {
+                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
+                binding.nicknameGroup.setVisibility(View.GONE);
+            } else {
+                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1) + "\n" + getResources().getString(R.string.BottomSheetChainDescription2));
+                binding.nicknameGroup.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {
             e.printStackTrace();

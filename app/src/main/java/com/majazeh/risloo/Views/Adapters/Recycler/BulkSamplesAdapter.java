@@ -23,11 +23,11 @@ import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
-import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -174,19 +174,27 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         Sample.auth(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                AuthModel authModel = (AuthModel) object;
-
                 activity.runOnUiThread(() -> {
-                    String key = authModel.getKey();
+                    try {
+                        JSONObject jsonObject = (JSONObject) object;
+                        BulkSampleModel bulkSampleModel = null;
 
-                    if (key.startsWith("$")) {
-                        ((MainActivity) activity).loadingDialog.dismiss();
-                        IntentManager.test(activity, key);
-                    } else {
-                        ((MainActivity) activity).loadingDialog.dismiss();
+                        if (!jsonObject.getString("theory").equals("sample"))
+                            bulkSampleModel = new BulkSampleModel(jsonObject.getJSONObject("bulk_sample"));
 
-                        chainBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
-                        chainBottomSheet.setData(key, ((MainActivity) activity).singleton.getId(), ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), model);
+                        String key = jsonObject.getString("key");
+
+                        if (key.startsWith("$")) {
+                            ((MainActivity) activity).loadingDialog.dismiss();
+                            IntentManager.test(activity, key);
+                        } else {
+                            ((MainActivity) activity).loadingDialog.dismiss();
+
+                            chainBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
+                            chainBottomSheet.setData(key, ((MainActivity) activity).singleton.getId(), ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), bulkSampleModel);
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 });
             }
