@@ -299,26 +299,26 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null)
             if (fragment instanceof CreateCenterFragment)
-                return (CreateCenterFragment) fragment;
+                return fragment;
 
             else if (fragment instanceof EditCenterFragment) {
                 Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
                 if (childFragment != null)
                     if (childFragment instanceof EditCenterAvatarFragment)
-                        return (EditCenterAvatarFragment) childFragment;
+                        return childFragment;
 
             } else if (fragment instanceof EditUserFragment) {
                 Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
                 if (childFragment != null)
                     if (childFragment instanceof EditUserAvatarFragment)
-                        return (EditUserAvatarFragment) childFragment;
+                        return childFragment;
             }
 
             else if (fragment instanceof CreateDocumentFragment)
-                return (CreateDocumentFragment) fragment;
+                return fragment;
 
             else if (fragment instanceof CreatePracticeFragment)
-                return (CreatePracticeFragment) fragment;
+                return fragment;
 
         return null;
     }

@@ -100,13 +100,13 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     private void listener(WeeksHolder holder, long timestamp) {
         ClickManager.onDelayedClickListener(() -> {
-            if (getParent() != null) {
-                if (getParent() instanceof CenterSchedulesFragment) {
-                    ((CenterSchedulesFragment) getParent()).responseAdapter(timestamp);
+            if (getCurrent() != null) {
+                if (getCurrent() instanceof CenterSchedulesFragment) {
+                    ((CenterSchedulesFragment) getCurrent()).responseAdapter(timestamp);
                     selectedTimestamp = timestamp;
                     meSelected = true;
-                } else if (getParent() instanceof RoomSchedulesFragment) {
-                    ((RoomSchedulesFragment) getParent()).responseAdapter(timestamp);
+                } else if (getCurrent() instanceof RoomSchedulesFragment) {
+                    ((RoomSchedulesFragment) getCurrent()).responseAdapter(timestamp);
                     selectedTimestamp = timestamp;
                     meSelected = true;
                 }
@@ -141,13 +141,13 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
         }
     }
 
-    private Fragment getParent() {
+    private Fragment getCurrent() {
         Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null)
             if (fragment instanceof CenterSchedulesFragment)
-                return (CenterSchedulesFragment) fragment;
+                return fragment;
             else if (fragment instanceof RoomSchedulesFragment)
-                return (RoomSchedulesFragment) fragment;
+                return fragment;
 
         return null;
     }

@@ -65,15 +65,15 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
-                if (getParent() != null) {
-                    if (getParent() instanceof CreateCenterFragment)
-                        ((CreateCenterFragment) getParent()).avatarPath = IntentManager.camera(requireActivity());
+                if (getCurrent() != null) {
+                    if (getCurrent() instanceof CreateCenterFragment)
+                        ((CreateCenterFragment) getCurrent()).avatarPath = IntentManager.camera(requireActivity());
 
-                    else if (getParent() instanceof EditCenterAvatarFragment)
-                        ((EditCenterAvatarFragment) getParent()).avatarPath = IntentManager.camera(requireActivity());
+                    else if (getCurrent() instanceof EditCenterAvatarFragment)
+                        ((EditCenterAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(requireActivity());
 
-                    else if (getParent() instanceof EditUserAvatarFragment)
-                        ((EditUserAvatarFragment) getParent()).avatarPath = IntentManager.camera(requireActivity());
+                    else if (getCurrent() instanceof EditUserAvatarFragment)
+                        ((EditUserAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(requireActivity());
                 }
             }
 
@@ -81,23 +81,23 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
         }).widget(binding.cameraLinearLayout);
     }
 
-    private Fragment getParent() {
+    private Fragment getCurrent() {
         Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
         if (fragment != null)
             if (fragment instanceof CreateCenterFragment)
-                return (CreateCenterFragment) fragment;
+                return fragment;
 
             else if (fragment instanceof EditCenterFragment) {
                 Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
                 if (childFragment != null)
                     if (childFragment instanceof EditCenterAvatarFragment)
-                        return (EditCenterAvatarFragment) childFragment;
+                        return childFragment;
 
             } else if (fragment instanceof EditUserFragment) {
                 Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
                 if (childFragment != null)
                     if (childFragment instanceof EditUserAvatarFragment)
-                        return (EditUserAvatarFragment) childFragment;
+                        return childFragment;
             }
 
         return null;
