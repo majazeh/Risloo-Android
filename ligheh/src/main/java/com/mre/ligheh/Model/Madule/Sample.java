@@ -78,7 +78,7 @@ public class Sample extends Model {
     public static void listInstance(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             data.put("instance", 1);
-            Model.list(endpoint, data, header, response, SampleModel.class);
+            Model.list(endpoint, data, header, response, ScaleModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

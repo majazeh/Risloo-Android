@@ -18,7 +18,6 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
-import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -262,9 +261,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 } else if (getCurrent() instanceof CreateSampleFragment){
                     switch (method) {
                         case "scales": {
-                            SampleModel model = (SampleModel) item;
+                            ScaleModel model = (ScaleModel) item;
 
-                            detector(holder, ((CreateSampleFragment) getCurrent()).scalesAdapter.getIds().contains(model.getSampleId()));
+                            detector(holder, ((CreateSampleFragment) getCurrent()).scalesAdapter.getIds().contains(model.getId()));
                             calculateCount(((CreateSampleFragment) getCurrent()).scalesAdapter.getIds().size());
                         } break;
                         case "references": {

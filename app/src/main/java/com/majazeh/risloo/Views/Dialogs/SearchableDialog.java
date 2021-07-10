@@ -413,7 +413,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     }
                 });
                 break;
-            case "session":
+            case "sessions":
                 Session.list(data, header, new Response() {
                     @Override
                     public void onOK(Object object) {
