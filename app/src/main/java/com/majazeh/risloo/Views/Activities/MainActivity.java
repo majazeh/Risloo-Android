@@ -202,7 +202,7 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            binding.contentIncludeLayout.breadcumpTextView.setText(breadCrumb.getBreadCrumbFa(destination, arguments));
+            binding.contentIncludeLayout.breadcumpTextView.setText(breadCrumb.getFa(destination, arguments));
             binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
         });
     }
