@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import android.widget.Toast;
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -62,6 +64,9 @@ public class MainActivity extends AppCompatActivity {
 
     // BottomSheets
     private LogoutBottomSheet logoutBottomSheet;
+
+    // BreadCump
+    private BreadCrumb breadCrumb;
 
     // Singleton
     public Singleton singleton;
@@ -116,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
         navsAdapter = new NavsAdapter(this);
 
         logoutBottomSheet = new LogoutBottomSheet();
+
+        breadCrumb = new BreadCrumb(this);
 
         singleton = new Singleton(this);
 
@@ -195,8 +202,8 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-//            binding.contentIncludeLayout.breadcumpTextView.setText();
-//            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+            binding.contentIncludeLayout.breadcumpTextView.setText(breadCrumb.getBreadCrumbFa(destination, arguments));
+            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
         });
     }
 
