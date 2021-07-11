@@ -1,24 +1,13 @@
 package com.majazeh.risloo.Utils.Managers;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.text.SpannableString;
-import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextPaint;
 import android.text.style.AbsoluteSizeSpan;
 import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
 import android.text.style.StyleSpan;
-import android.view.View;
-
-import androidx.annotation.NonNull;
-import androidx.navigation.NavBackStackEntry;
-import androidx.navigation.NavController;
-
-import com.majazeh.risloo.R;
 
 import java.text.DecimalFormat;
 
@@ -223,40 +212,6 @@ public class StringManager {
         spannableString.setSpan(foregroundColorSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         spannableString.setSpan(sizeSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         return spannableString;
-    }
-
-    @SuppressLint("RestrictedApi")
-    public static SpannableStringBuilder clickableNavBackStack(Activity activity, NavController navController) {
-        SpannableStringBuilder destination = new SpannableStringBuilder();
-
-        for (NavBackStackEntry navBackStackEntry : navController.getBackStack()) {
-            if (navBackStackEntry.getDestination().getLabel() != null) {
-                destination.append(navBackStackEntry.getDestination().getLabel().toString());
-                if (!navBackStackEntry.getDestination().equals(navController.getCurrentDestination())) {
-                    destination.append("  >  ");
-                }
-                String singleLabel = navBackStackEntry.getDestination().getLabel().toString();
-                if (!navBackStackEntry.getDestination().equals(navController.getCurrentDestination())) {
-
-                    destination.setSpan(new ClickableSpan() {
-                        @Override
-                        public void onClick(@NonNull View widget) {
-                            while (!navBackStackEntry.getDestination().equals(navController.getCurrentDestination())) {
-                                navController.popBackStack();
-                            }
-                        }
-                        @Override
-                        public void updateDrawState(@NonNull TextPaint textPaint) {
-                            textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
-                            textPaint.setUnderlineText(false);
-                        }
-
-                    }, destination.toString().indexOf(singleLabel), destination.toString().indexOf(singleLabel) + singleLabel.length(), 0);
-                }
-            }
-        }
-
-        return destination;
     }
 
 }
