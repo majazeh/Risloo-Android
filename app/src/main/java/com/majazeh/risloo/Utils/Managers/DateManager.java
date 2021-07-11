@@ -261,7 +261,7 @@ public class DateManager {
         switch (persianDate.dayName()) {
             case "شنبه":
                 return new Date(date.getTime() - (86400000)).getTime() / 1000;
-            case "یکشنبه":
+            case "یک\u200Cشنبه":
                 return new Date(date.getTime() - (2*86400000)).getTime() / 1000;
             case "دوشنبه":
                 return new Date(date.getTime() - (3*86400000)).getTime() / 1000;
@@ -285,7 +285,7 @@ public class DateManager {
         switch (persianDate.dayName()) {
             case "شنبه":
                 return new Date(date.getTime() + (7*86400000)).getTime() / 1000;
-            case "یکشنبه":
+            case "یک\u200Cشنبه":
                 return new Date(date.getTime() + (6*86400000)).getTime() / 1000;
             case "دوشنبه":
                 return new Date(date.getTime() + (5*86400000)).getTime() / 1000;
@@ -317,7 +317,7 @@ public class DateManager {
 
                 return dateCorrector(persianDate.getShMonth(), persianDate.getShDay(), lastPersianDate.getShMonth(), lastPersianDate.getShDay());
             }
-            case "یکشنبه": {
+            case "یک\u200Cشنبه": {
                 Date firstDay = new Date(date.getTime() - (86400000));
                 Date lastDay = new Date(date.getTime() + (5*86400000));
 
@@ -389,7 +389,7 @@ public class DateManager {
                 timestamps.add(new Date(date.getTime() + (5*86400000)).getTime() / 1000);
                 timestamps.add(new Date(date.getTime() + (6*86400000)).getTime() / 1000);
                 return timestamps;
-            case "یکشنبه":
+            case "یک\u200Cشنبه":
                 timestamps.add(new Date(date.getTime() - (86400000)).getTime() / 1000);
                 timestamps.add(new Date(date.getTime()).getTime() / 1000);
                 timestamps.add(new Date(date.getTime() + (86400000)).getTime() / 1000);
