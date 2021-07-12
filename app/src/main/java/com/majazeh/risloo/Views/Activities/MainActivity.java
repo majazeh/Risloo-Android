@@ -294,7 +294,7 @@ public class MainActivity extends AppCompatActivity {
                 NavDirections action = NavigationMainDirections.actionGlobalBulkSamplesFragment();
                 navController.navigate(action);
             } break;
-            case "اسناد و مدارک": {
+            case "مدارک": {
                 NavDirections action = NavigationMainDirections.actionGlobalDocumentsFragment();
                 navController.navigate(action);
             } break;

@@ -212,7 +212,7 @@
     ---------- CreateCase Fragment ----------
     */
 
-    <string name="CreateCaseFragmentTitle">ساخت پرونده درمانی</string>
+    <string name="CreateCaseFragmentTitle">ساخت پرونده جدید</string>
 
     <string name="CreateCaseFragmentRoomHeader">اتاق درمان</string>
     <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
@@ -238,7 +238,7 @@
     ---------- CreateCenter Fragment ----------
     */
 
-    <string name="CreateCenterFragmentTitle">ساخت مرکز درمانی</string>
+    <string name="CreateCenterFragmentTitle">ساخت مرکز درمانی جدید</string>
 
     <string name="CreateCenterFragmentTypeHeader">نوع مرکز درمانی</string>
     <string name="CreateCenterFragmentManagerHeader">مدیر</string>
@@ -279,7 +279,7 @@
     ---------- CreateDocument Fragment ----------
     */
 
-    <string name="CreateDocumentFragmentTitle">افزودن مدرک یا سند</string>
+    <string name="CreateDocumentFragmentTitle">ساخت مدرک جدید</string>
 
     <string name="CreateDocumentFragmentNameHeader">عنوان</string>
     <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
@@ -287,13 +287,13 @@
 
     <string name="CreateDocumentFragmentDescriptionHint">غیر ضروری</string>
 
-    <string name="CreateDocumentFragmentButton">ثبت</string>
+    <string name="CreateDocumentFragmentButton">ساخت</string>
 
     /*
     ---------- CreatePractice Fragment ----------
     */
 
-    <string name="CreatePracticeFragmentTitle">ساخت کاربرگ</string>
+    <string name="CreatePracticeFragmentTitle">ساخت کاربرگ جدید</string>
 
     <string name="CreatePracticeFragmentNameHeader">عنوان</string>
     <string name="CreatePracticeFragmentDescriptionHeader">محتوا</string>
@@ -319,7 +319,7 @@
     ---------- CreateRoom Fragment ----------
     */
 
-    <string name="CreateRoomFragmentTitle">ساخت اتاق درمانی</string>
+    <string name="CreateRoomFragmentTitle">ساخت اتاق درمانی جدید</string>
 
     <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
 
@@ -341,7 +341,7 @@
     ---------- CreateSample Fragment ----------
     */
 
-    <string name="CreateSampleFragmentTitle">ساخت نمونه</string>
+    <string name="CreateSampleFragmentTitle">ساخت نمونه جدید</string>
 
     <string name="CreateSampleFragmentScaleHeader">مقیاس</string>
     <string name="CreateSampleFragmentRoomHeader">اتاق درمان</string>
@@ -375,7 +375,7 @@
     ---------- CreateSchedule Fragment ----------
     */
 
-    <string name="CreateScheduleFragmentTitle">ساخت برنامه درمانی</string>
+    <string name="CreateScheduleFragmentTitle">ساخت برنامه درمانی جدید</string>
 
     ---------- // CreateScheduleTime Tab
 
@@ -434,7 +434,7 @@
     ---------- CreateSession Fragment ----------
     */
 
-    <string name="CreateSessionFragmentTitle">ساخت جلسه درمانی</string>
+    <string name="CreateSessionFragmentTitle">ساخت جلسه جدید</string>
 
     ---------- // CreateSessionTime Tab
 
@@ -482,7 +482,7 @@
     ---------- CreateTreasury Fragment ----------
     */
 
-    <string name="CreateTreasuryFragmentTitle">ساخت کیف پول</string>
+    <string name="CreateTreasuryFragmentTitle">ساخت کیف پول جدید</string>
 
     <string name="CreateTreasuryFragmentNameHeader">عنوان</string>
 
@@ -521,7 +521,7 @@
     <string name="CreateUserFragmentGenderMale">مرد</string>
     <string name="CreateUserFragmentGenderFemale">زن</string>
 
-    <string name="CreateUserFragmentButton">ایجاد</string>
+    <string name="CreateUserFragmentButton">ثبت</string>
 
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
@@ -799,7 +799,7 @@
     ---------- Documents Fragment ----------
     */
 
-    <string name="DocumentsFragmentTitle">مدارک و اسناد</string>
+    <string name="DocumentsFragmentTitle">مدارک</string>
 
     <string name="DocumentsFragmentSerial">سریال</string>
     <string name="DocumentsFragmentName">عنوان</string>
@@ -965,7 +965,7 @@
     ---------- Dashboard Fragment ----------
     */
 
-    <string name="DashboardFragmentTitle">پیش‌خوان</string>
+    <string name="DashboardFragmentTitle">خانه</string>
 
     <string name="DashboardFragmentCasesHeader">پرونده‌های درمانی من</string>
     <string name="DashboardFragmentSamplesHeader">آزمون‌های انجام نشده‌ی من</string>
@@ -988,7 +988,7 @@
     ---------- Room Fragment ----------
     */
 
-    <string name="RoomFragmentTitle">اتاق درمانی</string>
+    <string name="RoomFragmentTitle">اتاق درمان</string>
 
     <string name="RoomFragmentUsers">اعضاء</string>
     <string name="RoomFragmentSchedules">برنامه درمانی</string>
