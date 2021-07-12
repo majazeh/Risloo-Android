@@ -94,7 +94,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
 
-                if (item.contains("+989")) {
+                if (item.contains("989")) {
                     IntentManager.phone(activity, item);
                 } else if (item.contains("@")) {
                     IntentManager.email(activity, new String[]{item}, "", "", "");

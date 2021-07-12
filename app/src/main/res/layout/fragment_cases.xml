@@ -52,10 +52,12 @@
                 android:layout_height="@dimen/_28sdp"
                 android:layout_marginLeft="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_6sdp"
+                android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/search_includeLayout"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
-                app:layout_constraintTop_toTopOf="@id/search_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/search_includeLayout"
+                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/index_containerLayout"

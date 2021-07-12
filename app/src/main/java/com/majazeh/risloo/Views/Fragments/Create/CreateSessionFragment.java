@@ -13,6 +13,8 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateSessionAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 public class CreateSessionFragment extends Fragment {
 
@@ -27,6 +29,7 @@ public class CreateSessionFragment extends Fragment {
 
     // Vars
     private String[] tabs;
+    public CaseModel caseModel;
 
     @Nullable
     @Override
@@ -35,7 +38,7 @@ public class CreateSessionFragment extends Fragment {
 
         initializer();
 
-        setData();
+        setArgs();
 
         return binding.getRoot();
     }
@@ -47,7 +50,16 @@ public class CreateSessionFragment extends Fragment {
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
     }
 
-    private void setData() {
+    private void setArgs() {
+        String type = CreateSessionFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        if (typeModel != null) {
+            if (type.equals("case")) {
+                caseModel = (CaseModel) CreateSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+            }
+        }
+
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
     }
