@@ -76,21 +76,21 @@ public class BreadCrumb {
             builder.append(label);
             if (i != list.size() - 1) {
                 builder.append("  >  ");
+
+                builder.setSpan(new ClickableSpan() {
+                    @Override
+                    public void onClick(@NonNull View widget) {
+                        Log.e("Label", label);
+                    }
+
+                    @Override
+                    public void updateDrawState(@NonNull TextPaint textPaint) {
+                        textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
+                        textPaint.setUnderlineText(false);
+                    }
+
+                }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
             }
-
-            builder.setSpan(new ClickableSpan() {
-                @Override
-                public void onClick(@NonNull View widget) {
-                    Log.e("Label", label);
-                }
-
-                @Override
-                public void updateDrawState(@NonNull TextPaint textPaint) {
-                    textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
-                    textPaint.setUnderlineText(false);
-                }
-
-            }, builder.toString().indexOf(label), builder.toString().indexOf(label) + label.length(), 0);
         }
 
         return builder;
