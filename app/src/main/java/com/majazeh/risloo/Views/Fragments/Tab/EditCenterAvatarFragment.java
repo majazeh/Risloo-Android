@@ -102,8 +102,10 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void setData() {
-        if (getParent() != null) {
-            CenterModel model = getParent().centerModel;
+        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
+        if (current instanceof EditCenterFragment) {
+            CenterModel model = ((EditCenterFragment) current).centerModel;
 
             try {
                 if (model.getCenterId() != null && !model.getCenterId().equals("")) {
@@ -126,15 +128,6 @@ public class EditCenterAvatarFragment extends Fragment {
                 e.printStackTrace();
             }
         }
-    }
-
-    private EditCenterFragment getParent() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof EditCenterFragment)
-                return (EditCenterFragment) fragment;
-
-        return null;
     }
 
     public void responseAction(String method, Intent data) {

@@ -18,10 +18,6 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
-import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
@@ -192,47 +188,52 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     }
 
     private void removePayment(int position) {
-        if (getPayment() != null) {
-            if (getPayment() instanceof CreateSchedulePaymentFragment)
-                ((CreateSchedulePaymentFragment) getPayment()).axisAdapter.removeItem(position);
+        Fragment payment = ((MainActivity) activity).fragmont.getPayment();
 
-            else if (getPayment() instanceof CreateSessionPaymentFragment)
-                ((CreateSessionPaymentFragment) getPayment()).axisAdapter.removeItem(position);
+        if (payment instanceof CreateSchedulePaymentFragment)
+            ((CreateSchedulePaymentFragment) payment).axisAdapter.removeItem(position);
 
-            else if (getPayment() instanceof EditSessionPaymentFragment)
-                ((EditSessionPaymentFragment) getPayment()).axisAdapter.removeItem(position);
-        }
+        if (payment instanceof CreateSessionPaymentFragment)
+            ((CreateSessionPaymentFragment) payment).axisAdapter.removeItem(position);
+
+        if (payment instanceof EditSessionPaymentFragment)
+            ((EditSessionPaymentFragment) payment).axisAdapter.removeItem(position);
     }
 
     private void refreshCount() {
-        if (getCurrent() != null) {
-            if (getCurrent() instanceof CreateCenterFragment) {
-                if (method.equals("phones"))
-                    if (((CreateCenterFragment) getCurrent()).phonesDialog.isVisible())
-                        ((CreateCenterFragment) getCurrent()).phonesDialog.calculateCount();
+        Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+        Fragment child = ((MainActivity) activity).fragmont.getChild();
 
-            } else if (getCurrent() instanceof CreateScheduleSessionFragment) {
-                if (method.equals("axises"))
-                    if (((CreateScheduleSessionFragment) getCurrent()).axisesDialog.isVisible())
-                        ((CreateScheduleSessionFragment) getCurrent()).axisesDialog.calculateCount();
-
-            } else if (getCurrent() instanceof CreateSessionFragment) {
-                if (method.equals("axises"))
-                    if (((CreateSessionSessionFragment) getCurrent()).axisesDialog.isVisible())
-                        ((CreateSessionSessionFragment) getCurrent()).axisesDialog.calculateCount();
-
-            } else if (getCurrent() instanceof EditCenterFragment) {
-                if (method.equals("phones"))
-                    if (((EditCenterDetailFragment) getCurrent()).phonesDialog.isVisible())
-                        ((EditCenterDetailFragment) getCurrent()).phonesDialog.calculateCount();
-
-            } else if (getCurrent() instanceof EditSessionFragment) {
-                if (method.equals("axises"))
-                    if (((EditSessionSessionFragment) getCurrent()).axisesDialog.isVisible())
-                        ((EditSessionSessionFragment) getCurrent()).axisesDialog.calculateCount();
-
-            }
+        if (current instanceof CreateCenterFragment) {
+            if (method.equals("phones"))
+                if (((CreateCenterFragment) current).phonesDialog.isVisible())
+                    ((CreateCenterFragment) current).phonesDialog.calculateCount();
         }
+
+        if (child instanceof CreateScheduleSessionFragment) {
+            if (method.equals("axises"))
+                if (((CreateScheduleSessionFragment) child).axisesDialog.isVisible())
+                    ((CreateScheduleSessionFragment) child).axisesDialog.calculateCount();
+        }
+
+        if (child instanceof CreateSessionSessionFragment) {
+            if (method.equals("axises"))
+                if (((CreateSessionSessionFragment) child).axisesDialog.isVisible())
+                    ((CreateSessionSessionFragment) child).axisesDialog.calculateCount();
+        }
+
+        if (child instanceof EditCenterDetailFragment) {
+            if (method.equals("phones"))
+                if (((EditCenterDetailFragment) child).phonesDialog.isVisible())
+                    ((EditCenterDetailFragment) child).phonesDialog.calculateCount();
+        }
+
+        if (current instanceof EditSessionSessionFragment) {
+            if (method.equals("axises"))
+                if (((EditSessionSessionFragment) current).axisesDialog.isVisible())
+                    ((EditSessionSessionFragment) current).axisesDialog.calculateCount();
+        }
+
     }
 
     private void calculateCount() {
@@ -243,83 +244,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
             countTextView.setVisibility(View.GONE);
             countTextView.setText("");
         }
-    }
-
-    private Fragment getCurrent() {
-        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof CreateCenterFragment)
-                return fragment;
-
-            else if (fragment instanceof CreateScheduleFragment) {
-                Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof CreateScheduleSessionFragment)
-                        return childFragment;
-
-            } else if (fragment instanceof CreateSessionFragment) {
-                Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof CreateSessionSessionFragment)
-                        return childFragment;
-
-            } else if (fragment instanceof EditCenterFragment) {
-                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof EditCenterDetailFragment)
-                        return childFragment;
-
-            } else if (fragment instanceof EditSessionFragment) {
-                Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof EditSessionSessionFragment)
-                        return childFragment;
-            }
-
-        return null;
-    }
-
-    private Fragment getParent() {
-        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof CreateScheduleFragment)
-                return fragment;
-
-            else if (fragment instanceof CreateSessionFragment)
-                return fragment;
-
-            else if (fragment instanceof EditCenterFragment)
-                return fragment;
-
-            else if (fragment instanceof EditSessionFragment)
-                return fragment;
-
-        return null;
-    }
-
-    private Fragment getPayment() {
-        Fragment fragment = getParent();
-        if (fragment != null)
-            if (fragment instanceof CreateScheduleFragment) {
-                Fragment paymentFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(3);
-                if (paymentFragment != null)
-                    if (paymentFragment instanceof CreateSchedulePaymentFragment)
-                        return paymentFragment;
-
-            } else if (fragment instanceof CreateSessionFragment) {
-                Fragment paymentFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(2);
-                if (paymentFragment != null)
-                    if (paymentFragment instanceof CreateSessionPaymentFragment)
-                        return paymentFragment;
-
-            } else if (fragment instanceof EditSessionFragment) {
-                Fragment paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
-                if (paymentFragment != null)
-                    if (paymentFragment instanceof EditSessionPaymentFragment)
-                        return paymentFragment;
-            }
-
-        return null;
     }
 
     public class SelectedHolder extends RecyclerView.ViewHolder {

@@ -90,9 +90,11 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (getParent() != null) {
-                getParent().sendGen("cornometer", holder.binding.inputEditText.getText().toString());
-            }
+            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
+            if (current instanceof SampleFragment)
+                ((SampleFragment) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString());
+
             return false;
         });
 
@@ -105,11 +107,10 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
+                    Fragment current = ((MainActivity) activity).fragmont.getCurrent();
 
-                    if (getParent() != null) {
-                        getParent().sendGen("cornometer", String.valueOf(position + 1));
-                    }
+                    if (current instanceof SampleFragment)
+                        ((SampleFragment) current).sendGen("cornometer", String.valueOf(position + 1));
 
                     userSelect = false;
                 }
@@ -152,15 +153,6 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
 
             holder.binding.getRoot().setAlpha((float) 0.5);
         }
-    }
-
-    private SampleFragment getParent() {
-        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof SampleFragment)
-                return (SampleFragment) fragment;
-
-        return null;
     }
 
     public class SaGensHolder extends RecyclerView.ViewHolder {

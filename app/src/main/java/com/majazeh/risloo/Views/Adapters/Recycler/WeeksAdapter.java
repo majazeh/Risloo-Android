@@ -100,16 +100,18 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     private void listener(WeeksHolder holder, long timestamp) {
         ClickManager.onDelayedClickListener(() -> {
-            if (getCurrent() != null) {
-                if (getCurrent() instanceof CenterSchedulesFragment) {
-                    ((CenterSchedulesFragment) getCurrent()).responseAdapter(timestamp);
-                    selectedTimestamp = timestamp;
-                    meSelected = true;
-                } else if (getCurrent() instanceof RoomSchedulesFragment) {
-                    ((RoomSchedulesFragment) getCurrent()).responseAdapter(timestamp);
-                    selectedTimestamp = timestamp;
-                    meSelected = true;
-                }
+            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
+            if (current instanceof CenterSchedulesFragment) {
+                ((CenterSchedulesFragment) current).responseAdapter(timestamp);
+                selectedTimestamp = timestamp;
+                meSelected = true;
+            }
+
+            if (current instanceof RoomSchedulesFragment) {
+                ((RoomSchedulesFragment) current).responseAdapter(timestamp);
+                selectedTimestamp = timestamp;
+                meSelected = true;
             }
 
             notifyDataSetChanged();
@@ -139,17 +141,6 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
             holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
             holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
         }
-    }
-
-    private Fragment getCurrent() {
-        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof CenterSchedulesFragment)
-                return fragment;
-            else if (fragment instanceof RoomSchedulesFragment)
-                return fragment;
-
-        return null;
     }
 
     public class WeeksHolder extends RecyclerView.ViewHolder {

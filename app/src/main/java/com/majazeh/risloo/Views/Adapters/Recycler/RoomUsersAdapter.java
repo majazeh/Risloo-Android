@@ -84,8 +84,10 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
 
     private void listener(RoomUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            if (getParent() != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(getParent().type, getParent().centerId, null, model);
+            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
+            if (current instanceof RoomUsersFragment) {
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).type, ((RoomUsersFragment) current).centerId, null, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());
@@ -111,15 +113,6 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusAccepted));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
         }
-    }
-
-    private RoomUsersFragment getParent() {
-        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof RoomUsersFragment)
-                return (RoomUsersFragment) fragment;
-
-        return null;
     }
 
     public class RoomUsersHolder extends RecyclerView.ViewHolder {

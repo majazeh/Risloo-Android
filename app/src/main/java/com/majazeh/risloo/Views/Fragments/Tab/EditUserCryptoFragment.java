@@ -109,8 +109,10 @@ public class EditUserCryptoFragment extends Fragment {
     }
 
     private void setData() {
-        if (getParent() != null) {
-            UserModel model = getParent().userModel;
+        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
+        if (current instanceof EditUserFragment) {
+            UserModel model = ((EditUserFragment) current).userModel;
 
             if (model.getId() != null && !model.getId().equals("")) {
                 data.put("id", model.getId());
@@ -126,15 +128,6 @@ public class EditUserCryptoFragment extends Fragment {
 //                binding.privateIncludeLayout.inputEditText.setText(privateKey);
 //            }
         }
-    }
-
-    private EditUserFragment getParent() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof EditUserFragment)
-                return (EditUserFragment) fragment;
-
-        return null;
     }
 
     private void doWork(String key) {

@@ -20,8 +20,6 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.BottomSheetImageBinding;
 
 public class ImageBottomSheet extends BottomSheetDialogFragment {
@@ -65,42 +63,21 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
-                if (getCurrent() != null) {
-                    if (getCurrent() instanceof CreateCenterFragment)
-                        ((CreateCenterFragment) getCurrent()).avatarPath = IntentManager.camera(requireActivity());
+                Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+                Fragment child = ((MainActivity) requireActivity()).fragmont.getChild();
 
-                    else if (getCurrent() instanceof EditCenterAvatarFragment)
-                        ((EditCenterAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(requireActivity());
+                if (current instanceof CreateCenterFragment)
+                    ((CreateCenterFragment) current).avatarPath = IntentManager.camera(requireActivity());
 
-                    else if (getCurrent() instanceof EditUserAvatarFragment)
-                        ((EditUserAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(requireActivity());
-                }
+                if (child instanceof EditCenterAvatarFragment)
+                    ((EditCenterAvatarFragment) child).avatarPath = IntentManager.camera(requireActivity());
+
+                if (child instanceof EditUserAvatarFragment)
+                    ((EditUserAvatarFragment) child).avatarPath = IntentManager.camera(requireActivity());
             }
 
             dismiss();
         }).widget(binding.cameraLinearLayout);
-    }
-
-    private Fragment getCurrent() {
-        Fragment fragment = ((MainActivity) requireActivity()).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof CreateCenterFragment)
-                return fragment;
-
-            else if (fragment instanceof EditCenterFragment) {
-                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof EditCenterAvatarFragment)
-                        return childFragment;
-
-            } else if (fragment instanceof EditUserFragment) {
-                Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof EditUserAvatarFragment)
-                        return childFragment;
-            }
-
-        return null;
     }
 
     @Override

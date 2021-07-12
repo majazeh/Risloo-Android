@@ -105,8 +105,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     @SuppressLint("ClickableViewAccessibility")
     private void listener(CenterUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            if (getParent() != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(getParent().type, getParent().centerId, null, model);
+            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
+            if (current instanceof CenterUsersFragment) {
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).type, ((CenterUsersFragment) current).centerId, null, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());
@@ -139,6 +141,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String item = parent.getItemAtPosition(position).toString();
 
+                Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
                 switch (item) {
                     case "پذیرفتن":
                         doWork(holder, model, "accept", "status");
@@ -147,8 +151,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         doWork(holder, model, "kick", "status");
                         break;
                     case "ساختن اتاق درمان": {
-                        if (getParent() != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", getParent().centerId, model);
+                        if (current instanceof CenterUsersFragment) {
+                            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", ((CenterUsersFragment) current).centerId, model);
                             ((MainActivity) activity).navController.navigate(action);
                         }
                     } break;
@@ -156,8 +160,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         // TODO : Place Code If Needed
                         break;
                     case "ویرایش عضو": {
-                        if (getParent() != null) {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(getParent().centerId, model);
+                        if (current instanceof CenterUsersFragment) {
+                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(((CenterUsersFragment) current).centerId, model);
                             ((MainActivity) activity).navController.navigate(action);
                         }
                     } break;
@@ -265,9 +269,11 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private void doWork(CenterUsersHolder holder, UserModel model, String value, String method) {
         ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
 
+        Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
         if (method.equals("position")) {
-            if (getParent() != null)
-                data.put("id", getParent().centerId);
+            if (current instanceof CenterUsersFragment)
+                data.put("id", ((CenterUsersFragment) current).centerId);
 
             data.put("userId", model.getId());
             data.put("position", value);
@@ -289,8 +295,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 }
             });
         } else {
-            if (getParent() != null)
-                data.put("id", getParent().centerId);
+            if (current instanceof CenterUsersFragment)
+                data.put("id", ((CenterUsersFragment) current).centerId);
 
             data.put("userId", model.getId());
             data.put("status", value);
@@ -316,15 +322,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 }
             });
         }
-    }
-
-    private CenterUsersFragment getParent() {
-        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof CenterUsersFragment)
-                return (CenterUsersFragment) fragment;
-
-        return null;
     }
 
     public class CenterUsersHolder extends RecyclerView.ViewHolder {

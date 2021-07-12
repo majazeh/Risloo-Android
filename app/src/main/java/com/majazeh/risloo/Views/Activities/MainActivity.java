@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
-import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
@@ -27,6 +26,7 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
+import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -42,8 +42,6 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
@@ -67,6 +65,9 @@ public class MainActivity extends AppCompatActivity {
 
     // BreadCump
     private BreadCrumb breadCrumb;
+
+    // Fragmont
+    public Fragmont fragmont;
 
     // Singleton
     public Singleton singleton;
@@ -133,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
+
+        fragmont = new Fragmont(navHostFragment);
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
         InitManager.imgResTint(this, binding.contentIncludeLayout.enterImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.Gray500);
@@ -302,34 +305,6 @@ public class MainActivity extends AppCompatActivity {
         navsAdapter.notifyDataSetChanged();
     }
 
-    private Fragment getCurrent() {
-        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof CreateCenterFragment)
-                return fragment;
-
-            else if (fragment instanceof EditCenterFragment) {
-                Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof EditCenterAvatarFragment)
-                        return childFragment;
-
-            } else if (fragment instanceof EditUserFragment) {
-                Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-                if (childFragment != null)
-                    if (childFragment instanceof EditUserAvatarFragment)
-                        return childFragment;
-            }
-
-            else if (fragment instanceof CreateDocumentFragment)
-                return fragment;
-
-            else if (fragment instanceof CreatePracticeFragment)
-                return fragment;
-
-        return null;
-    }
-
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
@@ -379,16 +354,14 @@ public class MainActivity extends AppCompatActivity {
                             return;
                     }
 
-                    if (getCurrent() != null) {
-                        if (getCurrent() instanceof CreateCenterFragment)
-                            ((CreateCenterFragment) getCurrent()).avatarPath = IntentManager.camera(this);
+                    if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreateCenterFragment)
+                        ((CreateCenterFragment) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
 
-                        else if (getCurrent() instanceof EditCenterAvatarFragment)
-                            ((EditCenterAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(this);
+                    if (fragmont.getChild() != null && fragmont.getChild() instanceof EditCenterAvatarFragment)
+                        ((EditCenterAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
-                        else if (getCurrent() instanceof EditUserAvatarFragment)
-                            ((EditUserAvatarFragment) getCurrent()).avatarPath = IntentManager.camera(this);
-                    }
+                    if (fragmont.getChild() != null && fragmont.getChild() instanceof EditUserAvatarFragment)
+                        ((EditUserAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
                 }
                 break;
         }
@@ -400,34 +373,37 @@ public class MainActivity extends AppCompatActivity {
 
         switch (resultCode) {
             case RESULT_OK: {
-                if (getCurrent() != null) {
-                    if (getCurrent() instanceof CreateCenterFragment) {
-                        if (requestCode == 300)
-                            ((CreateCenterFragment) getCurrent()).responseAction("gallery", data);
-                        else if (requestCode == 400)
-                            ((CreateCenterFragment) getCurrent()).responseAction("camera", data);
-
-                    } else if (getCurrent() instanceof EditCenterAvatarFragment) {
-                        if (requestCode == 300)
-                            ((EditCenterAvatarFragment) getCurrent()).responseAction("gallery", data);
-                        else if (requestCode == 400)
-                            ((EditCenterAvatarFragment) getCurrent()).responseAction("camera", data);
-
-                    } else if (getCurrent() instanceof EditUserAvatarFragment) {
-                        if (requestCode == 300)
-                            ((EditUserAvatarFragment) getCurrent()).responseAction("gallery", data);
-                        else if (requestCode == 400)
-                            ((EditUserAvatarFragment) getCurrent()).responseAction("camera", data);
-
-                    } else if (getCurrent() instanceof CreateDocumentFragment) {
-                        if (requestCode == 100)
-                            ((CreateDocumentFragment) getCurrent()).responseAction("file", data);
-
-                    } else if (getCurrent() instanceof CreatePracticeFragment) {
-                        if (requestCode == 100)
-                            ((CreatePracticeFragment) getCurrent()).responseAction("file", data);
-                    }
+                if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreateCenterFragment) {
+                    if (requestCode == 300)
+                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("gallery", data);
+                    else if (requestCode == 400)
+                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("camera", data);
                 }
+
+                if (fragmont.getChild() != null && fragmont.getChild() instanceof EditCenterAvatarFragment) {
+                    if (requestCode == 300)
+                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                    else if (requestCode == 400)
+                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                }
+
+                if (fragmont.getChild() != null && fragmont.getChild() instanceof EditUserAvatarFragment) {
+                    if (requestCode == 300)
+                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                    else if (requestCode == 400)
+                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                }
+
+                if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreateDocumentFragment) {
+                    if (requestCode == 100)
+                        ((CreateDocumentFragment) fragmont.getCurrent()).responseAction("file", data);
+                }
+
+                if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreatePracticeFragment) {
+                    if (requestCode == 100)
+                        ((CreatePracticeFragment) fragmont.getCurrent()).responseAction("file", data);
+                }
+
             } break;
             case RESULT_CANCELED: {
                 switch (requestCode) {

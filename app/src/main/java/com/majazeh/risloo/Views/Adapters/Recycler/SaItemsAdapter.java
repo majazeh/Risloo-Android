@@ -93,9 +93,11 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
         });
 
         holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (getParent() != null) {
-                getParent().sendItem(item + 1, holder.binding.inputEditText.getText().toString());
-            }
+            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
+            if (current instanceof SampleFragment)
+                ((SampleFragment) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString());
+
             return false;
         });
 
@@ -108,11 +110,10 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
+                    Fragment current = ((MainActivity) activity).fragmont.getCurrent();
 
-                    if (getParent() != null) {
-                        getParent().sendItem(item + 1, String.valueOf(position + 1));
-                    }
+                    if (current instanceof SampleFragment)
+                        ((SampleFragment) current).sendItem(item + 1, String.valueOf(position + 1));
 
                     userSelect = false;
                 }
@@ -198,15 +199,6 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private SampleFragment getParent() {
-        Fragment fragment = ((MainActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof SampleFragment)
-                return (SampleFragment) fragment;
-
-        return null;
     }
 
     public class SaItemsHolder extends RecyclerView.ViewHolder {
