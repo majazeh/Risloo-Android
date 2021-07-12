@@ -211,6 +211,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setData() {
+        if (binding.contentIncludeLayout.breadcumpTextView.getText().equals("")) {
+            binding.contentIncludeLayout.breadcumpTextView.setVisibility(View.GONE);
+        } else {
+            binding.contentIncludeLayout.breadcumpTextView.setVisibility(View.VISIBLE);
+        }
+
         if (!singleton.getName().equals("")) {
             binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
         } else {

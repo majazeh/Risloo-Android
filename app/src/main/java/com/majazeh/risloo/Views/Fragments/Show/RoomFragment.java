@@ -93,18 +93,15 @@ public class RoomFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
-        InitManager.imgResTint(requireActivity(), binding.addCaseImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-        InitManager.imgResTint(requireActivity(), binding.addScheduleImageView.getRoot(), R.drawable.ic_calendar_plus_light, R.color.Green700);
+        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_green700_ripple_green300);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
         } else {
-            binding.addCaseImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-            binding.addScheduleImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_green700);
+            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
         }
     }
 
@@ -270,12 +267,7 @@ public class RoomFragment extends Fragment {
                 NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment("room", roomModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
-        }).widget(binding.addCaseImageView.getRoot());
-
-        ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment("room", roomModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
-        }).widget(binding.addScheduleImageView.getRoot());
+        }).widget(binding.addImageView.getRoot());
     }
 
     private void setArgs() {
