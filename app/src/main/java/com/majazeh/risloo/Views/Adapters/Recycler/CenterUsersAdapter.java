@@ -241,6 +241,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
         if (model.getUserAccepted_at() == 0) {
             menu.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+            holder.binding.acceptedTextView.setText("");
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusAccepted));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
@@ -248,6 +249,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
         if (model.getUserKicked_at() == 0) {
             menu.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+            holder.binding.kickedTextView.setText("");
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
             holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
@@ -257,10 +259,14 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusWaiting));
         }
 
+        if (model.getUserAccepted_at() != 0 && model.getUserKicked_at() != 0) {
+            menu.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+        }
+
         menu.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
         menu.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
         menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
-        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
+//        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
         menu.add("");
 
         InitManager.unfixedCustomSpinner(activity, holder.binding.menuSpinner, menu, "centerUsers");

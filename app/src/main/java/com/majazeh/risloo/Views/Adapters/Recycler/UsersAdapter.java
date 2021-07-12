@@ -140,7 +140,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
             menu.add(model.getEmail());
 
         if (!model.getUserType().equals("admin"))
-            menu.add(activity.getResources().getString(R.string.UsersFragmentEnter));
+//            menu.add(activity.getResources().getString(R.string.UsersFragmentEnter));
 
         menu.add(activity.getResources().getString(R.string.UsersFragmentEdit));
         menu.add("");
