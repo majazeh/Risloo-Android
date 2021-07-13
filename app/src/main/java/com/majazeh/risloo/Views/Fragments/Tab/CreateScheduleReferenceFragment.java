@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -23,6 +24,10 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import org.json.JSONException;
+
+import java.util.ArrayList;
 
 public class CreateScheduleReferenceFragment extends Fragment {
 
@@ -33,7 +38,7 @@ public class CreateScheduleReferenceFragment extends Fragment {
     private SearchableDialog casesDialog;
 
     // Vars
-    public String type = "", caseId = "", count = "", selection = "";
+    public String type = "", roomId = "", caseId = "", count = "", selection = "";
     public boolean bulkSession = false;
 
     @Nullable
@@ -62,7 +67,6 @@ public class CreateScheduleReferenceFragment extends Fragment {
 
         binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.CreateScheduleReferenceTabCheckbox));
 
-        InitManager.fixedSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, R.array.RequestTypes, "main");
         InitManager.fixedSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes, "main");
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleReferenceTabButton), getResources().getColor(R.color.White));
@@ -83,7 +87,7 @@ public class CreateScheduleReferenceFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 type = parent.getItemAtPosition(position).toString();
 
-                if (type.contains("پرونده درمانی"))
+                if (type.equals("اعضاء پرونده درمانی …"))
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                 else
                     binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
@@ -150,7 +154,41 @@ public class CreateScheduleReferenceFragment extends Fragment {
     }
 
     private void setData() {
-        // TODO : Place Code If Needed
+        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
+        if (current instanceof CreateScheduleFragment) {
+            RoomModel model = ((CreateScheduleFragment) current).roomModel;
+
+            if (model.getRoomId() != null && !model.getRoomId().equals("")) {
+                roomId = model.getRoomId();
+            }
+
+            setTypes(model);
+        }
+    }
+
+    private void setTypes(RoomModel model) {
+        ArrayList<String> options = new ArrayList<>();
+
+        options.add(requireActivity().getResources().getString(R.string.CreateScheduleReferenceTabTypeRisloo));
+
+        try {
+            if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
+                options.add(model.getRoomCenter().getDetail().getString("title"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
+            String name = requireActivity().getResources().getString(R.string.CreateScheduleReferenceTabRoom) + " " + model.getRoomManager().getName();
+            options.add(name);
+        }
+
+        options.add(requireActivity().getResources().getString(R.string.CreateScheduleReferenceTabTypeCase));
+
+        options.add("");
+
+        InitManager.unfixedSpinner(requireActivity(), binding.typeIncludeLayout.selectSpinner, options, "main");
     }
 
     private void setClients(com.mre.ligheh.Model.Madule.List clients) {

@@ -288,7 +288,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         if (child instanceof CreateScheduleReferenceFragment) {
             if (method.equals("cases")) {
-                // TODO : Place Code If  Needed
+                data.put("room", ((CreateScheduleReferenceFragment) child).roomId);
+                data.put("instance", "1");
             }
         }
 

@@ -406,6 +406,12 @@
 
     <string name="CreateScheduleReferenceTabCheckbox">جلسه گروهی</string>
 
+    <string name="CreateScheduleReferenceTabTypeRisloo">اعضاء ریسلو</string>
+    <string name="CreateScheduleReferenceTabTypeUser">اعضاء</string>
+    <string name="CreateScheduleReferenceTabTypeCase">اعضاء پرونده درمانی …</string>
+
+    <string name="CreateScheduleReferenceTabRoom">اتاق درمان</string>
+
     <string name="CreateScheduleReferenceTabButton">ساخت</string>
 
     ---------- // CreateScheduleSession Tab
@@ -989,6 +995,7 @@
 
     <string name="RoomFragmentUsers">اعضاء</string>
     <string name="RoomFragmentSchedules">برنامه درمانی</string>
+    <string name="RoomFragmentAddSchedule">تعریف برنامه درمانی</string>
     <string name="RoomFragmentProfile">پروفایل من</string>
     <string name="RoomFragmentEdit">ویرایش</string>
 

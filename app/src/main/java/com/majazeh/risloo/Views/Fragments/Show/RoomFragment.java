@@ -155,6 +155,10 @@ public class RoomFragment extends Fragment {
                                 ((MainActivity) requireActivity()).navController.navigate(action);
                             }
                             break;
+                        case "تعریف برنامه درمانی": {
+                            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment("room", roomModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+                        } break;
                         case "پروفایل من": {
                             NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
@@ -452,6 +456,10 @@ public class RoomFragment extends Fragment {
         }
 
         menu.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
+
+        if (((MainActivity) requireActivity()).singleton.getType().equals("admin") && type.equals("room")) {
+            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
+        }
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin") && !type.equals("room")) {
             if (!status.equals("request"))
