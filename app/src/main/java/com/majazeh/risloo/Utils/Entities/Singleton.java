@@ -10,8 +10,6 @@ import com.google.gson.Gson;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
-import org.json.JSONException;
-
 public class Singleton {
 
     // Objects
@@ -180,62 +178,6 @@ public class Singleton {
 //            }
 //        }
         return "";
-    }
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    public String getDescription() {
-        if (!sharedPreferences.getString("description", "").equals("")) {
-            return sharedPreferences.getString("description", "");
-        }
-        return "";
-    }
-
-    public String getStartDate() {
-        if (!sharedPreferences.getString("start_date", "").equals("")) {
-            return sharedPreferences.getString("start_date", "");
-        }
-        return "";
-    }
-
-    public String getStartTime() {
-        if (!sharedPreferences.getString("start_time", "").equals("")) {
-            return sharedPreferences.getString("start_time", "");
-        }
-        return "";
-    }
-
-    public String getDuration() {
-        if (!sharedPreferences.getString("duration", "").equals("")) {
-            return sharedPreferences.getString("duration", "");
-        }
-        return "";
-    }
-
-    public String getAddress() {
-        if (!sharedPreferences.getString("address", "").equals("")) {
-            return sharedPreferences.getString("address", "");
-        }
-        return "";
-    }
-
-    public int getProgress() {
-        if (sharedPreferences.getInt("progress", 0) != -1) {
-            return sharedPreferences.getInt("address", 0);
-        }
-        return -1;
-    }
-
-    public boolean getBulkSession() {
-        return sharedPreferences.getBoolean("bulkSession", false);
-    }
-
-    public boolean getEndScheduleTime() {
-        return sharedPreferences.getBoolean("endScheduleTime", false);
     }
 
 }

@@ -29,7 +29,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <include
-                android:id="@+id/type_includeLayout"
+                android:id="@+id/status_includeLayout"
                 layout="@layout/component_main_input_spinner"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -39,27 +39,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <include
-                android:id="@+id/type_errorLayout"
-                layout="@layout/component_main_error"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/type_includeLayout" />
-
-            <include
-                android:id="@+id/status_includeLayout"
-                layout="@layout/component_main_input_spinner"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/type_errorLayout" />
 
             <include
                 android:id="@+id/status_errorLayout"
@@ -79,8 +58,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/status_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/status_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/status_errorLayout" />
 
             <include
@@ -89,8 +68,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/status_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/status_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/scheduled_includeLayout" />
 
             <include
@@ -120,8 +99,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/status_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/status_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/axis_guideLayout" />
 
             <include
@@ -141,8 +120,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/status_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/status_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/description_errorLayout" />
 
             <include

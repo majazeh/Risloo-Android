@@ -600,7 +600,6 @@
 
     ---------- // EditSessionSession Tab
 
-    <string name="EditSessionSessionTabTypeHeader">نوع جلسه</string>
     <string name="EditSessionSessionTabStatusHeader">وضعیت جلسه</string>
     <string name="EditSessionSessionTabAxisHeader">محور جلسه</string>
     <string name="EditSessionSessionTabDescriptionHeader">توضیحات</string>
