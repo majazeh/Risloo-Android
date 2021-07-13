@@ -458,7 +458,6 @@
 
     ---------- // CreateSessionSession Tab
 
-    <string name="CreateSessionSessionTabTypeHeader">نوع جلسه</string>
     <string name="CreateSessionSessionTabStatusHeader">وضعیت جلسه</string>
     <string name="CreateSessionSessionTabAxisHeader">محور جلسه</string>
     <string name="CreateSessionSessionTabDescriptionHeader">توضیحات</string>

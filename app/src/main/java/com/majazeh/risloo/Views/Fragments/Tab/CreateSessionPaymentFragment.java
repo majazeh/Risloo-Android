@@ -17,6 +17,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.AxisAdapter;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -31,7 +32,7 @@ public class CreateSessionPaymentFragment extends Fragment {
     public AxisAdapter axisAdapter;
 
     // Vars
-    private String payment = "";
+    public String payment = "";
 
     @Nullable
     @Override
@@ -85,54 +86,28 @@ public class CreateSessionPaymentFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.errorImageView, binding.paymentErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-
-            if (!payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.errorImageView, binding.paymentErrorLayout.errorTextView);
-
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getStatus().equals("")) {
-            payment = ((MainActivity) requireActivity()).singleton.getStatus();
-            for (int i=0; i<binding.paymentIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.paymentIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(payment)) {
-                    binding.paymentIncludeLayout.selectSpinner.setSelection(i);
-                }
-            }
-        }
-
-//        if (extras.getString("axis") != null) {
-//            try {
-//                JSONArray jsonArray = new JSONArray(extras.getString("axis"));
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    Model model = new Model(jsonObject);
-//
-//                    axis.add(model);
-//                }
-//
-//                setRecyclerView(axis, "axis");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
-        setRecyclerView(new ArrayList<>(), new ArrayList<>());
-//        }
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
-    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids) {
-        axisAdapter.setItems(items, ids);
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> titles) {
+        axisAdapter.setItems(items, ids, titles);
         binding.axisRecyclerView.setAdapter(axisAdapter);
     }
 
     private void doWork() {
-        // TODO : Call Work Method
+        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
+        if (current instanceof CreateSessionFragment)
+            ((CreateSessionFragment) current).doWork();
     }
 
     @Override

@@ -127,8 +127,8 @@ public class EditSessionPaymentFragment extends Fragment {
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids) {
-        axisAdapter.setItems(items, ids);
-        binding.axisRecyclerView.setAdapter(axisAdapter);
+//        axisAdapter.setItems(items, ids);
+//        binding.axisRecyclerView.setAdapter(axisAdapter);
     }
 
     private void doWork() {

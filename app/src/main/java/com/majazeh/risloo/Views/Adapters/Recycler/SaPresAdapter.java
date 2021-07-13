@@ -93,13 +93,11 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
             return false;
         });
 
-        holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
+        holder.binding.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             Fragment current = ((MainActivity) activity).fragmont.getCurrent();
 
             if (current instanceof SampleFragment)
                 ((SampleFragment) current).sendPre(item + 1, holder.binding.inputEditText.getText().toString());
-
-            return false;
         });
 
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {

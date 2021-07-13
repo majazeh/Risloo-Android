@@ -623,6 +623,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         searchableAdapter.setItems(values, method, binding.countTextView);
         binding.listRecyclerView.setAdapter(searchableAdapter);
+
+        if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+            binding.searchProgressBar.setVisibility(View.GONE);
     }
 
     public void setData(String method) {

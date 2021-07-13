@@ -89,13 +89,11 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
             return false;
         });
 
-        holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
+        holder.binding.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             Fragment current = ((MainActivity) activity).fragmont.getCurrent();
 
             if (current instanceof SampleFragment)
                 ((SampleFragment) current).sendGen("cornometer", holder.binding.inputEditText.getText().toString());
-
-            return false;
         });
 
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {

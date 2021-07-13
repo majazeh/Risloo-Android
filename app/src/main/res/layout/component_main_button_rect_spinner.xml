@@ -34,6 +34,7 @@
         android:layout_height="0dp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="@dimen/_32sdp"
         android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@id/select_textView"
         app:layout_constraintEnd_toEndOf="@id/select_textView"

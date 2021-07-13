@@ -84,9 +84,8 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
             return false;
         });
 
-        holder.binding.inputEditText.setOnEditorActionListener((v, actionId, event) -> {
+        holder.binding.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString());
-            return false;
         });
 
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {

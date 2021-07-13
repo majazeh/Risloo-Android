@@ -125,11 +125,11 @@ public class SelectedDialog extends AppCompatDialogFragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            String text = binding.inputEditText.getText().toString().trim();
+            String value = binding.inputEditText.getText().toString().trim();
 
-            if (!text.equals("")) {
-                refreshList(createItem(text));
-            } else
+            if (!value.equals(""))
+                refreshList(createItem(value));
+            else
                 dismiss();
         }).widget(binding.entryButton);
     }
@@ -169,7 +169,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
     private TypeModel createItem(String text) {
         try {
             if (method.equals("axises"))
-                return new TypeModel(new JSONObject().put("id", "").put("title", text));
+                return new TypeModel(new JSONObject().put("id", text).put("title", "0"));
             else
                 return new TypeModel(new JSONObject().put("id", text).put("title", text));
 

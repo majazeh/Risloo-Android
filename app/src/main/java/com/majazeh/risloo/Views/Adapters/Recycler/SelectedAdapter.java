@@ -173,8 +173,13 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
                 } break;
+                case "axises": {
+                    holder.binding.titleTextView.setText(item.object.getString("id"));
+
+                    holder.binding.subTextView.setVisibility(View.GONE);
+                    holder.binding.subTextView.setText("");
+                } break;
                 case "phones":
-                case "axises":
                 case "patternDays": {
                     holder.binding.titleTextView.setText(item.object.getString("title"));
 
