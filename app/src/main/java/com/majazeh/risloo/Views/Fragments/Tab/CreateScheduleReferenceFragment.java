@@ -14,14 +14,15 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleReferenceBinding;
-
-import org.json.JSONException;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class CreateScheduleReferenceFragment extends Fragment {
 
@@ -32,8 +33,8 @@ public class CreateScheduleReferenceFragment extends Fragment {
     private SearchableDialog casesDialog;
 
     // Vars
-    public String type = "", caseId = "", caseName = "", count = "", selection = "";
-    private boolean bulkSession = false;
+    public String type = "", caseId = "", count = "", selection = "";
+    public boolean bulkSession = false;
 
     @Nullable
     @Override
@@ -82,11 +83,10 @@ public class CreateScheduleReferenceFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 type = parent.getItemAtPosition(position).toString();
 
-                if (type.contains("پرونده درمانی")) {
+                if (type.contains("پرونده درمانی"))
                     binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                } else {
+                else
                     binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
-                }
             }
 
             @Override
@@ -98,7 +98,7 @@ public class CreateScheduleReferenceFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
             casesDialog.setData("cases");
-        }).widget(binding.caseIncludeLayout.selectTextView);
+        }).widget(binding.caseIncludeLayout.selectContainer);
 
         binding.bulkSessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
@@ -134,89 +134,75 @@ public class CreateScheduleReferenceFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (type.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (selection.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.errorImageView, binding.selectionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
+            if (type.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
 
-            if (!type.equals("") && !selection.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.errorImageView, binding.typeErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.errorImageView, binding.selectionErrorLayout.errorTextView);
+            if (selection.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView);
 
+            if (!type.equals("") && !selection.equals(""))
                 doWork();
-            }
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            type = ((MainActivity) requireActivity()).singleton.getType();
-            for (int i=0; i<binding.typeIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.typeIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(type)) {
-                    binding.typeIncludeLayout.selectSpinner.setSelection(i);
+        // TODO : Place Code If Needed
+    }
 
-                    if (type.contains("پرونده درمانی")) {
-                        binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    } else {
-                        binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+    private void setClients(com.mre.ligheh.Model.Madule.List clients) {
+        if (clients != null && clients.data().size() != 0) {
+            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
+
+            binding.caseIncludeLayout.secondaryTextView.setText("");
+            for (int i = 0; i < clients.data().size(); i++) {
+                UserModel user = (UserModel) clients.data().get(i);
+                if (user != null) {
+                    binding.caseIncludeLayout.secondaryTextView.append(user.getName());
+                    if (i != clients.data().size() - 1) {
+                        binding.caseIncludeLayout.secondaryTextView.append("  -  ");
                     }
                 }
             }
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            caseId = ((MainActivity) requireActivity()).singleton.getAddress();
-            caseName = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.caseIncludeLayout.selectTextView.setText(caseName);
-        }
-        if (((MainActivity) requireActivity()).singleton.getBulkSession()) {
-            bulkSession = true;
-            binding.bulkSessionCheckBox.getRoot().setChecked(true);
-            binding.countIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            count = ((MainActivity) requireActivity()).singleton.getAddress();
-            binding.countIncludeLayout.inputEditText.setText(count);
-        }
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            selection = ((MainActivity) requireActivity()).singleton.getType();
-            for (int i=0; i<binding.selectionIncludeLayout.selectSpinner.getCount(); i++) {
-                if (binding.selectionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(selection)) {
-                    binding.selectionIncludeLayout.selectSpinner.setSelection(i);
-                }
-            }
+        } else {
+            binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
         }
     }
 
     public void responseDialog(String method, TypeModel item) {
-        try {
-            switch (method) {
-                case "cases":
-                    if (!caseId.equals(item.object.get("id").toString())) {
-                        caseId = item.object.get("id").toString();
-                        caseName = item.object.get("title").toString();
+        switch (method) {
+            case "cases": {
+                CaseModel model = (CaseModel) item;
 
-                        binding.caseIncludeLayout.selectTextView.setText(caseName);
-                    } else if (caseId.equals(item.object.get("id").toString())) {
-                        caseId = "";
-                        caseName = "";
+                if (!caseId.equals(model.getCaseId())) {
+                    caseId = model.getCaseId();
 
-                        binding.caseIncludeLayout.selectTextView.setText("");
-                    }
+                    binding.caseIncludeLayout.primaryTextView.setText(caseId);
+                    setClients(model.getClients());
+                } else if (caseId.equals(model.getCaseId())) {
+                    caseId = "";
 
-                    casesDialog.dismiss();
-                    break;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+                    binding.caseIncludeLayout.primaryTextView.setText("");
+                    binding.caseIncludeLayout.secondaryTextView.setText("");
+
+                    setClients(null);
+                }
+
+                casesDialog.dismiss();
+            } break;
         }
     }
 
     private void doWork() {
         count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
+        if (current instanceof CreateScheduleFragment)
+            ((CreateScheduleFragment) current).doWork();
     }
 
     @Override

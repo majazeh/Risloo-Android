@@ -410,7 +410,6 @@
 
     ---------- // CreateScheduleSession Tab
 
-    <string name="CreateScheduleSessionTabTypeHeader">نوع جلسه</string>
     <string name="CreateScheduleSessionTabStatusHeader">وضعیت جلسه</string>
     <string name="CreateScheduleSessionTabAxisHeader">محور جلسه</string>
     <string name="CreateScheduleSessionTabDescriptionHeader">توضیحات</string>
@@ -434,7 +433,7 @@
     ---------- CreateSession Fragment ----------
     */
 
-    <string name="CreateSessionFragmentTitle">ساخت جلسه جدید</string>
+    <string name="CreateSessionFragmentTitle">ساخت جلسه درمانی جدید</string>
 
     ---------- // CreateSessionTime Tab
 

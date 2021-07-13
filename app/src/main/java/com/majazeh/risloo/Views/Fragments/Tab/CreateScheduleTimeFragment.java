@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -45,8 +46,7 @@ public class CreateScheduleTimeFragment extends Fragment {
     private DateBottomSheet specifiedDateBottomSheet, periodStartDateBottomSheet, periodEndDateBottomSheet;
 
     // Vars
-    private String startTime = "", duration = "60", dateType = "", patternType = "", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
-    private int startHour, startMinute, specifiedYear, periodStartYear, periodEndYear, specifiedMonth, periodStartMonth, periodEndMonth, specifiedDay, periodStartDay, periodEndDay;
+    public String startTime = "", duration = "60", dateType = "specified", patternType = "period", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
 
     @Nullable
     @Override
@@ -85,10 +85,12 @@ public class CreateScheduleTimeFragment extends Fragment {
         binding.periodEndDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTimeTabPeriodEndDateHeader));
 
         binding.dateTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabDateTypeSpecified));
+        binding.dateTypeIncludeLayout.firstRadioButton.setChecked(true);
         binding.dateTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabDateTypePattern));
 
         binding.patternTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabPatternTypeRepeat));
         binding.patternTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateScheduleTimeTabPatternTypePeriod));
+        binding.patternTypeIncludeLayout.secondRadioButton.setChecked(true);
 
         binding.durationIncludeLayout.inputEditText.setText(duration);
         binding.repeatWeeksIncludeLayout.inputEditText.setText(repeatWeeks);
@@ -109,8 +111,8 @@ public class CreateScheduleTimeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-//            startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
-//            startTimeBottomSheet.setTime(startHour, startMinute, "startTime");
+            startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
+            startTimeBottomSheet.setTime(startTime, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -130,11 +132,11 @@ public class CreateScheduleTimeFragment extends Fragment {
                     binding.specifiedDateGroup.setVisibility(View.VISIBLE);
                     binding.patternDateGroup.setVisibility(View.GONE);
 
-                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton) {
+                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton)
                         binding.repeatPatternGroup.setVisibility(View.GONE);
-                    } else {
+                    else
                         binding.periodPatternGroup.setVisibility(View.GONE);
-                    }
+
                     break;
                 case R.id.second_radioButton:
                     dateType = "pattern";
@@ -142,18 +144,18 @@ public class CreateScheduleTimeFragment extends Fragment {
                     binding.specifiedDateGroup.setVisibility(View.GONE);
                     binding.patternDateGroup.setVisibility(View.VISIBLE);
 
-                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton) {
+                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton)
                         binding.repeatPatternGroup.setVisibility(View.VISIBLE);
-                    } else {
+                    else
                         binding.periodPatternGroup.setVisibility(View.VISIBLE);
-                    }
+
                     break;
             }
         });
 
         ClickManager.onDelayedClickListener(() -> {
-//            specifiedDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "specifiedDateBottomSheet");
-//            specifiedDateBottomSheet.setDate(specifiedYear, specifiedMonth, specifiedDay, "specifiedDate");
+            specifiedDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "specifiedDateBottomSheet");
+            specifiedDateBottomSheet.setDate(specifiedDate, "specifiedDate");
         }).widget(binding.specifiedDateIncludeLayout.selectTextView);
 
         binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -191,156 +193,45 @@ public class CreateScheduleTimeFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-//            periodStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodStartDateBottomSheet");
-//            periodStartDateBottomSheet.setDate(periodStartYear, periodStartMonth, periodStartDay, "periodStartDate");
+            periodStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodStartDateBottomSheet");
+            periodStartDateBottomSheet.setDate(periodStartDate, "periodStartDate");
         }).widget(binding.periodStartDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-//            periodEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodEndDateBottomSheet");
-//            periodEndDateBottomSheet.setDate(periodEndYear, periodEndMonth, periodEndDay, "periodEndDate");
+            periodEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodEndDateBottomSheet");
+            periodEndDateBottomSheet.setDate(periodEndDate, "periodEndDate");
         }).widget(binding.periodEndDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (startTime.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.errorImageView, binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
-            if (binding.durationIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.errorImageView, binding.durationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            }
+            if (startTime.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
 
-            if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0) {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.errorImageView, binding.startTimeErrorLayout.errorTextView);
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.errorImageView, binding.durationErrorLayout.errorTextView);
+            if (binding.durationIncludeLayout.inputEditText.length() == 0)
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
 
+            if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0)
                 doWork();
-            }
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        if (!((MainActivity) requireActivity()).singleton.getStartTime().equals("")) {
-            startTime = ((MainActivity) requireActivity()).singleton.getStartTime();
-            binding.startTimeIncludeLayout.selectTextView.setText(startTime);
-        } else {
-            startTime = getResources().getString(R.string.AppDefaultTime);
-            binding.startTimeIncludeLayout.selectTextView.setText(startTime);
-        }
+        startTime = String.valueOf(DateManager.currentTimestamp());
+        binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
 
-        startHour = Integer.parseInt(DateManager.dateToString("hh", DateManager.stringToDate("hh:mm", startTime)));
-        startMinute = Integer.parseInt(DateManager.dateToString("mm", DateManager.stringToDate("hh:mm", startTime)));
+        specifiedDate = String.valueOf(DateManager.currentTimestamp());
+        binding.specifiedDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(specifiedDate, "-"));
 
-        if (!((MainActivity) requireActivity()).singleton.getDuration().equals("")) {
-            duration = ((MainActivity) requireActivity()).singleton.getDuration();
-            binding.durationIncludeLayout.inputEditText.setText(duration);
-        }
+        periodStartDate = String.valueOf(DateManager.currentTimestamp());
+        binding.periodStartDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(periodStartDate, "-"));
 
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            dateType = ((MainActivity) requireActivity()).singleton.getType();
-            switch (dateType) {
-                case "specified":
-                    binding.dateTypeIncludeLayout.firstRadioButton.setChecked(true);
+        periodEndDate = String.valueOf(DateManager.currentTimestamp());
+        binding.periodEndDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(periodEndDate, "-"));
 
-                    binding.specifiedDateGroup.setVisibility(View.VISIBLE);
-                    binding.patternDateGroup.setVisibility(View.GONE);
-
-                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton) {
-                        binding.repeatPatternGroup.setVisibility(View.GONE);
-                    } else {
-                        binding.periodPatternGroup.setVisibility(View.GONE);
-                    }
-                    break;
-                case "pattern":
-                    binding.dateTypeIncludeLayout.secondRadioButton.setChecked(true);
-
-                    binding.specifiedDateGroup.setVisibility(View.GONE);
-                    binding.patternDateGroup.setVisibility(View.VISIBLE);
-
-                    if (binding.patternTypeIncludeLayout.getRoot().getCheckedRadioButtonId() == R.id.first_radioButton) {
-                        binding.repeatPatternGroup.setVisibility(View.VISIBLE);
-                    } else {
-                        binding.periodPatternGroup.setVisibility(View.VISIBLE);
-                    }
-                    break;
-            }
-        }
-
-        if (!((MainActivity) requireActivity()).singleton.getStartDate().equals("")) {
-            specifiedDate = ((MainActivity) requireActivity()).singleton.getStartDate();
-            binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
-        } else {
-            specifiedDate = getResources().getString(R.string.AppDefaultDate);
-            binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
-        }
-
-        specifiedYear = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
-        specifiedMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
-        specifiedDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", specifiedDate)));
-
-//        if (extras.getString("patternDays") != null) {
-//            try {
-//                JSONArray jsonArray = new JSONArray(extras.getString("patternDays"));
-//
-//                for (int i = 0; i < jsonArray.length(); i++) {
-//                    JSONObject jsonObject = (JSONObject) jsonArray.get(i);
-//                    TypeModel TypeModel = new TypeModel(jsonObject);
-//
-//                    patternDays.add(TypeModel);
-//                }
-//
-//                setRecyclerView(patternDays, "patternDays");
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        } else {
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "patternDays");
-//        }
-
-        if (!((MainActivity) requireActivity()).singleton.getType().equals("")) {
-            patternType = ((MainActivity) requireActivity()).singleton.getType();
-            switch (patternType) {
-                case "repeat":
-                    binding.patternTypeIncludeLayout.firstRadioButton.setChecked(true);
-
-                    binding.repeatPatternGroup.setVisibility(View.VISIBLE);
-                    binding.periodPatternGroup.setVisibility(View.GONE);
-                    break;
-                case "period":
-                    binding.patternTypeIncludeLayout.secondRadioButton.setChecked(true);
-
-                    binding.repeatPatternGroup.setVisibility(View.GONE);
-                    binding.periodPatternGroup.setVisibility(View.VISIBLE);
-                    break;
-            }
-        }
-
-        if (!((MainActivity) requireActivity()).singleton.getAddress().equals("")) {
-            repeatWeeks = ((MainActivity) requireActivity()).singleton.getDuration();
-            binding.repeatWeeksIncludeLayout.inputEditText.setText(repeatWeeks);
-        }
-
-        if (!((MainActivity) requireActivity()).singleton.getStartDate().equals("")) {
-            periodStartDate = ((MainActivity) requireActivity()).singleton.getStartDate();
-            binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
-        } else {
-            periodStartDate = getResources().getString(R.string.AppDefaultDate);
-            binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
-        }
-
-        periodStartYear = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", periodStartDate)));
-        periodStartMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", periodStartDate)));
-        periodStartDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", periodStartDate)));
-
-        if (!((MainActivity) requireActivity()).singleton.getStartDate().equals("")) {
-            periodEndDate = ((MainActivity) requireActivity()).singleton.getStartDate();
-            binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
-        } else {
-            periodEndDate = getResources().getString(R.string.AppDefaultDate);
-            binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
-        }
-
-        periodEndYear = Integer.parseInt(DateManager.dateToString("yyyy", DateManager.stringToDate("yyyy-MM-dd", periodEndDate)));
-        periodEndMonth = Integer.parseInt(DateManager.dateToString("MM", DateManager.stringToDate("yyyy-MM-dd", periodEndDate)));
-        periodEndDay = Integer.parseInt(DateManager.dateToString("dd", DateManager.stringToDate("yyyy-MM-dd", periodEndDate)));
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
@@ -354,38 +245,19 @@ public class CreateScheduleTimeFragment extends Fragment {
         switch (method) {
             case "startTime":
                 startTime = data;
-
-//                startHour = startTimeBottomSheet.hour;
-//                startMinute = startTimeBottomSheet.minute;
-
-                binding.startTimeIncludeLayout.selectTextView.setText(startTime);
+                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
                 break;
             case "specifiedDate":
                 specifiedDate = data;
-
-//                specifiedYear = specifiedDateBottomSheet.year;
-//                specifiedMonth = specifiedDateBottomSheet.month;
-//                specifiedDay = specifiedDateBottomSheet.day;
-
-                binding.specifiedDateIncludeLayout.selectTextView.setText(specifiedDate);
+                binding.specifiedDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(specifiedDate, "-"));
                 break;
             case "periodStartDate":
                 periodStartDate = data;
-
-//                periodStartYear = periodStartDateBottomSheet.year;
-//                periodStartMonth = periodStartDateBottomSheet.month;
-//                periodStartDay = periodStartDateBottomSheet.day;
-
-                binding.periodStartDateIncludeLayout.selectTextView.setText(periodStartDate);
+                binding.periodStartDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(periodStartDate, "-"));
                 break;
             case "periodEndDate":
                 periodEndDate = data;
-
-//                periodEndYear = periodEndDateBottomSheet.year;
-//                periodEndMonth = periodEndDateBottomSheet.month;
-//                periodEndDay = periodEndDateBottomSheet.day;
-
-                binding.periodEndDateIncludeLayout.selectTextView.setText(periodEndDate);
+                binding.periodEndDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(periodEndDate, "-"));
                 break;
         }
     }
@@ -403,7 +275,7 @@ public class CreateScheduleTimeFragment extends Fragment {
 
                     if (patternDaysAdapter.getIds().size() != 0) {
                         binding.patternDaysIncludeLayout.countTextView.setVisibility(View.VISIBLE);
-                        binding.patternDaysIncludeLayout.countTextView.setText("(" + patternDaysAdapter.getIds().size() + ")");
+                        binding.patternDaysIncludeLayout.countTextView.setText(StringManager.bracing(patternDaysAdapter.getIds().size()));
                     } else {
                         binding.patternDaysIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.patternDaysIncludeLayout.countTextView.setText("");
@@ -420,7 +292,10 @@ public class CreateScheduleTimeFragment extends Fragment {
         duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
         repeatWeeks = binding.repeatWeeksIncludeLayout.inputEditText.getText().toString().trim();
 
-        // TODO : Call Work Method
+        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
+        if (current instanceof CreateScheduleFragment)
+            ((CreateScheduleFragment) current).doWork();
     }
 
     @Override
