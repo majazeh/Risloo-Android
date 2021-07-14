@@ -276,8 +276,7 @@ public class TestActivity extends AppCompatActivity {
                 } else {
                     finish();
                 }
-            }
-            break;
+            } break;
             case "chain": {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testChainFragment) {
                     NavDirections action = NavigationTestDirections.actionGlobalTestChainFragment();
@@ -285,8 +284,7 @@ public class TestActivity extends AppCompatActivity {
                 } else {
                     finish();
                 }
-            }
-            break;
+            } break;
             case "prerequisites": {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testPrerequisiteFragment) {
                     NavDirections action = NavigationTestDirections.actionGlobalTestPrerequisiteFragment();
@@ -294,8 +292,7 @@ public class TestActivity extends AppCompatActivity {
                 } else {
                     finish();
                 }
-            }
-            break;
+            } break;
             case "description": {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testDescriptionFragment) {
                     NavDirections action = NavigationTestDirections.actionGlobalTestDescriptionFragment();
@@ -303,13 +300,11 @@ public class TestActivity extends AppCompatActivity {
                 } else {
                     finish();
                 }
-            }
-            break;
+            } break;
             case "entities": {
                 NavDirections action = NavigationTestDirections.actionGlobalTestEntityFragment();
                 navController.navigate(action);
-            }
-            break;
+            } break;
             case "item": {
                 ItemModel itemModel = (ItemModel) formModel.getObject();
 
@@ -320,13 +315,11 @@ public class TestActivity extends AppCompatActivity {
                     NavDirections action = NavigationTestDirections.actionGlobalTestPictoralFragment();
                     navController.navigate(action);
                 }
-            }
-            break;
+            } break;
             case "close": {
                 NavDirections action = NavigationTestDirections.actionGlobalTestEndFragment();
                 navController.navigate(action);
-            }
-            break;
+            } break;
         }
 
         setWidgets();
@@ -350,19 +343,18 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void sendPre(int key, String value) {
+        PrerequisitesModel prere = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key - 1);
+        prere.setUser_answered(value);
+
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
         binding.statusTextView.getRoot().requestLayout();
 
-        PrerequisitesModel item = (PrerequisitesModel) ((List) formModel.getObject()).data().get(key-1);
-        item.setUser_answered(value);
         sampleAnswers.addToPrerequisites(key, value);
         sampleAnswers.sendPrerequisites(singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    // Update FormModel Answer
-
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
                     binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
                     binding.statusTextView.getRoot().requestLayout();
@@ -381,19 +373,18 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void sendItem(int key, String value) {
+        ItemModel item = (ItemModel) formModel.getObject();
+        item.setUser_answered(value);
+
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));
         binding.statusTextView.getRoot().requestLayout();
 
-        ItemModel item = (ItemModel) formModel.getObject();
-        item.setUser_answered(value);
         sampleAnswers.addToRemote(key, value);
         sampleAnswers.sendRequest(singleton.getToken(), new Response() {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    // Update FormModel Answer
-
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
                     binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
                     binding.statusTextView.getRoot().requestLayout();

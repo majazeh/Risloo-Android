@@ -586,6 +586,25 @@
 
     <string name="EditSessionTimeTabButton">ویرایش</string>
 
+    ---------- // EditSessionReference Tab
+
+    <string name="EditSessionReferenceTabTypeHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="EditSessionReferenceTabCaseHeader">پرونده</string>
+    <string name="EditSessionReferenceTabProblemHeader">مسئله</string>
+    <string name="EditSessionReferenceTabCountHeader">تعداد حداکثر مراجعین</string>
+    <string name="EditSessionReferenceTabSelectionHeader">نوع انتخاب مراجعین</string>
+
+    <string name="EditSessionReferenceTabCheckbox">جلسه گروهی</string>
+
+    <string name="EditSessionReferenceTabTypeRisloo">اعضاء ریسلو</string>
+    <string name="EditSessionReferenceTabTypeUser">اعضاء</string>
+    <string name="EditSessionReferenceTabTypeCase">اعضاء پرونده درمانی …</string>
+    <string name="EditSessionReferenceTabTypeNew">ساخت پرونده جدید</string>
+
+    <string name="EditSessionReferenceTabRoom">اتاق درمان</string>
+
+    <string name="EditSessionReferenceTabButton">ساخت</string>
+
     ---------- // EditSessionSession Tab
 
     <string name="EditSessionSessionTabStatusHeader">وضعیت جلسه</string>
