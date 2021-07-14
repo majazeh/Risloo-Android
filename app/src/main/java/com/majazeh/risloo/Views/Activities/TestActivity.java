@@ -351,6 +351,10 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
+                    // Update FormModel Answer
+                    ItemModel item = (ItemModel) formModel.getObject();
+                    item.setUser_answered(value);
+
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
                     binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
                     binding.statusTextView.getRoot().requestLayout();
@@ -378,6 +382,10 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
+                    // Update FormModel Answer
+                    ItemModel item = (ItemModel) formModel.getObject();
+                    item.setUser_answered(value);
+
                     binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestFixed));
                     binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
                     binding.statusTextView.getRoot().requestLayout();
