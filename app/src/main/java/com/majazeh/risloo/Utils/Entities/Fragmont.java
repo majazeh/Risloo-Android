@@ -55,6 +55,10 @@ public class Fragmont {
         this.navHostFragment = navHostFragment;
     }
 
+    /*
+    ---------- Current ----------
+    */
+
     public Fragment getCurrent() {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
@@ -208,6 +212,10 @@ public class Fragmont {
         return null;
     }
 
+    /*
+    ---------- Specefic ----------
+    */
+
     public Fragment getTime() {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
@@ -267,11 +275,6 @@ public class Fragmont {
                 if (sessionFragment instanceof CreateSessionSessionFragment)
                     return sessionFragment;
 
-        } else if (fragment instanceof EditSessionFragment) {
-            Fragment sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
-            if (sessionFragment != null)
-                if (sessionFragment instanceof EditSessionSessionFragment)
-                    return sessionFragment;
         }
 
         return null;
@@ -292,10 +295,47 @@ public class Fragmont {
                 if (paymentFragment instanceof CreateSessionPaymentFragment)
                     return paymentFragment;
 
-        } else if (fragment instanceof EditSessionFragment) {
-            Fragment paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
+        }
+
+        return null;
+    }
+
+    /*
+    ---------- EditSession ----------
+    */
+
+    public Fragment getSessionEditSession(boolean hasCase) {
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+        if (fragment instanceof EditSessionFragment) {
+            Fragment sessionFragment;
+
+            if (hasCase)
+                sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
+            else
+                sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
+
+            if (sessionFragment != null)
+                if (sessionFragment instanceof EditSessionReferenceFragment)
+                    return sessionFragment;
+        }
+
+        return null;
+    }
+
+    public Fragment getPaymentEditSession(boolean hasCase) {
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+        if (fragment instanceof EditSessionFragment) {
+            Fragment paymentFragment;
+
+            if (hasCase)
+                paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
+            else
+                paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
+
             if (paymentFragment != null)
-                if (paymentFragment instanceof EditSessionPaymentFragment)
+                if (paymentFragment instanceof EditSessionReferenceFragment)
                     return paymentFragment;
         }
 

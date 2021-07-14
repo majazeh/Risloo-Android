@@ -115,8 +115,8 @@ public class EditSessionTimeFragment extends Fragment {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
             if (model.getStarted_at() != 0) {
-                startTime = DateManager.jalHHsMM(String.valueOf(model.getStarted_at()));
-                binding.startTimeIncludeLayout.selectTextView.setText(startTime);
+                startTime = String.valueOf(model.getStarted_at());
+                binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
             } else {
                 startTime = String.valueOf(DateManager.currentTimestamp());
                 binding.startTimeIncludeLayout.selectTextView.setText(DateManager.jalHHsMM(startTime));
@@ -130,8 +130,8 @@ public class EditSessionTimeFragment extends Fragment {
             }
 
             if (model.getStarted_at() != 0) {
-                startDate = DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), "-");
-                binding.startDateIncludeLayout.selectTextView.setText(startDate);
+                startDate = String.valueOf(model.getStarted_at());
+                binding.startDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(startDate, "-"));
             } else {
                 startDate = String.valueOf(DateManager.currentTimestamp());
                 binding.startDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(startDate, "-"));

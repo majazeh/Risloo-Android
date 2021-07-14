@@ -285,17 +285,37 @@ public class EditSessionSessionFragment extends Fragment {
                 binding.coordinationIncludeLayout.inputEditText.setText(coordination);
             }
 
-            startAccurateTime = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+            if (model.getOpens_at() != 0) {
+                startAccurateTime = String.valueOf(model.getOpens_at());
+                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+            } else {
+                startAccurateTime = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+            }
 
-            startAccurateDate = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+            if (model.getOpens_at() != 0) {
+                startAccurateDate = String.valueOf(model.getOpens_at());
+                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+            } else {
+                startAccurateDate = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+            }
 
-            endAccurateTime = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+            if (model.getClosed_at() != 0) {
+                endAccurateTime = String.valueOf(model.getClosed_at());
+                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+            } else {
+                endAccurateTime = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+            }
 
-            endAccurateDate = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+            if (model.getClosed_at() != 0) {
+                endAccurateDate = String.valueOf(model.getClosed_at());
+                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+            } else {
+                endAccurateDate = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+            }
         }
     }
 

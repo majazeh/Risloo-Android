@@ -14,44 +14,73 @@ import java.util.HashMap;
 
 public class EditSessionAdapter extends FragmentStateAdapter {
 
+    // Vars
+    private boolean hasCase;
+
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
-    public EditSessionAdapter(@NonNull FragmentActivity fragment) {
+    public EditSessionAdapter(@NonNull FragmentActivity fragment, boolean hasCase) {
         super(fragment);
+        this.hasCase = hasCase;
     }
 
     @NonNull
     @Override
     public Fragment createFragment(int position) {
-        switch (position) {
-            case 0: {
-                Fragment fragment = new EditSessionTimeFragment();
-                hashMap.put(position, fragment);
-                return fragment;
+        if (hasCase) {
+            switch (position) {
+                case 0: {
+                    Fragment fragment = new EditSessionTimeFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 1: {
+                    Fragment fragment = new EditSessionSessionFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 2: {
+                    Fragment fragment = new EditSessionPaymentFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                default:
+                    return null;
             }
-            case 1: {
-                Fragment fragment = new EditSessionReferenceFragment();
-                hashMap.put(position, fragment);
-                return fragment;
+        } else {
+            switch (position) {
+                case 0: {
+                    Fragment fragment = new EditSessionTimeFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 1: {
+                    Fragment fragment = new EditSessionReferenceFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 2: {
+                    Fragment fragment = new EditSessionSessionFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 3: {
+                    Fragment fragment = new EditSessionPaymentFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                default:
+                    return null;
             }
-            case 2: {
-                Fragment fragment = new EditSessionSessionFragment();
-                hashMap.put(position, fragment);
-                return fragment;
-            }
-            case 3: {
-                Fragment fragment = new EditSessionPaymentFragment();
-                hashMap.put(position, fragment);
-                return fragment;
-            }
-            default:
-                return null;
         }
     }
 
     @Override
     public int getItemCount() {
-        return 4;
+        if (hasCase)
+            return 3;
+        else
+            return 4;
     }
 
 }

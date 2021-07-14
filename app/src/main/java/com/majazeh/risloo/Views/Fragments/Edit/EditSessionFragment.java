@@ -38,6 +38,7 @@ public class EditSessionFragment extends Fragment {
 
     // Vars
     private String[] tabs;
+    private boolean hasCase = false;
     public HashMap data, header;
     public SessionModel sessionModel;
 
@@ -54,11 +55,6 @@ public class EditSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new EditSessionAdapter(requireActivity());
-
-        tabs = getResources().getStringArray(R.array.EditSessionTabs);
-        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -67,10 +63,21 @@ public class EditSessionFragment extends Fragment {
     private void setArgs() {
         sessionModel = (SessionModel) EditSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        setData(sessionModel);
+        if (sessionModel.getCaseModel() != null && sessionModel.getCaseModel().getCaseId() != null && !sessionModel.getCaseModel().getCaseId().equals("")) {
+            hasCase = true;
+            tabs = getResources().getStringArray(R.array.EditSessionHasCaseTabs);
+        } else {
+            tabs = getResources().getStringArray(R.array.EditSessionNoCaseTabs);
+        }
+
+        tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
+
+        adapter = new EditSessionAdapter(requireActivity(), hasCase);
 
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
+
+        setData(sessionModel);
     }
 
     private void setData(SessionModel model) {
@@ -106,8 +113,9 @@ public class EditSessionFragment extends Fragment {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
                                         Fragment time = ((MainActivity) requireActivity()).fragmont.getTime();
-                                        Fragment session = ((MainActivity) requireActivity()).fragmont.getSession();
-                                        Fragment payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+                                        Fragment reference = ((MainActivity) requireActivity()).fragmont.getReference();
+                                        Fragment session = ((MainActivity) requireActivity()).fragmont.getSessionEditSession(hasCase);
+                                        Fragment payment = ((MainActivity) requireActivity()).fragmont.getPaymentEditSession(hasCase);
 
                                         switch (key) {
                                             case "":
