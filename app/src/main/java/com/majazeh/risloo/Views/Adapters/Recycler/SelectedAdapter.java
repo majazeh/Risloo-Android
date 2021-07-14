@@ -23,8 +23,6 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -200,9 +198,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
         if (payment instanceof CreateSessionPaymentFragment)
             ((CreateSessionPaymentFragment) payment).axisAdapter.removeItem(position);
-
-        if (payment instanceof EditSessionPaymentFragment)
-            ((EditSessionPaymentFragment) payment).axisAdapter.removeItem(position);
     }
 
     private void refreshCount() {
@@ -232,13 +227,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                 if (((EditCenterDetailFragment) child).phonesDialog.isVisible())
                     ((EditCenterDetailFragment) child).phonesDialog.calculateCount();
         }
-
-        if (current instanceof EditSessionSessionFragment) {
-            if (method.equals("axises"))
-                if (((EditSessionSessionFragment) current).axisesDialog.isVisible())
-                    ((EditSessionSessionFragment) current).axisesDialog.calculateCount();
-        }
-
     }
 
     private void calculateCount() {

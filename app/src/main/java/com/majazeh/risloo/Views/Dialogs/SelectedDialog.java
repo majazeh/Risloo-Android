@@ -33,8 +33,6 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
 
 import org.json.JSONException;
@@ -158,11 +156,6 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 binding.listRecyclerView.setAdapter(((EditCenterDetailFragment) child).phonesAdapter);
         }
 
-        if (child instanceof EditSessionSessionFragment) {
-            if (method.equals("axises"))
-                binding.listRecyclerView.setAdapter(((EditSessionSessionFragment) child).axisesAdapter);
-        }
-
         calculateCount();
     }
 
@@ -186,9 +179,6 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
         if (payment instanceof CreateSessionPaymentFragment)
             ((CreateSessionPaymentFragment) payment).axisAdapter.addItem(item);
-
-        if (payment instanceof EditSessionPaymentFragment)
-            ((EditSessionPaymentFragment) payment).axisAdapter.addItem(item);
     }
 
     private void refreshList(TypeModel item) {
@@ -229,16 +219,6 @@ public class SelectedDialog extends AppCompatDialogFragment {
                     if (!((EditCenterDetailFragment) child).phonesAdapter.getIds().contains(item.object.getString("id")))
                         ((EditCenterDetailFragment) child).phonesAdapter.addItem(item);
                     else
-                        Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
-            }
-
-            if (child instanceof EditSessionSessionFragment) {
-                if (method.equals("axises"))
-                    if (!((EditSessionSessionFragment) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
-                        ((EditSessionSessionFragment) child).axisesAdapter.addItem(item);
-
-                        addPayment(item);
-                    } else
                         Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
             }
 

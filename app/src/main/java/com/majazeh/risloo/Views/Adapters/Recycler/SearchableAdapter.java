@@ -33,7 +33,6 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -324,13 +323,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 }
             }
 
-            if (child instanceof EditSessionTimeFragment) {
-                if (method.equals("patternDays")) {
-                    detector(holder, ((EditSessionTimeFragment) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                    calculateCount(((EditSessionTimeFragment) child).patternDaysAdapter.getIds().size());
-                }
-            }
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -372,9 +364,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
         if (child instanceof EditCenterDetailFragment)
             ((EditCenterDetailFragment) child).responseDialog(method, item);
-
-        if (child instanceof EditSessionTimeFragment)
-            ((EditSessionTimeFragment) child).responseDialog(method, item);
     }
 
     private void calculateCount(int count) {

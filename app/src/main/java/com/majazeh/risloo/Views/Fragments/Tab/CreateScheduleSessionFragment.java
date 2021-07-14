@@ -46,7 +46,6 @@ public class CreateScheduleSessionFragment extends Fragment {
     // Vars
     private String status = "", description = "", coordination = "";
     private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
-    private boolean hasEndScheduleTime = false;
 
     @Nullable
     @Override
@@ -207,14 +206,10 @@ public class CreateScheduleSessionFragment extends Fragment {
 
         binding.scheduledIncludeLayout.endHintCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                hasEndScheduleTime = true;
-
                 binding.scheduledIncludeLayout.setAlpha((float) 1);
                 binding.scheduledIncludeLayout.setEnable(true);
                 binding.scheduledIncludeLayout.setFocusableInTouchMode(true);
             } else {
-                hasEndScheduleTime = false;
-
                 binding.scheduledIncludeLayout.setAlpha((float) 0.4);
                 binding.scheduledIncludeLayout.setEnable(false);
                 binding.scheduledIncludeLayout.setFocusableInTouchMode(false);

@@ -17,21 +17,14 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.AxisAdapter;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
-
-import java.util.ArrayList;
 
 public class EditSessionPaymentFragment extends Fragment {
 
     // Binding
     private FragmentEditSessionPaymentBinding binding;
-
-    // Adapters
-    public AxisAdapter axisAdapter;
 
     // Vars
     private String payment = "";
@@ -53,13 +46,9 @@ public class EditSessionPaymentFragment extends Fragment {
     }
 
     private void initializer() {
-        axisAdapter = new AxisAdapter(requireActivity());
-
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionPaymentTabPaymentHeader));
 
         InitManager.fixedSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes, "main");
-
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionPaymentTabButton), getResources().getColor(R.color.White));
     }
@@ -110,14 +99,7 @@ public class EditSessionPaymentFragment extends Fragment {
                     }
                 }
             }
-
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
         }
-    }
-
-    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> titles) {
-        axisAdapter.setItems(items, ids, titles);
-        binding.axisRecyclerView.setAdapter(axisAdapter);
     }
 
     private void doWork() {

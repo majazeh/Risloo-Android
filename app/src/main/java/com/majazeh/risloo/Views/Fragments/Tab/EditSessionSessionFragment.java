@@ -19,27 +19,16 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
-import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
-import com.mre.ligheh.Model.TypeModel.TypeModel;
-
-import java.util.ArrayList;
 
 public class EditSessionSessionFragment extends Fragment {
 
     // Binding
     private FragmentEditSessionSessionBinding binding;
-
-    // Adapters
-    public SelectedAdapter axisesAdapter;
-
-    // Dialogs
-    public SelectedDialog axisesDialog;
 
     // BottomSheets
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
@@ -48,7 +37,6 @@ public class EditSessionSessionFragment extends Fragment {
     // Vars
     private String status = "", description = "", coordination = "";
     private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
-    private boolean hasEndScheduleTime = false;
 
     @Nullable
     @Override
@@ -67,26 +55,18 @@ public class EditSessionSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        axisesAdapter = new SelectedAdapter(requireActivity());
-
-        axisesDialog = new SelectedDialog();
-
         startAccurateTimeBottomSheet = new TimeBottomSheet();
         endAccurateTimeBottomSheet = new TimeBottomSheet();
         startAccurateDateBottomSheet = new DateBottomSheet();
         endAccurateDateBottomSheet = new DateBottomSheet();
 
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabStatusHeader));
-        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabAxisHeader));
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabDescriptionHeader));
         binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabCoordinationHeader));
 
-        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.EditSessionSessionTabAxisGuide));
         binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.EditSessionSessionTabCoordinationGuide));
 
         InitManager.fixedSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
-
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionSessionTabButton), getResources().getColor(R.color.White));
     }
@@ -116,14 +96,6 @@ public class EditSessionSessionFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
-        binding.axisIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                axisesDialog.show(requireActivity().getSupportFragmentManager(), "axisesDialog");
-                axisesDialog.setData("axises");
-            }
-            return false;
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -209,14 +181,10 @@ public class EditSessionSessionFragment extends Fragment {
 
         binding.scheduledIncludeLayout.endHintCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                hasEndScheduleTime = true;
-
                 binding.scheduledIncludeLayout.setAlpha((float) 1);
                 binding.scheduledIncludeLayout.setEnable(true);
                 binding.scheduledIncludeLayout.setFocusableInTouchMode(true);
             } else {
-                hasEndScheduleTime = false;
-
                 binding.scheduledIncludeLayout.setAlpha((float) 0.4);
                 binding.scheduledIncludeLayout.setEnable(false);
                 binding.scheduledIncludeLayout.setFocusableInTouchMode(false);
@@ -328,15 +296,6 @@ public class EditSessionSessionFragment extends Fragment {
 
             endAccurateDate = String.valueOf(DateManager.currentTimestamp());
             binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
-
-            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "axises");
-        }
-    }
-
-    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
-        if (method.equals("axises")) {
-            axisesAdapter.setItems(items, ids, method, binding.axisIncludeLayout.countTextView);
-            binding.axisIncludeLayout.selectRecyclerView.setAdapter(axisesAdapter);
         }
     }
 
