@@ -44,9 +44,9 @@ public class CreateSessionSessionFragment extends Fragment {
     private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
 
     // Vars
-    public String status = "", description = "", coordination = "";
-    public String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
-    public boolean hasEndScheduleTime = false;
+    private String status = "", description = "", coordination = "";
+    private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
+    private boolean hasEndScheduleTime = false;
 
     @Nullable
     @Override

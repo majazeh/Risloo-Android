@@ -39,7 +39,7 @@ public class CreateScheduleReferenceFragment extends Fragment {
 
     // Vars
     public String type = "", roomId = "", caseId = "", count = "", selection = "";
-    public boolean bulkSession = false;
+    private boolean bulkSession = false;
 
     @Nullable
     @Override

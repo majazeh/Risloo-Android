@@ -32,7 +32,7 @@ public class CreateSessionPaymentFragment extends Fragment {
     public AxisAdapter axisAdapter;
 
     // Vars
-    public String payment = "";
+    private String payment = "";
 
     @Nullable
     @Override

@@ -46,9 +46,9 @@ public class EditSessionSessionFragment extends Fragment {
     private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
 
     // Vars
-    public String status = "", description = "", coordination = "";
-    public String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
-    public boolean hasEndScheduleTime = false;
+    private String status = "", description = "", coordination = "";
+    private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
+    private boolean hasEndScheduleTime = false;
 
     @Nullable
     @Override
@@ -310,6 +310,11 @@ public class EditSessionSessionFragment extends Fragment {
             if (model.getDescription() != null && !model.getDescription().equals("")) {
                 description = model.getDescription();
                 binding.descriptionIncludeLayout.inputEditText.setText(description);
+            }
+
+            if (model.getClient_reminder() != null && !model.getClient_reminder().equals("")) {
+                coordination = model.getClient_reminder();
+                binding.coordinationIncludeLayout.inputEditText.setText(coordination);
             }
 
             startAccurateTime = String.valueOf(DateManager.currentTimestamp());
