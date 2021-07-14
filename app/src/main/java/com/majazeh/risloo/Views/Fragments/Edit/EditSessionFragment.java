@@ -37,8 +37,8 @@ public class EditSessionFragment extends Fragment {
     private TabLayoutMediator tabLayoutMediator;
 
     // Vars
-    private HashMap data, header;
     private String[] tabs;
+    public HashMap data, header;
     public SessionModel sessionModel;
 
     @Nullable
@@ -80,47 +80,50 @@ public class EditSessionFragment extends Fragment {
     }
 
     public void doWork() {
-//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-//
-//        // TODO : Place Code Here
-//
-//        Session.edit(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            if (!jsonObject.isNull("errors")) {
-//                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-//                                        switch (key) {
-//                                            case "":
-//                                                break;
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        Session.edit(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        Fragment time = ((MainActivity) requireActivity()).fragmont.getTime();
+                                        Fragment session = ((MainActivity) requireActivity()).fragmont.getSession();
+                                        Fragment payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+
+                                        switch (key) {
+                                            case "":
+                                                break;
+                                        }
+
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override

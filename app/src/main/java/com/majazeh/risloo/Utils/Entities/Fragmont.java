@@ -205,6 +205,69 @@ public class Fragmont {
         return null;
     }
 
+    public Fragment getTime() {
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+        if (fragment instanceof CreateScheduleFragment) {
+            Fragment timeFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(0);
+            if (timeFragment != null)
+                if (timeFragment instanceof CreateScheduleTimeFragment)
+                    return timeFragment;
+
+        } else if (fragment instanceof CreateSessionFragment) {
+            Fragment timeFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(0);
+            if (timeFragment != null)
+                if (timeFragment instanceof CreateSessionTimeFragment)
+                    return timeFragment;
+
+        } else if (fragment instanceof EditSessionFragment) {
+            Fragment timeFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(0);
+            if (timeFragment != null)
+                if (timeFragment instanceof EditSessionTimeFragment)
+                    return timeFragment;
+        }
+
+        return null;
+    }
+
+    public Fragment getReference() {
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+        if (fragment instanceof CreateScheduleFragment) {
+            Fragment timeFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(1);
+            if (timeFragment != null)
+                if (timeFragment instanceof CreateScheduleReferenceFragment)
+                    return timeFragment;
+        }
+
+        return null;
+    }
+
+    public Fragment getSession() {
+        Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
+
+        if (fragment instanceof CreateScheduleFragment) {
+            Fragment sessionFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(2);
+            if (sessionFragment != null)
+                if (sessionFragment instanceof CreateScheduleSessionFragment)
+                    return sessionFragment;
+
+        } else if (fragment instanceof CreateSessionFragment) {
+            Fragment sessionFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(1);
+            if (sessionFragment != null)
+                if (sessionFragment instanceof CreateSessionSessionFragment)
+                    return sessionFragment;
+
+        } else if (fragment instanceof EditSessionFragment) {
+            Fragment sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
+            if (sessionFragment != null)
+                if (sessionFragment instanceof EditSessionSessionFragment)
+                    return sessionFragment;
+        }
+
+        return null;
+    }
+
     public Fragment getPayment() {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 

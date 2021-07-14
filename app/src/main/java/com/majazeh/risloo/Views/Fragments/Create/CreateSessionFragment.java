@@ -38,8 +38,8 @@ public class CreateSessionFragment extends Fragment {
     private TabLayoutMediator tabLayoutMediator;
 
     // Vars
-    private HashMap data, header;
     private String[] tabs;
+    public HashMap data, header;
 
     @Nullable
     @Override
@@ -81,14 +81,12 @@ public class CreateSessionFragment extends Fragment {
 
     private void setData(CaseModel model) {
         if (model.getCaseId() != null && !model.getCaseId().equals("")) {
-            data.put("id", model.getCaseId());
+            data.put("case_id", model.getCaseId());
         }
     }
 
     public void doWork() {
 //        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-//
-//        // TODO : Place Code Here
 //
 //        Session.create(data, header, new Response() {
 //            @Override
@@ -113,10 +111,15 @@ public class CreateSessionFragment extends Fragment {
 //                                while (keys.hasNext()) {
 //                                    String key = keys.next();
 //                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+//                                        Fragment time = ((MainActivity) requireActivity()).fragmont.getTime();
+//                                        Fragment session = ((MainActivity) requireActivity()).fragmont.getSession();
+//                                        Fragment payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+//
 //                                        switch (key) {
 //                                            case "":
 //                                                break;
 //                                        }
+//
 //                                    }
 //                                }
 //                            }
