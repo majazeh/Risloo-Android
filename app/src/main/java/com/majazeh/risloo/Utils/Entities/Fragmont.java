@@ -38,6 +38,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
@@ -183,6 +184,8 @@ public class Fragmont {
             if (childFragment != null)
                 if (childFragment instanceof EditSessionTimeFragment)
                     return childFragment;
+                else if (childFragment instanceof EditSessionReferenceFragment)
+                    return childFragment;
                 else if (childFragment instanceof EditSessionSessionFragment)
                     return childFragment;
                 else if (childFragment instanceof EditSessionPaymentFragment)
@@ -234,10 +237,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof CreateScheduleFragment) {
-            Fragment timeFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(1);
-            if (timeFragment != null)
-                if (timeFragment instanceof CreateScheduleReferenceFragment)
-                    return timeFragment;
+            Fragment referenceFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(1);
+            if (referenceFragment != null)
+                if (referenceFragment instanceof CreateScheduleReferenceFragment)
+                    return referenceFragment;
+
+        } else if (fragment instanceof EditSessionFragment) {
+            Fragment referenceFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
+            if (referenceFragment != null)
+                if (referenceFragment instanceof EditSessionReferenceFragment)
+                    return referenceFragment;
         }
 
         return null;
@@ -259,7 +268,7 @@ public class Fragmont {
                     return sessionFragment;
 
         } else if (fragment instanceof EditSessionFragment) {
-            Fragment sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
+            Fragment sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
             if (sessionFragment != null)
                 if (sessionFragment instanceof EditSessionSessionFragment)
                     return sessionFragment;
@@ -284,7 +293,7 @@ public class Fragmont {
                     return paymentFragment;
 
         } else if (fragment instanceof EditSessionFragment) {
-            Fragment paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
+            Fragment paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
             if (paymentFragment != null)
                 if (paymentFragment instanceof EditSessionPaymentFragment)
                     return paymentFragment;

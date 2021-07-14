@@ -1,15 +1,19 @@
 [
   {
-    "fa_title": "در انتظار تشکیل جلسه",
-    "en_title": "session_awaiting"
+    "fa_title": "پیش\u200Cنویس",
+    "en_title": "draft"
+  },
+  {
+    "fa_title": "زمان\u200Cبندی شده",
+    "en_title": "registration_awaiting"
   },
   {
     "fa_title": "در انتظار تأیید مراجع",
     "en_title": "client_awaiting"
   },
   {
-    "fa_title": "در انتظار",
-    "en_title": "awaiting"
+    "fa_title": "در انتظار تشکیل جلسه",
+    "en_title": "session_awaiting"
   },
   {
     "fa_title": "در جلسه",
@@ -28,15 +32,11 @@
     "en_title": "canceled_by_center"
   },
   {
-    "fa_title": "پیش\u200Cنویس",
-    "en_title": "draft"
-  },
-  {
     "fa_title": "نام نویسی",
     "en_title": "registration"
   },
   {
-    "fa_title": "زمان\u200Cبندی شده",
-    "en_title": "scheduled"
+    "fa_title": "در انتظار",
+    "en_title": "awaiting"
   }
 ]
