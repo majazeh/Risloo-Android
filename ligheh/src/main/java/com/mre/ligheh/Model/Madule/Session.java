@@ -43,6 +43,14 @@ public class Session extends Model {
         }
     }
 
+    public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.post("rooms/" + data.get("id") + "/schedules", data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public static void edit(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {

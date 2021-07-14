@@ -47,6 +47,10 @@ public class SampleModel extends TypeModel {
     private int code;
 
     public SampleModel(JSONObject jsonObject) throws JSONException {
+//        String customDesign = "customScale" + jsonObject.scale.id;
+//        if(class customDesign){
+//            new customDesign();
+//        }
         super(jsonObject);
         if (!jsonObject.isNull("id"))
             setSampleId(jsonObject.getString("id"));
