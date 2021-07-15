@@ -28,7 +28,6 @@ public class APIRequest extends APIEvents {
         request(callback, aClass, client, request);
     }
 
-    @SuppressLint("NewApi")
     static void exec(String endpoint, String method, RequestData data, RequestHeader headers, Response callback, Class aClass) throws IOException {
         Model.request = true;
         Request.Builder builder = new Request.Builder();

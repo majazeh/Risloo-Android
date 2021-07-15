@@ -39,7 +39,6 @@ public class RequestData {
     }
 
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
     public String body(String url) {
         String new_url;
         if (url.contains("?")) {
@@ -49,11 +48,12 @@ public class RequestData {
         }
         ArrayList<String> qp = new ArrayList<>();
         for (String key : data.keySet()) {
-            qp.add(key + "=" + data.get(key));
+            qp.add(key + "=" + data.get(key) + "&");
         }
-
-        new_url += String.join("&", qp);
-        return new_url;
+        for (int i = 0; i < qp.size(); i++) {
+         new_url += qp.get(i);
+        }
+        return new_url.substring(0, new_url.length()-1);
     }
 
     public RequestBody body() {
