@@ -60,7 +60,6 @@ public class BreadCrumb {
 
     // Vars
     private String centerType = "", clientReportsType = "";
-    private String referenceCenterId = "", referenceUserId = "";
 
     public BreadCrumb(@NonNull Activity activity) {
         this.activity = activity;
@@ -243,13 +242,13 @@ public class BreadCrumb {
                 setModals("bulk", BulkSampleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return bulkSample();
             case R.id.referenceFragment:
-                referenceCenterId = ReferenceFragmentArgs.fromBundle(arguments).getCenterId();
-                referenceUserId = ReferenceFragmentArgs.fromBundle(arguments).getUserId();
+                String centerId = ReferenceFragmentArgs.fromBundle(arguments).getCenterId();
+                String userId = ReferenceFragmentArgs.fromBundle(arguments).getUserId();
 
-                if (referenceCenterId != null)
+                if (centerId != null)
                     setModals("user", ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
 
-                if (referenceUserId != null)
+                if (userId != null)
                     setModals("center", ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
 
                 return reference();
@@ -264,9 +263,11 @@ public class BreadCrumb {
                 break;
             case "center":
                 centerModel = (CenterModel) model;
+                centerType = centerModel.getCenterType();
                 break;
             case "room":
                 roomModel = (RoomModel) model;
+                centerType = roomModel.getRoomType();
 
                 if (roomModel.getRoomCenter() != null)
                     centerModel = roomModel.getRoomCenter();
@@ -276,6 +277,7 @@ public class BreadCrumb {
 
                 if (caseModel.getCaseRoom() != null) {
                     roomModel = caseModel.getCaseRoom();
+                    centerType = roomModel.getRoomType();
 
                     if (roomModel.getRoomCenter() != null)
                         centerModel = roomModel.getRoomCenter();
@@ -289,6 +291,7 @@ public class BreadCrumb {
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
+                        centerType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -296,6 +299,7 @@ public class BreadCrumb {
                 } else {
                     if (sessionModel.getRoom() != null) {
                         roomModel = sessionModel.getRoom();
+                        centerType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -310,6 +314,7 @@ public class BreadCrumb {
 
                     if (caseModel.getCaseRoom() != null) {
                         roomModel = caseModel.getCaseRoom();
+                        centerType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -317,6 +322,7 @@ public class BreadCrumb {
                 } else {
                     if (sampleModel.getSampleRoom() != null) {
                         roomModel = sampleModel.getSampleRoom();
+                        centerType = roomModel.getRoomType();
 
                         if (roomModel.getRoomCenter() != null)
                             centerModel = roomModel.getRoomCenter();
@@ -735,19 +741,10 @@ public class BreadCrumb {
             list = roomUsers();
 
         if (activity instanceof MainActivity) {
-            if (referenceCenterId != null) {
-                if (userModel.getId().equals(((MainActivity) activity).singleton.getId()))
-                    list.add(activity.getResources().getString(R.string.MeFragmentTitle));
-                else
-                    list.add(userModel.getId());
-            }
-
-            if (referenceUserId != null) {
-                if (referenceUserId.equals(((MainActivity) activity).singleton.getId()))
-                    list.add(activity.getResources().getString(R.string.MeFragmentTitle));
-                else
-                    list.add(referenceUserId);
-            }
+            if (userModel.getId().equals(((MainActivity) activity).singleton.getId()))
+                list.add(activity.getResources().getString(R.string.MeFragmentTitle));
+            else
+                list.add(userModel.getName());
         }
 
         return list;
