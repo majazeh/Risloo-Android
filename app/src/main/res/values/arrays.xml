@@ -100,8 +100,15 @@
         <item>تصویر نمایشی</item>
     </array>
 
-    <array name="EditSessionTabs">
+    <array name="EditSessionHasCaseTabs">
         <item>زمان</item>
+        <item>جلسه</item>
+        <item>پرداخت</item>
+    </array>
+
+    <array name="EditSessionNoCaseTabs">
+        <item>زمان</item>
+        <item>مراجعین</item>
         <item>جلسه</item>
         <item>پرداخت</item>
     </array>
@@ -152,7 +159,7 @@
 
     <array name="SelectionTypes">
         <item>اولین درخواست کننده</item>
-        <item>انتخب به عهده مرکز</item>
+        <item>انتخاب به عهده مرکز</item>
     </array>
 
     //////////////////////////////////////////////////////////////////////////////////////

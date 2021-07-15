@@ -582,30 +582,35 @@
 
     <string name="EditSessionTimeTabStartTimeHeader">زمان (ساعت - دقیقه)</string>
     <string name="EditSessionTimeTabDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="EditSessionTimeTabDateTypeHeader">نوع تاریخ انتخابی</string>
-    <string name="EditSessionTimeTabSpecifiedDateHeader">تاریخ</string>
-    <string name="EditSessionTimeTabPatternDaysHeader">روزهای هفته</string>
-    <string name="EditSessionTimeTabPatternTypeHeader">نوع الگوی التخابی</string>
-    <string name="EditSessionTimeTabRepeatWeeksHeader">تعداد هفته</string>
-    <string name="EditSessionTimeTabPeriodStartDateHeader">شروع</string>
-    <string name="EditSessionTimeTabPeriodEndDateHeader">پایان</string>
-
-    <string name="EditSessionTimeTabDateTypeSpecified">مشخص</string>
-    <string name="EditSessionTimeTabDateTypePattern">الگو</string>
-
-    <string name="EditSessionTimeTabPatternTypeRepeat">تکرار</string>
-    <string name="EditSessionTimeTabPatternTypePeriod">بازه زمانی</string>
+    <string name="EditSessionTimeTabStartDateHeader">تاریخ</string>
 
     <string name="EditSessionTimeTabButton">ویرایش</string>
+
+    ---------- // EditSessionReference Tab
+
+    <string name="EditSessionReferenceTabTypeHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="EditSessionReferenceTabCaseHeader">پرونده</string>
+    <string name="EditSessionReferenceTabProblemHeader">مسئله</string>
+    <string name="EditSessionReferenceTabCountHeader">تعداد حداکثر مراجعین</string>
+    <string name="EditSessionReferenceTabSelectionHeader">نوع انتخاب مراجعین</string>
+
+    <string name="EditSessionReferenceTabCheckbox">جلسه گروهی</string>
+
+    <string name="EditSessionReferenceTabTypeRisloo">اعضاء ریسلو</string>
+    <string name="EditSessionReferenceTabTypeUser">اعضاء</string>
+    <string name="EditSessionReferenceTabTypeCase">اعضاء پرونده درمانی …</string>
+    <string name="EditSessionReferenceTabTypeNew">ساخت پرونده جدید</string>
+
+    <string name="EditSessionReferenceTabRoom">اتاق درمان</string>
+
+    <string name="EditSessionReferenceTabButton">ساخت</string>
 
     ---------- // EditSessionSession Tab
 
     <string name="EditSessionSessionTabStatusHeader">وضعیت جلسه</string>
-    <string name="EditSessionSessionTabAxisHeader">محور جلسه</string>
     <string name="EditSessionSessionTabDescriptionHeader">توضیحات</string>
     <string name="EditSessionSessionTabCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
 
-    <string name="EditSessionSessionTabAxisGuide">می‌توانید تعدادی از فیلدهای درمانی را ثبت کنید و در قسمت «پرداخت» برای هرکدام قیمتی مشخص کنید.</string>
     <string name="EditSessionSessionTabCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
 
     <string name="EditSessionSessionTabButton">ویرایش</string>
@@ -613,9 +618,6 @@
     ---------- // EditSessionPayment Tab
 
     <string name="EditSessionPaymentTabPaymentHeader">نوع دریافت</string>
-
-    <string name="EditSessionPaymentTabAxisTotal">مبلغ جلسه</string>
-    <string name="EditSessionPaymentTabAxisCurrency">(تومان)</string>
 
     <string name="EditSessionPaymentTabButton">ویرایش</string>
 

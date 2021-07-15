@@ -63,37 +63,6 @@
                 app:layout_constraintTop_toBottomOf="@id/status_errorLayout" />
 
             <include
-                android:id="@+id/axis_includeLayout"
-                layout="@layout/component_main_input_recycler"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/status_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/status_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/scheduled_includeLayout" />
-
-            <include
-                android:id="@+id/axis_errorLayout"
-                layout="@layout/component_main_error"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/axis_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/axis_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/axis_includeLayout" />
-
-            <include
-                android:id="@+id/axis_guideLayout"
-                layout="@layout/component_main_guide"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                app:layout_goneMarginTop="@dimen/_6sdp"
-                app:layout_constraintEnd_toEndOf="@id/axis_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/axis_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/axis_errorLayout" />
-
-            <include
                 android:id="@+id/description_includeLayout"
                 layout="@layout/component_main_input_multi"
                 android:layout_width="0dp"
@@ -101,7 +70,7 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="@id/status_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/status_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/axis_guideLayout" />
+                app:layout_constraintTop_toBottomOf="@id/scheduled_includeLayout" />
 
             <include
                 android:id="@+id/description_errorLayout"
