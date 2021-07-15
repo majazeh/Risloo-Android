@@ -269,7 +269,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     break;
                 case "references":
                     data.put("id", ((CreateSampleFragment) current).roomId);
-                    data.put("usage", "create_case");
+                    data.put("status", "accepted");
                     break;
                 case "rooms":
                     data.put("my_management", "1");
