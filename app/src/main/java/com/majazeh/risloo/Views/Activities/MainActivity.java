@@ -207,6 +207,8 @@ public class MainActivity extends AppCompatActivity {
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
             binding.contentIncludeLayout.breadcumpTextView.setText(breadCrumb.getFa(destination, arguments));
             binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+
+            setActiveDrawer();
         });
     }
 
@@ -266,6 +268,23 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    private void setActiveDrawer() {
+        if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("نمونه\u200Cهای گروهی"))
+            navsAdapter.setSelectedPosition(6);
+        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("نمونه") || binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("نمونه\u200Cها"))
+            navsAdapter.setSelectedPosition(5);
+        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("جلسه") || binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("جلسات"))
+            navsAdapter.setSelectedPosition(2);
+        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("مراکز درمانی"))
+            navsAdapter.setSelectedPosition(1);
+        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("اعضاء"))
+            navsAdapter.setSelectedPosition(3);
+        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("ارزیابی\u200Cها"))
+            navsAdapter.setSelectedPosition(4);
+        else
+            navsAdapter.setSelectedPosition(0);
+    }
+
     public void responseAdapter(String item) {
         switch (item) {
             case "پیش\u200Cخوان": {
@@ -307,8 +326,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
         binding.getRoot().closeDrawer(GravityCompat.START);
-
-        navsAdapter.notifyDataSetChanged();
     }
 
     @Override

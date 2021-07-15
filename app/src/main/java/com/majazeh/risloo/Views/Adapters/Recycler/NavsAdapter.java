@@ -93,7 +93,7 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
     private void listener(NavsHolder holder, int position) {
         ClickManager.onDelayedClickListener(() -> {
             ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString());
-            selectedPosition = position;
+            setSelectedPosition(position);
         }).widget(holder.binding.getRoot());
     }
 
@@ -120,6 +120,11 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
             ImageViewCompat.setImageTintList(holder.binding.iconImageView, AppCompatResources.getColorStateList(activity, R.color.Gray800));
         }
+    }
+
+    public void setSelectedPosition(int position) {
+        selectedPosition = position;
+        notifyDataSetChanged();
     }
 
     public class NavsHolder extends RecyclerView.ViewHolder {
