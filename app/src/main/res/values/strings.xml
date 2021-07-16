@@ -960,6 +960,8 @@
 
     <string name="CenterFragmentTitle">مرکز درمانی</string>
 
+    <string name="CenterFragmentRequest">درخواست پذیرش</string>
+
     <string name="CenterFragmentUsers">اعضاء</string>
     <string name="CenterFragmentSchedules">برنامه درمانی</string>
     <string name="CenterFragmentProfile">پروفایل من</string>
@@ -993,6 +995,8 @@
     */
 
     <string name="RoomFragmentTitle">اتاق درمان</string>
+
+    <string name="RoomFragmentRequest">درخواست پذیرش</string>
 
     <string name="RoomFragmentUsers">اعضاء</string>
     <string name="RoomFragmentSchedules">برنامه درمانی</string>

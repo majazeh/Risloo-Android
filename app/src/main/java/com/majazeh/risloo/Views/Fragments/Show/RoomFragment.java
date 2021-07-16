@@ -38,6 +38,7 @@ import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -93,6 +94,7 @@ public class RoomFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.Cases2AdapterHeader));
 
+        InitManager.txtTextColor(binding.requestTextView.getRoot(), getResources().getString(R.string.RoomFragmentRequest), getResources().getColor(R.color.White));
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
@@ -100,8 +102,10 @@ public class RoomFragment extends Fragment {
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
+            binding.requestTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
         } else {
             binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
+            binding.requestTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
         }
     }
 
@@ -208,7 +212,7 @@ public class RoomFragment extends Fragment {
                     }
                 }
             });
-        }).widget(binding.statusTextView.getRoot());
+        }).widget(binding.requestTextView.getRoot());
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
@@ -307,9 +311,25 @@ public class RoomFragment extends Fragment {
 
             if (model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
                 binding.descriptionTextView.setText(model.getDetail().getString("description"));
-                binding.descriptionTextView.setVisibility(View.VISIBLE);
+                binding.descriptionGroup.setVisibility(View.VISIBLE);
             } else {
-                binding.descriptionTextView.setVisibility(View.GONE);
+                binding.descriptionGroup.setVisibility(View.GONE);
+            }
+
+            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
+                JSONArray phones = model.getDetail().getJSONArray("phone_numbers");
+
+                binding.mobileTextView.setText("");
+                for (int i = 0; i < phones.length(); i++) {
+                    binding.mobileTextView.append(phones.get(i).toString());
+                    if (i != phones.length() - 1) {
+                        binding.mobileTextView.append("  -  ");
+                    }
+                }
+
+                binding.mobileGroup.setVisibility(View.VISIBLE);
+            } else {
+                binding.mobileGroup.setVisibility(View.GONE);
             }
 
             if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
@@ -320,13 +340,6 @@ public class RoomFragment extends Fragment {
                 binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.nameTextView.getText().toString()));
 
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
-            }
-
-            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
-                binding.mobileTextView.setText(model.getDetail().getJSONArray("phone_numbers").get(0).toString());
-                binding.mobileGroup.setVisibility(View.VISIBLE);
-            } else {
-                binding.mobileGroup.setVisibility(View.GONE);
             }
 
             setAcceptation(model);
@@ -357,7 +370,11 @@ public class RoomFragment extends Fragment {
             binding.nameTextView.setVisibility(View.GONE);
         }
 
-        binding.descriptionTextView.setVisibility(View.GONE);
+        if (binding.descriptionTextView.getText().toString().equals(""))
+            binding.descriptionGroup.setVisibility(View.GONE);
+
+        if (binding.mobileTextView.getText().toString().equals(""))
+            binding.mobileGroup.setVisibility(View.GONE);
 
         if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null && model.getRoomManager().getAvatar() .getMedium().getUrl() != null && !model.getRoomManager().getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
@@ -368,8 +385,6 @@ public class RoomFragment extends Fragment {
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         }
-
-        binding.mobileGroup.setVisibility(View.GONE);
 
         setDropdown("");
     }
@@ -425,24 +440,16 @@ public class RoomFragment extends Fragment {
     }
 
     private void setStatus(String status) {
-        binding.statusTextView.getRoot().setText(SelectionManager.getRoomStatus(requireActivity(), "fa", status));
+        if (status.equals("request")) {
+            binding.requestTextView.getRoot().setVisibility(View.VISIBLE);
 
-        switch (status) {
-            case "request":
-                binding.statusTextView.getRoot().setEnabled(true);
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.White));
+            binding.statusTextView.setVisibility(View.GONE);
+            binding.statusTextView.setText("");
+        } else {
+            binding.requestTextView.getRoot().setVisibility(View.GONE);
 
-                if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600_ripple_green800);
-                else
-                    binding.statusTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_green600);
-                break;
-            default:
-                binding.statusTextView.getRoot().setEnabled(false);
-                binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Gray500));
-
-                binding.statusTextView.getRoot().setBackgroundResource(android.R.color.transparent);
-                break;
+            binding.statusTextView.setVisibility(View.VISIBLE);
+            binding.statusTextView.setText(SelectionManager.getRoomStatus(requireActivity(), "fa", status));
         }
 
         setDropdown(status);

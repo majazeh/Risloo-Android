@@ -50,9 +50,9 @@
                     layout="@layout/component_main_avatar_border_big"
                     android:layout_width="@dimen/_86sdp"
                     android:layout_height="@dimen/_86sdp"
-                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_12sdp"
                     app:layout_constraintBottom_toBottomOf="@id/background_imageView"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/background_imageView" />
 
                 <include
@@ -65,14 +65,12 @@
                     app:layout_constraintLeft_toLeftOf="parent" />
 
                 <include
-                    android:id="@+id/status_textView"
+                    android:id="@+id/request_textView"
                     layout="@layout/component_main_button_rect_wrap"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
                     app:layout_goneMarginLeft="@dimen/_8sdp"
-                    app:layout_constraintWidth_max="@dimen/_104sdp"
-                    app:layout_constraintHeight_min="@dimen/_28sdp"
                     app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
                     app:layout_constraintLeft_toRightOf="@id/menu_spinner" />
 
@@ -81,7 +79,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:textSize="@dimen/_12ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray900"
@@ -93,38 +91,38 @@
                     tools:text="نام و نام خانوادگی" />
 
                 <ImageView
-                    android:id="@+id/badge_imageView"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
-                    android:layout_marginStart="@dimen/_6sdp"
+                    android:id="@+id/description_imageView"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_badge_check_solid"
-                    android:visibility="gone"
-                    app:layout_constraintBottom_toBottomOf="@id/name_textView"
-                    app:layout_constraintStart_toEndOf="@id/name_textView"
-                    app:layout_constraintTop_toTopOf="@id/name_textView"
-                    app:tint="@color/Blue500" />
+                    android:src="@drawable/ic_info_circle_light"
+                    app:layout_constraintBottom_toBottomOf="@id/description_textView"
+                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintTop_toTopOf="@id/description_textView"
+                    app:tint="@color/Gray500" />
 
                 <TextView
                     android:id="@+id/description_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:gravity="start"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="right"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintEnd_toEndOf="@id/name_textView"
+                    app:layout_constraintStart_toEndOf="@id/description_imageView"
                     app:layout_constraintTop_toBottomOf="@id/name_textView"
                     tools:text="توضیحات" />
 
                 <ImageView
                     android:id="@+id/mobile_imageView"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:padding="@dimen/_1sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
@@ -136,19 +134,45 @@
 
                 <TextView
                     android:id="@+id/mobile_textView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_6sdp"
-                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="right"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray600"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
+                    app:layout_constraintEnd_toEndOf="@id/name_textView"
                     app:layout_constraintStart_toEndOf="@id/mobile_imageView"
                     app:layout_constraintTop_toBottomOf="@id/description_textView"
                     tools:text="موبایل" />
+
+                <TextView
+                    android:id="@+id/status_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="right"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray600"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular"
+                    android:visibility="gone"
+                    app:layout_constraintEnd_toEndOf="@id/name_textView"
+                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintTop_toBottomOf="@id/mobile_textView"
+                    tools:text="وضعیت"
+                    tools:visibility="visible" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/description_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="description_imageView, description_textView" />
 
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/mobile_group"
