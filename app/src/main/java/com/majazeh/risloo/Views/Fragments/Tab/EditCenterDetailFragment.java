@@ -213,7 +213,7 @@ public class EditCenterDetailFragment extends Fragment {
                     ArrayList<String> ids = new ArrayList<>();
 
                     for (int i = 0; i < phoneNumbers.length(); i++) {
-                        TypeModel typeModel = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)).put("title", phoneNumbers.getString(i)));
+                        TypeModel typeModel = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)));
 
                         phones.add(typeModel);
                         ids.add(typeModel.object.getString("id"));

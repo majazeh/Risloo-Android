@@ -35,6 +35,9 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     // Objects
     private Activity activity;
 
+    // Fragments
+    private Fragment current, child, payment;
+
     // Widget
     private TextView countTextView;
 
@@ -57,6 +60,8 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     public void onBindViewHolder(@NonNull SelectedHolder holder, int i) {
         TypeModel item = items.get(i);
 
+        intializer();
+
         detector(holder);
 
         listener(holder, i);
@@ -67,10 +72,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     @Override
     public int getItemCount() {
         return items.size();
-    }
-
-    public ArrayList<TypeModel> getItems() {
-        return items;
     }
 
     public ArrayList<String> getIds() {
@@ -129,6 +130,12 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         calculateCount();
     }
 
+    private void intializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+        child = ((MainActivity) activity).fragmont.getChild();
+        payment = ((MainActivity) activity).fragmont.getPayment();
+    }
+
     private void detector(SelectedHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
@@ -171,15 +178,10 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
                 } break;
-                case "axises": {
-                    holder.binding.titleTextView.setText(item.object.getString("id"));
-
-                    holder.binding.subTextView.setVisibility(View.GONE);
-                    holder.binding.subTextView.setText("");
-                } break;
                 case "phones":
+                case "axises":
                 case "patternDays": {
-                    holder.binding.titleTextView.setText(item.object.getString("title"));
+                    holder.binding.titleTextView.setText(item.object.getString("id"));
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
@@ -191,8 +193,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     }
 
     private void removePayment(int position) {
-        Fragment payment = ((MainActivity) activity).fragmont.getPayment();
-
         if (payment instanceof CreateSchedulePaymentFragment)
             ((CreateSchedulePaymentFragment) payment).axisAdapter.removeItem(position);
 
@@ -201,9 +201,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     }
 
     private void refreshCount() {
-        Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-        Fragment child = ((MainActivity) activity).fragmont.getChild();
-
         if (current instanceof CreateCenterFragment) {
             if (method.equals("phones"))
                 if (((CreateCenterFragment) current).phonesDialog.isVisible())

@@ -45,6 +45,9 @@ public class SelectedDialog extends AppCompatDialogFragment {
     // Binding
     private DialogSelectedBinding binding;
 
+    // Fragments
+    private Fragment current, child, payment;
+
     // Vars
     private String method;
 
@@ -75,6 +78,8 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
         detector();
 
+        setDialog();
+
         setRecyclerView();
 
         return binding.getRoot();
@@ -87,20 +92,9 @@ public class SelectedDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
-        switch (method) {
-            case "phones":
-                binding.titleTextView.setText(getResources().getString(R.string.DialogPhoneTitle));
-                binding.inputEditText.setHint(getResources().getString(R.string.DialogPhoneHint));
-                binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-                binding.entryButton.setText(getResources().getString(R.string.DialogPhoneEntry));
-                break;
-            case "axises":
-                binding.titleTextView.setText(getResources().getString(R.string.DialogAxisTitle));
-                binding.inputEditText.setHint(getResources().getString(R.string.DialogAxisHint));
-                binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-                binding.entryButton.setText(getResources().getString(R.string.DialogAxisEntry));
-                break;
-        }
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        child = ((MainActivity) requireActivity()).fragmont.getChild();
+        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
@@ -125,17 +119,43 @@ public class SelectedDialog extends AppCompatDialogFragment {
         ClickManager.onDelayedClickListener(() -> {
             String value = binding.inputEditText.getText().toString().trim();
 
-            if (!value.equals(""))
-                refreshList(createItem(value));
-            else
+            if (!value.equals("")) {
+                try {
+                    TypeModel model;
+
+                    if (method.equals("axises"))
+                        model =  new TypeModel(new JSONObject().put("id", value).put("amount", "0"));
+                    else
+                        model = new TypeModel(new JSONObject().put("id", value));
+
+                    addItem(model);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
                 dismiss();
+            }
         }).widget(binding.entryButton);
     }
 
-    private void setRecyclerView() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-        Fragment child = ((MainActivity) requireActivity()).fragmont.getChild();
+    private void setDialog() {
+        switch (method) {
+            case "phones":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogPhoneTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogPhoneHint));
+                binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                binding.entryButton.setText(getResources().getString(R.string.DialogPhoneEntry));
+                break;
+            case "axises":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogAxisTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogAxisHint));
+                binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+                binding.entryButton.setText(getResources().getString(R.string.DialogAxisEntry));
+                break;
+        }
+    }
 
+    private void setRecyclerView() {
         if (current instanceof CreateCenterFragment) {
             if (method.equals("phones"))
                 binding.listRecyclerView.setAdapter(((CreateCenterFragment) current).phonesAdapter);
@@ -159,32 +179,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
         calculateCount();
     }
 
-    private TypeModel createItem(String text) {
-        try {
-            if (method.equals("axises"))
-                return new TypeModel(new JSONObject().put("id", text).put("title", "0"));
-            else
-                return new TypeModel(new JSONObject().put("id", text).put("title", text));
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } return null;
-    }
-
-    private void addPayment(TypeModel item) {
-        Fragment payment = ((MainActivity) requireActivity()).fragmont.getPayment();
-
-        if (payment instanceof CreateSchedulePaymentFragment)
-            ((CreateSchedulePaymentFragment) payment).axisAdapter.addItem(item);
-
-        if (payment instanceof CreateSessionPaymentFragment)
-            ((CreateSessionPaymentFragment) payment).axisAdapter.addItem(item);
-    }
-
-    private void refreshList(TypeModel item) {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-        Fragment child = ((MainActivity) requireActivity()).fragmont.getChild();
-
+    private void addItem(TypeModel item) {
         try {
             if (current instanceof CreateCenterFragment) {
                 if (method.equals("phones"))
@@ -229,6 +224,14 @@ public class SelectedDialog extends AppCompatDialogFragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void addPayment(TypeModel item) {
+        if (payment instanceof CreateSchedulePaymentFragment)
+            ((CreateSchedulePaymentFragment) payment).axisAdapter.addItem(item);
+
+        if (payment instanceof CreateSessionPaymentFragment)
+            ((CreateSessionPaymentFragment) payment).axisAdapter.addItem(item);
     }
 
     public void calculateCount() {

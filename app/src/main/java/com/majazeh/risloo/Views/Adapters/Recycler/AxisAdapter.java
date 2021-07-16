@@ -25,7 +25,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
 
     // Vars
     private ArrayList<TypeModel> items;
-    private ArrayList<String> ids, titles;
+    private ArrayList<String> ids, amounts;
 
     public AxisAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -59,21 +59,21 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         return ids;
     }
 
-    public ArrayList<String> getTitles() {
-        return titles;
+    public ArrayList<String> getAmounts() {
+        return amounts;
     }
 
-    public void setItems(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> titles) {
+    public void setItems(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> amounts) {
         this.items = items;
         this.ids = ids;
-        this.titles = titles;
+        this.amounts = amounts;
         notifyDataSetChanged();
     }
 
     public void clearItems() {
         items.clear();
         ids.clear();
-        titles.clear();
+        amounts.clear();
         notifyDataSetChanged();
     }
 
@@ -81,7 +81,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         try {
             items.add(item);
             ids.add(item.object.get("id").toString());
-            titles.add(item.object.get("title").toString());
+            amounts.add(item.object.get("amount").toString());
             notifyDataSetChanged();
         } catch (JSONException e) {
             e.printStackTrace();
@@ -92,7 +92,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         try {
             items.set(position, item);
             ids.set(position, item.object.get("id").toString());
-            titles.set(position, item.object.get("title").toString());
+            amounts.set(position, item.object.get("amount").toString());
             notifyItemChanged(position);
             notifyItemRangeChanged(position, getItemCount());
         } catch (JSONException e) {
@@ -103,7 +103,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
     public void removeItem(int position) {
         items.remove(position);
         ids.remove(position);
-        titles.remove(position);
+        amounts.remove(position);
         notifyItemRemoved(position);
         notifyItemRangeChanged(position, getItemCount());
     }
@@ -122,14 +122,14 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         holder.binding.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
             String value = holder.binding.inputEditText.getText().toString().trim();
 
-            titles.set(position, value);
+            amounts.set(position, value);
         });
     }
 
     private void setData(AxisHolder holder, int position) {
         holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateSchedulePaymentTabAxisTotal) + " " + ids.get(position));
 
-        holder.binding.inputEditText.setText(titles.get(position));
+        holder.binding.inputEditText.setText(amounts.get(position));
     }
 
     public class AxisHolder extends RecyclerView.ViewHolder {

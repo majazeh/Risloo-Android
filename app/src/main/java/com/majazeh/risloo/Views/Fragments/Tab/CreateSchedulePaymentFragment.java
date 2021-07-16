@@ -98,8 +98,8 @@ public class CreateSchedulePaymentFragment extends Fragment {
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
     }
 
-    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> titles) {
-        axisAdapter.setItems(items, ids, titles);
+    private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> amounts) {
+        axisAdapter.setItems(items, ids, amounts);
         binding.axisRecyclerView.setAdapter(axisAdapter);
     }
 
