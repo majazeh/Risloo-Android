@@ -45,6 +45,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     // Objects
     private Activity activity;
 
+    // Fragments
+    private Fragment current, child;
+
     // Widget
     private TextView countTextView;
 
@@ -66,6 +69,8 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     public void onBindViewHolder(@NonNull SearchableHolder holder, int i) {
         TypeModel item = items.get(i);
 
+        intializer();
+
         listener(holder, item);
 
         setData(holder, item);
@@ -81,10 +86,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
             return 0;
     }
 
-    public ArrayList<TypeModel> getItems() {
-        return items;
-    }
-
     public void setItems(ArrayList<TypeModel> items, String method, TextView countTextView) {
         this.items = items;
         this.method = method;
@@ -98,6 +99,11 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
             this.items.clear();
             notifyDataSetChanged();
         }
+    }
+
+    private void intializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+        child = ((MainActivity) activity).fragmont.getChild();
     }
 
     private void detector(SearchableHolder holder, boolean selected) {
@@ -187,7 +193,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     holder.binding.subTextView.setText("");
                 } break;
                 case "patternDays": {
-                    holder.binding.titleTextView.setText(item.object.getString("title"));
+                    holder.binding.titleTextView.setText(item.object.getString("id"));
 
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
@@ -199,9 +205,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     }
 
     private void setActive(SearchableHolder holder, TypeModel item) {
-        Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-        Fragment child = ((MainActivity) activity).fragmont.getChild();
-
         try {
             if (current instanceof CreateCaseFragment) {
                 switch (method) {
@@ -329,9 +332,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     }
 
     private void responseDialog(TypeModel item) {
-        Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-        Fragment child = ((MainActivity) activity).fragmont.getChild();
-
         if (current instanceof CreateCaseFragment)
             ((CreateCaseFragment) current).responseDialog(method, item);
 

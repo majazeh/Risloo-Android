@@ -61,6 +61,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
     // Adapters
     private SearchableAdapter searchableAdapter;
 
+    // Fragments
+    private Fragment current, child;
+
     // Objects
     private Handler handler;
 
@@ -95,7 +98,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
         detector();
 
-        setRecyclerView();
+        setDialog();
+
+        setHashmap();
 
         return binding.getRoot();
     }
@@ -109,12 +114,64 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private void initializer() {
         searchableAdapter = new SearchableAdapter(requireActivity());
 
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        child = ((MainActivity) requireActivity()).fragmont.getChild();
+
         handler = new Handler();
 
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+    }
+
+    private void detector() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener() {
+        binding.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!binding.inputEditText.hasFocus()) {
+                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.inputEditText);
+                }
+            }
+            return false;
+        });
+
+        binding.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                handler.removeCallbacksAndMessages(null);
+                handler.postDelayed(() -> {
+                    data.put("q", String.valueOf(s));
+
+                    if (binding.searchProgressBar.getVisibility() == View.GONE)
+                        binding.searchProgressBar.setVisibility(View.VISIBLE);
+
+                    setHashmap();
+                }, 750);
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
+        });
+
+        ClickManager.onDelayedClickListener(this::dismiss).widget(binding.entryButton);
+    }
+
+    private void setDialog() {
         switch (method) {
             case "scales":
                 binding.titleTextView.setText(getResources().getString(R.string.DialogScaleTitle));
@@ -157,62 +214,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.entryButton.setText(getResources().getString(R.string.DialogDayEntry));
                 break;
         }
-
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
 
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.entryButton.setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
-        }
-    }
-
-    @SuppressLint("ClickableViewAccessibility")
-    private void listener() {
-        binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.inputEditText);
-                }
-            }
-            return false;
-        });
-
-        binding.inputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                handler.removeCallbacksAndMessages(null);
-                handler.postDelayed(() -> {
-                    data.put("q", String.valueOf(s));
-
-                    if (binding.searchProgressBar.getVisibility() == View.GONE)
-                        binding.searchProgressBar.setVisibility(View.VISIBLE);
-
-                    setRecyclerView();
-                }, 750);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
-        ClickManager.onDelayedClickListener(this::dismiss).widget(binding.entryButton);
-    }
-
-    private void setRecyclerView() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-        Fragment child = ((MainActivity) requireActivity()).fragmont.getChild();
-
-        if (binding.searchProgressBar.getVisibility() == View.GONE)
-            binding.searchProgressBar.setVisibility(View.VISIBLE);
-
+    private void setHashmap() {
         if (current instanceof CreateCaseFragment) {
             switch (method) {
                 case "rooms":
@@ -302,11 +306,12 @@ public class SearchableDialog extends AppCompatDialogFragment {
             }
         }
 
-        callList();
+        getData();
     }
 
-    private void callList() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+    private void getData() {
+        if (binding.searchProgressBar.getVisibility() == View.GONE)
+            binding.searchProgressBar.setVisibility(View.VISIBLE);
 
         switch (method) {
             case "scales":
@@ -605,16 +610,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
     private void patternList() {
         ArrayList<TypeModel> values = new ArrayList<>();
-
         String[] weekDays = requireActivity().getResources().getStringArray(R.array.WeekDays);
 
         for (String weekDay : weekDays) {
             try {
-                JSONObject jsonObject = new JSONObject();
-                jsonObject.put("id", weekDay);
-                jsonObject.put("title", weekDay);
-
-                TypeModel model = new TypeModel(jsonObject);
+                TypeModel model = new TypeModel(new JSONObject().put("id", weekDay));
 
                 values.add(model);
             } catch (JSONException e) {
