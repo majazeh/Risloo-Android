@@ -39,7 +39,7 @@ public class CreatePlatformFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private String title = "", sessionType = "", indentifierType = "", indentifier = "", createSession = "";
+    private String title = "", sessionType = "", indentifierType = "", indentifier = "", createSession = "", available = "";
 
     @Nullable
     @Override
@@ -148,6 +148,20 @@ public class CreatePlatformFragment extends Fragment {
                 createSession = "";
         });
 
+        binding.availableSwitchCompat.toggleSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked) {
+                available = "on";
+
+                binding.availableSwitchCompat.toggleTextView.setText(getResources().getString(R.string.AppSwicthOn));
+                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_green50);
+            } else {
+                available = "";
+
+                binding.availableSwitchCompat.toggleTextView.setText(getResources().getString(R.string.AppSwicthOff));
+                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50);
+            }
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleIncludeLayout.inputEditText.length() == 0) {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -187,6 +201,7 @@ public class CreatePlatformFragment extends Fragment {
 //        data.put("identifier_type", SelectionManager.getPlatformIdentifier(requireActivity(), "en", indentifierType));
 //        data.put("identifier", indentifier);
 //        data.put("selected", createSession);
+//        data.put("available", available);
 //
 //        Center.createPlatform(data, header, new Response() {
 //            @Override

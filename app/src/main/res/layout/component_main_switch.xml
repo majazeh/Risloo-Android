@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_2sdp_solid_gray50">
+
+    <androidx.appcompat.widget.SwitchCompat
+        android:id="@+id/toggle_switchCompat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:theme="@style/SwicthCompatTheme"
+        android:padding="@dimen/_6sdp"
+        android:checked="false"
+        android:layoutDirection="rtl"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/toggle_textView"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/toggle_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_6sdp"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_4sdp"
+        android:paddingTop="@dimen/_6sdp"
+        android:padding="@dimen/_6sdp"
+        android:gravity="center|start"
+        android:text="@string/AppSwicthOff"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:layoutDirection="rtl"
+        app:layout_constraintBottom_toBottomOf="@id/toggle_switchCompat"
+        app:layout_constraintEnd_toStartOf="@id/toggle_switchCompat"
+        app:layout_constraintTop_toTopOf="@id/toggle_switchCompat" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,6 +24,9 @@
     <string name="AppFileSelect">انتخاب فايل</string>
     <string name="AppFileEmpty">فايل انتخاب نشده است.</string>
 
+    <string name="AppSwicthOn">فعال</string>
+    <string name="AppSwicthOff">غیر فعال</string>
+
     <string name="AppDefaultName">عضو آزمایشی</string>
     <string name="AppDefaultCenter">مرکز آزمایشی</string>
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
@@ -342,9 +345,6 @@
     */
 
     <string name="CreatePlatformFragmentTitle">ایجاد محل برگزاری جدید</string>
-
-    <string name="CreatePlatformFragmentAvailableOn">فعال</string>
-    <string name="CreatePlatformFragmentAvailableOff">غیر فعال</string>
 
     <string name="CreatePlatformFragmentTitleHeader">عنوان</string>
     <string name="CreatePlatformFragmentSessionTypeHeader">نوع جلسه</string>
