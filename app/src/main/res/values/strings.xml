@@ -426,6 +426,14 @@
 
     <string name="CreateScheduleSessionTabButton">ساخت</string>
 
+    ---------- // CreateSchedulePlatform Tab
+
+    <string name="CreateSchedulePlatformTabHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
+
+    <string name="CreateSchedulePlatformTabCheckbox">اتصال به اتاق درمان</string>
+
+    <string name="CreateSchedulePlatformTabButton">ساخت</string>
+
     ---------- // CreateSchedulePayment Tab
 
     <string name="CreateSchedulePaymentTabPaymentHeader">نوع دریافت</string>
@@ -472,6 +480,14 @@
     <string name="CreateSessionSessionTabCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
 
     <string name="CreateSessionSessionTabButton">ساخت</string>
+
+    ---------- // CreateSessionPlatform Tab
+
+    <string name="CreateSessionPlatformTabHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
+
+    <string name="CreateSessionPlatformTabCheckbox">اتصال به اتاق درمان</string>
+
+    <string name="CreateSessionPlatformTabButton">ساخت</string>
 
     ---------- // CreateSessionPayment Tab
 
@@ -614,6 +630,14 @@
     <string name="EditSessionSessionTabCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
 
     <string name="EditSessionSessionTabButton">ویرایش</string>
+
+    ---------- // EditSessionPlatform Tab
+
+    <string name="EditSessionPlatformTabHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
+
+    <string name="EditSessionPlatformTabCheckbox">اتصال به اتاق درمان</string>
+
+    <string name="EditSessionPlatformTabButton">ویرایش</string>
 
     ---------- // EditSessionPayment Tab
 

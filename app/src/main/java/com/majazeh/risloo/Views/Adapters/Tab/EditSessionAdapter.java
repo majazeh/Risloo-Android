@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
@@ -40,6 +41,11 @@ public class EditSessionAdapter extends FragmentStateAdapter {
                     return fragment;
                 }
                 case 2: {
+                    Fragment fragment = new EditSessionPlatformFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 3: {
                     Fragment fragment = new EditSessionPaymentFragment();
                     hashMap.put(position, fragment);
                     return fragment;
@@ -65,6 +71,11 @@ public class EditSessionAdapter extends FragmentStateAdapter {
                     return fragment;
                 }
                 case 3: {
+                    Fragment fragment = new EditSessionPlatformFragment();
+                    hashMap.put(position, fragment);
+                    return fragment;
+                }
+                case 4: {
                     Fragment fragment = new EditSessionPaymentFragment();
                     hashMap.put(position, fragment);
                     return fragment;
@@ -78,9 +89,9 @@ public class EditSessionAdapter extends FragmentStateAdapter {
     @Override
     public int getItemCount() {
         if (hasCase)
-            return 3;
-        else
             return 4;
+        else
+            return 5;
     }
 
 }

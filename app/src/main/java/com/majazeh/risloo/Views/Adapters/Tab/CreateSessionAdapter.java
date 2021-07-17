@@ -6,6 +6,7 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 
@@ -34,6 +35,11 @@ public class CreateSessionAdapter extends FragmentStateAdapter {
                 return fragment;
             }
             case 2: {
+                Fragment fragment = new CreateSessionPlatformFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
+            case 3: {
                 Fragment fragment = new CreateSessionPaymentFragment();
                 hashMap.put(position, fragment);
                 return fragment;
@@ -45,7 +51,7 @@ public class CreateSessionAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 3;
+        return 4;
     }
 
 }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
@@ -40,6 +41,11 @@ public class CreateScheduleAdapter extends FragmentStateAdapter {
                 return fragment;
             }
             case 3: {
+                Fragment fragment = new CreateSchedulePlatformFragment();
+                hashMap.put(position, fragment);
+                return fragment;
+            }
+            case 4: {
                 Fragment fragment = new CreateSchedulePaymentFragment();
                 hashMap.put(position, fragment);
                 return fragment;
@@ -51,7 +57,7 @@ public class CreateScheduleAdapter extends FragmentStateAdapter {
 
     @Override
     public int getItemCount() {
-        return 4;
+        return 5;
     }
 
 }

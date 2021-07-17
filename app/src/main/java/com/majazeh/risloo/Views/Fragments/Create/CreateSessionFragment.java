@@ -38,7 +38,7 @@ public class CreateSessionFragment extends Fragment {
     private TabLayoutMediator tabLayoutMediator;
 
     // Fragments
-    private Fragment time, session, payment;
+    private Fragment time, session, platform, payment;
 
     // Vars
     private String[] tabs;
@@ -64,6 +64,7 @@ public class CreateSessionFragment extends Fragment {
 
         time = ((MainActivity) requireActivity()).fragmont.getTime();
         session = ((MainActivity) requireActivity()).fragmont.getSession();
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
         payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         data = new HashMap<>();

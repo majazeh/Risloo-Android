@@ -38,7 +38,7 @@ public class CreateScheduleFragment extends Fragment {
     private TabLayoutMediator tabLayoutMediator;
 
     // Fragments
-    private Fragment time, reference, session, payment;
+    private Fragment time, reference, session, platform, payment;
 
     // Vars
     private String[] tabs;
@@ -66,6 +66,7 @@ public class CreateScheduleFragment extends Fragment {
         time = ((MainActivity) requireActivity()).fragmont.getTime();
         reference = ((MainActivity) requireActivity()).fragmont.getReference();
         session = ((MainActivity) requireActivity()).fragmont.getSession();
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
         payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         data = new HashMap<>();

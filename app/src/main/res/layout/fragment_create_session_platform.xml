@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/White"
+    android:fillViewport="true"
+    android:scrollbarSize="0dp"
+    android:overScrollMode="always"
+    android:layoutDirection="rtl"
+    tools:context=".Views.Fragments.Tab.CreateSessionPlatformFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/platform_recyclerView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:overScrollMode="never"
+                android:layoutDirection="rtl"
+                app:layout_constrainedHeight="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_margin="@dimen/_12sdp"
+                tools:layout_marginBottom="@dimen/_8sdp"
+                tools:layout_marginTop="@dimen/_8sdp"
+                tools:listitem="@layout/single_item_platform"
+                tools:itemCount="4" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/create_textView"
+            layout="@layout/component_main_button_rect_big"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintRight_toRightOf="@id/container_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/container_constraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
