@@ -304,6 +304,21 @@
     </fragment>
 
     <fragment
+        android:id="@+id/createPlatformFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreatePlatformFragment"
+        android:label="@string/CreatePlatformFragmentTitle"
+        tools:layout="@layout/fragment_create_platform" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/createSampleFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment"
         android:label="@string/CreateSampleFragmentTitle"
@@ -415,6 +430,10 @@
     <action
         android:id="@+id/action_global_createRoomUserFragment"
         app:destination="@id/createRoomUserFragment" />
+
+    <action
+        android:id="@+id/action_global_createPlatformFragment"
+        app:destination="@id/createPlatformFragment" />
 
     <action
         android:id="@+id/action_global_createSampleFragment"

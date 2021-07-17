@@ -338,6 +338,26 @@
     <string name="CreateRoomUserFragmentButton">ثبت</string>
 
     /*
+    ---------- CreatePlatform Fragment ----------
+    */
+
+    <string name="CreatePlatformFragmentTitle">ایجاد محل برگزاری جدید</string>
+
+    <string name="CreatePlatformFragmentAvailableOn">فعال</string>
+    <string name="CreatePlatformFragmentAvailableOff">غیر فعال</string>
+
+    <string name="CreatePlatformFragmentTitleHeader">عنوان</string>
+    <string name="CreatePlatformFragmentSessionTypeHeader">نوع جلسه</string>
+    <string name="CreatePlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
+    <string name="CreatePlatformFragmentIdentifierHeader">مقدار</string>
+
+    <string name="CreatePlatformFragmentIdentifierHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
+
+    <string name="CreatePlatformFragmentSessionCheckbox">به صورت پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+
+    <string name="CreatePlatformFragmentButton">ایجاد</string>
+
+    /*
     ---------- CreateSample Fragment ----------
     */
 
@@ -428,10 +448,6 @@
 
     ---------- // CreateSchedulePlatform Tab
 
-    <string name="CreateSchedulePlatformTabHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
-
-    <string name="CreateSchedulePlatformTabCheckbox">اتصال به اتاق درمان</string>
-
     <string name="CreateSchedulePlatformTabButton">ساخت</string>
 
     ---------- // CreateSchedulePayment Tab
@@ -482,10 +498,6 @@
     <string name="CreateSessionSessionTabButton">ساخت</string>
 
     ---------- // CreateSessionPlatform Tab
-
-    <string name="CreateSessionPlatformTabHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
-
-    <string name="CreateSessionPlatformTabCheckbox">اتصال به اتاق درمان</string>
 
     <string name="CreateSessionPlatformTabButton">ساخت</string>
 
@@ -632,10 +644,6 @@
     <string name="EditSessionSessionTabButton">ویرایش</string>
 
     ---------- // EditSessionPlatform Tab
-
-    <string name="EditSessionPlatformTabHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
-
-    <string name="EditSessionPlatformTabCheckbox">اتصال به اتاق درمان</string>
 
     <string name="EditSessionPlatformTabButton">ویرایش</string>
 

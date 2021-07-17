@@ -11,6 +11,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
+
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -99,7 +102,8 @@ public class CenterPlatformsFragment extends Fragment {
         });
 
         ClickManager.onClickListener(() -> {
-            // TODO : Place Code If Needed
+            NavDirections action = NavigationMainDirections.actionGlobalCreatePlatformFragment("center", centerModel);
+            ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addConstraintLayout);
     }
 

@@ -161,6 +161,8 @@ public class BreadCrumb {
                 return createRoom();
             case R.id.createRoomUserFragment:
                 return createRoomUser();
+            case R.id.createPlatformFragment:
+                return createPlatform();
             case R.id.createSampleFragment:
                 return createSample();
             case R.id.createScheduleFragment:
@@ -683,6 +685,14 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> createPlatform() {
+        ArrayList<String> list = centerPlatforms();
+        list.add(activity.getResources().getString(R.string.CreatePlatformFragmentTitle));
+
+        destinationIds = createPlatformIds();
+        return list;
+    }
+
     private ArrayList<String> createSample() {
         ArrayList<String> list = samples();
         list.add(activity.getResources().getString(R.string.CreateSampleFragmentTitle));
@@ -1138,6 +1148,13 @@ public class BreadCrumb {
     private ArrayList<Integer> createRoomUserIds() {
         ArrayList<Integer> list = roomUsersIds();
         list.add(R.id.createRoomUserFragment);
+
+        return list;
+    }
+
+    private ArrayList<Integer> createPlatformIds() {
+        ArrayList<Integer> list = centerPlatformsIds();
+        list.add(R.id.createPlatformFragment);
 
         return list;
     }
