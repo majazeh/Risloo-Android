@@ -37,9 +37,12 @@ public class CreateSessionFragment extends Fragment {
     // Objects
     private TabLayoutMediator tabLayoutMediator;
 
+    // Fragments
+    private Fragment time, session, payment;
+
     // Vars
     private String[] tabs;
-    public HashMap data, header;
+    private HashMap data, header;
 
     @Nullable
     @Override
@@ -58,6 +61,10 @@ public class CreateSessionFragment extends Fragment {
 
         tabs = getResources().getStringArray(R.array.CreateSessionTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
+
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        session = ((MainActivity) requireActivity()).fragmont.getSession();
+        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -111,15 +118,10 @@ public class CreateSessionFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        Fragment time = ((MainActivity) requireActivity()).fragmont.getTime();
-                                        Fragment session = ((MainActivity) requireActivity()).fragmont.getSession();
-                                        Fragment payment = ((MainActivity) requireActivity()).fragmont.getPayment();
-
                                         switch (key) {
                                             case "":
                                                 break;
                                         }
-
                                     }
                                 }
                             }

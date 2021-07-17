@@ -34,14 +34,14 @@ import java.util.ArrayList;
 public class EditSessionReferenceFragment extends Fragment {
 
     // Binding
-    private FragmentEditSessionReferenceBinding binding;
+    public FragmentEditSessionReferenceBinding binding;
 
     // Dialogs
     private SearchableDialog casesDialog;
 
     // Vars
     public String type = "", roomId = "", caseId = "", problem = "", count = "", selection = "";
-    private boolean bulkSession = false;
+    public boolean bulkSession = false;
 
     @Nullable
     @Override
@@ -122,6 +122,10 @@ public class EditSessionReferenceFragment extends Fragment {
             return false;
         });
 
+        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.bulkSessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 bulkSession = true;
@@ -141,6 +145,10 @@ public class EditSessionReferenceFragment extends Fragment {
                 }
             }
             return false;
+        });
+
+        binding.countIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.selectionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -327,9 +335,6 @@ public class EditSessionReferenceFragment extends Fragment {
     }
 
     private void doWork() {
-        count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
-        problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
-
         Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         if (current instanceof EditSessionFragment)

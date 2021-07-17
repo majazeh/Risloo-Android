@@ -26,13 +26,13 @@ import java.util.ArrayList;
 public class CreateSchedulePaymentFragment extends Fragment {
 
     // Binding
-    private FragmentCreateSchedulePaymentBinding binding;
+    public FragmentCreateSchedulePaymentBinding binding;
 
     // Adapters
     public AxisAdapter axisAdapter;
 
     // Vars
-    private String payment = "";
+    public String payment = "";
 
     @Nullable
     @Override

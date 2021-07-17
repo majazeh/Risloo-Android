@@ -32,14 +32,14 @@ import java.util.ArrayList;
 public class CreateScheduleReferenceFragment extends Fragment {
 
     // Binding
-    private FragmentCreateScheduleReferenceBinding binding;
+    public FragmentCreateScheduleReferenceBinding binding;
 
     // Dialogs
     private SearchableDialog casesDialog;
 
     // Vars
     public String type = "", roomId = "", caseId = "", count = "", selection = "";
-    private boolean bulkSession = false;
+    public boolean bulkSession = false;
 
     @Nullable
     @Override
@@ -123,6 +123,10 @@ public class CreateScheduleReferenceFragment extends Fragment {
                 }
             }
             return false;
+        });
+
+        binding.countIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.selectionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -235,8 +239,6 @@ public class CreateScheduleReferenceFragment extends Fragment {
     }
 
     private void doWork() {
-        count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
-
         Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         if (current instanceof CreateScheduleFragment)

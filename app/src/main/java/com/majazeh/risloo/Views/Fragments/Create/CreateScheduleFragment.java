@@ -37,9 +37,12 @@ public class CreateScheduleFragment extends Fragment {
     // Objects
     private TabLayoutMediator tabLayoutMediator;
 
+    // Fragments
+    private Fragment time, reference, session, payment;
+
     // Vars
     private String[] tabs;
-    public HashMap data, header;
+    private HashMap data, header;
     public RoomModel roomModel;
 
     @Nullable
@@ -59,6 +62,11 @@ public class CreateScheduleFragment extends Fragment {
 
         tabs = getResources().getStringArray(R.array.CreateScheduleTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
+
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        reference = ((MainActivity) requireActivity()).fragmont.getReference();
+        session = ((MainActivity) requireActivity()).fragmont.getSession();
+        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -112,16 +120,10 @@ public class CreateScheduleFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        Fragment time = ((MainActivity) requireActivity()).fragmont.getTime();
-                                        Fragment reference = ((MainActivity) requireActivity()).fragmont.getReference();
-                                        Fragment session = ((MainActivity) requireActivity()).fragmont.getSession();
-                                        Fragment payment = ((MainActivity) requireActivity()).fragmont.getPayment();
-
                                         switch (key) {
                                             case "":
                                                 break;
                                         }
-
                                     }
                                 }
                             }

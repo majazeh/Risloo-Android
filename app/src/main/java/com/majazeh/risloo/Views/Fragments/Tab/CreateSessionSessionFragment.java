@@ -31,7 +31,7 @@ import java.util.ArrayList;
 public class CreateSessionSessionFragment extends Fragment {
 
     // Binding
-    private FragmentCreateSessionSessionBinding binding;
+    public FragmentCreateSessionSessionBinding binding;
 
     // Adapters
     public SelectedAdapter axisesAdapter;
@@ -44,8 +44,8 @@ public class CreateSessionSessionFragment extends Fragment {
     private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
 
     // Vars
-    private String status = "", description = "", coordination = "";
-    private String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
+    public String status = "", description = "", coordination = "";
+    public String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
 
     @Nullable
     @Override
@@ -132,6 +132,10 @@ public class CreateSessionSessionFragment extends Fragment {
             return false;
         });
 
+        binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
                 if (!binding.coordinationIncludeLayout.inputEditText.hasFocus()) {
@@ -139,6 +143,10 @@ public class CreateSessionSessionFragment extends Fragment {
                 }
             }
             return false;
+        });
+
+        binding.coordinationIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            coordination = binding.coordinationIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.scheduledIncludeLayout.startRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -325,9 +333,6 @@ public class CreateSessionSessionFragment extends Fragment {
     }
 
     private void doWork() {
-        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-        coordination = binding.coordinationIncludeLayout.inputEditText.getText().toString().trim();
-
         Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         if (current instanceof CreateSessionFragment)

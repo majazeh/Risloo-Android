@@ -26,13 +26,13 @@ import java.util.ArrayList;
 public class CreateSessionPaymentFragment extends Fragment {
 
     // Binding
-    private FragmentCreateSessionPaymentBinding binding;
+    public FragmentCreateSessionPaymentBinding binding;
 
     // Adapters
     public AxisAdapter axisAdapter;
 
     // Vars
-    private String payment = "";
+    public String payment = "";
 
     @Nullable
     @Override

@@ -27,14 +27,14 @@ import com.majazeh.risloo.databinding.FragmentEditSessionTimeBinding;
 public class EditSessionTimeFragment extends Fragment {
 
     // Binding
-    private FragmentEditSessionTimeBinding binding;
+    public FragmentEditSessionTimeBinding binding;
 
     // BottomSheets
     private TimeBottomSheet startTimeBottomSheet;
     private DateBottomSheet startDateBottomSheet;
 
     // Vars
-    private String startTime = "", duration = "60", startDate = "";
+    public String startTime = "", duration = "60", startDate = "";
 
     @Nullable
     @Override
@@ -85,6 +85,10 @@ public class EditSessionTimeFragment extends Fragment {
                 }
             }
             return false;
+        });
+
+        binding.durationIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -153,8 +157,6 @@ public class EditSessionTimeFragment extends Fragment {
     }
 
     private void doWork() {
-        duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
-
         Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         if (current instanceof EditSessionFragment)

@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class CreateScheduleTimeFragment extends Fragment {
 
     // Binding
-    private FragmentCreateScheduleTimeBinding binding;
+    public FragmentCreateScheduleTimeBinding binding;
 
     // Adapters
     public SelectedAdapter patternDaysAdapter;
@@ -46,7 +46,7 @@ public class CreateScheduleTimeFragment extends Fragment {
     private DateBottomSheet specifiedDateBottomSheet, periodStartDateBottomSheet, periodEndDateBottomSheet;
 
     // Vars
-    private String startTime = "", duration = "60", dateType = "specified", patternType = "period", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
+    public String startTime = "", duration = "60", dateType = "specified", patternType = "period", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
 
     @Nullable
     @Override
@@ -124,6 +124,10 @@ public class CreateScheduleTimeFragment extends Fragment {
             return false;
         });
 
+        binding.durationIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.dateTypeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.first_radioButton:
@@ -190,6 +194,10 @@ public class CreateScheduleTimeFragment extends Fragment {
                 }
             }
             return false;
+        });
+
+        binding.repeatWeeksIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            repeatWeeks = binding.repeatWeeksIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -289,9 +297,6 @@ public class CreateScheduleTimeFragment extends Fragment {
     }
 
     private void doWork() {
-        duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
-        repeatWeeks = binding.repeatWeeksIncludeLayout.inputEditText.getText().toString().trim();
-
         Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         if (current instanceof CreateScheduleFragment)

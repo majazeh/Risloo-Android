@@ -24,10 +24,10 @@ import com.mre.ligheh.Model.TypeModel.SessionModel;
 public class EditSessionPaymentFragment extends Fragment {
 
     // Binding
-    private FragmentEditSessionPaymentBinding binding;
+    public FragmentEditSessionPaymentBinding binding;
 
     // Vars
-    private String payment = "";
+    public String payment = "";
 
     @Nullable
     @Override
