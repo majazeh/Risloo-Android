@@ -172,7 +172,13 @@ public class RoomFragment extends Fragment {
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "محل برگزاری": {
-                            // TODO : Place Code When Needed
+                            if (!type.equals("room")) {
+                                NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            } else {
+                                NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            }
                         } break;
                         case "برچسب\u200Cهای مهم": {
                             // TODO : Place Code When Needed

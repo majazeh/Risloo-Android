@@ -18,9 +18,11 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragmentArgs;
@@ -192,12 +194,18 @@ public class BreadCrumb {
             case R.id.centerUsersFragment:
                 setModals("center", CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerUsers();
+            case R.id.centerPlatformsFragment:
+                setModals("center", CenterPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                return centerPlatforms();
             case R.id.centerSchedulesFragment:
                 setModals("center", CenterSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerSchedules();
             case R.id.roomUsersFragment:
                 setModals("room", RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomUsers();
+            case R.id.roomPlatformsFragment:
+                setModals("room", RoomPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                return roomPlatforms();
             case R.id.roomSchedulesFragment:
                 setModals("room", RoomSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomSchedules();
@@ -326,12 +334,20 @@ public class BreadCrumb {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
+            case R.id.centerPlatformsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
             case R.id.centerSchedulesFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.roomUsersFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.roomPlatformsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalRoomPlatformsFragment(roomModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.roomSchedulesFragment: {
@@ -775,6 +791,20 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> centerPlatforms() {
+        ArrayList<String> list;
+
+        if (!centerType.equals("room"))
+            list = center();
+        else
+            list = room();
+
+        list.add("محل برگزاری");
+
+        destinationIds = centerPlatformsIds();
+        return list;
+    }
+
     private ArrayList<String> centerSchedules() {
         ArrayList<String> list;
 
@@ -794,6 +824,14 @@ public class BreadCrumb {
         list.add("اعضاء");
 
         destinationIds = roomUsersIds();
+        return list;
+    }
+
+    private ArrayList<String> roomPlatforms() {
+        ArrayList<String> list = room();
+        list.add("محل برگزاری");
+
+        destinationIds = roomPlatformsIds();
         return list;
     }
 
@@ -1201,6 +1239,19 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<Integer> centerPlatformsIds() {
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.centerPlatformsFragment);
+
+        return list;
+    }
+
     private ArrayList<Integer> centerSchedulesIds() {
         ArrayList<Integer> list;
 
@@ -1217,6 +1268,13 @@ public class BreadCrumb {
     private ArrayList<Integer> roomUsersIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.roomUsersFragment);
+
+        return list;
+    }
+
+    private ArrayList<Integer> roomPlatformsIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.roomPlatformsFragment);
 
         return list;
     }

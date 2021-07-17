@@ -534,6 +534,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/centerPlatformsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment"
+        android:label="@string/CenterPlatformsFragmentTitle"
+        tools:layout="@layout/fragment_center_platforms" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/centerSchedulesFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment"
         android:label="@string/CenterSchedulesFragmentTitle"
@@ -548,6 +558,16 @@
         android:name="com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment"
         android:label="@string/RoomUsersFragmentTitle"
         tools:layout="@layout/fragment_room_users" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/roomPlatformsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment"
+        android:label="@string/RoomPlatformsFragmentTitle"
+        tools:layout="@layout/fragment_room_platforms" >
         <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
@@ -583,12 +603,20 @@
         app:destination="@id/centerUsersFragment" />
 
     <action
+        android:id="@+id/action_global_centerPlatformsFragment"
+        app:destination="@id/centerPlatformsFragment" />
+
+    <action
         android:id="@+id/action_global_centerSchedulesFragment"
         app:destination="@id/centerSchedulesFragment" />
 
     <action
         android:id="@+id/action_global_roomUsersFragment"
         app:destination="@id/roomUsersFragment" />
+
+    <action
+        android:id="@+id/action_global_roomPlatformsFragment"
+        app:destination="@id/roomPlatformsFragment" />
 
     <action
         android:id="@+id/action_global_roomSchedulesFragment"

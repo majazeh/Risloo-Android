@@ -147,7 +147,8 @@ public class CenterFragment extends Fragment {
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "محل برگزاری": {
-                            // TODO : Place Code When Needed
+                            NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                     }
 

@@ -781,6 +781,14 @@
     <string name="CentersFragmentTypePersonalClinic">اتاق درمان شخصی</string>
 
     /*
+    ---------- CenterPlatforms Fragment ----------
+    */
+
+    <string name="CenterPlatformsFragmentTitle">محل برگزاری جلسات مرکز درمانی</string>
+
+    <string name="CenterPlatformsFragmentAdd">افزودن محل برگزاری جدید</string>
+
+    /*
     ---------- CenterSchedules Fragment ----------
     */
 
@@ -844,6 +852,12 @@
     */
 
     <string name="PaymentsFragmentTitle">شارژ حساب</string>
+
+    /*
+    ---------- RoomPlatforms Fragment ----------
+    */
+
+    <string name="RoomPlatformsFragmentTitle">محل برگزاری جلسات اتاق درمانی</string>
 
     /*
     ---------- RoomSchedules Fragment ----------
