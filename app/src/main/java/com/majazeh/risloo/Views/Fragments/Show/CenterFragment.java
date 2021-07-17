@@ -146,6 +146,9 @@ public class CenterFragment extends Fragment {
                             NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
+                        case "محل برگزاری": {
+                            // TODO : Place Code When Needed
+                        } break;
                     }
 
                     binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
@@ -372,6 +375,7 @@ public class CenterFragment extends Fragment {
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
             menu.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
+            menu.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
         }
 
         menu.add("");

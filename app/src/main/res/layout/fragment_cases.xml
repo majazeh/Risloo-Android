@@ -38,26 +38,12 @@
                 layout="@layout/component_main_index_search"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/_28sdp"
-                android:layout_marginRight="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_6sdp"
-                app:layout_goneMarginLeft="@dimen/_12sdp"
-                app:layout_constraintLeft_toRightOf="@id/add_imageView"
-                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
-
-            <include
-                android:id="@+id/add_imageView"
-                layout="@layout/component_main_button_oval_mid"
-                android:layout_width="@dimen/_28sdp"
-                android:layout_height="@dimen/_28sdp"
-                android:layout_marginLeft="@dimen/_12sdp"
-                android:layout_marginRight="@dimen/_6sdp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/search_includeLayout"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
-                app:layout_constraintTop_toTopOf="@id/search_includeLayout"
-                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/index_containerLayout"

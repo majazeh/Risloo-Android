@@ -214,7 +214,7 @@
 
     <string name="CreateCaseFragmentTitle">ساخت پرونده جدید</string>
 
-    <string name="CreateCaseFragmentRoomHeader">اتاق درمان</string>
+    <string name="CreateCaseFragmentTitleHeader">عنوان یا سریال داخلی</string>
     <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
     <string name="CreateCaseFragmentProblemHeader">مسئله</string>
 
@@ -966,6 +966,7 @@
     <string name="CenterFragmentSchedules">برنامه درمانی</string>
     <string name="CenterFragmentProfile">پروفایل من</string>
     <string name="CenterFragmentEdit">ویرایش</string>
+    <string name="CenterFragmentPlatforms">محل برگزاری</string>
 
     /*
     ---------- Dashboard Fragment ----------
@@ -1003,6 +1004,8 @@
     <string name="RoomFragmentAddSchedule">تعریف برنامه درمانی</string>
     <string name="RoomFragmentProfile">پروفایل من</string>
     <string name="RoomFragmentEdit">ویرایش</string>
+    <string name="RoomFragmentPlatforms">محل برگزاری</string>
+    <string name="RoomFragmentTags">برچسب‌های مهم</string>
 
     <string name="RoomFragmentPersonalClinic">کلینیک شخصی</string>
 

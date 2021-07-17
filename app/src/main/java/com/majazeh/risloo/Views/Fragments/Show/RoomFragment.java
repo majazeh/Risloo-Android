@@ -171,6 +171,12 @@ public class RoomFragment extends Fragment {
                             NavDirections action = NavigationMainDirections.actionGlobalEditCenterFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
+                        case "محل برگزاری": {
+                            // TODO : Place Code When Needed
+                        } break;
+                        case "برچسب\u200Cهای مهم": {
+                            // TODO : Place Code When Needed
+                        } break;
                     }
 
                     binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
@@ -473,6 +479,11 @@ public class RoomFragment extends Fragment {
                 menu.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
 
             menu.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
+        }
+
+        if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
+            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentPlatforms));
+            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
         }
 
         menu.add("");

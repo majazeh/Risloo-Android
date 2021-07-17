@@ -436,6 +436,18 @@ public class InitManager {
                                 dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_edit_light, null));
                                 ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
                                 break;
+                            case "محل برگزاری":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_map_marker_alt_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
+                            case "برچسب\u200Cهای مهم":
+                                dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+
+                                dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_tags_light, null));
+                                ImageViewCompat.setImageTintList(dropdownImageView, AppCompatResources.getColorStateList(activity, R.color.Gray500));
+                                break;
                         }
                     }
 

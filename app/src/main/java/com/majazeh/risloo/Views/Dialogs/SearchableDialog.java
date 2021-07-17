@@ -218,14 +218,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
     private void setHashmap() {
         if (current instanceof CreateCaseFragment) {
-            switch (method) {
-                case "rooms":
-                    data.put("my_management", "1");
-                    break;
-                case "references":
-                    data.put("id", ((CreateCaseFragment) current).roomId);
-                    data.put("usage", "create_case");
-                    break;
+            if (method.equals("references")) {
+                data.put("id", ((CreateCaseFragment) current).roomId);
+                data.put("usage", "create_case");
             }
         }
 

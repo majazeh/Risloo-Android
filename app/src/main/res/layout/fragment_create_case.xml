@@ -28,8 +28,8 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <include
-                android:id="@+id/room_includeLayout"
-                layout="@layout/component_main_input_select2"
+                android:id="@+id/title_includeLayout"
+                layout="@layout/component_main_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_12sdp"
@@ -40,15 +40,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/room_errorLayout"
+                android:id="@+id/title_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/room_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/room_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/title_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/title_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/title_includeLayout" />
 
             <include
                 android:id="@+id/reference_includeLayout"
@@ -56,9 +56,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/room_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/room_errorLayout" />
+                app:layout_constraintEnd_toEndOf="@id/title_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/title_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/title_errorLayout" />
 
             <include
                 android:id="@+id/reference_errorLayout"
@@ -79,8 +79,8 @@
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_goneMarginBottom="@dimen/_12sdp"
                 app:layout_constraintBottom_toTopOf="@id/problem_errorLayout"
-                app:layout_constraintEnd_toEndOf="@id/room_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/room_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/title_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/title_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/reference_errorLayout" />
 
             <include

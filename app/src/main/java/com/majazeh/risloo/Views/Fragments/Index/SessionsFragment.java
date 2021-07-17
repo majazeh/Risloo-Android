@@ -1,7 +1,6 @@
 package com.majazeh.risloo.Views.Fragments.Index;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.text.Editable;
@@ -17,7 +16,6 @@ import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -52,8 +50,6 @@ public class SessionsFragment extends Fragment {
 
         initializer();
 
-        detector();
-
         listener();
 
         getData();
@@ -75,16 +71,7 @@ public class SessionsFragment extends Fragment {
 
         binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
 
-        InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, 0, 0, 0, 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600_ripple_white);
-        } else {
-            binding.addImageView.getRoot().setBackgroundResource(R.drawable.draw_oval_solid_green600);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -141,10 +128,6 @@ public class SessionsFragment extends Fragment {
                 }
             }
         });
-
-        ClickManager.onClickListener(() -> {
-            // TODO : Place Code If Needed
-        }).widget(binding.addImageView.getRoot());
     }
 
     private void getData() {
