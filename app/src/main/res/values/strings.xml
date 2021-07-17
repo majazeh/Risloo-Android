@@ -353,7 +353,7 @@
 
     <string name="CreatePlatformFragmentIdentifierHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
 
-    <string name="CreatePlatformFragmentSessionCheckbox">به صورت پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+    <string name="CreatePlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
 
     <string name="CreatePlatformFragmentButton">ایجاد</string>
 

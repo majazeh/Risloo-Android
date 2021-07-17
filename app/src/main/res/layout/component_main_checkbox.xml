@@ -8,7 +8,7 @@
     android:theme="@style/CheckBoxTheme"
     android:paddingEnd="@dimen/_6sdp"
     android:checked="false"
-    android:gravity="center"
+    android:gravity="center|start"
     android:textSize="@dimen/_10ssp"
     android:textStyle="normal"
     android:textColor="@color/Gray600"

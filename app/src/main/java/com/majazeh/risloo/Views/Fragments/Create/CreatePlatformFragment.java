@@ -3,6 +3,7 @@ package com.majazeh.risloo.Views.Fragments.Create;
 import android.annotation.SuppressLint;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -66,7 +67,7 @@ public class CreatePlatformFragment extends Fragment {
         binding.indentifierTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreatePlatformFragmentIndetifierTypeHeader));
         binding.indentifierIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreatePlatformFragmentIdentifierHeader));
 
-        binding.indentifierIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreatePlatformFragmentIdentifierHint));
+        binding.indentifierGuideLayout.guideTextView.setText(getResources().getString(R.string.CreatePlatformFragmentIdentifierHint));
 
         binding.sessionCheckBox.getRoot().setText(getResources().getString(R.string.CreatePlatformFragmentSessionCheckbox));
 
@@ -111,6 +112,18 @@ public class CreatePlatformFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 indentifierType = parent.getItemAtPosition(position).toString();
+
+                switch (indentifierType) {
+                    case "آدرس اینترنتی":
+                        binding.indentifierIncludeLayout.inputEditText.setInputType(InputType.TYPE_TEXT_VARIATION_EMAIL_ADDRESS);
+                        break;
+                    case "شماره تماس":
+                        binding.indentifierIncludeLayout.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
+                        break;
+                    case "متن":
+                        binding.indentifierIncludeLayout.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
+                        break;
+                }
             }
 
             @Override
