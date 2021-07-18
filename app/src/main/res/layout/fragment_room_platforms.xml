@@ -46,7 +46,7 @@
 
             <include
                 android:id="@+id/index_singleLayout"
-                layout="@layout/component_single_platform"
+                layout="@layout/component_single_room_platform"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="gone"

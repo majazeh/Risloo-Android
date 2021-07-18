@@ -796,6 +796,8 @@
 
     <string name="CenterPlatformsFragmentAdd">افزودن محل برگزاری جدید</string>
 
+    <string name="CenterPlatformsFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+
     /*
     ---------- CenterSchedules Fragment ----------
     */
@@ -866,6 +868,11 @@
     */
 
     <string name="RoomPlatformsFragmentTitle">محل برگزاری جلسات اتاق درمانی</string>
+
+    <string name="RoomPlatformsFragmentCenterCheckbox">اتصال به مرکز درمانی</string>
+
+    <string name="RoomPlatformsFragmentInputHint">مقدار</string>
+    <string name="RoomPlatformsFragmentSessionHint">تنظیمات پیش‌فرض هنگام ایجاد جلسه:</string>
 
     /*
     ---------- RoomSchedules Fragment ----------
@@ -1132,12 +1139,6 @@
     <string name="Cases3AdapterSessionCount">جلسات</string>
 
     <string name="Cases3AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Platforms Adapter ----------
-    */
-
-    <string name="PlatformsAdapterCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
 
     /*
     ---------- Psychologists Adapter ----------

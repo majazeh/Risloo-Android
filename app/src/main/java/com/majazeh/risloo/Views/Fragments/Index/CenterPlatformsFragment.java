@@ -19,7 +19,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PlatformsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.CenterPlatformsAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterPlatformsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -35,7 +35,7 @@ public class CenterPlatformsFragment extends Fragment {
     private FragmentCenterPlatformsBinding binding;
 
     // Adapters
-    private PlatformsAdapter adapter;
+    private CenterPlatformsAdapter adapter;
 
     // Vars
     private HashMap data, header;
@@ -62,7 +62,7 @@ public class CenterPlatformsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new PlatformsAdapter(requireActivity());
+        adapter = new CenterPlatformsAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -109,9 +109,9 @@ public class CenterPlatformsFragment extends Fragment {
     }
 
     private void setArgs() {
-//        centerModel = (CenterModel) CenterPlatformsFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//
-//        setData(centerModel);
+        centerModel = (CenterModel) CenterPlatformsFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        setData(centerModel);
     }
 
     private void setData(CenterModel model) {
@@ -139,7 +139,7 @@ public class CenterPlatformsFragment extends Fragment {
 //                        if (!platforms.data().isEmpty()) {
                             adapter.setPlatforms(null);
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
+
 //                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
 //                        } else if (adapter.getItemCount() == 0) {
 //                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
@@ -149,7 +149,7 @@ public class CenterPlatformsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
-//
+
 //                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
 //                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
 //                    });

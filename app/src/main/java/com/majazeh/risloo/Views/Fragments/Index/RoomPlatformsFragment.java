@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PlatformsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.RoomPlatformsAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomPlatformsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -31,7 +31,7 @@ public class RoomPlatformsFragment extends Fragment {
     private FragmentRoomPlatformsBinding binding;
 
     // Adapters
-    private PlatformsAdapter adapter;
+    private RoomPlatformsAdapter adapter;
 
     // Vars
     private HashMap data, header;
@@ -56,7 +56,7 @@ public class RoomPlatformsFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new PlatformsAdapter(requireActivity());
+        adapter = new RoomPlatformsAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -90,9 +90,9 @@ public class RoomPlatformsFragment extends Fragment {
     }
 
     private void setArgs() {
-//        roomModel = (RoomModel) RoomPlatformsFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//
-//        setData(roomModel);
+        roomModel = (RoomModel) RoomPlatformsFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        setData(roomModel);
     }
 
     private void setData(RoomModel model) {
@@ -134,7 +134,7 @@ public class RoomPlatformsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
-//
+
 //                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
 //                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
 //                    });

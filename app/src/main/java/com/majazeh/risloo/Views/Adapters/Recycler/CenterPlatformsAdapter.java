@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.SingleItemPlatformBinding;
+import com.majazeh.risloo.databinding.SingleItemCenterPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.PlatformsHolder> {
+public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatformsAdapter.CenterPlatformsHolder> {
 
     // Objects
     private Activity activity;
@@ -26,18 +26,18 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
     private ArrayList<TypeModel> platforms;
     private HashMap data, header;
 
-    public PlatformsAdapter(@NonNull Activity activity) {
+    public CenterPlatformsAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public PlatformsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new PlatformsHolder(SingleItemPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public CenterPlatformsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new CenterPlatformsHolder(SingleItemCenterPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PlatformsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull CenterPlatformsHolder holder, int i) {
 //        PlatformModel platform = (PlatformModel) platforms.get(i);
 
         initializer(holder);
@@ -72,13 +72,13 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
         }
     }
 
-    private void initializer(PlatformsHolder holder) {
+    private void initializer(CenterPlatformsHolder holder) {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
-    private void detector(PlatformsHolder holder) {
+    private void detector(CenterPlatformsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
 
@@ -86,7 +86,7 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
         }
     }
 
-    private void listener(PlatformsHolder holder) {
+    private void listener(CenterPlatformsHolder holder) {
         ClickManager.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.containerConstraintLayout);
@@ -119,7 +119,7 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
         });
     }
 
-    private void setData(PlatformsHolder holder) {
+    private void setData(CenterPlatformsHolder holder) {
         holder.binding.titleTextView.setText("تماس صوتی آنلاین");
     }
 
@@ -127,11 +127,11 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
         // TODO : Place Code When Needed
     }
 
-    public class PlatformsHolder extends RecyclerView.ViewHolder {
+    public class CenterPlatformsHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemPlatformBinding binding;
+        private SingleItemCenterPlatformBinding binding;
 
-        public PlatformsHolder(SingleItemPlatformBinding binding) {
+        public CenterPlatformsHolder(SingleItemCenterPlatformBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
