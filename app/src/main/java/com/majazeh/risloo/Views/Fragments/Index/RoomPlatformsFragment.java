@@ -15,6 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.PlatformsAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomPlatformsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -30,7 +31,7 @@ public class RoomPlatformsFragment extends Fragment {
     private FragmentRoomPlatformsBinding binding;
 
     // Adapters
-//    private PlatformsAdapter adapter;
+    private PlatformsAdapter adapter;
 
     // Vars
     private HashMap data, header;
@@ -55,7 +56,7 @@ public class RoomPlatformsFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new PlatformsAdapter(requireActivity());
+        adapter = new PlatformsAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -121,18 +122,18 @@ public class RoomPlatformsFragment extends Fragment {
 //                            adapter.clearPlatforms();
 //
 //                        if (!platforms.data().isEmpty()) {
-//                            adapter.setPlatforms(platforms.data());
-//                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
+                            adapter.setPlatforms(null);
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
 //                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
 //                        } else if (adapter.getItemCount() == 0) {
 //                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
 //                        }
-//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
-//
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
 //
 //                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
 //                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
