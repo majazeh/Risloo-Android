@@ -1,15 +1,20 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemRoomPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -25,6 +30,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
     // Vars
     private ArrayList<TypeModel> platforms;
     private HashMap data, header;
+    private boolean userSelect = false, editable = false;
 
     public RoomPlatformsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -72,10 +78,17 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }
     }
 
+    private void setEditable(boolean editable) {
+        this.editable = editable;
+        notifyDataSetChanged();
+    }
+
     private void initializer(RoomPlatformsHolder holder) {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
+
+        InitManager.fixedSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels, "adapter");
     }
 
     private void detector(RoomPlatformsHolder holder) {
@@ -84,10 +97,22 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(RoomPlatformsHolder holder) {
         ClickManager.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.containerConstraintLayout);
+
+        holder.binding.inputEditText.setOnTouchListener((v, event) -> {
+            if (editable) {
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    if (!holder.binding.inputEditText.hasFocus()) {
+                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                    }
+                }
+            }
+            return false;
+        });
 
         holder.binding.centerCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked)
@@ -98,23 +123,82 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
 
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                doWork("on", "switch");
+                setEditable(true);
 
                 holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
                 holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
                 holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+
+                doWork("on", "switch");
             } else {
-                doWork("", "switch");
+                setEditable(false);
 
                 holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
                 holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
                 holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+
+                doWork("", "switch");
+            }
+        });
+
+        holder.binding.levelSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        holder.binding.levelSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    switch (position) {
+                        case 0:
+                            doWork("1", "level");
+                            break;
+                        case 1:
+                            doWork("2", "level");
+                            break;
+                        case 2:
+                            doWork("0", "level");
+                            break;
+                    }
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
             }
         });
     }
 
     private void setData(RoomPlatformsHolder holder) {
         holder.binding.titleTextView.setText("تماس صوتی آنلاین");
+
+        setClickable(holder);
+    }
+
+    private void setClickable(RoomPlatformsHolder holder) {
+        if (editable) {
+            holder.binding.inputEditText.setFocusableInTouchMode(true);
+            holder.binding.centerCheckBox.setEnabled(true);
+            holder.binding.levelSpinner.setEnabled(true);
+
+            holder.binding.inputEditText.setAlpha((float) 1);
+            holder.binding.centerCheckBox.setAlpha((float) 1);
+            holder.binding.levelSpinner.setAlpha((float) 1);
+            holder.binding.angleImageView.setAlpha((float) 1);
+        } else {
+            holder.binding.inputEditText.setFocusableInTouchMode(false);
+            holder.binding.centerCheckBox.setEnabled(false);
+            holder.binding.levelSpinner.setEnabled(false);
+
+            holder.binding.inputEditText.setAlpha((float) 0.6);
+            holder.binding.centerCheckBox.setAlpha((float) 0.6);
+            holder.binding.levelSpinner.setAlpha((float) 0.6);
+            holder.binding.angleImageView.setAlpha((float) 0.6);
+        }
     }
 
     private void doWork(String value, String method) {

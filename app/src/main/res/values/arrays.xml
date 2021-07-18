@@ -162,6 +162,12 @@
         <item>متن</item>
     </array>
 
+    <array name="PlatformLevels">
+        <item>پیشفرض مرکز</item>
+        <item>فعال</item>
+        <item>غیر‌فعال</item>
+    </array>
+
     //////////////////////////////////////////////////////////////////////////////////////
 
     // Payment Arrays
