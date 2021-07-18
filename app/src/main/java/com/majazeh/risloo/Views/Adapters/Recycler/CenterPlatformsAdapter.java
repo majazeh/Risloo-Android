@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -92,7 +94,8 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         }).widget(holder.binding.containerConstraintLayout);
 
         ClickManager.onClickListener(() -> {
-            // TODO : Place Code When Needed
+//            NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(model);
+//            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.editImageView);
 
         holder.binding.sessionCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {

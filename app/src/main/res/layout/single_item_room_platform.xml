@@ -112,7 +112,7 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_8sdp"
             android:singleLine="true"
             android:spinnerMode="dropdown"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"

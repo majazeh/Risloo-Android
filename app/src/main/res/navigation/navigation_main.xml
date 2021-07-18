@@ -485,6 +485,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/editPlatformFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Edit.EditPlatformFragment"
+        android:label="@string/EditPlatformFragmentTitle"
+        tools:layout="@layout/fragment_edit_platform" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/editSessionFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment"
         android:label="@string/EditSessionFragmentTitle"
@@ -523,6 +533,10 @@
     <action
         android:id="@+id/action_global_editCenterUserFragment"
         app:destination="@id/editCenterUserFragment" />
+
+    <action
+        android:id="@+id/action_global_editPlatformFragment"
+        app:destination="@id/editPlatformFragment" />
 
     <action
         android:id="@+id/action_global_editSessionFragment"

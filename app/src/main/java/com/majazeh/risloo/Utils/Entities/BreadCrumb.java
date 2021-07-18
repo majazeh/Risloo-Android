@@ -182,6 +182,8 @@ public class BreadCrumb {
             case R.id.editCenterUserFragment:
                 setModals("user", EditCenterUserFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editCenterUser();
+            case R.id.editPlatformFragment:
+                return editPlatform();
             case R.id.editSessionFragment:
                 setModals("session", EditSessionFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editSession();
@@ -759,6 +761,14 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> editPlatform() {
+        ArrayList<String> list = centerPlatforms();
+        list.add(activity.getResources().getString(R.string.EditPlatformFragmentTitle));
+
+        destinationIds = editPlatformIds();
+        return list;
+    }
+
     private ArrayList<String> editSession() {
         ArrayList<String> list = session();
         list.add("ویرایش");
@@ -1214,6 +1224,13 @@ public class BreadCrumb {
     private ArrayList<Integer> editCenterUserIds() {
         ArrayList<Integer> list = referenceIds();
         list.add(R.id.editCenterUserFragment);
+
+        return list;
+    }
+
+    private ArrayList<Integer> editPlatformIds() {
+        ArrayList<Integer> list = centerPlatformsIds();
+        list.add(R.id.editPlatformFragment);
 
         return list;
     }

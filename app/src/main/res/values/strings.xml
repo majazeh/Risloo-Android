@@ -601,6 +601,23 @@
     <string name="EditCenterUserFragmentButton">ویرایش</string>
 
     /*
+    ---------- EditPlatform Fragment ----------
+    */
+
+    <string name="EditPlatformFragmentTitle">ویرایش محل برگزاری</string>
+
+    <string name="EditPlatformFragmentTitleHeader">عنوان</string>
+    <string name="EditPlatformFragmentSessionTypeHeader">نوع جلسه</string>
+    <string name="EditPlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
+    <string name="EditPlatformFragmentIdentifierHeader">مقدار</string>
+
+    <string name="EditPlatformFragmentIdentifierHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
+
+    <string name="EditPlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+
+    <string name="EditPlatformFragmentButton">ویرایش</string>
+
+    /*
     ---------- EditSession Fragment ----------
     */
 
