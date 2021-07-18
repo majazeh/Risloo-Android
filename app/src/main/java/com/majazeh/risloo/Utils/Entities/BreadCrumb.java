@@ -915,12 +915,18 @@ public class BreadCrumb {
 
         if (!centerType.equals("room")) {
             try {
-                list.add("کلینیک شخصی" + " " + centerModel.getDetail().getString("title"));
+                if (centerModel != null && centerModel.getDetail() != null)
+                    list.add("کلینیک شخصی" + " " + centerModel.getDetail().getString("title"));
+                else
+                    list.add("نامعلوم");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         } else {
-            list.add("اتاق درمان" + " " + roomModel.getRoomManager().getName());
+            if (roomModel != null && roomModel.getRoomManager() != null)
+                list.add("اتاق درمان" + " " + roomModel.getRoomManager().getName());
+            else
+                list.add("نامعلوم");
         }
 
         destinationIds = roomIds();

@@ -46,7 +46,7 @@ public class CreateSchedulePlatformFragment extends Fragment {
     private void initializer() {
         adapter = new TabPlatformsAdapter(requireActivity());
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.platformRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.platformRecyclerView, 0, 0, getResources().getDimension(R.dimen._4sdp), 0);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSchedulePlatformTabButton), getResources().getColor(R.color.White));
     }
