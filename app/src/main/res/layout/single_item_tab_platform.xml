@@ -10,7 +10,7 @@
     app:cardElevation="0dp"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.RoomPlatformsAdapter">
+    tools:context=".Views.Adapters.Recycler.TabPlatformsAdapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
@@ -71,7 +71,7 @@
             android:paddingStart="@dimen/_8sdp"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:hint="@string/RoomPlatformsFragmentInputHint"
+            android:hint="@string/TabPlatformsAdapterInputHint"
             android:gravity="center|right"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:checked="false"
             android:gravity="center|start"
-            android:text="@string/RoomPlatformsFragmentCenterCheckbox"
+            android:text="@string/TabPlatformsAdapterRoomCheckbox"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray600"
@@ -107,47 +107,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/input_editText" />
-
-        <Spinner
-            android:id="@+id/level_spinner"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_28sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:singleLine="true"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-            app:layout_constraintEnd_toEndOf="@id/title_textView"
-            app:layout_constraintStart_toEndOf="@id/level_textView"
-            app:layout_constraintTop_toBottomOf="@id/center_checkBox" />
-
-        <ImageView
-            android:id="@+id/angle_imageView"
-            android:layout_width="@dimen/_14sdp"
-            android:layout_height="@dimen/_14sdp"
-            android:layout_marginEnd="@dimen/_4sdp"
-            android:contentDescription="@string/AppImageContent"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_angle_down_light"
-            app:layout_constraintBottom_toBottomOf="@id/level_spinner"
-            app:layout_constraintEnd_toEndOf="@id/level_spinner"
-            app:layout_constraintTop_toTopOf="@id/level_spinner"
-            app:tint="@color/Gray500" />
-
-        <TextView
-            android:id="@+id/level_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="start"
-            android:text="@string/RoomPlatformsFragmentSessionHint"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray400"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintBottom_toBottomOf="@id/level_spinner"
-            app:layout_constraintStart_toStartOf="@id/title_textView"
-            app:layout_constraintTop_toTopOf="@id/level_spinner" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -15,6 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionPlatformBinding;
 
@@ -22,6 +23,9 @@ public class CreateSessionPlatformFragment extends Fragment {
 
     // Binding
     public FragmentCreateSessionPlatformBinding binding;
+
+    // Adapters
+    public TabPlatformsAdapter adapter;
 
     @Nullable
     @Override
@@ -40,6 +44,8 @@ public class CreateSessionPlatformFragment extends Fragment {
     }
 
     private void initializer() {
+        adapter = new TabPlatformsAdapter(requireActivity());
+
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.platformRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionPlatformTabButton), getResources().getColor(R.color.White));
@@ -61,7 +67,8 @@ public class CreateSessionPlatformFragment extends Fragment {
     }
 
     private void setData() {
-        // TODO : Place Code When Needed
+        adapter.setPlatforms(null);
+        binding.platformRecyclerView.setAdapter(adapter);
     }
 
     private void setRecyclerView() {

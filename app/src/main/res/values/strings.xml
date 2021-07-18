@@ -1268,6 +1268,14 @@
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
 
     /*
+    ---------- TabPlatforms Adapter ----------
+    */
+
+    <string name="TabPlatformsAdapterRoomCheckbox">اتصال به اتاق درمان</string>
+
+    <string name="TabPlatformsAdapterInputHint">مقدار</string>
+
+    /*
     ---------- Users2 Adapter ----------
     */
 
