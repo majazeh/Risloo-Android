@@ -148,17 +148,19 @@ public class CreatePlatformFragment extends Fragment {
                 createSession = "";
         });
 
-        binding.availableSwitchCompat.toggleSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.availableSwitchCompat.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
                 available = "on";
 
-                binding.availableSwitchCompat.toggleTextView.setText(getResources().getString(R.string.AppSwicthOn));
-                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_green50);
+                binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOn));
+                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Green700));
+                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray300);
             } else {
                 available = "";
 
-                binding.availableSwitchCompat.toggleTextView.setText(getResources().getString(R.string.AppSwicthOff));
-                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50);
+                binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOff));
+                binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
+                binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
             }
         });
 
