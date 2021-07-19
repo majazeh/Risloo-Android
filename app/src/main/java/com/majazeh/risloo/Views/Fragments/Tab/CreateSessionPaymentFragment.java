@@ -31,6 +31,9 @@ public class CreateSessionPaymentFragment extends Fragment {
     // Adapters
     public AxisAdapter axisAdapter;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
     public String payment = "";
 
@@ -52,6 +55,8 @@ public class CreateSessionPaymentFragment extends Fragment {
 
     private void initializer() {
         axisAdapter = new AxisAdapter(requireActivity());
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionPaymentTabPaymentHeader));
 
@@ -85,12 +90,8 @@ public class CreateSessionPaymentFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView);
-                doWork();
-            }
+            if (current instanceof CreateSessionFragment)
+                ((CreateSessionFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 
@@ -101,13 +102,6 @@ public class CreateSessionPaymentFragment extends Fragment {
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> amounts) {
         axisAdapter.setItems(items, ids, amounts);
         binding.axisRecyclerView.setAdapter(axisAdapter);
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof CreateSessionFragment)
-            ((CreateSessionFragment) current).doWork();
     }
 
     @Override

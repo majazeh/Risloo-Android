@@ -43,6 +43,9 @@ public class CreateSessionSessionFragment extends Fragment {
     private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
     private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
     public String status = "", description = "", coordination = "";
     public String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
@@ -72,6 +75,8 @@ public class CreateSessionSessionFragment extends Fragment {
         endAccurateTimeBottomSheet = new TimeBottomSheet();
         startAccurateDateBottomSheet = new DateBottomSheet();
         endAccurateDateBottomSheet = new DateBottomSheet();
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabStatusHeader));
         binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabAxisHeader));
@@ -268,23 +273,8 @@ public class CreateSessionSessionFragment extends Fragment {
         }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (status.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.statusIncludeLayout.selectSpinner, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
-
-            if (binding.descriptionIncludeLayout.inputEditText.length() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
-
-            if (binding.coordinationIncludeLayout.inputEditText.length() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.coordinationIncludeLayout.inputEditText, binding.coordinationErrorLayout.getRoot(), binding.coordinationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.coordinationIncludeLayout.inputEditText, binding.coordinationErrorLayout.getRoot(), binding.coordinationErrorLayout.errorTextView);
-
-            if (!status.equals("") && binding.descriptionIncludeLayout.inputEditText.length() != 0 && binding.coordinationIncludeLayout.inputEditText.length() != 0)
-                doWork();
+            if (current instanceof CreateSessionFragment)
+                ((CreateSessionFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 
@@ -330,13 +320,6 @@ public class CreateSessionSessionFragment extends Fragment {
                 binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
                 break;
         }
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof CreateSessionFragment)
-            ((CreateSessionFragment) current).doWork();
     }
 
     @Override

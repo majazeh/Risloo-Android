@@ -27,6 +27,9 @@ public class CreateSessionPlatformFragment extends Fragment {
     // Adapters
     public TabPlatformsAdapter adapter;
 
+    // Fragments
+    private Fragment current;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class CreateSessionPlatformFragment extends Fragment {
     private void initializer() {
         adapter = new TabPlatformsAdapter(requireActivity());
 
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.platformRecyclerView, 0, 0, getResources().getDimension(R.dimen._4sdp), 0);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionPlatformTabButton), getResources().getColor(R.color.White));
@@ -62,7 +67,8 @@ public class CreateSessionPlatformFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            doWork();
+            if (current instanceof CreateSessionFragment)
+                ((CreateSessionFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 
@@ -73,13 +79,6 @@ public class CreateSessionPlatformFragment extends Fragment {
 
     private void setRecyclerView() {
         // TODO : Place Code When Needed
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof CreateSessionFragment)
-            ((CreateSessionFragment) current).doWork();
     }
 
     @Override
