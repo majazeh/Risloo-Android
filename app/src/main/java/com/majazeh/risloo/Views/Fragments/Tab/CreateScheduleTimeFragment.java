@@ -45,8 +45,11 @@ public class CreateScheduleTimeFragment extends Fragment {
     private TimeBottomSheet startTimeBottomSheet;
     private DateBottomSheet specifiedDateBottomSheet, periodStartDateBottomSheet, periodEndDateBottomSheet;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
-    public String startTime = "", duration = "60", dateType = "specified", patternType = "period", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
+    public String startTime = "", duration = "60", dateType = "specified", patternType = "weeks", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
 
     @Nullable
     @Override
@@ -73,6 +76,8 @@ public class CreateScheduleTimeFragment extends Fragment {
         specifiedDateBottomSheet = new DateBottomSheet();
         periodStartDateBottomSheet = new DateBottomSheet();
         periodEndDateBottomSheet = new DateBottomSheet();
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTimeTabStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateScheduleTimeTabDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
@@ -173,13 +178,13 @@ public class CreateScheduleTimeFragment extends Fragment {
         binding.patternTypeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.first_radioButton:
-                    patternType = "repeat";
+                    patternType = "weeks";
 
                     binding.repeatPatternGroup.setVisibility(View.VISIBLE);
                     binding.periodPatternGroup.setVisibility(View.GONE);
                     break;
                 case R.id.second_radioButton:
-                    patternType = "period";
+                    patternType = "range";
 
                     binding.repeatPatternGroup.setVisibility(View.GONE);
                     binding.periodPatternGroup.setVisibility(View.VISIBLE);
@@ -211,18 +216,8 @@ public class CreateScheduleTimeFragment extends Fragment {
         }).widget(binding.periodEndDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (startTime.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
-
-            if (binding.durationIncludeLayout.inputEditText.length() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
-
-            if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0)
-                doWork();
+            if (current instanceof CreateScheduleFragment)
+                ((CreateScheduleFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 
@@ -294,13 +289,6 @@ public class CreateScheduleTimeFragment extends Fragment {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof CreateScheduleFragment)
-            ((CreateScheduleFragment) current).doWork();
     }
 
     @Override

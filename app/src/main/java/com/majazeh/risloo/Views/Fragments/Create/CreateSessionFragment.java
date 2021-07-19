@@ -176,7 +176,7 @@ public class CreateSessionFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (time instanceof CreateSessionTimeFragment && session instanceof CreateSessionSessionFragment && payment instanceof CreateSessionPaymentFragment) {
+                                        if (time instanceof CreateSessionTimeFragment && session instanceof CreateSessionSessionFragment) {
                                             switch (key) {
                                                 case "time":
                                                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));

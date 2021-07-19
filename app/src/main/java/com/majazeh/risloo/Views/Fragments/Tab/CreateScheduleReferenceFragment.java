@@ -37,9 +37,11 @@ public class CreateScheduleReferenceFragment extends Fragment {
     // Dialogs
     private SearchableDialog casesDialog;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
-    public String type = "", roomId = "", caseId = "", count = "", selection = "";
-    public boolean bulkSession = false;
+    public String type = "", roomId = "", caseId = "", count = "", selection = "", groupSession = "";
 
     @Nullable
     @Override
@@ -59,6 +61,8 @@ public class CreateScheduleReferenceFragment extends Fragment {
 
     private void initializer() {
         casesDialog = new SearchableDialog();
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabTypeHeader));
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabCaseHeader));
@@ -106,11 +110,11 @@ public class CreateScheduleReferenceFragment extends Fragment {
 
         binding.bulkSessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                bulkSession = true;
+                groupSession = "on";
 
                 binding.countIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             } else {
-                bulkSession = false;
+                groupSession = "";
 
                 binding.countIncludeLayout.getRoot().setVisibility(View.GONE);
             }
@@ -142,24 +146,12 @@ public class CreateScheduleReferenceFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (type.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
-
-            if (selection.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView);
-
-            if (!type.equals("") && !selection.equals(""))
-                doWork();
+            if (current instanceof CreateScheduleFragment)
+                ((CreateScheduleFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof CreateScheduleFragment) {
             RoomModel model = ((CreateScheduleFragment) current).roomModel;
 
@@ -236,13 +228,6 @@ public class CreateScheduleReferenceFragment extends Fragment {
                 casesDialog.dismiss();
             } break;
         }
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof CreateScheduleFragment)
-            ((CreateScheduleFragment) current).doWork();
     }
 
     @Override
