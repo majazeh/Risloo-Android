@@ -53,6 +53,7 @@ public class EditUserFragment extends Fragment {
         userModel = (UserModel) EditUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         binding.viewPager.getRoot().setAdapter(adapter);
+        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
         tabLayoutMediator.attach();
     }
 

@@ -53,6 +53,7 @@ public class EditCenterFragment extends Fragment {
         adapter = new EditCenterAdapter(requireActivity(), centerModel.getCenterType());
 
         binding.viewPager.getRoot().setAdapter(adapter);
+        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
         tabLayoutMediator.attach();
 
         setData();

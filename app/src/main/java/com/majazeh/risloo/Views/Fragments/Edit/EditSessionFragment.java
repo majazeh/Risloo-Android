@@ -83,6 +83,7 @@ public class EditSessionFragment extends Fragment {
         adapter = new EditSessionAdapter(requireActivity(), hasCase);
 
         binding.viewPager.getRoot().setAdapter(adapter);
+        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
         tabLayoutMediator.attach();
 
         setData(sessionModel);
@@ -101,16 +102,22 @@ public class EditSessionFragment extends Fragment {
         platform = ((MainActivity) requireActivity()).fragmont.getPlatformEditSession(hasCase);
         payment = ((MainActivity) requireActivity()).fragmont.getPaymentEditSession(hasCase);
 
-        if (time instanceof EditSessionTimeFragment && reference instanceof EditSessionReferenceFragment) {
-            if (((EditSessionTimeFragment) time).startTime.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
-
-            if (hasCase) {
-                if (!((EditSessionTimeFragment) time).startTime.equals(""))
+        if (hasCase) {
+            if (time instanceof EditSessionTimeFragment) {
+                if (((EditSessionTimeFragment) time).startTime.equals("")) {
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                } else {
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
                     doWork();
-            } else {
+                }
+            }
+        } else {
+            if (time instanceof EditSessionTimeFragment && reference instanceof EditSessionReferenceFragment) {
+                if (((EditSessionTimeFragment) time).startTime.equals(""))
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                else
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
+
                 if (((EditSessionReferenceFragment) reference).type.equals("case") && ((EditSessionReferenceFragment) reference).caseId.equals(""))
                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                 else
@@ -193,15 +200,15 @@ public class EditSessionFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (time instanceof EditSessionTimeFragment && reference instanceof EditSessionReferenceFragment) {
-                                            switch (key) {
-                                                case "time":
+                                        switch (key) {
+                                            case "time":
+                                                if (time instanceof EditSessionTimeFragment)
                                                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                                                    break;
-                                                case "case_id":
+                                                break;
+                                            case "case_id":
+                                                if (!hasCase && reference instanceof EditSessionReferenceFragment)
                                                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                                                    break;
-                                            }
+                                                break;
                                         }
                                     }
                                 }

@@ -85,6 +85,7 @@ public class CreateScheduleFragment extends Fragment {
         }
 
         binding.viewPager.getRoot().setAdapter(adapter);
+        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
         tabLayoutMediator.attach();
     }
 
