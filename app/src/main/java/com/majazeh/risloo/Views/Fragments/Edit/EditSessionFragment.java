@@ -101,12 +101,28 @@ public class EditSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
-        if (time instanceof EditSessionTimeFragment) {
-            if (((EditSessionTimeFragment) time).startTime.equals("")) {
+        if (time instanceof EditSessionTimeFragment && reference instanceof EditSessionReferenceFragment) {
+            if (((EditSessionTimeFragment) time).startTime.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
-                doWork();
+
+            if (hasCase) {
+                if (!((EditSessionTimeFragment) time).startTime.equals(""))
+                    doWork();
+            } else {
+                if (((EditSessionReferenceFragment) reference).type.equals("case") && ((EditSessionReferenceFragment) reference).caseId.equals(""))
+                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                else
+                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
+
+                if (((EditSessionReferenceFragment) reference).type.equals("case")) {
+                    if (!((EditSessionTimeFragment) time).startTime.equals("") && !((EditSessionReferenceFragment) reference).caseId.equals(""))
+                        doWork();
+                } else {
+                    if (!((EditSessionTimeFragment) time).startTime.equals(""))
+                        doWork();
+                }
             }
         }
     }
@@ -177,10 +193,13 @@ public class EditSessionFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (time instanceof EditSessionTimeFragment) {
+                                        if (time instanceof EditSessionTimeFragment && reference instanceof EditSessionReferenceFragment) {
                                             switch (key) {
                                                 case "time":
                                                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    break;
+                                                case "case_id":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                             }
                                         }

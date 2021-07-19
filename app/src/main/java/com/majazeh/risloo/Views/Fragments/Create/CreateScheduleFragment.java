@@ -101,7 +101,7 @@ public class CreateScheduleFragment extends Fragment {
     }
 
     public void checkRequire() {
-        if (time instanceof CreateScheduleTimeFragment && session instanceof CreateScheduleSessionFragment) {
+        if (time instanceof CreateScheduleTimeFragment && session instanceof CreateScheduleSessionFragment && reference instanceof CreateScheduleReferenceFragment) {
             if (((CreateScheduleTimeFragment) time).startTime.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
@@ -112,8 +112,18 @@ public class CreateScheduleFragment extends Fragment {
             else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.errorTextView);
 
-            if (!((CreateScheduleTimeFragment) time).startTime.equals("") && ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0)
-                doWork();
+            if (((CreateScheduleReferenceFragment) reference).type.equals("case") && ((CreateScheduleReferenceFragment) reference).caseId.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            else
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
+
+            if (((CreateScheduleReferenceFragment) reference).type.equals("case")) {
+                if (!((CreateScheduleTimeFragment) time).startTime.equals("") && ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0 && !((CreateScheduleReferenceFragment) reference).caseId.equals(""))
+                    doWork();
+            } else {
+                if (!((CreateScheduleTimeFragment) time).startTime.equals("") && ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0)
+                    doWork();
+            }
         }
     }
 
@@ -193,13 +203,16 @@ public class CreateScheduleFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (time instanceof CreateScheduleTimeFragment && session instanceof CreateScheduleSessionFragment) {
+                                        if (time instanceof CreateScheduleTimeFragment && session instanceof CreateScheduleSessionFragment && reference instanceof CreateScheduleReferenceFragment) {
                                             switch (key) {
                                                 case "time":
                                                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                                 case "fields":
                                                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    break;
+                                                case "case_id":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                             }
                                         }
