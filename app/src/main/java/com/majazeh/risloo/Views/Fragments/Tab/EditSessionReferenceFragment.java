@@ -43,8 +43,7 @@ public class EditSessionReferenceFragment extends Fragment {
     private Fragment current;
 
     // Vars
-    public String type = "", roomId = "", caseId = "", problem = "", count = "", selection = "";
-    public boolean bulkSession = false;
+    public String type = "", roomId = "", caseId = "", problem = "", count = "", selection = "", groupSession = "";
 
     @Nullable
     @Override
@@ -133,11 +132,11 @@ public class EditSessionReferenceFragment extends Fragment {
 
         binding.bulkSessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                bulkSession = true;
+                groupSession = "on";
 
                 binding.countIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             } else {
-                bulkSession = false;
+                groupSession = "";
 
                 binding.countIncludeLayout.getRoot().setVisibility(View.GONE);
             }
@@ -238,7 +237,7 @@ public class EditSessionReferenceFragment extends Fragment {
 
             if (model.isGroup_session()) {
                 binding.bulkSessionCheckBox.getRoot().setChecked(true);
-                bulkSession = true;
+                groupSession = "on";
 
                 binding.countIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             }

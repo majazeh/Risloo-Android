@@ -16,6 +16,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditSessionAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionBinding;
@@ -120,8 +121,26 @@ public class EditSessionFragment extends Fragment {
         }
 
         // Reference Data
-        data.put("case_id", "");
-        data.put("clients_type", "case");
+        if (hasCase) {
+            data.put("case_id", sessionModel.getCaseModel().getCaseId());
+            data.put("clients_type", "case");
+        } else {
+            if (reference instanceof EditSessionReferenceFragment) {
+                data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", ((EditSessionReferenceFragment) reference).selection));
+
+                data.put("clients_type", SelectionManager.getClientType(requireActivity(), "en", ((EditSessionReferenceFragment) reference).type));
+                if (data.get("clients_type").equals("case")) {
+                    data.put("case_id", ((EditSessionReferenceFragment) reference).caseId);
+                } else if (data.get("clients_type").equals("new_case")) {
+                    data.put("problem", ((EditSessionReferenceFragment) reference).problem);
+                }
+
+                data.put("group_session", ((EditSessionReferenceFragment) reference).groupSession);
+                if (data.get("group_session").equals("on")) {
+                    data.put("clients_number", ((EditSessionReferenceFragment) reference).count);
+                }
+            }
+        }
 
         // Session Data
         if (session instanceof EditSessionSessionFragment) {
