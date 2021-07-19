@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateSessionAdapter;
@@ -121,7 +122,7 @@ public class CreateSessionFragment extends Fragment {
 
         // Time Data
         if (time instanceof CreateSessionTimeFragment) {
-            data.put("time", ((CreateSessionTimeFragment) time).startTime);
+            data.put("time", DateManager.jalHHsMM(((CreateSessionTimeFragment) time).startTime));
             data.put("duration", ((CreateSessionTimeFragment) time).duration);
             data.put("date_type", ((CreateSessionTimeFragment) time).dateType);
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditSessionAdapter;
@@ -139,7 +140,7 @@ public class EditSessionFragment extends Fragment {
 
         // Time Data
         if (time instanceof EditSessionTimeFragment) {
-            data.put("time", ((EditSessionTimeFragment) time).startTime);
+            data.put("time", DateManager.jalHHsMM(((EditSessionTimeFragment) time).startTime));
             data.put("duration", ((EditSessionTimeFragment) time).duration);
         }
 
@@ -151,7 +152,18 @@ public class EditSessionFragment extends Fragment {
             if (reference instanceof EditSessionReferenceFragment) {
                 data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", ((EditSessionReferenceFragment) reference).selection));
 
-                data.put("clients_type", SelectionManager.getClientType(requireActivity(), "en", ((EditSessionReferenceFragment) reference).type));
+                if (((EditSessionReferenceFragment) reference).type.equals("اعضاء ریسلو")) {
+                    data.put("clients_type", "risloo");
+                } else if (((EditSessionReferenceFragment) reference).type.contains("مرکز")) {
+                    data.put("clients_type", "center");
+                } else if (((EditSessionReferenceFragment) reference).type.contains("اتاق درمان")) {
+                    data.put("clients_type", "room");
+                } else if (((EditSessionReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
+                    data.put("clients_type", "case");
+                } else if (((EditSessionReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
+                    data.put("clients_type", "new_case");
+                }
+
                 if (data.get("clients_type").equals("case")) {
                     data.put("case_id", ((EditSessionReferenceFragment) reference).caseId);
                 } else if (data.get("clients_type").equals("new_case")) {

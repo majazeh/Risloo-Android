@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateScheduleAdapter;
@@ -133,7 +134,7 @@ public class CreateScheduleFragment extends Fragment {
 
         // Time Data
         if (time instanceof CreateScheduleTimeFragment) {
-            data.put("time", ((CreateScheduleTimeFragment) time).startTime);
+            data.put("time", DateManager.jalHHsMM(((CreateScheduleTimeFragment) time).startTime));
             data.put("duration", ((CreateScheduleTimeFragment) time).duration);
             data.put("date_type", ((CreateScheduleTimeFragment) time).dateType);
 
@@ -156,7 +157,18 @@ public class CreateScheduleFragment extends Fragment {
         if (reference instanceof CreateScheduleReferenceFragment) {
             data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", ((CreateScheduleReferenceFragment) reference).selection));
 
-            data.put("clients_type", SelectionManager.getClientType(requireActivity(), "en", ((CreateScheduleReferenceFragment) reference).type));
+            if (((CreateScheduleReferenceFragment) reference).type.equals("اعضاء ریسلو")) {
+                data.put("clients_type", "risloo");
+            } else if (((CreateScheduleReferenceFragment) reference).type.contains("مرکز")) {
+                data.put("clients_type", "center");
+            } else if (((CreateScheduleReferenceFragment) reference).type.contains("اتاق درمان")) {
+                data.put("clients_type", "room");
+            } else if (((CreateScheduleReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
+                data.put("clients_type", "case");
+            } else if (((CreateScheduleReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
+                data.put("clients_type", "new_case");
+            }
+
             if (data.get("clients_type").equals("case")) {
                 data.put("case_id", ((CreateScheduleReferenceFragment) reference).caseId);
             }
