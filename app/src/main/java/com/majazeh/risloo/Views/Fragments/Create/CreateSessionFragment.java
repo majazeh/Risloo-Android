@@ -99,7 +99,7 @@ public class CreateSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
-        if (time instanceof CreateSessionTimeFragment && session instanceof CreateSessionSessionFragment && payment instanceof CreateSessionPaymentFragment) {
+        if (time instanceof CreateSessionTimeFragment && session instanceof CreateSessionSessionFragment) {
             if (((CreateSessionTimeFragment) time).startTime.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else

@@ -12,8 +12,12 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditSessionAdapter;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
@@ -95,8 +99,41 @@ public class EditSessionFragment extends Fragment {
         }
     }
 
+    public void checkRequire() {
+        if (time instanceof EditSessionTimeFragment) {
+            if (((EditSessionTimeFragment) time).startTime.equals("")) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            } else {
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
+                doWork();
+            }
+        }
+    }
+
     public void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        // Time Data
+        if (time instanceof EditSessionTimeFragment) {
+            data.put("time", ((EditSessionTimeFragment) time).startTime);
+            data.put("duration", ((EditSessionTimeFragment) time).duration);
+        }
+
+        // Reference Data
+        data.put("case_id", "");
+        data.put("clients_type", "case");
+
+        // Session Data
+        if (session instanceof EditSessionSessionFragment) {
+            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((EditSessionSessionFragment) session).status));
+            data.put("description", ((EditSessionSessionFragment) session).description);
+            data.put("client_reminder", ((EditSessionSessionFragment) session).coordination);
+        }
+
+        // Payment Data
+        if (payment instanceof EditSessionPaymentFragment) {
+            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((EditSessionPaymentFragment) payment).payment));
+        }
 
         Session.edit(data, header, new Response() {
             @Override
@@ -121,9 +158,12 @@ public class EditSessionFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        switch (key) {
-                                            case "":
-                                                break;
+                                        if (time instanceof EditSessionTimeFragment) {
+                                            switch (key) {
+                                                case "time":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    break;
+                                            }
                                         }
                                     }
                                 }

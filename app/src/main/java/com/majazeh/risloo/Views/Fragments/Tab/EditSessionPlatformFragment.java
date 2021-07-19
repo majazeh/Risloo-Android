@@ -27,6 +27,9 @@ public class EditSessionPlatformFragment extends Fragment {
     // Adapters
     public TabPlatformsAdapter adapter;
 
+    // Fragments
+    private Fragment current;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
@@ -46,6 +49,8 @@ public class EditSessionPlatformFragment extends Fragment {
     private void initializer() {
         adapter = new TabPlatformsAdapter(requireActivity());
 
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.platformRecyclerView, 0, 0, getResources().getDimension(R.dimen._4sdp), 0);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionPlatformTabButton), getResources().getColor(R.color.White));
@@ -62,7 +67,8 @@ public class EditSessionPlatformFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            doWork();
+            if (current instanceof EditSessionFragment)
+                ((EditSessionFragment) current).checkRequire();
         }).widget(binding.editTextView.getRoot());
     }
 
@@ -73,13 +79,6 @@ public class EditSessionPlatformFragment extends Fragment {
 
     private void setRecyclerView() {
         // TODO : Place Code When Needed
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof EditSessionFragment)
-            ((EditSessionFragment) current).doWork();
     }
 
     @Override

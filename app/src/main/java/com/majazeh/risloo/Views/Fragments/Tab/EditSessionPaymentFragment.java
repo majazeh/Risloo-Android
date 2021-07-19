@@ -26,6 +26,9 @@ public class EditSessionPaymentFragment extends Fragment {
     // Binding
     public FragmentEditSessionPaymentBinding binding;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
     public String payment = "";
 
@@ -46,6 +49,8 @@ public class EditSessionPaymentFragment extends Fragment {
     }
 
     private void initializer() {
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionPaymentTabPaymentHeader));
 
         InitManager.fixedSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes, "main");
@@ -76,18 +81,12 @@ public class EditSessionPaymentFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (payment.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.paymentIncludeLayout.selectSpinner, binding.paymentErrorLayout.getRoot(), binding.paymentErrorLayout.errorTextView);
-                doWork();
-            }
+            if (current instanceof EditSessionFragment)
+                ((EditSessionFragment) current).checkRequire();
         }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
@@ -100,13 +99,6 @@ public class EditSessionPaymentFragment extends Fragment {
                 }
             }
         }
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof EditSessionFragment)
-            ((EditSessionFragment) current).doWork();
     }
 
     @Override

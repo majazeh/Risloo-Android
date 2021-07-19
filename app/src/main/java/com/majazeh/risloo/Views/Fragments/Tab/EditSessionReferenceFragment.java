@@ -39,6 +39,9 @@ public class EditSessionReferenceFragment extends Fragment {
     // Dialogs
     private SearchableDialog casesDialog;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
     public String type = "", roomId = "", caseId = "", problem = "", count = "", selection = "";
     public boolean bulkSession = false;
@@ -61,6 +64,8 @@ public class EditSessionReferenceFragment extends Fragment {
 
     private void initializer() {
         casesDialog = new SearchableDialog();
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionReferenceTabTypeHeader));
         binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionReferenceTabCaseHeader));
@@ -164,24 +169,12 @@ public class EditSessionReferenceFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (type.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.typeIncludeLayout.selectSpinner, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
-
-            if (selection.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.selectionIncludeLayout.selectSpinner, binding.selectionErrorLayout.getRoot(), binding.selectionErrorLayout.errorTextView);
-
-            if (!type.equals("") && !selection.equals(""))
-                doWork();
+            if (current instanceof EditSessionFragment)
+                ((EditSessionFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
@@ -332,13 +325,6 @@ public class EditSessionReferenceFragment extends Fragment {
                 casesDialog.dismiss();
             } break;
         }
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof EditSessionFragment)
-            ((EditSessionFragment) current).doWork();
     }
 
     @Override

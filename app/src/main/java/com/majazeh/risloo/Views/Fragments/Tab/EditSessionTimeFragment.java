@@ -33,6 +33,9 @@ public class EditSessionTimeFragment extends Fragment {
     private TimeBottomSheet startTimeBottomSheet;
     private DateBottomSheet startDateBottomSheet;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
     public String startTime = "", duration = "60", startDate = "";
 
@@ -55,6 +58,8 @@ public class EditSessionTimeFragment extends Fragment {
     private void initializer() {
         startTimeBottomSheet = new TimeBottomSheet();
         startDateBottomSheet = new DateBottomSheet();
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTimeTabStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
         binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTimeTabDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
@@ -97,24 +102,12 @@ public class EditSessionTimeFragment extends Fragment {
         }).widget(binding.startDateIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (startTime.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.startTimeIncludeLayout.selectTextView, binding.startTimeErrorLayout.getRoot(), binding.startTimeErrorLayout.errorTextView);
-
-            if (binding.durationIncludeLayout.inputEditText.length() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.durationIncludeLayout.inputEditText, binding.durationErrorLayout.getRoot(), binding.durationErrorLayout.errorTextView);
-
-            if (!startTime.equals("") && binding.durationIncludeLayout.inputEditText.length() != 0)
-                doWork();
+            if (current instanceof EditSessionFragment)
+                ((EditSessionFragment) current).checkRequire();
         }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
@@ -154,13 +147,6 @@ public class EditSessionTimeFragment extends Fragment {
                 binding.startDateIncludeLayout.selectTextView.setText(DateManager.jalYYYYsMMsDD(startDate, "-"));
                 break;
         }
-    }
-
-    private void doWork() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
-        if (current instanceof EditSessionFragment)
-            ((EditSessionFragment) current).doWork();
     }
 
     @Override
