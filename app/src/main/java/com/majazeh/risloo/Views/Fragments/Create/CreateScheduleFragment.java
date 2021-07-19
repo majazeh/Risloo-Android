@@ -68,12 +68,6 @@ public class CreateScheduleFragment extends Fragment {
         tabs = getResources().getStringArray(R.array.CreateScheduleTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
 
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        reference = ((MainActivity) requireActivity()).fragmont.getReference();
-        session = ((MainActivity) requireActivity()).fragmont.getSession();
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
-        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -101,6 +95,12 @@ public class CreateScheduleFragment extends Fragment {
     }
 
     public void checkRequire() {
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        reference = ((MainActivity) requireActivity()).fragmont.getReference();
+        session = ((MainActivity) requireActivity()).fragmont.getSession();
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
+        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+
         if (time instanceof CreateScheduleTimeFragment && session instanceof CreateScheduleSessionFragment && reference instanceof CreateScheduleReferenceFragment) {
             if (((CreateScheduleTimeFragment) time).startTime.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));

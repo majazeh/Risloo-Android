@@ -66,11 +66,6 @@ public class CreateSessionFragment extends Fragment {
         tabs = getResources().getStringArray(R.array.CreateSessionTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
 
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        session = ((MainActivity) requireActivity()).fragmont.getSession();
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
-        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -99,6 +94,11 @@ public class CreateSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        session = ((MainActivity) requireActivity()).fragmont.getSession();
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
+        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
+
         if (time instanceof CreateSessionTimeFragment && session instanceof CreateSessionSessionFragment) {
             if (((CreateSessionTimeFragment) time).startTime.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));

@@ -82,12 +82,6 @@ public class EditSessionFragment extends Fragment {
 
         adapter = new EditSessionAdapter(requireActivity(), hasCase);
 
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        reference = ((MainActivity) requireActivity()).fragmont.getReference();
-        session = ((MainActivity) requireActivity()).fragmont.getSessionEditSession(hasCase);
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatformEditSession(hasCase);
-        payment = ((MainActivity) requireActivity()).fragmont.getPaymentEditSession(hasCase);
-
         binding.viewPager.getRoot().setAdapter(adapter);
         tabLayoutMediator.attach();
 
@@ -101,6 +95,12 @@ public class EditSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        reference = ((MainActivity) requireActivity()).fragmont.getReference();
+        session = ((MainActivity) requireActivity()).fragmont.getSessionEditSession(hasCase);
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatformEditSession(hasCase);
+        payment = ((MainActivity) requireActivity()).fragmont.getPaymentEditSession(hasCase);
+
         if (time instanceof EditSessionTimeFragment && reference instanceof EditSessionReferenceFragment) {
             if (((EditSessionTimeFragment) time).startTime.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
