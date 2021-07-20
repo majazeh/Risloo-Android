@@ -364,6 +364,21 @@
     </fragment>
 
     <fragment
+        android:id="@+id/createSessionUserFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.CreateSessionUserFragment"
+        android:label="@string/CreateSessionUserFragmentTitle"
+        tools:layout="@layout/fragment_create_session_user" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/createTreasuryFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Create.CreateTreasuryFragment"
         android:label="@string/CreateTreasuryFragmentTitle"
@@ -446,6 +461,10 @@
     <action
         android:id="@+id/action_global_createSessionFragment"
         app:destination="@id/createSessionFragment" />
+
+    <action
+        android:id="@+id/action_global_createSessionUserFragment"
+        app:destination="@id/createSessionUserFragment" />
 
     <action
         android:id="@+id/action_global_createTreasuryFragment"

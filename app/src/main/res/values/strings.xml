@@ -511,6 +511,19 @@
     <string name="CreateSessionPaymentTabButton">ساخت</string>
 
     /*
+    ---------- CreateSessionUser Fragment ----------
+    */
+
+    <string name="CreateSessionUserFragmentTitle">ثبت عضو جدید</string>
+
+    <string name="CreateSessionUserFragmentAxisHeader">انتخاب محور جلسه</string>
+    <string name="CreateSessionUserFragmentPlatformHeader">محل برگزاری جلسه</string>
+    <string name="CreateSessionUserFragmentClientHeader">انتخاب مراجع</string>
+    <string name="CreateSessionUserFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="CreateSessionUserFragmentButton">ثبت</string>
+
+    /*
     ---------- CreateTreasury Fragment ----------
     */
 

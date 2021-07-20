@@ -169,6 +169,8 @@ public class BreadCrumb {
                 return createSchedule();
             case R.id.createSessionFragment:
                 return createSession();
+            case R.id.createSessionUserFragment:
+                return createSessionUser();
             case R.id.createTreasuryFragment:
                 return createTreasury();
             case R.id.createUserFragment:
@@ -719,6 +721,14 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> createSessionUser() {
+        ArrayList<String> list = session();
+        list.add(activity.getResources().getString(R.string.CreateSessionUserFragmentTitle));
+
+        destinationIds = createSessionUserIds();
+        return list;
+    }
+
     private ArrayList<String> createTreasury() {
         ArrayList<String> list = treasuries();
         list.add(activity.getResources().getString(R.string.CreateTreasuryFragmentTitle));
@@ -1192,6 +1202,13 @@ public class BreadCrumb {
     private ArrayList<Integer> createSessionIds() {
         ArrayList<Integer> list = casseIds();
         list.add(R.id.createSessionFragment);
+
+        return list;
+    }
+
+    private ArrayList<Integer> createSessionUserIds() {
+        ArrayList<Integer> list = sessionIds();
+        list.add(R.id.createSessionUserFragment);
 
         return list;
     }
