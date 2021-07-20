@@ -6,6 +6,7 @@ import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -34,6 +35,17 @@ public class Room extends Model {
     public static void show(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
             Model.show(endpoint + "/" + data.get("id"), data, header, response, RoomModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void roomSessionPlatform(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.show(endpoint + "/" + data.get("id") + "/settings/session-platforms", data, header, response, SessionPlatformModel.class);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }

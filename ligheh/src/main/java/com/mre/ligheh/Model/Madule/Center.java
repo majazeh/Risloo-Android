@@ -4,6 +4,7 @@ import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -66,6 +67,17 @@ public class Center extends Model {
         try {
             if (has(data, "id"))
                 Model.show(endpoint + "/" + data.get("id") + "/dashboard", data, header, response, null);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void centerSessionPlatform(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.show(endpoint + "/" + data.get("id") + "/settings/session-platforms", data, header, response, SessionPlatformModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {

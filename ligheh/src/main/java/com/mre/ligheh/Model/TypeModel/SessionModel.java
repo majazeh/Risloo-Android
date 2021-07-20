@@ -19,7 +19,7 @@ public class SessionModel extends TypeModel {
     private boolean group_session = false;
     private String payment_status = "";
     private String selection_type = "";
-    private int clients_number ;
+    private int clients_number;
     private String clients_type = "";
     private String client_reminder = "";
     private String description = "";
@@ -31,6 +31,7 @@ public class SessionModel extends TypeModel {
     private JSONArray fields;
     private JSONArray practices;
     private List samples;
+    private List session_platforms;
     private String report = "";
     private String encryption_type = "";
     private ArrayList transactions;
@@ -43,7 +44,7 @@ public class SessionModel extends TypeModel {
                 setRoom(new RoomModel(jsonObject.getJSONObject("room")));
             if (!jsonObject.isNull("case"))
                 setCaseModel(new CaseModel(jsonObject.getJSONObject("case")));
-            if (!jsonObject.isNull("clients") && jsonObject.getJSONArray("clients").length() != 0){
+            if (!jsonObject.isNull("clients") && jsonObject.getJSONArray("clients").length() != 0) {
                 clients = new com.mre.ligheh.Model.Madule.List();
                 for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++) {
                     clients.add(new UserModel(jsonObject.getJSONArray("clients").getJSONObject(i)));
@@ -75,6 +76,14 @@ public class SessionModel extends TypeModel {
                 setClosed_at(jsonObject.getInt("closed_at"));
             if (!jsonObject.isNull("started_at"))
                 setStarted_at(jsonObject.getInt("started_at"));
+            if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
+                session_platforms = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++) {
+                    session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
+                }
+            }else{
+                setSession_platforms(new List());
+            }
             if (!jsonObject.isNull("canceled_at"))
                 setCanceled_at(jsonObject.getInt("canceled_at"));
             if (!jsonObject.isNull("fields")) {
@@ -294,6 +303,14 @@ public class SessionModel extends TypeModel {
 
     public void setEncryption_type(String encryption_type) {
         this.encryption_type = encryption_type;
+    }
+
+    public List getSession_platforms() {
+        return session_platforms;
+    }
+
+    public void setSession_platforms(List session_platforms) {
+        this.session_platforms = session_platforms;
     }
 
     public ArrayList getTransactions() {
