@@ -90,6 +90,10 @@ public class AuthRegisterFragment extends Fragment {
             return false;
         });
 
+        binding.mobileEditText.getRoot().setOnFocusChangeListener((v, hasFocus) -> {
+            mobile = binding.mobileEditText.getRoot().getText().toString().trim();
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -113,7 +117,6 @@ public class AuthRegisterFragment extends Fragment {
     private void doWork() {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        mobile = binding.mobileEditText.getRoot().getText().toString().trim();
         data.put("mobile", mobile);
 
         Auth.register(data, header, new Response() {

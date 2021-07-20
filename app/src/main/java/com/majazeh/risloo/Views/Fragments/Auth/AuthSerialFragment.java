@@ -94,6 +94,10 @@ public class AuthSerialFragment extends Fragment {
             return false;
         });
 
+        binding.serialEditText.getRoot().setOnFocusChangeListener((v, hasFocus) -> {
+            serial = binding.serialEditText.getRoot().getText().toString().trim();
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             if (binding.serialEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -150,7 +154,6 @@ public class AuthSerialFragment extends Fragment {
     private void doWork() {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        serial = binding.serialEditText.getRoot().getText().toString().trim();
         data.put("authorized_key", serial);
 
         // Todo : Place Code Here

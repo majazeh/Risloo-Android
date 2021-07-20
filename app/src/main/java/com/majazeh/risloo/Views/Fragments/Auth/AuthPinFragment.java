@@ -103,6 +103,10 @@ public class AuthPinFragment extends Fragment {
             return false;
         });
 
+        binding.pinEditText.getRoot().setOnFocusChangeListener((v, hasFocus) -> {
+            pin = binding.pinEditText.getRoot().getText().toString().trim();
+        });
+
         clickableSpan = new ClickableSpan() {
             @Override
             public void onClick(@NonNull View view) {
@@ -199,8 +203,6 @@ public class AuthPinFragment extends Fragment {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         countDownTimer.cancel();
-
-        pin = binding.pinEditText.getRoot().getText().toString().trim();
 
         if (method.equals("pin")) {
             data.put("code", pin);

@@ -140,8 +140,10 @@ public class CreateSessionUserFragment extends Fragment {
         }
 
         // TODO : Set Axis Spinner Here
+        setAxis();
 
         // TODO : Set Platform Spinner Here
+        setPlatform();
 
         if (model.getCaseModel() != null && model.getCaseModel().getClients() != null && model.getCaseModel().getClients().size() != 0) {
             setClients(model.getCaseModel().getClients());
@@ -151,6 +153,22 @@ public class CreateSessionUserFragment extends Fragment {
             description = model.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
         }
+    }
+
+    private void setAxis() {
+        ArrayList<String> options = new ArrayList<>();
+
+        options.add("");
+
+        InitManager.unfixedSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options, "main");
+    }
+
+    private void setPlatform() {
+        ArrayList<String> options = new ArrayList<>();
+
+        options.add("");
+
+        InitManager.unfixedSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options, "main");
     }
 
     private void setClients(com.mre.ligheh.Model.Madule.List clients) {

@@ -97,6 +97,10 @@ public class AuthLoginFragment extends Fragment {
             return false;
         });
 
+        binding.mobileEditText.getRoot().setOnFocusChangeListener((v, hasFocus) -> {
+            mobile = binding.mobileEditText.getRoot().getText().toString().trim();
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -120,7 +124,6 @@ public class AuthLoginFragment extends Fragment {
     private void doWork() {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        mobile = binding.mobileEditText.getRoot().getText().toString().trim();
         data.put("authorized_key", mobile);
 
         Auth.auth(data, header, new Response() {

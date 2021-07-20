@@ -98,6 +98,10 @@ public class AuthPasswordFragment extends Fragment {
             return false;
         });
 
+        binding.passwordIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.passwordIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -189,7 +193,6 @@ public class AuthPasswordFragment extends Fragment {
     private void doWork() {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        password = binding.passwordIncludeLayout.inputEditText.getText().toString().trim();
         data.put("password", password);
 
         if (authModel.getKey() != null)
