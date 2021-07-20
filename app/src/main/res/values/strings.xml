@@ -1171,6 +1171,12 @@
     <string name="Cases3AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
 
     /*
+    ---------- Platforms Adapter ----------
+    */
+
+    <string name="PlatformsAdapterHeader">بسترها</string>
+
+    /*
     ---------- Psychologists Adapter ----------
     */
 

@@ -453,13 +453,51 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/psychologists_header_includeLayout"
+                android:id="@+id/platforms_header_includeLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toBottomOf="@id/info3_constraintLayout" />
+
+            <include
+                android:id="@+id/platforms_shimmerLayout"
+                layout="@layout/component_shimmer_platform2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/platforms_header_includeLayout"
+                tools:visibility="gone" />
+
+            <include
+                android:id="@+id/platforms_singleLayout"
+                layout="@layout/component_single_platoform2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/platforms_header_includeLayout"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/platforms_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="platforms_shimmerLayout, platforms_singleLayout" />
+
+            <include
+                android:id="@+id/psychologists_header_includeLayout"
+                layout="@layout/component_main_index_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/platforms_barrier" />
 
             <include
                 android:id="@+id/psychologists_shimmerLayout"

@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.PlatformsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PracticesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples2Adapter;
@@ -38,6 +39,7 @@ public class SessionFragment extends Fragment {
     private FragmentSessionBinding binding;
 
     // Adapters
+    private PlatformsAdapter platformsAdapter;
     private PsychologistsAdapter psychologistsAdapter;
     private Users2Adapter users2Adapter;
     private PracticesAdapter practicesAdapter;
@@ -66,6 +68,7 @@ public class SessionFragment extends Fragment {
     }
 
     private void initializer() {
+        platformsAdapter = new PlatformsAdapter(requireActivity());
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
         users2Adapter = new Users2Adapter(requireActivity());
         practicesAdapter = new PracticesAdapter(requireActivity());
@@ -78,6 +81,7 @@ public class SessionFragment extends Fragment {
         InitManager.txtTextColor(binding.reportsTextView.getRoot(), getResources().getString(R.string.SessionFragmentReports), getResources().getColor(R.color.Blue600));
         InitManager.imgResTint(requireActivity(), binding.editImageView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
 
+        binding.platformsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PlatformsAdapterHeader));
         binding.psychologistsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
         binding.usersHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Users2AdapterHeader));
         binding.practicesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
@@ -87,6 +91,7 @@ public class SessionFragment extends Fragment {
         InitManager.imgResTint(requireActivity(), binding.practicesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.samplesAddImageView.getRoot(), R.drawable.ic_plus_light, R.color.Green700);
 
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.platformsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.practicesSingleLayout.recyclerView, 0, 0, 0, 0);
@@ -202,6 +207,16 @@ public class SessionFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         setData(sessionModel);
 
+//                        // Platforms Data
+//                        if (!sessionModel.getPlatforms().data().isEmpty()) {
+//                            platformsAdapter.setPlatforms(sessionModel.getPlatforms().data());
+//                            binding.platformsSingleLayout.recyclerView.setAdapter(platformsAdapter);
+//
+//                            binding.psychologistsSingleLayout.textView.setVisibility(View.GONE);
+//                        } else if (platformsAdapter.getItemCount() == 0) {
+                            binding.platformsSingleLayout.textView.setVisibility(View.VISIBLE);
+//                        }
+
                         List psychologists = new List();
                         if (sessionModel.getRoom() != null && sessionModel.getRoom().getRoomManager() != null)
                             psychologists.add(sessionModel.getRoom().getRoomManager());
@@ -252,10 +267,16 @@ public class SessionFragment extends Fragment {
                             binding.samplesSingleLayout.textView.setVisibility(View.VISIBLE);
                         }
 
+                        binding.platformsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(platformsAdapter.getItemCount()));
                         binding.psychologistsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
                         binding.usersHeaderIncludeLayout.countTextView.setText(StringManager.bracing(users2Adapter.getItemCount()));
                         binding.practicesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(practicesAdapter.getItemCount()));
                         binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples2Adapter.getItemCount()));
+
+                        // Platforms Data
+                        binding.platformsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.platformsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.platformsShimmerLayout.getRoot().stopShimmer();
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -284,6 +305,11 @@ public class SessionFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
+                        // Platforms Data
+                        binding.platformsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.platformsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.platformsShimmerLayout.getRoot().stopShimmer();
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
