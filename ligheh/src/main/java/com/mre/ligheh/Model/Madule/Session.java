@@ -68,6 +68,14 @@ public class Session extends Model {
         }
     }
 
+    public static void addUser(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.post(endpoint + "/" + data.get("id") + "/users" , data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void reports(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
             Model.get(" client-reports/all/"+ data.get("id"), data, header, response, SessionModel.class);

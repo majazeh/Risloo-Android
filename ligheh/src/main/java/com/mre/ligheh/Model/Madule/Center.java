@@ -85,6 +85,28 @@ public class Center extends Model {
         }
     }
 
+    public static void editCenterSessionPlatform(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.put(endpoint + "/" + data.get("id") + "/settings/session-platforms/" + data.get("platformId"), data, header, response, null);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void createCenterSessionPlatform(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            if (has(data, "id"))
+                Model.post(endpoint + "/" + data.get("id") + "/settings/session-platforms", data, header, response,null );
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public static void users(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(data, "id"))
