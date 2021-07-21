@@ -822,7 +822,7 @@
     ---------- CenterPlatforms Fragment ----------
     */
 
-    <string name="CenterPlatformsFragmentTitle">محل برگزاری جلسات مرکز درمانی</string>
+    <string name="CenterPlatformsFragmentTitle">محل برگزاری جلسات مرکز</string>
 
     <string name="CenterPlatformsFragmentAdd">افزودن محل برگزاری جدید</string>
 
@@ -897,7 +897,7 @@
     ---------- RoomPlatforms Fragment ----------
     */
 
-    <string name="RoomPlatformsFragmentTitle">محل برگزاری جلسات اتاق درمانی</string>
+    <string name="RoomPlatformsFragmentTitle">محل برگزاری جلسات اتاق</string>
 
     <string name="RoomPlatformsFragmentCenterCheckbox">اتصال به مرکز درمانی</string>
 
@@ -1176,6 +1176,14 @@
     <string name="PlatformsAdapterHeader">بسترها</string>
 
     /*
+    ---------- Platforms2 Adapter ----------
+    */
+
+    <string name="Platforms2AdapterRoomCheckbox">اتصال به اتاق درمان</string>
+
+    <string name="Platforms2AdapterIdentifierHint">مقدار</string>
+
+    /*
     ---------- Psychologists Adapter ----------
     */
 
@@ -1284,14 +1292,6 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- TabPlatforms Adapter ----------
-    */
-
-    <string name="TabPlatformsAdapterRoomCheckbox">اتصال به اتاق درمان</string>
-
-    <string name="TabPlatformsAdapterInputHint">مقدار</string>
 
     /*
     ---------- Users2 Adapter ----------

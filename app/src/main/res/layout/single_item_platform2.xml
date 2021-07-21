@@ -10,20 +10,22 @@
     app:cardElevation="0dp"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.TabPlatformsAdapter">
+    tools:context=".Views.Adapters.Recycler.Platforms2Adapter">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/_12sdp"
-        android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200">
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/available_switchCompat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="@dimen/_88sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:minWidth="@dimen/_86sdp"
             android:paddingBottom="@dimen/_6sdp"
             android:paddingEnd="@dimen/_4sdp"
             android:paddingStart="@dimen/_8sdp"
@@ -36,11 +38,9 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             android:layoutDirection="rtl"
             android:theme="@style/SwicthCompatTheme"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:gravity="start"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="right"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray700"
@@ -63,16 +63,16 @@
             tools:text="عنوان" />
 
         <EditText
-            android:id="@+id/input_editText"
+            android:id="@+id/identifier_editText"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:paddingEnd="@dimen/_8sdp"
             android:paddingStart="@dimen/_8sdp"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:hint="@string/TabPlatformsAdapterInputHint"
             android:gravity="center|right"
+            android:hint="@string/Platforms2AdapterIdentifierHint"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray700"
@@ -81,19 +81,19 @@
             android:fontFamily="@font/dana_regular"
             android:importantForAutofill="no"
             android:saveEnabled="false"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/title_textView"
             tools:text="مقدار" />
 
         <CheckBox
-            android:id="@+id/center_checkBox"
+            android:id="@+id/room_checkBox"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:checked="false"
             android:gravity="center|start"
-            android:text="@string/TabPlatformsAdapterRoomCheckbox"
+            android:text="@string/Platforms2AdapterRoomCheckbox"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray600"
@@ -103,10 +103,10 @@
             android:theme="@style/CheckBoxTheme"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_editText" />
+            app:layout_constraintTop_toBottomOf="@id/identifier_editText" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

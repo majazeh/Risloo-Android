@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Platforms2Adapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSchedulePlatformBinding;
 
@@ -25,7 +25,7 @@ public class CreateSchedulePlatformFragment extends Fragment {
     public FragmentCreateSchedulePlatformBinding binding;
 
     // Adapters
-    public TabPlatformsAdapter adapter;
+    public Platforms2Adapter adapter;
 
     // Fragments
     private Fragment current;
@@ -47,7 +47,7 @@ public class CreateSchedulePlatformFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new TabPlatformsAdapter(requireActivity());
+        adapter = new Platforms2Adapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
