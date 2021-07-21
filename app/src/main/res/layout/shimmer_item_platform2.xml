@@ -17,9 +17,9 @@
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <View
-            android:id="@+id/name_view"
+            android:id="@+id/full_view"
             android:layout_width="0dp"
-            android:layout_height="@dimen/_36sdp"
+            android:layout_height="@dimen/_108sdp"
             android:layout_margin="@dimen/_6sdp"
             android:background="@drawable/draw_2sdp_solid_gray50"
             app:layout_constraintBottom_toBottomOf="parent"
