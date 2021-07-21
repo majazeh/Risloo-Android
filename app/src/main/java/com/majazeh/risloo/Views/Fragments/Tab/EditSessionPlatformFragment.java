@@ -18,6 +18,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Platforms2Adapter;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionPlatformBinding;
+import com.mre.ligheh.Model.TypeModel.SessionModel;
 
 public class EditSessionPlatformFragment extends Fragment {
 
@@ -51,7 +52,7 @@ public class EditSessionPlatformFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.platformRecyclerView, 0, 0, getResources().getDimension(R.dimen._4sdp), 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionPlatformTabButton), getResources().getColor(R.color.White));
     }
@@ -73,12 +74,18 @@ public class EditSessionPlatformFragment extends Fragment {
     }
 
     private void setData() {
-        adapter.setPlatforms(null);
-        binding.platformRecyclerView.setAdapter(adapter);
-    }
+        if (current instanceof EditSessionFragment) {
+            SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-    private void setRecyclerView() {
-        // TODO : Place Code When Needed
+            if (!model.getSession_platforms().data().isEmpty()) {
+                adapter.setPlatforms(model.getSession_platforms().data());
+                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                binding.indexSingleLayout.textView.setVisibility(View.GONE);
+            } else if (adapter.getItemCount() == 0) {
+                binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     @Override
