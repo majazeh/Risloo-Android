@@ -17,13 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/_12sdp"
-        android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200">
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/available_switchCompat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="@dimen/_88sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:minWidth="@dimen/_86sdp"
             android:paddingBottom="@dimen/_6sdp"
             android:paddingEnd="@dimen/_4sdp"
             android:paddingStart="@dimen/_8sdp"
@@ -36,11 +38,9 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             android:layoutDirection="rtl"
             android:theme="@style/SwicthCompatTheme"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -50,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:gravity="start"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="right"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray700"
@@ -63,15 +63,14 @@
             tools:text="عنوان" />
 
         <EditText
-            android:id="@+id/input_editText"
+            android:id="@+id/identifier_editText"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
-            android:layout_marginTop="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
             android:paddingEnd="@dimen/_8sdp"
             android:paddingStart="@dimen/_8sdp"
             android:imeOptions="actionDone"
             android:inputType="text"
-            android:hint="@string/RoomPlatformsFragmentInputHint"
             android:gravity="center|right"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
@@ -81,7 +80,7 @@
             android:fontFamily="@font/dana_regular"
             android:importantForAutofill="no"
             android:saveEnabled="false"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/title_textView"
@@ -103,20 +102,20 @@
             android:theme="@style/CheckBoxTheme"
             android:layout_marginEnd="@dimen/_8sdp"
             android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/input_editText" />
+            app:layout_constraintTop_toBottomOf="@id/identifier_editText" />
 
         <Spinner
             android:id="@+id/level_spinner"
             android:layout_width="0dp"
             android:layout_height="@dimen/_28sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_8sdp"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:singleLine="true"
             android:spinnerMode="dropdown"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toEndOf="@id/level_textView"
             app:layout_constraintTop_toBottomOf="@id/center_checkBox" />

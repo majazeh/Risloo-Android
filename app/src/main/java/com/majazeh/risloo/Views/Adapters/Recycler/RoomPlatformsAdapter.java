@@ -15,8 +15,11 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemRoomPlatformBinding;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -44,15 +47,15 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
 
     @Override
     public void onBindViewHolder(@NonNull RoomPlatformsHolder holder, int i) {
-//        PlatformModel platform = (PlatformModel) platforms.get(i);
+        SessionPlatformModel platform = (SessionPlatformModel) platforms.get(i);
 
         initializer(holder);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, platform);
 
-        setData(holder);
+        setData(holder, platform);
     }
 
     @Override
@@ -60,7 +63,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         if (this.platforms != null)
             return platforms.size();
         else
-            return 4;
+            return 0;
     }
 
     public void setPlatforms(ArrayList<TypeModel> platforms) {
@@ -93,25 +96,30 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
 
     private void detector(RoomPlatformsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
+            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(RoomPlatformsHolder holder) {
+    private void listener(RoomPlatformsHolder holder, SessionPlatformModel model) {
         ClickManager.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.containerConstraintLayout);
 
-        holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (editable) {
+        holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
                 if (MotionEvent.ACTION_UP == event.getAction()) {
-                    if (!holder.binding.inputEditText.hasFocus()) {
-                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                    if (!holder.binding.identifierEditText.hasFocus()) {
+                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
                     }
                 }
-            }
             return false;
+        });
+
+        holder.binding.identifierEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            String identifier = holder.binding.identifierEditText.getText().toString().trim();
+
+            if (!identifier.equals(""))
+                doWork(identifier, "editText");
         });
 
         holder.binding.centerCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -123,21 +131,17 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
 
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                setEditable(true);
+                doWork("on", "switch");
 
                 holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
                 holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
                 holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
-
-                doWork("on", "switch");
             } else {
-                setEditable(false);
+                doWork("", "switch");
 
                 holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
                 holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
                 holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-
-                doWork("", "switch");
             }
         });
 
@@ -150,17 +154,9 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    switch (position) {
-                        case 0:
-                            doWork("1", "level");
-                            break;
-                        case 1:
-                            doWork("2", "level");
-                            break;
-                        case 2:
-                            doWork("0", "level");
-                            break;
-                    }
+                    String level = parent.getItemAtPosition(position).toString();
+
+                    doWork(SelectionManager.getPlatformLevel(activity, "en", level), "level");
 
                     userSelect = false;
                 }
@@ -173,28 +169,67 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         });
     }
 
-    private void setData(RoomPlatformsHolder holder) {
-        holder.binding.titleTextView.setText("تماس صوتی آنلاین");
+    private void setData(RoomPlatformsHolder holder, SessionPlatformModel model) {
+        String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType())) ;
 
-        setClickable(holder);
+        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.Gray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+        holder.binding.identifierEditText.setText(model.getIdentifier());
+
+        setAvailable(holder, model);
+
+        setPinned(holder, model);
+
+        setLevel(holder, model);
+    }
+
+    private void setAvailable(RoomPlatformsHolder holder, SessionPlatformModel model) {
+        if (model.isAvailable()) {
+            holder.binding.availableSwitchCompat.setChecked(true);
+
+            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
+            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
+            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+        } else {
+            holder.binding.availableSwitchCompat.setChecked(false);
+
+            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
+            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
+            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+        }
+    }
+
+    private void setPinned(RoomPlatformsHolder holder, SessionPlatformModel model) {
+        if (model.isPin())
+            holder.binding.centerCheckBox.setChecked(true);
+        else
+            holder.binding.centerCheckBox.setChecked(false);
+    }
+
+    private void setLevel(RoomPlatformsHolder holder, SessionPlatformModel model) {
+        String level = SelectionManager.getPlatformLevel(activity, "fa", String.valueOf(model.getSelected_level()));
+        for (int i = 0; i < holder.binding.levelSpinner.getCount(); i++) {
+            if (holder.binding.levelSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(level)) {
+                holder.binding.levelSpinner.setSelection(i);
+            }
+        }
     }
 
     private void setClickable(RoomPlatformsHolder holder) {
         if (editable) {
-            holder.binding.inputEditText.setFocusableInTouchMode(true);
+            holder.binding.identifierEditText.setFocusableInTouchMode(true);
             holder.binding.centerCheckBox.setEnabled(true);
             holder.binding.levelSpinner.setEnabled(true);
 
-            holder.binding.inputEditText.setAlpha((float) 1);
+            holder.binding.identifierEditText.setAlpha((float) 1);
             holder.binding.centerCheckBox.setAlpha((float) 1);
             holder.binding.levelSpinner.setAlpha((float) 1);
             holder.binding.angleImageView.setAlpha((float) 1);
         } else {
-            holder.binding.inputEditText.setFocusableInTouchMode(false);
+            holder.binding.identifierEditText.setFocusableInTouchMode(false);
             holder.binding.centerCheckBox.setEnabled(false);
             holder.binding.levelSpinner.setEnabled(false);
 
-            holder.binding.inputEditText.setAlpha((float) 0.6);
+            holder.binding.identifierEditText.setAlpha((float) 0.6);
             holder.binding.centerCheckBox.setAlpha((float) 0.6);
             holder.binding.levelSpinner.setAlpha((float) 0.6);
             holder.binding.angleImageView.setAlpha((float) 0.6);

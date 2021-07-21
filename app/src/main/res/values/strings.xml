@@ -901,7 +901,6 @@
 
     <string name="RoomPlatformsFragmentCenterCheckbox">اتصال به مرکز درمانی</string>
 
-    <string name="RoomPlatformsFragmentInputHint">مقدار</string>
     <string name="RoomPlatformsFragmentSessionHint">تنظیمات پیش‌فرض هنگام ایجاد جلسه:</string>
 
     /*

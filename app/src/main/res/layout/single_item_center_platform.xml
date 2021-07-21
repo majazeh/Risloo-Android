@@ -17,13 +17,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingBottom="@dimen/_12sdp"
-        android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200">
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
 
         <androidx.appcompat.widget.SwitchCompat
             android:id="@+id/available_switchCompat"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:minWidth="@dimen/_88sdp"
+            android:layout_marginLeft="@dimen/_4sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            android:minWidth="@dimen/_86sdp"
             android:paddingBottom="@dimen/_6sdp"
             android:paddingEnd="@dimen/_4sdp"
             android:paddingStart="@dimen/_8sdp"
@@ -36,28 +38,11 @@
             android:textColor="@color/Gray600"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
-            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
             android:layoutDirection="rtl"
             android:theme="@style/SwicthCompatTheme"
-            android:layout_marginLeft="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_12sdp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/edit_imageView"
-            android:layout_width="@dimen/_26sdp"
-            android:layout_height="@dimen/_26sdp"
-            android:layout_marginRight="@dimen/_12sdp"
-            android:contentDescription="@string/AppImageContent"
-            android:padding="@dimen/_7sdp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_pen_light"
-            android:background="@drawable/draw_oval_solid_transparent_border_1sdp_gray200"
-            app:layout_constraintBottom_toBottomOf="@id/available_switchCompat"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="@id/available_switchCompat"
-            app:tint="@color/Gray500" />
 
         <TextView
             android:id="@+id/title_textView"
@@ -65,8 +50,8 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:gravity="start"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:gravity="right"
             android:textSize="@dimen/_10ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray700"
@@ -76,6 +61,42 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/available_switchCompat"
             tools:text="عنوان" />
+
+        <ImageView
+            android:id="@+id/identifier_imageView"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toBottomOf="@id/identifier_textView"
+            app:layout_constraintStart_toStartOf="@id/title_textView"
+            app:layout_constraintTop_toTopOf="@id/identifier_textView"
+            app:tint="@color/Gray500"
+            tools:src="@drawable/ic_info_circle_light" />
+
+        <TextView
+            android:id="@+id/identifier_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_6sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:gravity="right"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintEnd_toEndOf="@id/title_textView"
+            app:layout_constraintStart_toEndOf="@id/identifier_imageView"
+            app:layout_constraintTop_toBottomOf="@id/title_textView"
+            tools:text="مقدار" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/identifier_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:constraint_referenced_ids="identifier_textView, identifier_imageView" />
 
         <CheckBox
             android:id="@+id/session_checkBox"
@@ -91,12 +112,28 @@
             android:fontFamily="@font/dana_regular"
             android:layoutDirection="rtl"
             android:theme="@style/CheckBoxTheme"
-            android:layout_marginEnd="@dimen/_8sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/title_textView" />
+            android:layout_marginLeft="@dimen/_6sdp"
+            android:layout_marginRight="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintLeft_toRightOf="@id/edit_imageView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/identifier_textView" />
+
+        <ImageView
+            android:id="@+id/edit_imageView"
+            android:layout_width="@dimen/_26sdp"
+            android:layout_height="@dimen/_26sdp"
+            android:layout_marginLeft="@dimen/_6sdp"
+            android:contentDescription="@string/AppImageContent"
+            android:padding="@dimen/_7sdp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_pen_light"
+            android:background="@drawable/draw_oval_solid_transparent_border_1sdp_gray200"
+            app:layout_constraintBottom_toBottomOf="@id/session_checkBox"
+            app:layout_constraintRight_toLeftOf="@id/session_checkBox"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="@id/session_checkBox"
+            app:tint="@color/Gray500" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

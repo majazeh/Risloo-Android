@@ -71,21 +71,21 @@ public class RoomPlatformsFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (!isLoading) {
-                if (!binding.getRoot().canScrollVertically(1)) {
-                    isLoading = true;
-
-                    if (data.containsKey("page"))
-                        data.put("page", ((int) data.get("page")) + 1);
-                    else
-                        data.put("page", 1);
-
-                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
-                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
-
-                    getData();
-                }
-            }
+//            if (!isLoading) {
+//                if (!binding.getRoot().canScrollVertically(1)) {
+//                    isLoading = true;
+//
+//                    if (data.containsKey("page"))
+//                        data.put("page", ((int) data.get("page")) + 1);
+//                    else
+//                        data.put("page", 1);
+//
+//                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
+//                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+//
+//                    getData();
+//                }
+//            }
         });
     }
 
@@ -111,52 +111,52 @@ public class RoomPlatformsFragment extends Fragment {
     }
 
     private void getData() {
-//        Room.platforms(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                List platforms = (List) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        if (Objects.equals(data.get("page"), 1))
-//                            adapter.clearPlatforms();
-//
-//                        if (!platforms.data().isEmpty()) {
-                            adapter.setPlatforms(null);
+        Room.roomSessionPlatform(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List platforms = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (Objects.equals(data.get("page"), 1))
+                            adapter.clearPlatforms();
+
+                        if (!platforms.data().isEmpty()) {
+                            adapter.setPlatforms(platforms.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
-//                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
-//                        }
+                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (adapter.getItemCount() == 0) {
+                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                        }
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                    });
-//                    isLoading = false;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                    });
-//                    isLoading = false;
-//                }
-//            }
-//        });
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                    });
+                    isLoading = false;
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                    });
+                    isLoading = false;
+                }
+            }
+        });
     }
 
     @Override
