@@ -17,6 +17,10 @@ public class StringManager {
         return "(" + value + ")";
     }
 
+    public static String bracing(String value) {
+        return "(" + value + ")";
+    }
+
     public static String substring(String value, int index) {
         return value.substring(value.length() - index);
     }

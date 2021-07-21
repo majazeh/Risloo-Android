@@ -10,7 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.databinding.SingleItemPlatformBinding;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -35,13 +38,13 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
 
     @Override
     public void onBindViewHolder(@NonNull PlatformsHolder holder, int i) {
-//        PlatformModel platform = (PlatformModel) platforms.get(i);
+        SessionPlatformModel platform = (SessionPlatformModel) platforms.get(i);
 
         detector(holder);
 
-        listener(holder);
+        listener(holder, platform);
 
-        setData(holder);
+        setData(holder, platform);
     }
 
     @Override
@@ -73,15 +76,17 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
         }
     }
 
-    private void listener(PlatformsHolder holder) {
+    private void listener(PlatformsHolder holder, SessionPlatformModel model) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.containerConstraintLayout);
     }
 
-    private void setData(PlatformsHolder holder) {
-        holder.binding.titleTextView.setText("انتخاب به عهده مراجع (مجازی) ");
-        holder.binding.valueTextView.setText("توضیح تستی");
+    private void setData(PlatformsHolder holder, SessionPlatformModel model) {
+        String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType())) + " :";
+
+        holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._8ssp)));
+        holder.binding.valueTextView.setText(model.getIdentifier());
     }
 
     public class PlatformsHolder extends RecyclerView.ViewHolder {

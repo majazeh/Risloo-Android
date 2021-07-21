@@ -207,15 +207,15 @@ public class SessionFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         setData(sessionModel);
 
-//                        // Platforms Data
-//                        if (!sessionModel.getPlatforms().data().isEmpty()) {
-//                            platformsAdapter.setPlatforms(sessionModel.getPlatforms().data());
-//                            binding.platformsSingleLayout.recyclerView.setAdapter(platformsAdapter);
-//
-//                            binding.psychologistsSingleLayout.textView.setVisibility(View.GONE);
-//                        } else if (platformsAdapter.getItemCount() == 0) {
+                        // Platforms Data
+                        if (!sessionModel.getSession_platforms().data().isEmpty()) {
+                            platformsAdapter.setPlatforms(sessionModel.getSession_platforms().data());
+                            binding.platformsSingleLayout.recyclerView.setAdapter(platformsAdapter);
+
+                            binding.psychologistsSingleLayout.textView.setVisibility(View.GONE);
+                        } else if (platformsAdapter.getItemCount() == 0) {
                             binding.platformsSingleLayout.textView.setVisibility(View.VISIBLE);
-//                        }
+                        }
 
                         List psychologists = new List();
                         if (sessionModel.getRoom() != null && sessionModel.getRoom().getRoomManager() != null)
