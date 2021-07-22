@@ -23,8 +23,10 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditTreasuryFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
+import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
@@ -134,10 +136,16 @@ public class Fragmont {
         else if (fragment instanceof CenterSchedulesFragment)
             return fragment;
 
+        else if (fragment instanceof CenterPlatformsFragment)
+            return fragment;
+
         else if (fragment instanceof RoomUsersFragment)
             return fragment;
 
         else if (fragment instanceof RoomSchedulesFragment)
+            return fragment;
+
+        else if (fragment instanceof RoomPlatformsFragment)
             return fragment;
 
         // -------------------- Show

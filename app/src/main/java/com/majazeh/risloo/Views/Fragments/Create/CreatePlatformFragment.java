@@ -96,6 +96,10 @@ public class CreatePlatformFragment extends Fragment {
             return false;
         });
 
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.sessionTypeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -139,6 +143,10 @@ public class CreatePlatformFragment extends Fragment {
                 }
             }
             return false;
+        });
+
+        binding.indentifierIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            indentifier = binding.indentifierIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.sessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -193,65 +201,62 @@ public class CreatePlatformFragment extends Fragment {
     }
 
     private void doWork() {
-//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-//
-//        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
-//        indentifier = binding.indentifierIncludeLayout.inputEditText.getText().toString().trim();
-//
-//        data.put("title", title);
-//        data.put("type", SelectionManager.getPlatformSession(requireActivity(), "en", sessionType));
-//        data.put("identifier_type", SelectionManager.getPlatformIdentifier(requireActivity(), "en", indentifierType));
-//        data.put("identifier", indentifier);
-//        data.put("selected", createSession);
-//        data.put("available", available);
-//
-//        Center.createPlatform(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            if (!jsonObject.isNull("errors")) {
-//                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-//                                        switch (key) {
-//                                            case "title":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                            case "type":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                            case "identifier_type":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                            case "identifier":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.indentifierIncludeLayout.inputEditText, binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        data.put("title", title);
+        data.put("type", SelectionManager.getPlatformSession(requireActivity(), "en", sessionType));
+        data.put("identifier_type", SelectionManager.getPlatformIdentifier(requireActivity(), "en", indentifierType));
+        data.put("identifier", indentifier);
+        data.put("selected", createSession);
+        data.put("available", available);
+
+        Center.createCenterSessionPlatform(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "title":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "type":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "identifier_type":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "identifier":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.indentifierIncludeLayout.inputEditText, binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override

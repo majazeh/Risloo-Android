@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -99,8 +101,12 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         }).widget(holder.binding.containerConstraintLayout);
 
         ClickManager.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(model);
-            ((MainActivity) activity).navController.navigate(action);
+            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+
+            if (current instanceof CenterPlatformsFragment) {
+                NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(((CenterPlatformsFragment) current).centerId, model);
+                ((MainActivity) activity).navController.navigate(action);
+            }
         }).widget(holder.binding.editImageView);
 
         holder.binding.sessionCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {

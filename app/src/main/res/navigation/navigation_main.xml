@@ -509,6 +509,9 @@
         android:label="@string/EditPlatformFragmentTitle"
         tools:layout="@layout/fragment_edit_platform" >
         <argument
+            android:name="centerId"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
