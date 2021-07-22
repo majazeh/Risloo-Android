@@ -1,10 +1,12 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -20,6 +22,8 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterPlatformBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -31,9 +35,13 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     // Objects
     private Activity activity;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
     private ArrayList<TypeModel> platforms;
     private HashMap data, header;
+    private boolean userSelect = false;
 
     public CenterPlatformsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -82,6 +90,8 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     }
 
     private void initializer(CenterPlatformsHolder holder) {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
@@ -95,40 +105,57 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(CenterPlatformsHolder holder, SessionPlatformModel model) {
         ClickManager.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.containerConstraintLayout);
 
         ClickManager.onClickListener(() -> {
-            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-
             if (current instanceof CenterPlatformsFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(((CenterPlatformsFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.editImageView);
 
+        holder.binding.sessionCheckBox.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         holder.binding.sessionCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked)
-                doWork("1", "checkbox");
-            else
-                doWork("", "checkbox");
+            if (userSelect) {
+                if (isChecked)
+                    doWork(holder, model, "1", "checkbox");
+                else
+                    doWork(holder, model, "0", "checkbox");
+
+                userSelect = false;
+            }
+        });
+
+        holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
         });
 
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                doWork("on", "switch");
+            if (userSelect) {
+                if (isChecked) {
+                    doWork(holder, model, "1", "switch");
 
-                holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-                holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
-                holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
-            } else {
-                doWork("", "switch");
+                    holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
+                    holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
+                    holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+                } else {
+                    doWork(holder, model, "0", "switch");
 
-                holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-                holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
-                holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                    holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
+                    holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
+                    holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                }
+
+                userSelect = false;
             }
         });
     }
@@ -191,8 +218,54 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             holder.binding.sessionCheckBox.setChecked(false);
     }
 
-    private void doWork(String value, String method) {
-        // TODO : Place Code When Needed
+    private void doWork(CenterPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
+        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+
+        if (current instanceof CenterPlatformsFragment)
+            data.put("id", ((CenterPlatformsFragment) current).centerId);
+
+        data.put("platformId", model.getId());
+
+        if (method.equals("switch"))
+            data.put("available", value);
+        else if (method.equals("checkbox"))
+            data.put("selected", value);
+
+        Center.editCenterSessionPlatform(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                activity.runOnUiThread(() -> {
+                    ((MainActivity) activity).loadingDialog.dismiss();
+                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    if (method.equals("switch")) {
+                        if (value.equals("1")) {
+                            holder.binding.availableSwitchCompat.setChecked(false);
+
+                            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
+                            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
+                            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                        } else if (value.equals("0")) {
+                            holder.binding.availableSwitchCompat.setChecked(true);
+
+                            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
+                            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
+                            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+                        }
+                    } else if (method.equals("checkbox")) {
+                        if (value.equals("1"))
+                            holder.binding.sessionCheckBox.setChecked(false);
+                        else if (value.equals("0"))
+                            holder.binding.sessionCheckBox.setChecked(true);
+                    }
+                });
+            }
+        });
     }
 
     public class CenterPlatformsHolder extends RecyclerView.ViewHolder {
