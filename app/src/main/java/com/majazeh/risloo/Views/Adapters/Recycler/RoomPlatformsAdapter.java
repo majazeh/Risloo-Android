@@ -41,7 +41,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
     // Vars
     private ArrayList<TypeModel> platforms;
     private HashMap data, header;
-    private boolean userSelect = false, editable = false;
+    private boolean userSelect = false;
 
     public RoomPlatformsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -89,11 +89,6 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }
     }
 
-    private void setEditable(boolean editable) {
-        this.editable = editable;
-        notifyDataSetChanged();
-    }
-
     private void initializer(RoomPlatformsHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
 
@@ -117,20 +112,23 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }).widget(holder.binding.containerConstraintLayout);
 
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!holder.binding.identifierEditText.hasFocus()) {
-                    ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
+            if (model.isAvailable() && model.isPin()) {
+                if (MotionEvent.ACTION_UP == event.getAction()) {
+                    if (!holder.binding.identifierEditText.hasFocus()) {
+                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
+                    }
                 }
             }
             return false;
         });
 
         holder.binding.identifierEditText.setOnEditorActionListener((v, actionId, event) -> {
-            String identifier = holder.binding.identifierEditText.getText().toString().trim();
+            if (model.isAvailable() && model.isPin()) {
+                String identifier = holder.binding.identifierEditText.getText().toString().trim();
 
-            if (!identifier.equals(""))
-                doWork(holder, model, identifier, "identifier");
-
+                if (!identifier.equals(""))
+                    doWork(holder, model, identifier, "identifier");
+            }
             return false;
         });
 
@@ -170,6 +168,8 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
                     holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
                     holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
                 }
+
+                setClickable(holder, isChecked);
 
                 userSelect = false;
             }
@@ -226,6 +226,8 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
             holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         }
+
+        setClickable(holder, model.isAvailable());
     }
 
     private void setPinned(RoomPlatformsHolder holder, SessionPlatformModel model) {
@@ -244,8 +246,8 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }
     }
 
-    private void setClickable(RoomPlatformsHolder holder) {
-        if (editable) {
+    private void setClickable(RoomPlatformsHolder holder, boolean isAvailable) {
+        if (isAvailable) {
             holder.binding.identifierEditText.setFocusableInTouchMode(true);
             holder.binding.centerCheckBox.setEnabled(true);
             holder.binding.levelSpinner.setEnabled(true);
@@ -294,12 +296,16 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
                             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
                             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
                             holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+
+                            setClickable(holder, false);
                         } else if (value.equals("0")) {
                             holder.binding.availableSwitchCompat.setChecked(true);
 
                             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
                             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
                             holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+
+                            setClickable(holder, true);
                         }
                     } else if (method.equals("checkbox")) {
                         if (value.equals("1"))
