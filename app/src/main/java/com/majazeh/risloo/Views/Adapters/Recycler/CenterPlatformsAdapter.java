@@ -126,9 +126,9 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         holder.binding.sessionCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
                 if (isChecked)
-                    doWork(holder, model, "1", "checkbox");
+                    doWork(holder, model, "1", "selected");
                 else
-                    doWork(holder, model, "0", "checkbox");
+                    doWork(holder, model, "0", "selected");
 
                 userSelect = false;
             }
@@ -142,13 +142,13 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
                 if (isChecked) {
-                    doWork(holder, model, "1", "switch");
+                    doWork(holder, model, "1", "available");
 
                     holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
                     holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
                     holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
                 } else {
-                    doWork(holder, model, "0", "switch");
+                    doWork(holder, model, "0", "available");
 
                     holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
                     holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
@@ -225,11 +225,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             data.put("id", ((CenterPlatformsFragment) current).centerId);
 
         data.put("platformId", model.getId());
-
-        if (method.equals("switch"))
-            data.put("available", value);
-        else if (method.equals("checkbox"))
-            data.put("selected", value);
+        data.put(method, value);
 
         Center.editCenterSessionPlatform(data, header, new Response() {
             @Override

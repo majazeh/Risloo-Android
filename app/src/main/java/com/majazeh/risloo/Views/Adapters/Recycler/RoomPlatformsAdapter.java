@@ -8,8 +8,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
@@ -18,7 +20,10 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomPlatformBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -29,6 +34,9 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
 
     // Objects
     private Activity activity;
+
+    // Fragments
+    private Fragment current;
 
     // Vars
     private ArrayList<TypeModel> platforms;
@@ -87,6 +95,8 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
     }
 
     private void initializer(RoomPlatformsHolder holder) {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
@@ -107,41 +117,61 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }).widget(holder.binding.containerConstraintLayout);
 
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
-                if (MotionEvent.ACTION_UP == event.getAction()) {
-                    if (!holder.binding.identifierEditText.hasFocus()) {
-                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
-                    }
+            if (MotionEvent.ACTION_UP == event.getAction()) {
+                if (!holder.binding.identifierEditText.hasFocus()) {
+                    ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
                 }
+            }
             return false;
         });
 
-        holder.binding.identifierEditText.setOnFocusChangeListener((v, hasFocus) -> {
+        holder.binding.identifierEditText.setOnEditorActionListener((v, actionId, event) -> {
             String identifier = holder.binding.identifierEditText.getText().toString().trim();
 
             if (!identifier.equals(""))
-                doWork(identifier, "editText");
+                doWork(holder, model, identifier, "identifier");
+
+            return false;
+        });
+
+        holder.binding.centerCheckBox.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
         });
 
         holder.binding.centerCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked)
-                doWork("1", "checkbox");
-            else
-                doWork("", "checkbox");
+            if (userSelect) {
+                if (isChecked)
+                    doWork(holder, model, "1", "pin");
+                else
+                    doWork(holder, model, "0", "pin");
+
+                userSelect = false;
+            }
+        });
+
+        holder.binding.availableSwitchCompat.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
         });
 
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                doWork("on", "switch");
+            if (userSelect) {
+                if (isChecked) {
+                    doWork(holder, model, "1", "available");
 
-                holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-                holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
-                holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
-            } else {
-                doWork("", "switch");
+                    holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
+                    holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
+                    holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+                } else {
+                    doWork(holder, model, "0", "available");
 
-                holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-                holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
-                holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                    holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
+                    holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
+                    holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                }
+
+                userSelect = false;
             }
         });
 
@@ -156,7 +186,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
                 if (userSelect) {
                     String level = parent.getItemAtPosition(position).toString();
 
-                    doWork(SelectionManager.getPlatformLevel(activity, "en", level), "level");
+                    doWork(holder, model, SelectionManager.getPlatformLevel(activity, "en", level), "selected_level");
 
                     userSelect = false;
                 }
@@ -236,8 +266,50 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }
     }
 
-    private void doWork(String value, String method) {
-        // TODO : Place Code When Needed
+    private void doWork(RoomPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
+        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+
+        if (current instanceof RoomPlatformsFragment)
+            data.put("id", ((RoomPlatformsFragment) current).roomId);
+
+        data.put("platformId", model.getId());
+        data.put(method, value);
+
+        Room.editRoomSessionPlatform(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                activity.runOnUiThread(() -> {
+                    ((MainActivity) activity).loadingDialog.dismiss();
+                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    if (method.equals("switch")) {
+                        if (value.equals("1")) {
+                            holder.binding.availableSwitchCompat.setChecked(false);
+
+                            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
+                            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
+                            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                        } else if (value.equals("0")) {
+                            holder.binding.availableSwitchCompat.setChecked(true);
+
+                            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
+                            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
+                            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+                        }
+                    } else if (method.equals("checkbox")) {
+                        if (value.equals("1"))
+                            holder.binding.centerCheckBox.setChecked(false);
+                        else if (value.equals("0"))
+                            holder.binding.centerCheckBox.setChecked(true);
+                    }
+                });
+            }
+        });
     }
 
     public class RoomPlatformsHolder extends RecyclerView.ViewHolder {
