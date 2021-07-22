@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import com.mre.ligheh.Model.Madule.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -13,6 +15,7 @@ public class RoomModel extends TypeModel {
     private String RoomType="";
     private int RoomCreated_at;
     private int RoomUpdated_at;
+    private List session_platforms;
 
     public RoomModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
@@ -33,6 +36,14 @@ public class RoomModel extends TypeModel {
             setRoomCreated_at(jsonObject.getInt("created_at"));
         if (!jsonObject.isNull("updated_at"))
             setRoomUpdated_at(jsonObject.getInt("updated_at"));
+        if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
+            session_platforms = new com.mre.ligheh.Model.Madule.List();
+            for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++) {
+                session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
+            }
+        }else{
+            setSession_platforms(new List());
+        }
     }
 
     public String getRoomId() {
@@ -105,5 +116,13 @@ public class RoomModel extends TypeModel {
 
     public void setRoomUpdated_at(int roomUpdated_at) {
         RoomUpdated_at = roomUpdated_at;
+    }
+
+    public List getSession_platforms() {
+        return session_platforms;
+    }
+
+    public void setSession_platforms(List session_platforms) {
+        this.session_platforms = session_platforms;
     }
 }
