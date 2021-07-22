@@ -39,7 +39,7 @@ public class EditPlatformFragment extends Fragment {
     // Vars
     private HashMap data, header;
     private SessionPlatformModel sessionPlatformModel;
-    private String title = "", sessionType = "", indentifierType = "", indentifier = "", createSession = "", available = "";
+    private String title = "", sessionType = "", indentifierType = "", indentifier = "", createSession = "0", available = "0";
 
     @Nullable
     @Override
@@ -153,18 +153,18 @@ public class EditPlatformFragment extends Fragment {
             if (isChecked)
                 createSession = "1";
             else
-                createSession = "";
+                createSession = "0";
         });
 
         binding.availableSwitchCompat.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                available = "on";
+                available = "1";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOn));
                 binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Green700));
                 binding.availableSwitchCompat.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray300);
             } else {
-                available = "";
+                available = "0";
 
                 binding.availableSwitchCompat.getRoot().setText(getResources().getString(R.string.AppSwicthOff));
                 binding.availableSwitchCompat.getRoot().setTextColor(getResources().getColor(R.color.Gray600));
@@ -225,6 +225,7 @@ public class EditPlatformFragment extends Fragment {
         }
 
         if (model.isAvailable()) {
+            available = "1";
             binding.availableSwitchCompat.getRoot().setChecked(true);
 
             binding.availableSwitchCompat.getRoot().setText(requireActivity().getResources().getString(R.string.AppSwicthOn));
@@ -233,6 +234,7 @@ public class EditPlatformFragment extends Fragment {
         }
 
         if (model.isSelected()) {
+            createSession = "1";
             binding.sessionCheckBox.getRoot().setChecked(true);
         }
     }

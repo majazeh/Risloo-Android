@@ -47,7 +47,7 @@ public class CreateCenterUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    public String centerId = "", type = "", mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "";
+    public String centerId = "", type = "", mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "0";
 
     @Nullable
     @Override
@@ -147,7 +147,7 @@ public class CreateCenterUserFragment extends Fragment {
             if (isChecked)
                 createCase = "1";
             else
-                createCase = "";
+                createCase = "0";
         });
 
         ClickManager.onDelayedClickListener(() -> {
