@@ -349,9 +349,9 @@ public class SelectionManager {
         } return value;
     }
 
-    public static String getUserStatus2(Activity activity, String local, String value) {
+    public static String getUserPosition(Activity activity, String local, String value) {
         try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, "UserStatus2.json"));
+            JSONArray list = new JSONArray(JsonManager.getJson(activity, "UserPosition.json"));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {

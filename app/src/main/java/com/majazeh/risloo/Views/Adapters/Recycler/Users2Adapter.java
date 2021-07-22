@@ -10,6 +10,7 @@ import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -19,10 +20,10 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Show.SessionFragmentDirections;
+import com.majazeh.risloo.Views.Fragments.Show.SessionFragment;
 import com.majazeh.risloo.databinding.SingleItemUser2Binding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -33,6 +34,9 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
 
     // Objects
     private Activity activity;
+
+    // Fragments
+    private Fragment current;
 
     // Vars
     private ArrayList<TypeModel> users;
@@ -86,11 +90,13 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     private void initializer(Users2Holder holder) {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.fixedSpinner(activity, holder.binding.statusSpinner, R.array.UserStatus, "adapter");
+        InitManager.fixedSpinner(activity, holder.binding.statusSpinner, R.array.UserPosition, "adapter");
     }
 
     private void detector(Users2Holder holder) {
@@ -117,7 +123,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
                 if (userSelect) {
                     String status = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getUserStatus2(activity, "en", status));
+                    doWork(holder, model, SelectionManager.getUserPosition(activity, "en", status));
 
                     userSelect = false;
                 }
@@ -148,17 +154,10 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     private void setStatus(Users2Holder holder, UserModel model) {
+        String position = SelectionManager.getUserPosition(activity, "fa", String.valueOf(model.getPosition()));
         for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
-            switch (model.getUserStatus()) {
-                case "client":
-                    holder.binding.statusSpinner.setSelection(0);
-                    break;
-                case "request":
-                    holder.binding.statusSpinner.setSelection(1);
-                    break;
-                case "delete":
-                    holder.binding.statusSpinner.setSelection(2);
-                    break;
+            if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
+                holder.binding.statusSpinner.setSelection(i);
             }
         }
 
@@ -182,31 +181,30 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
     }
 
     private void doWork(Users2Holder holder, UserModel model, String status) {
-//        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
-//
-//        data.put("id", model.getId());
-//        data.put("status", status);
-//
-//        User.changeStatus(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                UserModel model = (UserModel) object;
-//
-//                activity.runOnUiThread(() -> {
-//                    setStatus(holder, model);
-//
-//                    ((MainActivity) activity).loadingDialog.dismiss();
-//                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
-//                });
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                activity.runOnUiThread(() -> {
-//                    // Place Code if Needed
-//                });
-//            }
-//        });
+        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+
+        if (current instanceof SessionFragment)
+            data.put("id", ((SessionFragment) current).sessionModel.getId());
+
+        data.put("userId", model.getId());
+        data.put("position", status);
+
+        Session.editUser(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                activity.runOnUiThread(() -> {
+                    ((MainActivity) activity).loadingDialog.dismiss();
+                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                });
+            }
+
+            @Override
+            public void onFailure(String response) {
+                activity.runOnUiThread(() -> {
+                    // Place Code if Needed
+                });
+            }
+        });
     }
 
     public class Users2Holder extends RecyclerView.ViewHolder {

@@ -47,7 +47,7 @@ public class SessionFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
-    private SessionModel sessionModel;
+    public SessionModel sessionModel;
 
     @Nullable
     @Override
