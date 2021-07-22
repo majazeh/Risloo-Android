@@ -21,7 +21,7 @@ public class AcceptationModel extends TypeModel {
             setPosition(jsonObject.getString("position"));
         if (!jsonObject.isNull("created_at"))
             setCreated_at(jsonObject.getInt("created_at"));
-        if (!jsonObject.isNull("type"))
+        if (!jsonObject.isNull("accepted_at"))
             setAccepted_at(jsonObject.getInt("accepted_at"));
         if (!jsonObject.isNull("kicked_at"))
             setKicked_at(jsonObject.getString("kicked_at"));

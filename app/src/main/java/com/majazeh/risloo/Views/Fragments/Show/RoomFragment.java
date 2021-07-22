@@ -403,23 +403,23 @@ public class RoomFragment extends Fragment {
 
     private void setAcceptation(CenterModel model) {
         if (model.getAcceptation() != null) {
-            switch (model.getAcceptation().getPosition()) {
-                case "manager":
-                case "operator":
-                case "psychologist":
-                case "client":
-                    setStatus(model.getAcceptation().getPosition());
-                    break;
-                default:
-                    if (!model.getAcceptation().getKicked_at().equals("")) {
-                        setStatus("kicked");
-                    } else {
-                        if (model.getAcceptation().getAccepted_at() != 0)
+            if (!model.getAcceptation().getKicked_at().equals("")) {
+                setStatus("kicked");
+            } else {
+                if (model.getAcceptation().getAccepted_at() != 0)
+                    switch (model.getAcceptation().getPosition()) {
+                        case "manager":
+                        case "operator":
+                        case "psychologist":
+                        case "client":
+                            setStatus(model.getAcceptation().getPosition());
+                            break;
+                        default:
                             setStatus("accepted");
-                        else
-                            setStatus("awaiting");
+                            break;
                     }
-                    break;
+                else
+                    setStatus("awaiting");
             }
         } else {
             setStatus("request");
@@ -428,23 +428,23 @@ public class RoomFragment extends Fragment {
 
     private void setAcceptation(RoomModel model) {
         if (model.getRoomAcceptation() != null) {
-            switch (model.getRoomAcceptation().getPosition()) {
-                case "manager":
-                case "operator":
-                case "psychologist":
-                case "client":
-                    setStatus(model.getRoomAcceptation().getPosition());
-                    break;
-                default:
-                    if (!model.getRoomAcceptation().getKicked_at().equals("")) {
-                        setStatus("kicked");
-                    } else {
-                        if (model.getRoomAcceptation().getAccepted_at() != 0)
+            if (!model.getRoomAcceptation().getKicked_at().equals("")) {
+                setStatus("kicked");
+            } else {
+                if (model.getRoomAcceptation().getAccepted_at() != 0)
+                    switch (model.getRoomAcceptation().getPosition()) {
+                        case "manager":
+                        case "operator":
+                        case "psychologist":
+                        case "client":
+                            setStatus(model.getRoomAcceptation().getPosition());
+                            break;
+                        default:
                             setStatus("accepted");
-                        else
-                            setStatus("awaiting");
+                            break;
                     }
-                    break;
+                else
+                    setStatus("awaiting");
             }
         } else {
             setStatus("request");

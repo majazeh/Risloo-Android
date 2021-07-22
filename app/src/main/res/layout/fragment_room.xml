@@ -71,8 +71,10 @@
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
                     app:layout_goneMarginLeft="@dimen/_8sdp"
+                    android:visibility="gone"
                     app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
-                    app:layout_constraintLeft_toRightOf="@id/menu_spinner" />
+                    app:layout_constraintLeft_toRightOf="@id/menu_spinner"
+                    tools:visibility="visible" />
 
                 <TextView
                     android:id="@+id/name_textView"

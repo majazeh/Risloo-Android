@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -17,15 +18,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateSessionUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,6 +48,7 @@ public class CreateSessionUserFragment extends Fragment {
 
     // Vars
     private HashMap data, header;
+    private ArrayList<String> axisIds = new ArrayList<>(), platformIds = new ArrayList<>();
     public String axis = "", platform = "", description;
 
     @Nullable
@@ -101,6 +107,30 @@ public class CreateSessionUserFragment extends Fragment {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
+        binding.axisIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                axis = axisIds.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.platformIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                platform = platformIds.get(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             if (axis.equals(""))
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.axisIncludeLayout.selectSpinner, binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
@@ -139,11 +169,13 @@ public class CreateSessionUserFragment extends Fragment {
             data.put("id", model.getId());
         }
 
-        // TODO : Set Axis Spinner Here
-        setAxis();
+        if (model.getFields() != null && model.getFields().length() != 0) {
+            setAxis(model.getFields());
+        }
 
-        // TODO : Set Platform Spinner Here
-        setPlatform();
+        if (model.getSession_platforms() != null) {
+            setPlatform(model.getSession_platforms());
+        }
 
         if (model.getCaseModel() != null && model.getCaseModel().getClients() != null && model.getCaseModel().getClients().size() != 0) {
             setClients(model.getCaseModel().getClients());
@@ -155,18 +187,40 @@ public class CreateSessionUserFragment extends Fragment {
         }
     }
 
-    private void setAxis() {
+    private void setAxis(JSONArray fields) {
         ArrayList<String> options = new ArrayList<>();
 
+        for (int i = 0; i < fields.length(); i++) {
+            try {
+                if (fields.getJSONObject(i).has("amount"))
+                    options.add(fields.getJSONObject(i).getString("title") + " | " + fields.getJSONObject(i).getString("amount"));
+                else
+                    options.add(fields.getJSONObject(i).getString("title"));
+
+                axisIds.add(fields.getJSONObject(i).getString("id"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
         options.add("");
+        axisIds.add("");
 
         InitManager.unfixedSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options, "main");
     }
 
-    private void setPlatform() {
+    private void setPlatform(com.mre.ligheh.Model.Madule.List platforms) {
         ArrayList<String> options = new ArrayList<>();
 
+        for (int i = 0; i < platforms.data().size(); i++) {
+            SessionPlatformModel model = (SessionPlatformModel) platforms.data().get(i);
+            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
+
+            platformIds.add(model.getId());
+        }
+
         options.add("");
+        platformIds.add("");
 
         InitManager.unfixedSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options, "main");
     }
@@ -200,60 +254,60 @@ public class CreateSessionUserFragment extends Fragment {
     }
 
     private void doWork() {
-//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-//
-//        data.put("field", "");
-//        data.put("session_platform", "");
-//        data.put("client_id", clientsAdapter.getIds());
-//        data.put("description", description);
-//
-//        Session.addClient(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            if (!jsonObject.isNull("errors")) {
-//                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-//                                        switch (key) {
-//                                            case "field":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.axisIncludeLayout.selectSpinner, binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                            case "session_platform":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.platformIncludeLayout.selectSpinner, binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                            case "client_id":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (RecyclerView) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                            case "description":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-//                                                break;
-//                                        }
-//                                    }
-//                                }
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        data.put("field", axis);
+        data.put("session_platform", platform);
+        data.put("client_id", clientsAdapter.getIds());
+        data.put("description", description);
+
+        Session.addUser(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        switch (key) {
+                                            case "field":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.axisIncludeLayout.selectSpinner, binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "session_platform":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.platformIncludeLayout.selectSpinner, binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "client_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (RecyclerView) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "description":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
