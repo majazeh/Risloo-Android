@@ -11,7 +11,6 @@
     android:focusableInTouchMode="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="never"
-    android:layoutDirection="rtl"
     tools:context=".Views.Activities.AuthActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout

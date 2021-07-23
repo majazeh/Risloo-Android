@@ -32,8 +32,10 @@ public class AuthSerialFragment extends Fragment {
     // Binding
     private FragmentAuthSerialBinding binding;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String serial = "";
 
     @Nullable
@@ -58,11 +60,8 @@ public class AuthSerialFragment extends Fragment {
         header.put("Authorization", ((AuthActivity) requireActivity()).singleton.getAuthorization());
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentTitle));
-
         binding.serialEditText.getRoot().setHint(getResources().getString(R.string.SerialFragmentInput));
-
-        binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.SerialFragmentGuide));
-
+        binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.SerialFragmentGuide));
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.SerialFragmentButton));
 
         binding.dashboardLinkTextView.getRoot().setText(StringManager.foreground(getResources().getString(R.string.AuthDashboardLink), 0, 8, getResources().getColor(R.color.Gray800)));
@@ -82,15 +81,12 @@ public class AuthSerialFragment extends Fragment {
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
-                IntentManager.display(requireActivity(), ((AuthActivity) requireActivity()).singleton.getName(), "", ((AuthActivity) requireActivity()).singleton.getAvatar());
+                IntentManager.display(requireActivity(), ((AuthActivity) requireActivity()).singleton.getName(), ((AuthActivity) requireActivity()).singleton.getAvatar());
         }).widget(binding.avatarIncludeLayout.avatarImageView);
 
         binding.serialEditText.getRoot().setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.serialEditText.getRoot().hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.serialEditText.getRoot());
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.serialEditText.getRoot().hasFocus())
+                ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.serialEditText.getRoot());
             return false;
         });
 

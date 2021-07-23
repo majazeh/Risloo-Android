@@ -116,15 +116,15 @@ public class RoomFragment extends Fragment {
                 if (!type.equals("room")) {
                     if (!succesRequest) {
                         try {
-                            IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), "", (centerModel).getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                            IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), (centerModel).getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
                     } else {
-                        IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), "", (roomModel).getRoomManager().getAvatar() .getMedium().getUrl());
+                        IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), (roomModel).getRoomManager().getAvatar() .getMedium().getUrl());
                     }
                 } else {
-                    IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), "", (roomModel).getRoomManager().getAvatar() .getMedium().getUrl());
+                    IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), (roomModel).getRoomManager().getAvatar() .getMedium().getUrl());
                 }
             }
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);

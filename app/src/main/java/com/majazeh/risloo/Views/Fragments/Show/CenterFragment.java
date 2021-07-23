@@ -111,7 +111,7 @@ public class CenterFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE) {
                 try {
-                    IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), "", centerModel.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                    IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), centerModel.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }

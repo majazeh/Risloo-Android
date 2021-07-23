@@ -82,7 +82,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
 
     private void listener(ProfilesHolder holder, ProfileModel profile) {
         ClickManager.onDelayedClickListener(() -> {
-            IntentManager.display(activity, profile.getFile_name(), "", profile.getUrl());
+            IntentManager.display(activity, profile.getFile_name(), profile.getUrl());
         }).widget(holder.binding.containerConstraintLayout);
     }
 

@@ -25,6 +25,10 @@ public class StringManager {
         return value.substring(value.length() - index);
     }
 
+    public static String replace(String value, String oldText, String newText) {
+        return value.replace(oldText, newText);
+    }
+
     public static String substring(String value, char character) {
         int position = 0;
 

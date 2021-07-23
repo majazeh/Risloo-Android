@@ -40,9 +40,10 @@ public class AuthPasswordFragment extends Fragment {
     // Binding
     private FragmentAuthPasswordBinding binding;
 
-    // Vars
+    // Objects
     private HashMap data, header;
-    private AuthModel authModel;
+
+    // Vars
     private String password = "", mobile = "";
     private boolean passwordVisibility = false;
 
@@ -67,11 +68,8 @@ public class AuthPasswordFragment extends Fragment {
         header = new HashMap<>();
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentTitle));
-
         binding.passwordIncludeLayout.inputEditText.setHint(getResources().getString(R.string.PasswordFragmentInput));
-
-        binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.PasswordFragmentGuide));
-
+        binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.PasswordFragmentGuide));
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordFragmentButton));
 
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
@@ -90,11 +88,8 @@ public class AuthPasswordFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.passwordIncludeLayout.inputEditText.hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.passwordIncludeLayout.inputEditText.hasFocus())
+                ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
             return false;
         });
 
@@ -111,9 +106,11 @@ public class AuthPasswordFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                    binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
+                    if (binding.passwordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
+                        binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
                 } else if (binding.passwordIncludeLayout.inputEditText.length() == 1) {
-                    binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+                    if (binding.passwordIncludeLayout.visibilityImageView.getVisibility() != View.VISIBLE)
+                        binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -136,8 +133,12 @@ public class AuthPasswordFragment extends Fragment {
 
             @Override
             public void onPaste() {
-                if (binding.passwordIncludeLayout.inputEditText.length() != 0) {
-                    binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+                if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
+                    if (binding.passwordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
+                        binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
+                } else if (binding.passwordIncludeLayout.inputEditText.length() != 0) {
+                    if (binding.passwordIncludeLayout.visibilityImageView.getVisibility() != View.VISIBLE)
+                        binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -145,16 +146,16 @@ public class AuthPasswordFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (!passwordVisibility) {
                 passwordVisibility = true;
-                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(null);
+
+                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
+                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
             } else {
                 passwordVisibility = false;
-                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-
-                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
                 binding.passwordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
+
+                binding.passwordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
+                ImageViewCompat.setImageTintList(binding.passwordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
             }
         }).widget(binding.passwordIncludeLayout.visibilityImageView);
 
@@ -187,19 +188,24 @@ public class AuthPasswordFragment extends Fragment {
         mobile = AuthPasswordFragmentArgs.fromBundle(getArguments()).getMobile();
         binding.mobileTextView.getRoot().setText(mobile);
 
-        authModel = (AuthModel) AuthPasswordFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        AuthModel authModel = (AuthModel) AuthPasswordFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        setData(authModel);
+    }
+
+    private void setData(AuthModel model) {
+        if (model.getKey() != null && !model.getKey().equals("")) {
+            data.put("key", model.getKey());
+        }
+
+        if (model.getCallback() != null && !model.getCallback().equals("")) {
+            data.put("callback", model.getCallback());
+        }
     }
 
     private void doWork() {
         ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         data.put("password", password);
-
-        if (authModel.getKey() != null)
-            data.put("key", authModel.getKey());
-
-        if (authModel.getCallback() != null)
-            data.put("callback", authModel.getCallback());
 
         Auth.auth_theory(data, header, new Response() {
             @Override
@@ -221,6 +227,9 @@ public class AuthPasswordFragment extends Fragment {
 
                                     ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
+                                } break;
+                                default: {
+                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                 } break;
                             }
                         } else {

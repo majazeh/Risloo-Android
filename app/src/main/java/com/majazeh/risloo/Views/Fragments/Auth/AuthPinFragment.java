@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -41,12 +42,11 @@ public class AuthPinFragment extends Fragment {
     private FragmentAuthPinBinding binding;
 
     // Objects
+    private HashMap data, header;
     private ClickableSpan clickableSpan;
     private CountDownTimer countDownTimer;
 
     // Vars
-    private HashMap data, header;
-    private AuthModel authModel;
     private String pin = "", mobile = "";
 
     @Nullable
@@ -62,8 +62,6 @@ public class AuthPinFragment extends Fragment {
 
         setArgs();
 
-        startCountDownTimer();
-
         return binding.getRoot();
     }
 
@@ -72,12 +70,10 @@ public class AuthPinFragment extends Fragment {
         header = new HashMap<>();
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PinFragmentTitle));
-
         binding.pinEditText.getRoot().setHint(getResources().getString(R.string.PinFragmentInput));
-
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PinFragmentButton));
 
-        binding.timerTextView.setMovementMethod(LinkMovementMethod.getInstance());
+        binding.timerViewFlipper.resendTextView.setMovementMethod(LinkMovementMethod.getInstance());
 
         binding.loginLinkTextView.getRoot().setText(getResources().getString(R.string.AuthLoginLink));
         binding.registerLinkTextView.getRoot().setText(getResources().getString(R.string.AuthRegisterLink));
@@ -95,11 +91,8 @@ public class AuthPinFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.pinEditText.getRoot().setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.pinEditText.getRoot().hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.pinEditText.getRoot());
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.pinEditText.getRoot().hasFocus())
+                ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.pinEditText.getRoot());
             return false;
         });
 
@@ -126,7 +119,7 @@ public class AuthPinFragment extends Fragment {
                 int minutes = (int) (millisUntilFinished / 1000) / 60;
                 int seconds = (int) (millisUntilFinished / 1000) % 60;
 
-                binding.countdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds));
+                binding.timerViewFlipper.countdownTextView.setText(String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds));
             }
 
             @Override
@@ -140,7 +133,9 @@ public class AuthPinFragment extends Fragment {
                 ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
                 ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
-                doWork("pin");
+                countDownTimer.cancel();
+
+                doWork("code");
             }
         }).widget(binding.buttonTextView.getRoot());
 
@@ -170,48 +165,53 @@ public class AuthPinFragment extends Fragment {
         mobile = AuthPinFragmentArgs.fromBundle(getArguments()).getMobile();
         binding.mobileTextView.getRoot().setText(mobile);
 
-        authModel = (AuthModel) AuthPinFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        AuthModel authModel = (AuthModel) AuthPinFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        setData(authModel);
+    }
+
+    private void setData(AuthModel model) {
+        if (model.getKey() != null && !model.getKey().equals("")) {
+            data.put("key", model.getKey());
+        }
+
+        if (model.getCallback() != null && !model.getCallback().equals("")) {
+            data.put("callback", model.getCallback());
+        }
+
+        startCountDownTimer();
     }
 
     private void startCountDownTimer() {
-        binding.guideIncludeLayout.guideTextView.setText(requireActivity().getResources().getString(R.string.PinFragmentGuide1) + " " + mobile + " " + requireActivity().getResources().getString(R.string.PinFragmentGuide2));
+        binding.guideIncludeLayout.guideTextView.setText(StringManager.replace(requireActivity().getResources().getString(R.string.PinFragmentGuide), "09123456789", mobile));
 
-        binding.timerTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
+        binding.timerViewFlipper.resendTextView.setText(StringManager.clickable(requireActivity().getResources().getString(R.string.PinFragmentResend), 24, 34, clickableSpan));
 
         countDownTimer.start();
     }
 
-    private void showTimer(boolean value) {
-        if (value) {
+    private void showTimer(boolean bool) {
+        if (bool) {
             countDownTimer.start();
 
-            binding.viewFlipper.setInAnimation(requireActivity(), R.anim.slide_in_right_with_fade);
-            binding.viewFlipper.setOutAnimation(requireActivity(), R.anim.slide_out_left_with_fade);
+            binding.timerViewFlipper.getRoot().setInAnimation(requireActivity(), R.anim.slide_in_right_with_fade);
+            binding.timerViewFlipper.getRoot().setOutAnimation(requireActivity(), R.anim.slide_out_left_with_fade);
 
-            binding.viewFlipper.showPrevious();
+            binding.timerViewFlipper.getRoot().showPrevious();
         } else {
             countDownTimer.cancel();
 
-            binding.viewFlipper.setInAnimation(requireActivity(), R.anim.slide_in_left_with_fade);
-            binding.viewFlipper.setOutAnimation(requireActivity(), R.anim.slide_out_right_with_fade);
+            binding.timerViewFlipper.getRoot().setInAnimation(requireActivity(), R.anim.slide_in_left_with_fade);
+            binding.timerViewFlipper.getRoot().setOutAnimation(requireActivity(), R.anim.slide_out_right_with_fade);
 
-            binding.viewFlipper.showNext();
+            binding.timerViewFlipper.getRoot().showNext();
         }
     }
 
     private void doWork(String method) {
-        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        if (method.equals("code")) {
+            ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        countDownTimer.cancel();
-
-        if (method.equals("pin")) {
             data.put("code", pin);
-
-            if (authModel.getKey() != null)
-                data.put("key", authModel.getKey());
-
-            if (authModel.getCallback() != null)
-                data.put("callback", authModel.getCallback());
 
             Auth.auth_theory(data, header, new Response() {
                 @Override
@@ -233,6 +233,9 @@ public class AuthPinFragment extends Fragment {
 
                                         ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                         ((AuthActivity) requireActivity()).navController.navigate(action);
+                                    } break;
+                                    default: {
+                                        ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     } break;
                                 }
                             } else {
@@ -272,6 +275,7 @@ public class AuthPinFragment extends Fragment {
                 }
             });
         } else if (method.equals("verification")) {
+            Toast.makeText(requireActivity().getApplicationContext(), "این دستور هنوز اضافه نشده است.", Toast.LENGTH_SHORT).show();
 
             // TODO : Place Code if Needed
 
@@ -283,6 +287,7 @@ public class AuthPinFragment extends Fragment {
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+        countDownTimer.cancel();
     }
 
 }

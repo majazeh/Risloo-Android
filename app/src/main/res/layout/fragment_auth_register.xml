@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/Gray50"
-    android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Auth.AuthRegisterFragment">
 
     <include
@@ -127,7 +126,7 @@
 
     <include
         android:id="@+id/illu_imageView"
-        layout="@layout/component_auth_image"
+        layout="@layout/component_auth_illu"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_8sdp"

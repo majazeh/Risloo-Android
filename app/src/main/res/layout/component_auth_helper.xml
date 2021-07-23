@@ -5,12 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:gravity="start"
+    android:gravity="right"
     android:textSize="@dimen/_9ssp"
     android:textStyle="normal"
     android:textColor="@color/Gray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_light"
-    android:layoutDirection="rtl"
     tools:text="متن مساعد"
     tools:layout_margin="@dimen/_24sdp" />

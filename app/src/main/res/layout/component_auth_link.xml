@@ -12,5 +12,4 @@
     android:textColor="@color/Gray700"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_regular"
-    android:layoutDirection="rtl"
     tools:text="لینک" />

@@ -92,12 +92,12 @@ public class DisplayActivity extends AppCompatActivity {
                 binding.titleTextView.setVisibility(View.VISIBLE);
             }
 
-            if (!extras.getString("bitmap").equals("")) {
-                bitmap = extras.getString("bitmap");
-
-                binding.avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), bitmap));
-                FileManager.deleteFileFromCache(this, "bitmap");
-            }
+//            if (!extras.getString("bitmap").equals("")) {
+//                bitmap = extras.getString("bitmap");
+//
+//                binding.avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), bitmap));
+//                FileManager.deleteFileFromCache(this, "bitmap");
+//            }
 
             if (!extras.getString("path").equals("")) {
                 path = extras.getString("path");

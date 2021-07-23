@@ -11,5 +11,4 @@
     android:textStyle="bold"
     android:textColor="@color/Risloo500"
     android:textAlignment="gravity"
-    android:fontFamily="@font/dana_extra_bold"
-    android:layoutDirection="rtl" />
+    android:fontFamily="@font/dana_extra_bold" />

@@ -42,10 +42,9 @@ public class IntentManager {
         activity.finish();
     }
 
-    public static void display(Activity activity, String title, String bitmap, String path) {
+    public static void display(Activity activity, String title, String path) {
         Intent intent = new Intent(activity, DisplayActivity.class);
         intent.putExtra("title", title);
-        intent.putExtra("bitmap", bitmap);
         intent.putExtra("path", path);
 
         activity.startActivity(intent);

@@ -104,8 +104,7 @@
 
     <string name="PinFragmentTitle">تأیید موبایل</string>
     <string name="PinFragmentInput">کد پیامکی</string>
-    <string name="PinFragmentGuide1">یک کد 6 رقمی به شماره</string>
-    <string name="PinFragmentGuide2">پیامک شد. کد پیامک شده را در فیلد مشخص شده وارد کرده و روی دکمه تأیید کلیک کنید.</string>
+    <string name="PinFragmentGuide">یک کد 6 رقمی به شماره 09123456789 پیامک شد. کد پیامک شده را در فیلد مشخص شده وارد کرده و روی دکمه تأیید کلیک کنید.</string>
     <string name="PinFragmentButton">تأیید</string>
 
     <string name="PinFragmentResend">کد پیامکی دریافت نکردی؟ ارسال مجدد</string>

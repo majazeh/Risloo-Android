@@ -34,8 +34,10 @@ public class AuthPasswordRecoverFragment extends Fragment {
     // Binding
     private FragmentAuthPasswordRecoverBinding binding;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String mobile = "";
 
     @Nullable
@@ -57,11 +59,8 @@ public class AuthPasswordRecoverFragment extends Fragment {
         header = new HashMap<>();
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PasswordRecoverFragmentTitle));
-
         binding.mobileEditText.getRoot().setHint(getResources().getString(R.string.PasswordRecoverFragmentInput));
-
-        binding.guideIncludeLayout.guideTextView.setHint(getResources().getString(R.string.PasswordRecoverFragmentGuide));
-
+        binding.guideIncludeLayout.guideTextView.setText(getResources().getString(R.string.PasswordRecoverFragmentGuide));
         binding.buttonTextView.getRoot().setText(getResources().getString(R.string.PasswordRecoverFragmentButton));
 
         binding.loginHelperTextView.getRoot().setText(getResources().getString(R.string.AuthLoginHelper));
@@ -82,11 +81,8 @@ public class AuthPasswordRecoverFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.mobileEditText.getRoot().setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.mobileEditText.getRoot().hasFocus()) {
-                    ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileEditText.getRoot());
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileEditText.getRoot().hasFocus())
+                ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileEditText.getRoot());
             return false;
         });
 

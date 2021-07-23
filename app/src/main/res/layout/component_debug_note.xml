@@ -16,5 +16,4 @@
     android:textColor="@color/White"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_bold"
-    android:layoutDirection="rtl"
     android:background="@drawable/draw_2sdp_bottom_solid_red500" />

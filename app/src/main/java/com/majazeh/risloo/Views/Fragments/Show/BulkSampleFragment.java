@@ -107,7 +107,7 @@ public class BulkSampleFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (binding.avatarsIncludeLayout.charTextView.getVisibility() == View.GONE) {
                 try {
-                    IntentManager.display(requireActivity(), binding.centerTextView.getText().toString(), "", bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
+                    IntentManager.display(requireActivity(), binding.centerTextView.getText().toString(), bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -116,7 +116,7 @@ public class BulkSampleFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.avatarsIncludeLayout.charSubTextView.getVisibility() == View.GONE) {
-                IntentManager.display(requireActivity(), binding.psychologyTextView.getText().toString(), "", bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
+                IntentManager.display(requireActivity(), binding.psychologyTextView.getText().toString(), bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
             }
         }).widget(binding.avatarsIncludeLayout.avatarSubCircleImageView);
 

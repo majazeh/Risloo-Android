@@ -11,5 +11,4 @@
     android:textColor="@color/Gray800"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_demi_bold"
-    android:layoutDirection="rtl"
     tools:text="عنوان" />

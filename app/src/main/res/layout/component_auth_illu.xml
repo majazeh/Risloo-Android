@@ -7,7 +7,6 @@
     android:layout_gravity="center"
     android:contentDescription="@string/AppImageContent"
     android:scaleType="fitCenter"
-    android:layoutDirection="rtl"
     tools:layout_height="wrap_content"
     tools:layout_margin="@dimen/_24sdp"
     tools:src="@drawable/illu_001" />

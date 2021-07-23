@@ -82,65 +82,15 @@
         app:layout_constraintStart_toStartOf="@id/pin_editText"
         app:layout_constraintTop_toBottomOf="@id/guide_includeLayout" />
 
-    <ViewFlipper
-        android:id="@+id/viewFlipper"
+    <include
+        android:id="@+id/timer_viewFlipper"
+        layout="@layout/component_auth_timer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/_8sdp"
         app:layout_constraintEnd_toEndOf="@id/pin_editText"
         app:layout_constraintStart_toStartOf="@id/pin_editText"
-        app:layout_constraintTop_toBottomOf="@id/button_textView">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/hint_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:text="@string/PinFragmentTimer"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray400"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/countdown_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/_2sdp"
-                android:gravity="center"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="bold"
-                android:textColor="@color/Gray700"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintBottom_toBottomOf="@id/hint_textView"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/hint_textView"
-                app:layout_constraintTop_toTopOf="@id/hint_textView"
-                tools:text="05:00" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <TextView
-            android:id="@+id/timer_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:gravity="center"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray400"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular" />
-
-    </ViewFlipper>
+        app:layout_constraintTop_toBottomOf="@id/button_textView" />
 
     <include
         android:id="@+id/login_link_textView"
@@ -151,7 +101,7 @@
         app:layout_constraintHorizontal_chainStyle="packed"
         app:layout_constraintEnd_toStartOf="@id/separator_view"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/viewFlipper" />
+        app:layout_constraintTop_toBottomOf="@id/timer_viewFlipper" />
 
     <View
         android:id="@+id/separator_view"
@@ -201,7 +151,7 @@
 
     <include
         android:id="@+id/illu_imageView"
-        layout="@layout/component_auth_image"
+        layout="@layout/component_auth_illu"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_8sdp"
