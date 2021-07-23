@@ -29,9 +29,6 @@ public class TestOptionalFragment extends Fragment {
     // Adapters
     private OptionalsAdapter adapter;
 
-    // Vars
-    public FormModel formModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -51,8 +48,7 @@ public class TestOptionalFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).formModel;
-
+        FormModel formModel = ((TestActivity) requireActivity()).formModel;
         setData(formModel);
     }
 
@@ -82,10 +78,8 @@ public class TestOptionalFragment extends Fragment {
             }
 
             if (options.size() != 0) {
-                adapter.setItems(options, item.getUser_answered());
+                adapter.setItems(options, item.getUser_answered(), model.getTitle());
                 binding.listRecyclerView.setAdapter(adapter);
-            } else if (adapter.getItemCount() == 0) {
-
             }
         } catch (JSONException e) {
             e.printStackTrace();

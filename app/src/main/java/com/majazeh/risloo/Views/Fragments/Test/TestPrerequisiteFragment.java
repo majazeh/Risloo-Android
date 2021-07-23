@@ -25,9 +25,6 @@ public class TestPrerequisiteFragment extends Fragment {
     // Adapters
     private PrerequisitesAdapter adapter;
 
-    // Vars
-    private FormModel formModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -50,8 +47,7 @@ public class TestPrerequisiteFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).formModel;
-
+        FormModel formModel = ((TestActivity) requireActivity()).formModel;
         setData(formModel);
     }
 
@@ -61,8 +57,6 @@ public class TestPrerequisiteFragment extends Fragment {
         if (!prerequisites.data().isEmpty()) {
             adapter.setItems(prerequisites.data());
             binding.listRecyclerView.setAdapter(adapter);
-        } else if (adapter.getItemCount() == 0) {
-
         }
     }
 

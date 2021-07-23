@@ -19,9 +19,6 @@ public class TestPsyDescFragment extends Fragment {
     // Binding
     private FragmentTestPsyDescBinding binding;
 
-    // Vars
-    private FormModel formModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -39,8 +36,7 @@ public class TestPsyDescFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).formModel;
-
+        FormModel formModel = ((TestActivity) requireActivity()).formModel;
         setData(formModel);
     }
 

@@ -10,33 +10,18 @@
 
     <TextView
         android:id="@+id/title_textView"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:gravity="center|start"
-        android:textSize="@dimen/_14ssp"
+        android:textSize="@dimen/_13ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_bold"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:text="آزمون" />
-
-    <TextView
-        android:id="@+id/type_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_6sdp"
-        android:gravity="center|start"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray600"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@id/title_textView"
-        app:layout_constraintStart_toEndOf="@id/title_textView"
-        app:layout_constraintTop_toTopOf="@id/title_textView"
-        tools:text="نوع" />
 
     <ProgressBar
         android:id="@+id/answered_progressBar"
@@ -44,7 +29,7 @@
         android:layout_height="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:progress="0"
-        android:progressDrawable="@drawable/draw_progress_back_gray100_front_blue600"
+        android:progressDrawable="@drawable/draw_progress_back_gray200_front_blue600"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

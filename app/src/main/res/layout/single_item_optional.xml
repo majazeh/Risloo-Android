@@ -6,10 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200"
+    android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
     tools:layout_marginBottom="@dimen/_4sdp"
-    tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.OptionalsAdapter">
+    tools:layout_marginTop="@dimen/_4sdp">
 
     <TextView
         android:id="@+id/number_textView"

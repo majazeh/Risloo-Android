@@ -25,9 +25,6 @@ public class TestChainFragment extends Fragment {
     // Adapters
     private ChainsAdapter adapter;
 
-    // Vars
-    private FormModel formModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -49,8 +46,7 @@ public class TestChainFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).formModel;
-
+        FormModel formModel = ((TestActivity) requireActivity()).formModel;
         setData(formModel);
     }
 
@@ -60,8 +56,6 @@ public class TestChainFragment extends Fragment {
         if (!chains.data().isEmpty()) {
             adapter.setItems(chains.data());
             binding.listRecyclerView.setAdapter(adapter);
-        } else if (adapter.getItemCount() == 0) {
-
         }
     }
 

@@ -30,9 +30,6 @@ public class TestPictoralFragment extends Fragment {
     // Adapters
     private PictoralsAdapter adapter;
 
-    // Vars
-    public FormModel formModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -52,8 +49,7 @@ public class TestPictoralFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).formModel;
-
+        FormModel formModel = ((TestActivity) requireActivity()).formModel;
         setData(formModel);
     }
 
@@ -61,18 +57,23 @@ public class TestPictoralFragment extends Fragment {
         try {
             ItemModel item = (ItemModel) model.getObject();
 
-            Picasso.get().load(item.getImage_url()).placeholder(R.color.Gray100).into(binding.questionImageView);
-
-            ArrayList<String> images = new ArrayList<>();
-            for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {
-                images.add(item.getAnswer().getAnswer().get(i).toString());
+            if (item.getCategory() != null && !item.getCategory().equals("")) {
+                binding.entityTextView.getRoot().setText(item.getCategory());
+                binding.entityTextView.getRoot().setVisibility(View.VISIBLE);
+            } else {
+                binding.entityTextView.getRoot().setVisibility(View.GONE);
             }
 
-            if (images.size() != 0) {
-                adapter.setItems(images, item.getUser_answered());
-                binding.listRecyclerView.setAdapter(adapter);
-            } else if (adapter.getItemCount() == 0) {
+            Picasso.get().load(item.getImage_url()).placeholder(R.color.Gray100).into(binding.questionImageView);
 
+            ArrayList<String> pics = new ArrayList<>();
+            for (int i = 0; i < item.getAnswer().getAnswer().length(); i++) {
+                pics.add(item.getAnswer().getAnswer().get(i).toString());
+            }
+
+            if (pics.size() != 0) {
+                adapter.setItems(pics, item.getUser_answered(), model.getTitle());
+                binding.listRecyclerView.setAdapter(adapter);
             }
         } catch (JSONException e) {
             e.printStackTrace();

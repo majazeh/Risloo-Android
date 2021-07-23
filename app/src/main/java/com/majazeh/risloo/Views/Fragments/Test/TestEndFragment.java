@@ -25,9 +25,6 @@ public class TestEndFragment extends Fragment {
     // Binding
     private FragmentTestEndBinding binding;
 
-    // Vars
-    private SampleModel sampleModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -61,18 +58,17 @@ public class TestEndFragment extends Fragment {
     }
 
     private void setArgs() {
-        sampleModel = ((TestActivity) requireActivity()).sampleModel;
-
+        SampleModel sampleModel = ((TestActivity) requireActivity()).sampleModel;
         setData(sampleModel);
     }
 
     private void setData(SampleModel model) {
-        FormModel form = model.getSampleForm().getModel("زنجیره");
+        FormModel formModel = model.getSampleForm().getModel("زنجیره");
 
-        if (form == null)
+        if (formModel == null)
             binding.endTextView.setText(getResources().getString(R.string.EndFragmentButtonSample));
         else {
-            List chains = (List) form.getObject();
+            List chains = (List) formModel.getObject();
 
             for (int i = 0; i < chains.data().size(); i++) {
                 ChainModel chainModel = (ChainModel) chains.data().get(i);

@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Fragments.Test.TestPictoralFragment;
 import com.majazeh.risloo.databinding.SingleItemPictoralBinding;
 import com.squareup.picasso.Picasso;
 
@@ -24,8 +22,8 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
     private Activity activity;
 
     // Vars
-    private ArrayList<String> urls;
-    private int answer = -1;
+    private ArrayList<String> items;
+    private int answer = -1, key = -1;
     private boolean userSelect = false;
 
     public PictoralsAdapter(@NonNull Activity activity) {
@@ -40,36 +38,39 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
 
     @Override
     public void onBindViewHolder(@NonNull PictoralsHolder holder, int i) {
-        String url = urls.get(i);
+        String item = items.get(i);
 
         listener(holder, i);
 
-        setData(holder, url, i);
+        setData(holder, item, i);
     }
 
     @Override
     public int getItemCount() {
-        if (this.urls != null)
-            return urls.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setItems(ArrayList<String> urls, String answer) {
-        if (this.urls == null)
-            this.urls = urls;
+    public void setItems(ArrayList<String> items, String answer, String key) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.urls.addAll(urls);
+            this.items.addAll(items);
 
         if (!answer.equals(""))
             this.answer = Integer.parseInt(answer) - 1;
+
+        if (!key.equals(""))
+            this.key = Integer.parseInt(key);
 
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        if (this.urls != null) {
-            this.urls.clear();
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -94,8 +95,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
             userSelect = true;
             notifyDataSetChanged();
 
-            if (getParent() != null)
-                ((TestActivity) activity).sendItem(Integer.parseInt(getParent().formModel.getTitle()), String.valueOf(answer + 1));
+            ((TestActivity) activity).sendItem(key, String.valueOf(answer + 1));
         }).widget(holder.itemView);
     }
 
@@ -133,15 +133,6 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
             holder.itemView.setEnabled(true);
             holder.itemView.setClickable(true);
         }
-    }
-
-    private TestPictoralFragment getParent() {
-        Fragment fragment = ((TestActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof TestPictoralFragment)
-                return (TestPictoralFragment) fragment;
-
-        return null;
     }
 
     public class PictoralsHolder extends RecyclerView.ViewHolder {

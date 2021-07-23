@@ -25,7 +25,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> chains;
+    private ArrayList<TypeModel> items;
 
     public ChainsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -39,30 +39,30 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
 
     @Override
     public void onBindViewHolder(@NonNull ChainsHolder holder, int i) {
-        ChainModel chain = (ChainModel) chains.get(i);
+        ChainModel model = (ChainModel) items.get(i);
 
-        setData(holder, chain);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.chains != null)
-            return chains.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setItems(ArrayList<TypeModel> chains) {
-        if (this.chains == null)
-            this.chains = chains;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.chains.addAll(chains);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        if (this.chains != null) {
-            this.chains.clear();
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

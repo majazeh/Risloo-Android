@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.util.Objects;
 
@@ -35,6 +36,8 @@ public class ControlEditText {
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue500);
         else if (activity instanceof MainActivity)
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
+        else if (activity instanceof TestActivity)
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue500);
     }
 
     public void clear(Activity activity, EditText editText) {
@@ -43,6 +46,8 @@ public class ControlEditText {
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         else if (activity instanceof MainActivity)
             editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+        else if (activity instanceof TestActivity)
+            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
 
         hideKeyboard(activity, editText);
     }
@@ -54,6 +59,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
 
             hideKeyboard(activity, widget);
         }
@@ -68,6 +75,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
         }
 
         errorLayout.setVisibility(View.VISIBLE);
@@ -80,6 +89,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
         }
 
         errorLayout.setVisibility(View.VISIBLE);
@@ -92,6 +103,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
         }
 
         errorLayout.setVisibility(View.VISIBLE);
@@ -104,6 +117,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
         }
 
         errorLayout.setVisibility(View.VISIBLE);
@@ -116,6 +131,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_red500);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_red500);
         }
 
         errorLayout.setVisibility(View.VISIBLE);
@@ -129,6 +146,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
 
             hideKeyboard(activity, widget);
         }
@@ -143,6 +162,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
         }
 
         errorLayout.setVisibility(View.GONE);
@@ -155,6 +176,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
         }
 
         errorLayout.setVisibility(View.GONE);
@@ -167,6 +190,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
         }
 
         errorLayout.setVisibility(View.GONE);
@@ -179,6 +204,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
         }
 
         errorLayout.setVisibility(View.GONE);
@@ -191,6 +218,8 @@ public class ControlEditText {
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             else if (activity instanceof MainActivity)
                 widget.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+            else if (activity instanceof TestActivity)
+                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
         }
 
         errorLayout.setVisibility(View.GONE);

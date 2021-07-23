@@ -6,13 +6,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Fragments.Test.TestOptionalFragment;
 import com.majazeh.risloo.databinding.SingleItemOptionalBinding;
 
 import java.util.ArrayList;
@@ -23,8 +21,8 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     private Activity activity;
 
     // Vars
-    private ArrayList<String> titles;
-    private int answer = -1;
+    private ArrayList<String> items;
+    private int answer = -1, key = -1;
     private boolean userSelect = false;
 
     public OptionalsAdapter(@NonNull Activity activity) {
@@ -39,36 +37,39 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
 
     @Override
     public void onBindViewHolder(@NonNull OptionalsHolder holder, int i) {
-        String title = titles.get(i);
+        String item = items.get(i);
 
         listener(holder, i);
 
-        setData(holder, title, i);
+        setData(holder, item, i);
     }
 
     @Override
     public int getItemCount() {
-        if (this.titles != null)
-            return titles.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setItems(ArrayList<String> titles, String answer) {
-        if (this.titles == null)
-            this.titles = titles;
+    public void setItems(ArrayList<String> items, String answer, String key) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.titles.addAll(titles);
+            this.items.addAll(items);
 
         if (!answer.equals(""))
             this.answer = Integer.parseInt(answer) - 1;
+
+        if (!key.equals(""))
+            this.key = Integer.parseInt(key);
 
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        if (this.titles != null) {
-            this.titles.clear();
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -76,14 +77,14 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
     private void detector(OptionalsHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (selected)
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_blue600_ripple_gray300);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
             else
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         } else {
             if (selected)
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_blue600);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_blue600);
             else
-                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
+                holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
         }
     }
 
@@ -93,8 +94,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
             userSelect = true;
             notifyDataSetChanged();
 
-            if (getParent() != null)
-                ((TestActivity) activity).sendItem(Integer.parseInt(getParent().formModel.getTitle()), String.valueOf(answer + 1));
+            ((TestActivity) activity).sendItem(key, String.valueOf(answer + 1));
         }).widget(holder.itemView);
     }
 
@@ -132,15 +132,6 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
             holder.itemView.setEnabled(true);
             holder.itemView.setClickable(true);
         }
-    }
-
-    private TestOptionalFragment getParent() {
-        Fragment fragment = ((TestActivity) activity).navHostFragment.getChildFragmentManager().getFragments().get(0);
-        if (fragment != null)
-            if (fragment instanceof TestOptionalFragment)
-                return (TestOptionalFragment) fragment;
-
-        return null;
     }
 
     public class OptionalsHolder extends RecyclerView.ViewHolder {

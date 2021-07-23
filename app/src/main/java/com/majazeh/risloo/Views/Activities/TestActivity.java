@@ -5,6 +5,7 @@ import android.graphics.Rect;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -24,6 +25,7 @@ import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
@@ -55,19 +57,21 @@ public class TestActivity extends AppCompatActivity {
     // Dialogs
     private LoadingDialog loadingDialog;
 
-    // Objects
-    private Bundle extras;
-    private Handler handler;
-    public ControlEditText controlEditText;
-    public NavHostFragment navHostFragment;
-    public NavController navController;
-    public NavGraph navGraph;
-
-    // Vars
-    public HashMap data, header;
+    // Models
     private SampleAnswers sampleAnswers;
     public SampleModel sampleModel;
     public FormModel formModel;
+
+    // Objects
+    public ControlEditText controlEditText;
+    private NavHostFragment navHostFragment;
+    private NavController navController;
+    private NavGraph navGraph;
+    private Bundle extras;
+    private Handler handler;
+    public HashMap data, header;
+
+    // Vars
     private boolean userSelect = false;
 
     @Override
@@ -118,9 +122,7 @@ public class TestActivity extends AppCompatActivity {
 
         loadingDialog = new LoadingDialog();
 
-        extras = getIntent().getExtras();
-
-        handler = new Handler();
+        sampleAnswers = new SampleAnswers();
 
         controlEditText = new ControlEditText();
 
@@ -130,11 +132,13 @@ public class TestActivity extends AppCompatActivity {
 
         navGraph = navController.getNavInflater().inflate(R.navigation.navigation_test);
 
+        extras = getIntent().getExtras();
+
+        handler = new Handler();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", singleton.getAuthorization());
-
-        sampleAnswers = new SampleAnswers();
 
         InitManager.imgResTint(this, binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500);
         InitManager.imgResTintRotate(this, binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Gray500, 180);
@@ -153,12 +157,12 @@ public class TestActivity extends AppCompatActivity {
     private void listener() {
         ClickManager.onClickListener(() -> {
             formModel = sampleModel.getSampleForm().prev();
-            navigateFragment();
+            navigate();
         }).widget(binding.backwardImageView.getRoot());
 
         ClickManager.onClickListener(() -> {
             formModel = sampleModel.getSampleForm().next();
-            navigateFragment();
+            navigate();
         }).widget(binding.forwardImageView.getRoot());
 
         binding.locationIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
@@ -173,7 +177,7 @@ public class TestActivity extends AppCompatActivity {
                     String pos = parent.getItemAtPosition(position).toString();
 
                     formModel = sampleModel.getSampleForm().goTo(pos);
-                    navigateFragment();
+                    navigate();
 
                     userSelect = false;
                 }
@@ -195,21 +199,22 @@ public class TestActivity extends AppCompatActivity {
         }
     }
 
-    private void setData(SampleModel model) {
-        if (model.getSampleScaleTitle() != null && !model.getSampleScaleTitle().equals("")) {
-            binding.headerIncludeLayout.titleTextView.setText(model.getSampleScaleTitle());
+    private void setData() {
+        if (sampleModel.getSampleScaleTitle() != null && !sampleModel.getSampleScaleTitle().equals("")) {
+            binding.headerIncludeLayout.titleTextView.setText(sampleModel.getSampleScaleTitle());
         }
 
-        if (model.getSampleEdition() != null && !model.getSampleEdition().equals("")) {
-            binding.headerIncludeLayout.typeTextView.setText(model.getSampleEdition());
+        if (sampleModel.getSampleEdition() != null && !sampleModel.getSampleEdition().equals("")) {
+            String title = binding.headerIncludeLayout.titleTextView.getText().toString() + " " + StringManager.bracing(sampleModel.getSampleEdition());
+            binding.headerIncludeLayout.titleTextView.setText(StringManager.foregroundSize(title, binding.headerIncludeLayout.titleTextView.getText().toString().length() + 1, title.length(), getResources().getColor(R.color.Gray400), (int) getResources().getDimension(R.dimen._9ssp)));
         }
 
-        if (model.getSampleForm() != null && model.getSampleForm().getForms() != null && model.getSampleForm().getForms().length() != 0) {
+        if (sampleModel.getSampleForm() != null && sampleModel.getSampleForm().getForms() != null && sampleModel.getSampleForm().getForms().length() != 0) {
             try {
                 ArrayList<String> titles = new ArrayList<>();
 
-                for (int i = 0; i < model.getSampleForm().getForms().length(); i++) {
-                    titles.add(model.getSampleForm().getForms().get(i).toString());
+                for (int i = 0; i < sampleModel.getSampleForm().getForms().length(); i++) {
+                    titles.add(sampleModel.getSampleForm().getForms().get(i).toString());
                 }
 
                 titles.add("");
@@ -220,8 +225,8 @@ public class TestActivity extends AppCompatActivity {
             }
         }
 
-        if (model.getSampleForm() != null && model.getSampleForm().getCurrentForm() != null) {
-            formModel = model.getSampleForm().getCurrentForm();
+        if (sampleModel.getSampleForm() != null && sampleModel.getSampleForm().getCurrentForm() != null) {
+            formModel = sampleModel.getSampleForm().getCurrentForm();
 
             switch (formModel.getType()) {
                 case "psychologist_description":
@@ -253,7 +258,7 @@ public class TestActivity extends AppCompatActivity {
                 sampleModel = (SampleModel) object;
 
                 runOnUiThread(() -> {
-                    setData(sampleModel);
+                    setData();
 
                     binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
                     decorator(false);
@@ -267,7 +272,7 @@ public class TestActivity extends AppCompatActivity {
         });
     }
 
-    private void navigateFragment() {
+    private void navigate() {
         switch (formModel.getType()) {
             case "psychologist_description": {
                 if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.testPsyDescFragment) {
@@ -326,8 +331,8 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void setWidgets() {
-        String locationSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
-        binding.locationSumTextView.getRoot().setText(locationSum);
+        String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSize(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Blue700), (int) getResources().getDimension(R.dimen._14ssp)));
 
         binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
         binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());
@@ -403,7 +408,7 @@ public class TestActivity extends AppCompatActivity {
 
         handler.postDelayed(() -> {
             formModel = sampleModel.getSampleForm().next();
-            navigateFragment();
+            navigate();
         }, 1000);
     }
 
@@ -414,13 +419,13 @@ public class TestActivity extends AppCompatActivity {
             @Override
             public void onOK(Object object) {
                 runOnUiThread(() -> {
-                    FormModel form = sampleModel.getSampleForm().getModel("زنجیره");
+                    FormModel model = sampleModel.getSampleForm().getModel("زنجیره");
 
-                    if (form == null) {
+                    if (model == null) {
                         loadingDialog.dismiss();
                         IntentManager.main(TestActivity.this);
                     } else {
-                        List chains = (List) form.getObject();
+                        List chains = (List) model.getObject();
 
                         for (int i = 0; i < chains.data().size(); i++) {
                             ChainModel chainModel = (ChainModel) chains.data().get(i);
@@ -458,7 +463,7 @@ public class TestActivity extends AppCompatActivity {
     public void onBackPressed() {
         if (formModel != null) {
             formModel = sampleModel.getSampleForm().prev();
-            navigateFragment();
+            navigate();
         }
     }
 

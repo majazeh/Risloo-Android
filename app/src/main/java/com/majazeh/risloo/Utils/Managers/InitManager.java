@@ -95,7 +95,7 @@ public class InitManager {
 
                         initializer(view);
 
-                        detector(view, position);
+                        detector(view);
 
                         setData(position);
 
@@ -106,15 +106,14 @@ public class InitManager {
                         dropdownTextView = view.findViewById(R.id.dropdown_textView);
                     }
 
-                    private void detector(View view, int position) {
+                    private void detector(View view) {
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                            view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                            view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
                         }
                     }
 
                     private void setData(int position) {
                         dropdownTextView.setText(arrayList.get(position));
-                        dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
                     }
 
                     @Override
@@ -143,7 +142,7 @@ public class InitManager {
 
                         initializer(view);
 
-                        detector(view, position);
+                        detector(view);
 
                         setData(position);
 
@@ -154,15 +153,14 @@ public class InitManager {
                         dropdownTextView = view.findViewById(R.id.dropdown_textView);
                     }
 
-                    private void detector(View view, int position) {
+                    private void detector(View view) {
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                            view.setBackgroundResource(R.drawable.draw_rec_solid_gray50_ripple_gray300);
+                            view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
                         }
                     }
 
                     private void setData(int position) {
                         dropdownTextView.setText(arrayList.get(position));
-                        dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
                     }
 
                     @Override

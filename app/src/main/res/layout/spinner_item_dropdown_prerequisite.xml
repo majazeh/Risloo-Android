@@ -10,7 +10,7 @@
     android:paddingTop="@dimen/_8sdp"
     android:paddingStart="@dimen/_12sdp"
     android:gravity="center|start"
-    android:textSize="@dimen/_12ssp"
+    android:textSize="@dimen/_10ssp"
     android:textStyle="normal"
     android:textColor="@color/Gray600"
     android:textAlignment="gravity"

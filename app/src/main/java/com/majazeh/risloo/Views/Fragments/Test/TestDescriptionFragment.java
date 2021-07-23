@@ -20,9 +20,6 @@ public class TestDescriptionFragment extends Fragment {
     // Binding
     private FragmentTestDescriptionBinding binding;
 
-    // Vars
-    private FormModel formModel;
-
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
@@ -34,15 +31,14 @@ public class TestDescriptionFragment extends Fragment {
     }
 
     private void setArgs() {
-        formModel = ((TestActivity) requireActivity()).formModel;
-
+        FormModel formModel = ((TestActivity) requireActivity()).formModel;
         setData(formModel);
     }
 
     private void setData(FormModel model) {
         String description = model.getObject().toString();
 
-        Markwon.create(requireActivity()).setMarkdown(binding.markdownTextView,  description);
+        Markwon.create(requireActivity()).setMarkdown(binding.descriptionTextView,  description);
     }
 
     @Override

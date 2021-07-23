@@ -2,7 +2,10 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Handler;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,9 +29,10 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
 
     // Objects
     private Activity activity;
+    private Handler handler;
 
     // Vars
-    private ArrayList<TypeModel> prerequisites;
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public PrerequisitesAdapter(@NonNull Activity activity) {
@@ -43,49 +47,68 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
 
     @Override
     public void onBindViewHolder(@NonNull PrerequisitesHolder holder, int i) {
-        PrerequisitesModel prerequisite = (PrerequisitesModel) prerequisites.get(i);
+        PrerequisitesModel model = (PrerequisitesModel) items.get(i);
+
+        initializer();
 
         listener(holder, i);
 
-        setData(holder, prerequisite);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.prerequisites != null)
-            return prerequisites.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setItems(ArrayList<TypeModel> prerequisites) {
-        if (this.prerequisites == null)
-            this.prerequisites = prerequisites;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.prerequisites.addAll(prerequisites);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
     public void clearItems() {
-        if (this.prerequisites != null) {
-            this.prerequisites.clear();
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
+    }
+
+    private void initializer() {
+        handler = new Handler();
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(PrerequisitesHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!holder.binding.inputEditText.hasFocus()) {
-                    ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
+                ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
             return false;
         });
 
-        holder.binding.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString());
+        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (holder.binding.inputEditText.hasFocus()) {
+                    handler.removeCallbacksAndMessages(null);
+                    handler.postDelayed(() -> ((TestActivity) activity).sendPre(item + 1, holder.binding.inputEditText.getText().toString().trim()), 750);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {
@@ -97,8 +120,6 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String pos = parent.getItemAtPosition(position).toString();
-
                     ((TestActivity) activity).sendPre(item + 1, String.valueOf(position + 1));
 
                     userSelect = false;
