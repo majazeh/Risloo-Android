@@ -4,7 +4,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.View;
 
+import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
@@ -40,6 +42,11 @@ public class SplashActivity extends AppCompatActivity {
 
         windowDecorator.showSystemUI(false, false);
         windowDecorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
+
+        if (BuildConfig.BUILD_TYPE.equals("debug"))
+            binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.debugTextView.getRoot().setVisibility(View.GONE);
     }
 
     private void initializer() {
@@ -47,7 +54,7 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void setData() {
-        String version = getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionName(this);
+        String version = getResources().getString(R.string.SplashVersion) + " " + PackageManager.versionNameWithoutSuffix(this);
         binding.versionTextView.setText(version);
     }
 

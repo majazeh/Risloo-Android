@@ -75,7 +75,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="نام و نام خانوادگی"
+        tools:text="عنوان"
         tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

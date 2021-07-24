@@ -9,10 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
-import com.majazeh.risloo.Utils.Managers.BitmapManager;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
-import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
@@ -29,7 +26,7 @@ public class DisplayActivity extends AppCompatActivity {
     private Bundle extras;
 
     // Vars
-    private String title = "", bitmap = "", path = "";
+    private String title = "", path = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,8 +38,6 @@ public class DisplayActivity extends AppCompatActivity {
         decorator();
 
         initializer();
-
-        ExtendOnFailureException.activity = this;
 
         detector();
 
@@ -75,7 +70,9 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        ClickManager.onClickListener(this::finish).widget(binding.returnImageView.getRoot());
+        ClickManager.onClickListener(() -> {
+                IntentManager.finish(this);
+        }).widget(binding.returnImageView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.storagePermission(this))
@@ -91,13 +88,6 @@ public class DisplayActivity extends AppCompatActivity {
                 binding.titleTextView.setText(title);
                 binding.titleTextView.setVisibility(View.VISIBLE);
             }
-
-//            if (!extras.getString("bitmap").equals("")) {
-//                bitmap = extras.getString("bitmap");
-//
-//                binding.avatarZoomageView.setImageBitmap(BitmapManager.modifyOrientation(FileManager.readBitmapFromCache(this, "bitmap"), bitmap));
-//                FileManager.deleteFileFromCache(this, "bitmap");
-//            }
 
             if (!extras.getString("path").equals("")) {
                 path = extras.getString("path");

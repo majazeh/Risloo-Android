@@ -29,7 +29,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_12sdp"
         android:gravity="center"
-        android:textSize="@dimen/_10ssp"
+        android:textSize="@dimen/_9ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray200"
         android:textAlignment="gravity"
@@ -38,5 +38,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         tools:text="نسخه 1.0.0" />
+
+    <include
+        android:id="@+id/debug_textView"
+        layout="@layout/component_debug_tag"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/logo_imageView"
+        app:layout_constraintEnd_toEndOf="@id/logo_imageView"
+        app:layout_constraintStart_toEndOf="@id/logo_imageView"
+        app:layout_constraintTop_toBottomOf="@id/logo_imageView"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

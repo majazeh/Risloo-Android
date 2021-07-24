@@ -23,4 +23,16 @@ public class PackageManager {
         } return "";
     }
 
+    public static String versionNameWithoutSuffix(Activity activity) {
+        try {
+            PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);
+            if (packageInfo.versionName.contains("-"))
+                return packageInfo.versionName.substring(0, packageInfo.versionName.indexOf("-"));
+            else
+                return packageInfo.versionName;
+        } catch (android.content.pm.PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        } return "";
+    }
+
 }
