@@ -78,54 +78,8 @@ public class InitManager {
 
     public static void unfixedSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, String dimension) {
         switch (dimension) {
-            case "prerequisite":
-            case "item": {
-                ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_prerequisite, arrayList) {
-
-                    private TextView dropdownTextView;
-
-                    @Override
-                    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                        return super.getView(position, convertView, viewGroup);
-                    }
-
-                    @Override
-                    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup viewGroup) {
-                        View view = LayoutInflater.from(activity).inflate(R.layout.spinner_item_dropdown_prerequisite, viewGroup, false);
-
-                        initializer(view);
-
-                        detector(view);
-
-                        setData(position);
-
-                        return view;
-                    }
-
-                    private void initializer(View view) {
-                        dropdownTextView = view.findViewById(R.id.dropdown_textView);
-                    }
-
-                    private void detector(View view) {
-                        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                            view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-                        }
-                    }
-
-                    private void setData(int position) {
-                        dropdownTextView.setText(arrayList.get(position));
-                    }
-
-                    @Override
-                    public int getCount() {
-                        return super.getCount() - 1;
-                    }
-
-                };
-
-                spinner.setAdapter(adapter);
-                spinner.setSelection(adapter.getCount());
-            } break;
+            case "pre":
+            case "item":
             case "test": {
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_test, arrayList) {
 
@@ -142,7 +96,7 @@ public class InitManager {
 
                         initializer(view);
 
-                        detector(view);
+                        detector(view, position);
 
                         setData(position);
 
@@ -153,14 +107,27 @@ public class InitManager {
                         dropdownTextView = view.findViewById(R.id.dropdown_textView);
                     }
 
-                    private void detector(View view) {
+                    private void detector(View view, int position) {
                         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-                            view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                            if (spinner.getSelectedItemPosition() == position)
+                                view.setBackgroundResource(R.drawable.draw_rec_solid_gray100_ripple_gray300);
+                            else
+                                view.setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
+                        } else {
+                            if (spinner.getSelectedItemPosition() == position)
+                                view.setBackgroundResource(R.drawable.draw_rec_solid_gray100);
+                            else
+                                view.setBackgroundResource(R.drawable.draw_rec_solid_white);
                         }
                     }
 
                     private void setData(int position) {
                         dropdownTextView.setText(arrayList.get(position));
+
+                        if (spinner.getSelectedItemPosition() == position)
+                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
+                        else
+                            dropdownTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
                     }
 
                     @Override

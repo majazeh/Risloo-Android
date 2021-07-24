@@ -198,7 +198,7 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
 
             options.add("");
 
-            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "prerequisite");
+            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "pre");
         } catch (JSONException e) {
             e.printStackTrace();
         }

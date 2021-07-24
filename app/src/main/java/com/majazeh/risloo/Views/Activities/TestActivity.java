@@ -213,15 +213,15 @@ public class TestActivity extends AppCompatActivity {
 
         if (sampleModel.getSampleForm() != null && sampleModel.getSampleForm().getForms() != null && sampleModel.getSampleForm().getForms().length() != 0) {
             try {
-                ArrayList<String> titles = new ArrayList<>();
+                ArrayList<String> options = new ArrayList<>();
 
                 for (int i = 0; i < sampleModel.getSampleForm().getForms().length(); i++) {
-                    titles.add(sampleModel.getSampleForm().getForms().get(i).toString());
+                    options.add(sampleModel.getSampleForm().getForms().get(i).toString());
                 }
 
-                titles.add("");
+                options.add("");
 
-                InitManager.unfixedSpinner(this, binding.locationIncludeLayout.selectSpinner, titles, "test");
+                InitManager.unfixedSpinner(this, binding.locationIncludeLayout.selectSpinner, options, "test");
             } catch (JSONException e) {
                 e.printStackTrace();
             }
