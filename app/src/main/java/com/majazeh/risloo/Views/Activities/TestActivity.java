@@ -6,11 +6,11 @@ import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -70,10 +70,11 @@ public class TestActivity extends AppCompatActivity {
     private NavGraph navGraph;
     private Bundle extras;
     private Handler handler;
+    private Toast toast;
     public HashMap data, header;
 
     // Vars
-    private boolean userSelect = false;
+    private boolean userSelect = false, doubleBackPressed = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -333,7 +334,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void setWidgets() {
         String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Blue600), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Blue700), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
         binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());
@@ -462,9 +463,20 @@ public class TestActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (formModel != null) {
-            formModel = sampleModel.getSampleForm().prev();
-            navigate();
+        if (doubleBackPressed) {
+            IntentManager.finish(this);
+        } else {
+            doubleBackPressed = true;
+            handler.postDelayed(() -> doubleBackPressed = false, 2000);
+
+            try {
+                toast.getView().isShown();
+                toast.setText(getResources().getString(R.string.AppDoubleBackPressed));
+            } catch (Exception e) {
+                toast = Toast.makeText(this, getResources().getString(R.string.AppDoubleBackPressed), Toast.LENGTH_SHORT);
+            }
+
+            toast.show();
         }
     }
 

@@ -9,6 +9,8 @@
 
     <string name="AppImageContent">عکس</string>
 
+    <string name="AppDoubleBackPressed">برای خروج از نمونه مجددا دکمه را کلیک کنید.</string>
+
     <string name="AppAdded">ساخته شد.</string>
     <string name="AppChanged">تغییرات ثبت شد.</string>
     <string name="AppAuthenticated">ورود شما تمام شد.</string>

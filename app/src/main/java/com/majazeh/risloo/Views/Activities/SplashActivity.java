@@ -8,6 +8,7 @@ import android.view.View;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
@@ -17,6 +18,9 @@ public class SplashActivity extends AppCompatActivity {
 
     // Binding
     private ActivitySplashBinding binding;
+
+    // Singleton
+    private Singleton singleton;
 
     // Objects
     private Handler handler;
@@ -50,6 +54,8 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void initializer() {
+        singleton = new Singleton(this);
+
         handler = new Handler();
     }
 
@@ -59,7 +65,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void navigator() {
-        handler.postDelayed(() -> IntentManager.auth(this), 1000);
+        handler.postDelayed(() -> {
+            if (!singleton.getToken().equals(""))
+                IntentManager.main(this);
+            else
+                IntentManager.auth(this);
+        }, 1000);
     }
 
     @Override

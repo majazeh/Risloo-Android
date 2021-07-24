@@ -46,16 +46,11 @@ public class AuthLoginFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentAuthLoginBinding.inflate(inflater, viewGroup, false);
 
-        if (!((AuthActivity) requireActivity()).singleton.getToken().equals("")) {
-            NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
-            ((AuthActivity) requireActivity()).navController.navigate(action);
-        } else {
-            initializer();
+        initializer();
 
-            detector();
+        detector();
 
-            listener();
-        }
+        listener();
 
         return binding.getRoot();
     }
