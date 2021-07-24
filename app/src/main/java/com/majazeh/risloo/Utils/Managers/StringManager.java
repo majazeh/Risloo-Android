@@ -222,4 +222,15 @@ public class StringManager {
         return spannableString;
     }
 
+    public static SpannableString foregroundSizeStyle(String value, int startIndex, int endIndex, int foregroundColor, int size, int typeface) {
+        SpannableString spannableString = new SpannableString(value);
+        ForegroundColorSpan foregroundColorSpan = new ForegroundColorSpan(foregroundColor);
+        AbsoluteSizeSpan sizeSpan = new AbsoluteSizeSpan(size);
+        StyleSpan styleSpan = new StyleSpan(typeface);
+        spannableString.setSpan(foregroundColorSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(sizeSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        spannableString.setSpan(styleSpan, startIndex, endIndex, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        return spannableString;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Activities;
 
 import android.annotation.SuppressLint;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -279,7 +280,7 @@ public class TestActivity extends AppCompatActivity {
                     NavDirections action = NavigationTestDirections.actionGlobalTestPsyDescFragment();
                     navController.navigate(action);
                 } else {
-                    finish();
+                    IntentManager.finish(this);
                 }
             } break;
             case "chain": {
@@ -287,7 +288,7 @@ public class TestActivity extends AppCompatActivity {
                     NavDirections action = NavigationTestDirections.actionGlobalTestChainFragment();
                     navController.navigate(action);
                 } else {
-                    finish();
+                    IntentManager.finish(this);
                 }
             } break;
             case "prerequisites": {
@@ -295,7 +296,7 @@ public class TestActivity extends AppCompatActivity {
                     NavDirections action = NavigationTestDirections.actionGlobalTestPrerequisiteFragment();
                     navController.navigate(action);
                 } else {
-                    finish();
+                    IntentManager.finish(this);
                 }
             } break;
             case "description": {
@@ -303,7 +304,7 @@ public class TestActivity extends AppCompatActivity {
                     NavDirections action = NavigationTestDirections.actionGlobalTestDescriptionFragment();
                     navController.navigate(action);
                 } else {
-                    finish();
+                    IntentManager.finish(this);
                 }
             } break;
             case "entities": {
@@ -332,7 +333,7 @@ public class TestActivity extends AppCompatActivity {
 
     private void setWidgets() {
         String indexSum = sampleModel.getSampleForm().itemSize() + " / " + sampleModel.getSampleForm().getItemPosition();
-        binding.indexTextView.getRoot().setText(StringManager.foregroundSize(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Blue700), (int) getResources().getDimension(R.dimen._14ssp)));
+        binding.indexTextView.getRoot().setText(StringManager.foregroundSizeStyle(indexSum, String.valueOf(sampleModel.getSampleForm().itemSize()).length() + 3, indexSum.length(), getResources().getColor(R.color.Blue600), (int) getResources().getDimension(R.dimen._15ssp), Typeface.BOLD));
 
         binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
         binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());

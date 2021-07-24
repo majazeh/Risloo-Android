@@ -454,7 +454,7 @@ public class MainActivity extends AppCompatActivity {
         else if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.dashboardFragment)
             navController.navigateUp();
         else
-            finish();
+            IntentManager.finish(this);
     }
 
 }

@@ -14,6 +14,7 @@ import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
@@ -98,10 +99,10 @@ public class AuthActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authLoginFragment)
+        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authLoginFragment && Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authSerialFragment)
             navController.navigateUp();
         else
-            finish();
+            IntentManager.finish(this);
     }
 
 }
