@@ -45,7 +45,7 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
         detector(holder, i);
 
-        listener(holder, i);
+        listener(holder);
 
         setData(holder, item);
 
@@ -86,10 +86,9 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
         }
     }
 
-    private void listener(NavsHolder holder, int position) {
+    private void listener(NavsHolder holder) {
         ClickManager.onDelayedClickListener(() -> {
             ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString());
-            setSelectedPosition(position);
         }).widget(holder.binding.getRoot());
     }
 
@@ -118,8 +117,22 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
         }
     }
 
-    public void setSelectedPosition(int position) {
-        selectedPosition = position;
+    public void setFocused(String value) {
+        if (value.contains("نمونه\u200Cهای گروهی"))
+            selectedPosition = 6;
+        else if (value.contains("نمونه") || value.contains("نمونه\u200Cها"))
+            selectedPosition = 5;
+        else if (value.contains("جلسه") || value.contains("جلسات"))
+            selectedPosition = 2;
+        else if (value.contains("مراکز درمانی"))
+            selectedPosition = 1;
+        else if (value.contains("اعضاء"))
+            selectedPosition = 3;
+        else if (value.contains("ارزیابی\u200Cها"))
+            selectedPosition = 4;
+        else
+            selectedPosition = 0;
+
         notifyDataSetChanged();
     }
 

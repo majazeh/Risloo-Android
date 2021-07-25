@@ -19,7 +19,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.NavigationMainDirections;
@@ -32,6 +31,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
@@ -57,20 +57,16 @@ public class MainActivity extends AppCompatActivity {
     // Binding
     private ActivityMainBinding binding;
 
+    // Entities
+    private BreadCrumb breadCrumb;
+    public Fragmont fragmont;
+    public Singleton singleton;
+
     // Adapters
     private NavsAdapter navsAdapter;
 
     // BottomSheets
     private LogoutBottomSheet logoutBottomSheet;
-
-    // BreadCump
-    private BreadCrumb breadCrumb;
-
-    // Fragmont
-    public Fragmont fragmont;
-
-    // Singleton
-    public Singleton singleton;
 
     // Dialogs
     public LoadingDialog loadingDialog;
@@ -119,13 +115,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initializer() {
-        navsAdapter = new NavsAdapter(this);
-
-        logoutBottomSheet = new LogoutBottomSheet();
-
         breadCrumb = new BreadCrumb(this);
 
         singleton = new Singleton(this);
+
+        navsAdapter = new NavsAdapter(this);
+
+        logoutBottomSheet = new LogoutBottomSheet();
 
         loadingDialog = new LoadingDialog();
 
@@ -138,34 +134,22 @@ public class MainActivity extends AppCompatActivity {
         fragmont = new Fragmont(navHostFragment);
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.imgResTint(this, binding.contentIncludeLayout.enterImageView.getRoot(), R.drawable.ic_user_crown_light, R.color.Gray500);
-        InitManager.imgResTint(this, binding.contentIncludeLayout.notificationImageView.getRoot(), R.drawable.ic_bell_light, R.color.Gray500);
-
         InitManager.fixedCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
-
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._8sdp));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.contentIncludeLayout.menuImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            binding.contentIncludeLayout.enterImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
-            binding.contentIncludeLayout.notificationImageView.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_gray300);
 
             binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray300_ripple_blue300);
         }
     }
 
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> binding.getRoot().openDrawer(GravityCompat.START)).widget(binding.contentIncludeLayout.menuImageView.getRoot());
-
-        ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.contentIncludeLayout.enterImageView.getRoot());
-
-        ClickManager.onClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(binding.contentIncludeLayout.notificationImageView.getRoot());
+        ClickManager.onDelayedClickListener(() -> {
+            binding.getRoot().openDrawer(GravityCompat.START);
+        }).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
         binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -195,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
                     } break;
                 }
 
-                binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setSelection(binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.getAdapter().getCount());
+                binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setSelection(parent.getAdapter().getCount());
             }
 
             @Override
@@ -205,20 +189,14 @@ public class MainActivity extends AppCompatActivity {
         });
 
         navController.addOnDestinationChangedListener((controller, destination, arguments) -> {
-            binding.contentIncludeLayout.breadcumpTextView.setText(breadCrumb.getFa(destination, arguments));
-            binding.contentIncludeLayout.breadcumpTextView.setMovementMethod(LinkMovementMethod.getInstance());
+            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setText(breadCrumb.getFa(destination, arguments));
+            binding.contentIncludeLayout.breadcumpIncludeLayout.getRoot().setMovementMethod(LinkMovementMethod.getInstance());
 
-            setActiveDrawer();
+            navsAdapter.setFocused(breadCrumb.getFa(destination, arguments).toString());
         });
     }
 
     public void setData() {
-        if (binding.contentIncludeLayout.breadcumpTextView.getText().equals("")) {
-            binding.contentIncludeLayout.breadcumpTextView.setVisibility(View.GONE);
-        } else {
-            binding.contentIncludeLayout.breadcumpTextView.setVisibility(View.VISIBLE);
-        }
-
         if (!singleton.getName().equals("")) {
             binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.setText(singleton.getName());
         } else {
@@ -268,23 +246,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setActiveDrawer() {
-        if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("نمونه\u200Cهای گروهی"))
-            navsAdapter.setSelectedPosition(6);
-        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("نمونه") || binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("نمونه\u200Cها"))
-            navsAdapter.setSelectedPosition(5);
-        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("جلسه") || binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("جلسات"))
-            navsAdapter.setSelectedPosition(2);
-        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("مراکز درمانی"))
-            navsAdapter.setSelectedPosition(1);
-        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("اعضاء"))
-            navsAdapter.setSelectedPosition(3);
-        else if (binding.contentIncludeLayout.breadcumpTextView.getText().toString().contains("ارزیابی\u200Cها"))
-            navsAdapter.setSelectedPosition(4);
-        else
-            navsAdapter.setSelectedPosition(0);
-    }
-
     public void responseAdapter(String item) {
         switch (item) {
             case "پیش\u200Cخوان": {
@@ -329,6 +290,95 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (grantResults.length > 0) {
+            for (int grantResult : grantResults) {
+                if (grantResult != PackageManager.PERMISSION_GRANTED)
+                    return;
+            }
+
+            switch (requestCode) {
+                case 100:
+                    IntentManager.file(this);
+                    break;
+                case 300:
+                    IntentManager.gallery(this);
+                    break;
+                case 400:
+                    if (fragmont.getCurrent() instanceof CreateCenterFragment)
+                        ((CreateCenterFragment) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
+
+                    if (fragmont.getChild() instanceof EditCenterAvatarFragment)
+                        ((EditCenterAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+
+                    if (fragmont.getChild() instanceof EditUserAvatarFragment)
+                        ((EditUserAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+
+                    break;
+            }
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        switch (resultCode) {
+            case RESULT_OK: {
+                if (fragmont.getCurrent() instanceof CreateCenterFragment) {
+                    if (requestCode == 300)
+                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("gallery", data);
+                    else if (requestCode == 400)
+                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("camera", data);
+                }
+
+                if (fragmont.getChild() instanceof EditCenterAvatarFragment) {
+                    if (requestCode == 300)
+                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                    else if (requestCode == 400)
+                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                }
+
+                if (fragmont.getChild() instanceof EditUserAvatarFragment) {
+                    if (requestCode == 300)
+                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                    else if (requestCode == 400)
+                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                }
+
+                if (fragmont.getCurrent() instanceof CreateDocumentFragment) {
+                    if (requestCode == 100)
+                        ((CreateDocumentFragment) fragmont.getCurrent()).responseAction("file", data);
+                }
+
+                if (fragmont.getCurrent() instanceof CreatePracticeFragment) {
+                    if (requestCode == 100)
+                        ((CreatePracticeFragment) fragmont.getCurrent()).responseAction("file", data);
+                }
+
+            } break;
+            case RESULT_CANCELED: {
+                switch (requestCode) {
+                    case 100:
+                        ToastManager.showToast(this, getResources().getString(R.string.ToastFileException));
+                        break;
+                    case 200:
+                        ToastManager.showToast(this, getResources().getString(R.string.ToastStorageException));
+                        break;
+                    case 300:
+                        ToastManager.showToast(this, getResources().getString(R.string.ToastGalleryException));
+                        break;
+                    case 400:
+                        ToastManager.showToast(this, getResources().getString(R.string.ToastCameraException));
+                        break;
+                }
+            } break;
+        }
+    }
+
+    @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
         if (event.getAction() == MotionEvent.ACTION_DOWN) {
             View view = getCurrentFocus();
@@ -343,108 +393,6 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         return super.dispatchTouchEvent(event);
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        switch (requestCode) {
-            case 100:
-                if (grantResults.length > 0) {
-                    for (int grantResult : grantResults) {
-                        if (grantResult != PackageManager.PERMISSION_GRANTED)
-                            return;
-                    }
-
-                    IntentManager.file(this);
-                }
-                break;
-            case 300:
-                if (grantResults.length > 0) {
-                    for (int grantResult : grantResults) {
-                        if (grantResult != PackageManager.PERMISSION_GRANTED)
-                            return;
-                    }
-
-                    IntentManager.gallery(this);
-                }
-                break;
-            case 400:
-                if (grantResults.length > 0) {
-                    for (int grantResult : grantResults) {
-                        if (grantResult != PackageManager.PERMISSION_GRANTED)
-                            return;
-                    }
-
-                    if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreateCenterFragment)
-                        ((CreateCenterFragment) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
-
-                    if (fragmont.getChild() != null && fragmont.getChild() instanceof EditCenterAvatarFragment)
-                        ((EditCenterAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
-
-                    if (fragmont.getChild() != null && fragmont.getChild() instanceof EditUserAvatarFragment)
-                        ((EditUserAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
-                }
-                break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (resultCode) {
-            case RESULT_OK: {
-                if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreateCenterFragment) {
-                    if (requestCode == 300)
-                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("gallery", data);
-                    else if (requestCode == 400)
-                        ((CreateCenterFragment) fragmont.getCurrent()).responseAction("camera", data);
-                }
-
-                if (fragmont.getChild() != null && fragmont.getChild() instanceof EditCenterAvatarFragment) {
-                    if (requestCode == 300)
-                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
-                    else if (requestCode == 400)
-                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("camera", data);
-                }
-
-                if (fragmont.getChild() != null && fragmont.getChild() instanceof EditUserAvatarFragment) {
-                    if (requestCode == 300)
-                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
-                    else if (requestCode == 400)
-                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("camera", data);
-                }
-
-                if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreateDocumentFragment) {
-                    if (requestCode == 100)
-                        ((CreateDocumentFragment) fragmont.getCurrent()).responseAction("file", data);
-                }
-
-                if (fragmont.getCurrent() != null && fragmont.getCurrent() instanceof CreatePracticeFragment) {
-                    if (requestCode == 100)
-                        ((CreatePracticeFragment) fragmont.getCurrent()).responseAction("file", data);
-                }
-
-            } break;
-            case RESULT_CANCELED: {
-                switch (requestCode) {
-                    case 100:
-                        Toast.makeText(this, "File Exception", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 200:
-                        Toast.makeText(this, "Storage Exception", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 300:
-                        Toast.makeText(this, "Gallery Exception", Toast.LENGTH_SHORT).show();
-                        break;
-                    case 400:
-                        Toast.makeText(this, "Camera Exception", Toast.LENGTH_SHORT).show();
-                        break;
-                }
-            } break;
-        }
     }
 
     @Override
