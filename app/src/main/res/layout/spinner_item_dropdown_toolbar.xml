@@ -10,12 +10,11 @@
     android:gravity="center"
     android:textSize="@dimen/_10ssp"
     android:textStyle="normal"
+    android:textColor="@color/Gray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:background="@color/Gray50"
     android:layoutDirection="rtl"
     tools:text="گزینه مورد نظر"
     tools:layout_width="wrap_content"
     tools:layout_height="wrap_content"
-    tools:layout_gravity="center"
-    tools:textColor="@color/Gray600" />
+    tools:layout_gravity="center" />

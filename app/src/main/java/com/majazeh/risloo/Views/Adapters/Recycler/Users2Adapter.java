@@ -96,7 +96,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.fixedSpinner(activity, holder.binding.statusSpinner, R.array.UserPosition, "adapter");
+        InitManager.normalAdapterSpinner(activity, holder.binding.statusSpinner, R.array.UserPosition);
     }
 
     private void detector(Users2Holder holder) {

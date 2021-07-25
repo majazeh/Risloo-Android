@@ -193,7 +193,7 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
 
             options.add("");
 
-            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "sample");
+            InitManager.normal10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
         }

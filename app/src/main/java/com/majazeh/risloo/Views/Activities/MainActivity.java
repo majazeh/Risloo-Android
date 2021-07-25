@@ -8,6 +8,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavDirections;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -76,6 +77,9 @@ public class MainActivity extends AppCompatActivity {
     public NavHostFragment navHostFragment;
     public NavController navController;
 
+    // Vars
+    private boolean userSelect = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -94,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
         listener();
 
         setData();
+
+        setToolbar();
 
         setDrawer();
     }
@@ -134,7 +140,6 @@ public class MainActivity extends AppCompatActivity {
         fragmont = new Fragmont(navHostFragment);
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
-        InitManager.fixedCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, R.array.MainRows, "toolbar");
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._8sdp));
     }
 
@@ -146,40 +151,50 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
             binding.getRoot().openDrawer(GravityCompat.START);
         }).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 
+        binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                switch (pos) {
-                    case "مشاهده پروفایل": {
-                        NavDirections action = NavigationMainDirections.actionGlobalMeFragment(singleton.getUserModel());
-                        navController.navigate(action);
-                    } break;
-                    case "کیف پول\u200Cها": {
-                        NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "صورت حساب\u200Cها": {
-                        NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "شارژ حساب": {
-                        NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment();
-                        navController.navigate(action);
-                    } break;
-                    case "خروج": {
-                        logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
-                        logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
-                    } break;
+                    switch (pos) {
+                        case "مشاهده پروفایل": {
+                            NavDirections action = NavigationMainDirections.actionGlobalMeFragment(singleton.getUserModel());
+                            navController.navigate(action);
+                        } break;
+                        case "کیف پول\u200Cها": {
+                            NavDirections action = NavigationMainDirections.actionGlobalTreasuriesFragment();
+                            navController.navigate(action);
+                        } break;
+                        case "صورت حساب\u200Cها": {
+                            NavDirections action = NavigationMainDirections.actionGlobalBillingsFragment();
+                            navController.navigate(action);
+                        } break;
+                        case "شارژ حساب": {
+                            NavDirections action = NavigationMainDirections.actionGlobalPaymentsFragment();
+                            navController.navigate(action);
+                        } break;
+                        case "خروج": {
+                            logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
+                            logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
+                        } break;
+                    }
+
+                    binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setSelection(parent.getAdapter().getCount());
+
+                    userSelect = false;
                 }
-
-                binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setSelection(parent.getAdapter().getCount());
             }
 
             @Override
@@ -218,6 +233,16 @@ public class MainActivity extends AppCompatActivity {
             binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
             binding.contentIncludeLayout.toolbarIncludeLayout.charTextView.setText(StringManager.firstChars(binding.contentIncludeLayout.toolbarIncludeLayout.nameTextView.getText().toString()));
         }
+    }
+
+    private void setToolbar() {
+        ArrayList<String> items = new ArrayList<>();
+
+        items.add(getResources().getString(R.string.MainMe));
+        items.add(getResources().getString(R.string.MainLogout));
+        items.add("");
+
+        InitManager.toolbarCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, items);
     }
 
     private void setDrawer() {

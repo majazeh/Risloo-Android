@@ -138,9 +138,9 @@ public class RoomFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String item = parent.getItemAtPosition(position).toString();
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                    switch (item) {
+                    switch (pos) {
                         case "اعضاء":
                             if (!type.equals("room")) {
                                 NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
@@ -185,7 +185,7 @@ public class RoomFragment extends Fragment {
                         } break;
                     }
 
-                    binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
+                    binding.menuSpinner.selectSpinner.setSelection(parent.getAdapter().getCount());
 
                     userSelect = false;
                 }
@@ -468,33 +468,33 @@ public class RoomFragment extends Fragment {
     }
 
     private void setDropdown(String status) {
-        ArrayList<String> menu = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
         }
 
-        menu.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
+        items.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin") && type.equals("room")) {
-            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
         }
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin") && !type.equals("room")) {
             if (!status.equals("request"))
-                menu.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
+                items.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
 
-            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
         }
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentPlatforms));
-            menu.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentPlatforms));
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
         }
 
-        menu.add("");
+        items.add("");
 
-        InitManager.unfixedCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, menu, "room");
+        InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
     }
 
     private void getData() {

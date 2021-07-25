@@ -136,7 +136,7 @@ public class SampleFragment extends Fragment {
                 if (userSelect) {
                     IntentManager.download(requireContext(), profileUrls.get(position));
 
-                    binding.profilesTextView.selectSpinner.setSelection(binding.profilesTextView.selectSpinner.getAdapter().getCount());
+                    binding.profilesTextView.selectSpinner.setSelection(parent.getAdapter().getCount());
 
                     userSelect = false;
                 }
@@ -292,19 +292,20 @@ public class SampleFragment extends Fragment {
         if (status.equals("done")) {
             binding.profilesTextView.getRoot().setVisibility(View.VISIBLE);
 
-            ArrayList<String> profilesExecs = new ArrayList<>();
+            ArrayList<String> options = new ArrayList<>();
             profileUrls = new ArrayList<>();
 
             for (int i = 0; i < sampleModel.getProfiles().size(); i++) {
                 ProfileModel profile = (ProfileModel) sampleModel.getProfiles().data().get(i);
 
-                profilesExecs.add(profile.getFile_name());
+                options.add(profile.getFile_name());
                 profileUrls.add(profile.getUrl());
             }
 
-            profilesExecs.add("");
+            options.add("");
+            profileUrls.add("");
 
-            InitManager.unfixedCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, profilesExecs, "profiles");
+            InitManager.profileCustomSpinner(requireActivity(), binding.profilesTextView.selectSpinner, options);
 
             // Profile Half
             if (sampleModel.getProfilesHalf() != null && !sampleModel.getProfilesHalf().data().isEmpty()) {

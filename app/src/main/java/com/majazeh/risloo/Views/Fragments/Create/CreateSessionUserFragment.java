@@ -206,7 +206,7 @@ public class CreateSessionUserFragment extends Fragment {
         options.add("");
         axisIds.add("");
 
-        InitManager.unfixedSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options, "main");
+        InitManager.normal12sspSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
     }
 
     private void setPlatform(com.mre.ligheh.Model.Madule.List platforms) {
@@ -222,7 +222,7 @@ public class CreateSessionUserFragment extends Fragment {
         options.add("");
         platformIds.add("");
 
-        InitManager.unfixedSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options, "main");
+        InitManager.normal12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setClients(com.mre.ligheh.Model.Madule.List clients) {

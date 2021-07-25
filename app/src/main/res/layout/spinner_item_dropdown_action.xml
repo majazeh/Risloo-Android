@@ -11,32 +11,32 @@
     android:paddingTop="@dimen/_6sdp"
     android:paddingStart="@dimen/_12sdp">
 
-    <ImageView
-        android:id="@+id/item_imageView"
-        android:layout_width="@dimen/_14sdp"
-        android:layout_height="@dimen/_14sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitCenter"
-        app:layout_constraintBottom_toBottomOf="@id/item_textView"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/item_textView"
-        tools:tint="@color/Gray500"
-        tools:src="@drawable/ic_info_circle_light" />
-
     <TextView
-        android:id="@+id/item_textView"
+        android:id="@+id/dropdown_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_8sdp"
         android:gravity="center|start"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
+        android:textColor="@color/Gray600"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/item_imageView"
+        app:layout_constraintStart_toEndOf="@id/dropdown_imageView"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="گزینه مورد نظر"
-        tools:textColor="@color/Gray600" />
+        tools:text="گزینه مورد نظر" />
+
+    <ImageView
+        android:id="@+id/dropdown_imageView"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        app:layout_constraintBottom_toBottomOf="@id/dropdown_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/dropdown_textView"
+        app:tint="@color/Gray500"
+        tools:src="@drawable/ic_info_circle_light" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -93,7 +93,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.fixedSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes, "adapter2");
+        InitManager.normalAdapterSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
     }
 
     private void detector(CenterUsersHolder holder) {
@@ -136,14 +136,20 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             }
         });
 
+        holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                String pos = parent.getItemAtPosition(position).toString();
 
                 Fragment current = ((MainActivity) activity).fragmont.getCurrent();
 
-                switch (item) {
+                switch (pos) {
                     case "پذیرفتن":
                         doWork(holder, model, "accept", "status");
                         break;
@@ -170,7 +176,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         break;
                 }
 
-                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -237,10 +244,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     private void setAcceptation(CenterUsersHolder holder, UserModel model) {
-        ArrayList<String> menu = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
 
         if (model.getUserAccepted_at() == 0) {
-            menu.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
             holder.binding.acceptedTextView.setText("");
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusAccepted));
@@ -248,7 +255,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         }
 
         if (model.getUserKicked_at() == 0) {
-            menu.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+            items.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
             holder.binding.kickedTextView.setText("");
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
@@ -260,16 +267,16 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         }
 
         if (model.getUserAccepted_at() != 0 && model.getUserKicked_at() != 0) {
-            menu.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
         }
 
-        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
-        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
-        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
+        items.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
+        items.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
+        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
 //        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
-        menu.add("");
+        items.add("");
 
-        InitManager.unfixedCustomSpinner(activity, holder.binding.menuSpinner, menu, "centerUsers");
+        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }
 
     private void doWork(CenterUsersHolder holder, UserModel model, String value, String method) {

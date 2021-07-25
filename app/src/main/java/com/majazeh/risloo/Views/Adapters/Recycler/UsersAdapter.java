@@ -92,20 +92,20 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
+                String pos = parent.getItemAtPosition(position).toString();
 
-                if (item.contains("989")) {
-                    IntentManager.phone(activity, item);
-                } else if (item.contains("@")) {
-                    IntentManager.email(activity, new String[]{item}, "", "", "");
-                } else if (item.equals("ورود به کاربری")) {
+                if (pos.contains("989")) {
+                    IntentManager.phone(activity, pos);
+                } else if (pos.contains("@")) {
+                    IntentManager.email(activity, new String[]{pos}, "", "", "");
+                } else if (pos.equals("ورود به کاربری")) {
                     Log.e("method", "enter");
-                } else if (item.equals("ویرایش عضو")) {
+                } else if (pos.equals("ویرایش عضو")) {
                     NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
                     ((MainActivity) activity).navController.navigate(action);
                 }
 
-                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
+                holder.binding.menuSpinner.setSelection(parent.getAdapter().getCount());
             }
 
             @Override
@@ -131,26 +131,26 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     }
 
     private void setMenu(UsersHolder holder, UserModel model) {
-        ArrayList<String> menu = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
 
         if (!model.getMobile().equals(""))
-            menu.add(model.getMobile());
+            items.add(model.getMobile());
 
         if (!model.getEmail().equals(""))
-            menu.add(model.getEmail());
+            items.add(model.getEmail());
 
         if (!model.getUserType().equals("admin"))
 //            menu.add(activity.getResources().getString(R.string.UsersFragmentEnter));
 
-        menu.add(activity.getResources().getString(R.string.UsersFragmentEdit));
-        menu.add("");
+        items.add(activity.getResources().getString(R.string.UsersFragmentEdit));
+        items.add("");
 
-        if (menu.size() != 1)
+        if (items.size() != 1)
             holder.binding.menuImageView.setVisibility(View.VISIBLE);
         else
             holder.binding.menuImageView.setVisibility(View.INVISIBLE);
 
-        InitManager.unfixedCustomSpinner(activity, holder.binding.menuSpinner, menu, "users");
+        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }
 
     public class UsersHolder extends RecyclerView.ViewHolder {

@@ -73,7 +73,7 @@ public class TestActivity extends AppCompatActivity {
     public HashMap data, header;
 
     // Vars
-    private ArrayList<Boolean> answered = new ArrayList<>();
+    private ArrayList<Boolean> answers;
     private boolean userSelect = false, doubleBackPressed = false;
 
     @Override
@@ -214,16 +214,17 @@ public class TestActivity extends AppCompatActivity {
         if (sampleModel.getSampleForm() != null && sampleModel.getSampleForm().getForms() != null && sampleModel.getSampleForm().getForms().length() != 0) {
             try {
                 ArrayList<String> options = new ArrayList<>();
+                answers = new ArrayList<>();
 
                 for (int i = 0; i < sampleModel.getSampleForm().getForms().length(); i++) {
                     options.add(sampleModel.getSampleForm().getForms().getJSONObject(i).getString("title"));
-                    answered.add(sampleModel.getSampleForm().getForms().getJSONObject(i).getBoolean("answer"));
+                    answers.add(sampleModel.getSampleForm().getForms().getJSONObject(i).getBoolean("answer"));
                 }
 
                 options.add("");
-                answered.add(false);
+                answers.add(false);
 
-                InitManager.unfixedCustomTestSpinner(this, binding.locationIncludeLayout.selectSpinner, options, answered);
+                InitManager.testCustomSpinner(this, binding.locationIncludeLayout.selectSpinner, options, answers);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -384,7 +385,7 @@ public class TestActivity extends AppCompatActivity {
     public void sendItem(int key, String value) {
         ItemModel item = (ItemModel) formModel.getObject();
         item.setUser_answered(value);
-        answered.set(sampleModel.getSampleForm().getPosition(), true);
+        answers.set(sampleModel.getSampleForm().getPosition(), true);
 
         binding.statusTextView.getRoot().setText(getResources().getString(R.string.TestSaving));
         binding.statusTextView.getRoot().setTextColor(getResources().getColor(R.color.Yellow500));

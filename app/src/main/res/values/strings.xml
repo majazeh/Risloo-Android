@@ -214,8 +214,13 @@
     // Main Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="MainHeader">ریسلو</string>
+    <string name="MainMe">مشاهده پروفایل</string>
+    <string name="MainTreasuries">کیف پول‌ها</string>
+    <string name="MainBillings">صورت حساب‌ها</string>
+    <string name="MainPayments">شارژ حساب</string>
+    <string name="MainLogout">خروج</string>
 
+    <string name="MainHeader">ریسلو</string>
     <string name="MainToman">تومان</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -807,6 +812,10 @@
     <string name="BulkSamplesFragmentStatus">وضعیت</string>
     <string name="BulkSamplesFragmentReference">اعضا</string>
 
+    <string name="BulkSamplesFragmentLink">لینک ثبت نام</string>
+    <string name="BulkSamplesFragmentCopy">کپی کردن لینک</string>
+    <string name="BulkSamplesFragmentEdit">ویرایش</string>
+
     <string name="BulkSamplesFragmentEmpty">هنوز نمونه‌ گروهی ثبت نشده است.</string>
 
     /*
@@ -868,7 +877,7 @@
     <string name="CenterUsersFragmentKick">تعلیق</string>
     <string name="CenterUsersFragmentCreateRoom">ساختن اتاق درمان</string>
     <string name="CenterUsersFragmentRoom">اتاق درمان</string>
-    <string name="CenterUsersFragmentEdit">ویرایش عضو</string>
+    <string name="CenterUsersFragmentEdit">ویرایش</string>
     <string name="CenterUsersFragmentEnter">ورود به کاربری</string>
 
     <string name="CenterUsersFragmentEmpty">هنوز عضویی برای این مرکز ثبت نشده است.</string>
@@ -1016,7 +1025,7 @@
     <string name="UsersFragmentStatus">وضعیت</string>
 
     <string name="UsersFragmentEnter">ورود به کاربری</string>
-    <string name="UsersFragmentEdit">ویرایش عضو</string>
+    <string name="UsersFragmentEdit">ویرایش</string>
 
     <string name="UsersFragmentEmpty">هنوز عضوی ثبت نشده است.</string>
 

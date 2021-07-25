@@ -127,9 +127,9 @@ public class CenterFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String item = parent.getItemAtPosition(position).toString();
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                    switch (item) {
+                    switch (pos) {
                         case "اعضاء": {
                             NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
@@ -152,7 +152,7 @@ public class CenterFragment extends Fragment {
                         } break;
                     }
 
-                    binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
+                    binding.menuSpinner.selectSpinner.setSelection(parent.getAdapter().getCount());
 
                     userSelect = false;
                 }
@@ -363,25 +363,25 @@ public class CenterFragment extends Fragment {
     }
 
     private void setDropdown(String status) {
-        ArrayList<String> menu = new ArrayList<>();
+        ArrayList<String> items = new ArrayList<>();
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            menu.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
         }
 
-        menu.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
+        items.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin") && !status.equals("request"))
-            menu.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
         if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            menu.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
-            menu.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
         }
 
-        menu.add("");
+        items.add("");
 
-        InitManager.unfixedCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, menu, "center");
+        InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
     }
 
     private void getData() {

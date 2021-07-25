@@ -113,9 +113,9 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String item = parent.getItemAtPosition(position).toString();
+                String pos = parent.getItemAtPosition(position).toString();
 
-                switch (item) {
+                switch (pos) {
                     case "لینک ثبت نام":
                         doWork(model);
                         break;
@@ -123,12 +123,12 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
                         IntentManager.clipboard(activity, model.getLink());
                         Toast.makeText(activity, activity.getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
                         break;
-                    case "ویرایش نمونه":
+                    case "ویرایش":
                         // TODO : Place Code If Needed
                         break;
                 }
 
-                holder.binding.menuSpinner.setSelection(holder.binding.menuSpinner.getAdapter().getCount());
+                holder.binding.menuSpinner.setSelection(parent.getAdapter().getCount());
             }
 
             @Override
@@ -160,10 +160,24 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
             holder.binding.statusTextView.setText(SelectionManager.getSampleStatus(activity, "fa", model.getStatus()));
             holder.binding.referenceTextView.setText(model.getMembers_count() + " / " + model.getJoined());
 
-            InitManager.fixedCustomSpinner(activity, holder.binding.menuSpinner, R.array.BulkSamplesTasks, "bulkSamples");
+            setMenu(holder, model);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setMenu(BulkSamplesHolder holder, BulkSampleModel model) {
+        ArrayList<String> items = new ArrayList<>();
+
+        if (!model.getLink().equals("")) {
+            items.add(activity.getResources().getString(R.string.BulkSamplesFragmentLink));
+            items.add(activity.getResources().getString(R.string.BulkSamplesFragmentCopy));
+        }
+
+        items.add(activity.getResources().getString(R.string.BulkSamplesFragmentEdit));
+        items.add("");
+
+        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }
 
     private void doWork(BulkSampleModel model) {

@@ -96,7 +96,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.fixedSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels, "adapter");
+        InitManager.normalAdapterSpinner(activity, holder.binding.levelSpinner, R.array.PlatformLevels);
     }
 
     private void detector(RoomPlatformsHolder holder) {

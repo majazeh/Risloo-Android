@@ -86,7 +86,7 @@ public class CreateSessionSessionFragment extends Fragment {
         binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSessionSessionTabAxisGuide));
         binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSessionSessionTabCoordinationGuide));
 
-        InitManager.fixedSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus, "main");
+        InitManager.normal12sspSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
