@@ -11,7 +11,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,6 +22,7 @@ import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPinBinding;
 import com.mre.ligheh.API.Response;
@@ -275,7 +275,7 @@ public class AuthPinFragment extends Fragment {
                 }
             });
         } else if (method.equals("verification")) {
-            Toast.makeText(requireActivity().getApplicationContext(), "این دستور هنوز اضافه نشده است.", Toast.LENGTH_SHORT).show();
+            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastFeatureNotAddedYet));
 
             // TODO : Place Code if Needed
 

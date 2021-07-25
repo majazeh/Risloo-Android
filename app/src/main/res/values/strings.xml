@@ -9,8 +9,6 @@
 
     <string name="AppImageContent">عکس</string>
 
-    <string name="AppDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
-
     <string name="AppAdded">ساخته شد.</string>
     <string name="AppChanged">تغییرات ثبت شد.</string>
     <string name="AppAuthenticated">ورود شما تمام شد.</string>
@@ -35,6 +33,14 @@
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
     <string name="AppDefaultDate">1400-01-01</string>
     <string name="AppDefaultTime">01:00</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // App Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>
+    <string name="ToastDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

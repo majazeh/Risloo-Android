@@ -10,7 +10,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
@@ -27,6 +26,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Widgets.ControlEditText;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
@@ -70,7 +70,6 @@ public class TestActivity extends AppCompatActivity {
     private NavGraph navGraph;
     private Bundle extras;
     private Handler handler;
-    private Toast toast;
     public HashMap data, header;
 
     // Vars
@@ -469,14 +468,7 @@ public class TestActivity extends AppCompatActivity {
             doubleBackPressed = true;
             handler.postDelayed(() -> doubleBackPressed = false, 2000);
 
-            try {
-                toast.getView().isShown();
-                toast.setText(getResources().getString(R.string.AppDoubleBackPressed));
-            } catch (Exception e) {
-                toast = Toast.makeText(this, getResources().getString(R.string.AppDoubleBackPressed), Toast.LENGTH_SHORT);
-            }
-
-            toast.show();
+            ToastManager.showToast(this, getResources().getString(R.string.ToastDoubleBackPressed));
         }
     }
 
