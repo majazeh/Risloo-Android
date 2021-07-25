@@ -27,7 +27,7 @@ public class AuthActivity extends AppCompatActivity {
     // Binding
     private ActivityAuthBinding binding;
 
-    // Singleton
+    // Entities
     public Singleton singleton;
 
     // Dialogs

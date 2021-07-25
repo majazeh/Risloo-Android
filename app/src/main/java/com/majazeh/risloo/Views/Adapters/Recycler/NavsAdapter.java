@@ -60,10 +60,6 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
             return 0;
     }
 
-    public ArrayList<TypeModel> getItems() {
-        return items;
-    }
-
     public void setItems(ArrayList<TypeModel> items) {
         this.items = items;
         notifyDataSetChanged();
@@ -81,12 +77,12 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
             if (selectedPosition == position)
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_blue500_ripple_blue800);
             else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray50_ripple_gray300);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray100_ripple_gray300);
         } else {
             if (selectedPosition == position)
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_blue500);
             else
-                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray50);
+                holder.binding.getRoot().setBackgroundResource(R.drawable.draw_4sdp_solid_gray100);
         }
     }
 

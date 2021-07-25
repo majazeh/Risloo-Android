@@ -19,7 +19,7 @@ public class SplashActivity extends AppCompatActivity {
     // Binding
     private ActivitySplashBinding binding;
 
-    // Singleton
+    // Entities
     private Singleton singleton;
 
     // Objects

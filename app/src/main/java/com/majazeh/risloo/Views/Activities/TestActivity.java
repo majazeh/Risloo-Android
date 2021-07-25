@@ -52,7 +52,7 @@ public class TestActivity extends AppCompatActivity {
     // Binding
     private ActivityTestBinding binding;
 
-    // Singleton
+    // Entities
     public Singleton singleton;
 
     // Dialogs
