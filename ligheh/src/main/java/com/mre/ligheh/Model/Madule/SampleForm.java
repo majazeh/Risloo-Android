@@ -4,9 +4,11 @@ import androidx.annotation.Nullable;
 
 import com.mre.ligheh.Model.TypeModel.EntityModel;
 import com.mre.ligheh.Model.TypeModel.FormModel;
+import com.mre.ligheh.Model.TypeModel.ItemModel;
 
 import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 public class SampleForm {
     private List items;
@@ -22,7 +24,7 @@ public class SampleForm {
     private int position = 0;
     private int itemPosition = 1;
 
-    public SampleForm(List items,String psychologist_description, @Nullable List chain, List entities, List prerequisites, String description) {
+    public SampleForm(List items, String psychologist_description, @Nullable List chain, List entities, List prerequisites, String description) {
         this.items = items;
         if (chain != null)
             this.chain = chain;
@@ -166,9 +168,24 @@ public class SampleForm {
     }
 
     public void addForm(FormModel formModel) {
-        forms.put(formModel.getTitle());
-        itemPositions.put(itemPosition);
-        sampleForm.put(formModel);
+        try {
+            JSONObject jsonObject = new JSONObject();
+            jsonObject.put("title", formModel.getTitle());
+            boolean answer = false;
+            if (formModel.getObject().getClass().getName().equals("com.mre.ligheh.Model.TypeModel.ItemModel"))
+                if (!((ItemModel) formModel.getObject()).getUser_answered().equals(""))
+                    answer = true;
+            jsonObject.put("answer", answer);
+
+            // TODO: delete next line and uncomment 2nd line
+            forms.put(formModel.getTitle());
+//            forms.put(jsonObject);
+
+            itemPositions.put(itemPosition);
+            sampleForm.put(formModel);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
 
