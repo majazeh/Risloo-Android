@@ -342,6 +342,8 @@ public class TestActivity extends AppCompatActivity {
         binding.headerIncludeLayout.answeredProgressBar.setMax(sampleModel.getSampleForm().itemSize());
         binding.headerIncludeLayout.answeredProgressBar.setProgress(sampleModel.getSampleForm().getItemPosition());
 
+        userSelect = false;
+
         for (int i = 0; i < binding.locationIncludeLayout.selectSpinner.getCount(); i++) {
             if (binding.locationIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(formModel.getTitle())) {
                 binding.locationIncludeLayout.selectSpinner.setSelection(i);
