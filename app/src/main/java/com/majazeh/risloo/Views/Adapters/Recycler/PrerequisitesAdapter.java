@@ -190,7 +190,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
 
             options.add("");
 
-            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "pre");
+            InitManager.unfixedSpinner(activity, holder.binding.selectSpinner, options, "sample");
         } catch (JSONException e) {
             e.printStackTrace();
         }

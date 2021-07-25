@@ -167,6 +167,10 @@ public class SampleForm {
         return 0;
     }
 
+    public int getPosition() {
+        return position;
+    }
+
     public void addForm(FormModel formModel) {
         try {
             JSONObject jsonObject = new JSONObject();
@@ -176,11 +180,7 @@ public class SampleForm {
                 if (!((ItemModel) formModel.getObject()).getUser_answered().equals(""))
                     answer = true;
             jsonObject.put("answer", answer);
-
-            // TODO: delete next line and uncomment 2nd line
-            forms.put(formModel.getTitle());
-//            forms.put(jsonObject);
-
+            forms.put(jsonObject);
             itemPositions.put(itemPosition);
             sampleForm.put(formModel);
         } catch (JSONException e) {
