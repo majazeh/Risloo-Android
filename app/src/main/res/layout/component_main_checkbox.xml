@@ -12,6 +12,6 @@
     android:textColor="@color/Gray600"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:layoutDirection="rtl"
     android:theme="@style/CheckBoxTheme"
+    android:layoutDirection="rtl"
     tools:text="تیک" />

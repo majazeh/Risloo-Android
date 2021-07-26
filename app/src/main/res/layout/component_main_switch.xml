@@ -19,5 +19,5 @@
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
     android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray300"
-    android:layoutDirection="rtl"
-    android:theme="@style/SwicthCompatTheme" />
+    android:theme="@style/SwicthCompatTheme"
+    android:layoutDirection="rtl" />

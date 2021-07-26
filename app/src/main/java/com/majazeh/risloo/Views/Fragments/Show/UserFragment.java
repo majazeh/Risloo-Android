@@ -32,9 +32,11 @@ public class UserFragment extends Fragment {
     // Binding
     private FragmentUserBinding binding;
 
-    // Vars
-    private HashMap data, header;
+    // Models
     private UserModel userModel;
+
+    // Objects
+    private HashMap data, header;
 
     @Nullable
     @Override
@@ -92,7 +94,6 @@ public class UserFragment extends Fragment {
 
     private void setArgs() {
         userModel = (UserModel) UserFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
         setData(userModel);
     }
 
@@ -105,29 +106,6 @@ public class UserFragment extends Fragment {
             binding.nameTextView.setText(model.getName());
         } else {
             binding.nameTextView.setText(getResources().getString(R.string.AppDefaultName));
-        }
-
-        if (model.getUsername() != null && !model.getUsername().equals("")) {
-            binding.usernameTextView.setText(model.getUsername());
-            binding.usernameTextView.setVisibility(View.VISIBLE);
-        } else {
-            binding.usernameTextView.setVisibility(View.GONE);
-        }
-
-        binding.educationGroup.setVisibility(View.GONE);
-
-        if (model.getBirthday() != null && !model.getBirthday().equals("")) {
-            binding.birthdayTextView.setText(model.getBirthday());
-            binding.birthdayGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.birthdayGroup.setVisibility(View.GONE);
-        }
-
-        if (model.getEmail() != null && !model.getEmail().equals("")) {
-            binding.emailTextView.setText(model.getEmail());
-            binding.emailGroup.setVisibility(View.VISIBLE);
-        } else {
-            binding.emailGroup.setVisibility(View.GONE);
         }
 
         if (model.getMobile() != null && !model.getMobile().equals("")) {

@@ -38,7 +38,8 @@
         app:layout_constraintBottom_toBottomOf="@id/header_textView"
         app:layout_constraintStart_toEndOf="@id/header_textView"
         app:layout_constraintTop_toTopOf="@id/header_textView"
-        tools:text="(5)" />
+        tools:text="(5)"
+        tools:visibility="visible" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/select_recyclerView"

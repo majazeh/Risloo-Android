@@ -1085,7 +1085,7 @@
     ---------- Me Fragment ----------
     */
 
-    <string name="MeFragmentTitle">حساب من</string>
+    <string name="MeFragmentTitle">من</string>
 
     /*
     ---------- Reference Fragment ----------

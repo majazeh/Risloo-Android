@@ -12,7 +12,6 @@
     android:textStyle="normal"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_medium"
-    android:layoutDirection="rtl"
     tools:text="دکمه"
     tools:textColor="@color/Gray500"
     tools:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray500" />

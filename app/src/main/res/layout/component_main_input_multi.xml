@@ -35,7 +35,7 @@
         android:paddingBottom="@dimen/_8sdp"
         android:imeOptions="actionDone"
         android:inputType="textMultiLine"
-        android:gravity="top|start"
+        android:gravity="top|right"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"

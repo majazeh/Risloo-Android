@@ -32,7 +32,7 @@
         android:paddingEnd="@dimen/_12sdp"
         android:imeOptions="actionDone"
         android:inputType="text"
-        android:gravity="center|start"
+        android:gravity="center|right"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"

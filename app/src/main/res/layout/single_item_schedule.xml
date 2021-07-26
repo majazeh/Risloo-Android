@@ -49,7 +49,7 @@
 
         <include
             android:id="@+id/avatar_includeLayout"
-            layout="@layout/component_main_avatar_borderless_too_small"
+            layout="@layout/component_main_avatar_borderless_small2"
             android:layout_width="@dimen/_36sdp"
             android:layout_height="@dimen/_36sdp"
             android:layout_marginTop="@dimen/_12sdp"
