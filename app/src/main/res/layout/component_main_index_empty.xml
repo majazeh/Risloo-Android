@@ -11,4 +11,4 @@
     android:textColor="@color/Gray400"
     android:textAlignment="gravity"
     android:fontFamily="@font/dana_regular"
-    tools:text="داده ثبت نشده است." />
+    tools:text="داده موجود نیست." />

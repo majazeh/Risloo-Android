@@ -167,6 +167,11 @@ public class UsersFragment extends Fragment {
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.headerView.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
+
+                            if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.UsersFragmentEmpty));
+                            else if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
