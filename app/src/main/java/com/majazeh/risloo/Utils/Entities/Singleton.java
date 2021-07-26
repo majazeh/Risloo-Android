@@ -102,7 +102,7 @@ public class Singleton {
     }
 
     public String getAvatar() {
-        if (getUserModel().getAvatar() != null && getUserModel().getAvatar().getMedium() != null && getUserModel().getAvatar().getMedium().getUrl() != null)
+        if (getUserModel().getAvatar() != null && getUserModel().getAvatar().getMedium() != null && getUserModel().getAvatar().getMedium().getUrl() != null && !getUserModel().getAvatar().getMedium().getUrl().equals(""))
             return getUserModel().getAvatar().getMedium().getUrl();
 
         return "";

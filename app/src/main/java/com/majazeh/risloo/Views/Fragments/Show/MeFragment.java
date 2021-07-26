@@ -108,6 +108,13 @@ public class MeFragment extends Fragment {
             binding.mobileGroup.setVisibility(View.GONE);
         }
 
+        if (model.getEmail() != null && !model.getEmail().equals("")) {
+            binding.emailTextView.setText(model.getEmail());
+            binding.emailGroup.setVisibility(View.VISIBLE);
+        } else {
+            binding.emailGroup.setVisibility(View.GONE);
+        }
+
         if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(model.getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);

@@ -10,7 +10,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
@@ -43,8 +43,13 @@ public class EditUserPasswordFragment extends Fragment {
     // Binding
     private FragmentEditUserPasswordBinding binding;
 
-    // Vars
+    // Fragments
+    private Fragment current;
+
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String currentPassword = "", newPassword = "";
     private boolean currentPasswordVisibility = false, newPasswordVisibility = false;
 
@@ -65,6 +70,8 @@ public class EditUserPasswordFragment extends Fragment {
     }
 
     private void initializer() {
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -88,21 +95,23 @@ public class EditUserPasswordFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.currentPasswordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.currentPasswordIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.currentPasswordIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.currentPasswordIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            currentPassword = binding.currentPasswordIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.newPasswordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.newPasswordIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.newPasswordIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.newPasswordIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.newPasswordIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.newPasswordIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            newPassword = binding.newPasswordIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.currentPasswordIncludeLayout.inputEditText.addTextChangedListener(new TextWatcher() {
@@ -114,9 +123,11 @@ public class EditUserPasswordFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0) {
-                    binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.INVISIBLE);
+                    if (binding.currentPasswordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
+                        binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
                 } else if (binding.currentPasswordIncludeLayout.inputEditText.length() == 1) {
-                    binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+                    if (binding.currentPasswordIncludeLayout.visibilityImageView.getVisibility() != View.VISIBLE)
+                        binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -135,9 +146,11 @@ public class EditUserPasswordFragment extends Fragment {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (binding.newPasswordIncludeLayout.inputEditText.length() == 0) {
-                    binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.INVISIBLE);
+                    if (binding.newPasswordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
+                        binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
                 } else if (binding.newPasswordIncludeLayout.inputEditText.length() == 1) {
-                    binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+                    if (binding.newPasswordIncludeLayout.visibilityImageView.getVisibility() != View.VISIBLE)
+                        binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -160,8 +173,12 @@ public class EditUserPasswordFragment extends Fragment {
 
             @Override
             public void onPaste() {
-                if (binding.currentPasswordIncludeLayout.inputEditText.length() != 0) {
-                    binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+                if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0) {
+                    if (binding.currentPasswordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
+                        binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
+                } else if (binding.currentPasswordIncludeLayout.inputEditText.length() != 0) {
+                    if (binding.currentPasswordIncludeLayout.visibilityImageView.getVisibility() != View.VISIBLE)
+                        binding.currentPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -179,8 +196,12 @@ public class EditUserPasswordFragment extends Fragment {
 
             @Override
             public void onPaste() {
-                if (binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
-                    binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
+                if (binding.newPasswordIncludeLayout.inputEditText.length() == 0) {
+                    if (binding.newPasswordIncludeLayout.visibilityImageView.getVisibility() != View.GONE)
+                        binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.GONE);
+                } else if (binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
+                    if (binding.newPasswordIncludeLayout.visibilityImageView.getVisibility() != View.VISIBLE)
+                        binding.newPasswordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
                 }
             }
         });
@@ -188,32 +209,32 @@ public class EditUserPasswordFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (!currentPasswordVisibility) {
                 currentPasswordVisibility = true;
-                binding.currentPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-
-                ImageViewCompat.setImageTintList(binding.currentPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
                 binding.currentPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
+
+                binding.currentPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
+                ImageViewCompat.setImageTintList(binding.currentPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
             } else {
                 currentPasswordVisibility = false;
-                binding.currentPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-
-                ImageViewCompat.setImageTintList(binding.currentPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
                 binding.currentPasswordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
+
+                binding.currentPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
+                ImageViewCompat.setImageTintList(binding.currentPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
             }
         }).widget(binding.currentPasswordIncludeLayout.visibilityImageView);
 
         ClickManager.onDelayedClickListener(() -> {
             if (!newPasswordVisibility) {
                 newPasswordVisibility = true;
-                binding.newPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
-
-                ImageViewCompat.setImageTintList(binding.newPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
                 binding.newPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
+
+                binding.newPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_light, null));
+                ImageViewCompat.setImageTintList(binding.newPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Blue800));
             } else {
                 newPasswordVisibility = false;
-                binding.newPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
-
-                ImageViewCompat.setImageTintList(binding.newPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
                 binding.newPasswordIncludeLayout.inputEditText.setTransformationMethod(new PasswordTransformationMethod());
+
+                binding.newPasswordIncludeLayout.visibilityImageView.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.ic_eye_slash_light, null));
+                ImageViewCompat.setImageTintList(binding.newPasswordIncludeLayout.visibilityImageView, AppCompatResources.getColorStateList(requireActivity(), R.color.Gray600));
             }
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
@@ -246,8 +267,6 @@ public class EditUserPasswordFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditUserFragment) {
             UserModel model = ((EditUserFragment) current).userModel;
 
@@ -265,9 +284,6 @@ public class EditUserPasswordFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        currentPassword = binding.currentPasswordIncludeLayout.inputEditText.getText().toString().trim();
-        newPassword = binding.newPasswordIncludeLayout.inputEditText.getText().toString().trim();
-
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             data.put("password",  currentPassword);
             data.put("new_password", newPassword);
@@ -278,7 +294,7 @@ public class EditUserPasswordFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }
                 }
@@ -319,7 +335,7 @@ public class EditUserPasswordFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }
                 }

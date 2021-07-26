@@ -27,8 +27,13 @@ public class EditUserCryptoFragment extends Fragment {
     // Binding
     private FragmentEditUserCryptoBinding binding;
 
-    // Vars
+    // Fragments
+    private Fragment current;
+
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String publicKey = "", privateKey = "";
 
     @Nullable
@@ -48,6 +53,8 @@ public class EditUserCryptoFragment extends Fragment {
     }
 
     private void initializer() {
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -72,21 +79,23 @@ public class EditUserCryptoFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.publicIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.publicIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.publicIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.publicIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.publicIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.publicIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.privateIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.privateIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.privateIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.privateIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.privateIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.privateIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -109,8 +118,6 @@ public class EditUserCryptoFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditUserFragment) {
             UserModel model = ((EditUserFragment) current).userModel;
 
@@ -134,12 +141,8 @@ public class EditUserCryptoFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         if (key.equals("public")) {
-            publicKey = binding.publicIncludeLayout.inputEditText.getText().toString().trim();
-
             // TODO : Place Code Here
         } else {
-            privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
-
             // TODO : Place Code Here
         }
     }

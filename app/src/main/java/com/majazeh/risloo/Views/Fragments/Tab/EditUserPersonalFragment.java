@@ -7,16 +7,17 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
@@ -42,9 +43,14 @@ public class EditUserPersonalFragment extends Fragment {
     // BottomSheets
     private DateBottomSheet birthdayBottomSheet;
 
-    // Vars
+    // Fragments
+    private Fragment current;
+
+    // Objects
     private HashMap data, header;
-    private String name = "", mobile = "", username = "", email = "", birthday = "", status = "", type = "", gender = "";
+
+    // Vars
+    private String name = "", mobile = "", email = "", birthday = "", status = "", type = "", gender = "";
 
     @Nullable
     @Override
@@ -65,20 +71,19 @@ public class EditUserPersonalFragment extends Fragment {
     private void initializer() {
         birthdayBottomSheet = new DateBottomSheet();
 
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabNameHeader));
         binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabMobileHeader));
-        binding.usernameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabUsernameHeader));
         binding.emailIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabEmailHeader));
         binding.birthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabBirthdayHeader));
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabStatusHeader));
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabTypeHeader));
         binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabGenderHeader));
-
-        binding.usernameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserPersonalTabUsernameGuide));
 
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusActive));
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusWaiting));
@@ -104,39 +109,33 @@ public class EditUserPersonalFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
-        binding.usernameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.usernameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.usernameIncludeLayout.inputEditText);
-                }
-            }
-            return false;
+        binding.mobileIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.emailIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.emailIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.emailIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -191,8 +190,6 @@ public class EditUserPersonalFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditUserFragment) {
             UserModel model = ((EditUserFragment) current).userModel;
 
@@ -208,11 +205,6 @@ public class EditUserPersonalFragment extends Fragment {
             if (model.getMobile() != null && !model.getMobile().equals("")) {
                 mobile = model.getMobile();
                 binding.mobileIncludeLayout.inputEditText.setText(mobile);
-            }
-
-            if (model.getUsername() != null && !model.getUsername().equals("")) {
-                username = model.getUsername();
-                binding.usernameIncludeLayout.inputEditText.setText(username);
             }
 
             if (model.getEmail() != null && !model.getEmail().equals("")) {
@@ -248,13 +240,9 @@ public class EditUserPersonalFragment extends Fragment {
                 switch (type) {
                     case "admin":
                         binding.typeIncludeLayout.firstRadioButton.setChecked(true);
-
-                        binding.clientGroup.setVisibility(View.VISIBLE);
                         break;
                     case "user":
                         binding.typeIncludeLayout.secondRadioButton.setChecked(true);
-
-                        binding.clientGroup.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -285,12 +273,12 @@ public class EditUserPersonalFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-        mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
-        username = binding.usernameIncludeLayout.inputEditText.getText().toString().trim();
-        email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
-
         data.put("name", name);
+        data.put("mobile", mobile);
+        data.put("email", email);
+        data.put("birthday", birthday);
+        data.put("status", status);
+        data.put("type", type);
         data.put("gender", gender);
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
@@ -306,7 +294,7 @@ public class EditUserPersonalFragment extends Fragment {
                             ((MainActivity) requireActivity()).setData();
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }
                 }
@@ -323,8 +311,28 @@ public class EditUserPersonalFragment extends Fragment {
                                     while (keys.hasNext()) {
                                         String key = keys.next();
                                         for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                            if (key.equals("name")) {
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            switch (key) {
+                                                case "name":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "mobile":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "email":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.emailIncludeLayout.inputEditText, binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "birthday":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.birthdayIncludeLayout.selectTextView, binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "status":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "type":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "gender":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
                                             }
                                         }
                                     }
@@ -343,7 +351,7 @@ public class EditUserPersonalFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }
                 }
@@ -360,8 +368,28 @@ public class EditUserPersonalFragment extends Fragment {
                                     while (keys.hasNext()) {
                                         String key = keys.next();
                                         for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                            if (key.equals("name")) {
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            switch (key) {
+                                                case "name":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "mobile":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "email":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.emailIncludeLayout.inputEditText, binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "birthday":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.birthdayIncludeLayout.selectTextView, binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "status":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "type":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "gender":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
                                             }
                                         }
                                     }

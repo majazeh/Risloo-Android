@@ -111,12 +111,48 @@
                     app:layout_constraintTop_toBottomOf="@id/name_textView"
                     tools:text="موبایل" />
 
+                <ImageView
+                    android:id="@+id/email_imageView"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:contentDescription="@string/AppImageContent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_envelope_light"
+                    app:layout_constraintBottom_toBottomOf="@id/email_textView"
+                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintTop_toTopOf="@id/email_textView"
+                    app:tint="@color/Gray500" />
+
+                <TextView
+                    android:id="@+id/email_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="right"
+                    android:textSize="@dimen/_10ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray600"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular"
+                    app:layout_constraintEnd_toEndOf="@id/name_textView"
+                    app:layout_constraintStart_toEndOf="@id/email_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/mobile_textView"
+                    tools:text="ایمیل" />
+
                 <androidx.constraintlayout.widget.Group
                     android:id="@+id/mobile_group"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:visibility="visible"
                     app:constraint_referenced_ids="mobile_imageView, mobile_textView" />
+
+                <androidx.constraintlayout.widget.Group
+                    android:id="@+id/email_group"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible"
+                    app:constraint_referenced_ids="email_imageView, email_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

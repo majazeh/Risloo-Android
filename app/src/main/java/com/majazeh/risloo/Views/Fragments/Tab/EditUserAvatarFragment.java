@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
@@ -42,11 +42,14 @@ public class EditUserAvatarFragment extends Fragment {
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
 
+    // Fragments
+    private Fragment current;
+
     // Objects
     private Bitmap avatarBitmap = null;
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
     public String avatarPath = "";
 
     @Nullable
@@ -67,6 +70,8 @@ public class EditUserAvatarFragment extends Fragment {
 
     private void initializer() {
         imageBottomSheet = new ImageBottomSheet();
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -93,9 +98,9 @@ public class EditUserAvatarFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (avatarBitmap == null) {
                 if (!avatarPath.equals(""))
-                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageNew), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
                 else
-                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageEmpty), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
             } else {
                 doWork();
             }
@@ -103,8 +108,6 @@ public class EditUserAvatarFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditUserFragment) {
             UserModel model = ((EditUserFragment) current).userModel;
 
@@ -152,9 +155,8 @@ public class EditUserAvatarFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-        if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
             data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
-        }
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             Auth.changeAvatar(data, header, new Response() {
@@ -169,7 +171,7 @@ public class EditUserAvatarFragment extends Fragment {
                             ((MainActivity) requireActivity()).setData();
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
 
                         FileManager.deleteFileFromCache(requireActivity(), "image");
@@ -192,7 +194,7 @@ public class EditUserAvatarFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
 
                         FileManager.deleteFileFromCache(requireActivity(), "image");

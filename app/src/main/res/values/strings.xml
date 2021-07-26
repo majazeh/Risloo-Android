@@ -38,6 +38,9 @@
     // Toast Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <string name="ToastNewImageNotSelected">عکس جدیدی انتخاب نشده است.</string>
+    <string name="ToastImageIsEmpty">عکسی انتخاب نشده است.</string>
+    <string name="ToastChangesSaved">تغییرات ثبت شد.</string>
     <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>
     <string name="ToastDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
     <string name="ToastFileException">ریسلو به انتخاب فایل دسترسی ندارد.</string>
@@ -723,14 +726,11 @@
 
     <string name="EditUserPersonalTabNameHeader">نام و نام خانوادگی</string>
     <string name="EditUserPersonalTabMobileHeader">موبایل</string>
-    <string name="EditUserPersonalTabUsernameHeader">شناسه کاربری</string>
     <string name="EditUserPersonalTabEmailHeader">رایانامه</string>
     <string name="EditUserPersonalTabBirthdayHeader">تاریخ تولد</string>
     <string name="EditUserPersonalTabStatusHeader">وضعیت</string>
     <string name="EditUserPersonalTabTypeHeader">نوع عضو</string>
     <string name="EditUserPersonalTabGenderHeader">جنسیت</string>
-
-    <string name="EditUserPersonalTabUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
 
     <string name="EditUserPersonalTabStatusActive">فعال</string>
     <string name="EditUserPersonalTabStatusWaiting">در انتظار</string>

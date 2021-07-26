@@ -23,12 +23,14 @@ public class EditUserFragment extends Fragment {
     // Adapters
     public EditUserAdapter adapter;
 
+    // Models
+    public UserModel userModel;
+
     // Objects
     private TabLayoutMediator tabLayoutMediator;
 
     // Vars
     private String[] tabs;
-    public UserModel userModel;
 
     @Nullable
     @Override
@@ -51,9 +53,13 @@ public class EditUserFragment extends Fragment {
 
     private void setArgs() {
         userModel = (UserModel) EditUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        setData();
+    }
 
+    private void setData() {
         binding.viewPager.getRoot().setAdapter(adapter);
         binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
+
         tabLayoutMediator.attach();
     }
 
