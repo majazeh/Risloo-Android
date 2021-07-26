@@ -14,6 +14,7 @@ public class App extends MultiDexApplication {
     @Override
     public void onCreate() {
         super.onCreate();
+
         APIRequest.ExternalAPIEvents = ExtendEvent.class;
         Exceptioner.External = ExtendOnFailureException.class;
 

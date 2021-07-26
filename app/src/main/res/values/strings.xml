@@ -11,7 +11,6 @@
 
     <string name="AppAdded">ساخته شد.</string>
     <string name="AppChanged">تغییرات ثبت شد.</string>
-    <string name="AppAuthenticated">ورود شما تمام شد.</string>
     <string name="AppLinkSaved">لینک ذخیره شد.</string>
 
     <string name="AppImageNew">عکس جدیدی انتخاب نشده است.</string>
@@ -36,7 +35,7 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
-    // App Strings
+    // Toast Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
     <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>

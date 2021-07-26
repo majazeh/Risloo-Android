@@ -9,6 +9,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreatePlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateReportFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
@@ -16,21 +17,45 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateTreasuryFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragment;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditTreasuryFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
+import com.majazeh.risloo.Views.Fragments.Index.BillingsFragment;
+import com.majazeh.risloo.Views.Fragments.Index.BulkSamplesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.CasesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
+import com.majazeh.risloo.Views.Fragments.Index.CentersFragment;
+import com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragment;
+import com.majazeh.risloo.Views.Fragments.Index.DocumentsFragment;
+import com.majazeh.risloo.Views.Fragments.Index.PaymentsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
+import com.majazeh.risloo.Views.Fragments.Index.SamplesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.ScalesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.SessionsFragment;
+import com.majazeh.risloo.Views.Fragments.Index.TreasuriesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.UsersFragment;
+import com.majazeh.risloo.Views.Fragments.Show.BillFragment;
+import com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Show.CaseFragment;
+import com.majazeh.risloo.Views.Fragments.Show.CenterFragment;
+import com.majazeh.risloo.Views.Fragments.Show.DashboardFragment;
+import com.majazeh.risloo.Views.Fragments.Show.MeFragment;
+import com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Show.RoomFragment;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.Views.Fragments.Show.SessionFragment;
+import com.majazeh.risloo.Views.Fragments.Show.TreasuryFragment;
+import com.majazeh.risloo.Views.Fragments.Show.UserFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
@@ -85,6 +110,9 @@ public class Fragmont {
         else if (fragment instanceof CreateDocumentFragment)
             return fragment;
 
+        else if (fragment instanceof CreatePlatformFragment)
+            return fragment;
+
         else if (fragment instanceof CreatePracticeFragment)
             return fragment;
 
@@ -106,6 +134,9 @@ public class Fragmont {
         else if (fragment instanceof CreateSessionFragment)
             return fragment;
 
+        else if (fragment instanceof CreateSessionUserFragment)
+            return fragment;
+
         else if (fragment instanceof CreateTreasuryFragment)
             return fragment;
 
@@ -120,6 +151,9 @@ public class Fragmont {
         else if (fragment instanceof EditCenterUserFragment)
             return fragment;
 
+        else if (fragment instanceof EditPlatformFragment)
+            return fragment;
+
         else if (fragment instanceof EditSessionFragment)
             return fragment;
 
@@ -131,30 +165,96 @@ public class Fragmont {
 
         // -------------------- Index
 
-        else if (fragment instanceof CenterUsersFragment)
+        else if (fragment instanceof BillingsFragment)
             return fragment;
 
-        else if (fragment instanceof CenterSchedulesFragment)
+        else if (fragment instanceof BulkSamplesFragment)
+            return fragment;
+
+        else if (fragment instanceof CasesFragment)
             return fragment;
 
         else if (fragment instanceof CenterPlatformsFragment)
             return fragment;
 
-        else if (fragment instanceof RoomUsersFragment)
+        else if (fragment instanceof CenterSchedulesFragment)
             return fragment;
 
-        else if (fragment instanceof RoomSchedulesFragment)
+        else if (fragment instanceof CentersFragment)
+            return fragment;
+
+        else if (fragment instanceof CenterUsersFragment)
+            return fragment;
+
+        else if (fragment instanceof ClientReportsFragment)
+            return fragment;
+
+        else if (fragment instanceof DocumentsFragment)
+            return fragment;
+
+        else if (fragment instanceof PaymentsFragment)
             return fragment;
 
         else if (fragment instanceof RoomPlatformsFragment)
             return fragment;
 
+        else if (fragment instanceof RoomSchedulesFragment)
+            return fragment;
+
+        else if (fragment instanceof RoomUsersFragment)
+            return fragment;
+
+        else if (fragment instanceof SamplesFragment)
+            return fragment;
+
+        else if (fragment instanceof ScalesFragment)
+            return fragment;
+
+        else if (fragment instanceof SessionsFragment)
+            return fragment;
+
+        else if (fragment instanceof TreasuriesFragment)
+            return fragment;
+
+        else if (fragment instanceof UsersFragment)
+            return fragment;
+
         // -------------------- Show
+
+        else if (fragment instanceof BillFragment)
+            return fragment;
+
+        else if (fragment instanceof BulkSampleFragment)
+            return fragment;
+
+        else if (fragment instanceof CaseFragment)
+            return fragment;
+
+        else if (fragment instanceof CenterFragment)
+            return fragment;
+
+        else if (fragment instanceof DashboardFragment)
+            return fragment;
+
+        else if (fragment instanceof MeFragment)
+            return fragment;
+
+        else if (fragment instanceof ReferenceFragment)
+            return fragment;
+
+        else if (fragment instanceof RoomFragment)
+            return fragment;
 
         else if (fragment instanceof SampleFragment)
             return fragment;
 
         else if (fragment instanceof SessionFragment)
+            return fragment;
+
+        else if (fragment instanceof TreasuryFragment)
+            return fragment;
+
+        else if (fragment instanceof UserFragment)
             return fragment;
 
         return null;
@@ -166,68 +266,68 @@ public class Fragmont {
         // -------------------- Create
 
         if (fragment instanceof CreateScheduleFragment) {
-            Fragment childFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-            if (childFragment != null)
-                if (childFragment instanceof CreateScheduleTimeFragment)
-                    return childFragment;
-                else if (childFragment instanceof CreateScheduleReferenceFragment)
-                    return childFragment;
-                else if (childFragment instanceof CreateScheduleSessionFragment)
-                    return childFragment;
-                else if (childFragment instanceof CreateSchedulePlatformFragment)
-                    return childFragment;
-                else if (childFragment instanceof CreateSchedulePaymentFragment)
-                    return childFragment;
+            Fragment child = ((CreateScheduleFragment) fragment).adapter.hashMap.get(((CreateScheduleFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+            if (child != null)
+                if (child instanceof CreateScheduleTimeFragment)
+                    return child;
+                else if (child instanceof CreateScheduleReferenceFragment)
+                    return child;
+                else if (child instanceof CreateScheduleSessionFragment)
+                    return child;
+                else if (child instanceof CreateSchedulePlatformFragment)
+                    return child;
+                else if (child instanceof CreateSchedulePaymentFragment)
+                    return child;
 
         } else if (fragment instanceof CreateSessionFragment) {
-            Fragment childFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-            if (childFragment != null)
-                if (childFragment instanceof CreateSessionTimeFragment)
-                    return childFragment;
-                else if (childFragment instanceof CreateSessionSessionFragment)
-                    return childFragment;
-                else if (childFragment instanceof CreateSessionPlatformFragment)
-                    return childFragment;
-                else if (childFragment instanceof CreateSessionPaymentFragment)
-                    return childFragment;
+            Fragment child = ((CreateSessionFragment) fragment).adapter.hashMap.get(((CreateSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+            if (child != null)
+                if (child instanceof CreateSessionTimeFragment)
+                    return child;
+                else if (child instanceof CreateSessionSessionFragment)
+                    return child;
+                else if (child instanceof CreateSessionPlatformFragment)
+                    return child;
+                else if (child instanceof CreateSessionPaymentFragment)
+                    return child;
 
             // -------------------- Edit
 
         } else if (fragment instanceof EditCenterFragment) {
-            Fragment childFragment = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-            if (childFragment != null)
-                if (childFragment instanceof EditCenterDetailFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditCenterAvatarFragment)
-                    return childFragment;
+            Fragment child = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+            if (child != null)
+                if (child instanceof EditCenterDetailFragment)
+                    return child;
+                else if (child instanceof EditCenterAvatarFragment)
+                    return child;
         }
 
         else if (fragment instanceof EditSessionFragment) {
-            Fragment childFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-            if (childFragment != null)
-                if (childFragment instanceof EditSessionTimeFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditSessionReferenceFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditSessionSessionFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditSessionPlatformFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditSessionPaymentFragment)
-                    return childFragment;
+            Fragment child = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+            if (child != null)
+                if (child instanceof EditSessionTimeFragment)
+                    return child;
+                else if (child instanceof EditSessionReferenceFragment)
+                    return child;
+                else if (child instanceof EditSessionSessionFragment)
+                    return child;
+                else if (child instanceof EditSessionPlatformFragment)
+                    return child;
+                else if (child instanceof EditSessionPaymentFragment)
+                    return child;
         }
 
         else if (fragment instanceof EditUserFragment) {
-            Fragment childFragment = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
-            if (childFragment != null)
-                if (childFragment instanceof EditUserPersonalFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditUserPasswordFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditUserAvatarFragment)
-                    return childFragment;
-                else if (childFragment instanceof EditUserCryptoFragment)
-                    return childFragment;
+            Fragment child = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
+            if (child != null)
+                if (child instanceof EditUserPersonalFragment)
+                    return child;
+                else if (child instanceof EditUserPasswordFragment)
+                    return child;
+                else if (child instanceof EditUserAvatarFragment)
+                    return child;
+                else if (child instanceof EditUserCryptoFragment)
+                    return child;
         }
 
         return null;
@@ -241,22 +341,22 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof CreateScheduleFragment) {
-            Fragment timeFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(0);
-            if (timeFragment != null)
-                if (timeFragment instanceof CreateScheduleTimeFragment)
-                    return timeFragment;
+            Fragment time = ((CreateScheduleFragment) fragment).adapter.hashMap.get(0);
+            if (time != null)
+                if (time instanceof CreateScheduleTimeFragment)
+                    return time;
 
         } else if (fragment instanceof CreateSessionFragment) {
-            Fragment timeFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(0);
-            if (timeFragment != null)
-                if (timeFragment instanceof CreateSessionTimeFragment)
-                    return timeFragment;
+            Fragment time = ((CreateSessionFragment) fragment).adapter.hashMap.get(0);
+            if (time != null)
+                if (time instanceof CreateSessionTimeFragment)
+                    return time;
 
         } else if (fragment instanceof EditSessionFragment) {
-            Fragment timeFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(0);
-            if (timeFragment != null)
-                if (timeFragment instanceof EditSessionTimeFragment)
-                    return timeFragment;
+            Fragment time = ((EditSessionFragment) fragment).adapter.hashMap.get(0);
+            if (time != null)
+                if (time instanceof EditSessionTimeFragment)
+                    return time;
         }
 
         return null;
@@ -266,16 +366,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof CreateScheduleFragment) {
-            Fragment referenceFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(1);
-            if (referenceFragment != null)
-                if (referenceFragment instanceof CreateScheduleReferenceFragment)
-                    return referenceFragment;
+            Fragment reference = ((CreateScheduleFragment) fragment).adapter.hashMap.get(1);
+            if (reference != null)
+                if (reference instanceof CreateScheduleReferenceFragment)
+                    return reference;
 
         } else if (fragment instanceof EditSessionFragment) {
-            Fragment referenceFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
-            if (referenceFragment != null)
-                if (referenceFragment instanceof EditSessionReferenceFragment)
-                    return referenceFragment;
+            Fragment reference = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
+            if (reference != null)
+                if (reference instanceof EditSessionReferenceFragment)
+                    return reference;
         }
 
         return null;
@@ -285,16 +385,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof CreateScheduleFragment) {
-            Fragment sessionFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(2);
-            if (sessionFragment != null)
-                if (sessionFragment instanceof CreateScheduleSessionFragment)
-                    return sessionFragment;
+            Fragment session = ((CreateScheduleFragment) fragment).adapter.hashMap.get(2);
+            if (session != null)
+                if (session instanceof CreateScheduleSessionFragment)
+                    return session;
 
         } else if (fragment instanceof CreateSessionFragment) {
-            Fragment sessionFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(1);
-            if (sessionFragment != null)
-                if (sessionFragment instanceof CreateSessionSessionFragment)
-                    return sessionFragment;
+            Fragment session = ((CreateSessionFragment) fragment).adapter.hashMap.get(1);
+            if (session != null)
+                if (session instanceof CreateSessionSessionFragment)
+                    return session;
 
         }
 
@@ -305,16 +405,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof CreateScheduleFragment) {
-            Fragment platformFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(3);
-            if (platformFragment != null)
-                if (platformFragment instanceof CreateSchedulePlatformFragment)
-                    return platformFragment;
+            Fragment platform = ((CreateScheduleFragment) fragment).adapter.hashMap.get(3);
+            if (platform != null)
+                if (platform instanceof CreateSchedulePlatformFragment)
+                    return platform;
 
         } else if (fragment instanceof CreateSessionFragment) {
-            Fragment platformFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(2);
-            if (platformFragment != null)
-                if (platformFragment instanceof CreateSessionPlatformFragment)
-                    return platformFragment;
+            Fragment platform = ((CreateSessionFragment) fragment).adapter.hashMap.get(2);
+            if (platform != null)
+                if (platform instanceof CreateSessionPlatformFragment)
+                    return platform;
 
         }
 
@@ -325,16 +425,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof CreateScheduleFragment) {
-            Fragment paymentFragment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(4);
-            if (paymentFragment != null)
-                if (paymentFragment instanceof CreateSchedulePaymentFragment)
-                    return paymentFragment;
+            Fragment payment = ((CreateScheduleFragment) fragment).adapter.hashMap.get(4);
+            if (payment != null)
+                if (payment instanceof CreateSchedulePaymentFragment)
+                    return payment;
 
         } else if (fragment instanceof CreateSessionFragment) {
-            Fragment paymentFragment = ((CreateSessionFragment) fragment).adapter.hashMap.get(3);
-            if (paymentFragment != null)
-                if (paymentFragment instanceof CreateSessionPaymentFragment)
-                    return paymentFragment;
+            Fragment payment = ((CreateSessionFragment) fragment).adapter.hashMap.get(3);
+            if (payment != null)
+                if (payment instanceof CreateSessionPaymentFragment)
+                    return payment;
 
         }
 
@@ -349,16 +449,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof EditSessionFragment) {
-            Fragment sessionFragment;
+            Fragment session;
 
             if (hasCase)
-                sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
+                session = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
             else
-                sessionFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
+                session = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
 
-            if (sessionFragment != null)
-                if (sessionFragment instanceof EditSessionSessionFragment)
-                    return sessionFragment;
+            if (session != null)
+                if (session instanceof EditSessionSessionFragment)
+                    return session;
         }
 
         return null;
@@ -368,16 +468,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof EditSessionFragment) {
-            Fragment platformFragment;
+            Fragment platform;
 
             if (hasCase)
-                platformFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
+                platform = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
             else
-                platformFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
+                platform = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
 
-            if (platformFragment != null)
-                if (platformFragment instanceof EditSessionPlatformFragment)
-                    return platformFragment;
+            if (platform != null)
+                if (platform instanceof EditSessionPlatformFragment)
+                    return platform;
         }
 
         return null;
@@ -387,16 +487,16 @@ public class Fragmont {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof EditSessionFragment) {
-            Fragment paymentFragment;
+            Fragment payment;
 
             if (hasCase)
-                paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
+                payment = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
             else
-                paymentFragment = ((EditSessionFragment) fragment).adapter.hashMap.get(4);
+                payment = ((EditSessionFragment) fragment).adapter.hashMap.get(4);
 
-            if (paymentFragment != null)
-                if (paymentFragment instanceof EditSessionPaymentFragment)
-                    return paymentFragment;
+            if (payment != null)
+                if (payment instanceof EditSessionPaymentFragment)
+                    return payment;
         }
 
         return null;

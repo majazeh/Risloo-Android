@@ -191,7 +191,7 @@ public class MainActivity extends AppCompatActivity {
                         } break;
                     }
 
-                    binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner.setSelection(parent.getAdapter().getCount());
+                    parent.setSelection(parent.getAdapter().getCount());
 
                     userSelect = false;
                 }

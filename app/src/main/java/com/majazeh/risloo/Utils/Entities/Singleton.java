@@ -44,13 +44,6 @@ public class Singleton {
             setUserModel(userModel);
     }
 
-    public void logout() {
-        editor.remove("token");
-        editor.remove("authorization");
-        editor.remove("usermodel");
-        editor.apply();
-    }
-
     public void setToken(String value) {
         editor.putString("token", value);
         editor.apply();
@@ -67,100 +60,58 @@ public class Singleton {
     }
 
     public String getToken() {
-        if (!sharedPreferences.getString("token", "").equals("")) {
+        if (!sharedPreferences.getString("token", "").equals(""))
             return sharedPreferences.getString("token", "");
-        }
+
         return "";
     }
 
     public String getAuthorization() {
-        if (!sharedPreferences.getString("authorization", "").equals("")) {
+        if (!sharedPreferences.getString("authorization", "").equals(""))
             return sharedPreferences.getString("authorization", "");
-        }
+
         return "";
     }
 
     public UserModel getUserModel() {
-        if (!sharedPreferences.getString("usermodel", "").equals("")) {
+        if (!sharedPreferences.getString("usermodel", "").equals(""))
             return new Gson().fromJson(sharedPreferences.getString("usermodel", ""), UserModel.class);
-        }
+
         return null;
     }
 
+    public void logout() {
+        editor.remove("token");
+        editor.remove("authorization");
+        editor.remove("usermodel");
+        editor.apply();
+    }
+
     public String getId() {
-        if (getUserModel().getId() != null) {
+        if (getUserModel().getId() != null)
             return getUserModel().getId();
-        }
+
         return "";
     }
 
     public String getName() {
-        if (getUserModel().getName() != null) {
+        if (getUserModel().getName() != null)
             return getUserModel().getName();
-        }
-        return "";
-    }
 
-    public String getUsername() {
-        if (getUserModel().getUsername() != null) {
-            return getUserModel().getUsername();
-        }
-        return "";
-    }
-
-    public String getBirthday() {
-        if (getUserModel().getBirthday() != null) {
-            return getUserModel().getBirthday();
-        }
-        return "";
-    }
-
-    public String getEmail() {
-        if (getUserModel().getEmail() != null) {
-            return getUserModel().getEmail();
-        }
-        return "";
-    }
-
-    public String getMobile() {
-        if (getUserModel().getMobile() != null) {
-            return getUserModel().getMobile();
-        }
-        return "";
-    }
-
-    public String getStatus() {
-        if (getUserModel().getUserStatus() != null) {
-            return getUserModel().getUserStatus();
-        }
-        return "";
-    }
-
-    public String getType() {
-        if (getUserModel().getUserType() != null) {
-            return getUserModel().getUserType();
-        }
-        return "";
-    }
-
-    public String getGender() {
-        if (getUserModel().getGender() != null) {
-            return getUserModel().getGender();
-        }
         return "";
     }
 
     public String getAvatar() {
-        if (getUserModel().getAvatar() != null && getUserModel().getAvatar().getMedium() != null && getUserModel().getAvatar().getMedium().getUrl() != null) {
+        if (getUserModel().getAvatar() != null && getUserModel().getAvatar().getMedium() != null && getUserModel().getAvatar().getMedium().getUrl() != null)
             return getUserModel().getAvatar().getMedium().getUrl();
-        }
+
         return "";
     }
 
-    public String getPublicKey() {
-        if (getUserModel().getPublic_key() != null) {
-            return getUserModel().getPublic_key();
-        }
+    public String getType() {
+        if (getUserModel().getUserType() != null)
+            return getUserModel().getUserType();
+
         return "";
     }
 
