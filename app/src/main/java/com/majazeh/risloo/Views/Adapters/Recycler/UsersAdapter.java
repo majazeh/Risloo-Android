@@ -1,8 +1,8 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +32,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     // Vars
     private ArrayList<TypeModel> users;
+    private boolean userSelect = false;
 
     public UsersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -45,13 +46,13 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     @Override
     public void onBindViewHolder(@NonNull UsersHolder holder, int i) {
-        UserModel user = (UserModel) users.get(i);
+        UserModel model = (UserModel) users.get(i);
 
         detector(holder);
 
-        listener(holder, user);
+        listener(holder, model);
 
-        setData(holder, user);
+        setData(holder, model);
     }
 
     @Override
@@ -83,29 +84,39 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(UsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
+        holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                if (pos.contains("989")) {
-                    IntentManager.phone(activity, pos);
-                } else if (pos.contains("@")) {
-                    IntentManager.email(activity, new String[]{pos}, "", "", "");
-                } else if (pos.equals("ورود به کاربری")) {
-                    Log.e("method", "enter");
-                } else if (pos.equals("ویرایش عضو")) {
-                    NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
-                    ((MainActivity) activity).navController.navigate(action);
+                    if (pos.contains("989")) {
+                        IntentManager.phone(activity, pos);
+                    } else if (pos.contains("@")) {
+                        IntentManager.email(activity, new String[]{pos}, "", "", "");
+                    } else if (pos.equals("ورود به کاربری")) {
+                        // TODO : Place Code When Needed
+                    } else if (pos.equals("ویرایش")) {
+                        NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(model);
+                        ((MainActivity) activity).navController.navigate(action);
+                    }
+
+                    parent.setSelection(parent.getAdapter().getCount());
+
+                    userSelect = false;
                 }
-
-                holder.binding.menuSpinner.setSelection(parent.getAdapter().getCount());
             }
 
             @Override
@@ -123,7 +134,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
-        holder.binding.usernameTextView.setText(model.getUsername());
         holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
         holder.binding.statusTextView.setText(SelectionManager.getUserStatus(activity, "fa", model.getUserStatus()));
 
@@ -139,16 +149,8 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         if (!model.getEmail().equals(""))
             items.add(model.getEmail());
 
-        if (!model.getUserType().equals("admin"))
-//            menu.add(activity.getResources().getString(R.string.UsersFragmentEnter));
-
         items.add(activity.getResources().getString(R.string.UsersFragmentEdit));
         items.add("");
-
-        if (items.size() != 1)
-            holder.binding.menuImageView.setVisibility(View.VISIBLE);
-        else
-            holder.binding.menuImageView.setVisibility(View.INVISIBLE);
 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }

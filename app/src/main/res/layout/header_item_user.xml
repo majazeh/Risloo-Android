@@ -6,13 +6,15 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray200">
+    android:background="@drawable/draw_2sdp_solid_gray100_border_bottom_2dp_gray200">
 
     <TextView
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/UsersFragmentSerial"
         android:textSize="@dimen/_8ssp"
@@ -21,18 +23,19 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintBottom_toBottomOf="@id/username_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/UsersFragmentName"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -40,26 +43,10 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.35"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/type_textView"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/username_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
-        android:text="@string/UsersFragmentUsername"
-        android:textSize="@dimen/_7ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/name_textView"
-        app:layout_constraintStart_toStartOf="@id/name_textView"
-        app:layout_constraintTop_toBottomOf="@id/name_textView" />
 
     <TextView
         android:id="@+id/type_textView"
@@ -68,7 +55,7 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/UsersFragmentType"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -84,7 +71,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/UsersFragmentStatus"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"

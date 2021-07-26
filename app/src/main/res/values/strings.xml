@@ -38,15 +38,19 @@
     // Toast Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="ToastNewImageNotSelected">عکس جدیدی انتخاب نشده است.</string>
-    <string name="ToastImageIsEmpty">عکسی انتخاب نشده است.</string>
     <string name="ToastChangesSaved">تغییرات ثبت شد.</string>
     <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>
     <string name="ToastDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
+
+    <string name="ToastNewImageNotSelected">عکس جدیدی انتخاب نشده است.</string>
+    <string name="ToastImageIsEmpty">عکسی انتخاب نشده است.</string>
+
     <string name="ToastFileException">ریسلو به انتخاب فایل دسترسی ندارد.</string>
     <string name="ToastStorageException">ریسلو به حافظه گوشی دسترسی ندارد.</string>
     <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
+
+    <string name="ToastNewUserAdded">کاربر جدید افزوده شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -564,15 +568,13 @@
 
     <string name="CreateUserFragmentNameHeader">نام و نام خانوادگی</string>
     <string name="CreateUserFragmentMobileHeader">موبایل</string>
-    <string name="CreateUserFragmentUsernameHeader">شناسه کاربری</string>
     <string name="CreateUserFragmentEmailHeader">رایانامه</string>
-    <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
     <string name="CreateUserFragmentPasswordHeader">کلمه عبور</string>
+    <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
     <string name="CreateUserFragmentStatusHeader">وضعیت</string>
     <string name="CreateUserFragmentTypeHeader">نوع عضو</string>
     <string name="CreateUserFragmentGenderHeader">جنسیت</string>
 
-    <string name="CreateUserFragmentUsernameGuide">شناسه کاربری باید ترکیبی از حروف و اعداد انگلیسی باشد.</string>
     <string name="CreateUserFragmentPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>
 
     <string name="CreateUserFragmentStatusActive">فعال</string>
@@ -1019,7 +1021,6 @@
 
     <string name="UsersFragmentSerial">سریال</string>
     <string name="UsersFragmentName">نام و نام خانوادگی</string>
-    <string name="UsersFragmentUsername">شناسه کاربری</string>
     <string name="UsersFragmentType">نوع</string>
     <string name="UsersFragmentStatus">وضعیت</string>
 
