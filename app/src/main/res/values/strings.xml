@@ -1001,10 +1001,10 @@
     <string name="SessionsFragmentSerial">سریال</string>
     <string name="SessionsFragmentRoom">اتاق درمان</string>
     <string name="SessionsFragmentCenter">مرکز درمانی</string>
-    <string name="SessionsFragmentCase">پرونده</string>
-    <string name="SessionsFragmentStatus">وضعیت</string>
     <string name="SessionsFragmentStartTime">زمان شروع</string>
     <string name="SessionsFragmentDuration">مدت‌زمان جلسه</string>
+    <string name="SessionsFragmentStatus">وضعیت</string>
+    <string name="SessionsFragmentCase">پرونده</string>
 
     <string name="SessionsFragmentEmpty">هنوز جلسه‌‌ای ثبت نشده است.</string>
 

@@ -30,7 +30,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> sessions;
+    private ArrayList<TypeModel> items;
 
     public SessionsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -44,34 +44,34 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
     @Override
     public void onBindViewHolder(@NonNull SessionsHolder holder, int i) {
-        SessionModel session = (SessionModel) sessions.get(i);
+        SessionModel model = (SessionModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, session);
+        listener(holder, model);
 
-        setData(holder, session);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.sessions != null)
-            return sessions.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setSessions(ArrayList<TypeModel> sessions) {
-        if (this.sessions == null)
-            this.sessions = sessions;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.sessions.addAll(sessions);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearSessions() {
-        if (this.sessions != null) {
-            this.sessions.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -113,13 +113,13 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
                 holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
             }
 
-            if (model.getCaseModel() != null && model.getCaseModel().getCaseId() != null) {
-                holder.binding.caseTextView.setText(model.getCaseModel().getCaseId());
-            }
-
             holder.binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getStarted_at()), " "));
             holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
             holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
+
+            if (model.getCaseModel() != null && model.getCaseModel().getCaseId() != null) {
+                holder.binding.caseTextView.setText(model.getCaseModel().getCaseId());
+            }
 
         } catch (JSONException e) {
             e.printStackTrace();

@@ -5,7 +5,18 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layoutDirection="rtl">
+    tools:layout_margin="@dimen/_12sdp"
+    tools:padding="@dimen/_1sdp"
+    tools:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+
+    <include
+        android:id="@+id/headerView"
+        layout="@layout/header_item_session"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -16,40 +27,30 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerView"
         tools:listitem="@layout/single_item_session"
         tools:itemCount="4" />
 
-    <TextView
-        android:id="@+id/textView"
+    <include
+        android:id="@+id/emptyView"
+        layout="@layout/component_main_index_empty"
         android:layout_width="0dp"
         android:layout_height="@dimen/_96sdp"
-        android:gravity="center"
-        android:text="@string/AppSearchEmpty"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray400"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/headerView" />
 
-    <ProgressBar
+    <include
         android:id="@+id/progressBar"
+        layout="@layout/component_main_index_progress"
         android:layout_width="@dimen/_28sdp"
         android:layout_height="@dimen/_28sdp"
         android:layout_marginBottom="@dimen/_6sdp"
-        android:padding="@dimen/_6sdp"
-        android:theme="@style/ProgressBarTheme2"
-        android:background="@drawable/draw_oval_solid_blue600"
         android:visibility="gone"
-        app:elevation="@dimen/_2sdp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        style="@style/Widget.AppCompat.ProgressBar" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
