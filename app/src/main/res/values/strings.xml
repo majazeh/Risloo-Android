@@ -51,6 +51,8 @@
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
 
     <string name="ToastNewUserAdded">کاربر جدید افزوده شد.</string>
+    <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
+    <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -310,8 +312,6 @@
     <string name="CreateDocumentFragmentNameHeader">عنوان</string>
     <string name="CreateDocumentFragmentDescriptionHeader">توضیحات</string>
     <string name="CreateDocumentFragmentFileHeader">پیوست</string>
-
-    <string name="CreateDocumentFragmentDescriptionHint">غیر ضروری</string>
 
     <string name="CreateDocumentFragmentButton">ساخت</string>
 
@@ -906,8 +906,9 @@
 
     <string name="DocumentsFragmentAccept">تأیید</string>
     <string name="DocumentsFragmentKick">رد کردن</string>
+    <string name="DocumentsFragmentDownload">دانلود فایل</string>
 
-    <string name="DocumentsFragmentEmpty">هنوز مدرک یا سندی ثبت نشده است.</string>
+    <string name="DocumentsFragmentEmpty">هنوز مدرکی ثبت نشده است.</string>
 
     /*
     ---------- Payments Fragment ----------

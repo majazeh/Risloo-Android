@@ -471,9 +471,11 @@ public class InitManager {
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_tags_light, null));
                         break;
                     case "پذیرفتن":
+                    case "تأیید":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_check_light, null));
                         break;
                     case "تعلیق":
+                    case "رد کردن":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_times_light, null));
                         break;
                     case "ساختن اتاق درمان":
@@ -487,6 +489,9 @@ public class InitManager {
                         break;
                     case "کپی کردن لینک":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_copy_light, null));
+                        break;
+                    case "دانلود فایل":
+                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_arrow_to_bottom_light, null));
                         break;
                     default:
                         if (dropdownTextView.getText().toString().contains("989")) {

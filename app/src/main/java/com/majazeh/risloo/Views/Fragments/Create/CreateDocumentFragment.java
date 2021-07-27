@@ -8,7 +8,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateDocumentBinding;
 import com.mre.ligheh.API.Response;
@@ -36,8 +36,10 @@ public class CreateDocumentFragment extends Fragment {
     // Binding
     private FragmentCreateDocumentBinding binding;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String name = "", description = "", filePath = "";
 
     @Nullable
@@ -65,8 +67,6 @@ public class CreateDocumentFragment extends Fragment {
         binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateDocumentFragmentDescriptionHeader));
         binding.fileIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateDocumentFragmentFileHeader));
 
-        binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateDocumentFragmentDescriptionHint));
-
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateDocumentFragmentButton), getResources().getColor(R.color.White));
     }
 
@@ -83,21 +83,23 @@ public class CreateDocumentFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.nameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -140,9 +142,6 @@ public class CreateDocumentFragment extends Fragment {
     private void doWork() {
 //        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 //
-//        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-//        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-//
 //        data.put("name", name);
 //        data.put("description", description);
 //        data.put("file", filePath);
@@ -153,7 +152,9 @@ public class CreateDocumentFragment extends Fragment {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
 //                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewDocumentAdded));
+//
+//                        ((MainActivity) requireActivity()).navController.navigateUp();
 //                    });
 //                }
 //            }

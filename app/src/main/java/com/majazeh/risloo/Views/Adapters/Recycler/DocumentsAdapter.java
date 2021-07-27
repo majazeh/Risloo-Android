@@ -1,16 +1,19 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.databinding.SingleItemDocumentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -22,7 +25,8 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> documents;
+    private ArrayList<TypeModel> items;
+    private boolean userSelect = false;
 
     public DocumentsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -36,34 +40,34 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
 
     @Override
     public void onBindViewHolder(@NonNull DocumentsHolder holder, int i) {
-//        DocumentModel document = (DocumentModel) documents.get(i);
-//
-//        detector(holder);
-//
-//        listener(holder, document);
-//
-//        setData(holder, document);
+//        DocumentModel model = (DocumentModel) items.get(i);
+
+        detector(holder);
+
+        listener(holder);
+
+        setData(holder);
     }
 
     @Override
     public int getItemCount() {
-        if (this.documents != null)
-            return documents.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setDocuments(ArrayList<TypeModel> documents) {
-        if (this.documents == null)
-            this.documents = documents;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.documents.addAll(documents);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearDocuments() {
-        if (this.documents != null) {
-            this.documents.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -71,23 +75,49 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
     private void detector(DocumentsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
-
-            holder.binding.attachmentImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_ripple_gray300);
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(DocumentsHolder holder) {
         ClickManager.onDelayedClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.attachmentImageView);
+        holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code Here
-        }).widget(holder.binding.actionTextView);
+        holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
+
+                    switch (pos) {
+                        case "تأیید":
+                            // TODO : Place Code Here
+                            break;
+                        case "رد کردن":
+                            // TODO : Place Code Here
+                            break;
+                        case "دانلود فایل":
+                            // TODO : Place Code Here
+                            break;
+                    }
+
+                    parent.setSelection(parent.getAdapter().getCount());
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setData(DocumentsHolder holder) {
@@ -100,37 +130,19 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         holder.binding.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
         holder.binding.statusTextView.setText("تأیید شده");
 
-        if (holder.getBindingAdapterPosition() == 0)
-            setAction(holder, "none");
-        else if (holder.getBindingAdapterPosition() == 2)
-            setAction(holder, "kick");
-        else
-            setAction(holder, "accept");
+        setMenu(holder);
     }
 
-    private void setAction(DocumentsHolder holder, String action) {
-        if (action.equals("accept")) {
-            holder.binding.actionTextView.setVisibility(View.VISIBLE);
-            holder.binding.actionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentAccept));
-            holder.binding.actionTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+    private void setMenu(DocumentsHolder holder) {
+        ArrayList<String> items = new ArrayList<>();
 
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
-            else
-                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
-        } else if (action.equals("kick")) {
-            holder.binding.actionTextView.setVisibility(View.VISIBLE);
-            holder.binding.actionTextView.setText(activity.getResources().getString(R.string.DocumentsFragmentKick));
-            holder.binding.actionTextView.setTextColor(activity.getResources().getColor(R.color.Red600));
+        items.add(activity.getResources().getString(R.string.DocumentsFragmentAccept));
+        items.add(activity.getResources().getString(R.string.DocumentsFragmentKick));
+        items.add(activity.getResources().getString(R.string.DocumentsFragmentDownload));
 
-            if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_red700_ripple_red300);
-            else
-                holder.binding.actionTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_red700);
-        } else {
-            holder.binding.actionTextView.setVisibility(View.GONE);
-            holder.binding.actionTextView.setText("");
-        }
+        items.add("");
+
+        InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }
 
     public class DocumentsHolder extends RecyclerView.ViewHolder {

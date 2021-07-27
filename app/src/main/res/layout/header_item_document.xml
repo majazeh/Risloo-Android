@@ -6,13 +6,15 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray200">
+    android:background="@drawable/draw_2sdp_solid_gray100_border_bottom_2dp_gray200">
 
     <TextView
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/DocumentsFragmentSerial"
         android:textSize="@dimen/_8ssp"
@@ -20,27 +22,28 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintWidth_percent="0.25"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:minLines="2"
         android:text="@string/DocumentsFragmentName"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.3"
+        app:layout_constraintWidth_percent="0.30"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/status_textView"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
@@ -50,8 +53,10 @@
         android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginEnd="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/DocumentsFragmentStatus"
         android:textSize="@dimen/_8ssp"
@@ -59,10 +64,9 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/name_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
