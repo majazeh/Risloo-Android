@@ -6,13 +6,15 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray50_border_2dp_gray200">
+    android:background="@drawable/draw_2sdp_solid_gray100_border_bottom_2dp_gray200">
 
     <TextView
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/BulkSamplesFragmentSerial"
         android:textSize="@dimen/_8ssp"
@@ -21,10 +23,10 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.18"
-        app:layout_constraintBottom_toBottomOf="@id/case_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name_textView"
@@ -32,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/BulkSamplesFragmentName"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -49,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/BulkSamplesFragmentCase"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
@@ -67,7 +69,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/BulkSamplesFragmentRoom"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -84,7 +86,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/BulkSamplesFragmentCenter"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
@@ -103,7 +105,7 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/BulkSamplesFragmentStatus"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -119,7 +121,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/BulkSamplesFragmentReference"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"

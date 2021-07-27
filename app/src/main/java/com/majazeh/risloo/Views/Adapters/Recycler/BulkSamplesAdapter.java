@@ -6,7 +6,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
@@ -18,6 +17,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
@@ -34,15 +34,16 @@ import java.util.HashMap;
 
 public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.BulkSamplesHolder> {
 
-    // Objects
-    private Activity activity;
-
     // BottomSheets
     private ChainBottomSheet chainBottomSheet;
 
-    // Vars
-    private ArrayList<TypeModel> bulkSamples;
+    // Objects
+    private Activity activity;
     private HashMap data, header;
+
+    // Vars
+    private ArrayList<TypeModel> items;
+    private boolean userSelect = false;
 
     public BulkSamplesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -56,36 +57,36 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull BulkSamplesHolder holder, int i) {
-        BulkSampleModel bulkSample = (BulkSampleModel) bulkSamples.get(i);
+        BulkSampleModel model = (BulkSampleModel) items.get(i);
 
         initializer();
 
         detector(holder);
 
-        listener(holder, bulkSample);
+        listener(holder, model);
 
-        setData(holder, bulkSample);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.bulkSamples != null)
-            return bulkSamples.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setBulkSamples(ArrayList<TypeModel> bulkSamples) {
-        if (this.bulkSamples == null)
-            this.bulkSamples = bulkSamples;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.bulkSamples.addAll(bulkSamples);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearBulkSamples() {
-        if (this.bulkSamples != null) {
-            this.bulkSamples.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -113,22 +114,26 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String pos = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                switch (pos) {
-                    case "لینک ثبت نام":
-                        doWork(model);
-                        break;
-                    case "کپی کردن لینک":
-                        IntentManager.clipboard(activity, model.getLink());
-                        Toast.makeText(activity, activity.getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
-                        break;
-                    case "ویرایش":
-                        // TODO : Place Code If Needed
-                        break;
+                    switch (pos) {
+                        case "لینک ثبت نام":
+                            doWork(model);
+                            break;
+                        case "کپی کردن لینک":
+                            IntentManager.clipboard(activity, model.getLink());
+                            ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastLinkSaved));
+                            break;
+                        case "ویرایش":
+                            // TODO : Place Code If Needed
+                            break;
+                    }
+
+                    parent.setSelection(parent.getAdapter().getCount());
+
+                    userSelect = false;
                 }
-
-                holder.binding.menuSpinner.setSelection(parent.getAdapter().getCount());
             }
 
             @Override

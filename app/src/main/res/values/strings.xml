@@ -41,6 +41,7 @@
     <string name="ToastChangesSaved">تغییرات ثبت شد.</string>
     <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>
     <string name="ToastDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
+    <string name="ToastLinkSaved">لینک ذخیره شد.</string>
 
     <string name="ToastNewImageNotSelected">عکس جدیدی انتخاب نشده است.</string>
     <string name="ToastImageIsEmpty">عکسی انتخاب نشده است.</string>
