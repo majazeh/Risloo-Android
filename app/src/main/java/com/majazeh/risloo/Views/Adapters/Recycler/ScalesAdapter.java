@@ -26,7 +26,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> scales;
+    private ArrayList<TypeModel> items;
 
     public ScalesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -40,34 +40,34 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
 
     @Override
     public void onBindViewHolder(@NonNull ScalesHolder holder, int i) {
-        ScaleModel scale = (ScaleModel) scales.get(i);
+        ScaleModel model = (ScaleModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, scale);
+        listener(holder, model);
 
-        setData(holder, scale);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.scales != null)
-            return scales.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setScales(ArrayList<TypeModel> scales) {
-        if (this.scales == null)
-            this.scales = scales;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.scales.addAll(scales);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearScales() {
-        if (this.scales != null) {
-            this.scales.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

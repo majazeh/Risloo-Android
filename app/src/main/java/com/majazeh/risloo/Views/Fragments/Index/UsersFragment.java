@@ -156,10 +156,10 @@ public class UsersFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (Objects.equals(data.get("page"), 1))
-                            adapter.clearUsers();
+                            adapter.clearItems();
 
                         if (!items.data().isEmpty()) {
-                            adapter.setUsers(items.data());
+                            adapter.setItems(items.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.indexSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);

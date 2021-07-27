@@ -31,7 +31,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> users;
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public UsersAdapter(@NonNull Activity activity) {
@@ -46,7 +46,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     @Override
     public void onBindViewHolder(@NonNull UsersHolder holder, int i) {
-        UserModel model = (UserModel) users.get(i);
+        UserModel model = (UserModel) items.get(i);
 
         detector(holder);
 
@@ -57,23 +57,23 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
 
     @Override
     public int getItemCount() {
-        if (this.users != null)
-            return users.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setUsers(ArrayList<TypeModel> users) {
-        if (this.users == null)
-            this.users = users;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.users.addAll(users);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearUsers() {
-        if (this.users != null) {
-            this.users.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

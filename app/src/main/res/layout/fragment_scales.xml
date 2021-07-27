@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
@@ -53,8 +53,7 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/search_includeLayout">
@@ -71,17 +70,6 @@
                     tools:visibility="gone" />
 
                 <include
-                    android:id="@+id/index_headerLayout"
-                    layout="@layout/header_item_scale"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-                <include
                     android:id="@+id/index_singleLayout"
                     layout="@layout/component_single_scale"
                     android:layout_width="0dp"
@@ -89,7 +77,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/index_headerLayout"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

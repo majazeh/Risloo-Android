@@ -41,13 +41,13 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull NavsHolder holder, int i) {
-        TypeModel item = items.get(i);
+        TypeModel model = items.get(i);
 
         detector(holder, i);
 
         listener(holder);
 
-        setData(holder, item);
+        setData(holder, model);
 
         setActive(holder, i);
     }
@@ -92,12 +92,12 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(NavsHolder holder, TypeModel item) {
+    private void setData(NavsHolder holder, TypeModel model) {
         try {
-            holder.binding.nameTextView.setText(item.object.get("title").toString());
-            holder.binding.descriptionTextView.setText(item.object.get("description").toString());
+            holder.binding.nameTextView.setText(model.object.get("title").toString());
+            holder.binding.descriptionTextView.setText(model.object.get("description").toString());
 
-            holder.binding.iconImageView.setImageResource((Integer) item.object.get("image"));
+            holder.binding.iconImageView.setImageResource((Integer) model.object.get("image"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
