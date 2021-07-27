@@ -839,7 +839,9 @@
 
     <string name="CentersFragmentTitle">مراکز درمانی</string>
 
-    <string name="CentersFragmentTypePersonalClinic">اتاق درمان شخصی</string>
+    <string name="CentersFragmentPersonalClinic">اتاق درمان شخصی</string>
+
+    <string name="CentersFragmentEmpty">هنوز مرکز درمانی ثبت نشده است.</string>
 
     /*
     ---------- CenterPlatforms Fragment ----------

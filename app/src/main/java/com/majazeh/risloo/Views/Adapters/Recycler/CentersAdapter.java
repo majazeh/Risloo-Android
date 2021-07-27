@@ -30,7 +30,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> centers;
+    private ArrayList<TypeModel> items;
 
     public CentersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -44,34 +44,34 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
 
     @Override
     public void onBindViewHolder(@NonNull CentersHolder holder, int i) {
-        CenterModel center = (CenterModel) centers.get(i);
+        CenterModel model = (CenterModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, center);
+        listener(holder, model);
 
-        setData(holder, center);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.centers != null)
-            return centers.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setCenters(ArrayList<TypeModel> centers) {
-        if (this.centers == null)
-            this.centers = centers;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.centers.addAll(centers);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearCenters() {
-        if (this.centers != null) {
-            this.centers.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -101,7 +101,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
                 holder.binding.typeTextView.setText(model.getManager().getName());
             } else {
                 holder.binding.nameTextView.setText(model.getManager().getName());
-                holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentTypePersonalClinic));
+                holder.binding.typeTextView.setText(activity.getResources().getString(R.string.CentersFragmentPersonalClinic));
             }
 
             if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0)

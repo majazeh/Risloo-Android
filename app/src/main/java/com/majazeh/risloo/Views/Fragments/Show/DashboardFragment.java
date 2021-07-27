@@ -129,7 +129,7 @@ public class DashboardFragment extends Fragment {
 
                         // Centers Data
                         if (!model.getCenterList().data().isEmpty()) {
-                            centersAdapter.setCenters(model.getCenterList().data());
+                            centersAdapter.setItems(model.getCenterList().data());
 
                             binding.centersSingleLayout.recyclerView.setAdapter(centersAdapter);
                             binding.centersHeaderIncludeLayout.countTextView.setText(StringManager.bracing(centersAdapter.getItemCount()));

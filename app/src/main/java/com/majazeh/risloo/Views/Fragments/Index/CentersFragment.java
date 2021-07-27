@@ -42,9 +42,9 @@ public class CentersFragment extends Fragment {
 
     // Objects
     private Handler handler;
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
     private boolean isLoading = true;
 
     @Nullable
@@ -90,11 +90,8 @@ public class CentersFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.searchIncludeLayout.editText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.editText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
             return false;
         });
 
@@ -134,8 +131,8 @@ public class CentersFragment extends Fragment {
                     else
                         data.put("page", 1);
 
-                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
-                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                    if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.GONE)
+                        binding.indexSingleLayout.progressBar.getRoot().setVisibility(View.VISIBLE);
 
                     getData();
                 }
@@ -152,32 +149,39 @@ public class CentersFragment extends Fragment {
         Center.list(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                List centers = (List) object;
+                List items = (List) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (Objects.equals(data.get("page"), 1))
-                            adapter.clearCenters();
+                            adapter.clearItems();
 
-                        if (!centers.data().isEmpty()) {
-                            adapter.setCenters(centers.data());
+                        if (!items.data().isEmpty()) {
+                            adapter.setItems(items.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
-                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
+                            binding.indexSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
-                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
+
+                            if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.CentersFragmentEmpty));
+                            else if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
                         }
+
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
+
                     isLoading = false;
                 }
             }
@@ -190,11 +194,12 @@ public class CentersFragment extends Fragment {
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
+
                     isLoading = false;
                 }
             }
