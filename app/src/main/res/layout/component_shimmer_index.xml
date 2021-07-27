@@ -9,10 +9,7 @@
     app:shimmer_base_alpha="1"
     app:shimmer_highlight_alpha="0"
     app:shimmer_auto_start="true"
-    app:shimmer_duration="1000"
-    tools:layout_margin="@dimen/_12sdp"
-    tools:padding="@dimen/_1sdp"
-    tools:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+    app:shimmer_duration="1000">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
