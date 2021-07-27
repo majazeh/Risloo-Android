@@ -100,7 +100,7 @@ public class DashboardFragment extends Fragment {
 
                         // Samples Data
                         if (!model.getSampleList().data().isEmpty()) {
-                            samplesAdapter.setSamples(model.getSampleList().data());
+                            samplesAdapter.setItems(model.getSampleList().data());
 
                             binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
                             binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samplesAdapter.getItemCount()));

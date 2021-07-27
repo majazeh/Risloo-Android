@@ -970,13 +970,6 @@
     <string name="SamplesFragmentReference">مراجع</string>
     <string name="SamplesFragmentStatus">وضعیت</string>
 
-    <string name="SamplesFragmentStatusSeald">شروع</string>
-    <string name="SamplesFragmentStatusOpen">ادامه</string>
-    <string name="SamplesFragmentStatusClosed">بسته شده</string>
-    <string name="SamplesFragmentStatusScoring">نمره دهی</string>
-    <string name="SamplesFragmentStatusCreatingFiles">ساخت فایل‌ها</string>
-    <string name="SamplesFragmentStatusDone">تمام شده</string>
-
     <string name="SamplesFragmentEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
 
     /*
