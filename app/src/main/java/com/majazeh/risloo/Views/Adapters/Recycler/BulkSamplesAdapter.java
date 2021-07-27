@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Views.Adapters.Recycler;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
@@ -105,11 +106,17 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener(BulkSamplesHolder holder, BulkSampleModel model) {
         ClickManager.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
+
+        holder.binding.menuSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
 
         holder.binding.menuSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
