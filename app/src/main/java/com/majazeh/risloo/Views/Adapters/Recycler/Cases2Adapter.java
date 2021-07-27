@@ -15,6 +15,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCase2Binding;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -27,7 +28,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> cases;
+    private ArrayList<TypeModel> items;
 
     public Cases2Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -41,34 +42,34 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
     @Override
     public void onBindViewHolder(@NonNull Cases2Holder holder, int i) {
-        CaseModel casse = (CaseModel) cases.get(i);
+        CaseModel model = (CaseModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, casse);
+        listener(holder, model);
 
-        setData(holder, casse);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.cases != null)
-            return cases.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setCases(ArrayList<TypeModel> cases) {
-        if (this.cases == null)
-            this.cases = cases;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.cases.addAll(cases);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearCases() {
-        if (this.cases != null) {
-            this.cases.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -88,22 +89,25 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
 
     private void setData(Cases2Holder holder, CaseModel model) {
         holder.binding.serialTextView.setText(model.getCaseId());
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDD(String.valueOf(model.getCaseCreated_at()), " "));
+        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " جلسه ");
 
-        if (model.getClients() != null && model.getClients().data().size() != 0) {
+        setClients(holder, model.getClients());
+    }
+
+    private void setClients(Cases2Holder holder, List clients) {
+        if (clients != null && clients.data().size() != 0) {
             holder.binding.referenceTextView.setText("");
-            for (int i = 0; i < model.getClients().data().size(); i++) {
-                UserModel user = (UserModel) model.getClients().data().get(i);
+            for (int i = 0; i < clients.data().size(); i++) {
+                UserModel user = (UserModel) clients.data().get(i);
                 if (user != null) {
                     holder.binding.referenceTextView.append(user.getName());
-                    if (i != model.getClients().data().size() - 1) {
+                    if (i != clients.data().size() - 1) {
                         holder.binding.referenceTextView.append("  -  ");
                     }
                 }
             }
         }
-
-        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDD(String.valueOf(model.getCaseCreated_at()), " "));
-        holder.binding.sessionCountTextView.setText(model.getSessions_count() + " جلسه ");
     }
 
     public class Cases2Holder extends RecyclerView.ViewHolder {

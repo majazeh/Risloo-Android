@@ -28,7 +28,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> rooms;
+    private ArrayList<TypeModel> items;
 
     public RoomsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -42,34 +42,34 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     @Override
     public void onBindViewHolder(@NonNull RoomsHolder holder, int i) {
-        RoomModel room = (RoomModel) rooms.get(i);
+        RoomModel model = (RoomModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, room);
+        listener(holder, model);
 
-        setData(holder, room);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.rooms != null)
-            return rooms.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setRooms(ArrayList<TypeModel> rooms) {
-        if (this.rooms == null)
-            this.rooms = rooms;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.rooms.addAll(rooms);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearRooms() {
-        if (this.rooms != null) {
-            this.rooms.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -89,7 +89,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
 
     private void setData(RoomsHolder holder, RoomModel model) {
         holder.binding.nameTextView.setText(model.getRoomManager().getName());
-        holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterTypePersonalClinic));
+        holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterPersonalClinic));
 
         if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
             setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());

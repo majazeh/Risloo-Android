@@ -271,8 +271,8 @@ public class RoomFragment extends Fragment {
                     else
                         data.put("page", 1);
 
-                    if (binding.casesSingleLayout.progressBar.getVisibility() == View.GONE)
-                        binding.casesSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                    if (binding.casesSingleLayout.progressBar.getRoot().getVisibility() == View.GONE)
+                        binding.casesSingleLayout.progressBar.getRoot().setVisibility(View.VISIBLE);
 
                     getData();
                 }
@@ -514,15 +514,15 @@ public class RoomFragment extends Fragment {
                             }
 
                             if (Objects.equals(data.get("page"), 1))
-                                cases2Adapter.clearCases();
+                                cases2Adapter.clearItems();
 
                             if (!cases.data().isEmpty()) {
-                                cases2Adapter.setCases(cases.data());
+                                cases2Adapter.setItems(cases.data());
                                 binding.casesSingleLayout.recyclerView.setAdapter(cases2Adapter);
 
-                                binding.casesSingleLayout.textView.setVisibility(View.GONE);
+                                binding.casesSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
                             } else if (cases2Adapter.getItemCount() == 0) {
-                                binding.casesSingleLayout.textView.setVisibility(View.VISIBLE);
+                                binding.casesSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
                             }
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
 
@@ -530,8 +530,8 @@ public class RoomFragment extends Fragment {
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.casesShimmerLayout.getRoot().stopShimmer();
 
-                            if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
+                            if (binding.casesSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                                binding.casesSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                         } catch (JSONException e) {
@@ -551,8 +551,8 @@ public class RoomFragment extends Fragment {
                         binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.casesShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.casesSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.casesSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                            binding.casesSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });

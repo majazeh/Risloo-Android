@@ -165,12 +165,12 @@ public class ReferenceFragment extends Fragment {
 
                             // Rooms Data
                             if (!userModel.getRoomList().data().isEmpty()) {
-                                roomsAdapter.setRooms(userModel.getRoomList().data());
+                                roomsAdapter.setItems(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-                                binding.roomsSingleLayout.textView.setVisibility(View.GONE);
+                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
-                                binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
+                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
                             }
 
                             // Cases Data
@@ -255,12 +255,12 @@ public class ReferenceFragment extends Fragment {
 
                             // Rooms Data
                             if (!userModel.getRoomList().data().isEmpty()) {
-                                roomsAdapter.setRooms(userModel.getRoomList().data());
+                                roomsAdapter.setItems(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-                                binding.roomsSingleLayout.textView.setVisibility(View.GONE);
+                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
-                                binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
+                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
                             }
 
                             // Cases Data

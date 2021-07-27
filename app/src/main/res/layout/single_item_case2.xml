@@ -9,15 +9,14 @@
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
     tools:layout_marginBottom="@dimen/_4sdp"
-    tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.Cases2Adapter">
+    tools:layout_marginTop="@dimen/_4sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_12sdp"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
 
         <ImageView
             android:id="@+id/serial_imageView"
@@ -52,8 +51,8 @@
 
         <ImageView
             android:id="@+id/reference_imageView"
-            android:layout_width="@dimen/_14sdp"
-            android:layout_height="@dimen/_14sdp"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
@@ -78,7 +77,7 @@
             app:layout_constraintEnd_toEndOf="@id/serial_imageView"
             app:layout_constraintStart_toEndOf="@id/reference_imageView"
             app:layout_constraintTop_toBottomOf="@id/serial_textView"
-            tools:text="مراجع" />
+            tools:text="مراجعین" />
 
         <View
             android:id="@+id/mid_view"
@@ -92,8 +91,8 @@
 
         <ImageView
             android:id="@+id/date_imageView"
-            android:layout_width="@dimen/_14sdp"
-            android:layout_height="@dimen/_14sdp"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"
@@ -123,8 +122,8 @@
 
         <ImageView
             android:id="@+id/session_count_imageView"
-            android:layout_width="@dimen/_14sdp"
-            android:layout_height="@dimen/_14sdp"
+            android:layout_width="@dimen/_12sdp"
+            android:layout_height="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_6sdp"
             android:contentDescription="@string/AppImageContent"
             android:scaleType="fitCenter"

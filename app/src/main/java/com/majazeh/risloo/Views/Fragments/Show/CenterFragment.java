@@ -238,8 +238,8 @@ public class CenterFragment extends Fragment {
                     else
                         data.put("page", 1);
 
-                    if (binding.roomsSingleLayout.progressBar.getVisibility() == View.GONE)
-                        binding.roomsSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                    if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.GONE)
+                        binding.roomsSingleLayout.progressBar.getRoot().setVisibility(View.VISIBLE);
 
                     getData();
                 }
@@ -401,15 +401,15 @@ public class CenterFragment extends Fragment {
                             }
 
                             if (Objects.equals(data.get("page"), 1))
-                                roomsAdapter.clearRooms();
+                                roomsAdapter.clearItems();
 
                             if (!rooms.data().isEmpty()) {
-                                roomsAdapter.setRooms(rooms.data());
+                                roomsAdapter.setItems(rooms.data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-                                binding.roomsSingleLayout.textView.setVisibility(View.GONE);
+                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
-                                binding.roomsSingleLayout.textView.setVisibility(View.VISIBLE);
+                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
                             }
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
 
@@ -417,8 +417,8 @@ public class CenterFragment extends Fragment {
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                            if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
+                            if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                                binding.roomsSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                         } catch (JSONException e) {
@@ -437,8 +437,8 @@ public class CenterFragment extends Fragment {
                         binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                            binding.roomsSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
