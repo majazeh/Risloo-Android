@@ -165,6 +165,7 @@ public class ScalesFragment extends Fragment {
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
+
                     isLoading = false;
                 }
             }

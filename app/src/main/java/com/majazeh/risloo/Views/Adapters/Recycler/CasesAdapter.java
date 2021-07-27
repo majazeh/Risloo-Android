@@ -15,6 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemCaseBinding;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -29,7 +30,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> cases;
+    private ArrayList<TypeModel> items;
 
     public CasesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -43,34 +44,34 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
 
     @Override
     public void onBindViewHolder(@NonNull CasesHolder holder, int i) {
-        CaseModel casse = (CaseModel) cases.get(i);
+        CaseModel model = (CaseModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, casse);
+        listener(holder, model);
 
-        setData(holder, casse);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.cases != null)
-            return cases.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setCases(ArrayList<TypeModel> cases) {
-        if (this.cases == null)
-            this.cases = cases;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.cases.addAll(cases);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearCases() {
-        if (this.cases != null) {
-            this.cases.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -105,20 +106,24 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesAdapter.CasesHolder>
                 holder.binding.centerTextView.setText(model.getCaseRoom().getRoomCenter().getDetail().getString("title"));
             }
 
-            if (model.getClients() != null && model.getClients().data().size() != 0) {
-                holder.binding.referenceTextView.setText("");
-                for (int i = 0; i < model.getClients().data().size(); i++) {
-                    UserModel user = (UserModel) model.getClients().data().get(i);
-                    if (user != null) {
-                        holder.binding.referenceTextView.append(user.getName());
-                        if (i != model.getClients().data().size() - 1) {
-                            holder.binding.referenceTextView.append("\n");
-                        }
+            setClients(holder, model.getClients());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void setClients(CasesHolder holder, List clients) {
+        if (clients != null && clients.data().size() != 0) {
+            holder.binding.referenceTextView.setText("");
+            for (int i = 0; i < clients.data().size(); i++) {
+                UserModel user = (UserModel) clients.data().get(i);
+                if (user != null) {
+                    holder.binding.referenceTextView.append(user.getName());
+                    if (i != clients.data().size() - 1) {
+                        holder.binding.referenceTextView.append("\n");
                     }
                 }
             }
-        } catch (JSONException e) {
-            e.printStackTrace();
         }
     }
 
