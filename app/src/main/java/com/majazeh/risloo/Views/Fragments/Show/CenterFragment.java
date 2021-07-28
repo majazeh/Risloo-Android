@@ -61,7 +61,7 @@ public class CenterFragment extends Fragment {
 
     // Vars
     private String type = "counseling_center";
-    private boolean isLoading = true, userSelect = false;
+    private boolean isLoading = true, userSelect = false, userScroll = false;
 
     @Nullable
     @Override
@@ -228,21 +228,25 @@ public class CenterFragment extends Fragment {
             }
         });
 
+        binding.getRoot().setOnTouchListener((v, event) -> {
+            userScroll = true;
+            return false;
+        });
+
         binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (!isLoading) {
-                if (!binding.getRoot().canScrollVertically(1)) {
-                    isLoading = true;
+            if (userScroll && !isLoading && !v.canScrollVertically(1)) {
+                userScroll = false;
+                isLoading = true;
 
-                    if (data.containsKey("page"))
-                        data.put("page", ((int) data.get("page")) + 1);
-                    else
-                        data.put("page", 1);
+                if (data.containsKey("page"))
+                    data.put("page", ((int) data.get("page")) + 1);
+                else
+                    data.put("page", 1);
 
-                    if (binding.roomsSingleLayout.progressBar.getVisibility() == View.GONE)
-                        binding.roomsSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                if (binding.roomsSingleLayout.progressBar.getVisibility() == View.GONE)
+                    binding.roomsSingleLayout.progressBar.setVisibility(View.VISIBLE);
 
-                    getData();
-                }
+                getData();
             }
         });
 

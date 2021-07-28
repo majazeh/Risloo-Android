@@ -109,20 +109,18 @@ public class ScalesFragment extends Fragment {
         });
 
         binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (!isLoading) {
-                if (!binding.getRoot().canScrollVertically(1)) {
-                    isLoading = true;
+            if (!isLoading && !v.canScrollVertically(1)) {
+                isLoading = true;
 
-                    if (data.containsKey("page"))
-                        data.put("page", ((int) data.get("page")) + 1);
-                    else
-                        data.put("page", 1);
+                if (data.containsKey("page"))
+                    data.put("page", ((int) data.get("page")) + 1);
+                else
+                    data.put("page", 1);
 
-                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
-                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
+                    binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
 
-                    getData();
-                }
+                getData();
             }
         });
     }
