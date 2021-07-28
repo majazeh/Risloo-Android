@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
@@ -30,8 +31,10 @@ import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.squareup.picasso.Picasso;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class EditCenterAvatarFragment extends Fragment {
 
@@ -41,16 +44,19 @@ public class EditCenterAvatarFragment extends Fragment {
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
 
+    // Fragments
+    private Fragment current;
+
     // Objects
     private Bitmap avatarBitmap = null;
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
     public String avatarPath = "";
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentEditCenterAvatarBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -66,6 +72,8 @@ public class EditCenterAvatarFragment extends Fragment {
 
     private void initializer() {
         imageBottomSheet = new ImageBottomSheet();
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -92,9 +100,9 @@ public class EditCenterAvatarFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (avatarBitmap == null) {
                 if (!avatarPath.equals(""))
-                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageNew), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
                 else
-                    Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppImageEmpty), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
             } else {
                 doWork();
             }
@@ -102,8 +110,6 @@ public class EditCenterAvatarFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditCenterFragment) {
             CenterModel model = ((EditCenterFragment) current).centerModel;
 
@@ -113,8 +119,10 @@ public class EditCenterAvatarFragment extends Fragment {
                 }
 
                 if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+                    avatarPath = model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url");
+
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
-                    Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
+                    Picasso.get().load(avatarPath).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
                 } else {
                     binding.avatarIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                     if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals(""))
@@ -153,9 +161,8 @@ public class EditCenterAvatarFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-        if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
+        if (FileManager.readFileFromCache(requireActivity(), "image") != null)
             data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
-        }
 
         Center.editAvatar(data, header, new Response() {
             @Override
@@ -163,7 +170,7 @@ public class EditCenterAvatarFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                     });
 
                     FileManager.deleteFileFromCache(requireActivity(), "image");
@@ -174,7 +181,23 @@ public class EditCenterAvatarFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        // Place Code if Needed
+                        try {
+                            JSONObject jsonObject = new JSONObject(response);
+                            if (!jsonObject.isNull("errors")) {
+                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                        if (key.equals("avatar")) {
+                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        }
+                                    }
+                                }
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
                     });
                 }
             }

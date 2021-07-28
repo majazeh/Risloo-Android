@@ -148,10 +148,10 @@ public class ScalesFragment extends Fragment {
                             binding.indexSingleLayout.headerView.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
 
-                            if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.ScalesFragmentEmpty));
-                            else if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
+                            else
+                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.ScalesFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));

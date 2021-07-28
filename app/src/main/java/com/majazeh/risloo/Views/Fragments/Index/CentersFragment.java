@@ -164,10 +164,10 @@ public class CentersFragment extends Fragment {
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
 
-                            if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.CentersFragmentEmpty));
-                            else if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
+                            else
+                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.CentersFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));

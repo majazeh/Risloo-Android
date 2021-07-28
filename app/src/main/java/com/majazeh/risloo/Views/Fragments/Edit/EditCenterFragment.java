@@ -23,12 +23,14 @@ public class EditCenterFragment extends Fragment {
     // Adapters
     public EditCenterAdapter adapter;
 
+    // Models
+    public CenterModel centerModel;
+
     // Objects
     private TabLayoutMediator tabLayoutMediator;
 
     // Vars
     private String[] tabs;
-    public CenterModel centerModel;
 
     @Nullable
     @Override
@@ -49,21 +51,21 @@ public class EditCenterFragment extends Fragment {
 
     private void setArgs() {
         centerModel = (CenterModel) EditCenterFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
-        adapter = new EditCenterAdapter(requireActivity(), centerModel.getCenterType());
-
-        binding.viewPager.getRoot().setAdapter(adapter);
-        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
-        tabLayoutMediator.attach();
-
         setData();
     }
 
     private void setData() {
+        adapter = new EditCenterAdapter(requireActivity(), centerModel.getCenterType());
+
         if (centerModel.getCenterType().equals("personal_clinic"))
             binding.tabLayout.getRoot().setVisibility(View.GONE);
         else
             binding.tabLayout.getRoot().setVisibility(View.VISIBLE);
+
+        binding.viewPager.getRoot().setAdapter(adapter);
+        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
+
+        tabLayoutMediator.attach();
     }
 
     @Override

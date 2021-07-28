@@ -404,10 +404,10 @@ public class CenterFragment extends Fragment {
                             } else if (roomsAdapter.getItemCount() == 0) {
                                 binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
 
-                                if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                                    binding.roomsSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.RoomsAdapterEmpty));
-                                else if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                     binding.roomsSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
+                                else
+                                    binding.roomsSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.RoomsAdapterEmpty));
                             }
 
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));

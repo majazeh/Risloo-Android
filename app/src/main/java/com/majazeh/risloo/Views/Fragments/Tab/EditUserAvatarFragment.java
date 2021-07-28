@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,7 +32,11 @@ import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class EditUserAvatarFragment extends Fragment {
@@ -182,7 +187,23 @@ public class EditUserAvatarFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            // Place Code if Needed
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (!jsonObject.isNull("errors")) {
+                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                            if (key.equals("avatar")) {
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         });
                     }
                 }
@@ -205,7 +226,23 @@ public class EditUserAvatarFragment extends Fragment {
                 public void onFailure(String response) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            // Place Code if Needed
+                            try {
+                                JSONObject jsonObject = new JSONObject(response);
+                                if (!jsonObject.isNull("errors")) {
+                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                            if (key.equals("avatar")) {
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                            }
+                                        }
+                                    }
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         });
                     }
                 }

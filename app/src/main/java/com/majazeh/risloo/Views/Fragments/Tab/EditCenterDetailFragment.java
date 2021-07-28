@@ -7,13 +7,13 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -41,15 +41,20 @@ public class EditCenterDetailFragment extends Fragment {
     // Binding
     private FragmentEditCenterDetailBinding binding;
 
-    // Adapters
-    public SelectedAdapter phonesAdapter;
-
     // Dialogs
     private SearchableDialog managersDialog;
     public SelectedDialog phonesDialog;
 
-    // Vars
+    // Adapters
+    public SelectedAdapter phonesAdapter;
+
+    // Fragments
+    private Fragment current;
+
+    // Objects
     private HashMap data, header;
+
+    // Vars
     public String type = "", managerId = "", managerName = "", title = "", address = "", description = "";
 
     @Nullable
@@ -69,10 +74,12 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesAdapter = new SelectedAdapter(requireActivity());
-
         managersDialog = new SearchableDialog();
         phonesDialog = new SelectedDialog();
+
+        phonesAdapter = new SelectedAdapter(requireActivity());
+
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -88,7 +95,6 @@ public class EditCenterDetailFragment extends Fragment {
         binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailTabDescriptionHint));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
-
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterDetailTabButton), getResources().getColor(R.color.White));
     }
 
@@ -108,21 +114,23 @@ public class EditCenterDetailFragment extends Fragment {
         }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.titleIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.addressIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.addressIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.addressIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -134,12 +142,13 @@ public class EditCenterDetailFragment extends Fragment {
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-                 }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -160,8 +169,6 @@ public class EditCenterDetailFragment extends Fragment {
     }
 
     private void setData() {
-        Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-
         if (current instanceof EditCenterFragment) {
             CenterModel model = ((EditCenterFragment) current).centerModel;
 
@@ -207,19 +214,19 @@ public class EditCenterDetailFragment extends Fragment {
                 }
 
                 if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
-                    JSONArray phoneNumbers = model.getDetail().getJSONArray("phone_numbers");
+                    JSONArray phones = model.getDetail().getJSONArray("phone_numbers");
 
-                    ArrayList<TypeModel> phones = new ArrayList<>();
+                    ArrayList<TypeModel> models = new ArrayList<>();
                     ArrayList<String> ids = new ArrayList<>();
 
-                    for (int i = 0; i < phoneNumbers.length(); i++) {
-                        TypeModel typeModel = new TypeModel(new JSONObject().put("id", phoneNumbers.getString(i)));
+                    for (int i = 0; i < phones.length(); i++) {
+                        TypeModel typeModel = new TypeModel(new JSONObject().put("id", phones.getString(i)));
 
-                        phones.add(typeModel);
+                        models.add(typeModel);
                         ids.add(typeModel.object.getString("id"));
                     }
 
-                    setRecyclerView(phones, ids, "phones");
+                    setRecyclerView(models, ids, "phones");
                 } else {
                     setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
                 }
@@ -261,10 +268,6 @@ public class EditCenterDetailFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
-        address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
-        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
         data.put("manager_id", managerId);
         data.put("address", address);
         data.put("description", description);
@@ -279,7 +282,7 @@ public class EditCenterDetailFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                     });
                 }
             }

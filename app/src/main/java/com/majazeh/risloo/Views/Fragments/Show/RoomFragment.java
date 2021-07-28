@@ -511,10 +511,10 @@ public class RoomFragment extends Fragment {
                             } else if (cases2Adapter.getItemCount() == 0) {
                                 binding.casesSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
 
-                                if (binding.casesSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                                    binding.casesSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.Cases2AdapterEmpty));
-                                else if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                     binding.casesSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
+                                else
+                                    binding.casesSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.Cases2AdapterEmpty));
                             }
 
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
