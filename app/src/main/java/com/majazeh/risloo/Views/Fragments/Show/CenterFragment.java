@@ -238,8 +238,8 @@ public class CenterFragment extends Fragment {
                     else
                         data.put("page", 1);
 
-                    if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.GONE)
-                        binding.roomsSingleLayout.progressBar.getRoot().setVisibility(View.VISIBLE);
+                    if (binding.roomsSingleLayout.progressBar.getVisibility() == View.GONE)
+                        binding.roomsSingleLayout.progressBar.setVisibility(View.VISIBLE);
 
                     getData();
                 }
@@ -400,14 +400,14 @@ public class CenterFragment extends Fragment {
                                 roomsAdapter.setItems(items.data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
+                                binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
-                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
+                                binding.roomsSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                                 if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-                                    binding.roomsSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
+                                    binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                                 else
-                                    binding.roomsSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.RoomsAdapterEmpty));
+                                    binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.RoomsAdapterEmpty));
                             }
 
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
@@ -416,8 +416,8 @@ public class CenterFragment extends Fragment {
                             binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                             binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                            if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                                binding.roomsSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
+                            if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                         } catch (JSONException e) {
@@ -437,8 +437,8 @@ public class CenterFragment extends Fragment {
                         binding.roomsShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.roomsShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                            binding.roomsSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
+                        if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });

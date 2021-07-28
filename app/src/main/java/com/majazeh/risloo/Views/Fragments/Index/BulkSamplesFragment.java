@@ -133,8 +133,8 @@ public class BulkSamplesFragment extends Fragment {
                     else
                         data.put("page", 1);
 
-                    if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.GONE)
-                        binding.indexSingleLayout.progressBar.getRoot().setVisibility(View.VISIBLE);
+                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
+                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
 
                     getData();
                 }
@@ -163,15 +163,15 @@ public class BulkSamplesFragment extends Fragment {
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.indexSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
-                            binding.indexSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
+                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.headerView.getRoot().setVisibility(View.GONE);
-                            binding.indexSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                             else
-                                binding.indexSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.BulkSamplesFragmentEmpty));
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BulkSamplesFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
@@ -180,8 +180,8 @@ public class BulkSamplesFragment extends Fragment {
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
@@ -198,8 +198,8 @@ public class BulkSamplesFragment extends Fragment {
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
 
-                        if (binding.indexSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.getRoot().setVisibility(View.GONE);
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });

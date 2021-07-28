@@ -168,9 +168,9 @@ public class ReferenceFragment extends Fragment {
                                 roomsAdapter.setItems(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
+                                binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
-                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
+                                binding.roomsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             }
 
                             // Cases Data
@@ -258,9 +258,9 @@ public class ReferenceFragment extends Fragment {
                                 roomsAdapter.setItems(userModel.getRoomList().data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
-                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
+                                binding.roomsSingleLayout.emptyView.setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
-                                binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
+                                binding.roomsSingleLayout.emptyView.setVisibility(View.VISIBLE);
                             }
 
                             // Cases Data
