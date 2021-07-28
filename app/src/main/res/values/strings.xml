@@ -1043,8 +1043,8 @@
 
     <string name="BulkSampleFragmentTitle">نمونه گروهی</string>
 
-    <string name="BulkSampleFragmentEdit">ویرایش</string>
     <string name="BulkSampleFragmentLink">لینک ثبت نام</string>
+    <string name="BulkSampleFragmentEdit">ویرایش</string>
 
     /*
     ---------- Case Fragment ----------
@@ -1228,6 +1228,8 @@
     */
 
     <string name="ReferencesAdapterHeader">مراجعین</string>
+
+    <string name="ReferencesAdapterEmpty">هنوز مراجعی ثبت نشده است.</string>
 
     /*
     ---------- Rooms Adapter ----------

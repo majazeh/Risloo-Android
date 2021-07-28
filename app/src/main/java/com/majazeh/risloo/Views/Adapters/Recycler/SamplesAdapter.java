@@ -94,7 +94,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
     private void setData(SamplesHolder holder, SampleModel model) {
         if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-         else
+        else
             holder.binding.topView.setVisibility(View.VISIBLE);
 
         holder.binding.serialTextView.setText(model.getSampleId());
@@ -136,7 +136,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;

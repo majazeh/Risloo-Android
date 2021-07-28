@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,6 +17,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples4Adapter;
@@ -47,9 +47,11 @@ public class BulkSampleFragment extends Fragment {
     // BottomSheets
     private ChainBottomSheet chainBottomSheet;
 
-    // Vars
-    private HashMap data, header;
+    // Models
     private BulkSampleModel bulkSampleModel;
+
+    // Objects
+    private HashMap data, header;
 
     @Nullable
     @Override
@@ -85,11 +87,11 @@ public class BulkSampleFragment extends Fragment {
 
         InitManager.txtTextColor(binding.linkTextView.buttonTextView, getResources().getString(R.string.BulkSampleFragmentLink), getResources().getColor(R.color.Gray500));
 
-        binding.referencesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
-        binding.scalesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
-        binding.samplesHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
+        binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
+        binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
+        binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.referencesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.referencesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.scalesSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
     }
@@ -126,7 +128,7 @@ public class BulkSampleFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
-            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppLinkSaved), Toast.LENGTH_SHORT).show();
+            ToastManager.showToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastLinkSaved));
         }).widget(binding.linkTextView.buttonImageView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -178,7 +180,6 @@ public class BulkSampleFragment extends Fragment {
 
     private void setArgs() {
         bulkSampleModel = (BulkSampleModel) BulkSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
         setData(bulkSampleModel);
     }
 
@@ -198,7 +199,7 @@ public class BulkSampleFragment extends Fragment {
             }
 
             if (model.getMembers_count() != -1 && model.getJoined() != -1) {
-                binding.referencesHeaderIncludeLayout.countTextView.setText("(" + model.getMembers_count() + " / " + model.getJoined() + ")");
+                binding.referencesHeaderLayout.countTextView.setText("(" + model.getMembers_count() + " / " + model.getJoined() + ")");
             }
 
             if (model.getCase_status() != null && !model.getCase_status().equals("")) {
@@ -245,40 +246,46 @@ public class BulkSampleFragment extends Fragment {
 
                         // References Data
                         if (bulkSampleModel.getMembers() != null && bulkSampleModel.getMembers().data().size() != 0) {
-                            referencesAdapter.setReferences(bulkSampleModel.getMembers().data());
+                            referencesAdapter.setItems(bulkSampleModel.getMembers().data());
                             binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
 
-                            binding.referencesSingleLayout.textView.setVisibility(View.GONE);
+                            binding.referencesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (referencesAdapter.getItemCount() == 0) {
-                            binding.referencesSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.referencesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.referencesSingleLayout.emptyView.setText(getResources().getString(R.string.ReferencesAdapterEmpty));
                         }
 
                         // Scales Data
                         if (!bulkSampleModel.getScales().data().isEmpty()) {
-                            scales2Adapter.setScales(bulkSampleModel.getScales().data());
+                            scales2Adapter.setItems(bulkSampleModel.getScales().data());
                             binding.scalesSingleLayout.recyclerView.setAdapter(scales2Adapter);
 
-                            binding.scalesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.scalesSingleLayout.textView.setVisibility(View.GONE);
+                            binding.scalesSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
+                            binding.scalesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (scales2Adapter.getItemCount() == 0) {
-                            binding.scalesHeaderLayout.getRoot().setVisibility(View.GONE);
-                            binding.scalesSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.scalesSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                            binding.scalesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+
+                            binding.scalesSingleLayout.emptyView.setText(getResources().getString(R.string.Scales2AdapterEmpty));
                         }
+
+                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(scales2Adapter.getItemCount()));
 
                         // Samples Data
                         if (!bulkSampleModel.getSamples().data().isEmpty()) {
-                            samples4Adapter.setSamples(bulkSampleModel.getSamples().data());
+                            samples4Adapter.setItems(bulkSampleModel.getSamples().data());
                             binding.samplesSingleLayout.recyclerView.setAdapter(samples4Adapter);
 
-                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-                            binding.samplesSingleLayout.textView.setVisibility(View.GONE);
+                            binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (samples4Adapter.getItemCount() == 0) {
-                            binding.samplesHeaderLayout.getRoot().setVisibility(View.GONE);
-                            binding.samplesSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                            binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+
+                            binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.Samples4AdapterEmpty));
                         }
 
-                        binding.scalesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(scales2Adapter.getItemCount()));
-                        binding.samplesHeaderIncludeLayout.countTextView.setText(StringManager.bracing(samples4Adapter.getItemCount()));
+                        binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samples4Adapter.getItemCount()));
 
                         // References Data
                         binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -294,6 +301,7 @@ public class BulkSampleFragment extends Fragment {
                         binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
+
                     });
                 }
             }
@@ -319,6 +327,7 @@ public class BulkSampleFragment extends Fragment {
                         binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();
+
                     });
                 }
             }

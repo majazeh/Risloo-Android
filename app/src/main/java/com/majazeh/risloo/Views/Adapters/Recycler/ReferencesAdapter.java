@@ -22,7 +22,7 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> references;
+    private ArrayList<TypeModel> items;
 
     public ReferencesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -36,34 +36,34 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
 
     @Override
     public void onBindViewHolder(@NonNull ReferencesHolder holder, int i) {
-        UserModel reference = (UserModel) references.get(i);
+        UserModel model = (UserModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, reference);
+        listener(holder, model);
 
-        setData(holder, reference);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.references != null)
-            return references.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setReferences(ArrayList<TypeModel> references) {
-        if (this.references == null)
-            this.references = references;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.references.addAll(references);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearReferences() {
-        if (this.references != null) {
-            this.references.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

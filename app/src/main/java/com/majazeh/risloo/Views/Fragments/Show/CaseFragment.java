@@ -183,12 +183,12 @@ public class CaseFragment extends Fragment {
 
                         // References Data
                         if (caseModel.getClients() != null && caseModel.getClients().data().size() != 0) {
-                            referencesAdapter.setReferences(caseModel.getClients().data());
+                            referencesAdapter.setItems(caseModel.getClients().data());
                             binding.referencesSingleLayout.recyclerView.setAdapter(referencesAdapter);
 
-                            binding.referencesSingleLayout.textView.setVisibility(View.GONE);
+                            binding.referencesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (referencesAdapter.getItemCount() == 0) {
-                            binding.referencesSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.referencesSingleLayout.emptyView.setVisibility(View.VISIBLE);
                         }
 
                         // Sessions Data
