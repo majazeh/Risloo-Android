@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
@@ -13,11 +13,13 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp"
+        tools:paddingBottom="0dp">
 
         <androidx.cardview.widget.CardView
-            android:id="@+id/info_cardView"
-            android:layout_width="0dp"
+            android:id="@+id/container_cardView"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
@@ -29,9 +31,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:paddingBottom="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
 
                 <ImageView
                     android:id="@+id/background_imageView"
@@ -70,9 +72,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginLeft="@dimen/_4sdp"
-                    app:layout_goneMarginLeft="@dimen/_8sdp"
                     app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
-                    app:layout_constraintLeft_toRightOf="@id/menu_spinner" />
+                    app:layout_constraintLeft_toRightOf="@id/menu_spinner"
+                    app:layout_goneMarginLeft="@dimen/_8sdp" />
 
                 <TextView
                     android:id="@+id/name_textView"
@@ -227,8 +229,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@id/info_cardView"
-            app:layout_constraintTop_toBottomOf="@id/info_cardView" />
+            app:layout_constraintStart_toStartOf="@id/container_cardView"
+            app:layout_constraintTop_toBottomOf="@id/container_cardView" />
 
         <include
             android:id="@+id/search_includeLayout"
@@ -237,7 +239,7 @@
             android:layout_height="@dimen/_28sdp"
             android:layout_marginTop="@dimen/_6sdp"
             app:layout_constraintLeft_toRightOf="@id/add_imageView"
-            app:layout_constraintRight_toRightOf="@id/info_cardView"
+            app:layout_constraintRight_toRightOf="@id/container_cardView"
             app:layout_constraintTop_toBottomOf="@id/header_includeLayout" />
 
         <include
@@ -247,7 +249,7 @@
             android:layout_height="@dimen/_28sdp"
             android:layout_marginRight="@dimen/_6sdp"
             app:layout_constraintBottom_toBottomOf="@id/search_includeLayout"
-            app:layout_constraintLeft_toLeftOf="@id/info_cardView"
+            app:layout_constraintLeft_toLeftOf="@id/container_cardView"
             app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
             app:layout_constraintTop_toTopOf="@id/search_includeLayout" />
 

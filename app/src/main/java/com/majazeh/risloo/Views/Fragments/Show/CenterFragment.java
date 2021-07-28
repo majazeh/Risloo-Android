@@ -11,7 +11,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -26,6 +25,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterBinding;
@@ -52,12 +52,14 @@ public class CenterFragment extends Fragment {
     // Adapters
     private RoomsAdapter roomsAdapter;
 
+    // Models
+    private CenterModel centerModel;
+
     // Objects
     private Handler handler;
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
-    private CenterModel centerModel;
     private String type = "counseling_center";
     private boolean isLoading = true, userSelect = false;
 
@@ -93,7 +95,7 @@ public class CenterFragment extends Fragment {
 
         InitManager.txtTextColor(binding.requestTextView.getRoot(), getResources().getString(R.string.CenterFragmentRequest), getResources().getColor(R.color.White));
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {
@@ -119,6 +121,7 @@ public class CenterFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
         binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
+            binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
             userSelect = true;
             return false;
         });
@@ -152,7 +155,7 @@ public class CenterFragment extends Fragment {
                         } break;
                     }
 
-                    binding.menuSpinner.selectSpinner.setSelection(parent.getAdapter().getCount());
+                    parent.setSelection(parent.getAdapter().getCount());
 
                     userSelect = false;
                 }
@@ -177,7 +180,7 @@ public class CenterFragment extends Fragment {
                             setAcceptation(centerModel);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
                         });
                     }
                 }
@@ -194,11 +197,8 @@ public class CenterFragment extends Fragment {
         }).widget(binding.requestTextView.getRoot());
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.searchIncludeLayout.editText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.editText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
             return false;
         });
 
@@ -254,7 +254,6 @@ public class CenterFragment extends Fragment {
 
     private void setArgs() {
         centerModel = (CenterModel) CenterFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
         setData(centerModel);
     }
 
@@ -365,19 +364,14 @@ public class CenterFragment extends Fragment {
     private void setDropdown(String status) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
-        }
-
+        items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
         items.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
 
-        if (((MainActivity) requireActivity()).singleton.getType().equals("admin") && !status.equals("request"))
+        if (!status.equals("request"))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
-        if (((MainActivity) requireActivity()).singleton.getType().equals("admin")) {
-            items.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
-            items.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
-        }
+        items.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
+        items.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
 
         items.add("");
 
@@ -392,25 +386,30 @@ public class CenterFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             centerModel = new CenterModel(((JSONObject) object).getJSONObject("center"));
-
                             setData(centerModel);
 
-                            List rooms = new List();
+                            List items = new List();
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
-                                rooms.add(new RoomModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
+                                items.add(new RoomModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
                             }
 
                             if (Objects.equals(data.get("page"), 1))
                                 roomsAdapter.clearItems();
 
-                            if (!rooms.data().isEmpty()) {
-                                roomsAdapter.setItems(rooms.data());
+                            if (!items.data().isEmpty()) {
+                                roomsAdapter.setItems(items.data());
                                 binding.roomsSingleLayout.recyclerView.setAdapter(roomsAdapter);
 
                                 binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.GONE);
                             } else if (roomsAdapter.getItemCount() == 0) {
                                 binding.roomsSingleLayout.emptyView.getRoot().setVisibility(View.VISIBLE);
+
+                                if (binding.roomsSingleLayout.progressBar.getRoot().getVisibility() == View.VISIBLE)
+                                    binding.roomsSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.RoomsAdapterEmpty));
+                                else if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                    binding.roomsSingleLayout.emptyView.getRoot().setText(getResources().getString(R.string.AppSearchEmpty));
                             }
+
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
 
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -425,6 +424,7 @@ public class CenterFragment extends Fragment {
                             e.printStackTrace();
                         }
                     });
+
                     isLoading = false;
                 }
             }
@@ -442,6 +442,7 @@ public class CenterFragment extends Fragment {
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
                     });
+
                     isLoading = false;
                 }
             }

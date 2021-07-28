@@ -49,7 +49,7 @@ public class CreateUserFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String name = "", mobile = "", email = "", password = "", birthday = "", status = "", type = "", gender = "";
+    private String name = "", mobile = "", email = "", password = "", birthday = "", status = "active", type = "user", gender = "male";
     private boolean passwordVisibility = false;
 
     @Nullable
@@ -87,13 +87,16 @@ public class CreateUserFragment extends Fragment {
         binding.passwordGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateUserFragmentPasswordGuide));
 
         binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateUserFragmentStatusActive));
+        binding.statusIncludeLayout.firstRadioButton.setChecked(true);
         binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateUserFragmentStatusWaiting));
         binding.statusIncludeLayout.thirdRadioButton.setText(getResources().getString(R.string.CreateUserFragmentStatusClosed));
 
         binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateUserFragmentTypeAdmin));
         binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateUserFragmentTypeClient));
+        binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
         binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateUserFragmentGenderMale));
+        binding.genderIncludeLayout.firstRadioButton.setChecked(true);
         binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateUserFragmentGenderFemale));
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateUserFragmentButton), getResources().getColor(R.color.White));

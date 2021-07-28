@@ -10,13 +10,14 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -45,22 +46,22 @@ public class CreateCenterFragment extends Fragment {
     // Binding
     private FragmentCreateCenterBinding binding;
 
-    // Adapters
-    public SelectedAdapter phonesAdapter;
-
     // Dialogs
     private SearchableDialog managersDialog;
     public SelectedDialog phonesDialog;
+
+    // Adapters
+    public SelectedAdapter phonesAdapter;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
 
     // Objects
     private Bitmap avatarBitmap = null;
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
-    public String type = "", managerId = "", managerName = "", title = "", address = "", description = "", avatarPath = "";
+    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "", avatarPath = "";
 
     @Nullable
     @Override
@@ -79,10 +80,10 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesAdapter = new SelectedAdapter(requireActivity());
-
         managersDialog = new SearchableDialog();
         phonesDialog = new SelectedDialog();
+
+        phonesAdapter = new SelectedAdapter(requireActivity());
 
         imageBottomSheet = new ImageBottomSheet();
 
@@ -104,6 +105,7 @@ public class CreateCenterFragment extends Fragment {
         binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentDescriptionHint));
 
         binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentPersonalClinic));
+        binding.typeIncludeLayout.firstRadioButton.setChecked(true);
         binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCounselingCenter));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
@@ -142,12 +144,13 @@ public class CreateCenterFragment extends Fragment {
         }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.titleIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -155,12 +158,13 @@ public class CreateCenterFragment extends Fragment {
         }).widget(binding.avatarIncludeLayout.selectCircleImageView);
 
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.addressIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.addressIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.addressIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -172,12 +176,13 @@ public class CreateCenterFragment extends Fragment {
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -268,10 +273,6 @@ public class CreateCenterFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
-        address = binding.addressIncludeLayout.inputEditText.getText().toString().trim();
-        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-
         data.put("type", type);
         data.put("manager_id", managerId);
         data.put("address", address);
@@ -283,9 +284,8 @@ public class CreateCenterFragment extends Fragment {
 
             if (avatarBitmap != null) {
                 FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
-                if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
+                if (FileManager.readFileFromCache(requireActivity(), "image") != null)
                     data.put("avatar", FileManager.readFileFromCache(requireActivity(), "image"));
-                }
             }
         }
 
@@ -295,12 +295,13 @@ public class CreateCenterFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewCenterAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
 
-                    if (FileManager.readFileFromCache(requireActivity(), "image") != null) {
+                    if (FileManager.readFileFromCache(requireActivity(), "image") != null)
                         FileManager.deleteFileFromCache(requireActivity(), "image");
-                    }
                 }
             }
 
@@ -317,6 +318,9 @@ public class CreateCenterFragment extends Fragment {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
                                         switch (key) {
+                                            case "type":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
                                             case "manager_id":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;

@@ -38,6 +38,7 @@
     // Toast Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
+    <string name="ToastRequestSucces">شما مورد پذیرش قرار گرفته اید.</string>
     <string name="ToastChangesSaved">تغییرات ثبت شد.</string>
     <string name="ToastFeatureNotAddedYet">این دستور هنوز اضافه نشده است.</string>
     <string name="ToastDoubleBackPressed">برای خروج از نمونه مجددا کلیک کنید.</string>
@@ -51,6 +52,7 @@
     <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
 
+    <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
     <string name="ToastNewUserAdded">کاربر جدید افزوده شد.</string>
     <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
     <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
