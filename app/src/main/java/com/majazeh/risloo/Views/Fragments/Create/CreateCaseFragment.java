@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -40,14 +40,16 @@ public class CreateCaseFragment extends Fragment {
     // Binding
     private FragmentCreateCaseBinding binding;
 
-    // Adapters
-    public SelectedAdapter referencesAdapter;
-
     // Dialogs
-    private SearchableDialog referencesDialog;
+    private SearchableDialog referencesDialog, tagsDialog;
+
+    // Adapters
+    public SelectedAdapter referencesAdapter, tagsAdapter;
+
+    // Objects
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
     public String roomId = "", title = "", problem = "";
 
     @Nullable
@@ -67,9 +69,11 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void initializer() {
-        referencesAdapter = new SelectedAdapter(requireActivity());
-
         referencesDialog = new SearchableDialog();
+        tagsDialog = new SearchableDialog();
+
+        referencesAdapter = new SelectedAdapter(requireActivity());
+        tagsAdapter = new SelectedAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -78,8 +82,10 @@ public class CreateCaseFragment extends Fragment {
         binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentTitleHeader));
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentReferenceHeader));
         binding.problemIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentProblemHeader));
+        binding.tagsIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentTagsHeader));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.tagsIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }
@@ -95,12 +101,13 @@ public class CreateCaseFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.titleIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -112,10 +119,19 @@ public class CreateCaseFragment extends Fragment {
         });
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.tagsIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.problemIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
-                }
+                tagsDialog.show(requireActivity().getSupportFragmentManager(), "tagsDialog");
+                tagsDialog.setData("tags");
             }
             return false;
         });
@@ -145,6 +161,7 @@ public class CreateCaseFragment extends Fragment {
             }
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "tags");
         }
     }
 
@@ -155,6 +172,7 @@ public class CreateCaseFragment extends Fragment {
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "tags");
     }
 
     private void setData(RoomModel model) {
@@ -164,12 +182,19 @@ public class CreateCaseFragment extends Fragment {
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "tags");
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
-        if (method.equals("references")) {
-            referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
-            binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+        switch (method) {
+            case "references":
+                referencesAdapter.setItems(items, ids, method, binding.referenceIncludeLayout.countTextView);
+                binding.referenceIncludeLayout.selectRecyclerView.setAdapter(referencesAdapter);
+                break;
+            case "tags":
+                tagsAdapter.setItems(items, ids, method, binding.tagsIncludeLayout.countTextView);
+                binding.tagsIncludeLayout.selectRecyclerView.setAdapter(tagsAdapter);
+                break;
         }
     }
 
@@ -192,20 +217,35 @@ public class CreateCaseFragment extends Fragment {
                     binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                     binding.referenceIncludeLayout.countTextView.setText("");
                 }
-            }
-            break;
+            } break;
+            case "tags": {
+                UserModel model = (UserModel) item;
+
+                int position = tagsAdapter.getIds().indexOf(model.getId());
+
+                if (position == -1)
+                    tagsAdapter.addItem(item);
+                else
+                    tagsAdapter.removeItem(position);
+
+                if (tagsAdapter.getIds().size() != 0) {
+                    binding.tagsIncludeLayout.countTextView.setVisibility(View.VISIBLE);
+                    binding.tagsIncludeLayout.countTextView.setText(StringManager.bracing(tagsAdapter.getIds().size()));
+                } else {
+                    binding.tagsIncludeLayout.countTextView.setVisibility(View.GONE);
+                    binding.tagsIncludeLayout.countTextView.setText("");
+                }
+            } break;
         }
     }
 
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
-        problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
-
         data.put("title", title);
         data.put("client_id", referencesAdapter.getIds());
         data.put("problem", problem);
+        data.put("tags", tagsAdapter.getIds());
 
         Case.create(data, header, new Response() {
             @Override
@@ -213,7 +253,9 @@ public class CreateCaseFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewCaseAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
@@ -239,6 +281,9 @@ public class CreateCaseFragment extends Fragment {
                                                 break;
                                             case "problem":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "tags":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.tagsIncludeLayout.selectRecyclerView, binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                         }
                                     }

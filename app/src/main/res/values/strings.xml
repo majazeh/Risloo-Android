@@ -52,7 +52,9 @@
     <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
 
+    <string name="ToastNewCaseAdded">پرونده جدید افزوده شد.</string>
     <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
+    <string name="ToastNewRoomAdded">اتاق جدید افزوده شد.</string>
     <string name="ToastNewUserAdded">کاربر جدید افزوده شد.</string>
     <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
     <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
@@ -248,6 +250,7 @@
     <string name="CreateCaseFragmentTitleHeader">عنوان یا سریال داخلی</string>
     <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
     <string name="CreateCaseFragmentProblemHeader">مسئله</string>
+    <string name="CreateCaseFragmentTagsHeader">برچسب‌(ها)</string>
 
     <string name="CreateCaseFragmentReferenceHint">انتخاب مراجع از طریق جستجوی موبایل یا نام</string>
 
@@ -348,7 +351,7 @@
     ---------- CreateRoom Fragment ----------
     */
 
-    <string name="CreateRoomFragmentTitle">ساخت اتاق درمانی جدید</string>
+    <string name="CreateRoomFragmentTitle">ساخت اتاق درمان جدید</string>
 
     <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
 

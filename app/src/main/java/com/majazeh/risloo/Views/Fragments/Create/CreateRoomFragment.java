@@ -6,13 +6,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -38,10 +38,11 @@ public class CreateRoomFragment extends Fragment {
     // Dialogs
     private SearchableDialog psychologiesDialog;
 
-    // Vars
+    // Objects
     private HashMap data, header;
-    public String centerId = "";
-    public String psychologyId = "", psychologyName = "";
+
+    // Vars
+    public String centerId = "", psychologyId = "", psychologyName = "";
 
     @Nullable
     @Override
@@ -137,7 +138,7 @@ public class CreateRoomFragment extends Fragment {
 
     public void responseDialog(String method, TypeModel item) {
         switch (method) {
-            case "psychologies":
+            case "psychologies": {
                 UserModel model = (UserModel) item;
 
                 if (!psychologyId.equals(model.getId())) {
@@ -153,7 +154,7 @@ public class CreateRoomFragment extends Fragment {
                 }
 
                 psychologiesDialog.dismiss();
-                break;
+            } break;
         }
     }
 
@@ -168,7 +169,9 @@ public class CreateRoomFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewCenterAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
