@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:background="@color/White"
-    tools:context=".Views.Adapters.Recycler.ClientReportsAdapter">
+    tools:background="@color/White">
 
     <View
         android:id="@+id/top_view"
@@ -42,7 +41,9 @@
         android:id="@+id/time_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -50,17 +51,19 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/reference_textView"
         app:layout_constraintStart_toEndOf="@id/name_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="زمان" />
 
     <TextView
         android:id="@+id/reference_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -68,18 +71,20 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/readers_textView"
         app:layout_constraintStart_toEndOf="@id/time_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="مراجعین" />
 
     <TextView
         android:id="@+id/readers_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -87,10 +92,10 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/reference_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="خوانندگان" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

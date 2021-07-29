@@ -7,20 +7,19 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     app:cardCornerRadius="@dimen/_2sdp"
-    app:cardElevation="0dp"
-    tools:layout_margin="@dimen/_12sdp">
+    app:cardElevation="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+        android:layout_height="wrap_content"
+        android:padding="@dimen/_6sdp"
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
 
         <View
             android:id="@+id/date_view"
             android:layout_width="0dp"
             android:layout_height="@dimen/_40sdp"
-            android:layout_margin="@dimen/_6sdp"
             android:background="@drawable/draw_2sdp_solid_gray50"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

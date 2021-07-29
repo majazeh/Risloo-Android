@@ -6,10 +6,9 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:layout_margin="@dimen/_12sdp"
     tools:background="@color/White">
 
-    <TextView
+    <View
         android:id="@+id/top_view"
         android:layout_width="0dp"
         android:layout_height="@dimen/_18sdp"

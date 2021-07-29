@@ -12,7 +12,9 @@
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/Sessions2AdapterSerial"
         android:textSize="@dimen/_8ssp"
@@ -21,10 +23,10 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintBottom_toBottomOf="@id/duration_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/start_time_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/start_time_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/start_time_textView"
@@ -32,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/Sessions2AdapterDate"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -49,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/Sessions2AdapterDuration"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
@@ -65,8 +67,10 @@
         android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:paddingStart="@dimen/_6sdp"
         android:gravity="center|right"
         android:text="@string/Sessions2AdapterStatus"
@@ -75,9 +79,9 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@id/duration_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/start_time_textView"
-        app:layout_constraintTop_toTopOf="@id/start_time_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,7 +12,9 @@
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/PracticesAdapterSerial"
         android:textSize="@dimen/_8ssp"
@@ -21,25 +23,26 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.25"
-        app:layout_constraintBottom_toBottomOf="@id/description_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/name_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/PracticesAdapterName"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/attachment_textView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -48,7 +51,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:text="@string/PracticesAdapterDescription"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
@@ -59,40 +62,5 @@
         app:layout_constraintEnd_toEndOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="@id/name_textView"
         app:layout_constraintTop_toBottomOf="@id/name_textView" />
-
-    <TextView
-        android:id="@+id/attachment_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:gravity="center|right"
-        android:text="@string/PracticesAdapterAttachment"
-        android:textSize="@dimen/_8ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@id/description_textView"
-        app:layout_constraintEnd_toStartOf="@id/work_textView"
-        app:layout_constraintStart_toEndOf="@id/name_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
-
-    <TextView
-        android:id="@+id/work_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_8sdp"
-        android:gravity="center|right"
-        android:text="@string/PracticesAdapterWork"
-        android:textSize="@dimen/_8ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="@id/description_textView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/attachment_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

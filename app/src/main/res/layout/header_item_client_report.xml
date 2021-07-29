@@ -16,6 +16,7 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:lines="2"
         android:text="@string/ClientReportsFragmentName"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -32,7 +33,9 @@
         android:id="@+id/time_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/ClientReportsFragmentTime"
         android:textSize="@dimen/_8ssp"
@@ -41,16 +44,18 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/reference_textView"
         app:layout_constraintStart_toEndOf="@id/name_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/reference_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/ClientReportsFragmentReference"
         android:textSize="@dimen/_8ssp"
@@ -59,17 +64,19 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/readers_textView"
         app:layout_constraintStart_toEndOf="@id/time_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/readers_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/ClientReportsFragmentReaders"
         android:textSize="@dimen/_8ssp"
@@ -78,9 +85,9 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
-        app:layout_constraintBottom_toBottomOf="@id/name_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/reference_textView"
-        app:layout_constraintTop_toTopOf="@id/name_textView" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

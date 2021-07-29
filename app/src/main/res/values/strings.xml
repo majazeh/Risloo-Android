@@ -1198,6 +1198,8 @@
 
     <string name="PlatformsAdapterHeader">بسترها</string>
 
+    <string name="PlatformsAdapterEmpty">هنوز بستري ثبت نشده است.</string>
+
     /*
     ---------- Platforms2 Adapter ----------
     */
@@ -1206,11 +1208,15 @@
 
     <string name="Platforms2AdapterIdentifierHint">مقدار</string>
 
+    <string name="Platforms2AdapterEmpty">هنوز بستري ثبت نشده است.</string>
+
     /*
     ---------- Psychologists Adapter ----------
     */
 
     <string name="PsychologistsAdapterHeader">درمانگران</string>
+
+    <string name="PsychologistsAdapterEmpty">هنوز درمانگری ثبت نشده است.</string>
 
     /*
     ---------- Practices Adapter ----------
@@ -1221,8 +1227,9 @@
     <string name="PracticesAdapterSerial">سریال</string>
     <string name="PracticesAdapterName">عنوان</string>
     <string name="PracticesAdapterDescription">محتوا</string>
-    <string name="PracticesAdapterAttachment">پیوست</string>
-    <string name="PracticesAdapterWork">تکلیف</string>
+
+    <string name="PracticesAdapterAttachment">دریافت پیوست</string>
+    <string name="PracticesAdapterHomeWork">ارسال تکلیف</string>
 
     <string name="PracticesAdapterEmpty">هنوز کاربرگی ثبت نشده است.</string>
 
@@ -1251,7 +1258,8 @@
     <string name="Samples2AdapterHeader">نمونه‌ها</string>
 
     <string name="Samples2AdapterSerial">سریال</string>
-    <string name="Samples2AdapterName">عنوان</string>
+    <string name="Samples2AdapterName">مقیاس</string>
+    <string name="Samples2AdapterEdition">ویرایش - نسخه</string>
     <string name="Samples2AdapterSession">جلسه</string>
     <string name="Samples2AdapterReference">مراجع</string>
     <string name="Samples2AdapterStatus">وضعیت</string>
@@ -1266,6 +1274,7 @@
 
     <string name="Samples3AdapterSerial">سریال</string>
     <string name="Samples3AdapterName">مقیاس</string>
+    <string name="Samples3AdapterEdition">ویرایش - نسخه</string>
     <string name="Samples3AdapterRoom">اتاق درمان</string>
     <string name="Samples3AdapterCase">پرونده</string>
     <string name="Samples3AdapterStatus">وضعیت</string>
@@ -1305,6 +1314,8 @@
     <string name="SchedulesAdapterAxis">محور‌های جلسه</string>
     <string name="SchedulesAdapterBulk">جلسه گروهی</string>
 
+    <string name="SchedulesAdapterEmpty">هنوز برنامه‌ای ثبت نشده است.</string>
+
     /*
     ---------- Sessions2 Adapter ----------
     */
@@ -1325,12 +1336,8 @@
     <string name="Users2AdapterHeader">اعضاء</string>
 
     <string name="Users2AdapterName">مراجع</string>
-    <string name="Users2AdapterMobile">موبایل</string>
-    <string name="Users2AdapterSituation">مسئله</string>
-    <string name="Users2AdapterDescription">	توضیحات</string>
     <string name="Users2AdapterField">فیلد</string>
-    <string name="Users2AdapterType">نوع</string>
-    <string name="Users2AdapterCase">پرونده</string>
+    <string name="Users2AdapterPlatform">بستر</string>
     <string name="Users2AdapterStatus">وضعیت</string>
 
     <string name="Users2AdapterEmpty">هنوز عضوی ثبت نشده است.</string>
