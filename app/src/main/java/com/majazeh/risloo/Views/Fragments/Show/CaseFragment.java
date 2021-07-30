@@ -49,8 +49,10 @@ public class CaseFragment extends Fragment {
     // Models
     private CaseModel caseModel;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private boolean userSelect = false;
 
     @Nullable

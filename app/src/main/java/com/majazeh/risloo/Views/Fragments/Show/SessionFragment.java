@@ -50,8 +50,10 @@ public class SessionFragment extends Fragment {
     // Models
     public SessionModel sessionModel;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private boolean userSelect = false;
 
     @Nullable

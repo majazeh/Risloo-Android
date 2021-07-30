@@ -44,8 +44,10 @@ public class ReferenceFragment extends Fragment {
     // Models
     private UserModel userModel;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String type = "", centerId = "";
 
     @Nullable

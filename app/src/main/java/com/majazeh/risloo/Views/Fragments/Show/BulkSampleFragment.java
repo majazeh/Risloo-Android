@@ -1,11 +1,11 @@
 package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,6 +32,7 @@ import com.squareup.picasso.Picasso;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BulkSampleFragment extends Fragment {
@@ -53,14 +54,15 @@ public class BulkSampleFragment extends Fragment {
     // Objects
     private HashMap data, header;
 
+    // Vars
+    private boolean userSelect = false;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
         binding = FragmentBulkSampleBinding.inflate(inflater, viewGroup, false);
 
         initializer();
-
-        detector();
 
         listener();
 
@@ -82,11 +84,6 @@ public class BulkSampleFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        InitManager.imgResTint(requireActivity(), binding.editTextView.getRoot(), R.drawable.ic_edit_light, R.color.Gray500);
-        InitManager.imgResTint(requireActivity(), binding.linkTextView.buttonImageView, R.drawable.ic_copy_light, R.color.Gray500);
-
-        InitManager.txtTextColor(binding.linkTextView.buttonTextView, getResources().getString(R.string.BulkSampleFragmentLink), getResources().getColor(R.color.Gray500));
-
         binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
@@ -94,14 +91,6 @@ public class BulkSampleFragment extends Fragment {
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.referencesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.scalesSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
-    }
-
-    private void detector() {
-        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_gray500_ripple_gray300);
-        } else {
-            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_gray500);
-        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
@@ -122,60 +111,84 @@ public class BulkSampleFragment extends Fragment {
             }
         }).widget(binding.avatarsIncludeLayout.avatarSubCircleImageView);
 
-        ClickManager.onDelayedClickListener(() -> {
-            // TODO : Place Code If Needed
-        }).widget(binding.editTextView.getRoot());
+        binding.menuSpinner.selectSpinner.setOnTouchListener((v, event) -> {
+            binding.menuSpinner.selectSpinner.setSelection(binding.menuSpinner.selectSpinner.getAdapter().getCount());
+            userSelect = true;
+            return false;
+        });
 
-        ClickManager.onDelayedClickListener(() -> {
-            IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
-            ToastManager.showToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastLinkSaved));
-        }).widget(binding.linkTextView.buttonImageView);
+        binding.menuSpinner.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
 
-        ClickManager.onDelayedClickListener(() -> {
-            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+                    switch (pos) {
+                        case "لینک ثبت نام": {
+                            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-            HashMap authData = new HashMap<>();
-            authData.put("authorized_key", bulkSampleModel.getLink());
+                            HashMap authData = new HashMap<>();
+                            authData.put("authorized_key", bulkSampleModel.getLink());
 
-            Sample.auth(authData, header, new Response() {
-                @Override
-                public void onOK(Object object) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
-                            try {
-                                JSONObject jsonObject = (JSONObject) object;
+                            Sample.auth(authData, header, new Response() {
+                                @Override
+                                public void onOK(Object object) {
+                                    if (isAdded()) {
+                                        requireActivity().runOnUiThread(() -> {
+                                            try {
+                                                JSONObject jsonObject = (JSONObject) object;
 
-                                if (!jsonObject.getString("theory").equals("sample"))
-                                    bulkSampleModel = new BulkSampleModel(jsonObject.getJSONObject("bulk_sample"));
+                                                if (!jsonObject.getString("theory").equals("sample"))
+                                                    bulkSampleModel = new BulkSampleModel(jsonObject.getJSONObject("bulk_sample"));
 
-                                String key = jsonObject.getString("key");
+                                                String key = jsonObject.getString("key");
 
-                                if (key.startsWith("$")) {
-                                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                                    IntentManager.test(requireActivity(), key);
-                                } else {
-                                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                                if (key.startsWith("$")) {
+                                                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                                    IntentManager.test(requireActivity(), key);
+                                                } else {
+                                                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
 
-                                    chainBottomSheet.show(requireActivity().getSupportFragmentManager(), "chainBottomSheet");
-                                    chainBottomSheet.setData(key, ((MainActivity) requireActivity()).singleton.getId(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+                                                    chainBottomSheet.show(requireActivity().getSupportFragmentManager(), "chainBottomSheet");
+                                                    chainBottomSheet.setData(key, ((MainActivity) requireActivity()).singleton.getId(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+                                                }
+                                            } catch (JSONException e) {
+                                                e.printStackTrace();
+                                            }
+                                        });
+                                    }
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        });
-                    }
-                }
 
-                @Override
-                public void onFailure(String response) {
-                    if (isAdded()) {
-                        requireActivity().runOnUiThread(() -> {
+                                @Override
+                                public void onFailure(String response) {
+                                    if (isAdded()) {
+                                        requireActivity().runOnUiThread(() -> {
+                                            // TODO : Place Code If Needed
+                                        });
+                                    }
+                                }
+                            });
+                        } break;
+                        case "کپی کردن لینک": {
+                            IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
+                            ToastManager.showToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastLinkSaved));
+                        } break;
+                        case "ویرایش": {
                             // TODO : Place Code If Needed
-                        });
+                        } break;
                     }
+
+                    parent.setSelection(parent.getAdapter().getCount());
+
+                    userSelect = false;
                 }
-            });
-        }).widget(binding.linkTextView.buttonTextView);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
     }
 
     private void setArgs() {
@@ -229,9 +242,25 @@ public class BulkSampleFragment extends Fragment {
 
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             }
+
+            setDropdown(model);
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    private void setDropdown(BulkSampleModel model) {
+        ArrayList<String> items = new ArrayList<>();
+
+        if (!model.getLink().equals("")) {
+            items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentLink));
+            items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentCopy));
+        }
+
+        items.add(requireActivity().getResources().getString(R.string.BulkSampleFragmentEdit));
+        items.add("");
+
+        InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
     }
 
     private void getData() {
