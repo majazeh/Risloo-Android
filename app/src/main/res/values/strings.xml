@@ -1338,7 +1338,7 @@
     <string name="Users2AdapterName">مراجع</string>
     <string name="Users2AdapterField">فیلد</string>
     <string name="Users2AdapterPlatform">بستر</string>
-    <string name="Users2AdapterStatus">وضعیت</string>
+    <string name="Users2AdapterPosition">وضعیت</string>
 
     <string name="Users2AdapterEmpty">هنوز عضوی ثبت نشده است.</string>
 

@@ -25,7 +25,7 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> psychologists;
+    private ArrayList<TypeModel> items;
 
     public PsychologistsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -39,34 +39,34 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
 
     @Override
     public void onBindViewHolder(@NonNull PsychologistsHolder holder, int i) {
-        UserModel psychologist = (UserModel) psychologists.get(i);
+        UserModel model = (UserModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, psychologist);
+        listener(holder, model);
 
-        setData(holder, psychologist);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.psychologists != null)
-            return psychologists.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setPsychologists(ArrayList<TypeModel> psychologists) {
-        if (this.psychologists == null)
-            this.psychologists = psychologists;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.psychologists.addAll(psychologists);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearPsychologists() {
-        if (this.psychologists != null) {
-            this.psychologists.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -86,7 +86,7 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
     private void setData(PsychologistsHolder holder, UserModel model) {
         holder.binding.nameTextView.setText(model.getName());
 
-        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null && !model.getAvatar().getMedium().getUrl().equals(""))
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null)
             setAvatar(holder, model.getAvatar().getMedium().getUrl());
         else
             setAvatar(holder, "");

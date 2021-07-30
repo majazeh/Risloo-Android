@@ -66,12 +66,12 @@
         android:fontFamily="@font/dana_regular"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/status_textView"
+        app:layout_constraintEnd_toStartOf="@id/position_textView"
         app:layout_constraintStart_toEndOf="@id/field_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/status_textView"
+        android:id="@+id/position_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -80,7 +80,7 @@
         android:layout_marginTop="@dimen/_8sdp"
         android:paddingStart="@dimen/_6sdp"
         android:gravity="center|right"
-        android:text="@string/Users2AdapterStatus"
+        android:text="@string/Users2AdapterPosition"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"

@@ -69,7 +69,7 @@
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
         app:layout_constraintHorizontal_weight="1"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/status_spinner"
+        app:layout_constraintEnd_toStartOf="@id/position_spinner"
         app:layout_constraintStart_toEndOf="@id/field_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -87,7 +87,7 @@
         app:tint="@color/Gray600" />
 
     <Spinner
-        android:id="@+id/status_spinner"
+        android:id="@+id/position_spinner"
         android:layout_width="0dp"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginBottom="@dimen/_8sdp"
@@ -104,16 +104,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
-        android:id="@+id/status_angle_imageView"
+        android:id="@+id/position_angle_imageView"
         android:layout_width="@dimen/_14sdp"
         android:layout_height="@dimen/_14sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_angle_down_light"
-        app:layout_constraintBottom_toBottomOf="@id/status_spinner"
-        app:layout_constraintEnd_toEndOf="@id/status_spinner"
-        app:layout_constraintTop_toTopOf="@id/status_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/position_spinner"
+        app:layout_constraintEnd_toEndOf="@id/position_spinner"
+        app:layout_constraintTop_toTopOf="@id/position_spinner"
         app:tint="@color/Gray600" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -24,7 +24,7 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> platforms;
+    private ArrayList<TypeModel> items;
 
     public PlatformsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -38,34 +38,34 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
 
     @Override
     public void onBindViewHolder(@NonNull PlatformsHolder holder, int i) {
-        SessionPlatformModel platform = (SessionPlatformModel) platforms.get(i);
+        SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, platform);
+        listener(holder, model);
 
-        setData(holder, platform);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.platforms != null)
-            return platforms.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setPlatforms(ArrayList<TypeModel> platforms) {
-        if (this.platforms == null)
-            this.platforms = platforms;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.platforms.addAll(platforms);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearPlatforms() {
-        if (this.platforms != null) {
-            this.platforms.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

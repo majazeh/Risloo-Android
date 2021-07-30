@@ -11,8 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.databinding.SingleItemClientReportBinding;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.ReportModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
@@ -22,7 +26,7 @@ public class ClientReportsAdapter extends RecyclerView.Adapter<ClientReportsAdap
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> reports;
+    private ArrayList<TypeModel> items;
 
     public ClientReportsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -36,34 +40,34 @@ public class ClientReportsAdapter extends RecyclerView.Adapter<ClientReportsAdap
 
     @Override
     public void onBindViewHolder(@NonNull ClientReportsHolder holder, int i) {
-//        ReportModel report = (ReportModel) reports.get(i);
-//
-//        detector(holder);
-//
-//        listener(holder, report);
-//
-//        setData(holder, report);
+        ReportModel model = (ReportModel) items.get(i);
+
+        detector(holder);
+
+        listener(holder, model);
+
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.reports != null)
-            return reports.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setReports(ArrayList<TypeModel> reports) {
-        if (this.reports == null)
-            this.reports = reports;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.reports.addAll(reports);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearReports() {
-        if (this.reports != null) {
-            this.reports.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -74,22 +78,53 @@ public class ClientReportsAdapter extends RecyclerView.Adapter<ClientReportsAdap
         }
     }
 
-    private void listener(ClientReportsHolder holder) {
+    private void listener(ClientReportsHolder holder, ReportModel model) {
         ClickManager.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(ClientReportsHolder holder) {
+    private void setData(ClientReportsHolder holder, ReportModel model) {
         if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
         else
             holder.binding.topView.setVisibility(View.VISIBLE);
 
-        holder.binding.nameTextView.setText("مشکلی موجود نمی باشد.");
-        holder.binding.timeTextView.setText("1400/01/01\n20/00");
-        holder.binding.referenceTextView.setText("محمد حسن صالحی");
-        holder.binding.readersTextView.setText("محمد علی نخلی");
+        holder.binding.nameTextView.setText(model.getTitle());
+        holder.binding.timeTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(model.getReported_at()), "-"));
+
+        setClients(holder, model.getClients());
+        setViewers(holder, model.getViewers());
+    }
+
+    private void setClients(ClientReportsHolder holder, List clients) {
+        if (clients != null && clients.data().size() != 0) {
+            holder.binding.referenceTextView.setText("");
+            for (int i = 0; i < clients.data().size(); i++) {
+                UserModel user = (UserModel) clients.data().get(i);
+                if (user != null) {
+                    holder.binding.referenceTextView.append(user.getName());
+                    if (i != clients.data().size() - 1) {
+                        holder.binding.referenceTextView.append("\n");
+                    }
+                }
+            }
+        }
+    }
+
+    private void setViewers(ClientReportsHolder holder, List viewers) {
+        if (viewers != null && viewers.data().size() != 0) {
+            holder.binding.readersTextView.setText("");
+            for (int i = 0; i < viewers.data().size(); i++) {
+                UserModel user = (UserModel) viewers.data().get(i);
+                if (user != null) {
+                    holder.binding.readersTextView.append(user.getName());
+                    if (i != viewers.data().size() - 1) {
+                        holder.binding.readersTextView.append("\n");
+                    }
+                }
+            }
+        }
     }
 
     public class ClientReportsHolder extends RecyclerView.ViewHolder {

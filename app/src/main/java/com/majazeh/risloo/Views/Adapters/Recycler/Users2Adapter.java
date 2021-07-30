@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +18,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Show.SessionFragment;
 import com.majazeh.risloo.databinding.SingleItemUser2Binding;
@@ -32,15 +32,15 @@ import java.util.HashMap;
 
 public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Holder> {
 
-    // Objects
-    private Activity activity;
-
     // Fragments
     private Fragment current;
 
-    // Vars
-    private ArrayList<TypeModel> users;
+    // Objects
+    private Activity activity;
     private HashMap data, header;
+
+    // Vars
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public Users2Adapter(@NonNull Activity activity) {
@@ -55,36 +55,36 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
 
     @Override
     public void onBindViewHolder(@NonNull Users2Holder holder, int i) {
-        UserModel user = (UserModel) users.get(i);
+        UserModel model = (UserModel) items.get(i);
 
         initializer(holder);
 
         detector(holder);
 
-        listener(holder, user);
+        listener(holder, model);
 
-        setData(holder, user);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.users != null)
-            return users.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setUsers(ArrayList<TypeModel> users) {
-        if (this.users == null)
-            this.users = users;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.users.addAll(users);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearUsers() {
-        if (this.users != null) {
-            this.users.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -96,7 +96,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
 
-        InitManager.normalAdapterSpinner(activity, holder.binding.statusSpinner, R.array.UserPosition);
+        InitManager.normalAdapterSpinner(activity, holder.binding.positionSpinner, R.array.UserPosition);
     }
 
     private void detector(Users2Holder holder) {
@@ -112,18 +112,18 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
-        holder.binding.statusSpinner.setOnTouchListener((v, event) -> {
+        holder.binding.positionSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
         });
 
-        holder.binding.statusSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        holder.binding.positionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String status = parent.getItemAtPosition(position).toString();
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getUserPosition(activity, "en", status));
+                    doWork(holder, model, SelectionManager.getUserPosition(activity, "en", pos));
 
                     userSelect = false;
                 }
@@ -143,58 +143,53 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
             holder.binding.topView.setVisibility(View.VISIBLE);
 
         holder.binding.nameTextView.setText(model.getName());
-        holder.binding.mobileTextView.setText(model.getMobile());
-        holder.binding.situationTextView.setText("");
-        holder.binding.descriptionTextView.setText("");
         holder.binding.fieldTextView.setText("-");
-        holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
-        holder.binding.caseTextView.setText("-");
 
-        setStatus(holder, model);
+        setPosition(holder, model);
     }
 
-    private void setStatus(Users2Holder holder, UserModel model) {
-        String position = SelectionManager.getUserPosition(activity, "fa", String.valueOf(model.getPosition()));
-        for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
-            if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
-                holder.binding.statusSpinner.setSelection(i);
+    private void setPosition(Users2Holder holder, UserModel model) {
+        String position = SelectionManager.getUserPosition(activity, "fa", model.getPosition());
+        for (int i=0; i<holder.binding.positionSpinner.getCount(); i++) {
+            if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
+                holder.binding.positionSpinner.setSelection(i);
             }
         }
 
         boolean enable = true;
 
         if (enable) {
-            holder.binding.statusSpinner.setEnabled(true);
+            holder.binding.positionSpinner.setEnabled(true);
 
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             else
-                holder.binding.statusSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+                holder.binding.positionSpinner.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
 
-            holder.binding.statusAngleImageView.setVisibility(View.VISIBLE);
+            holder.binding.positionAngleImageView.setVisibility(View.VISIBLE);
         } else {
-            holder.binding.statusSpinner.setEnabled(false);
-            holder.binding.statusSpinner.setBackgroundResource(android.R.color.transparent);
+            holder.binding.positionSpinner.setEnabled(false);
+            holder.binding.positionSpinner.setBackgroundResource(android.R.color.transparent);
 
-            holder.binding.statusAngleImageView.setVisibility(View.GONE);
+            holder.binding.positionAngleImageView.setVisibility(View.GONE);
         }
     }
 
-    private void doWork(Users2Holder holder, UserModel model, String status) {
+    private void doWork(Users2Holder holder, UserModel model, String position) {
         ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
 
         if (current instanceof SessionFragment)
             data.put("id", ((SessionFragment) current).sessionModel.getId());
 
         data.put("userId", model.getId());
-        data.put("position", status);
+        data.put("position", position);
 
         Session.editUser(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     ((MainActivity) activity).loadingDialog.dismiss();
-                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
 

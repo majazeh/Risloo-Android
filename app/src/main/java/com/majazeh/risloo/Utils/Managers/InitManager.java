@@ -493,6 +493,12 @@ public class InitManager {
                     case "دانلود فایل":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_arrow_to_bottom_light, null));
                         break;
+                    case "دریافت پیوست":
+                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_cloud_download_light, null));
+                        break;
+                    case "ارسال تکلیف":
+                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_cloud_upload_light, null));
+                        break;
                     default:
                         if (dropdownTextView.getText().toString().contains("989")) {
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_mobile_light, null));

@@ -26,7 +26,7 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> cases;
+    private ArrayList<TypeModel> items;
 
     public Cases3Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -40,34 +40,34 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
 
     @Override
     public void onBindViewHolder(@NonNull Cases3Holder holder, int i) {
-        CaseModel casse = (CaseModel) cases.get(i);
+        CaseModel model = (CaseModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, casse);
+        listener(holder, model);
 
-        setData(holder, casse);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.cases != null)
-            return cases.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setCases(ArrayList<TypeModel> cases) {
-        if (this.cases == null)
-            this.cases = cases;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.cases.addAll(cases);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearCases() {
-        if (this.cases != null) {
-            this.cases.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

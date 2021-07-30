@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.NavDirections;
@@ -19,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemSession2Binding;
 import com.mre.ligheh.API.Response;
@@ -33,10 +33,10 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
     // Objects
     private Activity activity;
+    private HashMap data, header;
 
     // Vars
-    private ArrayList<TypeModel> sessions;
-    private HashMap data, header;
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public Sessions2Adapter(@NonNull Activity activity) {
@@ -51,36 +51,36 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
 
     @Override
     public void onBindViewHolder(@NonNull Sessions2Holder holder, int i) {
-        SessionModel session = (SessionModel) sessions.get(i);
+        SessionModel model = (SessionModel) items.get(i);
 
         initializer(holder);
 
         detector(holder);
 
-        listener(holder, session);
+        listener(holder, model);
 
-        setData(holder, session);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.sessions != null)
-            return sessions.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setSessions(ArrayList<TypeModel> sessions) {
-        if (this.sessions == null)
-            this.sessions = sessions;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.sessions.addAll(sessions);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearSessions() {
-        if (this.sessions != null) {
-            this.sessions.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -117,9 +117,9 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String status = parent.getItemAtPosition(position).toString();
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getSessionStatus(activity, "en", status));
+                    doWork(holder, model, SelectionManager.getSessionStatus(activity, "en", pos));
 
                     userSelect = false;
                 }
@@ -151,32 +151,10 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
     }
 
     private void setStatus(Sessions2Holder holder, SessionModel model) {
+        String status = SelectionManager.getSessionStatus(activity, "fa", model.getStatus());
         for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
-            switch (model.getStatus()) {
-                case "draft":
-                    holder.binding.statusSpinner.setSelection(0);
-                    break;
-                case "scheduled":
-                    holder.binding.statusSpinner.setSelection(1);
-                    break;
-                case "client_awaiting":
-                    holder.binding.statusSpinner.setSelection(2);
-                    break;
-                case "session_awaiting":
-                    holder.binding.statusSpinner.setSelection(3);
-                    break;
-                case "in_session":
-                    holder.binding.statusSpinner.setSelection(4);
-                    break;
-                case "finished":
-                    holder.binding.statusSpinner.setSelection(5);
-                    break;
-                case "canceled_by_client":
-                    holder.binding.statusSpinner.setSelection(6);
-                    break;
-                case "canceled_by_center":
-                    holder.binding.statusSpinner.setSelection(7);
-                    break;
+            if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {
+                holder.binding.statusSpinner.setSelection(i);
             }
         }
 
@@ -214,7 +192,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
                     setStatus(holder, model);
 
                     ((MainActivity) activity).loadingDialog.dismiss();
-                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
 

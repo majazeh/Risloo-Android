@@ -28,7 +28,7 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> samples;
+    private ArrayList<TypeModel> items;
 
     public Samples3Adapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -42,34 +42,34 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
 
     @Override
     public void onBindViewHolder(@NonNull Samples3Holder holder, int i) {
-        SampleModel sample = (SampleModel) samples.get(i);
+        SampleModel model = (SampleModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, sample);
+        listener(holder, model);
 
-        setData(holder, sample);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.samples != null)
-            return samples.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setSamples(ArrayList<TypeModel> samples) {
-        if (this.samples == null)
-            this.samples = samples;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.samples.addAll(samples);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearSamples() {
-        if (this.samples != null) {
-            this.samples.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -86,7 +86,9 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onClickListener(() -> IntentManager.test(activity, model.getSampleId())).widget(holder.binding.statusTextView);
+        ClickManager.onClickListener(() -> {
+            IntentManager.test(activity, model.getSampleId());
+        }).widget(holder.binding.statusTextView);
     }
 
     private void setData(Samples3Holder holder, SampleModel model) {
@@ -130,7 +132,7 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
