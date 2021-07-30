@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
@@ -31,7 +31,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:paddingBottom="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -43,7 +43,7 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_clipboard_light"
+                    android:src="@drawable/ic_copy_light"
                     app:layout_constraintBottom_toBottomOf="@id/serial_textView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/serial_textView"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:gravity="start"
+                    android:gravity="center"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Blue700"
@@ -67,8 +67,8 @@
 
                 <ImageView
                     android:id="@+id/date_imageView"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
@@ -84,7 +84,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray500"
@@ -97,8 +97,8 @@
 
                 <ImageView
                     android:id="@+id/duration_imageView"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_clock_light"
@@ -112,7 +112,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray500"
@@ -127,37 +127,27 @@
                     android:id="@+id/status_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="start"
+                    android:layout_marginEnd="@dimen/_6sdp"
+                    android:gravity="right"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                    app:layout_constraintStart_toStartOf="@id/duration_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/duration_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/menu_spinner"
+                    app:layout_constraintEnd_toStartOf="@id/menu_spinner"
+                    app:layout_constraintStart_toStartOf="@id/date_imageView"
+                    app:layout_constraintTop_toTopOf="@id/menu_spinner"
                     tools:text="وضعیت" />
 
                 <include
-                    android:id="@+id/reports_textView"
-                    layout="@layout/component_main_button_rect_mid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="@id/status_textView"
-                    app:layout_constraintTop_toBottomOf="@id/status_textView" />
-
-                <include
-                    android:id="@+id/edit_imageView"
-                    layout="@layout/component_main_button_oval_mid"
+                    android:id="@+id/menu_spinner"
+                    layout="@layout/component_main_button_oval_spinner"
                     android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/status_textView" />
+                    app:layout_constraintTop_toBottomOf="@id/duration_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -167,18 +157,18 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toBottomOf="@id/info_constraintLayout">
 
                 <TextView
-                    android:id="@+id/session_type_hint_textView"
+                    android:id="@+id/payment_hint_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/SessionFragmentSessionType"
-                    android:textSize="@dimen/_8ssp"
+                    android:text="@string/SessionFragmentPayment"
+                    android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
                     android:textAlignment="gravity"
@@ -186,88 +176,6 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/session_type_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray600"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/session_type_hint_textView"
-                    tools:text="حضوری" />
-
-                <View
-                    android:id="@+id/session_type_view"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/Gray200"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/session_type_textView" />
-
-                <TextView
-                    android:id="@+id/reference_count_hint_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center"
-                    android:text="@string/SessionFragmentReferenceCount"
-                    android:textSize="@dimen/_8ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray400"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/session_type_view" />
-
-                <TextView
-                    android:id="@+id/reference_count_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray600"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_count_hint_textView"
-                    tools:text="10" />
-
-                <View
-                    android:id="@+id/reference_count_view"
-                    android:layout_width="0dp"
-                    android:layout_height="@dimen/_1sdp"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:background="@color/Gray200"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_count_textView" />
-
-                <TextView
-                    android:id="@+id/payment_type_hint_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    android:gravity="center"
-                    android:text="@string/SessionFragmentPaymentType"
-                    android:textSize="@dimen/_8ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray400"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_count_view" />
 
                 <TextView
                     android:id="@+id/payment_type_textView"
@@ -276,107 +184,64 @@
                     android:gravity="center"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray600"
+                    android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/payment_type_hint_textView"
+                    app:layout_constraintTop_toBottomOf="@id/payment_hint_textView"
                     tools:text="آنلاین" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/info3_constraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:padding="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/info2_constraintLayout">
-
-                <TextView
-                    android:id="@+id/selection_type_hint_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:text="@string/SessionFragmentSelectionType"
-                    android:textSize="@dimen/_8ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray400"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/selection_type_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray600"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_medium"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/selection_type_hint_textView"
-                    tools:text="-" />
-
                 <View
-                    android:id="@+id/selection_type_view"
+                    android:id="@+id/seperate1_view"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@color/Gray200"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/selection_type_textView" />
+                    app:layout_constraintTop_toBottomOf="@id/payment_type_textView" />
 
                 <TextView
-                    android:id="@+id/reference_type_hint_textView"
+                    android:id="@+id/client_hint_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="@string/SessionFragmentReferenceType"
-                    android:textSize="@dimen/_8ssp"
+                    android:text="@string/SessionFragmentClient"
+                    android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/selection_type_view" />
+                    app:layout_constraintTop_toBottomOf="@id/seperate1_view" />
 
                 <TextView
-                    android:id="@+id/reference_type_textView"
+                    android:id="@+id/client_type_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray600"
+                    android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_type_hint_textView"
-                    tools:text="-" />
+                    app:layout_constraintTop_toBottomOf="@id/client_hint_textView"
+                    tools:text="پرونده" />
 
                 <View
-                    android:id="@+id/reference_type_view"
+                    android:id="@+id/seperate2_view"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:background="@color/Gray200"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_type_textView" />
+                    app:layout_constraintTop_toBottomOf="@id/client_type_textView" />
 
                 <TextView
                     android:id="@+id/start_time_hint_textView"
@@ -385,14 +250,14 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
                     android:text="@string/SessionFragmentStartTime"
-                    android:textSize="@dimen/_8ssp"
+                    android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_type_view" />
+                    app:layout_constraintTop_toBottomOf="@id/seperate2_view" />
 
                 <TextView
                     android:id="@+id/start_time_textView"
@@ -401,7 +266,7 @@
                     android:gravity="center"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray600"
+                    android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -410,7 +275,7 @@
                     tools:text="-" />
 
                 <View
-                    android:id="@+id/start_time_view"
+                    android:id="@+id/seperate3_view"
                     android:layout_width="0dp"
                     android:layout_height="@dimen/_1sdp"
                     android:layout_marginTop="@dimen/_10sdp"
@@ -426,14 +291,14 @@
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
                     android:text="@string/SessionFragmentEndTime"
-                    android:textSize="@dimen/_8ssp"
+                    android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/start_time_view" />
+                    app:layout_constraintTop_toBottomOf="@id/seperate3_view" />
 
                 <TextView
                     android:id="@+id/end_time_textView"
@@ -442,7 +307,7 @@
                     android:gravity="center"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray600"
+                    android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -453,13 +318,13 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/platforms_header_includeLayout"
+                android:id="@+id/platforms_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/info3_constraintLayout" />
+                app:layout_constraintTop_toBottomOf="@id/info2_constraintLayout" />
 
             <include
                 android:id="@+id/platforms_shimmerLayout"
@@ -469,7 +334,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/platforms_header_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/platforms_headerLayout"
                 tools:visibility="gone" />
 
             <include
@@ -480,7 +345,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/platforms_header_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/platforms_headerLayout"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -491,7 +356,7 @@
                 app:constraint_referenced_ids="platforms_shimmerLayout, platforms_singleLayout" />
 
             <include
-                android:id="@+id/psychologists_header_includeLayout"
+                android:id="@+id/psychologists_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -507,7 +372,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/psychologists_header_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/psychologists_headerLayout"
                 tools:visibility="gone" />
 
             <include
@@ -518,7 +383,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/psychologists_header_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/psychologists_headerLayout"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -529,7 +394,7 @@
                 app:constraint_referenced_ids="psychologists_shimmerLayout, psychologists_singleLayout" />
 
             <include
-                android:id="@+id/users_header_includeLayout"
+                android:id="@+id/users_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -538,13 +403,13 @@
                 app:layout_constraintTop_toBottomOf="@id/psychologists_barrier" />
 
             <include
-                android:id="@+id/users_add_imageView"
+                android:id="@+id/users_addView"
                 layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                app:layout_constraintBottom_toBottomOf="@id/users_header_includeLayout"
+                app:layout_constraintBottom_toBottomOf="@id/users_headerLayout"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/users_header_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/users_headerLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/users_containerLayout"
@@ -552,10 +417,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/users_add_imageView">
+                app:layout_constraintTop_toBottomOf="@id/users_addView">
 
                 <include
                     android:id="@+id/users_shimmerLayout"
@@ -569,8 +434,8 @@
                     tools:visibility="gone" />
 
                 <include
-                    android:id="@+id/users_headerLayout"
-                    layout="@layout/header_item_user2"
+                    android:id="@+id/users_singleLayout"
+                    layout="@layout/component_single_user2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -579,21 +444,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
-                <include
-                    android:id="@+id/users_singleLayout"
-                    layout="@layout/component_single_user2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/users_headerLayout"
-                    tools:visibility="visible" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/practices_header_includeLayout"
+                android:id="@+id/practices_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -602,13 +456,13 @@
                 app:layout_constraintTop_toBottomOf="@id/users_containerLayout" />
 
             <include
-                android:id="@+id/practices_add_imageView"
+                android:id="@+id/practices_addView"
                 layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                app:layout_constraintBottom_toBottomOf="@id/practices_header_includeLayout"
+                app:layout_constraintBottom_toBottomOf="@id/practices_headerLayout"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/practices_header_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/practices_headerLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/practices_containerLayout"
@@ -616,10 +470,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/practices_add_imageView">
+                app:layout_constraintTop_toBottomOf="@id/practices_addView">
 
                 <include
                     android:id="@+id/practices_shimmerLayout"
@@ -633,8 +487,8 @@
                     tools:visibility="gone" />
 
                 <include
-                    android:id="@+id/practices_headerLayout"
-                    layout="@layout/header_item_practice"
+                    android:id="@+id/practices_singleLayout"
+                    layout="@layout/component_single_practice"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -643,21 +497,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
-                <include
-                    android:id="@+id/practices_singleLayout"
-                    layout="@layout/component_single_practice"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/practices_headerLayout"
-                    tools:visibility="visible" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/samples_header_includeLayout"
+                android:id="@+id/samples_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -666,13 +509,13 @@
                 app:layout_constraintTop_toBottomOf="@id/practices_containerLayout" />
 
             <include
-                android:id="@+id/samples_add_imageView"
+                android:id="@+id/samples_addView"
                 layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                app:layout_constraintBottom_toBottomOf="@id/samples_header_includeLayout"
+                app:layout_constraintBottom_toBottomOf="@id/samples_headerLayout"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/samples_header_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/samples_headerLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/samples_containerLayout"
@@ -680,11 +523,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/samples_add_imageView">
+                app:layout_constraintTop_toBottomOf="@id/samples_addView">
 
                 <include
                     android:id="@+id/samples_shimmerLayout"
@@ -698,17 +541,6 @@
                     tools:visibility="gone" />
 
                 <include
-                    android:id="@+id/samples_headerLayout"
-                    layout="@layout/header_item_sample2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-                <include
                     android:id="@+id/samples_singleLayout"
                     layout="@layout/component_single_sample2"
                     android:layout_width="0dp"
@@ -716,7 +548,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/samples_headerLayout"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -87,7 +87,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
             Fragment current = ((MainActivity) activity).fragmont.getCurrent();
 
             if (current instanceof RoomUsersFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).type, ((RoomUsersFragment) current).centerId, null, model);
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).type, ((RoomUsersFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());

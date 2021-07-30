@@ -269,8 +269,6 @@ public class BulkSampleFragment extends Fragment {
                             binding.scalesSingleLayout.emptyView.setText(getResources().getString(R.string.Scales2AdapterEmpty));
                         }
 
-                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(scales2Adapter.getItemCount()));
-
                         // Samples Data
                         if (!bulkSampleModel.getSamples().data().isEmpty()) {
                             samples4Adapter.setItems(bulkSampleModel.getSamples().data());
@@ -285,6 +283,7 @@ public class BulkSampleFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.Samples4AdapterEmpty));
                         }
 
+                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(scales2Adapter.getItemCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samples4Adapter.getItemCount()));
 
                         // References Data
@@ -317,13 +316,11 @@ public class BulkSampleFragment extends Fragment {
                         binding.referencesShimmerLayout.getRoot().stopShimmer();
 
                         // Scales Data
-                        binding.scalesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.scalesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.scalesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.scalesShimmerLayout.getRoot().stopShimmer();
 
                         // Samples Data
-                        binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.samplesShimmerLayout.getRoot().stopShimmer();

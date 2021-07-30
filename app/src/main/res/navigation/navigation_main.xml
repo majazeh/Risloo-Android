@@ -793,10 +793,6 @@
             app:nullable="true"
             app:argType="string" />
         <argument
-            android:name="userId"
-            app:nullable="true"
-            app:argType="string" />
-        <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>

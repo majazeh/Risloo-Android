@@ -11,10 +11,6 @@
 
     <string name="AppAdded">ساخته شد.</string>
     <string name="AppChanged">تغییرات ثبت شد.</string>
-    <string name="AppLinkSaved">لینک ذخیره شد.</string>
-
-    <string name="AppImageNew">عکس جدیدی انتخاب نشده است.</string>
-    <string name="AppImageEmpty">عکس انتخاب نشده است.</string>
 
     <string name="AppInputEmpty">فیلد خالی است.</string>
 
@@ -30,8 +26,6 @@
     <string name="AppDefaultName">عضو آزمایشی</string>
     <string name="AppDefaultCenter">مرکز آزمایشی</string>
     <string name="AppDefaultWeek">00/00 تا 00/00</string>
-    <string name="AppDefaultDate">1400-01-01</string>
-    <string name="AppDefaultTime">01:00</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -902,6 +896,8 @@
     <string name="ClientReportsFragmentReference">مراجعین</string>
     <string name="ClientReportsFragmentReaders">خوانندگان</string>
 
+    <string name="ClientReportsFragmentEmpty">هنوز گزارشی ثبت نشده است.</string>
+
     /*
     ---------- Documents Fragment ----------
     */
@@ -1058,6 +1054,7 @@
     <string name="CaseFragmentProblemHeader">مسئله</string>
 
     <string name="CaseFragmentReports">گزارشات</string>
+    <string name="CaseFragmentEdit">ویرایش</string>
 
     /*
     ---------- Center Fragment ----------
@@ -1147,13 +1144,10 @@
     <string name="SessionFragmentTitle">جلسه</string>
 
     <string name="SessionFragmentReports">گزارشات</string>
+    <string name="SessionFragmentEdit">ویرایش</string>
 
-    <string name="SessionFragmentSessionType">نوع جلسه</string>
-    <string name="SessionFragmentReferenceCount">تعداد حداکثر مراجعین</string>
-    <string name="SessionFragmentPaymentType">نوع پرداخت</string>
-
-    <string name="SessionFragmentSelectionType">نوع انتخاب مراجع</string>
-    <string name="SessionFragmentReferenceType">نوع مراجعین درخواست دهنده</string>
+    <string name="SessionFragmentPayment">نوع پرداخت</string>
+    <string name="SessionFragmentClient">نوع مراجعین درخواست دهنده</string>
     <string name="SessionFragmentStartTime">زمان شروع نوبت‌گیری</string>
     <string name="SessionFragmentEndTime">زمان بستن نوبت‌گیری</string>
 

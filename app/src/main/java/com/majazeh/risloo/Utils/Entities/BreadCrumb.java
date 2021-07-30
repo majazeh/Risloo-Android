@@ -62,7 +62,7 @@ public class BreadCrumb {
     private BulkSampleModel bulkSampleModel;
 
     // Vars
-    private String centerType = "", clientReportsType = "";
+    private String centerType = "", clientReportsType = "", referenceType = "";
     private ArrayList<Integer> destinationIds;
 
     public BreadCrumb(@NonNull Activity activity) {
@@ -90,7 +90,7 @@ public class BreadCrumb {
 
                     @Override
                     public void updateDrawState(@NonNull TextPaint textPaint) {
-                        textPaint.setColor(activity.getResources().getColor(R.color.Gray400));
+                        textPaint.setColor(activity.getResources().getColor(R.color.Gray500));
                         textPaint.setUnderlineText(false);
                     }
 
@@ -260,13 +260,14 @@ public class BreadCrumb {
                 return bulkSample();
             case R.id.referenceFragment:
                 String centerId = ReferenceFragmentArgs.fromBundle(arguments).getCenterId();
-                String userId = ReferenceFragmentArgs.fromBundle(arguments).getUserId();
 
-                if (centerId != null)
-                    setModals("user", ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
-
-                if (userId != null)
-                    setModals("center", ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
+                if (centerId != null) {
+                    referenceType = "user";
+                    setModals(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
+                } else {
+                    referenceType = "center";
+                    setModals(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
+                }
 
                 return reference();
         }
@@ -412,7 +413,7 @@ public class BreadCrumb {
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.referenceFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerType, centerModel.getCenterId(), null, userModel);
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerType, centerModel.getCenterId(), userModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
 
@@ -1001,11 +1002,13 @@ public class BreadCrumb {
         else
             list = roomUsers();
 
-        if (activity instanceof MainActivity) {
+        if (referenceType.equals("user")) {
             if (userModel.getId().equals(((MainActivity) activity).singleton.getId()))
                 list.add(activity.getResources().getString(R.string.MeFragmentTitle));
             else
                 list.add(userModel.getName());
+        } else {
+            list.add(activity.getResources().getString(R.string.MeFragmentTitle));
         }
 
         destinationIds = referenceIds();

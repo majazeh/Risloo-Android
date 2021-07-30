@@ -98,7 +98,12 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
             holder.binding.topView.setVisibility(View.VISIBLE);
 
         holder.binding.serialTextView.setText(model.getSampleId());
-        holder.binding.nameTextView.setText(model.getSampleTitle());
+        holder.binding.nameTextView.setText(model.getSampleScaleTitle());
+
+        if (!model.getSampleEdition().equals(""))
+            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        else
+            holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
 
         holder.binding.sessionTextView.setText(model.getSessionId());
 

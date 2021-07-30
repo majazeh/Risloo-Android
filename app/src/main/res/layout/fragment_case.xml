@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
@@ -31,7 +31,7 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:paddingBottom="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
@@ -43,7 +43,7 @@
                     android:layout_marginEnd="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/ic_clipboard_light"
+                    android:src="@drawable/ic_copy_light"
                     app:layout_constraintBottom_toBottomOf="@id/serial_textView"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="@id/serial_textView"
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:gravity="start"
+                    android:gravity="center"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Blue700"
@@ -67,8 +67,8 @@
 
                 <ImageView
                     android:id="@+id/problem_imageView"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
@@ -80,17 +80,18 @@
 
                 <TextView
                     android:id="@+id/problem_textView"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_4sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:text="@string/CaseFragmentProblemHeader"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray700"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_demi_bold"
+                    app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                     app:layout_constraintStart_toEndOf="@id/problem_imageView"
                     app:layout_constraintTop_toBottomOf="@id/serial_textView" />
 
@@ -99,10 +100,10 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray600"
+                    android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
                     app:layout_constraintEnd_toEndOf="@id/serial_imageView"
@@ -112,48 +113,47 @@
 
                 <ImageView
                     android:id="@+id/date_imageView"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_calendar_alt_light"
-                    app:layout_constraintTop_toTopOf="@id/date_textView"
                     app:layout_constraintBottom_toBottomOf="@id/date_textView"
                     app:layout_constraintStart_toStartOf="@id/problem_imageView"
+                    app:layout_constraintTop_toTopOf="@id/date_textView"
                     app:tint="@color/Gray500" />
 
                 <TextView
                     android:id="@+id/date_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginStart="@dimen/_6sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintBottom_toBottomOf="@id/reports_textView"
-                    app:layout_constraintEnd_toStartOf="@id/reports_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/menu_spinner"
+                    app:layout_constraintEnd_toStartOf="@id/menu_spinner"
                     app:layout_constraintStart_toEndOf="@id/date_imageView"
-                    app:layout_constraintTop_toTopOf="@id/reports_textView"
+                    app:layout_constraintTop_toTopOf="@id/menu_spinner"
                     tools:text="تاریخ ساخت پرونده" />
 
                 <include
-                    android:id="@+id/reports_textView"
-                    layout="@layout/component_main_button_rect_mid"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/menu_spinner"
+                    layout="@layout/component_main_button_oval_spinner"
+                    android:layout_width="@dimen/_28sdp"
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                     app:layout_constraintTop_toBottomOf="@id/description_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/psychologists_header_includeLayout"
+                android:id="@+id/psychologists_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/psychologists_header_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/psychologists_headerLayout"
                 tools:visibility="gone" />
 
             <include
@@ -180,7 +180,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/psychologists_header_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/psychologists_headerLayout"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -191,7 +191,7 @@
                 app:constraint_referenced_ids="psychologists_shimmerLayout, psychologists_singleLayout" />
 
             <include
-                android:id="@+id/references_header_includeLayout"
+                android:id="@+id/references_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -200,13 +200,13 @@
                 app:layout_constraintTop_toBottomOf="@id/psychologists_barrier" />
 
             <include
-                android:id="@+id/references_add_imageView"
+                android:id="@+id/references_addView"
                 layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                app:layout_constraintBottom_toBottomOf="@id/references_header_includeLayout"
+                app:layout_constraintBottom_toBottomOf="@id/references_headerLayout"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/references_header_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/references_headerLayout" />
 
             <include
                 android:id="@+id/references_shimmerLayout"
@@ -216,7 +216,7 @@
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/references_add_imageView"
+                app:layout_constraintTop_toBottomOf="@id/references_addView"
                 tools:visibility="gone" />
 
             <include
@@ -227,7 +227,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/references_add_imageView"
+                app:layout_constraintTop_toBottomOf="@id/references_addView"
                 tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Barrier
@@ -238,7 +238,7 @@
                 app:constraint_referenced_ids="references_shimmerLayout, references_singleLayout" />
 
             <include
-                android:id="@+id/sessions_header_includeLayout"
+                android:id="@+id/sessions_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -247,13 +247,13 @@
                 app:layout_constraintTop_toBottomOf="@id/references_barrier" />
 
             <include
-                android:id="@+id/sessions_add_imageView"
+                android:id="@+id/sessions_addView"
                 layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                app:layout_constraintBottom_toBottomOf="@id/sessions_header_includeLayout"
+                app:layout_constraintBottom_toBottomOf="@id/sessions_headerLayout"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/sessions_header_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/sessions_headerLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/sessions_containerLayout"
@@ -261,10 +261,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/sessions_add_imageView">
+                app:layout_constraintTop_toBottomOf="@id/sessions_addView">
 
                 <include
                     android:id="@+id/sessions_shimmerLayout"
@@ -278,8 +278,8 @@
                     tools:visibility="gone" />
 
                 <include
-                    android:id="@+id/sessions_headerLayout"
-                    layout="@layout/header_item_session2"
+                    android:id="@+id/sessions_singleLayout"
+                    layout="@layout/component_single_session2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
@@ -288,21 +288,10 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
-                <include
-                    android:id="@+id/sessions_singleLayout"
-                    layout="@layout/component_single_session2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/sessions_headerLayout"
-                    tools:visibility="visible" />
-
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/samples_header_includeLayout"
+                android:id="@+id/samples_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -311,13 +300,13 @@
                 app:layout_constraintTop_toBottomOf="@id/sessions_containerLayout" />
 
             <include
-                android:id="@+id/samples_add_imageView"
+                android:id="@+id/samples_addView"
                 layout="@layout/component_main_button_oval_mid"
                 android:layout_width="@dimen/_28sdp"
                 android:layout_height="@dimen/_28sdp"
-                app:layout_constraintBottom_toBottomOf="@id/samples_header_includeLayout"
+                app:layout_constraintBottom_toBottomOf="@id/samples_headerLayout"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/samples_header_includeLayout" />
+                app:layout_constraintTop_toTopOf="@id/samples_headerLayout" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/samples_containerLayout"
@@ -325,11 +314,11 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
                 android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/samples_add_imageView">
+                app:layout_constraintTop_toBottomOf="@id/samples_addView">
 
                 <include
                     android:id="@+id/samples_shimmerLayout"
@@ -343,17 +332,6 @@
                     tools:visibility="gone" />
 
                 <include
-                    android:id="@+id/samples_headerLayout"
-                    layout="@layout/header_item_sample2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-                <include
                     android:id="@+id/samples_singleLayout"
                     layout="@layout/component_single_sample2"
                     android:layout_width="0dp"
@@ -361,7 +339,7 @@
                     android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/samples_headerLayout"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>

@@ -108,7 +108,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             Fragment current = ((MainActivity) activity).fragmont.getCurrent();
 
             if (current instanceof CenterUsersFragment) {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).type, ((CenterUsersFragment) current).centerId, null, model);
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).type, ((CenterUsersFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.getRoot());

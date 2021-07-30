@@ -499,6 +499,9 @@ public class InitManager {
                     case "ارسال تکلیف":
                         dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_cloud_upload_light, null));
                         break;
+                    case "گزارشات":
+                        dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_clipboard_light, null));
+                        break;
                     default:
                         if (dropdownTextView.getText().toString().contains("989")) {
                             dropdownImageView.setImageDrawable(ResourcesCompat.getDrawable(activity.getResources(), R.drawable.ic_mobile_light, null));

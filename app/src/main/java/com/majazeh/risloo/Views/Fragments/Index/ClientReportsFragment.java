@@ -26,7 +26,9 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ClientReportsAdapter;
 import com.majazeh.risloo.databinding.FragmentClientReportsBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Case;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
@@ -41,13 +43,15 @@ public class ClientReportsFragment extends Fragment {
     // Adapters
     private ClientReportsAdapter adapter;
 
-    // Objects
-    private Handler handler;
-
-    // Vars
-    private HashMap data, header;
+    // Models
     private CaseModel caseModel;
     private SessionModel sessionModel;
+
+    // Objects
+    private Handler handler;
+    private HashMap data, header;
+
+    // Vars
     private String type = "";
     private boolean isLoading = true;
 
@@ -98,11 +102,8 @@ public class ClientReportsFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.searchIncludeLayout.editText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.editText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.searchIncludeLayout.editText);
             return false;
         });
 
@@ -133,20 +134,18 @@ public class ClientReportsFragment extends Fragment {
         });
 
         binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (!isLoading) {
-                if (!binding.getRoot().canScrollVertically(1)) {
-                    isLoading = true;
+            if (!isLoading && !v.canScrollVertically(1)) {
+                isLoading = true;
 
-                    if (data.containsKey("page"))
-                        data.put("page", ((int) data.get("page")) + 1);
-                    else
-                        data.put("page", 1);
+                if (data.containsKey("page"))
+                    data.put("page", ((int) data.get("page")) + 1);
+                else
+                    data.put("page", 1);
 
-                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
-                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+                if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
+                    binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
 
-                    getData();
-                }
+                getData();
             }
         });
 
@@ -166,11 +165,9 @@ public class ClientReportsFragment extends Fragment {
 
         if (type.equals("case")) {
             caseModel = (CaseModel) ClientReportsFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
             setData(caseModel);
         } else {
             sessionModel = (SessionModel) ClientReportsFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
             setData(sessionModel);
         }
     }
@@ -188,59 +185,129 @@ public class ClientReportsFragment extends Fragment {
     }
 
     private void getData() {
-//        Client.reports(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                List reports = (List) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        if (Objects.equals(data.get("page"), 1))
-//                            adapter.clearReports();
-//
-//                        if (!reports.data().isEmpty()) {
-//                            adapter.setReports(reports.data());
-//                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-//                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-                            binding.indexHeaderLayout.getRoot().setVisibility(View.GONE);
-                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
-//                        }
-//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+        if (type.equals("case")) {
+            Case.reports(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    List items = (List) object;
 
-                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.indexShimmerLayout.getRoot().stopShimmer();
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            if (Objects.equals(data.get("page"), 1))
+                                adapter.clearItems();
 
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-//                    });
-//                    isLoading = false;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        binding.indexHeaderLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
-//                    });
-//                    isLoading = false;
-//                }
-//            }
-//        });
+                            if (!items.data().isEmpty()) {
+                                adapter.setItems(items.data());
+                                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                                binding.indexSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
+                                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                            } else if (adapter.getItemCount() == 0) {
+                                binding.indexSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+
+                                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                    binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
+                                else
+                                    binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.ClientReportsFragmentEmpty));
+                            }
+
+                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+
+                            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                            if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        });
+
+                        isLoading = false;
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                            if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        });
+
+                        isLoading = false;
+                    }
+                }
+            });
+        } else {
+            Session.reports(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    List items = (List) object;
+
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            if (Objects.equals(data.get("page"), 1))
+                                adapter.clearItems();
+
+                            if (!items.data().isEmpty()) {
+                                adapter.setItems(items.data());
+                                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                                binding.indexSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
+                                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                            } else if (adapter.getItemCount() == 0) {
+                                binding.indexSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+
+                                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                    binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
+                                else
+                                    binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.ClientReportsFragmentEmpty));
+                            }
+
+                            binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+
+                            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                            if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        });
+
+                        isLoading = false;
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                            if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        });
+
+                        isLoading = false;
+                    }
+                }
+            });
+        }
     }
 
     @Override

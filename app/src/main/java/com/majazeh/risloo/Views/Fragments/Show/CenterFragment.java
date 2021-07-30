@@ -142,7 +142,7 @@ public class CenterFragment extends Fragment {
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "پروفایل من": {
-                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(type, null, centerModel.getAcceptation().getId(), centerModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(type, null, centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "ویرایش": {
