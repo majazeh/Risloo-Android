@@ -3,12 +3,10 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,6 +19,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
@@ -34,12 +33,15 @@ import java.util.HashMap;
 
 public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.CenterUsersHolder> {
 
+    // Fragments
+    private Fragment current;
+
     // Objects
     private Activity activity;
+    private HashMap data, header;
 
     // Vars
-    private ArrayList<TypeModel> users;
-    private HashMap data, header;
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public CenterUsersAdapter(@NonNull Activity activity) {
@@ -54,41 +56,43 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
 
     @Override
     public void onBindViewHolder(@NonNull CenterUsersHolder holder, int i) {
-        UserModel user = (UserModel) users.get(i);
+        UserModel model = (UserModel) items.get(i);
 
         initializer(holder);
 
         detector(holder);
 
-        listener(holder, user);
+        listener(holder, model);
 
-        setData(holder, user);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.users != null)
-            return users.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setUsers(ArrayList<TypeModel> users) {
-        if (this.users == null)
-            this.users = users;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.users.addAll(users);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearUsers() {
-        if (this.users != null) {
-            this.users.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
 
     private void initializer(CenterUsersHolder holder) {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
@@ -105,8 +109,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     @SuppressLint("ClickableViewAccessibility")
     private void listener(CenterUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-
             if (current instanceof CenterUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).type, ((CenterUsersFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);
@@ -145,36 +147,34 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                String pos = parent.getItemAtPosition(position).toString();
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-
-                switch (pos) {
-                    case "پذیرفتن":
-                        doWork(holder, model, "accept", "status");
-                        break;
-                    case "تعلیق":
-                        doWork(holder, model, "kick", "status");
-                        break;
-                    case "ساختن اتاق درمان": {
-                        if (current instanceof CenterUsersFragment) {
-                            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", ((CenterUsersFragment) current).centerId, model);
-                            ((MainActivity) activity).navController.navigate(action);
-                        }
-                    } break;
-                    case "اتاق درمان":
-                        // TODO : Place Code If Needed
-                        break;
-                    case "ویرایش عضو": {
-                        if (current instanceof CenterUsersFragment) {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(((CenterUsersFragment) current).centerId, model);
-                            ((MainActivity) activity).navController.navigate(action);
-                        }
-                    } break;
-                    case "ورود به کاربری":
-                        Log.e("method", "enter");
-                        break;
-                }
+                    switch (pos) {
+                        case "پذیرفتن":
+                            doWork(holder, model, "accept", "status");
+                            break;
+                        case "تعلیق":
+                            doWork(holder, model, "kick", "status");
+                            break;
+                        case "ساختن اتاق درمان": {
+                            if (current instanceof CenterUsersFragment) {
+                                NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", ((CenterUsersFragment) current).centerId, model);
+                                ((MainActivity) activity).navController.navigate(action);
+                            }
+                        } break;
+                        case "اتاق درمان":
+                            // TODO : Place Code If Needed
+                            break;
+                        case "ویرایش": {
+                            if (current instanceof CenterUsersFragment) {
+                                NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(((CenterUsersFragment) current).centerId, model);
+                                ((MainActivity) activity).navController.navigate(action);
+                            }
+                        } break;
+                        case "ورود به کاربری":
+                            // TODO : Place Code If Needed
+                            break;
+                    }
 
                     userSelect = false;
                 }
@@ -203,24 +203,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     }
 
     private void setPosition(CenterUsersHolder holder, UserModel model) {
-        for (int i = 0; i < holder.binding.positionSpinner.getCount(); i++) {
-            switch (model.getPosition()) {
-                case "مدیر":
-                case "manager":
-                    holder.binding.positionSpinner.setSelection(0);
-                    break;
-                case "اپراتور":
-                case "operator":
-                    holder.binding.positionSpinner.setSelection(1);
-                    break;
-                case "روان\u200Cشناس":
-                case "psychologist":
-                    holder.binding.positionSpinner.setSelection(2);
-                    break;
-                case "مراجع":
-                case "client":
-                    holder.binding.positionSpinner.setSelection(3);
-                    break;
+        String position = SelectionManager.getUserType(activity, "fa", model.getPosition());
+        for (int i=0; i<holder.binding.positionSpinner.getCount(); i++) {
+            if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
+                holder.binding.positionSpinner.setSelection(i);
             }
         }
 
@@ -273,7 +259,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
         items.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
         items.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
         items.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
-//        menu.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
+        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
         items.add("");
 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
@@ -282,12 +268,10 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private void doWork(CenterUsersHolder holder, UserModel model, String value, String method) {
         ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
 
-        Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+        if (current instanceof CenterUsersFragment)
+            data.put("id", ((CenterUsersFragment) current).centerId);
 
         if (method.equals("position")) {
-            if (current instanceof CenterUsersFragment)
-                data.put("id", ((CenterUsersFragment) current).centerId);
-
             data.put("userId", model.getId());
             data.put("position", value);
 
@@ -296,7 +280,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
                         ((MainActivity) activity).loadingDialog.dismiss();
-                        Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                     });
                 }
 
@@ -308,9 +292,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 }
             });
         } else {
-            if (current instanceof CenterUsersFragment)
-                data.put("id", ((CenterUsersFragment) current).centerId);
-
             data.put("userId", model.getId());
             data.put("status", value);
 
@@ -323,7 +304,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         setAcceptation(holder, userModel);
 
                         ((MainActivity) activity).loadingDialog.dismiss();
-                        Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                     });
                 }
 

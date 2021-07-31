@@ -26,11 +26,14 @@ import java.util.ArrayList;
 
 public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.RoomUsersHolder> {
 
+    // Fragments
+    private Fragment current;
+
     // Objects
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> users;
+    private ArrayList<TypeModel> items;
 
     public RoomUsersAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -44,36 +47,42 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
 
     @Override
     public void onBindViewHolder(@NonNull RoomUsersHolder holder, int i) {
-        UserModel user = (UserModel) users.get(i);
+        UserModel model = (UserModel) items.get(i);
+
+        initializer(holder);
 
         detector(holder);
 
-        listener(holder, user);
+        listener(holder, model);
 
-        setData(holder, user);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.users != null)
-            return users.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setUsers(ArrayList<TypeModel> users) {
-        if (this.users == null)
-            this.users = users;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.users.addAll(users);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearUsers() {
-        if (this.users != null) {
-            this.users.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
+    }
+
+    private void initializer(RoomUsersHolder holder) {
+        current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
     private void detector(RoomUsersHolder holder) {
@@ -84,8 +93,6 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
 
     private void listener(RoomUsersHolder holder, UserModel model) {
         ClickManager.onClickListener(() -> {
-            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-
             if (current instanceof RoomUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).type, ((RoomUsersFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);

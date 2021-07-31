@@ -75,10 +75,11 @@
     <Spinner
         android:id="@+id/status_spinner"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_26sdp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:minHeight="@dimen/_26sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
@@ -89,8 +90,8 @@
 
     <ImageView
         android:id="@+id/status_angle_imageView"
-        android:layout_width="@dimen/_14sdp"
-        android:layout_height="@dimen/_14sdp"
+        android:layout_width="@dimen/_12sdp"
+        android:layout_height="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"

@@ -6,8 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:background="@color/White"
-    tools:context=".Views.Adapters.Recycler.CenterUsersAdapter">
+    tools:background="@color/White">
 
     <View
         android:id="@+id/top_view"
@@ -22,7 +21,9 @@
         android:id="@+id/serial_textView"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
@@ -30,10 +31,10 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
-        app:layout_constraintBottom_toBottomOf="@id/mobile_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/name_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/name_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="سریال" />
 
     <TextView
@@ -42,7 +43,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -52,14 +53,14 @@
         app:layout_constraintEnd_toStartOf="@id/position_spinner"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="نام مستعار" />
+        tools:text="نام" />
 
     <TextView
         android:id="@+id/mobile_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"
@@ -77,11 +78,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:minHeight="@dimen/_24sdp"
+        android:minHeight="@dimen/_26sdp"
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-        app:layout_constraintWidth_percent="0.2"
+        app:layout_constraintWidth_percent="0.22"
         app:layout_constraintEnd_toStartOf="@id/accepted_textView"
         app:layout_constraintStart_toEndOf="@id/name_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view" />
@@ -90,7 +91,7 @@
         android:id="@+id/position_angle_imageView"
         android:layout_width="@dimen/_12sdp"
         android:layout_height="@dimen/_12sdp"
-        android:layout_marginEnd="@dimen/_2sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_angle_down_light"
@@ -106,7 +107,7 @@
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_4sdp"
         android:paddingStart="@dimen/_4sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"
@@ -122,10 +123,9 @@
         android:id="@+id/accepted_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
@@ -141,7 +141,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="right"
+        android:gravity="center|right"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Red500"
@@ -158,14 +158,15 @@
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginStart="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:padding="@dimen/_4sdp"
         android:scaleType="fitCenter"
         android:src="@drawable/ic_ellipsis_v_light"
-        app:layout_constraintBottom_toBottomOf="@id/kicked_textView"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/accepted_textView"
-        app:layout_constraintTop_toTopOf="@id/accepted_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
         app:tint="@color/Gray500" />
 
     <Spinner
