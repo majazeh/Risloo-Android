@@ -175,7 +175,7 @@ public class CaseFragment extends Fragment {
             }
 
             if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem")) {
-                binding.descriptionTextView.setText(model.getDetail().getString("problem"));
+                binding.problemTextView.setText(model.getDetail().getString("problem"));
             }
 
             if (model.getCaseCreated_at() != 0) {

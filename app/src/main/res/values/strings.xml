@@ -1087,7 +1087,7 @@
     ---------- Reference Fragment ----------
     */
 
-    <string name="ReferenceFragmentTitle">عضو</string>
+    <string name="ReferenceFragmentTitle">مراجع</string>
 
     /*
     ---------- Room Fragment ----------
@@ -1139,13 +1139,13 @@
 
     <string name="SessionFragmentTitle">جلسه</string>
 
+    <string name="SessionFragmentPaymentHeader">نوع پرداخت</string>
+    <string name="SessionFragmentClientHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="SessionFragmentStartTimeHeader">زمان شروع نوبت‌گیری</string>
+    <string name="SessionFragmentEndTimeHeader">زمان بستن نوبت‌گیری</string>
+
     <string name="SessionFragmentReports">گزارشات</string>
     <string name="SessionFragmentEdit">ویرایش</string>
-
-    <string name="SessionFragmentPayment">نوع پرداخت</string>
-    <string name="SessionFragmentClient">نوع مراجعین درخواست دهنده</string>
-    <string name="SessionFragmentStartTime">زمان شروع نوبت‌گیری</string>
-    <string name="SessionFragmentEndTime">زمان بستن نوبت‌گیری</string>
 
     /*
     ---------- Treasury Fragment ----------

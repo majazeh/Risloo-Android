@@ -73,13 +73,13 @@
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_file_alt_light"
-                    app:layout_constraintBottom_toBottomOf="@id/problem_textView"
+                    app:layout_constraintBottom_toBottomOf="@id/problem_header_textView"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/problem_textView"
+                    app:layout_constraintTop_toTopOf="@id/problem_header_textView"
                     app:tint="@color/Gray700" />
 
                 <TextView
-                    android:id="@+id/problem_textView"
+                    android:id="@+id/problem_header_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
@@ -96,7 +96,7 @@
                     app:layout_constraintTop_toBottomOf="@id/serial_textView" />
 
                 <TextView
-                    android:id="@+id/description_textView"
+                    android:id="@+id/problem_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_8sdp"
@@ -108,7 +108,7 @@
                     android:fontFamily="@font/dana_regular"
                     app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                     app:layout_constraintStart_toStartOf="@id/problem_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/problem_textView"
+                    app:layout_constraintTop_toBottomOf="@id/problem_header_textView"
                     tools:text="ﻟﻮرم اﯾﭙﺴﻮم متن ﺳﺎﺧﺘﮕﯽ ﺑﺎ ﺗﻮﻟﯿﺪ ﺳﺎدﮔﯽ ﻧﺎﻣﻔﻬﻮم از ﺻﻨﻌﺖ ﭼﺎپ، و ﺑﺎ اﺳﺘﻔﺎده از ﻃﺮاﺣﺎن ﮔﺮاﻓﯿﮏ اﺳﺖ، ﭼﺎﭘﮕﺮﻫﺎ و ﻣﺘﻮن ﺑﻠﮑﻪ روزنامه و مجله در ستون و سطر آنچنان که لازم است، و برای شرایط فعلی تکنولوژی مورد نیاز، و کاربرهای متنوع با هدف بهبود ابزراهای کاربردی می‌باشد، کتابهای زیادی در شصت و سه درصد گذشته حال و آینده، شناخت فراوان جامعه و متخصصان را می‌طلبد." />
 
                 <ImageView
@@ -148,7 +148,7 @@
                     android:layout_height="@dimen/_28sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/description_textView" />
+                    app:layout_constraintTop_toBottomOf="@id/problem_textView" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -191,11 +191,11 @@ public class SessionFragment extends Fragment {
         }
 
         if (model.getPayment_status() != null && !model.getPayment_status().equals("")) {
-            binding.paymentTypeTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPayment_status()));
+            binding.paymentTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPayment_status()));
         }
 
         if (model.getClients_type() != null && !model.getClients_type().equals("")) {
-            binding.clientTypeTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClients_type()));
+            binding.clientTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClients_type()));
         }
 
         if (model.getOpens_at() != 0) {

@@ -164,11 +164,11 @@
                 app:layout_constraintTop_toBottomOf="@id/info_constraintLayout">
 
                 <TextView
-                    android:id="@+id/payment_hint_textView"
+                    android:id="@+id/payment_header_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:text="@string/SessionFragmentPayment"
+                    android:text="@string/SessionFragmentPaymentHeader"
                     android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
@@ -179,7 +179,7 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/payment_type_textView"
+                    android:id="@+id/payment_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -190,7 +190,7 @@
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/payment_hint_textView"
+                    app:layout_constraintTop_toBottomOf="@id/payment_header_textView"
                     tools:text="آنلاین" />
 
                 <View
@@ -201,15 +201,15 @@
                     android:background="@color/Gray200"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/payment_type_textView" />
+                    app:layout_constraintTop_toBottomOf="@id/payment_textView" />
 
                 <TextView
-                    android:id="@+id/client_hint_textView"
+                    android:id="@+id/client_header_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="@string/SessionFragmentClient"
+                    android:text="@string/SessionFragmentClientHeader"
                     android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
@@ -220,7 +220,7 @@
                     app:layout_constraintTop_toBottomOf="@id/seperate1_view" />
 
                 <TextView
-                    android:id="@+id/client_type_textView"
+                    android:id="@+id/client_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
@@ -231,7 +231,7 @@
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/client_hint_textView"
+                    app:layout_constraintTop_toBottomOf="@id/client_header_textView"
                     tools:text="پرونده" />
 
                 <View
@@ -242,15 +242,15 @@
                     android:background="@color/Gray200"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/client_type_textView" />
+                    app:layout_constraintTop_toBottomOf="@id/client_textView" />
 
                 <TextView
-                    android:id="@+id/start_time_hint_textView"
+                    android:id="@+id/start_time_header_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="@string/SessionFragmentStartTime"
+                    android:text="@string/SessionFragmentStartTimeHeader"
                     android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
@@ -272,7 +272,7 @@
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/start_time_hint_textView"
+                    app:layout_constraintTop_toBottomOf="@id/start_time_header_textView"
                     tools:text="-" />
 
                 <View
@@ -286,12 +286,12 @@
                     app:layout_constraintTop_toBottomOf="@id/start_time_textView" />
 
                 <TextView
-                    android:id="@+id/end_time_hint_textView"
+                    android:id="@+id/end_time_header_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"
                     android:gravity="center"
-                    android:text="@string/SessionFragmentEndTime"
+                    android:text="@string/SessionFragmentEndTimeHeader"
                     android:textSize="@dimen/_7ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray400"
@@ -313,7 +313,7 @@
                     android:fontFamily="@font/dana_medium"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/end_time_hint_textView"
+                    app:layout_constraintTop_toBottomOf="@id/end_time_header_textView"
                     tools:text="-" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
