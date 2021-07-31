@@ -11,21 +11,22 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -53,19 +54,20 @@ public class CreateSampleFragment extends Fragment {
     // Binding
     private FragmentCreateSampleBinding binding;
 
+    // Dialogs
+    private SearchableDialog scalesDialog, roomsDialog, referencesDialog, casesDialog, sessionsDialog;
+
     // Adapters
     public SelectedAdapter scalesAdapter, referencesAdapter;
     public CheckedAdapter clientsAdapter;
 
-    // Dialogs
-    private SearchableDialog scalesDialog, roomsDialog, referencesDialog, casesDialog, sessionsDialog;
-
     // Objects
     private ClickableSpan assessmentLinkSpan;
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
-    public String roomId = "", roomName = "", centerName = "", type = "case_user", title = "", membersCount = "", caseStatus = "", problem = "", caseId = "",  sessionId = "", psychologyDescription = "";
+    public String roomId = "", type = "case_user", title = "", membersCount = "", caseStatus = "", problem = "", caseId = "", sessionId = "", psychologyDescription = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -86,15 +88,15 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void initializer() {
-        scalesAdapter = new SelectedAdapter(requireActivity());
-        referencesAdapter = new SelectedAdapter(requireActivity());
-        clientsAdapter = new CheckedAdapter(requireActivity());
-
         scalesDialog = new SearchableDialog();
         roomsDialog = new SearchableDialog();
         referencesDialog = new SearchableDialog();
         casesDialog = new SearchableDialog();
         sessionsDialog = new SearchableDialog();
+
+        scalesAdapter = new SelectedAdapter(requireActivity());
+        referencesAdapter = new SelectedAdapter(requireActivity());
+        clientsAdapter = new CheckedAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -112,19 +114,18 @@ public class CreateSampleFragment extends Fragment {
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentReferenceHeader));
         binding.psychologyDescriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionHeader));
 
-        binding.titleIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateSampleFragmentTitleHint));
+        binding.bulkHelperView.getRoot().setText(getResources().getString(R.string.CreateSampleFragmentBulkHelper));
 
         binding.scaleGuideLayout.guideTextView.setMovementMethod(LinkMovementMethod.getInstance());
-
         binding.titleGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentTitleGuide));
         binding.membersCountGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentMembersCountGuide));
         binding.psychologyDescriptionGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSampleFragmentPsychologyDescriptionGuide));
 
+        InitManager.normal12sspSpinner(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, R.array.CaseTypes);
+
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
-
-        InitManager.normal12sspSpinner(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, R.array.CaseTypes);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }
@@ -193,43 +194,59 @@ public class CreateSampleFragment extends Fragment {
         });
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.titleIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         binding.membersCountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.membersCountIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.membersCountIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.membersCountIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.membersCountIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.membersCountIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            membersCount = binding.membersCountIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.caseStatusIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
             return false;
         });
 
         binding.caseStatusIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                caseStatus = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    caseStatus = parent.getItemAtPosition(position).toString();
 
-                if (position == 0) {
-                    binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                    switch (caseStatus) {
+                        case "بدون پرونده":
+                            binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
-                    binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
-                } else if (position == 1 || position == 2) {
-                    binding.caseIncludeLayout.selectContainer.setEnabled(false);
-                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
+                            binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
+                            break;
+                        case "ساخت پرونده مجزا برای هر فرد":
+                        case "ساخت یک پرونده گروهی برای همه افراد":
+                            binding.caseIncludeLayout.selectContainer.setEnabled(false);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray500);
 
-                    binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                } else {
-                    binding.caseIncludeLayout.selectContainer.setEnabled(true);
-                    binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
+                            binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            break;
+                        case "افزودن در پرونده انتخابی":
+                            binding.caseIncludeLayout.selectContainer.setEnabled(true);
+                            binding.caseIncludeLayout.selectContainer.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
 
-                    binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
+                            break;
+                    }
+
+                    userSelect = false;
                 }
             }
 
@@ -240,12 +257,13 @@ public class CreateSampleFragment extends Fragment {
         });
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.problemIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.problemIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -267,12 +285,13 @@ public class CreateSampleFragment extends Fragment {
         });
 
         binding.psychologyDescriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.psychologyDescriptionIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.psychologyDescriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.psychologyDescriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            psychologyDescription = binding.psychologyDescriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -360,6 +379,12 @@ public class CreateSampleFragment extends Fragment {
                     this.type = "case_user";
                     setType(this.type);
                     break;
+                case "room":
+                    binding.typeTabLayout.getTabAt(1).select();
+
+                    this.type = "room_user";
+                    setType(this.type);
+                    break;
                 case "bulk":
                     binding.typeTabLayout.getTabAt(2).select();
 
@@ -392,15 +417,15 @@ public class CreateSampleFragment extends Fragment {
     private void setData(CaseModel model) {
         if (model.getCaseRoom() != null && model.getCaseRoom().getRoomId() != null && !model.getCaseRoom().getRoomId().equals("")) {
             roomId = model.getCaseRoom().getRoomId();
-            roomName = model.getCaseRoom().getRoomManager().getName();
-            binding.roomIncludeLayout.primaryTextView.setText(roomName);
+        }
+
+        if (model.getCaseRoom() != null && model.getCaseRoom().getRoomManager() != null && model.getCaseRoom().getRoomManager().getName() != null && !model.getCaseRoom().getRoomManager().getName().equals("")) {
+            binding.roomIncludeLayout.primaryTextView.setText(model.getCaseRoom().getRoomManager().getName());
         }
 
         try {
-            if (model.getCaseRoom() != null && model.getCaseRoom().getRoomCenter() != null && model.getCaseRoom().getRoomCenter().getDetail() != null && model.getCaseRoom().getRoomCenter().getDetail().has("title") && !model.getCaseRoom().getRoomCenter().getDetail().getString("title").equals("")) {
-                centerName = model.getCaseRoom().getRoomCenter().getDetail().getString("title");
-                binding.roomIncludeLayout.secondaryTextView.setText(centerName);
-            }
+            if (model.getCaseRoom() != null && model.getCaseRoom().getRoomCenter() != null && model.getCaseRoom().getRoomCenter().getDetail() != null && model.getCaseRoom().getRoomCenter().getDetail().has("title") && !model.getCaseRoom().getRoomCenter().getDetail().getString("title").equals(""))
+                binding.roomIncludeLayout.secondaryTextView.setText(model.getCaseRoom().getRoomCenter().getDetail().getString("title"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -421,10 +446,7 @@ public class CreateSampleFragment extends Fragment {
             caseId = model.getCaseModel().getCaseId();
 
             binding.caseIncludeLayout.primaryTextView.setText(caseId);
-            if (model.getCaseModel() != null)
-                setClients(model.getCaseModel().getClients());
-            else
-                binding.caseIncludeLayout.secondaryTextView.setVisibility(View.GONE);
+            setClients(model.getCaseModel().getClients());
         }
 
         if (model.getId() != null && !model.getId().equals("")) {
@@ -458,7 +480,7 @@ public class CreateSampleFragment extends Fragment {
         }
     }
 
-    private void setClients(com.mre.ligheh.Model.Madule.List clients) {
+    private void setClients(List clients) {
         if (clients != null && clients.data().size() != 0) {
             binding.caseIncludeLayout.secondaryTextView.setVisibility(View.VISIBLE);
 
@@ -506,30 +528,24 @@ public class CreateSampleFragment extends Fragment {
                         binding.scaleIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.scaleIncludeLayout.countTextView.setText("");
                     }
-                }
-                break;
+                } break;
                 case "rooms": {
                     RoomModel model = (RoomModel) item;
 
                     if (!roomId.equals(model.getRoomId())) {
                         roomId = model.getRoomId();
-                        roomName = model.getRoomManager().getName();
-                        centerName = model.getRoomCenter().getDetail().getString("title");
 
-                        binding.roomIncludeLayout.primaryTextView.setText(roomName);
-                        binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+                        binding.roomIncludeLayout.primaryTextView.setText(model.getRoomManager().getName());
+                        binding.roomIncludeLayout.secondaryTextView.setText(model.getRoomCenter().getDetail().getString("title"));
                     } else if (roomId.equals(model.getRoomId())) {
                         roomId = "";
-                        roomName = "";
-                        centerName = "";
 
                         binding.roomIncludeLayout.primaryTextView.setText("");
                         binding.roomIncludeLayout.secondaryTextView.setText("");
                     }
 
                     roomsDialog.dismiss();
-                }
-                break;
+                } break;
                 case "references": {
                     UserModel model = (UserModel) item;
 
@@ -547,8 +563,7 @@ public class CreateSampleFragment extends Fragment {
                         binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.referenceIncludeLayout.countTextView.setText("");
                     }
-                }
-                break;
+                } break;
                 case "cases": {
                     CaseModel model = (CaseModel) item;
 
@@ -567,8 +582,7 @@ public class CreateSampleFragment extends Fragment {
                     }
 
                     casesDialog.dismiss();
-                }
-                break;
+                } break;
                 case "sessions": {
                     SessionModel model = (SessionModel) item;
 
@@ -588,8 +602,7 @@ public class CreateSampleFragment extends Fragment {
                     }
 
                     sessionsDialog.dismiss();
-                }
-                break;
+                } break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -598,11 +611,6 @@ public class CreateSampleFragment extends Fragment {
 
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
-        membersCount = binding.membersCountIncludeLayout.inputEditText.getText().toString().trim();
-        problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
-        psychologyDescription = binding.psychologyDescriptionIncludeLayout.inputEditText.getText().toString().trim();
 
         data.put("scale_id", scalesAdapter.getIds());
         data.put("room_id", roomId);
@@ -628,11 +636,11 @@ public class CreateSampleFragment extends Fragment {
                     data.put("problem", problem);
                 else if (casseStatus.equals("exist"))
                     data.put("case_id", caseId);
+
                 break;
         }
 
-        if (!psychologyDescription.equals(""))
-            data.put("psychologist_description", psychologyDescription);
+        data.put("psychologist_description", psychologyDescription);
 
         Sample.create(data, header, new Response() {
             @Override
@@ -640,7 +648,12 @@ public class CreateSampleFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        if (type.equals("bulk"))
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
+                        else
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewSampleAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
@@ -664,6 +677,9 @@ public class CreateSampleFragment extends Fragment {
                                             case "room_id":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
+                                            case "type":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
                                             case "title":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
@@ -684,7 +700,7 @@ public class CreateSampleFragment extends Fragment {
                                                 break;
                                             case "client_id":
                                                 if (type.equals("case_user"))
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (RecyclerView) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 else if (type.equals("room_user"))
                                                     ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;

@@ -118,10 +118,10 @@
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_goneMarginTop="@dimen/_6sdp"
                 app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/avatar_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/avatar_errorLayout"
+                app:layout_goneMarginTop="@dimen/_6sdp" />
 
             <include
                 android:id="@+id/address_includeLayout"

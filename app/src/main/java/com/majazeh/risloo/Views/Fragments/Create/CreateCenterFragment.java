@@ -61,7 +61,7 @@ public class CreateCenterFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    public String type = "personal_clinic", managerId = "", managerName = "", title = "", address = "", description = "", avatarPath = "";
+    public String type = "personal_clinic", managerId = "", title = "", address = "", description = "", avatarPath = "";
 
     @Nullable
     @Override
@@ -101,14 +101,12 @@ public class CreateCenterFragment extends Fragment {
 
         binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateCenterFragmentAvatarGuide));
 
-        binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentAddressHint));
-        binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateCenterFragmentDescriptionHint));
-
         binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentPersonalClinic));
         binding.typeIncludeLayout.firstRadioButton.setChecked(true);
         binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateCenterFragmentCounselingCenter));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
+
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateCenterFragmentButton), getResources().getColor(R.color.White));
     }
 
@@ -189,6 +187,7 @@ public class CreateCenterFragment extends Fragment {
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView);
+
             if (binding.phonesIncludeLayout.selectRecyclerView.getChildCount() == 0)
                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
@@ -212,13 +211,14 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void setArgs() {
-        // TODO : Place Code If Needed
+        String type = CreateCenterFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateCenterFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        setData();
-    }
-
-    private void setData() {
-        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+        if (typeModel != null) {
+            // TODO : Place Code When Needed
+        } else {
+            setRecyclerView(new ArrayList<>(), new ArrayList<>(), "phones");
+        }
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
@@ -230,23 +230,21 @@ public class CreateCenterFragment extends Fragment {
 
     public void responseDialog(String method, TypeModel item) {
         switch (method) {
-            case "managers":
+            case "managers": {
                 UserModel model = (UserModel) item;
 
                 if (!managerId.equals(model.getId())) {
                     managerId = model.getId();
-                    managerName = model.getName();
 
-                    binding.managerIncludeLayout.selectTextView.setText(managerName);
+                    binding.managerIncludeLayout.selectTextView.setText(model.getName());
                 } else if (managerId.equals(model.getId())) {
                     managerId = "";
-                    managerName = "";
 
                     binding.managerIncludeLayout.selectTextView.setText("");
                 }
 
                 managersDialog.dismiss();
-                break;
+            } break;
         }
     }
 

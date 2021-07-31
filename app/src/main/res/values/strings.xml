@@ -47,10 +47,16 @@
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
 
     <string name="ToastNewCaseAdded">پرونده جدید افزوده شد.</string>
+    <string name="ToastNewReportAdded">گزارش جدید افزوده شد.</string>
+    <string name="ToastNewSampleAdded">نمونه جدید افزوده شد.</string>
+    <string name="ToastNewBulkSampleAdded">نمونه گروهی جدید افزوده شد.</string>
+    <string name="ToastNewReferenceAdded">عضو جدید افزوده شد.</string>
     <string name="ToastNewCenterAdded">مرکز جدید افزوده شد.</string>
+    <string name="ToastNewPlatformAdded">محل برگزاری جدید افزوده شد.</string>
     <string name="ToastNewRoomAdded">اتاق جدید افزوده شد.</string>
     <string name="ToastNewUserAdded">کاربر جدید افزوده شد.</string>
     <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
+    <string name="ToastNewTreasuryAdded">کیف پول جدید افزوده شد.</string>
     <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
@@ -242,11 +248,11 @@
     <string name="CreateCaseFragmentTitle">ساخت پرونده جدید</string>
 
     <string name="CreateCaseFragmentTitleHeader">عنوان یا سریال داخلی</string>
-    <string name="CreateCaseFragmentReferenceHeader">مراجع</string>
+    <string name="CreateCaseFragmentReferenceHeader">مراجع(ین)</string>
     <string name="CreateCaseFragmentProblemHeader">مسئله</string>
     <string name="CreateCaseFragmentTagsHeader">برچسب‌(ها)</string>
 
-    <string name="CreateCaseFragmentReferenceHint">انتخاب مراجع از طریق جستجوی موبایل یا نام</string>
+    <string name="CreateCaseFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
 
     <string name="CreateCaseFragmentButton">ساخت</string>
 
@@ -256,9 +262,9 @@
 
     <string name="CreateCaseUserFragmentTitle">ثبت عضو جدید</string>
 
-    <string name="CreateCaseUserFragmentReferenceHeader">مراجع</string>
+    <string name="CreateCaseUserFragmentReferenceHeader">مراجع(ین)</string>
 
-    <string name="CreateCaseUserFragmentReferenceHint">انتخاب مراجع</string>
+    <string name="CreateCaseUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
 
     <string name="CreateCaseUserFragmentButton">ثبت</string>
 
@@ -275,9 +281,6 @@
     <string name="CreateCenterFragmentAddressHeader">آدرس</string>
     <string name="CreateCenterFragmentPhonesHeader">شماره تلفن(ها)</string>
     <string name="CreateCenterFragmentDescriptionHeader">توضیحات</string>
-
-    <string name="CreateCenterFragmentAddressHint">غیر ضروری</string>
-    <string name="CreateCenterFragmentDescriptionHint">غیر ضروری</string>
 
     <string name="CreateCenterFragmentAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
 
@@ -316,6 +319,23 @@
     <string name="CreateDocumentFragmentButton">ساخت</string>
 
     /*
+    ---------- CreatePlatform Fragment ----------
+    */
+
+    <string name="CreatePlatformFragmentTitle">ساخت محل برگزاری جدید</string>
+
+    <string name="CreatePlatformFragmentTitleHeader">عنوان</string>
+    <string name="CreatePlatformFragmentSessionTypeHeader">نوع جلسه</string>
+    <string name="CreatePlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
+    <string name="CreatePlatformFragmentIdentifierHeader">مقدار</string>
+
+    <string name="CreatePlatformFragmentIdentifierGuide">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید.</string>
+
+    <string name="CreatePlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
+
+    <string name="CreatePlatformFragmentButton">ساخت</string>
+
+    /*
     ---------- CreatePractice Fragment ----------
     */
 
@@ -349,8 +369,6 @@
 
     <string name="CreateRoomFragmentPsychologyHeader">روان‌شناس</string>
 
-    <string name="CreateRoomFragmentPsychologyHint">انتخاب روان‌شناس</string>
-
     <string name="CreateRoomFragmentButton">ساخت</string>
 
     /*
@@ -359,26 +377,11 @@
 
     <string name="CreateRoomUserFragmentTitle">ثبت عضو جدید</string>
 
-    <string name="CreateRoomUserFragmentReferenceHeader">عضو</string>
+    <string name="CreateRoomUserFragmentReferenceHeader">مراجع(ین)</string>
+
+    <string name="CreateRoomUserFragmentReferenceGuide">مراجع یا مراجعین از طریق جستجوی موبایل یا نام را انتحاب کنید.</string>
 
     <string name="CreateRoomUserFragmentButton">ثبت</string>
-
-    /*
-    ---------- CreatePlatform Fragment ----------
-    */
-
-    <string name="CreatePlatformFragmentTitle">ایجاد محل برگزاری جدید</string>
-
-    <string name="CreatePlatformFragmentTitleHeader">عنوان</string>
-    <string name="CreatePlatformFragmentSessionTypeHeader">نوع جلسه</string>
-    <string name="CreatePlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
-    <string name="CreatePlatformFragmentIdentifierHeader">مقدار</string>
-
-    <string name="CreatePlatformFragmentIdentifierHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
-
-    <string name="CreatePlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
-
-    <string name="CreatePlatformFragmentButton">ایجاد</string>
 
     /*
     ---------- CreateSample Fragment ----------
@@ -395,19 +398,16 @@
     <string name="CreateSampleFragmentCaseHeader">پرونده</string>
     <string name="CreateSampleFragmentClientHeader">انتخاب مراجع</string>
     <string name="CreateSampleFragmentSessionHeader">جلسه</string>
-    <string name="CreateSampleFragmentReferenceHeader">مراجع</string>
+    <string name="CreateSampleFragmentReferenceHeader">مراجع(ین)</string>
     <string name="CreateSampleFragmentPsychologyDescriptionHeader">توضیحات روان‌شناس</string>
 
     <string name="CreateSampleFragmentTabCaseUser">پرونده</string>
     <string name="CreateSampleFragmentTabRoomUser">اتاق درمان</string>
     <string name="CreateSampleFragmentTabBulk">گروهی</string>
 
-    <string name="CreateSampleFragmentScaleHint">جستجو</string>
-    <string name="CreateSampleFragmentTitleHint">مثال: گروه درمانی دکتر جان بزرگی - CBT - درمان وسواس</string>
-    <string name="CreateSampleFragmentReferenceHint">بدون مراجع مشخص شده</string>
+    <string name="CreateSampleFragmentBulkHelper">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
 
     <string name="CreateSampleFragmentScaleGuide">در این قسمت لیست آزمون‌های پُر کاربرد را مشاهده می‌کنید. جهت انتخاب آزمونی که در این لیست وجود ندارد، عنوان آزمون مد نظر را جست‌وجو کرده و آن را انتخاب نمایید. شما می‌توانید لیست تمام آزمون‌های موجود در سامانه را نیز در این صفحه مشاهده نمایید.</string>
-    <string name="CreateSampleFragmentBulkGuide">زمانی که قصد دارید تعداد نا مشخصی از اعضا که به آن‌ها دسترسی ندارید، نمونه‌(ها)ای را پر کنند، با این قسمت نمونه را بسازید. در این‌حالت یک لینک در اختیار شما قرار می‌گیرد که آن را به اشتراک می‌گذارید و هرفردی که با این لینک وارد شد، نمونه(ها) برای او فعال می‌شود.</string>
     <string name="CreateSampleFragmentTitleGuide">کمک می‌کند تا نمونه‌های شما یک نام مشترک داشته باشند و راحت‌تر آن‌ها را پیدا کنید.</string>
     <string name="CreateSampleFragmentMembersCountGuide">تعداد اعضائی که قصد دارند نمونه(ها) را انجام دهند.</string>
     <string name="CreateSampleFragmentPsychologyDescriptionGuide">در این قسمت شما می‌توانید توضیحاتی را اضافه بر توضیحات یک نمونه وارد کنید تا مراجع قبل از انجام نمونه(ها) این توضیحات را مشاهده کند.</string>
@@ -539,7 +539,7 @@
 
     <string name="CreateSessionUserFragmentTitle">ثبت عضو جدید</string>
 
-    <string name="CreateSessionUserFragmentAxisHeader">انتخاب محور جلسه</string>
+    <string name="CreateSessionUserFragmentAxisHeader">محور جلسه</string>
     <string name="CreateSessionUserFragmentPlatformHeader">محل برگزاری جلسه</string>
     <string name="CreateSessionUserFragmentClientHeader">انتخاب مراجع</string>
     <string name="CreateSessionUserFragmentDescriptionHeader">توضیحات</string>
@@ -553,8 +553,7 @@
     <string name="CreateTreasuryFragmentTitle">ساخت کیف پول جدید</string>
 
     <string name="CreateTreasuryFragmentNameHeader">عنوان</string>
-
-    <string name="CreateTreasuryFragmentNameHint">عنوان کیف پول</string>
+    <string name="CreateTreasuryFragmentRegionHeader">بستر</string>
 
     <string name="CreateTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
 
@@ -572,7 +571,7 @@
     <string name="CreateUserFragmentPasswordHeader">کلمه عبور</string>
     <string name="CreateUserFragmentBirthdayHeader">تاریخ تولد</string>
     <string name="CreateUserFragmentStatusHeader">وضعیت</string>
-    <string name="CreateUserFragmentTypeHeader">نوع عضو</string>
+    <string name="CreateUserFragmentTypeHeader">نوع کاربر</string>
     <string name="CreateUserFragmentGenderHeader">جنسیت</string>
 
     <string name="CreateUserFragmentPasswordGuide">کلمه عبور باید حداقل ۶ کاراکتر و ترکیبی از اعداد و حروف انگلیسی باشد.</string>

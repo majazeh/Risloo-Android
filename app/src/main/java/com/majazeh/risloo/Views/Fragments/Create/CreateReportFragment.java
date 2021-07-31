@@ -16,22 +16,33 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateReportBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class CreateReportFragment extends Fragment {
 
     // Binding
     private FragmentCreateReportBinding binding;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String encryption = "", description = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -75,15 +86,28 @@ public class CreateReportFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.encryptionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.encryptionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                encryption = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    encryption = parent.getItemAtPosition(position).toString();
 
-                if (position == 0)
-                    binding.cryptoConstraintLayout.setVisibility(View.GONE);
-                else
-                    binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
+                    switch(encryption) {
+                        case "با رمزگذاری":
+                            binding.cryptoConstraintLayout.setVisibility(View.GONE);
+                            break;
+                        default:
+                            binding.cryptoConstraintLayout.setVisibility(View.VISIBLE);
+                            break;
+                    }
+
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -93,12 +117,13 @@ public class CreateReportFragment extends Fragment {
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.descriptionIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         ClickManager.onDelayedClickListener(() -> {
@@ -146,8 +171,6 @@ public class CreateReportFragment extends Fragment {
     private void doWork() {
 //        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 //
-//        description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
-//
 //        data.put("encryption", SelectionManager.getEncryption(requireActivity(), "en", encryption));
 //        data.put("description", description);
 //
@@ -157,7 +180,9 @@ public class CreateReportFragment extends Fragment {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
 //                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReportAdded));
+//
+//                        ((MainActivity) requireActivity()).navController.navigateUp();
 //                    });
 //                }
 //            }

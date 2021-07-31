@@ -24,6 +24,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateDocumentBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -124,7 +125,10 @@ public class CreateDocumentFragment extends Fragment {
     }
 
     private void setArgs() {
-        // TODO : Place Code If Needed
+        String type = CreateDocumentFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateDocumentFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        // TODO : Place Code When Needed
     }
 
     public void responseAction(String method, Intent data) {

@@ -7,7 +7,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,9 +16,11 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateTreasuryBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,9 +33,12 @@ public class CreateTreasuryFragment extends Fragment {
     // Binding
     private FragmentCreateTreasuryBinding binding;
 
-    // Vars
+    // Objecs
     private HashMap data, header;
-    private String name = "";
+
+    // Vars
+    private String title = "", regionId = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -56,11 +61,12 @@ public class CreateTreasuryFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateTreasuryFragmentNameHeader));
+        binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateTreasuryFragmentNameHeader));
+        binding.regionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateTreasuryFragmentRegionHeader));
 
-        binding.nameIncludeLayout.inputEditText.setHint(getResources().getString(R.string.CreateTreasuryFragmentNameHint));
+        binding.titleGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateTreasuryFragmentNameGuide));
 
-        binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateTreasuryFragmentNameGuide));
+        InitManager.normal12sspSpinner(requireActivity(), binding.regionIncludeLayout.selectSpinner, R.array.TreasuryRegion);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateTreasuryFragmentButton), getResources().getColor(R.color.White));
     }
@@ -75,35 +81,68 @@ public class CreateTreasuryFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
-                }
-            }
+        binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.regionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        binding.regionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
+
+                    switch(pos) {
+                        case "شخصی":
+                            regionId = "";
+                            break;
+                        default:
+                            regionId = "RS96666W6";
+                            break;
+                    }
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.titleIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.createTextView.getRoot());
     }
 
     private void setArgs() {
-        // TODO : Place Code If Needed
+        String type = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        // TODO : Place Code When Needed
     }
 
     private void doWork() {
 //        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 //
-//        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-//
-//        data.put("name", name);
+//        data.put("title", title);
+//        data.put("region_id", regionId);
 //
 //        Treasury.create(data, header, new Response() {
 //            @Override
@@ -111,7 +150,9 @@ public class CreateTreasuryFragment extends Fragment {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
 //                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewTreasuryAdded));
+//
+//                        ((MainActivity) requireActivity()).navController.navigateUp();
 //                    });
 //                }
 //            }
@@ -129,8 +170,11 @@ public class CreateTreasuryFragment extends Fragment {
 //                                    String key = keys.next();
 //                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
 //                                        switch (key) {
-//                                            case "name":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                            case "title":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                                break;
+//                                            case "region_id":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.regionIncludeLayout.selectSpinner, binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
 //                                                break;
 //                                        }
 //                                    }

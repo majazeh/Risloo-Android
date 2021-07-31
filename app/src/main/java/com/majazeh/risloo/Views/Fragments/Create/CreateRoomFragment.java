@@ -42,11 +42,11 @@ public class CreateRoomFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    public String centerId = "", psychologyId = "", psychologyName = "";
+    public String centerId = "", psychologyId = "";
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCreateRoomBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -68,8 +68,6 @@ public class CreateRoomFragment extends Fragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.psychologyIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateRoomFragmentPsychologyHeader));
-
-        binding.psychologyIncludeLayout.selectTextView.setHint(getResources().getString(R.string.CreateRoomFragmentPsychologyHint));
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateRoomFragmentButton), getResources().getColor(R.color.White));
     }
@@ -131,8 +129,7 @@ public class CreateRoomFragment extends Fragment {
         }
 
         if (model.getName() != null && !model.getName().equals("")) {
-            psychologyName = model.getName();
-            binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+            binding.psychologyIncludeLayout.selectTextView.setText(model.getName());
         }
     }
 
@@ -143,12 +140,10 @@ public class CreateRoomFragment extends Fragment {
 
                 if (!psychologyId.equals(model.getId())) {
                     psychologyId = model.getId();
-                    psychologyName = model.getName();
 
-                    binding.psychologyIncludeLayout.selectTextView.setText(psychologyName);
+                    binding.psychologyIncludeLayout.selectTextView.setText(model.getName());
                 } else if (psychologyId.equals(model.getId())) {
                     psychologyId = "";
-                    psychologyName = "";
 
                     binding.psychologyIncludeLayout.selectTextView.setText("");
                 }
@@ -169,7 +164,7 @@ public class CreateRoomFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewCenterAdded));
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });

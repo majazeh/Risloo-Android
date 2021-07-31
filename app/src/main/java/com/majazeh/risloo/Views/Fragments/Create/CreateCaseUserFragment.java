@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -39,14 +39,16 @@ public class CreateCaseUserFragment extends Fragment {
     // Binding
     private FragmentCreateCaseUserBinding binding;
 
-    // Adapters
-    public SelectedAdapter referencesAdapter;
-
     // Dialogs
     private SearchableDialog referencesDialog;
 
-    // Vars
+    // Adapters
+    public SelectedAdapter referencesAdapter;
+
+    // Objects
     private HashMap data, header;
+
+    // Vars
     public String caseId = "", roomId = "";
 
     @Nullable
@@ -66,15 +68,17 @@ public class CreateCaseUserFragment extends Fragment {
     }
 
     private void initializer() {
-        referencesAdapter = new SelectedAdapter(requireActivity());
-
         referencesDialog = new SearchableDialog();
+
+        referencesAdapter = new SelectedAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.referenceIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseUserFragmentReferenceHeader));
+
+        binding.referenceGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateCaseUserFragmentReferenceGuide));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -145,7 +149,7 @@ public class CreateCaseUserFragment extends Fragment {
 
     public void responseDialog(String method, TypeModel item) {
         switch (method) {
-            case "references":
+            case "references": {
                 UserModel model = (UserModel) item;
 
                 int position = referencesAdapter.getIds().indexOf(model.getId());
@@ -162,8 +166,7 @@ public class CreateCaseUserFragment extends Fragment {
                     binding.referenceIncludeLayout.countTextView.setVisibility(View.GONE);
                     binding.referenceIncludeLayout.countTextView.setText("");
                 }
-
-                break;
+            } break;
         }
     }
 
@@ -178,7 +181,9 @@ public class CreateCaseUserFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }

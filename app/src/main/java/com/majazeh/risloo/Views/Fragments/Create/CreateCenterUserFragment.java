@@ -11,6 +11,7 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -45,9 +46,12 @@ public class CreateCenterUserFragment extends Fragment {
     // Dialogs
     private SearchableDialog roomsDialog;
 
-    // Vars
+    // Objects
     private HashMap data, header;
-    public String centerId = "", type = "", mobile = "", position = "", roomId = "", roomName = "", centerName = "", nickname = "", createCase = "0";
+
+    // Vars
+    public String centerId = "", type = "", mobile = "", position = "", roomId = "", nickname = "", createCase = "0";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -99,27 +103,40 @@ public class CreateCenterUserFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.mobileIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.mobileIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.positionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
             return false;
         });
 
         binding.positionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                CreateCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    CreateCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
 
-                if (position == 3) {
-                    binding.roomIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    switch(CreateCenterUserFragment.this.position) {
+                        case "مراجع":
+                            binding.roomIncludeLayout.getRoot().setVisibility(View.VISIBLE);
 
-                    binding.clientGroup.setVisibility(View.VISIBLE);
-                } else {
-                    binding.roomIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.clientGroup.setVisibility(View.VISIBLE);
+                            break;
+                        default:
+                            binding.roomIncludeLayout.getRoot().setVisibility(View.GONE);
 
-                    binding.clientGroup.setVisibility(View.GONE);
+                            binding.clientGroup.setVisibility(View.GONE);
+                            break;
+                    }
+
+                    userSelect = false;
                 }
             }
 
@@ -135,12 +152,13 @@ public class CreateCenterUserFragment extends Fragment {
         }).widget(binding.roomIncludeLayout.selectContainer);
 
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nicknameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.nicknameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.caseCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -198,27 +216,23 @@ public class CreateCenterUserFragment extends Fragment {
     public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
-                case "rooms":
+                case "rooms": {
                     RoomModel model = (RoomModel) item;
 
                     if (!roomId.equals(model.getRoomId())) {
                         roomId = model.getRoomId();
-                        roomName = model.getRoomManager().getName();
-                        centerName = model.getRoomCenter().getDetail().getString("title");
 
-                        binding.roomIncludeLayout.primaryTextView.setText(roomName);
-                        binding.roomIncludeLayout.secondaryTextView.setText(centerName);
+                        binding.roomIncludeLayout.primaryTextView.setText(model.getRoomManager().getName());
+                        binding.roomIncludeLayout.secondaryTextView.setText(model.getRoomCenter().getDetail().getString("title"));
                     } else if (roomId.equals(model.getRoomId())) {
                         roomId = "";
-                        roomName = "";
-                        centerName = "";
 
                         binding.roomIncludeLayout.primaryTextView.setText("");
                         binding.roomIncludeLayout.secondaryTextView.setText("");
                     }
 
                     roomsDialog.dismiss();
-                    break;
+                } break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -227,9 +241,6 @@ public class CreateCenterUserFragment extends Fragment {
 
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
-
-        mobile = binding.mobileIncludeLayout.inputEditText.getText().toString().trim();
-        nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
 
         data.put("mobile", mobile);
 
@@ -289,6 +300,9 @@ public class CreateCenterUserFragment extends Fragment {
                                                 break;
                                             case "nickname":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "create_case":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                         }
                                     }

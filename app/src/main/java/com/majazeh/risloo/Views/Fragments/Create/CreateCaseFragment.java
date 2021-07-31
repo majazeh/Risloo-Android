@@ -84,6 +84,8 @@ public class CreateCaseFragment extends Fragment {
         binding.problemIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentProblemHeader));
         binding.tagsIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateCaseFragmentTagsHeader));
 
+        binding.referenceGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateCaseFragmentReferenceGuide));
+
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.tagsIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 

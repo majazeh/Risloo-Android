@@ -30,6 +30,7 @@ import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -266,7 +267,10 @@ public class CreateUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        // TODO : Place Code IF Needed
+        String type = CreateUserFragmentArgs.fromBundle(getArguments()).getType();
+        TypeModel typeModel = CreateUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
+
+        // TODO : Place Code When Needed
     }
 
     public void responseBottomSheet(String method, String data) {

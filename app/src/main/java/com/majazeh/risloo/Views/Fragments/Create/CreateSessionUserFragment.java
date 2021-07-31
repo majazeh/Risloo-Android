@@ -8,10 +8,10 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -20,10 +20,12 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateSessionUserBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -46,10 +48,13 @@ public class CreateSessionUserFragment extends Fragment {
     // Adapters
     public CheckedAdapter clientsAdapter;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private ArrayList<String> axisIds = new ArrayList<>(), platformIds = new ArrayList<>();
-    public String axis = "", platform = "", description;
+    private String axis = "", platform = "", description;
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -95,11 +100,8 @@ public class CreateSessionUserFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 
@@ -107,10 +109,19 @@ public class CreateSessionUserFragment extends Fragment {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
+        binding.axisIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.axisIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                axis = axisIds.get(position);
+                if (userSelect) {
+                    axis = axisIds.get(position);
+
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -119,10 +130,19 @@ public class CreateSessionUserFragment extends Fragment {
             }
         });
 
+        binding.platformIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.platformIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                platform = platformIds.get(position);
+                if (userSelect) {
+                    platform = platformIds.get(position);
+
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -209,7 +229,7 @@ public class CreateSessionUserFragment extends Fragment {
         InitManager.normal12sspSpinner(requireActivity(), binding.axisIncludeLayout.selectSpinner, options);
     }
 
-    private void setPlatform(com.mre.ligheh.Model.Madule.List platforms) {
+    private void setPlatform(List platforms) {
         ArrayList<String> options = new ArrayList<>();
 
         for (int i = 0; i < platforms.data().size(); i++) {
@@ -225,7 +245,7 @@ public class CreateSessionUserFragment extends Fragment {
         InitManager.normal12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
-    private void setClients(com.mre.ligheh.Model.Madule.List clients) {
+    private void setClients(List clients) {
         if (clients != null && clients.data().size() != 0) {
             ArrayList<TypeModel> items = new ArrayList<>();
 
@@ -267,7 +287,9 @@ public class CreateSessionUserFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
@@ -292,7 +314,7 @@ public class CreateSessionUserFragment extends Fragment {
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.platformIncludeLayout.selectSpinner, binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                             case "client_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (RecyclerView) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                             case "description":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
