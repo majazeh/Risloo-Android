@@ -7,7 +7,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -16,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
 import com.mre.ligheh.API.Response;
@@ -31,10 +31,14 @@ public class EditTreasuryFragment extends Fragment {
     // Binding
     private FragmentEditTreasuryBinding binding;
 
-    // Vars
-    private HashMap data, header;
+    // Models
 //    private TreasuryModel treasuryModel;
-    private String name = "";
+
+    // Objecs
+    private HashMap data, header;
+
+    // Vars
+    private String title = "";
 
     @Nullable
     @Override
@@ -57,11 +61,9 @@ public class EditTreasuryFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditTreasuryFragmentNameHeader));
+        binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditTreasuryFragmentNameHeader));
 
-        binding.nameIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditTreasuryFragmentNameHint));
-
-        binding.nameGuideLayout.guideTextView.setText(getResources().getString(R.string.EditTreasuryFragmentNameGuide));
+        binding.titleGuideLayout.guideTextView.setText(getResources().getString(R.string.EditTreasuryFragmentNameGuide));
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditTreasuryFragmentButton), getResources().getColor(R.color.White));
     }
@@ -76,20 +78,21 @@ public class EditTreasuryFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
-                }
-            }
+        binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
+        binding.titleIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.nameIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (binding.titleIncludeLayout.inputEditText.length() == 0) {
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.editTextView.getRoot());
@@ -97,7 +100,6 @@ public class EditTreasuryFragment extends Fragment {
 
     private void setArgs() {
 //        treasuryModel = (TreasuryModel) EditTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//
 //        setData(treasuryModel);
     }
 
@@ -106,18 +108,16 @@ public class EditTreasuryFragment extends Fragment {
 //            data.put("id", model.getId());
 //        }
 //
-//        if (model.getName() != null && !model.getName().equals("")) {
-//            name = model.getName();
-//            binding.nameIncludeLayout.inputEditText.setText(name);
+//        if (model.getTitle() != null && !model.getTitle().equals("")) {
+//            title = model.getTitle();
+//            binding.titleIncludeLayout.inputEditText.setText(title);
 //        }
 //    }
 
     private void doWork() {
 //        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 //
-//        name = binding.nameIncludeLayout.inputEditText.getText().toString().trim();
-//
-//        data.put("name", name);
+//        data.put("title", title);
 //
 //        Treasury.edit(data, header, new Response() {
 //            @Override
@@ -125,7 +125,7 @@ public class EditTreasuryFragment extends Fragment {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
 //                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
 //                    });
 //                }
 //            }
@@ -143,8 +143,8 @@ public class EditTreasuryFragment extends Fragment {
 //                                    String key = keys.next();
 //                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
 //                                        switch (key) {
-//                                            case "name":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                            case "title":
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
 //                                                break;
 //                                        }
 //                                    }

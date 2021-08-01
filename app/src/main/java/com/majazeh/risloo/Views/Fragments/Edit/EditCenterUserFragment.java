@@ -8,16 +8,17 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditCenterUserBinding;
 import com.mre.ligheh.API.Response;
@@ -35,10 +36,15 @@ public class EditCenterUserFragment extends Fragment {
     // Binding
     private FragmentEditCenterUserBinding binding;
 
-    // Vars
-    private HashMap data, header;
+    // Models
     private UserModel userModel;
+
+    // Objects
+    private HashMap data, header;
+
+    // Vars
     private String centerId = "", userId = "", position = "", nickname = "", status ="";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -85,15 +91,28 @@ public class EditCenterUserFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.positionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.positionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                EditCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    EditCenterUserFragment.this.position = parent.getItemAtPosition(position).toString();
 
-                if (position == 3)
-                    binding.clientGroup.setVisibility(View.VISIBLE);
-                else
-                    binding.clientGroup.setVisibility(View.GONE);
+                    switch(EditCenterUserFragment.this.position) {
+                        case "مراجع":
+                            binding.clientGroup.setVisibility(View.VISIBLE);
+                            break;
+                        default:
+                            binding.clientGroup.setVisibility(View.GONE);
+                            break;
+                    }
+
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -103,12 +122,13 @@ public class EditCenterUserFragment extends Fragment {
         });
 
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.nicknameIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
             return false;
+        });
+
+        binding.nicknameIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
         });
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
@@ -137,7 +157,6 @@ public class EditCenterUserFragment extends Fragment {
         data.put("id", centerId);
 
         userModel = (UserModel) EditCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
         setData(userModel);
     }
 
@@ -153,10 +172,14 @@ public class EditCenterUserFragment extends Fragment {
                 if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
                     binding.positionIncludeLayout.selectSpinner.setSelection(i);
 
-                    if (i == 3)
-                        binding.clientGroup.setVisibility(View.VISIBLE);
-                    else
-                        binding.clientGroup.setVisibility(View.GONE);
+                    switch(position) {
+                        case "مراجع":
+                            binding.clientGroup.setVisibility(View.VISIBLE);
+                            break;
+                        default:
+                            binding.clientGroup.setVisibility(View.GONE);
+                            break;
+                    }
                 }
             }
         }
@@ -166,7 +189,14 @@ public class EditCenterUserFragment extends Fragment {
             binding.nicknameIncludeLayout.inputEditText.setText(nickname);
         }
 
-        if (model.getUserKicked_at() != 0) {
+        setAcceptation(model);
+    }
+
+    private void setAcceptation(UserModel model) {
+        if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
+            status = "kick";
+            binding.statusIncludeLayout.secondRadioButton.setChecked(true);
+        } else if (model.getUserKicked_at() != 0) {
             status = "kick";
             binding.statusIncludeLayout.secondRadioButton.setChecked(true);
         } else if (model.getUserAccepted_at() != 0) {
@@ -181,13 +211,9 @@ public class EditCenterUserFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        nickname = binding.nicknameIncludeLayout.inputEditText.getText().toString().trim();
-
         data.put("position", SelectionManager.getPosition(requireActivity(), "en", position));
         data.put("nickname", nickname);
-
-        if (!status.equals(""))
-            data.put("status", status);
+        data.put("status", status);
 
         Center.editUser(data, header, new Response() {
             @Override
@@ -195,7 +221,7 @@ public class EditCenterUserFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                     });
                 }
             }
@@ -218,6 +244,9 @@ public class EditCenterUserFragment extends Fragment {
                                                 break;
                                             case "nickname":
                                                 ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                break;
+                                            case "status":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                 break;
                                         }
                                     }
