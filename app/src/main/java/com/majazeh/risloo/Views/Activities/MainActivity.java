@@ -41,7 +41,7 @@ import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -338,8 +338,8 @@ public class MainActivity extends AppCompatActivity {
                     if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
                         ((EditCenterTabAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
-                    if (fragmont.getChild() instanceof EditUserAvatarFragment)
-                        ((EditUserAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+                    if (fragmont.getChild() instanceof EditUserTabAvatarFragment)
+                        ((EditUserTabAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
                     break;
             }
@@ -366,11 +366,11 @@ public class MainActivity extends AppCompatActivity {
                         ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
                 }
 
-                if (fragmont.getChild() instanceof EditUserAvatarFragment) {
+                if (fragmont.getChild() instanceof EditUserTabAvatarFragment) {
                     if (requestCode == 300)
-                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                        ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
                     else if (requestCode == 400)
-                        ((EditUserAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                        ((EditUserTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
                 }
 
                 if (fragmont.getCurrent() instanceof CreateDocumentFragment) {

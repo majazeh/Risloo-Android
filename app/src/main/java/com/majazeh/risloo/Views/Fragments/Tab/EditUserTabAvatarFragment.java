@@ -24,7 +24,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
-import com.majazeh.risloo.databinding.FragmentEditUserAvatarBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabAvatarBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.User;
@@ -39,10 +39,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class EditUserAvatarFragment extends Fragment {
+public class EditUserTabAvatarFragment extends Fragment {
 
     // Binding
-    private FragmentEditUserAvatarBinding binding;
+    private FragmentEditUserTabAvatarBinding binding;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
@@ -60,7 +60,7 @@ public class EditUserAvatarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditUserAvatarBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserTabAvatarBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -82,9 +82,9 @@ public class EditUserAvatarFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserAvatarTabAvatarGuide));
+        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserTabAvatarAvatarGuide));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserAvatarTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabAvatarButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {

@@ -72,10 +72,10 @@ import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserCryptoFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserPasswordFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditUserPersonalFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabCryptoFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabPasswordFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabPersonalFragment;
 
 public class Fragmont {
 
@@ -320,13 +320,13 @@ public class Fragmont {
         else if (fragment instanceof EditUserFragment) {
             Fragment child = ((EditUserFragment) fragment).adapter.hashMap.get(((EditUserFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
             if (child != null)
-                if (child instanceof EditUserPersonalFragment)
+                if (child instanceof EditUserTabPersonalFragment)
                     return child;
-                else if (child instanceof EditUserPasswordFragment)
+                else if (child instanceof EditUserTabPasswordFragment)
                     return child;
-                else if (child instanceof EditUserAvatarFragment)
+                else if (child instanceof EditUserTabAvatarFragment)
                     return child;
-                else if (child instanceof EditUserCryptoFragment)
+                else if (child instanceof EditUserTabCryptoFragment)
                     return child;
         }
 

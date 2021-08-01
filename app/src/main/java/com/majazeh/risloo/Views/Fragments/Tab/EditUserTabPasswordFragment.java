@@ -25,7 +25,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
-import com.majazeh.risloo.databinding.FragmentEditUserPasswordBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabPasswordBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.User;
@@ -38,10 +38,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class EditUserPasswordFragment extends Fragment {
+public class EditUserTabPasswordFragment extends Fragment {
 
     // Binding
-    private FragmentEditUserPasswordBinding binding;
+    private FragmentEditUserTabPasswordBinding binding;
 
     // Fragments
     private Fragment current;
@@ -56,7 +56,7 @@ public class EditUserPasswordFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditUserPasswordBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserTabPasswordBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -76,12 +76,12 @@ public class EditUserPasswordFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.currentPasswordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPasswordTabCurrentPasswordHeader));
-        binding.newPasswordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPasswordTabNewPasswordHeader));
+        binding.currentPasswordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPasswordCurrentPasswordHeader));
+        binding.newPasswordIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPasswordNewPasswordHeader));
 
-        binding.newPasswordGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserPasswordTabNewPasswordGuide));
+        binding.newPasswordGuideLayout.guideTextView.setText(getResources().getString(R.string.EditUserTabPasswordNewPasswordGuide));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserPasswordTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPasswordButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {

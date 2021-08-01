@@ -17,15 +17,15 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
-import com.majazeh.risloo.databinding.FragmentEditUserCryptoBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabCryptoBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 
-public class EditUserCryptoFragment extends Fragment {
+public class EditUserTabCryptoFragment extends Fragment {
 
     // Binding
-    private FragmentEditUserCryptoBinding binding;
+    private FragmentEditUserTabCryptoBinding binding;
 
     // Fragments
     private Fragment current;
@@ -39,7 +39,7 @@ public class EditUserCryptoFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditUserCryptoBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserTabCryptoBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -59,11 +59,11 @@ public class EditUserCryptoFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserCryptoTabPublicHeader));
-        binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserCryptoTabPrivateHeader));
+        binding.publicIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPublicHeader));
+        binding.privateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabCryptoPrivateHeader));
 
-        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditUserCryptoTabFragmentButton), getResources().getColor(R.color.White));
-        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditUserCryptoTabFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.publicEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.privateEditTextView.getRoot(), getResources().getString(R.string.EditUserTabCryptoFragmentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {

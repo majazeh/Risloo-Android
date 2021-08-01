@@ -9,7 +9,7 @@
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
-    tools:context=".Views.Fragments.Tab.EditUserPasswordFragment">
+    tools:context=".Views.Fragments.Tab.EditUserTabAvatarFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -23,67 +23,46 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <include
-                android:id="@+id/current_password_includeLayout"
-                layout="@layout/component_main_input_password"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
+                android:id="@+id/avatar_includeLayout"
+                layout="@layout/component_main_avatar_borderless_big"
+                android:layout_width="@dimen/_82sdp"
+                android:layout_height="@dimen/_82sdp"
                 android:layout_marginTop="@dimen/_12sdp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <include
-                android:id="@+id/current_password_errorLayout"
+                android:id="@+id/avatar_errorLayout"
                 layout="@layout/component_main_error"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_6sdp"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/current_password_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/current_password_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/current_password_includeLayout" />
-
-            <include
-                android:id="@+id/new_password_includeLayout"
-                layout="@layout/component_main_input_password"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
-                android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/current_password_errorLayout" />
-
-            <include
-                android:id="@+id/new_password_errorLayout"
-                layout="@layout/component_main_error"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/new_password_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/new_password_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/new_password_includeLayout" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout" />
 
             <include
-                android:id="@+id/new_password_guideLayout"
+                android:id="@+id/avatar_guideLayout"
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/new_password_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/new_password_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/new_password_errorLayout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/avatar_errorLayout"
                 app:layout_goneMarginTop="@dimen/_6sdp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

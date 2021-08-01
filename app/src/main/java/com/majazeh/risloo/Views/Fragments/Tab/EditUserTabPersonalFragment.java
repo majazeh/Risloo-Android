@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
-import com.majazeh.risloo.databinding.FragmentEditUserPersonalBinding;
+import com.majazeh.risloo.databinding.FragmentEditUserTabPersonalBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.User;
@@ -35,10 +35,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Objects;
 
-public class EditUserPersonalFragment extends Fragment {
+public class EditUserTabPersonalFragment extends Fragment {
 
     // Binding
-    private FragmentEditUserPersonalBinding binding;
+    private FragmentEditUserTabPersonalBinding binding;
 
     // BottomSheets
     private DateBottomSheet birthdayBottomSheet;
@@ -55,7 +55,7 @@ public class EditUserPersonalFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditUserPersonalBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditUserTabPersonalBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -77,25 +77,25 @@ public class EditUserPersonalFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabNameHeader));
-        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabMobileHeader));
-        binding.emailIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabEmailHeader));
-        binding.birthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabBirthdayHeader));
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabStatusHeader));
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabTypeHeader));
-        binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserPersonalTabGenderHeader));
+        binding.nameIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalNameHeader));
+        binding.mobileIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalMobileHeader));
+        binding.emailIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalEmailHeader));
+        binding.birthdayIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalBirthdayHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalStatusHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalTypeHeader));
+        binding.genderIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditUserTabPersonalGenderHeader));
 
-        binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusActive));
-        binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusWaiting));
-        binding.statusIncludeLayout.thirdRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabStatusClosed));
+        binding.statusIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalStatusActive));
+        binding.statusIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalStatusWaiting));
+        binding.statusIncludeLayout.thirdRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalStatusClosed));
 
-        binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabTypeAdmin));
-        binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabTypeClient));
+        binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalTypeAdmin));
+        binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalTypeClient));
 
-        binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabGenderMale));
-        binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserPersonalTabGenderFemale));
+        binding.genderIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalGenderMale));
+        binding.genderIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.EditUserTabPersonalGenderFemale));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserPersonalTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditUserTabPersonalButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
