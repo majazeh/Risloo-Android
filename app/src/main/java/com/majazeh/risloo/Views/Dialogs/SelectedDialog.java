@@ -32,7 +32,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
 
 import org.json.JSONException;
@@ -171,9 +171,9 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 binding.listRecyclerView.setAdapter(((CreateSessionSessionFragment) child).axisesAdapter);
         }
 
-        if (child instanceof EditCenterDetailFragment) {
+        if (child instanceof EditCenterTabDetailFragment) {
             if (method.equals("phones"))
-                binding.listRecyclerView.setAdapter(((EditCenterDetailFragment) child).phonesAdapter);
+                binding.listRecyclerView.setAdapter(((EditCenterTabDetailFragment) child).phonesAdapter);
         }
 
         calculateCount();
@@ -209,10 +209,10 @@ public class SelectedDialog extends AppCompatDialogFragment {
                         Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
             }
 
-            if (child instanceof EditCenterDetailFragment) {
+            if (child instanceof EditCenterTabDetailFragment) {
                 if (method.equals("phones"))
-                    if (!((EditCenterDetailFragment) child).phonesAdapter.getIds().contains(item.object.getString("id")))
-                        ((EditCenterDetailFragment) child).phonesAdapter.addItem(item);
+                    if (!((EditCenterTabDetailFragment) child).phonesAdapter.getIds().contains(item.object.getString("id")))
+                        ((EditCenterTabDetailFragment) child).phonesAdapter.addItem(item);
                     else
                         Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
             }

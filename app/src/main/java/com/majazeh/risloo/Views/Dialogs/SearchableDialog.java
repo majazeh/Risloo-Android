@@ -35,7 +35,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
@@ -292,9 +292,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
             }
         }
 
-        if (child instanceof EditCenterDetailFragment) {
+        if (child instanceof EditCenterTabDetailFragment) {
             if (method.equals("managers")) {
-                if (((EditCenterDetailFragment) child).type.equals("personal_clinic"))
+                if (((EditCenterTabDetailFragment) child).type.equals("personal_clinic"))
                     data.put("personal_clinic", "no");
                 else
                     data.put("personal_clinic", "yes");

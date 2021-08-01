@@ -32,7 +32,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -311,11 +311,11 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 }
             }
 
-            if (child instanceof EditCenterDetailFragment) {
+            if (child instanceof EditCenterTabDetailFragment) {
                 if (method.equals("managers")) {
                     UserModel model = (UserModel) item;
 
-                    detector(holder, ((EditCenterDetailFragment) child).managerId.equals(model.getId()));
+                    detector(holder, ((EditCenterTabDetailFragment) child).managerId.equals(model.getId()));
                 }
             }
 
@@ -355,8 +355,8 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         if (child instanceof CreateSessionTimeFragment)
             ((CreateSessionTimeFragment) child).responseDialog(method, item);
 
-        if (child instanceof EditCenterDetailFragment)
-            ((EditCenterDetailFragment) child).responseDialog(method, item);
+        if (child instanceof EditCenterTabDetailFragment)
+            ((EditCenterTabDetailFragment) child).responseDialog(method, item);
     }
 
     private void calculateCount(int count) {

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.databinding.FragmentEditCenterTabDetailBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -25,7 +26,6 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
-import com.majazeh.risloo.databinding.FragmentEditCenterDetailBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONArray;
@@ -36,10 +36,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class EditCenterDetailFragment extends Fragment {
+public class EditCenterTabDetailFragment extends Fragment {
 
     // Binding
-    private FragmentEditCenterDetailBinding binding;
+    private FragmentEditCenterTabDetailBinding binding;
 
     // Dialogs
     private SearchableDialog managersDialog;
@@ -55,12 +55,12 @@ public class EditCenterDetailFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    public String type = "", managerId = "", managerName = "", title = "", address = "", description = "";
+    public String type = "", managerId = "", title = "", address = "", description = "";
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditCenterDetailBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditCenterTabDetailBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -85,17 +85,15 @@ public class EditCenterDetailFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabManagerHeader));
-        binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabTitleHeader));
-        binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabAddressHeader));
-        binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabPhonesHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterDetailTabDescriptionHeader));
-
-        binding.addressIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailTabAddressHint));
-        binding.descriptionIncludeLayout.inputEditText.setHint(getResources().getString(R.string.EditCenterDetailTabDescriptionHint));
+        binding.managerIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterTabDetailManagerHeader));
+        binding.titleIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterTabDetailTitleHeader));
+        binding.addressIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterTabDetailAddressHeader));
+        binding.phonesIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterTabDetailPhonesHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditCenterTabDetailDescriptionHeader));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterDetailTabButton), getResources().getColor(R.color.White));
+
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabDetailButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -194,8 +192,7 @@ public class EditCenterDetailFragment extends Fragment {
                 }
 
                 if (model.getManager().getName() != null && !model.getManager().getName().equals("")) {
-                    managerName = model.getManager().getName();
-                    binding.managerIncludeLayout.selectTextView.setText(managerName);
+                    binding.managerIncludeLayout.selectTextView.setText(model.getManager().getName());
                 }
 
                 if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
@@ -245,23 +242,21 @@ public class EditCenterDetailFragment extends Fragment {
 
     public void responseDialog(String method, TypeModel item) {
         switch (method) {
-            case "managers":
+            case "managers": {
                 UserModel model = (UserModel) item;
 
                 if (!managerId.equals(model.getId())) {
                     managerId = model.getId();
-                    managerName = model.getName();
 
-                    binding.managerIncludeLayout.selectTextView.setText(managerName);
+                    binding.managerIncludeLayout.selectTextView.setText(model.getName());
                 } else if (managerId.equals(model.getId())) {
                     managerId = "";
-                    managerName = "";
 
                     binding.managerIncludeLayout.selectTextView.setText("");
                 }
 
                 managersDialog.dismiss();
-                break;
+            } break;
         }
     }
 

@@ -19,7 +19,7 @@ import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.databinding.BottomSheetImageBinding;
 
 public class ImageBottomSheet extends BottomSheetDialogFragment {
@@ -69,8 +69,8 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
                 if (current instanceof CreateCenterFragment)
                     ((CreateCenterFragment) current).avatarPath = IntentManager.camera(requireActivity());
 
-                if (child instanceof EditCenterAvatarFragment)
-                    ((EditCenterAvatarFragment) child).avatarPath = IntentManager.camera(requireActivity());
+                if (child instanceof EditCenterTabAvatarFragment)
+                    ((EditCenterTabAvatarFragment) child).avatarPath = IntentManager.camera(requireActivity());
 
                 if (child instanceof EditUserAvatarFragment)
                     ((EditUserAvatarFragment) child).avatarPath = IntentManager.camera(requireActivity());

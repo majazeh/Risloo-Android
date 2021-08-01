@@ -65,8 +65,8 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionReferenceFragment;
@@ -296,9 +296,9 @@ public class Fragmont {
         } else if (fragment instanceof EditCenterFragment) {
             Fragment child = ((EditCenterFragment) fragment).adapter.hashMap.get(((EditCenterFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
             if (child != null)
-                if (child instanceof EditCenterDetailFragment)
+                if (child instanceof EditCenterTabDetailFragment)
                     return child;
-                else if (child instanceof EditCenterAvatarFragment)
+                else if (child instanceof EditCenterTabAvatarFragment)
                     return child;
         }
 

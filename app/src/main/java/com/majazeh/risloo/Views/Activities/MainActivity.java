@@ -42,7 +42,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.databinding.ActivityMainBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.squareup.picasso.Picasso;
@@ -335,8 +335,8 @@ public class MainActivity extends AppCompatActivity {
                     if (fragmont.getCurrent() instanceof CreateCenterFragment)
                         ((CreateCenterFragment) fragmont.getCurrent()).avatarPath = IntentManager.camera(this);
 
-                    if (fragmont.getChild() instanceof EditCenterAvatarFragment)
-                        ((EditCenterAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
+                    if (fragmont.getChild() instanceof EditCenterTabAvatarFragment)
+                        ((EditCenterTabAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
 
                     if (fragmont.getChild() instanceof EditUserAvatarFragment)
                         ((EditUserAvatarFragment) fragmont.getChild()).avatarPath = IntentManager.camera(this);
@@ -359,11 +359,11 @@ public class MainActivity extends AppCompatActivity {
                         ((CreateCenterFragment) fragmont.getCurrent()).responseAction("camera", data);
                 }
 
-                if (fragmont.getChild() instanceof EditCenterAvatarFragment) {
+                if (fragmont.getChild() instanceof EditCenterTabAvatarFragment) {
                     if (requestCode == 300)
-                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
+                        ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("gallery", data);
                     else if (requestCode == 400)
-                        ((EditCenterAvatarFragment) fragmont.getChild()).responseAction("camera", data);
+                        ((EditCenterTabAvatarFragment) fragmont.getChild()).responseAction("camera", data);
                 }
 
                 if (fragmont.getChild() instanceof EditUserAvatarFragment) {

@@ -5,8 +5,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterAvatarFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 
 import java.util.HashMap;
 
@@ -27,7 +27,7 @@ public class EditCenterAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         if (type.equals("personal_clinic")) {
             if (position == 0) {
-                Fragment fragment = new EditCenterDetailFragment();
+                Fragment fragment = new EditCenterTabDetailFragment();
                 hashMap.put(position, fragment);
                 return fragment;
             }
@@ -35,12 +35,12 @@ public class EditCenterAdapter extends FragmentStateAdapter {
         } else {
             switch (position) {
                 case 0: {
-                    Fragment fragment = new EditCenterDetailFragment();
+                    Fragment fragment = new EditCenterTabDetailFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 1: {
-                    Fragment fragment = new EditCenterAvatarFragment();
+                    Fragment fragment = new EditCenterTabAvatarFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }

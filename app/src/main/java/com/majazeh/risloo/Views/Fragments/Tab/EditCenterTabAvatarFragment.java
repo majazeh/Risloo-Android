@@ -24,7 +24,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
-import com.majazeh.risloo.databinding.FragmentEditCenterAvatarBinding;
+import com.majazeh.risloo.databinding.FragmentEditCenterTabAvatarBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -36,10 +36,10 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class EditCenterAvatarFragment extends Fragment {
+public class EditCenterTabAvatarFragment extends Fragment {
 
     // Binding
-    private FragmentEditCenterAvatarBinding binding;
+    private FragmentEditCenterTabAvatarBinding binding;
 
     // BottomSheets
     private ImageBottomSheet imageBottomSheet;
@@ -57,7 +57,7 @@ public class EditCenterAvatarFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditCenterAvatarBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditCenterTabAvatarBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -79,9 +79,9 @@ public class EditCenterAvatarFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterAvatarTabAvatarGuide));
+        binding.avatarGuideLayout.guideTextView.setText(getResources().getString(R.string.EditCenterTabAvatarAvatarGuide));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterAvatarTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditCenterTabAvatarButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {

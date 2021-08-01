@@ -22,7 +22,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterDetailFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -219,10 +219,10 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     ((CreateSessionSessionFragment) child).axisesDialog.calculateCount();
         }
 
-        if (child instanceof EditCenterDetailFragment) {
+        if (child instanceof EditCenterTabDetailFragment) {
             if (method.equals("phones"))
-                if (((EditCenterDetailFragment) child).phonesDialog.isVisible())
-                    ((EditCenterDetailFragment) child).phonesDialog.calculateCount();
+                if (((EditCenterTabDetailFragment) child).phonesDialog.isVisible())
+                    ((EditCenterTabDetailFragment) child).phonesDialog.calculateCount();
         }
     }
 

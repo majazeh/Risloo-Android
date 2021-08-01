@@ -597,24 +597,21 @@
 
     <string name="EditCenterFragmentTitle">ویرایش مرکز درمانی</string>
 
-    ---------- // EditCenterDetail Tab
+    ---------- // EditCenterTabDetail
 
-    <string name="EditCenterDetailTabManagerHeader">مدیر</string>
-    <string name="EditCenterDetailTabTitleHeader">عنوان</string>
-    <string name="EditCenterDetailTabAddressHeader">آدرس</string>
-    <string name="EditCenterDetailTabPhonesHeader">شماره تلفن(ها)</string>
-    <string name="EditCenterDetailTabDescriptionHeader">توضیحات</string>
+    <string name="EditCenterTabDetailManagerHeader">مدیر</string>
+    <string name="EditCenterTabDetailTitleHeader">عنوان</string>
+    <string name="EditCenterTabDetailAddressHeader">آدرس</string>
+    <string name="EditCenterTabDetailPhonesHeader">شماره تلفن(ها)</string>
+    <string name="EditCenterTabDetailDescriptionHeader">توضیحات</string>
 
-    <string name="EditCenterDetailTabAddressHint">غیر ضروری</string>
-    <string name="EditCenterDetailTabDescriptionHint">غیر ضروری</string>
+    <string name="EditCenterTabDetailButton">ویرایش</string>
 
-    <string name="EditCenterDetailTabButton">ویرایش</string>
+    ---------- // EditCenterTabAvatar
 
-    ---------- // EditCenterAvatar Tab
+    <string name="EditCenterTabAvatarAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
 
-    <string name="EditCenterAvatarTabAvatarGuide">جهت انتخاب تصویر جدید، روی تصویر پروفایل کلیک کنید.</string>
-
-    <string name="EditCenterAvatarTabButton">ویرایش</string>
+    <string name="EditCenterTabAvatarButton">ویرایش</string>
 
     /*
     ---------- EditCenterUser Fragment ----------
@@ -644,7 +641,7 @@
     <string name="EditPlatformFragmentIndetifierTypeHeader">نوع مقدار</string>
     <string name="EditPlatformFragmentIdentifierHeader">مقدار</string>
 
-    <string name="EditPlatformFragmentIdentifierHint">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
+    <string name="EditPlatformFragmentIdentifierGuide">آدرس اینترنتی، شماره تماس یا متن را وارد نمایید</string>
 
     <string name="EditPlatformFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
 
@@ -710,8 +707,6 @@
     <string name="EditTreasuryFragmentTitle">ویرایش کیف پول</string>
 
     <string name="EditTreasuryFragmentNameHeader">عنوان</string>
-
-    <string name="EditTreasuryFragmentNameHint">عنوان کیف پول</string>
 
     <string name="EditTreasuryFragmentNameGuide">عنوان کیف پولی که دارید را وارد کنید؛ مثلا صندوق نقدی مرکز، حساب جناب دکتر…</string>
 
