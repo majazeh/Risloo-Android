@@ -5,16 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:background="@drawable/draw_12sdp_solid_white"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
     android:layoutDirection="rtl"
+    android:background="@drawable/draw_12sdp_solid_white"
     tools:context=".Views.Dialogs.SelectedDialog">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_16sdp">
 
         <TextView
             android:id="@+id/title_textView"
@@ -23,8 +24,8 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_16sdp"
-            android:gravity="start"
-            android:textSize="@dimen/_13ssp"
+            android:gravity="right"
+            android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray700"
             android:textAlignment="gravity"
@@ -54,9 +55,9 @@
             android:id="@+id/input_editText"
             android:layout_width="0dp"
             android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_12sdp"
             android:paddingEnd="@dimen/_8sdp"
             android:paddingStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_12sdp"
             android:imeOptions="actionDone"
             android:inputType="text"
             android:gravity="center|right"
@@ -69,7 +70,6 @@
             android:importantForAutofill="no"
             android:saveEnabled="false"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-            app:layout_constraintBottom_toTopOf="@id/list_recyclerView"
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/title_textView"
@@ -86,6 +86,7 @@
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/input_editText"
+            tools:layout_marginBottom="@dimen/_14sdp"
             tools:layout_marginTop="@dimen/_14sdp"
             tools:listitem="@layout/single_item_selected"
             tools:itemCount="4" />
@@ -94,7 +95,6 @@
             android:id="@+id/entry_button"
             android:layout_width="0dp"
             android:layout_height="@dimen/_36sdp"
-            android:layout_marginBottom="@dimen/_18sdp"
             android:layout_marginTop="@dimen/_16sdp"
             android:gravity="center"
             android:textSize="@dimen/_12ssp"
@@ -103,11 +103,9 @@
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_medium"
             android:background="@drawable/draw_16sdp_solid_blue500"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@id/title_textView"
             app:layout_constraintStart_toStartOf="@id/title_textView"
             app:layout_constraintTop_toBottomOf="@id/list_recyclerView"
-            tools:layout_marginTop="@dimen/_14sdp"
             tools:text="ثبت" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

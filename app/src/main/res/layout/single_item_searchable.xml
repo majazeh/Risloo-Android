@@ -8,8 +8,7 @@
     android:layoutDirection="rtl"
     android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
     tools:layout_marginBottom="@dimen/_2sdp"
-    tools:layout_marginTop="@dimen/_2sdp"
-    tools:context=".Views.Adapters.Recycler.SearchableAdapter">
+    tools:layout_marginTop="@dimen/_2sdp">
 
     <TextView
         android:id="@+id/title_textView"

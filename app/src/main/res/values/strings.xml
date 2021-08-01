@@ -1389,7 +1389,7 @@
     <string name="DialogPhoneEntry">ثبت</string>
 
     <string name="DialogAxisTitle">محور(ها) جلسه را تایپ کنید.</string>
-    <string name="DialogAxisHint">محور</string>
+    <string name="DialogAxisHint">محور جلسه</string>
     <string name="DialogAxisEntry">ثبت</string>
 
     <string name="DialogScaleTitle">مقیاس(ها) را انتخاب کنید.</string>
@@ -1400,6 +1400,10 @@
     <string name="DialogReferenceHint">جستجو</string>
     <string name="DialogReferenceEntry">ثبت</string>
 
+    <string name="DialogTagTitle">برچسب‌(ها) را انتخاب کنید.</string>
+    <string name="DialogTagHint">جستجو</string>
+    <string name="DialogTagEntry">ثبت</string>
+
     <string name="DialogCaseTitle">پرونده را انتخاب کنید.</string>
     <string name="DialogCaseHint">جستجو</string>
 
@@ -1409,11 +1413,11 @@
     <string name="DialogSessionTitle">جلسه را انتخاب کنید.</string>
     <string name="DialogSessionHint">جستجو</string>
 
-    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
-    <string name="DialogPsychologyHint">جستجو</string>
-
     <string name="DialogRoomTitle">اتاق درمان را انتخاب کنید.</string>
     <string name="DialogRoomHint">جستجو</string>
+
+    <string name="DialogPsychologyTitle">روان‌شناس را انتخاب کنید.</string>
+    <string name="DialogPsychologyHint">جستجو</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

@@ -192,6 +192,9 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     holder.binding.subTextView.setVisibility(View.GONE);
                     holder.binding.subTextView.setText("");
                 } break;
+                case "tags": {
+                    // TODO : Place Code When Needed
+                } break;
                 case "patternDays": {
                     holder.binding.titleTextView.setText(item.object.getString("id"));
 
@@ -207,11 +210,16 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
     private void setActive(SearchableHolder holder, TypeModel item) {
         try {
             if (current instanceof CreateCaseFragment) {
-                if (method.equals("references")) {
-                    UserModel model = (UserModel) item;
+                switch (method) {
+                    case "references": {
+                        UserModel model = (UserModel) item;
 
-                    detector(holder, ((CreateCaseFragment) current).referencesAdapter.getIds().contains(model.getId()));
-                    calculateCount(((CreateCaseFragment) current).referencesAdapter.getIds().size());
+                        detector(holder, ((CreateCaseFragment) current).referencesAdapter.getIds().contains(model.getId()));
+                        calculateCount(((CreateCaseFragment) current).referencesAdapter.getIds().size());
+                    } break;
+                    case "tags": {
+                        // TODO : Place Code When Needed
+                    } break;
                 }
             }
 

@@ -66,9 +66,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
     // Objects
     private Handler handler;
+    private HashMap data, header;
 
     // Vars
-    private HashMap data, header;
     private String method;
 
     @NonNull
@@ -135,11 +135,8 @@ public class SearchableDialog extends AppCompatDialogFragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.inputEditText);
             return false;
         });
 
@@ -183,6 +180,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogReferenceHint));
                 binding.entryButton.setText(getResources().getString(R.string.DialogReferenceEntry));
                 break;
+            case "tags":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogTagTitle));
+                binding.inputEditText.setHint(getResources().getString(R.string.DialogTagHint));
+                binding.entryButton.setText(getResources().getString(R.string.DialogTagEntry));
+                break;
             case "managers":
                 binding.titleTextView.setText(getResources().getString(R.string.DialogManagerTitle));
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogManagerHint));
@@ -218,9 +220,14 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
     private void setHashmap() {
         if (current instanceof CreateCaseFragment) {
-            if (method.equals("references")) {
-                data.put("id", ((CreateCaseFragment) current).roomId);
-                data.put("usage", "create_case");
+            switch (method) {
+                case "references":
+                    data.put("id", ((CreateCaseFragment) current).roomId);
+                    data.put("usage", "create_case");
+                    break;
+                case "tags":
+                    // TODO : Place Code When Needed
+                    break;
             }
         }
 
@@ -524,6 +531,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
                             }
                         }
                     });
+                break;
+            case "tags":
+                // TODO : Place Code When Needed
                 break;
             case "psychologies":
                 Center.users(data, header, new Response() {
