@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Platforms2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -26,7 +26,7 @@ public class EditSessionPlatformFragment extends Fragment {
     public FragmentEditSessionPlatformBinding binding;
 
     // Adapters
-    public Platforms2Adapter adapter;
+    public TabPlatformsAdapter adapter;
 
     // Fragments
     private Fragment current;
@@ -48,7 +48,7 @@ public class EditSessionPlatformFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new Platforms2Adapter(requireActivity());
+        adapter = new TabPlatformsAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 

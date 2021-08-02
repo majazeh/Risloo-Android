@@ -30,7 +30,7 @@
 
             <include
                 android:id="@+id/index_singleLayout"
-                layout="@layout/component_single_platform2"
+                layout="@layout/component_single_tab_platform"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 app:layout_constraintBottom_toBottomOf="parent"

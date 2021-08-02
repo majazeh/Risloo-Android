@@ -1185,14 +1185,14 @@
     <string name="PlatformsAdapterEmpty">هنوز بستري ثبت نشده است.</string>
 
     /*
-    ---------- Platforms2 Adapter ----------
+    ---------- TabPlatforms Adapter ----------
     */
 
-    <string name="Platforms2AdapterRoomCheckbox">اتصال به اتاق درمان</string>
+    <string name="TabPlatformsAdapterRoomCheckbox">اتصال به اتاق درمان</string>
 
-    <string name="Platforms2AdapterIdentifierHint">مقدار</string>
+    <string name="TabPlatformsAdapterIdentifierHint">مقدار</string>
 
-    <string name="Platforms2AdapterEmpty">هنوز بستري ثبت نشده است.</string>
+    <string name="TabPlatformsAdapterEmpty">هنوز بستري ثبت نشده است.</string>
 
     /*
     ---------- Psychologists Adapter ----------

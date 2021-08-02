@@ -15,14 +15,14 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.databinding.SingleItemPlatform2Binding;
+import com.majazeh.risloo.databinding.SingleItemTabPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Platforms2Adapter extends RecyclerView.Adapter<Platforms2Adapter.Platforms2Holder> {
+public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapter.TabPlatformsHolder> {
 
     // Objects
     private Activity activity;
@@ -32,18 +32,18 @@ public class Platforms2Adapter extends RecyclerView.Adapter<Platforms2Adapter.Pl
     private HashMap data, header;
     private boolean editable = false;
 
-    public Platforms2Adapter(@NonNull Activity activity) {
+    public TabPlatformsAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public Platforms2Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Platforms2Holder(SingleItemPlatform2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public TabPlatformsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new TabPlatformsHolder(SingleItemTabPlatformBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Platforms2Holder holder, int i) {
+    public void onBindViewHolder(@NonNull TabPlatformsHolder holder, int i) {
         SessionPlatformModel platform = (SessionPlatformModel) platforms.get(i);
 
         initializer(holder);
@@ -83,20 +83,20 @@ public class Platforms2Adapter extends RecyclerView.Adapter<Platforms2Adapter.Pl
         notifyDataSetChanged();
     }
 
-    private void initializer(Platforms2Holder holder) {
+    private void initializer(TabPlatformsHolder holder) {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
-    private void detector(Platforms2Holder holder) {
+    private void detector(TabPlatformsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(Platforms2Holder holder, SessionPlatformModel model) {
+    private void listener(TabPlatformsHolder holder, SessionPlatformModel model) {
         ClickManager.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.containerConstraintLayout);
@@ -141,7 +141,7 @@ public class Platforms2Adapter extends RecyclerView.Adapter<Platforms2Adapter.Pl
         });
     }
 
-    private void setData(Platforms2Holder holder, SessionPlatformModel model) {
+    private void setData(TabPlatformsHolder holder, SessionPlatformModel model) {
         String title = model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(activity, "fa", model.getType())) ;
 
         holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.Gray400), (int) activity.getResources().getDimension(R.dimen._7ssp)));
@@ -152,7 +152,7 @@ public class Platforms2Adapter extends RecyclerView.Adapter<Platforms2Adapter.Pl
         setPinned(holder, model);
     }
 
-    private void setAvailable(Platforms2Holder holder, SessionPlatformModel model) {
+    private void setAvailable(TabPlatformsHolder holder, SessionPlatformModel model) {
         if (model.isAvailable()) {
             holder.binding.availableSwitchCompat.setChecked(true);
 
@@ -168,14 +168,14 @@ public class Platforms2Adapter extends RecyclerView.Adapter<Platforms2Adapter.Pl
         }
     }
 
-    private void setPinned(Platforms2Holder holder, SessionPlatformModel model) {
+    private void setPinned(TabPlatformsHolder holder, SessionPlatformModel model) {
         if (model.isPin())
             holder.binding.roomCheckBox.setChecked(true);
         else
             holder.binding.roomCheckBox.setChecked(false);
     }
 
-    private void setClickable(Platforms2Holder holder) {
+    private void setClickable(TabPlatformsHolder holder) {
         if (editable) {
             holder.binding.identifierEditText.setFocusableInTouchMode(true);
             holder.binding.roomCheckBox.setEnabled(true);
@@ -195,11 +195,11 @@ public class Platforms2Adapter extends RecyclerView.Adapter<Platforms2Adapter.Pl
         // TODO : Place Code When Needed
     }
 
-    public class Platforms2Holder extends RecyclerView.ViewHolder {
+    public class TabPlatformsHolder extends RecyclerView.ViewHolder {
 
-        private SingleItemPlatform2Binding binding;
+        private SingleItemTabPlatformBinding binding;
 
-        public Platforms2Holder(SingleItemPlatform2Binding binding) {
+        public TabPlatformsHolder(SingleItemTabPlatformBinding binding) {
             super(binding.getRoot());
             this.binding = binding;
         }
