@@ -24,10 +24,13 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
     // Objects
     private Activity activity;
 
+    // Fragments
+    private Fragment current;
+
     // Vars
-    private ArrayList<Long> week;
+    private ArrayList<Long> items;
     private long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
-    private boolean meSelected = false;
+    private boolean userSelect = false;
 
     public WeeksAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -41,7 +44,9 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     @Override
     public void onBindViewHolder(@NonNull WeeksHolder holder, int i) {
-        long timestamp = week.get(i);
+        long timestamp = items.get(i);
+
+        intializer();
 
         listener(holder, timestamp);
 
@@ -52,12 +57,16 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     @Override
     public int getItemCount() {
-        return week.size();
+        return items.size();
     }
 
-    public void setWeek(ArrayList<Long> week) {
-        this.week = week;
+    public void setItems(ArrayList<Long> items) {
+        this.items = items;
         notifyDataSetChanged();
+    }
+
+    private void intializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
     private void detector(WeeksHolder holder, long timestamp) {
@@ -100,18 +109,16 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     private void listener(WeeksHolder holder, long timestamp) {
         ClickManager.onDelayedClickListener(() -> {
-            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-
             if (current instanceof CenterSchedulesFragment) {
                 ((CenterSchedulesFragment) current).responseAdapter(timestamp);
                 selectedTimestamp = timestamp;
-                meSelected = true;
+                userSelect = true;
             }
 
             if (current instanceof RoomSchedulesFragment) {
                 ((RoomSchedulesFragment) current).responseAdapter(timestamp);
                 selectedTimestamp = timestamp;
-                meSelected = true;
+                userSelect = true;
             }
 
             notifyDataSetChanged();
@@ -122,7 +129,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
         holder.binding.titleTextView.setText(DateManager.jalDayName(String.valueOf(timestamp)));
         holder.binding.dateTextView.setText(DateManager.jalYYYYsMMsDD(String.valueOf(timestamp), "/"));
 
-        if (!meSelected) {
+        if (!userSelect) {
             if (currentTimestamp == timestamp) {
                 selectedTimestamp = timestamp;
             }

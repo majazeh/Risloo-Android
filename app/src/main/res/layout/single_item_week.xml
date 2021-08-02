@@ -9,18 +9,17 @@
     app:cardCornerRadius="@dimen/_2sdp"
     app:cardElevation="0dp"
     tools:layout_marginEnd="@dimen/_2sdp"
-    tools:layout_marginStart="@dimen/_2sdp"
-    tools:context=".Views.Adapters.Recycler.WeeksAdapter">
+    tools:layout_marginStart="@dimen/_2sdp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_constraintLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_8sdp"
         android:paddingEnd="@dimen/_4sdp"
         android:paddingStart="@dimen/_4sdp"
         android:paddingTop="@dimen/_8sdp"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200">
+        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
 
         <TextView
             android:id="@+id/title_textView"
@@ -28,8 +27,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textSize="@dimen/_10ssp"
-            android:textStyle="bold"
-            android:textColor="@color/Gray600"
+            android:textStyle="normal"
+            android:textColor="@color/Gray700"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_bold"
             app:layout_constraintEnd_toEndOf="parent"
@@ -44,7 +43,7 @@
             android:gravity="center"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"
-            android:textColor="@color/Gray600"
+            android:textColor="@color/Gray500"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
             app:layout_constraintBottom_toBottomOf="parent"
