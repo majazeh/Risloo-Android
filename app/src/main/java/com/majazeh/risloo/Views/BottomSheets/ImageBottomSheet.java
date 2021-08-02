@@ -27,6 +27,9 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
     // Binding
     private BottomSheetImageBinding binding;
 
+    // Fragments
+    private Fragment current, child;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -38,11 +41,18 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = BottomSheetImageBinding.inflate(inflater, viewGroup, false);
 
+        intializer();
+
         listener();
 
         detector();
 
         return binding.getRoot();
+    }
+
+    private void intializer() {
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        child = ((MainActivity) requireActivity()).fragmont.getChild();
     }
 
     private void detector() {
@@ -63,9 +73,6 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
-                Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-                Fragment child = ((MainActivity) requireActivity()).fragmont.getChild();
-
                 if (current instanceof CreateCenterFragment)
                     ((CreateCenterFragment) current).avatarPath = IntentManager.camera(requireActivity());
 

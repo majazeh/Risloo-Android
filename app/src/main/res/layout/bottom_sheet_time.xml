@@ -25,7 +25,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:text="ساعت را انتخاب کنید." />
+        tools:text="زمان را انتخاب کنید." />
 
     <com.majazeh.risloo.Utils.Widgets.SingleNumberPicker
         android:id="@+id/minute_numberPicker"
