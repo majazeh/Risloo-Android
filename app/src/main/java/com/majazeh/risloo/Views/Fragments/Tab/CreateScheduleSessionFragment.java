@@ -303,19 +303,19 @@ public class CreateScheduleSessionFragment extends Fragment {
 
     public void responseBottomSheet(String method, String data) {
         switch (method) {
-            case "startAccurateTime":
+            case "accurateStartTime":
                 startAccurateTime = data;
                 binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
                 break;
-            case "startAccurateDate":
+            case "accurateStartDate":
                 startAccurateDate = data;
                 binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
                 break;
-            case "endAccurateTime":
+            case "accurateEndTime":
                 endAccurateTime = data;
                 binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
                 break;
-            case "endAccurateDate":
+            case "accurateEndDate":
                 endAccurateDate = data;
                 binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
                 break;

@@ -28,8 +28,10 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
     // Binding
     private BottomSheetLogoutBinding binding;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String name, avatar;
 
     @NonNull
@@ -49,7 +51,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
         detector();
 
-        setWidget();
+        setDialog();
 
         return binding.getRoot();
     }
@@ -77,6 +79,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).singleton.logout();
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
+
                             IntentManager.auth(requireActivity());
 
                             dismiss();
@@ -96,7 +99,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
         }).widget(binding.entryButton);
     }
 
-    private void setWidget() {
+    private void setDialog() {
         if (!name.equals("")) {
             binding.nameTextView.setText(name);
         } else {

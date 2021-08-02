@@ -1343,17 +1343,17 @@
     <string name="BottomSheetStartTimeTitle">زمان شروع جلسه را انتخاب کنید.</string>
     <string name="BottomSheetStartTimeEntry">ثبت</string>
 
-    <string name="BottomSheetStartAccurateDateTitle">تاریخ دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetStartAccurateDateEntry">ثبت</string>
+    <string name="BottomSheetAccurateStartDateTitle">تاریخ دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetAccurateStartDateEntry">ثبت</string>
 
-    <string name="BottomSheetStartAccurateTimeTitle">زمان دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetStartAccurateTimeEntry">ثبت</string>
+    <string name="BottomSheetAccurateStartTimeTitle">زمان دقيق شروع نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetAccurateStartTimeEntry">ثبت</string>
 
-    <string name="BottomSheetEndAccurateDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetEndAccurateDateEntry">ثبت</string>
+    <string name="BottomSheetAccurateEndDateTitle">تاریخ دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetAccurateEndDateEntry">ثبت</string>
 
-    <string name="BottomSheetEndAccurateTimeTitle">زمان دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
-    <string name="BottomSheetEndAccurateTimeEntry">ثبت</string>
+    <string name="BottomSheetAccurateEndTimeTitle">زمان دقيق پايان نوبت‌گیری را انتخاب کنید.</string>
+    <string name="BottomSheetAccurateEndTimeEntry">ثبت</string>
 
     <string name="BottomSheetPeriodStartDateTitle">تاریخ شروع بازه زمانی را انتخاب کنید.</string>
     <string name="BottomSheetPeriodStartDateEntry">ثبت</string>

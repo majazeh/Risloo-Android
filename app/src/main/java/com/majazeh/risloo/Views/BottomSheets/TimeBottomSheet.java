@@ -34,6 +34,9 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     // Binding
     private BottomSheetTimeBinding binding;
 
+    // Fragments
+    private Fragment child;
+
     // Vars
     private int year, month, day, hour, minute, second;
     private String method;
@@ -55,6 +58,8 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
         detector();
 
+        setDialog();
+
         setNumberPicker();
 
         return binding.getRoot();
@@ -67,20 +72,7 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        switch (method) {
-            case "startTime":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartTimeTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartTimeEntry));
-                break;
-            case "startAccurateTime":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartAccurateTimeTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartAccurateTimeEntry));
-                break;
-            case "endAccurateTime":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetEndAccurateTimeTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetEndAccurateTimeEntry));
-                break;
-        }
+        child = ((MainActivity) requireActivity()).fragmont.getChild();
     }
 
     private void detector() {
@@ -91,9 +83,6 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-            Fragment child = ((MainActivity) requireActivity()).fragmont.getChild();
-
             if (child instanceof CreateSessionTimeFragment)
                 ((CreateSessionTimeFragment) child).responseBottomSheet(method, getTime());
 
@@ -114,6 +103,23 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
             dismiss();
         }).widget(binding.entryButton);
+    }
+
+    private void setDialog() {
+        switch (method) {
+            case "startTime":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartTimeTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartTimeEntry));
+                break;
+            case "accurateStartTime":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateStartTimeTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetAccurateStartTimeEntry));
+                break;
+            case "accurateEndTime":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateEndTimeTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetAccurateEndTimeEntry));
+                break;
+        }
     }
 
     private void setNumberPicker() {

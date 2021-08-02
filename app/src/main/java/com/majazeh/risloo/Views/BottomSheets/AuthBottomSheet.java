@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +14,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.BottomSheetAuthBinding;
 import com.mre.ligheh.API.Response;
@@ -28,8 +28,10 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
     // Binding
     private BottomSheetAuthBinding binding;
 
-    // Vars
+    // Objects
     private HashMap data, header;
+
+    // Vars
     private String key, name, avatar;
 
     @NonNull
@@ -49,7 +51,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
 
         detector();
 
-        setWidget();
+        setDialog();
 
         return binding.getRoot();
     }
@@ -78,7 +80,9 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+
+                            ((MainActivity) requireActivity()).navController.navigateUp();
 
                             dismiss();
                         });
@@ -97,7 +101,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
         }).widget(binding.entryButton);
     }
 
-    private void setWidget() {
+    private void setDialog() {
         if (!name.equals("")) {
             binding.nameTextView.setText(name);
         } else {

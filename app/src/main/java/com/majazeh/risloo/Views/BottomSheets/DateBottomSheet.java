@@ -36,6 +36,9 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
     // Binding
     private BottomSheetDateBinding binding;
 
+    // Fragments
+    private Fragment current, child;
+
     // Vars
     private int year, month, day, hour, minute, second;
     private String method;
@@ -57,6 +60,8 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
 
         detector();
 
+        setDialog();
+
         setNumberPicker();
 
         return binding.getRoot();
@@ -69,36 +74,8 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        switch (method) {
-            case "startDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartDateTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartDateEntry));
-                break;
-            case "startAccurateDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartAccurateDateTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartAccurateDateEntry));
-                break;
-            case "endAccurateDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetEndAccurateDateTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetEndAccurateDateEntry));
-                break;
-            case "specifiedDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetSpecifiedDateTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetSpecifiedDateEntry));
-                break;
-            case "periodStartDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodStartDateTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetPeriodStartDateEntry));
-                break;
-            case "periodEndDate":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodEndDateTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetPeriodEndDateEntry));
-                break;
-            case "birthday":
-                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayTitle));
-                binding.entryButton.setText(getResources().getString(R.string.BottomSheetBirthdayEntry));
-                break;
-        }
+        current = ((MainActivity) requireActivity()).fragmont.getCurrent();
+        child = ((MainActivity) requireActivity()).fragmont.getChild();
     }
 
     private void detector() {
@@ -119,9 +96,6 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            Fragment current = ((MainActivity) requireActivity()).fragmont.getCurrent();
-            Fragment child = ((MainActivity) requireActivity()).fragmont.getChild();
-
             if (child instanceof CreateSessionTimeFragment)
                 ((CreateSessionTimeFragment) child).responseBottomSheet(method, getDate());
 
@@ -148,6 +122,39 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
 
             dismiss();
         }).widget(binding.entryButton);
+    }
+
+    private void setDialog() {
+        switch (method) {
+            case "birthday":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetBirthdayTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetBirthdayEntry));
+                break;
+            case "startDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetStartDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetStartDateEntry));
+                break;
+            case "accurateStartDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateStartDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetAccurateStartDateEntry));
+                break;
+            case "accurateEndDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetAccurateEndDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetAccurateEndDateEntry));
+                break;
+            case "periodStartDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodStartDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetPeriodStartDateEntry));
+                break;
+            case "periodEndDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetPeriodEndDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetPeriodEndDateEntry));
+                break;
+            case "specifiedDate":
+                binding.titleTextView.setText(getResources().getString(R.string.BottomSheetSpecifiedDateTitle));
+                binding.entryButton.setText(getResources().getString(R.string.BottomSheetSpecifiedDateEntry));
+                break;
+        }
     }
 
     private void setNumberPicker() {
