@@ -312,9 +312,9 @@ public class SampleFragment extends Fragment {
                 profileHalfsAdapter.setProfiles(sampleModel.getProfilesHalf().data(), false);
                 binding.profileHalfsSingleLayout.recyclerView.setAdapter(profileHalfsAdapter);
 
-                binding.profileHalfsSingleLayout.textView.setVisibility(View.GONE);
+                binding.profileHalfsSingleLayout.emptyView.setVisibility(View.GONE);
             } else if (profileHalfsAdapter.getItemCount() == 0) {
-                binding.profileHalfsSingleLayout.textView.setVisibility(View.VISIBLE);
+                binding.profileHalfsSingleLayout.emptyView.setVisibility(View.VISIBLE);
             }
 
             binding.profileHalfsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));

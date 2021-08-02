@@ -125,9 +125,9 @@ public class RoomPlatformsFragment extends Fragment {
                             adapter.setPlatforms(platforms.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
-                            binding.indexSingleLayout.textView.setVisibility(View.GONE);
+                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
-                            binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
                         }
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 

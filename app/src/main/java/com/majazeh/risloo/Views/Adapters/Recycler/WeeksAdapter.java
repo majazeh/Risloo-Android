@@ -28,7 +28,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
     private Fragment current;
 
     // Vars
-    private ArrayList<Long> items;
+    private ArrayList<Long> timestamps;
     private long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
     private boolean userSelect = false;
 
@@ -44,7 +44,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     @Override
     public void onBindViewHolder(@NonNull WeeksHolder holder, int i) {
-        long timestamp = items.get(i);
+        long timestamp = timestamps.get(i);
 
         intializer();
 
@@ -57,11 +57,11 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return timestamps.size();
     }
 
-    public void setItems(ArrayList<Long> items) {
-        this.items = items;
+    public void setTimestamps(ArrayList<Long> timestamps) {
+        this.timestamps = timestamps;
         notifyDataSetChanged();
     }
 

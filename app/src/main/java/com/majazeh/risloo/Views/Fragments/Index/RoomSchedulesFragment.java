@@ -35,11 +35,15 @@ public class RoomSchedulesFragment extends Fragment {
     private WeeksAdapter weeksAdapter;
     private SchedulesAdapter schedulesAdapter;
 
-    // Vars
-    private HashMap data, header;
+    // Models
     private RoomModel roomModel;
+
+    // Objects
+    private HashMap data, header;
+
+    // Vars
+    private String roomId = "", centerId = "", type = "";
     private long currentTimestamp = DateManager.currentTimestamp();
-    public String roomId = "", centerId = "", type = "";
 
     @Nullable
     @Override
@@ -67,13 +71,15 @@ public class RoomSchedulesFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
+        binding.schedulesHeaderLayout.titleTextView.setText(getResources().getString(R.string.RoomSchedulesFragmentTitle));
+
         InitManager.txtTextColor(binding.weekTextView.getRoot(), getResources().getString(R.string.AppDefaultWeek), getResources().getColor(R.color.Gray500));
 
         InitManager.imgResTint(requireActivity(), binding.backwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600);
         InitManager.imgResTintRotate(requireActivity(), binding.forwardImageView.getRoot(), R.drawable.ic_angle_right_regular, R.color.Blue600, 180);
 
         InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.weeksRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.schedulesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.schedulesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {
@@ -103,7 +109,6 @@ public class RoomSchedulesFragment extends Fragment {
 
     private void setArgs() {
         roomModel = (RoomModel) RoomUsersFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
         setData(roomModel);
     }
 
@@ -125,7 +130,7 @@ public class RoomSchedulesFragment extends Fragment {
     private void setSchedules(long timestamp) {
         binding.weekTextView.getRoot().setText(DateManager.currentJalWeekString(timestamp));
 
-        weeksAdapter.setWeek(DateManager.currentJalWeekTimestamps(timestamp));
+        weeksAdapter.setTimestamps(DateManager.currentJalWeekTimestamps(timestamp));
         binding.weeksRecyclerView.setAdapter(weeksAdapter);
     }
 
@@ -137,26 +142,27 @@ public class RoomSchedulesFragment extends Fragment {
         Room.schedule(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                List schedules = (List) object;
+                List items = (List) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        schedulesAdapter.clearSchedules();
+                        schedulesAdapter.clearItems();
 
-                        if (!schedules.data().isEmpty()) {
-                            schedulesAdapter.setSchedules(schedules.data(), type, binding.schedulesSingleLayout.textView);
+                        if (!items.data().isEmpty()) {
+                            schedulesAdapter.setItems(items.data(), binding.schedulesHeaderLayout.countTextView, binding.schedulesSingleLayout.emptyView);
                             binding.schedulesSingleLayout.recyclerView.setAdapter(schedulesAdapter);
                         } else if (schedulesAdapter.getItemCount() == 0) {
-                            binding.schedulesSingleLayout.textView.setVisibility(View.VISIBLE);
+                            binding.schedulesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.schedulesSingleLayout.emptyView.setText(getResources().getString(R.string.SchedulesAdapterWeekEmpty));
                         }
-
-                        binding.weeksRecyclerView.setVisibility(View.VISIBLE);
-                        binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.weeksShimmerLayout.getRoot().stopShimmer();
 
                         binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.schedulesShimmerLayout.getRoot().stopShimmer();
+
+                        binding.weeksRecyclerView.setVisibility(View.VISIBLE);
+                        binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.weeksShimmerLayout.getRoot().stopShimmer();
                     });
                 }
             }
@@ -165,13 +171,13 @@ public class RoomSchedulesFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        binding.weeksRecyclerView.setVisibility(View.VISIBLE);
-                        binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.weeksShimmerLayout.getRoot().stopShimmer();
-
                         binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.schedulesShimmerLayout.getRoot().stopShimmer();
+
+                        binding.weeksRecyclerView.setVisibility(View.VISIBLE);
+                        binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.weeksShimmerLayout.getRoot().stopShimmer();
                     });
                 }
             }
@@ -179,13 +185,13 @@ public class RoomSchedulesFragment extends Fragment {
     }
 
     private void doWork(long timestamp) {
-        binding.weeksRecyclerView.setVisibility(View.GONE);
-        binding.weeksShimmerLayout.getRoot().setVisibility(View.VISIBLE);
-        binding.weeksShimmerLayout.getRoot().startShimmer();
-
         binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);
         binding.schedulesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
         binding.schedulesShimmerLayout.getRoot().startShimmer();
+
+        binding.weeksRecyclerView.setVisibility(View.GONE);
+        binding.weeksShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.weeksShimmerLayout.getRoot().startShimmer();
 
         currentTimestamp = timestamp;
 
