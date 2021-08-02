@@ -217,7 +217,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
                             ((MainActivity) activity).loadingDialog.dismiss();
 
                             chainBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
-                            chainBottomSheet.setData(key, ((MainActivity) activity).singleton.getId(), ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), bulkSampleModel);
+                            chainBottomSheet.setData(key, ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), bulkSampleModel);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

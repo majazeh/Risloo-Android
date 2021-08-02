@@ -19,7 +19,7 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.TestsHolder>
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> tests;
+    private ArrayList<TypeModel> items;
 
     public TestsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -33,30 +33,30 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.TestsHolder>
 
     @Override
     public void onBindViewHolder(@NonNull TestsHolder holder, int i) {
-        ScaleModel scale = (ScaleModel) tests.get(i);
+        ScaleModel model = (ScaleModel) items.get(i);
 
-        setData(holder, scale);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.tests != null)
-            return tests.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setTests(ArrayList<TypeModel> tests) {
-        if (this.tests == null)
-            this.tests = tests;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.tests.addAll(tests);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearTests() {
-        if (this.tests != null) {
-            this.tests.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

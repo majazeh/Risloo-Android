@@ -150,7 +150,7 @@ public class BulkSampleFragment extends Fragment {
                                                     ((MainActivity) requireActivity()).loadingDialog.dismiss();
 
                                                     chainBottomSheet.show(requireActivity().getSupportFragmentManager(), "chainBottomSheet");
-                                                    chainBottomSheet.setData(key, ((MainActivity) requireActivity()).singleton.getId(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+                                                    chainBottomSheet.setData(key, ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

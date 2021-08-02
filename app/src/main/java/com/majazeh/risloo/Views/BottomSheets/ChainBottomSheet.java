@@ -1,9 +1,11 @@
 package com.majazeh.risloo.Views.BottomSheets;
 
+import android.annotation.SuppressLint;
 import android.app.Dialog;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -37,10 +39,14 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     // Adapters
     private TestsAdapter testAdapter;
 
-    // Vars
+    // Models
+    private BulkSampleModel bulkSampleModel;
+
+    // Objects
     private HashMap data, header;
-    private BulkSampleModel model;
-    private String key, id, name, avatar;
+
+    // Vars
+    private String key, name, avatar;
 
     @NonNull
     @Override
@@ -59,7 +65,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
 
         detector();
 
-        setWidget();
+        setDialog();
 
         return binding.getRoot();
     }
@@ -71,7 +77,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
+        InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._6sdp), 0, getResources().getDimension(R.dimen._2sdp), 0);
     }
 
     private void detector() {
@@ -80,16 +86,25 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.nicknameEditText.getRoot().setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameEditText.getRoot().hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameEditText.getRoot());
+            return false;
+        });
+
+        binding.nicknameEditText.getRoot().setOnFocusChangeListener((v, hasFocus) -> {
+            name = binding.nicknameEditText.getRoot().getText().toString().trim();
+        });
+
         ClickManager.onDelayedClickListener(() -> {
             ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
             data.put("key", key);
 
-            if (binding.nicknameGroup.getVisibility() == View.VISIBLE) {
-                name = binding.nicknameEditText.getRoot().getText().toString().trim();
+            if (binding.nicknameGroup.getVisibility() == View.VISIBLE)
                 data.put("nickname", name);
-            }
 
             Sample.theory(data, header, new Response() {
                 @Override
@@ -99,8 +114,8 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             key = model.getKey();
-
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
+
                             IntentManager.test(requireActivity(), key);
 
                             dismiss();
@@ -120,7 +135,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
         }).widget(binding.entryButton);
     }
 
-    private void setWidget() {
+    private void setDialog() {
         try {
             if (!name.equals("")) {
                 binding.nicknameEditText.getRoot().setText(name);
@@ -138,17 +153,17 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().getString("title").equals("")) {
-                binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail().has("title") && !bulkSampleModel.getRoom().getRoomCenter().getDetail().getString("title").equals("")) {
+                binding.centerTextView.setText(bulkSampleModel.getRoom().getRoomCenter().getDetail().getString("title"));
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getName() != null) {
-                binding.psychologyTextView.setText(model.getRoom().getRoomManager().getName());
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomManager() != null && bulkSampleModel.getRoom().getRoomManager().getName() != null) {
+                binding.psychologyTextView.setText(bulkSampleModel.getRoom().getRoomManager().getName());
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("avatar") && !model.getRoom().getRoomCenter().getDetail().getString("avatar").equals("") && model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail() != null && bulkSampleModel.getRoom().getRoomCenter().getDetail().has("avatar") && !bulkSampleModel.getRoom().getRoomCenter().getDetail().getString("avatar").equals("") && bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").length() != 0) {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
+                Picasso.get().load(bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charTextView.setText(StringManager.firstChars(binding.centerTextView.getText().toString()));
@@ -156,9 +171,9 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarCircleImageView);
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null && model.getRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomManager() != null && bulkSampleModel.getRoom().getRoomManager().getAvatar() != null && bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium() != null && bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl() != null) {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.GONE);
-                Picasso.get().load(model.getRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
+                Picasso.get().load(bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             } else {
                 binding.avatarsIncludeLayout.charSubTextView.setVisibility(View.VISIBLE);
                 binding.avatarsIncludeLayout.charSubTextView.setText(StringManager.firstChars(binding.psychologyTextView.getText().toString()));
@@ -166,12 +181,12 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                 Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(binding.avatarsIncludeLayout.avatarSubCircleImageView);
             }
 
-            if (model.getScales() != null) {
-                testAdapter.setTests(model.getScales().data());
+            if (bulkSampleModel.getScales() != null) {
+                testAdapter.setItems(bulkSampleModel.getScales().data());
                 binding.listRecyclerView.setAdapter(testAdapter);
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getAcceptation() != null) {
+            if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getAcceptation() != null) {
                 binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
                 binding.nicknameGroup.setVisibility(View.GONE);
             } else {
@@ -183,12 +198,11 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
         }
     }
 
-    public void setData(String key, String id, String name, String avatar, BulkSampleModel model) {
+    public void setData(String key, String name, String avatar, BulkSampleModel model) {
         this.key = key;
-        this.id = id;
         this.name = name;
         this.avatar = avatar;
-        this.model = model;
+        this.bulkSampleModel = model;
     }
 
     @Override

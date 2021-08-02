@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.databinding.SingleItemCheckedBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -40,11 +41,11 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedH
 
     @Override
     public void onBindViewHolder(@NonNull CheckedHolder holder, int i) {
-        TypeModel item = items.get(i);
+        TypeModel model = items.get(i);
 
-        listener(holder, item);
+        listener(holder, model);
 
-        setData(holder, item);
+        setData(holder, model);
     }
 
     @Override
@@ -53,10 +54,6 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedH
             return items.size();
         else
             return 0;
-    }
-
-    public ArrayList<TypeModel> getItems() {
-        return items;
     }
 
     public ArrayList<String> getIds() {
@@ -78,13 +75,13 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedH
         }
     }
 
-    private void listener(CheckedHolder holder, TypeModel item) {
+    private void listener(CheckedHolder holder, TypeModel model) {
         holder.binding.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             try {
                 if (isChecked)
-                    ids.add(item.object.getString("id"));
+                    ids.add(model.object.getString("id"));
                 else
-                    ids.remove(item.object.getString("id"));
+                    ids.remove(model.object.getString("id"));
 
                 calculateCount();
             } catch (JSONException e) {
@@ -93,9 +90,9 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedH
         });
     }
 
-    private void setData(CheckedHolder holder, TypeModel item) {
+    private void setData(CheckedHolder holder, TypeModel model) {
         try {
-            holder.binding.getRoot().setText(item.object.getString("name"));
+            holder.binding.getRoot().setText(model.object.getString("name"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -103,10 +100,8 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedH
 
     private void calculateCount() {
         if (ids.size() != 0) {
-            String count = "(" + ids.size() + ")";
-
             countTextView.setVisibility(View.VISIBLE);
-            countTextView.setText(count);
+            countTextView.setText(StringManager.bracing(ids.size()));
         } else {
             countTextView.setVisibility(View.GONE);
             countTextView.setText("");
