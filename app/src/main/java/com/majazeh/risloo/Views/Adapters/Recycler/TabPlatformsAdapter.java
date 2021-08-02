@@ -26,10 +26,10 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
 
     // Objects
     private Activity activity;
+    private HashMap data, header;
 
     // Vars
-    private ArrayList<TypeModel> platforms;
-    private HashMap data, header;
+    private ArrayList<TypeModel> items;
     private boolean editable = false;
 
     public TabPlatformsAdapter(@NonNull Activity activity) {
@@ -44,36 +44,36 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull TabPlatformsHolder holder, int i) {
-        SessionPlatformModel platform = (SessionPlatformModel) platforms.get(i);
+        SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
         initializer(holder);
 
         detector(holder);
 
-        listener(holder, platform);
+        listener(holder, model);
 
-        setData(holder, platform);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.platforms != null)
-            return platforms.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setPlatforms(ArrayList<TypeModel> platforms) {
-        if (this.platforms == null)
-            this.platforms = platforms;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.platforms.addAll(platforms);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearPlatforms() {
-        if (this.platforms != null) {
-            this.platforms.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -102,11 +102,8 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
         }).widget(holder.binding.containerConstraintLayout);
 
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!holder.binding.identifierEditText.hasFocus()) {
-                    ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
+                ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
             return false;
         });
 

@@ -6,7 +6,6 @@ import android.os.Build;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
@@ -19,6 +18,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterPlatformBinding;
@@ -32,15 +32,15 @@ import java.util.HashMap;
 
 public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatformsAdapter.CenterPlatformsHolder> {
 
-    // Objects
-    private Activity activity;
-
     // Fragments
     private Fragment current;
 
-    // Vars
-    private ArrayList<TypeModel> platforms;
+    // Objects
+    private Activity activity;
     private HashMap data, header;
+
+    // Vars
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public CenterPlatformsAdapter(@NonNull Activity activity) {
@@ -55,36 +55,36 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
     @Override
     public void onBindViewHolder(@NonNull CenterPlatformsHolder holder, int i) {
-        SessionPlatformModel platform = (SessionPlatformModel) platforms.get(i);
+        SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
         initializer(holder);
 
         detector(holder);
 
-        listener(holder, platform);
+        listener(holder, model);
 
-        setData(holder, platform);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.platforms != null)
-            return platforms.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setPlatforms(ArrayList<TypeModel> platforms) {
-        if (this.platforms == null)
-            this.platforms = platforms;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.platforms.addAll(platforms);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearPlatforms() {
-        if (this.platforms != null) {
-            this.platforms.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
@@ -232,7 +232,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     ((MainActivity) activity).loadingDialog.dismiss();
-                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
 

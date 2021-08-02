@@ -78,7 +78,7 @@ public class EditSessionPlatformFragment extends Fragment {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
             if (!model.getSession_platforms().data().isEmpty()) {
-                adapter.setPlatforms(model.getSession_platforms().data());
+                adapter.setItems(model.getSession_platforms().data());
                 binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                 binding.indexSingleLayout.emptyView.setVisibility(View.GONE);

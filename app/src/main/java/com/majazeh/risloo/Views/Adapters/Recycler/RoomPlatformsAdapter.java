@@ -3,12 +3,14 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Build;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -19,6 +21,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomPlatformBinding;
@@ -32,15 +35,16 @@ import java.util.HashMap;
 
 public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdapter.RoomPlatformsHolder> {
 
-    // Objects
-    private Activity activity;
-
     // Fragments
     private Fragment current;
 
-    // Vars
-    private ArrayList<TypeModel> platforms;
+    // Objects
+    private Activity activity;
+    private Handler handler;
     private HashMap data, header;
+
+    // Vars
+    private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
     public RoomPlatformsAdapter(@NonNull Activity activity) {
@@ -55,42 +59,44 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
 
     @Override
     public void onBindViewHolder(@NonNull RoomPlatformsHolder holder, int i) {
-        SessionPlatformModel platform = (SessionPlatformModel) platforms.get(i);
+        SessionPlatformModel model = (SessionPlatformModel) items.get(i);
 
         initializer(holder);
 
         detector(holder);
 
-        listener(holder, platform);
+        listener(holder, model);
 
-        setData(holder, platform);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.platforms != null)
-            return platforms.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setPlatforms(ArrayList<TypeModel> platforms) {
-        if (this.platforms == null)
-            this.platforms = platforms;
+    public void setItems(ArrayList<TypeModel> items) {
+        if (this.items == null)
+            this.items = items;
         else
-            this.platforms.addAll(platforms);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearPlatforms() {
-        if (this.platforms != null) {
-            this.platforms.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }
 
     private void initializer(RoomPlatformsHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
+
+        handler = new Handler();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -112,24 +118,36 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
         }).widget(holder.binding.containerConstraintLayout);
 
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
-            if (model.isAvailable() && model.isPin()) {
-                if (MotionEvent.ACTION_UP == event.getAction()) {
-                    if (!holder.binding.identifierEditText.hasFocus()) {
-                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
-                    }
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
+                ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
             return false;
         });
 
-        holder.binding.identifierEditText.setOnEditorActionListener((v, actionId, event) -> {
-            if (model.isAvailable() && model.isPin()) {
-                String identifier = holder.binding.identifierEditText.getText().toString().trim();
+        holder.binding.identifierEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-                if (!identifier.equals(""))
-                    doWork(holder, model, identifier, "identifier");
             }
-            return false;
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (holder.binding.identifierEditText.hasFocus()) {
+                    handler.removeCallbacksAndMessages(null);
+                    handler.postDelayed(() -> {
+                        if (model.isAvailable() && model.isPin()) {
+                            String identifier = holder.binding.identifierEditText.getText().toString().trim();
+
+                            if (!identifier.equals(""))
+                                doWork(holder, model, identifier, "identifier");
+                        }
+                    },750);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         holder.binding.centerCheckBox.setOnTouchListener((v, event) -> {
@@ -184,9 +202,9 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    String level = parent.getItemAtPosition(position).toString();
+                    String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getPlatformLevel(activity, "en", level), "selected_level");
+                    doWork(holder, model, SelectionManager.getPlatformLevel(activity, "en", pos), "selected_level");
 
                     userSelect = false;
                 }
@@ -282,7 +300,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     ((MainActivity) activity).loadingDialog.dismiss();
-                    Toast.makeText(activity, activity.getResources().getString(R.string.AppChanged), Toast.LENGTH_SHORT).show();
+                    ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
 

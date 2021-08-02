@@ -134,10 +134,10 @@ public class CenterPlatformsFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (Objects.equals(data.get("page"), 1))
-                            adapter.clearPlatforms();
+                            adapter.clearItems();
 
                         if (!platforms.data().isEmpty()) {
-                            adapter.setPlatforms(platforms.data());
+                            adapter.setItems(platforms.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
