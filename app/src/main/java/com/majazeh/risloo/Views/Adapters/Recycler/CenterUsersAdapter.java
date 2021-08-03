@@ -176,6 +176,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                             break;
                     }
 
+                    parent.setSelection(parent.getAdapter().getCount());
+
                     userSelect = false;
                 }
             }
@@ -232,27 +234,33 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
     private void setAcceptation(CenterUsersHolder holder, UserModel model) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (model.getUserAccepted_at() == 0) {
-            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
-            holder.binding.acceptedTextView.setText("");
-        } else {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusAccepted));
-            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
-        }
-
-        if (model.getUserKicked_at() == 0) {
-            items.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
-            holder.binding.kickedTextView.setText("");
-        } else {
+        if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
+
+            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
             holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
-        }
 
-        if (model.getUserAccepted_at() == 0 && model.getUserKicked_at() == 0) {
-            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusWaiting));
-        }
+            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+        } else if (model.getUserKicked_at() != 0) {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
 
-        if (model.getUserAccepted_at() != 0 && model.getUserKicked_at() != 0) {
+            holder.binding.acceptedTextView.setText("");
+            holder.binding.kickedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
+
+            items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
+        } else if (model.getUserAccepted_at() != 0) {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusAccepted));
+
+            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
+            holder.binding.kickedTextView.setText("");
+
+            items.add(activity.getResources().getString(R.string.CenterUsersFragmentKick));
+        } else {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusWaiting));
+
+            holder.binding.acceptedTextView.setText("");
+            holder.binding.kickedTextView.setText("");
+
             items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
         }
 

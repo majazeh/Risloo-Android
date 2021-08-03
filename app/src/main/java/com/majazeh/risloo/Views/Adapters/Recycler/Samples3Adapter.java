@@ -94,7 +94,7 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
     private void setData(Samples3Holder holder, SampleModel model) {
         if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
-         else
+        else
             holder.binding.topView.setVisibility(View.VISIBLE);
 
         holder.binding.serialTextView.setText(model.getSampleId());
@@ -109,7 +109,7 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
             holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
         }
 
-        if (model.getSampleCase() != null && model.getSampleCase().getCaseId() != null) {
+        if (model.getSampleCase() != null) {
             holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
         }
 

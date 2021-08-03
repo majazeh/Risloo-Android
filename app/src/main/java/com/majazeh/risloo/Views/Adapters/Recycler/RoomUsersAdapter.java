@@ -109,16 +109,24 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
-
         holder.binding.positionTextView.setText(SelectionManager.getPosition(activity, "fa", model.getPosition()));
 
         setAcceptation(holder, model);
     }
 
     private void setAcceptation(RoomUsersHolder holder, UserModel model) {
-        if (model.getUserAccepted_at() != 0) {
+        if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusKicked));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
+        } else if (model.getUserKicked_at() != 0) {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusKicked));
+            holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));
+        } else if (model.getUserAccepted_at() != 0) {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusAccepted));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserAccepted_at())));
+        } else {
+            holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusWaiting));
+            holder.binding.acceptedTextView.setText("");
         }
     }
 

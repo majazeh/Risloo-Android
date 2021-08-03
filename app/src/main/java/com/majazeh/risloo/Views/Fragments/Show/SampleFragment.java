@@ -309,7 +309,7 @@ public class SampleFragment extends Fragment {
 
             // Profile Half
             if (sampleModel.getProfilesHalf() != null && !sampleModel.getProfilesHalf().data().isEmpty()) {
-                profileHalfsAdapter.setProfiles(sampleModel.getProfilesHalf().data(), false);
+                profileHalfsAdapter.setItems(sampleModel.getProfilesHalf().data(), false);
                 binding.profileHalfsSingleLayout.recyclerView.setAdapter(profileHalfsAdapter);
 
                 binding.profileHalfsSingleLayout.emptyView.setVisibility(View.GONE);
@@ -322,7 +322,7 @@ public class SampleFragment extends Fragment {
 
             // Profile Extra
             if (sampleModel.getProfilesExtra() != null && !sampleModel.getProfilesExtra().data().isEmpty()) {
-                profileExtrasAdapter.setProfiles(sampleModel.getProfilesExtra().data(), true);
+                profileExtrasAdapter.setItems(sampleModel.getProfilesExtra().data(), true);
                 binding.profileExtrasSingleLayout.recyclerView.setAdapter(profileExtrasAdapter);
 
                 binding.profileExtrasGroup.setVisibility(View.VISIBLE);

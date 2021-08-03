@@ -86,7 +86,7 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
     private void setData(PsychologistsHolder holder, UserModel model) {
         holder.binding.nameTextView.setText(model.getName());
 
-        if (model.getAvatar() != null && model.getAvatar().getMedium() != null && model.getAvatar().getMedium().getUrl() != null)
+        if (model.getAvatar() != null && model.getAvatar().getMedium() != null)
             setAvatar(holder, model.getAvatar().getMedium().getUrl());
         else
             setAvatar(holder, "");

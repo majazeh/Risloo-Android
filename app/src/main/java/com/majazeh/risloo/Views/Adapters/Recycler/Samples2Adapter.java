@@ -107,7 +107,7 @@ public class Samples2Adapter extends RecyclerView.Adapter<Samples2Adapter.Sample
 
         holder.binding.sessionTextView.setText(model.getSessionId());
 
-        if (model.getClient() != null && model.getClient().getName() != null) {
+        if (model.getClient() != null) {
             holder.binding.referenceTextView.setText(model.getClient().getName());
         }
 

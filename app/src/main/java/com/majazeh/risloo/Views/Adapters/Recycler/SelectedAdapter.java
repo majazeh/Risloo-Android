@@ -32,11 +32,11 @@ import java.util.ArrayList;
 
 public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedHolder> {
 
-    // Objects
-    private Activity activity;
-
     // Fragments
     private Fragment current, child, payment;
+
+    // Objects
+    private Activity activity;
 
     // Widget
     private TextView countTextView;
@@ -58,7 +58,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
     @Override
     public void onBindViewHolder(@NonNull SelectedHolder holder, int i) {
-        TypeModel item = items.get(i);
+        TypeModel model = items.get(i);
 
         intializer();
 
@@ -66,7 +66,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
 
         listener(holder, i);
 
-        setData(holder, item);
+        setData(holder, model);
     }
 
     @Override

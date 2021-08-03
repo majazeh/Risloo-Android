@@ -39,7 +39,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull AxisHolder holder, int i) {
-        TypeModel item = items.get(i);
+        TypeModel model = items.get(i);
 
         listener(holder, i);
 
@@ -111,11 +111,8 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
     @SuppressLint("ClickableViewAccessibility")
     private void listener(AxisHolder holder, int position) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!holder.binding.inputEditText.hasFocus()) {
-                    ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
+                ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
             return false;
         });
 

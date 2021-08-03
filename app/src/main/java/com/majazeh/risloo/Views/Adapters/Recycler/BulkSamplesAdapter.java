@@ -161,11 +161,11 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
             holder.binding.nameTextView.setText(model.getTitle());
             holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCase_status()));
 
-            if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getName() != null) {
+            if (model.getRoom() != null && model.getRoom().getRoomManager() != null) {
                 holder.binding.roomTextView.setText(model.getRoom().getRoomManager().getName());
             }
 
-            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && !model.getRoom().getRoomCenter().getDetail().getString("title").equals("")) {
+            if (model.getRoom() != null && model.getRoom().getRoomCenter() != null && model.getRoom().getRoomCenter().getDetail() != null && model.getRoom().getRoomCenter().getDetail().has("title") && !model.getRoom().getRoomCenter().getDetail().isNull("title")) {
                 holder.binding.centerTextView.setText(model.getRoom().getRoomCenter().getDetail().getString("title"));
             }
 

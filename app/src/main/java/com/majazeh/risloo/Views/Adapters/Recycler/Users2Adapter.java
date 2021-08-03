@@ -123,7 +123,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getUserPosition(activity, "en", pos));
+                    doWork(model, SelectionManager.getUserPosition(activity, "en", pos));
 
                     userSelect = false;
                 }
@@ -175,7 +175,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
         }
     }
 
-    private void doWork(Users2Holder holder, UserModel model, String position) {
+    private void doWork(UserModel model, String position) {
         ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
 
         if (current instanceof SessionFragment)

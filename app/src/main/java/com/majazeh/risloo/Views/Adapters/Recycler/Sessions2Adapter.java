@@ -119,7 +119,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getSessionStatus(activity, "en", pos));
+                    doWork(model, SelectionManager.getSessionStatus(activity, "en", pos));
 
                     userSelect = false;
                 }
@@ -177,7 +177,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
         }
     }
 
-    private void doWork(Sessions2Holder holder, SessionModel model, String status) {
+    private void doWork(SessionModel model, String status) {
         ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
 
         data.put("id", model.getId());
@@ -186,11 +186,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
         Session.edit(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                SessionModel model = (SessionModel) object;
-
                 activity.runOnUiThread(() -> {
-                    setStatus(holder, model);
-
                     ((MainActivity) activity).loadingDialog.dismiss();
                     ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });

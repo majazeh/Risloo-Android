@@ -42,11 +42,11 @@ import java.util.ArrayList;
 
 public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.SearchableHolder> {
 
-    // Objects
-    private Activity activity;
-
     // Fragments
     private Fragment current, child;
+
+    // Objects
+    private Activity activity;
 
     // Widget
     private TextView countTextView;
@@ -67,15 +67,15 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
     @Override
     public void onBindViewHolder(@NonNull SearchableHolder holder, int i) {
-        TypeModel item = items.get(i);
+        TypeModel model = items.get(i);
 
         intializer();
 
-        listener(holder, item);
+        listener(holder, model);
 
-        setData(holder, item);
+        setData(holder, model);
 
-        setActive(holder, item);
+        setActive(holder, model);
     }
 
     @Override

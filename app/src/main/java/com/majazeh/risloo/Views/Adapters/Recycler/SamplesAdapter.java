@@ -105,15 +105,15 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesAdapter.SamplesH
         else
             holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
 
-        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null && model.getSampleRoom().getRoomManager().getName() != null) {
+        if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
             holder.binding.roomTextView.setText(model.getSampleRoom().getRoomManager().getName());
         }
 
-        if (model.getSampleCase() != null && model.getSampleCase().getCaseId() != null) {
+        if (model.getSampleCase() != null) {
             holder.binding.caseTextView.setText(model.getSampleCase().getCaseId());
         }
 
-        if (model.getClient() != null && model.getClient().getName() != null) {
+        if (model.getClient() != null) {
             holder.binding.referenceTextView.setText(model.getClient().getName());
         }
 

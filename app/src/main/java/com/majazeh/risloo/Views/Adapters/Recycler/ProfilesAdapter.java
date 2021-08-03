@@ -25,7 +25,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
     private Activity activity;
 
     // Vars
-    private ArrayList<TypeModel> profiles;
+    private ArrayList<TypeModel> items;
     private boolean showTitle = false;
 
     public ProfilesAdapter(@NonNull Activity activity) {
@@ -40,36 +40,36 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
 
     @Override
     public void onBindViewHolder(@NonNull ProfilesHolder holder, int i) {
-        ProfileModel profile = (ProfileModel) profiles.get(i);
+        ProfileModel model = (ProfileModel) items.get(i);
 
         detector(holder);
 
-        listener(holder, profile);
+        listener(holder, model);
 
-        setData(holder, profile);
+        setData(holder, model);
     }
 
     @Override
     public int getItemCount() {
-        if (this.profiles != null)
-            return profiles.size();
+        if (this.items != null)
+            return items.size();
         else
             return 0;
     }
 
-    public void setProfiles(ArrayList<TypeModel> profiles, boolean showTitle) {
+    public void setItems(ArrayList<TypeModel> items, boolean showTitle) {
         this.showTitle = showTitle;
 
-        if (this.profiles == null)
-            this.profiles = profiles;
+        if (this.items == null)
+            this.items = items;
         else
-            this.profiles.addAll(profiles);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
-    public void clearProfiles() {
-        if (this.profiles != null) {
-            this.profiles.clear();
+    public void clearItems() {
+        if (this.items != null) {
+            this.items.clear();
             notifyDataSetChanged();
         }
     }

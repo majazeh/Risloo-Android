@@ -117,7 +117,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
             holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
             holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
 
-            if (model.getCaseModel() != null && model.getCaseModel().getCaseId() != null) {
+            if (model.getCaseModel() != null) {
                 holder.binding.caseTextView.setText(model.getCaseModel().getCaseId());
             }
 

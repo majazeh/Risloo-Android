@@ -21,11 +21,11 @@ import java.util.ArrayList;
 
 public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder> {
 
-    // Objects
-    private Activity activity;
-
     // Fragments
     private Fragment current;
+
+    // Objects
+    private Activity activity;
 
     // Vars
     private ArrayList<Long> timestamps;

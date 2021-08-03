@@ -105,7 +105,7 @@ public class Samples4Adapter extends RecyclerView.Adapter<Samples4Adapter.Sample
         else
             holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
 
-        if (model.getClient() != null && model.getClient().getName() != null) {
+        if (model.getClient() != null) {
             holder.binding.referenceTextView.setText(model.getClient().getName());
         }
 
