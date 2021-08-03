@@ -846,6 +846,8 @@
 
     <string name="CenterPlatformsFragmentSessionCheckbox">پیشفرض در ساخت جلسه درمانی انتخاب شود.</string>
 
+    <string name="CenterPlatformsFragmentEmpty">هنوز محل برگزاری جلسات برای مرکز ثبت نشده است.</string>
+
     /*
     ---------- CenterSchedules Fragment ----------
     */
@@ -923,6 +925,8 @@
     <string name="RoomPlatformsFragmentCenterCheckbox">اتصال به مرکز درمانی</string>
 
     <string name="RoomPlatformsFragmentSessionHint">تنظیمات پیش‌فرض هنگام ایجاد جلسه:</string>
+
+    <string name="RoomPlatformsFragmentEmpty">هنوز محل برگزاری جلسات برای اتاق ثبت نشده است.</string>
 
     /*
     ---------- RoomSchedules Fragment ----------

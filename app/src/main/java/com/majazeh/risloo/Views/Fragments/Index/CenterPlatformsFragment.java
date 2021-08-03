@@ -37,11 +37,15 @@ public class CenterPlatformsFragment extends Fragment {
     // Adapters
     private CenterPlatformsAdapter adapter;
 
-    // Vars
-    private HashMap data, header;
+    // Models
     private CenterModel centerModel;
-    private boolean isLoading = true;
+
+    // Objects
+    private HashMap data, header;
+
+    // Vars
     public String centerId = "", type = "";
+    private boolean isLoading = true;
 
     @Nullable
     @Override
@@ -71,34 +75,32 @@ public class CenterPlatformsFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterPlatformsFragmentTitle));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._8sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             binding.addConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_green300);
         } else {
-            binding.addConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
+            binding.addConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-//            if (!isLoading) {
-//                if (!binding.getRoot().canScrollVertically(1)) {
-//                    isLoading = true;
+//            if (!isLoading && !v.canScrollVertically(1)) {
+//                isLoading = true;
 //
-//                    if (data.containsKey("page"))
-//                        data.put("page", ((int) data.get("page")) + 1);
-//                    else
-//                        data.put("page", 1);
+//                if (data.containsKey("page"))
+//                    data.put("page", ((int) data.get("page")) + 1);
+//                else
+//                    data.put("page", 1);
 //
-//                    if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
-//                        binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
+//                if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
+//                    binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
 //
-//                    getData();
-//                }
+//                getData();
 //            }
         });
 
@@ -110,7 +112,6 @@ public class CenterPlatformsFragment extends Fragment {
 
     private void setArgs() {
         centerModel = (CenterModel) CenterPlatformsFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
         setData(centerModel);
     }
 
@@ -129,21 +130,23 @@ public class CenterPlatformsFragment extends Fragment {
         Center.centerSessionPlatform(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                List platforms = (List) object;
+                List items = (List) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         if (Objects.equals(data.get("page"), 1))
                             adapter.clearItems();
 
-                        if (!platforms.data().isEmpty()) {
-                            adapter.setItems(platforms.data());
+                        if (!items.data().isEmpty()) {
+                            adapter.setItems(items.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.CenterPlatformsFragmentEmpty));
                         }
+
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -152,7 +155,9 @@ public class CenterPlatformsFragment extends Fragment {
 
                         if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+
                     });
+
                     isLoading = false;
                 }
             }
@@ -167,7 +172,9 @@ public class CenterPlatformsFragment extends Fragment {
 
                         if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+
                     });
+
                     isLoading = false;
                 }
             }

@@ -152,13 +152,16 @@ public class CenterSchedulesFragment extends Fragment {
                             binding.schedulesSingleLayout.emptyView.setText(getResources().getString(R.string.SchedulesAdapterWeekEmpty));
                         }
 
+                        // Schedules Data
                         binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.schedulesShimmerLayout.getRoot().stopShimmer();
 
+                        // Weeks Data
                         binding.weeksRecyclerView.setVisibility(View.VISIBLE);
                         binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.weeksShimmerLayout.getRoot().stopShimmer();
+
                     });
                 }
             }
@@ -167,13 +170,17 @@ public class CenterSchedulesFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
+                        // Schedules Data
                         binding.schedulesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.schedulesShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.schedulesShimmerLayout.getRoot().stopShimmer();
 
+                        // Weeks Data
                         binding.weeksRecyclerView.setVisibility(View.VISIBLE);
                         binding.weeksShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.weeksShimmerLayout.getRoot().stopShimmer();
+
                     });
                 }
             }
@@ -181,10 +188,13 @@ public class CenterSchedulesFragment extends Fragment {
     }
 
     private void doWork(long timestamp) {
+
+        // Schedules Data
         binding.schedulesSingleLayout.getRoot().setVisibility(View.GONE);
         binding.schedulesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
         binding.schedulesShimmerLayout.getRoot().startShimmer();
 
+        // Weeks Data
         binding.weeksRecyclerView.setVisibility(View.GONE);
         binding.weeksShimmerLayout.getRoot().setVisibility(View.VISIBLE);
         binding.weeksShimmerLayout.getRoot().startShimmer();

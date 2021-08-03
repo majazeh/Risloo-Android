@@ -209,6 +209,7 @@ public class RoomUsersFragment extends Fragment {
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+
                     });
 
                     isLoading = false;
@@ -227,6 +228,7 @@ public class RoomUsersFragment extends Fragment {
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
                         if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+
                     });
 
                     isLoading = false;
