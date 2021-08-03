@@ -197,7 +197,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/psychologists_barrier" />
+                app:layout_constraintTop_toBottomOf="@id/psychologists_barrier"
+                tools:layout_marginTop="@dimen/_6sdp" />
 
             <include
                 android:id="@+id/references_addView"
@@ -244,7 +245,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/references_barrier" />
+                app:layout_constraintTop_toBottomOf="@id/references_barrier"
+                tools:layout_marginTop="@dimen/_6sdp" />
 
             <include
                 android:id="@+id/sessions_addView"

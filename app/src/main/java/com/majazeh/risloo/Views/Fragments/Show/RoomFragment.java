@@ -531,6 +531,7 @@ public class RoomFragment extends Fragment {
                                 binding.casesSingleLayout.progressBar.setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

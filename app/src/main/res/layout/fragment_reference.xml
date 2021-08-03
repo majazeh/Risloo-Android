@@ -185,7 +185,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@id/container_cardView"
-            app:layout_constraintTop_toBottomOf="@id/rooms_barrier" />
+            app:layout_constraintTop_toBottomOf="@id/rooms_barrier"
+            tools:layout_marginTop="@dimen/_6sdp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cases_containerLayout"

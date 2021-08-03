@@ -424,6 +424,7 @@ public class CenterFragment extends Fragment {
                                 binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
                             if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

@@ -72,7 +72,7 @@
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cases_barrier"
-                tools:layout_marginTop="0dp" />
+                tools:layout_marginTop="@dimen/_6sdp" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/samples_containerLayout"
@@ -119,8 +119,7 @@
                 android:layout_marginStart="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/samples_containerLayout"
-                tools:layout_marginTop="@dimen/_12sdp" />
+                app:layout_constraintTop_toBottomOf="@id/samples_containerLayout" />
 
             <include
                 android:id="@+id/rooms_shimmerLayout"
@@ -160,7 +159,7 @@
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/rooms_barrier"
-                tools:layout_marginTop="0dp" />
+                tools:layout_marginTop="@dimen/_6sdp" />
 
             <include
                 android:id="@+id/centers_shimmerLayout"
