@@ -172,6 +172,7 @@ public class CaseFragment extends Fragment {
             if (model.getCaseId() != null && !model.getCaseId().equals("")) {
                 binding.serialTextView.setText(model.getCaseId());
                 data.put("id", model.getCaseId());
+                data.put("session_platforms", 1);
             }
 
             if (model.getDetail() != null && model.getDetail().has("problem") && !model.getDetail().isNull("problem")) {

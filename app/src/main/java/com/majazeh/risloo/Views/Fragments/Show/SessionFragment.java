@@ -176,6 +176,7 @@ public class SessionFragment extends Fragment {
         if (model.getId() != null && !model.getId().equals("")) {
             binding.serialTextView.setText(model.getId());
             data.put("id", model.getId());
+            data.put("session_platforms", 1);
         }
 
         if (model.getStarted_at() != 0) {

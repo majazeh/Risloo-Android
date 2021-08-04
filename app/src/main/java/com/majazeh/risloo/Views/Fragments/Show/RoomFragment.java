@@ -306,6 +306,7 @@ public class RoomFragment extends Fragment {
         try {
             if (model.getCenterId() != null && !model.getCenterId().equals("")) {
                 data.put("id", model.getCenterId());
+                data.put("session_platforms", 1);
             }
 
             if (model.getCenterType() != null && !model.getCenterType().equals("")) {
@@ -361,6 +362,7 @@ public class RoomFragment extends Fragment {
     private void setData(RoomModel model) {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
             data.put("id", model.getRoomId());
+            data.put("session_platforms", 1);
         }
 
         if (model.getRoomType() != null && !model.getRoomType().equals("")) {
