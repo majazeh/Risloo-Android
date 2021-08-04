@@ -29,9 +29,9 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -297,25 +297,25 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 }
             }
 
-            if (child instanceof CreateScheduleReferenceFragment){
+            if (child instanceof CreateScheduleTabReferenceFragment){
                 if (method.equals("cases")) {
                     CaseModel model = (CaseModel) item;
 
-                    detector(holder, ((CreateScheduleReferenceFragment) child).caseId.equals(model.getCaseId()));
+                    detector(holder, ((CreateScheduleTabReferenceFragment) child).caseId.equals(model.getCaseId()));
                 }
             }
 
-            if (child instanceof CreateScheduleTimeFragment) {
+            if (child instanceof CreateScheduleTabTimeFragment) {
                 if (method.equals("patternDays")) {
-                    detector(holder, ((CreateScheduleTimeFragment) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                    calculateCount(((CreateScheduleTimeFragment) child).patternDaysAdapter.getIds().size());
+                    detector(holder, ((CreateScheduleTabTimeFragment) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                    calculateCount(((CreateScheduleTabTimeFragment) child).patternDaysAdapter.getIds().size());
                 }
             }
 
-            if (child instanceof CreateSessionTimeFragment) {
+            if (child instanceof CreateSessionTabTimeFragment) {
                 if (method.equals("patternDays")) {
-                    detector(holder, ((CreateSessionTimeFragment) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
-                    calculateCount(((CreateSessionTimeFragment) child).patternDaysAdapter.getIds().size());
+                    detector(holder, ((CreateSessionTabTimeFragment) child).patternDaysAdapter.getIds().contains(item.object.get("id").toString()));
+                    calculateCount(((CreateSessionTabTimeFragment) child).patternDaysAdapter.getIds().size());
                 }
             }
 
@@ -354,14 +354,14 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         if (current instanceof CreateSampleFragment)
             ((CreateSampleFragment) current).responseDialog(method, item);
 
-        if (child instanceof CreateScheduleReferenceFragment)
-            ((CreateScheduleReferenceFragment) child).responseDialog(method, item);
+        if (child instanceof CreateScheduleTabReferenceFragment)
+            ((CreateScheduleTabReferenceFragment) child).responseDialog(method, item);
 
-        if (child instanceof CreateScheduleTimeFragment)
-            ((CreateScheduleTimeFragment) child).responseDialog(method, item);
+        if (child instanceof CreateScheduleTabTimeFragment)
+            ((CreateScheduleTabTimeFragment) child).responseDialog(method, item);
 
-        if (child instanceof CreateSessionTimeFragment)
-            ((CreateSessionTimeFragment) child).responseDialog(method, item);
+        if (child instanceof CreateSessionTabTimeFragment)
+            ((CreateSessionTabTimeFragment) child).responseDialog(method, item);
 
         if (child instanceof EditCenterTabDetailFragment)
             ((EditCenterTabDetailFragment) child).responseDialog(method, item);

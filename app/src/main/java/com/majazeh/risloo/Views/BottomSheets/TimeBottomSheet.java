@@ -17,10 +17,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.BottomSheetTimeBinding;
@@ -83,17 +83,17 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            if (child instanceof CreateSessionTimeFragment)
-                ((CreateSessionTimeFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof CreateSessionTabTimeFragment)
+                ((CreateSessionTabTimeFragment) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof CreateSessionSessionFragment)
-                ((CreateSessionSessionFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof CreateSessionTabSessionFragment)
+                ((CreateSessionTabSessionFragment) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof CreateScheduleTimeFragment)
-                ((CreateScheduleTimeFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof CreateScheduleTabTimeFragment)
+                ((CreateScheduleTabTimeFragment) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof CreateScheduleSessionFragment)
-                ((CreateScheduleSessionFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof CreateScheduleTabSessionFragment)
+                ((CreateScheduleTabSessionFragment) child).responseBottomSheet(method, getTime());
 
             if (child instanceof EditSessionTabTimeFragment)
                 ((EditSessionTabTimeFragment) child).responseBottomSheet(method, getTime());

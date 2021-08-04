@@ -17,12 +17,12 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
-import com.majazeh.risloo.databinding.FragmentCreateSessionPlatformBinding;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTabPlatformBinding;
 
-public class CreateSessionPlatformFragment extends Fragment {
+public class CreateSessionTabPlatformFragment extends Fragment {
 
     // Binding
-    public FragmentCreateSessionPlatformBinding binding;
+    public FragmentCreateSessionTabPlatformBinding binding;
 
     // Adapters
     public TabPlatformsAdapter adapter;
@@ -33,7 +33,7 @@ public class CreateSessionPlatformFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateSessionPlatformBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCreateSessionTabPlatformBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

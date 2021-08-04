@@ -16,9 +16,9 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateSessionAdapter;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
@@ -101,18 +101,18 @@ public class CreateSessionFragment extends Fragment {
         platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
         payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
-        if (time instanceof CreateSessionTimeFragment && session instanceof CreateSessionSessionFragment) {
-            if (((CreateSessionTimeFragment) time).startTime.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+        if (time instanceof CreateSessionTabTimeFragment && session instanceof CreateSessionTabSessionFragment) {
+            if (((CreateSessionTabTimeFragment) time).startTime.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
 
-            if (((CreateSessionSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() == 0)
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateSessionSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionSessionFragment) session).binding.axisErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView);
 
-            if (!((CreateSessionTimeFragment) time).startTime.equals("") && ((CreateSessionSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0)
+            if (!((CreateSessionTabTimeFragment) time).startTime.equals("") && ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0)
                 doWork();
         }
     }
@@ -121,38 +121,38 @@ public class CreateSessionFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         // Time Data
-        if (time instanceof CreateSessionTimeFragment) {
-            data.put("time", DateManager.jalHHsMM(((CreateSessionTimeFragment) time).startTime));
-            data.put("duration", ((CreateSessionTimeFragment) time).duration);
-            data.put("date_type", ((CreateSessionTimeFragment) time).dateType);
+        if (time instanceof CreateSessionTabTimeFragment) {
+            data.put("time", DateManager.jalHHsMM(((CreateSessionTabTimeFragment) time).startTime));
+            data.put("duration", ((CreateSessionTabTimeFragment) time).duration);
+            data.put("date_type", ((CreateSessionTabTimeFragment) time).dateType);
 
             if (data.get("date_type").equals("specific")) {
-                data.put("date", ((CreateSessionTimeFragment) time).specifiedDate);
+                data.put("date", ((CreateSessionTabTimeFragment) time).specifiedDate);
             } else {
-                data.put("week_days", ((CreateSessionTimeFragment) time).patternDaysAdapter.getIds());
-                data.put("repeat_status", ((CreateSessionTimeFragment) time).patternType);
+                data.put("week_days", ((CreateSessionTabTimeFragment) time).patternDaysAdapter.getIds());
+                data.put("repeat_status", ((CreateSessionTabTimeFragment) time).patternType);
 
                 if (data.get("repeat_status").equals("weeks")) {
-                    data.put("repeat", ((CreateSessionTimeFragment) time).repeatWeeks);
+                    data.put("repeat", ((CreateSessionTabTimeFragment) time).repeatWeeks);
                 } else {
-                    data.put("repeat_from", ((CreateSessionTimeFragment) time).periodStartDate);
-                    data.put("repeat_to", ((CreateSessionTimeFragment) time).periodEndDate);
+                    data.put("repeat_from", ((CreateSessionTabTimeFragment) time).periodStartDate);
+                    data.put("repeat_to", ((CreateSessionTabTimeFragment) time).periodEndDate);
                 }
             }
         }
 
         // Session Data
-        if (session instanceof CreateSessionSessionFragment) {
-            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((CreateSessionSessionFragment) session).status));
-            data.put("fields", ((CreateSessionSessionFragment) session).axisesAdapter.getIds());
-            data.put("description", ((CreateSessionSessionFragment) session).description);
-            data.put("client_reminder", ((CreateSessionSessionFragment) session).coordination);
+        if (session instanceof CreateSessionTabSessionFragment) {
+            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((CreateSessionTabSessionFragment) session).status));
+            data.put("fields", ((CreateSessionTabSessionFragment) session).axisesAdapter.getIds());
+            data.put("description", ((CreateSessionTabSessionFragment) session).description);
+            data.put("client_reminder", ((CreateSessionTabSessionFragment) session).coordination);
         }
 
         // Payment Data
-        if (payment instanceof CreateSessionPaymentFragment) {
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateSessionPaymentFragment) payment).payment));
-            data.put("amounts", ((CreateSessionPaymentFragment) payment).axisAdapter.getAmounts());
+        if (payment instanceof CreateSessionTabPaymentFragment) {
+            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateSessionTabPaymentFragment) payment).payment));
+            data.put("amounts", ((CreateSessionTabPaymentFragment) payment).axisAdapter.getAmounts());
         }
 
         Session.create(data, header, new Response() {
@@ -178,13 +178,13 @@ public class CreateSessionFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (time instanceof CreateSessionTimeFragment && session instanceof CreateSessionSessionFragment) {
+                                        if (time instanceof CreateSessionTabTimeFragment && session instanceof CreateSessionTabSessionFragment) {
                                             switch (key) {
                                                 case "time":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                                 case "fields":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                             }
                                         }

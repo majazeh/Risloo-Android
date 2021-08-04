@@ -16,10 +16,10 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateScheduleAdapter;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabTimeFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -103,27 +103,27 @@ public class CreateScheduleFragment extends Fragment {
         platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
         payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
-        if (time instanceof CreateScheduleTimeFragment && session instanceof CreateScheduleSessionFragment && reference instanceof CreateScheduleReferenceFragment) {
-            if (((CreateScheduleTimeFragment) time).startTime.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+        if (time instanceof CreateScheduleTabTimeFragment && session instanceof CreateScheduleTabSessionFragment && reference instanceof CreateScheduleTabReferenceFragment) {
+            if (((CreateScheduleTabTimeFragment) time).startTime.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
 
-            if (((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() == 0)
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView);
 
-            if (((CreateScheduleReferenceFragment) reference).type.equals("case") && ((CreateScheduleReferenceFragment) reference).caseId.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+            if (((CreateScheduleTabReferenceFragment) reference).type.equals("case") && ((CreateScheduleTabReferenceFragment) reference).caseId.equals(""))
+                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             else
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
 
-            if (((CreateScheduleReferenceFragment) reference).type.equals("case")) {
-                if (!((CreateScheduleTimeFragment) time).startTime.equals("") && ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0 && !((CreateScheduleReferenceFragment) reference).caseId.equals(""))
+            if (((CreateScheduleTabReferenceFragment) reference).type.equals("case")) {
+                if (!((CreateScheduleTabTimeFragment) time).startTime.equals("") && ((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0 && !((CreateScheduleTabReferenceFragment) reference).caseId.equals(""))
                     doWork();
             } else {
-                if (!((CreateScheduleTimeFragment) time).startTime.equals("") && ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0)
+                if (!((CreateScheduleTabTimeFragment) time).startTime.equals("") && ((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView.getChildCount() != 0)
                     doWork();
             }
         }
@@ -133,64 +133,64 @@ public class CreateScheduleFragment extends Fragment {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
         // Time Data
-        if (time instanceof CreateScheduleTimeFragment) {
-            data.put("time", DateManager.jalHHsMM(((CreateScheduleTimeFragment) time).startTime));
-            data.put("duration", ((CreateScheduleTimeFragment) time).duration);
-            data.put("date_type", ((CreateScheduleTimeFragment) time).dateType);
+        if (time instanceof CreateScheduleTabTimeFragment) {
+            data.put("time", DateManager.jalHHsMM(((CreateScheduleTabTimeFragment) time).startTime));
+            data.put("duration", ((CreateScheduleTabTimeFragment) time).duration);
+            data.put("date_type", ((CreateScheduleTabTimeFragment) time).dateType);
 
             if (data.get("date_type").equals("specific")) {
-                data.put("date", ((CreateScheduleTimeFragment) time).specifiedDate);
+                data.put("date", ((CreateScheduleTabTimeFragment) time).specifiedDate);
             } else {
-                data.put("week_days", ((CreateScheduleTimeFragment) time).patternDaysAdapter.getIds());
-                data.put("repeat_status", ((CreateScheduleTimeFragment) time).patternType);
+                data.put("week_days", ((CreateScheduleTabTimeFragment) time).patternDaysAdapter.getIds());
+                data.put("repeat_status", ((CreateScheduleTabTimeFragment) time).patternType);
 
                 if (data.get("repeat_status").equals("weeks")) {
-                    data.put("repeat", ((CreateScheduleTimeFragment) time).repeatWeeks);
+                    data.put("repeat", ((CreateScheduleTabTimeFragment) time).repeatWeeks);
                 } else {
-                    data.put("repeat_from", ((CreateScheduleTimeFragment) time).periodStartDate);
-                    data.put("repeat_to", ((CreateScheduleTimeFragment) time).periodEndDate);
+                    data.put("repeat_from", ((CreateScheduleTabTimeFragment) time).periodStartDate);
+                    data.put("repeat_to", ((CreateScheduleTabTimeFragment) time).periodEndDate);
                 }
             }
         }
 
         // Reference Data
-        if (reference instanceof CreateScheduleReferenceFragment) {
-            data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", ((CreateScheduleReferenceFragment) reference).selection));
+        if (reference instanceof CreateScheduleTabReferenceFragment) {
+            data.put("selection_type", SelectionManager.getSelectionType(requireActivity(), "en", ((CreateScheduleTabReferenceFragment) reference).selection));
 
-            if (((CreateScheduleReferenceFragment) reference).type.equals("اعضاء ریسلو")) {
+            if (((CreateScheduleTabReferenceFragment) reference).type.equals("اعضاء ریسلو")) {
                 data.put("clients_type", "risloo");
-            } else if (((CreateScheduleReferenceFragment) reference).type.contains("مرکز")) {
+            } else if (((CreateScheduleTabReferenceFragment) reference).type.contains("مرکز")) {
                 data.put("clients_type", "center");
-            } else if (((CreateScheduleReferenceFragment) reference).type.contains("اتاق درمان")) {
+            } else if (((CreateScheduleTabReferenceFragment) reference).type.contains("اتاق درمان")) {
                 data.put("clients_type", "room");
-            } else if (((CreateScheduleReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
+            } else if (((CreateScheduleTabReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
                 data.put("clients_type", "case");
-            } else if (((CreateScheduleReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
+            } else if (((CreateScheduleTabReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
                 data.put("clients_type", "new_case");
             }
 
             if (data.get("clients_type").equals("case")) {
-                data.put("case_id", ((CreateScheduleReferenceFragment) reference).caseId);
+                data.put("case_id", ((CreateScheduleTabReferenceFragment) reference).caseId);
             }
 
-            data.put("group_session", ((CreateScheduleReferenceFragment) reference).groupSession);
+            data.put("group_session", ((CreateScheduleTabReferenceFragment) reference).groupSession);
             if (data.get("group_session").equals("on")) {
-                data.put("clients_number", ((CreateScheduleReferenceFragment) reference).count);
+                data.put("clients_number", ((CreateScheduleTabReferenceFragment) reference).count);
             }
         }
 
         // Session Data
-        if (session instanceof CreateScheduleSessionFragment) {
-            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((CreateScheduleSessionFragment) session).status));
-            data.put("fields", ((CreateScheduleSessionFragment) session).axisesAdapter.getIds());
-            data.put("description", ((CreateScheduleSessionFragment) session).description);
-            data.put("client_reminder", ((CreateScheduleSessionFragment) session).coordination);
+        if (session instanceof CreateScheduleTabSessionFragment) {
+            data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((CreateScheduleTabSessionFragment) session).status));
+            data.put("fields", ((CreateScheduleTabSessionFragment) session).axisesAdapter.getIds());
+            data.put("description", ((CreateScheduleTabSessionFragment) session).description);
+            data.put("client_reminder", ((CreateScheduleTabSessionFragment) session).coordination);
         }
 
         // Payment Data
-        if (payment instanceof CreateSchedulePaymentFragment) {
-            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateSchedulePaymentFragment) payment).payment));
-            data.put("amounts", ((CreateSchedulePaymentFragment) payment).axisAdapter.getAmounts());
+        if (payment instanceof CreateScheduleTabPaymentFragment) {
+            data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateScheduleTabPaymentFragment) payment).payment));
+            data.put("amounts", ((CreateScheduleTabPaymentFragment) payment).axisAdapter.getAmounts());
         }
 
         Center.createSchedule(data, header, new Response() {
@@ -216,16 +216,16 @@ public class CreateScheduleFragment extends Fragment {
                                 while (keys.hasNext()) {
                                     String key = keys.next();
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (time instanceof CreateScheduleTimeFragment && session instanceof CreateScheduleSessionFragment && reference instanceof CreateScheduleReferenceFragment) {
+                                        if (time instanceof CreateScheduleTabTimeFragment && session instanceof CreateScheduleTabSessionFragment && reference instanceof CreateScheduleTabReferenceFragment) {
                                             switch (key) {
                                                 case "time":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                                 case "fields":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                                 case "case_id":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
                                                     break;
                                             }
                                         }

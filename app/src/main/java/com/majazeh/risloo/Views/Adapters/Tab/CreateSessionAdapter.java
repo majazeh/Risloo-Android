@@ -5,10 +5,10 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPlatformFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPlatformFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabTimeFragment;
 
 import java.util.HashMap;
 
@@ -25,22 +25,22 @@ public class CreateSessionAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position) {
             case 0: {
-                Fragment fragment = new CreateSessionTimeFragment();
+                Fragment fragment = new CreateSessionTabTimeFragment();
                 hashMap.put(position, fragment);
                 return fragment;
             }
             case 1: {
-                Fragment fragment = new CreateSessionSessionFragment();
+                Fragment fragment = new CreateSessionTabSessionFragment();
                 hashMap.put(position, fragment);
                 return fragment;
             }
             case 2: {
-                Fragment fragment = new CreateSessionPlatformFragment();
+                Fragment fragment = new CreateSessionTabPlatformFragment();
                 hashMap.put(position, fragment);
                 return fragment;
             }
             case 3: {
-                Fragment fragment = new CreateSessionPaymentFragment();
+                Fragment fragment = new CreateSessionTabPaymentFragment();
                 hashMap.put(position, fragment);
                 return fragment;
             }

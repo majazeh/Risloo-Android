@@ -28,10 +28,10 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.DialogSelectedBinding;
 
@@ -158,14 +158,14 @@ public class SelectedDialog extends AppCompatDialogFragment {
                 binding.listRecyclerView.setAdapter(((CreateCenterFragment) current).phonesAdapter);
         }
 
-        if (child instanceof CreateScheduleSessionFragment) {
+        if (child instanceof CreateScheduleTabSessionFragment) {
             if (method.equals("axises"))
-                binding.listRecyclerView.setAdapter(((CreateScheduleSessionFragment) child).axisesAdapter);
+                binding.listRecyclerView.setAdapter(((CreateScheduleTabSessionFragment) child).axisesAdapter);
         }
 
-        if (child instanceof CreateSessionSessionFragment) {
+        if (child instanceof CreateSessionTabSessionFragment) {
             if (method.equals("axises"))
-                binding.listRecyclerView.setAdapter(((CreateSessionSessionFragment) child).axisesAdapter);
+                binding.listRecyclerView.setAdapter(((CreateSessionTabSessionFragment) child).axisesAdapter);
         }
 
         if (child instanceof EditCenterTabDetailFragment) {
@@ -186,20 +186,20 @@ public class SelectedDialog extends AppCompatDialogFragment {
                         Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
             }
 
-            if (child instanceof CreateScheduleSessionFragment) {
+            if (child instanceof CreateScheduleTabSessionFragment) {
                 if (method.equals("axises"))
-                    if (!((CreateScheduleSessionFragment) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
-                        ((CreateScheduleSessionFragment) child).axisesAdapter.addItem(item);
+                    if (!((CreateScheduleTabSessionFragment) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
+                        ((CreateScheduleTabSessionFragment) child).axisesAdapter.addItem(item);
 
                         addPayment(item);
                     } else
                         Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
             }
 
-            if (child instanceof CreateSessionSessionFragment) {
+            if (child instanceof CreateSessionTabSessionFragment) {
                 if (method.equals("axises"))
-                    if (!((CreateSessionSessionFragment) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
-                        ((CreateSessionSessionFragment) child).axisesAdapter.addItem(item);
+                    if (!((CreateSessionTabSessionFragment) child).axisesAdapter.getIds().contains(item.object.getString("id"))) {
+                        ((CreateSessionTabSessionFragment) child).axisesAdapter.addItem(item);
 
                         addPayment(item);
                     } else
@@ -224,11 +224,11 @@ public class SelectedDialog extends AppCompatDialogFragment {
     }
 
     private void addPayment(TypeModel item) {
-        if (payment instanceof CreateSchedulePaymentFragment)
-            ((CreateSchedulePaymentFragment) payment).axisAdapter.addItem(item);
+        if (payment instanceof CreateScheduleTabPaymentFragment)
+            ((CreateScheduleTabPaymentFragment) payment).axisAdapter.addItem(item);
 
-        if (payment instanceof CreateSessionPaymentFragment)
-            ((CreateSessionPaymentFragment) payment).axisAdapter.addItem(item);
+        if (payment instanceof CreateSessionTabPaymentFragment)
+            ((CreateSessionTabPaymentFragment) payment).axisAdapter.addItem(item);
     }
 
     public void calculateCount() {

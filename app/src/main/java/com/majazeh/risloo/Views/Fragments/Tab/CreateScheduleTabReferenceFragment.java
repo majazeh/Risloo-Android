@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
+import com.majazeh.risloo.databinding.FragmentCreateScheduleTabReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -22,17 +23,16 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
-import com.majazeh.risloo.databinding.FragmentCreateScheduleReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class CreateScheduleReferenceFragment extends Fragment {
+public class CreateScheduleTabReferenceFragment extends Fragment {
 
     // Binding
-    public FragmentCreateScheduleReferenceBinding binding;
+    public FragmentCreateScheduleTabReferenceBinding binding;
 
     // Dialogs
     private SearchableDialog casesDialog;
@@ -46,7 +46,7 @@ public class CreateScheduleReferenceFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateScheduleReferenceBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCreateScheduleTabReferenceBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

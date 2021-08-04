@@ -17,12 +17,12 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
-import com.majazeh.risloo.databinding.FragmentCreateSchedulePlatformBinding;
+import com.majazeh.risloo.databinding.FragmentCreateScheduleTabPlatformBinding;
 
-public class CreateSchedulePlatformFragment extends Fragment {
+public class CreateScheduleTabPlatformFragment extends Fragment {
 
     // Binding
-    public FragmentCreateSchedulePlatformBinding binding;
+    public FragmentCreateScheduleTabPlatformBinding binding;
 
     // Adapters
     public TabPlatformsAdapter adapter;
@@ -33,7 +33,7 @@ public class CreateSchedulePlatformFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateSchedulePlatformBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCreateScheduleTabPlatformBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 

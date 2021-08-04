@@ -17,16 +17,16 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.AxisAdapter;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
-import com.majazeh.risloo.databinding.FragmentCreateSchedulePaymentBinding;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTabPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class CreateSchedulePaymentFragment extends Fragment {
+public class CreateSessionTabPaymentFragment extends Fragment {
 
     // Binding
-    public FragmentCreateSchedulePaymentBinding binding;
+    public FragmentCreateSessionTabPaymentBinding binding;
 
     // Adapters
     public AxisAdapter axisAdapter;
@@ -40,7 +40,7 @@ public class CreateSchedulePaymentFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateSchedulePaymentBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCreateSessionTabPaymentBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -58,13 +58,13 @@ public class CreateSchedulePaymentFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSchedulePaymentTabPaymentHeader));
+        binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionPaymentTabPaymentHeader));
 
         InitManager.normal12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSchedulePaymentTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionPaymentTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -90,8 +90,8 @@ public class CreateSchedulePaymentFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (current instanceof CreateScheduleFragment)
-                ((CreateScheduleFragment) current).checkRequire();
+            if (current instanceof CreateSessionFragment)
+                ((CreateSessionFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 

@@ -22,16 +22,16 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
-import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
-import com.majazeh.risloo.databinding.FragmentCreateScheduleSessionBinding;
+import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
+import com.majazeh.risloo.databinding.FragmentCreateSessionTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class CreateScheduleSessionFragment extends Fragment {
+public class CreateSessionTabSessionFragment extends Fragment {
 
     // Binding
-    public FragmentCreateScheduleSessionBinding binding;
+    public FragmentCreateSessionTabSessionBinding binding;
 
     // Adapters
     public SelectedAdapter axisesAdapter;
@@ -53,7 +53,7 @@ public class CreateScheduleSessionFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentCreateScheduleSessionBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCreateSessionTabSessionBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -78,19 +78,19 @@ public class CreateScheduleSessionFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabStatusHeader));
-        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabAxisHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabDescriptionHeader));
-        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabCoordinationHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabStatusHeader));
+        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabAxisHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabDescriptionHeader));
+        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionSessionTabCoordinationHeader));
 
-        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabAxisGuide));
-        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabCoordinationGuide));
+        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSessionSessionTabAxisGuide));
+        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateSessionSessionTabCoordinationGuide));
 
         InitManager.normal12sspSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleSessionTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionSessionTabButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -273,8 +273,8 @@ public class CreateScheduleSessionFragment extends Fragment {
         }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (current instanceof CreateScheduleFragment)
-                ((CreateScheduleFragment) current).checkRequire();
+            if (current instanceof CreateSessionFragment)
+                ((CreateSessionFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());
     }
 

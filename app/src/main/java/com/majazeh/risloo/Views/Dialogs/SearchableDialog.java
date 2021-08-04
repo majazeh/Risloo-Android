@@ -34,7 +34,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
 import com.mre.ligheh.API.Response;
@@ -292,9 +292,9 @@ public class SearchableDialog extends AppCompatDialogFragment {
             }
         }
 
-        if (child instanceof CreateScheduleReferenceFragment) {
+        if (child instanceof CreateScheduleTabReferenceFragment) {
             if (method.equals("cases")) {
-                data.put("room", ((CreateScheduleReferenceFragment) child).roomId);
+                data.put("room", ((CreateScheduleTabReferenceFragment) child).roomId);
                 data.put("instance", "1");
             }
         }

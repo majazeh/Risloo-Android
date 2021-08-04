@@ -18,10 +18,10 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSchedulePaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -196,11 +196,11 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
     }
 
     private void removePayment(int position) {
-        if (payment instanceof CreateSchedulePaymentFragment)
-            ((CreateSchedulePaymentFragment) payment).axisAdapter.removeItem(position);
+        if (payment instanceof CreateScheduleTabPaymentFragment)
+            ((CreateScheduleTabPaymentFragment) payment).axisAdapter.removeItem(position);
 
-        if (payment instanceof CreateSessionPaymentFragment)
-            ((CreateSessionPaymentFragment) payment).axisAdapter.removeItem(position);
+        if (payment instanceof CreateSessionTabPaymentFragment)
+            ((CreateSessionTabPaymentFragment) payment).axisAdapter.removeItem(position);
     }
 
     private void refreshCount() {
@@ -210,16 +210,16 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     ((CreateCenterFragment) current).phonesDialog.calculateCount();
         }
 
-        if (child instanceof CreateScheduleSessionFragment) {
+        if (child instanceof CreateScheduleTabSessionFragment) {
             if (method.equals("axises"))
-                if (((CreateScheduleSessionFragment) child).axisesDialog.isVisible())
-                    ((CreateScheduleSessionFragment) child).axisesDialog.calculateCount();
+                if (((CreateScheduleTabSessionFragment) child).axisesDialog.isVisible())
+                    ((CreateScheduleTabSessionFragment) child).axisesDialog.calculateCount();
         }
 
-        if (child instanceof CreateSessionSessionFragment) {
+        if (child instanceof CreateSessionTabSessionFragment) {
             if (method.equals("axises"))
-                if (((CreateSessionSessionFragment) child).axisesDialog.isVisible())
-                    ((CreateSessionSessionFragment) child).axisesDialog.calculateCount();
+                if (((CreateSessionTabSessionFragment) child).axisesDialog.isVisible())
+                    ((CreateSessionTabSessionFragment) child).axisesDialog.calculateCount();
         }
 
         if (child instanceof EditCenterTabDetailFragment) {
