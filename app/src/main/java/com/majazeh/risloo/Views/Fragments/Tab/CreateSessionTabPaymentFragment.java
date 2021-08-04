@@ -36,6 +36,7 @@ public class CreateSessionTabPaymentFragment extends Fragment {
 
     // Vars
     public String payment = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -77,10 +78,19 @@ public class CreateSessionTabPaymentFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.paymentIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.paymentIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                payment = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    payment = parent.getItemAtPosition(position).toString();
+
+                    userSelect = false;
+                }
             }
 
             @Override

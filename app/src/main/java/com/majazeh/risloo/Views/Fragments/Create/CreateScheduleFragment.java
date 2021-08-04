@@ -4,16 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateScheduleAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
@@ -40,20 +41,22 @@ public class CreateScheduleFragment extends Fragment {
     // Adapters
     public CreateScheduleAdapter adapter;
 
-    // Objects
-    private TabLayoutMediator tabLayoutMediator;
+    // Models
+    public RoomModel roomModel;
 
     // Fragments
     private Fragment time, reference, session, platform, payment;
 
+    // Objects
+    private TabLayoutMediator tabLayoutMediator;
+    private HashMap data, header;
+
     // Vars
     private String[] tabs;
-    private HashMap data, header;
-    public RoomModel roomModel;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCreateScheduleBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -84,16 +87,17 @@ public class CreateScheduleFragment extends Fragment {
                 setData(roomModel);
             }
         }
-
-        binding.viewPager.getRoot().setAdapter(adapter);
-        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
-        tabLayoutMediator.attach();
     }
 
     private void setData(RoomModel model) {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
             data.put("id", model.getRoomId());
         }
+
+        binding.viewPager.getRoot().setAdapter(adapter);
+        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
+
+        tabLayoutMediator.attach();
     }
 
     public void checkRequire() {
@@ -199,7 +203,9 @@ public class CreateScheduleFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewScheduleAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
@@ -218,14 +224,89 @@ public class CreateScheduleFragment extends Fragment {
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
                                         if (time instanceof CreateScheduleTabTimeFragment && session instanceof CreateScheduleTabSessionFragment && reference instanceof CreateScheduleTabReferenceFragment) {
                                             switch (key) {
+
+                                                // Time Data
                                                 case "time":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                     break;
-                                                case "fields":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                case "duration":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.durationIncludeLayout.inputEditText, ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "date_type":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "date":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "week_days":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysIncludeLayout.selectRecyclerView, ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat_status":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksIncludeLayout.inputEditText, ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat_from":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat_to":
+                                                    if (time instanceof CreateScheduleTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateIncludeLayout.selectTextView, ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+
+                                                // Reference Data
+                                                case "selection_type":
+                                                    if (reference instanceof CreateScheduleTabReferenceFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionIncludeLayout.selectSpinner, ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "clients_type":
+                                                    if (reference instanceof CreateScheduleTabReferenceFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.typeIncludeLayout.selectSpinner, ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                     break;
                                                 case "case_id":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    if (reference instanceof CreateScheduleTabReferenceFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "group_session":
+                                                    if (reference instanceof CreateScheduleTabReferenceFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "clients_number":
+                                                    if (reference instanceof CreateScheduleTabReferenceFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabReferenceFragment) reference).binding.countIncludeLayout.inputEditText, ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+
+                                                // Session Data
+                                                case "status":
+                                                    if (session instanceof CreateScheduleTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.statusIncludeLayout.selectSpinner, ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "fields":
+                                                    if (session instanceof CreateScheduleTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "description":
+                                                    if (session instanceof CreateScheduleTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.descriptionIncludeLayout.inputEditText, ((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "client_reminder":
+                                                    if (session instanceof CreateScheduleTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabSessionFragment) session).binding.coordinationIncludeLayout.inputEditText, ((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+
+                                                // Payment Data
+                                                case "payment_status":
+                                                    if (payment instanceof CreateScheduleTabPaymentFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentIncludeLayout.selectSpinner, ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                     break;
                                             }
                                         }

@@ -35,11 +35,11 @@ public class CreateSessionTabTimeFragment extends Fragment {
     // Binding
     public FragmentCreateSessionTabTimeBinding binding;
 
-    // Adapters
-    public SelectedAdapter patternDaysAdapter;
-
     // Dialogs
     private SearchableDialog patternDaysDialog;
+
+    // Adapters
+    public SelectedAdapter patternDaysAdapter;
 
     // BottomSheets
     private TimeBottomSheet startTimeBottomSheet;
@@ -53,7 +53,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCreateSessionTabTimeBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -68,9 +68,9 @@ public class CreateSessionTabTimeFragment extends Fragment {
     }
 
     private void initializer() {
-        patternDaysAdapter = new SelectedAdapter(requireActivity());
-
         patternDaysDialog = new SearchableDialog();
+
+        patternDaysAdapter = new SelectedAdapter(requireActivity());
 
         startTimeBottomSheet = new TimeBottomSheet();
         specifiedDateBottomSheet = new DateBottomSheet();
@@ -121,11 +121,8 @@ public class CreateSessionTabTimeFragment extends Fragment {
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.durationIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
             return false;
         });
 
@@ -193,11 +190,8 @@ public class CreateSessionTabTimeFragment extends Fragment {
         });
 
         binding.repeatWeeksIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.repeatWeeksIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.repeatWeeksIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.repeatWeeksIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.repeatWeeksIncludeLayout.inputEditText);
             return false;
         });
 
@@ -268,7 +262,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
     public void responseDialog(String method, TypeModel item) {
         try {
             switch (method) {
-                case "patternDays":
+                case "patternDays": {
                     int position = patternDaysAdapter.getIds().indexOf(item.object.get("id").toString());
 
                     if (position == -1)
@@ -283,8 +277,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
                         binding.patternDaysIncludeLayout.countTextView.setVisibility(View.GONE);
                         binding.patternDaysIncludeLayout.countTextView.setText("");
                     }
-
-                    break;
+                } break;
             }
         } catch (JSONException e) {
             e.printStackTrace();

@@ -4,16 +4,17 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateSessionAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
@@ -39,19 +40,22 @@ public class CreateSessionFragment extends Fragment {
     // Adapters
     public CreateSessionAdapter adapter;
 
-    // Objects
-    private TabLayoutMediator tabLayoutMediator;
+    // Models
+    public CaseModel caseModel;
 
     // Fragments
     private Fragment time, session, platform, payment;
 
+    // Objects
+    private TabLayoutMediator tabLayoutMediator;
+    private HashMap data, header;
+
     // Vars
     private String[] tabs;
-    private HashMap data, header;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = FragmentCreateSessionBinding.inflate(inflater, viewGroup, false);
 
         initializer();
@@ -78,14 +82,10 @@ public class CreateSessionFragment extends Fragment {
 
         if (typeModel != null) {
             if (type.equals("case")) {
-                CaseModel caseModel = (CaseModel) CreateSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                caseModel = (CaseModel) CreateSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
                 setData(caseModel);
             }
         }
-
-        binding.viewPager.getRoot().setAdapter(adapter);
-        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
-        tabLayoutMediator.attach();
     }
 
     private void setData(CaseModel model) {
@@ -93,6 +93,11 @@ public class CreateSessionFragment extends Fragment {
             data.put("case_id", model.getCaseId());
             data.put("clients_type", "case");
         }
+
+        binding.viewPager.getRoot().setAdapter(adapter);
+        binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
+
+        tabLayoutMediator.attach();
     }
 
     public void checkRequire() {
@@ -161,7 +166,9 @@ public class CreateSessionFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        Toast.makeText(requireActivity(), requireActivity().getResources().getString(R.string.AppAdded), Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewSessionAdded));
+
+                        ((MainActivity) requireActivity()).navController.navigateUp();
                     });
                 }
             }
@@ -180,11 +187,67 @@ public class CreateSessionFragment extends Fragment {
                                     for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
                                         if (time instanceof CreateSessionTabTimeFragment && session instanceof CreateSessionTabSessionFragment) {
                                             switch (key) {
+
+                                                // Time Data
                                                 case "time":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "duration":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.durationIncludeLayout.inputEditText, ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "date_type":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "date":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "week_days":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.patternDaysIncludeLayout.selectRecyclerView, ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat_status":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksIncludeLayout.inputEditText, ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat_from":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "repeat_to":
+                                                    if (time instanceof CreateSessionTabTimeFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+
+                                                // Session Data
+                                                case "status":
+                                                    if (session instanceof CreateSessionTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.statusIncludeLayout.selectSpinner, ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                     break;
                                                 case "fields":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                                                    if (session instanceof CreateSessionTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "description":
+                                                    if (session instanceof CreateSessionTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.descriptionIncludeLayout.inputEditText, ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+                                                case "client_reminder":
+                                                    if (session instanceof CreateSessionTabSessionFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.coordinationIncludeLayout.inputEditText, ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    break;
+
+                                                // Payment Data
+                                                case "payment_status":
+                                                    if (payment instanceof CreateSessionTabPaymentFragment)
+                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabPaymentFragment) payment).binding.paymentIncludeLayout.selectSpinner, ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                                                     break;
                                             }
                                         }

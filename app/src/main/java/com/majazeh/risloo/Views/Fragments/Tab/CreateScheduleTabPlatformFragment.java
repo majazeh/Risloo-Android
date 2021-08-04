@@ -18,6 +18,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabPlatformBinding;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 
 public class CreateScheduleTabPlatformFragment extends Fragment {
 
@@ -74,16 +75,17 @@ public class CreateScheduleTabPlatformFragment extends Fragment {
 
     private void setData() {
         if (current instanceof CreateScheduleFragment) {
-//            SessionModel model = ((CreateScheduleFragment) current).sessionModel;
-//
-//            if (!model.getSession_platforms().data().isEmpty()) {
-//                adapter.setPlatforms(model.getSession_platforms().data());
-//                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                binding.indexSingleLayout.textView.setVisibility(View.GONE);
-//            } else if (adapter.getItemCount() == 0) {
-//                binding.indexSingleLayout.textView.setVisibility(View.VISIBLE);
-//            }
+            RoomModel model = ((CreateScheduleFragment) current).roomModel;
+
+            if (model.getSession_platforms() != null && !model.getSession_platforms().data().isEmpty()) {
+                adapter.setItems(model.getSession_platforms().data());
+                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+            } else if (adapter.getItemCount() == 0) {
+                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
+            }
         }
     }
 

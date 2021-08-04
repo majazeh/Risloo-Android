@@ -42,6 +42,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
     // Vars
     public String type = "", roomId = "", caseId = "", count = "", selection = "", groupSession = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
@@ -86,15 +87,24 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.typeIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.typeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    type = parent.getItemAtPosition(position).toString();
 
-                if (type.equals("اعضاء پرونده درمانی …"))
-                    binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                else
-                    binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+                    if (type.equals("اعضاء پرونده درمانی …"))
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    else
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -121,11 +131,8 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
         });
 
         binding.countIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.countIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.countIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.countIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.countIncludeLayout.inputEditText);
             return false;
         });
 
@@ -133,10 +140,19 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
             count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
         });
 
+        binding.selectionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.selectionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selection = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    selection = parent.getItemAtPosition(position).toString();
+
+                    userSelect = false;
+                }
             }
 
             @Override
