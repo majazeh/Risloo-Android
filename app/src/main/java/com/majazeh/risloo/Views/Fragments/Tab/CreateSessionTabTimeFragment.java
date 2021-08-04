@@ -79,22 +79,22 @@ public class CreateSessionTabTimeFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTimeTabStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTimeTabDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeTabDateTypeHeader));
-        binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeTabSpecifiedDateHeader));
-        binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeTabPatternDaysHeader));
-        binding.patternTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeTabPatternTypeHeader));
-        binding.repeatWeeksIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeTabRepeatWeeksHeader));
-        binding.periodStartDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeTabPeriodStartDateHeader));
-        binding.periodEndDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTimeTabPeriodEndDateHeader));
+        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.CreateSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.dateTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimeDateTypeHeader));
+        binding.specifiedDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimeSpecifiedDateHeader));
+        binding.patternDaysIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimePatternDaysHeader));
+        binding.patternTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimePatternTypeHeader));
+        binding.repeatWeeksIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimeRepeatWeeksHeader));
+        binding.periodStartDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimePeriodStartDateHeader));
+        binding.periodEndDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateSessionTabTimePeriodEndDateHeader));
 
-        binding.dateTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateSessionTimeTabDateTypeSpecified));
+        binding.dateTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateSessionTabTimeDateTypeSpecified));
         binding.dateTypeIncludeLayout.firstRadioButton.setChecked(true);
-        binding.dateTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateSessionTimeTabDateTypePattern));
+        binding.dateTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateSessionTabTimeDateTypePattern));
 
-        binding.patternTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateSessionTimeTabPatternTypeRepeat));
-        binding.patternTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateSessionTimeTabPatternTypePeriod));
+        binding.patternTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.CreateSessionTabTimePatternTypeRepeat));
+        binding.patternTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.CreateSessionTabTimePatternTypePeriod));
         binding.patternTypeIncludeLayout.secondRadioButton.setChecked(true);
 
         binding.durationIncludeLayout.inputEditText.setText(duration);
@@ -102,7 +102,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.patternDaysIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTimeTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTabTimeButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {

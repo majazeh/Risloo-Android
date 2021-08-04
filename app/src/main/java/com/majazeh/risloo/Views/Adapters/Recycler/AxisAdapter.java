@@ -124,7 +124,7 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
     }
 
     private void setData(AxisHolder holder, int position) {
-        holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateSchedulePaymentTabAxisTotal) + " " + ids.get(position));
+        holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateScheduleTabPaymentAxisTotal) + " " + ids.get(position));
 
         holder.binding.inputEditText.setText(amounts.get(position));
     }

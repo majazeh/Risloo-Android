@@ -64,16 +64,16 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabTypeHeader));
-        binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabCaseHeader));
-        binding.countIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabCountHeader));
-        binding.selectionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleReferenceTabSelectionHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabReferenceTypeHeader));
+        binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabReferenceCaseHeader));
+        binding.countIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabReferenceCountHeader));
+        binding.selectionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabReferenceSelectionHeader));
 
-        binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.CreateScheduleReferenceTabCheckbox));
+        binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.CreateScheduleTabReferenceCheckbox));
 
         InitManager.normal12sspSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleReferenceTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabReferenceButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -166,7 +166,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
     private void setTypes(RoomModel model) {
         ArrayList<String> options = new ArrayList<>();
 
-        options.add(requireActivity().getResources().getString(R.string.CreateScheduleReferenceTabTypeRisloo));
+        options.add(requireActivity().getResources().getString(R.string.CreateScheduleTabReferenceTypeRisloo));
 
         try {
             if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
@@ -176,11 +176,11 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
         }
 
         if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
-            String name = requireActivity().getResources().getString(R.string.CreateScheduleReferenceTabRoom) + " " + model.getRoomManager().getName();
+            String name = requireActivity().getResources().getString(R.string.CreateScheduleTabReferenceRoom) + " " + model.getRoomManager().getName();
             options.add(name);
         }
 
-        options.add(requireActivity().getResources().getString(R.string.CreateScheduleReferenceTabTypeCase));
+        options.add(requireActivity().getResources().getString(R.string.CreateScheduleTabReferenceTypeCase));
 
         options.add("");
 

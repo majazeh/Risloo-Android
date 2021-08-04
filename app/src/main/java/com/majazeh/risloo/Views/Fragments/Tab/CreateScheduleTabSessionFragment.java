@@ -78,19 +78,19 @@ public class CreateScheduleTabSessionFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabStatusHeader));
-        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabAxisHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabDescriptionHeader));
-        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabCoordinationHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabSessionStatusHeader));
+        binding.axisIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabSessionAxisHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabSessionDescriptionHeader));
+        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabSessionCoordinationHeader));
 
-        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabAxisGuide));
-        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleSessionTabCoordinationGuide));
+        binding.axisGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleTabSessionAxisGuide));
+        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateScheduleTabSessionCoordinationGuide));
 
         InitManager.normal12sspSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleSessionTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateScheduleTabSessionButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
