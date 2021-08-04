@@ -64,7 +64,7 @@ public class SessionsFragment extends Fragment {
 
         data = new HashMap<>();
         data.put("page", 1);
-        data.put("session_platform", 1);
+        data.put("session_platforms", 1);
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
