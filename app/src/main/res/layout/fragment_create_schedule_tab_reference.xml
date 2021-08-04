@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
@@ -23,7 +23,8 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -86,6 +87,17 @@
                 app:layout_constraintTop_toBottomOf="@id/case_errorLayout" />
 
             <include
+                android:id="@+id/bulk_session_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/bulk_session_checkBox"
+                app:layout_constraintStart_toStartOf="@id/bulk_session_checkBox"
+                app:layout_constraintTop_toBottomOf="@id/bulk_session_checkBox" />
+
+            <include
                 android:id="@+id/count_includeLayout"
                 layout="@layout/component_main_input_number"
                 android:layout_width="0dp"
@@ -94,7 +106,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/bulk_session_checkBox" />
+                app:layout_constraintTop_toBottomOf="@id/bulk_session_errorLayout" />
 
             <include
                 android:id="@+id/count_errorLayout"
@@ -113,8 +125,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/selection_errorLayout"
                 app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/type_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/count_errorLayout" />
@@ -124,7 +134,6 @@
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="parent"

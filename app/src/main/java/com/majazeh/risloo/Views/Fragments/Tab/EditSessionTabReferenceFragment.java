@@ -77,14 +77,14 @@ public class EditSessionTabReferenceFragment extends Fragment {
 
         InitManager.normal12sspSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.EditSessionTabReferenceButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabReferenceButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
         } else {
-            binding.createTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+            binding.editTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
         }
     }
 
@@ -183,7 +183,7 @@ public class EditSessionTabReferenceFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (current instanceof EditSessionFragment)
                 ((EditSessionFragment) current).checkRequire();
-        }).widget(binding.createTextView.getRoot());
+        }).widget(binding.editTextView.getRoot());
     }
 
     private void setData() {

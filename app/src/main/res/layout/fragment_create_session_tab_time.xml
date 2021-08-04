@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
@@ -23,7 +23,8 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
-            android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
@@ -83,26 +84,33 @@
                 app:layout_constraintTop_toBottomOf="@id/duration_errorLayout" />
 
             <include
+                android:id="@+id/date_type_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/date_type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/date_type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/date_type_includeLayout" />
+
+            <include
                 android:id="@+id/specified_date_includeLayout"
                 layout="@layout/component_main_input_select"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/specified_date_errorLayout"
-                app:layout_constraintEnd_toEndOf="@id/date_type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/date_type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/date_type_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/date_type_errorLayout" />
 
             <include
                 android:id="@+id/specified_date_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/specified_date_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/specified_date_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/specified_date_includeLayout" />
@@ -113,8 +121,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/date_type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/date_type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/specified_date_errorLayout" />
 
             <include
@@ -134,9 +142,20 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/date_type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/date_type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/pattern_days_errorLayout" />
+
+            <include
+                android:id="@+id/pattern_type_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/pattern_type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/pattern_type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/pattern_type_includeLayout" />
 
             <include
                 android:id="@+id/repeat_weeks_includeLayout"
@@ -144,21 +163,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/repeat_weeks_errorLayout"
-                app:layout_constraintEnd_toEndOf="@id/date_type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/date_type_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/pattern_type_includeLayout" />
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/pattern_type_errorLayout" />
 
             <include
                 android:id="@+id/repeat_weeks_errorLayout"
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/repeat_weeks_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/repeat_weeks_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/repeat_weeks_includeLayout" />
@@ -169,8 +184,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_constraintEnd_toEndOf="@id/date_type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/date_type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/repeat_weeks_errorLayout" />
 
             <include
@@ -190,10 +205,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                app:layout_goneMarginBottom="@dimen/_12sdp"
-                app:layout_constraintBottom_toTopOf="@id/period_end_date_errorLayout"
-                app:layout_constraintEnd_toEndOf="@id/date_type_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/date_type_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/period_start_date_errorLayout" />
 
             <include
@@ -201,12 +214,10 @@
                 layout="@layout/component_main_error"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/_12sdp"
                 android:layout_marginTop="@dimen/_6sdp"
                 android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="@id/period_end_date_includeLayout"
-                app:layout_constraintStart_toStartOf="@id/period_end_date_includeLayout"
+                app:layout_constraintEnd_toEndOf="@id/start_time_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/start_time_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/period_end_date_includeLayout" />
 
             <androidx.constraintlayout.widget.Group

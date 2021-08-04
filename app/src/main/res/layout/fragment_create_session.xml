@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:layoutDirection="rtl"
     tools:context=".Views.Fragments.Create.CreateSessionFragment">
 
@@ -12,7 +12,7 @@
         android:id="@+id/tabLayout"
         layout="@layout/component_main_tablayout"
         android:layout_width="0dp"
-        android:layout_height="@dimen/_36sdp"
+        android:layout_height="@dimen/_32sdp"
         android:layout_marginEnd="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         app:layout_constraintEnd_toEndOf="parent"
