@@ -22,29 +22,30 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
-import com.majazeh.risloo.databinding.FragmentEditSessionSessionBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
-public class EditSessionSessionFragment extends Fragment {
+public class EditSessionTabSessionFragment extends Fragment {
 
     // Binding
-    public FragmentEditSessionSessionBinding binding;
+    public FragmentEditSessionTabSessionBinding binding;
 
     // BottomSheets
-    private TimeBottomSheet startAccurateTimeBottomSheet, endAccurateTimeBottomSheet;
-    private DateBottomSheet startAccurateDateBottomSheet, endAccurateDateBottomSheet;
+    private TimeBottomSheet accurateStartTimeBottomSheet, accurateEndTimeBottomSheet;
+    private DateBottomSheet accurateStartDateBottomSheet, accurateEndDateBottomSheet;
 
     // Fragments
     private Fragment current;
 
     // Vars
     public String status = "", description = "", coordination = "";
-    public String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
+    public String accurateStartTime = "", accurateStartDate = "", accurateEndTime = "", accurateEndDate = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditSessionSessionBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditSessionTabSessionBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -58,22 +59,22 @@ public class EditSessionSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        startAccurateTimeBottomSheet = new TimeBottomSheet();
-        endAccurateTimeBottomSheet = new TimeBottomSheet();
-        startAccurateDateBottomSheet = new DateBottomSheet();
-        endAccurateDateBottomSheet = new DateBottomSheet();
+        accurateStartTimeBottomSheet = new TimeBottomSheet();
+        accurateEndTimeBottomSheet = new TimeBottomSheet();
+        accurateStartDateBottomSheet = new DateBottomSheet();
+        accurateEndDateBottomSheet = new DateBottomSheet();
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabStatusHeader));
-        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabDescriptionHeader));
-        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionSessionTabCoordinationHeader));
+        binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabSessionStatusHeader));
+        binding.descriptionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabSessionDescriptionHeader));
+        binding.coordinationIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabSessionCoordinationHeader));
 
-        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.EditSessionSessionTabCoordinationGuide));
+        binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.EditSessionTabSessionCoordinationGuide));
 
         InitManager.normal12sspSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionSessionTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabSessionButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -86,15 +87,24 @@ public class EditSessionSessionFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.statusIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.statusIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                status = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    status = parent.getItemAtPosition(position).toString();
 
-                if (status.equals("زمان\u200Cبندی شده"))
-                    binding.scheduledIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                else
-                    binding.scheduledIncludeLayout.getRoot().setVisibility(View.GONE);
+                    if (status.equals("زمان\u200Cبندی شده"))
+                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    else
+                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.GONE);
+
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -104,11 +114,8 @@ public class EditSessionSessionFragment extends Fragment {
         });
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.descriptionIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 
@@ -117,11 +124,8 @@ public class EditSessionSessionFragment extends Fragment {
         });
 
         binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.coordinationIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.coordinationIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
             return false;
         });
 
@@ -143,40 +147,31 @@ public class EditSessionSessionFragment extends Fragment {
         });
 
         binding.scheduledIncludeLayout.startRelativeDayEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.scheduledIncludeLayout.startRelativeDayEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeDayEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeDayEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeDayEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.startRelativeHourEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.scheduledIncludeLayout.startRelativeHourEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeHourEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeHourEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeHourEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.startRelativeMinuteEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.scheduledIncludeLayout.startRelativeMinuteEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeMinuteEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeMinuteEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeMinuteEditText);
             return false;
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            startAccurateTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startAccurateTimeBottomSheet");
-            startAccurateTimeBottomSheet.setTime(startAccurateTime, "startAccurateTime");
+            accurateStartTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateStartTimeBottomSheet");
+            accurateStartTimeBottomSheet.setTime(accurateStartTime, "accurateStartTime");
         }).widget(binding.scheduledIncludeLayout.startAccurateTimeTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            startAccurateDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startAccurateDateBottomSheet");
-            startAccurateDateBottomSheet.setDate(startAccurateDate, "startAccurateDate");
+            accurateStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateStartDateBottomSheet");
+            accurateStartDateBottomSheet.setDate(accurateStartDate, "accurateStartDate");
         }).widget(binding.scheduledIncludeLayout.startAccurateDateTextView);
 
         binding.scheduledIncludeLayout.endRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -205,46 +200,31 @@ public class EditSessionSessionFragment extends Fragment {
         });
 
         binding.scheduledIncludeLayout.endRelativeDayEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (binding.scheduledIncludeLayout.getFocusableInTouchMode()) {
-                    if (!binding.scheduledIncludeLayout.endRelativeDayEditText.hasFocus()) {
-                        ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeDayEditText);
-                    }
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeDayEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeDayEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.endRelativeHourEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (binding.scheduledIncludeLayout.getFocusableInTouchMode()) {
-                    if (!binding.scheduledIncludeLayout.endRelativeHourEditText.hasFocus()) {
-                        ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeHourEditText);
-                    }
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeHourEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeHourEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.endRelativeMinuteEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (binding.scheduledIncludeLayout.getFocusableInTouchMode()) {
-                    if (!binding.scheduledIncludeLayout.endRelativeMinuteEditText.hasFocus()) {
-                        ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeMinuteEditText);
-                    }
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeMinuteEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeMinuteEditText);
             return false;
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            endAccurateTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "endAccurateTimeBottomSheet");
-            endAccurateTimeBottomSheet.setTime(endAccurateTime, "endAccurateTime");
+            accurateEndTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateEndTimeBottomSheet");
+            accurateEndTimeBottomSheet.setTime(accurateEndTime, "accurateEndTime");
         }).widget(binding.scheduledIncludeLayout.endAccurateTimeTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            endAccurateDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "endAccurateDateBottomSheet");
-            endAccurateDateBottomSheet.setDate(endAccurateDate, "endAccurateDate");
+            accurateEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateEndDateBottomSheet");
+            accurateEndDateBottomSheet.setDate(accurateEndDate, "accurateEndDate");
         }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
 
         ClickManager.onDelayedClickListener(() -> {
@@ -282,35 +262,35 @@ public class EditSessionSessionFragment extends Fragment {
             }
 
             if (model.getOpens_at() != 0) {
-                startAccurateTime = String.valueOf(model.getOpens_at());
-                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                accurateStartTime = String.valueOf(model.getOpens_at());
+                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateStartTime));
             } else {
-                startAccurateTime = String.valueOf(DateManager.currentTimestamp());
-                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                accurateStartTime = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateStartTime));
             }
 
             if (model.getOpens_at() != 0) {
-                startAccurateDate = String.valueOf(model.getOpens_at());
-                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+                accurateStartDate = String.valueOf(model.getOpens_at());
+                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateStartDate, "-"));
             } else {
-                startAccurateDate = String.valueOf(DateManager.currentTimestamp());
-                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+                accurateStartDate = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateStartDate, "-"));
             }
 
             if (model.getClosed_at() != 0) {
-                endAccurateTime = String.valueOf(model.getClosed_at());
-                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                accurateEndTime = String.valueOf(model.getClosed_at());
+                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateEndTime));
             } else {
-                endAccurateTime = String.valueOf(DateManager.currentTimestamp());
-                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                accurateEndTime = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateEndTime));
             }
 
             if (model.getClosed_at() != 0) {
-                endAccurateDate = String.valueOf(model.getClosed_at());
-                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+                accurateEndDate = String.valueOf(model.getClosed_at());
+                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateEndDate, "-"));
             } else {
-                endAccurateDate = String.valueOf(DateManager.currentTimestamp());
-                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+                accurateEndDate = String.valueOf(DateManager.currentTimestamp());
+                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateEndDate, "-"));
             }
         }
     }
@@ -318,20 +298,20 @@ public class EditSessionSessionFragment extends Fragment {
     public void responseBottomSheet(String method, String data) {
         switch (method) {
             case "accurateStartTime":
-                startAccurateTime = data;
-                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
+                accurateStartTime = data;
+                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateStartTime));
                 break;
             case "accurateStartDate":
-                startAccurateDate = data;
-                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
+                accurateStartDate = data;
+                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateStartDate, "-"));
                 break;
             case "accurateEndTime":
-                endAccurateTime = data;
-                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
+                accurateEndTime = data;
+                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateEndTime));
                 break;
             case "accurateEndDate":
-                endAccurateDate = data;
-                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
+                accurateEndDate = data;
+                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateEndDate, "-"));
                 break;
         }
     }

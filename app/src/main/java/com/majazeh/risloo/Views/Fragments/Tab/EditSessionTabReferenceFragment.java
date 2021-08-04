@@ -20,7 +20,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
-import com.majazeh.risloo.databinding.FragmentEditSessionReferenceBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -31,10 +31,10 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class EditSessionReferenceFragment extends Fragment {
+public class EditSessionTabReferenceFragment extends Fragment {
 
     // Binding
-    public FragmentEditSessionReferenceBinding binding;
+    public FragmentEditSessionTabReferenceBinding binding;
 
     // Dialogs
     private SearchableDialog casesDialog;
@@ -44,11 +44,12 @@ public class EditSessionReferenceFragment extends Fragment {
 
     // Vars
     public String type = "", roomId = "", caseId = "", problem = "", count = "", selection = "", groupSession = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditSessionReferenceBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditSessionTabReferenceBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -66,17 +67,17 @@ public class EditSessionReferenceFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionReferenceTabTypeHeader));
-        binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionReferenceTabCaseHeader));
-        binding.problemIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionReferenceTabProblemHeader));
-        binding.countIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionReferenceTabCountHeader));
-        binding.selectionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionReferenceTabSelectionHeader));
+        binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabReferenceTypeHeader));
+        binding.caseIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabReferenceCaseHeader));
+        binding.problemIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabReferenceProblemHeader));
+        binding.countIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabReferenceCountHeader));
+        binding.selectionIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabReferenceSelectionHeader));
 
-        binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.EditSessionReferenceTabCheckbox));
+        binding.bulkSessionCheckBox.getRoot().setText(getResources().getString(R.string.EditSessionTabReferenceCheckbox));
 
         InitManager.normal12sspSpinner(requireActivity(), binding.selectionIncludeLayout.selectSpinner, R.array.SelectionTypes);
 
-        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.EditSessionReferenceTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.EditSessionTabReferenceButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -89,20 +90,29 @@ public class EditSessionReferenceFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.typeIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.typeIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                type = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    type = parent.getItemAtPosition(position).toString();
 
-                if (type.equals("اعضاء پرونده درمانی …")) {
-                    binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
-                } else if (type.equals("ساخت پرونده جدید")) {
-                    binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
-                    binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                } else {
-                    binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
-                    binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
+                    if (type.equals("اعضاء پرونده درمانی …")) {
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
+                    } else if (type.equals("ساخت پرونده جدید")) {
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    } else {
+                        binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
+                    }
+
+                    userSelect = false;
                 }
             }
 
@@ -118,11 +128,8 @@ public class EditSessionReferenceFragment extends Fragment {
         }).widget(binding.caseIncludeLayout.selectContainer);
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.problemIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
             return false;
         });
 
@@ -143,11 +150,8 @@ public class EditSessionReferenceFragment extends Fragment {
         });
 
         binding.countIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.countIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.countIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.countIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.countIncludeLayout.inputEditText);
             return false;
         });
 
@@ -155,10 +159,19 @@ public class EditSessionReferenceFragment extends Fragment {
             count = binding.countIncludeLayout.inputEditText.getText().toString().trim();
         });
 
+        binding.selectionIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.selectionIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                selection = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    selection = parent.getItemAtPosition(position).toString();
+
+                    userSelect = false;
+                }
             }
 
             @Override
@@ -177,7 +190,7 @@ public class EditSessionReferenceFragment extends Fragment {
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-            if (model.getRoom() != null && model.getRoom().getRoomId() != null && !model.getRoom().getRoomId().equals("")) {
+            if (model.getRoom() != null && model.getRoom().getRoomId() != null) {
                 roomId = model.getRoom().getRoomId();
             }
 
@@ -261,7 +274,7 @@ public class EditSessionReferenceFragment extends Fragment {
     private void setTypes(RoomModel model) {
         ArrayList<String> options = new ArrayList<>();
 
-        options.add(requireActivity().getResources().getString(R.string.EditSessionReferenceTabTypeRisloo));
+        options.add(requireActivity().getResources().getString(R.string.EditSessionTabReferenceTypeRisloo));
 
         try {
             if (model.getRoomCenter() != null && model.getRoomCenter().getDetail() != null && model.getRoomCenter().getDetail().has("title") && !model.getRoomCenter().getDetail().isNull("title") && !model.getRoomCenter().getDetail().getString("title").equals(""))
@@ -271,12 +284,12 @@ public class EditSessionReferenceFragment extends Fragment {
         }
 
         if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
-            String name = requireActivity().getResources().getString(R.string.EditSessionReferenceTabRoom) + " " + model.getRoomManager().getName();
+            String name = requireActivity().getResources().getString(R.string.EditSessionTabReferenceRoom) + " " + model.getRoomManager().getName();
             options.add(name);
         }
 
-        options.add(requireActivity().getResources().getString(R.string.EditSessionReferenceTabTypeCase));
-        options.add(requireActivity().getResources().getString(R.string.EditSessionReferenceTabTypeNew));
+        options.add(requireActivity().getResources().getString(R.string.EditSessionTabReferenceTypeCase));
+        options.add(requireActivity().getResources().getString(R.string.EditSessionTabReferenceTypeNew));
 
         options.add("");
 

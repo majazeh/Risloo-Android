@@ -653,52 +653,52 @@
 
     <string name="EditSessionFragmentTitle">ویرایش جلسه درمانی</string>
 
-    ---------- // EditSessionTime Tab
+    ---------- // EditSessionTabTime
 
-    <string name="EditSessionTimeTabStartTimeHeader">زمان (ساعت - دقیقه)</string>
-    <string name="EditSessionTimeTabDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
-    <string name="EditSessionTimeTabStartDateHeader">تاریخ</string>
+    <string name="EditSessionTabTimeStartTimeHeader">زمان (ساعت - دقیقه)</string>
+    <string name="EditSessionTabTimeDurationHeader">مدت‌زمان جلسه (دقیقه)</string>
+    <string name="EditSessionTabTimeStartDateHeader">تاریخ</string>
 
-    <string name="EditSessionTimeTabButton">ویرایش</string>
+    <string name="EditSessionTabTimeButton">ویرایش</string>
 
-    ---------- // EditSessionReference Tab
+    ---------- // EditSessionTabReference
 
-    <string name="EditSessionReferenceTabTypeHeader">نوع مراجعین درخواست دهنده</string>
-    <string name="EditSessionReferenceTabCaseHeader">پرونده</string>
-    <string name="EditSessionReferenceTabProblemHeader">مسئله</string>
-    <string name="EditSessionReferenceTabCountHeader">تعداد حداکثر مراجعین</string>
-    <string name="EditSessionReferenceTabSelectionHeader">نوع انتخاب مراجعین</string>
+    <string name="EditSessionTabReferenceTypeHeader">نوع مراجعین درخواست دهنده</string>
+    <string name="EditSessionTabReferenceCaseHeader">پرونده</string>
+    <string name="EditSessionTabReferenceProblemHeader">مسئله</string>
+    <string name="EditSessionTabReferenceCountHeader">تعداد حداکثر مراجعین</string>
+    <string name="EditSessionTabReferenceSelectionHeader">نوع انتخاب مراجعین</string>
 
-    <string name="EditSessionReferenceTabCheckbox">جلسه گروهی</string>
+    <string name="EditSessionTabReferenceCheckbox">جلسه گروهی</string>
 
-    <string name="EditSessionReferenceTabTypeRisloo">اعضاء ریسلو</string>
-    <string name="EditSessionReferenceTabTypeUser">اعضاء</string>
-    <string name="EditSessionReferenceTabTypeCase">اعضاء پرونده درمانی …</string>
-    <string name="EditSessionReferenceTabTypeNew">ساخت پرونده جدید</string>
+    <string name="EditSessionTabReferenceTypeRisloo">اعضاء ریسلو</string>
+    <string name="EditSessionTabReferenceTypeUser">اعضاء</string>
+    <string name="EditSessionTabReferenceTypeCase">اعضاء پرونده درمانی …</string>
+    <string name="EditSessionTabReferenceTypeNew">ساخت پرونده جدید</string>
 
-    <string name="EditSessionReferenceTabRoom">اتاق درمان</string>
+    <string name="EditSessionTabReferenceRoom">اتاق درمان</string>
 
-    <string name="EditSessionReferenceTabButton">ساخت</string>
+    <string name="EditSessionTabReferenceButton">ساخت</string>
 
-    ---------- // EditSessionSession Tab
+    ---------- // EditSessionTabSession
 
-    <string name="EditSessionSessionTabStatusHeader">وضعیت جلسه</string>
-    <string name="EditSessionSessionTabDescriptionHeader">توضیحات</string>
-    <string name="EditSessionSessionTabCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
+    <string name="EditSessionTabSessionStatusHeader">وضعیت جلسه</string>
+    <string name="EditSessionTabSessionDescriptionHeader">توضیحات</string>
+    <string name="EditSessionTabSessionCoordinationHeader">پیغام یادآوری و هماهنگی مراجع</string>
 
-    <string name="EditSessionSessionTabCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
+    <string name="EditSessionTabSessionCoordinationGuide">شما می‌توانید در این قسمت توضیحاتی را وارد کنید که قصد دارید همراه با پیغام یادآوری مراجع برای او ارسال شود؛ مثلا لینک جلسه آنلاین، شماره تلفن جلسه تلفنی و …</string>
 
-    <string name="EditSessionSessionTabButton">ویرایش</string>
+    <string name="EditSessionTabSessionButton">ویرایش</string>
 
-    ---------- // EditSessionPlatform Tab
+    ---------- // EditSessionTabPlatform
 
-    <string name="EditSessionPlatformTabButton">ویرایش</string>
+    <string name="EditSessionTabPlatformButton">ویرایش</string>
 
-    ---------- // EditSessionPayment Tab
+    ---------- // EditSessionTabPayment
 
-    <string name="EditSessionPaymentTabPaymentHeader">نوع دریافت</string>
+    <string name="EditSessionTabPaymentPaymentHeader">نوع دریافت</string>
 
-    <string name="EditSessionPaymentTabButton">ویرایش</string>
+    <string name="EditSessionTabPaymentButton">ویرایش</string>
 
     /*
     ---------- EditTreasury Fragment ----------

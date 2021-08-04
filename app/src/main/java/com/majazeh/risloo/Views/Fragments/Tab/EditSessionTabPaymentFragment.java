@@ -18,24 +18,25 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
-import com.majazeh.risloo.databinding.FragmentEditSessionPaymentBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
-public class EditSessionPaymentFragment extends Fragment {
+public class EditSessionTabPaymentFragment extends Fragment {
 
     // Binding
-    public FragmentEditSessionPaymentBinding binding;
+    public FragmentEditSessionTabPaymentBinding binding;
 
     // Fragments
     private Fragment current;
 
     // Vars
     public String payment = "";
+    private boolean userSelect = false;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditSessionPaymentBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditSessionTabPaymentBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -51,11 +52,11 @@ public class EditSessionPaymentFragment extends Fragment {
     private void initializer() {
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionPaymentTabPaymentHeader));
+        binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabPaymentPaymentHeader));
 
         InitManager.normal12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes);
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionPaymentTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabPaymentButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -68,10 +69,19 @@ public class EditSessionPaymentFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
+        binding.paymentIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
         binding.paymentIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                payment = parent.getItemAtPosition(position).toString();
+                if (userSelect) {
+                    payment = parent.getItemAtPosition(position).toString();
+
+                    userSelect = false;
+                }
             }
 
             @Override

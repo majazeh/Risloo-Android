@@ -17,13 +17,13 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
-import com.majazeh.risloo.databinding.FragmentEditSessionPlatformBinding;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 
-public class EditSessionPlatformFragment extends Fragment {
+public class EditSessionTabPlatformFragment extends Fragment {
 
     // Binding
-    public FragmentEditSessionPlatformBinding binding;
+    public FragmentEditSessionTabPlatformBinding binding;
 
     // Adapters
     public TabPlatformsAdapter adapter;
@@ -34,7 +34,7 @@ public class EditSessionPlatformFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditSessionPlatformBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditSessionTabPlatformBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -52,9 +52,9 @@ public class EditSessionPlatformFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionPlatformTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabPlatformButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -84,6 +84,7 @@ public class EditSessionPlatformFragment extends Fragment {
                 binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
             } else if (adapter.getItemCount() == 0) {
                 binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
             }
         }
     }

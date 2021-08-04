@@ -23,8 +23,8 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabPersonalFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.BottomSheetDateBinding;
 
 import java.util.Date;
@@ -111,11 +111,11 @@ public class DateBottomSheet extends BottomSheetDialogFragment {
             if (current instanceof CreateUserFragment)
                 ((CreateUserFragment) current).responseBottomSheet(method, getDate());
 
-            if (child instanceof EditSessionTimeFragment)
-                ((EditSessionTimeFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof EditSessionTabTimeFragment)
+                ((EditSessionTabTimeFragment) child).responseBottomSheet(method, getDate());
 
-            if (child instanceof EditSessionSessionFragment)
-                ((EditSessionSessionFragment) child).responseBottomSheet(method, getDate());
+            if (child instanceof EditSessionTabSessionFragment)
+                ((EditSessionTabSessionFragment) child).responseBottomSheet(method, getDate());
 
             if (child instanceof EditUserTabPersonalFragment)
                 ((EditUserTabPersonalFragment) child).responseBottomSheet(method, getDate());

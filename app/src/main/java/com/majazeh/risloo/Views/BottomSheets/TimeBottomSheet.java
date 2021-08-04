@@ -21,8 +21,8 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.BottomSheetTimeBinding;
 
 import java.util.Date;
@@ -95,11 +95,11 @@ public class TimeBottomSheet extends BottomSheetDialogFragment {
             if (child instanceof CreateScheduleSessionFragment)
                 ((CreateScheduleSessionFragment) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof EditSessionTimeFragment)
-                ((EditSessionTimeFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof EditSessionTabTimeFragment)
+                ((EditSessionTabTimeFragment) child).responseBottomSheet(method, getTime());
 
-            if (child instanceof EditSessionSessionFragment)
-                ((EditSessionSessionFragment) child).responseBottomSheet(method, getTime());
+            if (child instanceof EditSessionTabSessionFragment)
+                ((EditSessionTabSessionFragment) child).responseBottomSheet(method, getTime());
 
             dismiss();
         }).widget(binding.entryButton);

@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
+import com.majazeh.risloo.databinding.FragmentEditSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -22,12 +23,11 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
-import com.majazeh.risloo.databinding.FragmentEditSessionTimeBinding;
 
-public class EditSessionTimeFragment extends Fragment {
+public class EditSessionTabTimeFragment extends Fragment {
 
     // Binding
-    public FragmentEditSessionTimeBinding binding;
+    public FragmentEditSessionTabTimeBinding binding;
 
     // BottomSheets
     private TimeBottomSheet startTimeBottomSheet;
@@ -42,7 +42,7 @@ public class EditSessionTimeFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
-        binding = FragmentEditSessionTimeBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentEditSessionTabTimeBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -61,11 +61,11 @@ public class EditSessionTimeFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTimeTabStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTimeTabDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
-        binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTimeTabStartDateHeader));
+        binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.durationIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTabTimeDurationHeader), 14, 21, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+        binding.startDateIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabTimeStartDateHeader));
 
-        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTimeTabButton), getResources().getColor(R.color.White));
+        InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabTimeButton), getResources().getColor(R.color.White));
     }
 
     private void detector() {
@@ -84,11 +84,8 @@ public class EditSessionTimeFragment extends Fragment {
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                if (!binding.durationIncludeLayout.inputEditText.hasFocus()) {
-                    ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
-                }
-            }
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
             return false;
         });
 

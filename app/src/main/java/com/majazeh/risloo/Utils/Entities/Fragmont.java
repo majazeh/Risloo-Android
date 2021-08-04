@@ -67,11 +67,11 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPlatformFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabPlatformFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabAvatarFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabCryptoFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditUserTabPasswordFragment;
@@ -305,15 +305,15 @@ public class Fragmont {
         else if (fragment instanceof EditSessionFragment) {
             Fragment child = ((EditSessionFragment) fragment).adapter.hashMap.get(((EditSessionFragment) fragment).binding.viewPager.getRoot().getCurrentItem());
             if (child != null)
-                if (child instanceof EditSessionTimeFragment)
+                if (child instanceof EditSessionTabTimeFragment)
                     return child;
-                else if (child instanceof EditSessionReferenceFragment)
+                else if (child instanceof EditSessionTabReferenceFragment)
                     return child;
-                else if (child instanceof EditSessionSessionFragment)
+                else if (child instanceof EditSessionTabSessionFragment)
                     return child;
-                else if (child instanceof EditSessionPlatformFragment)
+                else if (child instanceof EditSessionTabPlatformFragment)
                     return child;
-                else if (child instanceof EditSessionPaymentFragment)
+                else if (child instanceof EditSessionTabPaymentFragment)
                     return child;
         }
 
@@ -355,7 +355,7 @@ public class Fragmont {
         } else if (fragment instanceof EditSessionFragment) {
             Fragment time = ((EditSessionFragment) fragment).adapter.hashMap.get(0);
             if (time != null)
-                if (time instanceof EditSessionTimeFragment)
+                if (time instanceof EditSessionTabTimeFragment)
                     return time;
         }
 
@@ -374,7 +374,7 @@ public class Fragmont {
         } else if (fragment instanceof EditSessionFragment) {
             Fragment reference = ((EditSessionFragment) fragment).adapter.hashMap.get(1);
             if (reference != null)
-                if (reference instanceof EditSessionReferenceFragment)
+                if (reference instanceof EditSessionTabReferenceFragment)
                     return reference;
         }
 
@@ -457,7 +457,7 @@ public class Fragmont {
                 session = ((EditSessionFragment) fragment).adapter.hashMap.get(2);
 
             if (session != null)
-                if (session instanceof EditSessionSessionFragment)
+                if (session instanceof EditSessionTabSessionFragment)
                     return session;
         }
 
@@ -476,7 +476,7 @@ public class Fragmont {
                 platform = ((EditSessionFragment) fragment).adapter.hashMap.get(3);
 
             if (platform != null)
-                if (platform instanceof EditSessionPlatformFragment)
+                if (platform instanceof EditSessionTabPlatformFragment)
                     return platform;
         }
 
@@ -495,7 +495,7 @@ public class Fragmont {
                 payment = ((EditSessionFragment) fragment).adapter.hashMap.get(4);
 
             if (payment != null)
-                if (payment instanceof EditSessionPaymentFragment)
+                if (payment instanceof EditSessionTabPaymentFragment)
                     return payment;
         }
 

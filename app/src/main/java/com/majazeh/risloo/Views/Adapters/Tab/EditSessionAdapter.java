@@ -5,11 +5,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionPlatformFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionReferenceFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTimeFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabPlatformFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabSessionFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabTimeFragment;
 
 import java.util.HashMap;
 
@@ -31,22 +31,22 @@ public class EditSessionAdapter extends FragmentStateAdapter {
         if (hasCase) {
             switch (position) {
                 case 0: {
-                    Fragment fragment = new EditSessionTimeFragment();
+                    Fragment fragment = new EditSessionTabTimeFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 1: {
-                    Fragment fragment = new EditSessionSessionFragment();
+                    Fragment fragment = new EditSessionTabSessionFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 2: {
-                    Fragment fragment = new EditSessionPlatformFragment();
+                    Fragment fragment = new EditSessionTabPlatformFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 3: {
-                    Fragment fragment = new EditSessionPaymentFragment();
+                    Fragment fragment = new EditSessionTabPaymentFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
@@ -56,27 +56,27 @@ public class EditSessionAdapter extends FragmentStateAdapter {
         } else {
             switch (position) {
                 case 0: {
-                    Fragment fragment = new EditSessionTimeFragment();
+                    Fragment fragment = new EditSessionTabTimeFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 1: {
-                    Fragment fragment = new EditSessionReferenceFragment();
+                    Fragment fragment = new EditSessionTabReferenceFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 2: {
-                    Fragment fragment = new EditSessionSessionFragment();
+                    Fragment fragment = new EditSessionTabSessionFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 3: {
-                    Fragment fragment = new EditSessionPlatformFragment();
+                    Fragment fragment = new EditSessionTabPlatformFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
                 case 4: {
-                    Fragment fragment = new EditSessionPaymentFragment();
+                    Fragment fragment = new EditSessionTabPaymentFragment();
                     hashMap.put(position, fragment);
                     return fragment;
                 }
