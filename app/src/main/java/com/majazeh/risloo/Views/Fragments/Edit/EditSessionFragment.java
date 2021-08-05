@@ -18,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.EditSessionAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditSessionTabTimeFragment;
@@ -187,6 +188,13 @@ public class EditSessionFragment extends Fragment {
             data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((EditSessionTabSessionFragment) session).status));
             data.put("description", ((EditSessionTabSessionFragment) session).description);
             data.put("client_reminder", ((EditSessionTabSessionFragment) session).coordination);
+        }
+
+        // Platform Data
+        if (platform instanceof EditSessionTabPlatformFragment) {
+            data.put("platforms", ((EditSessionTabPlatformFragment) platform).adapter.platforms);
+            data.put("pin_platform", ((EditSessionTabPlatformFragment) platform).adapter.pinPlatform);
+            data.put("identifier_platform", ((EditSessionTabPlatformFragment) platform).adapter.identifierPlatform);
         }
 
         // Payment Data

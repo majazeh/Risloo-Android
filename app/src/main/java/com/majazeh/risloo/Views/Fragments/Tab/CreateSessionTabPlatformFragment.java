@@ -77,7 +77,7 @@ public class CreateSessionTabPlatformFragment extends Fragment {
         if (current instanceof CreateSessionFragment) {
             CaseModel model = ((CreateSessionFragment) current).caseModel;
 
-            if (model.getCaseRoom() != null && model.getCaseRoom().getSession_platforms() != null && !model.getCaseRoom().getSession_platforms().data().isEmpty()) {
+            if (model.getCaseRoom() != null && !model.getCaseRoom().getSession_platforms().data().isEmpty()) {
                 adapter.setItems(model.getCaseRoom().getSession_platforms().data());
                 binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 

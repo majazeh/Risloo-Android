@@ -18,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateSessionAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
+import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPlatformFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabTimeFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionBinding;
@@ -152,6 +153,13 @@ public class CreateSessionFragment extends Fragment {
             data.put("fields", ((CreateSessionTabSessionFragment) session).axisesAdapter.getIds());
             data.put("description", ((CreateSessionTabSessionFragment) session).description);
             data.put("client_reminder", ((CreateSessionTabSessionFragment) session).coordination);
+        }
+
+        // Platform Data
+        if (platform instanceof CreateSessionTabPlatformFragment) {
+            data.put("platforms", ((CreateSessionTabPlatformFragment) platform).adapter.platforms);
+            data.put("pin_platform", ((CreateSessionTabPlatformFragment) platform).adapter.pinPlatform);
+            data.put("identifier_platform", ((CreateSessionTabPlatformFragment) platform).adapter.identifierPlatform);
         }
 
         // Payment Data

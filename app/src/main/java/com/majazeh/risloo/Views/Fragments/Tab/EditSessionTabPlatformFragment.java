@@ -77,8 +77,8 @@ public class EditSessionTabPlatformFragment extends Fragment {
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-            if (model.getCaseModel() != null && model.getCaseModel().getCaseRoom() != null && model.getCaseModel().getCaseRoom().getSession_platforms() != null && !model.getCaseModel().getCaseRoom().getSession_platforms().data().isEmpty()) {
-                adapter.setItems(model.getCaseModel().getCaseRoom().getSession_platforms().data());
+            if (model.getRoom() != null && !model.getRoom().getSession_platforms().data().isEmpty()) {
+                adapter.setItems(model.getRoom().getSession_platforms().data());
                 binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
                 binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
