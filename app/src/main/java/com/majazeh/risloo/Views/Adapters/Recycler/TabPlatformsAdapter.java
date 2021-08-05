@@ -149,8 +149,13 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
     }
 
     private void setIdentifier(TabPlatformsHolder holder, String id, String identifier) {
-        identifierPlatform.put(id, identifier);
-        holder.binding.identifierEditText.setText(identifier);
+        if (identifier == null) {
+            identifierPlatform.put(id, "");
+            holder.binding.identifierEditText.setText("");
+        } else {
+            identifierPlatform.put(id, identifier);
+            holder.binding.identifierEditText.setText(identifier);
+        }
     }
 
     private void setPinned(TabPlatformsHolder holder, String id , boolean isPinned) {
