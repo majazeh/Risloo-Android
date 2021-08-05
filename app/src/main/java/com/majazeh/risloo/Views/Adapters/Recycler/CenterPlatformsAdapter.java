@@ -141,19 +141,12 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
         holder.binding.availableSwitchCompat.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (userSelect) {
-                if (isChecked) {
+                if (isChecked)
                     doWork(holder, model, "1", "available");
-
-                    holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-                    holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
-                    holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
-                } else {
+                else
                     doWork(holder, model, "0", "available");
 
-                    holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-                    holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
-                    holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-                }
+                setAvailable(holder, isChecked);
 
                 userSelect = false;
             }
@@ -167,9 +160,9 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
         setIdentifier(holder, model);
 
-        setAvailable(holder, model);
+        setSelected(holder, model.isSelected());
 
-        setSelected(holder, model);
+        setAvailable(holder, model.isAvailable());
     }
 
     private void setIdentifier(CenterPlatformsHolder holder, SessionPlatformModel model) {
@@ -195,27 +188,33 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
         }
     }
 
-    private void setAvailable(CenterPlatformsHolder holder, SessionPlatformModel model) {
-        if (model.isAvailable()) {
+    private void setSelected(CenterPlatformsHolder holder, boolean isSelected) {
+        if (isSelected)
+            holder.binding.sessionCheckBox.setChecked(true);
+        else
+            holder.binding.sessionCheckBox.setChecked(false);
+    }
+
+    private void setAvailable(CenterPlatformsHolder holder, boolean isAvailable) {
+        if (isAvailable) {
             holder.binding.availableSwitchCompat.setChecked(true);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
             holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
+
+            holder.binding.sessionCheckBox.setEnabled(true);
+            holder.binding.sessionCheckBox.setAlpha((float) 1);
         } else {
             holder.binding.availableSwitchCompat.setChecked(false);
 
             holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
             holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
             holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-        }
-    }
 
-    private void setSelected(CenterPlatformsHolder holder, SessionPlatformModel model) {
-        if (model.isSelected())
-            holder.binding.sessionCheckBox.setChecked(true);
-        else
-            holder.binding.sessionCheckBox.setChecked(false);
+            holder.binding.sessionCheckBox.setEnabled(false);
+            holder.binding.sessionCheckBox.setAlpha((float) 0.6);
+        }
     }
 
     private void doWork(CenterPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
@@ -239,25 +238,17 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
             @Override
             public void onFailure(String response) {
                 activity.runOnUiThread(() -> {
-                    if (method.equals("switch")) {
-                        if (value.equals("1")) {
-                            holder.binding.availableSwitchCompat.setChecked(false);
-
-                            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
-                            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Gray600));
-                            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-                        } else if (value.equals("0")) {
-                            holder.binding.availableSwitchCompat.setChecked(true);
-
-                            holder.binding.availableSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOn));
-                            holder.binding.availableSwitchCompat.setTextColor(activity.getResources().getColor(R.color.Green700));
-                            holder.binding.availableSwitchCompat.setBackgroundResource(R.drawable.draw_2sdp_solid_green50_border_1sdp_gray200);
-                        }
-                    } else if (method.equals("checkbox")) {
+                    if (method.equals("available")) {
                         if (value.equals("1"))
-                            holder.binding.sessionCheckBox.setChecked(false);
+                            setAvailable(holder, false);
                         else if (value.equals("0"))
-                            holder.binding.sessionCheckBox.setChecked(true);
+                            setAvailable(holder, true);
+
+                    } else if (method.equals("selected")) {
+                        if (value.equals("1"))
+                            setSelected(holder, false);
+                        else if (value.equals("0"))
+                            setSelected(holder, true);
                     }
                 });
             }

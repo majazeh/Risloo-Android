@@ -7,8 +7,7 @@
     android:layout_gravity="center"
     android:layoutDirection="rtl"
     tools:layout_marginBottom="@dimen/_4sdp"
-    tools:layout_marginTop="@dimen/_4sdp"
-    tools:context=".Views.Adapters.Recycler.AxisAdapter">
+    tools:layout_marginTop="@dimen/_4sdp">
 
     <TextView
         android:id="@+id/header_textView"
@@ -63,35 +62,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header_textView"
         tools:text="عدد" />
-
-    <ImageView
-        android:id="@+id/error_imageView"
-        android:layout_width="@dimen/_8sdp"
-        android:layout_height="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_exclamation_triangle_light"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/input_editText"
-        app:layout_constraintTop_toTopOf="@id/error_textView"
-        app:tint="@color/Red500" />
-
-    <TextView
-        android:id="@+id/error_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:gravity="start"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Red500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_light"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@id/error_imageView"
-        app:layout_constraintTop_toBottomOf="@id/input_editText"
-        tools:text="متن خطا" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
