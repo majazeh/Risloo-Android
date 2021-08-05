@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/White"
+    android:background="@null"
     android:fillViewport="true"
     android:scrollbarSize="0dp"
     android:overScrollMode="always"
@@ -31,38 +31,66 @@
                 android:layout_marginEnd="@dimen/_12sdp"
                 android:layout_marginStart="@dimen/_12sdp"
                 android:paddingBottom="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <TextView
-                    android:id="@+id/name_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
+                <ImageView
+                    android:id="@+id/serial_imageView"
+                    android:layout_width="@dimen/_16sdp"
+                    android:layout_height="@dimen/_16sdp"
                     android:layout_marginEnd="@dimen/_12sdp"
-                    android:layout_marginStart="@dimen/_12sdp"
+                    android:contentDescription="@string/AppImageContent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_copy_light"
+                    app:layout_constraintBottom_toBottomOf="@id/serial_textView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/serial_textView"
+                    app:tint="@color/Blue700" />
+
+                <TextView
+                    android:id="@+id/serial_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:gravity="start"
+                    android:gravity="center"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray900"
+                    android:textColor="@color/Blue700"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_bold"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toStartOf="@id/serial_imageView"
                     app:layout_constraintTop_toTopOf="parent"
+                    tools:text="سریال" />
+
+                <TextView
+                    android:id="@+id/scale_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_4sdp"
+                    android:gravity="right"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray700"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_demi_bold"
+                    app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/serial_textView"
                     tools:text="مقیاس" />
 
                 <ImageView
                     android:id="@+id/reference_imageView"
-                    android:layout_width="@dimen/_14sdp"
-                    android:layout_height="@dimen/_14sdp"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
                     android:contentDescription="@string/AppImageContent"
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_user_light"
                     app:layout_constraintBottom_toBottomOf="@id/reference_textView"
-                    app:layout_constraintStart_toStartOf="@id/name_textView"
+                    app:layout_constraintStart_toStartOf="@id/scale_textView"
                     app:layout_constraintTop_toTopOf="@id/reference_textView"
                     app:tint="@color/Gray500" />
 
@@ -72,15 +100,15 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
                     android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toEndOf="@id/name_textView"
+                    app:layout_constraintEnd_toEndOf="@id/scale_textView"
                     app:layout_constraintStart_toEndOf="@id/reference_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/name_textView"
+                    app:layout_constraintTop_toBottomOf="@id/scale_textView"
                     tools:text="مراجع" />
 
                 <TextView
@@ -89,53 +117,54 @@
                     android:layout_height="wrap_content"
                     android:layout_marginEnd="@dimen/_6sdp"
                     android:layout_marginTop="@dimen/_12sdp"
-                    android:gravity="start"
+                    android:gravity="right"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray400"
+                    android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
                     app:layout_constraintEnd_toStartOf="@id/secondary_textView"
-                    app:layout_constraintStart_toStartOf="@id/reference_imageView"
+                    app:layout_constraintStart_toStartOf="@id/scale_textView"
                     app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                    app:layout_goneMarginEnd="0dp"
                     tools:text="وضعیت" />
-
-                <include
-                    android:id="@+id/secondary_textView"
-                    layout="@layout/component_main_button_rect_mid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:visibility="visible"
-                    app:layout_goneMarginEnd="@dimen/_6sdp"
-                    app:layout_goneMarginTop="@dimen/_8sdp"
-                    app:layout_constraintLeft_toRightOf="@id/buttons_barrier"
-                    app:layout_constraintTop_toBottomOf="@id/reference_textView" />
 
                 <include
                     android:id="@+id/primary_textView"
                     layout="@layout/component_main_button_rect_mid"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:visibility="visible"
-                    app:layout_goneMarginTop="@dimen/_8sdp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_textView" />
+                    app:layout_constraintLeft_toLeftOf="@id/serial_imageView"
+                    app:layout_constraintRight_toLeftOf="@id/secondary_textView"
+                    app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                    app:layout_goneMarginTop="@dimen/_8sdp" />
 
                 <include
                     android:id="@+id/profiles_textView"
                     layout="@layout/component_main_button_rect_spinner"
                     android:layout_width="wrap_content"
                     android:layout_height="@dimen/_28sdp"
-                    android:layout_marginLeft="@dimen/_12sdp"
+                    android:layout_marginRight="@dimen/_4sdp"
                     android:layout_marginTop="@dimen/_8sdp"
                     android:visibility="gone"
-                    app:layout_goneMarginTop="@dimen/_8sdp"
-                    app:layout_constraintLeft_toLeftOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/reference_textView" />
+                    app:layout_constraintLeft_toLeftOf="@id/serial_imageView"
+                    app:layout_constraintRight_toLeftOf="@id/secondary_textView"
+                    app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                    app:layout_goneMarginTop="@dimen/_8sdp" />
+
+                <include
+                    android:id="@+id/secondary_textView"
+                    layout="@layout/component_main_button_rect_mid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_28sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:visibility="visible"
+                    app:layout_constraintLeft_toRightOf="@id/buttons_barrier"
+                    app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                    app:layout_goneMarginTop="@dimen/_8sdp" />
 
                 <androidx.constraintlayout.widget.Barrier
                     android:id="@+id/buttons_barrier"
@@ -150,9 +179,9 @@
                 android:id="@+id/scoring_constraintLayout"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:paddingBottom="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:padding="@dimen/_12sdp"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
@@ -163,7 +192,6 @@
                     android:id="@+id/scoring_progressBar"
                     android:layout_width="@dimen/_26sdp"
                     android:layout_height="@dimen/_26sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
                     android:theme="@style/ProgressBarTheme"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -179,10 +207,9 @@
                     android:text="@string/SampleFragmentScoring"
                     android:textSize="@dimen/_9ssp"
                     android:textStyle="normal"
-                    android:textColor="@color/Gray400"
+                    android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/scoring_progressBar" />
@@ -207,14 +234,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_halfs_header_includeLayout" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/profile_halfs_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="profile_halfs_header_includeLayout, profile_halfs_singleLayout"
-                tools:visibility="visible" />
-
             <include
                 android:id="@+id/profile_extras_header_includeLayout"
                 layout="@layout/component_main_index_header"
@@ -222,7 +241,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/profile_halfs_singleLayout" />
+                app:layout_constraintTop_toBottomOf="@id/profile_halfs_singleLayout"
+                tools:layout_marginTop="@dimen/_6sdp" />
 
             <include
                 android:id="@+id/profile_extras_singleLayout"
@@ -233,14 +253,6 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/profile_extras_header_includeLayout" />
 
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/profile_extras_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="profile_extras_header_includeLayout, profile_extras_singleLayout"
-                tools:visibility="visible" />
-
             <include
                 android:id="@+id/fields_header_includeLayout"
                 layout="@layout/component_main_index_header"
@@ -248,7 +260,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/profile_extras_singleLayout" />
+                app:layout_constraintTop_toBottomOf="@id/profile_extras_singleLayout"
+                tools:layout_marginTop="@dimen/_6sdp" />
 
             <CheckBox
                 android:id="@+id/fields_editable_checkBox"
@@ -263,12 +276,12 @@
                 android:textColor="@color/Gray600"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                android:layoutDirection="rtl"
                 android:theme="@style/CheckBoxTheme"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+                android:layoutDirection="rtl"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/fields_header_includeLayout"
-                app:layout_constraintLeft_toLeftOf="@id/info_constraintLayout"
+                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toTopOf="@id/fields_header_includeLayout"
                 tools:visibility="visible" />
 
@@ -277,7 +290,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toBottomOf="@id/fields_header_includeLayout">
@@ -286,9 +299,9 @@
                     android:id="@+id/general_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    android:gravity="start"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:gravity="right"
                     android:text="@string/SampleFragmentSubGeneral"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
@@ -296,8 +309,8 @@
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_demi_bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <include
                     android:id="@+id/general_shimmerLayout"
@@ -336,7 +349,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toBottomOf="@id/general_constraintLayout">
@@ -345,9 +358,9 @@
                     android:id="@+id/prerequisite_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    android:gravity="start"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:gravity="right"
                     android:text="@string/SampleFragmentSubPrerequisite"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
@@ -355,8 +368,8 @@
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_demi_bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <include
                     android:id="@+id/prerequisite_shimmerLayout"
@@ -395,8 +408,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_8sdp"
-                android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toBottomOf="@id/prerequisite_constraintLayout">
@@ -405,9 +417,9 @@
                     android:id="@+id/item_textView"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_12sdp"
                     android:layout_marginStart="@dimen/_12sdp"
-                    android:gravity="start"
+                    android:layout_marginTop="@dimen/_12sdp"
+                    android:gravity="right"
                     android:text="@string/SampleFragmentSubItem"
                     android:textSize="@dimen/_10ssp"
                     android:textStyle="normal"
@@ -415,8 +427,8 @@
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_demi_bold"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent" />
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <include
                     android:id="@+id/item_shimmerLayout"
@@ -449,6 +461,22 @@
                     tools:visibility="visible" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/profile_halfs_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="profile_halfs_header_includeLayout, profile_halfs_singleLayout"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/profile_extras_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="profile_extras_header_includeLayout, profile_extras_singleLayout"
+                tools:visibility="visible" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

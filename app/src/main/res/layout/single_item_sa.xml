@@ -43,17 +43,24 @@
         android:gravity="center|start"
         android:textSize="@dimen/_10ssp"
         android:textStyle="normal"
-        android:textColor="@color/Gray600"
+        android:textColor="@color/Gray700"
         android:textColorHint="@color/Gray400"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:importantForAutofill="no"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray300"
         android:visibility="visible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_barrier"
         tools:text="عنوان" />
+
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/select_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="select_spinner, angle_imageView" />
 
     <Spinner
         android:id="@+id/select_spinner"
@@ -63,7 +70,7 @@
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_40sdp"
-        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray300"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/top_barrier" />
@@ -87,42 +94,5 @@
         android:layout_height="wrap_content"
         app:barrierDirection="bottom"
         app:constraint_referenced_ids="input_editText, select_spinner" />
-
-    <androidx.constraintlayout.widget.Group
-        android:id="@+id/select_group"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:visibility="gone"
-        app:constraint_referenced_ids="select_spinner, angle_imageView" />
-
-    <ImageView
-        android:id="@+id/error_imageView"
-        android:layout_width="@dimen/_8sdp"
-        android:layout_height="@dimen/_8sdp"
-        android:layout_marginTop="@dimen/_4sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_exclamation_triangle_light"
-        android:visibility="gone"
-        app:layout_constraintStart_toStartOf="@id/header_textView"
-        app:layout_constraintTop_toTopOf="@id/error_textView"
-        app:tint="@color/Red500" />
-
-    <TextView
-        android:id="@+id/error_textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_6sdp"
-        android:gravity="start"
-        android:textSize="@dimen/_9ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Red600"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_light"
-        android:visibility="gone"
-        app:layout_constraintStart_toEndOf="@id/error_imageView"
-        app:layout_constraintTop_toBottomOf="@id/bottom_barrier"
-        tools:text="متن خطا" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

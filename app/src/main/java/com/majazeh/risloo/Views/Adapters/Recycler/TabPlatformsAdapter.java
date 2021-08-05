@@ -26,7 +26,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
 
     // Objects
     private Activity activity;
-    public HashMap platforms, pinPlatform, identifierPlatform;
+    public HashMap platforms = new HashMap(), pinPlatform = new HashMap<>(), identifierPlatform = new HashMap<>();
 
     // Vars
     private ArrayList<TypeModel> items;
@@ -45,8 +45,6 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
     @Override
     public void onBindViewHolder(@NonNull TabPlatformsHolder holder, int i) {
         SessionPlatformModel model = (SessionPlatformModel) items.get(i);
-
-        intializer();
 
         detector(holder);
 
@@ -76,12 +74,6 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
             this.items.clear();
             notifyDataSetChanged();
         }
-    }
-
-    private void intializer() {
-        platforms = new HashMap<>();
-        pinPlatform = new HashMap<>();
-        identifierPlatform = new HashMap<>();
     }
 
     private void detector(TabPlatformsHolder holder) {
