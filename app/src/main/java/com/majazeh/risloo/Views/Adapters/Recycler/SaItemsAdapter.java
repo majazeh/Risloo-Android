@@ -2,6 +2,9 @@ package com.majazeh.risloo.Views.Adapters.Recycler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.os.Handler;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSaBinding;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
@@ -25,8 +29,12 @@ import java.util.ArrayList;
 
 public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsHolder> {
 
+    // Fragments
+    private Fragment current;
+
     // Objects
     private Activity activity;
+    private Handler handler;
 
     // Vars
     private ArrayList<TypeModel> items;
@@ -44,11 +52,13 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
 
     @Override
     public void onBindViewHolder(@NonNull SaItemsHolder holder, int i) {
-        ItemModel item = (ItemModel) items.get(i);
+        ItemModel model = (ItemModel) items.get(i);
+
+        intializer();
 
         listener(holder, i);
 
-        setData(holder, item);
+        setData(holder, model);
     }
 
     @Override
@@ -79,24 +89,42 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
         notifyDataSetChanged();
     }
 
+    private void intializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+
+        handler = new Handler();
+    }
+
     @SuppressLint("ClickableViewAccessibility")
     private void listener(SaItemsHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (editable) {
-                if (MotionEvent.ACTION_UP == event.getAction()) {
-                    if (!holder.binding.inputEditText.hasFocus()) {
-                        ((MainActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
-                    }
-                }
-            }
+            if (editable)
+                if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
+                    ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
             return false;
         });
 
-        holder.binding.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            Fragment current = ((MainActivity) activity).fragmont.getCurrent();
+        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-            if (current instanceof SampleFragment)
-                ((SampleFragment) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString());
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (holder.binding.inputEditText.hasFocus()) {
+                    handler.removeCallbacksAndMessages(null);
+                    handler.postDelayed(() -> {
+                        if (current instanceof SampleFragment)
+                            ((SampleFragment) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString());
+                    }, 750);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+            }
         });
 
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {
@@ -108,8 +136,6 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    Fragment current = ((MainActivity) activity).fragmont.getCurrent();
-
                     if (current instanceof SampleFragment)
                         ((SampleFragment) current).sendItem(item + 1, String.valueOf(position + 1));
 

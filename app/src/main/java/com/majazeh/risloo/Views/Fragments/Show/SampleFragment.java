@@ -51,12 +51,16 @@ public class SampleFragment extends Fragment {
     private SaPresAdapter saPresAdapter;
     private SaItemsAdapter saItemsAdapter;
 
-    // Vars
-    private HashMap data, header;
+    // Models
     private SampleAnswers sampleAnswers;
     private SampleModel sampleModel;
-    private boolean isLoading = true, userSelect = false;
+
+    // Objects
+    private HashMap data, header;
+
+    // Vars
     private ArrayList<String> profileUrls;
+    private boolean isLoading = true, userSelect = false;
 
     @Nullable
     @Override
@@ -81,18 +85,18 @@ public class SampleFragment extends Fragment {
         saPresAdapter = new SaPresAdapter(requireActivity());
         saItemsAdapter = new SaItemsAdapter(requireActivity());
 
+        sampleAnswers = new SampleAnswers();
+
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-
-        sampleAnswers = new SampleAnswers();
 
         binding.profileHalfsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHalfHeader));
         binding.profileExtrasHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
         binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileHalfsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileExtrasSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileHalfsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileExtrasSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -101,26 +105,30 @@ public class SampleFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         ClickManager.onDelayedClickListener(() -> {
-            switch (SelectionManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString())) {
+            String status = SelectionManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString());
+
+            switch (status) {
                 case "seald":
                 case "open":
-                    doWork("fill");
+                    fillSample();
                     break;
                 case "closed":
-                    doWork("open");
+                    openSample();
                     break;
             }
         }).widget(binding.primaryTextView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
-            switch (SelectionManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString())) {
+            String status = SelectionManager.getSampleStatus(requireActivity(), "en", binding.statusTextView.getText().toString());
+
+            switch (status) {
                 case "seald":
                 case "open":
-                    doWork("close");
+                    closeSample();
                     break;
                 case "closed":
                 case "done":
-                    doWork("score");
+                    scoreSample();
                     break;
             }
         }).widget(binding.secondaryTextView.getRoot());
@@ -136,7 +144,7 @@ public class SampleFragment extends Fragment {
                 if (userSelect) {
                     IntentManager.download(requireContext(), profileUrls.get(position));
 
-                    binding.profilesTextView.selectSpinner.setSelection(parent.getAdapter().getCount());
+                    parent.setSelection(parent.getAdapter().getCount());
 
                     userSelect = false;
                 }
@@ -167,21 +175,21 @@ public class SampleFragment extends Fragment {
 
     private void setArgs() {
         sampleModel = (SampleModel) SampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-
         setData(sampleModel);
     }
 
     private void setData(SampleModel model) {
         if (model.getSampleId() != null && !model.getSampleId().equals("")) {
+            binding.serialTextView.setText(model.getSampleId());
             data.put("id", model.getSampleId());
             sampleAnswers.id = model.getSampleId();
         }
 
         if (model.getSampleScaleTitle() != null && !model.getSampleScaleTitle().equals("")) {
-            binding.nameTextView.setText(model.getSampleScaleTitle());
+            binding.scaleTextView.setText(model.getSampleScaleTitle());
         }
 
-        if (model.getClient() != null && model.getClient().getName() != null) {
+        if (model.getClient() != null) {
             binding.referenceTextView.setText(model.getClient().getName());
         }
 
@@ -266,7 +274,7 @@ public class SampleFragment extends Fragment {
     private void setScoring(String status) {
         if (status.equals("scoring") || status.equals("creating_files")) {
             binding.scoringConstraintLayout.setVisibility(View.VISIBLE);
-            doWork("getScore");
+            getScore();
         } else {
             binding.scoringConstraintLayout.setVisibility(View.GONE);
         }
@@ -435,129 +443,135 @@ public class SampleFragment extends Fragment {
                         binding.itemRecyclerView.setVisibility(View.VISIBLE);
                         binding.itemShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.itemShimmerLayout.getRoot().stopShimmer();
+
                     });
                 }
             }
         });
     }
 
-    private void doWork(String method) {
-        if (!method.equals("getScore"))
-            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+    private void getScore() {
+        Sample.getScore(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        setStatus("done");
+                    });
+                }
+            }
 
-        switch (method) {
-            case "fill":
-                Sample.fill(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
+    }
 
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "close":
-                Sample.close(sampleAnswers, data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                                setStatus("closed");
-                            });
-                        }
-                    }
+    private void fillSample() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "open":
-                Sample.open(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                                setStatus("open");
-                            });
-                        }
-                    }
+        Sample.fill(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
 
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "score":
-                Sample.score(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        sampleModel = (SampleModel) object;
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
+    }
 
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                                setStatus(sampleModel.getSampleStatus());
-                            });
-                        }
-                    }
+    private void closeSample() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-            case "getScore":
-                Sample.getScore(data, header, new Response() {
-                    @Override
-                    public void onOK(Object object) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                setStatus("done");
-                            });
-                        }
-                    }
+        Sample.close(sampleAnswers, data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        setStatus("closed");
+                    });
+                }
+            }
 
-                    @Override
-                    public void onFailure(String response) {
-                        if (isAdded()) {
-                            requireActivity().runOnUiThread(() -> {
-                                // TODO : Place Code If Needed
-                            });
-                        }
-                    }
-                });
-                break;
-        }
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
+    }
+
+    private void openSample() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        Sample.open(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        setStatus("open");
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
+    }
+
+    private void scoreSample() {
+        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+
+        Sample.score(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                sampleModel = (SampleModel) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        setStatus(sampleModel.getSampleStatus());
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // TODO : Place Code If Needed
+                    });
+                }
+            }
+        });
     }
 
     public void sendGen(String key, String value) {
