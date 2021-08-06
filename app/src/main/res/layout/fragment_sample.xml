@@ -83,6 +83,35 @@
                     tools:text="مقیاس" />
 
                 <ImageView
+                    android:id="@+id/edition_imageView"
+                    android:layout_width="@dimen/_12sdp"
+                    android:layout_height="@dimen/_12sdp"
+                    android:contentDescription="@string/AppImageContent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_info_circle_light"
+                    app:layout_constraintBottom_toBottomOf="@id/edition_textView"
+                    app:layout_constraintStart_toStartOf="@id/scale_textView"
+                    app:layout_constraintTop_toTopOf="@id/edition_textView"
+                    app:tint="@color/Gray500" />
+
+                <TextView
+                    android:id="@+id/edition_textView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_6sdp"
+                    android:layout_marginTop="@dimen/_8sdp"
+                    android:gravity="right"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="normal"
+                    android:textColor="@color/Gray500"
+                    android:textAlignment="gravity"
+                    android:fontFamily="@font/dana_regular"
+                    app:layout_constraintEnd_toEndOf="@id/scale_textView"
+                    app:layout_constraintStart_toEndOf="@id/edition_imageView"
+                    app:layout_constraintTop_toBottomOf="@id/scale_textView"
+                    tools:text="ویرایش - نسخه" />
+
+                <ImageView
                     android:id="@+id/reference_imageView"
                     android:layout_width="@dimen/_12sdp"
                     android:layout_height="@dimen/_12sdp"
@@ -90,7 +119,7 @@
                     android:scaleType="fitCenter"
                     android:src="@drawable/ic_user_light"
                     app:layout_constraintBottom_toBottomOf="@id/reference_textView"
-                    app:layout_constraintStart_toStartOf="@id/scale_textView"
+                    app:layout_constraintStart_toStartOf="@id/edition_imageView"
                     app:layout_constraintTop_toTopOf="@id/reference_textView"
                     app:tint="@color/Gray500" />
 
@@ -106,9 +135,9 @@
                     android:textColor="@color/Gray500"
                     android:textAlignment="gravity"
                     android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toEndOf="@id/scale_textView"
+                    app:layout_constraintEnd_toEndOf="@id/edition_textView"
                     app:layout_constraintStart_toEndOf="@id/reference_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/scale_textView"
+                    app:layout_constraintTop_toBottomOf="@id/edition_textView"
                     tools:text="مراجع" />
 
                 <TextView
@@ -267,7 +296,7 @@
                 android:id="@+id/fields_editable_checkBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/_6sdp"
+                android:paddingLeft="@dimen/_6sdp"
                 android:checked="false"
                 android:gravity="center|start"
                 android:text="@string/SampleFragmentEditable"
@@ -281,7 +310,7 @@
                 android:layoutDirection="rtl"
                 android:visibility="gone"
                 app:layout_constraintBottom_toBottomOf="@id/fields_header_includeLayout"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+                app:layout_constraintLeft_toLeftOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toTopOf="@id/fields_header_includeLayout"
                 tools:visibility="visible" />
 

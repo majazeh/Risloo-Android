@@ -189,6 +189,12 @@ public class SampleFragment extends Fragment {
             binding.scaleTextView.setText(model.getSampleScaleTitle());
         }
 
+        if (model.getSampleEdition() != null && !model.getSampleEdition().equals("")) {
+            binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        } else {
+            binding.editionTextView.setText("نسخه " + model.getSampleVersion());
+        }
+
         if (model.getClient() != null) {
             binding.referenceTextView.setText(model.getClient().getName());
         }
