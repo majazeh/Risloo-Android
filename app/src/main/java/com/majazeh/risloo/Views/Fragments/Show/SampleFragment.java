@@ -203,7 +203,7 @@ public class SampleFragment extends Fragment {
     }
 
     private void setStatus(String status) {
-        binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", status));
+        setText(status);
 
         setButtons(status);
 
@@ -213,6 +213,20 @@ public class SampleFragment extends Fragment {
             setEditable(status);
 
             setProfiles(status);
+        }
+    }
+
+    private void setText(String status) {
+        binding.statusTextView.setText(SelectionManager.getSampleStatus(requireActivity(), "fa", status));
+
+        switch (status) {
+            case "scoring":
+            case "creating_files":
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Yellow500));
+                break;
+            default:
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Gray500));
+                break;
         }
     }
 
