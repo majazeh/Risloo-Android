@@ -69,7 +69,7 @@ public class SplashActivity extends AppCompatActivity {
             if (!singleton.getToken().equals(""))
                 IntentManager.main(this);
             else
-                IntentManager.auth(this);
+                IntentManager.intro(this);
         }, 1000);
     }
 

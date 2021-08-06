@@ -17,6 +17,7 @@ import androidx.core.content.FileProvider;
 
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.DisplayActivity;
+import com.majazeh.risloo.Views.Activities.IntroActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 
@@ -28,8 +29,16 @@ import java.util.Objects;
 
 public class IntentManager {
 
-    public static void auth(Activity activity) {
+    public static void intro(Activity activity) {
+        Intent intent = new Intent(activity, IntroActivity.class);
+
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
+    public static void auth(Activity activity, String theory) {
         Intent intent = new Intent(activity, AuthActivity.class);
+        intent.putExtra("theory", theory);
 
         activity.startActivity(intent);
         activity.finish();

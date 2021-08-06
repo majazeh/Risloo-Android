@@ -80,7 +80,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
                             ((MainActivity) requireActivity()).singleton.logout();
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
 
-                            IntentManager.auth(requireActivity());
+                            IntentManager.auth(requireActivity(), "login");
 
                             dismiss();
                         });

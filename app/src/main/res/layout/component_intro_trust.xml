@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:paddingBottom="@dimen/_6sdp"
+    android:paddingEnd="@dimen/_6sdp"
+    android:paddingStart="@dimen/_8sdp"
+    android:paddingTop="@dimen/_6sdp"
+    android:layoutDirection="rtl"
+    android:background="@drawable/draw_2sdp_top_solid_blue500">
+
+    <TextView
+        android:id="@+id/guide_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_6sdp"
+        android:gravity="center|start"
+        android:text="@string/IntroTrust"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="bold"
+        android:textColor="@color/White"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/guide_imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/guide_imageView"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/logo_trust"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/White" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

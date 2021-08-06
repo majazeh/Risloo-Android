@@ -8,10 +8,6 @@
     <string name="AppDebugTag">نسخه آزمایشی</string>
 
     <string name="AppImageContent">عکس</string>
-
-    <string name="AppAdded">ساخته شد.</string>
-    <string name="AppChanged">تغییرات ثبت شد.</string>
-
     <string name="AppInputEmpty">فیلد خالی است.</string>
 
     <string name="AppSearchHint">جستجو</string>
@@ -63,6 +59,29 @@
 
     //////////////////////////////////////////////////////////////////////////////////////
 
+    // Splash Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="SplashVersion">نسخه</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    // Intro Strings
+    //////////////////////////////////////////////////////////////////////////////////////
+
+    <string name="IntroRisloo">ریسلو</string>
+    <string name="IntroLogin">ورود</string>
+
+    <string name="IntroTitle">درمان، آموزش و پژوهش</string>
+    <string name="IntroDescription">شما به عنوان روان‌شناس، روی کار اصلی خود تمرکز کنید؛ دغدغه کارهای جانبی درمان، آموزش و پژوهش را نداشته باشید و به خود آن‌ها فقط فکر کنید. ریسلو بستری یک‌پارچه است که کارهای شما را در این سه حوزه تسهیل می‌کند.</string>
+
+    <string name="IntroRegister">عضو ریسلو شوید</string>
+    <string name="IntroVersion">نسخه</string>
+
+    <string name="IntroTrust">© تمامی حقوق این نرم افزار متعلق به شرکت ریس اعتماد ایرانیان می‌باشد.</string>
+
+    //////////////////////////////////////////////////////////////////////////////////////
+
     // Auth Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -77,13 +96,6 @@
     <string name="AuthPasswordRecoverLink">فراموشی کلمه عبور</string>
     <string name="AuthDashboardLink">پیش‌خوان</string>
     <string name="AuthLogoutLink">خروج</string>
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    // Splash Strings
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    <string name="SplashVersion">نسخه</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 
@@ -183,7 +195,7 @@
     <string name="ChainFragmentTitle">وضعیت نمونه زنجیره‌ای</string>
 
     /*
-    ----------  Prerequisite Fragment ----------
+    ---------- Prerequisite Fragment ----------
     */
 
     <string name="PrerequisiteFragmentTitle">اطلاعات جمعیت ‌شناختی و عمومی</string>
@@ -202,13 +214,13 @@
     <string name="EntityFragmentTitle">بخش</string>
 
     /*
-    ----------  Optional Fragment ----------
+    ---------- Optional Fragment ----------
     */
 
     <string name="OptionalFragmentTitle">تست متنی</string>
 
     /*
-    ----------  Pictoral Fragment ----------
+    ---------- Pictoral Fragment ----------
     */
 
     <string name="PictoralFragmentTitle">تست تصویری</string>

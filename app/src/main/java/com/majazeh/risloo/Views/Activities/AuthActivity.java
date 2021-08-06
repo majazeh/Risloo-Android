@@ -2,6 +2,7 @@ package com.majazeh.risloo.Views.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.navigation.NavController;
+import androidx.navigation.NavGraph;
 import androidx.navigation.fragment.NavHostFragment;
 
 import android.graphics.Rect;
@@ -35,8 +36,10 @@ public class AuthActivity extends AppCompatActivity {
 
     // Objects
     public ControlEditText controlEditText;
-    public NavHostFragment navHostFragment;
+    private NavHostFragment navHostFragment;
     public NavController navController;
+    private NavGraph navGraph;
+    private Bundle extras;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,8 @@ public class AuthActivity extends AppCompatActivity {
         initializer();
 
         ExtendOnFailureException.activity = this;
+
+        setExtra();
     }
 
     private void decorator() {
@@ -78,6 +83,23 @@ public class AuthActivity extends AppCompatActivity {
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
+
+        navGraph = navController.getNavInflater().inflate(R.navigation.navigation_auth);
+
+        extras = getIntent().getExtras();
+    }
+
+    private void setExtra() {
+        if (extras != null) {
+            if (extras.getString("theory") != null) {
+                if (extras.getString("theory").equals("login"))
+                    navGraph.setStartDestination(R.id.authLoginFragment);
+                else
+                    navGraph.setStartDestination(R.id.authRegisterFragment);
+
+                navController.setGraph(navGraph);
+            }
+        }
     }
 
     @Override
@@ -99,10 +121,17 @@ public class AuthActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authLoginFragment && Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authSerialFragment)
-            navController.navigateUp();
-        else
-            IntentManager.finish(this);
+        if (navGraph.getStartDestination() == R.id.authLoginFragment) {
+            if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authLoginFragment && Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authSerialFragment)
+                navController.navigateUp();
+            else
+                IntentManager.finish(this);
+        } else {
+            if (Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authRegisterFragment && Objects.requireNonNull(navController.getCurrentDestination()).getId() != R.id.authSerialFragment)
+                navController.navigateUp();
+            else
+                IntentManager.finish(this);
+        }
     }
 
 }
