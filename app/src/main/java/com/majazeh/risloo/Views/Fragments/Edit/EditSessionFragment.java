@@ -166,18 +166,14 @@ public class EditSessionFragment extends Fragment {
                     data.put("clients_type", "room");
                 } else if (((EditSessionTabReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
                     data.put("clients_type", "case");
+                    data.put("case_id", ((EditSessionTabReferenceFragment) reference).caseId);
                 } else if (((EditSessionTabReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
                     data.put("clients_type", "new_case");
-                }
-
-                if (data.get("clients_type").equals("case")) {
-                    data.put("case_id", ((EditSessionTabReferenceFragment) reference).caseId);
-                } else if (data.get("clients_type").equals("new_case")) {
                     data.put("problem", ((EditSessionTabReferenceFragment) reference).problem);
                 }
 
                 data.put("group_session", ((EditSessionTabReferenceFragment) reference).groupSession);
-                if (data.get("group_session").equals("on")) {
+                if (((EditSessionTabReferenceFragment) reference).groupSession.equals("on")) {
                     data.put("clients_number", ((EditSessionTabReferenceFragment) reference).count);
                 }
             }

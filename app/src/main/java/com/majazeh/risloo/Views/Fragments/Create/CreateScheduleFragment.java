@@ -143,13 +143,13 @@ public class CreateScheduleFragment extends Fragment {
             data.put("duration", ((CreateScheduleTabTimeFragment) time).duration);
             data.put("date_type", ((CreateScheduleTabTimeFragment) time).dateType);
 
-            if (data.get("date_type").equals("specific")) {
+            if (((CreateScheduleTabTimeFragment) time).dateType.equals("specific")) {
                 data.put("date", ((CreateScheduleTabTimeFragment) time).specifiedDate);
             } else {
                 data.put("week_days", ((CreateScheduleTabTimeFragment) time).patternDaysAdapter.getIds());
                 data.put("repeat_status", ((CreateScheduleTabTimeFragment) time).patternType);
 
-                if (data.get("repeat_status").equals("weeks")) {
+                if (((CreateScheduleTabTimeFragment) time).patternType.equals("weeks")) {
                     data.put("repeat", ((CreateScheduleTabTimeFragment) time).repeatWeeks);
                 } else {
                     data.put("repeat_from", ((CreateScheduleTabTimeFragment) time).periodStartDate);
@@ -170,16 +170,13 @@ public class CreateScheduleFragment extends Fragment {
                 data.put("clients_type", "room");
             } else if (((CreateScheduleTabReferenceFragment) reference).type.equals("اعضاء پرونده درمانی …")) {
                 data.put("clients_type", "case");
+                data.put("case_id", ((CreateScheduleTabReferenceFragment) reference).caseId);
             } else if (((CreateScheduleTabReferenceFragment) reference).type.equals("ساخت پرونده جدید")) {
                 data.put("clients_type", "new_case");
             }
 
-            if (data.get("clients_type").equals("case")) {
-                data.put("case_id", ((CreateScheduleTabReferenceFragment) reference).caseId);
-            }
-
             data.put("group_session", ((CreateScheduleTabReferenceFragment) reference).groupSession);
-            if (data.get("group_session").equals("on")) {
+            if (((CreateScheduleTabReferenceFragment) reference).groupSession.equals("on")) {
                 data.put("clients_number", ((CreateScheduleTabReferenceFragment) reference).count);
             }
         }

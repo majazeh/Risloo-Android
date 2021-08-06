@@ -132,13 +132,13 @@ public class CreateSessionFragment extends Fragment {
             data.put("duration", ((CreateSessionTabTimeFragment) time).duration);
             data.put("date_type", ((CreateSessionTabTimeFragment) time).dateType);
 
-            if (data.get("date_type").equals("specific")) {
+            if (((CreateSessionTabTimeFragment) time).dateType.equals("specific")) {
                 data.put("date", ((CreateSessionTabTimeFragment) time).specifiedDate);
             } else {
                 data.put("week_days", ((CreateSessionTabTimeFragment) time).patternDaysAdapter.getIds());
                 data.put("repeat_status", ((CreateSessionTabTimeFragment) time).patternType);
 
-                if (data.get("repeat_status").equals("weeks")) {
+                if (((CreateSessionTabTimeFragment) time).patternType.equals("weeks")) {
                     data.put("repeat", ((CreateSessionTabTimeFragment) time).repeatWeeks);
                 } else {
                     data.put("repeat_from", ((CreateSessionTabTimeFragment) time).periodStartDate);
