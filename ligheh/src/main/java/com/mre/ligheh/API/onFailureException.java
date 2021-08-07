@@ -45,10 +45,11 @@ public abstract class onFailureException {
                         JSONObject jsonObject = new JSONObject(body);
                         message_text = jsonObject.getString("message_text");
                         MESSAGE_TEXT = jsonObject.getString("message");
-                        onServerFail(jsonObject.getString("message_text"));
 
                         if (hasValidation(jsonObject)) {
                             validation(jsonObject);
+                        }else{
+                        onServerFail(jsonObject.getString("message_text"));
                         }
                     } else {
                         onServerFail(body);
@@ -80,13 +81,13 @@ public abstract class onFailureException {
                     validationData.put(key, jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
                 }
             }
-//            onValidation(validationData);
+            onValidation(validationData);
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
 
-//    public abstract void onValidation(HashMap<String, Object> map);
+    public abstract void onValidation(HashMap<String, Object> map);
 
     public abstract void onClient(String s);
 

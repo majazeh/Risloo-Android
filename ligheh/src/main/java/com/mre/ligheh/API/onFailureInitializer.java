@@ -8,10 +8,10 @@ public class onFailureInitializer extends onFailureException {
         super(callback,object);
     }
 
-//    @Override
-//    public void onValidation(HashMap<String, Object> map) {
-//        log("onValidation: " + map);
-//    }
+    @Override
+    public void onValidation(HashMap<String, Object> map) {
+        log("onValidation: " + map);
+    }
 
     @Override
     public void onClient(String s) {

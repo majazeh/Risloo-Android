@@ -29,13 +29,8 @@ public class Auth extends Model {
 
     public static void auth_theory(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            if (has(data, "key")) {
-                String key = (String) data.get("key");
-                data.remove("key");
-                Model.post(endpoint + "/theory" + "/" + key, data, header, response, AuthModel.class);
-            } else {
-                Exceptioner.make(response,"کلید را وارد کنید");
-            }
+            String key = (String) data.get("key");
+            Model.post(endpoint + "/theory" + "/" + key, data, header, response, AuthModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

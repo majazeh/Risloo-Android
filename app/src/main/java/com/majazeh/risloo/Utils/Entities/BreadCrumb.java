@@ -912,7 +912,10 @@ public class BreadCrumb {
         ArrayList<String> list = centers();
 
         try {
-            list.add(centerModel.getDetail().getString("title"));
+            if (centerModel != null && centerModel.getDetail() != null)
+                list.add(centerModel.getDetail().getString("title"));
+            else
+                list.add("نامعلوم");
         } catch (JSONException e) {
             e.printStackTrace();
         }
