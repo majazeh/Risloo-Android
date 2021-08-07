@@ -13,7 +13,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -22,6 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -183,7 +183,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                     if (!((CreateCenterFragment) current).phonesAdapter.getIds().contains(item.object.getString("id")))
                         ((CreateCenterFragment) current).phonesAdapter.addItem(item);
                     else
-                        Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), "موجود هست");
             }
 
             if (child instanceof CreateScheduleTabSessionFragment) {
@@ -193,7 +193,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                         addPayment(item);
                     } else
-                        Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), "موجود هست");
             }
 
             if (child instanceof CreateSessionTabSessionFragment) {
@@ -203,7 +203,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                         addPayment(item);
                     } else
-                        Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), "موجود هست");
             }
 
             if (child instanceof EditCenterTabDetailFragment) {
@@ -211,7 +211,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                     if (!((EditCenterTabDetailFragment) child).phonesAdapter.getIds().contains(item.object.getString("id")))
                         ((EditCenterTabDetailFragment) child).phonesAdapter.addItem(item);
                     else
-                        Toast.makeText(requireActivity(), "موجود هست", Toast.LENGTH_SHORT).show();
+                        ToastManager.showToast(requireActivity(), "موجود هست");
             }
 
             calculateCount();
