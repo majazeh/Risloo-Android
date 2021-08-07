@@ -79,6 +79,10 @@ public class EditSessionFragment extends Fragment {
     }
 
     private void setData() {
+        if (sessionModel.getId() != null && !sessionModel.getId().equals("")) {
+            data.put("id", sessionModel.getId());
+        }
+
         if (sessionModel.getCaseModel() != null && sessionModel.getCaseModel().getCaseId() != null) {
             hasCase = true;
 
@@ -95,10 +99,6 @@ public class EditSessionFragment extends Fragment {
         binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
 
         tabLayoutMediator.attach();
-
-        if (sessionModel.getId() != null && !sessionModel.getId().equals("")) {
-            data.put("id", sessionModel.getId());
-        }
     }
 
     public void checkRequire() {

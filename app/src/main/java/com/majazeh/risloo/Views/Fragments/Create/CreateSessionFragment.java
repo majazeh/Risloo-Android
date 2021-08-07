@@ -90,6 +90,10 @@ public class CreateSessionFragment extends Fragment {
     }
 
     private void setData(CaseModel model) {
+        if (model.getCaseRoom() != null && model.getCaseRoom().getRoomId() != null && !model.getCaseRoom().getRoomId().equals("")) {
+            data.put("id", model.getCaseRoom().getRoomId());
+        }
+
         if (model.getCaseId() != null && !model.getCaseId().equals("")) {
             data.put("case_id", model.getCaseId());
             data.put("clients_type", "case");

@@ -24,7 +24,7 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabTimeFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -202,7 +202,7 @@ public class CreateScheduleFragment extends Fragment {
             data.put("amounts", ((CreateScheduleTabPaymentFragment) payment).axisAdapter.getAmounts());
         }
 
-        Center.createSchedule(data, header, new Response() {
+        Room.createSchedule(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 if (isAdded()) {

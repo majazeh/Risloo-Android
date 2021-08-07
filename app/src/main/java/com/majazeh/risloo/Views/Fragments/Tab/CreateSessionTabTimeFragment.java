@@ -49,7 +49,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
     private Fragment current;
 
     // Vars
-    public String startTime = "", duration = "60", dateType = "specified", patternType = "weeks", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
+    public String startTime = "", duration = "60", dateType = "specific", patternType = "weeks", specifiedDate = "", repeatWeeks = "1", periodStartDate = "", periodEndDate = "";
 
     @Nullable
     @Override
@@ -133,7 +133,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
         binding.dateTypeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.first_radioButton:
-                    dateType = "specified";
+                    dateType = "specific";
 
                     binding.specifiedDateGroup.setVisibility(View.VISIBLE);
                     binding.patternDateGroup.setVisibility(View.GONE);

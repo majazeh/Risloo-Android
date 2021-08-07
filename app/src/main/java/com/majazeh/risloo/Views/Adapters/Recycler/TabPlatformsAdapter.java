@@ -141,12 +141,11 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
     }
 
     private void setIdentifier(TabPlatformsHolder holder, String id, String identifier) {
-        if (identifier == null) {
-            identifierPlatform.put(id, "");
-            holder.binding.identifierEditText.setText("");
-        } else {
+        if (identifier != null) {
             identifierPlatform.put(id, identifier);
             holder.binding.identifierEditText.setText(identifier);
+        } else {
+            holder.binding.identifierEditText.setText("");
         }
     }
 
@@ -158,7 +157,6 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
             holder.binding.identifierEditText.setFocusableInTouchMode(true);
             holder.binding.identifierEditText.setAlpha((float) 1);
         } else {
-            pinPlatform.put(id, "");
             holder.binding.roomCheckBox.setChecked(false);
 
             holder.binding.identifierEditText.setFocusableInTouchMode(false);
@@ -178,7 +176,6 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
             holder.binding.roomCheckBox.setEnabled(true);
             holder.binding.roomCheckBox.setAlpha((float) 1);
         } else {
-            platforms.put(id, "");
             holder.binding.selectedSwitchCompat.setChecked(false);
 
             holder.binding.selectedSwitchCompat.setText(activity.getResources().getString(R.string.AppSwicthOff));
