@@ -29,7 +29,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
     public HashMap platforms = new HashMap(), pinPlatform = new HashMap<>(), identifierPlatform = new HashMap<>();
 
     // Vars
-    private ArrayList<TypeModel> items;
+    private ArrayList<TypeModel> items = new ArrayList<>();
     private boolean userSelect = false;
 
     public TabPlatformsAdapter(@NonNull Activity activity) {
@@ -67,6 +67,13 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
         else
             this.items.addAll(items);
         notifyDataSetChanged();
+    }
+
+    public void addItem(TypeModel item){
+        if (item != null) {
+            items.add(item);
+            notifyDataSetChanged();
+        }
     }
 
     public void clearItems() {

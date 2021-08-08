@@ -19,6 +19,10 @@ import com.majazeh.risloo.Views.Adapters.Recycler.TabPlatformsAdapter;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
+
+import java.util.ArrayList;
 
 public class EditSessionTabPlatformFragment extends Fragment {
 
@@ -77,10 +81,44 @@ public class EditSessionTabPlatformFragment extends Fragment {
         if (current instanceof EditSessionFragment) {
             SessionModel model = ((EditSessionFragment) current).sessionModel;
 
-            if (model.getRoom() != null && !model.getRoom().getSession_platforms().data().isEmpty()) {
-                adapter.setItems(model.getRoom().getSession_platforms().data());
-                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+            if (!model.getSession_platforms().data().isEmpty()) {
+                ArrayList<TypeModel> sessionPlatforms = model.getSession_platforms().data();
 
+                for (int i = 0; i < sessionPlatforms.size(); i++) {
+                    SessionPlatformModel spm = (SessionPlatformModel) sessionPlatforms.get(i);
+                    spm.setSelected(true);
+                    adapter.addItem(spm);
+                }
+
+                if (model.getRoom() != null && !model.getRoom().getSession_platforms().data().isEmpty()) {
+                    ArrayList<TypeModel> roomPlatforms = model.getRoom().getSession_platforms().data();
+
+                    for (int i = 0; i < roomPlatforms.size(); i++) {
+                        SessionPlatformModel rpm = (SessionPlatformModel) roomPlatforms.get(i);
+                        for (int j = 0; j < sessionPlatforms.size(); j++) {
+                            SessionPlatformModel spm = (SessionPlatformModel) sessionPlatforms.get(j);
+                            if (j == sessionPlatforms.size() - 1 && !rpm.getId().equals(spm.getId())) {
+                                rpm.setSelected(false);
+                                adapter.addItem(rpm);
+                            } else if (rpm.getId().equals(spm.getId())) {
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+            } else if (model.getRoom() != null && !model.getRoom().getSession_platforms().data().isEmpty()) {
+                ArrayList<TypeModel> roomPlatforms = model.getRoom().getSession_platforms().data();
+
+                for (int i = 0; i < roomPlatforms.size(); i++) {
+                    SessionPlatformModel rpm = (SessionPlatformModel) roomPlatforms.get(i);
+                    rpm.setSelected(false);
+                    adapter.addItem(rpm);
+                }
+
+                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
                 binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
             } else if (adapter.getItemCount() == 0) {
                 binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
