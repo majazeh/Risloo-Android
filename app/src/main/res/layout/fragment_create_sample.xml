@@ -356,7 +356,6 @@
                 layout="@layout/component_main_guide"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="@id/type_tabLayout"
                 app:layout_constraintStart_toStartOf="@id/type_tabLayout"
                 app:layout_constraintTop_toBottomOf="@id/psychology_description_errorLayout"

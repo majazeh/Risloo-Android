@@ -88,12 +88,10 @@ public class CreateRoomFragment extends Fragment {
         }).widget(binding.psychologyIncludeLayout.selectTextView);
 
         ClickManager.onDelayedClickListener(() -> {
-            if (psychologyId.equals("")) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            if (binding.psychologyErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView);
-                doWork();
-            }
+
+            doWork();
         }).widget(binding.createTextView.getRoot());
     }
 
@@ -176,18 +174,30 @@ public class CreateRoomFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (!jsonObject.isNull("errors")) {
-                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
-                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (key.equals("psychologist_id")) {
-                                            ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                        switch (key) {
+                                            case "psychologist_id":
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, validation);
+                                                break;
                                         }
+
+                                        errors.append(validation);
+                                        errors.append("\n");
                                     }
                                 }
+
+                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

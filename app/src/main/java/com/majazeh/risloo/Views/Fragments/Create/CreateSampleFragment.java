@@ -295,18 +295,32 @@ public class CreateSampleFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() == 0)
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
+            if (binding.scaleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView);
-
-            if (roomId.equals(""))
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            else
+            if (binding.roomErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView);
+            if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+            if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+            if (binding.membersCountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.membersCountIncludeLayout.inputEditText, binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView);
+            if (binding.caseStatusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView);
+            if (binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
+            if (binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.caseIncludeLayout.selectContainer, binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
+            if (binding.sessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.sessionIncludeLayout.selectContainer, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView);
+            if (binding.clientErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView);
+            if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+            if (binding.psychologyDescriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText, binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView);
 
-            if (binding.scaleIncludeLayout.selectRecyclerView.getChildCount() != 0 && !roomId.equals(""))
-                doWork();
+            doWork();
         }).widget(binding.createTextView.getRoot());
     }
 
@@ -628,13 +642,11 @@ public class CreateSampleFragment extends Fragment {
             case "bulk":
                 data.put("title", title);
                 data.put("members_count", membersCount);
+                data.put("case_status", SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus));
 
-                String casseStatus = SelectionManager.getCaseStatus2(requireActivity(), "en", caseStatus);
-                data.put("case_status", casseStatus);
-
-                if (casseStatus.equals("group") || casseStatus.equals("personal"))
+                if (data.get("case_status").equals("group") || data.get("case_status").equals("personal"))
                     data.put("problem", problem);
-                else if (casseStatus.equals("exist"))
+                else if (data.get("case_status").equals("exist"))
                     data.put("case_id", caseId);
 
                 break;
@@ -663,53 +675,63 @@ public class CreateSampleFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (!jsonObject.isNull("errors")) {
-                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
-                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+
                                         switch (key) {
                                             case "scale_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "room_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
                                                 break;
                                             case "type":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "title":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "members_count":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.membersCountIncludeLayout.inputEditText, binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.membersCountIncludeLayout.inputEditText, binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, validation);
                                                 break;
                                             case "case_status":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, validation);
                                                 break;
                                             case "problem":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
                                                 break;
                                             case "case_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseIncludeLayout.selectContainer, binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseIncludeLayout.selectContainer, binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
                                                 break;
                                             case "session_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionIncludeLayout.selectContainer, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionIncludeLayout.selectContainer, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_id":
                                                 if (type.equals("case_user"))
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
                                                 else if (type.equals("room_user"))
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
                                                 break;
                                             case "psychologist_description":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText, binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText, binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, validation);
                                                 break;
                                         }
+
+                                        errors.append(validation);
+                                        errors.append("\n");
                                     }
                                 }
+
+                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

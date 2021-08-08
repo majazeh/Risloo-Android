@@ -89,12 +89,10 @@ public class EditTreasuryFragment extends Fragment {
         });
 
         ClickManager.onDelayedClickListener(() -> {
-            if (binding.titleIncludeLayout.inputEditText.length() == 0) {
-                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-            } else {
+            if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
-                doWork();
-            }
+
+            doWork();
         }).widget(binding.editTextView.getRoot());
     }
 
@@ -135,20 +133,30 @@ public class EditTreasuryFragment extends Fragment {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
 //                        try {
-//                            JSONObject jsonObject = new JSONObject(response);
-//                            if (!jsonObject.isNull("errors")) {
-//                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+//                            JSONObject responseObject = new JSONObject(response);
+//                            if (!responseObject.isNull("errors")) {
+//                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+//
+//                                Iterator<String> keys = (errorsObject.keys());
+//                                StringBuilder errors = new StringBuilder();
 //
 //                                while (keys.hasNext()) {
 //                                    String key = keys.next();
-//                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
+//                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+//                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+//
 //                                        switch (key) {
 //                                            case "title":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
+//
+//                                        errors.append(validation);
+//                                        errors.append("\n");
 //                                    }
 //                                }
+//
+//                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
 //                            }
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();

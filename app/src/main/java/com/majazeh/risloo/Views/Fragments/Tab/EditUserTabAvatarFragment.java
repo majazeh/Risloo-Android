@@ -7,10 +7,10 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -188,18 +188,30 @@ public class EditUserTabAvatarFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                if (!jsonObject.isNull("errors")) {
-                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
 
                                     while (keys.hasNext()) {
                                         String key = keys.next();
-                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                            if (key.equals("avatar")) {
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                            switch (key) {
+                                                case "avatar":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
+                                                    break;
                                             }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
                                         }
                                     }
+
+                                    ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -227,18 +239,30 @@ public class EditUserTabAvatarFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                if (!jsonObject.isNull("errors")) {
-                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
 
                                     while (keys.hasNext()) {
                                         String key = keys.next();
-                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                            if (key.equals("avatar")) {
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (LinearLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                            switch (key) {
+                                                case "avatar":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
+                                                    break;
                                             }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
                                         }
                                     }
+
+                                    ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();

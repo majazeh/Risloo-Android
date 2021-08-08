@@ -240,28 +240,17 @@ public class EditUserTabPasswordFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
-                if (binding.currentPasswordIncludeLayout.inputEditText.length() == 0)
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                else
+                if (binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
-
-                if (binding.newPasswordIncludeLayout.inputEditText.length() == 0)
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                else
+                if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
-                if (binding.currentPasswordIncludeLayout.inputEditText.length() != 0 && binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
-                    doWork();
-                }
+                doWork();
             } else {
-                if (binding.newPasswordIncludeLayout.inputEditText.length() == 0)
-                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
-                else
+                if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                     ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
-                if (binding.newPasswordIncludeLayout.inputEditText.length() != 0) {
-                    doWork();
-                }
+                doWork();
             }
         }).widget(binding.editTextView.getRoot());
     }
@@ -304,20 +293,33 @@ public class EditUserTabPasswordFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                if (!jsonObject.isNull("errors")) {
-                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
 
                                     while (keys.hasNext()) {
                                         String key = keys.next();
-                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                            if (key.equals("password")) {
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                            } else if (key.equals("new_password")) {
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                            switch (key) {
+                                                case "password":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "new_password":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
+                                                    break;
                                             }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
                                         }
                                     }
+
+                                    ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -345,18 +347,30 @@ public class EditUserTabPasswordFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             try {
-                                JSONObject jsonObject = new JSONObject(response);
-                                if (!jsonObject.isNull("errors")) {
-                                    Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                                JSONObject responseObject = new JSONObject(response);
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
 
                                     while (keys.hasNext()) {
                                         String key = keys.next();
-                                        for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                            if (key.equals("new_password")) {
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                            switch (key) {
+                                                case "new_password":
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
+                                                    break;
                                             }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
                                         }
                                     }
+
+                                    ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
