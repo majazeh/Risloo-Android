@@ -209,7 +209,7 @@ public class RoomFragment extends Fragment {
                             setAcceptation(roomModel);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
+                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
                         });
                     }
                 }

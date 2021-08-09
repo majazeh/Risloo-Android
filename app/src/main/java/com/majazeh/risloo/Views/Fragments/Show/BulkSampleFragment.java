@@ -171,7 +171,7 @@ public class BulkSampleFragment extends Fragment {
                         } break;
                         case "کپی کردن لینک": {
                             IntentManager.clipboard(requireActivity(), bulkSampleModel.getLink());
-                            ToastManager.showToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastLinkSaved));
+                            ToastManager.showDefaultToast(requireActivity(), requireActivity().getResources().getString(R.string.ToastLinkSaved));
                         } break;
                         case "ویرایش": {
                             // TODO : Place Code If Needed

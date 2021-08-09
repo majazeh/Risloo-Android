@@ -180,7 +180,7 @@ public class CenterFragment extends Fragment {
                             setAcceptation(centerModel);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
+                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
                         });
                     }
                 }

@@ -179,7 +179,7 @@ public class CreateCaseUserFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+                        ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });
@@ -214,7 +214,7 @@ public class CreateCaseUserFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

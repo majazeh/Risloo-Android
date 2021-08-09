@@ -274,7 +274,7 @@ public class AuthPinFragment extends Fragment {
                                         }
                                     }
 
-                                    ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -284,7 +284,7 @@ public class AuthPinFragment extends Fragment {
                 }
             });
         } else if (method.equals("verification")) {
-            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastFeatureNotAddedYet));
+            ToastManager.showDefaultToast(requireActivity(), getResources().getString(R.string.ToastFeatureNotAddedYet));
 
             // TODO : Place Code if Needed
 

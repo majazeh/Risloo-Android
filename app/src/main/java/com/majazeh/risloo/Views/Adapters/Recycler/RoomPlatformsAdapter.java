@@ -294,7 +294,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     ((MainActivity) activity).loadingDialog.dismiss();
-                    ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                    ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
 

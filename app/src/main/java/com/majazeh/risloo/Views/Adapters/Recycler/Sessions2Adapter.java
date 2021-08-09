@@ -188,7 +188,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     ((MainActivity) activity).loadingDialog.dismiss();
-                    ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                    ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
 

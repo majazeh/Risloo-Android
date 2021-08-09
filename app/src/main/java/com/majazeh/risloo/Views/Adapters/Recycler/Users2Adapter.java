@@ -189,7 +189,7 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
                     ((MainActivity) activity).loadingDialog.dismiss();
-                    ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                    ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
 

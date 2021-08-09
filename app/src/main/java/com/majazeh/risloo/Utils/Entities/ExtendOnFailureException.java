@@ -44,7 +44,7 @@ public class ExtendOnFailureException extends onFailureException {
 
     public void toastError(String message) {
         activity.runOnUiThread(() -> {
-            ToastManager.showToast(activity, message);
+            ToastManager.showDefaultToast(activity, message);
         });
     }
 

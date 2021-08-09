@@ -183,7 +183,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                     if (!((CreateCenterFragment) current).phonesAdapter.getIds().contains(item.object.getString("id")))
                         ((CreateCenterFragment) current).phonesAdapter.addItem(item);
                     else
-                        ToastManager.showToast(requireActivity(), "موجود هست");
+                        ToastManager.showDefaultToast(requireActivity(), "موجود هست");
             }
 
             if (child instanceof CreateScheduleTabSessionFragment) {
@@ -193,7 +193,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                         addPayment(item);
                     } else
-                        ToastManager.showToast(requireActivity(), "موجود هست");
+                        ToastManager.showDefaultToast(requireActivity(), "موجود هست");
             }
 
             if (child instanceof CreateSessionTabSessionFragment) {
@@ -203,7 +203,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
 
                         addPayment(item);
                     } else
-                        ToastManager.showToast(requireActivity(), "موجود هست");
+                        ToastManager.showDefaultToast(requireActivity(), "موجود هست");
             }
 
             if (child instanceof EditCenterTabDetailFragment) {
@@ -211,7 +211,7 @@ public class SelectedDialog extends AppCompatDialogFragment {
                     if (!((EditCenterTabDetailFragment) child).phonesAdapter.getIds().contains(item.object.getString("id")))
                         ((EditCenterTabDetailFragment) child).phonesAdapter.addItem(item);
                     else
-                        ToastManager.showToast(requireActivity(), "موجود هست");
+                        ToastManager.showDefaultToast(requireActivity(), "موجود هست");
             }
 
             calculateCount();

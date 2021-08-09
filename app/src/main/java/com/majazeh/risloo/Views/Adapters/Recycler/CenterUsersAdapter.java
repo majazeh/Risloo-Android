@@ -288,7 +288,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                 public void onOK(Object object) {
                     activity.runOnUiThread(() -> {
                         ((MainActivity) activity).loadingDialog.dismiss();
-                        ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                     });
                 }
 
@@ -312,7 +312,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                         setAcceptation(holder, userModel);
 
                         ((MainActivity) activity).loadingDialog.dismiss();
-                        ToastManager.showToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                     });
                 }
 

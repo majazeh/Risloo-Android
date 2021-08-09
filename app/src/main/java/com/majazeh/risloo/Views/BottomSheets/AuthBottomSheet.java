@@ -80,7 +80,7 @@ public class AuthBottomSheet extends BottomSheetDialogFragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
+                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewReferenceAdded));
 
                             ((MainActivity) requireActivity()).navController.navigateUp();
 

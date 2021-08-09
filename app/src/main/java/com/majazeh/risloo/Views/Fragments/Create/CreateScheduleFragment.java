@@ -249,7 +249,7 @@ public class CreateScheduleFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewScheduleAdded));
+                        ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewScheduleAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });
@@ -379,7 +379,7 @@ public class CreateScheduleFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

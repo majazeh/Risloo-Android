@@ -661,9 +661,9 @@ public class CreateSampleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         if (type.equals("bulk"))
-                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
+                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
                         else
-                            ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewSampleAdded));
+                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewSampleAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });
@@ -731,7 +731,7 @@ public class CreateSampleFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

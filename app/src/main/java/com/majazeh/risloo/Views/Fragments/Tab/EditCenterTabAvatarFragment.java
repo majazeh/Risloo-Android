@@ -100,9 +100,9 @@ public class EditCenterTabAvatarFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (avatarBitmap == null) {
                 if (!avatarPath.equals(""))
-                    ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
+                    ToastManager.showDefaultToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
                 else
-                    ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
+                    ToastManager.showDefaultToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
             } else {
                 doWork();
             }
@@ -170,7 +170,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                        ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                     });
 
                     FileManager.deleteFileFromCache(requireActivity(), "image");
@@ -205,7 +205,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

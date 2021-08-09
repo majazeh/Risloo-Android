@@ -387,16 +387,16 @@ public class MainActivity extends AppCompatActivity {
             case RESULT_CANCELED: {
                 switch (requestCode) {
                     case 100:
-                        ToastManager.showToast(this, getResources().getString(R.string.ToastFileException));
+                        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastFileException));
                         break;
                     case 200:
-                        ToastManager.showToast(this, getResources().getString(R.string.ToastStorageException));
+                        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastStorageException));
                         break;
                     case 300:
-                        ToastManager.showToast(this, getResources().getString(R.string.ToastGalleryException));
+                        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastGalleryException));
                         break;
                     case 400:
-                        ToastManager.showToast(this, getResources().getString(R.string.ToastCameraException));
+                        ToastManager.showDefaultToast(this, getResources().getString(R.string.ToastCameraException));
                         break;
                 }
             } break;
