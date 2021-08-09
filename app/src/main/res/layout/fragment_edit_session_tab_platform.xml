@@ -23,20 +23,60 @@
             android:layout_marginEnd="@dimen/_12sdp"
             android:layout_marginStart="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:paddingBottom="0dp">
 
             <include
-                android:id="@+id/index_singleLayout"
+                android:id="@+id/platforms_singleLayout"
                 layout="@layout/component_single_tab_platform"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/platforms_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/platforms_singleLayout" />
+
+            <include
+                android:id="@+id/pin_platform_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/platforms_errorLayout"
+                app:layout_goneMarginTop="@dimen/_6sdp" />
+
+            <include
+                android:id="@+id/identifier_platform_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pin_platform_errorLayout"
+                app:layout_goneMarginTop="@dimen/_6sdp" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -56,7 +56,7 @@ public class EditSessionTabPlatformFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.platformsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabPlatformButton), getResources().getColor(R.color.White));
     }
@@ -107,8 +107,8 @@ public class EditSessionTabPlatformFragment extends Fragment {
                     }
                 }
 
-                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                binding.platformsSingleLayout.recyclerView.setAdapter(adapter);
+                binding.platformsSingleLayout.emptyView.setVisibility(View.GONE);
             } else if (model.getRoom() != null && !model.getRoom().getSession_platforms().data().isEmpty()) {
                 ArrayList<TypeModel> roomPlatforms = model.getRoom().getSession_platforms().data();
 
@@ -118,11 +118,11 @@ public class EditSessionTabPlatformFragment extends Fragment {
                     adapter.addItem(rpm);
                 }
 
-                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                binding.platformsSingleLayout.recyclerView.setAdapter(adapter);
+                binding.platformsSingleLayout.emptyView.setVisibility(View.GONE);
             } else if (adapter.getItemCount() == 0) {
-                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
+                binding.platformsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                binding.platformsSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
             }
         }
     }
