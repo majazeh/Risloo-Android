@@ -240,99 +240,99 @@ public class CreateSessionFragment extends Fragment {
                                     for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
                                         String validation = errorsObject.getJSONArray(key).get(i).toString();
 
-                                            switch (key) {
+                                        switch (key) {
 
-                                                // Time Data
-                                                case "time":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "duration":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.durationIncludeLayout.inputEditText, ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "date_type":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "date":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "week_days":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.patternDaysIncludeLayout.selectRecyclerView, ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "repeat_status":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "repeat":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksIncludeLayout.inputEditText, ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "repeat_from":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "repeat_to":
-                                                    if (time instanceof CreateSessionTabTimeFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, validation);
-                                                    break;
+                                            // Time Data
+                                            case "time":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "duration":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.durationIncludeLayout.inputEditText, ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "date_type":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "date":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "week_days":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.patternDaysIncludeLayout.selectRecyclerView, ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "repeat_status":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "repeat":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksIncludeLayout.inputEditText, ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "repeat_from":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "repeat_to":
+                                                if (time instanceof CreateSessionTabTimeFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateIncludeLayout.selectTextView, ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateSessionTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, validation);
+                                                break;
 
-                                                // Session Data
-                                                case "status":
-                                                    if (session instanceof CreateSessionTabSessionFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.statusIncludeLayout.selectSpinner, ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "fields":
-                                                    if (session instanceof CreateSessionTabSessionFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "description":
-                                                    if (session instanceof CreateSessionTabSessionFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.descriptionIncludeLayout.inputEditText, ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "client_reminder":
-                                                    if (session instanceof CreateSessionTabSessionFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.coordinationIncludeLayout.inputEditText, ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
-                                                    break;
+                                            // Session Data
+                                            case "status":
+                                                if (session instanceof CreateSessionTabSessionFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.statusIncludeLayout.selectSpinner, ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "fields":
+                                                if (session instanceof CreateSessionTabSessionFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.axisIncludeLayout.selectRecyclerView, ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.axisErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "description":
+                                                if (session instanceof CreateSessionTabSessionFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.descriptionIncludeLayout.inputEditText, ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "client_reminder":
+                                                if (session instanceof CreateSessionTabSessionFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabSessionFragment) session).binding.coordinationIncludeLayout.inputEditText, ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
+                                                break;
 
-                                                // Platform Data
-                                                case "platforms":
-                                                    if (platform instanceof CreateSessionTabPlatformFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "pin_platform":
-                                                    if (platform instanceof CreateSessionTabPlatformFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
-                                                    break;
-                                                case "identifier_platform":
-                                                    if (platform instanceof CreateSessionTabPlatformFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
-                                                    break;
+                                            // Platform Data
+                                            case "platforms":
+                                                if (platform instanceof CreateSessionTabPlatformFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "pin_platform":
+                                                if (platform instanceof CreateSessionTabPlatformFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "identifier_platform":
+                                                if (platform instanceof CreateSessionTabPlatformFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
+                                                break;
 
-                                                // Payment Data
-                                                case "payment_status":
-                                                    if (payment instanceof CreateSessionTabPaymentFragment)
-                                                        ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabPaymentFragment) payment).binding.paymentIncludeLayout.selectSpinner, ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
-                                                    break;
-                                            }
-
-                                            errors.append(validation);
-                                            errors.append("\n");
+                                            // Payment Data
+                                            case "payment_status":
+                                                if (payment instanceof CreateSessionTabPaymentFragment)
+                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((CreateSessionTabPaymentFragment) payment).binding.paymentIncludeLayout.selectSpinner, ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
+                                                break;
                                         }
-                                    }
 
-                                    ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                        errors.append(validation);
+                                        errors.append("\n");
+                                    }
                                 }
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+
+                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
-                        });
-                    }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
                 }
-            });
+            }
+        });
     }
 
     @Override
