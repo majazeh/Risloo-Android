@@ -18,6 +18,7 @@ import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthLoginBinding;
 import com.mre.ligheh.API.Response;
@@ -161,18 +162,27 @@ public class AuthLoginFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         try {
-                            JSONObject jsonObject = new JSONObject(response);
-                            if (!jsonObject.isNull("errors")) {
-                                Iterator<String> keys = (jsonObject.getJSONObject("errors").keys());
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
 
                                 while (keys.hasNext()) {
                                     String key = keys.next();
-                                    for (int i = 0; i < jsonObject.getJSONObject("errors").getJSONArray(key).length(); i++) {
-                                        if (key.equals("authorized_key")) {
-                                            ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, (String) jsonObject.getJSONObject("errors").getJSONArray(key).get(i));
-                                        }
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                        if (key.equals("authorized_key"))
+                                            ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
+
+                                        errors.append(validation);
+                                        errors.append("\n");
                                     }
                                 }
+
+                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
