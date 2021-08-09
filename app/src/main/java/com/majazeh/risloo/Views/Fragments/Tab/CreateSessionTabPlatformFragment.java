@@ -52,7 +52,7 @@ public class CreateSessionTabPlatformFragment extends Fragment {
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.platformsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateSessionTabPlatformButton), getResources().getColor(R.color.White));
     }
@@ -79,12 +79,12 @@ public class CreateSessionTabPlatformFragment extends Fragment {
 
             if (model.getCaseRoom() != null && !model.getCaseRoom().getSession_platforms().data().isEmpty()) {
                 adapter.setItems(model.getCaseRoom().getSession_platforms().data());
-                binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                binding.platformsSingleLayout.recyclerView.setAdapter(adapter);
 
-                binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                binding.platformsSingleLayout.emptyView.setVisibility(View.GONE);
             } else if (adapter.getItemCount() == 0) {
-                binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
+                binding.platformsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                binding.platformsSingleLayout.emptyView.setText(getResources().getString(R.string.TabPlatformsAdapterEmpty));
             }
         }
     }
