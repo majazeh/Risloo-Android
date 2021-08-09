@@ -95,12 +95,6 @@ public class EditSessionFragment extends Fragment {
 
         adapter = new EditSessionAdapter(requireActivity(), hasCase);
 
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        reference = ((MainActivity) requireActivity()).fragmont.getReference();
-        session = ((MainActivity) requireActivity()).fragmont.getSessionEditSession(hasCase);
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatformEditSession(hasCase);
-        payment = ((MainActivity) requireActivity()).fragmont.getPaymentEditSession(hasCase);
-
         binding.viewPager.getRoot().setAdapter(adapter);
         binding.viewPager.getRoot().setOffscreenPageLimit(adapter.getItemCount());
 
@@ -108,6 +102,11 @@ public class EditSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        reference = ((MainActivity) requireActivity()).fragmont.getReference();
+        session = ((MainActivity) requireActivity()).fragmont.getSessionEditSession(hasCase);
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatformEditSession(hasCase);
+        payment = ((MainActivity) requireActivity()).fragmont.getPaymentEditSession(hasCase);
 
         // Time Data
         if (time instanceof EditSessionTabTimeFragment) {

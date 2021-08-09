@@ -70,12 +70,6 @@ public class CreateScheduleFragment extends Fragment {
     private void initializer() {
         adapter = new CreateScheduleAdapter(requireActivity());
 
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        reference = ((MainActivity) requireActivity()).fragmont.getReference();
-        session = ((MainActivity) requireActivity()).fragmont.getSession();
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
-        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
-
         tabs = getResources().getStringArray(R.array.CreateScheduleTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
 
@@ -108,6 +102,11 @@ public class CreateScheduleFragment extends Fragment {
     }
 
     public void checkRequire() {
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        reference = ((MainActivity) requireActivity()).fragmont.getReference();
+        session = ((MainActivity) requireActivity()).fragmont.getSession();
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
+        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         // Time Data
         if (time instanceof CreateScheduleTabTimeFragment) {

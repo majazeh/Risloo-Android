@@ -69,11 +69,6 @@ public class CreateSessionFragment extends Fragment {
     private void initializer() {
         adapter = new CreateSessionAdapter(requireActivity());
 
-        time = ((MainActivity) requireActivity()).fragmont.getTime();
-        session = ((MainActivity) requireActivity()).fragmont.getSession();
-        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
-        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
-
         tabs = getResources().getStringArray(R.array.CreateSessionTabs);
         tabLayoutMediator = new TabLayoutMediator(binding.tabLayout.getRoot(), binding.viewPager.getRoot(), (tab, position) -> tab.setText(tabs[position]));
 
@@ -111,6 +106,10 @@ public class CreateSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
+        time = ((MainActivity) requireActivity()).fragmont.getTime();
+        session = ((MainActivity) requireActivity()).fragmont.getSession();
+        platform = ((MainActivity) requireActivity()).fragmont.getPlatform();
+        payment = ((MainActivity) requireActivity()).fragmont.getPayment();
 
         // Time Data
         if (time instanceof CreateSessionTabTimeFragment) {
