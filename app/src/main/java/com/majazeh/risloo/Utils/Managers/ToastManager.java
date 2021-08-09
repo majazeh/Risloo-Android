@@ -27,6 +27,7 @@ public class ToastManager {
     public static void showSuccesToast(Activity activity, String value) {
         try {
             toast.getView().isShown();
+            toast.setText(value);
         } catch (Exception e) {
             ToastSuccesBinding binding = ToastSuccesBinding.inflate(LayoutInflater.from(activity));
 
@@ -44,6 +45,7 @@ public class ToastManager {
     public static void showErrorToast(Activity activity, String value) {
         try {
             toast.getView().isShown();
+            toast.setText(value);
         } catch (Exception e) {
             ToastErrorBinding binding = ToastErrorBinding.inflate(LayoutInflater.from(activity));
 
@@ -61,6 +63,7 @@ public class ToastManager {
     public static void showDefaultToast(Activity activity, String value) {
         try {
             toast.getView().isShown();
+            toast.setText(value);
         } catch (Exception e) {
             ToastDefaultBinding binding = ToastDefaultBinding.inflate(LayoutInflater.from(activity));
 
