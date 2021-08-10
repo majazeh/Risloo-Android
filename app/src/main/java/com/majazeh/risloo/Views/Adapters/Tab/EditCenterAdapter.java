@@ -15,6 +15,7 @@ public class EditCenterAdapter extends FragmentStateAdapter {
     // Vars
     private String type;
 
+    // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
     public EditCenterAdapter(@NonNull FragmentActivity fragment, String type) {
@@ -30,21 +31,20 @@ public class EditCenterAdapter extends FragmentStateAdapter {
                 Fragment fragment = new EditCenterTabDetailFragment();
                 hashMap.put(position, fragment);
                 return fragment;
+            } else {
+                return null;
             }
-            return null;
         } else {
             switch (position) {
                 case 0: {
                     Fragment fragment = new EditCenterTabDetailFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 1: {
+                } case 1: {
                     Fragment fragment = new EditCenterTabAvatarFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                default:
+                } default:
                     return null;
             }
         }

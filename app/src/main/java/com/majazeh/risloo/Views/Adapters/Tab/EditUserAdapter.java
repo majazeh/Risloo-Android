@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class EditUserAdapter extends FragmentStateAdapter {
 
+    // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
     public EditUserAdapter(@NonNull FragmentActivity fragment) {
@@ -28,23 +29,19 @@ public class EditUserAdapter extends FragmentStateAdapter {
                 Fragment fragment = new EditUserTabPersonalFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 1: {
+            } case 1: {
                 Fragment fragment = new EditUserTabPasswordFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 2: {
+            } case 2: {
                 Fragment fragment = new EditUserTabAvatarFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 3: {
+            } case 3: {
                 Fragment fragment = new EditUserTabCryptoFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            default:
+            } default:
                 return null;
         }
     }

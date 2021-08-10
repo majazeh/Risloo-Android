@@ -18,6 +18,7 @@ public class EditSessionAdapter extends FragmentStateAdapter {
     // Vars
     private boolean hasCase;
 
+    // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
     public EditSessionAdapter(@NonNull FragmentActivity fragment, boolean hasCase) {
@@ -34,23 +35,19 @@ public class EditSessionAdapter extends FragmentStateAdapter {
                     Fragment fragment = new EditSessionTabTimeFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 1: {
+                } case 1: {
                     Fragment fragment = new EditSessionTabSessionFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 2: {
+                } case 2: {
                     Fragment fragment = new EditSessionTabPlatformFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 3: {
+                } case 3: {
                     Fragment fragment = new EditSessionTabPaymentFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                default:
+                } default:
                     return null;
             }
         } else {
@@ -59,28 +56,23 @@ public class EditSessionAdapter extends FragmentStateAdapter {
                     Fragment fragment = new EditSessionTabTimeFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 1: {
+                } case 1: {
                     Fragment fragment = new EditSessionTabReferenceFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 2: {
+                } case 2: {
                     Fragment fragment = new EditSessionTabSessionFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 3: {
+                } case 3: {
                     Fragment fragment = new EditSessionTabPlatformFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                case 4: {
+                } case 4: {
                     Fragment fragment = new EditSessionTabPaymentFragment();
                     hashMap.put(position, fragment);
                     return fragment;
-                }
-                default:
+                } default:
                     return null;
             }
         }

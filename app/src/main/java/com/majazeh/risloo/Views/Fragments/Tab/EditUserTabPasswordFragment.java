@@ -19,6 +19,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
@@ -65,6 +66,8 @@ public class EditUserTabPasswordFragment extends Fragment {
         listener();
 
         setData();
+
+        setPermission();
 
         return binding.getRoot();
     }
@@ -261,12 +264,18 @@ public class EditUserTabPasswordFragment extends Fragment {
 
             if (model.getId() != null && !model.getId().equals("")) {
                 data.put("id", model.getId());
-
-                if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId()))
-                    binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                else
-                    binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.GONE);
             }
+        }
+    }
+
+    private void setPermission() {
+        if (current instanceof EditUserFragment) {
+            UserModel model = ((EditUserFragment) current).userModel;
+
+            if (Permissoon.showEditUserTabPasswordCurrent(model))
+                binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+            else
+                binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.GONE);
         }
     }
 

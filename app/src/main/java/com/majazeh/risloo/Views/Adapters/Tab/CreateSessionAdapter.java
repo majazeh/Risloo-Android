@@ -14,6 +14,7 @@ import java.util.HashMap;
 
 public class CreateSessionAdapter extends FragmentStateAdapter {
 
+    // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
     public CreateSessionAdapter(@NonNull FragmentActivity fragment) {
@@ -28,23 +29,19 @@ public class CreateSessionAdapter extends FragmentStateAdapter {
                 Fragment fragment = new CreateSessionTabTimeFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 1: {
+            } case 1: {
                 Fragment fragment = new CreateSessionTabSessionFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 2: {
+            } case 2: {
                 Fragment fragment = new CreateSessionTabPlatformFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 3: {
+            } case 3: {
                 Fragment fragment = new CreateSessionTabPaymentFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            default:
+            } default:
                 return null;
         }
     }

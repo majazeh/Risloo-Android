@@ -15,6 +15,7 @@ import java.util.HashMap;
 
 public class CreateScheduleAdapter extends FragmentStateAdapter {
 
+    // Objects
     public HashMap<Integer, Fragment> hashMap = new HashMap<>();
 
     public CreateScheduleAdapter(@NonNull FragmentActivity fragment) {
@@ -29,28 +30,23 @@ public class CreateScheduleAdapter extends FragmentStateAdapter {
                 Fragment fragment = new CreateScheduleTabTimeFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 1: {
+            } case 1: {
                 Fragment fragment = new CreateScheduleTabReferenceFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 2: {
+            } case 2: {
                 Fragment fragment = new CreateScheduleTabSessionFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 3: {
+            } case 3: {
                 Fragment fragment = new CreateScheduleTabPlatformFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            case 4: {
+            } case 4: {
                 Fragment fragment = new CreateScheduleTabPaymentFragment();
                 hashMap.put(position, fragment);
                 return fragment;
-            }
-            default:
+            } default:
                 return null;
         }
     }
