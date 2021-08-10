@@ -99,6 +99,9 @@ dependencies {
     implementation 'com.google.android.material:material:1.4.0' // Google Materials
     implementation 'com.google.code.gson:gson:2.8.7' // Google GSON
 
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0' // ZoomImageView
+    implementation 'com.github.samanzamani:PersianDate:1.1' // Persian Date
+
     implementation 'com.facebook.shimmer:shimmer:0.5.0' // Facebook Shimmer
 
     implementation 'com.squareup.picasso:picasso:2.71828' // SquareUp Picasso
@@ -108,9 +111,6 @@ dependencies {
 
     implementation 'de.hdodenhof:circleimageview:3.1.0' // CircleImageView
     implementation 'io.noties.markwon:core:4.6.2' // MarkDownView
-    implementation 'com.jsibbold:zoomage:1.3.1' // ZoomImageView
-
-    implementation 'com.github.samanzamani:PersianDate:1.1' // Persian Date
 
     testImplementation 'junit:junit:4.13.2' // Unit Framework
 
