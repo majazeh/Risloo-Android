@@ -212,9 +212,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
             }
         }
 
-        boolean enable = true;
-
-        if (enable) {
+        if (current instanceof CenterUsersFragment && !((CenterUsersFragment) current).centerModel.getManager().getUserId().equals(model.getUserId())) {
             holder.binding.positionSpinner.setEnabled(true);
 
             if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)

@@ -42,7 +42,7 @@ public class CenterUsersFragment extends Fragment {
     private CenterUsersAdapter adapter;
 
     // Models
-    private CenterModel centerModel;
+    public CenterModel centerModel;
 
     // Objects
     private Handler handler;
