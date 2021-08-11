@@ -19,6 +19,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -28,6 +29,7 @@ import com.majazeh.risloo.databinding.FragmentCentersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -57,6 +59,8 @@ public class CentersFragment extends Fragment {
         detector();
 
         listener();
+
+        setPermission();
 
         getData();
 
@@ -142,6 +146,15 @@ public class CentersFragment extends Fragment {
             NavDirections action = NavigationMainDirections.actionGlobalCreateCenterFragment(null, null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
+    }
+
+    private void setPermission() {
+        UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
+
+        if (Permissoon.showCentersCreateCenter(model))
+            binding.addImageView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.addImageView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {
