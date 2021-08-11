@@ -82,10 +82,6 @@ public class Permissoon {
         return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showCenterDropdownTags(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
-    }
-
     public static boolean showCenterCreateRoom(String position) {
         return position.equals("admin") || position.equals("manager");
     }
@@ -94,32 +90,20 @@ public class Permissoon {
     ---------- Room ----------
     */
 
-    public static boolean showRoomDropdownCreateSchedule(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showRoomDropdownCreateSchedule(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showRoomDropdownUsers(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showRoomDropdownUsers(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showRoomDropdownPlatforms(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showRoomDropdownPlatforms(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showRoomDropdownTags(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showRoomDropdownTags(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
 }

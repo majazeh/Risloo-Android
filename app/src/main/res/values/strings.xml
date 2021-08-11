@@ -1077,7 +1077,6 @@
     <string name="CenterFragmentProfile">پروفایل من</string>
     <string name="CenterFragmentEdit">ویرایش</string>
     <string name="CenterFragmentPlatforms">محل برگزاری</string>
-    <string name="CenterFragmentTags">برچسب‌های مهم</string>
 
     /*
     ---------- Dashboard Fragment ----------

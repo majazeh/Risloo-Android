@@ -154,9 +154,6 @@ public class CenterFragment extends Fragment {
                             NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
-                        case "برچسب\u200Cهای مهم": {
-                            // TODO : Place Code When Needed
-                        } break;
                     }
 
                     parent.setSelection(parent.getAdapter().getCount());
@@ -386,9 +383,6 @@ public class CenterFragment extends Fragment {
 
         if (Permissoon.showCenterDropdownPlatforms(status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
-
-        if (Permissoon.showCenterDropdownTags(status))
-            items.add(requireActivity().getResources().getString(R.string.CenterFragmentTags));
 
         items.add("");
 

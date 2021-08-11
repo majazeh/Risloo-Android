@@ -20,6 +20,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -470,21 +471,25 @@ public class RoomFragment extends Fragment {
     private void setDropdown(String status) {
         ArrayList<String> items = new ArrayList<>();
 
-        items.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
+        if (Permissoon.showRoomDropdownUsers(status))
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
+
         items.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
 
-        if (type.equals("room"))
+        if (type.equals("room") && Permissoon.showRoomDropdownCreateSchedule(status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
 
-        if (!type.equals("room")) {
-            if (!status.equals("request"))
-                items.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
+        if (!type.equals("room") && !status.equals("request"))
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentProfile));
 
+        if (!type.equals("room"))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
-        }
 
-        items.add(requireActivity().getResources().getString(R.string.RoomFragmentPlatforms));
-        items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
+        if (Permissoon.showRoomDropdownPlatforms(status))
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentPlatforms));
+
+        if (Permissoon.showRoomDropdownTags(status))
+            items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
 
         items.add("");
 
