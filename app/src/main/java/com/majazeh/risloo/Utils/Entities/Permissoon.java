@@ -70,39 +70,24 @@ public class Permissoon {
     ---------- Center ----------
     */
 
-    public static boolean showCenterDropdownUsers(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showCenterDropdownUsers(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showCenterDropdownEdit(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showCenterDropdownEdit(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showCenterDropdownPlatforms(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showCenterDropdownPlatforms(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showCenterDropdownTags(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager") || model.getPosition().equals("operator");
-        else
-            return false;
+    public static boolean showCenterDropdownTags(String position) {
+        return position.equals("admin") || position.equals("manager") || position.equals("operator");
     }
 
-    public static boolean showCenterCreateRoom(AcceptationModel model) {
-        if (model != null)
-            return model.getPosition().equals("admin") || model.getPosition().equals("manager");
-        else
-            return false;
+    public static boolean showCenterCreateRoom(String position) {
+        return position.equals("admin") || position.equals("manager");
     }
 
     /*

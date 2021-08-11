@@ -20,6 +20,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -152,6 +153,9 @@ public class CenterFragment extends Fragment {
                         case "محل برگزاری": {
                             NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
+                        } break;
+                        case "برچسب\u200Cهای مهم": {
+                            // TODO : Place Code When Needed
                         } break;
                     }
 
@@ -363,23 +367,39 @@ public class CenterFragment extends Fragment {
         }
 
         setDropdown(status);
+        setPermission(status);
     }
 
     private void setDropdown(String status) {
         ArrayList<String> items = new ArrayList<>();
 
-        items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
+        if (Permissoon.showCenterDropdownUsers(status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
+
         items.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
 
         if (!status.equals("request"))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
-        items.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
-        items.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
+        if (Permissoon.showCenterDropdownEdit(status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
+
+        if (Permissoon.showCenterDropdownPlatforms(status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
+
+        if (Permissoon.showCenterDropdownTags(status))
+            items.add(requireActivity().getResources().getString(R.string.CenterFragmentTags));
 
         items.add("");
 
         InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+    }
+
+    private void setPermission(String status) {
+        if (Permissoon.showCenterCreateRoom(status))
+            binding.addImageView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.addImageView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {
