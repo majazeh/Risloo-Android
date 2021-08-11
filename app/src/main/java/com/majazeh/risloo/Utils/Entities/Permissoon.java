@@ -1,6 +1,5 @@
 package com.majazeh.risloo.Utils.Entities;
 
-import com.mre.ligheh.Model.TypeModel.AcceptationModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class Permissoon {
@@ -70,40 +69,64 @@ public class Permissoon {
     ---------- Center ----------
     */
 
-    public static boolean showCenterDropdownUsers(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
+    public static boolean showCenterDropdownUsers(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
     }
 
-    public static boolean showCenterDropdownEdit(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
+    public static boolean showCenterDropdownEdit(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
     }
 
-    public static boolean showCenterDropdownPlatforms(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
+    public static boolean showCenterDropdownPlatforms(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
     }
 
-    public static boolean showCenterCreateRoom(String position) {
-        return position.equals("admin") || position.equals("manager");
+    public static boolean showCenterCreateRoom(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager");
+        else
+            return false;
     }
 
     /*
     ---------- Room ----------
     */
 
-    public static boolean showRoomDropdownCreateSchedule(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
+    public static boolean showRoomDropdownCreateSchedule(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
     }
 
-    public static boolean showRoomDropdownUsers(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
+    public static boolean showRoomDropdownUsers(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
     }
 
-    public static boolean showRoomDropdownPlatforms(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
+    public static boolean showRoomDropdownPlatforms(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
     }
 
-    public static boolean showRoomDropdownTags(String position) {
-        return position.equals("admin") || position.equals("manager") || position.equals("operator");
+    public static boolean showRoomDropdownTags(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
     }
 
 }

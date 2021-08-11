@@ -370,7 +370,7 @@ public class CenterFragment extends Fragment {
     private void setDropdown(String status) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (Permissoon.showCenterDropdownUsers(status))
+        if (Permissoon.showCenterDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentUsers));
 
         items.add(requireActivity().getResources().getString(R.string.CenterFragmentSchedules));
@@ -378,10 +378,10 @@ public class CenterFragment extends Fragment {
         if (!status.equals("request"))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentProfile));
 
-        if (Permissoon.showCenterDropdownEdit(status))
+        if (Permissoon.showCenterDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentEdit));
 
-        if (Permissoon.showCenterDropdownPlatforms(status))
+        if (Permissoon.showCenterDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.CenterFragmentPlatforms));
 
         items.add("");
@@ -390,7 +390,7 @@ public class CenterFragment extends Fragment {
     }
 
     private void setPermission(String status) {
-        if (Permissoon.showCenterCreateRoom(status))
+        if (Permissoon.showCenterCreateRoom(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             binding.addImageView.getRoot().setVisibility(View.VISIBLE);
         else
             binding.addImageView.getRoot().setVisibility(View.GONE);
