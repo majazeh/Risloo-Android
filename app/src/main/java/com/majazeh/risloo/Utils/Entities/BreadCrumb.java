@@ -24,6 +24,7 @@ import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.CaseFragmentArgs;
@@ -215,6 +216,9 @@ public class BreadCrumb {
             case R.id.roomSchedulesFragment:
                 setModals("room", RoomSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomSchedules();
+            case R.id.roomTagsFragment:
+                setModals("room", RoomTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                return roomTags();
             case R.id.clientReportsFragment:
                 clientReportsType = ClientReportsFragmentArgs.fromBundle(arguments).getType();
 
@@ -359,6 +363,10 @@ public class BreadCrumb {
             } break;
             case R.id.roomSchedulesFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalRoomSchedulesFragment(roomModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.roomTagsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.clientReportsFragment: {
@@ -874,6 +882,14 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> roomTags() {
+        ArrayList<String> list = room();
+        list.add("برچسب\u200Cهای مهم");
+
+        destinationIds = roomTagsIds();
+        return list;
+    }
+
     private ArrayList<String> clientReports() {
         ArrayList<String> list;
 
@@ -1345,6 +1361,13 @@ public class BreadCrumb {
     private ArrayList<Integer> roomSchedulesIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.roomSchedulesFragment);
+
+        return list;
+    }
+
+    private ArrayList<Integer> roomTagsIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.roomTagsFragment);
 
         return list;
     }
