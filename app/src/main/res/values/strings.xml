@@ -949,6 +949,14 @@
     <string name="RoomSchedulesFragmentTitle">برنامه‌های اتاق درمان</string>
 
     /*
+    ---------- RoomTags Fragment ----------
+    */
+
+    <string name="RoomTagsFragmentTitle">برچسب‌های مهم اتاق</string>
+
+    <string name="RoomTagsFragmentEmpty">هنوز برچسبی برای اتاق ثبت نشده است.</string>
+
+    /*
     ---------- RoomUsers Fragment ----------
     */
 

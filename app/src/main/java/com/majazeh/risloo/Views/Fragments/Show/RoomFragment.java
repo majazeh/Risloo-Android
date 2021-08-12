@@ -181,7 +181,8 @@ public class RoomFragment extends Fragment {
                             }
                         } break;
                         case "برچسب\u200Cهای مهم": {
-                            // TODO : Place Code When Needed
+                            NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                     }
 
