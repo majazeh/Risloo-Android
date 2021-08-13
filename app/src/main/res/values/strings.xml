@@ -1126,6 +1126,7 @@
     <string name="RoomFragmentTags">برچسب‌های مهم</string>
 
     <string name="RoomFragmentPersonalClinic">کلینیک شخصی</string>
+    <string name="RoomFragmentFilterByTag">فیلتر بر اساس برچسب‌ها:</string>
 
     /*
     ---------- Sample Fragment ----------

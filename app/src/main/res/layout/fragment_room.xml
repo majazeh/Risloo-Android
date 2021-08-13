@@ -219,6 +219,59 @@
             app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
             app:layout_constraintTop_toTopOf="@id/search_includeLayout" />
 
+        <HorizontalScrollView
+            android:id="@+id/filter_horizontalScrollView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:scrollbarSize="0dp"
+            android:overScrollMode="never"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
+            tools:visibility="visible">
+
+            <RelativeLayout
+                android:id="@+id/filter_containerLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/filter_textView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_12sdp"
+                    android:fontFamily="@font/dana_regular"
+                    android:gravity="center"
+                    android:text="@string/RoomFragmentFilterByTag"
+                    android:textAlignment="gravity"
+                    android:textColor="@color/Gray600"
+                    android:textSize="@dimen/_9ssp"
+                    android:textStyle="normal" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/tags_recyclerView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/_12sdp"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:layout_toEndOf="@id/filter_textView"
+                    android:orientation="horizontal"
+                    android:overScrollMode="never"
+                    android:layoutDirection="rtl"
+                    tools:layout_marginEnd="@dimen/_10sdp"
+                    tools:layout_marginStart="@dimen/_2sdp"
+                    tools:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                    tools:listitem="@layout/single_item_filter_tag"
+                    tools:itemCount="6" />
+
+            </RelativeLayout>
+
+        </HorizontalScrollView>
+
         <include
             android:id="@+id/cases_shimmerLayout"
             layout="@layout/component_shimmer_case2"
@@ -227,7 +280,7 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
             tools:visibility="gone" />
 
         <include
@@ -238,7 +291,7 @@
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/filter_horizontalScrollView"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -29,6 +29,7 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.FilterTagsAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -54,6 +55,7 @@ public class RoomFragment extends Fragment {
 
     // Adapters
     private Cases2Adapter cases2Adapter;
+    private FilterTagsAdapter filterTagsAdapter;
 
     // Models
     private RoomModel roomModel;
@@ -87,6 +89,7 @@ public class RoomFragment extends Fragment {
 
     private void initializer() {
         cases2Adapter = new Cases2Adapter(requireActivity());
+        filterTagsAdapter = new FilterTagsAdapter(requireActivity());
 
         handler = new Handler();
 
@@ -99,6 +102,7 @@ public class RoomFragment extends Fragment {
 
         InitManager.txtTextColor(binding.requestTextView.getRoot(), getResources().getString(R.string.RoomFragmentRequest), getResources().getColor(R.color.White));
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
+        InitManager.fixedHorizontalRecyclerView(requireActivity(), binding.tagsRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
 
@@ -530,6 +534,16 @@ public class RoomFragment extends Fragment {
                             }
 
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
+
+//                            // Tags Data
+//                            if (!roomModel.getTags().data().isEmpty()) {
+//                                filterTagsAdapter.setItems(roomModel.getTags().data());
+//                                binding.tagsRecyclerView.setAdapter(filterTagsAdapter);
+//
+//                                binding.filterHorizontalScrollView.setVisibility(View.VISIBLE);
+//                            } else if (filterTagsAdapter.getItemCount() == 0) {
+//                                binding.filterHorizontalScrollView.setVisibility(View.GONE);
+//                            }
 
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
