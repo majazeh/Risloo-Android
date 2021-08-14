@@ -3,8 +3,10 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.ReportModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
+import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -36,6 +38,22 @@ public class Center extends Model {
                 Model.show(endpoint + "/" + data.get("id"), data, header, response, CenterModel.class);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void tags(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.show("tags", data, header, response, TagModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void orderTags(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.put("rooms" + data.get("id") + "settings/pinned-tags", data, header, response, null);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -5,6 +5,7 @@ import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.ReportModel;
+import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONObject;
@@ -54,6 +55,13 @@ public class Case extends Model {
         }
     }
 
+    public static void tags(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
+        try {
+            Model.show("tags", data, header, response, TagModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
