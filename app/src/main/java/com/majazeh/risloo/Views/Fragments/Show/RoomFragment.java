@@ -14,10 +14,10 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
+import com.factor.bouncy.BouncyNestedScrollView;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
@@ -268,8 +268,8 @@ public class RoomFragment extends Fragment {
             return false;
         });
 
-        binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (userScroll && !isLoading && !v.canScrollVertically(1)) {
+        binding.getRoot().setMOnScrollChangeListener((BouncyNestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (userScroll && !isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
                 userScroll = false;
                 isLoading = true;
 

@@ -12,9 +12,9 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.widget.NestedScrollView;
 import androidx.fragment.app.Fragment;
 
+import com.factor.bouncy.BouncyNestedScrollView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -108,8 +108,8 @@ public class ScalesFragment extends Fragment {
             }
         });
 
-        binding.getRoot().setOnScrollChangeListener((NestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (!isLoading && !v.canScrollVertically(1)) {
+        binding.getRoot().setMOnScrollChangeListener((BouncyNestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (!isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
                 isLoading = true;
 
                 if (data.containsKey("page"))
