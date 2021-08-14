@@ -20,23 +20,29 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
-        app:layout_constraintBottom_toBottomOf="@id/tag_spinner"
+        app:layout_constraintBottom_toBottomOf="@id/value_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tag_spinner"
+        app:layout_constraintTop_toTopOf="@id/value_textView"
         tools:text="5" />
 
-    <Spinner
-        android:id="@+id/tag_spinner"
+    <TextView
+        android:id="@+id/value_textView"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="@dimen/_36sdp"
         android:layout_marginStart="@dimen/_4sdp"
-        android:minHeight="@dimen/_36sdp"
-        android:singleLine="true"
-        android:spinnerMode="dropdown"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_8sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray200"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/index_textView"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="برچسب" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

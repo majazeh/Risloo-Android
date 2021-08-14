@@ -609,6 +609,16 @@
     </fragment>
 
     <fragment
+        android:id="@+id/centerTagsFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment"
+        android:label="@string/CenterTagsFragmentTitle"
+        tools:layout="@layout/fragment_center_tags" >
+        <argument
+            android:name="typeModel"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
+    <fragment
         android:id="@+id/roomUsersFragment"
         android:name="com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment"
         android:label="@string/RoomUsersFragmentTitle"
@@ -674,6 +684,10 @@
     <action
         android:id="@+id/action_global_centerSchedulesFragment"
         app:destination="@id/centerSchedulesFragment" />
+
+    <action
+        android:id="@+id/action_global_centerTagsFragment"
+        app:destination="@id/centerTagsFragment" />
 
     <action
         android:id="@+id/action_global_roomUsersFragment"

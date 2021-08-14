@@ -16,37 +16,37 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.TagsAdapter;
-import com.majazeh.risloo.databinding.FragmentRoomTagsBinding;
+import com.majazeh.risloo.databinding.FragmentCenterTagsBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
-import com.mre.ligheh.Model.Madule.Room;
-import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.HashMap;
 import java.util.Objects;
 
-public class RoomTagsFragment extends Fragment {
+public class CenterTagsFragment extends Fragment {
 
     // Binding
-    private FragmentRoomTagsBinding binding;
+    private FragmentCenterTagsBinding binding;
 
     // Adapters
     private TagsAdapter adapter;
 
     // Models
-    private RoomModel roomModel;
+    private CenterModel centerModel;
 
     // Objects
     private HashMap data, header;
 
     // Vars
-    public String roomId = "", centerId = "", type = "";
+    public String centerId = "", type = "";
     private boolean isLoading = true;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = FragmentRoomTagsBinding.inflate(inflater, viewGroup, false);
+        binding = FragmentCenterTagsBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -67,7 +67,7 @@ public class RoomTagsFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.RoomTagsFragmentTitle));
+        binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CenterTagsFragmentTitle));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
@@ -92,27 +92,23 @@ public class RoomTagsFragment extends Fragment {
     }
 
     private void setArgs() {
-        roomModel = (RoomModel) RoomTagsFragmentArgs.fromBundle(getArguments()).getTypeModel();
-        setData(roomModel);
+        centerModel = (CenterModel) CenterTagsFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        setData(centerModel);
     }
 
-    private void setData(RoomModel model) {
-        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-            roomId = model.getRoomId();
-            data.put("id", roomId);
+    private void setData(CenterModel model) {
+        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
+            centerId = model.getCenterId();
+            data.put("id", centerId);
         }
 
-        if (model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-            centerId = model.getRoomCenter().getCenterId();
-        }
-
-        if (model.getRoomType() != null && !model.getRoomType().equals("")) {
-            type = model.getRoomType();
+        if (model.getCenterType() != null && !model.getCenterType().equals("")) {
+            type = model.getCenterType();
         }
     }
 
     private void getData() {
-        Room.tags(data, header, new Response() {
+        Center.tags(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 List items = (List) object;
@@ -129,7 +125,7 @@ public class RoomTagsFragment extends Fragment {
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.RoomTagsFragmentEmpty));
+                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.CenterTagsFragmentEmpty));
                         }
 
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));

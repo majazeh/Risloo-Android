@@ -185,8 +185,13 @@ public class RoomFragment extends Fragment {
                             }
                         } break;
                         case "برچسب\u200Cهای مهم": {
-                            NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
+                            if (!type.equals("room")) {
+                                NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            } else {
+                                NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            }
                         } break;
                     }
 

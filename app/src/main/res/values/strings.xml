@@ -869,6 +869,14 @@
     <string name="CenterSchedulesFragmentTitle">برنامه‌های مرکز درمانی</string>
 
     /*
+    ---------- CenterTags Fragment ----------
+    */
+
+    <string name="CenterTagsFragmentTitle">برچسب‌های مهم کلینیک</string>
+
+    <string name="CenterTagsFragmentEmpty">هنوز برچسبی برای کلینیک ثبت نشده است.</string>
+
+    /*
     ---------- CenterUsers Fragment ----------
     */
 

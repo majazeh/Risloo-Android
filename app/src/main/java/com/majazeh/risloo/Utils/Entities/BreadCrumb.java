@@ -20,6 +20,7 @@ import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragmentArgs;
@@ -207,6 +208,9 @@ public class BreadCrumb {
             case R.id.centerSchedulesFragment:
                 setModals("center", CenterSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerSchedules();
+            case R.id.centerTagsFragment:
+                setModals("center", CenterTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                return centerTags();
             case R.id.roomUsersFragment:
                 setModals("room", RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
                 return roomUsers();
@@ -351,6 +355,10 @@ public class BreadCrumb {
             } break;
             case R.id.centerSchedulesFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterSchedulesFragment(centerModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.centerTagsFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.roomUsersFragment: {
@@ -858,6 +866,20 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> centerTags() {
+        ArrayList<String> list;
+
+        if (!centerType.equals("room"))
+            list = center();
+        else
+            list = room();
+
+        list.add("برچسب\u200Cهای مهم");
+
+        destinationIds = centerTagsIds();
+        return list;
+    }
+
     private ArrayList<String> roomUsers() {
         ArrayList<String> list = room();
         list.add("اعضاء");
@@ -1340,6 +1362,19 @@ public class BreadCrumb {
             list = roomIds();
 
         list.add(R.id.centerSchedulesFragment);
+
+        return list;
+    }
+
+    private ArrayList<Integer> centerTagsIds() {
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.centerTagsFragment);
 
         return list;
     }

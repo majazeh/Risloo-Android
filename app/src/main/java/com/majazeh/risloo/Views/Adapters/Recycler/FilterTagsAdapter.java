@@ -8,6 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
+import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -33,11 +34,11 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.Fi
 
     @Override
     public void onBindViewHolder(@NonNull FilterTagsHolder holder, int i) {
-//        TagModel model = (TagModel) items.get(i);
+        TagModel model = (TagModel) items.get(i);
 
-        listener(holder);
+        listener(holder, model);
 
-        setData(holder);
+        setData(holder, model);
     }
 
     @Override
@@ -66,12 +67,12 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.Fi
         }
     }
 
-    private void listener(FilterTagsHolder holder) {
+    private void listener(FilterTagsHolder holder, TagModel model) {
         // TODO Place Code When Needed
     }
 
-    private void setData(FilterTagsHolder holder) {
-        holder.binding.getRoot().setText("برچسب");
+    private void setData(FilterTagsHolder holder, TagModel model) {
+        holder.binding.getRoot().setText(model.getTitle());
     }
 
     public class FilterTagsHolder extends RecyclerView.ViewHolder {
