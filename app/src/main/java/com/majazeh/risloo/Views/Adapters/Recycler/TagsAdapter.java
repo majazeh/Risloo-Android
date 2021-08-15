@@ -33,17 +33,12 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull TagsHolder holder, int i) {
-        TagModel model = (TagModel) items.get(i);
-
-        setData(holder, model);
+        setData(holder);
     }
 
     @Override
     public int getItemCount() {
-        if (this.items != null)
-            return items.size();
-        else
-            return 0;
+        return 9;
     }
 
     public void setItems(ArrayList<TypeModel> items) {
@@ -61,9 +56,16 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
         }
     }
 
-    private void setData(TagsHolder holder, TagModel model) {
-        holder.binding.indexTextView.setText(String.valueOf(model.getOrder()));
-        holder.binding.valueTextView.setText(model.getTitle());
+    private void setData(TagsHolder holder) {
+        holder.binding.indexTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
+        holder.binding.valueTextView.setText("");
+
+        for (TypeModel item : items) {
+            TagModel model = (TagModel) item;
+
+            if (model.getOrder() == holder.getBindingAdapterPosition() + 1)
+                holder.binding.valueTextView.setText(model.getTitle());
+        }
     }
 
     public class TagsHolder extends RecyclerView.ViewHolder {

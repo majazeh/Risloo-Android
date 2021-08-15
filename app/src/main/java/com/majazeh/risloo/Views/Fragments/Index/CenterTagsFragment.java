@@ -22,6 +22,7 @@ import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Objects;
 
@@ -118,16 +119,12 @@ public class CenterTagsFragment extends Fragment {
                         if (Objects.equals(data.get("page"), 1))
                             adapter.clearItems();
 
-                        if (!items.data().isEmpty()) {
+                        if (!items.data().isEmpty())
                             adapter.setItems(items.data());
-                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+                        else
+                            adapter.setItems(new ArrayList<>());
 
-                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (adapter.getItemCount() == 0) {
-                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.CenterTagsFragmentEmpty));
-                        }
-
+                        binding.indexSingleLayout.recyclerView.setAdapter(adapter);
                         binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
