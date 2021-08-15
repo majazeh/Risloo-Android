@@ -16,6 +16,7 @@ public class RoomModel extends TypeModel {
     private int RoomCreated_at;
     private int RoomUpdated_at;
     private List session_platforms;
+    private List pinned_tags;
 
     public RoomModel(JSONObject jsonObject) throws JSONException {
         super(jsonObject);
@@ -43,6 +44,14 @@ public class RoomModel extends TypeModel {
             }
         }else{
             setSession_platforms(new List());
+        }
+        if (!jsonObject.isNull("pinned_tags") && jsonObject.getJSONArray("pinned_tags").length() != 0) {
+            pinned_tags = new com.mre.ligheh.Model.Madule.List();
+            for (int i = 0; i < jsonObject.getJSONArray("pinned_tags").length(); i++) {
+                pinned_tags.add(new TagModel(jsonObject.getJSONArray("pinned_tags").getJSONObject(i)));
+            }
+        }else{
+            setPinned_tags(new List());
         }
     }
 
@@ -124,5 +133,13 @@ public class RoomModel extends TypeModel {
 
     public void setSession_platforms(List session_platforms) {
         this.session_platforms = session_platforms;
+    }
+
+    public List getPinned_tags() {
+        return pinned_tags;
+    }
+
+    public void setPinned_tags(List pinned_tags) {
+        this.pinned_tags = pinned_tags;
     }
 }

@@ -16,6 +16,7 @@ public class CaseModel extends TypeModel {
     private int caseCreated_at;
     private List sessions;
     private List samples;
+    private List tags;
 
     public CaseModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -58,6 +59,14 @@ public class CaseModel extends TypeModel {
                 setSessions_count(jsonObject.getInt("sessions_count"));
             if (!jsonObject.isNull("created_at"))
                 setCaseCreated_at(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("pinned_tags") && jsonObject.getJSONArray("pinned_tags").length() != 0) {
+                tags = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("tags").length(); i++) {
+                    tags.add(new TagModel(jsonObject.getJSONArray("tags").getJSONObject(i)));
+                }
+            }else{
+                setTags(new List());
+            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -133,5 +142,13 @@ public class CaseModel extends TypeModel {
 
     public void setSamples(List samples) {
         this.samples = samples;
+    }
+
+    public List getTags() {
+        return tags;
+    }
+
+    public void setTags(List tags) {
+        this.tags = tags;
     }
 }

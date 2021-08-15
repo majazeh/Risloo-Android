@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import com.mre.ligheh.Model.Madule.List;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -35,6 +37,7 @@ public class CenterModel extends TypeModel {
             setCreated_at(jsonObject.getInt("created_at"));
         if (!jsonObject.isNull("updated_at"))
             setUpdated_at(jsonObject.getInt("updated_at"));
+
     }
 
     public String getCenterId() {
@@ -100,6 +103,8 @@ public class CenterModel extends TypeModel {
     public void setUpdated_at(int updated_at) {
         this.updated_at = updated_at;
     }
+
+
 
     @Override
     public String toString() {

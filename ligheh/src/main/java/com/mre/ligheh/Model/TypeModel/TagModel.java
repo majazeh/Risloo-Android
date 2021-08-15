@@ -4,8 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TagModel extends TypeModel {
-    private String id;
-    private String title;
+    private String id = "";
+    private String title = "";
+    private int order = 0;
 
     public TagModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -14,6 +15,8 @@ public class TagModel extends TypeModel {
                 setId(jsonObject.getString("id"));
             if (!jsonObject.isNull("title"))
                 setTitle(jsonObject.getString("title"));
+            if (!jsonObject.isNull("order"))
+                setOrder(jsonObject.getInt("order"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -33,5 +36,13 @@ public class TagModel extends TypeModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public int getOrder() {
+        return order;
+    }
+
+    public void setOrder(int order) {
+        this.order = order;
     }
 }
