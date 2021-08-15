@@ -95,6 +95,15 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         notifyDataSetChanged();
     }
 
+    public void addItem(TypeModel item) {
+        if (this.items == null)
+            this.items = new ArrayList<>();
+        else
+            this.items.add(item);
+
+        notifyDataSetChanged();
+    }
+
     public void clearItems() {
         if (this.items != null) {
             this.items.clear();

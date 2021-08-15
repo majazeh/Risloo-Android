@@ -45,6 +45,7 @@ import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.Madule.User;
+import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
@@ -546,9 +547,22 @@ public class SearchableDialog extends AppCompatDialogFragment {
 
                                 binding.emptyTextView.setVisibility(View.GONE);
                             } else {
-                                searchableAdapter.clearItems();
+                                String input = binding.inputEditText.getText().toString();
 
-                                binding.emptyTextView.setVisibility(View.VISIBLE);
+                                if (!input.equals("")) {
+                                    searchableAdapter.clearItems();
+                                    binding.emptyTextView.setVisibility(View.GONE);
+
+                                    try {
+                                        TagModel typeModel = new TagModel(new JSONObject().put("id", input).put("title", input));
+                                        searchableAdapter.addItem(typeModel);
+                                    } catch (JSONException e) {
+                                        e.printStackTrace();
+                                    }
+                                } else {
+                                    searchableAdapter.clearItems();
+                                    binding.emptyTextView.setVisibility(View.VISIBLE);
+                                }
                             }
 
                             if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
