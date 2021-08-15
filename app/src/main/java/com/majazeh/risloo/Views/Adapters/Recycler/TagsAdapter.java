@@ -62,7 +62,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
     }
 
     private void setData(TagsHolder holder, TagModel model) {
-        holder.binding.indexTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
+        holder.binding.indexTextView.setText(String.valueOf(model.getOrder()));
         holder.binding.valueTextView.setText(model.getTitle());
     }
 

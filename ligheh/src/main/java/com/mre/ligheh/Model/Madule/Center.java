@@ -45,7 +45,7 @@ public class Center extends Model {
 
     public static void tags(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
-            Model.show("tags", data, header, response, TagModel.class);
+            Model.show("rooms" + "/" + data.get("id") + "/settings/pinned-tags", data, header, response, TagModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -53,7 +53,7 @@ public class Center extends Model {
 
     public static void orderTags(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.put("rooms" + data.get("id") + "settings/pinned-tags", data, header, response, null);
+            Model.put("rooms" + "/" + data.get("id") + "/settings/pinned-tags", data, header, response, TagModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
