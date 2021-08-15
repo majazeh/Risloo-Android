@@ -534,7 +534,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     });
                 break;
             case "tags":
-                Room.tags(data, header, new Response() {
+                Case.tags(data, header, new Response() {
                 @Override
                 public void onOK(Object object) {
                     List list = (List) object;
