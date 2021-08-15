@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
+import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -179,7 +180,12 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
                     holder.binding.subTextView.setText("");
                 } break;
                 case "tags": {
-                    // TODO : Place Code When Needed
+                    TagModel model = (TagModel) item;
+
+                    holder.binding.titleTextView.setText(model.getTitle());
+
+                    holder.binding.subTextView.setVisibility(View.GONE);
+                    holder.binding.subTextView.setText("");
                 } break;
                 case "phones":
                 case "axises":

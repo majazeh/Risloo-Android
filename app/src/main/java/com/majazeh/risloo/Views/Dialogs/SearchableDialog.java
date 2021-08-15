@@ -226,7 +226,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     data.put("usage", "create_case");
                     break;
                 case "tags":
-                    // TODO : Place Code When Needed
+                    data.put("region", ((CreateCaseFragment) current).roomId);
                     break;
             }
         }
@@ -533,7 +533,40 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     });
                 break;
             case "tags":
-                // TODO : Place Code When Needed
+                Room.tags(data, header, new Response() {
+                @Override
+                public void onOK(Object object) {
+                    List list = (List) object;
+
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            if (!list.data().isEmpty()) {
+                                searchableAdapter.setItems(list.data(), method, binding.countTextView);
+                                binding.listRecyclerView.setAdapter(searchableAdapter);
+
+                                binding.emptyTextView.setVisibility(View.GONE);
+                            } else {
+                                searchableAdapter.clearItems();
+
+                                binding.emptyTextView.setVisibility(View.VISIBLE);
+                            }
+
+                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                binding.searchProgressBar.setVisibility(View.GONE);
+                        });
+                    }
+                }
+
+                @Override
+                public void onFailure(String response) {
+                    if (isAdded()) {
+                        requireActivity().runOnUiThread(() -> {
+                            if (binding.searchProgressBar.getVisibility() == View.VISIBLE)
+                                binding.searchProgressBar.setVisibility(View.GONE);
+                        });
+                    }
+                }
+            });
                 break;
             case "psychologies":
                 Center.users(data, header, new Response() {

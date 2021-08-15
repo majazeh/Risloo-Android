@@ -19,6 +19,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -225,7 +226,7 @@ public class CreateCaseFragment extends Fragment {
                 }
             } break;
             case "tags": {
-                UserModel model = (UserModel) item;
+                TagModel model = (TagModel) item;
 
                 int position = tagsAdapter.getIds().indexOf(model.getId());
 

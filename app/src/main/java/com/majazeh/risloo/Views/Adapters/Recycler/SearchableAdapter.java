@@ -20,6 +20,7 @@ import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -193,7 +194,12 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                     holder.binding.subTextView.setText("");
                 } break;
                 case "tags": {
-                    // TODO : Place Code When Needed
+                    TagModel model = (TagModel) item;
+
+                    holder.binding.titleTextView.setText(model.getTitle());
+
+                    holder.binding.subTextView.setVisibility(View.GONE);
+                    holder.binding.subTextView.setText("");
                 } break;
                 case "patternDays": {
                     holder.binding.titleTextView.setText(item.object.getString("id"));
@@ -218,7 +224,10 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                         calculateCount(((CreateCaseFragment) current).referencesAdapter.getIds().size());
                     } break;
                     case "tags": {
-                        // TODO : Place Code When Needed
+                        TagModel model = (TagModel) item;
+
+                        detector(holder, ((CreateCaseFragment) current).tagsAdapter.getIds().contains(model.getId()));
+                        calculateCount(((CreateCaseFragment) current).tagsAdapter.getIds().size());
                     } break;
                 }
             }
