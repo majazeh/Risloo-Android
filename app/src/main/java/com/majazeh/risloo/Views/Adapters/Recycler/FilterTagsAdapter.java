@@ -5,8 +5,11 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Show.RoomFragment;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -15,12 +18,15 @@ import java.util.ArrayList;
 
 public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.FilterTagsHolder> {
 
+    // Fragments
+    private Fragment current;
+
     // Objects
     private Activity activity;
 
     // Vars
     private ArrayList<TypeModel> items;
-    private ArrayList<String> ids;
+    private ArrayList<String> ids = new ArrayList<>();
 
     public FilterTagsAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -35,6 +41,8 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.Fi
     @Override
     public void onBindViewHolder(@NonNull FilterTagsHolder holder, int i) {
         TagModel model = (TagModel) items.get(i);
+
+        intializer();
 
         listener(holder, model);
 
@@ -53,9 +61,8 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.Fi
         return ids;
     }
 
-    public void setItems(ArrayList<TypeModel> items, ArrayList<String> ids) {
+    public void setItems(ArrayList<TypeModel> items) {
         this.items = items;
-        this.ids = ids;
         notifyDataSetChanged();
     }
 
@@ -67,8 +74,19 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.Fi
         }
     }
 
+    private void intializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+    }
+
     private void listener(FilterTagsHolder holder, TagModel model) {
-        // TODO Place Code When Needed
+        holder.binding.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
+            if (isChecked)
+                ids.add(model.getId());
+            else
+                ids.remove(model.getId());
+
+            ((RoomFragment) current).responseAdapter();
+        });
     }
 
     private void setData(FilterTagsHolder holder, TagModel model) {

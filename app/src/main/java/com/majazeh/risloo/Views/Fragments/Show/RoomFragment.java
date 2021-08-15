@@ -67,7 +67,7 @@ public class RoomFragment extends Fragment {
 
     // Vars
     private String type = "room";
-    private boolean isLoading = true, userSelect = false, userScroll = false, succesRequest = false;
+    private boolean isLoading = true, userSelect = false, userScroll = false, succesRequest = false, isFiltered = false;
 
     @Nullable
     @Override
@@ -274,7 +274,7 @@ public class RoomFragment extends Fragment {
         });
 
         binding.getRoot().setMOnScrollChangeListener((BouncyNestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-            if (userScroll && !isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
+            if (userScroll && !isLoading && !isFiltered && !Objects.requireNonNull(v).canScrollVertically(1)) {
                 userScroll = false;
                 isLoading = true;
 
@@ -532,7 +532,7 @@ public class RoomFragment extends Fragment {
                             } else if (cases2Adapter.getItemCount() == 0) {
                                 binding.casesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
-                                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE || isFiltered)
                                     binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                                 else
                                     binding.casesSingleLayout.emptyView.setText(getResources().getString(R.string.Cases2AdapterEmpty));
@@ -540,15 +540,17 @@ public class RoomFragment extends Fragment {
 
                             binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(cases2Adapter.getItemCount()));
 
-//                            // Tags Data
-//                            if (!roomModel.getTags().data().isEmpty()) {
-//                                filterTagsAdapter.setItems(roomModel.getTags().data());
-//                                binding.tagsRecyclerView.setAdapter(filterTagsAdapter);
-//
-//                                binding.filterHorizontalScrollView.setVisibility(View.VISIBLE);
-//                            } else if (filterTagsAdapter.getItemCount() == 0) {
-//                                binding.filterHorizontalScrollView.setVisibility(View.GONE);
-//                            }
+                            // Tags Data
+                            if (!isFiltered) {
+                                if (!roomModel.getPinned_tags().data().isEmpty()) {
+                                    filterTagsAdapter.setItems(roomModel.getPinned_tags().data());
+                                    binding.tagsRecyclerView.setAdapter(filterTagsAdapter);
+
+                                    binding.filterHorizontalScrollView.setVisibility(View.VISIBLE);
+                                } else if (filterTagsAdapter.getItemCount() == 0) {
+                                    binding.filterHorizontalScrollView.setVisibility(View.GONE);
+                                }
+                            }
 
                             binding.casesSingleLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.casesShimmerLayout.getRoot().setVisibility(View.GONE);
@@ -587,6 +589,25 @@ public class RoomFragment extends Fragment {
                 }
             }
         });
+    }
+
+    public void responseAdapter() {
+        data.put("page", 1);
+
+        if (filterTagsAdapter.getIds().size() != 0) {
+            isFiltered = true;
+            data.put("tag", filterTagsAdapter.getIds());
+        } else if (data.containsKey("tag")) {
+            isFiltered = false;
+            data.remove("tag");
+        }
+
+        // Schedules Data
+        binding.casesSingleLayout.getRoot().setVisibility(View.GONE);
+        binding.casesShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+        binding.casesShimmerLayout.getRoot().startShimmer();
+
+        getData();
     }
 
     @Override
