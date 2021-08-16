@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.CaseTagsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples2Adapter;
@@ -41,6 +42,7 @@ public class CaseFragment extends Fragment {
     private FragmentCaseBinding binding;
 
     // Adapters
+    private CaseTagsAdapter caseTagsAdapter;
     private PsychologistsAdapter psychologistsAdapter;
     private ReferencesAdapter referencesAdapter;
     private Sessions2Adapter sessions2Adapter;
@@ -74,6 +76,7 @@ public class CaseFragment extends Fragment {
     }
 
     private void initializer() {
+        caseTagsAdapter = new CaseTagsAdapter(requireActivity());
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
         referencesAdapter = new ReferencesAdapter(requireActivity());
         sessions2Adapter = new Sessions2Adapter(requireActivity());
@@ -83,6 +86,7 @@ public class CaseFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
+        binding.tagsHeaderLayout.titleTextView.setText(getResources().getString(R.string.CaseTagsAdapterHeader));
         binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
         binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.sessionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.Sessions2AdapterHeader));
@@ -92,6 +96,7 @@ public class CaseFragment extends Fragment {
         InitManager.imgResTint(requireActivity(), binding.sessionsAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
 
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.tagsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.referencesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.sessionsSingleLayout.recyclerView, 0, 0, 0, 0);
@@ -210,6 +215,17 @@ public class CaseFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         setData(caseModel);
 
+                        // Tags Data
+                        if (!caseModel.getTags().data().isEmpty()) {
+                            caseTagsAdapter.setItems(caseModel.getTags().data());
+                            binding.tagsSingleLayout.recyclerView.setAdapter(caseTagsAdapter);
+
+                            binding.tagsSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (caseTagsAdapter.getItemCount() == 0) {
+                            binding.tagsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.tagsSingleLayout.emptyView.setText(getResources().getString(R.string.CaseTagsAdapterEmpty));
+                        }
+
                         List psychologists = new List();
                         if (caseModel.getCaseManager() != null)
                             psychologists.add(caseModel.getCaseManager());
@@ -264,10 +280,16 @@ public class CaseFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.Samples2AdapterEmpty));
                         }
 
+                        binding.tagsHeaderLayout.countTextView.setText(StringManager.bracing(caseTagsAdapter.getItemCount()));
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
                         binding.referencesHeaderLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getItemCount()));
                         binding.sessionsHeaderLayout.countTextView.setText(StringManager.bracing(sessions2Adapter.getItemCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samples2Adapter.getItemCount()));
+
+                        // Tags Data
+                        binding.tagsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.tagsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.tagsShimmerLayout.getRoot().stopShimmer();
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -297,6 +319,11 @@ public class CaseFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+
+                        // Tags Data
+                        binding.tagsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.tagsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.tagsShimmerLayout.getRoot().stopShimmer();
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);

@@ -153,13 +153,52 @@
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <include
-                android:id="@+id/psychologists_headerLayout"
+                android:id="@+id/tags_headerLayout"
                 layout="@layout/component_main_index_header"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+
+            <include
+                android:id="@+id/tags_shimmerLayout"
+                layout="@layout/component_shimmer_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tags_headerLayout"
+                tools:visibility="gone" />
+
+            <include
+                android:id="@+id/tags_singleLayout"
+                layout="@layout/component_single_case_tag"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tags_headerLayout"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/tags_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="tags_shimmerLayout, tags_singleLayout" />
+
+            <include
+                android:id="@+id/psychologists_headerLayout"
+                layout="@layout/component_main_index_header"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_18sdp"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/tags_barrier"
+                tools:layout_marginTop="@dimen/_6sdp" />
 
             <include
                 android:id="@+id/psychologists_shimmerLayout"
