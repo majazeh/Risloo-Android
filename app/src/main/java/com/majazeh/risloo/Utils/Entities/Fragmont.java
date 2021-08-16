@@ -31,6 +31,7 @@ import com.majazeh.risloo.Views.Fragments.Index.BulkSamplesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CasesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CentersFragment;
 import com.majazeh.risloo.Views.Fragments.Index.ClientReportsFragment;
@@ -38,6 +39,7 @@ import com.majazeh.risloo.Views.Fragments.Index.DocumentsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.PaymentsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
 import com.majazeh.risloo.Views.Fragments.Index.SamplesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.ScalesFragment;
@@ -183,6 +185,9 @@ public class Fragmont {
         else if (fragment instanceof CentersFragment)
             return fragment;
 
+        else if (fragment instanceof CenterTagsFragment)
+            return fragment;
+
         else if (fragment instanceof CenterUsersFragment)
             return fragment;
 
@@ -199,6 +204,9 @@ public class Fragmont {
             return fragment;
 
         else if (fragment instanceof RoomSchedulesFragment)
+            return fragment;
+
+        else if (fragment instanceof RoomTagsFragment)
             return fragment;
 
         else if (fragment instanceof RoomUsersFragment)

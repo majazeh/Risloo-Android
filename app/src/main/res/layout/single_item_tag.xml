@@ -45,4 +45,18 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="برچسب" />
 
+    <ProgressBar
+        android:id="@+id/order_progressBar"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:padding="@dimen/_4sdp"
+        android:theme="@style/ProgressBarTheme"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="@id/value_textView"
+        app:layout_constraintEnd_toEndOf="@id/value_textView"
+        app:layout_constraintTop_toTopOf="@id/value_textView"
+        style="@style/Widget.AppCompat.ProgressBar"
+        tools:visibility="visible" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

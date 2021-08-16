@@ -34,6 +34,8 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabReferenceFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.DialogSearchableBinding;
@@ -307,6 +309,16 @@ public class SearchableDialog extends AppCompatDialogFragment {
                 else
                     data.put("personal_clinic", "yes");
             }
+        }
+
+        if (current instanceof CenterTagsFragment) {
+            if (method.equals("tags"))
+                data.put("region", ((CenterTagsFragment) current).centerId);
+        }
+
+        if (current instanceof RoomTagsFragment) {
+            if (method.equals("tags"))
+                data.put("region", ((RoomTagsFragment) current).roomId);
         }
 
         getData();

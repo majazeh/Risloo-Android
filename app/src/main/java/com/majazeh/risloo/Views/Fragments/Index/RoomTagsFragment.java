@@ -30,7 +30,7 @@ public class RoomTagsFragment extends Fragment {
     private FragmentRoomTagsBinding binding;
 
     // Adapters
-    private TagsAdapter adapter;
+    public TagsAdapter adapter;
 
     // Models
     private RoomModel roomModel;

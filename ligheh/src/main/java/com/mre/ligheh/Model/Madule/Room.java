@@ -62,7 +62,7 @@ public class Room extends Model {
 
     public static void orderTags(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.put("rooms" + "/" + data.get("id") + "/settings/pinned-tags", data, header, response, TagModel.class);
+            Model.put("rooms" + "/" + data.get("roomId") + "/settings/pinned-tags", data, header, response, TagModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

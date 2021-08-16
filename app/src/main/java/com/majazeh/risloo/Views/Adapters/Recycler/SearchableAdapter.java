@@ -16,6 +16,8 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
+import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
+import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
@@ -345,6 +347,22 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
                 }
             }
 
+            if (current instanceof CenterTagsFragment) {
+                if (method.equals("tags")) {
+                    TagModel model = (TagModel) item;
+
+                    detector(holder, ((CenterTagsFragment) current).adapter.selectedHolder.binding.valueTextView.getText().equals(model.getTitle()));
+                }
+            }
+
+            if (current instanceof RoomTagsFragment) {
+                if (method.equals("tags")) {
+                    TagModel model = (TagModel) item;
+
+                    detector(holder, ((RoomTagsFragment) current).adapter.selectedHolder.binding.valueTextView.getText().equals(model.getTitle()));
+                }
+            }
+
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -383,6 +401,12 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
 
         if (child instanceof EditCenterTabDetailFragment)
             ((EditCenterTabDetailFragment) child).responseDialog(method, item);
+
+        if (current instanceof CenterTagsFragment)
+            ((CenterTagsFragment) current).adapter.responseDialog(method, item);
+
+        if (current instanceof RoomTagsFragment)
+            ((RoomTagsFragment) current).adapter.responseDialog(method, item);
     }
 
     private void calculateCount(int count) {

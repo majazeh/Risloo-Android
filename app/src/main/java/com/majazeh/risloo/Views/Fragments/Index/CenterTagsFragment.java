@@ -30,7 +30,7 @@ public class CenterTagsFragment extends Fragment {
     private FragmentCenterTagsBinding binding;
 
     // Adapters
-    private TagsAdapter adapter;
+    public TagsAdapter adapter;
 
     // Models
     private CenterModel centerModel;
