@@ -329,7 +329,7 @@
 
             <include
                 android:id="@+id/platforms_shimmerLayout"
-                layout="@layout/component_shimmer_reference"
+                layout="@layout/component_shimmer_index2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:visibility="visible"
