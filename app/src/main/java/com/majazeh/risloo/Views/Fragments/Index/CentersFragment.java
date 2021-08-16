@@ -16,7 +16,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
-import com.factor.bouncy.BouncyNestedScrollView;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
@@ -126,7 +125,7 @@ public class CentersFragment extends Fragment {
             }
         });
 
-        binding.getRoot().setMOnScrollChangeListener((BouncyNestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+        binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
             if (!isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
                 isLoading = true;
 

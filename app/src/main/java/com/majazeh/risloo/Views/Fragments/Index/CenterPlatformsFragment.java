@@ -12,7 +12,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
-import com.factor.bouncy.BouncyNestedScrollView;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
@@ -88,22 +87,6 @@ public class CenterPlatformsFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.getRoot().setMOnScrollChangeListener((BouncyNestedScrollView.OnScrollChangeListener) (v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
-//            if (!isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
-//                isLoading = true;
-//
-//                if (data.containsKey("page"))
-//                    data.put("page", ((int) data.get("page")) + 1);
-//                else
-//                    data.put("page", 1);
-//
-//                if (binding.indexSingleLayout.progressBar.getVisibility() == View.GONE)
-//                    binding.indexSingleLayout.progressBar.setVisibility(View.VISIBLE);
-//
-//                getData();
-//            }
-        });
-
         ClickManager.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCreatePlatformFragment("center", centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
@@ -152,10 +135,6 @@ public class CenterPlatformsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-
                     });
 
                     isLoading = false;
@@ -169,10 +148,6 @@ public class CenterPlatformsFragment extends Fragment {
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
                         binding.indexShimmerLayout.getRoot().stopShimmer();
-
-                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-
                     });
 
                     isLoading = false;
