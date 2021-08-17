@@ -59,7 +59,7 @@ public class CaseModel extends TypeModel {
                 setSessions_count(jsonObject.getInt("sessions_count"));
             if (!jsonObject.isNull("created_at"))
                 setCaseCreated_at(jsonObject.getInt("created_at"));
-            if (!jsonObject.isNull("pinned_tags") && jsonObject.getJSONArray("pinned_tags").length() != 0) {
+            if (!jsonObject.isNull("tags") && jsonObject.getJSONArray("tags").length() != 0) {
                 tags = new com.mre.ligheh.Model.Madule.List();
                 for (int i = 0; i < jsonObject.getJSONArray("tags").length(); i++) {
                     tags.add(new TagModel(jsonObject.getJSONArray("tags").getJSONObject(i)));
