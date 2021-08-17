@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -90,6 +92,7 @@ public class PrerequisitesModel extends TypeModel {
         this.user_answered = user_answered;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Prerequisites{" +

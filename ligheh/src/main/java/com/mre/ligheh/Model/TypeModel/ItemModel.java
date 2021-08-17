@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -90,6 +92,7 @@ public class ItemModel extends TypeModel{
         this.description = description;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Item{" +

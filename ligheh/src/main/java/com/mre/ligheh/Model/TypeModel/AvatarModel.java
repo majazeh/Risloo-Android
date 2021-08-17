@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 
@@ -67,6 +69,7 @@ public class AvatarModel extends TypeModel {
 
 
 
+    @NonNull
     @Override
     public String toString() {
         return "large=" + large +

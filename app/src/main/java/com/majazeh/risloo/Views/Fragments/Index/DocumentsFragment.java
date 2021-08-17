@@ -23,7 +23,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.DocumentsAdapter;
 import com.majazeh.risloo.databinding.FragmentDocumentsBinding;
-import com.mre.ligheh.Model.Madule.List;
 
 import java.util.HashMap;
 import java.util.Objects;

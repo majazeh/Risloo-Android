@@ -1,6 +1,6 @@
 package com.mre.ligheh.Model.TypeModel;
 
-import com.mre.ligheh.Model.Madule.List;
+import androidx.annotation.NonNull;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -106,6 +106,7 @@ public class CenterModel extends TypeModel {
 
 
 
+    @NonNull
     @Override
     public String toString() {
         return "CenterModel{" +

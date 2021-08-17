@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.Madule.User;
 
 import org.json.JSONException;
@@ -66,6 +68,7 @@ public class AuthModel extends TypeModel {
         this.user = user;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "theory='" + theory + '\'' +

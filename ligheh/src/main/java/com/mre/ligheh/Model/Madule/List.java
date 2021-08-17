@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.Madule;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
@@ -188,6 +190,7 @@ public class List {
         return models.size();
     }
 
+    @NonNull
     @Override
     public String toString() {
         String outPut = "";

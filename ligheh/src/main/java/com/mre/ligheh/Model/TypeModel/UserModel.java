@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.Madule.List;
 
 import org.json.JSONArray;
@@ -335,6 +337,7 @@ public class UserModel extends TypeModel {
         this.meta = meta;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "UserModel{" +

@@ -1,5 +1,7 @@
 package com.mre.ligheh.Model.TypeModel;
 
+import androidx.annotation.NonNull;
+
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.SampleForm;
 
@@ -490,6 +492,7 @@ public class SampleModel extends TypeModel {
         this.code = code;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "SampleModel{" +
