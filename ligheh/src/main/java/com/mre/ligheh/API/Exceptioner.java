@@ -12,13 +12,7 @@ public class Exceptioner {
         if (External != null) {
             try {
                 External.getDeclaredConstructor(Response.class,Object.class).newInstance(callback,object);
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
-            } catch (NoSuchMethodException e) {
+            } catch (IllegalAccessException | InvocationTargetException | InstantiationException | NoSuchMethodException e) {
                 e.printStackTrace();
             }
 

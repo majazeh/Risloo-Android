@@ -50,7 +50,7 @@ public class InitManager {
     public static void normalAdapterSpinner(Activity activity, Spinner spinner, int arrayRes) {
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList, activity.getResources().getStringArray(arrayRes));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_adapter, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_adapter, arrayList) {
 
             private TextView dropdownTextView;
 
@@ -113,7 +113,7 @@ public class InitManager {
     public static void normal12sspSpinner(Activity activity, Spinner spinner, int arrayRes) {
         ArrayList<String> arrayList = new ArrayList<>();
         Collections.addAll(arrayList, activity.getResources().getStringArray(arrayRes));
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_12ssp, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_12ssp, arrayList) {
 
             private TextView dropdownTextView;
 
@@ -174,7 +174,7 @@ public class InitManager {
     }
 
     public static void normal10sspSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
 
             private TextView dropdownTextView;
 
@@ -235,7 +235,7 @@ public class InitManager {
     }
 
     public static void normal12sspSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_12ssp, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_12ssp, arrayList) {
 
             private TextView dropdownTextView;
 
@@ -300,7 +300,7 @@ public class InitManager {
     */
 
     public static void profileCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_empty, arrayList) {
 
             private TextView dropdownTextView;
 
@@ -349,7 +349,7 @@ public class InitManager {
     }
 
     public static void toolbarCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_empty, arrayList) {
 
             private TextView dropdownTextView;
 
@@ -407,7 +407,7 @@ public class InitManager {
     }
 
     public static void actionCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_empty, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_empty, arrayList) {
 
             private TextView dropdownTextView;
             private ImageView dropdownImageView;
@@ -527,7 +527,7 @@ public class InitManager {
     }
 
     public static void testCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList, ArrayList<Boolean> arrayList2) {
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_background_10ssp, arrayList) {
 
             private TextView dropdownTextView;
             private ImageView dropdownImageView;
