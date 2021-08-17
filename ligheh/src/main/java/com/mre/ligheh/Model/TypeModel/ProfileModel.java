@@ -1,6 +1,5 @@
 package com.mre.ligheh.Model.TypeModel;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 

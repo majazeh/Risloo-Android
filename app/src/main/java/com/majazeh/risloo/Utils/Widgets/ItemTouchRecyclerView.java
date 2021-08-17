@@ -1,8 +1,5 @@
 package com.majazeh.risloo.Utils.Widgets;
 
-import android.graphics.Canvas;
-import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;

@@ -1,7 +1,5 @@
 package com.mre.ligheh.API;
 
-import android.annotation.SuppressLint;
-
 import androidx.annotation.Nullable;
 
 import com.mre.ligheh.Model.Madule.Model;

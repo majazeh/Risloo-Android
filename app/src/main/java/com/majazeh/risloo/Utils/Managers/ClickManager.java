@@ -6,13 +6,13 @@ import android.view.View;
 public class ClickManager {
 
     public static CustomClickListener onClickListener(CustomExtraCode customExtraCode){
-        return view -> view.setOnClickListener((View.OnClickListener) v -> {
+        return view -> view.setOnClickListener(v -> {
             customExtraCode.code();
         });
     }
 
     public static CustomClickListener onDelayedClickListener(CustomExtraCode customExtraCode){
-        return view -> view.setOnClickListener((View.OnClickListener) v -> {
+        return view -> view.setOnClickListener(v -> {
             view.setClickable(false);
             new Handler().postDelayed(() -> view.setClickable(true), 300);
 

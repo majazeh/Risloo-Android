@@ -190,10 +190,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     }
 
     private void setSelected(CenterPlatformsHolder holder, boolean isSelected) {
-        if (isSelected)
-            holder.binding.sessionCheckBox.setChecked(true);
-        else
-            holder.binding.sessionCheckBox.setChecked(false);
+        holder.binding.sessionCheckBox.setChecked(isSelected);
     }
 
     private void setAvailable(CenterPlatformsHolder holder, boolean isAvailable) {

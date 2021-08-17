@@ -69,7 +69,6 @@ public class Model {
     }
 
     protected static boolean has(HashMap<String, Object> data, String key){
-        if (data.containsKey(key))return true;
-        else return false;
+        return data.containsKey(key);
     }
 }

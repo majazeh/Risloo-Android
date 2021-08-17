@@ -15,16 +15,10 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
-import com.mre.ligheh.API.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.util.HashMap;
-import java.util.Iterator;
 
 public class EditTreasuryFragment extends Fragment {
 

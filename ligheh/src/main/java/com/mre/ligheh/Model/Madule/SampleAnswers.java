@@ -1,13 +1,9 @@
 package com.mre.ligheh.Model.Madule;
 
-import com.mre.ligheh.API.APIRequest;
 import com.mre.ligheh.API.Response;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-
-import okhttp3.Headers;
 
 public class SampleAnswers {
     public ArrayList<ArrayList<String>> localAnswers;
