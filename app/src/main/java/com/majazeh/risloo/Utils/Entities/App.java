@@ -29,9 +29,4 @@ public class App extends MultiDexApplication {
         super.onConfigurationChanged(newConfig);
     }
 
-    @Override
-    public void onLowMemory() {
-        super.onLowMemory();
-    }
-
 }
