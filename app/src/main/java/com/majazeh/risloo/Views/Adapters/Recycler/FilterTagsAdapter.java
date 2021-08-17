@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.FilterTagsHolder;
 import com.majazeh.risloo.Views.Fragments.Show.RoomFragment;
 import com.majazeh.risloo.databinding.SingleItemFilterTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
@@ -16,7 +17,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.FilterTagsHolder> {
+public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsHolder> {
 
     // Fragments
     private Fragment current;
@@ -91,16 +92,6 @@ public class FilterTagsAdapter extends RecyclerView.Adapter<FilterTagsAdapter.Fi
 
     private void setData(FilterTagsHolder holder, TagModel model) {
         holder.binding.getRoot().setText(model.getTitle());
-    }
-
-    public class FilterTagsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemFilterTagBinding binding;
-
-        public FilterTagsHolder(SingleItemFilterTagBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

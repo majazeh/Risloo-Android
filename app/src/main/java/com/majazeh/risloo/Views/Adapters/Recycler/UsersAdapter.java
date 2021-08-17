@@ -19,13 +19,14 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.UsersHolder;
 import com.majazeh.risloo.databinding.SingleItemUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder> {
+public class UsersAdapter extends RecyclerView.Adapter<UsersHolder> {
 
     // Objects
     private Activity activity;
@@ -153,16 +154,6 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersAdapter.UsersHolder>
         items.add("");
 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
-    }
-
-    public class UsersHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemUserBinding binding;
-
-        public UsersHolder(SingleItemUserBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

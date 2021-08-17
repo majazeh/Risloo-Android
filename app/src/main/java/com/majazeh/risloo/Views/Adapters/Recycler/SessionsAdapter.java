@@ -16,6 +16,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.SessionsHolder;
 import com.majazeh.risloo.databinding.SingleItemSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -24,7 +25,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.SessionsHolder> {
+public class SessionsAdapter extends RecyclerView.Adapter<SessionsHolder> {
 
     // Objects
     private Activity activity;
@@ -123,16 +124,6 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsAdapter.Sessio
 
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-    }
-
-    public class SessionsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemSessionBinding binding;
-
-        public SessionsHolder(SingleItemSessionBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

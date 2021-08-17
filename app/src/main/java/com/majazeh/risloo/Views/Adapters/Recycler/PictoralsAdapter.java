@@ -11,12 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.PictoralsHolder;
 import com.majazeh.risloo.databinding.SingleItemPictoralBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.PictoralsHolder> {
+public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
 
     // Objects
     private Activity activity;
@@ -132,16 +133,6 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsAdapter.Pict
         } else {
             holder.itemView.setEnabled(true);
             holder.itemView.setClickable(true);
-        }
-    }
-
-    public class PictoralsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemPictoralBinding binding;
-
-        public PictoralsHolder(SingleItemPictoralBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

@@ -23,6 +23,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.RoomPlatformsHolder;
 import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomPlatformBinding;
 import com.mre.ligheh.API.Response;
@@ -33,7 +34,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdapter.RoomPlatformsHolder> {
+public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHolder> {
 
     // Fragments
     private Fragment current;
@@ -316,16 +317,6 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsAdap
                 });
             }
         });
-    }
-
-    public class RoomPlatformsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemRoomPlatformBinding binding;
-
-        public RoomPlatformsHolder(SingleItemRoomPlatformBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

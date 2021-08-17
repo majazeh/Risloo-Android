@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.SaPresHolder;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSaBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
@@ -28,7 +29,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHolder> {
+public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
 
     // Fragments
     private Fragment current;
@@ -227,16 +228,6 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresAdapter.SaPresHold
             InitManager.normal10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-    }
-
-    public class SaPresHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemSaBinding binding;
-
-        public SaPresHolder(SingleItemSaBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

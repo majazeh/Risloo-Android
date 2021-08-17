@@ -11,13 +11,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Views.Adapters.Holder.Scales2Holder;
 import com.majazeh.risloo.databinding.SingleItemScale2Binding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class Scales2Adapter extends RecyclerView.Adapter<Scales2Adapter.Scales2Holder> {
+public class Scales2Adapter extends RecyclerView.Adapter<Scales2Holder> {
 
     // Objects
     private Activity activity;
@@ -94,16 +95,6 @@ public class Scales2Adapter extends RecyclerView.Adapter<Scales2Adapter.Scales2H
             holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
         else
             holder.binding.editionTextView.setText("نسخه " + model.getVersion());
-    }
-
-    public class Scales2Holder extends RecyclerView.ViewHolder {
-
-        private SingleItemScale2Binding binding;
-
-        public Scales2Holder(SingleItemScale2Binding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

@@ -15,6 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.RoomsHolder;
 import com.majazeh.risloo.databinding.SingleItemRoomBinding;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -22,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder> {
+public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
 
     // Objects
     private Activity activity;
@@ -106,16 +107,6 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsAdapter.RoomsHolder>
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
-        }
-    }
-
-    public class RoomsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemRoomBinding binding;
-
-        public RoomsHolder(SingleItemRoomBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

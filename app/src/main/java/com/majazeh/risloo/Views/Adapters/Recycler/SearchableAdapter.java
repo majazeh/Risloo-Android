@@ -15,6 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Adapters.Holder.SearchableHolder;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
@@ -43,7 +44,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.SearchableHolder> {
+public class SearchableAdapter extends RecyclerView.Adapter<SearchableHolder> {
 
     // Fragments
     private Fragment current, child;
@@ -416,16 +417,6 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableAdapter.Se
         } else {
             countTextView.setVisibility(View.GONE);
             countTextView.setText("");
-        }
-    }
-
-    public class SearchableHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemSearchableBinding binding;
-
-        public SearchableHolder(SingleItemSearchableBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

@@ -14,12 +14,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Views.Adapters.Holder.DocumentsHolder;
 import com.majazeh.risloo.databinding.SingleItemDocumentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.DocumentsHolder> {
+public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsHolder> {
 
     // Objects
     private Activity activity;
@@ -143,16 +144,6 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsAdapter.Docu
         items.add("");
 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
-    }
-
-    public class DocumentsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemDocumentBinding binding;
-
-        public DocumentsHolder(SingleItemDocumentBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

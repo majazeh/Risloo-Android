@@ -11,11 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.OptionalsHolder;
 import com.majazeh.risloo.databinding.SingleItemOptionalBinding;
 
 import java.util.ArrayList;
 
-public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.OptionalsHolder> {
+public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
 
     // Objects
     private Activity activity;
@@ -131,16 +132,6 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsAdapter.Opti
         } else {
             holder.itemView.setEnabled(true);
             holder.itemView.setClickable(true);
-        }
-    }
-
-    public class OptionalsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemOptionalBinding binding;
-
-        public OptionalsHolder(SingleItemOptionalBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

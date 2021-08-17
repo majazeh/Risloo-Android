@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.Sessions2Holder;
 import com.majazeh.risloo.databinding.SingleItemSession2Binding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
@@ -29,7 +30,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sessions2Holder> {
+public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
 
     // Objects
     private Activity activity;
@@ -199,16 +200,6 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Adapter.Sess
                 });
             }
         });
-    }
-
-    public class Sessions2Holder extends RecyclerView.ViewHolder {
-
-        private SingleItemSession2Binding binding;
-
-        public Sessions2Holder(SingleItemSession2Binding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

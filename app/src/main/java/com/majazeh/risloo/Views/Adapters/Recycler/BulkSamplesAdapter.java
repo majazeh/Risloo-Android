@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.BulkSamplesHolder;
 import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
 import com.mre.ligheh.API.Response;
@@ -33,7 +34,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.BulkSamplesHolder> {
+public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> {
 
     // BottomSheets
     private ChainBottomSheet chainBottomSheet;
@@ -232,16 +233,6 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesAdapter.
                 });
             }
         });
-    }
-
-    public class BulkSamplesHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemBulkSampleBinding binding;
-
-        public BulkSamplesHolder(SingleItemBulkSampleBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

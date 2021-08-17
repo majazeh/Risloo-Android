@@ -17,6 +17,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.RoomUsersHolder;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemRoomUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -24,7 +25,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.RoomUsersHolder> {
+public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
 
     // Fragments
     private Fragment current;
@@ -127,16 +128,6 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersAdapter.Room
         } else {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusWaiting));
             holder.binding.acceptedTextView.setText("");
-        }
-    }
-
-    public class RoomUsersHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemRoomUserBinding binding;
-
-        public RoomUsersHolder(SingleItemRoomUserBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

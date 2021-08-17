@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Views.Adapters.Holder.ClientReportsHolder;
 import com.majazeh.risloo.databinding.SingleItemClientReportBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.ReportModel;
@@ -20,7 +21,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class ClientReportsAdapter extends RecyclerView.Adapter<ClientReportsAdapter.ClientReportsHolder> {
+public class ClientReportsAdapter extends RecyclerView.Adapter<ClientReportsHolder> {
 
     // Objects
     private Activity activity;
@@ -124,16 +125,6 @@ public class ClientReportsAdapter extends RecyclerView.Adapter<ClientReportsAdap
                     }
                 }
             }
-        }
-    }
-
-    public class ClientReportsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemClientReportBinding binding;
-
-        public ClientReportsHolder(SingleItemClientReportBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

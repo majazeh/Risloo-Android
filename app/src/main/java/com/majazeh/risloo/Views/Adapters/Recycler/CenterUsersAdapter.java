@@ -21,6 +21,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.CenterUsersHolder;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
 import com.mre.ligheh.API.Response;
@@ -31,7 +32,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.CenterUsersHolder> {
+public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> {
 
     // Fragments
     private Fragment current;
@@ -321,16 +322,6 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersAdapter.
                     });
                 }
             });
-        }
-    }
-
-    public class CenterUsersHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemCenterUserBinding binding;
-
-        public CenterUsersHolder(SingleItemCenterUserBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

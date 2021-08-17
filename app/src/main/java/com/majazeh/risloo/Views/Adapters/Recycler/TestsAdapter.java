@@ -7,13 +7,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.Views.Adapters.Holder.TestsHolder;
 import com.majazeh.risloo.databinding.SingleItemTestBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.TestsHolder> {
+public class TestsAdapter extends RecyclerView.Adapter<TestsHolder> {
 
     // Objects
     private Activity activity;
@@ -63,16 +64,6 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsAdapter.TestsHolder>
 
     private void setData(TestsHolder holder, ScaleModel model) {
         holder.binding.getRoot().setText(model.getTitle());
-    }
-
-    public class TestsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemTestBinding binding;
-
-        public TestsHolder(SingleItemTestBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

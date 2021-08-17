@@ -14,6 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.Cases2Holder;
 import com.majazeh.risloo.databinding.SingleItemCase2Binding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -22,7 +23,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Holder> {
+public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
 
     // Objects
     private Activity activity;
@@ -107,16 +108,6 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Adapter.Cases2Hold
                     }
                 }
             }
-        }
-    }
-
-    public class Cases2Holder extends RecyclerView.ViewHolder {
-
-        private SingleItemCase2Binding binding;
-
-        public Cases2Holder(SingleItemCase2Binding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

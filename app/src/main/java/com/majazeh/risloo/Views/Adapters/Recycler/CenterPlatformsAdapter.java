@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.CenterPlatformsHolder;
 import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterPlatformBinding;
 import com.mre.ligheh.API.Response;
@@ -30,7 +31,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatformsAdapter.CenterPlatformsHolder> {
+public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatformsHolder> {
 
     // Fragments
     private Fragment current;
@@ -253,16 +254,6 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
                 });
             }
         });
-    }
-
-    public class CenterPlatformsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemCenterPlatformBinding binding;
-
-        public CenterPlatformsHolder(SingleItemCenterPlatformBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

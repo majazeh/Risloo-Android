@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Views.Adapters.Holder.AxisHolder;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.SingleItemAxisBinding;
@@ -18,7 +19,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
+public class AxisAdapter extends RecyclerView.Adapter<AxisHolder> {
 
     // Objects
     private Activity activity;
@@ -127,16 +128,6 @@ public class AxisAdapter extends RecyclerView.Adapter<AxisAdapter.AxisHolder> {
         holder.binding.headerTextView.setText(activity.getResources().getString(R.string.CreateScheduleTabPaymentAxisTotal) + " " + ids.get(position));
 
         holder.binding.inputEditText.setText(amounts.get(position));
-    }
-
-    public class AxisHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemAxisBinding binding;
-
-        public AxisHolder(SingleItemAxisBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

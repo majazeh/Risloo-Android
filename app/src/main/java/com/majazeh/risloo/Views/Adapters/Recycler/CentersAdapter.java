@@ -15,6 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.CentersHolder;
 import com.majazeh.risloo.databinding.SingleItemCenterBinding;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -24,7 +25,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersHolder> {
+public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
 
     // Objects
     private Activity activity;
@@ -122,16 +123,6 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersAdapter.CentersH
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
-        }
-    }
-
-    public class CentersHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemCenterBinding binding;
-
-        public CentersHolder(SingleItemCenterBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

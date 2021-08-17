@@ -12,13 +12,14 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Adapters.Holder.PlatformsHolder;
 import com.majazeh.risloo.databinding.SingleItemPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.PlatformsHolder> {
+public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsHolder> {
 
     // Objects
     private Activity activity;
@@ -87,16 +88,6 @@ public class PlatformsAdapter extends RecyclerView.Adapter<PlatformsAdapter.Plat
 
         holder.binding.titleTextView.setText(StringManager.foregroundSize(title, model.getTitle().length() + 1, title.length(), activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._8ssp)));
         holder.binding.valueTextView.setText(model.getIdentifier());
-    }
-
-    public class PlatformsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemPlatformBinding binding;
-
-        public PlatformsHolder(SingleItemPlatformBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

@@ -14,13 +14,14 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.ScalesHolder;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHolder> {
+public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
 
     // Objects
     private Activity activity;
@@ -104,16 +105,6 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesAdapter.ScalesHold
             holder.binding.editionTextView.setText(model.getEdition() + " - نسخه " + model.getVersion());
         else
             holder.binding.editionTextView.setText("نسخه " + model.getVersion());
-    }
-
-    public class ScalesHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemScaleBinding binding;
-
-        public ScalesHolder(SingleItemScaleBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

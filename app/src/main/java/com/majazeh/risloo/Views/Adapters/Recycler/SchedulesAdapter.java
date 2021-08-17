@@ -15,6 +15,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Adapters.Holder.SchedulesHolder;
 import com.majazeh.risloo.databinding.SingleItemScheduleBinding;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -22,7 +23,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.SchedulesHolder> {
+public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
     // Objects
     private Activity activity;
@@ -41,7 +42,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
     @NonNull
     @Override
     public SchedulesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SchedulesAdapter.SchedulesHolder(SingleItemScheduleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new SchedulesHolder(SingleItemScheduleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -159,16 +160,6 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesAdapter.Sche
             }
 
             countTextView.setText(StringManager.bracing(showingItems.size()));
-        }
-    }
-
-    public class SchedulesHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemScheduleBinding binding;
-
-        public SchedulesHolder(SingleItemScheduleBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

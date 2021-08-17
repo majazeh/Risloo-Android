@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Adapters.Holder.CheckedHolder;
 import com.majazeh.risloo.databinding.SingleItemCheckedBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -17,7 +18,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedHolder> {
+public class CheckedAdapter extends RecyclerView.Adapter<CheckedHolder> {
 
     // Objects
     private Activity activity;
@@ -105,16 +106,6 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedAdapter.CheckedH
         } else {
             countTextView.setVisibility(View.GONE);
             countTextView.setText("");
-        }
-    }
-
-    public class CheckedHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemCheckedBinding binding;
-
-        public CheckedHolder(SingleItemCheckedBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

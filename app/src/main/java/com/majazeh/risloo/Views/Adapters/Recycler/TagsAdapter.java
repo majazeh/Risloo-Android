@@ -14,6 +14,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.TagsHolder;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
@@ -28,7 +29,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
+public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
 
     // Dialogs
     private SearchableDialog tagsDialog;
@@ -201,16 +202,6 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsAdapter.TagsHolder> {
                     });
                 }
             });
-    }
-
-    public class TagsHolder extends RecyclerView.ViewHolder {
-
-        public SingleItemTagBinding binding;
-
-        public TagsHolder(SingleItemTagBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

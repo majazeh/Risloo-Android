@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Views.Adapters.Holder.CaseTagsHolder;
 import com.majazeh.risloo.databinding.SingleItemCaseTagBinding;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class CaseTagsAdapter extends RecyclerView.Adapter<CaseTagsAdapter.CaseTagsHolder> {
+public class CaseTagsAdapter extends RecyclerView.Adapter<CaseTagsHolder> {
 
     // Objects
     private Activity activity;
@@ -82,16 +83,6 @@ public class CaseTagsAdapter extends RecyclerView.Adapter<CaseTagsAdapter.CaseTa
 
     private void setData(CaseTagsHolder holder, TagModel model) {
         holder.binding.titleTextView.setText(model.getTitle());
-    }
-
-    public class CaseTagsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemCaseTagBinding binding;
-
-        public CaseTagsHolder(SingleItemCaseTagBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

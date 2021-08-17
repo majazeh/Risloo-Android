@@ -13,13 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.ChainsHolder;
 import com.majazeh.risloo.databinding.SingleItemChainBinding;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHolder> {
+public class ChainsAdapter extends RecyclerView.Adapter<ChainsHolder> {
 
     // Objects
     private Activity activity;
@@ -100,16 +101,6 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsAdapter.ChainsHold
             holder.binding.activeImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray500);
             holder.binding.activeImageView.setImageDrawable(null);
             ImageViewCompat.setImageTintList(holder.binding.activeImageView, null);
-        }
-    }
-
-    public class ChainsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemChainBinding binding;
-
-        public ChainsHolder(SingleItemChainBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

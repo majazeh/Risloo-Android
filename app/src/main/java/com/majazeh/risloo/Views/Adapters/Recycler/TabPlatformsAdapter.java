@@ -15,6 +15,7 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.TabPlatformsHolder;
 import com.majazeh.risloo.databinding.SingleItemTabPlatformBinding;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -22,7 +23,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapter.TabPlatformsHolder> {
+public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder> {
 
     // Objects
     private Activity activity;
@@ -194,16 +195,6 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsAdapte
 
             holder.binding.identifierEditText.setFocusableInTouchMode(false);
             holder.binding.identifierEditText.setAlpha((float) 0.6);
-        }
-    }
-
-    public class TabPlatformsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemTabPlatformBinding binding;
-
-        public TabPlatformsHolder(SingleItemTabPlatformBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Adapters.Holder.SelectedHolder;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -31,7 +32,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.SelectedHolder> {
+public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
 
     // Fragments
     private Fragment current, child, payment;
@@ -242,16 +243,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedAdapter.Select
         } else {
             countTextView.setVisibility(View.GONE);
             countTextView.setText("");
-        }
-    }
-
-    public class SelectedHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemSelectedBinding binding;
-
-        public SelectedHolder(SingleItemSelectedBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

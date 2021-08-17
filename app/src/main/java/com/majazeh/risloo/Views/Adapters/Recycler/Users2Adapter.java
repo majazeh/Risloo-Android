@@ -20,6 +20,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.Users2Holder;
 import com.majazeh.risloo.Views.Fragments.Show.SessionFragment;
 import com.majazeh.risloo.databinding.SingleItemUser2Binding;
 import com.mre.ligheh.API.Response;
@@ -30,7 +31,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Holder> {
+public class Users2Adapter extends RecyclerView.Adapter<Users2Holder> {
 
     // Fragments
     private Fragment current;
@@ -200,16 +201,6 @@ public class Users2Adapter extends RecyclerView.Adapter<Users2Adapter.Users2Hold
                 });
             }
         });
-    }
-
-    public class Users2Holder extends RecyclerView.ViewHolder {
-
-        private SingleItemUser2Binding binding;
-
-        public Users2Holder(SingleItemUser2Binding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

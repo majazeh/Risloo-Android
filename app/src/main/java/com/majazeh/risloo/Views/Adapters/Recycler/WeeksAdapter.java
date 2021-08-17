@@ -13,13 +13,14 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.WeeksHolder;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragment;
 import com.majazeh.risloo.databinding.SingleItemWeekBinding;
 
 import java.util.ArrayList;
 
-public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder> {
+public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
 
     // Fragments
     private Fragment current;
@@ -39,7 +40,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
     @NonNull
     @Override
     public WeeksHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new WeeksAdapter.WeeksHolder(SingleItemWeekBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new WeeksHolder(SingleItemWeekBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
@@ -147,16 +148,6 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksAdapter.WeeksHolder>
 
             holder.binding.titleTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
             holder.binding.dateTextView.setTextColor(activity.getResources().getColor(R.color.Gray600));
-        }
-    }
-
-    public class WeeksHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemWeekBinding binding;
-
-        public WeeksHolder(SingleItemWeekBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

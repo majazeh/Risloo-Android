@@ -14,13 +14,14 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.Cases3Holder;
 import com.majazeh.risloo.databinding.SingleItemCase3Binding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Holder> {
+public class Cases3Adapter extends RecyclerView.Adapter<Cases3Holder> {
 
     // Objects
     private Activity activity;
@@ -98,16 +99,6 @@ public class Cases3Adapter extends RecyclerView.Adapter<Cases3Adapter.Cases3Hold
         }
 
         holder.binding.sessionCountTextView.setText(String.valueOf(model.getSessions_count()));
-    }
-
-    public class Cases3Holder extends RecyclerView.ViewHolder {
-
-        private SingleItemCase3Binding binding;
-
-        public Cases3Holder(SingleItemCase3Binding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

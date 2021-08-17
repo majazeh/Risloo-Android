@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.NavsHolder;
 import com.majazeh.risloo.databinding.SingleItemNavBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -20,7 +21,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
+public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
 
     // Objects
     private Activity activity;
@@ -134,16 +135,6 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsAdapter.NavsHolder> {
             selectedPosition = 0;
 
         notifyDataSetChanged();
-    }
-
-    public class NavsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemNavBinding binding;
-
-        public NavsHolder(SingleItemNavBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

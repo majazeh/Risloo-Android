@@ -13,6 +13,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Views.Adapters.Holder.ProfilesHolder;
 import com.majazeh.risloo.databinding.SingleItemProfileBinding;
 import com.mre.ligheh.Model.TypeModel.ProfileModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -20,7 +21,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.ProfilesHolder> {
+public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesHolder> {
 
     // Objects
     private Activity activity;
@@ -118,16 +119,6 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesAdapter.Profil
             return ".content.png";
         else
             return "نامغلوم";
-    }
-
-    public class ProfilesHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemProfileBinding binding;
-
-        public ProfilesHolder(SingleItemProfileBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

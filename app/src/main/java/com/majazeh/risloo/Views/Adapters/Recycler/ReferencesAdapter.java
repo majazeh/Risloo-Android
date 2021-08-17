@@ -10,13 +10,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Views.Adapters.Holder.ReferencesHolder;
 import com.majazeh.risloo.databinding.SingleItemReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.ReferencesHolder> {
+public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesHolder> {
 
     // Objects
     private Activity activity;
@@ -82,16 +83,6 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesAdapter.Re
 
     private void setData(ReferencesHolder holder, UserModel model) {
         holder.binding.nameTextView.setText(model.getName());
-    }
-
-    public class ReferencesHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemReferenceBinding binding;
-
-        public ReferencesHolder(SingleItemReferenceBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
-        }
     }
 
 }

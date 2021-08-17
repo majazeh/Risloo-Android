@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.SaItemsHolder;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSaBinding;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
@@ -27,7 +28,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsHolder> {
+public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsHolder> {
 
     // Fragments
     private Fragment current;
@@ -222,16 +223,6 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsAdapter.SaItemsH
             InitManager.normal10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-    }
-
-    public class SaItemsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemSaBinding binding;
-
-        public SaItemsHolder(SingleItemSaBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

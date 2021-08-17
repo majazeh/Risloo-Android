@@ -16,13 +16,14 @@ import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.Samples3Holder;
 import com.majazeh.risloo.databinding.SingleItemSample3Binding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Samples3Holder> {
+public class Samples3Adapter extends RecyclerView.Adapter<Samples3Holder> {
 
     // Objects
     private Activity activity;
@@ -136,16 +137,6 @@ public class Samples3Adapter extends RecyclerView.Adapter<Samples3Adapter.Sample
 
                 holder.binding.statusTextView.setBackgroundResource(android.R.color.transparent);
                 break;
-        }
-    }
-
-    public class Samples3Holder extends RecyclerView.ViewHolder {
-
-        private SingleItemSample3Binding binding;
-
-        public Samples3Holder(SingleItemSample3Binding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Adapters.Holder.PsychologistsHolder;
 import com.majazeh.risloo.databinding.SingleItemPsychologyBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -19,7 +20,7 @@ import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdapter.PsychologistsHolder> {
+public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsHolder> {
 
     // Objects
     private Activity activity;
@@ -101,16 +102,6 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsAdap
             holder.binding.avatarIncludeLayout.charTextView.setText(StringManager.firstChars(holder.binding.nameTextView.getText().toString()));
 
             Picasso.get().load(R.color.Gray50).placeholder(R.color.Gray50).into(holder.binding.avatarIncludeLayout.avatarCircleImageView);
-        }
-    }
-
-    public class PsychologistsHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemPsychologyBinding binding;
-
-        public PsychologistsHolder(SingleItemPsychologyBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

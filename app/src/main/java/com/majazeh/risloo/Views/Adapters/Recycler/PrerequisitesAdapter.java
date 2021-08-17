@@ -17,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.PrerequisitesHolder;
 import com.majazeh.risloo.databinding.SingleItemPrerequisiteBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -25,7 +26,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdapter.PrerequisitesHolder> {
+public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesHolder> {
 
     // Objects
     private Activity activity;
@@ -193,16 +194,6 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesAdap
             InitManager.normal10sspSpinner(activity, holder.binding.selectSpinner, options);
         } catch (JSONException e) {
             e.printStackTrace();
-        }
-    }
-
-    public class PrerequisitesHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemPrerequisiteBinding binding;
-
-        public PrerequisitesHolder(SingleItemPrerequisiteBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 

@@ -19,12 +19,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
+import com.majazeh.risloo.Views.Adapters.Holder.SaGensHolder;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.SingleItemSaBinding;
 
 import java.util.ArrayList;
 
-public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHolder> {
+public class SaGensAdapter extends RecyclerView.Adapter<SaGensHolder> {
 
     // Fragments
     private Fragment current;
@@ -176,16 +177,6 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensAdapter.SaGensHold
             holder.binding.selectSpinner.setEnabled(false);
 
             holder.binding.getRoot().setAlpha((float) 0.5);
-        }
-    }
-
-    public class SaGensHolder extends RecyclerView.ViewHolder {
-
-        private SingleItemSaBinding binding;
-
-        public SaGensHolder(SingleItemSaBinding binding) {
-            super(binding.getRoot());
-            this.binding = binding;
         }
     }
 
