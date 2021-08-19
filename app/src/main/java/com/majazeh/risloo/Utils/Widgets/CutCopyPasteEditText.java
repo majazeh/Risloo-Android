@@ -5,12 +5,7 @@ import android.util.AttributeSet;
 
 public class CutCopyPasteEditText extends androidx.appcompat.widget.AppCompatEditText {
 
-    // Objects
     private OnCutCopyPasteListener onCutCopyPasteListener;
-
-    public void setOnCutCopyPasteListener(OnCutCopyPasteListener onCutCopyPasteListener) {
-        this.onCutCopyPasteListener = onCutCopyPasteListener;
-    }
 
     public CutCopyPasteEditText(Context context) {
         super(context);
@@ -26,24 +21,23 @@ public class CutCopyPasteEditText extends androidx.appcompat.widget.AppCompatEdi
 
     @Override
     public boolean onTextContextMenuItem(int id) {
-        switch (id) {
-            case android.R.id.cut:
-                if (onCutCopyPasteListener != null) {
+        if (onCutCopyPasteListener != null) {
+            switch (id) {
+                case android.R.id.cut:
                     onCutCopyPasteListener.onCut();
-                }
-                break;
-            case android.R.id.copy:
-                if (onCutCopyPasteListener != null) {
+                    break;
+                case android.R.id.copy:
                     onCutCopyPasteListener.onCopy();
-                }
-                break;
-            case android.R.id.paste:
-                if (onCutCopyPasteListener != null) {
+                    break;
+                case android.R.id.paste:
                     onCutCopyPasteListener.onPaste();
-                }
-                break;
-        }
-        return super.onTextContextMenuItem(id);
+                    break;
+            }
+        } return super.onTextContextMenuItem(id);
+    }
+
+    public void setOnCutCopyPasteListener(OnCutCopyPasteListener onCutCopyPasteListener) {
+        this.onCutCopyPasteListener = onCutCopyPasteListener;
     }
 
     public interface OnCutCopyPasteListener {

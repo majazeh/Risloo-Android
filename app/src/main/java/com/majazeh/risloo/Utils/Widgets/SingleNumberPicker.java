@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
@@ -32,13 +33,13 @@ public class SingleNumberPicker extends NumberPicker {
     }
 
     @Override
-    public void addView(View view, android.view.ViewGroup.LayoutParams params) {
+    public void addView(View view, ViewGroup.LayoutParams params) {
         super.addView(view, params);
         updateView(getContext(), view);
     }
 
     @Override
-    public void addView(View view, int index, android.view.ViewGroup.LayoutParams params) {
+    public void addView(View view, int index, ViewGroup.LayoutParams params) {
         super.addView(view, index, params);
         updateView(getContext(), view);
     }
