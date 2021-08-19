@@ -269,13 +269,12 @@ public class BreadCrumb {
             case R.id.referenceFragment:
                 String centerId = ReferenceFragmentArgs.fromBundle(arguments).getCenterId();
 
-                if (centerId != null) {
+                if (centerId != null)
                     referenceType = "user";
-                    setModals(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
-                } else {
+                else
                     referenceType = "center";
-                    setModals(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
-                }
+
+                setModals(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
 
                 return reference();
         }

@@ -13,13 +13,10 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 public class Singleton {
 
     // Objects
-    private final Activity activity;
     private final SharedPreferences sharedPreferences;
     private final SharedPreferences.Editor editor;
 
     public Singleton(@NonNull Activity activity) {
-        this.activity = activity;
-
         sharedPreferences = activity.getSharedPreferences("sharedPreference", Context.MODE_PRIVATE);
 
         editor = sharedPreferences.edit();

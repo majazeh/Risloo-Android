@@ -43,9 +43,7 @@ public class ExtendOnFailureException extends onFailureException {
     }
 
     public void toastError(String message) {
-        activity.runOnUiThread(() -> {
-            ToastManager.showDefaultToast(activity, message);
-        });
+        activity.runOnUiThread(() -> ToastManager.showDefaultToast(activity, message));
     }
 
     public void dismissDialog() {

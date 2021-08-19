@@ -89,6 +89,7 @@ dependencies {
     implementation files('../libs/bouncy-release.aar')
 
     implementation 'androidx.appcompat:appcompat:1.3.1' // AppCompat
+    implementation 'androidx.exifinterface:exifinterface:1.3.3' // ExitInterface
     implementation 'androidx.cardview:cardview:1.0.0' // CardView
     implementation 'androidx.multidex:multidex:2.0.1' // MultiDex
     implementation 'androidx.viewpager2:viewpager2:1.0.0' // ViewPager2
