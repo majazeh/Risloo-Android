@@ -71,6 +71,7 @@
         android:layout_marginEnd="@dimen/_8sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
+        android:paddingEnd="0dp"
         android:paddingStart="@dimen/_6sdp"
         android:gravity="center|right"
         android:text="@string/Sessions2AdapterStatus"

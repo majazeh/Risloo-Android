@@ -47,6 +47,7 @@
         android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/header_textView" />
+        app:layout_constraintTop_toBottomOf="@id/header_textView"
+        tools:ignore="LabelFor" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
