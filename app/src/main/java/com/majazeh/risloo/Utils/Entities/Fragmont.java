@@ -508,7 +508,7 @@ public class Fragmont {
     ---------- EditSession ----------
     */
 
-    public Fragment getEditSessionTabTime(boolean hasCase) {
+    public Fragment getEditSessionTabTime() {
         Fragment fragment = navHostFragment.getChildFragmentManager().getFragments().get(0);
 
         if (fragment instanceof EditSessionFragment) {

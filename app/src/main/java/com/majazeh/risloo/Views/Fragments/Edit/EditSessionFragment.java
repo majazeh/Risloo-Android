@@ -102,7 +102,7 @@ public class EditSessionFragment extends Fragment {
     }
 
     public void checkRequire() {
-        time = ((MainActivity) requireActivity()).fragmont.getEditSessionTabTime(hasCase);
+        time = ((MainActivity) requireActivity()).fragmont.getEditSessionTabTime();
         reference = ((MainActivity) requireActivity()).fragmont.getEditSessionTabReference(hasCase);
         session = ((MainActivity) requireActivity()).fragmont.getEditSessionTabSession(hasCase);
         platform = ((MainActivity) requireActivity()).fragmont.getEditSessionTabPlatform(hasCase);

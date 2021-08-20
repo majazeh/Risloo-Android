@@ -1,5 +1,6 @@
 package com.majazeh.risloo.Utils.Entities;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
 import android.text.SpannableStringBuilder;
@@ -71,11 +72,14 @@ public class BreadCrumb {
         this.activity = activity;
     }
 
+    /*
+    ---------- Methods ----------
+    */
+
     public SpannableStringBuilder getFa(NavDestination destination, Bundle arguments) {
         SpannableStringBuilder builder = new SpannableStringBuilder();
 
         ArrayList<String> list = construct(destination, arguments);
-
         for (int i = 0; i < list.size(); i++) {
             String label = list.get(i);
 
@@ -87,7 +91,7 @@ public class BreadCrumb {
                 builder.setSpan(new ClickableSpan() {
                     @Override
                     public void onClick(@NonNull View widget) {
-                        navigate(destinationIds.get(position));
+                        navigateTo(destinationIds.get(position));
                     }
 
                     @Override
@@ -107,13 +111,14 @@ public class BreadCrumb {
     ---------- Construct ----------
     */
 
+    @SuppressLint("NonConstantResourceId")
     private ArrayList<String> construct(NavDestination destination, Bundle arguments) {
         switch (destination.getId()) {
 
             // -------------------- Toolbar
 
             case R.id.meFragment:
-                setModals("user", MeFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("user", MeFragmentArgs.fromBundle(arguments).getTypeModel());
                 return me();
             case R.id.treasuriesFragment:
                 return treasuries();
@@ -155,10 +160,10 @@ public class BreadCrumb {
                 return createCenterUser();
             case R.id.createDocumentFragment:
                 return createDocument();
-            case R.id.createPracticeFragment:
-                return createPractice();
             case R.id.createReportFragment:
                 return createReport();
+            case R.id.createPracticeFragment:
+                return createPractice();
             case R.id.createRoomFragment:
                 return createRoom();
             case R.id.createRoomUserFragment:
@@ -181,91 +186,71 @@ public class BreadCrumb {
             // -------------------- Edit
 
             case R.id.editCenterFragment:
-                setModals("center", EditCenterFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("center", EditCenterFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editCenter();
             case R.id.editCenterUserFragment:
-                setModals("user", EditCenterUserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("user", EditCenterUserFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editCenterUser();
             case R.id.editPlatformFragment:
                 return editPlatform();
             case R.id.editSessionFragment:
-                setModals("session", EditSessionFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("session", EditSessionFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editSession();
             case R.id.editTreasuryFragment:
                 return editTreasury();
             case R.id.editUserFragment:
-                setModals("user", EditUserFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("user", EditUserFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editUser();
 
             // -------------------- Index
 
-            case R.id.centerUsersFragment:
-                setModals("center", CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
-                return centerUsers();
             case R.id.centerPlatformsFragment:
-                setModals("center", CenterPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("center", CenterPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerPlatforms();
             case R.id.centerSchedulesFragment:
-                setModals("center", CenterSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("center", CenterSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerSchedules();
             case R.id.centerTagsFragment:
-                setModals("center", CenterTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("center", CenterTagsFragmentArgs.fromBundle(arguments).getTypeModel());
                 return centerTags();
-            case R.id.roomUsersFragment:
-                setModals("room", RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
-                return roomUsers();
-            case R.id.roomPlatformsFragment:
-                setModals("room", RoomPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
-                return roomPlatforms();
-            case R.id.roomSchedulesFragment:
-                setModals("room", RoomSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
-                return roomSchedules();
-            case R.id.roomTagsFragment:
-                setModals("room", RoomTagsFragmentArgs.fromBundle(arguments).getTypeModel());
-                return roomTags();
+            case R.id.centerUsersFragment:
+                setModels("center", CenterUsersFragmentArgs.fromBundle(arguments).getTypeModel());
+                return centerUsers();
             case R.id.clientReportsFragment:
                 clientReportsType = ClientReportsFragmentArgs.fromBundle(arguments).getType();
 
                 if (clientReportsType.equals("case"))
-                    setModals("case", ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel());
+                    setModels("case", ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel());
                 else
-                    setModals("session", ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel());
+                    setModels("session", ClientReportsFragmentArgs.fromBundle(arguments).getTypeModel());
 
                 return clientReports();
+            case R.id.roomPlatformsFragment:
+                setModels("room", RoomPlatformsFragmentArgs.fromBundle(arguments).getTypeModel());
+                return roomPlatforms();
+            case R.id.roomSchedulesFragment:
+                setModels("room", RoomSchedulesFragmentArgs.fromBundle(arguments).getTypeModel());
+                return roomSchedules();
+            case R.id.roomTagsFragment:
+                setModels("room", RoomTagsFragmentArgs.fromBundle(arguments).getTypeModel());
+                return roomTags();
+            case R.id.roomUsersFragment:
+                setModels("room", RoomUsersFragmentArgs.fromBundle(arguments).getTypeModel());
+                return roomUsers();
 
             // -------------------- Show
 
-            case R.id.treasuryFragment:
-                return treasury();
             case R.id.billFragment:
                 return bill();
-            case R.id.centerFragment:
-                setModals("center", CenterFragmentArgs.fromBundle(arguments).getTypeModel());
-                return center();
-            case R.id.roomFragment:
-                centerType = RoomFragmentArgs.fromBundle(arguments).getType();
-
-                if (!centerType.equals("room"))
-                    setModals("center", RoomFragmentArgs.fromBundle(arguments).getTypeModel());
-                else
-                    setModals("room", RoomFragmentArgs.fromBundle(arguments).getTypeModel());
-
-                return room();
-            case R.id.caseFragment:
-                setModals("case", CaseFragmentArgs.fromBundle(arguments).getTypeModel());
-                return casse();
-            case R.id.sessionFragment:
-                setModals("session", SessionFragmentArgs.fromBundle(arguments).getTypeModel());
-                return session();
-            case R.id.userFragment:
-                setModals("user", UserFragmentArgs.fromBundle(arguments).getTypeModel());
-                return user();
-            case R.id.sampleFragment:
-                setModals("sample", SampleFragmentArgs.fromBundle(arguments).getTypeModel());
-                return sample();
             case R.id.bulkSampleFragment:
-                setModals("bulk", BulkSampleFragmentArgs.fromBundle(arguments).getTypeModel());
+                setModels("bulk", BulkSampleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return bulkSample();
+            case R.id.caseFragment:
+                setModels("case", CaseFragmentArgs.fromBundle(arguments).getTypeModel());
+                return casse();
+            case R.id.centerFragment:
+                setModels("center", CenterFragmentArgs.fromBundle(arguments).getTypeModel());
+                return center();
             case R.id.referenceFragment:
                 String centerId = ReferenceFragmentArgs.fromBundle(arguments).getCenterId();
 
@@ -274,14 +259,35 @@ public class BreadCrumb {
                 else
                     referenceType = "center";
 
-                setModals(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
-
+                setModels(referenceType, ReferenceFragmentArgs.fromBundle(arguments).getTypeModel());
                 return reference();
+            case R.id.roomFragment:
+                centerType = RoomFragmentArgs.fromBundle(arguments).getType();
+
+                if (!centerType.equals("room"))
+                    setModels("center", RoomFragmentArgs.fromBundle(arguments).getTypeModel());
+                else
+                    setModels("room", RoomFragmentArgs.fromBundle(arguments).getTypeModel());
+
+                return room();
+            case R.id.sampleFragment:
+                setModels("sample", SampleFragmentArgs.fromBundle(arguments).getTypeModel());
+                return sample();
+            case R.id.sessionFragment:
+                setModels("session", SessionFragmentArgs.fromBundle(arguments).getTypeModel());
+                return session();
+            case R.id.treasuryFragment:
+                return treasury();
+            case R.id.userFragment:
+                setModels("user", UserFragmentArgs.fromBundle(arguments).getTypeModel());
+                return user();
         }
+
         return new ArrayList<>();
     }
 
-    private void navigate(int position) {
+    @SuppressLint("NonConstantResourceId")
+    private void navigateTo(int position) {
         switch (position) {
 
             // -------------------- Toolbar
@@ -344,10 +350,6 @@ public class BreadCrumb {
 
             // -------------------- Index
 
-            case R.id.centerUsersFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
             case R.id.centerPlatformsFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterPlatformsFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
@@ -360,8 +362,18 @@ public class BreadCrumb {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterTagsFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.roomUsersFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
+            case R.id.centerUsersFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalCenterUsersFragment(centerModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.clientReportsFragment: {
+                NavDirections action;
+
+                if (clientReportsType.equals("case"))
+                    action = NavigationMainDirections.actionGlobalClientReportsFragment("case", caseModel);
+                else
+                    action = NavigationMainDirections.actionGlobalClientReportsFragment("session", sessionModel);
+
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.roomPlatformsFragment: {
@@ -376,39 +388,41 @@ public class BreadCrumb {
                 NavDirections action = NavigationMainDirections.actionGlobalRoomTagsFragment(roomModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.clientReportsFragment: {
-                if (clientReportsType.equals("case")) {
-                    NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("case", caseModel);
-                    ((MainActivity) activity).navController.navigate(action);
-                } else {
-                    NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("session", sessionModel);
-                    ((MainActivity) activity).navController.navigate(action);
-                }
+            case R.id.roomUsersFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalRoomUsersFragment(roomModel);
+                ((MainActivity) activity).navController.navigate(action);
             } break;
 
             // -------------------- Show
 
-            case R.id.treasuryFragment: {
-                // TODO : Place Code If Needed
+            case R.id.bulkSampleFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(bulkSampleModel);
+                ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.billFragment: {
-                // TODO : Place Code If Needed
+            case R.id.caseFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(caseModel);
+                ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.centerFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalCenterFragment(centerModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.roomFragment: {
-                if (!centerType.equals("room")) {
-                    NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("personal_clinic", centerModel);
-                    ((MainActivity) activity).navController.navigate(action);
-                } else {
-                    NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("room", roomModel);
-                    ((MainActivity) activity).navController.navigate(action);
-                }
+            case R.id.referenceFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerType, centerModel.getCenterId(), userModel);
+                ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.caseFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(caseModel);
+            case R.id.roomFragment: {
+                NavDirections action;
+
+                if (!centerType.equals("room"))
+                    action = NavigationMainDirections.actionGlobalRoomFragment("personal_clinic", centerModel);
+                else
+                    action = NavigationMainDirections.actionGlobalRoomFragment("room", roomModel);
+
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.sampleFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(sampleModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.sessionFragment: {
@@ -419,23 +433,10 @@ public class BreadCrumb {
                 NavDirections action = NavigationMainDirections.actionGlobalUserFragment(userModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
-            case R.id.sampleFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(sampleModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.bulkSampleFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(bulkSampleModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-            case R.id.referenceFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(centerType, centerModel.getCenterId(), userModel);
-                ((MainActivity) activity).navController.navigate(action);
-            } break;
-
         }
     }
 
-    private void setModals(String type, TypeModel model) {
+    private void setModels(String type, TypeModel model) {
         switch (type) {
             case "user":
                 userModel = (UserModel) model;
@@ -528,12 +529,24 @@ public class BreadCrumb {
         destinationIds = meIds();
         return list;
     }
+    private ArrayList<Integer> meIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.meFragment);
+
+        return list;
+    }
 
     private ArrayList<String> treasuries() {
         ArrayList<String> list = dashboard();
         list.add(activity.getResources().getString(R.string.TreasuriesFragmentTitle));
 
         destinationIds = treasuriesIds();
+        return list;
+    }
+    private ArrayList<Integer> treasuriesIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.treasuriesFragment);
+
         return list;
     }
 
@@ -544,12 +557,24 @@ public class BreadCrumb {
         destinationIds = billingsIds();
         return list;
     }
+    private ArrayList<Integer> billingsIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.billingsFragment);
+
+        return list;
+    }
 
     private ArrayList<String> payments() {
         ArrayList<String> list = dashboard();
         list.add(activity.getResources().getString(R.string.PaymentsFragmentTitle));
 
         destinationIds = paymentsIds();
+        return list;
+    }
+    private ArrayList<Integer> paymentsIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.paymentsFragment);
+
         return list;
     }
 
@@ -564,12 +589,24 @@ public class BreadCrumb {
         destinationIds = dashboardIds();
         return list;
     }
+    private ArrayList<Integer> dashboardIds() {
+        ArrayList<Integer> list = new ArrayList<>();
+        list.add(R.id.dashboardFragment);
+
+        return list;
+    }
 
     private ArrayList<String> centers() {
         ArrayList<String> list = dashboard();
         list.add(activity.getResources().getString(R.string.CentersFragmentTitle));
 
         destinationIds = centersIds();
+        return list;
+    }
+    private ArrayList<Integer> centersIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.centersFragment);
+
         return list;
     }
 
@@ -580,12 +617,24 @@ public class BreadCrumb {
         destinationIds = casesIds();
         return list;
     }
+    private ArrayList<Integer> casesIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.casesFragment);
+
+        return list;
+    }
 
     private ArrayList<String> sessions() {
         ArrayList<String> list = dashboard();
         list.add(activity.getResources().getString(R.string.SessionsFragmentTitle));
 
         destinationIds = sessionsIds();
+        return list;
+    }
+    private ArrayList<Integer> sessionsIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.sessionsFragment);
+
         return list;
     }
 
@@ -596,12 +645,24 @@ public class BreadCrumb {
         destinationIds = usersIds();
         return list;
     }
+    private ArrayList<Integer> usersIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.usersFragment);
+
+        return list;
+    }
 
     private ArrayList<String> scales() {
         ArrayList<String> list = dashboard();
         list.add(activity.getResources().getString(R.string.ScalesFragmentTitle));
 
         destinationIds = scalesIds();
+        return list;
+    }
+    private ArrayList<Integer> scalesIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.scalesFragment);
+
         return list;
     }
 
@@ -612,6 +673,12 @@ public class BreadCrumb {
         destinationIds = samplesIds();
         return list;
     }
+    private ArrayList<Integer> samplesIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.samplesFragment);
+
+        return list;
+    }
 
     private ArrayList<String> bulkSamples() {
         ArrayList<String> list = dashboard();
@@ -620,12 +687,24 @@ public class BreadCrumb {
         destinationIds = bulkSamplesIds();
         return list;
     }
+    private ArrayList<Integer> bulkSamplesIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.bulkSamplesFragment);
+
+        return list;
+    }
 
     private ArrayList<String> documents() {
         ArrayList<String> list = dashboard();
         list.add(activity.getResources().getString(R.string.DocumentsFragmentTitle));
 
         destinationIds = documentsIds();
+        return list;
+    }
+    private ArrayList<Integer> documentsIds() {
+        ArrayList<Integer> list = dashboardIds();
+        list.add(R.id.documentsFragment);
+
         return list;
     }
 
@@ -640,12 +719,24 @@ public class BreadCrumb {
         destinationIds = createCaseIds();
         return list;
     }
+    private ArrayList<Integer> createCaseIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.createCaseFragment);
+
+        return list;
+    }
 
     private ArrayList<String> createCaseUser() {
         ArrayList<String> list = casse();
         list.add(activity.getResources().getString(R.string.CreateCaseUserFragmentTitle));
 
         destinationIds = createCaseUserIds();
+        return list;
+    }
+    private ArrayList<Integer> createCaseUserIds() {
+        ArrayList<Integer> list = casseIds();
+        list.add(R.id.createCaseUserFragment);
+
         return list;
     }
 
@@ -656,12 +747,24 @@ public class BreadCrumb {
         destinationIds = createCenterIds();
         return list;
     }
+    private ArrayList<Integer> createCenterIds() {
+        ArrayList<Integer> list = centersIds();
+        list.add(R.id.createCenterFragment);
+
+        return list;
+    }
 
     private ArrayList<String> createCenterUser() {
         ArrayList<String> list = centerUsers();
         list.add(activity.getResources().getString(R.string.CreateCenterUserFragmentTitle));
 
         destinationIds = createCenterUserIds();
+        return list;
+    }
+    private ArrayList<Integer> createCenterUserIds() {
+        ArrayList<Integer> list = centerUsersIds();
+        list.add(R.id.createCenterUserFragment);
+
         return list;
     }
 
@@ -672,36 +775,10 @@ public class BreadCrumb {
         destinationIds = createDocumentIds();
         return list;
     }
+    private ArrayList<Integer> createDocumentIds() {
+        ArrayList<Integer> list = documentsIds();
+        list.add(R.id.createDocumentFragment);
 
-    private ArrayList<String> createPractice() {
-        ArrayList<String> list = session();
-        list.add(activity.getResources().getString(R.string.CreatePracticeFragmentTitle));
-
-        destinationIds = createPracticeIds();
-        return list;
-    }
-
-    private ArrayList<String> createReport() {
-        ArrayList<String> list = clientReports();
-        list.add(activity.getResources().getString(R.string.CreateReportFragmentTitle));
-
-        destinationIds = createReportIds();
-        return list;
-    }
-
-    private ArrayList<String> createRoom() {
-        ArrayList<String> list = center();
-        list.add(activity.getResources().getString(R.string.CreateRoomFragmentTitle));
-
-        destinationIds = createRoomIds();
-        return list;
-    }
-
-    private ArrayList<String> createRoomUser() {
-        ArrayList<String> list = roomUsers();
-        list.add(activity.getResources().getString(R.string.CreateRoomUserFragmentTitle));
-
-        destinationIds = createRoomUserIds();
         return list;
     }
 
@@ -712,12 +789,80 @@ public class BreadCrumb {
         destinationIds = createPlatformIds();
         return list;
     }
+    private ArrayList<Integer> createPlatformIds() {
+        ArrayList<Integer> list = centerPlatformsIds();
+        list.add(R.id.createPlatformFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> createPractice() {
+        ArrayList<String> list = session();
+        list.add(activity.getResources().getString(R.string.CreatePracticeFragmentTitle));
+
+        destinationIds = createPracticeIds();
+        return list;
+    }
+    private ArrayList<Integer> createPracticeIds() {
+        ArrayList<Integer> list = sessionIds();
+        list.add(R.id.createPracticeFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> createReport() {
+        ArrayList<String> list = clientReports();
+        list.add(activity.getResources().getString(R.string.CreateReportFragmentTitle));
+
+        destinationIds = createReportIds();
+        return list;
+    }
+    private ArrayList<Integer> createReportIds() {
+        ArrayList<Integer> list = clientReportsIds();
+        list.add(R.id.createReportFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> createRoom() {
+        ArrayList<String> list = center();
+        list.add(activity.getResources().getString(R.string.CreateRoomFragmentTitle));
+
+        destinationIds = createRoomIds();
+        return list;
+    }
+    private ArrayList<Integer> createRoomIds() {
+        ArrayList<Integer> list = centerIds();
+        list.add(R.id.createRoomFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> createRoomUser() {
+        ArrayList<String> list = roomUsers();
+        list.add(activity.getResources().getString(R.string.CreateRoomUserFragmentTitle));
+
+        destinationIds = createRoomUserIds();
+        return list;
+    }
+    private ArrayList<Integer> createRoomUserIds() {
+        ArrayList<Integer> list = roomUsersIds();
+        list.add(R.id.createRoomUserFragment);
+
+        return list;
+    }
 
     private ArrayList<String> createSample() {
         ArrayList<String> list = samples();
         list.add(activity.getResources().getString(R.string.CreateSampleFragmentTitle));
 
         destinationIds = createSampleIds();
+        return list;
+    }
+    private ArrayList<Integer> createSampleIds() {
+        ArrayList<Integer> list = samplesIds();
+        list.add(R.id.createSampleFragment);
+
         return list;
     }
 
@@ -728,12 +873,24 @@ public class BreadCrumb {
         destinationIds = createScheduleIds();
         return list;
     }
+    private ArrayList<Integer> createScheduleIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.createScheduleFragment);
+
+        return list;
+    }
 
     private ArrayList<String> createSession() {
         ArrayList<String> list = casse();
         list.add(activity.getResources().getString(R.string.CreateSessionFragmentTitle));
 
         destinationIds = createSessionIds();
+        return list;
+    }
+    private ArrayList<Integer> createSessionIds() {
+        ArrayList<Integer> list = casseIds();
+        list.add(R.id.createSessionFragment);
+
         return list;
     }
 
@@ -744,6 +901,12 @@ public class BreadCrumb {
         destinationIds = createSessionUserIds();
         return list;
     }
+    private ArrayList<Integer> createSessionUserIds() {
+        ArrayList<Integer> list = sessionIds();
+        list.add(R.id.createSessionUserFragment);
+
+        return list;
+    }
 
     private ArrayList<String> createTreasury() {
         ArrayList<String> list = treasuries();
@@ -752,12 +915,24 @@ public class BreadCrumb {
         destinationIds = createTreasuryIds();
         return list;
     }
+    private ArrayList<Integer> createTreasuryIds() {
+        ArrayList<Integer> list = treasuriesIds();
+        list.add(R.id.createTreasuryFragment);
+
+        return list;
+    }
 
     private ArrayList<String> createUser() {
         ArrayList<String> list = users();
         list.add(activity.getResources().getString(R.string.CreateUserFragmentTitle));
 
         destinationIds = createUserIds();
+        return list;
+    }
+    private ArrayList<Integer> createUserIds() {
+        ArrayList<Integer> list = usersIds();
+        list.add(R.id.createUserFragment);
+
         return list;
     }
 
@@ -778,6 +953,18 @@ public class BreadCrumb {
         destinationIds = editCenterIds();
         return list;
     }
+    private ArrayList<Integer> editCenterIds() {
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.editCenterFragment);
+
+        return list;
+    }
 
     private ArrayList<String> editCenterUser() {
         ArrayList<String> list = reference();
@@ -786,12 +973,24 @@ public class BreadCrumb {
         destinationIds = editCenterUserIds();
         return list;
     }
+    private ArrayList<Integer> editCenterUserIds() {
+        ArrayList<Integer> list = referenceIds();
+        list.add(R.id.editCenterUserFragment);
+
+        return list;
+    }
 
     private ArrayList<String> editPlatform() {
         ArrayList<String> list = centerPlatforms();
-        list.add(activity.getResources().getString(R.string.EditPlatformFragmentTitle));
+        list.add("ویرایش");
 
         destinationIds = editPlatformIds();
+        return list;
+    }
+    private ArrayList<Integer> editPlatformIds() {
+        ArrayList<Integer> list = centerPlatformsIds();
+        list.add(R.id.editPlatformFragment);
+
         return list;
     }
 
@@ -802,12 +1001,24 @@ public class BreadCrumb {
         destinationIds = editSessionIds();
         return list;
     }
+    private ArrayList<Integer> editSessionIds() {
+        ArrayList<Integer> list = sessionIds();
+        list.add(R.id.editSessionFragment);
+
+        return list;
+    }
 
     private ArrayList<String> editTreasury() {
         ArrayList<String> list = treasury();
         list.add("ویرایش");
 
         destinationIds = editTreasuryIds();
+        return list;
+    }
+    private ArrayList<Integer> editTreasuryIds() {
+        ArrayList<Integer> list = treasuryIds();
+        list.add(R.id.editTreasuryFragment);
+
         return list;
     }
 
@@ -818,24 +1029,16 @@ public class BreadCrumb {
         destinationIds = editUserIds();
         return list;
     }
+    private ArrayList<Integer> editUserIds() {
+        ArrayList<Integer> list = userIds();
+        list.add(R.id.editUserFragment);
+
+        return list;
+    }
 
     /*
     ---------- Index ----------
     */
-
-    private ArrayList<String> centerUsers() {
-        ArrayList<String> list;
-
-        if (!centerType.equals("room"))
-            list = center();
-        else
-            list = room();
-
-        list.add("اعضاء");
-
-        destinationIds = centerUsersIds();
-        return list;
-    }
 
     private ArrayList<String> centerPlatforms() {
         ArrayList<String> list;
@@ -845,9 +1048,21 @@ public class BreadCrumb {
         else
             list = room();
 
-        list.add("محل برگزاری");
+        list.add("محل\u200Cهای برگزاری");
 
         destinationIds = centerPlatformsIds();
+        return list;
+    }
+    private ArrayList<Integer> centerPlatformsIds() {
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.centerPlatformsFragment);
+
         return list;
     }
 
@@ -859,9 +1074,21 @@ public class BreadCrumb {
         else
             list = room();
 
-        list.add("برنامه\u200Cها");
+        list.add("برنامه\u200Cهای درمانی");
 
         destinationIds = centerSchedulesIds();
+        return list;
+    }
+    private ArrayList<Integer> centerSchedulesIds() {
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.centerSchedulesFragment);
+
         return list;
     }
 
@@ -878,36 +1105,42 @@ public class BreadCrumb {
         destinationIds = centerTagsIds();
         return list;
     }
+    private ArrayList<Integer> centerTagsIds() {
+        ArrayList<Integer> list;
 
-    private ArrayList<String> roomUsers() {
-        ArrayList<String> list = room();
+        if (!centerType.equals("room"))
+            list = centerIds();
+        else
+            list = roomIds();
+
+        list.add(R.id.centerTagsFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> centerUsers() {
+        ArrayList<String> list;
+
+        if (!centerType.equals("room"))
+            list = center();
+        else
+            list = room();
+
         list.add("اعضاء");
 
-        destinationIds = roomUsersIds();
+        destinationIds = centerUsersIds();
         return list;
     }
+    private ArrayList<Integer> centerUsersIds() {
+        ArrayList<Integer> list;
 
-    private ArrayList<String> roomPlatforms() {
-        ArrayList<String> list = room();
-        list.add("محل برگزاری");
+        if (!centerType.equals("room"))
+            list = centerIds();
+        else
+            list = roomIds();
 
-        destinationIds = roomPlatformsIds();
-        return list;
-    }
+        list.add(R.id.centerUsersFragment);
 
-    private ArrayList<String> roomSchedules() {
-        ArrayList<String> list = room();
-        list.add("برنامه\u200Cها");
-
-        destinationIds = roomSchedulesIds();
-        return list;
-    }
-
-    private ArrayList<String> roomTags() {
-        ArrayList<String> list = room();
-        list.add("برچسب\u200Cهای مهم");
-
-        destinationIds = roomTagsIds();
         return list;
     }
 
@@ -924,488 +1157,6 @@ public class BreadCrumb {
         destinationIds = clientReportsIds();
         return list;
     }
-
-    /*
-    ---------- Show ----------
-    */
-
-    private ArrayList<String> treasury() {
-        ArrayList<String> list = treasuries();
-        list.add(" - ");
-
-        destinationIds = treasuryIds();
-        return list;
-    }
-
-    private ArrayList<String> bill() {
-        ArrayList<String> list = billings();
-        list.add(" - ");
-
-        destinationIds = billIds();
-        return list;
-    }
-
-    private ArrayList<String> center() {
-        ArrayList<String> list = centers();
-
-        try {
-            if (centerModel != null && centerModel.getDetail() != null)
-                list.add(centerModel.getDetail().getString("title"));
-            else
-                list.add("نامعلوم");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-
-        destinationIds = centerIds();
-        return list;
-    }
-
-    private ArrayList<String> room() {
-        ArrayList<String> list = centers();
-
-        if (!centerType.equals("room")) {
-            try {
-                if (centerModel != null && centerModel.getDetail() != null)
-                    list.add("کلینیک شخصی" + " " + centerModel.getDetail().getString("title"));
-                else
-                    list.add("نامعلوم");
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        } else {
-            if (roomModel != null && roomModel.getRoomManager() != null)
-                list.add("اتاق درمان" + " " + roomModel.getRoomManager().getName());
-            else
-                list.add("نامعلوم");
-        }
-
-        destinationIds = roomIds();
-        return list;
-    }
-
-    private ArrayList<String> casse() {
-        ArrayList<String> list = room();
-        list.add(activity.getResources().getString(R.string.CaseFragmentTitle) + " " + caseModel.getCaseId());
-
-        destinationIds = casseIds();
-        return list;
-    }
-
-    private ArrayList<String> session() {
-        ArrayList<String> list;
-
-        if (sessionModel.getCaseModel() != null)
-            list = casse();
-        else
-            list = room();
-
-        list.add(activity.getResources().getString(R.string.SessionFragmentTitle) + " " + sessionModel.getId());
-
-        destinationIds = sessionIds();
-        return list;
-    }
-
-    private ArrayList<String> user() {
-        ArrayList<String> list = users();
-        list.add(userModel.getName());
-
-        destinationIds = userIds();
-        return list;
-    }
-
-    private ArrayList<String> sample() {
-        ArrayList<String> list = reference();
-        list.add(activity.getResources().getString(R.string.SampleFragmentTitle) + " " + sampleModel.getSampleId());
-
-        destinationIds = sampleIds();
-        return list;
-    }
-
-    private ArrayList<String> bulkSample() {
-        ArrayList<String> list = bulkSamples();
-
-        if (bulkSampleModel.getTitle() != null && !bulkSampleModel.getTitle().equals(""))
-            list.add(bulkSampleModel.getTitle());
-        else
-            list.add("نامعلوم");
-
-        destinationIds = bulkSampleIds();
-        return list;
-    }
-
-    private ArrayList<String> reference() {
-        ArrayList<String> list;
-
-        if (!centerType.equals("room"))
-            list = centerUsers();
-        else
-            list = roomUsers();
-
-        if (referenceType.equals("user")) {
-            if (userModel.getId().equals(((MainActivity) activity).singleton.getId()))
-                list.add(activity.getResources().getString(R.string.MeFragmentTitle));
-            else
-                list.add(userModel.getName());
-        } else {
-            list.add(activity.getResources().getString(R.string.MeFragmentTitle));
-        }
-
-        destinationIds = referenceIds();
-        return list;
-    }
-
-   /*
-    ---------- Toolbar Ids ----------
-    */
-
-    private ArrayList<Integer> meIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.meFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> treasuriesIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.treasuriesFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> billingsIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.billingsFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> paymentsIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.paymentsFragment);
-
-        return list;
-    }
-
-    /*
-    ---------- Drawer Ids ----------
-    */
-
-    private ArrayList<Integer> dashboardIds() {
-        ArrayList<Integer> list = new ArrayList<>();
-        list.add(R.id.dashboardFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> centersIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.centersFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> casesIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.casesFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> sessionsIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.sessionsFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> usersIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.usersFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> scalesIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.scalesFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> samplesIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.samplesFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> bulkSamplesIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.bulkSamplesFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> documentsIds() {
-        ArrayList<Integer> list = dashboardIds();
-        list.add(R.id.documentsFragment);
-
-        return list;
-    }
-
-    /*
-    ---------- Create Ids ----------
-    */
-
-    private ArrayList<Integer> createCaseIds() {
-        ArrayList<Integer> list = roomIds();
-        list.add(R.id.createCaseFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createCaseUserIds() {
-        ArrayList<Integer> list = casseIds();
-        list.add(R.id.createCaseUserFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createCenterIds() {
-        ArrayList<Integer> list = centersIds();
-        list.add(R.id.createCenterFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createCenterUserIds() {
-        ArrayList<Integer> list = centerUsersIds();
-        list.add(R.id.createCenterUserFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createDocumentIds() {
-        ArrayList<Integer> list = documentsIds();
-        list.add(R.id.createDocumentFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createPracticeIds() {
-        ArrayList<Integer> list = sessionIds();
-        list.add(R.id.createPracticeFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createReportIds() {
-        ArrayList<Integer> list = clientReportsIds();
-        list.add(R.id.createReportFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createRoomIds() {
-        ArrayList<Integer> list = centerIds();
-        list.add(R.id.createRoomFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createRoomUserIds() {
-        ArrayList<Integer> list = roomUsersIds();
-        list.add(R.id.createRoomUserFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createPlatformIds() {
-        ArrayList<Integer> list = centerPlatformsIds();
-        list.add(R.id.createPlatformFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createSampleIds() {
-        ArrayList<Integer> list = samplesIds();
-        list.add(R.id.createSampleFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createScheduleIds() {
-        ArrayList<Integer> list = roomIds();
-        list.add(R.id.createScheduleFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createSessionIds() {
-        ArrayList<Integer> list = casseIds();
-        list.add(R.id.createSessionFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createSessionUserIds() {
-        ArrayList<Integer> list = sessionIds();
-        list.add(R.id.createSessionUserFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createTreasuryIds() {
-        ArrayList<Integer> list = treasuriesIds();
-        list.add(R.id.createTreasuryFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> createUserIds() {
-        ArrayList<Integer> list = usersIds();
-        list.add(R.id.createUserFragment);
-
-        return list;
-    }
-
-    /*
-    ---------- Edit Ids ----------
-    */
-
-    private ArrayList<Integer> editCenterIds() {
-        ArrayList<Integer> list;
-
-        if (!centerType.equals("room"))
-            list = centerIds();
-        else
-            list = roomIds();
-
-        list.add(R.id.editCenterFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> editCenterUserIds() {
-        ArrayList<Integer> list = referenceIds();
-        list.add(R.id.editCenterUserFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> editPlatformIds() {
-        ArrayList<Integer> list = centerPlatformsIds();
-        list.add(R.id.editPlatformFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> editSessionIds() {
-        ArrayList<Integer> list = sessionIds();
-        list.add(R.id.editSessionFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> editTreasuryIds() {
-        ArrayList<Integer> list = treasuryIds();
-        list.add(R.id.editTreasuryFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> editUserIds() {
-        ArrayList<Integer> list = userIds();
-        list.add(R.id.editUserFragment);
-
-        return list;
-    }
-
-   /*
-    ---------- Index Ids ----------
-    */
-
-    private ArrayList<Integer> centerUsersIds() {
-        ArrayList<Integer> list;
-
-        if (!centerType.equals("room"))
-            list = centerIds();
-        else
-            list = roomIds();
-
-        list.add(R.id.centerUsersFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> centerPlatformsIds() {
-        ArrayList<Integer> list;
-
-        if (!centerType.equals("room"))
-            list = centerIds();
-        else
-            list = roomIds();
-
-        list.add(R.id.centerPlatformsFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> centerSchedulesIds() {
-        ArrayList<Integer> list;
-
-        if (!centerType.equals("room"))
-            list = centerIds();
-        else
-            list = roomIds();
-
-        list.add(R.id.centerSchedulesFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> centerTagsIds() {
-        ArrayList<Integer> list;
-
-        if (!centerType.equals("room"))
-            list = centerIds();
-        else
-            list = roomIds();
-
-        list.add(R.id.centerTagsFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> roomUsersIds() {
-        ArrayList<Integer> list = roomIds();
-        list.add(R.id.roomUsersFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> roomPlatformsIds() {
-        ArrayList<Integer> list = roomIds();
-        list.add(R.id.roomPlatformsFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> roomSchedulesIds() {
-        ArrayList<Integer> list = roomIds();
-        list.add(R.id.roomSchedulesFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> roomTagsIds() {
-        ArrayList<Integer> list = roomIds();
-        list.add(R.id.roomTagsFragment);
-
-        return list;
-    }
-
     private ArrayList<Integer> clientReportsIds() {
         ArrayList<Integer> list;
 
@@ -1419,17 +1170,73 @@ public class BreadCrumb {
         return list;
     }
 
-   /*
-    ---------- Show Ids ----------
-    */
+    private ArrayList<String> roomPlatforms() {
+        ArrayList<String> list = room();
+        list.add("محل\u200Cهای برگزاری");
 
-    private ArrayList<Integer> treasuryIds() {
-        ArrayList<Integer> list = treasuriesIds();
-        list.add(R.id.treasuryFragment);
+        destinationIds = roomPlatformsIds();
+        return list;
+    }
+    private ArrayList<Integer> roomPlatformsIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.roomPlatformsFragment);
 
         return list;
     }
 
+    private ArrayList<String> roomSchedules() {
+        ArrayList<String> list = room();
+        list.add("برنامه\u200Cهای درمانی");
+
+        destinationIds = roomSchedulesIds();
+        return list;
+    }
+    private ArrayList<Integer> roomSchedulesIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.roomSchedulesFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> roomTags() {
+        ArrayList<String> list = room();
+        list.add("برچسب\u200Cهای مهم");
+
+        destinationIds = roomTagsIds();
+        return list;
+    }
+    private ArrayList<Integer> roomTagsIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.roomTagsFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> roomUsers() {
+        ArrayList<String> list = room();
+        list.add("اعضاء");
+
+        destinationIds = roomUsersIds();
+        return list;
+    }
+    private ArrayList<Integer> roomUsersIds() {
+        ArrayList<Integer> list = roomIds();
+        list.add(R.id.roomUsersFragment);
+
+        return list;
+    }
+
+    /*
+    ---------- Show ----------
+    */
+
+    private ArrayList<String> bill() {
+        ArrayList<String> list = billings();
+        list.add("نامعلوم");
+
+        destinationIds = billIds();
+        return list;
+    }
     private ArrayList<Integer> billIds() {
         ArrayList<Integer> list = billingsIds();
         list.add(R.id.billFragment);
@@ -1437,20 +1244,37 @@ public class BreadCrumb {
         return list;
     }
 
-    private ArrayList<Integer> centerIds() {
-        ArrayList<Integer> list = centersIds();
-        list.add(R.id.centerFragment);
+    private ArrayList<String> bulkSample() {
+        ArrayList<String> list = bulkSamples();
+
+        if (bulkSampleModel != null && bulkSampleModel.getTitle() != null && !bulkSampleModel.getTitle().equals(""))
+            list.add(bulkSampleModel.getTitle());
+        else if (bulkSampleModel != null && bulkSampleModel.getId() != null && !bulkSampleModel.getId().equals(""))
+            list.add("نمونه\u200Cای" + " " + bulkSampleModel.getId());
+        else
+            list.add("نامعلوم");
+
+        destinationIds = bulkSampleIds();
+        return list;
+    }
+    private ArrayList<Integer> bulkSampleIds() {
+        ArrayList<Integer> list = bulkSamplesIds();
+        list.add(R.id.bulkSampleFragment);
 
         return list;
     }
 
-    private ArrayList<Integer> roomIds() {
-        ArrayList<Integer> list = centersIds();
-        list.add(R.id.roomFragment);
+    private ArrayList<String> casse() {
+        ArrayList<String> list = room();
 
+        if (caseModel != null && caseModel.getCaseId() != null && !caseModel.getCaseId().equals(""))
+            list.add("پرونده\u200Cی" + " " + caseModel.getCaseId());
+        else
+            list.add("نامعلوم");
+
+        destinationIds = casseIds();
         return list;
     }
-
     private ArrayList<Integer> casseIds() {
         ArrayList<Integer> list = roomIds();
         list.add(R.id.caseFragment);
@@ -1458,6 +1282,136 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> center() {
+        ArrayList<String> list = centers();
+
+        try {
+            if (centerModel != null && centerModel.getDetail() != null && centerModel.getDetail().getString("title").equals(""))
+                list.add(centerModel.getDetail().getString("title"));
+            else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
+                list.add("مرکز" + " " + centerModel.getCenterId());
+            else
+                list.add("نامعلوم");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        destinationIds = centerIds();
+        return list;
+    }
+    private ArrayList<Integer> centerIds() {
+        ArrayList<Integer> list = centersIds();
+        list.add(R.id.centerFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> reference() {
+        ArrayList<String> list;
+
+        if (!centerType.equals("room"))
+            list = centerUsers();
+        else
+            list = roomUsers();
+
+        if (referenceType.equals("user")) {
+            if (userModel != null && userModel.getId() != null && userModel.getId().equals(((MainActivity) activity).singleton.getId()))
+                list.add(activity.getResources().getString(R.string.MeFragmentTitle));
+            else if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
+                list.add(userModel.getName());
+            else if (userModel != null && userModel.getId() != null && !userModel.getId().equals(""))
+                list.add("مراجع" + " " + userModel.getId());
+            else
+                list.add("نامعلوم");
+        } else {
+            list.add(activity.getResources().getString(R.string.MeFragmentTitle));
+        }
+
+        destinationIds = referenceIds();
+        return list;
+    }
+    private ArrayList<Integer> referenceIds() {
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centerUsersIds();
+        else
+            list = roomUsersIds();
+
+        list.add(R.id.referenceFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> room() {
+        ArrayList<String> list = centers();
+
+        if (!centerType.equals("room")) {
+            try {
+                if (centerModel != null && centerModel.getDetail() != null && centerModel.getDetail().getString("title").equals(""))
+                    list.add("کلینیک شخصی" + " " + centerModel.getDetail().getString("title"));
+                else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
+                    list.add("کلینیک شخصی" + " " + centerModel.getCenterId());
+                else
+                    list.add("نامعلوم");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        } else {
+            if (roomModel != null && roomModel.getRoomManager() != null && roomModel.getRoomManager().getName() != null && !roomModel.getRoomManager().getName().equals(""))
+                list.add("اتاق درمان" + " " + roomModel.getRoomManager().getName());
+            else if (roomModel != null && roomModel.getRoomId() != null && !roomModel.getRoomId().equals(""))
+                list.add("اتاق درمان" + " " + roomModel.getRoomId());
+            else
+                list.add("نامعلوم");
+        }
+
+        destinationIds = roomIds();
+        return list;
+    }
+    private ArrayList<Integer> roomIds() {
+        ArrayList<Integer> list = centersIds();
+        list.add(R.id.roomFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> sample() {
+        ArrayList<String> list = reference();
+
+        if (sampleModel != null && sampleModel.getSampleTitle() != null && !sampleModel.getSampleTitle().equals(""))
+            list.add(sampleModel.getSampleTitle());
+        else if (sampleModel != null && sampleModel.getSampleId() != null && !sampleModel.getSampleId().equals(""))
+            list.add("نمونه\u200Cای" + " " + sampleModel.getSampleId());
+        else
+            list.add("نامعلوم");
+
+        destinationIds = sampleIds();
+        return list;
+    }
+    private ArrayList<Integer> sampleIds() {
+        ArrayList<Integer> list = referenceIds();
+        list.add(R.id.sampleFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> session() {
+        ArrayList<String> list;
+
+        if (sessionModel.getCaseModel() != null)
+            list = casse();
+        else
+            list = room();
+
+        if (sessionModel != null && sessionModel.getId() != null && !sessionModel.getId().equals(""))
+            list.add("جلسه\u200Cی" + " " + sessionModel.getId());
+        else
+            list.add("نامعلوم");
+
+        destinationIds = sessionIds();
+        return list;
+    }
     private ArrayList<Integer> sessionIds() {
         ArrayList<Integer> list;
 
@@ -1471,36 +1425,36 @@ public class BreadCrumb {
         return list;
     }
 
+    private ArrayList<String> treasury() {
+        ArrayList<String> list = treasuries();
+        list.add("نامعلوم");
+
+        destinationIds = treasuryIds();
+        return list;
+    }
+    private ArrayList<Integer> treasuryIds() {
+        ArrayList<Integer> list = treasuriesIds();
+        list.add(R.id.treasuryFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> user() {
+        ArrayList<String> list = users();
+
+        if (userModel != null && userModel.getName() != null && !userModel.getName().equals(""))
+            list.add(userModel.getName());
+        else if (userModel != null && userModel.getId() != null && !userModel.getId().equals(""))
+            list.add("عضو" + " " + userModel.getId());
+        else
+            list.add("نامعلوم");
+
+        destinationIds = userIds();
+        return list;
+    }
     private ArrayList<Integer> userIds() {
         ArrayList<Integer> list = usersIds();
         list.add(R.id.userFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> sampleIds() {
-        ArrayList<Integer> list = referenceIds();
-        list.add(R.id.sampleFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> bulkSampleIds() {
-        ArrayList<Integer> list = bulkSamplesIds();
-        list.add(R.id.bulkSampleFragment);
-
-        return list;
-    }
-
-    private ArrayList<Integer> referenceIds() {
-        ArrayList<Integer> list;
-
-        if (!centerType.equals("room"))
-            list = centerUsersIds();
-        else
-            list = roomUsersIds();
-
-        list.add(R.id.referenceFragment);
 
         return list;
     }
