@@ -27,6 +27,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.BreadCrumb;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
+import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -61,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
     // Entities
     private BreadCrumb breadCrumb;
     public Fragmont fragmont;
+    public Permissoon permissoon;
     public Singleton singleton;
 
     // Adapters
@@ -138,6 +140,8 @@ public class MainActivity extends AppCompatActivity {
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         fragmont = new Fragmont(navHostFragment);
+
+        permissoon = new Permissoon();
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._8sdp));

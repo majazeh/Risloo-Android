@@ -4,39 +4,43 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class Permissoon {
 
+    public Permissoon() {
+        // TODO : Place Code If Needed
+    }
+
     /*
     ---------- EditUserTabPersonal ----------
     */
 
-    public static boolean showEditUserTabPersonalMobile(UserModel model) {
+    public boolean showEditUserTabPersonalMobile(UserModel model) {
         if (model != null)
             return model.getUserType().equals("admin");
         else
             return false;
     }
 
-    public static boolean showEditUserTabPersonalEmail(UserModel model) {
+    public boolean showEditUserTabPersonalEmail(UserModel model) {
         if (model != null)
             return model.getUserType().equals("admin");
         else
             return false;
     }
 
-    public static boolean showEditUserTabPersonalBirthday(UserModel model) {
+    public boolean showEditUserTabPersonalBirthday(UserModel model) {
         if (model != null)
             return model.getUserType().equals("admin");
         else
             return false;
     }
 
-    public static boolean showEditUserTabPersonalStatus(UserModel model) {
+    public boolean showEditUserTabPersonalStatus(UserModel model) {
         if (model != null)
             return model.getUserType().equals("admin");
         else
             return false;
     }
 
-    public static boolean showEditUserTabPersonalType(UserModel model) {
+    public boolean showEditUserTabPersonalType(UserModel model) {
         if (model != null)
             return model.getUserType().equals("admin");
         else
@@ -47,7 +51,7 @@ public class Permissoon {
     ---------- EditUserTabPassword ----------
     */
 
-    public static boolean showEditUserTabPasswordCurrent(UserModel model) {
+    public boolean showEditUserTabPasswordCurrent(UserModel model) {
         if (model != null)
             return !model.getUserType().equals("admin") && !model.isNo_password();
         else
@@ -58,7 +62,7 @@ public class Permissoon {
     ---------- Centers ----------
     */
 
-    public static boolean showCentersCreateCenter(UserModel model) {
+    public boolean showCentersCreateCenter(UserModel model) {
         if (model != null)
             return model.getUserType().equals("admin");
         else
@@ -69,28 +73,28 @@ public class Permissoon {
     ---------- Center ----------
     */
 
-    public static boolean showCenterDropdownUsers(UserModel model, String position) {
+    public boolean showCenterDropdownUsers(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
             return false;
     }
 
-    public static boolean showCenterDropdownEdit(UserModel model, String position) {
+    public boolean showCenterDropdownEdit(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
             return false;
     }
 
-    public static boolean showCenterDropdownPlatforms(UserModel model, String position) {
+    public boolean showCenterDropdownPlatforms(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
             return false;
     }
 
-    public static boolean showCenterCreateRoom(UserModel model, String position) {
+    public boolean showCenterCreateRoom(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager");
         else
@@ -101,28 +105,28 @@ public class Permissoon {
     ---------- Room ----------
     */
 
-    public static boolean showRoomDropdownCreateSchedule(UserModel model, String position) {
+    public boolean showRoomDropdownCreateSchedule(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
             return false;
     }
 
-    public static boolean showRoomDropdownUsers(UserModel model, String position) {
+    public boolean showRoomDropdownUsers(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
             return false;
     }
 
-    public static boolean showRoomDropdownPlatforms(UserModel model, String position) {
+    public boolean showRoomDropdownPlatforms(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else
             return false;
     }
 
-    public static boolean showRoomDropdownTags(UserModel model, String position) {
+    public boolean showRoomDropdownTags(UserModel model, String position) {
         if (model != null)
             return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
         else

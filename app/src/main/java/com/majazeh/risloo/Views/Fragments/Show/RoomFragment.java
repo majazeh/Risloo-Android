@@ -19,7 +19,6 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -480,12 +479,12 @@ public class RoomFragment extends Fragment {
     private void setDropdown(String status) {
         ArrayList<String> items = new ArrayList<>();
 
-        if (Permissoon.showRoomDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownUsers(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentUsers));
 
         items.add(requireActivity().getResources().getString(R.string.RoomFragmentSchedules));
 
-        if (type.equals("room") && Permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (type.equals("room") && ((MainActivity) requireActivity()).permissoon.showRoomDropdownCreateSchedule(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentAddSchedule));
 
         if (!type.equals("room") && !status.equals("request"))
@@ -494,10 +493,10 @@ public class RoomFragment extends Fragment {
         if (!type.equals("room"))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentEdit));
 
-        if (Permissoon.showRoomDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownPlatforms(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentPlatforms));
 
-        if (Permissoon.showRoomDropdownTags(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+        if (((MainActivity) requireActivity()).permissoon.showRoomDropdownTags(((MainActivity) requireActivity()).singleton.getUserModel(), status))
             items.add(requireActivity().getResources().getString(R.string.RoomFragmentTags));
 
         items.add("");

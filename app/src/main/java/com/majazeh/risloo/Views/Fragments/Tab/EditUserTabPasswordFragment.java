@@ -19,7 +19,6 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
@@ -272,7 +271,7 @@ public class EditUserTabPasswordFragment extends Fragment {
         if (current instanceof EditUserFragment) {
             UserModel model = ((EditUserFragment) current).userModel;
 
-            if (Permissoon.showEditUserTabPasswordCurrent(model))
+            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPasswordCurrent(model))
                 binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.currentPasswordIncludeLayout.getRoot().setVisibility(View.GONE);

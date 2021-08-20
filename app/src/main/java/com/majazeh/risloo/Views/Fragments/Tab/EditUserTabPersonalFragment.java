@@ -14,7 +14,6 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -278,27 +277,27 @@ public class EditUserTabPersonalFragment extends Fragment {
         if (current instanceof EditUserFragment) {
             UserModel model = ((EditUserFragment) current).userModel;
 
-            if (Permissoon.showEditUserTabPersonalMobile(model))
+            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalMobile(model))
                 binding.mobileIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.mobileIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (Permissoon.showEditUserTabPersonalEmail(model))
+            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalEmail(model))
                 binding.emailIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.emailIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (Permissoon.showEditUserTabPersonalBirthday(model))
+            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalBirthday(model))
                 binding.birthdayIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.birthdayIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (Permissoon.showEditUserTabPersonalStatus(model))
+            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalStatus(model))
                 binding.statusIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.statusIncludeLayout.getRoot().setVisibility(View.GONE);
 
-            if (Permissoon.showEditUserTabPersonalType(model))
+            if (((MainActivity) requireActivity()).permissoon.showEditUserTabPersonalType(model))
                 binding.typeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
             else
                 binding.typeIncludeLayout.getRoot().setVisibility(View.GONE);
