@@ -20,7 +20,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Widgets.ItemDecorateRecyclerView;
+import com.majazeh.risloo.Utils.Widgets.RecyclerViewDecoration;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -599,28 +599,28 @@ public class InitManager {
     */
 
     public static void fixedGridRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("gridLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("gridLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
         recyclerView.setLayoutManager(new GridLayoutManager(activity, 2, LinearLayoutManager.VERTICAL, false));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
     }
 
     public static void fixedHorizontalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("horizontalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
     }
 
     public static void fixedVerticalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(true);
     }
 
     public static void unfixedVerticalRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
-        recyclerView.addItemDecoration(new ItemDecorateRecyclerView("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
+        recyclerView.addItemDecoration(new RecyclerViewDecoration("verticalLayout", (int) marginTop, (int) marginBottom, (int) marginInner, (int) marginSide));
         recyclerView.setLayoutManager(new LinearLayoutManager(activity, LinearLayoutManager.VERTICAL, false));
         recyclerView.setNestedScrollingEnabled(false);
         recyclerView.setHasFixedSize(false);
