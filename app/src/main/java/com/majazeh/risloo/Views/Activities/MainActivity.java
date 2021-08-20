@@ -25,7 +25,7 @@ import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.BreadCrumb;
-import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
+import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
         initializer();
 
-        ExtendOnFailureException.activity = this;
+        ExtendException.activity = this;
 
         detector();
 

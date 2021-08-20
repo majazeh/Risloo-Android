@@ -20,7 +20,7 @@ import androidx.navigation.fragment.NavHostFragment;
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.NavigationTestDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
+import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -89,7 +89,7 @@ public class TestActivity extends AppCompatActivity {
 
         initializer();
 
-        ExtendOnFailureException.activity = this;
+        ExtendException.activity = this;
 
         detector();
 

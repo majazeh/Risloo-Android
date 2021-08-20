@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Entities;
+package com.majazeh.risloo.Utils.Config;
 
 import android.app.Activity;
 
@@ -10,11 +10,11 @@ import com.mre.ligheh.API.onFailureException;
 
 import java.util.HashMap;
 
-public class ExtendOnFailureException extends onFailureException {
+public class ExtendException extends onFailureException {
 
     public static Activity activity;
 
-    public ExtendOnFailureException(Response callback,Object object) {
+    public ExtendException(Response callback, Object object) {
         super(callback,object);
     }
 

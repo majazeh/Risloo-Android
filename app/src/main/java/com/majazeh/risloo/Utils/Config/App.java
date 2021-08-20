@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Entities;
+package com.majazeh.risloo.Utils.Config;
 
 import android.content.res.Configuration;
 
@@ -16,7 +16,7 @@ public class App extends MultiDexApplication {
         super.onCreate();
 
         APIRequest.ExternalAPIEvents = ExtendEvent.class;
-        Exceptioner.External = ExtendOnFailureException.class;
+        Exceptioner.External = ExtendException.class;
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             APIRequest.baseUrl = "https://bapi.risloo.ir/api/";
