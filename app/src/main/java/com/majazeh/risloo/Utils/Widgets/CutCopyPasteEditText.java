@@ -3,19 +3,21 @@ package com.majazeh.risloo.Utils.Widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
+
 public class CutCopyPasteEditText extends androidx.appcompat.widget.AppCompatEditText {
 
     private OnCutCopyPasteListener onCutCopyPasteListener;
 
-    public CutCopyPasteEditText(Context context) {
+    public CutCopyPasteEditText(@NonNull Context context) {
         super(context);
     }
 
-    public CutCopyPasteEditText(Context context, AttributeSet attrs) {
+    public CutCopyPasteEditText(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public CutCopyPasteEditText(Context context, AttributeSet attrs, int defStyle) {
+    public CutCopyPasteEditText(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

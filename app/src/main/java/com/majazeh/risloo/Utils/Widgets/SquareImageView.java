@@ -3,17 +3,19 @@ package com.majazeh.risloo.Utils.Widgets;
 import android.content.Context;
 import android.util.AttributeSet;
 
+import androidx.annotation.NonNull;
+
 public class SquareImageView extends androidx.appcompat.widget.AppCompatImageView {
 
-    public SquareImageView(Context context) {
+    public SquareImageView(@NonNull Context context) {
         super(context);
     }
 
-    public SquareImageView(Context context, AttributeSet attrs) {
+    public SquareImageView(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SquareImageView(Context context, AttributeSet attrs, int defStyle) {
+    public SquareImageView(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 

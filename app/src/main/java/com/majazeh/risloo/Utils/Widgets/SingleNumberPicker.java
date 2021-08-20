@@ -8,43 +8,44 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.NumberPicker;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.majazeh.risloo.R;
 
 public class SingleNumberPicker extends NumberPicker {
 
-    public SingleNumberPicker(Context context) {
+    public SingleNumberPicker(@NonNull Context context) {
         super(context);
     }
 
-    public SingleNumberPicker(Context context, AttributeSet attrs) {
+    public SingleNumberPicker(@NonNull Context context, @NonNull AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public SingleNumberPicker(Context context, AttributeSet attrs, int defStyle) {
+    public SingleNumberPicker(@NonNull Context context, @NonNull AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
     }
 
     @Override
-    public void addView(View view) {
+    public void addView(@NonNull View view) {
         super.addView(view);
         updateView(getContext(), view);
     }
 
     @Override
-    public void addView(View view, ViewGroup.LayoutParams params) {
+    public void addView(@NonNull View view, @NonNull ViewGroup.LayoutParams params) {
         super.addView(view, params);
         updateView(getContext(), view);
     }
 
     @Override
-    public void addView(View view, int index, ViewGroup.LayoutParams params) {
+    public void addView(@NonNull View view, int index, @NonNull ViewGroup.LayoutParams params) {
         super.addView(view, index, params);
         updateView(getContext(), view);
     }
 
-    private void updateView(Context context, View view) {
+    private void updateView(@NonNull Context context, @NonNull View view) {
         if (view instanceof EditText) {
             ((EditText) view).setTypeface(ResourcesCompat.getFont(context, R.font.dana_bold));
             ((EditText) view).setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimension(R.dimen._11ssp));
