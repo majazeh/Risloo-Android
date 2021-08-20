@@ -23,17 +23,19 @@ public class Singleton {
         editor.apply();
     }
 
-    public void login(AuthModel authModel) {
-        UserModel userModel = authModel.getUser();
+    /*
+    ---------- Voids ----------
+    */
 
+    public void login(AuthModel authModel) {
         if (authModel.getToken() != null)
             setToken(authModel.getToken());
 
         if (authModel.getToken() != null)
             setAuthorization("Bearer " + authModel.getToken());
 
-        if (userModel != null)
-            setUserModel(userModel);
+        if (authModel.getUser() != null)
+            setUserModel(authModel.getUser());
     }
 
     public void update(UserModel userModel) {
@@ -41,20 +43,45 @@ public class Singleton {
             setUserModel(userModel);
     }
 
-    public void setToken(String value) {
+    public void password(String password) {
+        if (password != null)
+            setPassword(password);
+    }
+
+    public void logout() {
+        editor.remove("token");
+        editor.remove("authorization");
+        editor.remove("usermodel");
+        editor.apply();
+    }
+
+    /*
+    ---------- Setters ----------
+    */
+
+    private void setToken(String value) {
         editor.putString("token", value);
         editor.apply();
     }
 
-    public void setAuthorization(String value) {
+    private void setAuthorization(String value) {
         editor.putString("authorization", value);
         editor.apply();
     }
 
-    public void setUserModel(UserModel userModel) {
+    private void setUserModel(UserModel userModel) {
         editor.putString("usermodel", new Gson().toJson(userModel));
         editor.apply();
     }
+
+    private void setPassword(String value) {
+        editor.putString("password", value);
+        editor.apply();
+    }
+
+    /*
+    ---------- Getters ----------
+    */
 
     public String getToken() {
         if (!sharedPreferences.getString("token", "").equals(""))
@@ -77,12 +104,16 @@ public class Singleton {
         return null;
     }
 
-    public void logout() {
-        editor.remove("token");
-        editor.remove("authorization");
-        editor.remove("usermodel");
-        editor.apply();
+    public String getPassword() {
+        if (!sharedPreferences.getString("password", "").equals(""))
+            return sharedPreferences.getString("password", "");
+
+        return "";
     }
+
+    /*
+    ---------- UserModel Properties ----------
+    */
 
     public String getId() {
         if (getUserModel().getId() != null)
@@ -105,26 +136,7 @@ public class Singleton {
         return "";
     }
 
-    public String getType() {
-        if (getUserModel().getUserType() != null)
-            return getUserModel().getUserType();
-
-        return "";
-    }
-
     public String getMoney() {
-//        if (getUserModel().getTreasuries() != null) {
-//            try {
-//                int money = 0;
-//                for (int i = 0; i < getUserModel().getTreasuries().length(); i++) {
-//                    if (getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("gift") || getUserModel().getTreasuries().getJSONObject(i).getString("symbol").equals("wallet") )
-//                        money += getUserModel().getTreasuries().getJSONObject(i).getInt("balance");
-//                }
-//                return String.valueOf(money);
-//            } catch (JSONException e) {
-//                e.printStackTrace();
-//            }
-//        }
         return "";
     }
 
