@@ -141,13 +141,13 @@ public class CreateCaseFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
             if (binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
             if (binding.tagsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -286,16 +286,16 @@ public class CreateCaseFragment extends Fragment {
 
                                         switch (key) {
                                             case "title":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_id":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
                                                 break;
                                             case "problem":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
                                                 break;
                                             case "tags":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

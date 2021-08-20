@@ -95,9 +95,9 @@ public class AuthLoginFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).validatoon.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).validatoon.check(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).validatoon.hideValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
@@ -175,7 +175,7 @@ public class AuthLoginFragment extends Fragment {
                                         String validation = errorsObject.getJSONArray(key).get(i).toString();
 
                                         if (key.equals("authorized_key"))
-                                            ((AuthActivity) requireActivity()).validatoon.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
+                                            ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
 
                                         errors.append(validation);
                                         errors.append("\n");

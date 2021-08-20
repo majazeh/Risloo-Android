@@ -170,15 +170,15 @@ public class CreateCenterUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
             if (binding.positionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
             if (binding.roomErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView);
             if (binding.nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
             if (binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -301,19 +301,19 @@ public class CreateCenterUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "mobile":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
                                                 break;
                                             case "position":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "room_id":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
                                                 break;
                                             case "nickname":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
                                                 break;
                                             case "create_case":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

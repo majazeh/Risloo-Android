@@ -189,17 +189,17 @@ public class CreatePlatformFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.sessionTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView);
             if (binding.indentifierTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView);
             if (binding.indentifierErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView);
             if (binding.sessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView);
             if (binding.availableErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -265,22 +265,22 @@ public class CreatePlatformFragment extends Fragment {
 
                                         switch (key) {
                                             case "title":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "type":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "identifier_type":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "identifier":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView, validation);
                                                 break;
                                             case "selected":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "available":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

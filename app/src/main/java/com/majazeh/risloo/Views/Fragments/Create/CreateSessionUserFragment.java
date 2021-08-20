@@ -151,13 +151,13 @@ public class CreateSessionUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.axisErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView);
             if (binding.platformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView);
             if (binding.clientErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView);
             if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -304,16 +304,16 @@ public class CreateSessionUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "field":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.axisErrorLayout.getRoot(), binding.axisErrorLayout.errorTextView, validation);
                                                 break;
                                             case "session_platform":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_id":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
                                                 break;
                                             case "description":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

@@ -201,7 +201,7 @@ public class EditUserTabAvatarFragment extends Fragment {
 
                                             switch (key) {
                                                 case "avatar":
-                                                    ((MainActivity) requireActivity()).validatoon.error(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 
@@ -252,7 +252,7 @@ public class EditUserTabAvatarFragment extends Fragment {
 
                                             switch (key) {
                                                 case "avatar":
-                                                    ((MainActivity) requireActivity()).validatoon.error(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 

@@ -110,65 +110,65 @@ public class CreateScheduleFragment extends Fragment {
         // Time Data
         if (time instanceof CreateScheduleTabTimeFragment) {
             if (((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView);
             if (((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView);
         }
 
         // Reference Data
         if (reference instanceof CreateScheduleTabReferenceFragment) {
             if (((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView);
             if (((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView);
             if (((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
             if (((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView);
             if (((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.errorTextView);
         }
 
         // Session Data
         if (session instanceof CreateScheduleTabSessionFragment) {
             if (((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.errorTextView);
             if (((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView);
             if (((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView);
             if (((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView);
         }
 
         // Platform Data
         if (platform instanceof CreateScheduleTabPlatformFragment) {
             if (((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
             if (((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
             if (((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
         }
 
         // Payment Data
         if (payment instanceof CreateScheduleTabPaymentFragment) {
             if (((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
         }
 
         doWork();
@@ -277,99 +277,99 @@ public class CreateScheduleFragment extends Fragment {
                                             // Time Data
                                             case "time":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "duration":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
                                                 break;
                                             case "date_type":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.dateTypeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "date":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.specifiedDateErrorLayout.errorTextView, validation);
                                                 break;
                                             case "week_days":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternDaysErrorLayout.errorTextView, validation);
                                                 break;
                                             case "repeat_status":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.patternTypeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "repeat":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.repeatWeeksErrorLayout.errorTextView, validation);
                                                 break;
                                             case "repeat_from":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodStartDateErrorLayout.errorTextView, validation);
                                                 break;
                                             case "repeat_to":
                                                 if (time instanceof CreateScheduleTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.getRoot(), ((CreateScheduleTabTimeFragment) time).binding.periodEndDateErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Reference Data
                                             case "selection_type":
                                                 if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "clients_type":
                                                 if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "case_id":
                                                 if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, validation);
                                                 break;
                                             case "group_session":
                                                 if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "clients_number":
                                                 if (reference instanceof CreateScheduleTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((CreateScheduleTabReferenceFragment) reference).binding.countErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Session Data
                                             case "status":
                                                 if (session instanceof CreateScheduleTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
                                                 break;
                                             case "fields":
                                                 if (session instanceof CreateScheduleTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView, validation);
                                                 break;
                                             case "description":
                                                 if (session instanceof CreateScheduleTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_reminder":
                                                 if (session instanceof CreateScheduleTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Platform Data
                                             case "platforms":
                                                 if (platform instanceof CreateScheduleTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
                                                 break;
                                             case "pin_platform":
                                                 if (platform instanceof CreateScheduleTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
                                                 break;
                                             case "identifier_platform":
                                                 if (platform instanceof CreateScheduleTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((CreateScheduleTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Payment Data
                                             case "payment_status":
                                                 if (payment instanceof CreateScheduleTabPaymentFragment)
-                                                    ((MainActivity) requireActivity()).validatoon.error(((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((CreateScheduleTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

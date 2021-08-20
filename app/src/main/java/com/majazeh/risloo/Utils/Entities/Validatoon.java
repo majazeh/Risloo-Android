@@ -48,12 +48,12 @@ public class Validatoon {
         hideKeyboard(activity, editText);
     }
 
-    public void error(ConstraintLayout errorLayout, TextView errorTextView, String value) {
+    public void showValid(ConstraintLayout errorLayout, TextView errorTextView, String value) {
         errorLayout.setVisibility(View.VISIBLE);
         errorTextView.setText(value);
     }
 
-    public void check(ConstraintLayout errorLayout, TextView errorTextView) {
+    public void hideValid(ConstraintLayout errorLayout, TextView errorTextView) {
         errorLayout.setVisibility(View.GONE);
         errorTextView.setText("");
     }

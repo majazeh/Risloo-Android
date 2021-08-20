@@ -143,11 +143,11 @@ public class EditCenterUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.positionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
             if (binding.nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
             if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).validatoon.check(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -246,13 +246,13 @@ public class EditCenterUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "position":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "nickname":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
                                                 break;
                                             case "status":
-                                                ((MainActivity) requireActivity()).validatoon.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 
