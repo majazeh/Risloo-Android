@@ -139,7 +139,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private void listener() {
         binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.inputEditText);
             return false;
         });
 

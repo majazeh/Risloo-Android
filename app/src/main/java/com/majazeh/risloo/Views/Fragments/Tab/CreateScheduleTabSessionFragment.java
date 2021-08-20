@@ -140,7 +140,7 @@ public class CreateScheduleTabSessionFragment extends Fragment {
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 
@@ -150,7 +150,7 @@ public class CreateScheduleTabSessionFragment extends Fragment {
 
         binding.coordinationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.coordinationIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.coordinationIncludeLayout.inputEditText);
             return false;
         });
 
@@ -173,19 +173,19 @@ public class CreateScheduleTabSessionFragment extends Fragment {
 
         binding.scheduledIncludeLayout.startRelativeDayEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeDayEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeDayEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeDayEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.startRelativeHourEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeHourEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeHourEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeHourEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.startRelativeMinuteEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeMinuteEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeMinuteEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeMinuteEditText);
             return false;
         });
 
@@ -226,19 +226,19 @@ public class CreateScheduleTabSessionFragment extends Fragment {
 
         binding.scheduledIncludeLayout.endRelativeDayEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeDayEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeDayEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeDayEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.endRelativeHourEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeHourEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeHourEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeHourEditText);
             return false;
         });
 
         binding.scheduledIncludeLayout.endRelativeMinuteEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeMinuteEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeMinuteEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeMinuteEditText);
             return false;
         });
 

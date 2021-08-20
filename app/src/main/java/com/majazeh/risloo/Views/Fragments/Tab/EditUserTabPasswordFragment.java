@@ -98,7 +98,7 @@ public class EditUserTabPasswordFragment extends Fragment {
     private void listener() {
         binding.currentPasswordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.currentPasswordIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText);
             return false;
         });
 
@@ -108,7 +108,7 @@ public class EditUserTabPasswordFragment extends Fragment {
 
         binding.newPasswordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.newPasswordIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.newPasswordIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.newPasswordIncludeLayout.inputEditText);
             return false;
         });
 
@@ -243,14 +243,14 @@ public class EditUserTabPasswordFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
                 if (binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).controlEditText.check(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).validatoon.check(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
                 if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).controlEditText.check(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).validatoon.check(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
                 doWork();
             } else {
                 if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).controlEditText.check(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).validatoon.check(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -315,10 +315,10 @@ public class EditUserTabPasswordFragment extends Fragment {
 
                                             switch (key) {
                                                 case "password":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.error(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "new_password":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.error(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 
@@ -369,7 +369,7 @@ public class EditUserTabPasswordFragment extends Fragment {
 
                                             switch (key) {
                                                 case "new_password":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).validatoon.error(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 

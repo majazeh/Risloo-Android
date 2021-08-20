@@ -80,7 +80,7 @@ public class CreatePracticeFragment extends Fragment {
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
@@ -90,7 +90,7 @@ public class CreatePracticeFragment extends Fragment {
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 
@@ -105,11 +105,11 @@ public class CreatePracticeFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
             if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
             if (binding.fileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());

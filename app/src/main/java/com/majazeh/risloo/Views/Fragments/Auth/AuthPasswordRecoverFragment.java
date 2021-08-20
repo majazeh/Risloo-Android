@@ -83,7 +83,7 @@ public class AuthPasswordRecoverFragment extends Fragment {
     private void listener() {
         binding.mobileEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileEditText.getRoot().hasFocus())
-                ((AuthActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileEditText.getRoot());
+                ((AuthActivity) requireActivity()).validatoon.select(requireActivity(), binding.mobileEditText.getRoot());
             return false;
         });
 
@@ -93,9 +93,9 @@ public class AuthPasswordRecoverFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.mobileEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).validatoon.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).validatoon.check(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
@@ -173,7 +173,7 @@ public class AuthPasswordRecoverFragment extends Fragment {
                                         String validation = errorsObject.getJSONArray(key).get(i).toString();
 
                                         if (key.equals("mobile"))
-                                            ((AuthActivity) requireActivity()).controlEditText.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
+                                            ((AuthActivity) requireActivity()).validatoon.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
 
                                         errors.append(validation);
                                         errors.append("\n");

@@ -114,7 +114,7 @@ public class CreateUserFragment extends Fragment {
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
@@ -124,7 +124,7 @@ public class CreateUserFragment extends Fragment {
 
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
@@ -134,7 +134,7 @@ public class CreateUserFragment extends Fragment {
 
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.emailIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
             return false;
         });
 
@@ -144,7 +144,7 @@ public class CreateUserFragment extends Fragment {
 
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.passwordIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
             return false;
         });
 
@@ -257,21 +257,21 @@ public class CreateUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
             if (binding.mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
             if (binding.emailErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView);
             if (binding.passwordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.passwordErrorLayout.getRoot(), binding.passwordErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.passwordErrorLayout.getRoot(), binding.passwordErrorLayout.errorTextView);
             if (binding.birthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView);
             if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.genderErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -337,28 +337,28 @@ public class CreateUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "name":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
                                                 break;
                                             case "mobile":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
                                                 break;
                                             case "email":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
                                                 break;
                                             case "password":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.passwordErrorLayout.getRoot(), binding.passwordErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.passwordErrorLayout.getRoot(), binding.passwordErrorLayout.errorTextView, validation);
                                                 break;
                                             case "birthday":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
                                                 break;
                                             case "status":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
                                                 break;
                                             case "type":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "gender":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

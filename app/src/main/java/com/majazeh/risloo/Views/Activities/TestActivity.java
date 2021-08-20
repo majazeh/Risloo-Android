@@ -28,7 +28,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
-import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
@@ -54,6 +54,7 @@ public class TestActivity extends AppCompatActivity {
 
     // Entities
     public Singleton singleton;
+    public Validatoon validatoon;
 
     // Dialogs
     private LoadingDialog loadingDialog;
@@ -64,7 +65,6 @@ public class TestActivity extends AppCompatActivity {
     public FormModel formModel;
 
     // Objects
-    public ControlEditText controlEditText;
     private NavHostFragment navHostFragment;
     private NavController navController;
     private NavGraph navGraph;
@@ -122,11 +122,11 @@ public class TestActivity extends AppCompatActivity {
     private void initializer() {
         singleton = new Singleton(this);
 
+        validatoon = new Validatoon();
+
         loadingDialog = new LoadingDialog();
 
         sampleAnswers = new SampleAnswers();
-
-        controlEditText = new ControlEditText();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
 
@@ -487,8 +487,8 @@ public class TestActivity extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
-                        controlEditText.clear(this, controlEditText.input());
+                    if (validatoon.input() != null && validatoon.input().hasFocus()) {
+                        validatoon.clear(this, validatoon.input());
                     }
                 }
             }

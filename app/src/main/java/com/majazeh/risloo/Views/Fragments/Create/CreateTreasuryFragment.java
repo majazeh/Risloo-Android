@@ -77,7 +77,7 @@ public class CreateTreasuryFragment extends Fragment {
     private void listener() {
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
@@ -117,9 +117,9 @@ public class CreateTreasuryFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.regionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());

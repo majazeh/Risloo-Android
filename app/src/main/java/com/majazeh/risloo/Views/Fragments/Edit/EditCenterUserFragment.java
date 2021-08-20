@@ -122,7 +122,7 @@ public class EditCenterUserFragment extends Fragment {
 
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
             return false;
         });
 
@@ -143,11 +143,11 @@ public class EditCenterUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.positionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
             if (binding.nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
             if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -246,13 +246,13 @@ public class EditCenterUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "position":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "nickname":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
                                                 break;
                                             case "status":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

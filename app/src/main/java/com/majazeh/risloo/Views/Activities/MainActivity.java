@@ -35,7 +35,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
-import com.majazeh.risloo.Utils.Widgets.ControlEditText;
+import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
@@ -64,6 +64,7 @@ public class MainActivity extends AppCompatActivity {
     public Fragmont fragmont;
     public Permissoon permissoon;
     public Singleton singleton;
+    public Validatoon validatoon;
 
     // Adapters
     private NavsAdapter navsAdapter;
@@ -75,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
     public LoadingDialog loadingDialog;
 
     // Objects
-    public ControlEditText controlEditText;
     public NavHostFragment navHostFragment;
     public NavController navController;
 
@@ -127,21 +127,21 @@ public class MainActivity extends AppCompatActivity {
 
         singleton = new Singleton(this);
 
+        permissoon = new Permissoon();
+
+        validatoon = new Validatoon();
+
         navsAdapter = new NavsAdapter(this);
 
         logoutBottomSheet = new LogoutBottomSheet();
 
         loadingDialog = new LoadingDialog();
 
-        controlEditText = new ControlEditText();
-
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
 
         navController = Objects.requireNonNull(navHostFragment).getNavController();
 
         fragmont = new Fragmont(navHostFragment);
-
-        permissoon = new Permissoon();
 
         InitManager.imgResTint(this, binding.contentIncludeLayout.menuImageView.getRoot(), R.drawable.ic_bars_light, R.color.Gray500);
         InitManager.fixedVerticalRecyclerView(this, binding.navIncludeLayout.listRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._8sdp));
@@ -415,8 +415,8 @@ public class MainActivity extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (controlEditText.input() != null && controlEditText.input().hasFocus()) {
-                        controlEditText.clear(this, controlEditText.input());
+                    if (validatoon.input() != null && validatoon.input().hasFocus()) {
+                        validatoon.clear(this, validatoon.input());
                     }
                 }
             }

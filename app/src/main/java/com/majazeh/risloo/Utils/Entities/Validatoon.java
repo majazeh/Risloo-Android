@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Widgets;
+package com.majazeh.risloo.Utils.Entities;
 
 import android.app.Activity;
 import android.view.View;
@@ -15,7 +15,7 @@ import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.util.Objects;
 
-public class ControlEditText {
+public class Validatoon {
 
     // Widgets
     private EditText editText;

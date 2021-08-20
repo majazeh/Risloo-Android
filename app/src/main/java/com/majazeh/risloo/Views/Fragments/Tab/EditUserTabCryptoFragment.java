@@ -80,7 +80,7 @@ public class EditUserTabCryptoFragment extends Fragment {
     private void listener() {
         binding.publicIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.publicIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.publicIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.publicIncludeLayout.inputEditText);
             return false;
         });
 
@@ -90,7 +90,7 @@ public class EditUserTabCryptoFragment extends Fragment {
 
         binding.privateIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.privateIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).controlEditText.select(requireActivity(), binding.privateIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.privateIncludeLayout.inputEditText);
             return false;
         });
 
@@ -100,14 +100,14 @@ public class EditUserTabCryptoFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.publicErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
 
             doWork("public");
         }).widget(binding.publicEditTextView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.privateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
 
             doWork("private");
         }).widget(binding.privateEditTextView.getRoot());

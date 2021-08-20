@@ -121,7 +121,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.availableSwitchCompat.isChecked() && holder.binding.centerCheckBox.isChecked())
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
-                    ((MainActivity) activity).controlEditText.select(activity, holder.binding.identifierEditText);
+                    ((MainActivity) activity).validatoon.select(activity, holder.binding.identifierEditText);
             return false;
         });
 

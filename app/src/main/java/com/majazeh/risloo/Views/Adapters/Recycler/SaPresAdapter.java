@@ -102,7 +102,7 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((TestActivity) activity).controlEditText.select(activity, holder.binding.inputEditText);
+                    ((TestActivity) activity).validatoon.select(activity, holder.binding.inputEditText);
             return false;
         });
 

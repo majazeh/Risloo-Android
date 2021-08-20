@@ -105,7 +105,7 @@ public class CreateRoomUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).validatoon.check(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -205,7 +205,7 @@ public class CreateRoomUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "user_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).validatoon.error(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 
