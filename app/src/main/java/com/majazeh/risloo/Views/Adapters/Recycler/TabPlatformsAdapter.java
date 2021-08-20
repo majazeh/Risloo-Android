@@ -99,7 +99,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.selectedSwitchCompat.isChecked() && holder.binding.roomCheckBox.isChecked())
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.identifierEditText.hasFocus())
-                    ((MainActivity) activity).validatoon.select(activity, holder.binding.identifierEditText);
+                    ((MainActivity) activity).inputManager.select(activity, holder.binding.identifierEditText);
             return false;
         });
 

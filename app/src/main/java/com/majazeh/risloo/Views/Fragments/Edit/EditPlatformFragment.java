@@ -94,7 +94,7 @@ public class EditPlatformFragment extends Fragment {
     private void listener() {
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
@@ -158,7 +158,7 @@ public class EditPlatformFragment extends Fragment {
 
         binding.indentifierIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.indentifierIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.indentifierIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.indentifierIncludeLayout.inputEditText);
             return false;
         });
 

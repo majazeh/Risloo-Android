@@ -236,7 +236,7 @@ public class RoomFragment extends Fragment {
 
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.editText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.searchIncludeLayout.editText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.searchIncludeLayout.editText);
             return false;
         });
 

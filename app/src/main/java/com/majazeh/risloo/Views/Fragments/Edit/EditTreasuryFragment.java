@@ -74,7 +74,7 @@ public class EditTreasuryFragment extends Fragment {
     private void listener() {
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 

@@ -85,7 +85,7 @@ public class EditSessionTabTimeFragment extends Fragment {
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.durationIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.durationIncludeLayout.inputEditText);
             return false;
         });
 

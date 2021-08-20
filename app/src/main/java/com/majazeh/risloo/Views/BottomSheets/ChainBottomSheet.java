@@ -90,7 +90,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     private void listener() {
         binding.nicknameEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameEditText.getRoot().hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.nicknameEditText.getRoot());
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.nicknameEditText.getRoot());
             return false;
         });
 

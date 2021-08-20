@@ -83,7 +83,7 @@ public class AuthPasswordRecoverFragment extends Fragment {
     private void listener() {
         binding.mobileEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileEditText.getRoot().hasFocus())
-                ((AuthActivity) requireActivity()).validatoon.select(requireActivity(), binding.mobileEditText.getRoot());
+                ((AuthActivity) requireActivity()).inputManager.select(requireActivity(), binding.mobileEditText.getRoot());
             return false;
         });
 

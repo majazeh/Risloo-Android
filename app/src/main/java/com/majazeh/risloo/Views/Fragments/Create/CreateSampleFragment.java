@@ -194,7 +194,7 @@ public class CreateSampleFragment extends Fragment {
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
@@ -204,7 +204,7 @@ public class CreateSampleFragment extends Fragment {
 
         binding.membersCountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.membersCountIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.membersCountIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.membersCountIncludeLayout.inputEditText);
             return false;
         });
 
@@ -257,7 +257,7 @@ public class CreateSampleFragment extends Fragment {
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.problemIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.problemIncludeLayout.inputEditText);
             return false;
         });
 
@@ -285,7 +285,7 @@ public class CreateSampleFragment extends Fragment {
 
         binding.psychologyDescriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.psychologyDescriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText);
             return false;
         });
 

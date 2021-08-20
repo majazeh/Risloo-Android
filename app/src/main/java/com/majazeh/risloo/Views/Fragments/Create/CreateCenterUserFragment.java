@@ -104,7 +104,7 @@ public class CreateCenterUserFragment extends Fragment {
     private void listener() {
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
@@ -153,7 +153,7 @@ public class CreateCenterUserFragment extends Fragment {
 
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
             return false;
         });
 

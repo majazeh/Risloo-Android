@@ -24,6 +24,7 @@ import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.ClickManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.InputManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
@@ -55,6 +56,7 @@ public class TestActivity extends AppCompatActivity {
     // Entities
     public Singleton singleton;
     public Validatoon validatoon;
+    public InputManager inputManager;
 
     // Dialogs
     private LoadingDialog loadingDialog;
@@ -123,6 +125,8 @@ public class TestActivity extends AppCompatActivity {
         singleton = new Singleton(this);
 
         validatoon = new Validatoon();
+
+        inputManager = new InputManager();
 
         loadingDialog = new LoadingDialog();
 
@@ -487,8 +491,8 @@ public class TestActivity extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (validatoon.input() != null && validatoon.input().hasFocus()) {
-                        validatoon.clear(this, validatoon.input());
+                    if (inputManager.input() != null && inputManager.input().hasFocus()) {
+                        inputManager.clear(this, inputManager.input());
                     }
                 }
             }

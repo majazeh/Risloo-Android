@@ -79,7 +79,7 @@ public class CreateDocumentFragment extends Fragment {
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
@@ -89,7 +89,7 @@ public class CreateDocumentFragment extends Fragment {
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).validatoon.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 

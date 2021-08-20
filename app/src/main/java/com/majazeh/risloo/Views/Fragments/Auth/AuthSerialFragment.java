@@ -86,7 +86,7 @@ public class AuthSerialFragment extends Fragment {
 
         binding.serialEditText.getRoot().setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.serialEditText.getRoot().hasFocus())
-                ((AuthActivity) requireActivity()).validatoon.select(requireActivity(), binding.serialEditText.getRoot());
+                ((AuthActivity) requireActivity()).inputManager.select(requireActivity(), binding.serialEditText.getRoot());
             return false;
         });
 

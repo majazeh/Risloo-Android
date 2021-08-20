@@ -15,6 +15,7 @@ import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.ExtendOnFailureException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.InputManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
@@ -31,6 +32,7 @@ public class AuthActivity extends AppCompatActivity {
     // Entities
     public Singleton singleton;
     public Validatoon validatoon;
+    public InputManager inputManager;
 
     // Dialogs
     public LoadingDialog loadingDialog;
@@ -78,6 +80,8 @@ public class AuthActivity extends AppCompatActivity {
 
         validatoon = new Validatoon();
 
+        inputManager = new InputManager();
+
         loadingDialog = new LoadingDialog();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
@@ -110,8 +114,8 @@ public class AuthActivity extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (validatoon.input() != null && validatoon.input().hasFocus()) {
-                        validatoon.clear(this, validatoon.input());
+                    if (inputManager.input() != null && inputManager.input().hasFocus()) {
+                        inputManager.clear(this, inputManager.input());
                     }
                 }
             }
