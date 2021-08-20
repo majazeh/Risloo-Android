@@ -151,15 +151,15 @@ public class EditCenterTabDetailFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.managerErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView);
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.addressErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.addressIncludeLayout.inputEditText, binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView);
             if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
             if (binding.phonesErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -300,19 +300,19 @@ public class EditCenterTabDetailFragment extends Fragment {
 
                                         switch (key) {
                                             case "manager_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.managerIncludeLayout.selectTextView, binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView,validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.managerErrorLayout.getRoot(), binding.managerErrorLayout.errorTextView,validation);
                                                 break;
                                             case "title":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView,validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView,validation);
                                                 break;
                                             case "address":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.addressIncludeLayout.inputEditText, binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView,validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.addressErrorLayout.getRoot(), binding.addressErrorLayout.errorTextView,validation);
                                                 break;
                                             case "description":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView,validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView,validation);
                                                 break;
                                             case "phone_numbers":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.phonesIncludeLayout.selectRecyclerView, binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView,validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.phonesErrorLayout.getRoot(), binding.phonesErrorLayout.errorTextView,validation);
                                                 break;
                                         }
 

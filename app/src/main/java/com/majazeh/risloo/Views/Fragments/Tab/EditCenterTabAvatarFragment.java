@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -196,7 +195,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
 
                                         switch (key) {
                                             case "avatar":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.avatarErrorLayout.getRoot(), binding.avatarErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

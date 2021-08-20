@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -106,11 +105,11 @@ public class CreatePracticeFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
             if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
             if (binding.fileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -185,13 +184,13 @@ public class CreatePracticeFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "name":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "description":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "file":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.fileErrorLayout.getRoot(), binding.fileErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //

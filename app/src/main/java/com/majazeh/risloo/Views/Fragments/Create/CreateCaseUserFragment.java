@@ -105,7 +105,7 @@ public class CreateCaseUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -205,7 +205,7 @@ public class CreateCaseUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "client_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

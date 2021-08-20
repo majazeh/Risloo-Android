@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -183,19 +182,19 @@ public class EditUserTabPersonalFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
             if (binding.mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
             if (binding.emailErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.emailIncludeLayout.inputEditText, binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView);
             if (binding.birthdayErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.birthdayIncludeLayout.selectTextView, binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView);
             if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.genderErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -361,25 +360,25 @@ public class EditUserTabPersonalFragment extends Fragment {
 
                                             switch (key) {
                                                 case "name":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "mobile":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "email":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.emailIncludeLayout.inputEditText, binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "birthday":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.birthdayIncludeLayout.selectTextView, binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "status":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "type":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "gender":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 
@@ -428,25 +427,25 @@ public class EditUserTabPersonalFragment extends Fragment {
 
                                             switch (key) {
                                                 case "name":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nameIncludeLayout.inputEditText, binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "mobile":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.mobileIncludeLayout.inputEditText, binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "email":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.emailIncludeLayout.inputEditText, binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.emailErrorLayout.getRoot(), binding.emailErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "birthday":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.birthdayIncludeLayout.selectTextView, binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.birthdayErrorLayout.getRoot(), binding.birthdayErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "status":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "type":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "gender":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.genderErrorLayout.getRoot(), binding.genderErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 

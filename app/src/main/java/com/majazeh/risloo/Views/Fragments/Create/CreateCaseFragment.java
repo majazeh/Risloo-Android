@@ -141,13 +141,13 @@ public class CreateCaseFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
             if (binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
             if (binding.tagsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.tagsIncludeLayout.selectRecyclerView, binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -286,16 +286,16 @@ public class CreateCaseFragment extends Fragment {
 
                                         switch (key) {
                                             case "title":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
                                                 break;
                                             case "problem":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
                                                 break;
                                             case "tags":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.tagsIncludeLayout.selectRecyclerView, binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.tagsErrorLayout.getRoot(), binding.tagsErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

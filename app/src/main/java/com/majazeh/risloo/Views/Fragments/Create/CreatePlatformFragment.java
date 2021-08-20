@@ -12,7 +12,6 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -190,17 +189,17 @@ public class CreatePlatformFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.sessionTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView);
             if (binding.indentifierTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView);
             if (binding.indentifierErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.indentifierIncludeLayout.inputEditText, binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView);
             if (binding.sessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView);
             if (binding.availableErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -266,22 +265,22 @@ public class CreatePlatformFragment extends Fragment {
 
                                         switch (key) {
                                             case "title":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "type":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionTypeIncludeLayout.selectSpinner, binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.sessionTypeErrorLayout.getRoot(), binding.sessionTypeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "identifier_type":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.indentifierTypeIncludeLayout.selectSpinner, binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.indentifierTypeErrorLayout.getRoot(), binding.indentifierTypeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "identifier":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.indentifierIncludeLayout.inputEditText, binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.indentifierErrorLayout.getRoot(), binding.indentifierErrorLayout.errorTextView, validation);
                                                 break;
                                             case "selected":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "available":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.availableErrorLayout.getRoot(), binding.availableErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

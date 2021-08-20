@@ -117,9 +117,9 @@ public class CreateTreasuryFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.regionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.regionIncludeLayout.selectSpinner, binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -170,10 +170,10 @@ public class CreateTreasuryFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "title":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "region_id":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.regionIncludeLayout.selectSpinner, binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //

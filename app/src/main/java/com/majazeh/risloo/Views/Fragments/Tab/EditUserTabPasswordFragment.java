@@ -243,14 +243,14 @@ public class EditUserTabPasswordFragment extends Fragment {
         ClickManager.onDelayedClickListener(() -> {
             if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
                 if (binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);
                 if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
                 doWork();
             } else {
                 if (binding.newPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                    ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
+                    ((MainActivity) requireActivity()).controlEditText.check(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView);
 
                 doWork();
             }
@@ -315,10 +315,10 @@ public class EditUserTabPasswordFragment extends Fragment {
 
                                             switch (key) {
                                                 case "password":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.currentPasswordIncludeLayout.inputEditText, binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView, validation);
                                                     break;
                                                 case "new_password":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 
@@ -369,7 +369,7 @@ public class EditUserTabPasswordFragment extends Fragment {
 
                                             switch (key) {
                                                 case "new_password":
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.newPasswordIncludeLayout.inputEditText, binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.newPasswordErrorLayout.getRoot(), binding.newPasswordErrorLayout.errorTextView, validation);
                                                     break;
                                             }
 

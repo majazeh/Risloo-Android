@@ -89,7 +89,7 @@ public class CreateRoomFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.psychologyErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -188,7 +188,7 @@ public class CreateRoomFragment extends Fragment {
 
                                         switch (key) {
                                             case "psychologist_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyIncludeLayout.selectTextView, binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

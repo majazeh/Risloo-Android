@@ -11,7 +11,6 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
@@ -144,11 +143,11 @@ public class EditCenterUserFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.positionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.positionIncludeLayout.selectSpinner, binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView);
             if (binding.nicknameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView);
             if (binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -247,13 +246,13 @@ public class EditCenterUserFragment extends Fragment {
 
                                         switch (key) {
                                             case "position":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.positionIncludeLayout.selectSpinner, binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.positionErrorLayout.getRoot(), binding.positionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "nickname":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.nicknameIncludeLayout.inputEditText, binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.nicknameErrorLayout.getRoot(), binding.nicknameErrorLayout.errorTextView, validation);
                                                 break;
                                             case "status":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.statusErrorLayout.getRoot(), binding.statusErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

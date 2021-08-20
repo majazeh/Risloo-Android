@@ -100,14 +100,14 @@ public class EditUserTabCryptoFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.publicErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.publicIncludeLayout.inputEditText, binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
 
             doWork("public");
         }).widget(binding.publicEditTextView.getRoot());
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.privateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.privateIncludeLayout.inputEditText, binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
 
             doWork("private");
         }).widget(binding.privateEditTextView.getRoot());

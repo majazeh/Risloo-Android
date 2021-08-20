@@ -130,9 +130,9 @@ public class AuthPinFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.pinEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 countDownTimer.cancel();
 
                 doWork("code");
@@ -267,7 +267,7 @@ public class AuthPinFragment extends Fragment {
                                             String validation = errorsObject.getJSONArray(key).get(i).toString();
 
                                             if (key.equals("code"))
-                                                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.pinEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
+                                                ((AuthActivity) requireActivity()).controlEditText.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
 
                                             errors.append(validation);
                                             errors.append("\n");

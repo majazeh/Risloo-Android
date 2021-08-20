@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -111,53 +110,53 @@ public class EditSessionFragment extends Fragment {
         // Time Data
         if (time instanceof EditSessionTabTimeFragment) {
             if (((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView);
             if (((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabTimeFragment) time).binding.durationIncludeLayout.inputEditText, ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView);
             if (((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabTimeFragment) time).binding.startDateIncludeLayout.selectTextView, ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView);
         }
 
         // Reference Data
         if (!hasCase && reference instanceof EditSessionTabReferenceFragment) {
             if (((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.selectionIncludeLayout.selectSpinner, ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView);
             if (((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.typeIncludeLayout.selectSpinner, ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView);
             if (((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView);
             if (((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.problemIncludeLayout.inputEditText, ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.errorTextView);
             if (((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView);
             if (((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.errorTextView);
         }
 
         // Session Data
         if (session instanceof EditSessionTabSessionFragment) {
             if (((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabSessionFragment) session).binding.statusIncludeLayout.selectSpinner, ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView);
             if (((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabSessionFragment) session).binding.descriptionIncludeLayout.inputEditText, ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView);
             if (((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabSessionFragment) session).binding.coordinationIncludeLayout.inputEditText, ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView);
         }
 
         // Platform Data
         if (platform instanceof EditSessionTabPlatformFragment) {
             if (((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView);
             if (((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView);
             if (((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView);
         }
 
         // Payment Data
         if (payment instanceof EditSessionTabPaymentFragment) {
             if (((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), ((EditSessionTabPaymentFragment) payment).binding.paymentIncludeLayout.selectSpinner, ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView);
         }
 
         doWork();
@@ -254,75 +253,75 @@ public class EditSessionFragment extends Fragment {
                                             // Time Data
                                             case "time":
                                                 if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabTimeFragment) time).binding.startTimeIncludeLayout.selectTextView, ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startTimeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "duration":
                                                 if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabTimeFragment) time).binding.durationIncludeLayout.inputEditText, ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabTimeFragment) time).binding.durationErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.durationErrorLayout.errorTextView, validation);
                                                 break;
                                             case "date":
                                                 if (time instanceof EditSessionTabTimeFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabTimeFragment) time).binding.startDateIncludeLayout.selectTextView, ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.getRoot(), ((EditSessionTabTimeFragment) time).binding.startDateErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Reference Data
                                             case "selection_type":
                                                 if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.selectionIncludeLayout.selectSpinner, ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.selectionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "clients_type":
                                                 if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.typeIncludeLayout.selectSpinner, ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.typeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "case_id":
                                                 if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.caseIncludeLayout.selectContainer, ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.caseErrorLayout.errorTextView, validation);
                                                 break;
                                             case "problem":
                                                 if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.problemIncludeLayout.inputEditText, ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.problemErrorLayout.errorTextView, validation);
                                                 break;
                                             case "group_session":
                                                 if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.bulkSessionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "clients_number":
                                                 if (!hasCase && reference instanceof EditSessionTabReferenceFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabReferenceFragment) reference).binding.countIncludeLayout.inputEditText, ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.getRoot(), ((EditSessionTabReferenceFragment) reference).binding.countErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Session Data
                                             case "status":
                                                 if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabSessionFragment) session).binding.statusIncludeLayout.selectSpinner, ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
                                                 break;
                                             case "description":
                                                 if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabSessionFragment) session).binding.descriptionIncludeLayout.inputEditText, ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.descriptionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_reminder":
                                                 if (session instanceof EditSessionTabSessionFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabSessionFragment) session).binding.coordinationIncludeLayout.inputEditText, ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.getRoot(), ((EditSessionTabSessionFragment) session).binding.coordinationErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Platform Data
                                             case "platforms":
                                                 if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.platformsErrorLayout.errorTextView, validation);
                                                 break;
                                             case "pin_platform":
                                                 if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.pinPlatformErrorLayout.errorTextView, validation);
                                                 break;
                                             case "identifier_platform":
                                                 if (platform instanceof EditSessionTabPlatformFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.getRoot(), ((EditSessionTabPlatformFragment) platform).binding.identifierPlatformErrorLayout.errorTextView, validation);
                                                 break;
 
                                             // Payment Data
                                             case "payment_status":
                                                 if (payment instanceof EditSessionTabPaymentFragment)
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), ((EditSessionTabPaymentFragment) payment).binding.paymentIncludeLayout.selectSpinner, ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.getRoot(), ((EditSessionTabPaymentFragment) payment).binding.paymentErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 

@@ -162,9 +162,9 @@ public class AuthPasswordFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.passwordIncludeLayout.inputEditText.length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());
@@ -262,7 +262,7 @@ public class AuthPasswordFragment extends Fragment {
                                         String validation = errorsObject.getJSONArray(key).get(i).toString();
 
                                         if (key.equals("password"))
-                                            ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.passwordIncludeLayout.inputEditText, binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
+                                            ((AuthActivity) requireActivity()).controlEditText.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, validation);
 
                                         errors.append(validation);
                                         errors.append("\n");

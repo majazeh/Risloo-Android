@@ -96,9 +96,9 @@ public class AuthSerialFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.serialEditText.getRoot().length() == 0) {
-                ((AuthActivity) requireActivity()).controlEditText.error(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
+                ((AuthActivity) requireActivity()).controlEditText.error(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
-                ((AuthActivity) requireActivity()).controlEditText.check(requireActivity(), binding.serialEditText.getRoot(), binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
+                ((AuthActivity) requireActivity()).controlEditText.check(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView);
                 doWork();
             }
         }).widget(binding.buttonTextView.getRoot());

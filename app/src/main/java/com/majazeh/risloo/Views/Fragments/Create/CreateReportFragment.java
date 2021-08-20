@@ -124,9 +124,9 @@ public class CreateReportFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.encryptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView);
             if (binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -198,10 +198,10 @@ public class CreateReportFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "encryption":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.encryptionIncludeLayout.selectSpinner, binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.encryptionErrorLayout.getRoot(), binding.encryptionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "description":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.descriptionIncludeLayout.inputEditText, binding.descriptionIncludeLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.descriptionIncludeLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //

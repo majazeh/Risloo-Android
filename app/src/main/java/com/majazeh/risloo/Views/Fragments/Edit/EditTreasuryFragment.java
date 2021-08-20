@@ -84,7 +84,7 @@ public class EditTreasuryFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.editTextView.getRoot());
@@ -141,7 +141,7 @@ public class EditTreasuryFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "title":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //

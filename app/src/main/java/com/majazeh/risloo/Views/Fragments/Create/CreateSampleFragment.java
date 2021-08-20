@@ -14,7 +14,6 @@ import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 
@@ -296,29 +295,29 @@ public class CreateSampleFragment extends Fragment {
 
         ClickManager.onDelayedClickListener(() -> {
             if (binding.scaleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView);
             if (binding.roomErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView);
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.titleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView);
             if (binding.membersCountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.membersCountIncludeLayout.inputEditText, binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView);
             if (binding.caseStatusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView);
             if (binding.problemErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView);
             if (binding.caseErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.caseIncludeLayout.selectContainer, binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView);
             if (binding.sessionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.sessionIncludeLayout.selectContainer, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView);
             if (binding.clientErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), (ConstraintLayout) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView);
             if (binding.referenceErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView);
             if (binding.psychologyDescriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
-                ((MainActivity) requireActivity()).controlEditText.check(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText, binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView);
+                ((MainActivity) requireActivity()).controlEditText.check(binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView);
 
             doWork();
         }).widget(binding.createTextView.getRoot());
@@ -689,40 +688,40 @@ public class CreateSampleFragment extends Fragment {
 
                                         switch (key) {
                                             case "scale_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.scaleIncludeLayout.selectRecyclerView, binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "room_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.roomIncludeLayout.selectContainer, binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.roomErrorLayout.getRoot(), binding.roomErrorLayout.errorTextView, validation);
                                                 break;
                                             case "type":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
                                                 break;
                                             case "title":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.titleIncludeLayout.inputEditText, binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
                                                 break;
                                             case "members_count":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.membersCountIncludeLayout.inputEditText, binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.membersCountErrorLayout.getRoot(), binding.membersCountErrorLayout.errorTextView, validation);
                                                 break;
                                             case "case_status":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseStatusIncludeLayout.selectSpinner, binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.caseStatusErrorLayout.getRoot(), binding.caseStatusErrorLayout.errorTextView, validation);
                                                 break;
                                             case "problem":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.problemIncludeLayout.inputEditText, binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
                                                 break;
                                             case "case_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.caseIncludeLayout.selectContainer, binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
                                                 break;
                                             case "session_id":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.sessionIncludeLayout.selectContainer, binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.sessionErrorLayout.getRoot(), binding.sessionErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_id":
                                                 if (type.equals("case_user"))
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), (ConstraintLayout) null, binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
                                                 else if (type.equals("room_user"))
-                                                    ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.referenceIncludeLayout.selectRecyclerView, binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                    ((MainActivity) requireActivity()).controlEditText.error(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
                                                 break;
                                             case "psychologist_description":
-                                                ((MainActivity) requireActivity()).controlEditText.error(requireActivity(), binding.psychologyDescriptionIncludeLayout.inputEditText, binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, validation);
+                                                ((MainActivity) requireActivity()).controlEditText.error(binding.psychologyDescriptionErrorLayout.getRoot(), binding.psychologyDescriptionErrorLayout.errorTextView, validation);
                                                 break;
                                         }
 
