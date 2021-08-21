@@ -13,17 +13,6 @@ public class ToastManager {
 
     private static Toast toast;
 
-    public static void showToast(Activity activity, String value) {
-        try {
-            toast.getView().isShown();
-            toast.setText(value);
-        } catch (Exception e) {
-            toast = Toast.makeText(activity, value, Toast.LENGTH_LONG);
-        }
-
-        toast.show();
-    }
-
     public static void showSuccesToast(Activity activity, String value) {
         try {
             toast.getView().isShown();
