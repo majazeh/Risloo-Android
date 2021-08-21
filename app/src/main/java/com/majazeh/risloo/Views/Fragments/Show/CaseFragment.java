@@ -15,7 +15,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -151,17 +151,17 @@ public class CaseFragment extends Fragment {
             }
         });
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.referencesAddView.getRoot());
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.sessionsAddView.getRoot());
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("case", caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.samplesAddView.getRoot());

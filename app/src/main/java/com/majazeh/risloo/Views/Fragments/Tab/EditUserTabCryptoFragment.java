@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
@@ -98,14 +98,14 @@ public class EditUserTabCryptoFragment extends Fragment {
             privateKey = binding.privateIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.publicErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.publicErrorLayout.getRoot(), binding.publicErrorLayout.errorTextView);
 
             doWork("public");
         }).widget(binding.publicEditTextView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.privateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.privateErrorLayout.getRoot(), binding.privateErrorLayout.errorTextView);
 

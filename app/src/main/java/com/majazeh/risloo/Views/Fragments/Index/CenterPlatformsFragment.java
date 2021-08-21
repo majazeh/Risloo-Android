@@ -14,7 +14,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -87,7 +87,7 @@ public class CenterPlatformsFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCreatePlatformFragment("center", centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addConstraintLayout);

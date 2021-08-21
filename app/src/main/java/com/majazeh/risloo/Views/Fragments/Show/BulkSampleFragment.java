@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -95,7 +95,7 @@ public class BulkSampleFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.avatarsIncludeLayout.charTextView.getVisibility() == View.GONE) {
                 try {
                     IntentManager.display(requireActivity(), binding.centerTextView.getText().toString(), bulkSampleModel.getRoom().getRoomCenter().getDetail().getJSONArray("avatar").getJSONObject(2).getString("url"));
@@ -105,7 +105,7 @@ public class BulkSampleFragment extends Fragment {
             }
         }).widget(binding.avatarsIncludeLayout.avatarCircleImageView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.avatarsIncludeLayout.charSubTextView.getVisibility() == View.GONE) {
                 IntentManager.display(requireActivity(), binding.psychologyTextView.getText().toString(), bulkSampleModel.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
             }

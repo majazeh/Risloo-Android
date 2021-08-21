@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -86,12 +86,12 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsHolder> {
     }
 
     private void listener(SessionsHolder holder, SessionModel model) {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.editImageView);

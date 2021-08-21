@@ -16,7 +16,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
@@ -79,7 +79,7 @@ public class AuthSerialFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
                 IntentManager.display(requireActivity(), ((AuthActivity) requireActivity()).singleton.getName(), ((AuthActivity) requireActivity()).singleton.getAvatar());
         }).widget(binding.avatarIncludeLayout.avatarImageView);
@@ -94,7 +94,7 @@ public class AuthSerialFragment extends Fragment {
             serial = binding.serialEditText.getRoot().getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.serialEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
@@ -103,9 +103,9 @@ public class AuthSerialFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardLinkTextView.getRoot());
+        CustomClickView.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardLinkTextView.getRoot());
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
             Auth.logout(new HashMap<>(), header, new Response() {

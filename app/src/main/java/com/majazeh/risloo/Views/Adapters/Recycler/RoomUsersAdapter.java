@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -93,7 +93,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
     }
 
     private void listener(RoomUsersHolder holder, UserModel model) {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             if (current instanceof RoomUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).type, ((RoomUsersFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);

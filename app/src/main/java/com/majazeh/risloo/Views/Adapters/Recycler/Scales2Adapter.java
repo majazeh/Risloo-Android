@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Scales2Holder;
 import com.majazeh.risloo.databinding.SingleItemScale2Binding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
@@ -77,7 +77,7 @@ public class Scales2Adapter extends RecyclerView.Adapter<Scales2Holder> {
     }
 
     private void listener(Scales2Holder holder, ScaleModel model) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }

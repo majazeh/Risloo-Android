@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.TagsHolder;
@@ -96,7 +96,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(TagsHolder holder) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             selectedHolder = holder;
 
             tagsDialog.show(((MainActivity) activity).getSupportFragmentManager(), "tagsDialog");

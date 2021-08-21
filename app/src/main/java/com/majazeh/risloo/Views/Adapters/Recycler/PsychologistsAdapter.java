@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Adapters.Holder.PsychologistsHolder;
 import com.majazeh.risloo.databinding.SingleItemPsychologyBinding;
@@ -79,7 +79,7 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsHold
     }
 
     private void listener(PsychologistsHolder holder, UserModel model) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.containerConstraintLayout);
     }

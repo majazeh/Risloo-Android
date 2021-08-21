@@ -16,7 +16,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthRegisterBinding;
@@ -91,7 +91,7 @@ public class AuthRegisterFragment extends Fragment {
             mobile = binding.mobileEditText.getRoot().getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.mobileEditText.getRoot().length() == 0) {
                 ((AuthActivity) requireActivity()).validatoon.showValid(binding.errorIncludeLayout.getRoot(), binding.errorIncludeLayout.errorTextView, getResources().getString(R.string.AppInputEmpty));
             } else {
@@ -100,12 +100,12 @@ public class AuthRegisterFragment extends Fragment {
             }
         }).widget(binding.buttonTextView.getRoot());
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.loginLinkTextView.getRoot());
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordRecoverFragment();
             ((AuthActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.passwordRecoverLinkTextView.getRoot());

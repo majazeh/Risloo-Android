@@ -14,7 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -164,12 +164,12 @@ public class EditSessionTabSessionFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             accurateStartTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateStartTimeBottomSheet");
             accurateStartTimeBottomSheet.setTime(accurateStartTime, "accurateStartTime");
         }).widget(binding.scheduledIncludeLayout.startAccurateTimeTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             accurateStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateStartDateBottomSheet");
             accurateStartDateBottomSheet.setDate(accurateStartDate, "accurateStartDate");
         }).widget(binding.scheduledIncludeLayout.startAccurateDateTextView);
@@ -217,17 +217,17 @@ public class EditSessionTabSessionFragment extends Fragment {
             return false;
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             accurateEndTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateEndTimeBottomSheet");
             accurateEndTimeBottomSheet.setTime(accurateEndTime, "accurateEndTime");
         }).widget(binding.scheduledIncludeLayout.endAccurateTimeTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             accurateEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateEndDateBottomSheet");
             accurateEndDateBottomSheet.setDate(accurateEndDate, "accurateEndDate");
         }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (current instanceof EditSessionFragment)
                 ((EditSessionFragment) current).checkRequire();
         }).widget(binding.editTextView.getRoot());

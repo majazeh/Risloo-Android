@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.ScalesHolder;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
@@ -82,11 +82,11 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
     }
 
     private void listener(ScalesHolder holder, ScaleModel model) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("scale", model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.createTextView);

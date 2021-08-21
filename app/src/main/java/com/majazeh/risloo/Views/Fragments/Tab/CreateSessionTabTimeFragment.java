@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -115,7 +115,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
             startTimeBottomSheet.setTime(startTime, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
@@ -159,7 +159,7 @@ public class CreateSessionTabTimeFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             specifiedDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "specifiedDateBottomSheet");
             specifiedDateBottomSheet.setDate(specifiedDate, "specifiedDate");
         }).widget(binding.specifiedDateIncludeLayout.selectTextView);
@@ -199,17 +199,17 @@ public class CreateSessionTabTimeFragment extends Fragment {
             repeatWeeks = binding.repeatWeeksIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             periodStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodStartDateBottomSheet");
             periodStartDateBottomSheet.setDate(periodStartDate, "periodStartDate");
         }).widget(binding.periodStartDateIncludeLayout.selectTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             periodEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodEndDateBottomSheet");
             periodEndDateBottomSheet.setDate(periodEndDate, "periodEndDate");
         }).widget(binding.periodEndDateIncludeLayout.selectTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (current instanceof CreateSessionFragment)
                 ((CreateSessionFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());

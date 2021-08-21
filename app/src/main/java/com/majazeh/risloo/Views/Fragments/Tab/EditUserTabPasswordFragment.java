@@ -19,7 +19,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
@@ -208,7 +208,7 @@ public class EditUserTabPasswordFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (!currentPasswordVisibility) {
                 currentPasswordVisibility = true;
                 binding.currentPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
@@ -224,7 +224,7 @@ public class EditUserTabPasswordFragment extends Fragment {
             }
         }).widget(binding.currentPasswordIncludeLayout.visibilityImageView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (!newPasswordVisibility) {
                 newPasswordVisibility = true;
                 binding.newPasswordIncludeLayout.inputEditText.setTransformationMethod(null);
@@ -240,7 +240,7 @@ public class EditUserTabPasswordFragment extends Fragment {
             }
         }).widget(binding.newPasswordIncludeLayout.visibilityImageView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
                 if (binding.currentPasswordErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                     ((MainActivity) requireActivity()).validatoon.hideValid(binding.currentPasswordErrorLayout.getRoot(), binding.currentPasswordErrorLayout.errorTextView);

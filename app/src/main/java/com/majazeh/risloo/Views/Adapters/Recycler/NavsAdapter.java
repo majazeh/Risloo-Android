@@ -11,7 +11,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.NavsHolder;
 import com.majazeh.risloo.databinding.SingleItemNavBinding;
@@ -88,7 +88,7 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
     }
 
     private void listener(NavsHolder holder) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             ((MainActivity) activity).responseAdapter(holder.binding.nameTextView.getText().toString());
         }).widget(holder.binding.getRoot());
     }

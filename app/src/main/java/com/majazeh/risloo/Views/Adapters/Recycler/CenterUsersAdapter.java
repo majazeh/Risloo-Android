@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
@@ -109,7 +109,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(CenterUsersHolder holder, UserModel model) {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             if (current instanceof CenterUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).type, ((CenterUsersFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);

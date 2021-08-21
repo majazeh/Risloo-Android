@@ -23,7 +23,7 @@ import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
@@ -146,7 +146,7 @@ public class CreateCenterUserFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             roomsDialog.show(requireActivity().getSupportFragmentManager(), "roomsDialog");
             roomsDialog.setData("rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
@@ -168,7 +168,7 @@ public class CreateCenterUserFragment extends Fragment {
                 createCase = "0";
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.mobileErrorLayout.getRoot(), binding.mobileErrorLayout.errorTextView);
             if (binding.positionErrorLayout.getRoot().getVisibility() == View.VISIBLE)

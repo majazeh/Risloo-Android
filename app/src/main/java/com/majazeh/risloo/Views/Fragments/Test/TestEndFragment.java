@@ -12,7 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.databinding.FragmentTestEndBinding;
 import com.mre.ligheh.Model.Madule.List;
@@ -54,7 +54,7 @@ public class TestEndFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> ((TestActivity) requireActivity()).closeSample()).widget(binding.endTextView);
+        CustomClickView.onDelayedListener(() -> ((TestActivity) requireActivity()).closeSample()).widget(binding.endTextView);
     }
 
     private void setArgs() {

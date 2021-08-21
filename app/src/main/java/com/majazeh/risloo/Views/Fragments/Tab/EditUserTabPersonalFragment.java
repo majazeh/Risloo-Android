@@ -13,7 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
@@ -139,7 +139,7 @@ public class EditUserTabPersonalFragment extends Fragment {
             email = binding.emailIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
             birthdayBottomSheet.setDate(birthday, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
@@ -180,7 +180,7 @@ public class EditUserTabPersonalFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.nameErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.nameErrorLayout.getRoot(), binding.nameErrorLayout.errorTextView);
             if (binding.mobileErrorLayout.getRoot().getVisibility() == View.VISIBLE)

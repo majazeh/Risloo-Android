@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.WeeksHolder;
@@ -109,7 +109,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
     }
 
     private void listener(WeeksHolder holder, long timestamp) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (current instanceof CenterSchedulesFragment) {
                 ((CenterSchedulesFragment) current).responseAdapter(timestamp);
                 selectedTimestamp = timestamp;

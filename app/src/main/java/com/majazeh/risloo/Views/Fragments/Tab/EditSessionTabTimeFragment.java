@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -78,7 +78,7 @@ public class EditSessionTabTimeFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
             startTimeBottomSheet.setTime(startTime, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
@@ -93,12 +93,12 @@ public class EditSessionTabTimeFragment extends Fragment {
             duration = binding.durationIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             startDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startDateBottomSheet");
             startDateBottomSheet.setDate(startDate, "startDate");
         }).widget(binding.startDateIncludeLayout.selectTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (current instanceof EditSessionFragment)
                 ((EditSessionFragment) current).checkRequire();
         }).widget(binding.editTextView.getRoot());

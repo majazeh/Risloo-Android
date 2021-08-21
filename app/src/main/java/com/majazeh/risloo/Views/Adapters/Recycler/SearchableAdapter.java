@@ -25,7 +25,7 @@ import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
@@ -134,7 +134,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableHolder> {
     }
 
     private void listener(SearchableHolder holder, TypeModel item) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             responseDialog(item);
             notifyDataSetChanged();
         }).widget(holder.binding.getRoot());

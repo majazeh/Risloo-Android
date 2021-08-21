@@ -9,7 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
@@ -70,11 +70,11 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
                 IntentManager.finish(this);
         }).widget(binding.returnImageView.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (PermissionManager.storagePermission(this))
                 IntentManager.download(this, path);
         }).widget(binding.downloadImageView.getRoot());

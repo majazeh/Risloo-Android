@@ -17,7 +17,7 @@ import com.majazeh.risloo.Views.Adapters.Holder.SelectedHolder;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
@@ -147,11 +147,11 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
     }
 
     private void listener(SelectedHolder holder, int position) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             removePayment(position);
             removeItem(position);
             refreshCount();

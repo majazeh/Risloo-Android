@@ -17,7 +17,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
@@ -82,12 +82,12 @@ public class CreateRoomFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             psychologiesDialog.show(requireActivity().getSupportFragmentManager(), "psychologiesDialog");
             psychologiesDialog.setData("psychologies");
         }).widget(binding.psychologyIncludeLayout.selectTextView);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.psychologyErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.psychologyErrorLayout.getRoot(), binding.psychologyErrorLayout.errorTextView);
 

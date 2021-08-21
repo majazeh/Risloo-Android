@@ -13,7 +13,7 @@ import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -63,7 +63,7 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (PermissionManager.galleryPermission(requireActivity())) {
                 IntentManager.gallery(requireActivity());
             }
@@ -71,7 +71,7 @@ public class ImageBottomSheet extends BottomSheetDialogFragment {
             dismiss();
         }).widget(binding.galleryLinearLayout);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (PermissionManager.cameraPermission(requireActivity())) {
                 if (current instanceof CreateCenterFragment)
                     ((CreateCenterFragment) current).avatarPath = IntentManager.camera(requireActivity());

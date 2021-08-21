@@ -14,7 +14,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -74,12 +74,12 @@ public class MeFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.avatarIncludeLayout.charTextView.getVisibility() == View.GONE)
                 IntentManager.display(requireActivity(), binding.nameTextView.getText().toString(), userModel.getAvatar().getMedium().getUrl());
         }).widget(binding.avatarIncludeLayout.avatarCircleImageView);
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalEditUserFragment(userModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.editImageView.getRoot());

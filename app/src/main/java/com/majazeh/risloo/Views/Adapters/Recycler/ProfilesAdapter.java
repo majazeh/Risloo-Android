@@ -10,7 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Adapters.Holder.ProfilesHolder;
@@ -83,7 +83,7 @@ public class ProfilesAdapter extends RecyclerView.Adapter<ProfilesHolder> {
     }
 
     private void listener(ProfilesHolder holder, ProfileModel model) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             IntentManager.display(activity, SelectionManager.getProfileExtras(activity, "fa", getFileNameSub(model.getFile_name())), model.getUrl());
         }).widget(holder.binding.containerConstraintLayout);
     }

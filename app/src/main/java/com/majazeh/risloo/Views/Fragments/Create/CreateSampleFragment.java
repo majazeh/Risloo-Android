@@ -32,7 +32,7 @@ import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -161,7 +161,7 @@ public class CreateSampleFragment extends Fragment {
             }
         };
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             roomsDialog.show(requireActivity().getSupportFragmentManager(), "roomsDialog");
             roomsDialog.setData("rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
@@ -265,12 +265,12 @@ public class CreateSampleFragment extends Fragment {
             problem = binding.problemIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
             casesDialog.setData("cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             sessionsDialog.show(requireActivity().getSupportFragmentManager(), "sessionsDialog");
             sessionsDialog.setData("sessions");
         }).widget(binding.sessionIncludeLayout.selectContainer);
@@ -293,7 +293,7 @@ public class CreateSampleFragment extends Fragment {
             psychologyDescription = binding.psychologyDescriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.scaleErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.scaleErrorLayout.getRoot(), binding.scaleErrorLayout.errorTextView);
             if (binding.roomErrorLayout.getRoot().getVisibility() == View.VISIBLE)

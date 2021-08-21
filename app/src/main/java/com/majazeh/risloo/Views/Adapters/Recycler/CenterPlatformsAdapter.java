@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
@@ -108,11 +108,11 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(CenterPlatformsHolder holder, SessionPlatformModel model) {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.containerConstraintLayout);
 
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             if (current instanceof CenterPlatformsFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalEditPlatformFragment(((CenterPlatformsFragment) current).centerId, model);
                 ((MainActivity) activity).navController.navigate(action);

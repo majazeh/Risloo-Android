@@ -12,7 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Adapters.Holder.DocumentsHolder;
 import com.majazeh.risloo.databinding.SingleItemDocumentBinding;
@@ -81,7 +81,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsHolder> {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(DocumentsHolder holder) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 

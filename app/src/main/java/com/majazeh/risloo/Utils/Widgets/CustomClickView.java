@@ -1,15 +1,15 @@
-package com.majazeh.risloo.Utils.Managers;
+package com.majazeh.risloo.Utils.Widgets;
 
 import android.os.Handler;
 import android.view.View;
 
-public class ClickManager {
+public class CustomClickView {
 
     public static CustomClickListener onClickListener(CustomExtraCode customExtraCode){
         return view -> view.setOnClickListener(v -> customExtraCode.code());
     }
 
-    public static CustomClickListener onDelayedClickListener(CustomExtraCode customExtraCode){
+    public static CustomClickListener onDelayedListener(CustomExtraCode customExtraCode){
         return view -> view.setOnClickListener(v -> {
             view.setClickable(false);
             new Handler().postDelayed(() -> view.setClickable(true), 300);

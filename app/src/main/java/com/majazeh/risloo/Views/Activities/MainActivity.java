@@ -29,7 +29,7 @@ import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.InputManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -161,7 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             binding.getRoot().openDrawer(GravityCompat.START);
         }).widget(binding.contentIncludeLayout.menuImageView.getRoot());
 

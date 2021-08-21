@@ -20,7 +20,7 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Managers.BitmapManager;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
@@ -133,7 +133,7 @@ public class CreateCenterFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             managersDialog.show(requireActivity().getSupportFragmentManager(), "managersDialog");
             managersDialog.setData("managers");
         }).widget(binding.managerIncludeLayout.selectTextView);
@@ -148,7 +148,7 @@ public class CreateCenterFragment extends Fragment {
             title = binding.titleIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             imageBottomSheet.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
         }).widget(binding.avatarIncludeLayout.selectCircleImageView);
 
@@ -180,7 +180,7 @@ public class CreateCenterFragment extends Fragment {
             description = binding.descriptionIncludeLayout.inputEditText.getText().toString().trim();
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (binding.typeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView);
             if (binding.managerErrorLayout.getRoot().getVisibility() == View.VISIBLE)

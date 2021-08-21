@@ -19,7 +19,7 @@ import com.majazeh.risloo.databinding.FragmentCreateScheduleTabReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
@@ -113,7 +113,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
             casesDialog.setData("cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
@@ -161,7 +161,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
             }
         });
 
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             if (current instanceof CreateScheduleFragment)
                 ((CreateScheduleFragment) current).checkRequire();
         }).widget(binding.createTextView.getRoot());

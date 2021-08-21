@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.RoomsHolder;
@@ -82,7 +82,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
     }
 
     private void listener(RoomsHolder holder, RoomModel model) {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("room", model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.containerConstraintLayout);

@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.PictoralsHolder;
 import com.majazeh.risloo.databinding.SingleItemPictoralBinding;
@@ -91,7 +91,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
     }
 
     private void listener(PictoralsHolder holder, int position) {
-        ClickManager.onDelayedClickListener(() -> {
+        CustomClickView.onDelayedListener(() -> {
             answer = position;
             userSelect = true;
             notifyDataSetChanged();

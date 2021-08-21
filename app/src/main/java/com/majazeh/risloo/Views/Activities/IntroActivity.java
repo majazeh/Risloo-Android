@@ -8,7 +8,7 @@ import android.view.View;
 
 import com.majazeh.risloo.BuildConfig;
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
 import com.majazeh.risloo.Utils.Managers.WindowDecorator;
@@ -54,9 +54,9 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void listener() {
-        ClickManager.onClickListener(() -> IntentManager.auth(this, "login")).widget(binding.headerIncludeLayout.loginTextView);
+        CustomClickView.onClickListener(() -> IntentManager.auth(this, "login")).widget(binding.headerIncludeLayout.loginTextView);
 
-        ClickManager.onClickListener(() -> IntentManager.auth(this, "register")).widget(binding.registerTextView);
+        CustomClickView.onClickListener(() -> IntentManager.auth(this, "register")).widget(binding.registerTextView);
     }
 
     private void setData() {

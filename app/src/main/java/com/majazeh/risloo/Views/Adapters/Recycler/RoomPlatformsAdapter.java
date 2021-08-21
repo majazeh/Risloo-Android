@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
-import com.majazeh.risloo.Utils.Managers.ClickManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -114,7 +114,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener(RoomPlatformsHolder holder, SessionPlatformModel model) {
-        ClickManager.onClickListener(() -> {
+        CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
         }).widget(holder.binding.containerConstraintLayout);
 
