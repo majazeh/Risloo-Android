@@ -19,7 +19,7 @@ import javax.crypto.NoSuchPaddingException;
 
 public class CryptoManager {
 
-    public static String encrypt(String text, String publicKey)
+    public static String encrypt(String value, String publicKey)
             throws NoSuchPaddingException,
             NoSuchAlgorithmException,
             BadPaddingException,
@@ -30,7 +30,7 @@ public class CryptoManager {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
         cipher.init(Cipher.ENCRYPT_MODE, stringToPublicKey(getMainPublicKey(publicKey)));
 
-        byte[] data = text.getBytes();
+        byte[] data = value.getBytes();
         int chunkSize = 245;
         int encryptSize = (int) (Math.ceil(data.length / 245.0) * 256);
         int idx = 0;
@@ -48,7 +48,7 @@ public class CryptoManager {
         return Base64.encodeToString(encryptData, Base64.DEFAULT);
     }
 
-    public static String decrypt(String result, String privateKey)
+    public static String decrypt(String value, String privateKey)
             throws NoSuchPaddingException,
             NoSuchAlgorithmException,
             BadPaddingException,
@@ -59,7 +59,7 @@ public class CryptoManager {
         Cipher cipher = Cipher.getInstance("RSA/ECB/PKCS1PADDING");
         cipher.init(Cipher.DECRYPT_MODE, stringToPrivateKey(getMainPrivateKey(privateKey)));
 
-        byte[] data = Base64.decode(result,1);
+        byte[] data = Base64.decode(value,1);
         int chunkSize = 256;
         int idx = 0;
 
@@ -77,8 +77,8 @@ public class CryptoManager {
     }
 
     private static PublicKey stringToPublicKey(String publicKey)
-            throws InvalidKeySpecException,
-            NoSuchAlgorithmException {
+            throws NoSuchAlgorithmException,
+            InvalidKeySpecException {
 
         byte[] keyBytes = Base64.decode(publicKey, Base64.DEFAULT);
         X509EncodedKeySpec keySpec = new X509EncodedKeySpec(keyBytes);
@@ -87,8 +87,8 @@ public class CryptoManager {
     }
 
     private static PrivateKey stringToPrivateKey(String privateKey)
-            throws InvalidKeySpecException,
-            NoSuchAlgorithmException {
+            throws NoSuchAlgorithmException,
+            InvalidKeySpecException {
 
         byte[] keyBytes = Base64.decode(privateKey, Base64.DEFAULT);
         PKCS8EncodedKeySpec keySpec = new PKCS8EncodedKeySpec(keyBytes);
@@ -96,26 +96,22 @@ public class CryptoManager {
         return keyFactory.generatePrivate(keySpec);
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private static String getMainPublicKey(String publicKey) {
-        String pubKey = "";
         publicKey.trim();
-        if (publicKey.startsWith("-----BEGIN PUBLIC KEY-----") && publicKey.endsWith("-----END PUBLIC KEY-----")) {
-            pubKey = publicKey.substring(26, publicKey.length() - 24);
-        } else {
-            pubKey = publicKey;
-        }
-        return pubKey;
+        if (publicKey.startsWith("-----BEGIN PUBLIC KEY-----") && publicKey.endsWith("-----END PUBLIC KEY-----"))
+            return publicKey.substring(26, publicKey.length() - 24);
+        else
+            return publicKey;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     private static String getMainPrivateKey(String privateKey) {
-        String priKey = "";
         privateKey.trim();
-        if (privateKey.startsWith("-----BEGIN RSA PRIVATE KEY-----") && privateKey.endsWith("-----END RSA PRIVATE KEY-----")) {
-            priKey = privateKey.substring(31, privateKey.length() - 29);
-        } else {
-            priKey = privateKey;
-        }
-        return priKey;
+        if (privateKey.startsWith("-----BEGIN RSA PRIVATE KEY-----") && privateKey.endsWith("-----END RSA PRIVATE KEY-----"))
+            return privateKey.substring(31, privateKey.length() - 29);
+        else
+            return privateKey;
     }
 
 }
