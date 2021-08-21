@@ -17,18 +17,23 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.util.Objects;
 
 public class FileManager {
 
+    /*
+    ---------- Write ----------
+    */
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void writeObjectToCache(Context context, JSONObject jsonObject, String fileName) {
         try {
             File file = new File(context.getCacheDir(), fileName);
-            if (!file.getParentFile().exists()) {
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
                 file.getParentFile().mkdirs();
-            }
-            if (!file.exists()) {
+            if (!file.exists())
                 file.createNewFile();
-            }
+
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(jsonObject.toString());
@@ -39,15 +44,15 @@ public class FileManager {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void writeArrayToCache(Context context, JSONArray jsonArray, String fileName) {
         try {
             File file = new File(context.getCacheDir(), fileName);
-            if (!file.getParentFile().exists()) {
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
                 file.getParentFile().mkdirs();
-            }
-            if (!file.exists()) {
+            if (!file.exists())
                 file.createNewFile();
-            }
+
             FileOutputStream fos = new FileOutputStream(file);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
             oos.writeObject(jsonArray.toString());
@@ -58,15 +63,15 @@ public class FileManager {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void writeBitmapToCache(Context context, Bitmap bitmap, String fileName) {
         try {
             File file = new File(context.getCacheDir(), fileName);
-            if (!file.getParentFile().exists()) {
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
                 file.getParentFile().mkdirs();
-            }
-            if (!file.exists()) {
+            if (!file.exists())
                 file.createNewFile();
-            }
+
             FileOutputStream fos = new FileOutputStream(file);
             bitmap.compress(Bitmap.CompressFormat.JPEG, 100, fos);
             fos.flush();
@@ -76,6 +81,7 @@ public class FileManager {
         }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void writeUriToCache(Context context, Uri uri, String fileName) {
         InputStream is = null;
         FileOutputStream fos = null;
@@ -87,11 +93,10 @@ public class FileManager {
             bos = new BufferedOutputStream(fos);
 
             byte[] buf = new byte[1024];
-
             is.read(buf);
-            do {
-                bos.write(buf);
-            } while (is.read(buf) != -1);
+
+            do bos.write(buf);
+            while (is.read(buf) != -1);
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -106,15 +111,18 @@ public class FileManager {
         }
     }
 
+    /*
+    ---------- Read ----------
+    */
+
     public static JSONObject readObjectFromCache(Context context, String fileName) {
         try {
             File file = new File(context.getCacheDir(), fileName);
-            if (!file.getParentFile().exists()) {
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
                 return null;
-            }
-            if (!file.exists()) {
+            if (!file.exists())
                 return null;
-            }
+
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             JSONObject jsonObject = new JSONObject(ois.readObject().toString());
@@ -129,12 +137,11 @@ public class FileManager {
     public static JSONArray readArrayFromCache(Context context, String fileName) {
         try {
             File file = new File(context.getCacheDir(), fileName);
-            if (!file.getParentFile().exists()) {
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
                 return null;
-            }
-            if (!file.exists()) {
+            if (!file.exists())
                 return null;
-            }
+
             FileInputStream fis = new FileInputStream(file);
             ObjectInputStream ois = new ObjectInputStream(fis);
             JSONArray jsonArray = new JSONArray(ois.readObject().toString());
@@ -149,12 +156,11 @@ public class FileManager {
     public static Bitmap readBitmapFromCache(Context context, String fileName) {
         try {
             File file = new File(context.getCacheDir(), fileName);
-            if (!file.getParentFile().exists()) {
+            if (!Objects.requireNonNull(file.getParentFile()).exists())
                 return null;
-            }
-            if (!file.exists()) {
+            if (!file.exists())
                 return null;
-            }
+
             FileInputStream fis = new FileInputStream(file);
             Bitmap bitmap = BitmapFactory.decodeStream(fis);
             fis.close();
@@ -167,26 +173,35 @@ public class FileManager {
 
     public static File readFileFromCache(Context context, String fileName) {
         File file = new File(context.getCacheDir(), fileName);
-        if (!file.getParentFile().exists()) {
+        if (!Objects.requireNonNull(file.getParentFile()).exists())
             return null;
-        }
-        if (!file.exists()) {
+        if (!file.exists())
             return null;
-        }
+
         return file;
     }
 
+    /*
+    ---------- Check ----------
+    */
+
     public static boolean hasFileInCache(Context context, String fileName) {
-        return new File(context.getCacheDir(), fileName).exists();
+        File file = new File(context.getCacheDir(), fileName);
+        return file.exists();
     }
 
+    /*
+    ---------- Delete ----------
+    */
+
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void deleteFileFromCache(Context context, String fileName) {
         File file = new File(context.getCacheDir(), fileName);
-        if (file.exists()) {
+        if (file.exists())
             file.delete();
-        }
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static void deleteFolderFromCache(Context context, String fileName) {
         File file = new File(context.getCacheDir(), fileName);
         if (file.exists()) {
@@ -194,9 +209,8 @@ public class FileManager {
             if (children != null) {
                 for (String child : children) {
                     File subFile = new File(file, child);
-                    if (subFile.exists()) {
+                    if (subFile.exists())
                         subFile.delete();
-                    }
                 }
             }
             file.delete();
