@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:layout_margin="@dimen/_6sdp"
+    android:layoutDirection="rtl"
+    android:paddingBottom="@dimen/_6sdp"
+    android:paddingEnd="@dimen/_2sdp"
+    android:paddingStart="@dimen/_8sdp"
+    android:paddingTop="@dimen/_6sdp"
+    android:background="@drawable/draw_4sdp_solid_gray500">
+
+    <TextView
+        android:id="@+id/message_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_2sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray100"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/callback_imageView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="پیغام عادی" />
+
+    <ImageView
+        android:id="@+id/callback_imageView"
+        android:layout_width="@dimen/_24sdp"
+        android:layout_height="@dimen/_24sdp"
+        android:padding="@dimen/_5sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        android:src="@drawable/ic_times_light"
+        app:layout_constraintBottom_toBottomOf="@id/message_textView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/message_textView"
+        app:tint="@color/Gray100" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
