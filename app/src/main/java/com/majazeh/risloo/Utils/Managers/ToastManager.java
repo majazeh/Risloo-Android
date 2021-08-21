@@ -13,6 +13,10 @@ public class ToastManager {
 
     private static Toast toast;
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static void showToast(Activity activity, String value) {
         try {
             toast.getView().isShown();

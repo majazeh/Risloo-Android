@@ -14,6 +14,10 @@ import java.io.IOException;
 
 public class BitmapManager {
 
+    /*
+    ---------- Converts ----------
+    */
+
     public static byte[] bitmapToByte(Bitmap image) {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         image.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
@@ -35,6 +39,10 @@ public class BitmapManager {
         byte[] decodedByte = Base64.decode(value, 0);
         return BitmapFactory.decodeByteArray(decodedByte, 0, decodedByte.length);
     }
+
+    /*
+    ---------- Funcs ----------
+    */
 
     public static Bitmap scaleToCenter(Bitmap image) {
         int imageWidth = image.getWidth();

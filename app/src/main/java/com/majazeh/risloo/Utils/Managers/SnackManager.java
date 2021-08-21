@@ -15,6 +15,10 @@ import com.majazeh.risloo.databinding.SnackSuccesBinding;
 
 public class SnackManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static void showSuccesSnack(Activity activity, String value) {
         Snackbar snackbar = Snackbar.make(activity.findViewById(android.R.id.content), "", Snackbar.LENGTH_LONG);
         View snackbarView = snackbar.getView();

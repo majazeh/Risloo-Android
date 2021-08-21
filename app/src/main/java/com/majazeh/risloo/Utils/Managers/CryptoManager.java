@@ -19,6 +19,10 @@ import javax.crypto.NoSuchPaddingException;
 
 public class CryptoManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static String encrypt(String value, String publicKey)
             throws NoSuchPaddingException,
             NoSuchAlgorithmException,
@@ -76,6 +80,10 @@ public class CryptoManager {
         return new String(decryptData).replaceAll("\u0000.*", "");
     }
 
+    /*
+    ---------- Converts ----------
+    */
+
     private static PublicKey stringToPublicKey(String publicKey)
             throws NoSuchAlgorithmException,
             InvalidKeySpecException {
@@ -95,6 +103,10 @@ public class CryptoManager {
         KeyFactory keyFactory = KeyFactory.getInstance("RSA");
         return keyFactory.generatePrivate(keySpec);
     }
+
+    /*
+    ---------- Getter ----------
+    */
 
     @SuppressWarnings("ResultOfMethodCallIgnored")
     private static String getMainPublicKey(String publicKey) {

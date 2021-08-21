@@ -7,6 +7,10 @@ import java.io.InputStream;
 
 public class JsonManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static String getJson(Activity activity, String file) {
         try {
             InputStream inputStream = activity.getAssets().open(file);

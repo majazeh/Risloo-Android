@@ -5,6 +5,10 @@ import android.content.pm.PackageInfo;
 
 public class PackageManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static int versionCode(Activity activity) {
         try {
             PackageInfo packageInfo = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0);

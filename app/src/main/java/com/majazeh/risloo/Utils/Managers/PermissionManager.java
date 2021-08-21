@@ -10,6 +10,10 @@ import androidx.core.content.ContextCompat;
 
 public class PermissionManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static boolean filePermission(Activity activity) {
         String[] permissions = {Manifest.permission.READ_EXTERNAL_STORAGE};
 

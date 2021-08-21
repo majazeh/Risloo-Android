@@ -14,6 +14,10 @@ import java.util.Objects;
 
 public class PathManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static String localPath(Context context, Uri uri) {
 
         // DocumentProvider
@@ -117,6 +121,10 @@ public class PathManager {
         return null;
     }
 
+    /*
+    ---------- Access ----------
+    */
+
     private static String fileName(Context context, Uri uri) {
         Cursor cursor = null;
 
@@ -157,6 +165,10 @@ public class PathManager {
 
         return null;
     }
+
+    /*
+    ---------- Bools ----------
+    */
 
     private static boolean isLocalStorageDocument(Uri uri) {
         return "com.majazeh.risloo.debug.fileprovider".equals(uri.getAuthority());

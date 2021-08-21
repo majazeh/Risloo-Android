@@ -5,6 +5,10 @@ import android.view.WindowManager;
 
 public class ParamsManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static WindowManager.LayoutParams applyWrapContent(Dialog dialog) {
         WindowManager.LayoutParams layoutParams = new WindowManager.LayoutParams();
         layoutParams.copyFrom(dialog.getWindow().getAttributes());
