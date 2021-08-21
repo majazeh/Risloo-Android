@@ -27,10 +27,18 @@ import java.util.Collections;
 
 public class InitManager {
 
+    /*
+    ---------- Texts ----------
+    */
+
     public static void txtTextColor(TextView txt, String txtValue, int txtColor) {
         txt.setText(txtValue);
         txt.setTextColor(txtColor);
     }
+
+    /*
+    ---------- Images ----------
+    */
 
     public static void imgResTint(Activity activity, ImageView img, int imgRes, int imgColor) {
         img.setImageResource(imgRes);
@@ -44,7 +52,7 @@ public class InitManager {
     }
 
     /*
-    ---------- Spinner Normal Codes ----------
+    ---------- Spinners - Normal ----------
     */
 
     public static void normalAdapterSpinner(Activity activity, Spinner spinner, int arrayRes) {
@@ -296,7 +304,7 @@ public class InitManager {
     }
 
      /*
-    ---------- Spinner Custom Codes ----------
+    ---------- Spinners - Custom ----------
     */
 
     public static void profileCustomSpinner(Activity activity, Spinner spinner, ArrayList<String> arrayList) {
@@ -595,7 +603,7 @@ public class InitManager {
     }
 
     /*
-    ---------- RecyclerView Codes ----------
+    ---------- RecyclerViews ----------
     */
 
     public static void fixedGridRecyclerView(Activity activity, RecyclerView recyclerView, float marginTop, float marginBottom, float marginInner, float marginSide) {
