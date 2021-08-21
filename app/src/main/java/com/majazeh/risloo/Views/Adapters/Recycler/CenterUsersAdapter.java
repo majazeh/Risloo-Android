@@ -127,7 +127,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
                 if (userSelect) {
                     String pos = parent.getItemAtPosition(position).toString();
 
-                    doWork(holder, model, SelectionManager.getPosition(activity, "en", pos), "position");
+                    doWork(holder, model, SelectionManager.getUserType(activity, "en", pos), "position");
 
                     userSelect = false;
                 }

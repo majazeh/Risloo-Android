@@ -110,7 +110,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
-        holder.binding.positionTextView.setText(SelectionManager.getPosition(activity, "fa", model.getPosition()));
+        holder.binding.positionTextView.setText(SelectionManager.getUserType(activity, "fa", model.getPosition()));
 
         setAcceptation(holder, model);
     }

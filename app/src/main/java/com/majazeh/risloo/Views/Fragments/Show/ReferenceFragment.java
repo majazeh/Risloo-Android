@@ -158,7 +158,7 @@ public class ReferenceFragment extends Fragment {
         }
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
-            binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", model.getPosition()));
+            binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getPosition()));
             binding.statusTextView.setVisibility(View.VISIBLE);
         } else {
             binding.statusTextView.setVisibility(View.GONE);
@@ -194,7 +194,7 @@ public class ReferenceFragment extends Fragment {
         }
 
         if (model.getAcceptation() != null && model.getAcceptation().getPosition() != null && !model.getAcceptation().getPosition().equals("")) {
-            binding.statusTextView.setText(SelectionManager.getPosition2(requireActivity(), "fa", model.getAcceptation().getPosition()));
+            binding.statusTextView.setText(SelectionManager.getReferencePosition(requireActivity(), "fa", model.getAcceptation().getPosition()));
             binding.statusTextView.setVisibility(View.VISIBLE);
         } else {
             binding.statusTextView.setVisibility(View.GONE);

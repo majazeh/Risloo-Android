@@ -106,13 +106,7 @@
     // Spinner Arrays
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <array name="EncryptionStates">
-        <item>با رمزگذاری</item>
-        <item>بدون رمزگذاری</item>
-        <item></item>
-    </array>
-
-    <array name="CaseTypes">
+    <array name="CaseStatus">
         <item>بدون پرونده</item>
         <item>ساخت پرونده مجزا برای هر فرد</item>
         <item>ساخت یک پرونده گروهی برای همه افراد</item>
@@ -120,9 +114,15 @@
         <item></item>
     </array>
 
-    <array name="PlatformSessions">
-        <item>حضوری</item>
-        <item>مجازی</item>
+    <array name="EncryptionStates">
+        <item>با رمزگذاری</item>
+        <item>بدون رمزگذاری</item>
+        <item></item>
+    </array>
+
+    <array name="PaymentStatus">
+        <item>آنلاین</item>
+        <item>نقدی</item>
         <item></item>
     </array>
 
@@ -140,9 +140,9 @@
         <item></item>
     </array>
 
-    <array name="PaymentTypes">
-        <item>آنلاین</item>
-        <item>نقدی</item>
+    <array name="PlatformSessions">
+        <item>حضوری</item>
+        <item>مجازی</item>
         <item></item>
     </array>
 
@@ -164,18 +164,18 @@
         <item></item>
     </array>
 
+    <array name="UserPosition">
+        <item>مراجع</item>
+        <item>درخواست</item>
+        <item>حذف</item>
+        <item></item>
+    </array>
+
     <array name="UserTypes">
         <item>مدیر</item>
         <item>اپراتور</item>
         <item>روان‌شناس</item>
         <item>مراجع</item>
-        <item></item>
-    </array>
-
-    <array name="UserPosition">
-        <item>مراجع</item>
-        <item>درخواست</item>
-        <item>حذف</item>
         <item></item>
     </array>
 

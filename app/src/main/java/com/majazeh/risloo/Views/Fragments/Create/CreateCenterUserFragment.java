@@ -251,7 +251,7 @@ public class CreateCenterUserFragment extends Fragment {
         data.put("mobile", mobile);
 
         if (type.equals("counseling_center")) {
-            data.put("position", SelectionManager.getPosition(requireActivity(), "en", position));
+            data.put("position", SelectionManager.getUserType(requireActivity(), "en", position));
 
             if (position.equals("مراجع")) {
                 data.put("room_id", roomId);

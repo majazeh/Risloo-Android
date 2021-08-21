@@ -168,7 +168,7 @@ public class EditCenterUserFragment extends Fragment {
         }
 
         if (model.getPosition() != null && !model.getPosition().equals("")) {
-            position = SelectionManager.getPosition(requireActivity(), "fa", model.getPosition());
+            position = SelectionManager.getUserType(requireActivity(), "fa", model.getPosition());
             for (int i = 0; i < binding.positionIncludeLayout.selectSpinner.getCount(); i++) {
                 if (binding.positionIncludeLayout.selectSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
                     binding.positionIncludeLayout.selectSpinner.setSelection(i);
@@ -212,7 +212,7 @@ public class EditCenterUserFragment extends Fragment {
     private void doWork() {
         ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
 
-        data.put("position", SelectionManager.getPosition(requireActivity(), "en", position));
+        data.put("position", SelectionManager.getUserType(requireActivity(), "en", position));
         data.put("nickname", nickname);
         data.put("status", status);
 

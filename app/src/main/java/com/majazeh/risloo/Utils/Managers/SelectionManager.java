@@ -7,6 +7,10 @@ import org.json.JSONException;
 
 public class SelectionManager {
 
+    /*
+    ---------- Funcs ----------
+    */
+
     public static String getAcceptation(Activity activity, String local, String value) {
         try {
             JSONArray list = new JSONArray(JsonManager.getJson(activity, "Acceptations.json"));
@@ -187,9 +191,9 @@ public class SelectionManager {
         } return value;
     }
 
-    public static String getPosition(Activity activity, String local, String value) {
+    public static String getProfileExtras(Activity activity, String local, String value) {
         try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, "Positions.json"));
+            JSONArray list = new JSONArray(JsonManager.getJson(activity, "ProfileExtras.json"));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {
@@ -205,9 +209,9 @@ public class SelectionManager {
         } return value;
     }
 
-    public static String getPosition2(Activity activity, String local, String value) {
+    public static String getReferencePosition(Activity activity, String local, String value) {
         try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, "Positions2.json"));
+            JSONArray list = new JSONArray(JsonManager.getJson(activity, "ReferencePositions.json"));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {
@@ -226,24 +230,6 @@ public class SelectionManager {
     public static String getRoomStatus(Activity activity, String local, String value) {
         try {
             JSONArray list = new JSONArray(JsonManager.getJson(activity, "RoomStatus.json"));
-
-            for (int i = 0; i < list.length(); i++) {
-                if (local.equals("en")) {
-                    if (value.equals(list.getJSONObject(i).getString("fa_title")))
-                        return list.getJSONObject(i).getString("en_title");
-                } else {
-                    if (value.equals(list.getJSONObject(i).getString("en_title")))
-                        return list.getJSONObject(i).getString("fa_title");
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } return value;
-    }
-
-    public static String getProfileExtras(Activity activity, String local, String value) {
-        try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, "ProfileExtras.json"));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {
@@ -331,9 +317,9 @@ public class SelectionManager {
         } return value;
     }
 
-    public static String getSessionType(Activity activity, String local, String value) {
+    public static String getUserPosition(Activity activity, String local, String value) {
         try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, "SessionType.json"));
+            JSONArray list = new JSONArray(JsonManager.getJson(activity, "UserPosition.json"));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {
@@ -352,24 +338,6 @@ public class SelectionManager {
     public static String getUserStatus(Activity activity, String local, String value) {
         try {
             JSONArray list = new JSONArray(JsonManager.getJson(activity, "UserStatus.json"));
-
-            for (int i = 0; i < list.length(); i++) {
-                if (local.equals("en")) {
-                    if (value.equals(list.getJSONObject(i).getString("fa_title")))
-                        return list.getJSONObject(i).getString("en_title");
-                } else {
-                    if (value.equals(list.getJSONObject(i).getString("en_title")))
-                        return list.getJSONObject(i).getString("fa_title");
-                }
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        } return value;
-    }
-
-    public static String getUserPosition(Activity activity, String local, String value) {
-        try {
-            JSONArray list = new JSONArray(JsonManager.getJson(activity, "UserPosition.json"));
 
             for (int i = 0; i < list.length(); i++) {
                 if (local.equals("en")) {

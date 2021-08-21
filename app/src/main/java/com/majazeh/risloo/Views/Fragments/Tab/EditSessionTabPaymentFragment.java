@@ -54,7 +54,7 @@ public class EditSessionTabPaymentFragment extends Fragment {
 
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabPaymentPaymentHeader));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes);
+        InitManager.normal12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentStatus);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabPaymentButton), getResources().getColor(R.color.White));
     }

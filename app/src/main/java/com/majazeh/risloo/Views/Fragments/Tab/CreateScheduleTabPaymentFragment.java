@@ -61,7 +61,7 @@ public class CreateScheduleTabPaymentFragment extends Fragment {
 
         binding.paymentIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabPaymentPaymentHeader));
 
-        InitManager.normal12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentTypes);
+        InitManager.normal12sspSpinner(requireActivity(), binding.paymentIncludeLayout.selectSpinner, R.array.PaymentStatus);
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.axisRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), 0);
 

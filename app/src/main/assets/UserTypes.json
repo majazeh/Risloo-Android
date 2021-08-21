@@ -1,17 +1,5 @@
 [
     {
-        "fa_title": "سیستم",
-        "en_title": "system"
-    },
-    {
-        "fa_title": "ادمین",
-        "en_title": "admin"
-    },
-    {
-        "fa_title": "عضو",
-        "en_title": "user"
-    },
-    {
         "fa_title": "مدیر",
         "en_title": "manager"
     },
@@ -26,5 +14,17 @@
     {
         "fa_title": "مراجع",
         "en_title": "client"
+    },
+    {
+        "fa_title": "سیستم",
+        "en_title": "system"
+    },
+    {
+        "fa_title": "ادمین",
+        "en_title": "admin"
+    },
+    {
+        "fa_title": "عضو",
+        "en_title": "user"
     }
 ]
