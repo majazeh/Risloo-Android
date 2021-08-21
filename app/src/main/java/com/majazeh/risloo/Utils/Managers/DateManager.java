@@ -127,50 +127,6 @@ public class DateManager {
         }
     }
 
-    public static String jalYYYYsNMMsDDsNDD(String timestamp, String seperator) {
-        long value = Long.parseLong(timestamp);
-        Date date = timestampToDate(value);
-        PersianDate persianDate = dateToPersian(date);
-
-        return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear();
-    }
-
-    public static String jalYYYYsNMMsDDsNDDsHHsMM(String timestamp, String seperator) {
-        long value = Long.parseLong(timestamp);
-        Date date = timestampToDate(value);
-        PersianDate persianDate = dateToPersian(date);
-
-        if (persianDate.getHour() < 10) {
-            if (persianDate.getMinute() < 10)
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
-            else
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
-        } else {
-            if (persianDate.getMinute() < 10)
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
-            else
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + persianDate.getHour() + ":" + persianDate.getMinute();
-        }
-    }
-
-    public static String jalYYYYsNMMsDDsNDDnlHHsMM(String timestamp, String seperator) {
-        long value = Long.parseLong(timestamp);
-        Date date = timestampToDate(value);
-        PersianDate persianDate = dateToPersian(date);
-
-        if (persianDate.getHour() < 10) {
-            if (persianDate.getMinute() < 10)
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
-            else
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
-        } else {
-            if (persianDate.getMinute() < 10)
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
-            else
-                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + persianDate.getMinute();
-        }
-    }
-
     public static String jalYYYYsMMsDD(String timestamp, String seperator) {
         long value = Long.parseLong(timestamp);
         Date date = timestampToDate(value);
@@ -187,6 +143,14 @@ public class DateManager {
             else
                 return persianDate.getShYear() + seperator + persianDate.getShMonth() + seperator + persianDate.getShDay();
         }
+    }
+
+    public static String jalYYYYsNMMsDDsNDD(String timestamp, String seperator) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear();
     }
 
     public static String jalHHoMMoYYoMMoDD(String timestamp) {
@@ -247,6 +211,42 @@ public class DateManager {
                         return StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + "-" + persianDate.getShMonth() + "-" + persianDate.getShDay() + " " + persianDate.getHour() + ":" + persianDate.getMinute();
                 }
             }
+        }
+    }
+
+    public static String jalYYYYsNMMsDDsNDDsHHsMM(String timestamp, String seperator) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        if (persianDate.getHour() < 10) {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+        } else {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + seperator + "ساعت" + seperator + persianDate.getHour() + ":" + persianDate.getMinute();
+        }
+    }
+
+    public static String jalYYYYsNMMsDDsNDDnlHHsMM(String timestamp, String seperator) {
+        long value = Long.parseLong(timestamp);
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        if (persianDate.getHour() < 10) {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
+        } else {
+            if (persianDate.getMinute() < 10)
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
+            else
+                return persianDate.dayName() + seperator + persianDate.getShDay() + seperator + persianDate.monthName() + seperator + persianDate.getShYear() + "\n" + "ساعت" + seperator + persianDate.getHour() + ":" + persianDate.getMinute();
         }
     }
 
@@ -505,48 +505,6 @@ public class DateManager {
                         return firstMonth + "/" +firstDay + " تا " + lastMonth + "/" + lastDay;
                 }
             }
-        }
-    }
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-
-
-    //////////////////////////////////////////////////////////////////////////////////////
-
-    public static String gregorianToJalali6(String value) {
-        int year = Integer.parseInt(dateToString("yyyy", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int month = Integer.parseInt(dateToString("MM", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int day = Integer.parseInt(dateToString("dd", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int hour = Integer.parseInt(dateToString("HH", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int minute = Integer.parseInt(dateToString("mm", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-        int second = Integer.parseInt(dateToString("ss", stringToDate("yyyy-MM-dd HH:mm:ss", value)));
-
-        PersianDate persianDate = new PersianDate();
-        persianDate.initGrgDate(year, month, day, hour, minute, second);
-
-        if (persianDate.getHour() < 10) {
-            if (persianDate.getMinute() < 10)
-                return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + " " + "ساعت" + " " + "0" + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
-            else
-                return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + " " + "ساعت" + " " + "0" + persianDate.getHour() + ":" + persianDate.getMinute();
-        } else {
-            if (persianDate.getMinute() < 10)
-                return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + " " + "ساعت" + " " + persianDate.getHour() + ":" + "0" + persianDate.getMinute();
-            else
-                return persianDate.dayName() + " " + persianDate.getShDay() + " " + persianDate.monthName() + " " + StringManager.substring(String.valueOf(persianDate.getShYear()), 2) + " " + "ساعت" + " " + persianDate.getHour() + ":" + persianDate.getMinute();
         }
     }
 

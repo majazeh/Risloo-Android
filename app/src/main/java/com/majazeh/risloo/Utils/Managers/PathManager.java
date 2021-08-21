@@ -30,20 +30,18 @@ public class PathManager {
                 String[] split = documentId.split(":");
                 String type = split[0];
 
-                if ("primary".equalsIgnoreCase(type)) {
+                if ("primary".equalsIgnoreCase(type))
                     return Environment.getExternalStorageDirectory() + "/" + split[1];
-                } else if ("home".equalsIgnoreCase(type)) {
+                else if ("home".equalsIgnoreCase(type))
                     return Environment.getExternalStorageDirectory() + "/documents/" + split[1];
-                }
             }
 
             // Downloads
             else if (isDownloadsDocument(uri)) {
                 String documentId = DocumentsContract.getDocumentId(uri);
 
-                if (documentId != null && documentId.startsWith("raw:")) {
+                if (documentId != null && documentId.startsWith("raw:"))
                     return documentId.substring(4);
-                }
 
                 String[] contentUriPrefixesToTry = new String[] {
                         "content://downloads/public_downloads",
@@ -54,16 +52,14 @@ public class PathManager {
                     String[] split = Objects.requireNonNull(documentId).split(":");
 
                     Uri contentUri;
-                    if (Objects.requireNonNull(documentId).startsWith("msf:")) {
+                    if (Objects.requireNonNull(documentId).startsWith("msf:"))
                         contentUri = ContentUris.withAppendedId(Uri.parse(contentUriPrefix), Long.parseLong(split[1]));
-                    } else {
+                    else
                         contentUri = ContentUris.withAppendedId(Uri.parse(contentUriPrefix), Long.parseLong(documentId));
-                    }
 
                     String path = fileColumn(context, contentUri, null, null);
-                    if (path != null) {
+                    if (path != null)
                         return path;
-                    }
                 }
 
                 String fileName = fileName(context, uri);
@@ -107,11 +103,10 @@ public class PathManager {
 
         // MediaStore
         else if ("content".equalsIgnoreCase(uri.getScheme())) {
-            if (isGooglePhotosUri(uri)) {
+            if (isGooglePhotosUri(uri))
                 return uri.getLastPathSegment();
-            } else {
+            else
                 return fileColumn(context, uri, null, null);
-            }
         }
 
         // File
@@ -134,9 +129,8 @@ public class PathManager {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (cursor != null) {
+            if (cursor != null)
                 cursor.close();
-            }
         }
 
         return null;
@@ -157,9 +151,8 @@ public class PathManager {
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
-            if (cursor != null) {
+            if (cursor != null)
                 cursor.close();
-            }
         }
 
         return null;

@@ -29,8 +29,19 @@ import java.util.Objects;
 
 public class IntentManager {
 
+    /*
+    ---------- Activities ----------
+    */
+
     public static void intro(Activity activity) {
         Intent intent = new Intent(activity, IntroActivity.class);
+
+        activity.startActivity(intent);
+        activity.finish();
+    }
+
+    public static void main(Activity activity) {
+        Intent intent = new Intent(activity, MainActivity.class);
 
         activity.startActivity(intent);
         activity.finish();
@@ -44,11 +55,11 @@ public class IntentManager {
         activity.finish();
     }
 
-    public static void main(Activity activity) {
-        Intent intent = new Intent(activity, MainActivity.class);
+    public static void test(Activity activity, String id) {
+        Intent intent = new Intent(activity, TestActivity.class);
+        intent.putExtra("id", id);
 
         activity.startActivity(intent);
-        activity.finish();
     }
 
     public static void display(Activity activity, String title, String path) {
@@ -59,16 +70,13 @@ public class IntentManager {
         activity.startActivity(intent);
     }
 
-    public static void test(Activity activity, String id) {
-        Intent intent = new Intent(activity, TestActivity.class);
-        intent.putExtra("id", id);
-
-        activity.startActivity(intent);
-    }
-
     public static void finish(Activity activity) {
         activity.finish();
     }
+
+    /*
+    ---------- Requests ----------
+    */
 
     public static void file(Activity activity) {
         Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
@@ -114,18 +122,15 @@ public class IntentManager {
         }
     }
 
+    /*
+    ---------- Local ----------
+    */
+
     public static void internet(Context context) {
         Intent intent = new Intent(Settings.ACTION_WIRELESS_SETTINGS);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         context.startActivity(intent);
-    }
-
-    public static void mediaScan(Activity activity, File file) {
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        intent.setData(Uri.fromFile(file));
-
-        activity.sendBroadcast(intent);
     }
 
     public static void phone(Context context, String number) {
@@ -163,6 +168,34 @@ public class IntentManager {
 
         context.startActivity(Intent.createChooser(intent, chooser));
     }
+
+    public static void download(Context context, String url) {
+        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
+
+        request.allowScanningByMediaScanner();
+        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
+        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, url.substring(url.lastIndexOf('/')));
+
+        DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
+        Objects.requireNonNull(manager).enqueue(request);
+    }
+
+    public static void clipboard(Context context, String value) {
+        ClipboardManager manager = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
+        ClipData clip = ClipData.newPlainText("saved", value);
+        manager.setPrimaryClip(clip);
+    }
+
+    public static void mediaScan(Activity activity, File file) {
+        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+        intent.setData(Uri.fromFile(file));
+
+        activity.sendBroadcast(intent);
+    }
+
+    /*
+    ---------- Social ----------
+    */
 
     public static void googlePlay(Context context) {
         Intent intent;
@@ -222,23 +255,6 @@ public class IntentManager {
             intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://instagram.com/" + instagramID));
             context.startActivity(intent);
         }
-    }
-
-    public static void download(Context context, String url) {
-        DownloadManager.Request request = new DownloadManager.Request(Uri.parse(url));
-
-        request.allowScanningByMediaScanner();
-        request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-        request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, url.substring(url.lastIndexOf('/')));
-
-        DownloadManager manager = (DownloadManager) context.getSystemService(Context.DOWNLOAD_SERVICE);
-        Objects.requireNonNull(manager).enqueue(request);
-    }
-
-    public static void clipboard(Context context, String text) {
-        ClipboardManager clipboard = (ClipboardManager) context.getSystemService(Context.CLIPBOARD_SERVICE);
-        ClipData clip = ClipData.newPlainText("saved", text);
-        clipboard.setPrimaryClip(clip);
     }
 
 }
