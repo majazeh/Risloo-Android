@@ -137,20 +137,18 @@ public class EditUserTabAvatarFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
-        ResultManager resultManager = new ResultManager();
-
         switch (method) {
             case "gallery":
-                resultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                ResultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
 
-                avatarPath = resultManager.path;
-                avatarBitmap = resultManager.bitmap;
+                avatarPath = ResultManager.filePath;
+                avatarBitmap = ResultManager.bitmap;
                 break;
             case "camera":
-                resultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
+                ResultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.avatarCircleImageView, binding.avatarIncludeLayout.charTextView);
 
-                avatarPath = resultManager.path;
-                avatarBitmap = resultManager.bitmap;
+                avatarPath = ResultManager.filePath;
+                avatarBitmap = ResultManager.bitmap;
                 break;
         }
     }

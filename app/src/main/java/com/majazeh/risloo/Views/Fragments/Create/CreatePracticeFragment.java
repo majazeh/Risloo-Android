@@ -134,13 +134,11 @@ public class CreatePracticeFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
-        ResultManager resultManager = new ResultManager();
-
         switch (method) {
             case "file":
-                resultManager.fileResult(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
+                ResultManager.fileResult(requireActivity(), data, binding.fileIncludeLayout.nameTextView);
 
-                filePath = resultManager.path;
+                filePath = ResultManager.filePath;
                 break;
         }
     }

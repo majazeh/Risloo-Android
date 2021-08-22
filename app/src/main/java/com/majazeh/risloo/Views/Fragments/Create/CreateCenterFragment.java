@@ -239,20 +239,18 @@ public class CreateCenterFragment extends Fragment {
     }
 
     public void responseAction(String method, Intent data) {
-        ResultManager resultManager = new ResultManager();
-
         switch (method) {
             case "gallery":
-                resultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
+                ResultManager.galleryResult(requireActivity(), data, binding.avatarIncludeLayout.selectCircleImageView, null);
 
-                avatarPath = resultManager.path;
-                avatarBitmap = resultManager.bitmap;
+                avatarPath = ResultManager.filePath;
+                avatarBitmap = ResultManager.bitmap;
                 break;
             case "camera":
-                resultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.selectCircleImageView, null);
+                ResultManager.cameraResult(requireActivity(), avatarPath, binding.avatarIncludeLayout.selectCircleImageView, null);
 
-                avatarPath = resultManager.path;
-                avatarBitmap = resultManager.bitmap;
+                avatarPath = ResultManager.filePath;
+                avatarBitmap = ResultManager.bitmap;
                 break;
         }
     }

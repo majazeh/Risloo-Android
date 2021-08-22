@@ -16,40 +16,43 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class ResultManager {
 
-    public String path = "";
-    public Bitmap bitmap = null;
+    // Vars
+    public static Bitmap bitmap = null;
+    public static String filePath = "";
 
-    public void fileResult(Activity activity, Intent data, TextView textView) {
+    /*
+    ---------- Funcs ----------
+    */
+
+    public static void fileResult(Activity activity, Intent data, TextView textView) {
         Uri fileUri = data.getData();
 
-        path = PathManager.localPath(activity, fileUri);
+        filePath = PathManager.localPath(activity, fileUri);
 
-        if (textView != null) {
-            textView.setText(StringManager.substring(path, '/'));
-        }
+        if (filePath != null && textView != null)
+            textView.setText(StringManager.substring(filePath, '/'));
     }
 
-    public void galleryResult(Activity activity, Intent data, CircleImageView circleImageView, TextView textView) {
+    public static void galleryResult(Activity activity, Intent data, CircleImageView circleImageView, TextView textView) {
         try {
             Uri imageUri = data.getData();
             InputStream imageStream = activity.getContentResolver().openInputStream(imageUri);
             Bitmap imageBitmap = BitmapFactory.decodeStream(imageStream);
 
-            path = PathManager.localPath(activity, imageUri);
+            filePath = PathManager.localPath(activity, imageUri);
             bitmap = BitmapManager.scaleToCenter(imageBitmap);
 
-            circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
-            if (textView != null) {
+            if (filePath != null && bitmap != null)
+                circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, filePath));
+
+            if (textView != null)
                 textView.setVisibility(View.GONE);
-            }
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
     }
 
-    public void cameraResult(Activity activity, String path, CircleImageView circleImageView, TextView textView) {
-        this.path = path;
-
+    public static void cameraResult(Activity activity, String path, CircleImageView circleImageView, TextView textView) {
         File imageFile = new File(path);
         IntentManager.mediaScan(activity, imageFile);
 
@@ -61,12 +64,14 @@ public class ResultManager {
 
         Bitmap imageBitmap = BitmapFactory.decodeFile(path, options);
 
+        filePath = path;
         bitmap = BitmapManager.scaleToCenter(imageBitmap);
 
-        circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, path));
-        if (textView != null) {
+        if (filePath != null && bitmap != null)
+            circleImageView.setImageBitmap(BitmapManager.modifyOrientation(bitmap, filePath));
+
+        if (textView != null)
             textView.setVisibility(View.GONE);
-        }
     }
 
 }

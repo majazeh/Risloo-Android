@@ -11,6 +11,7 @@ import com.majazeh.risloo.databinding.ToastSuccesBinding;
 
 public class ToastManager {
 
+    // Widgets
     private static Toast toast;
 
     /*
