@@ -100,9 +100,9 @@ public class EditCenterTabAvatarFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             if (avatarBitmap == null) {
                 if (!avatarPath.equals(""))
-                    ToastManager.showDefaultToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
+                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastNewImageNotSelected));
                 else
-                    ToastManager.showDefaultToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
+                    ToastManager.showErrorToast(requireActivity(), getResources().getString(R.string.ToastImageIsEmpty));
             } else {
                 doWork();
             }

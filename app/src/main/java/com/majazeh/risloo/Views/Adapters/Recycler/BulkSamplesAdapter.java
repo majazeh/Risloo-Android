@@ -131,7 +131,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
                             break;
                         case "کپی کردن لینک":
                             IntentManager.clipboard(activity, model.getLink());
-                            ToastManager.showDefaultToast(activity, activity.getResources().getString(R.string.ToastLinkSaved));
+                            ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastLinkSaved));
                             break;
                         case "ویرایش":
                             // TODO : Place Code If Needed
