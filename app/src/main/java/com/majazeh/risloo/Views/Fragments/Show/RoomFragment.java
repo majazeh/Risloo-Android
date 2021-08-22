@@ -408,6 +408,7 @@ public class RoomFragment extends Fragment {
         }
 
         setDropdown("");
+        setPermission("");
     }
 
     private void setAcceptation(CenterModel model) {
@@ -474,6 +475,7 @@ public class RoomFragment extends Fragment {
         }
 
         setDropdown(status);
+        setPermission(status);
     }
 
     private void setDropdown(String status) {
@@ -502,6 +504,13 @@ public class RoomFragment extends Fragment {
         items.add("");
 
         InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+    }
+
+    private void setPermission(String status) {
+        if (((MainActivity) requireActivity()).permissoon.showRoomCreateCase(((MainActivity) requireActivity()).singleton.getUserModel(), status))
+            binding.addImageView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.addImageView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {

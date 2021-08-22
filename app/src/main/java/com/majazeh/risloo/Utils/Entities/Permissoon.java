@@ -133,4 +133,47 @@ public class Permissoon {
             return false;
     }
 
+    public boolean showRoomCreateCase(UserModel model, String position) {
+        if (model != null)
+            return model.getUserType().equals("admin") || position.equals("manager") || position.equals("operator");
+        else
+            return false;
+    }
+
+    /*
+    ---------- Case ----------
+    */
+
+
+
+    /*
+    ---------- Session ----------
+    */
+
+
+
+    /*
+    ---------- Sample ----------
+    */
+
+
+
+    /*
+    ---------- BulkSample ----------
+    */
+
+
+
+    /*
+    ---------- BulkSample ----------
+    */
+
+
+
+    /*
+    ---------- Main ----------
+    */
+
+    
+
 }
