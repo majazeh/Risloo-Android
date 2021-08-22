@@ -244,11 +244,27 @@
     // Main Strings
     //////////////////////////////////////////////////////////////////////////////////////
 
-    <string name="MainMe">مشاهده پروفایل</string>
-    <string name="MainTreasuries">کیف پول‌ها</string>
-    <string name="MainBillings">صورت حساب‌ها</string>
-    <string name="MainPayments">شارژ حساب</string>
-    <string name="MainLogout">خروج</string>
+    <string name="MainTitleDashboard">پیش‌خوان</string>
+    <string name="MainTitleCenters">مراکز درمانی</string>
+    <string name="MainTitleSessions">جلسات</string>
+    <string name="MainTitleUsers">اعضاء</string>
+    <string name="MainTitleScales">ارزیابی‌ها</string>
+    <string name="MainTitleSamples">نمونه‌ها</string>
+    <string name="MainTitleBulkSamples">نمونه‌های گروهی</string>
+
+    <string name="MainDescDashboard">خلاصه‌ای از سامانه</string>
+    <string name="MainDescCenters">همه مراکز درمانی</string>
+    <string name="MainDescSessions">جلسات درمانی من</string>
+    <string name="MainDescUsers">اعضاء موجود در سامانه</string>
+    <string name="MainDescScales">آزمون‌های روان شناختی موجود در سامانه</string>
+    <string name="MainDescSamples">آزمون‌های گرفته شده</string>
+    <string name="MainDescBulkSamples">آزمون‌های گروهی گرفته شده</string>
+
+    <string name="MainTitleMe">مشاهده پروفایل</string>
+    <string name="MainTitleTreasuries">کیف پول‌ها</string>
+    <string name="MainTitleBillings">صورت حساب‌ها</string>
+    <string name="MainTitlePayments">شارژ حساب</string>
+    <string name="MainTitleLogout">خروج</string>
 
     <string name="MainHeader">ریسلو</string>
     <string name="MainToman">تومان</string>

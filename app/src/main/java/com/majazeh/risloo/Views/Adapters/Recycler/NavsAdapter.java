@@ -119,18 +119,36 @@ public class NavsAdapter extends RecyclerView.Adapter<NavsHolder> {
     }
 
     public void setFocused(String value) {
-        if (value.contains("نمونه\u200Cهای گروهی"))
-            selectedPosition = 6;
-        else if (value.contains("نمونه") || value.contains("نمونه\u200Cها"))
-            selectedPosition = 5;
+        if (value.contains("نمونه\u200Cهای گروهی")) {
+            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()) && ((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 6;
+            else if (((MainActivity) activity).permissoon.showBulkSamples(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 5;
+            else
+                selectedPosition = 10;
+        }
+
+        else if (value.contains("نمونه") || value.contains("نمونه\u200Cها")) {
+            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 5;
+            else
+                selectedPosition = 4;
+        }
+
         else if (value.contains("جلسه") || value.contains("جلسات"))
             selectedPosition = 2;
         else if (value.contains("مراکز درمانی"))
             selectedPosition = 1;
         else if (value.contains("اعضاء"))
             selectedPosition = 3;
-        else if (value.contains("ارزیابی\u200Cها"))
-            selectedPosition = 4;
+
+        else if (value.contains("ارزیابی\u200Cها")) {
+            if (((MainActivity) activity).permissoon.showUsers(((MainActivity) activity).singleton.getUserModel()))
+                selectedPosition = 4;
+            else
+                selectedPosition = 3;
+        }
+
         else
             selectedPosition = 0;
 

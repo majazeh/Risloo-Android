@@ -27,6 +27,7 @@ import com.majazeh.risloo.databinding.FragmentSamplesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -56,6 +57,8 @@ public class SamplesFragment extends Fragment {
         detector();
 
         listener();
+
+        setPermission();
 
         getData();
 
@@ -142,6 +145,15 @@ public class SamplesFragment extends Fragment {
             NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("sample", null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
+    }
+
+    private void setPermission() {
+        UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
+
+        if (((MainActivity) requireActivity()).permissoon.showSamplesCreateSample(model))
+            binding.addImageView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.addImageView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {

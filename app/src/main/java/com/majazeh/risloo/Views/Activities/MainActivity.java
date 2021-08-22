@@ -246,8 +246,8 @@ public class MainActivity extends AppCompatActivity {
     private void setToolbar() {
         ArrayList<String> items = new ArrayList<>();
 
-        items.add(getResources().getString(R.string.MainMe));
-        items.add(getResources().getString(R.string.MainLogout));
+        items.add(getResources().getString(R.string.MainTitleMe));
+        items.add(getResources().getString(R.string.MainTitleLogout));
         items.add("");
 
         InitManager.toolbarCustomSpinner(this, binding.contentIncludeLayout.toolbarIncludeLayout.toolbarSpinner, items);
@@ -256,16 +256,45 @@ public class MainActivity extends AppCompatActivity {
     private void setDrawer() {
         ArrayList<TypeModel> values = new ArrayList<>();
 
-        String[] titles = getResources().getStringArray(R.array.MainTitles);
-        String[] description = getResources().getStringArray(R.array.MainDescriptions);
-        int[] images = new int[]{R.drawable.ic_tachometer_alt_light, R.drawable.ic_building_light, R.drawable.ic_user_friends_light, R.drawable.ic_users_light, R.drawable.ic_balance_scale_light, R.drawable.ic_vial_light, R.drawable.ic_users_medical_light};
+        ArrayList<String> titles = new ArrayList<>();
+        ArrayList<String> description = new ArrayList<>();
+        ArrayList<Integer> images = new ArrayList<>();
 
-        for (int i = 0; i < titles.length; i++) {
+        titles.add(getResources().getString(R.string.MainTitleDashboard));
+        titles.add(getResources().getString(R.string.MainTitleCenters));
+        titles.add(getResources().getString(R.string.MainTitleSessions));
+        description.add(getResources().getString(R.string.MainDescDashboard));
+        description.add(getResources().getString(R.string.MainDescCenters));
+        description.add(getResources().getString(R.string.MainDescSessions));
+        images.add(R.drawable.ic_tachometer_alt_light);
+        images.add(R.drawable.ic_building_light);
+        images.add(R.drawable.ic_user_friends_light);
+
+        if (permissoon.showUsers(singleton.getUserModel())) {
+            titles.add(getResources().getString(R.string.MainTitleUsers));
+            description.add(getResources().getString(R.string.MainDescUsers));
+            images.add(R.drawable.ic_users_light);
+        }
+
+        titles.add(getResources().getString(R.string.MainTitleScales));
+        titles.add(getResources().getString(R.string.MainTitleSamples));
+        description.add(getResources().getString(R.string.MainDescScales));
+        description.add(getResources().getString(R.string.MainDescSamples));
+        images.add(R.drawable.ic_balance_scale_light);
+        images.add(R.drawable.ic_vial_light);
+
+        if (permissoon.showBulkSamples(singleton.getUserModel())) {
+            titles.add(getResources().getString(R.string.MainTitleBulkSamples));
+            description.add(getResources().getString(R.string.MainDescBulkSamples));
+            images.add(R.drawable.ic_users_medical_light);
+        }
+
+        for (int i = 0; i < titles.size(); i++) {
             try {
                 JSONObject object = new JSONObject();
-                object.put("title", titles[i]);
-                object.put("description", description[i]);
-                object.put("image", images[i]);
+                object.put("title", titles.get(i));
+                object.put("description", description.get(i));
+                object.put("image", images.get(i));
 
                 TypeModel model = new TypeModel(object);
 

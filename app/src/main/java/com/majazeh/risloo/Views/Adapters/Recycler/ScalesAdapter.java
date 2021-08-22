@@ -18,6 +18,7 @@ import com.majazeh.risloo.Views.Adapters.Holder.ScalesHolder;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
@@ -46,6 +47,8 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
         detector(holder);
 
         listener(holder, model);
+
+        setPermission(holder);
 
         setData(holder, model);
     }
@@ -90,6 +93,15 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
             NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("scale", model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.createTextView);
+    }
+
+    private void setPermission(ScalesHolder holder) {
+        UserModel model = ((MainActivity) activity).singleton.getUserModel();
+
+        if (((MainActivity) activity).permissoon.showScalesCreateSample(model))
+            holder.binding.createTextView.setVisibility(View.VISIBLE);
+        else
+            holder.binding.createTextView.setVisibility(View.GONE);
     }
 
     private void setData(ScalesHolder holder, ScaleModel model) {

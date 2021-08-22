@@ -153,27 +153,43 @@ public class Permissoon {
 
 
     /*
-    ---------- Sample ----------
+    ---------- Scales ----------
     */
 
-
+    public boolean showScalesCreateSample(UserModel model) {
+        if (model != null)
+            return model.getUserType().equals("admin");
+        else
+            return false;
+    }
 
     /*
-    ---------- BulkSample ----------
+    ---------- Samples ----------
     */
 
-
-
-    /*
-    ---------- BulkSample ----------
-    */
-
-
+    public boolean showSamplesCreateSample(UserModel model) {
+        if (model != null)
+            return model.getUserType().equals("admin");
+        else
+            return false;
+    }
 
     /*
     ---------- Main ----------
     */
 
-    
+    public boolean showBulkSamples(UserModel model) {
+        if (model != null)
+            return model.getUserType().equals("admin");
+        else
+            return false;
+    }
+
+    public boolean showUsers(UserModel model) {
+        if (model != null)
+            return model.getUserType().equals("admin");
+        else
+            return false;
+    }
 
 }
