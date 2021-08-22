@@ -35,7 +35,7 @@ import com.majazeh.risloo.Utils.Managers.InputManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
@@ -109,16 +109,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator(this);
+        Decorator decorator = new Decorator(this);
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
-            windowDecorator.navShowSystemUI(false, true);
-            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+            decorator.navShowSystemUI(false, true);
+            decorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
-            windowDecorator.navShowSystemUI(true, true);
-            windowDecorator.setSystemUIColor(Color.TRANSPARENT, getResources().getColor(R.color.Gray50));
+            decorator.navShowSystemUI(true, true);
+            decorator.setSystemUIColor(Color.TRANSPARENT, getResources().getColor(R.color.Gray50));
 
             binding.contentIncludeLayout.debugTextView.getRoot().setVisibility(View.GONE);
         }

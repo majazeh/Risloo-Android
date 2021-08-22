@@ -17,7 +17,7 @@ import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.InputManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
-import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
@@ -60,16 +60,16 @@ public class AuthActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator(this);
+        Decorator decorator = new Decorator(this);
 
         if (BuildConfig.BUILD_TYPE.equals("debug")) {
-            windowDecorator.showSystemUI(false, true);
-            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+            decorator.showSystemUI(false, true);
+            decorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
 
             binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
         } else {
-            windowDecorator.showSystemUI(true, true);
-            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
+            decorator.showSystemUI(true, true);
+            decorator.setSystemUIColor(getResources().getColor(R.color.Gray50), getResources().getColor(R.color.Gray50));
 
             binding.debugTextView.getRoot().setVisibility(View.GONE);
         }

@@ -28,7 +28,7 @@ import com.majazeh.risloo.Utils.Managers.InputManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.databinding.ActivityTestBinding;
@@ -101,20 +101,20 @@ public class TestActivity extends AppCompatActivity {
     }
 
     private void decorator(boolean dark) {
-        WindowDecorator windowDecorator = new WindowDecorator(this);
+        Decorator decorator = new Decorator(this);
 
         if (dark) {
-            windowDecorator.showSystemUI(false, true);
-            windowDecorator.setSystemUIColor(getResources().getColor(R.color.Blue600), getResources().getColor(R.color.Gray50));
+            decorator.showSystemUI(false, true);
+            decorator.setSystemUIColor(getResources().getColor(R.color.Blue600), getResources().getColor(R.color.Gray50));
         } else {
             if (BuildConfig.BUILD_TYPE.equals("debug")) {
-                windowDecorator.showSystemUI(false, true);
-                windowDecorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
+                decorator.showSystemUI(false, true);
+                decorator.setSystemUIColor(getResources().getColor(R.color.Red500), getResources().getColor(R.color.Gray50));
 
                 binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
             } else {
-                windowDecorator.showSystemUI(true, true);
-                windowDecorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+                decorator.showSystemUI(true, true);
+                decorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
 
                 binding.debugTextView.getRoot().setVisibility(View.GONE);
             }

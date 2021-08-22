@@ -11,7 +11,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
-import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.databinding.ActivityIntroBinding;
 
 public class IntroActivity extends AppCompatActivity {
@@ -36,10 +36,10 @@ public class IntroActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator(this);
+        Decorator decorator = new Decorator(this);
 
-        windowDecorator.showSystemUI(true, true);
-        windowDecorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
+        decorator.showSystemUI(true, true);
+        decorator.setSystemUIColor(getResources().getColor(R.color.White), getResources().getColor(R.color.Gray50));
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.headerIncludeLayout.debugTextView.setVisibility(View.VISIBLE);

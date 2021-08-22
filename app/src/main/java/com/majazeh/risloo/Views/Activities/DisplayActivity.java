@@ -13,7 +13,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PermissionManager;
-import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.databinding.ActivityDisplayBinding;
 import com.squareup.picasso.Picasso;
 
@@ -47,10 +47,10 @@ public class DisplayActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator(this);
+        Decorator decorator = new Decorator(this);
 
-        windowDecorator.showSystemUI(false, false);
-        windowDecorator.setSystemUIColor(getResources().getColor(R.color.Gray900), getResources().getColor(R.color.Gray900));
+        decorator.showSystemUI(false, false);
+        decorator.setSystemUIColor(getResources().getColor(R.color.Gray900), getResources().getColor(R.color.Gray900));
     }
 
     private void initializer() {

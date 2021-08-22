@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Managers;
+package com.majazeh.risloo.Utils.Entities;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -6,13 +6,17 @@ import android.os.Build;
 import android.view.View;
 import android.view.WindowManager;
 
-public class WindowDecorator {
+import androidx.annotation.NonNull;
+
+public class Decorator {
 
     // Objects
-    private Activity activity;
+    private final Activity activity;
+
+    // Vars
     private boolean lightStatus, lightNav;
 
-    public WindowDecorator(Activity activity) {
+    public Decorator(@NonNull Activity activity) {
         this.activity = activity;
     }
 

@@ -11,7 +11,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.PackageManager;
-import com.majazeh.risloo.Utils.Managers.WindowDecorator;
+import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.databinding.ActivitySplashBinding;
 
 public class SplashActivity extends AppCompatActivity {
@@ -42,10 +42,10 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void decorator() {
-        WindowDecorator windowDecorator = new WindowDecorator(this);
+        Decorator decorator = new Decorator(this);
 
-        windowDecorator.showSystemUI(false, false);
-        windowDecorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
+        decorator.showSystemUI(false, false);
+        decorator.setSystemUIColor(getResources().getColor(R.color.Risloo500), getResources().getColor(R.color.Risloo500));
 
         if (BuildConfig.BUILD_TYPE.equals("debug"))
             binding.debugTextView.getRoot().setVisibility(View.VISIBLE);
