@@ -8,4 +8,13 @@
         </shape>
     </item>
 
+    <item>
+        <scale android:scaleWidth="100%">
+            <shape>
+                <solid android:color="@color/Green200" />
+                <corners android:radius="@dimen/_4sdp" />
+            </shape>
+        </scale>
+    </item>
+
 </layer-list>
