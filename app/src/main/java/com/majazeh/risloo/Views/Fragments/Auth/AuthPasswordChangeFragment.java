@@ -21,8 +21,8 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.databinding.FragmentAuthPasswordChangeBinding;
@@ -269,7 +269,7 @@ public class AuthPasswordChangeFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

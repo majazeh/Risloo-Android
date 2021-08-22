@@ -13,7 +13,7 @@ import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateSessionAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
@@ -214,7 +214,7 @@ public class CreateSessionFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewSessionAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSessionAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });
@@ -322,7 +322,7 @@ public class CreateSessionFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

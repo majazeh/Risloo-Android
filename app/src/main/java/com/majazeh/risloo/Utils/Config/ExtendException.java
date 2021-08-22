@@ -2,7 +2,7 @@ package com.majazeh.risloo.Utils.Config;
 
 import android.app.Activity;
 
-import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.mre.ligheh.API.Response;
@@ -22,14 +22,14 @@ public class ExtendException extends onFailureException {
     public void onClient(String s) {
         logError("onClient: " + s);
         dismissDialog();
-        toastError(s);
+        snackError(s);
     }
 
     @Override
     public void onServerFail(String s) {
         logError("onServerFail: " + s);
         dismissDialog();
-        toastError(s);
+        snackError(s);
     }
 
     @Override
@@ -42,8 +42,8 @@ public class ExtendException extends onFailureException {
         System.out.println(object);
     }
 
-    public void toastError(String message) {
-        activity.runOnUiThread(() -> ToastManager.showDefaultToast(activity, message));
+    public void snackError(String message) {
+        activity.runOnUiThread(() -> SnackManager.showDefaultSnack(activity, message));
     }
 
     public void dismissDialog() {

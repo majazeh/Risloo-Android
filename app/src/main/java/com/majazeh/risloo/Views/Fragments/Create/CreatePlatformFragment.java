@@ -15,10 +15,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreatePlatformBinding;
 import com.mre.ligheh.API.Response;
@@ -239,7 +239,7 @@ public class CreatePlatformFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                        ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewPlatformAdded));
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewPlatformAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });
@@ -289,7 +289,7 @@ public class CreatePlatformFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

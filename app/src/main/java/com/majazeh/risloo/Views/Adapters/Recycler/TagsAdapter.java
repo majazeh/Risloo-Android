@@ -11,8 +11,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.TagsHolder;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
@@ -153,7 +153,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
                     List tags = (List) object;
 
                     activity.runOnUiThread(() -> {
-                        ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
 
                         items.clear();
                         if (!tags.data().isEmpty())
@@ -181,7 +181,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
                     List tags = (List) object;
 
                     activity.runOnUiThread(() -> {
-                        ToastManager.showSuccesToast(activity, activity.getResources().getString(R.string.ToastChangesSaved));
+                        SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
 
                         items.clear();
                         if (!tags.data().isEmpty())

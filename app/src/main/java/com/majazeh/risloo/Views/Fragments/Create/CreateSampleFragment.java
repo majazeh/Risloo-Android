@@ -22,7 +22,7 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -660,9 +660,9 @@ public class CreateSampleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         ((MainActivity) requireActivity()).loadingDialog.dismiss();
                         if (type.equals("bulk"))
-                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
                         else
-                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastNewSampleAdded));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSampleAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();
                     });
@@ -730,7 +730,7 @@ public class CreateSampleFragment extends Fragment {
                                     }
                                 }
 
-                                ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

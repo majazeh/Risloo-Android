@@ -13,10 +13,10 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
@@ -336,7 +336,7 @@ public class EditUserTabPersonalFragment extends Fragment {
                             ((MainActivity) requireActivity()).setData();
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }
                 }
@@ -387,7 +387,7 @@ public class EditUserTabPersonalFragment extends Fragment {
                                         }
                                     }
 
-                                    ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
@@ -403,7 +403,7 @@ public class EditUserTabPersonalFragment extends Fragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
-                            ToastManager.showSuccesToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }
                 }
@@ -454,7 +454,7 @@ public class EditUserTabPersonalFragment extends Fragment {
                                         }
                                     }
 
-                                    ToastManager.showErrorToast(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
                                 }
                             } catch (JSONException e) {
                                 e.printStackTrace();
