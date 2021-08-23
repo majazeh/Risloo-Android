@@ -77,7 +77,7 @@ public class CasesFragment extends Fragment {
     private void listener() {
         binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.editText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.searchIncludeLayout.editText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.editText);
             return false;
         });
 

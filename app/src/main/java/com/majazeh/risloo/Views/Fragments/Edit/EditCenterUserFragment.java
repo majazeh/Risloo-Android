@@ -122,7 +122,7 @@ public class EditCenterUserFragment extends Fragment {
 
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nicknameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.nicknameIncludeLayout.inputEditText);
             return false;
         });
 

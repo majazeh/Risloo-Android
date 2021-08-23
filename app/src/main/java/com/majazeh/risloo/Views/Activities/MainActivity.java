@@ -31,7 +31,7 @@ import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Utils.Managers.InputManager;
+import com.majazeh.risloo.Utils.Entities.Inputor;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
@@ -63,10 +63,10 @@ public class MainActivity extends AppCompatActivity {
     // Entities
     private BreadCrumb breadCrumb;
     public Fragmont fragmont;
+    public Inputor inputor;
     public Permissoon permissoon;
     public Singleton singleton;
     public Validatoon validatoon;
-    public InputManager inputManager;
 
     // Adapters
     private NavsAdapter navsAdapter;
@@ -127,13 +127,13 @@ public class MainActivity extends AppCompatActivity {
     private void initializer() {
         breadCrumb = new BreadCrumb(this);
 
+        inputor = new Inputor();
+
         singleton = new Singleton(this);
 
         permissoon = new Permissoon();
 
         validatoon = new Validatoon();
-
-        inputManager = new InputManager();
 
         navsAdapter = new NavsAdapter(this);
 
@@ -448,8 +448,8 @@ public class MainActivity extends AppCompatActivity {
                 Rect outRect = new Rect();
                 view.getGlobalVisibleRect(outRect);
                 if (!outRect.contains((int) event.getRawX(), (int) event.getRawY())) {
-                    if (inputManager.input() != null && inputManager.input().hasFocus()) {
-                        inputManager.clear(this, inputManager.input());
+                    if (inputor.editText != null && inputor.editText.hasFocus()) {
+                        inputor.clear(this, inputor.editText);
                     }
                 }
             }

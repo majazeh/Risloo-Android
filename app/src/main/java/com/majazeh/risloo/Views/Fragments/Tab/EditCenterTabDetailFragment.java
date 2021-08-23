@@ -113,7 +113,7 @@ public class EditCenterTabDetailFragment extends Fragment {
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.titleIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.titleIncludeLayout.inputEditText);
             return false;
         });
 
@@ -123,7 +123,7 @@ public class EditCenterTabDetailFragment extends Fragment {
 
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.addressIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.addressIncludeLayout.inputEditText);
             return false;
         });
 
@@ -141,7 +141,7 @@ public class EditCenterTabDetailFragment extends Fragment {
 
         binding.descriptionIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.descriptionIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.descriptionIncludeLayout.inputEditText);
             return false;
         });
 

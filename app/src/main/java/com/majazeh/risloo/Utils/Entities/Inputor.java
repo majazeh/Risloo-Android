@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Utils.Managers;
+package com.majazeh.risloo.Utils.Entities;
 
 import android.app.Activity;
 import android.view.inputmethod.InputMethodManager;
@@ -11,14 +11,18 @@ import com.majazeh.risloo.Views.Activities.TestActivity;
 
 import java.util.Objects;
 
-public class InputManager {
+public class Inputor {
 
     // Widgets
-    private EditText editText;
+    public EditText editText;
 
-    public EditText input() {
-        return editText;
+    public Inputor() {
+        // TODO : Place Code If Needed
     }
+
+    /*
+    ---------- Methods ----------
+    */
 
     public void select(Activity activity, EditText editText) {
         this.editText = editText;

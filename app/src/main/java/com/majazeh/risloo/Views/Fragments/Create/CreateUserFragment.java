@@ -114,7 +114,7 @@ public class CreateUserFragment extends Fragment {
     private void listener() {
         binding.nameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.nameIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.nameIncludeLayout.inputEditText);
             return false;
         });
 
@@ -124,7 +124,7 @@ public class CreateUserFragment extends Fragment {
 
         binding.mobileIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.mobileIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.mobileIncludeLayout.inputEditText);
             return false;
         });
 
@@ -134,7 +134,7 @@ public class CreateUserFragment extends Fragment {
 
         binding.emailIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.emailIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.emailIncludeLayout.inputEditText);
             return false;
         });
 
@@ -144,7 +144,7 @@ public class CreateUserFragment extends Fragment {
 
         binding.passwordIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.passwordIncludeLayout.inputEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputManager.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.passwordIncludeLayout.inputEditText);
             return false;
         });
 

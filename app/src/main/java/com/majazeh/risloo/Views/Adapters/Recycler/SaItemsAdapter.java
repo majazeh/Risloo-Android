@@ -101,7 +101,7 @@ public class SaItemsAdapter extends RecyclerView.Adapter<SaItemsHolder> {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((TestActivity) activity).inputManager.select(activity, holder.binding.inputEditText);
+                    ((TestActivity) activity).inputor.select(activity, holder.binding.inputEditText);
             return false;
         });
 
