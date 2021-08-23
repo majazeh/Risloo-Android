@@ -1,7 +1,9 @@
 package com.majazeh.risloo.Utils.Entities;
 
 import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 public class Permissoon {
@@ -254,10 +256,20 @@ public class Permissoon {
     */
 
     public boolean showScalesCreateSample(UserModel model) {
-        if (model != null)
-            return model.getUserType().equals("admin");
-        else
-            return false;
+        if (model != null) {
+            if (model.getUserType().equals("admin"))
+                return true;
+
+            if (!model.getCenterList().data().isEmpty())
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
+
+                    if (centerModel != null && centerModel.getAcceptation() != null)
+                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
+                            return true;
+                }
+
+        } return false;
     }
 
     /*
@@ -265,10 +277,20 @@ public class Permissoon {
     */
 
     public boolean showSamplesCreateSample(UserModel model) {
-        if (model != null)
-            return model.getUserType().equals("admin");
-        else
-            return false;
+        if (model != null) {
+            if (model.getUserType().equals("admin"))
+                return true;
+
+            if (!model.getCenterList().data().isEmpty())
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
+
+                    if (centerModel != null && centerModel.getAcceptation() != null)
+                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
+                            return true;
+                }
+
+        } return false;
     }
 
     /*
@@ -276,10 +298,20 @@ public class Permissoon {
     */
 
     public boolean showBulkSamples(UserModel model) {
-        if (model != null)
-            return model.getUserType().equals("admin");
-        else
-            return false;
+        if (model != null) {
+            if (model.getUserType().equals("admin"))
+                return true;
+
+            if (!model.getCenterList().data().isEmpty())
+                for (TypeModel typeModel : model.getCenterList().data()) {
+                    CenterModel centerModel = (CenterModel) typeModel;
+
+                    if (centerModel != null && centerModel.getAcceptation() != null)
+                        if (centerModel.getAcceptation().getPosition().equals("manager") || centerModel.getAcceptation().getPosition().equals("operator") || centerModel.getAcceptation().getPosition().equals("psychologist"))
+                            return true;
+                }
+
+        } return false;
     }
 
     public boolean showUsers(UserModel model) {
