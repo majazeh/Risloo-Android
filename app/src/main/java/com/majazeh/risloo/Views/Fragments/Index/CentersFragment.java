@@ -92,13 +92,13 @@ public class CentersFragment extends Fragment {
 
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
-        binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.editText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.editText);
+        binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
             return false;
         });
 
-        binding.searchIncludeLayout.editText.addTextChangedListener(new TextWatcher() {
+        binding.searchIncludeLayout.searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -111,8 +111,8 @@ public class CentersFragment extends Fragment {
                     data.put("page", 1);
                     data.put("q", String.valueOf(s));
 
-                    if (binding.searchIncludeLayout.progressBar.getVisibility() == View.GONE)
-                        binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
+                    if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
+                        binding.searchIncludeLayout.searchProgressBar.setVisibility(View.VISIBLE);
 
                     getData();
                 }, 750);
@@ -174,7 +174,7 @@ public class CentersFragment extends Fragment {
                         } else if (adapter.getItemCount() == 0) {
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
-                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                             else
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.CentersFragmentEmpty));
@@ -188,8 +188,8 @@ public class CentersFragment extends Fragment {
 
                         if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 
                     });
 
@@ -207,8 +207,8 @@ public class CentersFragment extends Fragment {
 
                         if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 
                     });
 

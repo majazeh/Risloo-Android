@@ -9,7 +9,7 @@
     tools:layout_margin="@dimen/_12sdp">
 
     <EditText
-        android:id="@+id/editText"
+        android:id="@+id/search_editText"
         android:layout_width="0dp"
         android:layout_height="@dimen/_28sdp"
         android:paddingEnd="@dimen/_8sdp"
@@ -33,16 +33,16 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/search_progressBar"
         android:layout_width="@dimen/_24sdp"
         android:layout_height="@dimen/_24sdp"
         android:layout_marginEnd="@dimen/_2sdp"
         android:padding="@dimen/_4sdp"
         android:theme="@style/ProgressBarTheme"
         android:visibility="gone"
-        app:layout_constraintBottom_toBottomOf="@id/editText"
-        app:layout_constraintEnd_toEndOf="@id/editText"
-        app:layout_constraintTop_toTopOf="@id/editText"
+        app:layout_constraintBottom_toBottomOf="@id/search_editText"
+        app:layout_constraintEnd_toEndOf="@id/search_editText"
+        app:layout_constraintTop_toTopOf="@id/search_editText"
         style="@style/Widget.AppCompat.ProgressBar"
         tools:visibility="visible" />
 

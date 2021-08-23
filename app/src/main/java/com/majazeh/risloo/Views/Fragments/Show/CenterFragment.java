@@ -195,13 +195,13 @@ public class CenterFragment extends Fragment {
             });
         }).widget(binding.requestTextView.getRoot());
 
-        binding.searchIncludeLayout.editText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.editText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.editText);
+        binding.searchIncludeLayout.searchEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.searchIncludeLayout.searchEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.searchIncludeLayout.searchEditText);
             return false;
         });
 
-        binding.searchIncludeLayout.editText.addTextChangedListener(new TextWatcher() {
+        binding.searchIncludeLayout.searchEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
@@ -214,8 +214,8 @@ public class CenterFragment extends Fragment {
                     data.put("page", 1);
                     data.put("q", String.valueOf(s));
 
-                    if (binding.searchIncludeLayout.progressBar.getVisibility() == View.GONE)
-                        binding.searchIncludeLayout.progressBar.setVisibility(View.VISIBLE);
+                    if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.GONE)
+                        binding.searchIncludeLayout.searchProgressBar.setVisibility(View.VISIBLE);
 
                     getData();
                 }, 750);
@@ -420,7 +420,7 @@ public class CenterFragment extends Fragment {
                             } else if (roomsAdapter.getItemCount() == 0) {
                                 binding.roomsSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
-                                if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
+                                if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
                                     binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
                                 else
                                     binding.roomsSingleLayout.emptyView.setText(getResources().getString(R.string.RoomsAdapterEmpty));
@@ -434,8 +434,8 @@ public class CenterFragment extends Fragment {
 
                             if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                                 binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
-                            if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-                                binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                                binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
 
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -456,8 +456,8 @@ public class CenterFragment extends Fragment {
 
                         if (binding.roomsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
                             binding.roomsSingleLayout.progressBar.setVisibility(View.GONE);
-                        if (binding.searchIncludeLayout.progressBar.getVisibility() == View.VISIBLE)
-                            binding.searchIncludeLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
                     });
 
                     isLoading = false;
