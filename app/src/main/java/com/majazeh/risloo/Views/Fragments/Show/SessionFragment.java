@@ -208,17 +208,43 @@ public class SessionFragment extends Fragment {
         }
 
         setDropdown();
+        setPermission();
     }
 
     private void setDropdown() {
         ArrayList<String> items = new ArrayList<>();
 
-        items.add(requireActivity().getResources().getString(R.string.SessionFragmentReports));
-        items.add(requireActivity().getResources().getString(R.string.SessionFragmentEdit));
+        if (((MainActivity) requireActivity()).permissoon.showSessionDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+            items.add(requireActivity().getResources().getString(R.string.SessionFragmentReports));
+
+        if (((MainActivity) requireActivity()).permissoon.showSessionDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+            items.add(requireActivity().getResources().getString(R.string.SessionFragmentEdit));
 
         items.add("");
 
         InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+
+        if (items.size() > 1)
+            binding.menuSpinner.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.menuSpinner.getRoot().setVisibility(View.GONE);
+    }
+
+    private void setPermission() {
+        if (((MainActivity) requireActivity()).permissoon.showSessionCreateUser(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+            binding.usersAddView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.usersAddView.getRoot().setVisibility(View.GONE);
+
+        if (((MainActivity) requireActivity()).permissoon.showSessionCreatePractice(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+            binding.practicesAddView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.practicesAddView.getRoot().setVisibility(View.GONE);
+
+        if (((MainActivity) requireActivity()).permissoon.showSessionCreateSample(((MainActivity) requireActivity()).singleton.getUserModel(), sessionModel))
+            binding.samplesAddView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.samplesAddView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {

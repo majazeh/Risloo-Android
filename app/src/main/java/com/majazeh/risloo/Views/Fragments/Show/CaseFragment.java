@@ -189,6 +189,7 @@ public class CaseFragment extends Fragment {
             }
 
             setDropdown();
+            setPermission();
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -197,12 +198,32 @@ public class CaseFragment extends Fragment {
     private void setDropdown() {
         ArrayList<String> items = new ArrayList<>();
 
-        items.add(requireActivity().getResources().getString(R.string.CaseFragmentReports));
-        items.add(requireActivity().getResources().getString(R.string.CaseFragmentEdit));
+        if (((MainActivity) requireActivity()).permissoon.showCaseDropdownReports(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+            items.add(requireActivity().getResources().getString(R.string.CaseFragmentReports));
+
+        if (((MainActivity) requireActivity()).permissoon.showCaseDropdownEdit(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+            items.add(requireActivity().getResources().getString(R.string.CaseFragmentEdit));
 
         items.add("");
 
         InitManager.actionCustomSpinner(requireActivity(), binding.menuSpinner.selectSpinner, items);
+
+        if (items.size() > 1)
+            binding.menuSpinner.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.menuSpinner.getRoot().setVisibility(View.GONE);
+    }
+
+    private void setPermission() {
+        if (((MainActivity) requireActivity()).permissoon.showCaseCreateSession(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+            binding.sessionsAddView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.sessionsAddView.getRoot().setVisibility(View.GONE);
+
+        if (((MainActivity) requireActivity()).permissoon.showCaseCreateSample(((MainActivity) requireActivity()).singleton.getUserModel(), caseModel))
+            binding.samplesAddView.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.samplesAddView.getRoot().setVisibility(View.GONE);
     }
 
     private void getData() {
