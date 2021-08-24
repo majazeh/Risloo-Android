@@ -50,7 +50,7 @@ public class EditUserTabPasswordFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String currentPassword = "", newPassword = "";
+    private String mobile = "", currentPassword = "", newPassword = "";
     private boolean currentPasswordVisibility = false, newPasswordVisibility = false;
 
     @Nullable
@@ -264,6 +264,10 @@ public class EditUserTabPasswordFragment extends Fragment {
             if (model.getId() != null && !model.getId().equals("")) {
                 data.put("id", model.getId());
             }
+
+            if (model.getMobile() != null && !model.getMobile().equals("")) {
+                mobile = model.getMobile();
+            }
         }
     }
 
@@ -290,6 +294,8 @@ public class EditUserTabPasswordFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
+                            ((MainActivity) requireActivity()).singleton.regist(mobile, newPassword);
+
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
