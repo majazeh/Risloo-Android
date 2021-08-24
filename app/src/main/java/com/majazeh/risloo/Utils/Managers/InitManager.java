@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -49,6 +50,15 @@ public class InitManager {
         img.setImageResource(imgRes);
         ImageViewCompat.setImageTintList(img, AppCompatResources.getColorStateList(activity, imgColor));
         img.setRotation(img.getRotation() + degree);
+    }
+
+    /*
+    ---------- AutoCompletes - Normal ----------
+    */
+
+    public static void normal12sspAutoComplete(Activity activity, AutoCompleteTextView act, ArrayList<String> arrayList) {
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(activity, R.layout.spinner_item_dropdown_12ssp, arrayList);
+        act.setAdapter(adapter);
     }
 
     /*

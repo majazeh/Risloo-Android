@@ -16,6 +16,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -73,6 +74,8 @@ public class AuthLoginFragment extends Fragment {
         binding.passwordRecoverLinkTextView.getRoot().setText(getResources().getString(R.string.AuthPasswordRecoverLink));
 
         binding.illuImageView.getRoot().setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.illu_001, null));
+
+        InitManager.normal12sspAutoComplete(requireActivity(), binding.mobileEditText.getRoot(), ((AuthActivity) requireActivity()).singleton.getRegistMobiles());
     }
 
     private void detector() {

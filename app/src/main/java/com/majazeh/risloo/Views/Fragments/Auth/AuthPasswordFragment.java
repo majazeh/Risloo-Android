@@ -201,6 +201,12 @@ public class AuthPasswordFragment extends Fragment {
         if (model.getCallback() != null && !model.getCallback().equals("")) {
             data.put("callback", model.getCallback());
         }
+
+        password = ((AuthActivity) requireActivity()).singleton.getRegistPassword(mobile);
+        binding.passwordIncludeLayout.inputEditText.setText(password);
+
+        if (!password.equals(""))
+            binding.passwordIncludeLayout.visibilityImageView.setVisibility(View.VISIBLE);
     }
 
     private void doWork() {
@@ -237,6 +243,7 @@ public class AuthPasswordFragment extends Fragment {
                             NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
 
                             ((AuthActivity) requireActivity()).singleton.login(model);
+                            ((AuthActivity) requireActivity()).singleton.regist(mobile, password);
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                             ((AuthActivity) requireActivity()).navController.navigate(action);
                         }

@@ -7,8 +7,15 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 
 public class Singleton {
 
@@ -43,9 +50,9 @@ public class Singleton {
             setUserModel(userModel);
     }
 
-    public void password(String password) {
-        if (password != null)
-            setPassword(password);
+    public void regist(String mobile, String password) {
+        if (mobile != null && password != null)
+            setRegist(mobile, password);
     }
 
     public void logout() {
@@ -74,9 +81,37 @@ public class Singleton {
         editor.apply();
     }
 
-    private void setPassword(String value) {
-        editor.putString("password", value);
-        editor.apply();
+    private void setRegist(String mobile, String password) {
+        try {
+            ArrayList<TypeModel> models = new ArrayList<>();
+
+            if (!sharedPreferences.getString("regists", "").equals("")) {
+                models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {}.getType());
+
+                boolean updated = false;
+                for (TypeModel model : models) {
+                    if (model.object.getString("mobile").equals(mobile)) {
+                        model.object.put("password", password);
+                        updated = true;
+                        break;
+                    }
+                }
+
+                if (!updated) {
+                    TypeModel user = new TypeModel(new JSONObject().put("mobile", mobile).put("password", password));
+                    models.add(user);
+                }
+            } else {
+                TypeModel user = new TypeModel(new JSONObject().put("mobile", mobile).put("password", password));
+                models.add(user);
+            }
+
+            editor.putString("regists", new Gson().toJson(models));
+            editor.apply();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /*
@@ -104,11 +139,35 @@ public class Singleton {
         return null;
     }
 
-    public String getPassword() {
-        if (!sharedPreferences.getString("password", "").equals(""))
-            return sharedPreferences.getString("password", "");
+    public String getRegistPassword(String mobile) {
+        try {
+            if (!sharedPreferences.getString("regists", "").equals("")) {
+                ArrayList<TypeModel> models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {}.getType());
 
-        return "";
+                for (TypeModel model : models) {
+                    if (model.object.getString("mobile").equals(mobile))
+                        return model.object.getString("password");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return "";
+    }
+
+    public ArrayList<String> getRegistMobiles() {
+        try {
+            if (!sharedPreferences.getString("regists", "").equals("")) {
+                ArrayList<TypeModel> models = new Gson().fromJson(sharedPreferences.getString("regists", ""), new TypeToken<ArrayList<TypeModel>>() {}.getType());
+                ArrayList<String> mobiles = new ArrayList<>();
+
+                for (TypeModel model : models)
+                    mobiles.add(model.object.getString("mobile"));
+
+                return mobiles;
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return new ArrayList<>();
     }
 
     /*

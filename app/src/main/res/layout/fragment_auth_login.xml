@@ -30,7 +30,7 @@
 
     <include
         android:id="@+id/mobile_editText"
-        layout="@layout/component_auth_input_number"
+        layout="@layout/component_auth_input_suggestion"
         android:layout_width="0dp"
         android:layout_height="@dimen/_36sdp"
         android:layout_marginEnd="@dimen/_24sdp"
