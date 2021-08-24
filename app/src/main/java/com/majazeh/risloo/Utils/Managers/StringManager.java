@@ -57,6 +57,13 @@ public class StringManager {
         } return value;
     }
 
+    public static String mobileConvert(String value) {
+        if (!value.equals("")) {
+            if (value.startsWith("989"))
+                return "0" + value.substring(2);
+        } return value;
+    }
+
     public static String separate(String value) {
         DecimalFormat decimalFormat = new DecimalFormat("#,###,###");
         return decimalFormat.format(Double.parseDouble(value));
