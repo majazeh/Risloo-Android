@@ -267,7 +267,7 @@ public class EditUserTabPasswordFragment extends Fragment {
             }
 
             if (model.getMobile() != null && !model.getMobile().equals("")) {
-                mobile = StringManager.mobileConvert(model.getMobile());
+                mobile = model.getMobile();
             }
         }
     }
@@ -295,7 +295,7 @@ public class EditUserTabPasswordFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).singleton.regist(mobile, newPassword);
+                            ((MainActivity) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), newPassword);
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));

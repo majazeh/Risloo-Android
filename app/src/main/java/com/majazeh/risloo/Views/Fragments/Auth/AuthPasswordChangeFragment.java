@@ -22,6 +22,7 @@ import androidx.navigation.NavDirections;
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
@@ -243,7 +244,7 @@ public class AuthPasswordChangeFragment extends Fragment {
                             NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
 
                             ((AuthActivity) requireActivity()).singleton.login(model);
-                            ((AuthActivity) requireActivity()).singleton.regist(mobile, password);
+                            ((AuthActivity) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), password);
                             ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                             ((AuthActivity) requireActivity()).navController.navigate(action);
                         }
