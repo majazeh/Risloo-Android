@@ -74,7 +74,11 @@ public class User extends Model {
     public static void editProfile(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(header, "Authorization")) {
-                Model.put(endpoint +"/"+ data.get("id"), data, header, response, AuthModel.class);
+                if (has(data, "id")) {
+                    Model.put(endpoint +"/"+ data.get("id"), data, header, response, AuthModel.class);
+                } else {
+                    Exceptioner.make(response,"آیدی را وارد کنید");
+                }
             } else {
                 Exceptioner.make(response,"شما لاگین نیستید");
             }
@@ -86,7 +90,7 @@ public class User extends Model {
     public static void editPassword(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
             if (has(header, "Authorization")) {
-                if (has(data, "user")) {
+                if (has(data, "id")) {
                     Model.put(endpoint + "/" + data.get("id") + "/change-password", data, header, response, null);
                 } else {
                     Exceptioner.make(response,"آیدی را وارد کنید");
