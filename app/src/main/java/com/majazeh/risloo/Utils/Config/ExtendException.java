@@ -2,10 +2,9 @@ package com.majazeh.risloo.Utils.Config;
 
 import android.app.Activity;
 
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
-import com.majazeh.risloo.Views.Activities.AuthActivity;
-import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.API.onFailureException;
 
@@ -52,15 +51,7 @@ public class ExtendException extends onFailureException {
     }
 
     public void dismissDialog() {
-        activity.runOnUiThread(() -> {
-            if (activity instanceof AuthActivity) {
-                if (((AuthActivity) activity).loadingDialog != null && ((AuthActivity) activity).loadingDialog.isVisible())
-                    ((AuthActivity) activity).loadingDialog.dismiss();
-            } else if (activity instanceof MainActivity) {
-                if (((MainActivity) activity).loadingDialog != null && ((MainActivity) activity).loadingDialog.isVisible())
-                    ((MainActivity) activity).loadingDialog.dismiss();
-            }
-        });
+        activity.runOnUiThread(DialogManager::dismissLoadingDialog);
     }
 
 }

@@ -19,7 +19,6 @@ import com.majazeh.risloo.Utils.Entities.Inputor;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
-import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.databinding.ActivityAuthBinding;
 
 import java.util.Objects;
@@ -33,9 +32,6 @@ public class AuthActivity extends AppCompatActivity {
     public Inputor inputor;
     public Singleton singleton;
     public Validatoon validatoon;
-
-    // Dialogs
-    public LoadingDialog loadingDialog;
 
     // Objects
     private NavHostFragment navHostFragment;
@@ -81,8 +77,6 @@ public class AuthActivity extends AppCompatActivity {
         singleton = new Singleton(this);
 
         validatoon = new Validatoon();
-
-        loadingDialog = new LoadingDialog();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.fragmentNavHostFragment.getId());
 

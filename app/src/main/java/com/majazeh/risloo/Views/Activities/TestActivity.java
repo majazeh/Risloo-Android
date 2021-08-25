@@ -22,6 +22,7 @@ import com.majazeh.risloo.NavigationTestDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Entities.Inputor;
@@ -30,7 +31,6 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
-import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.databinding.ActivityTestBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -57,9 +57,6 @@ public class TestActivity extends AppCompatActivity {
     public Inputor inputor;
     public Singleton singleton;
     public Validatoon validatoon;
-
-    // Dialogs
-    private LoadingDialog loadingDialog;
 
     // Models
     private SampleAnswers sampleAnswers;
@@ -127,8 +124,6 @@ public class TestActivity extends AppCompatActivity {
         singleton = new Singleton(this);
 
         validatoon = new Validatoon();
-
-        loadingDialog = new LoadingDialog();
 
         sampleAnswers = new SampleAnswers();
 
@@ -425,7 +420,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void closeSample() {
-        loadingDialog.show(this.getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(this);
 
         Sample.close(sampleAnswers, data, header, new Response() {
             @Override
@@ -434,7 +429,7 @@ public class TestActivity extends AppCompatActivity {
                     FormModel model = sampleModel.getSampleForm().getModel("زنجیره");
 
                     if (model == null) {
-                        loadingDialog.dismiss();
+                        DialogManager.dismissLoadingDialog();
                         IntentManager.main(TestActivity.this);
                     } else {
                         List chains = (List) model.getObject();
@@ -443,7 +438,7 @@ public class TestActivity extends AppCompatActivity {
                             ChainModel chainModel = (ChainModel) chains.data().get(i);
 
                             if ((chainModel.getStatus().equals("seald") || chainModel.getStatus().equals("open")) && i != chains.data().size() && !chainModel.getId().equals(data.get("id"))) {
-                                loadingDialog.dismiss();
+                                DialogManager.dismissLoadingDialog();
 
                                 data.put("id", chainModel.getId());
                                 sampleAnswers.id = chainModel.getId();
@@ -454,7 +449,7 @@ public class TestActivity extends AppCompatActivity {
                                 getData();
                                 break;
                             } else {
-                                loadingDialog.dismiss();
+                                DialogManager.dismissLoadingDialog();
                                 IntentManager.main(TestActivity.this);
                             }
                         }
@@ -464,9 +459,7 @@ public class TestActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String response) {
-                runOnUiThread(() -> {
-                    loadingDialog.dismiss();
-                });
+                // TODO : Place Code If Needed
             }
         });
     }

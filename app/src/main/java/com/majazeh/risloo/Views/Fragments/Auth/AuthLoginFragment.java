@@ -16,6 +16,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -117,7 +118,7 @@ public class AuthLoginFragment extends Fragment {
     }
 
     private void doWork() {
-        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(requireActivity());
 
         data.put("authorized_key", mobile);
 
@@ -132,29 +133,30 @@ public class AuthLoginFragment extends Fragment {
                             switch (model.getTheory()) {
                                 case "password": {
                                     NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordFragment(mobile, model);
-
-                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
+
+                                    DialogManager.dismissLoadingDialog();
                                 } break;
                                 case "mobileCode": {
                                     NavDirections action = NavigationAuthDirections.actionGlobalAuthPinFragment(mobile, model);
-
-                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
+
+                                    DialogManager.dismissLoadingDialog();
                                 } break;
                                 case "recovery": {
                                     NavDirections action = NavigationAuthDirections.actionGlobalAuthPasswordChangeFragment(mobile, model);
-
-                                    ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                                     ((AuthActivity) requireActivity()).navController.navigate(action);
+
+                                    DialogManager.dismissLoadingDialog();
                                 } break;
                             }
                         } else {
                             NavDirections action = NavigationAuthDirections.actionGlobalAuthSerialFragment();
 
                             ((AuthActivity) requireActivity()).singleton.login(model);
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                             ((AuthActivity) requireActivity()).navController.navigate(action);
+
+                            DialogManager.dismissLoadingDialog();
                         }
                     });
                 }

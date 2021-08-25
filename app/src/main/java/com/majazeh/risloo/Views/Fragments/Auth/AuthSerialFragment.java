@@ -16,6 +16,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationAuthDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -106,7 +107,7 @@ public class AuthSerialFragment extends Fragment {
         CustomClickView.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+            DialogManager.showLoadingDialog(requireActivity());
 
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
@@ -116,8 +117,9 @@ public class AuthSerialFragment extends Fragment {
                             NavDirections action = NavigationAuthDirections.actionGlobalAuthLoginFragment();
 
                             ((AuthActivity) requireActivity()).singleton.logout();
-                            ((AuthActivity) requireActivity()).loadingDialog.dismiss();
                             ((AuthActivity) requireActivity()).navController.navigate(action);
+
+                            DialogManager.dismissLoadingDialog();
                         });
                     }
                 }
@@ -148,7 +150,7 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void doWork() {
-        ((AuthActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(requireActivity());
 
         data.put("authorized_key", serial);
 
