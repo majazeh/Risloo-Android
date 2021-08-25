@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -164,7 +165,7 @@ public class CreateSessionFragment extends Fragment {
     }
 
     public void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(requireActivity());
 
         // Time Data
         if (time instanceof CreateSessionTabTimeFragment) {
@@ -213,7 +214,7 @@ public class CreateSessionFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSessionAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();

@@ -19,6 +19,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -206,7 +207,7 @@ public class RoomFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+            DialogManager.showLoadingDialog(requireActivity());
 
             Room.request(data, header, new Response() {
                 @Override
@@ -217,7 +218,7 @@ public class RoomFragment extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             setAcceptation(roomModel);
 
-                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
                         });
                     }

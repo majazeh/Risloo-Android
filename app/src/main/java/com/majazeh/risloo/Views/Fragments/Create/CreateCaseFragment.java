@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.mre.ligheh.API.Response;
@@ -247,7 +248,7 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(requireActivity());
 
         data.put("title", title);
         data.put("client_id", referencesAdapter.getIds());
@@ -259,7 +260,7 @@ public class CreateCaseFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        DialogManager.dismissLoadingDialog();
                         SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewCaseAdded));
 
                         ((MainActivity) requireActivity()).navController.navigateUp();

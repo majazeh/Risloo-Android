@@ -19,6 +19,7 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -284,7 +285,7 @@ public class EditUserTabPasswordFragment extends Fragment {
     }
 
     private void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(requireActivity());
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             data.put("password",  currentPassword);
@@ -297,7 +298,7 @@ public class EditUserTabPasswordFragment extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             ((MainActivity) requireActivity()).singleton.regist(StringManager.mobileConvert(mobile), newPassword);
 
-                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }
@@ -351,7 +352,7 @@ public class EditUserTabPasswordFragment extends Fragment {
                 public void onOK(Object object) {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
-                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
                         });
                     }

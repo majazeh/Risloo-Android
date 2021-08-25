@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
@@ -179,7 +180,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
     }
 
     private void doWork(SessionModel model, String status) {
-        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(activity);
 
         data.put("id", model.getId());
         data.put("status", status);
@@ -188,7 +189,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
             @Override
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
-                    ((MainActivity) activity).loadingDialog.dismiss();
+                    DialogManager.dismissLoadingDialog();
                     SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }

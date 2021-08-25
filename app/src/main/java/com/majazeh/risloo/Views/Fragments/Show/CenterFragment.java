@@ -19,6 +19,7 @@ import androidx.navigation.NavDirections;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -167,7 +168,7 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+            DialogManager.showLoadingDialog(requireActivity());
 
             Center.request(data, header, new Response() {
                 @Override
@@ -178,7 +179,7 @@ public class CenterFragment extends Fragment {
                         requireActivity().runOnUiThread(() -> {
                             setAcceptation(centerModel);
 
-                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastRequestSucces));
                         });
                     }

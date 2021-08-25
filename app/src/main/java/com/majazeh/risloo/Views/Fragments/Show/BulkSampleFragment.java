@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -120,7 +121,7 @@ public class BulkSampleFragment extends Fragment {
 
                     switch (pos) {
                         case "لینک ثبت نام": {
-                            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+                            DialogManager.showLoadingDialog(requireActivity());
 
                             HashMap authData = new HashMap<>();
                             authData.put("authorized_key", bulkSampleModel.getLink());
@@ -139,11 +140,10 @@ public class BulkSampleFragment extends Fragment {
                                                 String key = jsonObject.getString("key");
 
                                                 if (key.startsWith("$")) {
-                                                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                                                    DialogManager.dismissLoadingDialog();
                                                     IntentManager.test(requireActivity(), key);
                                                 } else {
-                                                    ((MainActivity) requireActivity()).loadingDialog.dismiss();
-
+                                                    DialogManager.dismissLoadingDialog();
                                                     SheetManager.showChainBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
                                                 }
                                             } catch (JSONException e) {

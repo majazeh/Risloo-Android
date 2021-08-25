@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
@@ -241,7 +242,7 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(requireActivity());
 
         data.put("mobile", mobile);
 
@@ -266,7 +267,7 @@ public class CreateCenterUserFragment extends Fragment {
                         try {
                             AuthModel model = new AuthModel((JSONObject) object);
 
-                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            DialogManager.dismissLoadingDialog();
 
                             SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
                         } catch (JSONException e) {

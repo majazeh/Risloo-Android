@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -99,7 +100,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+            DialogManager.showLoadingDialog(requireActivity());
 
             data.put("key", key);
 
@@ -114,7 +115,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
                     if (isAdded()) {
                         requireActivity().runOnUiThread(() -> {
                             key = model.getKey();
-                            ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                            DialogManager.dismissLoadingDialog();
 
                             IntentManager.test(requireActivity(), key);
 

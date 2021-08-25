@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -189,7 +190,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
     }
 
     private void doWork(BulkSampleModel model) {
-        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(activity);
 
         data.put("authorized_key", model.getLink());
 
@@ -207,11 +208,10 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
                         String key = jsonObject.getString("key");
 
                         if (key.startsWith("$")) {
-                            ((MainActivity) activity).loadingDialog.dismiss();
+                            DialogManager.dismissLoadingDialog();
                             IntentManager.test(activity, key);
                         } else {
-                            ((MainActivity) activity).loadingDialog.dismiss();
-
+                            DialogManager.dismissLoadingDialog();
                             SheetManager.showChainBottomSheet(activity, key, ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), bulkSampleModel);
                         }
                     } catch (JSONException e) {

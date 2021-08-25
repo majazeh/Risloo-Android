@@ -21,6 +21,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
@@ -623,7 +624,7 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void doWork() {
-        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(requireActivity());
 
         data.put("scale_id", scalesAdapter.getIds());
         data.put("room_id", roomId);
@@ -658,7 +659,7 @@ public class CreateSampleFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
+                        DialogManager.dismissLoadingDialog();
                         if (type.equals("bulk"))
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewBulkSampleAdded));
                         else

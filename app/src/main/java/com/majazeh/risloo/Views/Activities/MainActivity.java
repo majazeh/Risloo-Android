@@ -39,7 +39,6 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
-import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreatePracticeFragment;
@@ -70,9 +69,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Adapters
     private NavsAdapter navsAdapter;
-
-    // Dialogs
-    public LoadingDialog loadingDialog;
 
     // Objects
     public NavHostFragment navHostFragment;
@@ -133,8 +129,6 @@ public class MainActivity extends AppCompatActivity {
         validatoon = new Validatoon();
 
         navsAdapter = new NavsAdapter(this);
-
-        loadingDialog = new LoadingDialog();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
 

@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -282,7 +283,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
     }
 
     private void doWork(RoomPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
-        ((MainActivity) activity).loadingDialog.show(((MainActivity) activity).getSupportFragmentManager(), "loadingDialog");
+        DialogManager.showLoadingDialog(activity);
 
         if (current instanceof RoomPlatformsFragment)
             data.put("id", ((RoomPlatformsFragment) current).roomId);
@@ -294,7 +295,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
             @Override
             public void onOK(Object object) {
                 activity.runOnUiThread(() -> {
-                    ((MainActivity) activity).loadingDialog.dismiss();
+                    DialogManager.dismissLoadingDialog();
                     SnackManager.showSuccesSnack(activity, activity.getResources().getString(R.string.ToastChangesSaved));
                 });
             }
