@@ -79,7 +79,7 @@ public class RoomPlatformsFragment extends Fragment {
             data.put("id", roomId);
         }
 
-        if (model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
+        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
             centerId = model.getRoomCenter().getCenterId();
         }
 

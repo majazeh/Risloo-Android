@@ -186,7 +186,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
             case "tags":
                 binding.titleTextView.setText(getResources().getString(R.string.DialogTagTitle));
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogTagHint));
-                binding.entryButton.setText(getResources().getString(R.string.DialogTagEntry));
+
+                if (current instanceof CenterTagsFragment || current instanceof RoomTagsFragment)
+                    binding.entryButton.setVisibility(View.GONE);
+                else
+                    binding.entryButton.setText(getResources().getString(R.string.DialogTagEntry));
                 break;
             case "managers":
                 binding.titleTextView.setText(getResources().getString(R.string.DialogManagerTitle));
