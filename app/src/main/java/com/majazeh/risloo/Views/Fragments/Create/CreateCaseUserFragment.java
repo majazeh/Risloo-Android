@@ -24,7 +24,6 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseUserBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -39,9 +38,6 @@ public class CreateCaseUserFragment extends Fragment {
 
     // Binding
     private FragmentCreateCaseUserBinding binding;
-
-    // Dialogs
-    private SearchableDialog referencesDialog;
 
     // Adapters
     public SelectedAdapter referencesAdapter;
@@ -69,8 +65,6 @@ public class CreateCaseUserFragment extends Fragment {
     }
 
     private void initializer() {
-        referencesDialog = new SearchableDialog();
-
         referencesAdapter = new SelectedAdapter(requireActivity());
 
         data = new HashMap<>();
@@ -97,10 +91,8 @@ public class CreateCaseUserFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
-                referencesDialog.setData("references");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "references");
             return false;
         });
 

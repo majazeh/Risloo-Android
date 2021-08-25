@@ -28,7 +28,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -46,7 +45,6 @@ public class CreateCenterFragment extends Fragment {
     private FragmentCreateCenterBinding binding;
 
     // Dialogs
-    private SearchableDialog managersDialog;
     public SelectedDialog phonesDialog;
 
     // Adapters
@@ -76,7 +74,6 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        managersDialog = new SearchableDialog();
         phonesDialog = new SelectedDialog();
 
         phonesAdapter = new SelectedAdapter(requireActivity());
@@ -130,8 +127,7 @@ public class CreateCenterFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            managersDialog.show(requireActivity().getSupportFragmentManager(), "managersDialog");
-            managersDialog.setData("managers");
+            DialogManager.showSearchableDialog(requireActivity(), "managers");
         }).widget(binding.managerIncludeLayout.selectTextView);
 
         binding.titleIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -229,7 +225,7 @@ public class CreateCenterFragment extends Fragment {
                     binding.managerIncludeLayout.selectTextView.setText("");
                 }
 
-                managersDialog.dismiss();
+                DialogManager.dismissSearchableDialog();
             } break;
         }
     }

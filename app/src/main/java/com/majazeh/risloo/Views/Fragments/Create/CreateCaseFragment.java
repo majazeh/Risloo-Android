@@ -26,7 +26,6 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -41,9 +40,6 @@ public class CreateCaseFragment extends Fragment {
 
     // Binding
     private FragmentCreateCaseBinding binding;
-
-    // Dialogs
-    private SearchableDialog referencesDialog, tagsDialog;
 
     // Adapters
     public SelectedAdapter referencesAdapter, tagsAdapter;
@@ -71,9 +67,6 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void initializer() {
-        referencesDialog = new SearchableDialog();
-        tagsDialog = new SearchableDialog();
-
         referencesAdapter = new SelectedAdapter(requireActivity());
         tagsAdapter = new SelectedAdapter(requireActivity());
 
@@ -115,10 +108,8 @@ public class CreateCaseFragment extends Fragment {
         });
 
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
-                referencesDialog.setData("references");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "references");
             return false;
         });
 
@@ -133,10 +124,8 @@ public class CreateCaseFragment extends Fragment {
         });
 
         binding.tagsIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                tagsDialog.show(requireActivity().getSupportFragmentManager(), "tagsDialog");
-                tagsDialog.setData("tags");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "tags");
             return false;
         });
 

@@ -21,7 +21,6 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateRoomBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -35,9 +34,6 @@ public class CreateRoomFragment extends Fragment {
 
     // Binding
     private FragmentCreateRoomBinding binding;
-
-    // Dialogs
-    private SearchableDialog psychologiesDialog;
 
     // Objects
     private HashMap data, header;
@@ -62,8 +58,6 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void initializer() {
-        psychologiesDialog = new SearchableDialog();
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -84,8 +78,7 @@ public class CreateRoomFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            psychologiesDialog.show(requireActivity().getSupportFragmentManager(), "psychologiesDialog");
-            psychologiesDialog.setData("psychologies");
+            DialogManager.showSearchableDialog(requireActivity(), "psychologies");
         }).widget(binding.psychologyIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
@@ -147,7 +140,7 @@ public class CreateRoomFragment extends Fragment {
                     binding.psychologyIncludeLayout.selectTextView.setText("");
                 }
 
-                psychologiesDialog.dismiss();
+                DialogManager.dismissSearchableDialog();
             } break;
         }
     }

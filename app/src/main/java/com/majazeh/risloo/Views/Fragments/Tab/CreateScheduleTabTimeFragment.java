@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabTimeBinding;
@@ -23,7 +24,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 
 import org.json.JSONException;
 
@@ -33,9 +33,6 @@ public class CreateScheduleTabTimeFragment extends Fragment {
 
     // Binding
     public FragmentCreateScheduleTabTimeBinding binding;
-
-    // Dialogs
-    private SearchableDialog patternDaysDialog;
 
     // Adapters
     public SelectedAdapter patternDaysAdapter;
@@ -63,8 +60,6 @@ public class CreateScheduleTabTimeFragment extends Fragment {
     }
 
     private void initializer() {
-        patternDaysDialog = new SearchableDialog();
-
         patternDaysAdapter = new SelectedAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
@@ -153,10 +148,8 @@ public class CreateScheduleTabTimeFragment extends Fragment {
         }).widget(binding.specifiedDateIncludeLayout.selectTextView);
 
         binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                patternDaysDialog.show(requireActivity().getSupportFragmentManager(), "patternDaysDialog");
-                patternDaysDialog.setData("patternDays");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "patternDays");
             return false;
         });
 

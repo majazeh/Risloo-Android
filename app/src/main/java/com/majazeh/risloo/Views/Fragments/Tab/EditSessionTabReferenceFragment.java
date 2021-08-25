@@ -14,11 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -35,9 +35,6 @@ public class EditSessionTabReferenceFragment extends Fragment {
 
     // Binding
     public FragmentEditSessionTabReferenceBinding binding;
-
-    // Dialogs
-    private SearchableDialog casesDialog;
 
     // Fragments
     private Fragment current;
@@ -63,8 +60,6 @@ public class EditSessionTabReferenceFragment extends Fragment {
     }
 
     private void initializer() {
-        casesDialog = new SearchableDialog();
-
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabReferenceTypeHeader));
@@ -123,8 +118,7 @@ public class EditSessionTabReferenceFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
-            casesDialog.setData("cases");
+            DialogManager.showSearchableDialog(requireActivity(), "cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
 
         binding.problemIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -334,7 +328,7 @@ public class EditSessionTabReferenceFragment extends Fragment {
                     setClients(null);
                 }
 
-                casesDialog.dismiss();
+                DialogManager.dismissSearchableDialog();
             } break;
         }
     }

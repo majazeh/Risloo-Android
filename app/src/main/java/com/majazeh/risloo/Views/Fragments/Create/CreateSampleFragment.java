@@ -38,7 +38,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -53,9 +52,6 @@ public class CreateSampleFragment extends Fragment {
 
     // Binding
     private FragmentCreateSampleBinding binding;
-
-    // Dialogs
-    private SearchableDialog scalesDialog, roomsDialog, referencesDialog, casesDialog, sessionsDialog;
 
     // Adapters
     public SelectedAdapter scalesAdapter, referencesAdapter;
@@ -88,12 +84,6 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void initializer() {
-        scalesDialog = new SearchableDialog();
-        roomsDialog = new SearchableDialog();
-        referencesDialog = new SearchableDialog();
-        casesDialog = new SearchableDialog();
-        sessionsDialog = new SearchableDialog();
-
         scalesAdapter = new SelectedAdapter(requireActivity());
         referencesAdapter = new SelectedAdapter(requireActivity());
         clientsAdapter = new CheckedAdapter(requireActivity());
@@ -141,10 +131,8 @@ public class CreateSampleFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         binding.scaleIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                scalesDialog.show(requireActivity().getSupportFragmentManager(), "scalesDialog");
-                scalesDialog.setData("scales");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "scales");
             return false;
         });
 
@@ -163,8 +151,7 @@ public class CreateSampleFragment extends Fragment {
         };
 
         CustomClickView.onDelayedListener(() -> {
-            roomsDialog.show(requireActivity().getSupportFragmentManager(), "roomsDialog");
-            roomsDialog.setData("rooms");
+            DialogManager.showSearchableDialog(requireActivity(), "rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
         binding.typeTabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -267,20 +254,16 @@ public class CreateSampleFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
-            casesDialog.setData("cases");
+            DialogManager.showSearchableDialog(requireActivity(), "cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
 
         CustomClickView.onDelayedListener(() -> {
-            sessionsDialog.show(requireActivity().getSupportFragmentManager(), "sessionsDialog");
-            sessionsDialog.setData("sessions");
+            DialogManager.showSearchableDialog(requireActivity(), "sessions");
         }).widget(binding.sessionIncludeLayout.selectContainer);
 
         binding.referenceIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                referencesDialog.show(requireActivity().getSupportFragmentManager(), "referencesDialog");
-                referencesDialog.setData("references");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSearchableDialog(requireActivity(), "references");
             return false;
         });
 
@@ -558,7 +541,7 @@ public class CreateSampleFragment extends Fragment {
                         binding.roomIncludeLayout.secondaryTextView.setText("");
                     }
 
-                    roomsDialog.dismiss();
+                    DialogManager.dismissSearchableDialog();
                 } break;
                 case "references": {
                     UserModel model = (UserModel) item;
@@ -595,7 +578,7 @@ public class CreateSampleFragment extends Fragment {
                         setClients(null);
                     }
 
-                    casesDialog.dismiss();
+                    DialogManager.dismissSearchableDialog();
                 } break;
                 case "sessions": {
                     SessionModel model = (SessionModel) item;
@@ -615,7 +598,7 @@ public class CreateSampleFragment extends Fragment {
                         binding.sessionIncludeLayout.secondaryTextView.setText("");
                     }
 
-                    sessionsDialog.dismiss();
+                    DialogManager.dismissSearchableDialog();
                 } break;
             }
         } catch (JSONException e) {

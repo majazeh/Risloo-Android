@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabReferenceBinding;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -22,7 +23,6 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
@@ -33,9 +33,6 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
 
     // Binding
     public FragmentCreateScheduleTabReferenceBinding binding;
-
-    // Dialogs
-    private SearchableDialog casesDialog;
 
     // Fragments
     private Fragment current;
@@ -61,8 +58,6 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
     }
 
     private void initializer() {
-        casesDialog = new SearchableDialog();
-
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.typeIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateScheduleTabReferenceTypeHeader));
@@ -114,8 +109,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            casesDialog.show(requireActivity().getSupportFragmentManager(), "casesDialog");
-            casesDialog.setData("cases");
+            DialogManager.showSearchableDialog(requireActivity(), "cases");
         }).widget(binding.caseIncludeLayout.selectContainer);
 
         binding.bulkSessionCheckBox.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
@@ -241,7 +235,7 @@ public class CreateScheduleTabReferenceFragment extends Fragment {
                     setClients(null);
                 }
 
-                casesDialog.dismiss();
+                DialogManager.dismissSearchableDialog();
             } break;
         }
     }

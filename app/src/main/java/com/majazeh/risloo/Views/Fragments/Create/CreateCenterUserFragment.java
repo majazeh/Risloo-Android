@@ -27,7 +27,6 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterUserBinding;
 
 import org.json.JSONException;
@@ -40,9 +39,6 @@ public class CreateCenterUserFragment extends Fragment {
 
     // Binding
     private FragmentCreateCenterUserBinding binding;
-
-    // Dialogs
-    private SearchableDialog roomsDialog;
 
     // Objects
     private HashMap data, header;
@@ -68,8 +64,6 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void initializer() {
-        roomsDialog = new SearchableDialog();
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -143,8 +137,7 @@ public class CreateCenterUserFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            roomsDialog.show(requireActivity().getSupportFragmentManager(), "roomsDialog");
-            roomsDialog.setData("rooms");
+            DialogManager.showSearchableDialog(requireActivity(), "rooms");
         }).widget(binding.roomIncludeLayout.selectContainer);
 
         binding.nicknameIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -233,7 +226,7 @@ public class CreateCenterUserFragment extends Fragment {
                         binding.roomIncludeLayout.secondaryTextView.setText("");
                     }
 
-                    roomsDialog.dismiss();
+                    DialogManager.dismissSearchableDialog();
                 } break;
             }
         } catch (JSONException e) {

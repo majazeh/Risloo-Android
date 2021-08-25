@@ -11,11 +11,11 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.TagsHolder;
-import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
 import com.majazeh.risloo.databinding.SingleItemTagBinding;
@@ -30,9 +30,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
-
-    // Dialogs
-    private SearchableDialog tagsDialog;
 
     // Fragments
     private Fragment current;
@@ -85,8 +82,6 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
     }
 
     private void intializer() {
-        tagsDialog = new SearchableDialog();
-
         current = ((MainActivity) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
@@ -98,9 +93,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
     private void listener(TagsHolder holder) {
         CustomClickView.onDelayedListener(() -> {
             selectedHolder = holder;
-
-            tagsDialog.show(((MainActivity) activity).getSupportFragmentManager(), "tagsDialog");
-            tagsDialog.setData("tags");
+            DialogManager.showSearchableDialog(activity, "tags");
         }).widget(holder.binding.valueTextView);
     }
 
@@ -127,7 +120,7 @@ public class TagsAdapter extends RecyclerView.Adapter<TagsHolder> {
                     selectedHolder.binding.valueTextView.setText("");
                 }
 
-                tagsDialog.dismiss();
+                DialogManager.dismissSearchableDialog();
 
                 doWork(model);
             } break;
