@@ -38,19 +38,19 @@ public class ExtendException extends onFailureException {
         dismissDialog();
     }
 
-    public void logError(Object object) {
+    private void logError(Object object) {
         System.out.println(object);
     }
 
-    public void snackMessage(String message) {
+    private void snackMessage(String message) {
         activity.runOnUiThread(() -> SnackManager.showDefaultSnack(activity, message));
     }
 
-    public void toastMessage(String message) {
+    private void toastMessage(String message) {
         activity.runOnUiThread(() -> ToastManager.showDefaultToast(activity, message));
     }
 
-    public void dismissDialog() {
+    private void dismissDialog() {
         activity.runOnUiThread(DialogManager::dismissLoadingDialog);
     }
 
