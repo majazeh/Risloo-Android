@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -21,17 +22,11 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
-import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 
 public class EditSessionTabTimeFragment extends Fragment {
 
     // Binding
     public FragmentEditSessionTabTimeBinding binding;
-
-    // BottomSheets
-    private TimeBottomSheet startTimeBottomSheet;
-    private DateBottomSheet startDateBottomSheet;
 
     // Fragments
     private Fragment current;
@@ -56,9 +51,6 @@ public class EditSessionTabTimeFragment extends Fragment {
     }
 
     private void initializer() {
-        startTimeBottomSheet = new TimeBottomSheet();
-        startDateBottomSheet = new DateBottomSheet();
-
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.startTimeIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.EditSessionTabTimeStartTimeHeader), 5, 19, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
@@ -79,8 +71,7 @@ public class EditSessionTabTimeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
-            startTimeBottomSheet.setTime(startTime, "startTime");
+            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -94,8 +85,7 @@ public class EditSessionTabTimeFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            startDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "startDateBottomSheet");
-            startDateBottomSheet.setDate(startDate, "startDate");
+            SheetManager.showDateBottomSheet(requireActivity(), startDate, "startDate");
         }).widget(binding.startDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {

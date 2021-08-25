@@ -12,6 +12,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -22,7 +23,6 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples4Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Scales2Adapter;
-import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -44,9 +44,6 @@ public class BulkSampleFragment extends Fragment {
     private ReferencesAdapter referencesAdapter;
     private Scales2Adapter scales2Adapter;
     private Samples4Adapter samples4Adapter;
-
-    // BottomSheets
-    private ChainBottomSheet chainBottomSheet;
 
     // Models
     private BulkSampleModel bulkSampleModel;
@@ -77,8 +74,6 @@ public class BulkSampleFragment extends Fragment {
         referencesAdapter = new ReferencesAdapter(requireActivity());
         scales2Adapter = new Scales2Adapter(requireActivity());
         samples4Adapter = new Samples4Adapter(requireActivity());
-
-        chainBottomSheet = new ChainBottomSheet();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -149,8 +144,7 @@ public class BulkSampleFragment extends Fragment {
                                                 } else {
                                                     ((MainActivity) requireActivity()).loadingDialog.dismiss();
 
-                                                    chainBottomSheet.show(requireActivity().getSupportFragmentManager(), "chainBottomSheet");
-                                                    chainBottomSheet.setData(key, ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+                                                    SheetManager.showChainBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();

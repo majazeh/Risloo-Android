@@ -13,12 +13,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragment;
 import com.majazeh.risloo.databinding.FragmentEditUserTabPersonalBinding;
 import com.mre.ligheh.API.Response;
@@ -38,9 +38,6 @@ public class EditUserTabPersonalFragment extends Fragment {
 
     // Binding
     private FragmentEditUserTabPersonalBinding binding;
-
-    // BottomSheets
-    private DateBottomSheet birthdayBottomSheet;
 
     // Fragments
     private Fragment current;
@@ -70,8 +67,6 @@ public class EditUserTabPersonalFragment extends Fragment {
     }
 
     private void initializer() {
-        birthdayBottomSheet = new DateBottomSheet();
-
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         data = new HashMap<>();
@@ -140,8 +135,7 @@ public class EditUserTabPersonalFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
-            birthdayBottomSheet.setDate(birthday, "birthday");
+            SheetManager.showDateBottomSheet(requireActivity(), birthday, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {

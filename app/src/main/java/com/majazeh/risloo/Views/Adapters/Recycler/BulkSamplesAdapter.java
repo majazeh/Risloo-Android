@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
@@ -21,7 +22,6 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.BulkSamplesHolder;
-import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
 import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -35,9 +35,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> {
-
-    // BottomSheets
-    private ChainBottomSheet chainBottomSheet;
 
     // Objects
     private Activity activity;
@@ -94,8 +91,6 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
     }
 
     private void initializer() {
-        chainBottomSheet = new ChainBottomSheet();
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
@@ -217,8 +212,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
                         } else {
                             ((MainActivity) activity).loadingDialog.dismiss();
 
-                            chainBottomSheet.show(((MainActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
-                            chainBottomSheet.setData(key, ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), bulkSampleModel);
+                            SheetManager.showChainBottomSheet(activity, key, ((MainActivity) activity).singleton.getName(), ((MainActivity) activity).singleton.getAvatar(), bulkSampleModel);
                         }
                     } catch (JSONException e) {
                         e.printStackTrace();

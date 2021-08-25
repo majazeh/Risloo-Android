@@ -29,6 +29,7 @@ import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Entities.Inputor;
@@ -38,7 +39,6 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Utils.Entities.Decorator;
 import com.majazeh.risloo.Utils.Entities.Validatoon;
 import com.majazeh.risloo.Views.Adapters.Recycler.NavsAdapter;
-import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.LoadingDialog;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateDocumentFragment;
@@ -70,9 +70,6 @@ public class MainActivity extends AppCompatActivity {
 
     // Adapters
     private NavsAdapter navsAdapter;
-
-    // BottomSheets
-    private LogoutBottomSheet logoutBottomSheet;
 
     // Dialogs
     public LoadingDialog loadingDialog;
@@ -137,8 +134,6 @@ public class MainActivity extends AppCompatActivity {
 
         navsAdapter = new NavsAdapter(this);
 
-        logoutBottomSheet = new LogoutBottomSheet();
-
         loadingDialog = new LoadingDialog();
 
         navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(binding.contentIncludeLayout.fragmentNavHostFragment.getId());
@@ -194,8 +189,7 @@ public class MainActivity extends AppCompatActivity {
                             navController.navigate(action);
                         } break;
                         case "خروج": {
-                            logoutBottomSheet.show(MainActivity.this.getSupportFragmentManager(), "logoutBottomSheet");
-                            logoutBottomSheet.setData(singleton.getName(), singleton.getAvatar());
+                            SheetManager.showLogoutBottomSheet(MainActivity.this, singleton.getName(), singleton.getAvatar());
                         } break;
                     }
 

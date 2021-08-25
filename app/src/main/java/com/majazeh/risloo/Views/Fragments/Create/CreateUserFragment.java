@@ -19,13 +19,13 @@ import androidx.core.widget.ImageViewCompat;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Widgets.CutCopyPasteEditText;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.databinding.FragmentCreateUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
@@ -41,9 +41,6 @@ public class CreateUserFragment extends Fragment {
 
     // Binding
     private FragmentCreateUserBinding binding;
-
-    // BottomSheets
-    private DateBottomSheet birthdayBottomSheet;
 
     // Objects
     private HashMap data, header;
@@ -69,8 +66,6 @@ public class CreateUserFragment extends Fragment {
     }
 
     private void initializer() {
-        birthdayBottomSheet = new DateBottomSheet();
-
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
@@ -215,8 +210,7 @@ public class CreateUserFragment extends Fragment {
         }).widget(binding.passwordIncludeLayout.visibilityImageView);
 
         CustomClickView.onDelayedListener(() -> {
-            birthdayBottomSheet.show(requireActivity().getSupportFragmentManager(), "birthdayBottomSheet");
-            birthdayBottomSheet.setDate(birthday, "birthday");
+            SheetManager.showDateBottomSheet(requireActivity(), birthday, "birthday");
         }).widget(binding.birthdayIncludeLayout.selectTextView);
 
         binding.statusIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {

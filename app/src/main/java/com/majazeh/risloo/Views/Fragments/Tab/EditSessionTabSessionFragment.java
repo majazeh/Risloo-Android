@@ -14,13 +14,12 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
-import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragment;
 import com.majazeh.risloo.databinding.FragmentEditSessionTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -29,10 +28,6 @@ public class EditSessionTabSessionFragment extends Fragment {
 
     // Binding
     public FragmentEditSessionTabSessionBinding binding;
-
-    // BottomSheets
-    private TimeBottomSheet accurateStartTimeBottomSheet, accurateEndTimeBottomSheet;
-    private DateBottomSheet accurateStartDateBottomSheet, accurateEndDateBottomSheet;
 
     // Fragments
     private Fragment current;
@@ -59,11 +54,6 @@ public class EditSessionTabSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        accurateStartTimeBottomSheet = new TimeBottomSheet();
-        accurateEndTimeBottomSheet = new TimeBottomSheet();
-        accurateStartDateBottomSheet = new DateBottomSheet();
-        accurateEndDateBottomSheet = new DateBottomSheet();
-
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
         binding.statusIncludeLayout.headerTextView.setText(getResources().getString(R.string.EditSessionTabSessionStatusHeader));
@@ -165,13 +155,11 @@ public class EditSessionTabSessionFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            accurateStartTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateStartTimeBottomSheet");
-            accurateStartTimeBottomSheet.setTime(accurateStartTime, "accurateStartTime");
+            SheetManager.showTimeBottomSheet(requireActivity(), accurateStartTime, "accurateStartTime");
         }).widget(binding.scheduledIncludeLayout.startAccurateTimeTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            accurateStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateStartDateBottomSheet");
-            accurateStartDateBottomSheet.setDate(accurateStartDate, "accurateStartDate");
+            SheetManager.showDateBottomSheet(requireActivity(), accurateStartDate, "accurateStartDate");
         }).widget(binding.scheduledIncludeLayout.startAccurateDateTextView);
 
         binding.scheduledIncludeLayout.endRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
@@ -218,13 +206,11 @@ public class EditSessionTabSessionFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            accurateEndTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateEndTimeBottomSheet");
-            accurateEndTimeBottomSheet.setTime(accurateEndTime, "accurateEndTime");
+            SheetManager.showTimeBottomSheet(requireActivity(), accurateEndTime, "accurateEndTime");
         }).widget(binding.scheduledIncludeLayout.endAccurateTimeTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            accurateEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "accurateEndDateBottomSheet");
-            accurateEndDateBottomSheet.setDate(accurateEndDate, "accurateEndDate");
+            SheetManager.showDateBottomSheet(requireActivity(), accurateEndDate, "accurateEndDate");
         }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
 
         CustomClickView.onDelayedListener(() -> {

@@ -15,8 +15,8 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Views.BottomSheets.AuthBottomSheet;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -39,9 +39,6 @@ public class CreateCenterUserFragment extends Fragment {
 
     // Binding
     private FragmentCreateCenterUserBinding binding;
-
-    // BottomSheets
-    private AuthBottomSheet authBottomSheet;
 
     // Dialogs
     private SearchableDialog roomsDialog;
@@ -70,8 +67,6 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void initializer() {
-        authBottomSheet = new AuthBottomSheet();
-
         roomsDialog = new SearchableDialog();
 
         data = new HashMap<>();
@@ -273,8 +268,7 @@ public class CreateCenterUserFragment extends Fragment {
 
                             ((MainActivity) requireActivity()).loadingDialog.dismiss();
 
-                            authBottomSheet.show(requireActivity().getSupportFragmentManager(), "authBottomSheet");
-                            authBottomSheet.setData(model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
+                            SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }

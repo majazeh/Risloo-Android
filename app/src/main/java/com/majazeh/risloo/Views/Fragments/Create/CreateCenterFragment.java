@@ -15,6 +15,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -26,7 +27,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
@@ -50,9 +50,6 @@ public class CreateCenterFragment extends Fragment {
 
     // Adapters
     public SelectedAdapter phonesAdapter;
-
-    // BottomSheets
-    private ImageBottomSheet imageBottomSheet;
 
     // Objects
     private Bitmap avatarBitmap = null;
@@ -82,8 +79,6 @@ public class CreateCenterFragment extends Fragment {
         phonesDialog = new SelectedDialog();
 
         phonesAdapter = new SelectedAdapter(requireActivity());
-
-        imageBottomSheet = new ImageBottomSheet();
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -149,7 +144,7 @@ public class CreateCenterFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            imageBottomSheet.show(requireActivity().getSupportFragmentManager(), "imageBottomSheet");
+            SheetManager.showImageBottomSheet(requireActivity());
         }).widget(binding.avatarIncludeLayout.selectCircleImageView);
 
         binding.addressIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {

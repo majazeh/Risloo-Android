@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabTimeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -22,8 +23,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
-import com.majazeh.risloo.Views.BottomSheets.TimeBottomSheet;
 import com.majazeh.risloo.Views.Dialogs.SearchableDialog;
 
 import org.json.JSONException;
@@ -40,10 +39,6 @@ public class CreateScheduleTabTimeFragment extends Fragment {
 
     // Adapters
     public SelectedAdapter patternDaysAdapter;
-
-    // BottomSheets
-    private TimeBottomSheet startTimeBottomSheet;
-    private DateBottomSheet specifiedDateBottomSheet, periodStartDateBottomSheet, periodEndDateBottomSheet;
 
     // Fragments
     private Fragment current;
@@ -71,11 +66,6 @@ public class CreateScheduleTabTimeFragment extends Fragment {
         patternDaysDialog = new SearchableDialog();
 
         patternDaysAdapter = new SelectedAdapter(requireActivity());
-
-        startTimeBottomSheet = new TimeBottomSheet();
-        specifiedDateBottomSheet = new DateBottomSheet();
-        periodStartDateBottomSheet = new DateBottomSheet();
-        periodEndDateBottomSheet = new DateBottomSheet();
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
@@ -116,8 +106,7 @@ public class CreateScheduleTabTimeFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            startTimeBottomSheet.show(requireActivity().getSupportFragmentManager(), "startTimeBottomSheet");
-            startTimeBottomSheet.setTime(startTime, "startTime");
+            SheetManager.showTimeBottomSheet(requireActivity(), startTime, "startTime");
         }).widget(binding.startTimeIncludeLayout.selectTextView);
 
         binding.durationIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
@@ -160,8 +149,7 @@ public class CreateScheduleTabTimeFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            specifiedDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "specifiedDateBottomSheet");
-            specifiedDateBottomSheet.setDate(specifiedDate, "specifiedDate");
+            SheetManager.showDateBottomSheet(requireActivity(), specifiedDate, "specifiedDate");
         }).widget(binding.specifiedDateIncludeLayout.selectTextView);
 
         binding.patternDaysIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
@@ -200,13 +188,11 @@ public class CreateScheduleTabTimeFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            periodStartDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodStartDateBottomSheet");
-            periodStartDateBottomSheet.setDate(periodStartDate, "periodStartDate");
+            SheetManager.showDateBottomSheet(requireActivity(), periodStartDate, "periodStartDate");
         }).widget(binding.periodStartDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            periodEndDateBottomSheet.show(requireActivity().getSupportFragmentManager(), "periodEndDateBottomSheet");
-            periodEndDateBottomSheet.setDate(periodEndDate, "periodEndDate");
+            SheetManager.showDateBottomSheet(requireActivity(), periodEndDate, "periodEndDate");
         }).widget(binding.periodEndDateIncludeLayout.selectTextView);
 
         CustomClickView.onDelayedListener(() -> {
