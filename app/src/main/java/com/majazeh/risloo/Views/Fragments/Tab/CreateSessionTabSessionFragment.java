@@ -14,13 +14,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.databinding.FragmentCreateSessionTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -31,9 +31,6 @@ public class CreateSessionTabSessionFragment extends Fragment {
 
     // Binding
     public FragmentCreateSessionTabSessionBinding binding;
-
-    // Dialogs
-    public SelectedDialog axisesDialog;
 
     // Adapters
     public SelectedAdapter axisesAdapter;
@@ -63,8 +60,6 @@ public class CreateSessionTabSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        axisesDialog = new SelectedDialog();
-
         axisesAdapter = new SelectedAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
@@ -121,10 +116,8 @@ public class CreateSessionTabSessionFragment extends Fragment {
         });
 
         binding.axisIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                axisesDialog.show(requireActivity().getSupportFragmentManager(), "axisesDialog");
-                axisesDialog.setData("axises");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSelectedDialog(requireActivity(), "axises");
             return false;
         });
 

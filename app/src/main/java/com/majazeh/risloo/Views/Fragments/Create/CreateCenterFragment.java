@@ -28,7 +28,6 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
-import com.majazeh.risloo.Views.Dialogs.SelectedDialog;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -43,9 +42,6 @@ public class CreateCenterFragment extends Fragment {
 
     // Binding
     private FragmentCreateCenterBinding binding;
-
-    // Dialogs
-    public SelectedDialog phonesDialog;
 
     // Adapters
     public SelectedAdapter phonesAdapter;
@@ -74,8 +70,6 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesDialog = new SelectedDialog();
-
         phonesAdapter = new SelectedAdapter(requireActivity());
 
         data = new HashMap<>();
@@ -155,10 +149,8 @@ public class CreateCenterFragment extends Fragment {
         });
 
         binding.phonesIncludeLayout.selectRecyclerView.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction()) {
-                phonesDialog.show(requireActivity().getSupportFragmentManager(), "phonesDialog");
-                phonesDialog.setData("phones");
-            }
+            if (MotionEvent.ACTION_UP == event.getAction())
+                DialogManager.showSelectedDialog(requireActivity(), "phones");
             return false;
         });
 

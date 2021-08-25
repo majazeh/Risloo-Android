@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Adapters.Holder.SelectedHolder;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
@@ -19,12 +20,8 @@ import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabSessionFragment;
-import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
 import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -35,7 +32,7 @@ import java.util.ArrayList;
 public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
 
     // Fragments
-    private Fragment current, child, payment;
+    private Fragment payment;
 
     // Objects
     private Activity activity;
@@ -133,8 +130,6 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
     }
 
     private void intializer() {
-        current = ((MainActivity) activity).fragmont.getCurrent();
-        child = ((MainActivity) activity).fragmont.getChild();
         payment = ((MainActivity) activity).fragmont.getPayment();
     }
 
@@ -211,29 +206,8 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
     }
 
     private void refreshCount() {
-        if (current instanceof CreateCenterFragment) {
-            if (method.equals("phones"))
-                if (((CreateCenterFragment) current).phonesDialog.isVisible())
-                    ((CreateCenterFragment) current).phonesDialog.calculateCount();
-        }
-
-        if (child instanceof CreateScheduleTabSessionFragment) {
-            if (method.equals("axises"))
-                if (((CreateScheduleTabSessionFragment) child).axisesDialog.isVisible())
-                    ((CreateScheduleTabSessionFragment) child).axisesDialog.calculateCount();
-        }
-
-        if (child instanceof CreateSessionTabSessionFragment) {
-            if (method.equals("axises"))
-                if (((CreateSessionTabSessionFragment) child).axisesDialog.isVisible())
-                    ((CreateSessionTabSessionFragment) child).axisesDialog.calculateCount();
-        }
-
-        if (child instanceof EditCenterTabDetailFragment) {
-            if (method.equals("phones"))
-                if (((EditCenterTabDetailFragment) child).phonesDialog.isVisible())
-                    ((EditCenterTabDetailFragment) child).phonesDialog.calculateCount();
-        }
+        if (DialogManager.getSelectedDialog() != null)
+            DialogManager.getSelectedDialog().calculateCount();
     }
 
     private void calculateCount() {
