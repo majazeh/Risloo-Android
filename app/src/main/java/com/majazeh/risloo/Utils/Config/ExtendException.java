@@ -3,6 +3,7 @@ package com.majazeh.risloo.Utils.Config;
 import android.app.Activity;
 
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.AuthActivity;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.mre.ligheh.API.Response;
@@ -22,14 +23,14 @@ public class ExtendException extends onFailureException {
     public void onClient(String s) {
         logError("onClient: " + s);
         dismissDialog();
-        snackError(s);
+        snackMessage(s);
     }
 
     @Override
     public void onServerFail(String s) {
         logError("onServerFail: " + s);
         dismissDialog();
-        snackError(s);
+        snackMessage(s);
     }
 
     @Override
@@ -42,20 +43,22 @@ public class ExtendException extends onFailureException {
         System.out.println(object);
     }
 
-    public void snackError(String message) {
+    public void snackMessage(String message) {
         activity.runOnUiThread(() -> SnackManager.showDefaultSnack(activity, message));
+    }
+
+    public void toastMessage(String message) {
+        activity.runOnUiThread(() -> ToastManager.showDefaultToast(activity, message));
     }
 
     public void dismissDialog() {
         activity.runOnUiThread(() -> {
             if (activity instanceof AuthActivity) {
-                if (((AuthActivity) activity).loadingDialog != null && ((AuthActivity) activity).loadingDialog.isVisible()) {
+                if (((AuthActivity) activity).loadingDialog != null && ((AuthActivity) activity).loadingDialog.isVisible())
                     ((AuthActivity) activity).loadingDialog.dismiss();
-                }
             } else if (activity instanceof MainActivity) {
-                if (((MainActivity) activity).loadingDialog != null && ((MainActivity) activity).loadingDialog.isVisible()) {
+                if (((MainActivity) activity).loadingDialog != null && ((MainActivity) activity).loadingDialog.isVisible())
                     ((MainActivity) activity).loadingDialog.dismiss();
-                }
             }
         });
     }

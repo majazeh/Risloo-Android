@@ -11,6 +11,7 @@ public class JsonManager {
     ---------- Funcs ----------
     */
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     public static String getJson(Activity activity, String file) {
         try {
             InputStream inputStream = activity.getAssets().open(file);
