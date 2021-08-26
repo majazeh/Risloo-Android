@@ -13,12 +13,13 @@
         android:contentDescription="@string/AppImageContent"
         android:padding="@dimen/_6sdp"
         android:scaleType="fitCenter"
-        android:src="@drawable/ic_ellipsis_v_light"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:tint="@color/Gray500" />
+        tools:src="@drawable/ic_ellipsis_v_light"
+        tools:tint="@color/Gray500"
+        tools:background="@drawable/draw_oval_solid_transparent_border_1sdp_gray500"/>
 
     <Spinner
         android:id="@+id/select_spinner"
@@ -27,7 +28,7 @@
         android:singleLine="true"
         android:spinnerMode="dropdown"
         android:dropDownVerticalOffset="@dimen/_32sdp"
-        android:background="@drawable/draw_oval_solid_transparent_border_1sdp_gray500"
+        android:background="@android:color/transparent"
         app:layout_constraintBottom_toBottomOf="@id/select_imageView"
         app:layout_constraintEnd_toEndOf="@id/select_imageView"
         app:layout_constraintStart_toStartOf="@id/select_imageView"

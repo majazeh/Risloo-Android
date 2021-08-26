@@ -1286,7 +1286,7 @@ public class BreadCrumb {
         ArrayList<String> list = centers();
 
         try {
-            if (centerModel != null && centerModel.getDetail() != null && centerModel.getDetail().getString("title").equals(""))
+            if (centerModel != null && centerModel.getDetail() != null && !centerModel.getDetail().getString("title").equals(""))
                 list.add(centerModel.getDetail().getString("title"));
             else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
                 list.add("مرکز" + " " + centerModel.getCenterId());
@@ -1348,7 +1348,7 @@ public class BreadCrumb {
 
         if (!centerType.equals("room")) {
             try {
-                if (centerModel != null && centerModel.getDetail() != null && centerModel.getDetail().getString("title").equals(""))
+                if (centerModel != null && centerModel.getDetail() != null && !centerModel.getDetail().getString("title").equals(""))
                     list.add("کلینیک شخصی" + " " + centerModel.getDetail().getString("title"));
                 else if (centerModel != null && centerModel.getCenterId() != null && !centerModel.getCenterId().equals(""))
                     list.add("کلینیک شخصی" + " " + centerModel.getCenterId());

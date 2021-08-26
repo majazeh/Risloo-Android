@@ -28,19 +28,6 @@
         tools:textColor="@color/Gray500"
         tools:background="@drawable/draw_16sdp_solid_transparent_border_1sdp_gray500" />
 
-    <Spinner
-        android:id="@+id/select_spinner"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:singleLine="true"
-        android:spinnerMode="dropdown"
-        android:dropDownVerticalOffset="@dimen/_32sdp"
-        android:background="@android:color/transparent"
-        app:layout_constraintBottom_toBottomOf="@id/select_textView"
-        app:layout_constraintEnd_toEndOf="@id/select_textView"
-        app:layout_constraintStart_toStartOf="@id/select_textView"
-        app:layout_constraintTop_toTopOf="@id/select_textView" />
-
     <ImageView
         android:id="@+id/angle_imageView"
         android:layout_width="@dimen/_14sdp"
@@ -53,5 +40,18 @@
         app:layout_constraintEnd_toEndOf="@id/select_spinner"
         app:layout_constraintTop_toTopOf="@id/select_spinner"
         app:tint="@color/Gray500" />
+
+    <Spinner
+        android:id="@+id/select_spinner"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:singleLine="true"
+        android:spinnerMode="dropdown"
+        android:dropDownVerticalOffset="@dimen/_32sdp"
+        android:background="@android:color/transparent"
+        app:layout_constraintBottom_toBottomOf="@id/select_textView"
+        app:layout_constraintEnd_toEndOf="@id/select_textView"
+        app:layout_constraintStart_toStartOf="@id/select_textView"
+        app:layout_constraintTop_toTopOf="@id/select_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

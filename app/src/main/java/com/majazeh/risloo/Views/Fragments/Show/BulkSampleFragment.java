@@ -1,6 +1,7 @@
 package com.majazeh.risloo.Views.Fragments.Show;
 
 import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -62,6 +63,8 @@ public class BulkSampleFragment extends Fragment {
 
         initializer();
 
+        detector();
+
         listener();
 
         setArgs();
@@ -84,9 +87,19 @@ public class BulkSampleFragment extends Fragment {
         binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
 
+        InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
+
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.referencesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.scalesSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.samplesSingleLayout.recyclerView, 0, 0, 0, 0);
+    }
+
+    private void detector() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
+        } else {
+            binding.menuSpinner.selectImageView.setBackgroundResource(R.drawable.draw_oval_solid_transparent_border_1sdp_gray300);
+        }
     }
 
     @SuppressLint("ClickableViewAccessibility")
