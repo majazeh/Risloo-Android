@@ -233,7 +233,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
                     data.put("usage", "create_case");
                     break;
                 case "tags":
-                    data.put("region", ((CreateCaseFragment) current).roomId);
+                    data.put("region", ((CreateCaseFragment) current).centerId);
                     break;
             }
         }

@@ -48,7 +48,7 @@ public class CreateCaseFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    public String roomId = "", title = "", problem = "";
+    public String roomId = "", centerId = "", title = "", problem = "";
 
     @Nullable
     @Override
@@ -166,6 +166,8 @@ public class CreateCaseFragment extends Fragment {
         if (model.getCenterId() != null && !model.getCenterId().equals("")) {
             roomId = model.getCenterId();
             data.put("id", roomId);
+
+            centerId = roomId;
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
@@ -176,6 +178,10 @@ public class CreateCaseFragment extends Fragment {
         if (model.getRoomId() != null && !model.getRoomId().equals("")) {
             roomId = model.getRoomId();
             data.put("id", roomId);
+        }
+
+        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
+            centerId = model.getRoomCenter().getCenterId();
         }
 
         setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
