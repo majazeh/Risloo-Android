@@ -27,8 +27,12 @@ import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
 import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
+import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -164,9 +168,16 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
                                 ((MainActivity) activity).navController.navigate(action);
                             }
                         } break;
-                        case "اتاق درمان":
-                            // TODO : Place Code If Needed
-                            break;
+                        case "اتاق درمان": {
+                            try {
+                                RoomModel roomModel = new RoomModel(new JSONObject().put("id", model.getMeta().getString("room_id")).put("type", "room").put("manager", model.object));
+
+                                NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("room", roomModel);
+                                ((MainActivity) activity).navController.navigate(action);
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } break;
                         case "ویرایش": {
                             if (current instanceof CenterUsersFragment) {
                                 NavDirections action = NavigationMainDirections.actionGlobalEditCenterUserFragment(((CenterUsersFragment) current).centerId, model);
@@ -234,6 +245,13 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
     private void setAcceptation(CenterUsersHolder holder, UserModel model) {
         ArrayList<String> items = new ArrayList<>();
 
+        if (model.getMeta() != null) {
+            items.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
+        } else {
+            if (!model.getPosition().equals("client"))
+                items.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
+        }
+
         if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.CenterUsersFragmentStatusKicked));
 
@@ -264,10 +282,8 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
             items.add(activity.getResources().getString(R.string.CenterUsersFragmentAccept));
         }
 
-        items.add(activity.getResources().getString(R.string.CenterUsersFragmentCreateRoom));
-        items.add(activity.getResources().getString(R.string.CenterUsersFragmentRoom));
         items.add(activity.getResources().getString(R.string.CenterUsersFragmentEdit));
-        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
+//        items.add(activity.getResources().getString(R.string.CenterUsersFragmentEnter));
         items.add("");
 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);

@@ -323,21 +323,21 @@ public class RoomFragment extends Fragment {
                 type = model.getCenterType();
             }
 
-            if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
+            if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
                 binding.nameTextView.setText(model.getDetail().getString("title"));
                 binding.nameTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
-            if (model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
+            if (model.getDetail() != null && model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
                 binding.descriptionTextView.setText(model.getDetail().getString("description"));
                 binding.descriptionGroup.setVisibility(View.VISIBLE);
             } else {
                 binding.descriptionGroup.setVisibility(View.GONE);
             }
 
-            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
+            if (model.getDetail() != null && model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
                 JSONArray phones = model.getDetail().getJSONArray("phone_numbers");
 
                 binding.mobileTextView.setText("");
@@ -353,7 +353,7 @@ public class RoomFragment extends Fragment {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
 
-            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+            if (model.getDetail() != null && model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                 Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
@@ -379,12 +379,20 @@ public class RoomFragment extends Fragment {
             type = model.getRoomType();
         }
 
-        if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
+        if (model.getRoomManager() != null) {
             if (!type.equals("room")) {
-                String name = requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName();
-                binding.nameTextView.setText(name);
+                if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals("")) {
+                    String name = requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getName();
+                    binding.nameTextView.setText(name);
+                } else {
+                    String name = requireActivity().getResources().getString(R.string.RoomFragmentPersonalClinic) + " " + model.getRoomManager().getId();
+                    binding.nameTextView.setText(name);
+                }
             } else {
-                binding.nameTextView.setText(model.getRoomManager().getName());
+                if (model.getRoomManager().getName() != null && !model.getRoomManager().getName().equals(""))
+                    binding.nameTextView.setText(model.getRoomManager().getName());
+                else
+                    binding.nameTextView.setText(model.getRoomManager().getId());
             }
 
             binding.nameTextView.setVisibility(View.VISIBLE);
@@ -398,7 +406,7 @@ public class RoomFragment extends Fragment {
         if (binding.mobileTextView.getText().toString().equals(""))
             binding.mobileGroup.setVisibility(View.GONE);
 
-        if (model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null && model.getRoomManager().getAvatar() .getMedium().getUrl() != null && !model.getRoomManager().getAvatar().getMedium().getUrl().equals("")) {
+        if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null && model.getRoomManager().getAvatar() .getMedium().getUrl() != null && !model.getRoomManager().getAvatar().getMedium().getUrl().equals("")) {
             binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
             Picasso.get().load(model.getRoomManager().getAvatar() .getMedium().getUrl()).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
         } else {
