@@ -1,7 +1,7 @@
 package com.majazeh.risloo.Utils.Entities;
 
 import android.app.Activity;
-import android.view.View;
+import android.graphics.drawable.Drawable;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
@@ -17,6 +17,9 @@ public class Inputor {
     // Widgets
     public EditText editText;
 
+    // Objects
+    private Drawable background;
+
     public Inputor() {
         // TODO : Place Code If Needed
     }
@@ -27,6 +30,7 @@ public class Inputor {
 
     public void select(Activity activity, EditText editText) {
         this.editText = editText;
+        background = editText.getBackground();
 
         editText.requestFocus();
         if (activity instanceof AuthActivity)
@@ -39,17 +43,7 @@ public class Inputor {
 
     public void clear(Activity activity, EditText editText) {
         editText.clearFocus();
-        if (activity instanceof AuthActivity)
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
-        else if (activity instanceof MainActivity) {
-            View searchView = activity.findViewById(R.id.search_editText);
-
-            if (searchView != null && searchView.getClass().getName().equals(editText.getClass().getName()))
-                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray200);
-            else
-                editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray500);
-        } else if (activity instanceof TestActivity)
-            editText.setBackgroundResource(R.drawable.draw_2sdp_solid_transparent_border_1sdp_gray300);
+        editText.setBackground(background);
 
         hideKeyboard(activity, editText);
     }
