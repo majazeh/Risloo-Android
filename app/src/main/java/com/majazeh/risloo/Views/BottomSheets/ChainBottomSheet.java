@@ -20,7 +20,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.TestsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetSampleAdapter;
 import com.majazeh.risloo.databinding.BottomSheetChainBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -38,7 +38,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     private BottomSheetChainBinding binding;
 
     // Adapters
-    private TestsAdapter testAdapter;
+    private SheetSampleAdapter sampleAdapter;
 
     // Models
     private BulkSampleModel bulkSampleModel;
@@ -72,7 +72,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     }
 
     private void initializer() {
-        testAdapter = new TestsAdapter(requireActivity());
+        sampleAdapter = new SheetSampleAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -183,8 +183,8 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
             }
 
             if (bulkSampleModel.getScales() != null) {
-                testAdapter.setItems(bulkSampleModel.getScales().data());
-                binding.listRecyclerView.setAdapter(testAdapter);
+                sampleAdapter.setItems(bulkSampleModel.getScales().data());
+                binding.listRecyclerView.setAdapter(sampleAdapter);
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getAcceptation() != null) {

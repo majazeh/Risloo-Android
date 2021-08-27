@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Sheet;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -7,14 +7,14 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.majazeh.risloo.Views.Adapters.Holder.TestsHolder;
-import com.majazeh.risloo.databinding.SingleItemTestBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Sheet.SheetSampleHolder;
+import com.majazeh.risloo.databinding.SingleItemSheetSampleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class TestsAdapter extends RecyclerView.Adapter<TestsHolder> {
+public class SheetSampleAdapter extends RecyclerView.Adapter<SheetSampleHolder> {
 
     // Objects
     private Activity activity;
@@ -22,18 +22,18 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsHolder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public TestsAdapter(@NonNull Activity activity) {
+    public SheetSampleAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public TestsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new TestsHolder(SingleItemTestBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public SheetSampleHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new SheetSampleHolder(SingleItemSheetSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull TestsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull SheetSampleHolder holder, int i) {
         ScaleModel model = (ScaleModel) items.get(i);
 
         setData(holder, model);
@@ -62,7 +62,7 @@ public class TestsAdapter extends RecyclerView.Adapter<TestsHolder> {
         }
     }
 
-    private void setData(TestsHolder holder, ScaleModel model) {
+    private void setData(SheetSampleHolder holder, ScaleModel model) {
         holder.binding.getRoot().setText(model.getTitle());
     }
 
