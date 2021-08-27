@@ -278,28 +278,28 @@ public class CenterFragment extends Fragment {
                 type = model.getCenterType();
             }
 
-            if (model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
+            if (model.getDetail() != null && model.getDetail().has("title") && !model.getDetail().isNull("title") && !model.getDetail().getString("title").equals("")) {
                 binding.nameTextView.setText(model.getDetail().getString("title"));
                 binding.nameTextView.setVisibility(View.VISIBLE);
             } else {
                 binding.nameTextView.setVisibility(View.GONE);
             }
 
-            if (model.getManager().getName() != null && !model.getManager().getName().equals("")) {
+            if (model.getManager() != null && model.getManager().getName() != null && !model.getManager().getName().equals("")) {
                 binding.ownerTextView.setText(model.getManager().getName());
                 binding.ownerGroup.setVisibility(View.VISIBLE);
             } else {
                 binding.ownerGroup.setVisibility(View.GONE);
             }
 
-            if (model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
+            if (model.getDetail() != null && model.getDetail().has("description") && !model.getDetail().isNull("description") && !model.getDetail().getString("description").equals("")) {
                 binding.descriptionTextView.setText(model.getDetail().getString("description"));
                 binding.descriptionGroup.setVisibility(View.VISIBLE);
             } else {
                 binding.descriptionGroup.setVisibility(View.GONE);
             }
 
-            if (model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
+            if (model.getDetail() != null && model.getDetail().has("phone_numbers") && !model.getDetail().isNull("phone_numbers") && model.getDetail().getJSONArray("phone_numbers").length() != 0) {
                 JSONArray phones = model.getDetail().getJSONArray("phone_numbers");
 
                 binding.mobileTextView.setText("");
@@ -315,7 +315,7 @@ public class CenterFragment extends Fragment {
                 binding.mobileGroup.setVisibility(View.GONE);
             }
 
-            if (model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
+            if (model.getDetail() != null && model.getDetail().has("avatar") && !model.getDetail().isNull("avatar") && model.getDetail().getJSONArray("avatar").length() != 0) {
                 binding.avatarIncludeLayout.charTextView.setVisibility(View.GONE);
                 Picasso.get().load(model.getDetail().getJSONArray("avatar").getJSONObject(2).getString("url")).placeholder(R.color.Gray50).into(binding.avatarIncludeLayout.avatarCircleImageView);
             } else {
