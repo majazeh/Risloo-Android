@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Test;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -13,14 +13,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.ChainsHolder;
-import com.majazeh.risloo.databinding.SingleItemChainBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestChainHolder;
+import com.majazeh.risloo.databinding.SingleItemTestChainBinding;
 import com.mre.ligheh.Model.TypeModel.ChainModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class ChainsAdapter extends RecyclerView.Adapter<ChainsHolder> {
+public class TestChainAdapter extends RecyclerView.Adapter<TestChainHolder> {
 
     // Objects
     private Activity activity;
@@ -28,18 +28,18 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsHolder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public ChainsAdapter(@NonNull Activity activity) {
+    public TestChainAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public ChainsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ChainsHolder(SingleItemChainBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public TestChainHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new TestChainHolder(SingleItemTestChainBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ChainsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull TestChainHolder holder, int i) {
         ChainModel model = (ChainModel) items.get(i);
 
         setData(holder, model);
@@ -68,7 +68,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsHolder> {
         }
     }
 
-    private void setData(ChainsHolder holder, ChainModel model) {
+    private void setData(TestChainHolder holder, ChainModel model) {
         if (holder.getBindingAdapterPosition() == 0)
             holder.binding.topView.setVisibility(View.GONE);
         else
@@ -79,7 +79,7 @@ public class ChainsAdapter extends RecyclerView.Adapter<ChainsHolder> {
         setActive(holder, model);
     }
 
-    private void setActive(ChainsHolder holder, ChainModel model) {
+    private void setActive(TestChainHolder holder, ChainModel model) {
         if (model.getId().equals(((TestActivity) activity).data.get("id"))) {
             holder.binding.nameTextView.setTextColor(activity.getResources().getColor(R.color.Blue700));
             holder.binding.nameTextView.setTextAppearance(activity, R.style.danaDemiBoldTextStyle);

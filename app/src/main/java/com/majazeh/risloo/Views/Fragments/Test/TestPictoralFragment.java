@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PictoralsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestPictoralAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPictoralBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
@@ -28,7 +28,7 @@ public class TestPictoralFragment extends Fragment {
     private FragmentTestPictoralBinding binding;
 
     // Adapters
-    private PictoralsAdapter adapter;
+    private TestPictoralAdapter adapter;
 
     @Nullable
     @Override
@@ -43,7 +43,7 @@ public class TestPictoralFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new PictoralsAdapter(requireActivity());
+        adapter = new TestPictoralAdapter(requireActivity());
 
         InitManager.fixedGridRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }

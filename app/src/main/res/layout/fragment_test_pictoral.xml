@@ -72,7 +72,7 @@
                 tools:layout_marginStart="@dimen/_8sdp"
                 tools:layout_marginTop="@dimen/_8sdp"
                 tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-                tools:listitem="@layout/single_item_pictoral"
+                tools:listitem="@layout/single_item_test_pictoral"
                 tools:itemCount="4"
                 tools:spanCount="2" />
 

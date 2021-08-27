@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.ChainsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestChainAdapter;
 import com.majazeh.risloo.databinding.FragmentTestChainBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.FormModel;
@@ -23,7 +23,7 @@ public class TestChainFragment extends Fragment {
     private FragmentTestChainBinding binding;
 
     // Adapters
-    private ChainsAdapter adapter;
+    private TestChainAdapter adapter;
 
     @Nullable
     @Override
@@ -38,7 +38,7 @@ public class TestChainFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new ChainsAdapter(requireActivity());
+        adapter = new TestChainAdapter(requireActivity());
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.ChainFragmentTitle));
 

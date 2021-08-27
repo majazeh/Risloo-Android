@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Test;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,8 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.PrerequisitesHolder;
-import com.majazeh.risloo.databinding.SingleItemPrerequisiteBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPrerequisiteHolder;
+import com.majazeh.risloo.databinding.SingleItemTestPrerequisiteBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -26,7 +26,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesHolder> {
+public class TestPrerequisiteAdapter extends RecyclerView.Adapter<TestPrerequisiteHolder> {
 
     // Objects
     private Activity activity;
@@ -36,18 +36,18 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesHold
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public PrerequisitesAdapter(@NonNull Activity activity) {
+    public TestPrerequisiteAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public PrerequisitesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new PrerequisitesHolder(SingleItemPrerequisiteBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public TestPrerequisiteHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new TestPrerequisiteHolder(SingleItemTestPrerequisiteBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PrerequisitesHolder holder, int i) {
+    public void onBindViewHolder(@NonNull TestPrerequisiteHolder holder, int i) {
         PrerequisitesModel model = (PrerequisitesModel) items.get(i);
 
         initializer();
@@ -85,7 +85,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesHold
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(PrerequisitesHolder holder, int item) {
+    private void listener(TestPrerequisiteHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
                 ((TestActivity) activity).inputor.select(activity, holder.binding.inputEditText);
@@ -134,13 +134,13 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesHold
         });
     }
 
-    private void setData(PrerequisitesHolder holder, PrerequisitesModel model) {
+    private void setData(TestPrerequisiteHolder holder, PrerequisitesModel model) {
         holder.binding.headerTextView.setText(model.getText());
 
         setType(holder, model);
     }
 
-    private void setType(PrerequisitesHolder holder, PrerequisitesModel model) {
+    private void setType(TestPrerequisiteHolder holder, PrerequisitesModel model) {
         try {
             switch (model.getAnswer().getString("type")) {
                 case "text":
@@ -181,7 +181,7 @@ public class PrerequisitesAdapter extends RecyclerView.Adapter<PrerequisitesHold
         }
     }
 
-    private void setSpinner(PrerequisitesHolder holder, PrerequisitesModel model) {
+    private void setSpinner(TestPrerequisiteHolder holder, PrerequisitesModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
 

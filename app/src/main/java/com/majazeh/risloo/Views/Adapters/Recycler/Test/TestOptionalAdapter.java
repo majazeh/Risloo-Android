@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Test;
 
 import android.app.Activity;
 import android.os.Build;
@@ -11,12 +11,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.OptionalsHolder;
-import com.majazeh.risloo.databinding.SingleItemOptionalBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestOptionalHolder;
+import com.majazeh.risloo.databinding.SingleItemTestOptionalBinding;
 
 import java.util.ArrayList;
 
-public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
+public class TestOptionalAdapter extends RecyclerView.Adapter<TestOptionalHolder> {
 
     // Objects
     private Activity activity;
@@ -26,18 +26,18 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
     private int answer = -1, key = -1;
     private boolean userSelect = false;
 
-    public OptionalsAdapter(@NonNull Activity activity) {
+    public TestOptionalAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public OptionalsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new OptionalsHolder(SingleItemOptionalBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public TestOptionalHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new TestOptionalHolder(SingleItemTestOptionalBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull OptionalsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull TestOptionalHolder holder, int i) {
         String item = items.get(i);
 
         listener(holder, i);
@@ -75,7 +75,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
         }
     }
 
-    private void detector(OptionalsHolder holder, boolean selected) {
+    private void detector(TestOptionalHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (selected)
                 holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
@@ -89,7 +89,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
         }
     }
 
-    private void listener(OptionalsHolder holder, int position) {
+    private void listener(TestOptionalHolder holder, int position) {
         CustomClickView.onDelayedListener(() -> {
             answer = position;
             userSelect = true;
@@ -99,7 +99,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
         }).widget(holder.itemView);
     }
 
-    private void setData(OptionalsHolder holder, String title, int position) {
+    private void setData(TestOptionalHolder holder, String title, int position) {
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
         holder.binding.answerTextView.setText(title);
 
@@ -108,7 +108,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
         setClickable(holder);
     }
 
-    private void setActive(OptionalsHolder holder, int position) {
+    private void setActive(TestOptionalHolder holder, int position) {
         if (position == answer) {
             detector(holder, true);
 
@@ -125,7 +125,7 @@ public class OptionalsAdapter extends RecyclerView.Adapter<OptionalsHolder> {
         }
     }
 
-    private void setClickable(OptionalsHolder holder) {
+    private void setClickable(TestOptionalHolder holder) {
         if (userSelect) {
             holder.itemView.setEnabled(false);
             holder.itemView.setClickable(false);

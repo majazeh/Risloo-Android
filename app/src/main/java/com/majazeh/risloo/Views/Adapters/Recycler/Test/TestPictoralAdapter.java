@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Test;
 
 import android.app.Activity;
 import android.os.Build;
@@ -11,13 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.PictoralsHolder;
-import com.majazeh.risloo.databinding.SingleItemPictoralBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Test.TestPictoralHolder;
+import com.majazeh.risloo.databinding.SingleItemTestPictoralBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
 
-public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
+public class TestPictoralAdapter extends RecyclerView.Adapter<TestPictoralHolder> {
 
     // Objects
     private Activity activity;
@@ -27,18 +27,18 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
     private int answer = -1, key = -1;
     private boolean userSelect = false;
 
-    public PictoralsAdapter(@NonNull Activity activity) {
+    public TestPictoralAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public PictoralsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new PictoralsHolder(SingleItemPictoralBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public TestPictoralHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new TestPictoralHolder(SingleItemTestPictoralBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PictoralsHolder holder, int i) {
+    public void onBindViewHolder(@NonNull TestPictoralHolder holder, int i) {
         String item = items.get(i);
 
         listener(holder, i);
@@ -76,7 +76,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
         }
     }
 
-    private void detector(PictoralsHolder holder, boolean selected) {
+    private void detector(TestPictoralHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (selected)
                 holder.itemView.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_blue600_ripple_gray300);
@@ -90,7 +90,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
         }
     }
 
-    private void listener(PictoralsHolder holder, int position) {
+    private void listener(TestPictoralHolder holder, int position) {
         CustomClickView.onDelayedListener(() -> {
             answer = position;
             userSelect = true;
@@ -100,7 +100,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
         }).widget(holder.itemView);
     }
 
-    private void setData(PictoralsHolder holder, String url, int position) {
+    private void setData(TestPictoralHolder holder, String url, int position) {
         holder.binding.numberTextView.setText(String.valueOf(holder.getBindingAdapterPosition() + 1));
         Picasso.get().load(url).placeholder(R.color.Gray100).into(holder.binding.answerImageView);
 
@@ -109,7 +109,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
         setClickable(holder);
     }
 
-    private void setActive(PictoralsHolder holder, int position) {
+    private void setActive(TestPictoralHolder holder, int position) {
         if (position == answer) {
             detector(holder, true);
 
@@ -126,7 +126,7 @@ public class PictoralsAdapter extends RecyclerView.Adapter<PictoralsHolder> {
         }
     }
 
-    private void setClickable(PictoralsHolder holder) {
+    private void setClickable(TestPictoralHolder holder) {
         if (userSelect) {
             holder.itemView.setEnabled(false);
             holder.itemView.setClickable(false);

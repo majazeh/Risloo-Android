@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.PrerequisitesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestPrerequisiteAdapter;
 import com.majazeh.risloo.databinding.FragmentTestPrerequisiteBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.FormModel;
@@ -23,7 +23,7 @@ public class TestPrerequisiteFragment extends Fragment {
     private FragmentTestPrerequisiteBinding binding;
 
     // Adapters
-    private PrerequisitesAdapter adapter;
+    private TestPrerequisiteAdapter adapter;
 
     @Nullable
     @Override
@@ -38,7 +38,7 @@ public class TestPrerequisiteFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new PrerequisitesAdapter(requireActivity());
+        adapter = new TestPrerequisiteAdapter(requireActivity());
 
         binding.titleTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentTitle));
         binding.descriptionTextView.getRoot().setText(getResources().getString(R.string.PrerequisiteFragmentDescription));

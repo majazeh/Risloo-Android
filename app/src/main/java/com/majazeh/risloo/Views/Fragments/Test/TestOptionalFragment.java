@@ -12,7 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.OptionalsAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Test.TestOptionalAdapter;
 import com.majazeh.risloo.databinding.FragmentTestOptionalBinding;
 import com.mre.ligheh.Model.TypeModel.FormModel;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
@@ -27,7 +27,7 @@ public class TestOptionalFragment extends Fragment {
     private FragmentTestOptionalBinding binding;
 
     // Adapters
-    private OptionalsAdapter adapter;
+    private TestOptionalAdapter adapter;
 
     @Nullable
     @Override
@@ -42,7 +42,7 @@ public class TestOptionalFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new OptionalsAdapter(requireActivity());
+        adapter = new TestOptionalAdapter(requireActivity());
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.listRecyclerView, getResources().getDimension(R.dimen._16sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
     }
