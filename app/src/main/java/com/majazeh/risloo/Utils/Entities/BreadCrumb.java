@@ -1344,7 +1344,12 @@ public class BreadCrumb {
     }
 
     private ArrayList<String> room() {
-        ArrayList<String> list = centers();
+        ArrayList<String> list;
+
+        if (!centerType.equals("room"))
+            list = centers();
+        else
+            list = center();
 
         if (!centerType.equals("room")) {
             try {
@@ -1370,7 +1375,13 @@ public class BreadCrumb {
         return list;
     }
     private ArrayList<Integer> roomIds() {
-        ArrayList<Integer> list = centersIds();
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centersIds();
+        else
+            list = centerIds();
+
         list.add(R.id.roomFragment);
 
         return list;
@@ -1416,7 +1427,7 @@ public class BreadCrumb {
         ArrayList<Integer> list;
 
         if (sessionModel.getCaseModel() != null)
-            list = casesIds();
+            list = casseIds();
         else
             list = roomIds();
 
