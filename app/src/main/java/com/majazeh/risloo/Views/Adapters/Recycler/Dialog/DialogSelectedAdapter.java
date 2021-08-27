@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Dialog;
 
 import android.app.Activity;
 import android.os.Build;
@@ -14,7 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Holder.SelectedHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogSelectedHolder;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TagModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -22,14 +22,14 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
-import com.majazeh.risloo.databinding.SingleItemSelectedBinding;
+import com.majazeh.risloo.databinding.SingleItemDialogSelectedBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
+public class DialogSelectedAdapter extends RecyclerView.Adapter<DialogSelectedHolder> {
 
     // Fragments
     private Fragment payment;
@@ -45,18 +45,18 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
     private ArrayList<String> ids;
     private String method;
 
-    public SelectedAdapter(@NonNull Activity activity) {
+    public DialogSelectedAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SelectedHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SelectedHolder(SingleItemSelectedBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public DialogSelectedHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new DialogSelectedHolder(SingleItemDialogSelectedBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SelectedHolder holder, int i) {
+    public void onBindViewHolder(@NonNull DialogSelectedHolder holder, int i) {
         TypeModel model = items.get(i);
 
         intializer();
@@ -133,7 +133,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
         payment = ((MainActivity) activity).fragmont.getPayment();
     }
 
-    private void detector(SelectedHolder holder) {
+    private void detector(DialogSelectedHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
 
@@ -141,7 +141,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
         }
     }
 
-    private void listener(SelectedHolder holder, int position) {
+    private void listener(DialogSelectedHolder holder, int position) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -153,7 +153,7 @@ public class SelectedAdapter extends RecyclerView.Adapter<SelectedHolder> {
         }).widget(holder.binding.removeImageView);
     }
 
-    private void setData(SelectedHolder holder, TypeModel item) {
+    private void setData(DialogSelectedHolder holder, TypeModel item) {
         try {
             switch (method) {
                 case "scales": {

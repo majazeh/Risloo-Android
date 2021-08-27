@@ -25,7 +25,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateCaseBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -42,7 +42,7 @@ public class CreateCaseFragment extends Fragment {
     private FragmentCreateCaseBinding binding;
 
     // Adapters
-    public SelectedAdapter referencesAdapter, tagsAdapter;
+    public DialogSelectedAdapter referencesAdapter, tagsAdapter;
 
     // Objects
     private HashMap data, header;
@@ -67,8 +67,8 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void initializer() {
-        referencesAdapter = new SelectedAdapter(requireActivity());
-        tagsAdapter = new SelectedAdapter(requireActivity());
+        referencesAdapter = new DialogSelectedAdapter(requireActivity());
+        tagsAdapter = new DialogSelectedAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();

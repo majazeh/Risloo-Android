@@ -26,7 +26,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ParamsManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SearchableAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSearchableAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCaseUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateCenterFragment;
@@ -62,7 +62,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
     private DialogSearchableBinding binding;
 
     // Adapters
-    private SearchableAdapter searchableAdapter;
+    private DialogSearchableAdapter searchableAdapter;
 
     // Fragments
     private Fragment current, child;
@@ -115,7 +115,7 @@ public class SearchableDialog extends AppCompatDialogFragment {
     }
 
     private void initializer() {
-        searchableAdapter = new SearchableAdapter(requireActivity());
+        searchableAdapter = new DialogSearchableAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
         child = ((MainActivity) requireActivity()).fragmont.getChild();

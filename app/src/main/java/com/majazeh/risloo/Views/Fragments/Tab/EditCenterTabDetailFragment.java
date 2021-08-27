@@ -23,7 +23,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -41,7 +41,7 @@ public class EditCenterTabDetailFragment extends Fragment {
     private FragmentEditCenterTabDetailBinding binding;
 
     // Adapters
-    public SelectedAdapter phonesAdapter;
+    public DialogSelectedAdapter phonesAdapter;
 
     // Fragments
     private Fragment current;
@@ -69,7 +69,7 @@ public class EditCenterTabDetailFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesAdapter = new SelectedAdapter(requireActivity());
+        phonesAdapter = new DialogSelectedAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 

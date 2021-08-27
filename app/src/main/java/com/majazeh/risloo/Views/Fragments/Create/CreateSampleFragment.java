@@ -37,7 +37,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateSampleBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -54,7 +54,7 @@ public class CreateSampleFragment extends Fragment {
     private FragmentCreateSampleBinding binding;
 
     // Adapters
-    public SelectedAdapter scalesAdapter, referencesAdapter;
+    public DialogSelectedAdapter scalesAdapter, referencesAdapter;
     public CheckedAdapter clientsAdapter;
 
     // Objects
@@ -84,8 +84,8 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void initializer() {
-        scalesAdapter = new SelectedAdapter(requireActivity());
-        referencesAdapter = new SelectedAdapter(requireActivity());
+        scalesAdapter = new DialogSelectedAdapter(requireActivity());
+        referencesAdapter = new DialogSelectedAdapter(requireActivity());
         clientsAdapter = new CheckedAdapter(requireActivity());
 
         data = new HashMap<>();

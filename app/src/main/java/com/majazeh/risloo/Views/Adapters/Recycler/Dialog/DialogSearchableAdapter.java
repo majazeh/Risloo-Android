@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Dialog;
 
 import android.app.Activity;
 import android.os.Build;
@@ -15,7 +15,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Holder.SearchableHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogSearchableHolder;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
@@ -37,14 +37,14 @@ import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabReferenceFragment
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabTimeFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.EditCenterTabDetailFragment;
-import com.majazeh.risloo.databinding.SingleItemSearchableBinding;
+import com.majazeh.risloo.databinding.SingleItemDialogSearchableBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SearchableAdapter extends RecyclerView.Adapter<SearchableHolder> {
+public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchableHolder> {
 
     // Fragments
     private Fragment current, child;
@@ -59,18 +59,18 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableHolder> {
     private ArrayList<TypeModel> items;
     private String method;
 
-    public SearchableAdapter(@NonNull Activity activity) {
+    public DialogSearchableAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SearchableHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SearchableHolder(SingleItemSearchableBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public DialogSearchableHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new DialogSearchableHolder(SingleItemDialogSearchableBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SearchableHolder holder, int i) {
+    public void onBindViewHolder(@NonNull DialogSearchableHolder holder, int i) {
         TypeModel model = items.get(i);
 
         intializer();
@@ -119,7 +119,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableHolder> {
         child = ((MainActivity) activity).fragmont.getChild();
     }
 
-    private void detector(SearchableHolder holder, boolean selected) {
+    private void detector(DialogSearchableHolder holder, boolean selected) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (selected)
                 holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray100_border_1sdp_gray200_ripple_gray300);
@@ -133,14 +133,14 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableHolder> {
         }
     }
 
-    private void listener(SearchableHolder holder, TypeModel item) {
+    private void listener(DialogSearchableHolder holder, TypeModel item) {
         CustomClickView.onDelayedListener(() -> {
             responseDialog(item);
             notifyDataSetChanged();
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(SearchableHolder holder, TypeModel item) {
+    private void setData(DialogSearchableHolder holder, TypeModel item) {
         try {
             switch (method) {
                 case "scales": {
@@ -225,7 +225,7 @@ public class SearchableAdapter extends RecyclerView.Adapter<SearchableHolder> {
         }
     }
 
-    private void setActive(SearchableHolder holder, TypeModel item) {
+    private void setActive(DialogSearchableHolder holder, TypeModel item) {
         try {
             if (current instanceof CreateCaseFragment) {
                 switch (method) {

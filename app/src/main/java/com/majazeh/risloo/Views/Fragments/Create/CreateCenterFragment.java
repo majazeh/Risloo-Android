@@ -27,7 +27,7 @@ import com.majazeh.risloo.Utils.Managers.FileManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.ResultManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateCenterBinding;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -44,7 +44,7 @@ public class CreateCenterFragment extends Fragment {
     private FragmentCreateCenterBinding binding;
 
     // Adapters
-    public SelectedAdapter phonesAdapter;
+    public DialogSelectedAdapter phonesAdapter;
 
     // Objects
     private Bitmap avatarBitmap = null;
@@ -70,7 +70,7 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void initializer() {
-        phonesAdapter = new SelectedAdapter(requireActivity());
+        phonesAdapter = new DialogSelectedAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();

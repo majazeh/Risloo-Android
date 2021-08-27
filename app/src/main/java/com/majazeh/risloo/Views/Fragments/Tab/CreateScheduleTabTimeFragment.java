@@ -23,7 +23,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 
 import org.json.JSONException;
 
@@ -35,7 +35,7 @@ public class CreateScheduleTabTimeFragment extends Fragment {
     public FragmentCreateScheduleTabTimeBinding binding;
 
     // Adapters
-    public SelectedAdapter patternDaysAdapter;
+    public DialogSelectedAdapter patternDaysAdapter;
 
     // Fragments
     private Fragment current;
@@ -60,7 +60,7 @@ public class CreateScheduleTabTimeFragment extends Fragment {
     }
 
     private void initializer() {
-        patternDaysAdapter = new SelectedAdapter(requireActivity());
+        patternDaysAdapter = new DialogSelectedAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 

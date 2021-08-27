@@ -20,7 +20,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabSessionBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -33,7 +33,7 @@ public class CreateScheduleTabSessionFragment extends Fragment {
     public FragmentCreateScheduleTabSessionBinding binding;
 
     // Adapters
-    public SelectedAdapter axisesAdapter;
+    public DialogSelectedAdapter axisesAdapter;
 
     // Fragments
     private Fragment current;
@@ -60,7 +60,7 @@ public class CreateScheduleTabSessionFragment extends Fragment {
     }
 
     private void initializer() {
-        axisesAdapter = new SelectedAdapter(requireActivity());
+        axisesAdapter = new DialogSelectedAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 

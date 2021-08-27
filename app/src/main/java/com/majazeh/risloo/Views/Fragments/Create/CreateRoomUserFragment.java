@@ -19,7 +19,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.SelectedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Dialog.DialogSelectedAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateRoomUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
@@ -40,7 +40,7 @@ public class CreateRoomUserFragment extends Fragment {
     private FragmentCreateRoomUserBinding binding;
 
     // Adapters
-    public SelectedAdapter referencesAdapter;
+    public DialogSelectedAdapter referencesAdapter;
 
     // Objects
     private HashMap data, header;
@@ -65,7 +65,7 @@ public class CreateRoomUserFragment extends Fragment {
     }
 
     private void initializer() {
-        referencesAdapter = new SelectedAdapter(requireActivity());
+        referencesAdapter = new DialogSelectedAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
