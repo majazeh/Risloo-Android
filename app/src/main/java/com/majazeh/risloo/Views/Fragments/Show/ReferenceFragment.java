@@ -19,8 +19,8 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases3Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Samples3Adapter;
 import com.majazeh.risloo.databinding.FragmentReferenceBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -39,7 +39,7 @@ public class ReferenceFragment extends Fragment {
     // Adapters
     private RoomsAdapter roomsAdapter;
     private Cases3Adapter cases3Adapter;
-    private Samples3Adapter samples3Adapter;
+    private IndexSampleAdapter indexSampleAdapter;
 
     // Models
     private UserModel userModel;
@@ -71,7 +71,7 @@ public class ReferenceFragment extends Fragment {
     private void initializer() {
         roomsAdapter = new RoomsAdapter(requireActivity());
         cases3Adapter = new Cases3Adapter(requireActivity());
-        samples3Adapter = new Samples3Adapter(requireActivity());
+        indexSampleAdapter = new IndexSampleAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -81,7 +81,7 @@ public class ReferenceFragment extends Fragment {
 
         binding.roomsHeaderLayout.titleTextView.setText(getResources().getString(R.string.RoomsAdapterHeader));
         binding.casesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Cases3AdapterHeader));
-        binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Samples3AdapterHeader));
+        binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.roomsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.casesSingleLayout.recyclerView, 0, 0, 0, 0);
@@ -239,21 +239,19 @@ public class ReferenceFragment extends Fragment {
 
                             // Samples Data
                             if (!userModel.getSampleList().data().isEmpty()) {
-                                samples3Adapter.setItems(userModel.getSampleList().data());
-                                binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
+                                indexSampleAdapter.setItems(userModel.getSampleList().data());
+                                binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
 
-                                binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (samples3Adapter.getItemCount() == 0) {
-                                binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                            } else if (indexSampleAdapter.getItemCount() == 0) {
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
-                                binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.Samples3AdapterEmpty));
+                                binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                             }
 
                             binding.roomsHeaderLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
                             binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(cases3Adapter.getItemCount()));
-                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samples3Adapter.getItemCount()));
+                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 
                             // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -335,21 +333,19 @@ public class ReferenceFragment extends Fragment {
 
                             // Samples Data
                             if (!userModel.getSampleList().data().isEmpty()) {
-                                samples3Adapter.setItems(userModel.getSampleList().data());
-                                binding.samplesSingleLayout.recyclerView.setAdapter(samples3Adapter);
+                                indexSampleAdapter.setItems(userModel.getSampleList().data());
+                                binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
 
-                                binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
-                            } else if (samples3Adapter.getItemCount() == 0) {
-                                binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                            } else if (indexSampleAdapter.getItemCount() == 0) {
                                 binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
-                                binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.Samples3AdapterEmpty));
+                                binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                             }
 
                             binding.roomsHeaderLayout.countTextView.setText(StringManager.bracing(roomsAdapter.getItemCount()));
                             binding.casesHeaderLayout.countTextView.setText(StringManager.bracing(cases3Adapter.getItemCount()));
-                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samples3Adapter.getItemCount()));
+                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 
                             // Rooms Data
                             binding.roomsSingleLayout.getRoot().setVisibility(View.VISIBLE);

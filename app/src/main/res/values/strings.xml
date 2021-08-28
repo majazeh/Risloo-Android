@@ -1313,35 +1313,6 @@
     <string name="Samples2AdapterEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
 
     /*
-    ---------- Samples3 Adapter ----------
-    */
-
-    <string name="Samples3AdapterHeader">نمونه‌ها</string>
-
-    <string name="Samples3AdapterSerial">سریال</string>
-    <string name="Samples3AdapterName">مقیاس</string>
-    <string name="Samples3AdapterEdition">ویرایش - نسخه</string>
-    <string name="Samples3AdapterRoom">اتاق درمان</string>
-    <string name="Samples3AdapterCase">پرونده</string>
-    <string name="Samples3AdapterStatus">وضعیت</string>
-
-    <string name="Samples3AdapterEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Samples4 Adapter ----------
-    */
-
-    <string name="Samples4AdapterHeader">نمونه‌ها</string>
-
-    <string name="Samples4AdapterSerial">سریال</string>
-    <string name="Samples4AdapterName">مقياس</string>
-    <string name="Samples4AdapterEdition">ویرایش - نسخه</string>
-    <string name="Samples4AdapterReference">مراجع</string>
-    <string name="Samples4AdapterStatus">وضعیت</string>
-
-    <string name="Samples4AdapterEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
-
-    /*
     ---------- Schedules Adapter ----------
     */
 

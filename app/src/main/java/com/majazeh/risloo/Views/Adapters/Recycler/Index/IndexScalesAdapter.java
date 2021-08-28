@@ -55,7 +55,7 @@ public class IndexScalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         if (holder instanceof  IndexScaleHolder) {
             ScaleModel model = (ScaleModel) items.get(i - 1);
 
-            initializer((IndexScaleHolder) holder);
+            initializer();
 
             detector((IndexScaleHolder) holder);
 
@@ -105,7 +105,7 @@ public class IndexScalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
-    private void initializer(IndexScaleHolder holder) {
+    private void initializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 

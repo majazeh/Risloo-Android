@@ -3,9 +3,11 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -17,6 +19,10 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderSampleHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexSampleHolder;
+import com.majazeh.risloo.Views.Fragments.Index.SamplesFragment;
+import com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Show.DashboardFragment;
+import com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexSampleBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexSampleBinding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -25,6 +31,9 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 
 public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+    // Fragments
+    private Fragment current;
 
     // Objects
     private Activity activity;
@@ -47,12 +56,20 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexSampleHolder) {
+        if (holder instanceof HeaderSampleHolder) {
+            initializer();
+
+            setWidget((HeaderSampleHolder) holder);
+        } else if (holder instanceof  IndexSampleHolder) {
             SampleModel model = (SampleModel) items.get(i - 1);
+
+            initializer();
 
             detector((IndexSampleHolder) holder);
 
             listener((IndexSampleHolder) holder, model);
+
+            setWidget((IndexSampleHolder) holder);
 
             setData((IndexSampleHolder) holder, model);
         }
@@ -96,6 +113,10 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         }
     }
 
+    private void initializer() {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+    }
+
     private void detector(IndexSampleHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
@@ -111,6 +132,44 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
         CustomClickView.onClickListener(() -> {
             IntentManager.test(activity, model.getSampleId());
         }).widget(holder.binding.statusTextView);
+    }
+
+    private void setWidget(HeaderSampleHolder holder) {
+        if (current instanceof SamplesFragment || current instanceof DashboardFragment) {
+            holder.binding.roomTextView.setVisibility(View.VISIBLE);
+            holder.binding.caseTextView.setVisibility(View.VISIBLE);
+
+            holder.binding.referenceTextView.setVisibility(View.VISIBLE);
+        } else if (current instanceof ReferenceFragment) {
+            holder.binding.roomTextView.setVisibility(View.VISIBLE);
+            holder.binding.caseTextView.setVisibility(View.VISIBLE);
+
+            holder.binding.referenceTextView.setVisibility(View.GONE);
+        } else if (current instanceof BulkSampleFragment) {
+            holder.binding.roomTextView.setVisibility(View.GONE);
+            holder.binding.caseTextView.setVisibility(View.GONE);
+
+            holder.binding.referenceTextView.setVisibility(View.VISIBLE);
+        }
+    }
+
+    private void setWidget(IndexSampleHolder holder) {
+        if (current instanceof SamplesFragment || current instanceof DashboardFragment) {
+            holder.binding.roomTextView.setVisibility(View.VISIBLE);
+            holder.binding.caseTextView.setVisibility(View.VISIBLE);
+
+            holder.binding.referenceTextView.setVisibility(View.VISIBLE);
+        } else if (current instanceof ReferenceFragment) {
+            holder.binding.roomTextView.setVisibility(View.VISIBLE);
+            holder.binding.caseTextView.setVisibility(View.VISIBLE);
+
+            holder.binding.referenceTextView.setVisibility(View.GONE);
+        } else if (current instanceof BulkSampleFragment) {
+            holder.binding.roomTextView.setVisibility(View.GONE);
+            holder.binding.caseTextView.setVisibility(View.GONE);
+
+            holder.binding.referenceTextView.setVisibility(View.VISIBLE);
+        }
     }
 
     private void setData(IndexSampleHolder holder, SampleModel model) {
@@ -144,12 +203,12 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             case "seald":
             case "open":
                 holder.binding.statusTextView.setEnabled(true);
-                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Blue600));
 
                 if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP)
-                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_green700_ripple_green300);
+                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_white_border_1sdp_blue600_ripple_blue300);
                 else
-                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_green700);
+                    holder.binding.statusTextView.setBackgroundResource(R.drawable.draw_16sdp_solid_transparent_border_1sdp_blue600);
                 break;
             default:
                 holder.binding.statusTextView.setEnabled(false);

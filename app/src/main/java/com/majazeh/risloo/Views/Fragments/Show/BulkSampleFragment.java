@@ -22,8 +22,8 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Samples4Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexScalesAdapter;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
@@ -45,7 +45,7 @@ public class BulkSampleFragment extends Fragment {
     // Adapters
     private ReferencesAdapter referencesAdapter;
     private IndexScalesAdapter indexScalesAdapter;
-    private Samples4Adapter samples4Adapter;
+    private IndexSampleAdapter indexSampleAdapter;
 
     // Models
     private BulkSampleModel bulkSampleModel;
@@ -77,7 +77,7 @@ public class BulkSampleFragment extends Fragment {
     private void initializer() {
         referencesAdapter = new ReferencesAdapter(requireActivity());
         indexScalesAdapter = new IndexScalesAdapter(requireActivity());
-        samples4Adapter = new Samples4Adapter(requireActivity());
+        indexSampleAdapter = new IndexSampleAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -85,7 +85,7 @@ public class BulkSampleFragment extends Fragment {
 
         binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
         binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
-        binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
+        binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
         InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
 
@@ -305,20 +305,18 @@ public class BulkSampleFragment extends Fragment {
 
                         // Samples Data
                         if (!bulkSampleModel.getSamples().data().isEmpty()) {
-                            samples4Adapter.setItems(bulkSampleModel.getSamples().data());
-                            binding.samplesSingleLayout.recyclerView.setAdapter(samples4Adapter);
+                            indexSampleAdapter.setItems(bulkSampleModel.getSamples().data());
+                            binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
 
-                            binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (samples4Adapter.getItemCount() == 0) {
-                            binding.samplesSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                        } else if (indexSampleAdapter.getItemCount() == 0) {
                             binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
-                            binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.Samples4AdapterEmpty));
+                            binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
                         binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(indexScalesAdapter.itemsCount()));
-                        binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samples4Adapter.getItemCount()));
+                        binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 
                         // References Data
                         binding.referencesSingleLayout.getRoot().setVisibility(View.VISIBLE);

@@ -76,10 +76,11 @@
     <TextView
         android:id="@+id/create_textView"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/_22sdp"
+        android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_4sdp"
         android:paddingEnd="@dimen/_8sdp"
         android:paddingStart="@dimen/_8sdp"
+        android:minHeight="@dimen/_22sdp"
         android:gravity="center"
         android:text="@string/ScalesFragmentCreate"
         android:textSize="@dimen/_8ssp"
