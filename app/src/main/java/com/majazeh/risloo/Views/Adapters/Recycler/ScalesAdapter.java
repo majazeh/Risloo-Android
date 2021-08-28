@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,6 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.ScalesHolder;
+import com.majazeh.risloo.Views.Fragments.Index.ScalesFragment;
 import com.majazeh.risloo.databinding.SingleItemScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -23,6 +25,9 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 import java.util.ArrayList;
 
 public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
+
+    // Fragments
+    private Fragment current;
 
     // Objects
     private Activity activity;
@@ -43,6 +48,8 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
     @Override
     public void onBindViewHolder(@NonNull ScalesHolder holder, int i) {
         ScaleModel model = (ScaleModel) items.get(i);
+
+        initializer(holder);
 
         detector(holder);
 
@@ -76,6 +83,10 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
         }
     }
 
+    private void initializer(ScalesHolder holder) {
+        current = ((MainActivity) activity).fragmont.getCurrent();
+    }
+
     private void detector(ScalesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
@@ -98,7 +109,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
     private void setPermission(ScalesHolder holder) {
         UserModel model = ((MainActivity) activity).singleton.getUserModel();
 
-        if (((MainActivity) activity).permissoon.showScalesCreateSample(model))
+        if (current instanceof ScalesFragment && ((MainActivity) activity).permissoon.showScalesCreateSample(model))
             holder.binding.createTextView.setVisibility(View.VISIBLE);
         else
             holder.binding.createTextView.setVisibility(View.GONE);

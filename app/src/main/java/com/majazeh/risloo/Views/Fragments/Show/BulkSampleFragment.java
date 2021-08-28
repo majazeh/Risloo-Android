@@ -24,7 +24,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Samples4Adapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Scales2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.ScalesAdapter;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -44,7 +44,7 @@ public class BulkSampleFragment extends Fragment {
 
     // Adapters
     private ReferencesAdapter referencesAdapter;
-    private Scales2Adapter scales2Adapter;
+    private ScalesAdapter scalesAdapter;
     private Samples4Adapter samples4Adapter;
 
     // Models
@@ -76,7 +76,7 @@ public class BulkSampleFragment extends Fragment {
 
     private void initializer() {
         referencesAdapter = new ReferencesAdapter(requireActivity());
-        scales2Adapter = new Scales2Adapter(requireActivity());
+        scalesAdapter = new ScalesAdapter(requireActivity());
         samples4Adapter = new Samples4Adapter(requireActivity());
 
         data = new HashMap<>();
@@ -84,7 +84,7 @@ public class BulkSampleFragment extends Fragment {
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
         binding.referencesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ReferencesAdapterHeader));
-        binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Scales2AdapterHeader));
+        binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.Samples4AdapterHeader));
 
         InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
@@ -293,16 +293,16 @@ public class BulkSampleFragment extends Fragment {
 
                         // Scales Data
                         if (!bulkSampleModel.getScales().data().isEmpty()) {
-                            scales2Adapter.setItems(bulkSampleModel.getScales().data());
-                            binding.scalesSingleLayout.recyclerView.setAdapter(scales2Adapter);
+                            scalesAdapter.setItems(bulkSampleModel.getScales().data());
+                            binding.scalesSingleLayout.recyclerView.setAdapter(scalesAdapter);
 
                             binding.scalesSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                             binding.scalesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (scales2Adapter.getItemCount() == 0) {
+                        } else if (scalesAdapter.getItemCount() == 0) {
                             binding.scalesSingleLayout.headerView.getRoot().setVisibility(View.GONE);
                             binding.scalesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
-                            binding.scalesSingleLayout.emptyView.setText(getResources().getString(R.string.Scales2AdapterEmpty));
+                            binding.scalesSingleLayout.emptyView.setText(getResources().getString(R.string.ScalesFragmentEmpty));
                         }
 
                         // Samples Data
@@ -319,7 +319,7 @@ public class BulkSampleFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.Samples4AdapterEmpty));
                         }
 
-                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(scales2Adapter.getItemCount()));
+                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(scalesAdapter.getItemCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samples4Adapter.getItemCount()));
 
                         // References Data

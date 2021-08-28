@@ -237,7 +237,7 @@
 
                 <include
                     android:id="@+id/scales_singleLayout"
-                    layout="@layout/component_single_scale2"
+                    layout="@layout/component_single_scale"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:visibility="gone"
