@@ -1,9 +1,8 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,14 +15,16 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.SamplesHolder;
-import com.majazeh.risloo.databinding.SingleItemSampleBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderSampleHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexSampleHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexSampleBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexSampleBinding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class SamplesAdapter extends RecyclerView.Adapter<SamplesHolder> {
+public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -31,29 +32,49 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesHolder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public SamplesAdapter(@NonNull Activity activity) {
+    public IndexSampleAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SamplesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SamplesHolder(SingleItemSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderSampleHolder(HeaderItemIndexSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexSampleHolder(SingleItemIndexSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SamplesHolder holder, int i) {
-        SampleModel model = (SampleModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexSampleHolder) {
+            SampleModel model = (SampleModel) items.get(i - 1);
 
-        detector(holder);
+            detector((IndexSampleHolder) holder);
 
-        listener(holder, model);
+            listener((IndexSampleHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexSampleHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -75,13 +96,13 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesHolder> {
         }
     }
 
-    private void detector(SamplesHolder holder) {
+    private void detector(IndexSampleHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
-    private void listener(SamplesHolder holder, SampleModel model) {
+    private void listener(IndexSampleHolder holder, SampleModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -92,12 +113,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesHolder> {
         }).widget(holder.binding.statusTextView);
     }
 
-    private void setData(SamplesHolder holder, SampleModel model) {
-        if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-        else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexSampleHolder holder, SampleModel model) {
         holder.binding.serialTextView.setText(model.getSampleId());
         holder.binding.nameTextView.setText(model.getSampleScaleTitle());
 
@@ -121,7 +137,7 @@ public class SamplesAdapter extends RecyclerView.Adapter<SamplesHolder> {
         setStatus(holder, model.getSampleStatus());
     }
 
-    private void setStatus(SamplesHolder holder, String status) {
+    private void setStatus(IndexSampleHolder holder, String status) {
         holder.binding.statusTextView.setText(SelectionManager.getSampleStatus2(activity, "fa", status));
 
         switch (status) {

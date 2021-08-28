@@ -16,7 +16,7 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Cases2Adapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.CentersAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.RoomsAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.SamplesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
 import com.majazeh.risloo.databinding.FragmentDashboardBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.User;
@@ -31,7 +31,7 @@ public class DashboardFragment extends Fragment {
 
     // Adapters
     private Cases2Adapter cases2Adapter;
-    private SamplesAdapter samplesAdapter;
+    private IndexSampleAdapter indexSampleAdapter;
     private RoomsAdapter roomsAdapter;
     private CentersAdapter centersAdapter;
 
@@ -52,7 +52,7 @@ public class DashboardFragment extends Fragment {
 
     private void initializer() {
         cases2Adapter = new Cases2Adapter(requireActivity());
-        samplesAdapter = new SamplesAdapter(requireActivity());
+        indexSampleAdapter = new IndexSampleAdapter(requireActivity());
         roomsAdapter = new RoomsAdapter(requireActivity());
         centersAdapter = new CentersAdapter(requireActivity());
 
@@ -100,14 +100,13 @@ public class DashboardFragment extends Fragment {
 
                         // Samples Data
                         if (!model.getSampleList().data().isEmpty()) {
-                            samplesAdapter.setItems(model.getSampleList().data());
+                            indexSampleAdapter.setItems(model.getSampleList().data());
 
-                            binding.samplesSingleLayout.recyclerView.setAdapter(samplesAdapter);
-                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(samplesAdapter.getItemCount()));
+                            binding.samplesSingleLayout.recyclerView.setAdapter(indexSampleAdapter);
+                            binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 
-                            binding.samplesHeaderLayout.getRoot().setVisibility(View.VISIBLE);
                             binding.samplesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        } else if (samplesAdapter.getItemCount() == 0) {
+                        } else if (indexSampleAdapter.getItemCount() == 0) {
                             binding.samplesGroup.setVisibility(View.GONE);
                         }
                         binding.samplesShimmerLayout.getRoot().setVisibility(View.GONE);
