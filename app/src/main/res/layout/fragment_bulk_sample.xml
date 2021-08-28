@@ -213,40 +213,36 @@
                 app:layout_constraintTop_toBottomOf="@id/references_barrier"
                 tools:layout_marginTop="@dimen/_6sdp" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scales_containerLayout"
+            <include
+                android:id="@+id/scales_shimmerLayout"
+                layout="@layout/component_shimmer_index"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/scales_headerLayout">
+                app:layout_constraintTop_toBottomOf="@id/scales_headerLayout"
+                tools:visibility="gone" />
 
-                <include
-                    android:id="@+id/scales_shimmerLayout"
-                    layout="@layout/component_shimmer_index"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="gone" />
+            <include
+                android:id="@+id/scales_singleLayout"
+                layout="@layout/component_single_scale"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/scales_headerLayout"
+                tools:visibility="visible" />
 
-                <include
-                    android:id="@+id/scales_singleLayout"
-                    layout="@layout/component_single_scale"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/scales_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="scales_shimmerLayout, scales_singleLayout" />
 
             <include
                 android:id="@+id/samples_headerLayout"
@@ -255,7 +251,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_18sdp"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/scales_containerLayout" />
+                app:layout_constraintTop_toBottomOf="@id/scales_barrier" />
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/samples_containerLayout"

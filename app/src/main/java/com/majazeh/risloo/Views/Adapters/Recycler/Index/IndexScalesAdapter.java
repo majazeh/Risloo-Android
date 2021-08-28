@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
 import android.os.Build;
@@ -15,16 +15,18 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.ScalesHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderScaleHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexScaleHolder;
 import com.majazeh.risloo.Views.Fragments.Index.ScalesFragment;
-import com.majazeh.risloo.databinding.SingleItemScaleBinding;
+import com.majazeh.risloo.databinding.HeaderItemIndexScaleBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexScaleBinding;
 import com.mre.ligheh.Model.TypeModel.ScaleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
+public class IndexScalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -35,33 +37,53 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public ScalesAdapter(@NonNull Activity activity) {
+    public IndexScalesAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public ScalesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new ScalesHolder(SingleItemScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderScaleHolder(HeaderItemIndexScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexScaleHolder(SingleItemIndexScaleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ScalesHolder holder, int i) {
-        ScaleModel model = (ScaleModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexScaleHolder) {
+            ScaleModel model = (ScaleModel) items.get(i - 1);
 
-        initializer(holder);
+            initializer((IndexScaleHolder) holder);
 
-        detector(holder);
+            detector((IndexScaleHolder) holder);
 
-        listener(holder, model);
+            listener((IndexScaleHolder) holder, model);
 
-        setPermission(holder);
+            setPermission((IndexScaleHolder) holder);
 
-        setData(holder, model);
+            setData((IndexScaleHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -83,11 +105,11 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
         }
     }
 
-    private void initializer(ScalesHolder holder) {
+    private void initializer(IndexScaleHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void detector(ScalesHolder holder) {
+    private void detector(IndexScaleHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
@@ -95,7 +117,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
         }
     }
 
-    private void listener(ScalesHolder holder, ScaleModel model) {
+    private void listener(IndexScaleHolder holder, ScaleModel model) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -106,7 +128,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
         }).widget(holder.binding.createTextView);
     }
 
-    private void setPermission(ScalesHolder holder) {
+    private void setPermission(IndexScaleHolder holder) {
         UserModel model = ((MainActivity) activity).singleton.getUserModel();
 
         if (current instanceof ScalesFragment && ((MainActivity) activity).permissoon.showScalesCreateSample(model))
@@ -115,12 +137,7 @@ public class ScalesAdapter extends RecyclerView.Adapter<ScalesHolder> {
             holder.binding.createTextView.setVisibility(View.GONE);
     }
 
-    private void setData(ScalesHolder holder, ScaleModel model) {
-        if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-        else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexScaleHolder holder, ScaleModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getTitle());
 
