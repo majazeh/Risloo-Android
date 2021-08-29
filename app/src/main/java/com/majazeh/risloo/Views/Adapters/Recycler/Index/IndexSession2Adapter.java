@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -21,8 +21,10 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.Sessions2Holder;
-import com.majazeh.risloo.databinding.SingleItemSession2Binding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderSession2Holder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexSession2Holder;
+import com.majazeh.risloo.databinding.HeaderItemIndexSession2Binding;
+import com.majazeh.risloo.databinding.SingleItemIndexSession2Binding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
@@ -31,7 +33,7 @@ import com.mre.ligheh.Model.TypeModel.TypeModel;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
+public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -41,31 +43,51 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public Sessions2Adapter(@NonNull Activity activity) {
+    public IndexSession2Adapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public Sessions2Holder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new Sessions2Holder(SingleItemSession2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderSession2Holder(HeaderItemIndexSession2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexSession2Holder(SingleItemIndexSession2Binding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull Sessions2Holder holder, int i) {
-        SessionModel model = (SessionModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexSession2Holder) {
+            SessionModel model = (SessionModel) items.get(i - 1);
 
-        initializer(holder);
+            initializer((IndexSession2Holder) holder);
 
-        detector(holder);
+            detector((IndexSession2Holder) holder);
 
-        listener(holder, model);
+            listener((IndexSession2Holder) holder, model);
 
-        setData(holder, model);
+            setData((IndexSession2Holder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -87,7 +109,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
         }
     }
 
-    private void initializer(Sessions2Holder holder) {
+    private void initializer(IndexSession2Holder holder) {
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
@@ -95,7 +117,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
         InitManager.normalAdapterSpinner(activity, holder.binding.statusSpinner, R.array.SessionStatus);
     }
 
-    private void detector(Sessions2Holder holder) {
+    private void detector(IndexSession2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
@@ -104,7 +126,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(Sessions2Holder holder, SessionModel model) {
+    private void listener(IndexSession2Holder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -139,12 +161,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
         }).widget(holder.binding.editImageView);
     }
 
-    private void setData(Sessions2Holder holder, SessionModel model) {
-        if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-         else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexSession2Holder holder, SessionModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getStarted_at()), " "));
         holder.binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
@@ -152,7 +169,7 @@ public class Sessions2Adapter extends RecyclerView.Adapter<Sessions2Holder> {
         setStatus(holder, model);
     }
 
-    private void setStatus(Sessions2Holder holder, SessionModel model) {
+    private void setStatus(IndexSession2Holder holder, SessionModel model) {
         String status = SelectionManager.getSessionStatus(activity, "fa", model.getStatus());
         for (int i=0; i<holder.binding.statusSpinner.getCount(); i++) {
             if (holder.binding.statusSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(status)) {

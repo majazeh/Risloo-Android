@@ -25,7 +25,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PlatformsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexPracticeAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Users2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexUser2Adapter;
 import com.majazeh.risloo.databinding.FragmentSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -43,7 +43,7 @@ public class SessionFragment extends Fragment {
     // Adapters
     private PlatformsAdapter platformsAdapter;
     private PsychologistsAdapter psychologistsAdapter;
-    private Users2Adapter users2Adapter;
+    private IndexUser2Adapter indexUser2Adapter;
     private IndexPracticeAdapter indexPracticeAdapter;
     private IndexSampleAdapter indexSampleAdapter;
 
@@ -77,7 +77,7 @@ public class SessionFragment extends Fragment {
     private void initializer() {
         platformsAdapter = new PlatformsAdapter(requireActivity());
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
-        users2Adapter = new Users2Adapter(requireActivity());
+        indexUser2Adapter = new IndexUser2Adapter(requireActivity());
         indexPracticeAdapter = new IndexPracticeAdapter(requireActivity());
         indexSampleAdapter = new IndexSampleAdapter(requireActivity());
 
@@ -290,13 +290,11 @@ public class SessionFragment extends Fragment {
 
                         // Users Data
                         if (sessionModel.getClients() != null && sessionModel.getClients().data().size() != 0) {
-                            users2Adapter.setItems(sessionModel.getClients().data());
-                            binding.usersSingleLayout.recyclerView.setAdapter(users2Adapter);
+                            indexUser2Adapter.setItems(sessionModel.getClients().data());
+                            binding.usersSingleLayout.recyclerView.setAdapter(indexUser2Adapter);
 
-                            binding.usersSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                             binding.usersSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (users2Adapter.getItemCount() == 0) {
-                            binding.usersSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                        } else if (indexUser2Adapter.getItemCount() == 0) {
                             binding.usersSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                             binding.usersSingleLayout.emptyView.setText(getResources().getString(R.string.Users2AdapterEmpty));
@@ -328,7 +326,7 @@ public class SessionFragment extends Fragment {
 
                         binding.platformsHeaderLayout.countTextView.setText(StringManager.bracing(platformsAdapter.getItemCount()));
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
-                        binding.usersHeaderLayout.countTextView.setText(StringManager.bracing(users2Adapter.getItemCount()));
+                        binding.usersHeaderLayout.countTextView.setText(StringManager.bracing(indexUser2Adapter.itemsCount()));
                         binding.practicesHeaderLayout.countTextView.setText(StringManager.bracing(indexPracticeAdapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 

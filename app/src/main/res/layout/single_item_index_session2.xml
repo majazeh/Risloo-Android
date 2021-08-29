@@ -41,6 +41,7 @@
         android:id="@+id/start_time_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
@@ -49,11 +50,10 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.3"
         app:layout_constraintEnd_toStartOf="@id/status_spinner"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="زمان" />
+        tools:text="زمان شروع" />
 
     <TextView
         android:id="@+id/duration_textView"
@@ -77,7 +77,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:minHeight="@dimen/_26sdp"
         android:singleLine="true"
@@ -106,7 +106,6 @@
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginEnd="@dimen/_4sdp"
-        android:layout_marginStart="@dimen/_4sdp"
         android:contentDescription="@string/AppImageContent"
         android:padding="@dimen/_5sdp"
         android:scaleType="fitCenter"

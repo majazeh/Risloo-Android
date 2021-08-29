@@ -1302,7 +1302,7 @@
     <string name="Sessions2AdapterHeader">جلسات</string>
 
     <string name="Sessions2AdapterSerial">سریال</string>
-    <string name="Sessions2AdapterDate">زمان</string>
+    <string name="Sessions2AdapterDate">زمان شروع</string>
     <string name="Sessions2AdapterDuration">مدت‌زمان جلسه</string>
     <string name="Sessions2AdapterStatus">وضعیت</string>
 

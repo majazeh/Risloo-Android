@@ -24,7 +24,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.CaseTagsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Sessions2Adapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSession2Adapter;
 import com.majazeh.risloo.databinding.FragmentCaseBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Case;
@@ -45,7 +45,7 @@ public class CaseFragment extends Fragment {
     private CaseTagsAdapter caseTagsAdapter;
     private PsychologistsAdapter psychologistsAdapter;
     private ReferencesAdapter referencesAdapter;
-    private Sessions2Adapter sessions2Adapter;
+    private IndexSession2Adapter indexSession2Adapter;
     private IndexSampleAdapter indexSampleAdapter;
 
     // Models
@@ -79,7 +79,7 @@ public class CaseFragment extends Fragment {
         caseTagsAdapter = new CaseTagsAdapter(requireActivity());
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
         referencesAdapter = new ReferencesAdapter(requireActivity());
-        sessions2Adapter = new Sessions2Adapter(requireActivity());
+        indexSession2Adapter = new IndexSession2Adapter(requireActivity());
         indexSampleAdapter = new IndexSampleAdapter(requireActivity());
 
         data = new HashMap<>();
@@ -280,13 +280,11 @@ public class CaseFragment extends Fragment {
 
                         // Sessions Data
                         if (!caseModel.getSessions().data().isEmpty()) {
-                            sessions2Adapter.setItems(caseModel.getSessions().data());
-                            binding.sessionsSingleLayout.recyclerView.setAdapter(sessions2Adapter);
+                            indexSession2Adapter.setItems(caseModel.getSessions().data());
+                            binding.sessionsSingleLayout.recyclerView.setAdapter(indexSession2Adapter);
 
-                            binding.sessionsSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                             binding.sessionsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (sessions2Adapter.getItemCount() == 0) {
-                            binding.sessionsSingleLayout.headerView.getRoot().setVisibility(View.GONE);
+                        } else if (indexSession2Adapter.getItemCount() == 0) {
                             binding.sessionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                             binding.sessionsSingleLayout.emptyView.setText(getResources().getString(R.string.Sessions2AdapterEmpty));
@@ -307,7 +305,7 @@ public class CaseFragment extends Fragment {
                         binding.tagsHeaderLayout.countTextView.setText(StringManager.bracing(caseTagsAdapter.getItemCount()));
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
                         binding.referencesHeaderLayout.countTextView.setText(StringManager.bracing(referencesAdapter.getItemCount()));
-                        binding.sessionsHeaderLayout.countTextView.setText(StringManager.bracing(sessions2Adapter.getItemCount()));
+                        binding.sessionsHeaderLayout.countTextView.setText(StringManager.bracing(indexSession2Adapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 
                         // Tags Data
