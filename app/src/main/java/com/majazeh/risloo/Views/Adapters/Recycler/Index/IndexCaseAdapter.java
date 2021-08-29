@@ -1,9 +1,8 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -14,8 +13,10 @@ import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.CasesHolder;
-import com.majazeh.risloo.databinding.SingleItemCaseBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderCaseHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexCaseHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexCaseBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexCaseBinding;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -25,7 +26,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class CasesAdapter extends RecyclerView.Adapter<CasesHolder> {
+public class IndexCaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -33,29 +34,49 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesHolder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public CasesAdapter(@NonNull Activity activity) {
+    public IndexCaseAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public CasesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new CasesHolder(SingleItemCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderCaseHolder(HeaderItemIndexCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexCaseHolder(SingleItemIndexCaseBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CasesHolder holder, int i) {
-        CaseModel model = (CaseModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexCaseHolder) {
+            CaseModel model = (CaseModel) items.get(i - 1);
 
-        detector(holder);
+            detector((IndexCaseHolder) holder);
 
-        listener(holder, model);
+            listener((IndexCaseHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexCaseHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -77,26 +98,21 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesHolder> {
         }
     }
 
-    private void detector(CasesHolder holder) {
+    private void detector(IndexCaseHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
-    private void listener(CasesHolder holder, CaseModel model) {
+    private void listener(IndexCaseHolder holder, CaseModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(CasesHolder holder, CaseModel model) {
+    private void setData(IndexCaseHolder holder, CaseModel model) {
         try {
-            if (holder.getBindingAdapterPosition() == 0)
-                holder.binding.topView.setVisibility(View.GONE);
-            else
-                holder.binding.topView.setVisibility(View.VISIBLE);
-
             holder.binding.serialTextView.setText(model.getCaseId());
 
             if (model.getCaseManager() != null) {
@@ -113,7 +129,7 @@ public class CasesAdapter extends RecyclerView.Adapter<CasesHolder> {
         }
     }
 
-    private void setClients(CasesHolder holder, List clients) {
+    private void setClients(IndexCaseHolder holder, List clients) {
         if (clients != null && clients.data().size() != 0) {
             holder.binding.referenceTextView.setText("");
             for (int i = 0; i < clients.data().size(); i++) {
