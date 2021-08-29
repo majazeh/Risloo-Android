@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import com.majazeh.risloo.Views.BottomSheets.AuthBottomSheet;
-import com.majazeh.risloo.Views.BottomSheets.ChainBottomSheet;
+import com.majazeh.risloo.Views.BottomSheets.BulkSampleBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.DateBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.ImageBottomSheet;
 import com.majazeh.risloo.Views.BottomSheets.LogoutBottomSheet;
@@ -25,9 +25,9 @@ public class SheetManager {
         bottomSheet.setData(key, name, avatar);
     }
 
-    public static void showChainBottomSheet(Activity activity, String key, String name, String avatar, BulkSampleModel model) {
-        ChainBottomSheet bottomSheet = new ChainBottomSheet();
-        bottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "chainBottomSheet");
+    public static void showBulkSampleBottomSheet(Activity activity, String key, String name, String avatar, BulkSampleModel model) {
+        BulkSampleBottomSheet bottomSheet = new BulkSampleBottomSheet();
+        bottomSheet.show(((FragmentActivity) activity).getSupportFragmentManager(), "bulkSampleBottomSheet");
         bottomSheet.setData(key, name, avatar, model);
     }
 

@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Sheet.SheetSampleAdapter;
-import com.majazeh.risloo.databinding.BottomSheetChainBinding;
+import com.majazeh.risloo.databinding.BottomSheetBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -32,10 +32,10 @@ import org.json.JSONException;
 
 import java.util.HashMap;
 
-public class ChainBottomSheet extends BottomSheetDialogFragment {
+public class BulkSampleBottomSheet extends BottomSheetDialogFragment {
 
     // Binding
-    private BottomSheetChainBinding binding;
+    private BottomSheetBulkSampleBinding binding;
 
     // Adapters
     private SheetSampleAdapter sampleAdapter;
@@ -58,7 +58,7 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
-        binding = BottomSheetChainBinding.inflate(inflater, viewGroup, false);
+        binding = BottomSheetBulkSampleBinding.inflate(inflater, viewGroup, false);
 
         initializer();
 
@@ -188,10 +188,10 @@ public class ChainBottomSheet extends BottomSheetDialogFragment {
             }
 
             if (bulkSampleModel.getRoom() != null && bulkSampleModel.getRoom().getRoomCenter() != null && bulkSampleModel.getRoom().getRoomCenter().getAcceptation() != null) {
-                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1));
+                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1));
                 binding.nicknameGroup.setVisibility(View.GONE);
             } else {
-                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetChainDescription1) + "\n" + getResources().getString(R.string.BottomSheetChainDescription2));
+                binding.descriptionTextView.setText(getResources().getString(R.string.BottomSheetBulkSampleDescription1) + "\n" + getResources().getString(R.string.BottomSheetBulkSampleDescription2));
                 binding.nicknameGroup.setVisibility(View.VISIBLE);
             }
         } catch (JSONException e) {

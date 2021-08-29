@@ -10,7 +10,7 @@
     android:overScrollMode="always"
     android:layoutDirection="rtl"
     android:background="@drawable/draw_12sdp_top_solid_white_border_2dp_gray200"
-    tools:context=".Views.BottomSheets.ChainBottomSheet">
+    tools:context=".Views.BottomSheets.BulkSampleBottomSheet">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -106,7 +106,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:gravity="right"
-            android:text="@string/BottomSheetChainList"
+            android:text="@string/BottomSheetBulkSampleList"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold"
             android:textColor="@color/Gray600"
@@ -152,7 +152,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_16sdp"
             android:gravity="right"
-            android:text="@string/BottomSheetChainNickname"
+            android:text="@string/BottomSheetBulkSampleNickname"
             android:textSize="@dimen/_9ssp"
             android:textStyle="bold"
             android:textColor="@color/Gray600"
@@ -185,7 +185,7 @@
             android:layout_height="@dimen/_36sdp"
             android:layout_marginTop="@dimen/_18sdp"
             android:gravity="center"
-            android:text="@string/BottomSheetChainEntry"
+            android:text="@string/BottomSheetBulkSampleEntry"
             android:textSize="@dimen/_12ssp"
             android:textStyle="normal"
             android:textColor="@color/White"

@@ -157,7 +157,7 @@ public class BulkSampleFragment extends Fragment {
                                                     IntentManager.test(requireActivity(), key);
                                                 } else {
                                                     DialogManager.dismissLoadingDialog();
-                                                    SheetManager.showChainBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
+                                                    SheetManager.showBulkSampleBottomSheet(requireActivity(), key, ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar(), bulkSampleModel);
                                                 }
                                             } catch (JSONException e) {
                                                 e.printStackTrace();
