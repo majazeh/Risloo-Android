@@ -1219,18 +1219,6 @@
     <string name="Cases2AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
 
     /*
-    ---------- Cases3 Adapter ----------
-    */
-
-    <string name="Cases3AdapterHeader">پرونده‌ها</string>
-
-    <string name="Cases3AdapterSerial">سریال</string>
-    <string name="Cases3AdapterRoom">اتاق درمان</string>
-    <string name="Cases3AdapterSessionCount">جلسات</string>
-
-    <string name="Cases3AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
-
-    /*
     ---------- CaseTags Adapter ----------
     */
 
