@@ -176,11 +176,15 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
 
     private void setData(IndexSampleHolder holder, SampleModel model) {
         holder.binding.serialTextView.setText(model.getSampleId());
-        holder.binding.nameTextView.setText(model.getSampleScaleTitle());
 
-        if (!model.getSampleEdition().equals(""))
-            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        if (!model.getSampleScaleTitle().equals(""))
+            holder.binding.nameTextView.setText(model.getSampleScaleTitle());
         else
+            holder.binding.nameTextView.setText(model.getSampleTitle());
+
+        if (!model.getSampleEdition().equals("") && model.getSampleVersion() != 0)
+            holder.binding.editionTextView.setText(model.getSampleEdition() + " - نسخه " + model.getSampleVersion());
+        else if (model.getSampleVersion() != 0)
             holder.binding.editionTextView.setText("نسخه " + model.getSampleVersion());
 
         if (model.getSampleRoom() != null && model.getSampleRoom().getRoomManager() != null) {
