@@ -1,9 +1,8 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -17,15 +16,17 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.RoomUsersHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderRoomUserHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexRoomUserHolder;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragment;
-import com.majazeh.risloo.databinding.SingleItemRoomUserBinding;
+import com.majazeh.risloo.databinding.HeaderItemIndexRoomUserBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexRoomUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
+public class IndexRoomUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -36,31 +37,51 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public RoomUsersAdapter(@NonNull Activity activity) {
+    public IndexRoomUserAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public RoomUsersHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new RoomUsersHolder(SingleItemRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderRoomUserHolder(HeaderItemIndexRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexRoomUserHolder(SingleItemIndexRoomUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RoomUsersHolder holder, int i) {
-        UserModel model = (UserModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexRoomUserHolder) {
+            UserModel model = (UserModel) items.get(i - 1);
 
-        initializer(holder);
+            initializer((IndexRoomUserHolder) holder);
 
-        detector(holder);
+            detector((IndexRoomUserHolder) holder);
 
-        listener(holder, model);
+            listener((IndexRoomUserHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexRoomUserHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -82,17 +103,17 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
         }
     }
 
-    private void initializer(RoomUsersHolder holder) {
+    private void initializer(IndexRoomUserHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
     }
 
-    private void detector(RoomUsersHolder holder) {
+    private void detector(IndexRoomUserHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
-    private void listener(RoomUsersHolder holder, UserModel model) {
+    private void listener(IndexRoomUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof RoomUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((RoomUsersFragment) current).type, ((RoomUsersFragment) current).centerId, model);
@@ -101,12 +122,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(RoomUsersHolder holder, UserModel model) {
-        if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-        else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexRoomUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
@@ -115,7 +131,7 @@ public class RoomUsersAdapter extends RecyclerView.Adapter<RoomUsersHolder> {
         setAcceptation(holder, model);
     }
 
-    private void setAcceptation(RoomUsersHolder holder, UserModel model) {
+    private void setAcceptation(IndexRoomUserHolder holder, UserModel model) {
         if (model.getUserKicked_at() != 0 && model.getUserAccepted_at() != 0) {
             holder.binding.statusTexView.setText(activity.getResources().getString(R.string.RoomUsersFragmentStatusKicked));
             holder.binding.acceptedTextView.setText(DateManager.jalHHoMMoYYoMMoDD(String.valueOf(model.getUserKicked_at())));

@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.CenterUsersAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexCenterUserAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterUsersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
@@ -38,7 +38,7 @@ public class CenterUsersFragment extends Fragment {
     private FragmentCenterUsersBinding binding;
 
     // Adapters
-    private CenterUsersAdapter adapter;
+    private IndexCenterUserAdapter adapter;
 
     // Models
     public CenterModel centerModel;
@@ -70,7 +70,7 @@ public class CenterUsersFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new CenterUsersAdapter(requireActivity());
+        adapter = new IndexCenterUserAdapter(requireActivity());
 
         handler = new Handler();
 
@@ -182,10 +182,8 @@ public class CenterUsersFragment extends Fragment {
                             adapter.setItems(items.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
-                            binding.indexSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
-                            binding.indexSingleLayout.headerView.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                             if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
@@ -194,7 +192,7 @@ public class CenterUsersFragment extends Fragment {
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.CenterUsersFragmentEmpty));
                         }
 
-                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);

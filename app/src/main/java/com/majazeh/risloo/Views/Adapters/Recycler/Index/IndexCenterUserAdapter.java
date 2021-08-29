@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,9 +22,11 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.CenterUsersHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderCenterUserHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexCenterUserHolder;
 import com.majazeh.risloo.Views.Fragments.Index.CenterUsersFragment;
-import com.majazeh.risloo.databinding.SingleItemCenterUserBinding;
+import com.majazeh.risloo.databinding.HeaderItemIndexCenterUserBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexCenterUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
@@ -37,7 +39,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> {
+public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -50,31 +52,51 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public CenterUsersAdapter(@NonNull Activity activity) {
+    public IndexCenterUserAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public CenterUsersHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new CenterUsersHolder(SingleItemCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderCenterUserHolder(HeaderItemIndexCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexCenterUserHolder(SingleItemIndexCenterUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CenterUsersHolder holder, int i) {
-        UserModel model = (UserModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexCenterUserHolder) {
+            UserModel model = (UserModel) items.get(i - 1);
 
-        initializer(holder);
+            initializer((IndexCenterUserHolder) holder);
 
-        detector(holder);
+            detector((IndexCenterUserHolder) holder);
 
-        listener(holder, model);
+            listener((IndexCenterUserHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexCenterUserHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -96,7 +118,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
         }
     }
 
-    private void initializer(CenterUsersHolder holder) {
+    private void initializer(IndexCenterUserHolder holder) {
         current = ((MainActivity) activity).fragmont.getCurrent();
 
         data = new HashMap<>();
@@ -106,14 +128,14 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
         InitManager.normalAdapterSpinner(activity, holder.binding.positionSpinner, R.array.UserTypes);
     }
 
-    private void detector(CenterUsersHolder holder) {
+    private void detector(IndexCenterUserHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(CenterUsersHolder holder, UserModel model) {
+    private void listener(IndexCenterUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             if (current instanceof CenterUsersFragment) {
                 NavDirections action = NavigationMainDirections.actionGlobalReferenceFragment(((CenterUsersFragment) current).type, ((CenterUsersFragment) current).centerId, model);
@@ -202,12 +224,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
         });
     }
 
-    private void setData(CenterUsersHolder holder, UserModel model) {
-        if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-        else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexCenterUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.mobileTextView.setText(model.getMobile());
@@ -217,7 +234,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
         setAcceptation(holder, model);
     }
 
-    private void setPosition(CenterUsersHolder holder, UserModel model) {
+    private void setPosition(IndexCenterUserHolder holder, UserModel model) {
         String position = SelectionManager.getUserType(activity, "fa", model.getPosition());
         for (int i=0; i<holder.binding.positionSpinner.getCount(); i++) {
             if (holder.binding.positionSpinner.getItemAtPosition(i).toString().equalsIgnoreCase(position)) {
@@ -242,7 +259,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
         }
     }
 
-    private void setAcceptation(CenterUsersHolder holder, UserModel model) {
+    private void setAcceptation(IndexCenterUserHolder holder, UserModel model) {
         ArrayList<String> items = new ArrayList<>();
 
         if (model.getMeta() != null) {
@@ -289,7 +306,7 @@ public class CenterUsersAdapter extends RecyclerView.Adapter<CenterUsersHolder> 
         InitManager.actionCustomSpinner(activity, holder.binding.menuSpinner, items);
     }
 
-    private void doWork(CenterUsersHolder holder, UserModel model, String value, String method) {
+    private void doWork(IndexCenterUserHolder holder, UserModel model, String value, String method) {
         DialogManager.showLoadingDialog(activity);
 
         if (current instanceof CenterUsersFragment)
