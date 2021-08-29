@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Adapters.Holder.PracticesHolder;
-import com.majazeh.risloo.databinding.SingleItemPracticeBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderPracticeHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexPracticeHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexPracticeBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexPracticeBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class PracticesAdapter extends RecyclerView.Adapter<PracticesHolder> {
+public class IndexPracticeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -29,29 +31,49 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesHolder> {
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public PracticesAdapter(@NonNull Activity activity) {
+    public IndexPracticeAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public PracticesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new PracticesHolder(SingleItemPracticeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderPracticeHolder(HeaderItemIndexPracticeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexPracticeHolder(SingleItemIndexPracticeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull PracticesHolder holder, int i) {
-//        PracticeModel model = (PracticeModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof IndexPracticeHolder) {
+//            PracticeModel model = (PracticeModel) items.get(i - 1);
 
-        detector(holder);
+            detector((IndexPracticeHolder) holder);
 
-        listener(holder);
+            listener((IndexPracticeHolder) holder);
 
-        setData(holder);
+            setData((IndexPracticeHolder) holder);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -73,14 +95,14 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesHolder> {
         }
     }
 
-    private void detector(PracticesHolder holder) {
+    private void detector(IndexPracticeHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(PracticesHolder holder) {
+    private void listener(IndexPracticeHolder holder) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -118,12 +140,7 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesHolder> {
         });
     }
 
-    private void setData(PracticesHolder holder) {
-        if (holder.getAbsoluteAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-        else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexPracticeHolder holder) {
         holder.binding.serialTextView.setText("P966663D");
         holder.binding.nameTextView.setText("تمرین abc");
         holder.binding.descriptionTextView.setText("چرا عاقل کند کاری که بازآید به کنعان غم مخور");
@@ -131,7 +148,7 @@ public class PracticesAdapter extends RecyclerView.Adapter<PracticesHolder> {
         setMenu(holder);
     }
 
-    private void setMenu(PracticesHolder holder) {
+    private void setMenu(IndexPracticeHolder holder) {
         ArrayList<String> items = new ArrayList<>();
 
         items.add(activity.getResources().getString(R.string.PracticesAdapterAttachment));

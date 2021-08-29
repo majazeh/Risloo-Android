@@ -4,16 +4,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center">
-
-    <include
-        android:id="@+id/headerView"
-        layout="@layout/header_item_practice"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:layout_gravity="center"
+    android:padding="@dimen/_1sdp"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -24,8 +17,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerView"
-        tools:listitem="@layout/single_item_practice"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:listitem="@layout/single_item_index_practice"
         tools:itemCount="4" />
 
     <TextView

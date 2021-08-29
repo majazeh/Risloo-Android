@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -14,13 +14,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
-import com.majazeh.risloo.Views.Adapters.Holder.DocumentsHolder;
-import com.majazeh.risloo.databinding.SingleItemDocumentBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderDocumentHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexDocumentHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexDocumentBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexDocumentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsHolder> {
+public class IndexDocumentAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -29,29 +31,49 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsHolder> {
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public DocumentsAdapter(@NonNull Activity activity) {
+    public IndexDocumentAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public DocumentsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new DocumentsHolder(SingleItemDocumentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderDocumentHolder(HeaderItemIndexDocumentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexDocumentHolder(SingleItemIndexDocumentBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DocumentsHolder holder, int i) {
-//        DocumentModel model = (DocumentModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexDocumentHolder) {
+//            DocumentModel model = (DocumentModel) items.get(i - 1);
 
-        detector(holder);
+            detector((IndexDocumentHolder) holder);
 
-        listener(holder);
+            listener((IndexDocumentHolder) holder);
 
-        setData(holder);
+            setData((IndexDocumentHolder) holder);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -73,14 +95,14 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsHolder> {
         }
     }
 
-    private void detector(DocumentsHolder holder) {
+    private void detector(IndexDocumentHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(DocumentsHolder holder) {
+    private void listener(IndexDocumentHolder holder) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -121,12 +143,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsHolder> {
         });
     }
 
-    private void setData(DocumentsHolder holder) {
-        if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-        else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexDocumentHolder holder) {
         holder.binding.serialTextView.setText("P-96666DD");
         holder.binding.nameTextView.setText("مجوز مرکز مشاوره طلیعه سلامت");
         holder.binding.statusTextView.setText("تأیید شده");
@@ -134,7 +151,7 @@ public class DocumentsAdapter extends RecyclerView.Adapter<DocumentsHolder> {
         setMenu(holder);
     }
 
-    private void setMenu(DocumentsHolder holder) {
+    private void setMenu(IndexDocumentHolder holder) {
         ArrayList<String> items = new ArrayList<>();
 
         items.add(activity.getResources().getString(R.string.DocumentsFragmentAccept));
