@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -22,8 +22,10 @@ import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.BulkSamplesHolder;
-import com.majazeh.risloo.databinding.SingleItemBulkSampleBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderBulkSampleHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexBulkSampleHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexBulkSampleBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
@@ -35,7 +37,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> {
+public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -45,31 +47,51 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public BulkSamplesAdapter(@NonNull Activity activity) {
+    public IndexBulkSampleAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public BulkSamplesHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new BulkSamplesHolder(SingleItemBulkSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderBulkSampleHolder(HeaderItemIndexBulkSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexBulkSampleHolder(SingleItemIndexBulkSampleBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull BulkSamplesHolder holder, int i) {
-        BulkSampleModel model = (BulkSampleModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexBulkSampleHolder) {
+            BulkSampleModel model = (BulkSampleModel) items.get(i - 1);
 
-        initializer();
+            initializer();
 
-        detector(holder);
+            detector((IndexBulkSampleHolder) holder);
 
-        listener(holder, model);
+            listener((IndexBulkSampleHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexBulkSampleHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -97,14 +119,14 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
         header.put("Authorization", ((MainActivity) activity).singleton.getAuthorization());
     }
 
-    private void detector(BulkSamplesHolder holder) {
+    private void detector(IndexBulkSampleHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(BulkSamplesHolder holder, BulkSampleModel model) {
+    private void listener(IndexBulkSampleHolder holder, BulkSampleModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -147,13 +169,8 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
         });
     }
 
-    private void setData(BulkSamplesHolder holder, BulkSampleModel model) {
+    private void setData(IndexBulkSampleHolder holder, BulkSampleModel model) {
         try {
-            if (holder.getBindingAdapterPosition() == 0)
-                holder.binding.topView.setVisibility(View.GONE);
-            else
-                holder.binding.topView.setVisibility(View.VISIBLE);
-
             holder.binding.serialTextView.setText(model.getId());
             holder.binding.nameTextView.setText(model.getTitle());
             holder.binding.caseTextView.setText(SelectionManager.getCaseStatus(activity, "fa", model.getCase_status()));
@@ -175,7 +192,7 @@ public class BulkSamplesAdapter extends RecyclerView.Adapter<BulkSamplesHolder> 
         }
     }
 
-    private void setMenu(BulkSamplesHolder holder, BulkSampleModel model) {
+    private void setMenu(IndexBulkSampleHolder holder, BulkSampleModel model) {
         ArrayList<String> items = new ArrayList<>();
 
         if (!model.getLink().equals("")) {

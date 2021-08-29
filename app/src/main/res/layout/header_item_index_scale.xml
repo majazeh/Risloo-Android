@@ -16,6 +16,7 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:lines="2"
         android:text="@string/ScalesFragmentSerial"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
