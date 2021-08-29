@@ -21,8 +21,10 @@ import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderSampleHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexSampleHolder;
 import com.majazeh.risloo.Views.Fragments.Index.SamplesFragment;
 import com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Show.CaseFragment;
 import com.majazeh.risloo.Views.Fragments.Show.DashboardFragment;
 import com.majazeh.risloo.Views.Fragments.Show.ReferenceFragment;
+import com.majazeh.risloo.Views.Fragments.Show.SessionFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexSampleBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexSampleBinding;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
@@ -145,7 +147,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.binding.caseTextView.setVisibility(View.VISIBLE);
 
             holder.binding.referenceTextView.setVisibility(View.GONE);
-        } else if (current instanceof BulkSampleFragment) {
+        } else if (current instanceof BulkSampleFragment || current instanceof CaseFragment || current instanceof SessionFragment) {
             holder.binding.roomTextView.setVisibility(View.GONE);
             holder.binding.caseTextView.setVisibility(View.GONE);
 
@@ -164,7 +166,7 @@ public class IndexSampleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
             holder.binding.caseTextView.setVisibility(View.VISIBLE);
 
             holder.binding.referenceTextView.setVisibility(View.GONE);
-        } else if (current instanceof BulkSampleFragment) {
+        } else if (current instanceof BulkSampleFragment || current instanceof CaseFragment || current instanceof SessionFragment) {
             holder.binding.roomTextView.setVisibility(View.GONE);
             holder.binding.caseTextView.setVisibility(View.GONE);
 

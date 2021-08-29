@@ -520,41 +520,36 @@
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintTop_toTopOf="@id/samples_headerLayout" />
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/samples_containerLayout"
+            <include
+                android:id="@+id/samples_shimmerLayout"
+                layout="@layout/component_shimmer_index"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:padding="@dimen/_1sdp"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
                 app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/samples_addView">
+                app:layout_constraintTop_toBottomOf="@id/samples_addView"
+                tools:visibility="gone" />
 
-                <include
-                    android:id="@+id/samples_shimmerLayout"
-                    layout="@layout/component_shimmer_index"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="visible"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="gone" />
+            <include
+                android:id="@+id/samples_singleLayout"
+                layout="@layout/component_single_sample"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+                app:layout_constraintTop_toBottomOf="@id/samples_addView"
+                tools:visibility="visible" />
 
-                <include
-                    android:id="@+id/samples_singleLayout"
-                    layout="@layout/component_single_sample2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:visibility="gone"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:visibility="visible" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/samples_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="samples_shimmerLayout, samples_singleLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1298,21 +1298,6 @@
     <string name="RoomsAdapterEmpty">هنوز اتاق درمانی ثبت نشده است.</string>
 
     /*
-    ---------- Samples2 Adapter ----------
-    */
-
-    <string name="Samples2AdapterHeader">نمونه‌ها</string>
-
-    <string name="Samples2AdapterSerial">سریال</string>
-    <string name="Samples2AdapterName">مقیاس</string>
-    <string name="Samples2AdapterEdition">ویرایش - نسخه</string>
-    <string name="Samples2AdapterSession">جلسه</string>
-    <string name="Samples2AdapterReference">مراجع</string>
-    <string name="Samples2AdapterStatus">وضعیت</string>
-
-    <string name="Samples2AdapterEmpty">هنوز نمونه‌ای ثبت نشده است.</string>
-
-    /*
     ---------- Schedules Adapter ----------
     */
 
