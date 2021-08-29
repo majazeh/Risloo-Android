@@ -26,7 +26,7 @@ import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class IndexScalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -37,7 +37,7 @@ public class IndexScalesAdapter extends RecyclerView.Adapter<RecyclerView.ViewHo
     // Vars
     private ArrayList<TypeModel> items;
 
-    public IndexScalesAdapter(@NonNull Activity activity) {
+    public IndexScaleAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 

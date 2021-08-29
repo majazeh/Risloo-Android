@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -19,14 +19,16 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.IntentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.UsersHolder;
-import com.majazeh.risloo.databinding.SingleItemUserBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderUserHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexUserHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexUserBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexUserBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import java.util.ArrayList;
 
-public class UsersAdapter extends RecyclerView.Adapter<UsersHolder> {
+public class IndexUserAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -35,29 +37,49 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersHolder> {
     private ArrayList<TypeModel> items;
     private boolean userSelect = false;
 
-    public UsersAdapter(@NonNull Activity activity) {
+    public IndexUserAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public UsersHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new UsersHolder(SingleItemUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderUserHolder(HeaderItemIndexUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexUserHolder(SingleItemIndexUserBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull UsersHolder holder, int i) {
-        UserModel model = (UserModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexUserHolder) {
+            UserModel model = (UserModel) items.get(i - 1);
 
-        detector(holder);
+            detector((IndexUserHolder) holder);
 
-        listener(holder, model);
+            listener((IndexUserHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexUserHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -79,14 +101,14 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersHolder> {
         }
     }
 
-    private void detector(UsersHolder holder) {
+    private void detector(IndexUserHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(UsersHolder holder, UserModel model) {
+    private void listener(IndexUserHolder holder, UserModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalUserFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -127,12 +149,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersHolder> {
         });
     }
 
-    private void setData(UsersHolder holder, UserModel model) {
-        if (holder.getBindingAdapterPosition() == 0)
-            holder.binding.topView.setVisibility(View.GONE);
-         else
-            holder.binding.topView.setVisibility(View.VISIBLE);
-
+    private void setData(IndexUserHolder holder, UserModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.nameTextView.setText(model.getName());
         holder.binding.typeTextView.setText(SelectionManager.getUserType(activity, "fa", model.getUserType()));
@@ -141,7 +158,7 @@ public class UsersAdapter extends RecyclerView.Adapter<UsersHolder> {
         setMenu(holder, model);
     }
 
-    private void setMenu(UsersHolder holder, UserModel model) {
+    private void setMenu(IndexUserHolder holder, UserModel model) {
         ArrayList<String> items = new ArrayList<>();
 
         if (!model.getMobile().equals(""))

@@ -22,7 +22,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.UsersAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexUserAdapter;
 import com.majazeh.risloo.databinding.FragmentUsersBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -37,7 +37,7 @@ public class UsersFragment extends Fragment {
     private FragmentUsersBinding binding;
 
     // Adapters
-    private UsersAdapter adapter;
+    private IndexUserAdapter adapter;
 
     // Objects
     private Handler handler;
@@ -63,7 +63,7 @@ public class UsersFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new UsersAdapter(requireActivity());
+        adapter = new IndexUserAdapter(requireActivity());
 
         handler = new Handler();
 
@@ -159,10 +159,8 @@ public class UsersFragment extends Fragment {
                             adapter.setItems(items.data());
                             binding.indexSingleLayout.recyclerView.setAdapter(adapter);
 
-                            binding.indexSingleLayout.headerView.getRoot().setVisibility(View.VISIBLE);
                             binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (adapter.getItemCount() == 0) {
-                            binding.indexSingleLayout.headerView.getRoot().setVisibility(View.GONE);
                             binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                             if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
@@ -171,7 +169,7 @@ public class UsersFragment extends Fragment {
                                 binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.UsersFragmentEmpty));
                         }
 
-                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.getItemCount()));
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
 
                         binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);

@@ -24,7 +24,7 @@ import com.majazeh.risloo.Utils.Managers.ToastManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.ReferencesAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexScalesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexScaleAdapter;
 import com.majazeh.risloo.databinding.FragmentBulkSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -44,7 +44,7 @@ public class BulkSampleFragment extends Fragment {
 
     // Adapters
     private ReferencesAdapter referencesAdapter;
-    private IndexScalesAdapter indexScalesAdapter;
+    private IndexScaleAdapter indexScaleAdapter;
     private IndexSampleAdapter indexSampleAdapter;
 
     // Models
@@ -76,7 +76,7 @@ public class BulkSampleFragment extends Fragment {
 
     private void initializer() {
         referencesAdapter = new ReferencesAdapter(requireActivity());
-        indexScalesAdapter = new IndexScalesAdapter(requireActivity());
+        indexScaleAdapter = new IndexScaleAdapter(requireActivity());
         indexSampleAdapter = new IndexSampleAdapter(requireActivity());
 
         data = new HashMap<>();
@@ -293,11 +293,11 @@ public class BulkSampleFragment extends Fragment {
 
                         // Scales Data
                         if (!bulkSampleModel.getScales().data().isEmpty()) {
-                            indexScalesAdapter.setItems(bulkSampleModel.getScales().data());
-                            binding.scalesSingleLayout.recyclerView.setAdapter(indexScalesAdapter);
+                            indexScaleAdapter.setItems(bulkSampleModel.getScales().data());
+                            binding.scalesSingleLayout.recyclerView.setAdapter(indexScaleAdapter);
 
                             binding.scalesSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (indexScalesAdapter.getItemCount() == 0) {
+                        } else if (indexScaleAdapter.getItemCount() == 0) {
                             binding.scalesSingleLayout.emptyView.setVisibility(View.VISIBLE);
 
                             binding.scalesSingleLayout.emptyView.setText(getResources().getString(R.string.ScalesFragmentEmpty));
@@ -315,7 +315,7 @@ public class BulkSampleFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
-                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(indexScalesAdapter.itemsCount()));
+                        binding.scalesHeaderLayout.countTextView.setText(StringManager.bracing(indexScaleAdapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
 
                         // References Data

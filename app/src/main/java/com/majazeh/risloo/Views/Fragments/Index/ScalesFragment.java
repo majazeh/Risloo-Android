@@ -18,7 +18,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexScalesAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexScaleAdapter;
 import com.majazeh.risloo.databinding.FragmentScalesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -33,7 +33,7 @@ public class ScalesFragment extends Fragment {
     private FragmentScalesBinding binding;
 
     // Adapters
-    private IndexScalesAdapter adapter;
+    private IndexScaleAdapter adapter;
 
     // Objects
     private Handler handler;
@@ -57,7 +57,7 @@ public class ScalesFragment extends Fragment {
     }
 
     private void initializer() {
-        adapter = new IndexScalesAdapter(requireActivity());
+        adapter = new IndexScaleAdapter(requireActivity());
 
         handler = new Handler();
 
