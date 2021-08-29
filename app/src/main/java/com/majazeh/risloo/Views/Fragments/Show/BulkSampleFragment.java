@@ -87,6 +87,9 @@ public class BulkSampleFragment extends Fragment {
         binding.scalesHeaderLayout.titleTextView.setText(getResources().getString(R.string.ScalesFragmentTitle));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
+        binding.scalesShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+        binding.samplesShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+
         InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.referencesSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));

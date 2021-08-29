@@ -91,6 +91,10 @@ public class SessionFragment extends Fragment {
         binding.practicesHeaderLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
+        binding.usersShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+        binding.practicesShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+        binding.samplesShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+
         InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
         InitManager.imgResTint(requireActivity(), binding.usersAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.practicesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
