@@ -6,16 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    tools:background="@color/White">
-
-    <View
-        android:id="@+id/top_view"
-        android:layout_width="0dp"
-        android:layout_height="@dimen/_1sdp"
-        android:background="@color/Gray200"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    android:background="@drawable/draw_2sdp_solid_gray50">
 
     <TextView
         android:id="@+id/serial_textView"
@@ -25,35 +16,36 @@
         android:layout_marginStart="@dimen/_8sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:lines="2"
+        android:text="@string/SessionsFragmentSerial"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.18"
+        app:layout_constraintWidth_percent="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/room_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="سریال" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/room_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:text="@string/SessionsFragmentRoom"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.22"
         app:layout_constraintEnd_toStartOf="@id/start_time_textView"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="اتاق درمان" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/center_textView"
@@ -61,6 +53,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:gravity="center|right"
+        android:text="@string/SessionsFragmentCenter"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"
@@ -69,26 +62,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/room_textView"
         app:layout_constraintStart_toStartOf="@id/room_textView"
-        app:layout_constraintTop_toBottomOf="@id/room_textView"
-        tools:text="مرکز درمانی" />
+        app:layout_constraintTop_toBottomOf="@id/room_textView" />
 
     <TextView
         android:id="@+id/start_time_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:text="@string/SessionsFragmentStartTime"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintWidth_percent="0.22"
         app:layout_constraintEnd_toStartOf="@id/status_textView"
         app:layout_constraintStart_toEndOf="@id/room_textView"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="زمان شروع" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/duration_textView"
@@ -96,6 +87,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:gravity="center|right"
+        android:text="@string/SessionsFragmentDuration"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"
@@ -104,25 +96,24 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/start_time_textView"
         app:layout_constraintStart_toStartOf="@id/start_time_textView"
-        app:layout_constraintTop_toBottomOf="@id/start_time_textView"
-        tools:text="مدت زمان جلسه" />
+        app:layout_constraintTop_toBottomOf="@id/start_time_textView" />
 
     <TextView
         android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_34sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
+        android:text="@string/SessionsFragmentStatus"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/edit_imageView"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/start_time_textView"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="وضعیت" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/case_textView"
@@ -130,6 +121,7 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:gravity="center|right"
+        android:text="@string/SessionsFragmentCase"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"
@@ -138,23 +130,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/status_textView"
         app:layout_constraintStart_toStartOf="@id/status_textView"
-        app:layout_constraintTop_toBottomOf="@id/status_textView"
-        tools:text="پرونده" />
-
-    <ImageView
-        android:id="@+id/edit_imageView"
-        android:layout_width="@dimen/_26sdp"
-        android:layout_height="@dimen/_26sdp"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:layout_marginStart="@dimen/_4sdp"
-        android:contentDescription="@string/AppImageContent"
-        android:padding="@dimen/_5sdp"
-        android:scaleType="fitCenter"
-        android:src="@drawable/ic_edit_light"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/status_textView"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        app:tint="@color/Gray500" />
+        app:layout_constraintTop_toBottomOf="@id/status_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

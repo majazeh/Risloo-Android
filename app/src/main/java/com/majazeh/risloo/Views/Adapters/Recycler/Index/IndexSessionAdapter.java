@@ -1,9 +1,8 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.app.Activity;
 import android.os.Build;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
@@ -16,8 +15,10 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.SessionsHolder;
-import com.majazeh.risloo.databinding.SingleItemSessionBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderSessionHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexSessionHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexSessionBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexSessionBinding;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -25,7 +26,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SessionsAdapter extends RecyclerView.Adapter<SessionsHolder> {
+public class IndexSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -33,29 +34,49 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsHolder> {
     // Vars
     private ArrayList<TypeModel> items;
 
-    public SessionsAdapter(@NonNull Activity activity) {
+    public IndexSessionAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SessionsHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SessionsHolder(SingleItemSessionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderSessionHolder(HeaderItemIndexSessionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexSessionHolder(SingleItemIndexSessionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SessionsHolder holder, int i) {
-        SessionModel model = (SessionModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof  IndexSessionHolder) {
+            SessionModel model = (SessionModel) items.get(i - 1);
 
-        detector(holder);
+            detector((IndexSessionHolder) holder);
 
-        listener(holder, model);
+            listener((IndexSessionHolder) holder, model);
 
-        setData(holder, model);
+            setData((IndexSessionHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -77,7 +98,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsHolder> {
         }
     }
 
-    private void detector(SessionsHolder holder) {
+    private void detector(IndexSessionHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
 
@@ -85,7 +106,7 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsHolder> {
         }
     }
 
-    private void listener(SessionsHolder holder, SessionModel model) {
+    private void listener(IndexSessionHolder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
             ((MainActivity) activity).navController.navigate(action);
@@ -97,13 +118,8 @@ public class SessionsAdapter extends RecyclerView.Adapter<SessionsHolder> {
         }).widget(holder.binding.editImageView);
     }
 
-    private void setData(SessionsHolder holder, SessionModel model) {
+    private void setData(IndexSessionHolder holder, SessionModel model) {
         try {
-            if (holder.getBindingAdapterPosition() == 0)
-                holder.binding.topView.setVisibility(View.GONE);
-             else
-                holder.binding.topView.setVisibility(View.VISIBLE);
-
             holder.binding.serialTextView.setText(model.getId());
 
             if (model.getRoom() != null && model.getRoom().getRoomManager() != null) {
