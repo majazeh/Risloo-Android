@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    android:background="@drawable/draw_2sdp_solid_gray50_border_bottom_2dp_gray200">
+    android:background="@drawable/draw_2sdp_solid_gray50">
 
     <TextView
         android:id="@+id/name_textView"
@@ -34,6 +34,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_8sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
@@ -54,7 +55,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_4sdp"
+        android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/ClientReportsFragmentReference"
@@ -75,7 +76,6 @@
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/_8sdp"
         android:layout_marginEnd="@dimen/_8sdp"
-        android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
         android:text="@string/ClientReportsFragmentReaders"
