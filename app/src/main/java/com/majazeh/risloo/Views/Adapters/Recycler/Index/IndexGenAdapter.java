@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -17,15 +17,18 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.SaGensHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderFieldHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldHolder;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
-import com.majazeh.risloo.databinding.SingleItemSaBinding;
+import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexFieldBinding;
 
 import java.util.ArrayList;
 
-public class SaGensAdapter extends RecyclerView.Adapter<SaGensHolder> {
+public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -38,29 +41,51 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensHolder> {
     private ArrayList<String> items;
     private boolean userSelect = false, editable = false;
 
-    public SaGensAdapter(@NonNull Activity activity) {
+    public IndexGenAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SaGensHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SaGensHolder(SingleItemSaBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderFieldHolder(HeaderItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexFieldHolder(SingleItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SaGensHolder holder, int i) {
-        String item = items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof HeaderFieldHolder) {
+            setData((HeaderFieldHolder) holder);
+        } else if (holder instanceof IndexFieldHolder) {
+            String item = items.get(i - 1);
 
-        intializer();
+            intializer();
 
-        listener(holder, i);
+            listener((IndexFieldHolder) holder, i);
 
-        setData(holder, item);
+            setData((IndexFieldHolder) holder, item);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
@@ -94,7 +119,7 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensHolder> {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(SaGensHolder holder, int item) {
+    private void listener(IndexFieldHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
@@ -148,15 +173,20 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensHolder> {
         });
     }
 
-    private void setData(SaGensHolder holder, String item) {
-        holder.binding.headerTextView.setText(activity.getResources().getString(R.string.SampleFragmentSubGeneralTime));
+    private void setData(HeaderFieldHolder holder) {
+        holder.binding.titleTextView.setText(activity.getResources().getString(R.string.SampleFragmentFieldGen));
+        holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
+    }
+
+    private void setData(IndexFieldHolder holder, String item) {
+        holder.binding.headerTextView.setText(activity.getResources().getString(R.string.SampleFragmentFieldTime));
 
         setType(holder, item);
 
         setClickable(holder);
     }
 
-    private void setType(SaGensHolder holder, String item) {
+    private void setType(IndexFieldHolder holder, String item) {
         holder.binding.selectGroup.setVisibility(View.GONE);
 
         holder.binding.inputEditText.setVisibility(View.VISIBLE);
@@ -166,7 +196,7 @@ public class SaGensAdapter extends RecyclerView.Adapter<SaGensHolder> {
             holder.binding.inputEditText.setText(item);
     }
 
-    private void setClickable(SaGensHolder holder) {
+    private void setClickable(IndexFieldHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.selectSpinner.setEnabled(true);

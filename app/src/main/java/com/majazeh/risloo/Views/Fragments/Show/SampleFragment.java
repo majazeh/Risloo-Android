@@ -23,9 +23,9 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.ProfilesAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.SaGensAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.SaItemsAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.SaPresAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexGenAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexItemAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexPreAdapter;
 import com.majazeh.risloo.databinding.FragmentSampleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -48,9 +48,9 @@ public class SampleFragment extends Fragment {
 
     // Adapters
     private ProfilesAdapter profileHalfsAdapter, profileExtrasAdapter;
-    private SaGensAdapter saGensAdapter;
-    private SaPresAdapter saPresAdapter;
-    private SaItemsAdapter saItemsAdapter;
+    private IndexGenAdapter indexGenAdapter;
+    private IndexPreAdapter indexPreAdapter;
+    private IndexItemAdapter indexItemAdapter;
 
     // Models
     private SampleAnswers sampleAnswers;
@@ -82,9 +82,9 @@ public class SampleFragment extends Fragment {
     private void initializer() {
         profileHalfsAdapter = new ProfilesAdapter(requireActivity());
         profileExtrasAdapter = new ProfilesAdapter(requireActivity());
-        saGensAdapter = new SaGensAdapter(requireActivity());
-        saPresAdapter = new SaPresAdapter(requireActivity());
-        saItemsAdapter = new SaItemsAdapter(requireActivity());
+        indexGenAdapter = new IndexGenAdapter(requireActivity());
+        indexPreAdapter = new IndexPreAdapter(requireActivity());
+        indexItemAdapter = new IndexItemAdapter(requireActivity());
 
         sampleAnswers = new SampleAnswers();
 
@@ -92,9 +92,9 @@ public class SampleFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.profileHalfsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHalfHeader));
-        binding.profileExtrasHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
-        binding.fieldsHeaderIncludeLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
+        binding.profileHalfsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileHalfHeader));
+        binding.profileExtrasHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
+        binding.fieldsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileHalfsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileExtrasSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -157,19 +157,19 @@ public class SampleFragment extends Fragment {
             }
         });
 
-        binding.fieldsEditableCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.fieldsCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (isChecked) {
-                binding.fieldsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray900));
+                binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.Gray900));
 
-                saGensAdapter.setEditable(true);
-                saPresAdapter.setEditable(true);
-                saItemsAdapter.setEditable(true);
+                indexGenAdapter.setEditable(true);
+                indexPreAdapter.setEditable(true);
+                indexItemAdapter.setEditable(true);
             } else {
-                binding.fieldsEditableCheckBox.setTextColor(getResources().getColor(R.color.Gray600));
+                binding.fieldsCheckBox.setTextColor(getResources().getColor(R.color.Gray600));
 
-                saGensAdapter.setEditable(false);
-                saPresAdapter.setEditable(false);
-                saItemsAdapter.setEditable(false);
+                indexGenAdapter.setEditable(false);
+                indexPreAdapter.setEditable(false);
+                indexItemAdapter.setEditable(false);
             }
         });
     }
@@ -303,16 +303,16 @@ public class SampleFragment extends Fragment {
 
     private void setEditable(String status) {
         if (status.equals("seald") || status.equals("open")) {
-            binding.fieldsEditableCheckBox.setVisibility(View.VISIBLE);
+            binding.fieldsCheckBox.setVisibility(View.VISIBLE);
         } else {
-            binding.fieldsEditableCheckBox.setVisibility(View.GONE);
+            binding.fieldsCheckBox.setVisibility(View.GONE);
 
-            if (binding.fieldsEditableCheckBox.isChecked()) {
-                binding.fieldsEditableCheckBox.setChecked(false);
+            if (binding.fieldsCheckBox.isChecked()) {
+                binding.fieldsCheckBox.setChecked(false);
 
-                saGensAdapter.setEditable(false);
-                saPresAdapter.setEditable(false);
-                saItemsAdapter.setEditable(false);
+                indexGenAdapter.setEditable(false);
+                indexPreAdapter.setEditable(false);
+                indexItemAdapter.setEditable(false);
             }
         }
     }
@@ -346,7 +346,7 @@ public class SampleFragment extends Fragment {
                 binding.profileHalfsSingleLayout.emptyView.setVisibility(View.VISIBLE);
             }
 
-            binding.profileHalfsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
+            binding.profileHalfsHeaderLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
             binding.profileHalfsGroup.setVisibility(View.VISIBLE);
 
             // Profile Extra
@@ -359,7 +359,7 @@ public class SampleFragment extends Fragment {
                 binding.profileExtrasGroup.setVisibility(View.GONE);
             }
 
-            binding.profileExtrasHeaderIncludeLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
+            binding.profileExtrasHeaderLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
         } else {
             binding.profilesTextView.getRoot().setVisibility(View.GONE);
 
@@ -386,10 +386,10 @@ public class SampleFragment extends Fragment {
 
                             // Gens Data
                             if (generals.size() != 0) {
-                                saGensAdapter.setItems(generals);
-                                binding.generalRecyclerView.setAdapter(saGensAdapter);
-                            } else if (saGensAdapter.getItemCount() == 0) {
-                                binding.generalConstraintLayout.setVisibility(View.GONE);
+                                indexGenAdapter.setItems(generals);
+                                binding.generalRecyclerView.setAdapter(indexGenAdapter);
+                            } else if (indexGenAdapter.getItemCount() == 0) {
+                                binding.generalRecyclerView.setVisibility(View.GONE);
                             }
 
                             List prerequisites = new List();
@@ -406,21 +406,19 @@ public class SampleFragment extends Fragment {
 
                             // Prerequisite Data
                             if (!prerequisites.data().isEmpty()) {
-                                saPresAdapter.setItems(prerequisites.data());
-                                binding.prerequisiteRecyclerView.setAdapter(saPresAdapter);
-                            } else if (saPresAdapter.getItemCount() == 0) {
-                                binding.prerequisiteConstraintLayout.setVisibility(View.GONE);
+                                indexPreAdapter.setItems(prerequisites.data());
+                                binding.prerequisiteRecyclerView.setAdapter(indexPreAdapter);
+                            } else if (indexPreAdapter.getItemCount() == 0) {
+                                binding.prerequisiteRecyclerView.setVisibility(View.GONE);
                             }
 
                             // Items Data
                             if (!items.data().isEmpty()) {
-                                saItemsAdapter.setItems(items.data());
-                                binding.itemRecyclerView.setAdapter(saItemsAdapter);
-                            } else if (saItemsAdapter.getItemCount() == 0) {
-                                binding.itemConstraintLayout.setVisibility(View.GONE);
+                                indexItemAdapter.setItems(items.data());
+                                binding.itemRecyclerView.setAdapter(indexItemAdapter);
+                            } else if (indexItemAdapter.getItemCount() == 0) {
+                                binding.itemRecyclerView.setVisibility(View.GONE);
                             }
-
-                            binding.fieldsHeaderIncludeLayout.countTextView.setText(StringManager.bracing(saGensAdapter.getItemCount() + saPresAdapter.getItemCount() + saItemsAdapter.getItemCount()));
 
                             // Generals Data
                             binding.generalRecyclerView.setVisibility(View.VISIBLE);

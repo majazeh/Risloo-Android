@@ -1169,17 +1169,17 @@
 
     <string name="SampleFragmentScoring">درحال نمره‌دهی و ساخت فایل‌ها …</string>
 
-    <string name="SampleFragmentEditable">قابلیت ویرایش فرم</string>
-
     <string name="SampleFragmentProfileHalfHeader">نیم‌رخ‌ها</string>
     <string name="SampleFragmentProfileExtraHeader">مقیاس‌های افزوده شده</string>
+
     <string name="SampleFragmentFieldHeader">مواد نمونه</string>
+    <string name="SampleFragmentFieldEditable">قابلیت ویرایش فرم</string>
 
-    <string name="SampleFragmentSubGeneral">عمومی</string>
-    <string name="SampleFragmentSubPrerequisite">پیش نیاز‌ها</string>
-    <string name="SampleFragmentSubItem">گویه‌ها</string>
+    <string name="SampleFragmentFieldGen">عمومی</string>
+    <string name="SampleFragmentFieldPre">پیش نیاز‌ها</string>
+    <string name="SampleFragmentFieldItem">گویه‌ها</string>
 
-    <string name="SampleFragmentSubGeneralTime">زمان انجام (دقیقه)</string>
+    <string name="SampleFragmentFieldTime">زمان انجام (دقیقه)</string>
 
     /*
     ---------- Session Fragment ----------

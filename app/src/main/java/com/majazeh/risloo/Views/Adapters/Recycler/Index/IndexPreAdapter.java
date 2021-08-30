@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -16,12 +16,16 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
-import com.majazeh.risloo.Views.Adapters.Holder.SaPresHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderFieldHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldHolder;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
-import com.majazeh.risloo.databinding.SingleItemSaBinding;
+import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexFieldBinding;
 import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -29,7 +33,7 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
+public class IndexPreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Fragments
     private Fragment current;
@@ -42,40 +46,62 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
     private ArrayList<TypeModel> items;
     private boolean userSelect = false, editable = false;
 
-    public SaPresAdapter(@NonNull Activity activity) {
+    public IndexPreAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public SaPresHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new SaPresHolder(SingleItemSaBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (viewType == 0)
+            return new HeaderFieldHolder(HeaderItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+
+        return new IndexFieldHolder(SingleItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull SaPresHolder holder, int i) {
-        PrerequisitesModel model = (PrerequisitesModel) items.get(i);
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
+        if (holder instanceof HeaderFieldHolder) {
+            setData((HeaderFieldHolder) holder);
+        } else if (holder instanceof IndexFieldHolder) {
+            PrerequisitesModel model = (PrerequisitesModel) items.get(i - 1);
 
-        intializer();
+            intializer();
 
-        listener(holder, i);
+            listener((IndexFieldHolder) holder, i);
 
-        setData(holder, model);
+            setData((IndexFieldHolder) holder, model);
+        }
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+        if (position == 0)
+            return 0;
+
+        return 1;
     }
 
     @Override
     public int getItemCount() {
+        if (this.items != null)
+            return items.size() + 1;
+        else
+            return 0;
+    }
+
+    public int itemsCount() {
         if (this.items != null)
             return items.size();
         else
             return 0;
     }
 
-    public void setItems(ArrayList<TypeModel> prerequisites) {
+    public void setItems(ArrayList<TypeModel> items) {
         if (this.items == null)
-            this.items = prerequisites;
+            this.items = items;
         else
-            this.items.addAll(prerequisites);
+            this.items.addAll(items);
         notifyDataSetChanged();
     }
 
@@ -98,7 +124,7 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(SaPresHolder holder, int item) {
+    private void listener(IndexFieldHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
@@ -152,15 +178,20 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
         });
     }
 
-    private void setData(SaPresHolder holder, PrerequisitesModel model) {
-        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition() + 1) + " - " + model.getText());
+    private void setData(HeaderFieldHolder holder) {
+        holder.binding.titleTextView.setText(activity.getResources().getString(R.string.SampleFragmentFieldPre));
+        holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
+    }
+
+    private void setData(IndexFieldHolder holder, PrerequisitesModel model) {
+        holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
         setType(holder, model);
 
         setClickable(holder);
     }
 
-    private void setType(SaPresHolder holder, PrerequisitesModel model) {
+    private void setType(IndexFieldHolder holder, PrerequisitesModel model) {
         try {
             switch (model.getAnswer().getString("type")) {
                 case "text":
@@ -201,7 +232,7 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
         }
     }
 
-    private void setClickable(SaPresHolder holder) {
+    private void setClickable(IndexFieldHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.selectSpinner.setEnabled(true);
@@ -215,7 +246,7 @@ public class SaPresAdapter extends RecyclerView.Adapter<SaPresHolder> {
         }
     }
 
-    private void setSpinner(SaPresHolder holder, PrerequisitesModel model) {
+    private void setSpinner(IndexFieldHolder holder, PrerequisitesModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
 
