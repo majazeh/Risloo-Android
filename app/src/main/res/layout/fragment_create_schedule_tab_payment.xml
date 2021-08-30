@@ -66,7 +66,7 @@
                 app:layout_constraintTop_toBottomOf="@id/payment_errorLayout"
                 tools:layout_marginBottom="@dimen/_8sdp"
                 tools:layout_marginTop="@dimen/_8sdp"
-                tools:listitem="@layout/single_item_axis"
+                tools:listitem="@layout/single_item_create_axis"
                 tools:itemCount="4" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

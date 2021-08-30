@@ -24,7 +24,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
-import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateCheckAdapter;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Sample;
@@ -55,7 +55,7 @@ public class CreateSampleFragment extends Fragment {
 
     // Adapters
     public DialogSelectedAdapter scalesAdapter, referencesAdapter;
-    public CheckedAdapter clientsAdapter;
+    public CreateCheckAdapter clientsAdapter;
 
     // Objects
     private ClickableSpan assessmentLinkSpan;
@@ -86,7 +86,7 @@ public class CreateSampleFragment extends Fragment {
     private void initializer() {
         scalesAdapter = new DialogSelectedAdapter(requireActivity());
         referencesAdapter = new DialogSelectedAdapter(requireActivity());
-        clientsAdapter = new CheckedAdapter(requireActivity());
+        clientsAdapter = new CreateCheckAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();

@@ -1,4 +1,4 @@
-package com.majazeh.risloo.Views.Adapters.Recycler;
+package com.majazeh.risloo.Views.Adapters.Recycler.Create;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -10,15 +10,15 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.Utils.Managers.StringManager;
-import com.majazeh.risloo.Views.Adapters.Holder.CheckedHolder;
-import com.majazeh.risloo.databinding.SingleItemCheckedBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Create.CreateCheckHolder;
+import com.majazeh.risloo.databinding.SingleItemCreateCheckBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import org.json.JSONException;
 
 import java.util.ArrayList;
 
-public class CheckedAdapter extends RecyclerView.Adapter<CheckedHolder> {
+public class CreateCheckAdapter extends RecyclerView.Adapter<CreateCheckHolder> {
 
     // Objects
     private Activity activity;
@@ -30,18 +30,18 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedHolder> {
     private ArrayList<TypeModel> items;
     private ArrayList<String> ids;
 
-    public CheckedAdapter(@NonNull Activity activity) {
+    public CreateCheckAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
     @NonNull
     @Override
-    public CheckedHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
-        return new CheckedHolder(SingleItemCheckedBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+    public CreateCheckHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
+        return new CreateCheckHolder(SingleItemCreateCheckBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
-    public void onBindViewHolder(@NonNull CheckedHolder holder, int i) {
+    public void onBindViewHolder(@NonNull CreateCheckHolder holder, int i) {
         TypeModel model = items.get(i);
 
         listener(holder, model);
@@ -76,7 +76,7 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedHolder> {
         }
     }
 
-    private void listener(CheckedHolder holder, TypeModel model) {
+    private void listener(CreateCheckHolder holder, TypeModel model) {
         holder.binding.getRoot().setOnCheckedChangeListener((buttonView, isChecked) -> {
             try {
                 if (isChecked)
@@ -91,7 +91,7 @@ public class CheckedAdapter extends RecyclerView.Adapter<CheckedHolder> {
         });
     }
 
-    private void setData(CheckedHolder holder, TypeModel model) {
+    private void setData(CreateCheckHolder holder, TypeModel model) {
         try {
             holder.binding.getRoot().setText(model.object.getString("name"));
         } catch (JSONException e) {

@@ -206,7 +206,7 @@ public class CreateSessionFragment extends Fragment {
         // Payment Data
         if (payment instanceof CreateSessionTabPaymentFragment) {
             data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateSessionTabPaymentFragment) payment).payment));
-            data.put("amounts", ((CreateSessionTabPaymentFragment) payment).axisAdapter.getAmounts());
+            data.put("amounts", ((CreateSessionTabPaymentFragment) payment).createAxisAdapter.getAmounts());
         }
 
         Session.create(data, header, new Response() {

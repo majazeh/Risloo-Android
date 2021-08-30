@@ -21,7 +21,7 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.CheckedAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateCheckAdapter;
 import com.majazeh.risloo.databinding.FragmentCreateSessionUserBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
@@ -45,7 +45,7 @@ public class CreateSessionUserFragment extends Fragment {
     private FragmentCreateSessionUserBinding binding;
 
     // Adapters
-    public CheckedAdapter clientsAdapter;
+    public CreateCheckAdapter clientsAdapter;
 
     // Objects
     private HashMap data, header;
@@ -72,7 +72,7 @@ public class CreateSessionUserFragment extends Fragment {
     }
 
     private void initializer() {
-        clientsAdapter = new CheckedAdapter(requireActivity());
+        clientsAdapter = new CreateCheckAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();

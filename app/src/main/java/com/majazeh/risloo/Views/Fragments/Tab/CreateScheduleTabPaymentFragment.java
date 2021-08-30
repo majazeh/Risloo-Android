@@ -16,7 +16,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Adapters.Recycler.AxisAdapter;
+import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateAxisAdapter;
 import com.majazeh.risloo.Views.Fragments.Create.CreateScheduleFragment;
 import com.majazeh.risloo.databinding.FragmentCreateScheduleTabPaymentBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -29,7 +29,7 @@ public class CreateScheduleTabPaymentFragment extends Fragment {
     public FragmentCreateScheduleTabPaymentBinding binding;
 
     // Adapters
-    public AxisAdapter axisAdapter;
+    public CreateAxisAdapter createAxisAdapter;
 
     // Fragments
     private Fragment current;
@@ -55,7 +55,7 @@ public class CreateScheduleTabPaymentFragment extends Fragment {
     }
 
     private void initializer() {
-        axisAdapter = new AxisAdapter(requireActivity());
+        createAxisAdapter = new CreateAxisAdapter(requireActivity());
 
         current = ((MainActivity) requireActivity()).fragmont.getCurrent();
 
@@ -110,8 +110,8 @@ public class CreateScheduleTabPaymentFragment extends Fragment {
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, ArrayList<String> amounts) {
-        axisAdapter.setItems(items, ids, amounts);
-        binding.axisRecyclerView.setAdapter(axisAdapter);
+        createAxisAdapter.setItems(items, ids, amounts);
+        binding.axisRecyclerView.setAdapter(createAxisAdapter);
     }
 
     @Override

@@ -240,7 +240,7 @@ public class CreateScheduleFragment extends Fragment {
         // Payment Data
         if (payment instanceof CreateScheduleTabPaymentFragment) {
             data.put("payment_status", SelectionManager.getPaymentStatus(requireActivity(), "en", ((CreateScheduleTabPaymentFragment) payment).payment));
-            data.put("amounts", ((CreateScheduleTabPaymentFragment) payment).axisAdapter.getAmounts());
+            data.put("amounts", ((CreateScheduleTabPaymentFragment) payment).createAxisAdapter.getAmounts());
         }
 
         Room.createSchedule(data, header, new Response() {
