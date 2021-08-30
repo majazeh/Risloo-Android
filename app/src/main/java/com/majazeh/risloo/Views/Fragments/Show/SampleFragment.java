@@ -96,8 +96,8 @@ public class SampleFragment extends Fragment {
         binding.profileExtrasHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentProfileExtraHeader));
         binding.fieldsHeaderLayout.titleTextView.setText(getResources().getString(R.string.SampleFragmentFieldHeader));
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileHalfsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileExtrasSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileHalfsRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.profileExtrasRecyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.generalRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.prerequisiteRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.itemRecyclerView, getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._12sdp), getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
@@ -339,27 +339,26 @@ public class SampleFragment extends Fragment {
             // Profile Half
             if (sampleModel.getProfilesHalf() != null && !sampleModel.getProfilesHalf().data().isEmpty()) {
                 profileHalfsAdapter.setItems(sampleModel.getProfilesHalf().data(), false);
-                binding.profileHalfsSingleLayout.recyclerView.setAdapter(profileHalfsAdapter);
+                binding.profileHalfsRecyclerView.setAdapter(profileHalfsAdapter);
 
-                binding.profileHalfsSingleLayout.emptyView.setVisibility(View.GONE);
+                binding.profileHalfsGroup.setVisibility(View.VISIBLE);
             } else if (profileHalfsAdapter.getItemCount() == 0) {
-                binding.profileHalfsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                binding.profileHalfsGroup.setVisibility(View.GONE);
             }
-
-            binding.profileHalfsHeaderLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
-            binding.profileHalfsGroup.setVisibility(View.VISIBLE);
 
             // Profile Extra
             if (sampleModel.getProfilesExtra() != null && !sampleModel.getProfilesExtra().data().isEmpty()) {
                 profileExtrasAdapter.setItems(sampleModel.getProfilesExtra().data(), true);
-                binding.profileExtrasSingleLayout.recyclerView.setAdapter(profileExtrasAdapter);
+                binding.profileExtrasRecyclerView.setAdapter(profileExtrasAdapter);
 
                 binding.profileExtrasGroup.setVisibility(View.VISIBLE);
             } else if (profileExtrasAdapter.getItemCount() == 0) {
                 binding.profileExtrasGroup.setVisibility(View.GONE);
             }
 
+            binding.profileHalfsHeaderLayout.countTextView.setText(StringManager.bracing(profileHalfsAdapter.getItemCount()));
             binding.profileExtrasHeaderLayout.countTextView.setText(StringManager.bracing(profileExtrasAdapter.getItemCount()));
+
         } else {
             binding.profilesTextView.getRoot().setVisibility(View.GONE);
 
