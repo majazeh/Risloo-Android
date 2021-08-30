@@ -91,7 +91,8 @@ public class BreadCrumb {
                 builder.setSpan(new ClickableSpan() {
                     @Override
                     public void onClick(@NonNull View widget) {
-                        navigateTo(destinationIds.get(position));
+                        if (!label.equals("نامعلوم"))
+                            navigateTo(destinationIds.get(position));
                     }
 
                     @Override
