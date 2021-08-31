@@ -13,456 +13,446 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:paddingBottom="@dimen/_12sdp">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/container_constraintLayout"
-            android:layout_width="match_parent"
+            android:id="@+id/info_constraintLayout"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/info_constraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+            <ImageView
+                android:id="@+id/serial_imageView"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
                 android:layout_marginEnd="@dimen/_12sdp"
-                android:layout_marginStart="@dimen/_12sdp"
-                android:paddingBottom="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_copy_light"
+                app:layout_constraintBottom_toBottomOf="@id/serial_textView"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="@id/serial_textView"
+                app:tint="@color/Blue700" />
 
-                <ImageView
-                    android:id="@+id/serial_imageView"
-                    android:layout_width="@dimen/_16sdp"
-                    android:layout_height="@dimen/_16sdp"
-                    android:layout_marginEnd="@dimen/_12sdp"
-                    android:contentDescription="@string/AppImageContent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_copy_light"
-                    app:layout_constraintBottom_toBottomOf="@id/serial_textView"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/serial_textView"
-                    app:tint="@color/Blue700" />
-
-                <TextView
-                    android:id="@+id/serial_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:gravity="center"
-                    android:textSize="@dimen/_10ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Blue700"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_bold"
-                    app:layout_constraintEnd_toStartOf="@id/serial_imageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="سریال" />
-
-                <TextView
-                    android:id="@+id/scale_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_12sdp"
-                    android:layout_marginTop="@dimen/_4sdp"
-                    android:gravity="right"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray700"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_demi_bold"
-                    app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/serial_textView"
-                    tools:text="مقیاس" />
-
-                <ImageView
-                    android:id="@+id/edition_imageView"
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"
-                    android:contentDescription="@string/AppImageContent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_info_circle_light"
-                    app:layout_constraintBottom_toBottomOf="@id/edition_textView"
-                    app:layout_constraintStart_toStartOf="@id/scale_textView"
-                    app:layout_constraintTop_toTopOf="@id/edition_textView"
-                    app:tint="@color/Gray500" />
-
-                <TextView
-                    android:id="@+id/edition_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="right"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray500"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toEndOf="@id/scale_textView"
-                    app:layout_constraintStart_toEndOf="@id/edition_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/scale_textView"
-                    tools:text="ویرایش - نسخه" />
-
-                <ImageView
-                    android:id="@+id/reference_imageView"
-                    android:layout_width="@dimen/_12sdp"
-                    android:layout_height="@dimen/_12sdp"
-                    android:contentDescription="@string/AppImageContent"
-                    android:scaleType="fitCenter"
-                    android:src="@drawable/ic_user_light"
-                    app:layout_constraintBottom_toBottomOf="@id/reference_textView"
-                    app:layout_constraintStart_toStartOf="@id/edition_imageView"
-                    app:layout_constraintTop_toTopOf="@id/reference_textView"
-                    app:tint="@color/Gray500" />
-
-                <TextView
-                    android:id="@+id/reference_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="right"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray500"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toEndOf="@id/edition_textView"
-                    app:layout_constraintStart_toEndOf="@id/reference_imageView"
-                    app:layout_constraintTop_toBottomOf="@id/edition_textView"
-                    tools:text="مراجع" />
-
-                <TextView
-                    android:id="@+id/status_textView"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginEnd="@dimen/_6sdp"
-                    android:layout_marginTop="@dimen/_12sdp"
-                    android:gravity="right"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray500"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toStartOf="@id/secondary_textView"
-                    app:layout_constraintStart_toStartOf="@id/scale_textView"
-                    app:layout_constraintTop_toBottomOf="@id/reference_textView"
-                    app:layout_goneMarginEnd="0dp"
-                    tools:text="وضعیت" />
-
-                <include
-                    android:id="@+id/primary_textView"
-                    layout="@layout/component_main_button_rect_mid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginRight="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:visibility="visible"
-                    app:layout_constraintLeft_toLeftOf="@id/serial_imageView"
-                    app:layout_constraintRight_toLeftOf="@id/secondary_textView"
-                    app:layout_constraintTop_toBottomOf="@id/reference_textView"
-                    app:layout_goneMarginTop="@dimen/_8sdp" />
-
-                <include
-                    android:id="@+id/profiles_textView"
-                    layout="@layout/component_main_button_rect_spinner"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginRight="@dimen/_4sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:visibility="gone"
-                    app:layout_constraintLeft_toLeftOf="@id/serial_imageView"
-                    app:layout_constraintRight_toLeftOf="@id/secondary_textView"
-                    app:layout_constraintTop_toBottomOf="@id/reference_textView"
-                    app:layout_goneMarginTop="@dimen/_8sdp" />
-
-                <include
-                    android:id="@+id/secondary_textView"
-                    layout="@layout/component_main_button_rect_mid"
-                    android:layout_width="wrap_content"
-                    android:layout_height="@dimen/_28sdp"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:visibility="visible"
-                    app:layout_constraintLeft_toRightOf="@id/buttons_barrier"
-                    app:layout_constraintTop_toBottomOf="@id/reference_textView"
-                    app:layout_goneMarginTop="@dimen/_8sdp" />
-
-                <androidx.constraintlayout.widget.Barrier
-                    android:id="@+id/buttons_barrier"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:barrierDirection="right"
-                    app:constraint_referenced_ids="primary_textView, profiles_textView" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/scoring_constraintLayout"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:padding="@dimen/_12sdp"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-                android:visibility="gone"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/info_constraintLayout"
-                tools:visibility="visible">
-
-                <ProgressBar
-                    android:id="@+id/scoring_progressBar"
-                    android:layout_width="@dimen/_26sdp"
-                    android:layout_height="@dimen/_26sdp"
-                    android:theme="@style/ProgressBarTheme"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    style="@style/Widget.AppCompat.ProgressBar"/>
-
-                <TextView
-                    android:id="@+id/scoring_textView"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/_8sdp"
-                    android:gravity="center"
-                    android:text="@string/SampleFragmentScoring"
-                    android:textSize="@dimen/_9ssp"
-                    android:textStyle="normal"
-                    android:textColor="@color/Gray500"
-                    android:textAlignment="gravity"
-                    android:fontFamily="@font/dana_regular"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/scoring_progressBar" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-            <include
-                android:id="@+id/profile_halfs_headerLayout"
-                layout="@layout/component_main_index_header"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_18sdp"
-                app:layout_constraintRight_toRightOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/scoring_constraintLayout" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/profile_halfs_recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                app:layout_constrainedHeight="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_halfs_headerLayout"
-                tools:layout_marginEnd="@dimen/_12sdp"
-                tools:layout_marginStart="@dimen/_12sdp"
-                tools:layout_marginTop="@dimen/_8sdp"
-                tools:listitem="@layout/single_item_profile"
-                tools:itemCount="4"
-                tools:visibility="visible" />
-
-            <include
-                android:id="@+id/profile_extras_headerLayout"
-                layout="@layout/component_main_index_header"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_18sdp"
-                app:layout_constraintRight_toRightOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/profile_halfs_recyclerView"
-                tools:layout_marginTop="@dimen/_14sdp" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/profile_extras_recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:overScrollMode="never"
-                app:layout_constrainedHeight="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/profile_extras_headerLayout"
-                tools:layout_marginEnd="@dimen/_12sdp"
-                tools:layout_marginStart="@dimen/_12sdp"
-                tools:layout_marginTop="@dimen/_8sdp"
-                tools:listitem="@layout/single_item_profile"
-                tools:itemCount="4"
-                tools:visibility="visible" />
-
-            <include
-                android:id="@+id/fields_headerLayout"
-                layout="@layout/component_main_index_header"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_18sdp"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/profile_extras_recyclerView"
-                tools:layout_marginTop="@dimen/_14sdp" />
-
-            <CheckBox
-                android:id="@+id/fields_checkBox"
+            <TextView
+                android:id="@+id/serial_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingEnd="@dimen/_6sdp"
-                android:paddingStart="0dp"
-                android:checked="false"
-                android:gravity="center|start"
-                android:text="@string/SampleFragmentFieldEditable"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="center"
                 android:textSize="@dimen/_10ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray600"
+                android:textColor="@color/Blue700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_bold"
+                app:layout_constraintEnd_toStartOf="@id/serial_imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="سریال" />
+
+            <TextView
+                android:id="@+id/scale_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_demi_bold"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/serial_textView"
+                tools:text="مقیاس" />
+
+            <ImageView
+                android:id="@+id/edition_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_info_circle_light"
+                app:layout_constraintBottom_toBottomOf="@id/edition_textView"
+                app:layout_constraintStart_toStartOf="@id/scale_textView"
+                app:layout_constraintTop_toTopOf="@id/edition_textView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/edition_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                android:theme="@style/CheckBoxTheme"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-                android:layoutDirection="rtl"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="@id/fields_headerLayout"
-                app:layout_constraintLeft_toLeftOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toTopOf="@id/fields_headerLayout"
-                tools:visibility="visible" />
+                app:layout_constraintEnd_toEndOf="@id/scale_textView"
+                app:layout_constraintStart_toEndOf="@id/edition_imageView"
+                app:layout_constraintTop_toBottomOf="@id/scale_textView"
+                tools:text="ویرایش - نسخه" />
 
-            <include
-                android:id="@+id/general_shimmerLayout"
-                layout="@layout/component_shimmer_field"
+            <ImageView
+                android:id="@+id/reference_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_user_light"
+                app:layout_constraintBottom_toBottomOf="@id/reference_textView"
+                app:layout_constraintStart_toStartOf="@id/edition_imageView"
+                app:layout_constraintTop_toTopOf="@id/reference_textView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/reference_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/edition_textView"
+                app:layout_constraintStart_toEndOf="@id/reference_imageView"
+                app:layout_constraintTop_toBottomOf="@id/edition_textView"
+                tools:text="مراجع" />
+
+            <TextView
+                android:id="@+id/status_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_6sdp"
                 android:layout_marginTop="@dimen/_12sdp"
-                android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/fields_headerLayout"
-                tools:visibility="gone" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/general_recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_12sdp"
-                android:overScrollMode="never"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-                android:visibility="gone"
-                app:layout_constrainedHeight="true"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/fields_headerLayout"
-                tools:paddingBottom="@dimen/_8sdp"
-                tools:paddingEnd="@dimen/_12sdp"
-                tools:paddingStart="@dimen/_12sdp"
-                tools:paddingTop="@dimen/_8sdp"
-                tools:listitem="@layout/single_item_index_field"
-                tools:itemCount="4"
-                tools:visibility="visible" />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/general_barrier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="general_shimmerLayout, general_recyclerView" />
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toStartOf="@id/secondary_textView"
+                app:layout_constraintStart_toStartOf="@id/scale_textView"
+                app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                app:layout_goneMarginEnd="0dp"
+                tools:text="وضعیت" />
 
             <include
-                android:id="@+id/prerequisite_shimmerLayout"
-                layout="@layout/component_shimmer_field"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/primary_textView"
+                layout="@layout/component_main_button_rect_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginRight="@dimen/_4sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/general_barrier"
-                tools:visibility="gone" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/prerequisite_recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:overScrollMode="never"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-                android:visibility="gone"
-                app:layout_constrainedHeight="true"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/general_barrier"
-                tools:paddingBottom="@dimen/_8sdp"
-                tools:paddingEnd="@dimen/_12sdp"
-                tools:paddingStart="@dimen/_12sdp"
-                tools:paddingTop="@dimen/_8sdp"
-                tools:listitem="@layout/single_item_index_field"
-                tools:itemCount="4"
-                tools:visibility="visible" />
-
-            <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/prerequisite_barrier"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="prerequisite_shimmerLayout, prerequisite_recyclerView" />
+                app:layout_constraintLeft_toLeftOf="@id/serial_imageView"
+                app:layout_constraintRight_toLeftOf="@id/secondary_textView"
+                app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                app:layout_goneMarginTop="@dimen/_8sdp" />
 
             <include
-                android:id="@+id/item_shimmerLayout"
-                layout="@layout/component_shimmer_field"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:id="@+id/profiles_textView"
+                layout="@layout/component_main_button_rect_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
+                android:layout_marginRight="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:visibility="gone"
+                app:layout_constraintLeft_toLeftOf="@id/serial_imageView"
+                app:layout_constraintRight_toLeftOf="@id/secondary_textView"
+                app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                app:layout_goneMarginTop="@dimen/_8sdp" />
+
+            <include
+                android:id="@+id/secondary_textView"
+                layout="@layout/component_main_button_rect_mid"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_28sdp"
                 android:layout_marginTop="@dimen/_8sdp"
                 android:visibility="visible"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/prerequisite_barrier"
-                tools:visibility="gone" />
-
-            <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/item_recyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:overScrollMode="never"
-                android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
-                android:visibility="gone"
-                app:layout_constrainedHeight="true"
-                app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
-                app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-                app:layout_constraintTop_toBottomOf="@id/prerequisite_barrier"
-                tools:paddingBottom="@dimen/_8sdp"
-                tools:paddingEnd="@dimen/_12sdp"
-                tools:paddingStart="@dimen/_12sdp"
-                tools:paddingTop="@dimen/_8sdp"
-                tools:listitem="@layout/single_item_index_field"
-                tools:itemCount="4"
-                tools:visibility="visible" />
+                app:layout_constraintLeft_toRightOf="@id/buttons_barrier"
+                app:layout_constraintTop_toBottomOf="@id/reference_textView"
+                app:layout_goneMarginTop="@dimen/_8sdp" />
 
             <androidx.constraintlayout.widget.Barrier
-                android:id="@+id/item_barrier"
+                android:id="@+id/buttons_barrier"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:barrierDirection="bottom"
-                app:constraint_referenced_ids="item_shimmerLayout, item_recyclerView" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/profile_halfs_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="profile_halfs_headerLayout, profile_halfs_recyclerView"
-                tools:visibility="visible" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/profile_extras_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="profile_extras_headerLayout, profile_extras_recyclerView"
-                tools:visibility="visible" />
+                app:barrierDirection="right"
+                app:constraint_referenced_ids="primary_textView, profiles_textView" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/scoring_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:padding="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout"
+            tools:visibility="visible">
+
+            <ProgressBar
+                android:id="@+id/scoring_progressBar"
+                android:layout_width="@dimen/_26sdp"
+                android:layout_height="@dimen/_26sdp"
+                android:theme="@style/ProgressBarTheme"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                style="@style/Widget.AppCompat.ProgressBar"/>
+
+            <TextView
+                android:id="@+id/scoring_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/SampleFragmentScoring"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/scoring_progressBar" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/profile_halfs_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintRight_toRightOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/scoring_constraintLayout" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_halfs_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_halfs_headerLayout"
+            tools:layout_marginEnd="@dimen/_12sdp"
+            tools:layout_marginStart="@dimen/_12sdp"
+            tools:layout_marginTop="@dimen/_8sdp"
+            tools:listitem="@layout/single_item_profile"
+            tools:itemCount="4"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/profile_extras_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintRight_toRightOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/profile_halfs_recyclerView"
+            tools:layout_marginTop="@dimen/_14sdp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/profile_extras_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:overScrollMode="never"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/profile_extras_headerLayout"
+            tools:layout_marginEnd="@dimen/_12sdp"
+            tools:layout_marginStart="@dimen/_12sdp"
+            tools:layout_marginTop="@dimen/_8sdp"
+            tools:listitem="@layout/single_item_profile"
+            tools:itemCount="4"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/fields_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/profile_extras_recyclerView"
+            tools:layout_marginTop="@dimen/_14sdp" />
+
+        <CheckBox
+            android:id="@+id/fields_checkBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingEnd="@dimen/_6sdp"
+            android:paddingStart="0dp"
+            android:checked="false"
+            android:gravity="center|start"
+            android:text="@string/SampleFragmentFieldEditable"
+            android:textSize="@dimen/_10ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray600"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            android:theme="@style/CheckBoxTheme"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:layoutDirection="rtl"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@id/fields_headerLayout"
+            app:layout_constraintLeft_toLeftOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/fields_headerLayout"
+            tools:visibility="visible" />
+
+        <include
+            android:id="@+id/general_shimmerLayout"
+            layout="@layout/component_shimmer_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/fields_headerLayout"
+            tools:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/general_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:overScrollMode="never"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:visibility="gone"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/fields_headerLayout"
+            tools:paddingBottom="@dimen/_8sdp"
+            tools:paddingEnd="@dimen/_12sdp"
+            tools:paddingStart="@dimen/_12sdp"
+            tools:paddingTop="@dimen/_8sdp"
+            tools:listitem="@layout/single_item_index_field"
+            tools:itemCount="4"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/general_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="general_shimmerLayout, general_recyclerView" />
+
+        <include
+            android:id="@+id/prerequisite_shimmerLayout"
+            layout="@layout/component_shimmer_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/general_barrier"
+            tools:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/prerequisite_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:overScrollMode="never"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:visibility="gone"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/general_barrier"
+            tools:paddingBottom="@dimen/_8sdp"
+            tools:paddingEnd="@dimen/_12sdp"
+            tools:paddingStart="@dimen/_12sdp"
+            tools:paddingTop="@dimen/_8sdp"
+            tools:listitem="@layout/single_item_index_field"
+            tools:itemCount="4"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/prerequisite_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="prerequisite_shimmerLayout, prerequisite_recyclerView" />
+
+        <include
+            android:id="@+id/item_shimmerLayout"
+            layout="@layout/component_shimmer_field"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/prerequisite_barrier"
+            tools:visibility="gone" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/item_recyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:overScrollMode="never"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            android:visibility="gone"
+            app:layout_constrainedHeight="true"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/prerequisite_barrier"
+            tools:paddingBottom="@dimen/_8sdp"
+            tools:paddingEnd="@dimen/_12sdp"
+            tools:paddingStart="@dimen/_12sdp"
+            tools:paddingTop="@dimen/_8sdp"
+            tools:listitem="@layout/single_item_index_field"
+            tools:itemCount="4"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/item_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="item_shimmerLayout, item_recyclerView" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/profile_halfs_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="profile_halfs_headerLayout, profile_halfs_recyclerView"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/profile_extras_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="profile_extras_headerLayout, profile_extras_recyclerView"
+            tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
