@@ -92,8 +92,8 @@ public class CaseFragment extends Fragment {
         binding.sessionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.Sessions2AdapterHeader));
         binding.samplesHeaderLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
-        binding.sessionsShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
-        binding.samplesShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+        binding.sessionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
+        binding.samplesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
         InitManager.imgResTint(requireActivity(), binding.menuSpinner.selectImageView, R.drawable.ic_ellipsis_v_light, R.color.Gray500);
         InitManager.imgResTint(requireActivity(), binding.referencesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);

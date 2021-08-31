@@ -2,7 +2,7 @@
 <com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
@@ -12,77 +12,54 @@
     app:shimmer_auto_start="true"
     app:shimmer_duration="1000">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
+    <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingEnd="@dimen/_12sdp"
+        android:paddingStart="@dimen/_12sdp">
 
         <include
-            android:id="@+id/shimmer_item1"
+            layout="@layout/shimmer_item_week"
+            android:layout_width="@dimen/_100sdp"
+            android:layout_height="wrap_content" />
+
+        <include
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_12sdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            android:id="@+id/shimmer_item2"
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            app:layout_constraintStart_toEndOf="@id/shimmer_item1"
-            app:layout_constraintTop_toTopOf="@id/shimmer_item1" />
+            android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            android:id="@+id/shimmer_item3"
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            app:layout_constraintStart_toEndOf="@id/shimmer_item2"
-            app:layout_constraintTop_toTopOf="@id/shimmer_item2" />
+            android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            android:id="@+id/shimmer_item4"
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            app:layout_constraintStart_toEndOf="@id/shimmer_item3"
-            app:layout_constraintTop_toTopOf="@id/shimmer_item3" />
+            android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            android:id="@+id/shimmer_item5"
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            app:layout_constraintStart_toEndOf="@id/shimmer_item4"
-            app:layout_constraintTop_toTopOf="@id/shimmer_item4" />
+            android:layout_marginStart="@dimen/_4sdp" />
 
         <include
-            android:id="@+id/shimmer_item6"
             layout="@layout/shimmer_item_week"
             android:layout_width="@dimen/_100sdp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_4sdp"
-            app:layout_constraintStart_toEndOf="@id/shimmer_item5"
-            app:layout_constraintTop_toTopOf="@id/shimmer_item5" />
+            android:layout_marginStart="@dimen/_4sdp" />
 
-        <include
-            android:id="@+id/shimmer_item7"
-            layout="@layout/shimmer_item_week"
-            android:layout_width="@dimen/_100sdp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_4sdp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/shimmer_item6"
-            app:layout_constraintTop_toTopOf="@id/shimmer_item6" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    </LinearLayout>
 
 </com.facebook.shimmer.ShimmerFrameLayout>

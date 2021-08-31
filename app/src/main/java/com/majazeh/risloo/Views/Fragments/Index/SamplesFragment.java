@@ -77,7 +77,7 @@ public class SamplesFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.SamplesFragmentTitle));
 
-        binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+        binding.indexShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
         InitManager.imgResTint(requireActivity(), binding.addImageView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, 0, 0, 0, 0);

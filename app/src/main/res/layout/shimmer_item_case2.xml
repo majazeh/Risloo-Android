@@ -1,52 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
-    android:layoutDirection="rtl"
-    app:cardCornerRadius="@dimen/_2sdp"
-    app:cardElevation="0dp">
+    android:orientation="vertical"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
+    <View
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
+        android:layout_height="@dimen/_56sdp"
+        android:layout_margin="@dimen/_6sdp"
+        android:background="@drawable/draw_2sdp_solid_gray50" />
 
-        <View
-            android:id="@+id/top_view"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_64sdp"
-            android:layout_margin="@dimen/_6sdp"
-            android:background="@drawable/draw_2sdp_solid_gray50"
-            app:layout_constraintBottom_toTopOf="@id/mid_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/Gray200" />
 
-        <View
-            android:id="@+id/mid_view"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_1sdp"
-            android:background="@color/Gray200"
-            app:layout_constraintBottom_toTopOf="@id/bottom_view"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/top_view" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_32sdp"
+        android:layout_margin="@dimen/_6sdp"
+        android:background="@drawable/draw_2sdp_solid_gray50" />
 
-        <View
-            android:id="@+id/bottom_view"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_32sdp"
-            android:layout_margin="@dimen/_6sdp"
-            android:background="@drawable/draw_2sdp_solid_gray50"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/mid_view" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

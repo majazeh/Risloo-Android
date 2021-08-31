@@ -68,7 +68,7 @@ public class CasesFragment extends Fragment {
 
         binding.headerIncludeLayout.titleTextView.setText(getResources().getString(R.string.CasesFragmentTitle));
 
-        binding.indexShimmerLayout.shimmerItem1.topView.setVisibility(View.GONE);
+        binding.indexShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.indexSingleLayout.recyclerView, 0, 0, 0, 0);
     }
