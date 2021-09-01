@@ -2,11 +2,7 @@ package com.majazeh.risloo.Views.Adapters.Recycler.Index;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.os.Handler;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -19,12 +15,11 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
-import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderFieldHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldSelectHolder;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexFieldBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexFieldSelectBinding;
 import com.mre.ligheh.Model.TypeModel.ItemModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
@@ -39,7 +34,6 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     // Objects
     private Activity activity;
-    private Handler handler;
 
     // Vars
     private ArrayList<TypeModel> items;
@@ -55,21 +49,21 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (viewType == 0)
             return new HeaderFieldHolder(HeaderItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexFieldHolder(SingleItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new IndexFieldSelectHolder(SingleItemIndexFieldSelectBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
-        } else if (holder instanceof IndexFieldHolder) {
+        } else if (holder instanceof IndexFieldSelectHolder) {
             ItemModel model = (ItemModel) items.get(i - 1);
 
             intializer();
 
-            listener((IndexFieldHolder) holder, i);
+            listener((IndexFieldSelectHolder) holder, i);
 
-            setData((IndexFieldHolder) holder, model);
+            setData((IndexFieldSelectHolder) holder, model);
         }
     }
 
@@ -118,42 +112,10 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void intializer() {
         current = ((MainActivity) activity).fragmont.getCurrent();
-
-        handler = new Handler();
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexFieldHolder holder, int item) {
-        holder.binding.inputEditText.setOnTouchListener((v, event) -> {
-            if (editable)
-                if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
-                    ((TestActivity) activity).inputor.select(activity, holder.binding.inputEditText);
-            return false;
-        });
-
-        holder.binding.inputEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                if (holder.binding.inputEditText.hasFocus()) {
-                    handler.removeCallbacksAndMessages(null);
-                    handler.postDelayed(() -> {
-                        if (current instanceof SampleFragment)
-                            ((SampleFragment) current).sendItem(item + 1, holder.binding.inputEditText.getText().toString());
-                    }, 750);
-                }
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-
-            }
-        });
-
+    private void listener(IndexFieldSelectHolder holder, int item) {
         holder.binding.selectSpinner.setOnTouchListener((v, event) -> {
             userSelect = true;
             return false;
@@ -182,7 +144,7 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
     }
 
-    private void setData(IndexFieldHolder holder, ItemModel model) {
+    private void setData(IndexFieldSelectHolder holder, ItemModel model) {
         holder.binding.headerTextView.setText((holder.getBindingAdapterPosition()) + " - " + model.getText());
 
         setType(holder, model);
@@ -190,58 +152,26 @@ public class IndexItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         setClickable(holder);
     }
 
-    private void setType(IndexFieldHolder holder, ItemModel model) {
-//        switch (model.getAnswer().getType()) {
-//            case "text":
-//                holder.binding.selectGroup.setVisibility(View.GONE);
-//
-//                holder.binding.inputEditText.setVisibility(View.VISIBLE);
-//                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_TEXT);
-//
-//                if (!model.getUser_answered().equals(""))
-//                    holder.binding.inputEditText.setText(model.getUser_answered());
-//
-//                break;
-//            case "number":
-//                holder.binding.selectGroup.setVisibility(View.GONE);
-//
-//                holder.binding.inputEditText.setVisibility(View.VISIBLE);
-//                holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
-//
-//                if (!model.getUser_answered().equals(""))
-//                    holder.binding.inputEditText.setText(model.getUser_answered());
-//
-//                break;
-//            case "select":
-                holder.binding.inputEditText.setVisibility(View.GONE);
+    private void setType(IndexFieldSelectHolder holder, ItemModel model) {
+        setSpinner(holder, model);
 
-                holder.binding.selectGroup.setVisibility(View.VISIBLE);
-                setSpinner(holder, model);
-
-                if (!model.getUser_answered().equals(""))
-                    holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
-                else
-                    holder.binding.selectSpinner.setSelection(holder.binding.selectSpinner.getCount());
-//
-//                break;
-//        }
+        if (!model.getUser_answered().equals(""))
+            holder.binding.selectSpinner.setSelection(Integer.parseInt(model.getUser_answered()) - 1);
+        else
+            holder.binding.selectSpinner.setSelection(holder.binding.selectSpinner.getCount());
     }
 
-    private void setClickable(IndexFieldHolder holder) {
+    private void setClickable(IndexFieldSelectHolder holder) {
         if (editable) {
-            holder.binding.inputEditText.setFocusableInTouchMode(true);
             holder.binding.selectSpinner.setEnabled(true);
-
             holder.binding.getRoot().setAlpha((float) 1);
         } else {
-            holder.binding.inputEditText.setFocusableInTouchMode(false);
             holder.binding.selectSpinner.setEnabled(false);
-
             holder.binding.getRoot().setAlpha((float) 0.5);
         }
     }
 
-    private void setSpinner(IndexFieldHolder holder, ItemModel model) {
+    private void setSpinner(IndexFieldSelectHolder holder, ItemModel model) {
         try {
             ArrayList<String> options = new ArrayList<>();
 

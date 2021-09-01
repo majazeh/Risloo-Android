@@ -349,7 +349,6 @@
             tools:paddingEnd="@dimen/_12sdp"
             tools:paddingStart="@dimen/_12sdp"
             tools:paddingTop="@dimen/_8sdp"
-            tools:listitem="@layout/single_item_index_field"
             tools:itemCount="4"
             tools:visibility="visible" />
 
@@ -388,7 +387,6 @@
             tools:paddingEnd="@dimen/_12sdp"
             tools:paddingStart="@dimen/_12sdp"
             tools:paddingTop="@dimen/_8sdp"
-            tools:listitem="@layout/single_item_index_field"
             tools:itemCount="4"
             tools:visibility="visible" />
 
@@ -427,7 +425,6 @@
             tools:paddingEnd="@dimen/_12sdp"
             tools:paddingStart="@dimen/_12sdp"
             tools:paddingTop="@dimen/_8sdp"
-            tools:listitem="@layout/single_item_index_field"
             tools:itemCount="4"
             tools:visibility="visible" />
 

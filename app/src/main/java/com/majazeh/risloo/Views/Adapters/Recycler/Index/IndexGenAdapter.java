@@ -8,9 +8,7 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
-import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
@@ -21,10 +19,10 @@ import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Activities.TestActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderFieldHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexFieldInputHolder;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragment;
 import com.majazeh.risloo.databinding.HeaderItemIndexFieldBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexFieldBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexFieldInputBinding;
 
 import java.util.ArrayList;
 
@@ -51,21 +49,21 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         if (viewType == 0)
             return new HeaderFieldHolder(HeaderItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexFieldHolder(SingleItemIndexFieldBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new IndexFieldInputHolder(SingleItemIndexFieldInputBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof HeaderFieldHolder) {
             setData((HeaderFieldHolder) holder);
-        } else if (holder instanceof IndexFieldHolder) {
+        } else if (holder instanceof IndexFieldInputHolder) {
             String item = items.get(i - 1);
 
             intializer();
 
-            listener((IndexFieldHolder) holder, i);
+            listener((IndexFieldInputHolder) holder, i);
 
-            setData((IndexFieldHolder) holder, item);
+            setData((IndexFieldInputHolder) holder, item);
         }
     }
 
@@ -119,7 +117,7 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexFieldHolder holder, int item) {
+    private void listener(IndexFieldInputHolder holder, int item) {
         holder.binding.inputEditText.setOnTouchListener((v, event) -> {
             if (editable)
                 if (MotionEvent.ACTION_UP == event.getAction() && !holder.binding.inputEditText.hasFocus())
@@ -149,28 +147,6 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
             }
         });
-
-        holder.binding.selectSpinner.setOnTouchListener((v, event) -> {
-            userSelect = true;
-            return false;
-        });
-
-        holder.binding.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                if (userSelect) {
-                    if (current instanceof SampleFragment)
-                        ((SampleFragment) current).sendGen("cornometer", String.valueOf(position + 1));
-
-                    userSelect = false;
-                }
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-        });
     }
 
     private void setData(HeaderFieldHolder holder) {
@@ -178,7 +154,7 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         holder.binding.countTextView.setText(StringManager.bracing(itemsCount()));
     }
 
-    private void setData(IndexFieldHolder holder, String item) {
+    private void setData(IndexFieldInputHolder holder, String item) {
         holder.binding.headerTextView.setText(activity.getResources().getString(R.string.SampleFragmentFieldTime));
 
         setType(holder, item);
@@ -186,26 +162,19 @@ public class IndexGenAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         setClickable(holder);
     }
 
-    private void setType(IndexFieldHolder holder, String item) {
-        holder.binding.selectGroup.setVisibility(View.GONE);
-
-        holder.binding.inputEditText.setVisibility(View.VISIBLE);
+    private void setType(IndexFieldInputHolder holder, String item) {
         holder.binding.inputEditText.setInputType(InputType.TYPE_CLASS_NUMBER);
 
         if (!item.equals(""))
             holder.binding.inputEditText.setText(item);
     }
 
-    private void setClickable(IndexFieldHolder holder) {
+    private void setClickable(IndexFieldInputHolder holder) {
         if (editable) {
             holder.binding.inputEditText.setFocusableInTouchMode(true);
-            holder.binding.selectSpinner.setEnabled(true);
-
             holder.binding.getRoot().setAlpha((float) 1);
         } else {
             holder.binding.inputEditText.setFocusableInTouchMode(false);
-            holder.binding.selectSpinner.setEnabled(false);
-
             holder.binding.getRoot().setAlpha((float) 0.5);
         }
     }
