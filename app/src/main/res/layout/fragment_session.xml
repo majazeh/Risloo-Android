@@ -116,11 +116,21 @@
                 app:layout_constraintTop_toBottomOf="@id/date_textView"
                 tools:text="مدت‌زمان جلسه" />
 
+            <View
+                android:id="@+id/status_circle"
+                android:layout_width="@dimen/_6sdp"
+                android:layout_height="@dimen/_6sdp"
+                android:background="@drawable/draw_oval_solid_gray400"
+                app:layout_constraintBottom_toBottomOf="@id/status_textView"
+                app:layout_constraintStart_toStartOf="@id/date_imageView"
+                app:layout_constraintTop_toTopOf="@id/status_textView" />
+
             <TextView
                 android:id="@+id/status_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginStart="@dimen/_4sdp"
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
@@ -129,7 +139,7 @@
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintBottom_toBottomOf="@id/menu_spinner"
                 app:layout_constraintEnd_toStartOf="@id/menu_spinner"
-                app:layout_constraintStart_toStartOf="@id/date_imageView"
+                app:layout_constraintStart_toEndOf="@id/status_circle"
                 app:layout_constraintTop_toTopOf="@id/menu_spinner"
                 tools:text="وضعیت" />
 

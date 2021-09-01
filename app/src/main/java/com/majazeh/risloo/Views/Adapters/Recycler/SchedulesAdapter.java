@@ -130,20 +130,30 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         switch (status) {
             case "registration_awaiting":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Yellow500));
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_yellow600);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_yellow50);
                 break;
             case "client_awaiting":
             case "session_awaiting":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Blue500));
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_blue600);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_blue50);
                 break;
             case "in_session":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green500));
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_green600);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_yellow50);
                 break;
             case "canceled_by_client":
             case "canceled_by_center":
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_red600);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_red50);
                 break;
             default:
                 holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray500));
+                holder.binding.statusCircle.setBackgroundResource(R.drawable.draw_oval_solid_gray400);
+                holder.binding.statusBackground.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50);
                 break;
         }
     }
