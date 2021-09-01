@@ -155,157 +155,204 @@
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/info_constraintLayout">
 
+            <ImageView
+                android:id="@+id/payment_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_credit_card_light"
+                app:layout_constraintBottom_toBottomOf="@id/payment_headerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/payment_headerView"
+                app:tint="@color/Gray500" />
+
             <TextView
-                android:id="@+id/payment_header_textView"
-                android:layout_width="0dp"
+                android:id="@+id/payment_headerView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
                 android:gravity="center"
                 android:text="@string/SessionFragmentPaymentHeader"
-                android:textSize="@dimen/_7ssp"
+                android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray400"
+                android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
-                android:fontFamily="@font/dana_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toEndOf="@id/payment_imageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/payment_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/_9ssp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center|right"
+                android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/payment_header_textView"
+                app:layout_constraintStart_toEndOf="@id/payment_headerView"
+                app:layout_constraintTop_toTopOf="@id/payment_headerView"
                 tools:text="آنلاین" />
 
-            <View
-                android:id="@+id/seperate1_view"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/Gray200"
-                app:layout_constraintEnd_toEndOf="parent"
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/payment_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="payment_headerView, payment_textView" />
+
+            <ImageView
+                android:id="@+id/client_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_user_tag_light"
+                app:layout_constraintBottom_toBottomOf="@id/client_headerView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/payment_textView" />
+                app:layout_constraintTop_toTopOf="@id/client_headerView"
+                app:tint="@color/Gray500" />
 
             <TextView
-                android:id="@+id/client_header_textView"
-                android:layout_width="0dp"
+                android:id="@+id/client_headerView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="center"
                 android:text="@string/SessionFragmentClientHeader"
-                android:textSize="@dimen/_7ssp"
+                android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray400"
+                android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
-                android:fontFamily="@font/dana_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/seperate1_view" />
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toEndOf="@id/client_imageView"
+                app:layout_constraintTop_toBottomOf="@id/payment_barrier" />
 
             <TextView
                 android:id="@+id/client_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/_9ssp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center|right"
+                android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/client_header_textView"
+                app:layout_constraintStart_toEndOf="@id/client_headerView"
+                app:layout_constraintTop_toTopOf="@id/client_headerView"
                 tools:text="پرونده" />
 
-            <View
-                android:id="@+id/seperate2_view"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/Gray200"
-                app:layout_constraintEnd_toEndOf="parent"
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/client_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="client_headerView, client_textView" />
+
+            <ImageView
+                android:id="@+id/start_time_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_stopwatch_light"
+                app:layout_constraintBottom_toBottomOf="@id/start_time_headerView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/client_textView" />
+                app:layout_constraintTop_toTopOf="@id/start_time_headerView"
+                app:tint="@color/Gray500" />
 
             <TextView
-                android:id="@+id/start_time_header_textView"
-                android:layout_width="0dp"
+                android:id="@+id/start_time_headerView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="center"
                 android:text="@string/SessionFragmentStartTimeHeader"
-                android:textSize="@dimen/_7ssp"
+                android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray400"
+                android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
-                android:fontFamily="@font/dana_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/seperate2_view" />
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toEndOf="@id/start_time_imageView"
+                app:layout_constraintTop_toBottomOf="@id/client_barrier" />
 
             <TextView
                 android:id="@+id/start_time_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/_9ssp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center|right"
+                android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/start_time_header_textView"
+                app:layout_constraintStart_toEndOf="@id/start_time_headerView"
+                app:layout_constraintTop_toTopOf="@id/start_time_headerView"
                 tools:text="-" />
 
-            <View
-                android:id="@+id/seperate3_view"
-                android:layout_width="0dp"
-                android:layout_height="@dimen/_1sdp"
-                android:layout_marginTop="@dimen/_10sdp"
-                android:background="@color/Gray200"
-                app:layout_constraintEnd_toEndOf="parent"
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/start_time_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="start_time_headerView, start_time_textView" />
+
+            <ImageView
+                android:id="@+id/end_time_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_times_circle_light"
+                app:layout_constraintBottom_toBottomOf="@id/end_time_headerView"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/start_time_textView" />
+                app:layout_constraintTop_toTopOf="@id/end_time_headerView"
+                app:tint="@color/Gray500" />
 
             <TextView
-                android:id="@+id/end_time_header_textView"
-                android:layout_width="0dp"
+                android:id="@+id/end_time_headerView"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/_10sdp"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="center"
                 android:text="@string/SessionFragmentEndTimeHeader"
-                android:textSize="@dimen/_7ssp"
+                android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
-                android:textColor="@color/Gray400"
+                android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
-                android:fontFamily="@font/dana_medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/seperate3_view" />
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toEndOf="@id/end_time_imageView"
+                app:layout_constraintTop_toBottomOf="@id/start_time_barrier" />
 
             <TextView
                 android:id="@+id/end_time_textView"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/_9ssp"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center|right"
+                android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_medium"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/end_time_header_textView"
+                app:layout_constraintStart_toEndOf="@id/end_time_headerView"
+                app:layout_constraintTop_toTopOf="@id/end_time_headerView"
                 tools:text="-" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

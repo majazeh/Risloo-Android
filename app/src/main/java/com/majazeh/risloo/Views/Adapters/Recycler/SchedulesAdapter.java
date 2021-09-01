@@ -116,12 +116,36 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         else
             holder.binding.bulkTextView.setVisibility(View.GONE);
 
-        holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", model.getStatus()));
+        setStatus(holder, model.getStatus());
 
         if (model.getRoom() != null && model.getRoom().getRoomManager() != null && model.getRoom().getRoomManager().getAvatar() != null && model.getRoom().getRoomManager().getAvatar().getMedium() != null)
             setAvatar(holder, model.getRoom().getRoomManager().getAvatar().getMedium().getUrl());
         else
             setAvatar(holder, "");
+    }
+
+    private void setStatus(SchedulesHolder holder, String status) {
+        holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", status));
+
+        switch (status) {
+            case "registration_awaiting":
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Yellow500));
+                break;
+            case "client_awaiting":
+            case "session_awaiting":
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Blue500));
+                break;
+            case "in_session":
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green500));
+                break;
+            case "canceled_by_client":
+            case "canceled_by_center":
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+                break;
+            default:
+                holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray500));
+                break;
+        }
     }
 
     private void setAvatar(SchedulesHolder holder, String url) {

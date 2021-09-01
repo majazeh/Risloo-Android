@@ -197,7 +197,7 @@ public class SessionFragment extends Fragment {
         }
 
         if (model.getStatus() != null && !model.getStatus().equals("")) {
-            binding.statusTextView.setText(SelectionManager.getSessionStatus(requireActivity(), "fa", model.getStatus()));
+            setStatus(model.getStatus());
         }
 
         if (model.getPayment_status() != null && !model.getPayment_status().equals("")) {
@@ -218,6 +218,30 @@ public class SessionFragment extends Fragment {
 
         setDropdown();
         setPermission();
+    }
+
+    private void setStatus(String status) {
+        binding.statusTextView.setText(SelectionManager.getSessionStatus(requireActivity(), "fa", status));
+
+        switch (status) {
+            case "registration_awaiting":
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Yellow500));
+                break;
+            case "client_awaiting":
+            case "session_awaiting":
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Blue500));
+                break;
+            case "in_session":
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Green500));
+                break;
+            case "canceled_by_client":
+            case "canceled_by_center":
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Red500));
+                break;
+            default:
+                binding.statusTextView.setTextColor(getResources().getColor(R.color.Gray500));
+                break;
+        }
     }
 
     private void setDropdown() {
