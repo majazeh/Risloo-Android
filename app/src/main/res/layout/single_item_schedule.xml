@@ -22,7 +22,7 @@
             android:id="@+id/status_background"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_8sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
             android:layout_marginEnd="@dimen/_1sdp"
             android:layout_marginStart="@dimen/_1sdp"
             android:layout_marginTop="@dimen/_1sdp"
@@ -94,7 +94,7 @@
             android:layout_width="@dimen/_52sdp"
             android:layout_height="@dimen/_52sdp"
             android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_14sdp"
+            android:layout_marginTop="@dimen/_16sdp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/duration_textView" />
 
@@ -117,21 +117,123 @@
             tools:text="نام و نام خانوادگی" />
 
         <TextView
-            android:id="@+id/bulk_textView"
-            android:layout_width="0dp"
+            android:id="@+id/reference_headerView"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:gravity="right"
-            android:text="@string/SchedulesAdapterBulk"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="center"
+            android:text="@string/SchedulesAdapterReference"
             android:textSize="@dimen/_9ssp"
             android:textStyle="normal"
             android:textColor="@color/Gray500"
             android:textAlignment="gravity"
             android:fontFamily="@font/dana_regular"
+            app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout" />
+
+        <TextView
+            android:id="@+id/reference_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:gravity="center|right"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintEnd_toEndOf="@id/name_textView"
+            app:layout_constraintStart_toEndOf="@id/reference_headerView"
+            app:layout_constraintTop_toTopOf="@id/reference_headerView"
+            tools:text="-" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/reference_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="reference_headerView, reference_textView" />
+
+        <Space
+            android:id="@+id/reference_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/reference_barrier" />
+
+        <TextView
+            android:id="@+id/axis_headerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="center"
+            android:text="@string/SchedulesAdapterAxis"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/reference_space"
+            app:layout_goneMarginTop="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/axis_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:gravity="center|right"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintEnd_toEndOf="@id/name_textView"
+            app:layout_constraintStart_toEndOf="@id/axis_headerView"
+            app:layout_constraintTop_toTopOf="@id/axis_headerView"
+            tools:text="-" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/axis_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="axis_headerView, axis_textView" />
+
+        <TextView
+            android:id="@+id/bulk_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:gravity="right"
+            android:text="@string/SchedulesAdapterBulk"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Blue800"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_bold"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/name_textView"
             app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
-            app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/axis_barrier"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/reference_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="reference_headerView, reference_textView, reference_space"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/axis_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="axis_headerView, axis_textView"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

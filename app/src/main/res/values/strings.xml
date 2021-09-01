@@ -1289,7 +1289,8 @@
     ---------- Schedules Adapter ----------
     */
 
-    <string name="SchedulesAdapterAxis">محور‌های جلسه</string>
+    <string name="SchedulesAdapterReference">مراجعین :</string>
+    <string name="SchedulesAdapterAxis">محور‌های جلسه :</string>
     <string name="SchedulesAdapterBulk">جلسه گروهی</string>
 
     <string name="SchedulesAdapterWeekEmpty">برنامه‌ای در این هفته موجود نمی باشد.</string>
