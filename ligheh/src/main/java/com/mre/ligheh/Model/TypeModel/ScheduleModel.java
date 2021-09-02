@@ -11,6 +11,7 @@ public class ScheduleModel extends TypeModel {
     private RoomModel room;
     private CaseModel caseModel;
     private com.mre.ligheh.Model.Madule.List clients;
+    private com.mre.ligheh.Model.Madule.List session_platforms;
     private String status = "";
     private String type = "";
     private boolean group_session = false;
@@ -40,6 +41,14 @@ public class ScheduleModel extends TypeModel {
                 for (int i = 0; i < jsonObject.getJSONArray("clients").length(); i++) {
                     clients.add(new UserModel(jsonObject.getJSONArray("clients").getJSONObject(i)));
                 }
+            }
+            if (!jsonObject.isNull("session_platforms") && jsonObject.getJSONArray("session_platforms").length() != 0) {
+                session_platforms = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("session_platforms").length(); i++) {
+                    session_platforms.add(new SessionPlatformModel(jsonObject.getJSONArray("session_platforms").getJSONObject(i)));
+                }
+            }else{
+                setSession_platforms(new List());
             }
             if (!jsonObject.isNull("status"))
                 setStatus(jsonObject.getString("status"));
@@ -220,5 +229,13 @@ public class ScheduleModel extends TypeModel {
 
     public void setFields(JSONArray fields) {
         this.fields = fields;
+    }
+
+    public List getSession_platforms() {
+        return session_platforms;
+    }
+
+    public void setSession_platforms(List session_platforms) {
+        this.session_platforms = session_platforms;
     }
 }
