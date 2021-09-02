@@ -158,12 +158,205 @@
             android:id="@+id/info2_constraintLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:padding="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
             android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
             app:layout_constraintTop_toBottomOf="@id/info_constraintLayout">
+
+            <ImageView
+                android:id="@+id/reference_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_user_light"
+                app:layout_constraintBottom_toBottomOf="@id/reference_headerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/reference_headerView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/reference_headerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentReferenceHeader"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toEndOf="@id/reference_imageView"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/reference_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center|right"
+                android:textSize="@dimen/_7ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/reference_headerView"
+                app:layout_constraintTop_toTopOf="@id/reference_headerView"
+                tools:text="-" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/reference_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="reference_headerView, reference_textView" />
+
+            <ImageView
+                android:id="@+id/axis_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:padding="@dimen/_1sdp"
+                android:src="@drawable/ic_pen_alt_light"
+                app:layout_constraintBottom_toBottomOf="@id/axis_headerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/axis_headerView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/axis_headerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentAxisHeader"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toEndOf="@id/axis_imageView"
+                app:layout_constraintTop_toBottomOf="@id/reference_barrier" />
+
+            <TextView
+                android:id="@+id/axis_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center|right"
+                android:textSize="@dimen/_7ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/axis_headerView"
+                app:layout_constraintTop_toTopOf="@id/axis_headerView"
+                tools:text="-" />
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/axis_barrier"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="bottom"
+                app:constraint_referenced_ids="axis_headerView, axis_textView" />
+
+            <ImageView
+                android:id="@+id/platform_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_street_view_light"
+                app:layout_constraintBottom_toBottomOf="@id/platform_headerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/platform_headerView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/platform_headerView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="center"
+                android:text="@string/SessionFragmentPlatformHeader"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintStart_toEndOf="@id/platform_imageView"
+                app:layout_constraintTop_toBottomOf="@id/axis_barrier" />
+
+            <TextView
+                android:id="@+id/platform_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_8sdp"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center|right"
+                android:textSize="@dimen/_7ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_medium"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/platform_headerView"
+                app:layout_constraintTop_toTopOf="@id/platform_headerView"
+                tools:text="-" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/reference_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="reference_imageView, reference_headerView, reference_textView"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/axis_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="axis_imageView, axis_headerView, axis_textView"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/platform_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="platform_imageView, platform_headerView, platform_textView"
+                tools:visibility="visible" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info3_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:paddingEnd="@dimen/_12sdp"
+            android:paddingStart="@dimen/_12sdp"
+            android:paddingTop="@dimen/_6sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info2_constraintLayout">
 
             <ImageView
                 android:id="@+id/payment_imageView"
@@ -182,6 +375,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="center"
                 android:text="@string/SessionFragmentPaymentHeader"
                 android:textSize="@dimen/_9ssp"
@@ -207,7 +401,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/payment_headerView"
                 app:layout_constraintTop_toTopOf="@id/payment_headerView"
-                tools:text="آنلاین" />
+                tools:text="-" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/payment_barrier"
@@ -259,7 +453,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/client_headerView"
                 app:layout_constraintTop_toTopOf="@id/client_headerView"
-                tools:text="پرونده" />
+                tools:text="-" />
 
             <androidx.constraintlayout.widget.Barrier
                 android:id="@+id/client_barrier"
@@ -365,45 +559,39 @@
                 app:layout_constraintTop_toTopOf="@id/end_time_headerView"
                 tools:text="-" />
 
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/payment_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="payment_imageView, payment_headerView, payment_textView"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/client_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="client_imageView, client_headerView, client_textView"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/start_time_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="start_time_imageView, start_time_headerView, start_time_textView"
+                tools:visibility="visible" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/end_time_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="end_time_imageView, end_time_headerView, end_time_textView"
+                tools:visibility="visible" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <include
-            android:id="@+id/platforms_headerLayout"
-            layout="@layout/component_main_index_header"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_18sdp"
-            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/info2_constraintLayout" />
-
-        <include
-            android:id="@+id/platforms_shimmerLayout"
-            layout="@layout/component_shimmer_index2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/platforms_headerLayout"
-            tools:visibility="gone" />
-
-        <include
-            android:id="@+id/platforms_singleLayout"
-            layout="@layout/component_single_platform"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/platforms_headerLayout"
-            tools:visibility="visible" />
-
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/platforms_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="platforms_shimmerLayout, platforms_singleLayout" />
 
         <include
             android:id="@+id/psychologists_headerLayout"
@@ -412,8 +600,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_18sdp"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/platforms_barrier"
-            tools:layout_marginTop="@dimen/_6sdp" />
+            app:layout_constraintTop_toBottomOf="@id/info3_constraintLayout" />
 
         <include
             android:id="@+id/psychologists_shimmerLayout"

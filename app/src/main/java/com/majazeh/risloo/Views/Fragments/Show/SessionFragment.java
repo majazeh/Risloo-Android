@@ -22,7 +22,6 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexSampleAdapter;
-import com.majazeh.risloo.Views.Adapters.Recycler.PlatformsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexPracticeAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.PsychologistsAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexUser2Adapter;
@@ -31,6 +30,10 @@ import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Session;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
+
+import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -41,7 +44,6 @@ public class SessionFragment extends Fragment {
     private FragmentSessionBinding binding;
 
     // Adapters
-    private PlatformsAdapter platformsAdapter;
     private PsychologistsAdapter psychologistsAdapter;
     private IndexUser2Adapter indexUser2Adapter;
     private IndexPracticeAdapter indexPracticeAdapter;
@@ -75,7 +77,6 @@ public class SessionFragment extends Fragment {
     }
 
     private void initializer() {
-        platformsAdapter = new PlatformsAdapter(requireActivity());
         psychologistsAdapter = new PsychologistsAdapter(requireActivity());
         indexUser2Adapter = new IndexUser2Adapter(requireActivity());
         indexPracticeAdapter = new IndexPracticeAdapter(requireActivity());
@@ -85,7 +86,6 @@ public class SessionFragment extends Fragment {
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.platformsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PlatformsAdapterHeader));
         binding.psychologistsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PsychologistsAdapterHeader));
         binding.usersHeaderLayout.titleTextView.setText(getResources().getString(R.string.Users2AdapterHeader));
         binding.practicesHeaderLayout.titleTextView.setText(getResources().getString(R.string.PracticesAdapterHeader));
@@ -100,7 +100,6 @@ public class SessionFragment extends Fragment {
         InitManager.imgResTint(requireActivity(), binding.practicesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
         InitManager.imgResTint(requireActivity(), binding.samplesAddView.getRoot(), R.drawable.ic_plus_light, R.color.White);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.platformsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.psychologistsSingleLayout.recyclerView, getResources().getDimension(R.dimen._12sdp), 0, getResources().getDimension(R.dimen._4sdp), getResources().getDimension(R.dimen._12sdp));
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.usersSingleLayout.recyclerView, 0, 0, 0, 0);
         InitManager.fixedVerticalRecyclerView(requireActivity(), binding.practicesSingleLayout.recyclerView, 0, 0, 0, 0);
@@ -200,20 +199,89 @@ public class SessionFragment extends Fragment {
             setStatus(model.getStatus());
         }
 
+        if (model.getClients() != null && model.getClients().data().size() != 0) {
+            binding.referenceGroup.setVisibility(View.VISIBLE);
+            binding.referenceTextView.setText("");
+            for (int i = 0; i < model.getClients().data().size(); i++) {
+                UserModel user = (UserModel) model.getClients().data().get(i);
+                if (user != null) {
+                    binding.referenceTextView.append(user.getName());
+                    if (i != model.getClients().data().size() - 1) {
+                        binding.referenceTextView.append("  -  ");
+                    }
+                }
+            }
+        } else {
+            binding.referenceGroup.setVisibility(View.GONE);
+        }
+
+        try {
+            if (model.getFields() != null && model.getFields().length() != 0) {
+                binding.axisGroup.setVisibility(View.VISIBLE);
+                binding.axisTextView.setText("");
+                for (int i = 0; i < model.getFields().length(); i++) {
+                    binding.axisTextView.append(model.getFields().getJSONObject(i).getString("title"));
+                    if (i != model.getFields().length() - 1) {
+                        binding.axisTextView.append("  |  ");
+                    }
+                }
+            } else {
+                binding.axisGroup.setVisibility(View.GONE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (model.getSession_platforms() != null && model.getSession_platforms().data().size() != 0) {
+            binding.platformGroup.setVisibility(View.VISIBLE);
+            binding.platformTextView.setText("");
+            for (int i = 0; i < model.getSession_platforms().data().size(); i++) {
+                SessionPlatformModel platform = (SessionPlatformModel) model.getSession_platforms().data().get(i);
+                if (platform != null) {
+                    binding.platformTextView.append(platform.getTitle());
+                    if (i != model.getSession_platforms().data().size() - 1) {
+                        binding.platformTextView.append("  |  ");
+                    }
+                }
+            }
+        } else {
+            binding.platformGroup.setVisibility(View.GONE);
+        }
+
+        if (binding.referenceGroup.getVisibility() != View.VISIBLE && binding.axisGroup.getVisibility() != View.VISIBLE && binding.platformGroup.getVisibility() != View.VISIBLE) {
+            binding.info2ConstraintLayout.setVisibility(View.GONE);
+        }
+
         if (model.getPayment_status() != null && !model.getPayment_status().equals("")) {
+            binding.paymentGroup.setVisibility(View.VISIBLE);
             binding.paymentTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPayment_status()));
+        } else {
+            binding.paymentGroup.setVisibility(View.GONE);
         }
 
         if (model.getClients_type() != null && !model.getClients_type().equals("")) {
+            binding.clientGroup.setVisibility(View.VISIBLE);
             binding.clientTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClients_type()));
+        } else {
+            binding.clientGroup.setVisibility(View.GONE);
         }
 
         if (model.getOpens_at() != 0) {
+            binding.startTimeGroup.setVisibility(View.VISIBLE);
             binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getOpens_at()), " "));
+        } else {
+            binding.startTimeGroup.setVisibility(View.GONE);
         }
 
         if (model.getClosed_at() != 0) {
+            binding.endTimeGroup.setVisibility(View.VISIBLE);
             binding.endTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getClosed_at()), " "));
+        } else {
+            binding.endTimeGroup.setVisibility(View.GONE);
+        }
+
+        if (binding.paymentGroup.getVisibility() != View.VISIBLE && binding.clientGroup.getVisibility() != View.VISIBLE && binding.startTimeGroup.getVisibility() != View.VISIBLE && binding.endTimeGroup.getVisibility() != View.VISIBLE) {
+            binding.info3ConstraintLayout.setVisibility(View.GONE);
         }
 
         setDropdown();
@@ -295,17 +363,6 @@ public class SessionFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         setData(sessionModel);
 
-                        // Platforms Data
-                        if (!sessionModel.getSession_platforms().data().isEmpty()) {
-                            platformsAdapter.setItems(sessionModel.getSession_platforms().data());
-                            binding.platformsSingleLayout.recyclerView.setAdapter(platformsAdapter);
-
-                            binding.platformsSingleLayout.emptyView.setVisibility(View.GONE);
-                        } else if (platformsAdapter.getItemCount() == 0) {
-                            binding.platformsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                            binding.platformsSingleLayout.emptyView.setText(getResources().getString(R.string.PlatformsAdapterEmpty));
-                        }
-
                         List psychologists = new List();
                         if (sessionModel.getRoom() != null && sessionModel.getRoom().getRoomManager() != null)
                             psychologists.add(sessionModel.getRoom().getRoomManager());
@@ -357,16 +414,10 @@ public class SessionFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
-                        binding.platformsHeaderLayout.countTextView.setText(StringManager.bracing(platformsAdapter.getItemCount()));
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
                         binding.usersHeaderLayout.countTextView.setText(StringManager.bracing(indexUser2Adapter.itemsCount()));
                         binding.practicesHeaderLayout.countTextView.setText(StringManager.bracing(indexPracticeAdapter.itemsCount()));
                         binding.samplesHeaderLayout.countTextView.setText(StringManager.bracing(indexSampleAdapter.itemsCount()));
-
-                        // Platforms Data
-                        binding.platformsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.platformsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.platformsShimmerLayout.getRoot().stopShimmer();
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);
@@ -396,11 +447,6 @@ public class SessionFragment extends Fragment {
             public void onFailure(String response) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-
-                        // Platforms Data
-                        binding.platformsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-                        binding.platformsShimmerLayout.getRoot().setVisibility(View.GONE);
-                        binding.platformsShimmerLayout.getRoot().stopShimmer();
 
                         // Psychologists Data
                         binding.psychologistsSingleLayout.getRoot().setVisibility(View.VISIBLE);

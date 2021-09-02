@@ -1095,6 +1095,7 @@
     <string name="CaseFragmentTitle">پرونده</string>
 
     <string name="CaseFragmentProblemHeader">مسئله</string>
+    <string name="CaseFragmentTagHeader">برچسب‌ها :</string>
 
     <string name="CaseFragmentReports">گزارشات</string>
     <string name="CaseFragmentEdit">ویرایش</string>
@@ -1187,6 +1188,10 @@
 
     <string name="SessionFragmentTitle">جلسه</string>
 
+    <string name="SessionFragmentReferenceHeader">مراجعین :</string>
+    <string name="SessionFragmentAxisHeader">محورها :</string>
+    <string name="SessionFragmentPlatformHeader">بسترها :</string>
+
     <string name="SessionFragmentPaymentHeader">نوع پرداخت :</string>
     <string name="SessionFragmentClientHeader">نوع مراجعین درخواست دهنده :</string>
     <string name="SessionFragmentStartTimeHeader">زمان شروع نوبت‌گیری :</string>
@@ -1217,22 +1222,6 @@
     <string name="Cases2AdapterHeader">پرونده‌ها</string>
 
     <string name="Cases2AdapterEmpty">هنوز پرونده‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- CaseTags Adapter ----------
-    */
-
-    <string name="CaseTagsAdapterHeader">برچسب‌ها</string>
-
-    <string name="CaseTagsAdapterEmpty">هنوز برچسبی ثبت نشده است.</string>
-
-    /*
-    ---------- Platforms Adapter ----------
-    */
-
-    <string name="PlatformsAdapterHeader">بسترها</string>
-
-    <string name="PlatformsAdapterEmpty">هنوز بستري ثبت نشده است.</string>
 
     /*
     ---------- TabPlatforms Adapter ----------
