@@ -27,6 +27,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateSessionFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSessionUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateTreasuryFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateUserFragment;
+import com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Edit.EditPlatformFragment;
@@ -181,6 +182,9 @@ public class Fragmont {
             return fragment;
 
         else if (fragment instanceof CreateUserFragment)
+            return fragment;
+
+        else if (fragment instanceof ReserveScheduleFragment)
             return fragment;
 
         // -------------------- Edit

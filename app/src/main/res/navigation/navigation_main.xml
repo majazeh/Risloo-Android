@@ -408,6 +408,21 @@
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>
 
+    <fragment
+        android:id="@+id/reserveScheduleFragment"
+        android:name="com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragment"
+        android:label="@string/ReserveScheduleFragmentTitle"
+        tools:layout="@layout/fragment_reserve_schedule" >
+        <argument
+            android:name="type"
+            app:nullable="true"
+            app:argType="string" />
+        <argument
+            android:name="typeModel"
+            app:nullable="true"
+            app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
+    </fragment>
+
     ---------- // Actions
 
     <action
@@ -473,6 +488,10 @@
     <action
         android:id="@+id/action_global_createUserFragment"
         app:destination="@id/createUserFragment" />
+
+    <action
+        android:id="@+id/action_global_reserveScheduleFragment"
+        app:destination="@id/reserveScheduleFragment" />
 
     /*
     ---------- Edit ----------

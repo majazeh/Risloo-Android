@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.factor.bouncy.BouncyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:fillViewport="true"
+    android:layoutDirection="rtl"
+    app:fling_animation_size=".3"
+    app:overscroll_animation_size=".3"
+    tools:context=".Views.Fragments.Create.ReserveScheduleFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingBottom="@dimen/_12sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container_constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_gray50_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/serial_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Blue700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="رزرو جلسه درمانی سریال" />
+
+            <ImageView
+                android:id="@+id/date_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_calendar_alt_light"
+                app:layout_constraintBottom_toBottomOf="@id/date_textView"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
+                app:layout_constraintTop_toTopOf="@id/date_textView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/date_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/serial_textView"
+                app:layout_constraintStart_toEndOf="@id/date_imageView"
+                app:layout_constraintTop_toBottomOf="@id/serial_textView"
+                tools:text="تاریخ جلسه" />
+
+            <ImageView
+                android:id="@+id/duration_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_clock_light"
+                app:layout_constraintBottom_toBottomOf="@id/duration_textView"
+                app:layout_constraintStart_toStartOf="@id/serial_textView"
+                app:layout_constraintTop_toTopOf="@id/duration_textView"
+                app:tint="@color/Gray500" />
+
+            <TextView
+                android:id="@+id/duration_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/serial_textView"
+                app:layout_constraintStart_toEndOf="@id/duration_imageView"
+                app:layout_constraintTop_toBottomOf="@id/date_textView"
+                tools:text="مدت‌زمان جلسه" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/container2_constraintLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_8sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/container_constraintLayout">
+
+            <include
+                android:id="@+id/field_includeLayout"
+                layout="@layout/component_main_input_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/field_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/field_includeLayout" />
+
+            <include
+                android:id="@+id/platform_includeLayout"
+                layout="@layout/component_main_input_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/field_errorLayout" />
+
+            <include
+                android:id="@+id/platform_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/platform_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/platform_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/platform_includeLayout" />
+
+            <include
+                android:id="@+id/type_includeLayout"
+                layout="@layout/component_main_radio_ver_two"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/platform_errorLayout" />
+
+            <include
+                android:id="@+id/type_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/type_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/type_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/type_includeLayout" />
+
+            <include
+                android:id="@+id/reference_includeLayout"
+                layout="@layout/component_main_input_select"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/type_errorLayout" />
+
+            <include
+                android:id="@+id/reference_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/reference_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/reference_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/reference_includeLayout" />
+
+            <include
+                android:id="@+id/case_includeLayout"
+                layout="@layout/component_main_input_select2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/reference_errorLayout" />
+
+            <include
+                android:id="@+id/case_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/case_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/case_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_includeLayout" />
+
+            <include
+                android:id="@+id/client_includeLayout"
+                layout="@layout/component_main_input_recycler2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_errorLayout" />
+
+            <include
+                android:id="@+id/client_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/client_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/client_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/client_includeLayout" />
+
+            <include
+                android:id="@+id/problem_includeLayout"
+                layout="@layout/component_main_input_multi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/client_errorLayout" />
+
+            <include
+                android:id="@+id/problem_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/problem_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/problem_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/problem_includeLayout" />
+
+            <include
+                android:id="@+id/description_includeLayout"
+                layout="@layout/component_main_input_multi"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/field_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/problem_errorLayout" />
+
+            <include
+                android:id="@+id/description_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/description_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/description_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/description_includeLayout" />
+
+            <androidx.constraintlayout.widget.Group
+                android:id="@+id/case_group"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:constraint_referenced_ids="case_includeLayout, problem_includeLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/reserve_textView"
+            layout="@layout/component_main_button_rect_big"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_16sdp"
+            app:layout_constraintRight_toRightOf="@id/container_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/container2_constraintLayout" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.factor.bouncy.BouncyNestedScrollView>

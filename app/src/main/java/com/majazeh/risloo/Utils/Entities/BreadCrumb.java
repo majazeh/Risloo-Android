@@ -183,6 +183,8 @@ public class BreadCrumb {
                 return createTreasury();
             case R.id.createUserFragment:
                 return createUser();
+            case R.id.reserveScheduleFragment:
+                return reserveSchedule();
 
             // -------------------- Edit
 
@@ -933,6 +935,32 @@ public class BreadCrumb {
     private ArrayList<Integer> createUserIds() {
         ArrayList<Integer> list = usersIds();
         list.add(R.id.createUserFragment);
+
+        return list;
+    }
+
+    private ArrayList<String> reserveSchedule() {
+        ArrayList<String> list;
+
+        if (!centerType.equals("room"))
+            list = centerSchedules();
+        else
+            list = roomSchedules();
+
+        list.add("رزرو");
+
+        destinationIds = reserveScheduleIds();
+        return list;
+    }
+    private ArrayList<Integer> reserveScheduleIds() {
+        ArrayList<Integer> list;
+
+        if (!centerType.equals("room"))
+            list = centerSchedulesIds();
+        else
+            list = roomSchedulesIds();
+
+        list.add(R.id.reserveScheduleFragment);
 
         return list;
     }

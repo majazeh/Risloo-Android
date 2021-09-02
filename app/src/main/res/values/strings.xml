@@ -621,6 +621,27 @@
 
     <string name="CreateUserFragmentButton">ثبت</string>
 
+    /*
+    ---------- ReserveSchedule Fragment ----------
+    */
+
+    <string name="ReserveScheduleFragmentTitle">رزرو برنامه درمانی</string>
+
+    <string name="ReserveScheduleFragmentSerialHeader">رزرو جلسه درمانی</string>
+    <string name="ReserveScheduleFragmentFieldHeader">محور جلسه</string>
+    <string name="ReserveScheduleFragmentPlatformHeader">محل برگزاری جلسه</string>
+    <string name="ReserveScheduleFragmentTypeHeader">انتخاب نوع کاربر</string>
+    <string name="ReserveScheduleFragmentReferenceHeader">مراجع</string>
+    <string name="ReserveScheduleFragmentCaseHeader">پرونده</string>
+    <string name="ReserveScheduleFragmentClientHeader">انتخاب مراجع</string>
+    <string name="ReserveScheduleFragmentProblemHeader">مسئله</string>
+    <string name="ReserveScheduleFragmentDescriptionHeader">توضیحات</string>
+
+    <string name="ReserveScheduleFragmentTypeReference">مراجع</string>
+    <string name="ReserveScheduleFragmentTypeCase">پرونده و مراجع(ین)</string>
+
+    <string name="ReserveScheduleFragmentButton">تأیید و ثبت</string>
+
     // Edit Fragments
     //////////////////////////////////////////////////////////////////////////////////////
 
