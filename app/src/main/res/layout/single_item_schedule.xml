@@ -202,6 +202,53 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="axis_headerView, axis_textView" />
 
+        <Space
+            android:id="@+id/axis_space"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@id/axis_barrier" />
+
+        <TextView
+            android:id="@+id/platform_headerView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_4sdp"
+            android:gravity="center"
+            android:text="@string/SchedulesAdapterPlatform"
+            android:textSize="@dimen/_9ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_regular"
+            app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+            app:layout_constraintTop_toBottomOf="@id/axis_space"
+            app:layout_goneMarginTop="@dimen/_12sdp" />
+
+        <TextView
+            android:id="@+id/platform_textView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_8sdp"
+            android:layout_marginTop="@dimen/_2sdp"
+            android:gravity="center|right"
+            android:textSize="@dimen/_7ssp"
+            android:textStyle="normal"
+            android:textColor="@color/Gray500"
+            android:textAlignment="gravity"
+            android:fontFamily="@font/dana_medium"
+            app:layout_constraintEnd_toEndOf="@id/name_textView"
+            app:layout_constraintStart_toEndOf="@id/platform_headerView"
+            app:layout_constraintTop_toTopOf="@id/platform_headerView"
+            tools:text="-" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/platform_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="platform_headerView, platform_textView" />
+
         <TextView
             android:id="@+id/bulk_textView"
             android:layout_width="wrap_content"
@@ -221,7 +268,7 @@
             android:background="@drawable/draw_16sdp_solid_gray100"
             android:visibility="gone"
             app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
-            app:layout_constraintTop_toBottomOf="@id/axis_barrier"
+            app:layout_constraintTop_toBottomOf="@id/platform_barrier"
             tools:visibility="visible" />
 
         <androidx.constraintlayout.widget.Group
@@ -237,7 +284,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:visibility="gone"
-            app:constraint_referenced_ids="axis_headerView, axis_textView"
+            app:constraint_referenced_ids="axis_headerView, axis_textView, axis_space"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/platform_group"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:constraint_referenced_ids="platform_headerView, platform_textView"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

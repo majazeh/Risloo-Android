@@ -8,16 +8,20 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.SchedulesHolder;
 import com.majazeh.risloo.databinding.SingleItemScheduleBinding;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 import com.squareup.picasso.Picasso;
@@ -105,7 +109,10 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
     private void listener(SchedulesHolder holder, ScheduleModel model) {
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            if (holder.binding.statusTextView.getText().toString().equals("زمان\u200Cبندی شده")) {
+                NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(model);
+                ((MainActivity) activity).navController.navigate(action);
+            }
         }).widget(holder.binding.containerConstraintLayout);
     }
 
@@ -142,6 +149,22 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
                 }
             } else {
                 holder.binding.axisGroup.setVisibility(View.GONE);
+            }
+
+            if (model.getSession_platforms() != null && model.getSession_platforms().data().size() != 0) {
+                holder.binding.platformGroup.setVisibility(View.VISIBLE);
+                holder.binding.platformTextView.setText("");
+                for (int i = 0; i < model.getSession_platforms().data().size(); i++) {
+                    SessionPlatformModel platform = (SessionPlatformModel) model.getSession_platforms().data().get(i);
+                    if (platform != null) {
+                        holder.binding.platformTextView.append(platform.getTitle());
+                        if (i != model.getSession_platforms().data().size() - 1) {
+                            holder.binding.platformTextView.append("  |  ");
+                        }
+                    }
+                }
+            } else {
+                holder.binding.platformGroup.setVisibility(View.GONE);
             }
 
             if (model.isGroup_session())

@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
@@ -27,8 +28,7 @@ import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
-import com.mre.ligheh.Model.TypeModel.CenterModel;
-import com.mre.ligheh.Model.TypeModel.RoomModel;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -46,6 +46,9 @@ public class ReserveScheduleFragment extends Fragment {
 
     // Adapters
     public CreateCheckAdapter clientsAdapter;
+
+    // Models
+    private ScheduleModel scheduleModel;
 
     // Objects
     private HashMap data, header;
@@ -152,11 +155,13 @@ public class ReserveScheduleFragment extends Fragment {
                 case R.id.first_radioButton:
                     type = "center";
 
+                    binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     binding.caseGroup.setVisibility(View.GONE);
                     break;
                 case R.id.second_radioButton:
                     type = "case";
 
+                    binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
                     binding.caseGroup.setVisibility(View.VISIBLE);
                     break;
             }
@@ -212,95 +217,48 @@ public class ReserveScheduleFragment extends Fragment {
         }).widget(binding.reserveTextView.getRoot());
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    /////////////////////////////////////////////////////////////////////////////
-
     private void setArgs() {
-//        String type = ReserveScheduleFragmentArgs.fromBundle(getArguments()).getType();
-//        TypeModel typeModel = ReserveScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//
-//        if (typeModel != null) {
-//            if (type.equals("center")) {
-//                CenterModel centerModel = (CenterModel) ReserveScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//                setData(centerModel);
-//
-//            } else if (type.equals("room")) {
-//                RoomModel roomModel = (RoomModel) ReserveScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//                setData(roomModel);
-//            }
-//        }
+        scheduleModel = (ScheduleModel) ReserveScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        setData(scheduleModel);
     }
 
-    private void setData(CenterModel model) {
-//        if (model.getCenterId() != null && !model.getCenterId().equals("")) {
-//            roomId = model.getCenterId();
-//            data.put("id", roomId);
-//
-//            centerId = roomId;
-//        }
+    private void setData(ScheduleModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            binding.serialTextView.setText(requireActivity().getResources().getString(R.string.ReserveScheduleFragmentSerialHeader) + " " + model.getId());
+            data.put("id", model.getId());
+        }
+
+        if (model.getStarted_at() != 0) {
+            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStarted_at()), " "));
+        }
+
+        if (model.getDuration() != 0) {
+            binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
+        }
+
+        if (model.getClients_type() != null && !model.getClients_type().equals("")) {
+            type = model.getClients_type();
+            switch (type) {
+                case "center":
+                    binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+
+                    binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.caseGroup.setVisibility(View.GONE);
+                    break;
+                case "case":
+                    binding.typeIncludeLayout.secondRadioButton.setChecked(true);
+
+                    binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.caseGroup.setVisibility(View.VISIBLE);
+                    break;
+            }
+        }
+
+        if (model.getDescription() != null && !model.getDescription().equals("")) {
+            description = model.getDescription();
+            binding.descriptionIncludeLayout.inputEditText.setText(description);
+        }
     }
-
-    private void setData(RoomModel model) {
-//        if (model.getRoomId() != null && !model.getRoomId().equals("")) {
-//            roomId = model.getRoomId();
-//            data.put("id", roomId);
-//        }
-//
-//        if (model.getRoomCenter() != null && model.getRoomCenter().getCenterId() != null && !model.getRoomCenter().getCenterId().equals("")) {
-//            centerId = model.getRoomCenter().getCenterId();
-//        }
-    }
-
-    /////////////////////////////////////////////////////////////////////////////
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
         switch (method) {
