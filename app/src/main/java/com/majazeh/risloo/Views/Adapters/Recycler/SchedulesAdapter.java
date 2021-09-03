@@ -40,7 +40,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
     // Vars
     private ArrayList<TypeModel> items, showingItems = new ArrayList<>();
-    private long selectedTimstamp = DateManager.currentTimestamp();
+    public long selectedTimestamp = DateManager.currentTimestamp();
 
     public SchedulesAdapter(@NonNull Activity activity) {
         this.activity = activity;
@@ -86,8 +86,8 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
         notifyDataSetChanged();
     }
 
-    public void setTimestamp(long selectedTimstamp) {
-        this.selectedTimstamp = selectedTimstamp;
+    public void setTimestamp(long timestamp) {
+        this.selectedTimestamp = timestamp;
 
         setShowingItems();
         notifyDataSetChanged();
@@ -241,7 +241,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
             for (int i = 0; i < items.size(); i++) {
                 ScheduleModel model = (ScheduleModel) items.get(i);
 
-                String selectedDate = DateManager.jalYYYYsMMsDD(String.valueOf(selectedTimstamp), "/");
+                String selectedDate = DateManager.jalYYYYsMMsDD(String.valueOf(selectedTimestamp), "/");
                 String modelDate = DateManager.jalYYYYsMMsDD(String.valueOf(model.getStarted_at()), "/");
 
                 if (selectedDate.equals(modelDate))

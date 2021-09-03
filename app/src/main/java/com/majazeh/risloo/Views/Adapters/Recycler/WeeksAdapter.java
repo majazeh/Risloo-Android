@@ -30,7 +30,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
 
     // Vars
     private ArrayList<Long> timestamps;
-    private long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
+    public long currentTimestamp = DateManager.currentTimestamp(), selectedTimestamp;
     private boolean userSelect = false;
 
     public WeeksAdapter(@NonNull Activity activity) {

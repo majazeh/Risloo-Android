@@ -204,6 +204,8 @@ public class RoomSchedulesFragment extends Fragment {
         binding.weeksShimmerLayout.getRoot().startShimmer();
 
         currentTimestamp = timestamp;
+        weeksAdapter.selectedTimestamp = timestamp;
+        schedulesAdapter.selectedTimestamp = timestamp;
 
         getData(timestamp);
     }
