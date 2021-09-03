@@ -3,7 +3,6 @@ package com.mre.ligheh.Model.Madule;
 import com.mre.ligheh.API.Exceptioner;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
-import com.mre.ligheh.Model.TypeModel.SessionModel;
 
 import org.json.JSONObject;
 
@@ -15,7 +14,7 @@ public class Schedules extends Model {
     public ScheduleModel model;
 
     public Schedules(JSONObject jsonObject) {
-        super.data = new SessionModel(jsonObject);
+        super.data = new ScheduleModel(jsonObject);
         model = (ScheduleModel) super.data;
     }
 
@@ -52,7 +51,10 @@ public class Schedules extends Model {
 
     public static void booking(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
-            Model.post(endpoint + "/" + data.get("id") + "/booking", data, header, response, null);
+            if (has(data, "id"))
+                Model.post(endpoint + "/" + data.get("id") + "/booking", data, header, response, null);
+            else
+                Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {
             e.printStackTrace();
         }

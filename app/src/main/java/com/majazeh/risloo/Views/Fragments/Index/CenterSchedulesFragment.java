@@ -20,8 +20,8 @@ import com.majazeh.risloo.Views.Adapters.Recycler.SchedulesAdapter;
 import com.majazeh.risloo.Views.Adapters.Recycler.WeeksAdapter;
 import com.majazeh.risloo.databinding.FragmentCenterSchedulesBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.HashMap;
@@ -135,7 +135,7 @@ public class CenterSchedulesFragment extends Fragment {
 
         setSchedules(timestamp);
 
-        Center.schedule(data, header, new Response() {
+        Schedules.centerList(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 List items = (List) object;

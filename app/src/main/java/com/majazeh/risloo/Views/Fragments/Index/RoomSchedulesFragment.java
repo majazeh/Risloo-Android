@@ -21,7 +21,7 @@ import com.majazeh.risloo.Views.Adapters.Recycler.WeeksAdapter;
 import com.majazeh.risloo.databinding.FragmentRoomSchedulesBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
-import com.mre.ligheh.Model.Madule.Room;
+import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 
 import java.util.HashMap;
@@ -139,7 +139,7 @@ public class RoomSchedulesFragment extends Fragment {
 
         setSchedules(timestamp);
 
-        Room.schedule(data, header, new Response() {
+        Schedules.roomList(data, header, new Response() {
             @Override
             public void onOK(Object object) {
                 List items = (List) object;

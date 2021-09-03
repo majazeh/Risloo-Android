@@ -256,17 +256,18 @@ public class ReserveScheduleFragment extends Fragment {
         if (model.getClients_type() != null && !model.getClients_type().equals("")) {
             type = model.getClients_type();
             switch (type) {
-                case "center":
-                    binding.typeIncludeLayout.firstRadioButton.setChecked(true);
-
-                    binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.caseGroup.setVisibility(View.GONE);
-                    break;
                 case "case":
                     binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
                     binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
                     binding.caseGroup.setVisibility(View.VISIBLE);
+                    break;
+                default:
+                    type = "center";
+                    binding.typeIncludeLayout.firstRadioButton.setChecked(true);
+
+                    binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.caseGroup.setVisibility(View.GONE);
                     break;
             }
         }
