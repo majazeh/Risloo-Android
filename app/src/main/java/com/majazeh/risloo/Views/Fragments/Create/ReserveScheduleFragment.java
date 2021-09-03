@@ -161,13 +161,21 @@ public class ReserveScheduleFragment extends Fragment {
                     type = "center";
 
                     binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.caseGroup.setVisibility(View.GONE);
+                    binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
                 case R.id.second_radioButton:
                     type = "case";
 
                     binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
-                    binding.caseGroup.setVisibility(View.VISIBLE);
+                    binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
+                    if (clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0)
+                        binding.clientIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+
+                    if (!caseId.equals(""))
+                        binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
             }
         });
@@ -260,14 +268,18 @@ public class ReserveScheduleFragment extends Fragment {
                     binding.typeIncludeLayout.secondRadioButton.setChecked(true);
 
                     binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
-                    binding.caseGroup.setVisibility(View.VISIBLE);
+                    binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
                 default:
                     type = "center";
                     binding.typeIncludeLayout.firstRadioButton.setChecked(true);
 
                     binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-                    binding.caseGroup.setVisibility(View.GONE);
+                    binding.caseIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.clientIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
             }
         }
@@ -378,6 +390,8 @@ public class ReserveScheduleFragment extends Fragment {
 
                     binding.caseIncludeLayout.primaryTextView.setText(caseId);
                     setClients(model.getClients());
+
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
                 } else if (caseId.equals(model.getCaseId())) {
                     caseId = "";
 
@@ -385,6 +399,8 @@ public class ReserveScheduleFragment extends Fragment {
                     binding.caseIncludeLayout.secondaryTextView.setText("");
 
                     setClients(null);
+
+                    binding.problemIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                 }
 
                 DialogManager.dismissSearchableDialog();
@@ -402,7 +418,12 @@ public class ReserveScheduleFragment extends Fragment {
         switch (type) {
             case "case":
                 data.put("case_id", caseId);
-                data.put("client_id", clientsAdapter.getIds());
+
+                if (clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0)
+                    data.put("client_id", clientsAdapter.getIds());
+
+                if (caseId.equals(""))
+                    data.put("problem", problem);
                 break;
             case "center":
                 data.put("client_id", referenceId);
@@ -461,7 +482,7 @@ public class ReserveScheduleFragment extends Fragment {
                                                 ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
                                                 break;
                                             case "client_id":
-                                                if (type.equals("case"))
+                                                if (type.equals("case") && clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0 && binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
                                                     ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
                                                 else if (type.equals("center"))
                                                     ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);

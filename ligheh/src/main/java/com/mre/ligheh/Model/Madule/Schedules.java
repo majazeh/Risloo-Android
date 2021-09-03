@@ -52,7 +52,7 @@ public class Schedules extends Model {
     public static void booking(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
             if (has(data, "id"))
-                Model.post(endpoint + "/" + data.get("id") + "/booking", data, header, response, null);
+                Model.get(endpoint + "/" + data.get("id") + "/booking", data, header, response, null);
             else
                 Exceptioner.make(response, "آیدی را وارد کنید!");
         } catch (IOException e) {

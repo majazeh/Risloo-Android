@@ -211,6 +211,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/_12sdp"
+                android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/field_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/reference_errorLayout" />
@@ -289,13 +290,6 @@
                 app:layout_constraintEnd_toEndOf="@id/description_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/description_includeLayout"
                 app:layout_constraintTop_toBottomOf="@id/description_includeLayout" />
-
-            <androidx.constraintlayout.widget.Group
-                android:id="@+id/case_group"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:visibility="gone"
-                app:constraint_referenced_ids="case_includeLayout, problem_includeLayout" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
