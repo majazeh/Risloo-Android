@@ -25,6 +25,7 @@ import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class CenterSchedulesFragment extends Fragment {
 
@@ -128,6 +129,8 @@ public class CenterSchedulesFragment extends Fragment {
 
         weeksAdapter.setTimestamps(DateManager.currentJalWeekTimestamps(timestamp));
         binding.weeksRecyclerView.setAdapter(weeksAdapter);
+
+        Objects.requireNonNull(binding.weeksRecyclerView.getLayoutManager()).scrollToPosition(DateManager.dayNameTimestampPosition(timestamp));
     }
 
     private void getData(long timestamp) {

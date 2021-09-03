@@ -25,6 +25,7 @@ import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 
 import java.util.HashMap;
+import java.util.Objects;
 
 public class RoomSchedulesFragment extends Fragment {
 
@@ -132,6 +133,8 @@ public class RoomSchedulesFragment extends Fragment {
 
         weeksAdapter.setTimestamps(DateManager.currentJalWeekTimestamps(timestamp));
         binding.weeksRecyclerView.setAdapter(weeksAdapter);
+
+        Objects.requireNonNull(binding.weeksRecyclerView.getLayoutManager()).scrollToPosition(DateManager.dayNameTimestampPosition(timestamp));
     }
 
     private void getData(long timestamp) {

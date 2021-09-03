@@ -302,6 +302,30 @@ public class DateManager {
         }
     }
 
+    public static int dayNameTimestampPosition(long value) {
+        Date date = timestampToDate(value);
+        PersianDate persianDate = dateToPersian(date);
+
+        switch (persianDate.dayName()) {
+            case "شنبه":
+                return 0;
+            case "یک\u200Cشنبه":
+                return 1;
+            case "دوشنبه":
+                return 2;
+            case "سه\u200Cشنبه":
+                return 3;
+            case "چهارشنبه":
+                return 4;
+            case "پنج\u200Cشنبه":
+                return 5;
+            case "جمعه":
+                return 6;
+            default:
+                return 7;
+        }
+    }
+
     /*
     ---------- Current Week ----------
     */
