@@ -49,7 +49,7 @@
         android:paddingStart="@dimen/_12sdp"
         android:imeOptions="actionDone"
         android:inputType="number"
-        android:gravity="center|start"
+        android:gravity="center|right"
         android:textSize="@dimen/_12ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"

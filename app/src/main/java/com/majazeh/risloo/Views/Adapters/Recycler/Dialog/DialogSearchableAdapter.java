@@ -17,6 +17,7 @@ import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Adapters.Holder.Dialog.DialogSearchableHolder;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
+import com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
@@ -340,6 +341,21 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
                 }
             }
 
+            if (current instanceof ReserveScheduleFragment) {
+                switch (method) {
+                    case "references": {
+                        UserModel model = (UserModel) item;
+
+                        detector(holder, ((ReserveScheduleFragment) current).referenceId.equals(model.getId()));
+                    } break;
+                    case "cases": {
+                        CaseModel model = (CaseModel) item;
+
+                        detector(holder, ((ReserveScheduleFragment) current).caseId.equals(model.getCaseId()));
+                    } break;
+                }
+            }
+
             if (child instanceof EditCenterTabDetailFragment) {
                 if (method.equals("managers")) {
                     UserModel model = (UserModel) item;
@@ -399,6 +415,9 @@ public class DialogSearchableAdapter extends RecyclerView.Adapter<DialogSearchab
 
         if (child instanceof CreateSessionTabTimeFragment)
             ((CreateSessionTabTimeFragment) child).responseDialog(method, item);
+
+        if (current instanceof ReserveScheduleFragment)
+            ((ReserveScheduleFragment) current).responseDialog(method, item);
 
         if (child instanceof EditCenterTabDetailFragment)
             ((EditCenterTabDetailFragment) child).responseDialog(method, item);

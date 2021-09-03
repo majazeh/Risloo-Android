@@ -17,8 +17,10 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateCheckAdapter;
@@ -29,9 +31,11 @@ import com.mre.ligheh.Model.Madule.Schedules;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -54,7 +58,8 @@ public class ReserveScheduleFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    public String field = "", platform = "", type = "center", caseId = "", referenceId = "", problem = "", description = "";
+    private ArrayList<String> fieldsIds = new ArrayList<>(), platformIds = new ArrayList<>();
+    public String roomId = "", field = "", platform = "", type = "center", caseId = "", referenceId = "", problem = "", description = "";
     private boolean userSelect = false;
 
     @Nullable
@@ -117,7 +122,7 @@ public class ReserveScheduleFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    field = parent.getItemAtPosition(position).toString();
+                    field = fieldsIds.get(position);
 
                     userSelect = false;
                 }
@@ -138,7 +143,7 @@ public class ReserveScheduleFragment extends Fragment {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if (userSelect) {
-                    platform = parent.getItemAtPosition(position).toString();
+                    platform = platformIds.get(position);
 
                     userSelect = false;
                 }
@@ -236,6 +241,18 @@ public class ReserveScheduleFragment extends Fragment {
             binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
         }
 
+        if (model.getRoom() != null && model.getRoom().getRoomId() != null && !model.getRoom().getRoomId().equals("")) {
+            roomId = model.getRoom().getRoomId();
+        }
+
+        if (model.getFields() != null && model.getFields().length() != 0) {
+            setAxis(model.getFields());
+        }
+
+        if (model.getSession_platforms() != null) {
+            setPlatform(model.getSession_platforms());
+        }
+
         if (model.getClients_type() != null && !model.getClients_type().equals("")) {
             type = model.getClients_type();
             switch (type) {
@@ -258,6 +275,44 @@ public class ReserveScheduleFragment extends Fragment {
             description = model.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
         }
+    }
+
+    private void setAxis(JSONArray fields) {
+        ArrayList<String> options = new ArrayList<>();
+
+        for (int i = 0; i < fields.length(); i++) {
+            try {
+                if (fields.getJSONObject(i).has("amount"))
+                    options.add(fields.getJSONObject(i).getString("title") + " | " + fields.getJSONObject(i).getString("amount"));
+                else
+                    options.add(fields.getJSONObject(i).getString("title"));
+
+                fieldsIds.add(fields.getJSONObject(i).getString("id"));
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
+        options.add("");
+        fieldsIds.add("");
+
+        InitManager.normal12sspSpinner(requireActivity(), binding.fieldIncludeLayout.selectSpinner, options);
+    }
+
+    private void setPlatform(List platforms) {
+        ArrayList<String> options = new ArrayList<>();
+
+        for (int i = 0; i < platforms.data().size(); i++) {
+            SessionPlatformModel model = (SessionPlatformModel) platforms.data().get(i);
+            options.add(model.getTitle() + " " + StringManager.bracing(SelectionManager.getPlatformSession(requireActivity(), "fa", model.getType())));
+
+            platformIds.add(model.getId());
+        }
+
+        options.add("");
+        platformIds.add("");
+
+        InitManager.normal12sspSpinner(requireActivity(), binding.platformIncludeLayout.selectSpinner, options);
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {

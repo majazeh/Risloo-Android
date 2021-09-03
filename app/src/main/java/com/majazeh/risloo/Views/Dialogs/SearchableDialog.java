@@ -34,6 +34,7 @@ import com.majazeh.risloo.Views.Fragments.Create.CreateCenterUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateRoomUserFragment;
 import com.majazeh.risloo.Views.Fragments.Create.CreateSampleFragment;
+import com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragment;
 import com.majazeh.risloo.Views.Fragments.Index.CenterTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragment;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabReferenceFragment;
@@ -181,7 +182,11 @@ public class SearchableDialog extends AppCompatDialogFragment {
             case "references":
                 binding.titleTextView.setText(getResources().getString(R.string.DialogReferenceTitle));
                 binding.inputEditText.setHint(getResources().getString(R.string.DialogReferenceHint));
-                binding.entryButton.setText(getResources().getString(R.string.DialogReferenceEntry));
+
+                if (current instanceof ReserveScheduleFragment)
+                    binding.entryButton.setVisibility(View.GONE);
+                else
+                    binding.entryButton.setText(getResources().getString(R.string.DialogReferenceEntry));
                 break;
             case "tags":
                 binding.titleTextView.setText(getResources().getString(R.string.DialogTagTitle));
@@ -303,6 +308,19 @@ public class SearchableDialog extends AppCompatDialogFragment {
             if (method.equals("cases")) {
                 data.put("room", ((CreateScheduleTabReferenceFragment) child).roomId);
                 data.put("instance", "1");
+            }
+        }
+
+        if (current instanceof ReserveScheduleFragment) {
+            switch (method) {
+                case "references":
+                    data.put("id", ((ReserveScheduleFragment) current).roomId);
+                    data.put("usage", "create_case");
+                    break;
+                case "cases":
+                    data.put("room", ((ReserveScheduleFragment) current).roomId);
+                    data.put("instance", "1");
+                    break;
             }
         }
 
