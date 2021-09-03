@@ -640,6 +640,8 @@
     <string name="ReserveScheduleFragmentTypeReference">مراجع</string>
     <string name="ReserveScheduleFragmentTypeCase">پرونده و مراجع(ین)</string>
 
+    <string name="ReserveScheduleFragmentCaseGuide">اگر پرونده‌ای در جریان دارید؛ می‌توانید با انتخاب آن، این جلسه را به آن پرونده متصل نمایید.</string>
+
     <string name="ReserveScheduleFragmentButton">تأیید و ثبت</string>
 
     // Edit Fragments

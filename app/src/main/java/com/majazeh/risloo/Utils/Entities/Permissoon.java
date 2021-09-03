@@ -145,6 +145,38 @@ public class Permissoon {
     }
 
     /*
+    ---------- Reserve Schedule ----------
+    */
+
+    public boolean showReserveScheduleClientType(UserModel model) {
+        if (model != null)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean showReserveScheduleReference(UserModel model) {
+        if (model != null)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean showReserveScheduleCaseGuide(UserModel model) {
+        if (model != null)
+            return true;
+        else
+            return false;
+    }
+
+    public boolean showReserveScheduleAuth(UserModel model) {
+        if (model != null)
+            return true;
+        else
+            return false;
+    }
+
+    /*
     ---------- Case ----------
     */
 

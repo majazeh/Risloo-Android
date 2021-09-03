@@ -75,6 +75,8 @@ public class ReserveScheduleFragment extends Fragment {
 
         setArgs();
 
+        setPermission();
+
         return binding.getRoot();
     }
 
@@ -97,6 +99,8 @@ public class ReserveScheduleFragment extends Fragment {
         binding.typeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.ReserveScheduleFragmentTypeReference));
         binding.typeIncludeLayout.firstRadioButton.setChecked(true);
         binding.typeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.ReserveScheduleFragmentTypeCase));
+
+        binding.caseGuideLayout.guideTextView.setText(getResources().getString(R.string.ReserveScheduleFragmentCaseGuide));
 
         InitManager.unfixedVerticalRecyclerView(requireActivity(), binding.clientIncludeLayout.selectRecyclerView, 0, 0, getResources().getDimension(R.dimen._2sdp), 0);
 
@@ -288,6 +292,25 @@ public class ReserveScheduleFragment extends Fragment {
             description = model.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
         }
+    }
+
+    private void setPermission() {
+        UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
+
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleClientType(model))
+            binding.typeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.typeIncludeLayout.getRoot().setVisibility(View.GONE);
+
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleReference(model))
+            binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
+
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleCaseGuide(model))
+            binding.caseGuideLayout.getRoot().setVisibility(View.VISIBLE);
+        else
+            binding.caseGuideLayout.getRoot().setVisibility(View.GONE);
     }
 
     private void setAxis(JSONArray fields) {

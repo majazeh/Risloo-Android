@@ -228,6 +228,17 @@
                 app:layout_constraintTop_toBottomOf="@id/case_includeLayout" />
 
             <include
+                android:id="@+id/case_guideLayout"
+                layout="@layout/component_main_guide"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/case_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/case_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/case_errorLayout"
+                app:layout_goneMarginTop="@dimen/_6sdp" />
+
+            <include
                 android:id="@+id/client_includeLayout"
                 layout="@layout/component_main_input_recycler2"
                 android:layout_width="0dp"
@@ -236,7 +247,7 @@
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@id/field_includeLayout"
                 app:layout_constraintStart_toStartOf="@id/field_includeLayout"
-                app:layout_constraintTop_toBottomOf="@id/case_errorLayout" />
+                app:layout_constraintTop_toBottomOf="@id/case_guideLayout" />
 
             <include
                 android:id="@+id/client_errorLayout"
