@@ -29,6 +29,7 @@ import com.majazeh.risloo.databinding.FragmentSessionBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Session;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -56,6 +57,7 @@ public class SessionFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
+    private String type = "session";
     private boolean userSelect = false;
 
     @Nullable
@@ -138,12 +140,16 @@ public class SessionFragment extends Fragment {
 
                     switch (pos) {
                         case "گزارشات": {
-                            NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("session", sessionModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
+                            if (sessionModel != null) {
+                                NavDirections action = NavigationMainDirections.actionGlobalClientReportsFragment("session", sessionModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            }
                         } break;
                         case "ویرایش": {
-                            NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(sessionModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
+                            if (sessionModel != null) {
+                                NavDirections action = NavigationMainDirections.actionGlobalEditSessionFragment(sessionModel);
+                                ((MainActivity) requireActivity()).navController.navigate(action);
+                            }
                         } break;
                     }
 
@@ -160,24 +166,145 @@ public class SessionFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSessionUserFragment("session", sessionModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            if (sessionModel != null) {
+                NavDirections action = NavigationMainDirections.actionGlobalCreateSessionUserFragment("session", sessionModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
         }).widget(binding.usersAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment("session", sessionModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            if (sessionModel != null) {
+                NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment("session", sessionModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
         }).widget(binding.practicesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("session", sessionModel);
-            ((MainActivity) requireActivity()).navController.navigate(action);
+            if (sessionModel != null) {
+                NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("session", sessionModel);
+                ((MainActivity) requireActivity()).navController.navigate(action);
+            }
         }).widget(binding.samplesAddView.getRoot());
     }
 
     private void setArgs() {
-        sessionModel = (SessionModel) SessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
-        setData(sessionModel);
+        type = SessionFragmentArgs.fromBundle(getArguments()).getType();
+
+        if (!type.equals("session")) {
+            ScheduleModel scheduleModel = (ScheduleModel) SessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+            setData(scheduleModel);
+        } else {
+            sessionModel = (SessionModel) SessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
+            setData(sessionModel);
+        }
+    }
+
+    private void setData(ScheduleModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            binding.serialTextView.setText(model.getId());
+            data.put("id", model.getId());
+            data.put("session_platforms", 1);
+        }
+
+        if (model.getStarted_at() != 0) {
+            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getStarted_at()), " "));
+        }
+
+        if (model.getDuration() != 0) {
+            binding.durationTextView.setText(model.getDuration() + " " + "دقیقه");
+        }
+
+        if (model.getStatus() != null && !model.getStatus().equals("")) {
+            setStatus(model.getStatus());
+        }
+
+        if (model.getClients() != null && model.getClients().data().size() != 0) {
+            binding.referenceGroup.setVisibility(View.VISIBLE);
+            binding.referenceTextView.setText("");
+            for (int i = 0; i < model.getClients().data().size(); i++) {
+                UserModel user = (UserModel) model.getClients().data().get(i);
+                if (user != null) {
+                    binding.referenceTextView.append(user.getName());
+                    if (i != model.getClients().data().size() - 1) {
+                        binding.referenceTextView.append("  -  ");
+                    }
+                }
+            }
+        } else {
+            binding.referenceGroup.setVisibility(View.GONE);
+        }
+
+        try {
+            if (model.getFields() != null && model.getFields().length() != 0) {
+                binding.axisGroup.setVisibility(View.VISIBLE);
+                binding.axisTextView.setText("");
+                for (int i = 0; i < model.getFields().length(); i++) {
+                    binding.axisTextView.append(model.getFields().getJSONObject(i).getString("title"));
+                    if (i != model.getFields().length() - 1) {
+                        binding.axisTextView.append("  |  ");
+                    }
+                }
+            } else {
+                binding.axisGroup.setVisibility(View.GONE);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        if (model.getSession_platforms() != null && model.getSession_platforms().data().size() != 0) {
+            binding.platformGroup.setVisibility(View.VISIBLE);
+            binding.platformTextView.setText("");
+            for (int i = 0; i < model.getSession_platforms().data().size(); i++) {
+                SessionPlatformModel platform = (SessionPlatformModel) model.getSession_platforms().data().get(i);
+                if (platform != null) {
+                    binding.platformTextView.append(platform.getTitle());
+                    if (i != model.getSession_platforms().data().size() - 1) {
+                        binding.platformTextView.append("  |  ");
+                    }
+                }
+            }
+        } else {
+            binding.platformGroup.setVisibility(View.GONE);
+        }
+
+        if (binding.referenceGroup.getVisibility() != View.VISIBLE && binding.axisGroup.getVisibility() != View.VISIBLE && binding.platformGroup.getVisibility() != View.VISIBLE) {
+            binding.info2ConstraintLayout.setVisibility(View.GONE);
+        }
+
+        if (model.getPayment_status() != null && !model.getPayment_status().equals("")) {
+            binding.paymentGroup.setVisibility(View.VISIBLE);
+            binding.paymentTextView.setText(SelectionManager.getPaymentStatus(requireActivity(), "fa", model.getPayment_status()));
+        } else {
+            binding.paymentGroup.setVisibility(View.GONE);
+        }
+
+        if (model.getClients_type() != null && !model.getClients_type().equals("")) {
+            binding.clientGroup.setVisibility(View.VISIBLE);
+            binding.clientTextView.setText(SelectionManager.getClientType(requireActivity(), "fa", model.getClients_type()));
+        } else {
+            binding.clientGroup.setVisibility(View.GONE);
+        }
+
+        if (model.getOpens_at() != 0) {
+            binding.startTimeGroup.setVisibility(View.VISIBLE);
+            binding.startTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getOpens_at()), " "));
+        } else {
+            binding.startTimeGroup.setVisibility(View.GONE);
+        }
+
+        if (model.getClosed_at() != 0) {
+            binding.endTimeGroup.setVisibility(View.VISIBLE);
+            binding.endTimeTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getClosed_at()), " "));
+        } else {
+            binding.endTimeGroup.setVisibility(View.GONE);
+        }
+
+        if (binding.paymentGroup.getVisibility() != View.VISIBLE && binding.clientGroup.getVisibility() != View.VISIBLE && binding.startTimeGroup.getVisibility() != View.VISIBLE && binding.endTimeGroup.getVisibility() != View.VISIBLE) {
+            binding.info3ConstraintLayout.setVisibility(View.GONE);
+        }
+
+        setDropdown();
+        setPermission();
     }
 
     private void setData(SessionModel model) {

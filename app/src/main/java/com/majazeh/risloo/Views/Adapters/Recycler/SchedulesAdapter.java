@@ -112,6 +112,9 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
             if (holder.binding.statusTextView.getText().toString().equals("زمان\u200Cبندی شده")) {
                 NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(model);
                 ((MainActivity) activity).navController.navigate(action);
+            } else {
+                NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", model);
+                ((MainActivity) activity).navController.navigate(action);
             }
         }).widget(holder.binding.containerConstraintLayout);
     }

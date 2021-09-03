@@ -15,6 +15,7 @@ import androidx.navigation.NavDirections;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragmentArgs;
@@ -42,6 +43,7 @@ import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -60,12 +62,13 @@ public class BreadCrumb {
     private CenterModel centerModel;
     private RoomModel roomModel;
     private CaseModel caseModel;
+    private ScheduleModel scheduleModel;
     private SessionModel sessionModel;
     private SampleModel sampleModel;
     private BulkSampleModel bulkSampleModel;
 
     // Vars
-    private String centerType = "", clientReportsType = "", referenceType = "";
+    private String centerType = "", sessionType = "", clientReportsType = "", referenceType = "";
     private ArrayList<Integer> destinationIds;
 
     public BreadCrumb(@NonNull Activity activity) {
@@ -184,6 +187,7 @@ public class BreadCrumb {
             case R.id.createUserFragment:
                 return createUser();
             case R.id.reserveScheduleFragment:
+                setModels("schedule", ReserveScheduleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return reserveSchedule();
 
             // -------------------- Edit
@@ -277,7 +281,13 @@ public class BreadCrumb {
                 setModels("sample", SampleFragmentArgs.fromBundle(arguments).getTypeModel());
                 return sample();
             case R.id.sessionFragment:
-                setModels("session", SessionFragmentArgs.fromBundle(arguments).getTypeModel());
+                sessionType = SessionFragmentArgs.fromBundle(arguments).getType();
+
+                if (!sessionType.equals("session"))
+                    setModels("schedule", SessionFragmentArgs.fromBundle(arguments).getTypeModel());
+                else
+                    setModels("session", SessionFragmentArgs.fromBundle(arguments).getTypeModel());
+
                 return session();
             case R.id.treasuryFragment:
                 return treasury();
@@ -429,7 +439,13 @@ public class BreadCrumb {
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.sessionFragment: {
-                NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(sessionModel);
+                NavDirections action;
+
+                if (!sessionType.equals("session"))
+                    action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
+                else
+                    action = NavigationMainDirections.actionGlobalSessionFragment("session", sessionModel);
+
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.userFragment: {
@@ -464,6 +480,29 @@ public class BreadCrumb {
 
                     if (roomModel.getRoomCenter() != null)
                         centerModel = roomModel.getRoomCenter();
+                }
+                break;
+            case "schedule":
+                scheduleModel = (ScheduleModel) model;
+
+                if (scheduleModel.getCaseModel() != null) {
+                    caseModel = scheduleModel.getCaseModel();
+
+                    if (caseModel.getCaseRoom() != null) {
+                        roomModel = caseModel.getCaseRoom();
+                        centerType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null)
+                            centerModel = roomModel.getRoomCenter();
+                    }
+                } else {
+                    if (scheduleModel.getRoom() != null) {
+                        roomModel = scheduleModel.getRoom();
+                        centerType = roomModel.getRoomType();
+
+                        if (roomModel.getRoomCenter() != null)
+                            centerModel = roomModel.getRoomCenter();
+                    }
                 }
                 break;
             case "session":
@@ -940,26 +979,14 @@ public class BreadCrumb {
     }
 
     private ArrayList<String> reserveSchedule() {
-        ArrayList<String> list;
-
-        if (!centerType.equals("room"))
-            list = centerSchedules();
-        else
-            list = roomSchedules();
-
+        ArrayList<String> list = roomSchedules();
         list.add("رزرو");
 
         destinationIds = reserveScheduleIds();
         return list;
     }
     private ArrayList<Integer> reserveScheduleIds() {
-        ArrayList<Integer> list;
-
-        if (!centerType.equals("room"))
-            list = centerSchedulesIds();
-        else
-            list = roomSchedulesIds();
-
+        ArrayList<Integer> list = roomSchedulesIds();
         list.add(R.id.reserveScheduleFragment);
 
         return list;
@@ -1439,13 +1466,17 @@ public class BreadCrumb {
     private ArrayList<String> session() {
         ArrayList<String> list;
 
-        if (sessionModel.getCaseModel() != null)
+        if (sessionType.equals("session") && sessionModel.getCaseModel() != null)
+            list = casse();
+        else if (sessionType.equals("schedule") && scheduleModel.getCaseModel() != null)
             list = casse();
         else
             list = room();
 
-        if (sessionModel != null && sessionModel.getId() != null && !sessionModel.getId().equals(""))
+        if (sessionType.equals("session") && sessionModel != null && sessionModel.getId() != null && !sessionModel.getId().equals(""))
             list.add("جلسه\u200Cی" + " " + sessionModel.getId());
+        else if (sessionType.equals("schedule") && scheduleModel != null && scheduleModel.getId() != null && !scheduleModel.getId().equals(""))
+            list.add("جلسه\u200Cی" + " " + scheduleModel.getId());
         else
             list.add("نامعلوم");
 
@@ -1455,7 +1486,9 @@ public class BreadCrumb {
     private ArrayList<Integer> sessionIds() {
         ArrayList<Integer> list;
 
-        if (sessionModel.getCaseModel() != null)
+        if (sessionType.equals("session") && sessionModel.getCaseModel() != null)
+            list = casseIds();
+        else if (sessionType.equals("schedule") && scheduleModel.getCaseModel() != null)
             list = casseIds();
         else
             list = roomIds();

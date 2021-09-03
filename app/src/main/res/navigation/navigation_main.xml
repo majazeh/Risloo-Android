@@ -788,6 +788,9 @@
         android:label="@string/SessionFragmentTitle"
         tools:layout="@layout/fragment_session" >
         <argument
+            android:name="type"
+            app:argType="string" />
+        <argument
             android:name="typeModel"
             app:argType="com.mre.ligheh.Model.TypeModel.TypeModel" />
     </fragment>

@@ -108,7 +108,7 @@ public class IndexSessionAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     private void listener(IndexSessionHolder holder, SessionModel model) {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("session", model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
