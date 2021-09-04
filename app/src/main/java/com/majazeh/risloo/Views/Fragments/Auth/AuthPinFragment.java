@@ -211,7 +211,7 @@ public class AuthPinFragment extends Fragment {
 
     private void doWork(String method) {
         if (method.equals("code")) {
-            DialogManager.showLoadingDialog(requireActivity());
+            DialogManager.showLoadingDialog(requireActivity(), "loading");
 
             data.put("code", pin);
 

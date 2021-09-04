@@ -113,7 +113,7 @@ public class AuthRegisterFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("mobile", mobile);
 

@@ -277,7 +277,7 @@ public class EditPlatformFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("title", title);
         data.put("type", SelectionManager.getPlatformSession(requireActivity(), "en", sessionType));

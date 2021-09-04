@@ -285,7 +285,7 @@ public class EditUserTabPasswordFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         if (Objects.equals(data.get("id"), ((MainActivity) requireActivity()).singleton.getId())) {
             data.put("password",  currentPassword);

@@ -22,6 +22,9 @@ public class LoadingDialog extends AppCompatDialogFragment {
     // Binding
     private DialogLoadingBinding binding;
 
+    // Vars
+    private String method;
+
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -44,7 +47,27 @@ public class LoadingDialog extends AppCompatDialogFragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
         binding = DialogLoadingBinding.inflate(inflater, viewGroup, false);
 
+        setDialog();
+
         return binding.getRoot();
+    }
+
+    private void setDialog() {
+        switch (method) {
+            case "loading":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogLoadingTitle));
+                break;
+            case "payment":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogPaymentTitle));
+                break;
+            case "callback":
+                binding.titleTextView.setText(getResources().getString(R.string.DialogCallbackTitle));
+                break;
+        }
+    }
+
+    public void setData(String method) {
+        this.method = method;
     }
 
     @Override

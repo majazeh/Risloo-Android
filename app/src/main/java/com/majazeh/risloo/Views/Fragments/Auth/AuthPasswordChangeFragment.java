@@ -212,7 +212,7 @@ public class AuthPasswordChangeFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("password", password);
 

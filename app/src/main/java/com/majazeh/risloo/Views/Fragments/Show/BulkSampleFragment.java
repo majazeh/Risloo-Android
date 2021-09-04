@@ -137,7 +137,7 @@ public class BulkSampleFragment extends Fragment {
 
                     switch (pos) {
                         case "لینک ثبت نام": {
-                            DialogManager.showLoadingDialog(requireActivity());
+                            DialogManager.showLoadingDialog(requireActivity(), "loading");
 
                             HashMap authData = new HashMap<>();
                             authData.put("authorized_key", bulkSampleModel.getLink());

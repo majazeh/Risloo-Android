@@ -214,7 +214,7 @@ public class RoomFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity());
+            DialogManager.showLoadingDialog(requireActivity(), "loading");
 
             Room.request(data, header, new Response() {
                 @Override

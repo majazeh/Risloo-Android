@@ -420,7 +420,7 @@ public class TestActivity extends AppCompatActivity {
     }
 
     public void closeSample() {
-        DialogManager.showLoadingDialog(this);
+        DialogManager.showLoadingDialog(this, "loading");
 
         Sample.close(sampleAnswers, data, header, new Response() {
             @Override

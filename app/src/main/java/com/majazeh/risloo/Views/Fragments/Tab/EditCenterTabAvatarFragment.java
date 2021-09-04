@@ -152,7 +152,7 @@ public class EditCenterTabAvatarFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         FileManager.writeBitmapToCache(requireActivity(), BitmapManager.modifyOrientation(avatarBitmap, avatarPath), "image");
         if (FileManager.readFileFromCache(requireActivity(), "image") != null)

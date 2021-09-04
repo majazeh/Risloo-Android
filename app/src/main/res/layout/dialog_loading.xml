@@ -10,19 +10,19 @@
     tools:context=".Views.Dialogs.LoadingDialog">
 
     <ProgressBar
-        android:id="@+id/progressBar"
+        android:id="@+id/loading_progressBar"
         android:layout_width="@dimen/_26sdp"
         android:layout_height="@dimen/_26sdp"
         android:layout_marginStart="@dimen/_16sdp"
         android:theme="@style/ProgressBarTheme"
-        app:layout_constraintBottom_toBottomOf="@id/textView"
-        app:layout_constraintEnd_toStartOf="@id/textView"
+        app:layout_constraintBottom_toBottomOf="@id/title_textView"
+        app:layout_constraintEnd_toStartOf="@id/title_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/textView"
+        app:layout_constraintTop_toTopOf="@id/title_textView"
         style="@style/Widget.AppCompat.ProgressBar" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/title_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_16sdp"
@@ -38,7 +38,7 @@
         android:fontFamily="@font/dana_bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/progressBar"
+        app:layout_constraintStart_toEndOf="@id/loading_progressBar"
         app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

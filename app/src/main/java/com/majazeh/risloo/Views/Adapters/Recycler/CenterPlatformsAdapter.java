@@ -217,7 +217,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     }
 
     private void doWork(CenterPlatformsHolder holder, SessionPlatformModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity);
+        DialogManager.showLoadingDialog(activity, "loading");
 
         if (current instanceof CenterPlatformsFragment)
             data.put("id", ((CenterPlatformsFragment) current).centerId);

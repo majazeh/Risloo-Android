@@ -175,7 +175,7 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity());
+            DialogManager.showLoadingDialog(requireActivity(), "loading");
 
             Center.request(data, header, new Response() {
                 @Override

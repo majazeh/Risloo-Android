@@ -1391,6 +1391,9 @@
 
     <string name="DialogLoadingTitle">لطفا منتظر بمانید …</string>
 
+    <string name="DialogPaymentTitle">در حال اتصال به درگاه …</string>
+    <string name="DialogCallbackTitle">در حال بررسی نتیجه پرداخت …</string>
+
     <string name="DialogDayTitle">روز(ها) هفته را انتخاب کنید.</string>
     <string name="DialogDayEntry">ثبت</string>
 

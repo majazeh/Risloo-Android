@@ -197,7 +197,7 @@ public class IndexSession2Adapter extends RecyclerView.Adapter<RecyclerView.View
     }
 
     private void doWork(SessionModel model, String status) {
-        DialogManager.showLoadingDialog(activity);
+        DialogManager.showLoadingDialog(activity, "loading");
 
         data.put("id", model.getId());
         data.put("status", status);

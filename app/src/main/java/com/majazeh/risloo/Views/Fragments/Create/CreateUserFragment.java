@@ -289,7 +289,7 @@ public class CreateUserFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("name", name);
         data.put("mobile", mobile);

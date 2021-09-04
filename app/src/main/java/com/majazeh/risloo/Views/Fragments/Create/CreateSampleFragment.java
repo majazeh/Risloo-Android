@@ -607,7 +607,7 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("scale_id", scalesAdapter.getIds());
         data.put("room_id", roomId);

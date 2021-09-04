@@ -71,7 +71,7 @@ public class LogoutBottomSheet extends BottomSheetDialogFragment {
 
     private void listener() {
         CustomClickView.onDelayedListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity());
+            DialogManager.showLoadingDialog(requireActivity(), "loading");
 
             Auth.logout(data, header, new Response() {
                 @Override

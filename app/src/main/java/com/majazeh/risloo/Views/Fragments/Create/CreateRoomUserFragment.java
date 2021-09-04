@@ -162,7 +162,7 @@ public class CreateRoomUserFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("user_id", referencesAdapter.getIds());
 

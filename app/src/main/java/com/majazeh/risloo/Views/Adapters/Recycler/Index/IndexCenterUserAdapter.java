@@ -307,7 +307,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void doWork(IndexCenterUserHolder holder, UserModel model, String value, String method) {
-        DialogManager.showLoadingDialog(activity);
+        DialogManager.showLoadingDialog(activity, "loading");
 
         if (current instanceof CenterUsersFragment)
             data.put("id", ((CenterUsersFragment) current).centerId);

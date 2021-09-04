@@ -2,6 +2,7 @@ package com.majazeh.risloo.Utils.Entities;
 
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
@@ -148,34 +149,38 @@ public class Permissoon {
     ---------- Reserve Schedule ----------
     */
 
-    public boolean showReserveScheduleClientType(UserModel model) {
-        if (model != null)
-            return true;
-//        return model.getUserType().equals("admin") || position.equals("operator");
+    public boolean showReserveScheduleClientType(UserModel userModel, ScheduleModel scheduleModel) {
+        if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null)
+            return userModel.getUserType().equals("admin") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator");
+        else if (userModel != null)
+            return userModel.getUserType().equals("admin");
         else
             return false;
     }
 
-    public boolean showReserveScheduleReference(UserModel model) {
-        if (model != null)
-            return true;
-//        return model.getUserType().equals("admin") || position.equals("operator");
+    public boolean showReserveScheduleReference(UserModel userModel, ScheduleModel scheduleModel) {
+        if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null)
+            return userModel.getUserType().equals("admin") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator");
+        else if (userModel != null)
+            return userModel.getUserType().equals("admin");
         else
             return false;
     }
 
-    public boolean showReserveScheduleCaseGuide(UserModel model) {
-        if (model != null)
-            return true;
-//            return model.getUserType().equals("client");
+    public boolean showReserveScheduleCaseGuide(UserModel userModel, ScheduleModel scheduleModel) {
+        if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null)
+            return userModel.getUserType().equals("client") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("client");
+        else if (userModel != null)
+            return userModel.getUserType().equals("client");
         else
             return false;
     }
 
-    public boolean showReserveScheduleAuth(UserModel model) {
-        if (model != null)
-            return true;
-//        return model.getUserType().equals("admin") || position.equals("operator");
+    public boolean showReserveScheduleNotCallAuth(UserModel userModel, ScheduleModel scheduleModel) {
+        if (userModel != null && scheduleModel != null && scheduleModel.getRoom() != null && scheduleModel.getRoom().getRoomAcceptation() != null)
+            return userModel.getUserType().equals("admin") || scheduleModel.getRoom().getRoomAcceptation().getPosition().equals("operator");
+        else if (userModel != null)
+            return userModel.getUserType().equals("admin");
         else
             return false;
     }

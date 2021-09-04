@@ -107,7 +107,7 @@ public class AuthSerialFragment extends Fragment {
         CustomClickView.onClickListener(() -> IntentManager.main(requireActivity())).widget(binding.dashboardLinkTextView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            DialogManager.showLoadingDialog(requireActivity());
+            DialogManager.showLoadingDialog(requireActivity(), "loading");
 
             Auth.logout(new HashMap<>(), header, new Response() {
                 @Override
@@ -150,7 +150,7 @@ public class AuthSerialFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("authorized_key", serial);
 

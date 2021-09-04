@@ -207,7 +207,7 @@ public class IndexBulkSampleAdapter extends RecyclerView.Adapter<RecyclerView.Vi
     }
 
     private void doWork(BulkSampleModel model) {
-        DialogManager.showLoadingDialog(activity);
+        DialogManager.showLoadingDialog(activity, "loading");
 
         data.put("authorized_key", model.getLink());
 

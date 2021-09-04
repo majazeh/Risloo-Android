@@ -165,7 +165,7 @@ public class CreateSessionFragment extends Fragment {
     }
 
     public void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         // Time Data
         if (time instanceof CreateSessionTabTimeFragment) {

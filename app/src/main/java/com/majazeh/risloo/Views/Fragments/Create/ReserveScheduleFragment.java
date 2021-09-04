@@ -20,7 +20,6 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
-import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -30,7 +29,6 @@ import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
-import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -308,18 +306,21 @@ public class ReserveScheduleFragment extends Fragment {
     private void setPermission() {
         UserModel model = ((MainActivity) requireActivity()).singleton.getUserModel();
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleClientType(model))
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleClientType(model, scheduleModel))
             binding.typeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
         else
             binding.typeIncludeLayout.getRoot().setVisibility(View.GONE);
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleReference(model))
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleReference(model, scheduleModel))
             binding.referenceIncludeLayout.getRoot().setVisibility(View.VISIBLE);
-        else
+        else {
             binding.referenceIncludeLayout.getRoot().setVisibility(View.GONE);
+            binding.caseIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+        }
 
-        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleCaseGuide(model))
-            binding.caseGuideLayout.getRoot().setVisibility(View.VISIBLE);
+        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleCaseGuide(model, scheduleModel))
+            if (binding.caseIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                binding.caseGuideLayout.getRoot().setVisibility(View.VISIBLE);
         else
             binding.caseGuideLayout.getRoot().setVisibility(View.GONE);
     }
@@ -443,7 +444,7 @@ public class ReserveScheduleFragment extends Fragment {
     }
 
     private void doWork() {
-        DialogManager.showLoadingDialog(requireActivity());
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
 
         data.put("field", field);
         data.put("session_platform", platform);
@@ -474,22 +475,16 @@ public class ReserveScheduleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
 
-                        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleAuth(userModel)) {
-                            try {
-                                AuthModel authModel = new AuthModel((JSONObject) object);
-
-                                DialogManager.dismissLoadingDialog();
-
-                                SheetManager.showAuthBottomSheet(requireActivity(), authModel.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-                        } else {
+                        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleNotCallAuth(userModel, scheduleModel)) {
                             DialogManager.dismissLoadingDialog();
                             SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
 
                             NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
+                        } else {
+                            DialogManager.dismissLoadingDialog();
+
+                            callAuth(object);
                         }
 
                     });
@@ -554,6 +549,38 @@ public class ReserveScheduleFragment extends Fragment {
                 }
             }
         });
+    }
+
+    private void callAuth(Object object) {
+        DialogManager.showLoadingDialog(requireActivity(), "payment");
+
+//        HashMap data = new HashMap<>();
+//        HashMap header = new HashMap<>();
+//        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+//
+//        data.put("authorized_key", "");
+//
+//        Auth.auth(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        DialogManager.dismissLoadingDialog();
+//
+//                        // TODO : Place Code Here
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        // Place Code if Needed
+//                    });
+//                }
+//            }
+//        });
     }
 
     @Override
