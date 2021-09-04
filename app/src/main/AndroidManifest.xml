@@ -64,7 +64,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:host="asan.shaparak.ir" android:scheme="https" />
+                <data android:host="bapi.risloo.ir" android:scheme="https" />
             </intent-filter>
 
         </activity>

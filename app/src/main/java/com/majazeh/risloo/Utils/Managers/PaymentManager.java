@@ -7,11 +7,10 @@ import android.net.Uri;
 
 public class PaymentManager {
 
-    public static void request(Context context, String url, String param1, String param2) {
+    public static void request(Context context, String url, String authorization) {
         String uri = Uri.parse(url)
                 .buildUpon()
-                .appendQueryParameter("param1", param1)
-                .appendQueryParameter("param2", param2)
+                .appendQueryParameter("Authorization", authorization)
                 .build().toString();
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         context.startActivity(intent);
@@ -20,8 +19,7 @@ public class PaymentManager {
     public static void callback(Activity activity) {
         Uri data = activity.getIntent().getData();
 
-        String tmpData = data.getQueryParameter("data");
-        String tmpStatus = data.getQueryParameter("status");
+        // TODO : Place Code Here
     }
 
 }

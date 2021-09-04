@@ -77,7 +77,7 @@ public class Singleton {
     }
 
     private void setUserModel(UserModel userModel) {
-        editor.putString("usermodel", new Gson().toJson(userModel));
+        editor.putString("usermodel", userModel.object.toString());
         editor.apply();
     }
 
@@ -133,10 +133,15 @@ public class Singleton {
     }
 
     public UserModel getUserModel() {
-        if (!sharedPreferences.getString("usermodel", "").equals(""))
-            return new Gson().fromJson(sharedPreferences.getString("usermodel", ""), UserModel.class);
+        try {
+            if (!sharedPreferences.getString("usermodel", "").equals("")) {
+                JSONObject jsonObject = new JSONObject(sharedPreferences.getString("usermodel", ""));
 
-        return null;
+                return new UserModel(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return null;
     }
 
     public String getRegistPassword(String mobile) {

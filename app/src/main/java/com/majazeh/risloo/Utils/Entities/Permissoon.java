@@ -151,6 +151,7 @@ public class Permissoon {
     public boolean showReserveScheduleClientType(UserModel model) {
         if (model != null)
             return true;
+//        return model.getUserType().equals("admin") || position.equals("operator");
         else
             return false;
     }
@@ -158,6 +159,7 @@ public class Permissoon {
     public boolean showReserveScheduleReference(UserModel model) {
         if (model != null)
             return true;
+//        return model.getUserType().equals("admin") || position.equals("operator");
         else
             return false;
     }
@@ -165,6 +167,7 @@ public class Permissoon {
     public boolean showReserveScheduleCaseGuide(UserModel model) {
         if (model != null)
             return true;
+//            return model.getUserType().equals("client");
         else
             return false;
     }
@@ -172,6 +175,7 @@ public class Permissoon {
     public boolean showReserveScheduleAuth(UserModel model) {
         if (model != null)
             return true;
+//        return model.getUserType().equals("admin") || position.equals("operator");
         else
             return false;
     }
