@@ -57,7 +57,17 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".Views.Activities.MainActivity"
-            android:screenOrientation="portrait" />
+            android:screenOrientation="portrait" >
+
+            <!-- Codes For Payment - Please Place It Inside Activity That Will Be Directed To -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:host="asan.shaparak.ir" android:scheme="https" />
+            </intent-filter>
+
+        </activity>
         <activity
             android:name=".Views.Activities.DisplayActivity"
             android:screenOrientation="portrait" />
