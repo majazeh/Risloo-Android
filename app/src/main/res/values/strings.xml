@@ -59,6 +59,7 @@
     <string name="ToastNewDocumentAdded">مدرک جدید افزوده شد.</string>
     <string name="ToastNewTreasuryAdded">کیف پول جدید افزوده شد.</string>
     <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
+    <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

@@ -12,7 +12,9 @@ import android.widget.AdapterView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavDirections;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
@@ -288,6 +290,15 @@ public class ReserveScheduleFragment extends Fragment {
             }
         }
 
+        if (model.getCaseModel() != null && model.getCaseModel().getCaseId() != null && !model.getCaseModel().getCaseId().equals("")) {
+            caseId = model.getCaseModel().getCaseId();
+
+            binding.caseIncludeLayout.primaryTextView.setText(caseId);
+            setClients(model.getCaseModel().getClients());
+
+            binding.problemIncludeLayout.getRoot().setVisibility(View.GONE);
+        }
+
         if (model.getDescription() != null && !model.getDescription().equals("")) {
             description = model.getDescription();
             binding.descriptionIncludeLayout.inputEditText.setText(description);
@@ -461,15 +472,26 @@ public class ReserveScheduleFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        try {
-                            AuthModel model = new AuthModel((JSONObject) object);
+                        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
 
+                        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleAuth(userModel)) {
+                            try {
+                                AuthModel authModel = new AuthModel((JSONObject) object);
+
+                                DialogManager.dismissLoadingDialog();
+
+                                SheetManager.showAuthBottomSheet(requireActivity(), authModel.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+                        } else {
                             DialogManager.dismissLoadingDialog();
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
 
-                            SheetManager.showAuthBottomSheet(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getName(), ((MainActivity) requireActivity()).singleton.getAvatar());
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+                            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
                         }
+
                     });
                 }
             }
