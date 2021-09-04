@@ -19,6 +19,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
@@ -27,8 +28,10 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateCheckAdapter;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Schedules;
+import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
@@ -473,20 +476,11 @@ public class ReserveScheduleFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
-                        UserModel userModel = ((MainActivity) requireActivity()).singleton.getUserModel();
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
 
-                        if (((MainActivity) requireActivity()).permissoon.showReserveScheduleNotCallAuth(userModel, scheduleModel)) {
-                            DialogManager.dismissLoadingDialog();
-                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
-
-                            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
-                            ((MainActivity) requireActivity()).navController.navigate(action);
-                        } else {
-                            DialogManager.dismissLoadingDialog();
-
-                            callAuth(object);
-                        }
-
+                        NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
+                        ((MainActivity) requireActivity()).navController.navigate(action);
                     });
                 }
             }
@@ -497,50 +491,60 @@ public class ReserveScheduleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
 
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                            if (responseObject.getString("message").equals("POVERTY")) {
+                                DialogManager.dismissLoadingDialog();
 
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                JSONObject payment = responseObject.getJSONObject("payment");
+                                String key = payment.getString("authorized_key");
 
-                                        switch (key) {
-                                            case "field":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "session_platform":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "client_typ":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "case_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "client_id":
-                                                if (type.equals("case") && clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0 && binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
-                                                else if (type.equals("center"))
-                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "problem":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "description":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
-                                                break;
+                                callAuth(key);
+                            } else {
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                            switch (key) {
+                                                case "field":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.fieldErrorLayout.getRoot(), binding.fieldErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "session_platform":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.platformErrorLayout.getRoot(), binding.platformErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "client_typ":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.typeErrorLayout.getRoot(), binding.typeErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "case_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.caseErrorLayout.getRoot(), binding.caseErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "client_id":
+                                                    if (type.equals("case") && clientsAdapter.getIds() != null && clientsAdapter.getIds().size() != 0 && binding.clientIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.clientErrorLayout.getRoot(), binding.clientErrorLayout.errorTextView, validation);
+                                                    else if (type.equals("center"))
+                                                        ((MainActivity) requireActivity()).validatoon.showValid(binding.referenceErrorLayout.getRoot(), binding.referenceErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "problem":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.problemErrorLayout.getRoot(), binding.problemErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "description":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.descriptionErrorLayout.getRoot(), binding.descriptionErrorLayout.errorTextView, validation);
+                                                    break;
+                                            }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
                                         }
-
-                                        errors.append(validation);
-                                        errors.append("\n");
                                     }
-                                }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -551,36 +555,38 @@ public class ReserveScheduleFragment extends Fragment {
         });
     }
 
-    private void callAuth(Object object) {
+    private void callAuth(String key) {
         DialogManager.showLoadingDialog(requireActivity(), "payment");
 
-//        HashMap data = new HashMap<>();
-//        HashMap header = new HashMap<>();
-//        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
-//
-//        data.put("authorized_key", "");
-//
-//        Auth.auth(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        DialogManager.dismissLoadingDialog();
-//
-//                        // TODO : Place Code Here
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        // Place Code if Needed
-//                    });
-//                }
-//            }
-//        });
+        HashMap data = new HashMap<>();
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        data.put("authorized_key", key);
+
+        Auth.auth(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                AuthModel model = (AuthModel) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+
+                        PaymentManager.request(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getAuthorization());
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Place Code if Needed
+                    });
+                }
+            }
+        });
     }
 
     @Override

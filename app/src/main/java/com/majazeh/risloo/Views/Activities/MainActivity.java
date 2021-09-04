@@ -29,6 +29,7 @@ import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Fragmont;
 import com.majazeh.risloo.Utils.Entities.Permissoon;
 import com.majazeh.risloo.Utils.Entities.Singleton;
+import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
@@ -99,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
         setToolbar();
 
         setDrawer();
+
+        PaymentManager.callback(this);
     }
 
     private void decorator() {
