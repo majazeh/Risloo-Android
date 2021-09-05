@@ -1144,6 +1144,12 @@
 
     <string name="DashboardFragmentTitle">خانه</string>
 
+    <string name="DashboardFragmentNoPasswordTitle">شما برای حساب کاربری خود کلمه عبور تنظیم نکرده‌اید. جهت افزایش امنیت حساب کاربری، کلمه عبور تنظیم نمایید.</string>
+    <string name="DashboardFragmentNoCenterTitle">شما عضو هیچ یک از مراکز درمانی نیستید. جهت ادامه روند درمان، به یکی از مراکز درمانی موجود در ریسلو درخواست پذیرش دهید.</string>
+
+    <string name="DashboardFragmentNoPasswordAction">تنظیم کلمه عبور</string>
+    <string name="DashboardFragmentNoCenterAction">مراکز درمانی</string>
+
     <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
 
     /*
