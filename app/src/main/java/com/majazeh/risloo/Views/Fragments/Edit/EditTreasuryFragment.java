@@ -17,6 +17,7 @@ import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 
 import java.util.HashMap;
 
@@ -26,7 +27,7 @@ public class EditTreasuryFragment extends Fragment {
     private FragmentEditTreasuryBinding binding;
 
     // Models
-//    private TreasuryModel treasuryModel;
+    private TreasuriesModel treasuryModel;
 
     // Objecs
     private HashMap data, header;
@@ -91,23 +92,23 @@ public class EditTreasuryFragment extends Fragment {
     }
 
     private void setArgs() {
-//        treasuryModel = (TreasuryModel) EditTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
-//        setData(treasuryModel);
+        treasuryModel = (TreasuriesModel) EditTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
+        setData(treasuryModel);
     }
 
-//    private void setData(TreasuryModel model) {
-//        if (model.getId() != null && !model.getId().equals("")) {
-//            data.put("id", model.getId());
-//        }
-//
-//        if (model.getTitle() != null && !model.getTitle().equals("")) {
-//            title = model.getTitle();
-//            binding.titleIncludeLayout.inputEditText.setText(title);
-//        }
-//    }
+    private void setData(TreasuriesModel model) {
+        if (model.getId() != null && !model.getId().equals("")) {
+            data.put("id", model.getId());
+        }
+
+        if (model.getTitle() != null && !model.getTitle().equals("")) {
+            title = model.getTitle();
+            binding.titleIncludeLayout.inputEditText.setText(title);
+        }
+    }
 
     private void doWork() {
-//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//        DialogManager.showLoadingDialog(requireActivity(), "loading");
 //
 //        data.put("title", title);
 //
@@ -116,8 +117,8 @@ public class EditTreasuryFragment extends Fragment {
 //            public void onOK(Object object) {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
-//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+//                        DialogManager.dismissLoadingDialog();
+//                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
 //                    });
 //                }
 //            }
@@ -141,7 +142,7 @@ public class EditTreasuryFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "title":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //
@@ -150,7 +151,7 @@ public class EditTreasuryFragment extends Fragment {
 //                                    }
 //                                }
 //
-//                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
 //                            }
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();

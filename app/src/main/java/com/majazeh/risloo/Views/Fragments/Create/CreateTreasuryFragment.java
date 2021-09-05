@@ -133,7 +133,7 @@ public class CreateTreasuryFragment extends Fragment {
     }
 
     private void doWork() {
-//        ((MainActivity) requireActivity()).loadingDialog.show(requireActivity().getSupportFragmentManager(), "loadingDialog");
+//        DialogManager.showLoadingDialog(requireActivity(), "loading");
 //
 //        data.put("title", title);
 //        data.put("region_id", regionId);
@@ -143,8 +143,8 @@ public class CreateTreasuryFragment extends Fragment {
 //            public void onOK(Object object) {
 //                if (isAdded()) {
 //                    requireActivity().runOnUiThread(() -> {
-//                        ((MainActivity) requireActivity()).loadingDialog.dismiss();
-//                        ToastManager.showToast(requireActivity(), getResources().getString(R.string.ToastNewTreasuryAdded));
+//                        DialogManager.dismissLoadingDialog();
+//                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewTreasuryAdded));
 //
 //                        ((MainActivity) requireActivity()).navController.navigateUp();
 //                    });
@@ -170,10 +170,10 @@ public class CreateTreasuryFragment extends Fragment {
 //
 //                                        switch (key) {
 //                                            case "title":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
 //                                                break;
 //                                            case "region_id":
-//                                                ((MainActivity) requireActivity()).controlEditText.error(binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView, validation);
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.regionErrorLayout.getRoot(), binding.regionErrorLayout.errorTextView, validation);
 //                                                break;
 //                                        }
 //
@@ -182,7 +182,7 @@ public class CreateTreasuryFragment extends Fragment {
 //                                    }
 //                                }
 //
-//                                ToastManager.showToast(requireActivity(), errors.substring(0, errors.length() - 1));
+//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
 //                            }
 //                        } catch (JSONException e) {
 //                            e.printStackTrace();
