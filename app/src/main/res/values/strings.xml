@@ -41,6 +41,7 @@
     <string name="ToastStorageException">ریسلو به حافظه گوشی دسترسی ندارد.</string>
     <string name="ToastGalleryException">ریسلو به گالری دسترسی ندارد.</string>
     <string name="ToastCameraException">ریسلو به دوربین دسترسی ندارد.</string>
+    <string name="ToastActivityException">برنامه‌ای برای اتصال به درگاه پرداخت وجود ندارد.</string>
 
     <string name="ToastHavePhone">این شماره در لیست انتخابی شما وجود داد.</string>
     <string name="ToastHaveAxis">این محور در لیست انتخابی شما وجود داد.</string>
