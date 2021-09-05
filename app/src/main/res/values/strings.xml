@@ -1144,10 +1144,7 @@
 
     <string name="DashboardFragmentTitle">خانه</string>
 
-    <string name="DashboardFragmentCasesHeader">پرونده‌های درمانی من</string>
-    <string name="DashboardFragmentSamplesHeader">آزمون‌های انجام نشده‌ی من</string>
     <string name="DashboardFragmentRoomsHeader">اتاق‌های درمانی من</string>
-    <string name="DashboardFragmentCentersHeader">مراکز درمانی من</string>
 
     /*
     ---------- Me Fragment ----------
