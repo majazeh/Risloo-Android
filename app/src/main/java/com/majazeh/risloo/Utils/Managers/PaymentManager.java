@@ -8,12 +8,8 @@ import android.util.Log;
 
 public class PaymentManager {
 
-    public static void request(Context context, String url, String authorization) {
-        String uri = Uri.parse(url)
-                .buildUpon()
-                .appendQueryParameter("Authorization", authorization)
-                .build().toString();
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+    public static void request(Context context, String url) {
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
         context.startActivity(intent);
     }
 

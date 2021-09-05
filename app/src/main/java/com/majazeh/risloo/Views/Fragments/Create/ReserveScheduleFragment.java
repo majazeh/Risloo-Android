@@ -28,11 +28,11 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Create.CreateCheckAdapter;
 import com.majazeh.risloo.databinding.FragmentReserveScheduleBinding;
 import com.mre.ligheh.API.Response;
-import com.mre.ligheh.Model.Madule.Auth;
 import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Payment;
 import com.mre.ligheh.Model.Madule.Schedules;
-import com.mre.ligheh.Model.TypeModel.AuthModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
+import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
@@ -564,16 +564,16 @@ public class ReserveScheduleFragment extends Fragment {
 
         data.put("authorized_key", key);
 
-        Auth.auth(data, header, new Response() {
+        Payment.auth(data, header, new Response() {
             @Override
             public void onOK(Object object) {
-                AuthModel model = (AuthModel) object;
+                PaymentModel model = (PaymentModel) object;
 
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
 
-                        PaymentManager.request(requireActivity(), model.getKey(), ((MainActivity) requireActivity()).singleton.getAuthorization());
+                        PaymentManager.request(requireActivity(), model.getRedirect());
                     });
                 }
             }

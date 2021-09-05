@@ -134,16 +134,17 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_12sdp"
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
-                app:layout_constraintBottom_toBottomOf="@id/menu_spinner"
                 app:layout_constraintEnd_toStartOf="@id/menu_spinner"
                 app:layout_constraintStart_toStartOf="@id/avatars_includeLayout"
-                app:layout_constraintTop_toTopOf="@id/menu_spinner"
+                app:layout_constraintTop_toBottomOf="@id/case_textView"
+                app:layout_goneMarginEnd="0dp"
                 tools:text="وضعیت" />
 
             <include
