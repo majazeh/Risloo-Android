@@ -130,6 +130,8 @@ public class DashboardFragment extends Fragment {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
                         setData(userModel);
+
+                        binding.loadingIncludeLayout.getRoot().setVisibility(View.GONE);
                     });
                 }
             }

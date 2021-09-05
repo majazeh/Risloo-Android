@@ -18,6 +18,18 @@
         tools:paddingBottom="0dp">
 
         <include
+            android:id="@+id/loading_includeLayout"
+            layout="@layout/component_main_loading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:visibility="gone" />
+
+        <include
             android:id="@+id/password_missingLayout"
             layout="@layout/component_main_missing"
             android:layout_width="0dp"
