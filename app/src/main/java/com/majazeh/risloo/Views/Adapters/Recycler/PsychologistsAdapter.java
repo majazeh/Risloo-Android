@@ -74,18 +74,21 @@ public class PsychologistsAdapter extends RecyclerView.Adapter<PsychologistsHold
 
     private void detector(PsychologistsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener(PsychologistsHolder holder, UserModel model) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(PsychologistsHolder holder, UserModel model) {
-        holder.binding.nameTextView.setText(model.getName());
+        if (!model.getName().equals(""))
+            holder.binding.nameTextView.setText(model.getName());
+        else
+            holder.binding.nameTextView.setText(model.getId());
 
         if (model.getAvatar() != null && model.getAvatar().getMedium() != null)
             setAvatar(holder, model.getAvatar().getMedium().getUrl());

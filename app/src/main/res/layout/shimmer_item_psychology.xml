@@ -7,7 +7,7 @@
     android:layout_gravity="center"
     android:orientation="horizontal"
     android:layoutDirection="rtl"
-    android:padding="@dimen/_6sdp"
+    android:padding="@dimen/_8sdp"
     android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
 
     <View

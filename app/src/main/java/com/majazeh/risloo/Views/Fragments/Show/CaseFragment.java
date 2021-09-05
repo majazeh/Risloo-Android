@@ -290,7 +290,6 @@ public class CaseFragment extends Fragment {
                             binding.sessionsSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (indexSession2Adapter.getItemCount() == 0) {
                             binding.sessionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-
                             binding.sessionsSingleLayout.emptyView.setText(getResources().getString(R.string.Sessions2AdapterEmpty));
                         }
 
@@ -302,7 +301,6 @@ public class CaseFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (indexSampleAdapter.getItemCount() == 0) {
                             binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 

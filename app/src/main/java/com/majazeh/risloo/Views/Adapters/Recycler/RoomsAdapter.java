@@ -77,7 +77,7 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
 
     private void detector(RoomsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -85,12 +85,14 @@ public class RoomsAdapter extends RecyclerView.Adapter<RoomsHolder> {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("room", model);
             ((MainActivity) activity).navController.navigate(action);
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(RoomsHolder holder, RoomModel model) {
-        holder.binding.nameTextView.setText(model.getRoomManager().getName());
-        holder.binding.typeTextView.setText(activity.getResources().getString(R.string.RoomsAdapterPersonalClinic));
+        if (!model.getRoomManager().getName().equals(""))
+            holder.binding.nameTextView.setText(model.getRoomManager().getName());
+        else
+            holder.binding.nameTextView.setText(model.getRoomManager().getId());
 
         if (model.getRoomManager() != null && model.getRoomManager().getAvatar() != null && model.getRoomManager().getAvatar().getMedium() != null)
             setAvatar(holder, model.getRoomManager().getAvatar().getMedium().getUrl());

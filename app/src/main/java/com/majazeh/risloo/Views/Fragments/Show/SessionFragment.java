@@ -513,7 +513,6 @@ public class SessionFragment extends Fragment {
                             binding.usersSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (indexUser2Adapter.getItemCount() == 0) {
                             binding.usersSingleLayout.emptyView.setVisibility(View.VISIBLE);
-
                             binding.usersSingleLayout.emptyView.setText(getResources().getString(R.string.Users2AdapterEmpty));
                         }
 
@@ -525,7 +524,6 @@ public class SessionFragment extends Fragment {
 //                            binding.practicesSingleLayout.emptyView.setVisibility(View.GONE);
 //                        } else if (practicesAdapter.getItemCount() == 0) {
                             binding.practicesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-
                             binding.practicesSingleLayout.emptyView.setText(getResources().getString(R.string.PracticesAdapterEmpty));
 //                        }
 
@@ -537,7 +535,6 @@ public class SessionFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setVisibility(View.GONE);
                         } else if (indexSampleAdapter.getItemCount() == 0) {
                             binding.samplesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
