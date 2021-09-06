@@ -851,6 +851,8 @@
 
     <string name="BillingsFragmentTitle">صورت حساب‌ها</string>
 
+    <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
+
     /*
     ---------- Bulk Samples Fragment ----------
     */
@@ -1087,6 +1089,8 @@
     */
 
     <string name="TreasuriesFragmentTitle">کیف پول‌ها</string>
+
+    <string name="TreasuriesFragmentEmpty">هنوز کیف پولی ثبت نشده است.</string>
 
     /*
     ---------- Users Fragment ----------

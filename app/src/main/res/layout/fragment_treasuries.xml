@@ -1,6 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.factor.bouncy.BouncyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:fillViewport="true"
+    android:layoutDirection="rtl"
+    app:fling_animation_size=".3"
+    app:overscroll_animation_size=".3"
+    tools:context=".Views.Fragments.Index.TreasuriesFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_12sdp">
+
+        <include
+            android:id="@+id/header_includeLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <include
+            android:id="@+id/search_includeLayout"
+            layout="@layout/component_main_index_search"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginRight="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_6sdp"
+            app:layout_constraintLeft_toRightOf="@id/add_imageView"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/header_includeLayout"
+            app:layout_goneMarginLeft="@dimen/_12sdp" />
+
+        <include
+            android:id="@+id/add_imageView"
+            layout="@layout/component_main_button_oval_mid"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            android:layout_marginLeft="@dimen/_12sdp"
+            android:layout_marginRight="@dimen/_6sdp"
+            app:layout_constraintBottom_toBottomOf="@id/search_includeLayout"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toLeftOf="@id/search_includeLayout"
+            app:layout_constraintTop_toTopOf="@id/search_includeLayout" />
+
+        <include
+            android:id="@+id/index_shimmerLayout"
+            layout="@layout/component_shimmer_index"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/index_singleLayout"
+            layout="@layout/component_single_bulk_sample"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/search_includeLayout"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.factor.bouncy.BouncyNestedScrollView>
