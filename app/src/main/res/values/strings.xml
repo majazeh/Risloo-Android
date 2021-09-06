@@ -1117,6 +1117,10 @@
 
     <string name="BillFragmentTitle">صورت حساب</string>
 
+    <string name="BillFragmentDebtor">بدهکار</string>
+    <string name="BillFragmentCreditor">بستانکار</string>
+    <string name="BillFragmentFinal">نهایی</string>
+
     /*
     ---------- Bulk Sample Fragment ----------
     */
@@ -1248,6 +1252,8 @@
 
     <string name="TreasuryFragmentTitle">کیف پول</string>
 
+    <string name="TreasuryFragmentLeft">باقی مانده</string>
+
     /*
     ---------- User Fragment ----------
     */
@@ -1338,6 +1344,22 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
+
+    /*
+    ---------- Times Adapter ----------
+    */
+
+    <string name="TimesAdapterHeader">موارد</string>
+
+    <string name="TimesAdapterEmpty">هنوز موردی ثبت نشده است.</string>
+
+    /*
+    ---------- Transactions Adapter ----------
+    */
+
+    <string name="TransactionsAdapterHeader">تراکنش‌ها</string>
+
+    <string name="TransactionsAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
 
     /*
     ---------- Users2 Adapter ----------

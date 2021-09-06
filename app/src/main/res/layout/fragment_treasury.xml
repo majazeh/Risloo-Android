@@ -1,6 +1,175 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.factor.bouncy.BouncyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:fillViewport="true"
+    android:layoutDirection="rtl"
+    app:fling_animation_size=".3"
+    app:overscroll_animation_size=".3"
+    tools:context=".Views.Fragments.Show.TreasuryFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_12sdp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/info_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/serial_imageView"
+                android:layout_width="@dimen/_16sdp"
+                android:layout_height="@dimen/_16sdp"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_copy_light"
+                app:layout_constraintBottom_toBottomOf="@id/serial_textView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/serial_textView"
+                app:tint="@color/Blue700" />
+
+            <TextView
+                android:id="@+id/serial_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                android:gravity="center"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Blue700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_bold"
+                app:layout_constraintEnd_toStartOf="@id/serial_imageView"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="سریال" />
+
+            <ImageView
+                android:id="@+id/title_imageView"
+                android:layout_width="@dimen/_12sdp"
+                android:layout_height="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:contentDescription="@string/AppImageContent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_wallet_light"
+                app:layout_constraintBottom_toBottomOf="@id/title_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@id/title_textView"
+                app:tint="@color/Gray700" />
+
+            <TextView
+                android:id="@+id/title_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_6sdp"
+                android:layout_marginTop="@dimen/_4sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_demi_bold"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintStart_toEndOf="@id/title_imageView"
+                app:layout_constraintTop_toBottomOf="@id/serial_textView"
+                tools:text="عنوان" />
+
+            <TextView
+                android:id="@+id/center_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintStart_toStartOf="@id/title_imageView"
+                app:layout_constraintTop_toBottomOf="@id/title_textView"
+                tools:text="مرکز درمانی" />
+
+            <TextView
+                android:id="@+id/amount_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="right"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Green700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_bold"
+                app:layout_constraintEnd_toStartOf="@id/left_textView"
+                app:layout_constraintStart_toStartOf="@id/title_imageView"
+                app:layout_constraintTop_toBottomOf="@id/center_textView"
+                tools:text="100.000 تومان" />
+
+            <TextView
+                android:id="@+id/left_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/TreasuryFragmentLeft"
+                android:textSize="@dimen/_9ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintBottom_toBottomOf="@id/amount_textView"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintTop_toTopOf="@id/amount_textView" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/transactions_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
+
+        <include
+            android:id="@+id/transactions_shimmerLayout"
+            layout="@layout/component_shimmer_index"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/transactions_headerLayout"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/transactions_singleLayout"
+            layout="@layout/component_single_scale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/transactions_headerLayout"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.factor.bouncy.BouncyNestedScrollView>
