@@ -1,6 +1,131 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.factor.bouncy.BouncyNestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@null"
+    android:fillViewport="true"
+    android:layoutDirection="rtl"
+    app:fling_animation_size=".3"
+    app:overscroll_animation_size=".3"
+    tools:context=".Views.Fragments.Index.PaymentsFragment">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingBottom="@dimen/_12sdp">
+
+        <include
+            android:id="@+id/charge_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_12sdp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/charge_constraintLayout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/_12sdp"
+            android:layout_marginStart="@dimen/_12sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:paddingBottom="@dimen/_12sdp"
+            android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/charge_headerLayout">
+
+            <include
+                android:id="@+id/treasury_includeLayout"
+                layout="@layout/component_main_input_spinner"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_12sdp"
+                android:layout_marginStart="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <include
+                android:id="@+id/treasury_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/treasury_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/treasury_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/treasury_includeLayout" />
+
+            <include
+                android:id="@+id/amount_includeLayout"
+                layout="@layout/component_main_input_number"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_12sdp"
+                app:layout_constraintEnd_toEndOf="@id/treasury_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/treasury_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/treasury_errorLayout" />
+
+            <include
+                android:id="@+id/amount_errorLayout"
+                layout="@layout/component_main_error"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_6sdp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@id/amount_includeLayout"
+                app:layout_constraintStart_toStartOf="@id/amount_includeLayout"
+                app:layout_constraintTop_toBottomOf="@id/amount_includeLayout" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <include
+            android:id="@+id/charge_textView"
+            layout="@layout/component_main_button_rect_big"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_32sdp"
+            android:layout_marginTop="@dimen/_12sdp"
+            app:layout_constraintRight_toRightOf="@id/charge_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/charge_constraintLayout" />
+
+        <include
+            android:id="@+id/payments_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_24sdp"
+            app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/charge_textView" />
+
+        <include
+            android:id="@+id/payments_shimmerLayout"
+            layout="@layout/component_shimmer_index"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/payments_headerLayout"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/payments_singleLayout"
+            layout="@layout/component_single_scale"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/charge_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/charge_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/payments_headerLayout"
+            tools:visibility="visible" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.factor.bouncy.BouncyNestedScrollView>

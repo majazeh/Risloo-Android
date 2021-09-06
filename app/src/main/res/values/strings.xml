@@ -982,6 +982,16 @@
 
     <string name="PaymentsFragmentTitle">شارژ حساب</string>
 
+    <string name="PaymentsFragmentChargeHeader">افزایش اعتبار</string>
+
+    <string name="PaymentsFragmentChargeTreasuryHeader">کیف پول</string>
+    <string name="PaymentsFragmentChargeAmountHeader">مبلغ (تومان)</string>
+
+    <string name="PaymentsFragmentChargeButton">انتقال به درگاه پرداخت</string>
+
+    <string name="PaymentsFragmentPaymentHeader">گزارش پرداخت‌ها</string>
+    <string name="PaymentsFragmentPaymentEmpty">هنوز پرداختی ثبت نشده است.</string>
+
     /*
     ---------- RoomPlatforms Fragment ----------
     */

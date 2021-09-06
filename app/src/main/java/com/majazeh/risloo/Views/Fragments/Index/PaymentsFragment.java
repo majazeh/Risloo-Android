@@ -1,27 +1,275 @@
 package com.majazeh.risloo.Views.Fragments.Index;
 
+import android.annotation.SuppressLint;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
+import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
+
+import java.util.HashMap;
+import java.util.Objects;
 
 public class PaymentsFragment extends Fragment {
 
     // Binding
     private FragmentPaymentsBinding binding;
 
+    // Adapters
+//    private IndexPaymentAdapter adapter;
+
+    // Objects
+    private HashMap data, header;
+
+    // Vars
+    private String treasuryId = "", amount = "";
+    private boolean userSelect = false, isLoading = true;
+
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup viewGroup,  @Nullable Bundle savedInstanceState) {
         binding = FragmentPaymentsBinding.inflate(inflater, viewGroup, false);
 
+        initializer();
+
+        detector();
+
+        listener();
+
+        getData();
+
         return binding.getRoot();
+    }
+
+    private void initializer() {
+//        adapter = new IndexPaymentAdapter(requireActivity());
+
+        data = new HashMap<>();
+        data.put("page", 1);
+        header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        binding.chargeHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeHeader));
+        binding.chargeHeaderLayout.titleTextView.setTextColor(requireActivity().getResources().getColor(R.color.Green700));
+
+        binding.treasuryIncludeLayout.headerTextView.setText(getResources().getString(R.string.PaymentsFragmentChargeTreasuryHeader));
+        binding.amountIncludeLayout.headerTextView.setText(StringManager.foregroundSize(getResources().getString(R.string.PaymentsFragmentChargeAmountHeader), 4, 12, getResources().getColor(R.color.Gray500), (int) getResources().getDimension(R.dimen._9ssp)));
+
+        InitManager.normal12sspSpinner(requireActivity(), binding.treasuryIncludeLayout.selectSpinner, R.array.UserTypes);
+
+        InitManager.txtTextColor(binding.chargeTextView.getRoot(), getResources().getString(R.string.PaymentsFragmentChargeButton), getResources().getColor(R.color.White));
+
+        binding.paymentsHeaderLayout.titleTextView.setText(getResources().getString(R.string.PaymentsFragmentPaymentHeader));
+
+        binding.paymentsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
+
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.paymentsSingleLayout.recyclerView, 0, 0, 0, 0);
+    }
+
+    private void detector() {
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
+            binding.chargeTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500_ripple_blue800);
+        } else {
+            binding.chargeTextView.getRoot().setBackgroundResource(R.drawable.draw_16sdp_solid_blue500);
+        }
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    private void listener() {
+        binding.treasuryIncludeLayout.selectSpinner.setOnTouchListener((v, event) -> {
+            userSelect = true;
+            return false;
+        });
+
+        binding.treasuryIncludeLayout.selectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (userSelect) {
+                    String pos = parent.getItemAtPosition(position).toString();
+
+                    switch(pos) {
+                        case "":
+                            treasuryId = "";
+                            break;
+                        default:
+                            treasuryId = "";
+                            break;
+                    }
+
+                    userSelect = false;
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        binding.amountIncludeLayout.inputEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.amountIncludeLayout.inputEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.amountIncludeLayout.inputEditText);
+            return false;
+        });
+
+        binding.amountIncludeLayout.inputEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            amount = binding.amountIncludeLayout.inputEditText.getText().toString().trim();
+        });
+
+        binding.getRoot().setMOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -> {
+            if (!isLoading && !Objects.requireNonNull(v).canScrollVertically(1)) {
+                isLoading = true;
+
+                if (data.containsKey("page"))
+                    data.put("page", ((int) data.get("page")) + 1);
+                else
+                    data.put("page", 1);
+
+                if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.GONE)
+                    binding.paymentsSingleLayout.progressBar.setVisibility(View.VISIBLE);
+
+                getData();
+            }
+        });
+
+        CustomClickView.onDelayedListener(() -> {
+            if (binding.treasuryErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView);
+            if (binding.amountErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView);
+
+            doWork();
+        }).widget(binding.chargeTextView.getRoot());
+    }
+
+    private void getData() {
+//        Treasury.list(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                List items = (List) object;
+//
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        if (Objects.equals(data.get("page"), 1))
+//                            adapter.clearItems();
+//
+//                        if (!items.data().isEmpty()) {
+//                            adapter.setItems(items.data());
+//                            binding.paymentsSingleLayout.recyclerView.setAdapter(adapter);
+//
+//                            binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
+//                        } else if (adapter.getItemCount() == 0) {
+//                            binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+//                            binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentsFragmentPaymentEmpty));
+//                        }
+//
+//                        binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+//
+//                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+//                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
+//                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
+//
+//                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+//                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
+//
+//                    });
+//
+//                    isLoading = false;
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+//                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
+//                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
+//
+//                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+//                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
+//
+//                    });
+//
+//                    isLoading = false;
+//                }
+//            }
+//        });
+    }
+
+    private void doWork() {
+//        DialogManager.showLoadingDialog(requireActivity(), "loading");
+//
+//        data.put("treasury_id", treasuryId);
+//        data.put("amount", amount);
+//
+//        Treasury.charge(data, header, new Response() {
+//            @Override
+//            public void onOK(Object object) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        binding.paymentsSingleLayout.getRoot().setVisibility(View.GONE);
+//                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+//                        binding.paymentsShimmerLayout.getRoot().startShimmer();
+//
+//                        getData();
+//                    });
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(String response) {
+//                if (isAdded()) {
+//                    requireActivity().runOnUiThread(() -> {
+//                        try {
+//                            JSONObject responseObject = new JSONObject(response);
+//                            if (!responseObject.isNull("errors")) {
+//                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+//
+//                                Iterator<String> keys = (errorsObject.keys());
+//                                StringBuilder errors = new StringBuilder();
+//
+//                                while (keys.hasNext()) {
+//                                    String key = keys.next();
+//                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+//                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+//
+//                                        switch (key) {
+//                                            case "treasury_id":
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
+//                                                break;
+//                                            case "amount":
+//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
+//                                                break;
+//                                        }
+//
+//                                        errors.append(validation);
+//                                        errors.append("\n");
+//                                    }
+//                                }
+//
+//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+//                            }
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//                    });
+//                }
+//            }
+//        });
     }
 
     @Override

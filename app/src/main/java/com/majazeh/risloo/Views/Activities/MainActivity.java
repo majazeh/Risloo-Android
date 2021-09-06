@@ -238,6 +238,7 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> items = new ArrayList<>();
 
         items.add(getResources().getString(R.string.MainTitleMe));
+        items.add(getResources().getString(R.string.MainTitlePayments));
         items.add(getResources().getString(R.string.MainTitleLogout));
         items.add("");
 
