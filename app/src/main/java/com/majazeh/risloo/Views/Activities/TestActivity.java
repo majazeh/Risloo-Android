@@ -23,6 +23,7 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Config.ExtendException;
 import com.majazeh.risloo.Utils.Entities.Singleton;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Entities.Inputor;
@@ -43,9 +44,11 @@ import com.mre.ligheh.Model.TypeModel.PrerequisitesModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class TestActivity extends AppCompatActivity {
@@ -459,7 +462,31 @@ public class TestActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(String response) {
-                // TODO : Place Code If Needed
+                runOnUiThread(() -> {
+                    try {
+                        JSONObject responseObject = new JSONObject(response);
+                        if (!responseObject.isNull("errors")) {
+                            JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                            Iterator<String> keys = (errorsObject.keys());
+                            StringBuilder errors = new StringBuilder();
+
+                            while (keys.hasNext()) {
+                                String key = keys.next();
+                                for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                    String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                    errors.append(validation);
+                                    errors.append("\n");
+                                }
+                            }
+
+                            SnackManager.showErrorSnack(TestActivity.this, errors.substring(0, errors.length() - 1));
+                        }
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
         });
     }
