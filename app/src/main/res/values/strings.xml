@@ -851,6 +851,14 @@
 
     <string name="BillingsFragmentTitle">صورت حساب‌ها</string>
 
+    <string name="BillingsFragmentSerial">سریال</string>
+    <string name="BillingsFragmentName">عنوان</string>
+    <string name="BillingsFragmentStatus">وضعیت</string>
+    <string name="BillingsFragmentAmount">مبلغ</string>
+    <string name="BillingsFragmentDate">تاریخ</string>
+    <string name="BillingsFragmentDebtor">بدهکار</string>
+    <string name="BillingsFragmentCreditor">بستانکار</string>
+
     <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
 
     /*
@@ -992,6 +1000,13 @@
     <string name="PaymentsFragmentChargeButton">انتقال به درگاه پرداخت</string>
 
     <string name="PaymentsFragmentPaymentHeader">گزارش پرداخت‌ها</string>
+
+    <string name="PaymentsFragmentPaymentSerial">سریال</string>
+    <string name="PaymentsFragmentPaymentLeft">باقی‌مانده</string>
+    <string name="PaymentsFragmentPaymentDate">تاریخ</string>
+    <string name="PaymentsFragmentPaymentStatus">وضعیت</string>
+    <string name="PaymentsFragmentPaymentDescription">توضیحات</string>
+
     <string name="PaymentsFragmentPaymentEmpty">هنوز پرداختی ثبت نشده است.</string>
 
     /*
@@ -1089,6 +1104,11 @@
     */
 
     <string name="TreasuriesFragmentTitle">کیف پول‌ها</string>
+
+    <string name="TreasuriesFragmentSerial">سریال</string>
+    <string name="TreasuriesFragmentName">عنوان</string>
+    <string name="TreasuriesFragmentCredit">اعتبار</string>
+    <string name="TreasuriesFragmentLeft">باقی‌مانده</string>
 
     <string name="TreasuriesFragmentEmpty">هنوز کیف پولی ثبت نشده است.</string>
 
@@ -1351,6 +1371,12 @@
 
     <string name="TimesAdapterHeader">موارد</string>
 
+    <string name="TimesAdapterSerial">سریال</string>
+    <string name="TimesAdapterName">عنوان</string>
+    <string name="TimesAdapterCreditor">بستانکار</string>
+    <string name="TimesAdapterDebtor">بدهکار</string>
+    <string name="TimesAdapterAmount">مبلغ</string>
+
     <string name="TimesAdapterEmpty">هنوز موردی ثبت نشده است.</string>
 
     /*
@@ -1358,6 +1384,12 @@
     */
 
     <string name="TransactionsAdapterHeader">تراکنش‌ها</string>
+
+    <string name="TransactionsAdapterSerial">سریال</string>
+    <string name="TransactionsAdapterDate">تاریخ</string>
+    <string name="TransactionsAdapterCreditor">بستانکار</string>
+    <string name="TransactionsAdapterDebtor">بدهکار</string>
+    <string name="TransactionsAdapterLeft">باقی‌مانده</string>
 
     <string name="TransactionsAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
 

@@ -65,7 +65,7 @@
 
         <include
             android:id="@+id/index_singleLayout"
-            layout="@layout/component_single_bulk_sample"
+            layout="@layout/component_single_treasury"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="@dimen/_12sdp"
