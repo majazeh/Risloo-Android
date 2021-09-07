@@ -10,7 +10,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentBillBinding;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
@@ -70,7 +72,25 @@ public class BillFragment extends Fragment {
             data.put("id", model.getId());
         }
 
-        // TODO : Place Code Here
+        if (model.getTitle() != null && !model.getTitle().equals("")) {
+            binding.titleTextView.setText(model.getTitle());
+        }
+
+        if (model.getAmount() != 0) {
+            String amount = StringManager.separate(String.valueOf(model.getAmount())) + " " + getResources().getString(R.string.MainToman);
+            binding.amountTextView.setText(amount);
+        } else {
+            String amount = "0" + " " + getResources().getString(R.string.MainToman);
+            binding.amountTextView.setText(amount);
+        }
+
+        if (model.getType() != null && !model.getType().equals("")) {
+            binding.statusTextView.setText(model.getType());
+        }
+
+        if (model.getCreated_at() != 0) {
+            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCreated_at()), " "));
+        }
     }
 
     private void getData() {

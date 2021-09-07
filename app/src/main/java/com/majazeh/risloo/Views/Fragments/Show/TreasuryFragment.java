@@ -11,6 +11,7 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentTreasuryBinding;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
@@ -70,7 +71,19 @@ public class TreasuryFragment extends Fragment {
             data.put("id", model.getId());
         }
 
-        // TODO : Place Code Here
+        if (model.getTitle() != null && !model.getTitle().equals("")) {
+            binding.titleTextView.setText(model.getTitle());
+        }
+
+        // TODO : Place Center Code Here
+
+        if (model.getBalance() != 0) {
+            String amount = StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman);
+            binding.amountTextView.setText(amount);
+        } else {
+            String amount = "0" + " " + getResources().getString(R.string.MainToman);
+            binding.amountTextView.setText(amount);
+        }
     }
 
     private void getData() {
