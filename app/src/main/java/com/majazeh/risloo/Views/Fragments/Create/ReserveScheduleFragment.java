@@ -80,6 +80,8 @@ public class ReserveScheduleFragment extends Fragment {
 
         setPermission();
 
+        setCallBack();
+
         return binding.getRoot();
     }
 
@@ -498,7 +500,7 @@ public class ReserveScheduleFragment extends Fragment {
                                 JSONObject payment = responseObject.getJSONObject("payment");
                                 String key = payment.getString("authorized_key");
 
-                                callAuth(key);
+                                callAuth("payment", key);
                             } else {
                                 if (!responseObject.isNull("errors")) {
                                     JSONObject errorsObject = responseObject.getJSONObject("errors");
@@ -555,8 +557,13 @@ public class ReserveScheduleFragment extends Fragment {
         });
     }
 
-    private void callAuth(String key) {
-        DialogManager.showLoadingDialog(requireActivity(), "payment");
+    private void setCallBack() {
+        if (!((MainActivity) requireActivity()).singleton.getPaymentAuthKey().equals(""))
+            callAuth("callback", ((MainActivity) requireActivity()).singleton.getPaymentAuthKey());
+    }
+
+    private void callAuth(String method, String key) {
+        DialogManager.showLoadingDialog(requireActivity(), method);
 
         HashMap data = new HashMap<>();
         HashMap header = new HashMap<>();
@@ -573,7 +580,18 @@ public class ReserveScheduleFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         DialogManager.dismissLoadingDialog();
 
-                        PaymentManager.request(requireActivity(), model.getRedirect());
+                        if (method.equals("payment")) {
+                            // TODO : Update Schedule Model
+
+                            ((MainActivity) requireActivity()).singleton.fillPayment(key, scheduleModel);
+
+                            PaymentManager.request(requireActivity(), model.getRedirect());
+                        } else {
+                            NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
+                            ((MainActivity) requireActivity()).navController.navigate(action);
+
+                            ((MainActivity) requireActivity()).singleton.clearPayment();
+                        }
                     });
                 }
             }

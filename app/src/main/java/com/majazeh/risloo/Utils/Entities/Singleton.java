@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
+import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -62,6 +63,22 @@ public class Singleton {
         editor.apply();
     }
 
+    // -------------------- Payment
+
+    public void fillPayment(String key, ScheduleModel scheduleModel) {
+        if (!key.equals(""))
+            setPaymentAuthKey(key);
+
+        if (scheduleModel != null)
+            setPaymentAuthScheduleModel(scheduleModel);
+    }
+
+    public void clearPayment() {
+        editor.remove("payment_auth_key");
+        editor.remove("payment_auth_schedulemodel");
+        editor.apply();
+    }
+
     /*
     ---------- Setters ----------
     */
@@ -112,6 +129,18 @@ public class Singleton {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    // -------------------- Payment
+
+    private void setPaymentAuthKey(String value) {
+        editor.putString("payment_auth_key", value);
+        editor.apply();
+    }
+
+    private void setPaymentAuthScheduleModel(ScheduleModel scheduleModel) {
+        editor.putString("payment_auth_schedulemodel", scheduleModel.object.toString());
+        editor.apply();
     }
 
     /*
@@ -173,6 +202,27 @@ public class Singleton {
         } catch (JSONException e) {
             e.printStackTrace();
         } return new ArrayList<>();
+    }
+
+    // -------------------- Payment
+
+    public String getPaymentAuthKey() {
+        if (!sharedPreferences.getString("payment_auth_key", "").equals(""))
+            return sharedPreferences.getString("payment_auth_key", "");
+
+        return "";
+    }
+
+    public ScheduleModel getPaymentAuthScheduleModel() {
+        try {
+            if (!sharedPreferences.getString("payment_auth_schedulemodel", "").equals("")) {
+                JSONObject jsonObject = new JSONObject(sharedPreferences.getString("payment_auth_schedulemodel", ""));
+
+                return new ScheduleModel(jsonObject);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return null;
     }
 
     /*
