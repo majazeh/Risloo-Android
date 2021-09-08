@@ -780,6 +780,55 @@
             app:barrierDirection="bottom"
             app:constraint_referenced_ids="samples_shimmerLayout, samples_singleLayout" />
 
+        <include
+            android:id="@+id/transactions_headerLayout"
+            layout="@layout/component_main_index_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_18sdp"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/samples_barrier" />
+
+        <include
+            android:id="@+id/transactions_addView"
+            layout="@layout/component_main_button_oval_mid"
+            android:layout_width="@dimen/_28sdp"
+            android:layout_height="@dimen/_28sdp"
+            app:layout_constraintBottom_toBottomOf="@id/transactions_headerLayout"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toTopOf="@id/transactions_headerLayout" />
+
+        <include
+            android:id="@+id/transactions_shimmerLayout"
+            layout="@layout/component_shimmer_index"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/transactions_addView"
+            tools:visibility="gone" />
+
+        <include
+            android:id="@+id/transactions_singleLayout"
+            layout="@layout/component_single_transaction2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_12sdp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
+            app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
+            app:layout_constraintTop_toBottomOf="@id/transactions_addView"
+            tools:visibility="visible" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/transactions_barrier"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:barrierDirection="bottom"
+            app:constraint_referenced_ids="transactions_shimmerLayout, transactions_singleLayout" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.factor.bouncy.BouncyNestedScrollView>

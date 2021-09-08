@@ -1394,6 +1394,25 @@
     <string name="TransactionsAdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
 
     /*
+    ---------- Transactions2 Adapter ----------
+    */
+
+    <string name="Transactions2AdapterHeader">تراکنش‌ها</string>
+
+    <string name="Transactions2AdapterSerial">سریال</string>
+    <string name="Transactions2AdapterName">عنوان</string>
+    <string name="Transactions2AdapterDate">تاریخ</string>
+    <string name="Transactions2AdapterCreditor">بستانکار</string>
+    <string name="Transactions2AdapterDebtor">بدهکار</string>
+    <string name="Transactions2AdapterAmount">مبلغ</string>
+    <string name="Transactions2AdapterStatus">وضعیت</string>
+
+    <string name="Transactions2AdapterPay">پرداخت</string>
+    <string name="Transactions2AdapterEdit">ویرایش</string>
+
+    <string name="Transactions2AdapterEmpty">هنوز تراکنشی ثبت نشده است.</string>
+
+    /*
     ---------- Users2 Adapter ----------
     */
 
