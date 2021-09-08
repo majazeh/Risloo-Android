@@ -425,7 +425,7 @@ public class SessionFragment extends Fragment {
     }
 
     private void setStatus(String status) {
-        binding.statusTextView.setText(SelectionManager.getSessionStatus(requireActivity(), "fa", status));
+        binding.statusTextView.setText(SelectionManager.getSessionStatus2(requireActivity(), "fa", status));
 
         switch (status) {
             case "registration_awaiting":

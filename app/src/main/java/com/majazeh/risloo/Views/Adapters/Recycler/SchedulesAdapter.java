@@ -188,7 +188,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
     }
 
     private void setStatus(SchedulesHolder holder, String status) {
-        holder.binding.statusTextView.setText(SelectionManager.getSessionStatus(activity, "fa", status));
+        holder.binding.statusTextView.setText(SelectionManager.getSessionStatus2(activity, "fa", status));
 
         switch (status) {
             case "registration_awaiting":

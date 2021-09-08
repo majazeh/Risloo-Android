@@ -1,0 +1,34 @@
+[
+  {
+    "fa_title": "پیش\u200Cنویس",
+    "en_title": "draft"
+  },
+  {
+    "fa_title": "در حال نوبت\u200Cگیری",
+    "en_title": "registration_awaiting"
+  },
+  {
+    "fa_title": "در انتظار تأیید مراجع",
+    "en_title": "client_awaiting"
+  },
+  {
+    "fa_title": "در انتظار تشکیل جلسه",
+    "en_title": "session_awaiting"
+  },
+  {
+    "fa_title": "در جلسه",
+    "en_title": "in_session"
+  },
+  {
+    "fa_title": "پایان یافته",
+    "en_title": "finished"
+  },
+  {
+    "fa_title": "لغو شده توسط مراجع",
+    "en_title": "canceled_by_client"
+  },
+  {
+    "fa_title": "لغو شده توسط مرکز مشاوره",
+    "en_title": "canceled_by_center"
+  }
+]
