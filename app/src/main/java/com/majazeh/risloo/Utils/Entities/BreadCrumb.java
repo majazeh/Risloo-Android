@@ -18,7 +18,9 @@ import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Fragments.Create.ReserveScheduleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditCenterUserFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Edit.EditPlatformFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditSessionFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Edit.EditTreasuryFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Edit.EditUserFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.CenterPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.CenterSchedulesFragmentArgs;
@@ -29,6 +31,7 @@ import com.majazeh.risloo.Views.Fragments.Index.RoomPlatformsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomSchedulesFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomTagsFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Index.RoomUsersFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Show.BillFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.BulkSampleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.CaseFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.CenterFragmentArgs;
@@ -37,7 +40,9 @@ import com.majazeh.risloo.Views.Fragments.Show.ReferenceFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.RoomFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.SampleFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.SessionFragmentArgs;
+import com.majazeh.risloo.Views.Fragments.Show.TreasuryFragmentArgs;
 import com.majazeh.risloo.Views.Fragments.Show.UserFragmentArgs;
+import com.mre.ligheh.Model.TypeModel.BillingModel;
 import com.mre.ligheh.Model.TypeModel.BulkSampleModel;
 import com.mre.ligheh.Model.TypeModel.CaseModel;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -45,6 +50,8 @@ import com.mre.ligheh.Model.TypeModel.RoomModel;
 import com.mre.ligheh.Model.TypeModel.SampleModel;
 import com.mre.ligheh.Model.TypeModel.ScheduleModel;
 import com.mre.ligheh.Model.TypeModel.SessionModel;
+import com.mre.ligheh.Model.TypeModel.SessionPlatformModel;
+import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 import com.mre.ligheh.Model.TypeModel.UserModel;
 
@@ -58,14 +65,17 @@ public class BreadCrumb {
     private final Activity activity;
 
     // Models
-    private UserModel userModel;
+    private BillingModel billingModel;
+    private BulkSampleModel bulkSampleModel;
+    private CaseModel caseModel;
     private CenterModel centerModel;
     private RoomModel roomModel;
-    private CaseModel caseModel;
     private ScheduleModel scheduleModel;
-    private SessionModel sessionModel;
     private SampleModel sampleModel;
-    private BulkSampleModel bulkSampleModel;
+    private SessionModel sessionModel;
+    private SessionPlatformModel sessionPlatformModel;
+    private TreasuriesModel treasuriesModel;
+    private UserModel userModel;
 
     // Vars
     private String centerType = "", sessionType = "", clientReportsType = "", referenceType = "";
@@ -199,11 +209,13 @@ public class BreadCrumb {
                 setModels("user", EditCenterUserFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editCenterUser();
             case R.id.editPlatformFragment:
+                setModels("platform", EditPlatformFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editPlatform();
             case R.id.editSessionFragment:
                 setModels("session", EditSessionFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editSession();
             case R.id.editTreasuryFragment:
+                setModels("treasury", EditTreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
                 return editTreasury();
             case R.id.editUserFragment:
                 setModels("user", EditUserFragmentArgs.fromBundle(arguments).getTypeModel());
@@ -248,6 +260,7 @@ public class BreadCrumb {
             // -------------------- Show
 
             case R.id.billFragment:
+                setModels("bill", BillFragmentArgs.fromBundle(arguments).getTypeModel());
                 return bill();
             case R.id.bulkSampleFragment:
                 setModels("bulk", BulkSampleFragmentArgs.fromBundle(arguments).getTypeModel());
@@ -290,6 +303,7 @@ public class BreadCrumb {
 
                 return session();
             case R.id.treasuryFragment:
+                setModels("treasury", TreasuryFragmentArgs.fromBundle(arguments).getTypeModel());
                 return treasury();
             case R.id.userFragment:
                 setModels("user", UserFragmentArgs.fromBundle(arguments).getTypeModel());
@@ -408,6 +422,10 @@ public class BreadCrumb {
 
             // -------------------- Show
 
+            case R.id.billFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalBillFragment(billingModel);
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
             case R.id.bulkSampleFragment: {
                 NavDirections action = NavigationMainDirections.actionGlobalBulkSampleFragment(bulkSampleModel);
                 ((MainActivity) activity).navController.navigate(action);
@@ -446,6 +464,10 @@ public class BreadCrumb {
                 else
                     action = NavigationMainDirections.actionGlobalSessionFragment("session", sessionModel);
 
+                ((MainActivity) activity).navController.navigate(action);
+            } break;
+            case R.id.treasuryFragment: {
+                NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(treasuriesModel);
                 ((MainActivity) activity).navController.navigate(action);
             } break;
             case R.id.userFragment: {
@@ -528,6 +550,9 @@ public class BreadCrumb {
                     }
                 }
                 break;
+            case "platform":
+                sessionPlatformModel = (SessionPlatformModel) model;
+                break;
             case "sample":
                 sampleModel = (SampleModel) model;
 
@@ -556,6 +581,12 @@ public class BreadCrumb {
                 break;
             case "bulk":
                 bulkSampleModel = (BulkSampleModel) model;
+                break;
+            case "bill":
+                billingModel = (BillingModel) model;
+                break;
+            case "treasury":
+                treasuriesModel = (TreasuriesModel) model;
                 break;
         }
     }
@@ -1288,7 +1319,13 @@ public class BreadCrumb {
 
     private ArrayList<String> bill() {
         ArrayList<String> list = billings();
-        list.add("نامعلوم");
+
+        if (billingModel != null && billingModel.getTitle() != null && !billingModel.getTitle().equals(""))
+            list.add(billingModel.getTitle());
+        else if (billingModel != null && billingModel.getId() != null && !billingModel.getId().equals(""))
+            list.add("صورت حساب" + " " + billingModel.getId());
+        else
+            list.add("نامعلوم");
 
         destinationIds = billIds();
         return list;
@@ -1500,7 +1537,13 @@ public class BreadCrumb {
 
     private ArrayList<String> treasury() {
         ArrayList<String> list = treasuries();
-        list.add("نامعلوم");
+
+        if (treasuriesModel != null && treasuriesModel.getTitle() != null && !treasuriesModel.getTitle().equals(""))
+            list.add(treasuriesModel.getTitle());
+        else if (treasuriesModel != null && treasuriesModel.getId() != null && !treasuriesModel.getId().equals(""))
+            list.add("کیف پول" + " " + treasuriesModel.getId());
+        else
+            list.add("نامعلوم");
 
         destinationIds = treasuryIds();
         return list;
