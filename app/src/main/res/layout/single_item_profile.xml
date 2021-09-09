@@ -1,59 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
+    android:orientation="vertical"
     android:layoutDirection="rtl"
-    app:cardCornerRadius="@dimen/_2sdp"
-    app:cardElevation="0dp"
+    android:padding="@dimen/_6sdp"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
+    <ImageView
+        android:id="@+id/avatar_imageView"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_200sdp"
+        android:contentDescription="@string/AppImageContent"
+        android:scaleType="fitCenter"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/avatar_textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        android:visibility="gone"
+        tools:text="عنوان" />
 
-        <ImageView
-            android:id="@+id/avatar_imageView"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/_200sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_6sdp"
-            android:contentDescription="@string/AppImageContent"
-            android:scaleType="fitCenter"
-            app:layout_goneMarginBottom="@dimen/_6sdp"
-            app:layout_constraintBottom_toTopOf="@id/avatar_textView"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/backgrounds/scenic" />
-
-        <TextView
-            android:id="@+id/avatar_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:gravity="center"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray600"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            android:visibility="gone"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/avatar_imageView"
-            tools:text="عنوان" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</LinearLayout>

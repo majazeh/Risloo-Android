@@ -74,36 +74,36 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             if (currentTimestamp == timestamp) {
                 if (selectedTimestamp == timestamp)
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
                 else
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             } else if (currentTimestamp > timestamp) {
                 if (selectedTimestamp == timestamp)
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
                 else
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200_ripple_gray300);
             } else {
                 if (selectedTimestamp == timestamp)
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500_ripple_blue800);
                 else
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
             }
         } else {
             if (currentTimestamp == timestamp) {
                 if (selectedTimestamp == timestamp)
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
                 else
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             } else if (currentTimestamp > timestamp) {
                 if (selectedTimestamp == timestamp)
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
                 else
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_gray50_border_1sdp_gray200);
             } else {
                 if (selectedTimestamp == timestamp)
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_blue500);
                 else
-                    holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
+                    holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200);
             }
         }
     }
@@ -123,7 +123,7 @@ public class WeeksAdapter extends RecyclerView.Adapter<WeeksHolder> {
             }
 
             notifyDataSetChanged();
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(WeeksHolder holder, long timestamp) {

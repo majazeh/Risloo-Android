@@ -101,7 +101,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
 
     private void detector(CenterPlatformsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
 
             holder.binding.editImageView.setBackgroundResource(R.drawable.draw_oval_solid_white_border_1sdp_gray200_ripple_gray300);
         }
@@ -111,7 +111,7 @@ public class CenterPlatformsAdapter extends RecyclerView.Adapter<CenterPlatforms
     private void listener(CenterPlatformsHolder holder, SessionPlatformModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (current instanceof CenterPlatformsFragment) {

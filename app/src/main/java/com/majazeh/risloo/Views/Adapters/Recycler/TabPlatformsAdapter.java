@@ -86,7 +86,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
 
     private void detector(TabPlatformsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -94,7 +94,7 @@ public class TabPlatformsAdapter extends RecyclerView.Adapter<TabPlatformsHolder
     private void listener(TabPlatformsHolder holder, SessionPlatformModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
 
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.selectedSwitchCompat.isChecked() && holder.binding.roomCheckBox.isChecked())

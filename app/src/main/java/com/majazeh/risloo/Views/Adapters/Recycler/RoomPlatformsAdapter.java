@@ -109,7 +109,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
 
     private void detector(RoomPlatformsHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -117,7 +117,7 @@ public class RoomPlatformsAdapter extends RecyclerView.Adapter<RoomPlatformsHold
     private void listener(RoomPlatformsHolder holder, SessionPlatformModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code When Needed
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
 
         holder.binding.identifierEditText.setOnTouchListener((v, event) -> {
             if (holder.binding.availableSwitchCompat.isChecked() && holder.binding.centerCheckBox.isChecked())

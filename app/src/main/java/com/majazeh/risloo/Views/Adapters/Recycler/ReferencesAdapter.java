@@ -71,14 +71,14 @@ public class ReferencesAdapter extends RecyclerView.Adapter<ReferencesHolder> {
 
     private void detector(ReferencesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
     private void listener(ReferencesHolder holder, UserModel model) {
         CustomClickView.onDelayedListener(() -> {
             // TODO : Place Code Here
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(ReferencesHolder holder, UserModel model) {

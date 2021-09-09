@@ -77,7 +77,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
 
     private void detector(Cases2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -85,7 +85,7 @@ public class Cases2Adapter extends RecyclerView.Adapter<Cases2Holder> {
         CustomClickView.onClickListener(() -> {
             NavDirections action = NavigationMainDirections.actionGlobalCaseFragment(model);
             ((MainActivity) activity).navController.navigate(action);
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(Cases2Holder holder, CaseModel model) {
