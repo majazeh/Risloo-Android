@@ -109,7 +109,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
     private void listener(SchedulesHolder holder, ScheduleModel model) {
         CustomClickView.onClickListener(() -> {
-            if (holder.binding.statusTextView.getText().toString().equals("زمان\u200Cبندی شده")) {
+            if (holder.binding.statusTextView.getText().toString().equals("در حال نوبت\u200Cگیری")) {
                 NavDirections action = NavigationMainDirections.actionGlobalReserveScheduleFragment(model);
                 ((MainActivity) activity).navController.navigate(action);
             } else {

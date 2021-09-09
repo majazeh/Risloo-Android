@@ -558,8 +558,10 @@ public class ReserveScheduleFragment extends Fragment {
     }
 
     private void setCallBack() {
-        if (!((MainActivity) requireActivity()).singleton.getPaymentAuthKey().equals(""))
+        if (!((MainActivity) requireActivity()).singleton.getPaymentAuthKey().equals("")) {
             callAuth("callback", ((MainActivity) requireActivity()).singleton.getPaymentAuthKey());
+            ((MainActivity) requireActivity()).singleton.clearPayment();
+        }
     }
 
     private void callAuth(String method, String key) {
@@ -589,8 +591,6 @@ public class ReserveScheduleFragment extends Fragment {
                         } else {
                             NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
-
-                            ((MainActivity) requireActivity()).singleton.clearPayment();
                         }
                     });
                 }
