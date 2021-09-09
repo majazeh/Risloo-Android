@@ -6,10 +6,14 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderTreasuryHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexTreasuryHolder;
 import com.majazeh.risloo.databinding.HeaderItemIndexTreasuryBinding;
@@ -42,7 +46,9 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexTreasuryHolder) {
+        if (holder instanceof HeaderTreasuryHolder) {
+            setWidget((HeaderTreasuryHolder) holder);
+        } else if (holder instanceof  IndexTreasuryHolder) {
             TreasuriesModel model = (TreasuriesModel) items.get(i - 1);
 
             detector((IndexTreasuryHolder) holder);
@@ -91,6 +97,10 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
         }
     }
 
+    private void setWidget(HeaderTreasuryHolder holder) {
+        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuriesFragmentLeft), 11, 14, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+    }
+
     private void detector(IndexTreasuryHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
@@ -99,16 +109,33 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
 
     private void listener(IndexTreasuryHolder holder, TreasuriesModel model) {
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            NavDirections action = NavigationMainDirections.actionGlobalEditTreasuryFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.editImageView);
     }
 
     private void setData(IndexTreasuryHolder holder, TreasuriesModel model) {
-        // TODO : Place Code Here
+        holder.binding.serialTextView.setText(model.getId());
+
+        holder.binding.titleTextView.setText(model.getTitle());
+
+        if (model.isCreditable())
+            holder.binding.creditTextView.setText(activity.getResources().getString(R.string.TreasuriesFragmentCreditTrue));
+        else
+            holder.binding.creditTextView.setText(activity.getResources().getString(R.string.TreasuriesFragmentCreditFalse));
+
+        holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getBalance())));
+        if (model.getBalance() == 0)
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
+        else if (String.valueOf(model.getBalance()).contains("-"))
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+        else
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 
 }

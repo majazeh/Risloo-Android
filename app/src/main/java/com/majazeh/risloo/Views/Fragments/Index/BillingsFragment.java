@@ -16,8 +16,13 @@ import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexBillAdapter;
 import com.majazeh.risloo.databinding.FragmentBillingsBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Billing;
+import com.mre.ligheh.Model.Madule.List;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -28,7 +33,7 @@ public class BillingsFragment extends Fragment {
     private FragmentBillingsBinding binding;
 
     // Adapters
-//    private IndexBillAdapter adapter;
+    private IndexBillAdapter adapter;
 
     // Objects
     private Handler handler;
@@ -52,7 +57,7 @@ public class BillingsFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexBillAdapter(requireActivity());
+        adapter = new IndexBillAdapter(requireActivity());
 
         handler = new Handler();
 
@@ -120,66 +125,66 @@ public class BillingsFragment extends Fragment {
     }
 
     private void getData() {
-//        Bill.list(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                List items = (List) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        if (Objects.equals(data.get("page"), 1))
-//                            adapter.clearItems();
-//
-//                        if (!items.data().isEmpty()) {
-//                            adapter.setItems(items.data());
-//                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//
-//                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
-//                            else
-//                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty));
-//                        }
-//
-//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
-//
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-//
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-//
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//        });
+        Billing.list(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List items = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (Objects.equals(data.get("page"), 1))
+                            adapter.clearItems();
+
+                        if (!items.data().isEmpty()) {
+                            adapter.setItems(items.data());
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (adapter.getItemCount() == 0) {
+                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+
+                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
+                            else
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.BillingsFragmentEmpty));
+                        }
+
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
+
+                    });
+
+                    isLoading = false;
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
+
+                    });
+
+                    isLoading = false;
+                }
+            }
+        });
     }
 
     @Override

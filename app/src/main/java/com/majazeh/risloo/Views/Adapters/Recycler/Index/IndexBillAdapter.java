@@ -6,10 +6,15 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderBillHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexBillHolder;
 import com.majazeh.risloo.databinding.HeaderItemIndexBillBinding;
@@ -42,7 +47,9 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexBillHolder) {
+        if (holder instanceof HeaderBillHolder) {
+            setWidget((HeaderBillHolder) holder);
+        } else if (holder instanceof  IndexBillHolder) {
             BillingModel model = (BillingModel) items.get(i - 1);
 
             detector((IndexBillHolder) holder);
@@ -91,6 +98,10 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    private void setWidget(HeaderBillHolder holder) {
+        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.BillingsFragmentAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+    }
+
     private void detector(IndexBillHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
@@ -99,12 +110,27 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void listener(IndexBillHolder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            NavDirections action = NavigationMainDirections.actionGlobalBillFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.getRoot());
     }
 
     private void setData(IndexBillHolder holder, BillingModel model) {
-        // TODO : Place Code Here
+        holder.binding.serialTextView.setText(model.getId());
+
+        holder.binding.titleTextView.setText(model.getTitle());
+//        holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
+
+        holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+
+        if (model.getCreditor() != null)
+            holder.binding.creditorTextView.setText(model.getCreditor().getTitle());
+
+        if (model.getDebtor() != null && model.getDebtor().getUserModel() != null)
+            holder.binding.debtorTextView.setText(model.getDebtor().getUserModel().getName() + " - " + model.getDebtor().getTitle());
+        else if (model.getDebtor() != null)
+            holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
     }
 
 }

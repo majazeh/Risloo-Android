@@ -19,9 +19,14 @@ import androidx.navigation.NavDirections;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexTreasuryAdapter;
 import com.majazeh.risloo.databinding.FragmentTreasuriesBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Treasury;
 
 import java.util.HashMap;
 import java.util.Objects;
@@ -32,7 +37,7 @@ public class TreasuriesFragment extends Fragment {
     private FragmentTreasuriesBinding binding;
 
     // Adapters
-//    private IndexTreasuryAdapter adapter;
+    private IndexTreasuryAdapter adapter;
 
     // Objects
     private Handler handler;
@@ -58,7 +63,7 @@ public class TreasuriesFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexTreasuryAdapter(requireActivity());
+        adapter = new IndexTreasuryAdapter(requireActivity());
 
         handler = new Handler();
 
@@ -140,66 +145,66 @@ public class TreasuriesFragment extends Fragment {
     }
 
     private void getData() {
-//        Treasury.list(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                List items = (List) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        if (Objects.equals(data.get("page"), 1))
-//                            adapter.clearItems();
-//
-//                        if (!items.data().isEmpty()) {
-//                            adapter.setItems(items.data());
-//                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//
-//                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
-//                            else
-//                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.TreasuriesFragmentEmpty));
-//                        }
-//
-//                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
-//
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-//
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.indexShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
-//                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
-//                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
-//
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//        });
+        Treasury.list(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List items = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (Objects.equals(data.get("page"), 1))
+                            adapter.clearItems();
+
+                        if (!items.data().isEmpty()) {
+                            adapter.setItems(items.data());
+                            binding.indexSingleLayout.recyclerView.setAdapter(adapter);
+
+                            binding.indexSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (adapter.getItemCount() == 0) {
+                            binding.indexSingleLayout.emptyView.setVisibility(View.VISIBLE);
+
+                            if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.AppSearchEmpty));
+                            else
+                                binding.indexSingleLayout.emptyView.setText(getResources().getString(R.string.TreasuriesFragmentEmpty));
+                        }
+
+                        binding.headerIncludeLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
+
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
+
+                    });
+
+                    isLoading = false;
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.indexSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.indexShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.indexShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.indexSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.indexSingleLayout.progressBar.setVisibility(View.GONE);
+                        if (binding.searchIncludeLayout.searchProgressBar.getVisibility() == View.VISIBLE)
+                            binding.searchIncludeLayout.searchProgressBar.setVisibility(View.GONE);
+
+                    });
+
+                    isLoading = false;
+                }
+            }
+        });
     }
 
     @Override

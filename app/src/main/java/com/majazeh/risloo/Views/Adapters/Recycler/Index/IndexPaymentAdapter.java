@@ -6,14 +6,18 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderPaymentHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexPaymentHolder;
 import com.majazeh.risloo.databinding.HeaderItemIndexPaymentBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexPaymentBinding;
+import com.mre.ligheh.Model.TypeModel.PaymentModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -42,13 +46,13 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
         if (holder instanceof  IndexPaymentHolder) {
-//            PaymentModel model = (PaymentModel) items.get(i - 1);
+            PaymentModel model = (PaymentModel) items.get(i - 1);
 
             detector((IndexPaymentHolder) holder);
 
-            listener((IndexPaymentHolder) holder);
+            listener((IndexPaymentHolder) holder, model);
 
-            setData((IndexPaymentHolder) holder);
+            setData((IndexPaymentHolder) holder, model);
         }
     }
 
@@ -96,17 +100,18 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
-    private void listener(IndexPaymentHolder holder) {
+    private void listener(IndexPaymentHolder holder, PaymentModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(model);
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.treasuryImageView);
     }
 
-    private void setData(IndexPaymentHolder holder) {
+    private void setData(IndexPaymentHolder holder, PaymentModel model) {
         // TODO : Place Code Here
     }
 

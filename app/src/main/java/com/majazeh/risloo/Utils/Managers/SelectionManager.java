@@ -29,6 +29,24 @@ public class SelectionManager {
         } return value;
     }
 
+    public static String getBillType(Activity activity, String local, String value) {
+        try {
+            JSONArray list = new JSONArray(JsonManager.getJson(activity, "BillType.json"));
+
+            for (int i = 0; i < list.length(); i++) {
+                if (local.equals("en")) {
+                    if (value.equals(list.getJSONObject(i).getString("fa_title")))
+                        return list.getJSONObject(i).getString("en_title");
+                } else {
+                    if (value.equals(list.getJSONObject(i).getString("en_title")))
+                        return list.getJSONObject(i).getString("fa_title");
+                }
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } return value;
+    }
+
     public static String getCaseStatus(Activity activity, String local, String value) {
         try {
             JSONArray list = new JSONArray(JsonManager.getJson(activity, "CaseStatus.json"));

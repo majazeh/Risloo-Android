@@ -84,9 +84,9 @@ public class BillFragment extends Fragment {
             binding.amountTextView.setText(amount);
         }
 
-        if (model.getType() != null && !model.getType().equals("")) {
-            binding.statusTextView.setText(model.getType());
-        }
+//        if (model.getType() != null && !model.getType().equals("")) {
+//            binding.statusTextView.setText(model.getType());
+//        }
 
         if (model.getCreated_at() != 0) {
             binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCreated_at()), " "));

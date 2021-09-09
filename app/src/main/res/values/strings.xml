@@ -854,7 +854,7 @@
     <string name="BillingsFragmentSerial">سریال</string>
     <string name="BillingsFragmentName">عنوان</string>
     <string name="BillingsFragmentStatus">وضعیت</string>
-    <string name="BillingsFragmentAmount">مبلغ</string>
+    <string name="BillingsFragmentAmount">مبلغ (ت)</string>
     <string name="BillingsFragmentDate">تاریخ</string>
     <string name="BillingsFragmentDebtor">بدهکار</string>
     <string name="BillingsFragmentCreditor">بستانکار</string>
@@ -1108,7 +1108,10 @@
     <string name="TreasuriesFragmentSerial">سریال</string>
     <string name="TreasuriesFragmentName">عنوان</string>
     <string name="TreasuriesFragmentCredit">اعتبار</string>
-    <string name="TreasuriesFragmentLeft">باقی‌مانده</string>
+    <string name="TreasuriesFragmentLeft">باقی‌مانده (ت)</string>
+
+    <string name="TreasuriesFragmentCreditTrue">معتبر</string>
+    <string name="TreasuriesFragmentCreditFalse">نامعتبر</string>
 
     <string name="TreasuriesFragmentEmpty">هنوز کیف پولی ثبت نشده است.</string>
 
