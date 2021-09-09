@@ -13,13 +13,21 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentEditTreasuryBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Treasury;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.HashMap;
+import java.util.Iterator;
 
 public class EditTreasuryFragment extends Fragment {
 
@@ -108,58 +116,58 @@ public class EditTreasuryFragment extends Fragment {
     }
 
     private void doWork() {
-//        DialogManager.showLoadingDialog(requireActivity(), "loading");
-//
-//        data.put("title", title);
-//
-//        Treasury.edit(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        DialogManager.dismissLoadingDialog();
-//                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject responseObject = new JSONObject(response);
-//                            if (!responseObject.isNull("errors")) {
-//                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-//
-//                                Iterator<String> keys = (errorsObject.keys());
-//                                StringBuilder errors = new StringBuilder();
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-//                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
-//
-//                                        switch (key) {
-//                                            case "title":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
-//                                                break;
-//                                        }
-//
-//                                        errors.append(validation);
-//                                        errors.append("\n");
-//                                    }
-//                                }
-//
-//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
+
+        data.put("title", title);
+
+        Treasury.edit(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastChangesSaved));
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                        switch (key) {
+                                            case "title":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.titleErrorLayout.getRoot(), binding.titleErrorLayout.errorTextView, validation);
+                                                break;
+                                        }
+
+                                        errors.append(validation);
+                                        errors.append("\n");
+                                    }
+                                }
+
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override
