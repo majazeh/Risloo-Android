@@ -123,19 +123,19 @@ public class IndexTreasuryAdapter extends RecyclerView.Adapter<RecyclerView.View
         holder.binding.serialTextView.setText(model.getId());
 
         holder.binding.titleTextView.setText(model.getTitle());
-
-        if (model.isCreditable())
-            holder.binding.creditTextView.setText(activity.getResources().getString(R.string.TreasuriesFragmentCreditTrue));
-        else
-            holder.binding.creditTextView.setText(activity.getResources().getString(R.string.TreasuriesFragmentCreditFalse));
-
         holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getBalance())));
+
         if (model.getBalance() == 0)
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
         else if (String.valueOf(model.getBalance()).contains("-"))
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
         else
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
+
+        if (model.isCreditable())
+            holder.binding.creditTextView.setText(activity.getResources().getString(R.string.TreasuriesFragmentCreditTrue));
+        else
+            holder.binding.creditTextView.setText(activity.getResources().getString(R.string.TreasuriesFragmentCreditFalse));
     }
 
 }

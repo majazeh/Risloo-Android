@@ -13,8 +13,16 @@ import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexTransactionAdapter;
 import com.majazeh.risloo.databinding.FragmentTreasuryBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Treasury;
+import com.mre.ligheh.Model.TypeModel.TransactionModel;
 import com.mre.ligheh.Model.TypeModel.TreasuriesModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -24,7 +32,7 @@ public class TreasuryFragment extends Fragment {
     private FragmentTreasuryBinding binding;
 
     // Adapters
-//    private IndexTransactionsAdapter adapter;
+    private IndexTransactionAdapter indexTransactionAdapter;
 
     // Models
     private TreasuriesModel treasuriesModel;
@@ -47,7 +55,7 @@ public class TreasuryFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexTransactionsAdapter(requireActivity());
+        indexTransactionAdapter = new IndexTransactionAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -66,72 +74,96 @@ public class TreasuryFragment extends Fragment {
     }
 
     private void setData(TreasuriesModel model) {
-        if (model.getId() != null && !model.getId().equals("")) {
-            binding.serialTextView.setText(model.getId());
-            data.put("id", model.getId());
-        }
+        try {
+            if (model.getId() != null && !model.getId().equals("")) {
+                binding.serialTextView.setText(model.getId());
+                data.put("id", model.getId());
+            }
 
-        if (model.getTitle() != null && !model.getTitle().equals("")) {
-            binding.titleTextView.setText(model.getTitle());
-        }
+            if (model.getTitle() != null && !model.getTitle().equals("")) {
+                binding.titleTextView.setText(model.getTitle());
+            }
 
-        // TODO : Place Center Code Here
+            if (model.getCenterModel() != null && model.getCenterModel().getDetail() != null && model.getCenterModel().getDetail().has("title") && !model.getCenterModel().getDetail().isNull("title") && !model.getCenterModel().getDetail().getString("title").equals("")) {
+                binding.centerTextView.setText(model.getCenterModel().getDetail().getString("title"));
+                binding.centerTextView.setVisibility(View.VISIBLE);
+            } else {
+                binding.centerTextView.setVisibility(View.GONE);
+            }
 
-        if (model.getBalance() != 0) {
-            String amount = StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman);
-            binding.amountTextView.setText(amount);
-        } else {
-            String amount = "0" + " " + getResources().getString(R.string.MainToman);
-            binding.amountTextView.setText(amount);
+            if (model.getBalance() != 0) {
+                String amount = StringManager.separate(String.valueOf(model.getBalance())) + " " + getResources().getString(R.string.MainToman);
+                binding.amountTextView.setText(amount);
+            } else {
+                String amount = "0" + " " + getResources().getString(R.string.MainToman);
+                binding.amountTextView.setText(amount);
+            }
+
+            if (model.getBalance() == 0)
+                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Gray700));
+            else if (String.valueOf(model.getBalance()).contains("-"))
+                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Red500));
+            else
+                binding.amountTextView.setTextColor(requireActivity().getResources().getColor(R.color.Green600));
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
     }
 
     private void getData() {
-//        Treasury.showDashborad(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                treasuriesModel = (TreasuriesModel) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        setData(treasuriesModel);
-//
-//                        // Transactions Data
-//                        if (!treasuriesModel.getTransactions().data().isEmpty()) {
-//                            adapter.setItems(treasuriesModel.getTransactions().data());
-//                            binding.transactionsSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.transactionsSingleLayout.emptyView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//                            binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.TransactionsAdapterEmpty));
-//                        }
-//
-//                        binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
-//
-//                        // Transactions Data
-//                        binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.transactionsShimmerLayout.getRoot().stopShimmer();
-//
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//
-//                        // Transactions Data
-//                        binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.transactionsShimmerLayout.getRoot().stopShimmer();
-//
-//                    });
-//                }
-//            }
-//        });
+        Treasury.transaction(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            treasuriesModel = new TreasuriesModel(((JSONObject) object).getJSONObject("treasury"));
+                            setData(treasuriesModel);
+
+                            List transactions = new List();
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
+                                transactions.add(new TransactionModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
+                            }
+
+                            // Transactions Data
+                            if (!transactions.data().isEmpty()) {
+                                indexTransactionAdapter.setItems(transactions.data());
+                                binding.transactionsSingleLayout.recyclerView.setAdapter(indexTransactionAdapter);
+
+                                binding.transactionsSingleLayout.emptyView.setVisibility(View.GONE);
+                            } else if (indexTransactionAdapter.getItemCount() == 0) {
+                                binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.TransactionsAdapterEmpty));
+                            }
+
+                            binding.transactionsHeaderLayout.countTextView.setText(StringManager.bracing(indexTransactionAdapter.itemsCount()));
+
+                            // Transactions Data
+                            binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.transactionsShimmerLayout.getRoot().stopShimmer();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+
+                        // Transactions Data
+                        binding.transactionsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.transactionsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.transactionsShimmerLayout.getRoot().stopShimmer();
+
+                    });
+                }
+            }
+        });
     }
 
     @Override

@@ -6,14 +6,20 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
+import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderTransactionHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexTransactionHolder;
 import com.majazeh.risloo.databinding.HeaderItemIndexTransactionBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexTransactionBinding;
+import com.mre.ligheh.Model.TypeModel.TransactionModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -41,14 +47,16 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexTransactionHolder) {
-//            TransactionModel model = (TransactionModel) items.get(i - 1);
+        if (holder instanceof HeaderTransactionHolder) {
+            setWidget((HeaderTransactionHolder) holder);
+        } else if (holder instanceof  IndexTransactionHolder) {
+            TransactionModel model = (TransactionModel) items.get(i - 1);
 
             detector((IndexTransactionHolder) holder);
 
-            listener((IndexTransactionHolder) holder);
+            listener((IndexTransactionHolder) holder, model);
 
-            setData((IndexTransactionHolder) holder);
+            setData((IndexTransactionHolder) holder, model);
         }
     }
 
@@ -90,24 +98,41 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
+    private void setWidget(HeaderTransactionHolder holder) {
+        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TreasuriesFragmentLeft), 11, 14, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+    }
+
     private void detector(IndexTransactionHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
-    private void listener(IndexTransactionHolder holder) {
+    private void listener(IndexTransactionHolder holder, TransactionModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            // TODO : Place Code Here
+            NavDirections action = NavigationMainDirections.actionGlobalBillFragment(model.getBilling());
+            ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.billImageView);
     }
 
-    private void setData(IndexTransactionHolder holder) {
-        // TODO : Place Code Here
+    private void setData(IndexTransactionHolder holder, TransactionModel model) {
+        holder.binding.serialTextView.setText(model.getId());
+
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+        holder.binding.creditorTextView.setText(StringManager.separate(model.getCredit()));
+        holder.binding.debtorTextView.setText(StringManager.separate(model.getDebt()));
+        holder.binding.leftTextView.setText(StringManager.separate(model.getBalance()));
+
+        if (model.getBalance().equals("0"))
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
+        else if (String.valueOf(model.getBalance()).contains("-"))
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+        else
+            holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 
 }
