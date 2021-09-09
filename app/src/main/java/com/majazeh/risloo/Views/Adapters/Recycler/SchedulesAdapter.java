@@ -103,7 +103,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
 
     private void detector(SchedulesHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -116,7 +116,7 @@ public class SchedulesAdapter extends RecyclerView.Adapter<SchedulesHolder> {
                 NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", model);
                 ((MainActivity) activity).navController.navigate(action);
             }
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(SchedulesHolder holder, ScheduleModel model) {

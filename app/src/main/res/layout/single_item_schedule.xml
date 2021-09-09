@@ -1,300 +1,291 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layoutDirection="rtl"
-    app:cardCornerRadius="@dimen/_2sdp"
-    app:cardElevation="0dp"
+    android:paddingBottom="@dimen/_12sdp"
+    android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200"
     tools:layout_marginBottom="@dimen/_4sdp"
     tools:layout_marginTop="@dimen/_4sdp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_constraintLayout"
-        android:layout_width="match_parent"
+    <View
+        android:id="@+id/status_background"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="@dimen/_12sdp"
+        android:layout_marginEnd="@dimen/_1sdp"
+        android:layout_marginStart="@dimen/_1sdp"
+        android:layout_marginTop="@dimen/_1sdp"
+        android:background="@drawable/draw_2sdp_solid_gray50"
+        app:layout_constraintBottom_toTopOf="@id/avatar_includeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/time_textView"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/_12sdp"
-        android:background="@drawable/draw_2sdp_solid_white_border_1sdp_gray200">
+        android:layout_marginStart="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="‌زمان" />
 
-        <View
-            android:id="@+id/status_background"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/_12sdp"
-            android:layout_marginEnd="@dimen/_1sdp"
-            android:layout_marginStart="@dimen/_1sdp"
-            android:layout_marginTop="@dimen/_1sdp"
-            android:background="@drawable/draw_2sdp_solid_gray50"
-            app:layout_constraintBottom_toTopOf="@id/avatar_includeLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/duration_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintStart_toStartOf="@id/time_textView"
+        app:layout_constraintTop_toBottomOf="@id/time_textView"
+        tools:text="مدت‌زمان" />
 
-        <TextView
-            android:id="@+id/time_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:gravity="center"
-            android:textSize="@dimen/_8ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray700"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="‌زمان" />
+    <View
+        android:id="@+id/status_circle"
+        android:layout_width="@dimen/_6sdp"
+        android:layout_height="@dimen/_6sdp"
+        android:layout_marginEnd="@dimen/_6sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:background="@drawable/draw_oval_solid_gray400"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/duration_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="center"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintStart_toStartOf="@id/time_textView"
-            app:layout_constraintTop_toBottomOf="@id/time_textView"
-            tools:text="مدت‌زمان" />
+    <TextView
+        android:id="@+id/status_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintEnd_toEndOf="@id/status_circle"
+        app:layout_constraintTop_toBottomOf="@id/time_textView"
+        tools:text="وضعیت" />
 
-        <View
-            android:id="@+id/status_circle"
-            android:layout_width="@dimen/_6sdp"
-            android:layout_height="@dimen/_6sdp"
-            android:layout_marginEnd="@dimen/_6sdp"
-            android:layout_marginTop="@dimen/_8sdp"
-            android:background="@drawable/draw_oval_solid_gray400"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <include
+        android:id="@+id/avatar_includeLayout"
+        layout="@layout/component_main_avatar_borderless_small"
+        android:layout_width="@dimen/_52sdp"
+        android:layout_height="@dimen/_52sdp"
+        android:layout_marginStart="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_16sdp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/duration_textView" />
 
-        <TextView
-            android:id="@+id/status_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="center"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintEnd_toEndOf="@id/status_circle"
-            app:layout_constraintTop_toBottomOf="@id/time_textView"
-            tools:text="وضعیت" />
+    <TextView
+        android:id="@+id/name_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_12sdp"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:gravity="right"
+        android:textSize="@dimen/_10ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/avatar_includeLayout"
+        app:layout_constraintTop_toTopOf="@id/avatar_includeLayout"
+        tools:text="نام و نام خانوادگی" />
 
-        <include
-            android:id="@+id/avatar_includeLayout"
-            layout="@layout/component_main_avatar_borderless_small"
-            android:layout_width="@dimen/_52sdp"
-            android:layout_height="@dimen/_52sdp"
-            android:layout_marginStart="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_16sdp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/duration_textView" />
+    <TextView
+        android:id="@+id/reference_headerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="center"
+        android:text="@string/SchedulesAdapterReference"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout" />
 
-        <TextView
-            android:id="@+id/name_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="@dimen/_12sdp"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:gravity="right"
-            android:textSize="@dimen/_10ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray700"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_bold"
-            app:layout_constraintBottom_toBottomOf="@id/avatar_includeLayout"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/avatar_includeLayout"
-            app:layout_constraintTop_toTopOf="@id/avatar_includeLayout"
-            tools:text="نام و نام خانوادگی" />
+    <TextView
+        android:id="@+id/reference_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toEndOf="@id/reference_headerView"
+        app:layout_constraintTop_toTopOf="@id/reference_headerView"
+        tools:text="-" />
 
-        <TextView
-            android:id="@+id/reference_headerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:gravity="center"
-            android:text="@string/SchedulesAdapterReference"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
-            app:layout_constraintTop_toBottomOf="@id/avatar_includeLayout" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/reference_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="reference_headerView, reference_textView" />
 
-        <TextView
-            android:id="@+id/reference_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="center|right"
-            android:textSize="@dimen/_7ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_medium"
-            app:layout_constraintEnd_toEndOf="@id/name_textView"
-            app:layout_constraintStart_toEndOf="@id/reference_headerView"
-            app:layout_constraintTop_toTopOf="@id/reference_headerView"
-            tools:text="-" />
+    <Space
+        android:id="@+id/reference_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/reference_barrier" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/reference_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="reference_headerView, reference_textView" />
+    <TextView
+        android:id="@+id/axis_headerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:gravity="center"
+        android:text="@string/SchedulesAdapterAxis"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/reference_space"
+        app:layout_goneMarginTop="@dimen/_12sdp" />
 
-        <Space
-            android:id="@+id/reference_space"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/reference_barrier" />
+    <TextView
+        android:id="@+id/axis_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toEndOf="@id/axis_headerView"
+        app:layout_constraintTop_toTopOf="@id/axis_headerView"
+        tools:text="-" />
 
-        <TextView
-            android:id="@+id/axis_headerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:gravity="center"
-            android:text="@string/SchedulesAdapterAxis"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
-            app:layout_constraintTop_toBottomOf="@id/reference_space"
-            app:layout_goneMarginTop="@dimen/_12sdp" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/axis_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="axis_headerView, axis_textView" />
 
-        <TextView
-            android:id="@+id/axis_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="center|right"
-            android:textSize="@dimen/_7ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_medium"
-            app:layout_constraintEnd_toEndOf="@id/name_textView"
-            app:layout_constraintStart_toEndOf="@id/axis_headerView"
-            app:layout_constraintTop_toTopOf="@id/axis_headerView"
-            tools:text="-" />
+    <Space
+        android:id="@+id/axis_space"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/axis_barrier" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/axis_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="axis_headerView, axis_textView" />
+    <TextView
+        android:id="@+id/platform_headerView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_4sdp"
+        android:gravity="center"
+        android:text="@string/SchedulesAdapterPlatform"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/axis_space"
+        app:layout_goneMarginTop="@dimen/_12sdp" />
 
-        <Space
-            android:id="@+id/axis_space"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@id/axis_barrier" />
+    <TextView
+        android:id="@+id/platform_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_8sdp"
+        android:layout_marginTop="@dimen/_2sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        app:layout_constraintEnd_toEndOf="@id/name_textView"
+        app:layout_constraintStart_toEndOf="@id/platform_headerView"
+        app:layout_constraintTop_toTopOf="@id/platform_headerView"
+        tools:text="-" />
 
-        <TextView
-            android:id="@+id/platform_headerView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_4sdp"
-            android:gravity="center"
-            android:text="@string/SchedulesAdapterPlatform"
-            android:textSize="@dimen/_9ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_regular"
-            app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
-            app:layout_constraintTop_toBottomOf="@id/axis_space"
-            app:layout_goneMarginTop="@dimen/_12sdp" />
+    <androidx.constraintlayout.widget.Barrier
+        android:id="@+id/platform_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="bottom"
+        app:constraint_referenced_ids="platform_headerView, platform_textView" />
 
-        <TextView
-            android:id="@+id/platform_textView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/_8sdp"
-            android:layout_marginTop="@dimen/_2sdp"
-            android:gravity="center|right"
-            android:textSize="@dimen/_7ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray500"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_medium"
-            app:layout_constraintEnd_toEndOf="@id/name_textView"
-            app:layout_constraintStart_toEndOf="@id/platform_headerView"
-            app:layout_constraintTop_toTopOf="@id/platform_headerView"
-            tools:text="-" />
+    <TextView
+        android:id="@+id/bulk_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:gravity="right"
+        android:paddingBottom="@dimen/_2sdp"
+        android:paddingEnd="@dimen/_6sdp"
+        android:paddingStart="@dimen/_6sdp"
+        android:paddingTop="@dimen/_2sdp"
+        android:text="@string/SchedulesAdapterBulk"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_bold"
+        android:background="@drawable/draw_16sdp_solid_gray100"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
+        app:layout_constraintTop_toBottomOf="@id/platform_barrier"
+        tools:visibility="visible" />
 
-        <androidx.constraintlayout.widget.Barrier
-            android:id="@+id/platform_barrier"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:barrierDirection="bottom"
-            app:constraint_referenced_ids="platform_headerView, platform_textView" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/reference_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="reference_headerView, reference_textView, reference_space"
+        tools:visibility="visible" />
 
-        <TextView
-            android:id="@+id/bulk_textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/_12sdp"
-            android:gravity="right"
-            android:paddingBottom="@dimen/_2sdp"
-            android:paddingEnd="@dimen/_6sdp"
-            android:paddingStart="@dimen/_6sdp"
-            android:paddingTop="@dimen/_2sdp"
-            android:text="@string/SchedulesAdapterBulk"
-            android:textSize="@dimen/_7ssp"
-            android:textStyle="normal"
-            android:textColor="@color/Gray400"
-            android:textAlignment="gravity"
-            android:fontFamily="@font/dana_bold"
-            android:background="@drawable/draw_16sdp_solid_gray100"
-            android:visibility="gone"
-            app:layout_constraintStart_toStartOf="@id/avatar_includeLayout"
-            app:layout_constraintTop_toBottomOf="@id/platform_barrier"
-            tools:visibility="visible" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/axis_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="axis_headerView, axis_textView, axis_space"
+        tools:visibility="visible" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/reference_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="reference_headerView, reference_textView, reference_space"
-            tools:visibility="visible" />
+    <androidx.constraintlayout.widget.Group
+        android:id="@+id/platform_group"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:constraint_referenced_ids="platform_headerView, platform_textView"
+        tools:visibility="visible" />
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/axis_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="axis_headerView, axis_textView, axis_space"
-            tools:visibility="visible" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/platform_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="platform_headerView, platform_textView"
-            tools:visibility="visible" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-</androidx.cardview.widget.CardView>
+</androidx.constraintlayout.widget.ConstraintLayout>

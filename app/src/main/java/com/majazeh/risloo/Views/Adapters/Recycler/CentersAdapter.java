@@ -79,7 +79,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
 
     private void detector(CentersHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
-            holder.binding.containerConstraintLayout.setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
+            holder.binding.getRoot().setBackgroundResource(R.drawable.draw_2sdp_solid_white_border_1sdp_gray200_ripple_gray300);
         }
     }
 
@@ -92,7 +92,7 @@ public class CentersAdapter extends RecyclerView.Adapter<CentersHolder> {
                 NavDirections action = NavigationMainDirections.actionGlobalRoomFragment("personal_clinic", model);
                 ((MainActivity) activity).navController.navigate(action);
             }
-        }).widget(holder.binding.containerConstraintLayout);
+        }).widget(holder.binding.getRoot());
     }
 
     private void setData(CentersHolder holder, CenterModel model) {
