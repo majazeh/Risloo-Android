@@ -3,38 +3,41 @@ package com.mre.ligheh.Model.TypeModel;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class BillingModel extends TypeModel{
-    private String id;
+public class BillingModel extends TypeModel {
+    private String id = "";
     private TreasuriesModel creditor;
     private TreasuriesModel debtor;
     private int amount;
-    private String type;
-    private String action;
-    private String title;
+    private String type = "";
+    private String action = "";
+    private String title = "";
+    private String description = "";
     private int created_at;
 
     public BillingModel(JSONObject jsonObject) {
         super(jsonObject);
-            try {
-        if (!jsonObject.isNull("id"))
+        try {
+            if (!jsonObject.isNull("id"))
                 setId(jsonObject.getString("id"));
-                if (!jsonObject.isNull("creditor"))
-                    setCreditor(new TreasuriesModel(jsonObject.getJSONObject("creditor")));
-                if (!jsonObject.isNull("debtor"))
-                    setDebtor(new TreasuriesModel(jsonObject.getJSONObject("debtor")));
-                if (!jsonObject.isNull("amount"))
-                    setAmount(jsonObject.getInt("amount"));
-                if (!jsonObject.isNull("type"))
-                    setType(jsonObject.getString("type"));
-                if (!jsonObject.isNull("action"))
-                    setAction(jsonObject.getString("action"));
-                if (!jsonObject.isNull("title"))
-                    setTitle(jsonObject.getString("title"));
-                if (!jsonObject.isNull("created_at"))
-                    setCreated_at(jsonObject.getInt("created_at"));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
+            if (!jsonObject.isNull("creditor"))
+                setCreditor(new TreasuriesModel(jsonObject.getJSONObject("creditor")));
+            if (!jsonObject.isNull("debtor"))
+                setDebtor(new TreasuriesModel(jsonObject.getJSONObject("debtor")));
+            if (!jsonObject.isNull("amount"))
+                setAmount(jsonObject.getInt("amount"));
+            if (!jsonObject.isNull("type"))
+                setType(jsonObject.getString("type"));
+            if (!jsonObject.isNull("action"))
+                setAction(jsonObject.getString("action"));
+            if (!jsonObject.isNull("description"))
+                setDescription(jsonObject.getString("description"));
+            if (!jsonObject.isNull("title"))
+                setTitle(jsonObject.getString("title"));
+            if (!jsonObject.isNull("created_at"))
+                setCreated_at(jsonObject.getInt("created_at"));
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public String getId() {
@@ -83,6 +86,14 @@ public class BillingModel extends TypeModel{
 
     public void setAction(String action) {
         this.action = action;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public String getTitle() {

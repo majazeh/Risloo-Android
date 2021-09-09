@@ -4,9 +4,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class TreasuriesModel extends TypeModel {
-    private String id;
-    private String symbol;
-    private String title;
+    private String id = "";
+    private String symbol = "";
+    private String title = "";
     private boolean creditable;
     private boolean my_treasury;
     private int balance;
