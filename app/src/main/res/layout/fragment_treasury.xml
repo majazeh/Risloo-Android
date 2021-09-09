@@ -104,36 +104,36 @@
                 tools:text="مرکز درمانی" />
 
             <TextView
-                android:id="@+id/amount_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="right"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Green700"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_bold"
-                app:layout_constraintEnd_toStartOf="@id/left_textView"
-                app:layout_constraintStart_toStartOf="@id/title_imageView"
-                app:layout_constraintTop_toBottomOf="@id/center_textView"
-                tools:text="100.000 تومان" />
-
-            <TextView
                 android:id="@+id/left_textView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="@string/TreasuryFragmentLeft"
-                android:textSize="@dimen/_9ssp"
+                android:textSize="@dimen/_7ssp"
                 android:textStyle="normal"
                 android:textColor="@color/Gray500"
                 android:textAlignment="gravity"
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintBottom_toBottomOf="@id/amount_textView"
-                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintStart_toStartOf="@id/title_imageView"
                 app:layout_constraintTop_toTopOf="@id/amount_textView" />
+
+            <TextView
+                android:id="@+id/amount_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="left"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Green700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_bold"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintStart_toEndOf="@id/left_textView"
+                app:layout_constraintTop_toBottomOf="@id/center_textView"
+                tools:text="100.000 تومان" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

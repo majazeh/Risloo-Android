@@ -87,38 +87,6 @@
                 app:layout_constraintTop_toBottomOf="@id/serial_textView"
                 tools:text="عنوان" />
 
-            <TextView
-                android:id="@+id/amount_textView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/_4sdp"
-                android:layout_marginTop="@dimen/_8sdp"
-                android:gravity="right"
-                android:textSize="@dimen/_10ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Green700"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_bold"
-                app:layout_constraintEnd_toStartOf="@id/status_textView"
-                app:layout_constraintStart_toStartOf="@id/title_imageView"
-                app:layout_constraintTop_toBottomOf="@id/title_textView"
-                tools:text="100.000 تومان" />
-
-            <TextView
-                android:id="@+id/status_textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:textSize="@dimen/_9ssp"
-                android:textStyle="normal"
-                android:textColor="@color/Gray500"
-                android:textAlignment="gravity"
-                android:fontFamily="@font/dana_regular"
-                app:layout_constraintBottom_toBottomOf="@id/amount_textView"
-                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
-                app:layout_constraintTop_toTopOf="@id/amount_textView"
-                tools:text="وضعیت" />
-
             <ImageView
                 android:id="@+id/date_imageView"
                 android:layout_width="@dimen/_12sdp"
@@ -136,7 +104,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/_6sdp"
-                android:layout_marginTop="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_8sdp"
                 android:gravity="right"
                 android:textSize="@dimen/_9ssp"
                 android:textStyle="normal"
@@ -145,8 +113,40 @@
                 android:fontFamily="@font/dana_regular"
                 app:layout_constraintEnd_toEndOf="@id/serial_imageView"
                 app:layout_constraintStart_toEndOf="@id/date_imageView"
-                app:layout_constraintTop_toBottomOf="@id/amount_textView"
+                app:layout_constraintTop_toBottomOf="@id/title_textView"
                 tools:text="تاریخ صورت حساب" />
+
+            <TextView
+                android:id="@+id/status_textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textSize="@dimen/_7ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Gray500"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_regular"
+                app:layout_constraintBottom_toBottomOf="@id/amount_textView"
+                app:layout_constraintStart_toStartOf="@id/title_imageView"
+                app:layout_constraintTop_toTopOf="@id/amount_textView"
+                tools:text="وضعیت" />
+
+            <TextView
+                android:id="@+id/amount_textView"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:gravity="left"
+                android:textSize="@dimen/_10ssp"
+                android:textStyle="normal"
+                android:textColor="@color/Green700"
+                android:textAlignment="gravity"
+                android:fontFamily="@font/dana_bold"
+                app:layout_constraintEnd_toEndOf="@id/serial_imageView"
+                app:layout_constraintStart_toEndOf="@id/status_textView"
+                app:layout_constraintTop_toBottomOf="@id/date_textView"
+                tools:text="100.000 تومان" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
