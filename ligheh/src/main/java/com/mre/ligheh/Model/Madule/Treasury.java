@@ -45,7 +45,7 @@ public class Treasury extends Model{
 
     public static void create(HashMap<String, Object> data, HashMap<String, Object> header, Response response)  {
         try {
-            Model.put(endpoint, data, header, response, null);
+            Model.post(endpoint, data, header, response, null);
         } catch (IOException e) {
             e.printStackTrace();
         }

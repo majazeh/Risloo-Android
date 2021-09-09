@@ -139,7 +139,7 @@ public class TreasuriesFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateTreasuryFragment(null, null);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateTreasuryFragment("user", ((MainActivity) requireActivity()).singleton.getUserModel());
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

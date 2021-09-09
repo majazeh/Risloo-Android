@@ -21,12 +21,16 @@ import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.databinding.FragmentCreateTreasuryBinding;
 import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Treasury;
+import com.mre.ligheh.Model.TypeModel.CenterModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
+import com.mre.ligheh.Model.TypeModel.UserModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
@@ -39,7 +43,7 @@ public class CreateTreasuryFragment extends Fragment {
     private HashMap data, header;
 
     // Vars
-    private String title = "", regionId = "";
+    private String title = "", regionId = "", personalClinicId = "";
     private boolean userSelect = false;
 
     @Nullable
@@ -67,8 +71,6 @@ public class CreateTreasuryFragment extends Fragment {
         binding.regionIncludeLayout.headerTextView.setText(getResources().getString(R.string.CreateTreasuryFragmentRegionHeader));
 
         binding.titleGuideLayout.guideTextView.setText(getResources().getString(R.string.CreateTreasuryFragmentNameGuide));
-
-        InitManager.normal12sspSpinner(requireActivity(), binding.regionIncludeLayout.selectSpinner, R.array.TreasuryRegion);
 
         InitManager.txtTextColor(binding.createTextView.getRoot(), getResources().getString(R.string.CreateTreasuryFragmentButton), getResources().getColor(R.color.White));
     }
@@ -108,8 +110,8 @@ public class CreateTreasuryFragment extends Fragment {
                         case "شخصی":
                             regionId = "";
                             break;
-                        default:
-                            regionId = "RS96666W6";
+                        case "کلینیک شخصی":
+                            regionId = personalClinicId;
                             break;
                     }
 
@@ -137,7 +139,38 @@ public class CreateTreasuryFragment extends Fragment {
         String type = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
-        // TODO : Place Code When Needed
+        if (typeModel != null) {
+            if (type.equals("user")) {
+                UserModel userModel = (UserModel) CreateTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
+                setData(userModel);
+            }
+        }
+    }
+
+    private void setData(UserModel model) {
+        setRegion(model.getCenterList());
+    }
+
+    private void setRegion(List centers) {
+        ArrayList<String> options = new ArrayList<>();
+
+        options.add("شخصی");
+
+        if (!centers.data().isEmpty()) {
+            for (TypeModel typeModel : centers.data()) {
+                CenterModel model = (CenterModel) typeModel;
+
+                if (model != null && model.getAcceptation() != null && model.getAcceptation().getPosition().equals("manager") && model.getCenterType().equals("personal_clinic")) {
+                    personalClinicId = model.getCenterId();
+                    options.add("کلینیک شخصی");
+                    break;
+                }
+            }
+        }
+
+        options.add("");
+
+        InitManager.normal12sspSpinner(requireActivity(), binding.regionIncludeLayout.selectSpinner, options);
     }
 
     private void doWork() {
