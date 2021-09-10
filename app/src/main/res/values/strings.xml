@@ -1002,10 +1002,10 @@
     <string name="PaymentsFragmentPaymentHeader">گزارش پرداخت‌ها</string>
 
     <string name="PaymentsFragmentPaymentSerial">سریال</string>
-    <string name="PaymentsFragmentPaymentLeft">باقی‌مانده</string>
-    <string name="PaymentsFragmentPaymentDate">تاریخ</string>
-    <string name="PaymentsFragmentPaymentStatus">وضعیت</string>
     <string name="PaymentsFragmentPaymentDescription">توضیحات</string>
+    <string name="PaymentsFragmentPaymentDate">تاریخ</string>
+    <string name="PaymentsFragmentPaymentLeft">باقی‌مانده (ت)</string>
+    <string name="PaymentsFragmentPaymentStatus">وضعیت</string>
 
     <string name="PaymentsFragmentPaymentEmpty">هنوز پرداختی ثبت نشده است.</string>
 

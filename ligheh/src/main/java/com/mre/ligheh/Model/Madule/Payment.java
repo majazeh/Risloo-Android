@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.HashMap;
 
 public class Payment extends Model{
-    static String endpoint = "auth";
+    static String endpoint = "payments";
     public AuthModel model;
 
     public Payment(JSONObject jsonObject) throws JSONException {
@@ -29,7 +29,7 @@ public class Payment extends Model{
 
     public static void list(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.get(endpoint, data, header, response, PaymentModel.class);
+            Model.list(endpoint, data, header, response, PaymentModel.class);
         } catch (IOException e) {
             e.printStackTrace();
         }

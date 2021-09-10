@@ -14,13 +14,23 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexPaymentAdapter;
 import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.Madule.Payment;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class PaymentsFragment extends Fragment {
@@ -29,7 +39,7 @@ public class PaymentsFragment extends Fragment {
     private FragmentPaymentsBinding binding;
 
     // Adapters
-//    private IndexPaymentAdapter adapter;
+    private IndexPaymentAdapter indexPaymentAdapter;
 
     // Objects
     private HashMap data, header;
@@ -55,7 +65,7 @@ public class PaymentsFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexPaymentAdapter(requireActivity());
+        indexPaymentAdapter = new IndexPaymentAdapter(requireActivity());
 
         data = new HashMap<>();
         data.put("page", 1);
@@ -156,120 +166,120 @@ public class PaymentsFragment extends Fragment {
     }
 
     private void getData() {
-//        Treasury.list(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                List items = (List) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        if (Objects.equals(data.get("page"), 1))
-//                            adapter.clearItems();
-//
-//                        if (!items.data().isEmpty()) {
-//                            adapter.setItems(items.data());
-//                            binding.paymentsSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//                            binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentsFragmentPaymentEmpty));
-//                        }
-//
-//                        binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
-//
-//                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
-//
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
-//
-//                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
-//                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
-//
-//                    });
-//
-//                    isLoading = false;
-//                }
-//            }
-//        });
+        Payment.list(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                List items = (List) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        if (Objects.equals(data.get("page"), 1))
+                            indexPaymentAdapter.clearItems();
+
+                        if (!items.data().isEmpty()) {
+                            indexPaymentAdapter.setItems(items.data());
+                            binding.paymentsSingleLayout.recyclerView.setAdapter(indexPaymentAdapter);
+
+                            binding.paymentsSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (indexPaymentAdapter.getItemCount() == 0) {
+                            binding.paymentsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.paymentsSingleLayout.emptyView.setText(getResources().getString(R.string.PaymentsFragmentPaymentEmpty));
+                        }
+
+                        binding.paymentsHeaderLayout.countTextView.setText(StringManager.bracing(indexPaymentAdapter.itemsCount()));
+
+                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
+
+                    });
+
+                    isLoading = false;
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.paymentsSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.paymentsShimmerLayout.getRoot().stopShimmer();
+
+                        if (binding.paymentsSingleLayout.progressBar.getVisibility() == View.VISIBLE)
+                            binding.paymentsSingleLayout.progressBar.setVisibility(View.GONE);
+
+                    });
+
+                    isLoading = false;
+                }
+            }
+        });
     }
 
     private void doWork() {
-//        DialogManager.showLoadingDialog(requireActivity(), "loading");
-//
-//        data.put("treasury_id", treasuryId);
-//        data.put("amount", amount);
-//
-//        Treasury.charge(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        binding.paymentsSingleLayout.getRoot().setVisibility(View.GONE);
-//                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.paymentsShimmerLayout.getRoot().startShimmer();
-//
-//                        getData();
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        try {
-//                            JSONObject responseObject = new JSONObject(response);
-//                            if (!responseObject.isNull("errors")) {
-//                                JSONObject errorsObject = responseObject.getJSONObject("errors");
-//
-//                                Iterator<String> keys = (errorsObject.keys());
-//                                StringBuilder errors = new StringBuilder();
-//
-//                                while (keys.hasNext()) {
-//                                    String key = keys.next();
-//                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-//                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
-//
-//                                        switch (key) {
-//                                            case "treasury_id":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
-//                                                break;
-//                                            case "amount":
-//                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
-//                                                break;
-//                                        }
-//
-//                                        errors.append(validation);
-//                                        errors.append("\n");
-//                                    }
-//                                }
-//
-//                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
-//                            }
-//                        } catch (JSONException e) {
-//                            e.printStackTrace();
-//                        }
-//                    });
-//                }
-//            }
-//        });
+        DialogManager.showLoadingDialog(requireActivity(), "loading");
+
+        data.put("treasury_id", treasuryId);
+        data.put("amount", amount);
+
+        Payment.post(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        binding.paymentsSingleLayout.getRoot().setVisibility(View.GONE);
+                        binding.paymentsShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.paymentsShimmerLayout.getRoot().startShimmer();
+
+                        getData();
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            JSONObject responseObject = new JSONObject(response);
+                            if (!responseObject.isNull("errors")) {
+                                JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                Iterator<String> keys = (errorsObject.keys());
+                                StringBuilder errors = new StringBuilder();
+
+                                while (keys.hasNext()) {
+                                    String key = keys.next();
+                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                        switch (key) {
+                                            case "treasury_id":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "amount":
+                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
+                                                break;
+                                        }
+
+                                        errors.append(validation);
+                                        errors.append("\n");
+                                    }
+                                }
+
+                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+        });
     }
 
     @Override

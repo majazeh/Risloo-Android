@@ -11,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderPaymentHolder;
@@ -45,7 +48,9 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexPaymentHolder) {
+        if (holder instanceof HeaderPaymentHolder) {
+            setWidget((HeaderPaymentHolder) holder);
+        } else if (holder instanceof  IndexPaymentHolder) {
             PaymentModel model = (PaymentModel) items.get(i - 1);
 
             detector((IndexPaymentHolder) holder);
@@ -94,6 +99,10 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }
     }
 
+    private void setWidget(HeaderPaymentHolder holder) {
+        holder.binding.leftTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.PaymentsFragmentPaymentLeft), 11, 14, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+    }
+
     private void detector(IndexPaymentHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
@@ -106,13 +115,24 @@ public class IndexPaymentAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(model);
+            NavDirections action = NavigationMainDirections.actionGlobalTreasuryFragment(model.getTreasury());
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.treasuryImageView);
     }
 
     private void setData(IndexPaymentHolder holder, PaymentModel model) {
-        // TODO : Place Code Here
+        holder.binding.serialTextView.setText(model.getId());
+        holder.binding.descriptionTextView.setText(model.getTitle());
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+        holder.binding.leftTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
+
+        holder.binding.statusTextView.setText(SelectionManager.getPaymentType(activity, "fa", model.getStatus()));
+        if (model.getStatus().equals("expired"))
+            holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
+        else if (model.getStatus().equals("fail"))
+            holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Red500));
+        else
+            holder.binding.statusTextView.setTextColor(activity.getResources().getColor(R.color.Green600));
     }
 
 }

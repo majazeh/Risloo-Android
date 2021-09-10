@@ -25,25 +25,25 @@
         android:fontFamily="@font/dana_regular"
         app:layout_constraintWidth_percent="0.2"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/left_textView"
+        app:layout_constraintEnd_toStartOf="@id/des_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/left_textView"
+        android:id="@+id/des_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_4sdp"
         android:layout_marginStart="@dimen/_4sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
-        android:text="@string/PaymentsFragmentPaymentLeft"
+        android:text="@string/PaymentsFragmentPaymentDescription"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/status_textView"
+        app:layout_constraintEnd_toStartOf="@id/left_textView"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -60,42 +60,42 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/left_textView"
-        app:layout_constraintStart_toStartOf="@id/left_textView"
-        app:layout_constraintTop_toBottomOf="@id/left_textView" />
+        app:layout_constraintEnd_toEndOf="@id/des_textView"
+        app:layout_constraintStart_toStartOf="@id/des_textView"
+        app:layout_constraintTop_toBottomOf="@id/des_textView" />
 
     <TextView
-        android:id="@+id/status_textView"
+        android:id="@+id/left_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_34sdp"
         android:layout_marginTop="@dimen/_8sdp"
         android:gravity="center|right"
-        android:text="@string/PaymentsFragmentPaymentStatus"
+        android:text="@string/PaymentsFragmentPaymentLeft"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/left_textView"
+        app:layout_constraintStart_toEndOf="@id/des_textView"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/description_textView"
+        android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:gravity="center|right"
-        android:text="@string/PaymentsFragmentPaymentDescription"
+        android:text="@string/PaymentsFragmentPaymentStatus"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
         android:textColor="@color/Gray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/status_textView"
-        app:layout_constraintStart_toStartOf="@id/status_textView"
-        app:layout_constraintTop_toBottomOf="@id/status_textView" />
+        app:layout_constraintEnd_toEndOf="@id/left_textView"
+        app:layout_constraintStart_toStartOf="@id/left_textView"
+        app:layout_constraintTop_toBottomOf="@id/left_textView" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
