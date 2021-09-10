@@ -61,6 +61,7 @@
     <string name="ToastNewTreasuryAdded">کیف پول جدید افزوده شد.</string>
     <string name="ToastNewPracticeAdded">کاربرگ جدید افزوده شد.</string>
     <string name="ToastNewScheduleReserved">برنامه درمانی رزرو شد.</string>
+    <string name="ToastNewSuccesPayment">پرداخت انجام شد.</string>
 
     //////////////////////////////////////////////////////////////////////////////////////
 

@@ -589,6 +589,8 @@ public class ReserveScheduleFragment extends Fragment {
 
                             PaymentManager.request(requireActivity(), model.getRedirect());
                         } else {
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewScheduleReserved));
+
                             NavDirections action = NavigationMainDirections.actionGlobalSessionFragment("schedule", scheduleModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         }

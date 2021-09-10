@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.PaymentManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
@@ -25,6 +26,7 @@ import com.majazeh.risloo.databinding.FragmentPaymentsBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.List;
 import com.mre.ligheh.Model.Madule.Payment;
+import com.mre.ligheh.Model.TypeModel.PaymentModel;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -40,6 +42,9 @@ public class PaymentsFragment extends Fragment {
 
     // Adapters
     private IndexPaymentAdapter indexPaymentAdapter;
+
+    // Models
+    private PaymentModel paymentModel;
 
     // Objects
     private HashMap data, header;
@@ -60,6 +65,8 @@ public class PaymentsFragment extends Fragment {
         listener();
 
         getData();
+
+        setCallBack();
 
         return binding.getRoot();
     }
@@ -231,9 +238,14 @@ public class PaymentsFragment extends Fragment {
             public void onOK(Object object) {
                 if (isAdded()) {
                     requireActivity().runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+                        SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSuccesPayment));
+
                         binding.paymentsSingleLayout.getRoot().setVisibility(View.GONE);
                         binding.paymentsShimmerLayout.getRoot().setVisibility(View.VISIBLE);
                         binding.paymentsShimmerLayout.getRoot().startShimmer();
+
+                        binding.paymentsHeaderLayout.countTextView.setText("");
 
                         getData();
                     });
@@ -246,36 +258,100 @@ public class PaymentsFragment extends Fragment {
                     requireActivity().runOnUiThread(() -> {
                         try {
                             JSONObject responseObject = new JSONObject(response);
-                            if (!responseObject.isNull("errors")) {
-                                JSONObject errorsObject = responseObject.getJSONObject("errors");
 
-                                Iterator<String> keys = (errorsObject.keys());
-                                StringBuilder errors = new StringBuilder();
+                            if (responseObject.getString("message").equals("POVERTY")) {
+                                DialogManager.dismissLoadingDialog();
 
-                                while (keys.hasNext()) {
-                                    String key = keys.next();
-                                    for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
-                                        String validation = errorsObject.getJSONArray(key).get(i).toString();
+                                JSONObject payment = responseObject.getJSONObject("payment");
+                                String key = payment.getString("authorized_key");
 
-                                        switch (key) {
-                                            case "treasury_id":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
-                                                break;
-                                            case "amount":
-                                                ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
-                                                break;
+                                callAuth("payment", key);
+                            } else {
+                                if (!responseObject.isNull("errors")) {
+                                    JSONObject errorsObject = responseObject.getJSONObject("errors");
+
+                                    Iterator<String> keys = (errorsObject.keys());
+                                    StringBuilder errors = new StringBuilder();
+
+                                    while (keys.hasNext()) {
+                                        String key = keys.next();
+                                        for (int i = 0; i < errorsObject.getJSONArray(key).length(); i++) {
+                                            String validation = errorsObject.getJSONArray(key).get(i).toString();
+
+                                            switch (key) {
+                                                case "treasury_id":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.treasuryErrorLayout.getRoot(), binding.treasuryErrorLayout.errorTextView, validation);
+                                                    break;
+                                                case "amount":
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(binding.amountErrorLayout.getRoot(), binding.amountErrorLayout.errorTextView, validation);
+                                                    break;
+                                            }
+
+                                            errors.append(validation);
+                                            errors.append("\n");
                                         }
-
-                                        errors.append(validation);
-                                        errors.append("\n");
                                     }
-                                }
 
-                                SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                    SnackManager.showErrorSnack(requireActivity(), errors.substring(0, errors.length() - 1));
+                                }
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+                    });
+                }
+            }
+        });
+    }
+
+    private void setCallBack() {
+        // TODO : Place Code Here
+    }
+
+    private void callAuth(String method, String key) {
+        DialogManager.showLoadingDialog(requireActivity(), method);
+
+        HashMap data = new HashMap<>();
+        HashMap header = new HashMap<>();
+        header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
+
+        data.put("authorized_key", key);
+
+        Payment.auth(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                PaymentModel model = (PaymentModel) object;
+
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        DialogManager.dismissLoadingDialog();
+
+                        if (method.equals("payment")) {
+                            // TODO : Update Payment Model
+
+//                            ((MainActivity) requireActivity()).singleton.fillPayment(key, paymentModel);
+
+                            PaymentManager.request(requireActivity(), model.getRedirect());
+                        } else {
+                            SnackManager.showSuccesSnack(requireActivity(), getResources().getString(R.string.ToastNewSuccesPayment));
+
+                            binding.paymentsSingleLayout.getRoot().setVisibility(View.GONE);
+                            binding.paymentsShimmerLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.paymentsShimmerLayout.getRoot().startShimmer();
+
+                            binding.paymentsHeaderLayout.countTextView.setText("");
+
+                            getData();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        // Place Code if Needed
                     });
                 }
             }
