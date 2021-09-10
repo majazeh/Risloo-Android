@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.majazeh.risloo.NavigationMainDirections;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -129,7 +130,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
 
         holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
-//        holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
+        holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
     }
 
 }

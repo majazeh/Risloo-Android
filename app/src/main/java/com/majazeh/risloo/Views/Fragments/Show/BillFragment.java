@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexTimeAdapter;
@@ -19,7 +20,6 @@ import com.majazeh.risloo.databinding.FragmentBillBinding;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Billing;
 import com.mre.ligheh.Model.Madule.List;
-import com.mre.ligheh.Model.TypeModel.BillingItemModel;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
 
 import org.json.JSONException;
@@ -88,9 +88,9 @@ public class BillFragment extends Fragment {
             binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCreated_at()), " "));
         }
 
-//        if (model.getType() != null && !model.getType().equals("")) {
-//            binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
-//        }
+        if (model.getType() != null && !model.getType().equals("")) {
+            binding.statusTextView.setText(SelectionManager.getBillType(requireActivity(), "fa", model.getType()));
+        }
 
         if (model.getAmount() != 0) {
             String amount = StringManager.separate(String.valueOf(model.getAmount())) + " " + getResources().getString(R.string.MainToman);
@@ -113,7 +113,7 @@ public class BillFragment extends Fragment {
 
                             List items = new List();
                             for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
-                                items.add(new BillingItemModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
+                                items.add(new BillingModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
                             }
 
                             // Items Data

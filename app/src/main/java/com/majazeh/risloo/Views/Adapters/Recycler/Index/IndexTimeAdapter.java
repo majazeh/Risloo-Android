@@ -15,7 +15,7 @@ import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderTimeHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexTimeHolder;
 import com.majazeh.risloo.databinding.HeaderItemIndexTimeBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexTimeBinding;
-import com.mre.ligheh.Model.TypeModel.BillingItemModel;
+import com.mre.ligheh.Model.TypeModel.BillingModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         if (holder instanceof HeaderTimeHolder) {
             setWidget((HeaderTimeHolder) holder);
         } else if (holder instanceof  IndexTimeHolder) {
-            BillingItemModel model = (BillingItemModel) items.get(i - 1);
+            BillingModel model = (BillingModel) items.get(i - 1);
 
             detector((IndexTimeHolder) holder);
 
@@ -104,13 +104,13 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void listener(IndexTimeHolder holder, BillingItemModel model) {
+    private void listener(IndexTimeHolder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexTimeHolder holder, BillingItemModel model) {
+    private void setData(IndexTimeHolder holder, BillingModel model) {
         holder.binding.serialTextView.setText(model.getId());
         holder.binding.titleTextView.setText(model.getTitle());
 
