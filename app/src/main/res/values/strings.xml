@@ -853,11 +853,11 @@
 
     <string name="BillingsFragmentSerial">سریال</string>
     <string name="BillingsFragmentName">عنوان</string>
-    <string name="BillingsFragmentStatus">وضعیت</string>
-    <string name="BillingsFragmentAmount">مبلغ (ت)</string>
     <string name="BillingsFragmentDate">تاریخ</string>
-    <string name="BillingsFragmentDebtor">بدهکار</string>
     <string name="BillingsFragmentCreditor">بستانکار</string>
+    <string name="BillingsFragmentDebtor">بدهکار</string>
+    <string name="BillingsFragmentAmount">مبلغ (ت)</string>
+    <string name="BillingsFragmentStatus">وضعیت</string>
 
     <string name="BillingsFragmentEmpty">هنوز صورت حسابی ثبت نشده است.</string>
 
@@ -1378,7 +1378,7 @@
     <string name="TimesAdapterName">عنوان</string>
     <string name="TimesAdapterCreditor">بستانکار</string>
     <string name="TimesAdapterDebtor">بدهکار</string>
-    <string name="TimesAdapterAmount">مبلغ</string>
+    <string name="TimesAdapterAmount">مبلغ (ت)</string>
 
     <string name="TimesAdapterEmpty">هنوز موردی ثبت نشده است.</string>
 

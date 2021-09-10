@@ -14,8 +14,16 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexTimeAdapter;
 import com.majazeh.risloo.databinding.FragmentBillBinding;
+import com.mre.ligheh.API.Response;
+import com.mre.ligheh.Model.Madule.Billing;
+import com.mre.ligheh.Model.Madule.List;
+import com.mre.ligheh.Model.TypeModel.BillingItemModel;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 
@@ -25,7 +33,7 @@ public class BillFragment extends Fragment {
     private FragmentBillBinding binding;
 
     // Adapters
-//    private IndexTimeAdapter adapter;
+    private IndexTimeAdapter indexTimeAdapter;
 
     // Models
     private BillingModel billingModel;
@@ -48,7 +56,7 @@ public class BillFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexTimeAdapter(requireActivity());
+        indexTimeAdapter = new IndexTimeAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
@@ -76,6 +84,14 @@ public class BillFragment extends Fragment {
             binding.titleTextView.setText(model.getTitle());
         }
 
+        if (model.getCreated_at() != 0) {
+            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCreated_at()), " "));
+        }
+
+//        if (model.getType() != null && !model.getType().equals("")) {
+//            binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
+//        }
+
         if (model.getAmount() != 0) {
             String amount = StringManager.separate(String.valueOf(model.getAmount())) + " " + getResources().getString(R.string.MainToman);
             binding.amountTextView.setText(amount);
@@ -83,62 +99,62 @@ public class BillFragment extends Fragment {
             String amount = "0" + " " + getResources().getString(R.string.MainToman);
             binding.amountTextView.setText(amount);
         }
-
-//        if (model.getType() != null && !model.getType().equals("")) {
-//            binding.statusTextView.setText(model.getType());
-//        }
-
-        if (model.getCreated_at() != 0) {
-            binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDsHHsMM(String.valueOf(model.getCreated_at()), " "));
-        }
     }
 
     private void getData() {
-//        Bill.showDashborad(data, header, new Response() {
-//            @Override
-//            public void onOK(Object object) {
-//                billingModel = (BillingModel) object;
-//
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//                        setData(billingModel);
-//
-//                        // Times Data
-//                        if (!billingModel.getTimes().data().isEmpty()) {
-//                            adapter.setItems(billingModel.getTimes().data());
-//                            binding.timesSingleLayout.recyclerView.setAdapter(adapter);
-//
-//                            binding.timesSingleLayout.emptyView.setVisibility(View.GONE);
-//                        } else if (adapter.getItemCount() == 0) {
-//                            binding.timesSingleLayout.emptyView.setVisibility(View.VISIBLE);
-//                            binding.timesSingleLayout.emptyView.setText(getResources().getString(R.string.TimesAdapterEmpty));
-//                        }
-//
-//                        binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(adapter.itemsCount()));
-//
-//                        // Times Data
-//                        binding.timesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.timesShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.timesShimmerLayout.getRoot().stopShimmer();
-//
-//                    });
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(String response) {
-//                if (isAdded()) {
-//                    requireActivity().runOnUiThread(() -> {
-//
-//                        // Times Data
-//                        binding.timesSingleLayout.getRoot().setVisibility(View.VISIBLE);
-//                        binding.timesShimmerLayout.getRoot().setVisibility(View.GONE);
-//                        binding.timesShimmerLayout.getRoot().stopShimmer();
-//
-//                    });
-//                }
-//            }
-//        });
+        Billing.show(data, header, new Response() {
+            @Override
+            public void onOK(Object object) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+                        try {
+                            billingModel = new BillingModel(((JSONObject) object).getJSONObject("billing"));
+                            setData(billingModel);
+
+                            List items = new List();
+                            for (int i = 0; i < ((JSONObject) object).getJSONArray("data").length(); i++) {
+                                items.add(new BillingItemModel(((JSONObject) object).getJSONArray("data").getJSONObject(i)));
+                            }
+
+                            // Items Data
+                            if (!items.data().isEmpty()) {
+                                indexTimeAdapter.setItems(items.data());
+                                binding.timesSingleLayout.recyclerView.setAdapter(indexTimeAdapter);
+
+                                binding.timesSingleLayout.emptyView.setVisibility(View.GONE);
+                            } else if (indexTimeAdapter.getItemCount() == 0) {
+                                binding.timesSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                                binding.timesSingleLayout.emptyView.setText(getResources().getString(R.string.TimesAdapterEmpty));
+                            }
+
+                            binding.timesHeaderLayout.countTextView.setText(StringManager.bracing(indexTimeAdapter.itemsCount()));
+
+                            // Items Data
+                            binding.timesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.timesShimmerLayout.getRoot().setVisibility(View.GONE);
+                            binding.timesShimmerLayout.getRoot().stopShimmer();
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(String response) {
+                if (isAdded()) {
+                    requireActivity().runOnUiThread(() -> {
+
+                        // Items Data
+                        binding.timesSingleLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.timesShimmerLayout.getRoot().setVisibility(View.GONE);
+                        binding.timesShimmerLayout.getRoot().stopShimmer();
+
+                    });
+                }
+            }
+        });
     }
 
     @Override

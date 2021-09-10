@@ -117,11 +117,7 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     private void setData(IndexBillHolder holder, BillingModel model) {
         holder.binding.serialTextView.setText(model.getId());
-
         holder.binding.titleTextView.setText(model.getTitle());
-//        holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
-
-        holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
         holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
 
         if (model.getCreditor() != null)
@@ -131,6 +127,9 @@ public class IndexBillAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
             holder.binding.debtorTextView.setText(model.getDebtor().getUserModel().getName() + " - " + model.getDebtor().getTitle());
         else if (model.getDebtor() != null)
             holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
+
+        holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
+//        holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
     }
 
 }

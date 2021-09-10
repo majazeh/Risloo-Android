@@ -9,11 +9,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderTimeHolder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexTimeHolder;
 import com.majazeh.risloo.databinding.HeaderItemIndexTimeBinding;
 import com.majazeh.risloo.databinding.SingleItemIndexTimeBinding;
+import com.mre.ligheh.Model.TypeModel.BillingItemModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -41,14 +43,16 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexTimeHolder) {
-//            TimeModel model = (TimeModel) items.get(i - 1);
+        if (holder instanceof HeaderTimeHolder) {
+            setWidget((HeaderTimeHolder) holder);
+        } else if (holder instanceof  IndexTimeHolder) {
+            BillingItemModel model = (BillingItemModel) items.get(i - 1);
 
             detector((IndexTimeHolder) holder);
 
-            listener((IndexTimeHolder) holder);
+            listener((IndexTimeHolder) holder, model);
 
-            setData((IndexTimeHolder) holder);
+            setData((IndexTimeHolder) holder, model);
         }
     }
 
@@ -90,20 +94,35 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
+    private void setWidget(HeaderTimeHolder holder) {
+        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.TimesAdapterAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+    }
+
     private void detector(IndexTimeHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
-    private void listener(IndexTimeHolder holder) {
+    private void listener(IndexTimeHolder holder, BillingItemModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexTimeHolder holder) {
-        // TODO : Place Code Here
+    private void setData(IndexTimeHolder holder, BillingItemModel model) {
+        holder.binding.serialTextView.setText(model.getId());
+        holder.binding.titleTextView.setText(model.getTitle());
+
+        if (model.getCreditor() != null)
+            holder.binding.creditorTextView.setText(model.getCreditor().getTitle());
+
+        if (model.getDebtor() != null && model.getDebtor().getUserModel() != null)
+            holder.binding.debtorTextView.setText(model.getDebtor().getUserModel().getName() + " - " + model.getDebtor().getTitle());
+        else if (model.getDebtor() != null)
+            holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
+
+        holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
     }
 
 }

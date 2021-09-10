@@ -121,12 +121,12 @@ public class IndexTransactionAdapter extends RecyclerView.Adapter<RecyclerView.V
 
     private void setData(IndexTransactionHolder holder, TransactionModel model) {
         holder.binding.serialTextView.setText(model.getId());
-
         holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+
         holder.binding.creditorTextView.setText(StringManager.separate(model.getCredit()));
         holder.binding.debtorTextView.setText(StringManager.separate(model.getDebt()));
-        holder.binding.leftTextView.setText(StringManager.separate(model.getBalance()));
 
+        holder.binding.leftTextView.setText(StringManager.separate(model.getBalance()));
         if (model.getBalance().equals("0"))
             holder.binding.leftTextView.setTextColor(activity.getResources().getColor(R.color.Gray700));
         else if (String.valueOf(model.getBalance()).contains("-"))

@@ -50,44 +50,10 @@
         android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/amount_textView"
+        app:layout_constraintEnd_toStartOf="@id/creditor_textView"
         app:layout_constraintStart_toEndOf="@id/serial_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
         tools:text="عنوان" />
-
-    <TextView
-        android:id="@+id/status_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/_8sdp"
-        android:gravity="center|right"
-        android:textSize="@dimen/_7ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray500"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/title_textView"
-        app:layout_constraintStart_toStartOf="@id/title_textView"
-        app:layout_constraintTop_toBottomOf="@id/title_textView"
-        tools:text="وضعیت" />
-
-    <TextView
-        android:id="@+id/amount_textView"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/_4sdp"
-        android:layout_marginTop="@dimen/_8sdp"
-        android:gravity="center|right"
-        android:textSize="@dimen/_8ssp"
-        android:textStyle="normal"
-        android:textColor="@color/Gray700"
-        android:textAlignment="gravity"
-        android:fontFamily="@font/dana_regular"
-        app:layout_constraintEnd_toStartOf="@id/debtor_textView"
-        app:layout_constraintStart_toEndOf="@id/title_textView"
-        app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="مبلغ" />
 
     <TextView
         android:id="@+id/date_textView"
@@ -101,13 +67,47 @@
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/amount_textView"
-        app:layout_constraintStart_toStartOf="@id/amount_textView"
-        app:layout_constraintTop_toBottomOf="@id/amount_textView"
+        app:layout_constraintEnd_toEndOf="@id/title_textView"
+        app:layout_constraintStart_toStartOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/title_textView"
         tools:text="تاریخ" />
 
     <TextView
+        android:id="@+id/creditor_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/_4sdp"
+        android:layout_marginTop="@dimen/_8sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_8ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Green600"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintEnd_toStartOf="@id/amount_textView"
+        app:layout_constraintStart_toEndOf="@id/title_textView"
+        app:layout_constraintTop_toBottomOf="@id/top_view"
+        tools:text="بستانکار" />
+
+    <TextView
         android:id="@+id/debtor_textView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/_8sdp"
+        android:gravity="center|right"
+        android:textSize="@dimen/_7ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Red500"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/creditor_textView"
+        app:layout_constraintStart_toStartOf="@id/creditor_textView"
+        app:layout_constraintTop_toBottomOf="@id/creditor_textView"
+        tools:text="بدهکار" />
+
+    <TextView
+        android:id="@+id/amount_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/_8sdp"
@@ -115,29 +115,29 @@
         android:gravity="center|right"
         android:textSize="@dimen/_8ssp"
         android:textStyle="normal"
-        android:textColor="@color/Red500"
+        android:textColor="@color/Gray700"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/amount_textView"
+        app:layout_constraintStart_toEndOf="@id/creditor_textView"
         app:layout_constraintTop_toBottomOf="@id/top_view"
-        tools:text="بدهکار" />
+        tools:text="مبلغ" />
 
     <TextView
-        android:id="@+id/creditor_textView"
+        android:id="@+id/status_textView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/_8sdp"
         android:gravity="center|right"
         android:textSize="@dimen/_7ssp"
         android:textStyle="normal"
-        android:textColor="@color/Green600"
+        android:textColor="@color/Gray500"
         android:textAlignment="gravity"
         android:fontFamily="@font/dana_regular"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/debtor_textView"
-        app:layout_constraintStart_toStartOf="@id/debtor_textView"
-        app:layout_constraintTop_toBottomOf="@id/debtor_textView"
-        tools:text="بستانکار" />
+        app:layout_constraintEnd_toEndOf="@id/amount_textView"
+        app:layout_constraintStart_toStartOf="@id/amount_textView"
+        app:layout_constraintTop_toBottomOf="@id/amount_textView"
+        tools:text="وضعیت" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
