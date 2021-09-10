@@ -21,7 +21,23 @@ public class Payment extends Model{
 
     public static void auth(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
         try {
-            Model.post(endpoint, data, header, response, PaymentModel.class);
+            Model.post("auth", data, header, response, null);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void list(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.get(endpoint, data, header, response, PaymentModel.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void post(HashMap<String, Object> data, HashMap<String, Object> header, Response response) {
+        try {
+            Model.post(endpoint, data, header, response, null);
         } catch (IOException e) {
             e.printStackTrace();
         }

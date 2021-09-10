@@ -12,6 +12,7 @@ public class BillingModel extends TypeModel {
     private String title = "";
     private String description = "";
     private int created_at;
+    private String type = "";
 
     public BillingModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -24,14 +25,23 @@ public class BillingModel extends TypeModel {
                 setDebtor(new TreasuriesModel(jsonObject.getJSONObject("debtor")));
             if (!jsonObject.isNull("amount"))
                 setAmount(jsonObject.getInt("amount"));
-            if (!jsonObject.isNull("action"))
-                setAction(jsonObject.getJSONObject("action"));
+            if (!jsonObject.isNull("action")) {
+                if (jsonObject.get("action").getClass().getName().equals("org.json.JSONObject")) {
+                    setAction(jsonObject.getJSONObject("action"));
+                } else {
+                    JSONObject jsonObject1 = new JSONObject();
+                    jsonObject1.put("method", jsonObject.getString("action"));
+                    setAction(jsonObject1);
+                }
+            }
             if (!jsonObject.isNull("description"))
                 setDescription(jsonObject.getString("description"));
             if (!jsonObject.isNull("title"))
                 setTitle(jsonObject.getString("title"));
             if (!jsonObject.isNull("created_at"))
                 setCreated_at(jsonObject.getInt("created_at"));
+            if (!jsonObject.isNull("type"))
+                setType(jsonObject.getString("type"));
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -99,5 +109,13 @@ public class BillingModel extends TypeModel {
 
     public void setCreated_at(int created_at) {
         this.created_at = created_at;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 }

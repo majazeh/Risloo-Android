@@ -34,7 +34,7 @@ public class SessionModel extends TypeModel {
     private List session_platforms;
     private String report = "";
     private String encryption_type = "";
-    private ArrayList transactions;
+    private List transactions;
 
     public SessionModel(JSONObject jsonObject) {
         super(jsonObject);
@@ -107,6 +107,16 @@ public class SessionModel extends TypeModel {
                 setSamples(samples);
             } else {
                 setSamples(new com.mre.ligheh.Model.Madule.List());
+            }
+
+            if (!jsonObject.isNull("transactions")) {
+                com.mre.ligheh.Model.Madule.List transactions = new com.mre.ligheh.Model.Madule.List();
+                for (int i = 0; i < jsonObject.getJSONArray("transactions").length(); i++) {
+                    transactions.add(new BillingModel(jsonObject.getJSONArray("transactions").getJSONObject(i)));
+                }
+                setTransactions(transactions);
+            } else {
+                setTransactions(new com.mre.ligheh.Model.Madule.List());
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -313,11 +323,11 @@ public class SessionModel extends TypeModel {
         this.session_platforms = session_platforms;
     }
 
-    public ArrayList getTransactions() {
+    public List getTransactions() {
         return transactions;
     }
 
-    public void setTransactions(ArrayList transactions) {
+    public void setTransactions(List transactions) {
         this.transactions = transactions;
     }
 }
