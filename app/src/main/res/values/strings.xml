@@ -1407,7 +1407,7 @@
     <string name="Transactions2AdapterDate">تاریخ</string>
     <string name="Transactions2AdapterCreditor">بستانکار</string>
     <string name="Transactions2AdapterDebtor">بدهکار</string>
-    <string name="Transactions2AdapterAmount">مبلغ</string>
+    <string name="Transactions2AdapterAmount">مبلغ (ت)</string>
     <string name="Transactions2AdapterStatus">وضعیت</string>
 
     <string name="Transactions2AdapterPay">پرداخت</string>

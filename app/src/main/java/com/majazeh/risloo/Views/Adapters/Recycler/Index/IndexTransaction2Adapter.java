@@ -12,12 +12,16 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
+import com.majazeh.risloo.Utils.Managers.SelectionManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderTransaction2Holder;
 import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexTransaction2Holder;
 import com.majazeh.risloo.databinding.HeaderItemIndexTransaction2Binding;
 import com.majazeh.risloo.databinding.SingleItemIndexTransaction2Binding;
+import com.mre.ligheh.Model.TypeModel.BillingModel;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
@@ -46,14 +50,16 @@ public class IndexTransaction2Adapter extends RecyclerView.Adapter<RecyclerView.
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexTransaction2Holder) {
-//            TransactionModel model = (TransactionModel) items.get(i - 1);
+        if (holder instanceof HeaderTransaction2Holder) {
+            setWidget((HeaderTransaction2Holder) holder);
+        } else if (holder instanceof  IndexTransaction2Holder) {
+            BillingModel model = (BillingModel) items.get(i - 1);
 
             detector((IndexTransaction2Holder) holder);
 
-            listener((IndexTransaction2Holder) holder);
+            listener((IndexTransaction2Holder) holder, model);
 
-            setData((IndexTransaction2Holder) holder);
+            setData((IndexTransaction2Holder) holder, model);
         }
     }
 
@@ -95,6 +101,10 @@ public class IndexTransaction2Adapter extends RecyclerView.Adapter<RecyclerView.
         }
     }
 
+    private void setWidget(HeaderTransaction2Holder holder) {
+        holder.binding.amountTextView.setText(StringManager.foregroundSize(activity.getResources().getString(R.string.Transactions2AdapterAmount), 5, 8, activity.getResources().getColor(R.color.Gray500), (int) activity.getResources().getDimension(R.dimen._7ssp)));
+    }
+
     private void detector(IndexTransaction2Holder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
@@ -102,7 +112,7 @@ public class IndexTransaction2Adapter extends RecyclerView.Adapter<RecyclerView.
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void listener(IndexTransaction2Holder holder) {
+    private void listener(IndexTransaction2Holder holder, BillingModel model) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
@@ -140,8 +150,21 @@ public class IndexTransaction2Adapter extends RecyclerView.Adapter<RecyclerView.
         });
     }
 
-    private void setData(IndexTransaction2Holder holder) {
-        // TODO : Place Code Here
+    private void setData(IndexTransaction2Holder holder, BillingModel model) {
+        holder.binding.serialTextView.setText(model.getId());
+        holder.binding.titleTextView.setText(model.getTitle());
+        holder.binding.dateTextView.setText(DateManager.jalYYYYsNMMsDDsNDDnlHHsMM(String.valueOf(model.getCreated_at()), " "));
+
+        if (model.getCreditor() != null)
+            holder.binding.creditorTextView.setText(model.getCreditor().getTitle());
+
+        if (model.getDebtor() != null && model.getDebtor().getUserModel() != null)
+            holder.binding.debtorTextView.setText(model.getDebtor().getUserModel().getName() + " - " + model.getDebtor().getTitle());
+        else if (model.getDebtor() != null)
+            holder.binding.debtorTextView.setText(model.getDebtor().getTitle());
+
+        holder.binding.amountTextView.setText(StringManager.separate(String.valueOf(model.getAmount())));
+        holder.binding.statusTextView.setText(SelectionManager.getBillType(activity, "fa", model.getType()));
 
         setMenu(holder);
     }

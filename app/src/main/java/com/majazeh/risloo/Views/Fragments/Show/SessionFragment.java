@@ -547,16 +547,16 @@ public class SessionFragment extends Fragment {
                             binding.samplesSingleLayout.emptyView.setText(getResources().getString(R.string.SamplesFragmentEmpty));
                         }
 
-//                        // Transactions Data
-//                        if (!sessionModel.getTransactions().data().isEmpty()) {
-//                            indexTransaction2Adapter.setItems(sessionModel.getTransactions().data());
-//                            binding.transactionsSingleLayout.recyclerView.setAdapter(indexTransaction2Adapter);
-//
-//                            binding.transactionsSingleLayout.emptyView.setVisibility(View.GONE);
-//                        } else if (indexTransaction2Adapter.getItemCount() == 0) {
-                        binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
-                        binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.Transactions2AdapterEmpty));
-//                        }
+                        // Transactions Data
+                        if (!sessionModel.getTransactions().data().isEmpty()) {
+                            indexTransaction2Adapter.setItems(sessionModel.getTransactions().data());
+                            binding.transactionsSingleLayout.recyclerView.setAdapter(indexTransaction2Adapter);
+
+                            binding.transactionsSingleLayout.emptyView.setVisibility(View.GONE);
+                        } else if (indexTransaction2Adapter.getItemCount() == 0) {
+                            binding.transactionsSingleLayout.emptyView.setVisibility(View.VISIBLE);
+                            binding.transactionsSingleLayout.emptyView.setText(getResources().getString(R.string.Transactions2AdapterEmpty));
+                        }
 
                         binding.psychologistsHeaderLayout.countTextView.setText(StringManager.bracing(psychologistsAdapter.getItemCount()));
                         binding.usersHeaderLayout.countTextView.setText(StringManager.bracing(indexUser2Adapter.itemsCount()));
