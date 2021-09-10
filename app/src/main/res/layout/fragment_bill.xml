@@ -151,7 +151,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <include
-            android:id="@+id/times_headerLayout"
+            android:id="@+id/actions_headerLayout"
             layout="@layout/component_main_index_header"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -160,7 +160,7 @@
             app:layout_constraintTop_toBottomOf="@id/info_constraintLayout" />
 
         <include
-            android:id="@+id/times_shimmerLayout"
+            android:id="@+id/actions_shimmerLayout"
             layout="@layout/component_shimmer_index"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -168,19 +168,19 @@
             android:visibility="visible"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/times_headerLayout"
+            app:layout_constraintTop_toBottomOf="@id/actions_headerLayout"
             tools:visibility="gone" />
 
         <include
-            android:id="@+id/times_singleLayout"
-            layout="@layout/component_single_time"
+            android:id="@+id/actions_singleLayout"
+            layout="@layout/component_single_bill_action"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/_12sdp"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@id/info_constraintLayout"
             app:layout_constraintStart_toStartOf="@id/info_constraintLayout"
-            app:layout_constraintTop_toBottomOf="@id/times_headerLayout"
+            app:layout_constraintTop_toBottomOf="@id/actions_headerLayout"
             tools:visibility="visible" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

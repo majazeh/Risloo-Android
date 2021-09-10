@@ -1287,6 +1287,20 @@
     //////////////////////////////////////////////////////////////////////////////////////
 
     /*
+    ---------- BillActions Adapter ----------
+    */
+
+    <string name="BillActionsAdapterHeader">موارد</string>
+
+    <string name="BillActionsAdapterSerial">سریال</string>
+    <string name="BillActionsAdapterName">عنوان</string>
+    <string name="BillActionsAdapterCreditor">بستانکار</string>
+    <string name="BillActionsAdapterDebtor">بدهکار</string>
+    <string name="BillActionsAdapterAmount">مبلغ</string>
+
+    <string name="BillActionsAdapterEmpty">هنوز موردی ثبت نشده است.</string>
+
+    /*
     ---------- Cases2 Adapter ----------
     */
 
@@ -1367,20 +1381,6 @@
     <string name="Sessions2AdapterStatus">وضعیت</string>
 
     <string name="Sessions2AdapterEmpty">هنوز جلسه‌ای ثبت نشده است.</string>
-
-    /*
-    ---------- Times Adapter ----------
-    */
-
-    <string name="TimesAdapterHeader">موارد</string>
-
-    <string name="TimesAdapterSerial">سریال</string>
-    <string name="TimesAdapterName">عنوان</string>
-    <string name="TimesAdapterCreditor">بستانکار</string>
-    <string name="TimesAdapterDebtor">بدهکار</string>
-    <string name="TimesAdapterAmount">مبلغ</string>
-
-    <string name="TimesAdapterEmpty">هنوز موردی ثبت نشده است.</string>
 
     /*
     ---------- Transactions Adapter ----------

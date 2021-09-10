@@ -18,7 +18,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        tools:listitem="@layout/single_item_index_time"
+        tools:listitem="@layout/single_item_index_bill_action"
         tools:itemCount="4" />
 
     <TextView

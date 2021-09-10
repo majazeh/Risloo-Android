@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
-import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderTimeHolder;
-import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexTimeHolder;
-import com.majazeh.risloo.databinding.HeaderItemIndexTimeBinding;
-import com.majazeh.risloo.databinding.SingleItemIndexTimeBinding;
+import com.majazeh.risloo.Views.Adapters.Holder.Header.HeaderBillActionHolder;
+import com.majazeh.risloo.Views.Adapters.Holder.Index.IndexBillActionHolder;
+import com.majazeh.risloo.databinding.HeaderItemIndexBillActionBinding;
+import com.majazeh.risloo.databinding.SingleItemIndexBillActionBinding;
 import com.mre.ligheh.Model.TypeModel.TypeModel;
 
 import java.util.ArrayList;
 
-public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class IndexBillActionAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     // Objects
     private Activity activity;
@@ -26,7 +26,7 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     // Vars
     private ArrayList<TypeModel> items;
 
-    public IndexTimeAdapter(@NonNull Activity activity) {
+    public IndexBillActionAdapter(@NonNull Activity activity) {
         this.activity = activity;
     }
 
@@ -34,21 +34,21 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         if (viewType == 0)
-            return new HeaderTimeHolder(HeaderItemIndexTimeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+            return new HeaderBillActionHolder(HeaderItemIndexBillActionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
 
-        return new IndexTimeHolder(SingleItemIndexTimeBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
+        return new IndexBillActionHolder(SingleItemIndexBillActionBinding.inflate(LayoutInflater.from(activity), viewGroup, false));
     }
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int i) {
-        if (holder instanceof  IndexTimeHolder) {
+        if (holder instanceof IndexBillActionHolder) {
 //            TimeModel model = (TimeModel) items.get(i - 1);
 
-            detector((IndexTimeHolder) holder);
+            detector((IndexBillActionHolder) holder);
 
-            listener((IndexTimeHolder) holder);
+            listener((IndexBillActionHolder) holder);
 
-            setData((IndexTimeHolder) holder);
+            setData((IndexBillActionHolder) holder);
         }
     }
 
@@ -90,19 +90,19 @@ public class IndexTimeAdapter extends RecyclerView.Adapter<RecyclerView.ViewHold
         }
     }
 
-    private void detector(IndexTimeHolder holder) {
+    private void detector(IndexBillActionHolder holder) {
         if (Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP) {
             holder.binding.getRoot().setBackgroundResource(R.drawable.draw_rec_solid_white_ripple_gray300);
         }
     }
 
-    private void listener(IndexTimeHolder holder) {
+    private void listener(IndexBillActionHolder holder) {
         CustomClickView.onClickListener(() -> {
             // TODO : Place Code Here
         }).widget(holder.binding.getRoot());
     }
 
-    private void setData(IndexTimeHolder holder) {
+    private void setData(IndexBillActionHolder holder) {
         // TODO : Place Code Here
     }
 

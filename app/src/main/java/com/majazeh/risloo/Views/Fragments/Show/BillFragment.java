@@ -14,6 +14,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
+import com.majazeh.risloo.Views.Adapters.Recycler.Index.IndexBillActionAdapter;
 import com.majazeh.risloo.databinding.FragmentBillBinding;
 import com.mre.ligheh.Model.TypeModel.BillingModel;
 
@@ -25,7 +26,7 @@ public class BillFragment extends Fragment {
     private FragmentBillBinding binding;
 
     // Adapters
-//    private IndexTimeAdapter adapter;
+    private IndexBillActionAdapter indexBillActionAdapter;
 
     // Models
     private BillingModel billingModel;
@@ -48,17 +49,17 @@ public class BillFragment extends Fragment {
     }
 
     private void initializer() {
-//        adapter = new IndexTimeAdapter(requireActivity());
+        indexBillActionAdapter = new IndexBillActionAdapter(requireActivity());
 
         data = new HashMap<>();
         header = new HashMap<>();
         header.put("Authorization", ((MainActivity) requireActivity()).singleton.getAuthorization());
 
-        binding.timesHeaderLayout.titleTextView.setText(getResources().getString(R.string.TimesAdapterHeader));
+        binding.actionsHeaderLayout.titleTextView.setText(getResources().getString(R.string.BillActionsAdapterHeader));
 
-        binding.timesShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
+        binding.actionsShimmerLayout.shimmerItem1.borderView.setVisibility(View.GONE);
 
-        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.timesSingleLayout.recyclerView, 0, 0, 0, 0);
+        InitManager.fixedVerticalRecyclerView(requireActivity(), binding.actionsSingleLayout.recyclerView, 0, 0, 0, 0);
     }
 
     private void setArgs() {
