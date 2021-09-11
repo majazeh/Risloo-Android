@@ -148,6 +148,20 @@ public class CreateScheduleFragment extends Fragment {
         if (session instanceof CreateScheduleTabSessionFragment) {
             if (((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.errorTextView);
+
+            if (((CreateScheduleTabSessionFragment) session).binding.startTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.startTypeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.startTypeErrorLayout.errorTextView);
+            if (((CreateScheduleTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.startRelativeErrorLayout.errorTextView);
+            if (((CreateScheduleTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.startAccurateErrorLayout.errorTextView);
+            if (((CreateScheduleTabSessionFragment) session).binding.endTypeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.endTypeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.endTypeErrorLayout.errorTextView);
+            if (((CreateScheduleTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.endRelativeErrorLayout.errorTextView);
+            if (((CreateScheduleTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot().getVisibility() == View.VISIBLE)
+                ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.endAccurateErrorLayout.errorTextView);
+
             if (((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot().getVisibility() == View.VISIBLE)
                 ((MainActivity) requireActivity()).validatoon.hideValid(((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView);
             if (((CreateScheduleTabSessionFragment) session).binding.descriptionErrorLayout.getRoot().getVisibility() == View.VISIBLE)
@@ -230,17 +244,17 @@ public class CreateScheduleFragment extends Fragment {
                 data.put("opens_at_type", ((CreateScheduleTabSessionFragment) session).startType);
 
                 if (data.get("opens_at_type").equals("relative"))
-                    data.put("opens_at", DateManager.relativeTimestamp(((CreateScheduleTabSessionFragment) session).relativeStartDay, ((CreateScheduleTabSessionFragment) session).relativeStartHour, ((CreateScheduleTabSessionFragment) session).relativeStartMinute));
+                    data.put("opens_at", DateManager.relativeTimestamp(((CreateScheduleTabSessionFragment) session).startRelativeDay, ((CreateScheduleTabSessionFragment) session).startRelativeHour, ((CreateScheduleTabSessionFragment) session).startRelativeMinute));
                 else
-                    data.put("opens_at", DateManager.accurateTimestamp(((CreateScheduleTabSessionFragment) session).accurateStartTime, ((CreateScheduleTabSessionFragment) session).accurateStartDate));
+                    data.put("opens_at", DateManager.accurateTimestamp(((CreateScheduleTabSessionFragment) session).startAccurateTime, ((CreateScheduleTabSessionFragment) session).startAccurateDate));
 
                 if (((CreateScheduleTabSessionFragment) session).endAvailable) {
                     data.put("closed_at_type", ((CreateScheduleTabSessionFragment) session).endType);
 
                     if (data.get("closed_at_type").equals("relative"))
-                        data.put("closed_at", DateManager.relativeTimestamp(((CreateScheduleTabSessionFragment) session).relativeEndDay, ((CreateScheduleTabSessionFragment) session).relativeEndHour, ((CreateScheduleTabSessionFragment) session).relativeEndMinute));
+                        data.put("closed_at", DateManager.relativeTimestamp(((CreateScheduleTabSessionFragment) session).endRelativeDay, ((CreateScheduleTabSessionFragment) session).endRelativeHour, ((CreateScheduleTabSessionFragment) session).endRelativeMinute));
                     else
-                        data.put("closed_at", DateManager.accurateTimestamp(((CreateScheduleTabSessionFragment) session).accurateEndTime, ((CreateScheduleTabSessionFragment) session).accurateEndDate));
+                        data.put("closed_at", DateManager.accurateTimestamp(((CreateScheduleTabSessionFragment) session).endAccurateTime, ((CreateScheduleTabSessionFragment) session).endAccurateDate));
                 }
             }
 
@@ -359,6 +373,29 @@ public class CreateScheduleFragment extends Fragment {
                                                 if (session instanceof CreateScheduleTabSessionFragment)
                                                     ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.statusErrorLayout.errorTextView, validation);
                                                 break;
+
+                                            case "opens_at_type":
+                                                if (session instanceof CreateScheduleTabSessionFragment)
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.startTypeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.startTypeErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "opens_at":
+                                                if (session instanceof CreateScheduleTabSessionFragment && data.get("opens_at_type").equals("relative"))
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.startRelativeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.startRelativeErrorLayout.errorTextView, validation);
+                                                else if (session instanceof CreateScheduleTabSessionFragment && data.get("opens_at_type").equals("absolute"))
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.startAccurateErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.startAccurateErrorLayout.errorTextView, validation);
+                                                break;
+
+                                            case "closed_at_type":
+                                                if (session instanceof CreateScheduleTabSessionFragment)
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.endTypeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.endTypeErrorLayout.errorTextView, validation);
+                                                break;
+                                            case "closed_at":
+                                                if (session instanceof CreateScheduleTabSessionFragment && data.get("closed_at_type").equals("relative"))
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.endRelativeErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.endRelativeErrorLayout.errorTextView, validation);
+                                                else if (session instanceof CreateScheduleTabSessionFragment && data.get("closed_at_type").equals("absolute"))
+                                                    ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.endAccurateErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.endAccurateErrorLayout.errorTextView, validation);
+                                                break;
+
                                             case "fields":
                                                 if (session instanceof CreateScheduleTabSessionFragment)
                                                     ((MainActivity) requireActivity()).validatoon.showValid(((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.getRoot(), ((CreateScheduleTabSessionFragment) session).binding.axisErrorLayout.errorTextView, validation);

@@ -35,8 +35,8 @@ public class EditSessionTabSessionFragment extends Fragment {
     // Vars
     public String status = "", description = "", coordination = "";
     public String startType = "relative", endType = "relative";
-    public String accurateStartTime = "", accurateStartDate = "", accurateEndTime = "", accurateEndDate = "";
-    public String relativeStartDay = "", relativeStartHour = "", relativeStartMinute = "", relativeEndDay = "", relativeEndHour = "", relativeEndMinute = "";
+    public String startAccurateTime = "", startAccurateDate = "", endAccurateTime = "", endAccurateDate = "";
+    public String startRelativeDay = "", startRelativeHour = "", startRelativeMinute = "", endRelativeDay = "", endRelativeHour = "", endRelativeMinute = "";
     public boolean endAvailable = false;
     private boolean userSelect = false;
 
@@ -65,6 +65,24 @@ public class EditSessionTabSessionFragment extends Fragment {
 
         binding.coordinationGuideLayout.guideTextView.setText(getResources().getString(R.string.EditSessionTabSessionCoordinationGuide));
 
+        binding.startTypeIncludeLayout.headerTextView.setText(getResources().getString(R.string.StartTime));
+        binding.startTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.AccurateTime));
+        binding.startTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.RelativeTime));
+        binding.startTypeIncludeLayout.secondRadioButton.setChecked(true);
+
+        binding.endTypeIncludeLayout.headerCheckBox.setText(getResources().getString(R.string.EndTime));
+        binding.endTypeIncludeLayout.firstRadioButton.setText(getResources().getString(R.string.AccurateTime));
+        binding.endTypeIncludeLayout.secondRadioButton.setText(getResources().getString(R.string.RelativeTime));
+        binding.endTypeIncludeLayout.secondRadioButton.setChecked(true);
+
+        binding.startRelativeIncludeLayout.dayTextView.setText(getResources().getString(R.string.DayHint));
+        binding.startRelativeIncludeLayout.hourTextView.setText(getResources().getString(R.string.HourHint));
+        binding.startRelativeIncludeLayout.minuteTextView.setText(getResources().getString(R.string.MinuteStartHint));
+
+        binding.endRelativeIncludeLayout.dayTextView.setText(getResources().getString(R.string.DayHint));
+        binding.endRelativeIncludeLayout.hourTextView.setText(getResources().getString(R.string.HourHint));
+        binding.endRelativeIncludeLayout.minuteTextView.setText(getResources().getString(R.string.MinuteEndHint));
+
         InitManager.normal12sspSpinner(requireActivity(), binding.statusIncludeLayout.selectSpinner, R.array.SessionStatus);
 
         InitManager.txtTextColor(binding.editTextView.getRoot(), getResources().getString(R.string.EditSessionTabSessionButton), getResources().getColor(R.color.White));
@@ -92,9 +110,9 @@ public class EditSessionTabSessionFragment extends Fragment {
                     status = parent.getItemAtPosition(position).toString();
 
                     if (status.equals("زمان\u200Cبندی شده"))
-                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                        binding.scheduledGroup.setVisibility(View.VISIBLE);
                     else
-                        binding.scheduledIncludeLayout.getRoot().setVisibility(View.GONE);
+                        binding.scheduledGroup.setVisibility(View.GONE);
 
                     userSelect = false;
                 }
@@ -128,137 +146,157 @@ public class EditSessionTabSessionFragment extends Fragment {
 
         // -------------------- RadioGroup
 
-        binding.scheduledIncludeLayout.startRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        binding.startTypeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
-                case R.id.start_accurate_radioButton:
+                case R.id.first_radioButton:
                     startType = "absolute";
 
-                    binding.scheduledIncludeLayout.startAccurateGroup.setVisibility(View.VISIBLE);
-                    binding.scheduledIncludeLayout.startRelativeGroup.setVisibility(View.GONE);
+                    binding.startRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.startAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
-                case R.id.start_relative_radioButton:
+                case R.id.second_radioButton:
                     startType = "relative";
 
-                    binding.scheduledIncludeLayout.startAccurateGroup.setVisibility(View.GONE);
-                    binding.scheduledIncludeLayout.startRelativeGroup.setVisibility(View.VISIBLE);
+                    binding.startRelativeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.startAccurateIncludeLayout.getRoot().setVisibility(View.GONE);
                     break;
             }
         });
 
-        binding.scheduledIncludeLayout.endRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+        binding.endTypeIncludeLayout.getRoot().setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
-                case R.id.end_accurate_radioButton:
+                case R.id.first_radioButton:
                     endType = "absolute";
 
-                    binding.scheduledIncludeLayout.endAccurateGroup.setVisibility(View.VISIBLE);
-                    binding.scheduledIncludeLayout.endRelativeGroup.setVisibility(View.GONE);
+                    binding.endRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
+                    binding.endAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
                     break;
-                case R.id.end_relative_radioButton:
+                case R.id.second_radioButton:
                     endType = "relative";
 
-                    binding.scheduledIncludeLayout.endAccurateGroup.setVisibility(View.GONE);
-                    binding.scheduledIncludeLayout.endRelativeGroup.setVisibility(View.VISIBLE);
+                    binding.endRelativeIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                    binding.endAccurateIncludeLayout.getRoot().setVisibility(View.GONE);
                     break;
             }
         });
 
         // -------------------- Checkbox
 
-        binding.scheduledIncludeLayout.endHintCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+        binding.endTypeIncludeLayout.headerCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
             endAvailable = isChecked;
 
             if (isChecked) {
-                binding.scheduledIncludeLayout.setAlpha((float) 1);
-                binding.scheduledIncludeLayout.setEnable(true);
-                binding.scheduledIncludeLayout.setFocusableInTouchMode(true);
+                binding.endTypeIncludeLayout.firstRadioButton.setAlpha((float) 1);
+                binding.endTypeIncludeLayout.secondRadioButton.setAlpha((float) 1);
+                binding.endRelativeIncludeLayout.getRoot().setAlpha((float) 1);
+                binding.endAccurateIncludeLayout.getRoot().setAlpha((float) 1);
+
+                binding.endTypeIncludeLayout.firstRadioButton.setEnabled(true);
+                binding.endTypeIncludeLayout.secondRadioButton.setEnabled(true);
+                binding.endAccurateIncludeLayout.timeTextView.setEnabled(true);
+                binding.endAccurateIncludeLayout.dateTextView.setEnabled(true);
+
+                binding.endRelativeIncludeLayout.dayEditText.setFocusableInTouchMode(true);
+                binding.endRelativeIncludeLayout.hourEditText.setFocusableInTouchMode(true);
+                binding.endRelativeIncludeLayout.minuteEditText.setFocusableInTouchMode(true);
             } else {
-                binding.scheduledIncludeLayout.setAlpha((float) 0.4);
-                binding.scheduledIncludeLayout.setEnable(false);
-                binding.scheduledIncludeLayout.setFocusableInTouchMode(false);
+                binding.endTypeIncludeLayout.firstRadioButton.setAlpha((float) 0.4);
+                binding.endTypeIncludeLayout.secondRadioButton.setAlpha((float) 0.4);
+                binding.endRelativeIncludeLayout.getRoot().setAlpha((float) 0.4);
+                binding.endAccurateIncludeLayout.getRoot().setAlpha((float) 0.4);
+
+                binding.endTypeIncludeLayout.firstRadioButton.setEnabled(false);
+                binding.endTypeIncludeLayout.secondRadioButton.setEnabled(false);
+                binding.endAccurateIncludeLayout.timeTextView.setEnabled(false);
+                binding.endAccurateIncludeLayout.dateTextView.setEnabled(false);
+
+                binding.endRelativeIncludeLayout.dayEditText.setFocusableInTouchMode(false);
+                binding.endRelativeIncludeLayout.hourEditText.setFocusableInTouchMode(false);
+                binding.endRelativeIncludeLayout.minuteEditText.setFocusableInTouchMode(false);
             }
         });
 
         // -------------------- Touch
 
-        binding.scheduledIncludeLayout.startRelativeDayEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeDayEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeDayEditText);
+        binding.startRelativeIncludeLayout.dayEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.startRelativeIncludeLayout.dayEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.startRelativeIncludeLayout.dayEditText);
             return false;
         });
 
-        binding.scheduledIncludeLayout.startRelativeHourEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeHourEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeHourEditText);
+        binding.startRelativeIncludeLayout.hourEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.startRelativeIncludeLayout.hourEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.startRelativeIncludeLayout.hourEditText);
             return false;
         });
 
-        binding.scheduledIncludeLayout.startRelativeMinuteEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeMinuteEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeMinuteEditText);
+        binding.startRelativeIncludeLayout.minuteEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.startRelativeIncludeLayout.minuteEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.startRelativeIncludeLayout.minuteEditText);
             return false;
         });
 
-        binding.scheduledIncludeLayout.endRelativeDayEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeDayEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeDayEditText);
+        binding.endRelativeIncludeLayout.dayEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.endRelativeIncludeLayout.dayEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.endRelativeIncludeLayout.dayEditText);
             return false;
         });
 
-        binding.scheduledIncludeLayout.endRelativeHourEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeHourEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeHourEditText);
+        binding.endRelativeIncludeLayout.hourEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.endRelativeIncludeLayout.hourEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.endRelativeIncludeLayout.hourEditText);
             return false;
         });
 
-        binding.scheduledIncludeLayout.endRelativeMinuteEditText.setOnTouchListener((v, event) -> {
-            if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.endRelativeMinuteEditText.hasFocus())
-                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.scheduledIncludeLayout.endRelativeMinuteEditText);
+        binding.endRelativeIncludeLayout.minuteEditText.setOnTouchListener((v, event) -> {
+            if (MotionEvent.ACTION_UP == event.getAction() && !binding.endRelativeIncludeLayout.minuteEditText.hasFocus())
+                ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.endRelativeIncludeLayout.minuteEditText);
             return false;
         });
 
         // -------------------- Focus
 
-        binding.scheduledIncludeLayout.startRelativeDayEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            relativeStartDay = binding.scheduledIncludeLayout.startRelativeDayEditText.getText().toString().trim();
+        binding.startRelativeIncludeLayout.dayEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            startRelativeDay = binding.startRelativeIncludeLayout.dayEditText.getText().toString().trim();
         });
 
-        binding.scheduledIncludeLayout.startRelativeHourEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            relativeStartHour = binding.scheduledIncludeLayout.startRelativeHourEditText.getText().toString().trim();
+        binding.startRelativeIncludeLayout.hourEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            startRelativeHour = binding.startRelativeIncludeLayout.hourEditText.getText().toString().trim();
         });
 
-        binding.scheduledIncludeLayout.startRelativeMinuteEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            relativeStartMinute = binding.scheduledIncludeLayout.startRelativeMinuteEditText.getText().toString().trim();
+        binding.startRelativeIncludeLayout.minuteEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            startRelativeMinute = binding.startRelativeIncludeLayout.minuteEditText.getText().toString().trim();
         });
 
-        binding.scheduledIncludeLayout.endRelativeDayEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            relativeEndDay = binding.scheduledIncludeLayout.endRelativeDayEditText.getText().toString().trim();
+        binding.endRelativeIncludeLayout.dayEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            endRelativeDay = binding.endRelativeIncludeLayout.dayEditText.getText().toString().trim();
         });
 
-        binding.scheduledIncludeLayout.endRelativeHourEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            relativeEndHour = binding.scheduledIncludeLayout.endRelativeHourEditText.getText().toString().trim();
+        binding.endRelativeIncludeLayout.hourEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            endRelativeHour = binding.endRelativeIncludeLayout.hourEditText.getText().toString().trim();
         });
 
-        binding.scheduledIncludeLayout.endRelativeMinuteEditText.setOnFocusChangeListener((v, hasFocus) -> {
-            relativeEndMinute = binding.scheduledIncludeLayout.endRelativeMinuteEditText.getText().toString().trim();
+        binding.endRelativeIncludeLayout.minuteEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            endRelativeMinute = binding.endRelativeIncludeLayout.minuteEditText.getText().toString().trim();
         });
 
         // -------------------- BottomSheet
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), accurateStartTime, "accurateStartTime");
-        }).widget(binding.scheduledIncludeLayout.startAccurateTimeTextView);
+            SheetManager.showTimeBottomSheet(requireActivity(), startAccurateTime, "accurateStartTime");
+        }).widget(binding.startAccurateIncludeLayout.timeTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), accurateStartDate, "accurateStartDate");
-        }).widget(binding.scheduledIncludeLayout.startAccurateDateTextView);
+            SheetManager.showDateBottomSheet(requireActivity(), startAccurateDate, "accurateStartDate");
+        }).widget(binding.startAccurateIncludeLayout.dateTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), accurateEndTime, "accurateEndTime");
-        }).widget(binding.scheduledIncludeLayout.endAccurateTimeTextView);
+            SheetManager.showTimeBottomSheet(requireActivity(), endAccurateTime, "accurateEndTime");
+        }).widget(binding.endAccurateIncludeLayout.timeTextView);
 
         CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), accurateEndDate, "accurateEndDate");
-        }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
+            SheetManager.showDateBottomSheet(requireActivity(), endAccurateDate, "accurateEndDate");
+        }).widget(binding.endAccurateIncludeLayout.dateTextView);
 
         // -------------------- Done
 
@@ -279,9 +317,9 @@ public class EditSessionTabSessionFragment extends Fragment {
                         binding.statusIncludeLayout.selectSpinner.setSelection(i);
 
                         if (status.equals("زمان\u200Cبندی شده"))
-                            binding.scheduledIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.scheduledGroup.setVisibility(View.VISIBLE);
                         else
-                            binding.scheduledIncludeLayout.getRoot().setVisibility(View.GONE);
+                            binding.scheduledGroup.setVisibility(View.GONE);
                     }
                 }
             }
@@ -296,37 +334,37 @@ public class EditSessionTabSessionFragment extends Fragment {
                 binding.coordinationIncludeLayout.inputEditText.setText(coordination);
             }
 
-            accurateStartTime = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateStartTime));
+            startAccurateTime = String.valueOf(DateManager.currentTimestamp());
+            binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
 
-            accurateStartDate = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateStartDate, "-"));
+            startAccurateDate = String.valueOf(DateManager.currentTimestamp());
+            binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
 
-            accurateEndTime = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateStartTime));
+            endAccurateTime = String.valueOf(DateManager.currentTimestamp());
+            binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
 
-            accurateEndDate = String.valueOf(DateManager.currentTimestamp());
-            binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateEndDate, "-"));
+            endAccurateDate = String.valueOf(DateManager.currentTimestamp());
+            binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
         }
     }
 
     public void responseBottomSheet(String method, String data) {
         switch (method) {
             case "accurateStartTime":
-                accurateStartTime = data;
-                binding.scheduledIncludeLayout.startAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateStartTime));
+                startAccurateTime = data;
+                binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
                 break;
             case "accurateStartDate":
-                accurateStartDate = data;
-                binding.scheduledIncludeLayout.startAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateStartDate, "-"));
+                startAccurateDate = data;
+                binding.startAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(startAccurateDate, "-"));
                 break;
             case "accurateEndTime":
-                accurateEndTime = data;
-                binding.scheduledIncludeLayout.endAccurateTimeTextView.setText(DateManager.jalHHsMM(accurateEndTime));
+                endAccurateTime = data;
+                binding.endAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(endAccurateTime));
                 break;
             case "accurateEndDate":
-                accurateEndDate = data;
-                binding.scheduledIncludeLayout.endAccurateDateTextView.setText(DateManager.jalYYYYsMMsDD(accurateEndDate, "-"));
+                endAccurateDate = data;
+                binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
                 break;
         }
     }

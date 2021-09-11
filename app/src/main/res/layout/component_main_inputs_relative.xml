@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:orientation="horizontal"
+    android:layoutDirection="rtl"
+    tools:layout_margin="@dimen/_12sdp">
+
+    <EditText
+        android:id="@+id/day_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:saveEnabled="false"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/day_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="روز و" />
+
+    <EditText
+        android:id="@+id/hour_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:saveEnabled="false"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/hour_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="ساعت و" />
+
+    <EditText
+        android:id="@+id/minute_editText"
+        android:layout_width="@dimen/_36sdp"
+        android:layout_height="@dimen/_36sdp"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:imeOptions="actionDone"
+        android:inputType="number"
+        android:maxLength="2"
+        android:gravity="center"
+        android:textSize="@dimen/_12ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray700"
+        android:textColorHint="@color/Gray400"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_medium"
+        android:importantForAutofill="no"
+        android:saveEnabled="false"
+        android:background="@drawable/draw_2sdp_solid_transparent_border_1sdp_gray500"
+        tools:ignore="LabelFor" />
+
+    <TextView
+        android:id="@+id/minute_textView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/_4sdp"
+        android:gravity="center|start"
+        android:textSize="@dimen/_9ssp"
+        android:textStyle="normal"
+        android:textColor="@color/Gray800"
+        android:textAlignment="gravity"
+        android:fontFamily="@font/dana_regular"
+        tools:text="دقیقه" />
+
+</LinearLayout>
