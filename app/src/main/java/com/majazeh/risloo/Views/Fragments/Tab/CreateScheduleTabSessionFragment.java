@@ -121,10 +121,27 @@ public class CreateScheduleTabSessionFragment extends Fragment {
                 if (userSelect) {
                     status = parent.getItemAtPosition(position).toString();
 
-                    if (status.equals("زمان\u200Cبندی شده"))
+                    if (status.equals("زمان\u200Cبندی شده")) {
                         binding.scheduledGroup.setVisibility(View.VISIBLE);
-                    else
+
+                        if (binding.startTypeIncludeLayout.firstRadioButton.isChecked()) {
+                            binding.startAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.startRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
+                        }
+
+                        if (binding.endTypeIncludeLayout.firstRadioButton.isChecked()) {
+                            binding.endAccurateIncludeLayout.getRoot().setVisibility(View.VISIBLE);
+                            binding.endRelativeIncludeLayout.getRoot().setVisibility(View.GONE);
+                        }
+
+                    } else {
                         binding.scheduledGroup.setVisibility(View.GONE);
+
+                        if (binding.startAccurateIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                            binding.startAccurateIncludeLayout.getRoot().setVisibility(View.GONE);
+                        if (binding.endAccurateIncludeLayout.getRoot().getVisibility() == View.VISIBLE)
+                            binding.endAccurateIncludeLayout.getRoot().setVisibility(View.GONE);
+                    }
 
                     userSelect = false;
                 }
@@ -325,6 +342,8 @@ public class CreateScheduleTabSessionFragment extends Fragment {
     }
 
     private void setData() {
+        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "axises");
+
         startAccurateTime = String.valueOf(DateManager.currentTimestamp());
         binding.startAccurateIncludeLayout.timeTextView.setText(DateManager.jalHHsMM(startAccurateTime));
 
@@ -337,7 +356,19 @@ public class CreateScheduleTabSessionFragment extends Fragment {
         endAccurateDate = String.valueOf(DateManager.currentTimestamp());
         binding.endAccurateIncludeLayout.dateTextView.setText(DateManager.jalYYYYsMMsDD(endAccurateDate, "-"));
 
-        setRecyclerView(new ArrayList<>(), new ArrayList<>(), "axises");
+        binding.endTypeIncludeLayout.firstRadioButton.setAlpha((float) 0.4);
+        binding.endTypeIncludeLayout.secondRadioButton.setAlpha((float) 0.4);
+        binding.endRelativeIncludeLayout.getRoot().setAlpha((float) 0.4);
+        binding.endAccurateIncludeLayout.getRoot().setAlpha((float) 0.4);
+
+        binding.endTypeIncludeLayout.firstRadioButton.setEnabled(false);
+        binding.endTypeIncludeLayout.secondRadioButton.setEnabled(false);
+        binding.endAccurateIncludeLayout.timeTextView.setEnabled(false);
+        binding.endAccurateIncludeLayout.dateTextView.setEnabled(false);
+
+        binding.endRelativeIncludeLayout.getRoot().setFocusableInTouchMode(false);
+        binding.endRelativeIncludeLayout.hourEditText.setFocusableInTouchMode(false);
+        binding.endRelativeIncludeLayout.minuteEditText.setFocusableInTouchMode(false);
     }
 
     private void setRecyclerView(ArrayList<TypeModel> items, ArrayList<String> ids, String method) {
