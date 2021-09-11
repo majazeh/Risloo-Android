@@ -60,10 +60,22 @@ public class DateManager {
         if (!date.equals(""))
             dateLong = Long.parseLong(date);
 
-        Timestamp timestamp = new Timestamp(timeLong + dateLong);
-        Date value = new Date(timestamp.getTime());
+        Date td = timestampToDate(timeLong);
+        Date dd = timestampToDate(dateLong);
+        PersianDate tpd = DateManager.dateToPersian(td);
+        PersianDate dpd = DateManager.dateToPersian(dd);
 
-        return value.getTime() / 1000;
+        int year = dpd.getShYear();
+        int month = dpd.getShMonth();
+        int day = dpd.getShDay();
+        int hour = tpd.getHour();
+        int minute = tpd.getMinute();
+        int second = tpd.getSecond();
+
+        PersianDate mpd = DateManager.createPersianDate(year, month, day, hour, minute, second);
+        Date md = DateManager.persianToDate(mpd);
+
+        return DateManager.dateToTimestamp(md);
     }
 
     public static long relativeTimestamp(String day, String hour, String minute) {
