@@ -14,6 +14,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Room;
 import com.mre.ligheh.Model.TypeModel.CenterModel;
@@ -90,20 +91,16 @@ public class CreateRoomFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateRoomFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("center")) {
-                CenterModel centerModel = (CenterModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(centerModel);
-
-            } else if (type.equals("user")) {
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+                setData((CenterModel) typeModel);
+            else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel")) {
                 centerId = CreateRoomFragmentArgs.fromBundle(getArguments()).getCenterId();
                 data.put("id", centerId);
 
-                UserModel userModel = (UserModel) CreateRoomFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(userModel);
+                setData((UserModel) typeModel);
             }
         }
     }

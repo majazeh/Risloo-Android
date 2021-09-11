@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.majazeh.risloo.R;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -136,14 +137,11 @@ public class CreateTreasuryFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("user")) {
-                UserModel userModel = (UserModel) CreateTreasuryFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(userModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("UserModel"))
+                setData((UserModel) typeModel);
         }
     }
 

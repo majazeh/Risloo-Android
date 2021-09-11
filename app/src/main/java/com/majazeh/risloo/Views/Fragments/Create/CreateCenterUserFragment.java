@@ -18,6 +18,7 @@ import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SheetManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.mre.ligheh.API.Response;
 import com.mre.ligheh.Model.Madule.Center;
 import com.mre.ligheh.Model.TypeModel.AuthModel;
@@ -174,14 +175,11 @@ public class CreateCenterUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateCenterUserFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("center")) {
-                CenterModel centerModel = (CenterModel) CreateCenterUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(centerModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+                setData((CenterModel) typeModel);
         }
     }
 

@@ -258,7 +258,7 @@ public class CenterFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("center", null, centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(null, centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

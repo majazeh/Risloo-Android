@@ -186,7 +186,7 @@ public class IndexCenterUserAdapter extends RecyclerView.Adapter<RecyclerView.Vi
                             break;
                         case "ساختن اتاق درمان": {
                             if (current instanceof CenterUsersFragment) {
-                                NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment("user", ((CenterUsersFragment) current).centerId, model);
+                                NavDirections action = NavigationMainDirections.actionGlobalCreateRoomFragment(((CenterUsersFragment) current).centerId, model);
                                 ((MainActivity) activity).navController.navigate(action);
                             }
                         } break;

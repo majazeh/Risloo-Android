@@ -185,7 +185,6 @@ public class CreateCenterFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateCenterFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateCenterFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {

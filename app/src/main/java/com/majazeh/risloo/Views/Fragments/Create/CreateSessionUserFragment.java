@@ -165,14 +165,11 @@ public class CreateSessionUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateSessionUserFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateSessionUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("session")) {
-                SessionModel sessionModel = (SessionModel) CreateSessionUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(sessionModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+                setData((SessionModel) typeModel);
         }
     }
 

@@ -115,7 +115,6 @@ public class CreateDocumentFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateDocumentFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateDocumentFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         // TODO : Place Code When Needed

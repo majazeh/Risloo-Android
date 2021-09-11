@@ -105,14 +105,12 @@ public class CreateCaseUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateCaseUserFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateCaseUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("case")) {
-                CaseModel caseModel = (CaseModel) CreateCaseUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(caseModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
+                setData((CaseModel) typeModel);
+
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
         }

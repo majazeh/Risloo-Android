@@ -139,7 +139,7 @@ public class BulkSamplesFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("bulk", null);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

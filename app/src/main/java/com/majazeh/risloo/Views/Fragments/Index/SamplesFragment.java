@@ -142,7 +142,7 @@ public class SamplesFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("sample", null);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

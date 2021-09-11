@@ -88,7 +88,7 @@ public class CenterPlatformsFragment extends Fragment {
     @SuppressLint("ClickableViewAccessibility")
     private void listener() {
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreatePlatformFragment("center", centerModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreatePlatformFragment(centerModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addConstraintLayout);
     }

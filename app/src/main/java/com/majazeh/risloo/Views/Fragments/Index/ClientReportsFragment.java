@@ -150,10 +150,10 @@ public class ClientReportsFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (type.equals("case")) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment("case", caseModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment(caseModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             } else {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment("session", sessionModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateReportFragment(sessionModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
         }).widget(binding.addImageView.getRoot());

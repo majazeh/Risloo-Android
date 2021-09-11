@@ -170,7 +170,7 @@ public class RoomFragment extends Fragment {
                             }
                             break;
                         case "تعریف برنامه درمانی": {
-                            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment("room", roomModel);
+                            NavDirections action = NavigationMainDirections.actionGlobalCreateScheduleFragment(roomModel);
                             ((MainActivity) requireActivity()).navController.navigate(action);
                         } break;
                         case "پروفایل من": {
@@ -298,10 +298,10 @@ public class RoomFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (roomModel == null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment("center", centerModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(centerModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             } else {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment("room", roomModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateCaseFragment(roomModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
         }).widget(binding.addImageView.getRoot());

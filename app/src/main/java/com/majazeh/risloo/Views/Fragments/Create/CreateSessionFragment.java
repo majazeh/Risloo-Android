@@ -15,6 +15,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateSessionAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateSessionTabPaymentFragment;
@@ -78,14 +79,11 @@ public class CreateSessionFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateSessionFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("case")) {
-                caseModel = (CaseModel) CreateSessionFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(caseModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
+                setData((CaseModel) typeModel);
         }
     }
 

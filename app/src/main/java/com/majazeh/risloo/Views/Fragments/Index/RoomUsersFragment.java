@@ -146,7 +146,7 @@ public class RoomUsersFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomUserFragment("room", roomModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateRoomUserFragment(roomModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

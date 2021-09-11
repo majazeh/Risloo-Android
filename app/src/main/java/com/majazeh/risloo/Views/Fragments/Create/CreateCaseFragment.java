@@ -144,18 +144,14 @@ public class CreateCaseFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateCaseFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("center")) {
-                CenterModel centerModel = (CenterModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(centerModel);
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CenterModel"))
+                setData((CenterModel) typeModel);
+            else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                setData((RoomModel) typeModel);
 
-            } else if (type.equals("room")) {
-                RoomModel roomModel = (RoomModel) CreateCaseFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(roomModel);
-            }
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "tags");

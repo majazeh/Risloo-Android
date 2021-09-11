@@ -139,7 +139,7 @@ public class UsersFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateUserFragment(null, null);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateUserFragment(null);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.addImageView.getRoot());
     }

@@ -105,14 +105,12 @@ public class CreateRoomUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateRoomUserFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateRoomUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("room")) {
-                RoomModel roomModel = (RoomModel) CreateRoomUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(roomModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                setData((RoomModel) typeModel);
+
         } else {
             setRecyclerView(new ArrayList<>(), new ArrayList<>(), "references");
         }

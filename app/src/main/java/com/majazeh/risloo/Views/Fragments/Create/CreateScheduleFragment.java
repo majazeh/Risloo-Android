@@ -15,6 +15,7 @@ import com.majazeh.risloo.Utils.Managers.DateManager;
 import com.majazeh.risloo.Utils.Managers.DialogManager;
 import com.majazeh.risloo.Utils.Managers.SelectionManager;
 import com.majazeh.risloo.Utils.Managers.SnackManager;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
 import com.majazeh.risloo.Views.Adapters.Tab.CreateScheduleAdapter;
 import com.majazeh.risloo.Views.Fragments.Tab.CreateScheduleTabPaymentFragment;
@@ -79,14 +80,11 @@ public class CreateScheduleFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateScheduleFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("room")) {
-                roomModel = (RoomModel) CreateScheduleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(roomModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("RoomModel"))
+                setData((RoomModel) typeModel);
         }
     }
 

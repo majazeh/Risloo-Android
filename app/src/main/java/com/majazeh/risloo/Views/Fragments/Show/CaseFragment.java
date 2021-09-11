@@ -156,17 +156,17 @@ public class CaseFragment extends Fragment {
         });
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment("case", caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateCaseUserFragment(caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.referencesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment("case", caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSessionFragment(caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.sessionsAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("case", caseModel);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(caseModel);
             ((MainActivity) requireActivity()).navController.navigate(action);
         }).widget(binding.samplesAddView.getRoot());
     }

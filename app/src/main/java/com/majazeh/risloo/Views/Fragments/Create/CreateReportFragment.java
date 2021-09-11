@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.majazeh.risloo.R;
+import com.majazeh.risloo.Utils.Managers.StringManager;
 import com.majazeh.risloo.Utils.Widgets.CustomClickView;
 import com.majazeh.risloo.Utils.Managers.InitManager;
 import com.majazeh.risloo.Views.Activities.MainActivity;
@@ -133,18 +134,13 @@ public class CreateReportFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateReportFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            if (type.equals("case")) {
-                CaseModel caseModel = (CaseModel) CreateReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(caseModel);
-
-            } else if (type.equals("session")) {
-                SessionModel sessionModel = (SessionModel) CreateReportFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                setData(sessionModel);
-            }
+            if (StringManager.substring(typeModel.getClass().getName(), '.').equals("CaseModel"))
+                setData((CaseModel) typeModel);
+            else if (StringManager.substring(typeModel.getClass().getName(), '.').equals("SessionModel"))
+                setData((SessionModel) typeModel);
         }
     }
 

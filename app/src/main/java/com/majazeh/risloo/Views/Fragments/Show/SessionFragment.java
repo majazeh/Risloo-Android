@@ -176,21 +176,21 @@ public class SessionFragment extends Fragment {
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateSessionUserFragment("session", sessionModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateSessionUserFragment(sessionModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
         }).widget(binding.usersAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment("session", sessionModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreatePracticeFragment(sessionModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
         }).widget(binding.practicesAddView.getRoot());
 
         CustomClickView.onClickListener(() -> {
             if (sessionModel != null) {
-                NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("session", sessionModel);
+                NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(sessionModel);
                 ((MainActivity) requireActivity()).navController.navigate(action);
             }
         }).widget(binding.samplesAddView.getRoot());

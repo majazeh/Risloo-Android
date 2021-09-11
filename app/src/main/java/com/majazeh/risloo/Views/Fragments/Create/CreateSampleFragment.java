@@ -350,22 +350,18 @@ public class CreateSampleFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateSampleFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         if (typeModel != null) {
-            switch (type) {
-                case "scale":
-                    ScaleModel scaleModel = (ScaleModel) CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                    setData(scaleModel);
+            switch (StringManager.substring(typeModel.getClass().getName(), '.')) {
+                case "ScaleModel":
+                    setData((ScaleModel) typeModel);
                     break;
-                case "case":
-                    CaseModel caseModel = (CaseModel) CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                    setData(caseModel);
+                case "CaseModel":
+                    setData((CaseModel) typeModel);
                     break;
-                case "session":
-                    SessionModel sessionModel = (SessionModel) CreateSampleFragmentArgs.fromBundle(getArguments()).getTypeModel();
-                    setData(sessionModel);
+                case "SessionModel":
+                    setData((SessionModel) typeModel);
                     break;
             }
         } else {

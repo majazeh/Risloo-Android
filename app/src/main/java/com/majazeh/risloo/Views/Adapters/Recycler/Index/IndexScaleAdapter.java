@@ -123,7 +123,7 @@ public class IndexScaleAdapter extends RecyclerView.Adapter<RecyclerView.ViewHol
         }).widget(holder.binding.getRoot());
 
         CustomClickView.onClickListener(() -> {
-            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment("scale", model);
+            NavDirections action = NavigationMainDirections.actionGlobalCreateSampleFragment(model);
             ((MainActivity) activity).navController.navigate(action);
         }).widget(holder.binding.createTextView);
     }

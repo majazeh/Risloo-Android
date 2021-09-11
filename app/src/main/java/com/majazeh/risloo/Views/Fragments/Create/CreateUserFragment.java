@@ -273,7 +273,6 @@ public class CreateUserFragment extends Fragment {
     }
 
     private void setArgs() {
-        String type = CreateUserFragmentArgs.fromBundle(getArguments()).getType();
         TypeModel typeModel = CreateUserFragmentArgs.fromBundle(getArguments()).getTypeModel();
 
         // TODO : Place Code When Needed
