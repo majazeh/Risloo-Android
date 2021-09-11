@@ -205,6 +205,25 @@ public class EditSessionFragment extends Fragment {
         // Session Data
         if (session instanceof EditSessionTabSessionFragment) {
             data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((EditSessionTabSessionFragment) session).status));
+
+            if (data.get("status").equals("registration_awaiting")) {
+                data.put("opens_at_type", ((EditSessionTabSessionFragment) session).startType);
+
+                if (data.get("opens_at_type").equals("relative"))
+                    data.put("opens_at", DateManager.relativeTimestamp(((EditSessionTabSessionFragment) session).relativeStartDay, ((EditSessionTabSessionFragment) session).relativeStartHour, ((EditSessionTabSessionFragment) session).relativeStartMinute));
+                else
+                    data.put("opens_at", DateManager.accurateTimestamp(((EditSessionTabSessionFragment) session).accurateStartTime, ((EditSessionTabSessionFragment) session).accurateStartDate));
+
+                if (((EditSessionTabSessionFragment) session).endAvailable) {
+                    data.put("closed_at_type", ((EditSessionTabSessionFragment) session).endType);
+
+                    if (data.get("closed_at_type").equals("relative"))
+                        data.put("closed_at", DateManager.relativeTimestamp(((EditSessionTabSessionFragment) session).relativeEndDay, ((EditSessionTabSessionFragment) session).relativeEndHour, ((EditSessionTabSessionFragment) session).relativeEndMinute));
+                    else
+                        data.put("closed_at", DateManager.accurateTimestamp(((EditSessionTabSessionFragment) session).accurateEndTime, ((EditSessionTabSessionFragment) session).accurateEndDate));
+                }
+            }
+
             data.put("description", ((EditSessionTabSessionFragment) session).description);
             data.put("client_reminder", ((EditSessionTabSessionFragment) session).coordination);
         }

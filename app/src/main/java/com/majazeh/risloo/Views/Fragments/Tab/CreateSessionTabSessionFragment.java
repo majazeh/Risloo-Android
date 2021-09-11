@@ -40,7 +40,10 @@ public class CreateSessionTabSessionFragment extends Fragment {
 
     // Vars
     public String status = "", description = "", coordination = "";
+    public String startType = "relative", endType = "relative";
     public String accurateStartTime = "", accurateStartDate = "", accurateEndTime = "", accurateEndDate = "";
+    public String relativeStartDay = "", relativeStartHour = "", relativeStartMinute = "", relativeEndDay = "", relativeEndHour = "", relativeEndMinute = "";
+    public boolean endAvailable = false;
     private boolean userSelect = false;
 
     @Nullable
@@ -141,18 +144,59 @@ public class CreateSessionTabSessionFragment extends Fragment {
             coordination = binding.coordinationIncludeLayout.inputEditText.getText().toString().trim();
         });
 
+        // -------------------- RadioGroup
+
         binding.scheduledIncludeLayout.startRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
             switch (checkedId) {
                 case R.id.start_accurate_radioButton:
+                    startType = "absolute";
+
                     binding.scheduledIncludeLayout.startAccurateGroup.setVisibility(View.VISIBLE);
                     binding.scheduledIncludeLayout.startRelativeGroup.setVisibility(View.GONE);
                     break;
                 case R.id.start_relative_radioButton:
+                    startType = "relative";
+
                     binding.scheduledIncludeLayout.startAccurateGroup.setVisibility(View.GONE);
                     binding.scheduledIncludeLayout.startRelativeGroup.setVisibility(View.VISIBLE);
                     break;
             }
         });
+
+        binding.scheduledIncludeLayout.endRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
+            switch (checkedId) {
+                case R.id.end_accurate_radioButton:
+                    endType = "absolute";
+
+                    binding.scheduledIncludeLayout.endAccurateGroup.setVisibility(View.VISIBLE);
+                    binding.scheduledIncludeLayout.endRelativeGroup.setVisibility(View.GONE);
+                    break;
+                case R.id.end_relative_radioButton:
+                    endType = "relative";
+
+                    binding.scheduledIncludeLayout.endAccurateGroup.setVisibility(View.GONE);
+                    binding.scheduledIncludeLayout.endRelativeGroup.setVisibility(View.VISIBLE);
+                    break;
+            }
+        });
+
+        // -------------------- Checkbox
+
+        binding.scheduledIncludeLayout.endHintCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            endAvailable = isChecked;
+
+            if (isChecked) {
+                binding.scheduledIncludeLayout.setAlpha((float) 1);
+                binding.scheduledIncludeLayout.setEnable(true);
+                binding.scheduledIncludeLayout.setFocusableInTouchMode(true);
+            } else {
+                binding.scheduledIncludeLayout.setAlpha((float) 0.4);
+                binding.scheduledIncludeLayout.setEnable(false);
+                binding.scheduledIncludeLayout.setFocusableInTouchMode(false);
+            }
+        });
+
+        // -------------------- Touch
 
         binding.scheduledIncludeLayout.startRelativeDayEditText.setOnTouchListener((v, event) -> {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeDayEditText.hasFocus())
@@ -170,39 +214,6 @@ public class CreateSessionTabSessionFragment extends Fragment {
             if (MotionEvent.ACTION_UP == event.getAction() && !binding.scheduledIncludeLayout.startRelativeMinuteEditText.hasFocus())
                 ((MainActivity) requireActivity()).inputor.select(requireActivity(), binding.scheduledIncludeLayout.startRelativeMinuteEditText);
             return false;
-        });
-
-        CustomClickView.onDelayedListener(() -> {
-            SheetManager.showTimeBottomSheet(requireActivity(), accurateStartTime, "accurateStartTime");
-        }).widget(binding.scheduledIncludeLayout.startAccurateTimeTextView);
-
-        CustomClickView.onDelayedListener(() -> {
-            SheetManager.showDateBottomSheet(requireActivity(), accurateStartDate, "accurateStartDate");
-        }).widget(binding.scheduledIncludeLayout.startAccurateDateTextView);
-
-        binding.scheduledIncludeLayout.endRadioGroup.setOnCheckedChangeListener((group, checkedId) -> {
-            switch (checkedId) {
-                case R.id.end_accurate_radioButton:
-                    binding.scheduledIncludeLayout.endAccurateGroup.setVisibility(View.VISIBLE);
-                    binding.scheduledIncludeLayout.endRelativeGroup.setVisibility(View.GONE);
-                    break;
-                case R.id.end_relative_radioButton:
-                    binding.scheduledIncludeLayout.endAccurateGroup.setVisibility(View.GONE);
-                    binding.scheduledIncludeLayout.endRelativeGroup.setVisibility(View.VISIBLE);
-                    break;
-            }
-        });
-
-        binding.scheduledIncludeLayout.endHintCheckBox.setOnCheckedChangeListener((buttonView, isChecked) -> {
-            if (isChecked) {
-                binding.scheduledIncludeLayout.setAlpha((float) 1);
-                binding.scheduledIncludeLayout.setEnable(true);
-                binding.scheduledIncludeLayout.setFocusableInTouchMode(true);
-            } else {
-                binding.scheduledIncludeLayout.setAlpha((float) 0.4);
-                binding.scheduledIncludeLayout.setEnable(false);
-                binding.scheduledIncludeLayout.setFocusableInTouchMode(false);
-            }
         });
 
         binding.scheduledIncludeLayout.endRelativeDayEditText.setOnTouchListener((v, event) -> {
@@ -223,6 +234,42 @@ public class CreateSessionTabSessionFragment extends Fragment {
             return false;
         });
 
+        // -------------------- Focus
+
+        binding.scheduledIncludeLayout.startRelativeDayEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            relativeStartDay = binding.scheduledIncludeLayout.startRelativeDayEditText.getText().toString().trim();
+        });
+
+        binding.scheduledIncludeLayout.startRelativeHourEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            relativeStartHour = binding.scheduledIncludeLayout.startRelativeHourEditText.getText().toString().trim();
+        });
+
+        binding.scheduledIncludeLayout.startRelativeMinuteEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            relativeStartMinute = binding.scheduledIncludeLayout.startRelativeMinuteEditText.getText().toString().trim();
+        });
+
+        binding.scheduledIncludeLayout.endRelativeDayEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            relativeEndDay = binding.scheduledIncludeLayout.endRelativeDayEditText.getText().toString().trim();
+        });
+
+        binding.scheduledIncludeLayout.endRelativeHourEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            relativeEndHour = binding.scheduledIncludeLayout.endRelativeHourEditText.getText().toString().trim();
+        });
+
+        binding.scheduledIncludeLayout.endRelativeMinuteEditText.setOnFocusChangeListener((v, hasFocus) -> {
+            relativeEndMinute = binding.scheduledIncludeLayout.endRelativeMinuteEditText.getText().toString().trim();
+        });
+
+        // -------------------- BottomSheet
+
+        CustomClickView.onDelayedListener(() -> {
+            SheetManager.showTimeBottomSheet(requireActivity(), accurateStartTime, "accurateStartTime");
+        }).widget(binding.scheduledIncludeLayout.startAccurateTimeTextView);
+
+        CustomClickView.onDelayedListener(() -> {
+            SheetManager.showDateBottomSheet(requireActivity(), accurateStartDate, "accurateStartDate");
+        }).widget(binding.scheduledIncludeLayout.startAccurateDateTextView);
+
         CustomClickView.onDelayedListener(() -> {
             SheetManager.showTimeBottomSheet(requireActivity(), accurateEndTime, "accurateEndTime");
         }).widget(binding.scheduledIncludeLayout.endAccurateTimeTextView);
@@ -230,6 +277,8 @@ public class CreateSessionTabSessionFragment extends Fragment {
         CustomClickView.onDelayedListener(() -> {
             SheetManager.showDateBottomSheet(requireActivity(), accurateEndDate, "accurateEndDate");
         }).widget(binding.scheduledIncludeLayout.endAccurateDateTextView);
+
+        // -------------------- Done
 
         CustomClickView.onDelayedListener(() -> {
             if (current instanceof CreateSessionFragment)

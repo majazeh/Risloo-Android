@@ -48,6 +48,40 @@ public class DateManager {
     }
 
     /*
+    ---------- Accurate & Relative ----------
+    */
+
+    public static long accurateTimestamp(String time, String date) {
+        long timeLong = 0;
+        long dateLong = 0;
+
+        if (!time.equals(""))
+            timeLong = Long.parseLong(time);
+        if (!date.equals(""))
+            dateLong = Long.parseLong(date);
+
+        Timestamp timestamp = new Timestamp(timeLong + dateLong);
+        Date value = new Date(timestamp.getTime());
+
+        return value.getTime() / 1000;
+    }
+
+    public static long relativeTimestamp(String day, String hour, String minute) {
+        long dayLong = 0;
+        long hourLong = 0;
+        long minuteLong = 0;
+
+        if (!day.equals(""))
+            dayLong = Long.parseLong(day);
+        if (!hour.equals(""))
+            hourLong = Long.parseLong(hour);
+        if (!minute.equals(""))
+            minuteLong = Long.parseLong(minute);
+
+        return (minuteLong * 60) + (hourLong * 60 * 60) + (dayLong * 24 * 60 * 60);
+    }
+
+    /*
     ---------- PersianDate & Date ----------
     */
 

@@ -191,6 +191,25 @@ public class CreateSessionFragment extends Fragment {
         // Session Data
         if (session instanceof CreateSessionTabSessionFragment) {
             data.put("status", SelectionManager.getSessionStatus(requireActivity(), "en", ((CreateSessionTabSessionFragment) session).status));
+
+            if (data.get("status").equals("registration_awaiting")) {
+                data.put("opens_at_type", ((CreateSessionTabSessionFragment) session).startType);
+
+                if (data.get("opens_at_type").equals("relative"))
+                    data.put("opens_at", DateManager.relativeTimestamp(((CreateSessionTabSessionFragment) session).relativeStartDay, ((CreateSessionTabSessionFragment) session).relativeStartHour, ((CreateSessionTabSessionFragment) session).relativeStartMinute));
+                else
+                    data.put("opens_at", DateManager.accurateTimestamp(((CreateSessionTabSessionFragment) session).accurateStartTime, ((CreateSessionTabSessionFragment) session).accurateStartDate));
+
+                if (((CreateSessionTabSessionFragment) session).endAvailable) {
+                    data.put("closed_at_type", ((CreateSessionTabSessionFragment) session).endType);
+
+                    if (data.get("closed_at_type").equals("relative"))
+                        data.put("closed_at", DateManager.relativeTimestamp(((CreateSessionTabSessionFragment) session).relativeEndDay, ((CreateSessionTabSessionFragment) session).relativeEndHour, ((CreateSessionTabSessionFragment) session).relativeEndMinute));
+                    else
+                        data.put("closed_at", DateManager.accurateTimestamp(((CreateSessionTabSessionFragment) session).accurateEndTime, ((CreateSessionTabSessionFragment) session).accurateEndDate));
+                }
+            }
+
             data.put("fields", ((CreateSessionTabSessionFragment) session).axisesAdapter.getIds());
             data.put("description", ((CreateSessionTabSessionFragment) session).description);
             data.put("client_reminder", ((CreateSessionTabSessionFragment) session).coordination);
